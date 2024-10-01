@@ -4,6 +4,18 @@
     "api-key": "{api key}",
     "api-version": "2024-09-01-preview",
     "fineTuningJob": {
+      "integrations": [
+        {
+          "type": "wandb",
+          "wandb": {
+            "project": "custom-wandb-project",
+            "tags": [
+              "project:tag",
+              "lineage"
+            ]
+          }
+        }
+      ],
       "model": "curie",
       "training_file": "file-181a1cbdcdcf4677ada87f63a0928099"
     },
@@ -18,6 +30,18 @@
         "hyperparameters": {
           "n_epochs": -1
         },
+        "integrations": [
+          {
+            "type": "wandb",
+            "wandb": {
+              "project": "custom-wandb-project",
+              "tags": [
+                "project:tag",
+                "lineage"
+              ]
+            }
+          }
+        ],
         "status": "pending",
         "model": "curie",
         "training_file": "file-181a1cbdcdcf4677ada87f63a0928099",

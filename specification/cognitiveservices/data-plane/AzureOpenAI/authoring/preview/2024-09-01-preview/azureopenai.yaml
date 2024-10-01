@@ -775,8 +775,8 @@ paths:
     post:
       tags:
         - "UploadFile:"
-      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
-      operationId: Upload_File_Start
+      summary: "An intermediate Upload object is created, allowing you to add Parts to it. Currently, an Upload size can be a maximum of 9 GB in total and will expire two hours after being created.\r\nAfter the Upload is completed a File object will be generated, containing all the uploaded parts. This File object can then be used across our platform just like any other file."
+      operationId: UploadFile_Start
       consumes:
         - application/json
         - text/json
@@ -812,8 +812,8 @@ paths:
     post:
       tags:
         - "UploadFile:"
-      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
-      operationId: Upload_File_Cancel
+      summary: "Cancels the Upload, and will lead to all uploaded parts to be deleted asynchronously.\r\nNo Parts may be added after an Upload is cancelled."
+      operationId: UploadFile_Cancel
       produces:
         - application/json
       parameters:
@@ -839,8 +839,8 @@ paths:
     post:
       tags:
         - "UploadFile:"
-      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
-      operationId: Upload_File_Complete
+      summary: "This completes the Upload, and the returned Upload object contains a nested File object that is ready for use across the platform.\r\nYou can define the order of the Parts by providing an ordered list of Part IDs.\r\nThe total number of bytes uploaded must match the size originally specified when creating the Upload object.\r\nAfter this operation no additional Parts can be added once the Upload is completed."
+      operationId: UploadFile_Complete
       consumes:
         - application/json
         - text/json
@@ -876,8 +876,8 @@ paths:
     post:
       tags:
         - "UploadFile:"
-      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
-      operationId: Upload_File_Part
+      summary: "Adds a Part to an Upload object, where each Part represents a segment of the file you are uploading.\r\nEach Part can be up to the standard size limit for file upload, based on the File Purpose. You can continue adding Parts until reaching the Upload size limit of 9 GB."
+      operationId: UploadFile_Part
       consumes:
         - multipart/form-data
       produces:
@@ -1627,6 +1627,11 @@ definitions:
         format: int32
         description: The seed used for the finetuning job.
         type: integer
+      integrations:
+        type: array
+        items:
+          $ref: "#/definitions/WandBIntegrationRequestWrapper"
+          description: "A list configurations for integrations supporting the fine-tuning job.\r\nThere are many integrations planned, so make sure to check and act on the integration type."
   FineTuningJobCheckpoint:
     title: FineTuningJobCheckpoint
     required:
@@ -1709,6 +1714,11 @@ definitions:
         format: int32
         description: The seed used for the finetuning job. Passing in the same seed and job parameters should produce the same results, but may differ in rare cases. If a seed is not specified, one will be generated for you.
         type: integer
+      integrations:
+        type: array
+        items:
+          $ref: "#/definitions/WandBIntegrationRequestWrapper"
+          description: "A list configurations for integrations supporting the fine-tuning job.\r\nThere are many integrations planned, so make sure to check and act on the integration type."
   FineTuningJobError:
     title: FineTuningJobError
     description: For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.
@@ -1989,6 +1999,12 @@ definitions:
       values:
         - value: invalidPayload
           description: The request data is invalid for this operation.
+  IntegrationTypes:
+    title: IntegrationTypes
+    enum:
+      - wandb
+    type: string
+    description: List of Fine Tune integrations available.
   JobCompute:
     title: JobCompute
     description: The compute settings of the job.
@@ -2455,6 +2471,37 @@ definitions:
             type: array
             items:
               $ref: "#/definitions/WorkspaceConnectionEmbeddingSettings"
+  WandBIntegrationRequest:
+    title: WandBIntegrationRequest
+    required:
+      - project
+    type: object
+    properties:
+      project:
+        minLength: 1
+        type: string
+      name:
+        type: string
+        readOnly: true
+      entity:
+        type: string
+        readOnly: true
+      tags:
+        type: array
+        items:
+          type: string
+        readOnly: true
+  WandBIntegrationRequestWrapper:
+    title: WandBIntegrationRequestWrapper
+    required:
+      - type
+      - wandb
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/IntegrationTypes'
+      wandb:
+        $ref: "#/definitions/WandBIntegrationRequest"
   WorkspaceConnection:
     description: AML Workspace connection.
     required:
