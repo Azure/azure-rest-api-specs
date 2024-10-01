@@ -103,7 +103,7 @@
     "/tilesets": {
       "post": {
         "summary": "Use to create a tileset.",
-        "description": "\n\n The `Create` API is an HTTP `POST` request is used to create a tileset from the specified dataset. For more information, see [Create a tileset](/azure/azure-maps/tutorial-creator-indoor-maps#create-a-tileset). A tileset contains a set of tiles that can be consumed using [Get Map Tile](/rest/api/maps/render/get-map-tile) to retrieve custom tiles. To create a dataset, use [Dataset Create](/rest/api/maps-creator/dataset/create). For an introduction to concepts and tools that apply to Azure Maps Creator, see [Creator for indoor maps](/azure/azure-maps/creator-indoor-maps).\n\nThe Create Tileset API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be used as the source of the tileset data.",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\n The `Create` API is an HTTP `POST` request is used to create a tileset from the specified dataset. For more information, see [Create a tileset](/azure/azure-maps/tutorial-creator-indoor-maps#create-a-tileset). A tileset contains a set of tiles that can be consumed using [Get Map Tile](/rest/api/maps/render/get-map-tile) to retrieve custom tiles. To create a dataset, use [Dataset Create](/rest/api/maps-creator/dataset/create). For an introduction to concepts and tools that apply to Azure Maps Creator, see [Creator for indoor maps](/azure/azure-maps/creator-indoor-maps).\n\nThe Create Tileset API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be used as the source of the tileset data.",
         "operationId": "Tileset_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -142,7 +142,7 @@
       },
       "get": {
         "summary": "Use to get a list of tilesets.",
-        "description": "\n\n### Submit List Request\n\nThe `List` API is an HTTP `GET` request used to fetch a list of all existing tilesets.",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\n### Submit List Request\n\nThe `List` API is an HTTP `GET` request used to fetch a list of all existing tilesets.",
         "operationId": "Tileset_List",
         "x-ms-examples": {
           "Get a list of all tilesets": {
@@ -177,6 +177,7 @@
     "/tilesets/{tilesetId}": {
       "get": {
         "summary": "Use to fetch details of the specified tileset.",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).",
         "operationId": "Tileset_Get",
         "x-ms-examples": {
           "Gets the details for a single tileset": {
@@ -208,7 +209,7 @@
       },
       "delete": {
         "summary": "Use to delete a tileset.",
-        "description": "\n\nn### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.\n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "Tileset_Delete",
         "x-ms-examples": {
           "Delete a created tileset": {
@@ -239,7 +240,7 @@
     "/tilesets/operations/{operationId}": {
       "get": {
         "summary": "Use to get the status of a tileset creation.",
-        "description": "\n\nThe `Get Operation` API is an HTTP `GET` request is used to check the status of the tileset creation process and retrieve the `tilesetId` value. The path is obtained from a call to [Tileset - Create](/rest/api/maps-creator/tilesets/create).  While in progress, an HTTP 200 is returned with no extra headers. Once successfully completed an HTTP 200 is returned with a `Resource-Location` header. For more information, see [Check the status of tileset creation](/azure/azure-maps/tutorial-creator-indoor-maps#check-the-status-of-tileset-creation).",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\nThe `Get Operation` API is an HTTP `GET` request is used to check the status of the tileset creation process and retrieve the `tilesetId` value. The path is obtained from a call to [Tileset - Create](/rest/api/maps-creator/tilesets/create).  While in progress, an HTTP 200 is returned with no extra headers. Once successfully completed an HTTP 200 is returned with a `Resource-Location` header. For more information, see [Check the status of tileset creation](/azure/azure-maps/tutorial-creator-indoor-maps#check-the-status-of-tileset-creation).",
         "operationId": "Tileset_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
