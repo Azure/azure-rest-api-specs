@@ -774,6 +774,17 @@ model AvsStorageContainerProperties {
   @doc("Maximum amount of bytes that can be provisioned in this storage container. It must be a multiple of 512. Each time a volume is provisioned in this container, its provisionedSize will be counted against the provisionLimit and the provisioning will fail if it goes over (minimum: 1048576 (1Mi), maximum: 4503599627370496 (4Pi)). By default it is unrestricted.")
   @visibility("create", "update", "read")
   provisionedLimit?: int64;
+
+  @added(Versions.v4_preview)
+  @doc("Current VMware datastore associate with this storage container")
+  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
+  @visibility("read")
+  datastore?: string;
+
+  @added(Versions.v4_preview)
+  @doc("Indicates whether the datastore is mounted in the VMware")
+  @visibility("read")
+  mounted?: boolean;
 }
 
 @armResourceOperations

@@ -2572,6 +2572,17 @@
             "update",
             "create"
           ]
+        },
+        "datastore": {
+          "type": "string",
+          "description": "Current VMware datastore associate with this storage container",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$",
+          "readOnly": true
+        },
+        "mounted": {
+          "type": "boolean",
+          "description": "Indicates whether the datastore is mounted in the VMware",
+          "readOnly": true
         }
       },
       "required": [
