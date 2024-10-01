@@ -39,7 +39,7 @@ jobs:
       - if: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
         uses: actions/upload-artifact@v4
         with:
-          name: spec-lifecycle-${{ matrix.spec-type }}--${{ steps.tsr-ps1.outputs.spec-lifecycle }}
+          name: spec-lifecycle-${{ matrix.spec-type }}-${{ steps.tsr-ps1.outputs.spec-lifecycle }}
           path: empty.txt
           if-no-files-found: error
           overwrite: true
