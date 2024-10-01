@@ -63,4 +63,11 @@ interface MessagingCatalogs {
    * List MessagingCatalog resources by subscription ID
    */
   listBySubscription is ArmListBySubscription<MessagingCatalog>;
+
+  associate is ArmResourceActionAsync<
+    MessagingCatalog,
+    Association,
+    Association,
+    BaseParameters<Association>
+  >;
 }
