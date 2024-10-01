@@ -19,6 +19,18 @@ namespace Azure.AI.Client.Evaluations;
 @post
 op create is Azure.Core.Foundations.Operation<
   {
+    @path
+    @doc("endpoint")
+    endpoint: string;
+    @path
+    @doc("Subscription ID.")
+    subscriptionId: string;
+    @path
+    @doc("Resource group name.")
+    resourceGroupName: string;
+    @path
+    @doc("Workspace name.")
+    workspaceName: string;
     @doc("Properties of Evaluation.")
     @body
     evaluation: Evaluation;
@@ -32,6 +44,18 @@ op create is Azure.Core.Foundations.Operation<
 @get
 op list is Azure.Core.Foundations.Operation<
   {
+    @path
+    @doc("endpoint")
+    endpoint: string;
+    @path
+    @doc("Subscription ID.")
+    subscriptionId: string;
+    @path
+    @doc("Resource group name.")
+    resourceGroupName: string;
+    @path
+    @doc("Workspace name.")
+    workspaceName: string;
     ...StandardListQueryParameters;
   },
   PagedEvaluation
@@ -43,7 +67,18 @@ op list is Azure.Core.Foundations.Operation<
 @patch
 op update is Azure.Core.Foundations.Operation<
   {
-
+    @path
+    @doc("endpoint")
+    endpoint: string;
+    @path
+    @doc("Subscription ID.")
+    subscriptionId: string;
+    @path
+    @doc("Resource group name.")
+    resourceGroupName: string;
+    @path
+    @doc("Workspace name.")
+    workspaceName: string;
     @doc("Identifier of the evaluation.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
     @maxLength(254)
