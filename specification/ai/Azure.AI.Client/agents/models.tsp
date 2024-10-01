@@ -15,9 +15,9 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Client.Agents;
 
-@doc("Represents an agent that can call the model and use tools.")
+@doc("Represents an assistant that can call the model and use tools.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model Agent {
+model Assistant {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
@@ -30,18 +30,18 @@ model Agent {
   createdAt: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The name of the agent.")
+  @doc("The name of the assistant.")
   name: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The description of the agent.")
+  @doc("The description of the assistant.")
   description: string | null;
 
   @doc("The ID of the model to use.")
   `model`: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The system instructions for the agent to use.")
+  @doc("The system instructions for the assistant to use.")
   instructions: string | null;
 
   /**
@@ -67,31 +67,31 @@ model Agent {
   @encodedName("application/json", "top_p")
   topP: float32 | null = 1;
 
-  /** The response format of the tool calls used by this agent. */
+  /** The response format of the tool calls used by this assistant. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
   @added(ServiceApiVersions.v2024_05_01_preview)
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
 }
 
-@doc("The request details to use when creating a new agent.")
+@doc("The request details to use when creating a new assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model CreateAgentOptions {
+model CreateAssistantOptions {
   @doc("The ID of the model to use.")
   `model`: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The name of the new agent.")
+  @doc("The name of the new assistant.")
   name?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The description of the new agent.")
+  @doc("The description of the new assistant.")
   description?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The system instructions for the new agent to use.")
+  @doc("The system instructions for the new assistant to use.")
   instructions?: string | null;
 
   /**
@@ -117,11 +117,11 @@ model CreateAgentOptions {
   @encodedName("application/json", "top_p")
   topP?: float32 | null = 1;
 
-  /** The response format of the tool calls used by this agent. */
+  /** The response format of the tool calls used by this assistant. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
   @added(ServiceApiVersions.v2024_05_01_preview)
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }
@@ -138,19 +138,19 @@ model CreateAgentOptions {
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
-union AgentsApiResponseFormatOption {
+union AssistantsApiResponseFormatOption {
   string,
 
   /** The model will handle the return format. */
-  AgentsApiResponseFormatMode,
+  AssistantsApiResponseFormatMode,
 
   /** Sets the format of the output of the model when a ToolCall is returned. */
-  AgentsApiResponseFormat,
+  AssistantsApiResponseFormat,
 }
 
 /** Represents the mode in which the model will handle the return format of a tool call. */
 @added(ServiceApiVersions.v2024_05_01_preview)
-union AgentsApiResponseFormatMode {
+union AssistantsApiResponseFormatMode {
   string,
 
   /** Default value. Let the model handle the return format. */
@@ -165,7 +165,7 @@ union AgentsApiResponseFormatMode {
  * If `text` the model can return text or any value needed.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
-model AgentsApiResponseFormat {
+model AssistantsApiResponseFormat {
   /** Must be one of `text` or `json_object`. */
   type?: ApiResponseFormat = ApiResponseFormat.text;
 }
