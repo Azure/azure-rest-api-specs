@@ -28,9 +28,23 @@ jobs:
       - run: npm ls -a
         continue-on-error: true
 
+        # Sets output "spec-lifecycle"
       - run: |
           eng/scripts/TypeSpec-Requirement.ps1 `
             -BaseCommitish HEAD^ `
             -TargetCommitish HEAD `
             -SpecType ${{ matrix.spec-type }}
+        id: tsr-ps1
         shell: pwsh
+
+      - name: Create empty file to upload artifact
+        run: touch empty.txt
+
+      # Upload artifact named "key--value", so consumers only need artifact names
+      # Example: spec-lifecycle-data-plane--brownfield
+      - uses: actions/upload-artifact@v4
+        with:
+          name: spec-lifecycle-${{ matrix.spec-type }}--${{ steps.tsr-ps1.outputs.spec-lifecycle }}
+          path: empty.txt
+          if-no-files-found: error
+          overwrite: true
