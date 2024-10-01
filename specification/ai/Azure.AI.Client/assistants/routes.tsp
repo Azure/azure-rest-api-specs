@@ -24,7 +24,7 @@ namespace Azure.AI.Client.Assistants;
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/assistants")
-op createAssistant is Azure.Core.RpcOperation<
+op createAssistant is Azure.Core.Foundations.Operation<
   {
     ...CreateAssistantOptions
   },
