@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.OpenAI.Assistants;
 
@@ -17,7 +19,7 @@ namespace Azure.AI.OpenAI.Assistants;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
@@ -34,7 +36,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
  * @returns A representation of the uploaded file.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
 @post
@@ -42,7 +44,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 @route("/files")
 op uploadFile(
   @header contentType: "multipart/form-data",
-  @projectedName("csharp", "Data") file: bytes,
+  @clientName("Data", "csharp") file: bytes,
   purpose: FilePurpose,
 
   /*
@@ -56,7 +58,7 @@ op uploadFile(
 ): OpenAIFile;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @doc("Delete a previously uploaded file.")
@@ -69,7 +71,7 @@ op deleteFile(
 ): FileDeletionStatus;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
@@ -81,3 +83,15 @@ op getFile(
   @encodedName("application/json", "file_id")
   fileId: string,
 ): OpenAIFile;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+@get
+@route("/files/{fileId}/content")
+@doc("Returns information about a specific file. Does not retrieve file content.")
+op getFileContent(
+  @doc("The ID of the file to retrieve.")
+  @path
+  @encodedName("application/json", "file_id")
+  fileId: string,
+): bytes;

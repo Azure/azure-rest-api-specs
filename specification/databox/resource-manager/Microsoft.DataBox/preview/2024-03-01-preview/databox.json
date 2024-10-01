@@ -2179,6 +2179,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "Error, if any, in the stage",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateCreateOrderLimit"
@@ -2489,6 +2494,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       }
     },
@@ -3442,6 +3452,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateDataTransferDetails"
@@ -3582,6 +3597,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       }
     },
@@ -5645,6 +5665,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidatePreferences"
@@ -5866,6 +5891,11 @@
         "country": {
           "description": "Country in which storage location should be supported.",
           "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "discriminator": "skuName"
@@ -6147,46 +6177,9 @@
           "type": "string"
         },
         "model": {
-          "description": "The display name of the sku.",
-          "enum": [
-            "DataBox",
-            "DataBoxDisk",
-            "DataBoxHeavy",
-            "DataBoxCustomerDisk",
-            "DataBoxV2x100",
-            "DataBoxV2x500"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ModelNames",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "DataBox",
-                "description": "Data Box."
-              },
-              {
-                "value": "DataBoxDisk",
-                "description": "Data Box Disk."
-              },
-              {
-                "value": "DataBoxHeavy",
-                "description": "Data Box Heavy."
-              },
-              {
-                "value": "DataBoxCustomerDisk",
-                "description": "Data Box Customer Disk"
-              },
-              {
-                "value": "DataBoxV2x100",
-                "description": "Data Box V2 100TB."
-              },
-              {
-                "value": "DataBoxV2x500",
-                "description": "Data Box V2 500TB."
-              }
-            ]
-          }
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       }
     },
@@ -6267,6 +6260,11 @@
         "location": {
           "description": "Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
           "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateSkuAvailability"
@@ -6792,6 +6790,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       }
     },
@@ -6995,6 +6998,11 @@
         "transportPreferences": {
           "$ref": "#/definitions/TransportPreferences",
           "description": "Preferences related to the shipment logistics of the sku."
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateAddress"
@@ -7195,6 +7203,47 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "modelName": {
+      "enum": [
+        "DataBox",
+        "DataBoxDisk",
+        "DataBoxHeavy",
+        "DataBoxCustomerDisk",
+        "DataBoxV2x100",
+        "DataBoxV2x500"
+      ],
+      "type": "string",
+      "description": "The customer friendly name of the combination of version and capacity of the device. This field is necessary only at the time of ordering the newer generation device i.e. DataBoxV2x100 and DataBoxV2x500 as of May/2024",
+      "x-ms-enum": {
+        "modelAsExtensible": true,
+        "values": [
+          {
+            "value": "DataBox",
+            "description": "Data Box."
+          },
+          {
+            "value": "DataBoxDisk",
+            "description": "Data Box Disk."
+          },
+          {
+            "value": "DataBoxHeavy",
+            "description": "Data Box Heavy."
+          },
+          {
+            "value": "DataBoxCustomerDisk",
+            "description": "Data Box Customer Disk"
+          },
+          {
+            "value": "DataBoxV2x100",
+            "description": "Data Box V2 100TB."
+          },
+          {
+            "value": "DataBoxV2x500",
+            "description": "Data Box V2 500TB."
+          }
+        ]
       }
     }
   },

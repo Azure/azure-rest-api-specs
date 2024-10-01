@@ -32,12 +32,8 @@
   "paths": {
     "/documentModels/{modelId}:analyze": {
       "post": {
-        "summary": "Analyze document",
         "description": "Analyzes document with document model.",
-        "operationId": "AnalyzeDocument",
-        "tags": [
-          "Analysis"
-        ],
+        "operationId": "DocumentModels_AnalyzeDocument",
         "consumes": [
           "application/json",
           "application/octet-stream",
@@ -107,12 +103,8 @@
     },
     "/documentModels/{modelId}/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get analyze result",
         "description": "Gets the result of document analysis.",
-        "operationId": "GetAnalyzeDocumentResult",
-        "tags": [
-          "Analysis"
-        ],
+        "operationId": "DocumentModels_GetAnalyzeResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -151,12 +143,8 @@
     },
     "/documentModels:build": {
       "post": {
-        "summary": "Build document model",
         "description": "Builds a custom document analysis model.",
-        "operationId": "BuildDocumentModel",
-        "tags": [
-          "Creation"
-        ],
+        "operationId": "DocumentModels_BuildModel",
         "consumes": [
           "application/json"
         ],
@@ -204,12 +192,8 @@
     },
     "/documentModels:compose": {
       "post": {
-        "summary": "Compose document model",
         "description": "Creates a new document model from document types of existing document models.",
-        "operationId": "ComposeDocumentModel",
-        "tags": [
-          "Creation"
-        ],
+        "operationId": "DocumentModels_ComposeModel",
         "consumes": [
           "application/json"
         ],
@@ -257,12 +241,8 @@
     },
     "/documentModels:authorizeCopy": {
       "post": {
-        "summary": "Generate copy authorization",
         "description": "Generates authorization to copy a document model to this location with specified modelId and optional description.",
-        "operationId": "AuthorizeCopyDocumentModel",
-        "tags": [
-          "Creation"
-        ],
+        "operationId": "DocumentModels_AuthorizeModelCopy",
         "consumes": [
           "application/json"
         ],
@@ -306,12 +286,8 @@
     },
     "/documentModels/{modelId}:copyTo": {
       "post": {
-        "summary": "Copy document model",
         "description": "Copies document model to the target resource, region, and modelId.",
-        "operationId": "CopyDocumentModelTo",
-        "tags": [
-          "Creation"
-        ],
+        "operationId": "DocumentModels_CopyModelTo",
         "consumes": [
           "application/json"
         ],
@@ -362,12 +338,8 @@
     },
     "/operations": {
       "get": {
-        "summary": "List operations",
         "description": "Lists all operations.",
-        "operationId": "GetOperations",
-        "tags": [
-          "Operation"
-        ],
+        "operationId": "Miscellaneous_ListOperations",
         "consumes": [],
         "produces": [
           "application/json"
@@ -404,12 +376,8 @@
     },
     "/operations/{operationId}": {
       "get": {
-        "summary": "Get operation",
         "description": "Gets operation info.",
-        "operationId": "GetOperation",
-        "tags": [
-          "Operation"
-        ],
+        "operationId": "Miscellaneous_GetOperation",
         "consumes": [],
         "produces": [
           "application/json"
@@ -445,12 +413,8 @@
     },
     "/documentModels": {
       "get": {
-        "summary": "List document models",
         "description": "List all document models",
-        "operationId": "GetDocumentModels",
-        "tags": [
-          "Management"
-        ],
+        "operationId": "DocumentModels_ListModels",
         "consumes": [],
         "produces": [
           "application/json"
@@ -487,12 +451,8 @@
     },
     "/documentModels/{modelId}": {
       "get": {
-        "summary": "Get document model",
         "description": "Gets detailed document model information.",
-        "operationId": "GetDocumentModel",
-        "tags": [
-          "Management"
-        ],
+        "operationId": "DocumentModels_GetModel",
         "consumes": [],
         "produces": [
           "application/json"
@@ -529,12 +489,8 @@
         }
       },
       "delete": {
-        "summary": "Delete document model",
         "description": "Deletes document model.",
-        "operationId": "DeleteDocumentModel",
-        "tags": [
-          "Management"
-        ],
+        "operationId": "DocumentModels_DeleteModel",
         "consumes": [],
         "produces": [
           "application/json"
@@ -567,12 +523,8 @@
     },
     "/info": {
       "get": {
-        "summary": "Get resource info",
         "description": "Return information about the current resource.",
-        "operationId": "GetResourceDetails",
-        "tags": [
-          "Management"
-        ],
+        "operationId": "Miscellaneous_GetResourceInfo",
         "consumes": [],
         "produces": [
           "application/json"

@@ -1,0 +1,7 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/azurearcdata/armazurearcdata
+      breaking-changes:
+        - Operation `*SQLServerInstancesClient.Update` has been changed to LRO, use `*SQLServerInstancesClient.BeginUpdate` instead.
+        - Struct `ErrorResponseBody` has been removed
+        - Type of `ErrorResponse.Error` has been changed from `*ErrorResponseBody` to `*ErrorDetail`

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher",
+    "networkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+    "networkServiceDesignVersionName": "1.0.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestVersion",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.0",
+        "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups/networkServiceDesignVersions",
+        "location": "eastus",
+        "properties": {
+          "versionState": "Active",
+          "configurationGroupSchemaReferences": {
+            "MyVM_Configuration": {
+              "id": "/subscriptions/subid/resourcegroups/contosorg1/providers/microsoft.hybridnetwork/publishers/contosoGroup/networkServiceDesignGroups/NSD_contoso/configurationGroupSchemas/MyVM_Configuration_Schema"
+            }
+          },
+          "nfvisFromSite": {
+            "nfvi1": {
+              "name": "{configurationparameter('MyVM_Configuration').nfviNameFromSite}",
+              "type": "AzureCore"
+            }
+          },
+          "resourceElementTemplates": [
+            {
+              "name": "MyVM",
+              "type": "ArmResourceDefinition",
+              "dependsOnProfile": {
+                "installDependsOn": []
+              },
+              "configuration": {
+                "templateType": "ArmTemplate",
+                "parameterValues": "{\"publisherName\":\"{configurationparameters('MyVM_Configuration').publisherName}\",\"skuGroupName\":\"{configurationparameters('MyVM_Configuration').skuGroupName}\",\"skuVersion\":\"{configurationparameters('MyVM_Configuration').skuVersion}\",\"skuOfferingLocation\":\"{configurationparameters('MyVM_Configuration').skuOfferingLocation}\",\"nfviType\":\"{nfvis().nfvisFromSitePerNfviType.AzureCore.nfviAlias1.nfviType}\",\"nfviId\":\"{nfvis().nfvisFromSitePerNfviType.AzureCore.nfviAlias1.nfviId}\",\"allowSoftwareUpdates\":\"{configurationparameters('MyVM_Configuration').allowSoftwareUpdates}\",\"virtualNetworkName\":\"{configurationparameters('MyVM_Configuration').vnetName}\",\"subnetName\":\"{configurationparameters('MyVM_Configuration').subnetName}\",\"subnetAddressPrefix\":\"{configurationparameters('MyVM_Configuration').subnetAddressPrefix}\",\"managedResourceGroup\":\"{configurationparameters('SNSSelf').managedResourceGroupName}\",\"adminPassword\":\"{secretparameters('MyVM_Configuration').adminPassword}\"}",
+                "artifactProfile": {
+                  "artifactStoreReference": {
+                    "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/publishers/contosoGroup/ArtifactStore/store1"
+                  },
+                  "artifactName": "MyVMArmTemplate",
+                  "artifactVersion": "1.0.0"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

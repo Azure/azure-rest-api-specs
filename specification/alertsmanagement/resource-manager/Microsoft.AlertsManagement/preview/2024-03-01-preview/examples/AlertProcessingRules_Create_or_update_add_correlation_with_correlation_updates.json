@@ -1,0 +1,132 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "subId1",
+    "resourceGroupName": "alertscorrelationrg",
+    "alertProcessingRuleName": "CorrelateAlerts",
+    "alertProcessingRule": {
+      "location": "Global",
+      "tags": {},
+      "properties": {
+        "scopes": [
+          "/subscriptions/subId1"
+        ],
+        "actions": [
+          {
+            "actionType": "CorrelateAlerts",
+            "correlateBy": [
+              {
+                "field": "essentials.alertRule"
+              }
+            ],
+            "correlationInterval": "PT30M",
+            "priority": 50,
+            "notificationsForCorrelatedAlerts": "SuppressAlways",
+            "correlationUpdates": {
+              "updateType": "timeBased",
+              "updateInterval": "PT15M",
+              "actionGroups": [
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+              ]
+            }
+          }
+        ],
+        "description": "Correlate Alerts Example.",
+        "enabled": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-02-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-02-13T16:15:34Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/subId1"
+          ],
+          "actions": [
+            {
+              "actionType": "CorrelateAlerts",
+              "correlateBy": [
+                {
+                  "field": "essentials.alertRule"
+                }
+              ],
+              "correlationInterval": "PT30M",
+              "priority": 50,
+              "notificationsForCorrelatedAlerts": "SuppressAlways",
+              "correlationUpdates": {
+                "updateType": "timeBased",
+                "updateInterval": "PT15M",
+                "actionGroups": [
+                  "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+                  "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+                ]
+              }
+            }
+          ],
+          "description": "Correlate Alerts Example.",
+          "enabled": true
+        },
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelateAlerts",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "CorrelateAlerts",
+        "location": "Global",
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-02-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-02-13T16:15:34Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/subId1"
+          ],
+          "actions": [
+            {
+              "actionType": "CorrelateAlerts",
+              "correlateBy": [
+                {
+                  "field": "essentials.alertRule"
+                }
+              ],
+              "correlationInterval": "PT30M",
+              "priority": 50,
+              "notificationsForCorrelatedAlerts": "SuppressAlways",
+              "correlationUpdates": {
+                "updateType": "timeBased",
+                "updateInterval": "PT15M",
+                "actionGroups": [
+                  "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+                  "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+                ]
+              }
+            }
+          ],
+          "description": "Correlate Alerts Example.",
+          "enabled": true
+        },
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelateAlerts",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "CorrelateAlerts",
+        "location": "Global",
+        "tags": {}
+      }
+    }
+  }
+}

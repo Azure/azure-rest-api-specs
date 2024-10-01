@@ -1,10 +1,15 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureLargeInstance;
 
@@ -287,26 +292,51 @@ model AzureLargeInstanceProperties {
   @doc("Specifies the network settings for the Azure Large Instance.")
   networkProfile?: NetworkProfile;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "azureLargeInstanceId")
   @doc("Specifies the Azure Large Instance unique ID.")
   @visibility("read")
+  azureLargeInstanceIdOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the Azure Large Instance unique ID.")
   azureLargeInstanceId?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "powerState")
   @doc("Resource power state")
   @visibility("read")
+  powerStateOld?: AzureLargeInstancePowerStateEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Resource power state")
   powerState?: AzureLargeInstancePowerStateEnum;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "proximityPlacementGroup")
   @doc("Resource proximity placement group")
   @visibility("read")
+  proximityPlacementGroupOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Resource proximity placement group")
   proximityPlacementGroup?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "hwRevision")
   @doc("Hardware revision of an Azure Large Instance")
   @visibility("read")
+  hwRevisionOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Hardware revision of an Azure Large Instance")
   hwRevision?: string;
 
   @doc("""
-ARM ID of another AzureLargeInstance that will share a network with this
-AzureLargeInstance
-""")
+    ARM ID of another AzureLargeInstance that will share a network with this
+    AzureLargeInstance
+    """)
+  @removed(Versions.v2024_04_10)
   partnerNodeId?: string;
 
   @doc("State of provisioning of the AzureLargeInstance")
@@ -316,25 +346,44 @@ AzureLargeInstance
 
 @doc("Specifies the hardware settings for the Azure Large Instance.")
 model HardwareProfile {
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "hardwareType")
   @doc("Name of the hardware type (vendor and/or their product name)")
   @visibility("read")
+  hardwareTypeOld?: AzureLargeInstanceHardwareTypeNamesEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Name of the hardware type (vendor and/or their product name)")
   hardwareType?: AzureLargeInstanceHardwareTypeNamesEnum;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "azureLargeInstanceSize")
   @doc("Specifies the Azure Large Instance SKU.")
   @visibility("read")
+  azureLargeInstanceSizeOld?: AzureLargeInstanceSizeNamesEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the Azure Large Instance SKU.")
   azureLargeInstanceSize?: AzureLargeInstanceSizeNamesEnum;
 }
 
 @doc("Specifies the storage settings for the Azure Large Instance disks.")
 model StorageProfile {
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "nfsIpAddress")
   @doc("IP Address to connect to storage.")
   @visibility("read")
+  nfsIpAddressOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("IP Address to connect to storage.")
   nfsIpAddress?: string;
 
   @doc("""
-Specifies information about the operating system disk used by Azure Large
-Instance.
-""")
+    Specifies information about the operating system disk used by Azure Large
+    Instance.
+    """)
+  @extension("x-ms-identifiers", [])
   osDisks?: Disk[];
 }
 
@@ -348,10 +397,10 @@ model Disk {
   diskSizeGB?: int32;
 
   @doc("""
-Specifies the logical unit number of the data disk. This value is used to
-identify data disks within the VM and therefore must be unique for each data
-disk attached to a VM.
-""")
+    Specifies the logical unit number of the data disk. This value is used to
+    identify data disks within the VM and therefore must be unique for each data
+    disk attached to a VM.
+    """)
   @visibility("read")
   lun?: int32;
 }
@@ -361,12 +410,24 @@ model OsProfile {
   @doc("Specifies the host OS name of the Azure Large Instance.")
   computerName?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "osType")
   @doc("This property allows you to specify the type of the OS.")
   @visibility("read")
+  osTypeOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("This property allows you to specify the type of the OS.")
   osType?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "version")
   @doc("Specifies version of operating system.")
   @visibility("read")
+  versionOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies version of operating system.")
   version?: string;
 
   @doc("Specifies the SSH public key used to access the operating system.")
@@ -376,33 +437,44 @@ model OsProfile {
 @doc("Specifies the network settings for the Azure Large Instance disks.")
 model NetworkProfile {
   @doc("Specifies the network interfaces for the Azure Large Instance.")
+  @extension("x-ms-identifiers", [])
   networkInterfaces?: IpAddress[];
 
+  @removed(Versions.v2024_08_01_preview)
   @doc("Specifies the circuit id for connecting to express route.")
+  @renamedFrom(Versions.v2024_08_01_preview, "circuitId")
   @visibility("read")
+  circuitIdOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the circuit id for connecting to express route.")
   circuitId?: string;
 }
 
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Specifies the IP address of the network interface.")
-  @projectedName("csharp", "ipAddressValue")
+  @clientName("ipAddressValue", "csharp")
   ipAddress?: string;
 }
 
 @doc("""
-The active state empowers the server with the ability to forcefully terminate
-and halt any existing processes that may be running on the server
-""")
+  The active state empowers the server with the ability to forcefully terminate
+  and halt any existing processes that may be running on the server
+  """)
 model ForceState {
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Whether to force restart by shutting all processes.")
-  @projectedName("csharp", "forceStateValue")
+  @clientName("forceStateValue", "csharp")
   forceState?: AzureLargeInstanceForcePowerState;
 }
 
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
-  @projectedName("csharp", "tagsValue")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
+  @clientName("tagsValue", "csharp")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
 }
@@ -449,3 +521,17 @@ model StorageBillingProperties {
   @doc("the SKU type that is provisioned")
   sku?: string;
 }
+
+@doc("The type used for updating tags in AzureLargeStorageInstance resources.")
+model AzureLargeStorageInstanceTagsUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
+  @clientName("tagsValue", "csharp")
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  ...ManagedServiceIdentityProperty;
+}
+@@added(AzureLargeStorageInstanceTagsUpdate.identity,
+  Versions.v2024_08_01_preview
+);

@@ -6,7 +6,6 @@
 
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./service.tsp";
@@ -36,7 +35,7 @@ model StandbyVirtualMachineResource
 @doc("Details of the StandbyVirtualMachine.")
 model StandbyVirtualMachineResourceProperties {
   @doc("Resource id of the virtual machine.")
-  virtualMachineResourceId: string;
+  virtualMachineResourceId: Azure.Core.armResourceIdentifier<[]>;
 
   @doc("The status of the last operation.")
   @visibility("read")
@@ -46,5 +45,5 @@ model StandbyVirtualMachineResourceProperties {
 @armResourceOperations
 interface StandbyVirtualMachines {
   get is ArmResourceRead<StandbyVirtualMachineResource>;
-  listByStandbyPool is ArmResourceListByParent<StandbyVirtualMachineResource>;
+  listByStandbyVirtualMachinePoolResource is ArmResourceListByParent<StandbyVirtualMachineResource>;
 }

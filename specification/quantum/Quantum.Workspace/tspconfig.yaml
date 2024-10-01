@@ -1,0 +1,20 @@
+parameters:
+  "service-dir":
+    default: "sdk/quantum"
+  "service-name":
+    default: "Microsoft.Quantum"
+  "version-status":
+    default: "preview"
+  "version":
+    default: "2024-03-01-preview"
+emit: ["@azure-tools/typespec-autorest"]
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/quantum.json"
+    emitter-output-dir: "{project-root}/../"

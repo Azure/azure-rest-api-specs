@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-03-02",
+    "diskAccessName": "myDiskAccess",
+    "privateEndpointConnectionName": "myPrivateEndpointConnection",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approving myPrivateEndpointConnection"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myPrivateEndpointConenction",
+        "type": "Microsoft.Compute/diskAccesses/privateEndpointConnections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateEndpoinConnections/myPrivateEndpointConnectionName",
+        "properties": {
+          "provisioningState": "Updating",
+          "privateEndpoint": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "actionsRequired": "None",
+            "description": "Approving myPrivateEndpointConnection",
+            "status": "Approved"
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myPrivateEndpointConnectionName",
+        "type": "Microsoft.Compute/diskAccesses/PrivateEndpointConnections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateEndpoinConnections/myPrivateEndpointConnectionName",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "actionsRequired": "None",
+            "description": "Approving myPrivateEndpointConnection",
+            "status": "Approved"
+          }
+        }
+      }
+    }
+  }
+}

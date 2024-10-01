@@ -1,0 +1,35 @@
+{
+  "title": "Gets a list of templates",
+  "operationId": "TemplateOperations_ListTemplates",
+  "parameters": {
+    "api-version": "2024-02-01",
+    "content-type": "application/json",
+    "channelId": "0f0eb78e-a576-1dfc-b414-0f0756de3338",
+    "endpoint": "https://my-resource.communication.azure.com"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sample_shipping_confirmation",
+            "language": "en_US",
+            "status": "approved",
+            "kind": "whatsApp",
+            "content": [
+              {
+                "type": "BODY",
+                "text": "Your package has been shipped. It will be delivered in {{1}} business days."
+              },
+              {
+                "type": "FOOTER",
+                "text": "This message is from an unverified business."
+              }
+            ]
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

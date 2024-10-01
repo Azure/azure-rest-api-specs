@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./helpers.tsp";
@@ -10,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
@@ -30,12 +28,12 @@ model Fleet is TrackedResource<FleetProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity?: Azure.ResourceManager.Legacy.ManagedServiceIdentityV4;
 }
 
 @doc("Fleet properties.")
@@ -50,7 +48,13 @@ model FleetProperties {
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "https://github.com/Azure/typespec-azure/issues/3558"
   @doc("The FleetHubProfile configures the Fleet's hub.")
+  @added(Versions.v2022_09_02_preview)
+  @added(Versions.v2023_03_15_preview)
+  @added(Versions.v2023_06_15_preview)
+  @added(Versions.v2023_08_15_preview)
   @removed(Versions.v2023_10_15)
+  @added(Versions.v2024_02_02_preview)
+  @added(Versions.v2024_04_01)
   hubProfile?: FleetHubProfile;
 }
 
@@ -88,7 +92,7 @@ model FleetHubProfile {
 }
 
 scalar SubnetResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets",
     }
@@ -102,10 +106,16 @@ model APIServerAccessProfile {
   enablePrivateCluster?: boolean;
 
   @visibility("read", "create")
+  @added(Versions.v2023_06_15_preview)
+  @removed(Versions.v2024_04_01)
+  @added(Versions.v2024_05_02_preview)
   @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
   enableVnetIntegration?: boolean;
 
   @visibility("read", "create")
+  @added(Versions.v2023_06_15_preview)
+  @removed(Versions.v2024_04_01)
+  @added(Versions.v2024_05_02_preview)
   @doc("The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.")
   subnetId?: SubnetResourceId;
 }
@@ -140,17 +150,15 @@ union FleetProvisioningState {
 
 @doc("Properties of a Fleet that can be patched.")
 model FleetPatch {
-  @doc("Resource tags.")
-  tags?: Record<string>;
-
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity?: Azure.ResourceManager.Legacy.ManagedServiceIdentityV4;
 }
 
 @doc("One credential result item.")
@@ -177,14 +185,17 @@ interface Fleets {
   @doc("Gets a Fleet.")
   get is ArmResourceRead<Fleet>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "changing the operation-id on an existing operation is an SDK breaking change"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next update"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "changing the operation-id on an existing operation is an SDK breaking change"
   @doc("Creates or updates a Fleet.")
   @operationId("Fleets_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,
-    BaseParameters<Fleet> &
+    Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
-      IfNoneMatchParameters<Fleet>
+      IfNoneMatchParameters<Fleet>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
@@ -193,24 +204,35 @@ interface Fleets {
   update is ArmCustomPatchSync<
     Fleet,
     FleetPatch,
-    BaseParameters<Fleet> & IfMatchParameters<Fleet>
+    Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
+      IfMatchParameters<Fleet>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Use operationId to keep same name as deprecated sync operation"
   @added(Versions.v2023_06_15_preview)
   @operationId("Fleets_Update")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "original-uri",
+    }
+  )
   @sharedRoute
   updateAsync is ArmCustomPatchAsync<
     Fleet,
     FleetPatch,
-    BaseParameters<Fleet> & IfMatchParameters<Fleet>
+    Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
+      IfMatchParameters<Fleet>
   >;
 
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   @sharedRoute // why do we need to set shared route on delete? compiler complains with an error
   // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<
     Fleet,
-    BaseParameters<Fleet> & IfMatchParameters<Fleet>
+    Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
+      IfMatchParameters<Fleet>
   >;
 
   @doc("Lists fleets in the specified subscription and resource group.")
@@ -220,8 +242,5 @@ interface Fleets {
   listBySubscription is ArmListBySubscription<Fleet>;
 
   @doc("Lists the user credentials of a Fleet.")
-  listCredentials is ArmResourceNoRequestBodyActionSync<
-    Fleet,
-    FleetCredentialResults
-  >;
+  listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
 }

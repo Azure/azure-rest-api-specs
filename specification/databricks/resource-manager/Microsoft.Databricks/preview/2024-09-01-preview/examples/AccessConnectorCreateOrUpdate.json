@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rg",
+    "connectorName": "myAccessConnector",
+    "api-version": "2024-09-01-preview",
+    "identity": {
+      "type": "SystemAssigned"
+    },
+    "parameters": {
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myAccessConnector",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg/providers/Microsoft.Databricks/accessConnectors/myAccessConnector2",
+        "type": "Microsoft.Databricks/accessConnectors",
+        "location": "West US",
+        "tags": {
+          "key1": "value1"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "referedBy": []
+        },
+        "identity": {
+          "principalId": "5619ff16-afe1-47e5-ae67-8393c6c3223d",
+          "tenantId": "e3fe3f22-4b98-4c04-82cc-d8817d1b17da",
+          "type": "SystemAssigned"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myAccessConnector",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg/providers/Microsoft.Databricks/accessConnectors/myAccessConnector",
+        "type": "Microsoft.Databricks/accessConnectors",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "referedBy": []
+        },
+        "identity": {
+          "principalId": "5619ff16-afe1-47e5-ae67-8393c6c3223d",
+          "tenantId": "e3fe3f22-4b98-4c04-82cc-d8817d1b17da",
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  }
+}

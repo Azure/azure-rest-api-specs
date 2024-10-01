@@ -1,0 +1,59 @@
+{
+  "operationId": "GroupQuotaLimitRequests_CreateOrUpdate",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "groupQuotaName": "groupquota1",
+    "resourceProviderName": "Microsoft.Compute",
+    "resourceName": "standardav2family",
+    "api-version": "2023-06-01-preview",
+    "properties": {
+      "requestedResource": {
+        "properties": {
+          "limit": 110,
+          "region": "westus",
+          "comments": "Contoso requires more quota."
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimitsRequests/requestId1",
+        "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitsRequests",
+        "name": "requestId1",
+        "properties": {
+          "requestedResource": {
+            "properties": {
+              "limit": 100,
+              "name": {
+                "value": "standardav2family",
+                "localizedValue": "Standard AV2 Family vCPUs"
+              },
+              "region": "westus",
+              "comments": "Contoso requires more quota."
+            }
+          },
+          "provisioningState": "Succeeded",
+          "requestSubmitTime": "2024-03-08T12:09:27.978Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "retry-after": 30
+      },
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimitsRequests/requestId1",
+        "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitsRequests",
+        "name": "requestId1",
+        "properties": {
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "operationId": "DocumentClassifiers_BuildClassifier",
+  "title": "Build Document Classifier",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-02-29-preview",
+    "buildRequest": {
+      "classifierId": "myClassifier",
+      "description": "Classifier description",
+      "docTypes": {
+        "formA": {
+          "azureBlobSource": {
+            "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer?mySasToken",
+            "prefix": "formADocs/"
+          }
+        },
+        "formB": {
+          "azureBlobFileListSource": {
+            "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer?mySasToken",
+            "fileList": "formB.jsonl"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/documentintelligence/operations/b704bb00-d130-4f3f-a1d8-ca96de3eabb4?api-version=2024-02-29-preview"
+      }
+    }
+  }
+}

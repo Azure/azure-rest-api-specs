@@ -6,7 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
@@ -25,11 +24,11 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 scalar ClusterResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/managedClusters",
     }
@@ -77,39 +76,60 @@ union FleetMemberProvisioningState {
 interface FleetMembers {
   get is ArmResourceRead<FleetMember>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next release"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     FleetMember,
-    BaseParameters<FleetMember> &
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
       IfMatchParameters<FleetMember> &
-      IfNoneMatchParameters<FleetMember>
+      IfNoneMatchParameters<FleetMember>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
   @sharedRoute
   @added(Versions.v2023_03_15_preview)
   @removed(Versions.v2023_06_15_preview)
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     FleetMember,
-    FleetMemberProperties,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FleetMember,
+      FleetMemberProperties
+    >,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Use operationId to keep same name as deprecated sync operation"
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
-  updateAsync is ArmResourcePatchAsync<
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "original-uri",
+    }
+  )
+  updateAsync is ArmCustomPatchAsync<
     FleetMember,
-    FleetMemberProperties,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FleetMember,
+      FleetMemberProperties
+    >,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   @sharedRoute // why do we need to set shared route on delete? compiler complains with an error
   // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<
     FleetMember,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
-  listByParent is ArmResourceListByParent<FleetMember>;
+  /** List FleetMember resources by Fleet */
+  listByFleet is ArmResourceListByParent<FleetMember>;
 }

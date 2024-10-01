@@ -43,6 +43,24 @@ input-file:
   - Microsoft.AzureLargeInstance/preview/2023-07-20-preview/azurelargeinstance.json
 ```
 
+### Tag: package-2024-04-10
+
+These settings apply only when `--tag=package-2024-04-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-10'
+input-file:
+  - Microsoft.AzureLargeInstance/stable/2024-04-10/azurelargeinstance.json
+```
+
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - Microsoft.AzureLargeInstance/preview/2024-08-01-preview/azurelargeinstance.json
+```
+
 ---
 
 # Code Generation
@@ -54,7 +72,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -62,6 +80,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
@@ -89,8 +108,8 @@ These set of linting rules aren't applicable to the AzureLargeInstance RP so sup
 ``` yaml
 suppressions:
   - code: TrackedResourcesMustHavePut
-    where:
-      - $.definitions.AzureLargeInstance
-      - $.definitions.AzureLargeStorageInstance
-    reason: All PUT actions are carried out internally by our specialized team utilizing Geneva actions. This process is not currently available for external use.
+    from:
+      - Microsoft.AzureLargeInstance/stable/2024-04-10/azurelargeinstance.json
+      - Microsoft.AzureLargeInstance/preview/2023-07-20-preview/azurelargeinstance.json
+    reason: In ALI api versions prior to 2024-08-01-preview, the PUT methods are not supported. 
 ```
