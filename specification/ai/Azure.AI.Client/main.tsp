@@ -5,7 +5,6 @@ import "@typespec/versioning";
 import "./agents/routes.tsp";
 import "./endpoints/routes.tsp";
 import "./evaluations/routes.tsp";
-import "./vector_stores/main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
