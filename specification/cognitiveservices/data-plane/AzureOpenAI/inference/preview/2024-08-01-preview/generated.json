@@ -4295,7 +4295,7 @@
         },
         "purpose": {
           "type": "string",
-          "description": "The intended purpose of the uploaded file.\n\nSee the [documentation on File purposes](/docs/api-reference/files/create#files-create-purpose).",
+          "description": "The intended purpose of the uploaded file.",
           "enum": [
             "assistants",
             "batch",
@@ -6024,7 +6024,19 @@
         },
         "purpose": {
           "type": "string",
-          "description": "The intended purpose of the file. [Please refer here](/docs/api-reference/files/object#files/object-purpose) for acceptable values."
+          "description": "The intended purpose of the file.",
+          "enum": [
+            "batch",
+            "batch_output",
+            "fine-tune",
+            "fine-tune-results",
+            "assistants",
+            "assistants_output",
+            "vision"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "status": {
           "type": "string",

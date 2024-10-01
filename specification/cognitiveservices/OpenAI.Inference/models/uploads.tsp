@@ -12,11 +12,8 @@ model CreateUploadRequest {
   /** The name of the file to upload. */
   filename: string;
 
-  /**
-   * The intended purpose of the uploaded file.
-   *
-   * See the [documentation on File purposes](/docs/api-reference/files/create#files-create-purpose).
-   */
+  // Reference: https://platform.openai.com/docs/api-reference/files/create#files-create-purpose
+  /** The intended purpose of the uploaded file. */
   purpose: string | "assistants" | "batch" | "fine-tune" | "vision";
 
   /** The number of bytes in the file you are uploading. */
@@ -67,8 +64,9 @@ model Upload {
   /** The intended number of bytes to be uploaded. */
   bytes: int64;
 
-  /** The intended purpose of the file. [Please refer here](/docs/api-reference/files/object#files/object-purpose) for acceptable values. */
-  purpose: string;
+  // Reference: https://platform.openai.com/docs/api-reference/files/object#files/object-purpose
+  /** The intended purpose of the file. */
+  purpose: string | "batch" | "batch_output" | "fine-tune" | "fine-tune-results" | "assistants" | "assistants_output" | "vision";
 
   /** The status of the Upload. */
   status: string | "pending" | "completed" | "cancelled" | "expired";
