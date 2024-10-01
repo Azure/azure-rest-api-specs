@@ -21,19 +21,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ``` yaml
 directive:
-  - suppress: TopLevelResourcesListBySubscription
-    from: sites.json
-    where: $.definitions["SiteAwareResourceType"]
-    reason: SiteAwareResourceTypes is an tenant-level resource hence not exposing subscription scoped list operation
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
     from: sites.json
     reason: RP is in PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
   - suppress: OperationsAPIImplementation
     from: sites.json
     reason: RP is in PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
-  - suppress: XmsPageableForListCalls
-    from: sites.json
-    reason: false-positive issue reported in Lintdiff. Because GET /providers/Microsoft.Edge/siteAwareResourceTypes/default isn't a list call and supposed to return single resource named default. Reference - [TypeSpec False Positives] EvenSegmentedPathForPutOperation and XmsPageableForListCalls with @singleton · Issue #646 · Azure/azure-openapi-validator (github.com)
 ```
 
 ## Configuration
