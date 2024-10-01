@@ -30,12 +30,14 @@ jobs:
         id: tsr-ps1
         shell: pwsh
 
-      - name: Create empty file to upload artifact
+      - if: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
+        name: Create empty file to upload artifact
         run: touch empty.txt
 
       # Upload artifact named "key--value", so consumers only need artifact names
       # Example: spec-lifecycle-data-plane--brownfield
-      - uses: actions/upload-artifact@v4
+      - if: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
+        uses: actions/upload-artifact@v4
         with:
           name: spec-lifecycle-${{ matrix.spec-type }}--${{ steps.tsr-ps1.outputs.spec-lifecycle }}
           path: empty.txt
