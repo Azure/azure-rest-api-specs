@@ -86,11 +86,11 @@ model FleetProperties {
 
   @added(Versions.v2024_11_01)
   @doc("Attribute based Fleet.")
-  vmAttributes: VMAttributes;
+  vmAttributes?: VMAttributes;
 
   @added(Versions.v2024_11_01)
   @doc("Represents the configuration for additional locations where Fleet resources may be deployed.")
-  additionalLocationsProfile: AdditionalLocationsProfile;
+  additionalLocationsProfile?: AdditionalLocationsProfile;
 
   @doc("Compute Profile to use for running user's workloads.")
   computeProfile: ComputeProfile;
@@ -294,10 +294,10 @@ union VMCategory {
 union CpuManufacturer {
   string,
 
-  @doc("Intel.")
+  @doc("Intel CPU.")
   Intel: "Intel",
 
-  @doc("AMD.")
+  @doc("AMD CPU.")
   AMD: "AMD",
 }
 
@@ -318,10 +318,10 @@ union LocalStorageDiskType {
 union ArchitectureType {
   string,
 
-  @doc("Intel")
+  @doc("Intel Architecture")
   Intel: "Intel",
 
-  @doc("AMD")
+  @doc("AMD Architecture")
   AMD: "AMD",
 }
 
