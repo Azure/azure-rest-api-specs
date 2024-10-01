@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 
 import "./agents/routes.tsp";
+import "./assistants/routes.tsp";
 import "./endpoints/routes.tsp";
 import "./evaluations/routes.tsp";
 
