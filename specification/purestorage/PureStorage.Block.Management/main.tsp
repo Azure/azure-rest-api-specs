@@ -840,6 +840,7 @@ model VolumeProperties {
   @visibility("read")
   space?: Space;
 
+  @removed(Versions.v4_preview)
   @doc("Name of the Performance Policy applied to the Volume.")
   @visibility("read")
   performancePolicy?: VolumePerformancePolicy;
@@ -848,6 +849,7 @@ model VolumeProperties {
   @visibility("read", "update")
   softDeletion: SoftDeletion;
 
+  @removed(Versions.v4_preview)
   @doc("Consistency Group the Volume belongs to.")
   @visibility("read")
   consistencyGroup?: VolumeConsistencyGroup;
@@ -868,6 +870,7 @@ model VolumeProperties {
   @visibility("read")
   avs?: AvsDiskDetails;
 
+  @removed(Versions.v4_preview)
   @doc("Azure Volume Group assigned to the volume.")
   @visibility("read")
   azure?: AzureProperties;
@@ -877,6 +880,7 @@ model VolumeProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
+@removed(Versions.v4_preview)
 @doc("Name of the Performance Policy applied to the Volume")
 model VolumePerformancePolicy {
   @doc("Resource id of the Performance Policy")
@@ -893,11 +897,13 @@ model SoftDeletion {
   @visibility("read")
   eradicationTimestamp?: string;
 
+  @removed(Versions.v4_preview)
   @doc("Set to the previous volumeResourceId for this volume if destroyed is true, and this used to be a VolumeGroup/Volume, the former Azure resourceId for that VolumeGroup/Volume before it was delete.")
   @visibility("read")
   previousResourceId?: string;
 }
 
+@removed(Versions.v4_preview)
 @doc("Consistency Group the Volume belongs to.")
 model VolumeConsistencyGroup {
   @doc("ID for the Consistency Group the Volume belongs to.")
@@ -907,6 +913,7 @@ model VolumeConsistencyGroup {
 @doc("Volume types.")
 union VolumeType {
   /** Azure Volume Type */
+  @removed(Versions.v4_preview)
   Azure: "azure",
 
   /** AVS Volume Type */
@@ -1051,6 +1058,7 @@ union VmType {
 @doc("Volume container types.")
 union VolumeContainerType {
   /** Azure Volume Container Type */
+  @removed(Versions.v4_preview)
   Azure: "azure",
 
   /** AVS Volume Container Type */
