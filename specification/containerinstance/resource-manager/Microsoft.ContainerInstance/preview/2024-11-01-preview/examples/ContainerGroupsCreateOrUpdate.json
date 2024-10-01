@@ -1,7 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "subid",
-    "api-version": "2024-10-02-preview",
+    "api-version": "2024-11-01-preview",
     "resourceGroupName": "demo",
     "containerGroupName": "demo1",
     "zones": [
@@ -10,46 +10,19 @@
     "containerGroup": {
       "location": "west us",
       "identity": {
-        "type": "UserAssigned",
+        "type": "SystemAssigned, UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {}
         }
       },
       "properties": {
-        "secretReferences": [
-          {
-            "name": "envSecretRef",
-            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-            "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/envSecret"
-          },
-          {
-            "name": "accountKeyRef",
-            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-            "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/accountKey"
-          },
-          {
-            "name": "volumeSecretRef",
-            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-            "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/volumeSecret"
-          },
-          {
-            "name": "privateRegistryKeyRef",
-            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-            "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/privateRegistryKey"
-          }
-        ],
         "containers": [
           {
             "name": "demo1",
             "properties": {
               "command": [],
-              "environmentVariables": [
-                {
-                  "name": "envSecret",
-                  "secureValueReference": "envSecretRef"
-                }
-              ],
-              "image": "privateRegistryImage",
+              "environmentVariables": [],
+              "image": "nginx",
               "ports": [
                 {
                   "port": 80
@@ -108,13 +81,7 @@
           "searchDomains": "cluster.local svc.cluster.local",
           "options": "ndots:2"
         },
-        "imageRegistryCredentials": [
-          {
-            "server": "demoregistry.azurecr.io",
-            "username": "registryUserName",
-            "passwordReference": "privateRegistryKeyRef"
-          }
-        ],
+        "imageRegistryCredentials": [],
         "ipAddress": {
           "ports": [
             {
@@ -133,7 +100,7 @@
             "azureFile": {
               "shareName": "shareName",
               "storageAccountName": "accountName",
-              "storageAccountKeyReference": "accountKeyRef"
+              "storageAccountKey": "accountKey"
             }
           },
           {
@@ -143,10 +110,8 @@
           {
             "name": "volume3",
             "secret": {
-              "secretKey1": "SecretValue1InBase64"
-            },
-            "secretReference": {
-              "secretKey2": "volumeSecretRef"
+              "secretKey1": "SecretValue1InBase64",
+              "secretKey2": "SecretValue2InBase64"
             }
           }
         ]
@@ -158,55 +123,18 @@
       "body": {
         "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
         "location": "WestUs",
-        "identity": {
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {
-              "principalId": "00000000-0000-0000-0000-000000000000",
-              "clientId": "00000000-0000-0000-0000-000000000000"
-            }
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
-          "type": "UserAssigned"
-        },
         "zones": [
           "1"
         ],
         "name": "demo1",
         "properties": {
-          "secretReferences": [
-            {
-              "name": "envSecretRef",
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-              "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/envSecret"
-            },
-            {
-              "name": "accountKeyRef",
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-              "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/accountKey"
-            },
-            {
-              "name": "volumeSecretRef",
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-              "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/volumeSecret"
-            },
-            {
-              "name": "privateRegistryKeyRef",
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-              "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/privateRegistryKey"
-            }
-          ],
           "containers": [
             {
               "name": "demo1",
               "properties": {
                 "command": [],
-                "environmentVariables": [
-                  {
-                    "name": "envSecret",
-                    "secureValueReference": "envSecretRef"
-                  }
-                ],
-                "image": "privateRegistryImage",
+                "environmentVariables": [],
+                "image": "nginx",
                 "ports": [
                   {
                     "port": 80
@@ -254,13 +182,7 @@
             "searchDomains": "cluster.local svc.cluster.local",
             "options": "ndots:2"
           },
-          "imageRegistryCredentials": [
-            {
-              "server": "demoregistry.azurecr.io",
-              "username": "registryUserName",
-              "passwordReference": "privateRegistryKeyRef"
-            }
-          ],
+          "imageRegistryCredentials": [],
           "ipAddress": {
             "ip": "10.0.0.1",
             "ports": [
@@ -281,8 +203,7 @@
               "name": "volume1",
               "azureFile": {
                 "shareName": "shareName",
-                "storageAccountName": "accountName",
-                "storageAccountKeyReference": "accountKeyRef"
+                "storageAccountName": "accountName"
               }
             },
             {
@@ -291,10 +212,7 @@
             },
             {
               "name": "volume3",
-              "secret": {},
-              "secretReference": {
-                "secretKey2": "volumeSecretRef"
-              }
+              "secret": {}
             }
           ]
         },
@@ -305,55 +223,18 @@
       "body": {
         "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
         "location": "WestUs",
-        "identity": {
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {
-              "principalId": "00000000-0000-0000-0000-000000000000",
-              "clientId": "00000000-0000-0000-0000-000000000000"
-            }
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
-          "type": "UserAssigned"
-        },
         "zones": [
           "1"
         ],
         "name": "demo1",
         "properties": {
-          "secretReferences": [
-            {
-              "name": "envSecretRef",
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-              "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/envSecret"
-            },
-            {
-              "name": "accountKeyRef",
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-              "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/accountKey"
-            },
-            {
-              "name": "volumeSecretRef",
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-              "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/volumeSecret"
-            },
-            {
-              "name": "privateRegistryKeyRef",
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name",
-              "secretReferenceUri": "https://keyvaultname.vault.azure.net/secrets/privateRegistryKey"
-            }
-          ],
           "containers": [
             {
               "name": "demo1",
               "properties": {
                 "command": [],
-                "environmentVariables": [
-                  {
-                    "name": "envSecret",
-                    "secureValueReference": "envSecretRef"
-                  }
-                ],
-                "image": "privateRegistryImage",
+                "environmentVariables": [],
+                "image": "nginx",
                 "ports": [
                   {
                     "port": 80
@@ -394,13 +275,7 @@
               "1.1.1.1"
             ]
           },
-          "imageRegistryCredentials": [
-            {
-              "server": "demoregistry.azurecr.io",
-              "username": "registryUserName",
-              "passwordReference": "privateRegistryKeyRef"
-            }
-          ],
+          "imageRegistryCredentials": [],
           "ipAddress": {
             "ip": "10.0.0.1",
             "ports": [
@@ -421,8 +296,7 @@
               "name": "volume1",
               "azureFile": {
                 "shareName": "shareName",
-                "storageAccountName": "accountName",
-                "storageAccountKeyReference": "accountKeyRef"
+                "storageAccountName": "accountName"
               }
             },
             {
@@ -431,10 +305,7 @@
             },
             {
               "name": "volume3",
-              "secret": {},
-              "secretReference": {
-                "secretKey2": "volumeSecretRef"
-              }
+              "secret": {}
             }
           ]
         },
