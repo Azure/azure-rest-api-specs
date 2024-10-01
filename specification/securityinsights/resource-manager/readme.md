@@ -45,6 +45,7 @@ input-file:
   - Microsoft.SecurityInsights/stable/2024-09-01/ContentProductPackages.json
   - Microsoft.SecurityInsights/stable/2024-09-01/ContentProductTemplates.json
   - Microsoft.SecurityInsights/stable/2024-09-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/DataConnectorDefinitions.json
   - Microsoft.SecurityInsights/stable/2024-09-01/DataConnectors.json
   - Microsoft.SecurityInsights/stable/2024-09-01/Incidents.json
   - Microsoft.SecurityInsights/stable/2024-09-01/Metadata.json
