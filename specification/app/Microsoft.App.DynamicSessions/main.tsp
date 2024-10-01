@@ -26,6 +26,6 @@ namespace Microsoft.App.DynamicSessions;
 @doc("The Microsoft.App Dynamic Sessions service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-09-01 version of the Microsoft.App Dynamic Sessions service.")
-  `2024-09-01`,
+  @doc("The 2024-10-02-preview version of the Microsoft.App Dynamic Sessions service.")
+  `2024-10-02-preview`,
 }
