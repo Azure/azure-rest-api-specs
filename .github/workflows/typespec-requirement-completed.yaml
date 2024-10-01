@@ -19,6 +19,8 @@ jobs:
     - uses: actions/checkout@v4
       with:
         path: repo
+        sparse-checkout: |
+          .github/workflows
 
     # TODO: List artifacts from JS instead of downloading from YAML
     # - uses: actions/download-artifact@v4
