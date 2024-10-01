@@ -600,7 +600,7 @@ model ConversationalAnalysisAuthoringJobState {
    * The job ID.
    */
   @key("jobId")
-  @visibility("read")
+  @visibility
   jobId: string;
 
   /**
