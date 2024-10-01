@@ -5,6 +5,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
+import "../common/models.tsp";
+import "../tools/models.tsp";
+import "../tools/tool_resources.tsp";
+
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
