@@ -54,6 +54,10 @@ input-file:
   - Microsoft.SecurityInsights/stable/2024-09-01/SourceControls.json
   - Microsoft.SecurityInsights/stable/2024-09-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2024-09-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
 ```
 
 ### Tag: package-preview-2024-04

@@ -105,6 +105,9 @@
           },
           "Get a MDATP data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
+          },
+          "Get a RestApiPoller data connector": {
+            "$ref": "./examples/dataConnectors/GetRestApiPollerById.json"
           }
         },
         "tags": [
@@ -145,6 +148,7 @@
         }
       },
       "put": {
+        "x-ms-azure-resource": true,
         "x-ms-examples": {
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
@@ -396,6 +400,955 @@
       },
       "type": "object"
     },
+    "RestApiPollerDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Rest Api Poller data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RestApiPollerDataConnectorProperties",
+          "description": "Rest Api Poller data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "RestApiPoller"
+    },
+    "RestApiPollerDataConnectorProperties": {
+      "description": "Rest Api Poller data connector properties.",
+      "properties": {
+        "connectorDefinitionName": {
+          "description": "The connector definition name (the dataConnectorDefinition resource id).",
+          "type": "string"
+        },
+        "auth": {
+          "description": "The a authentication model.",
+          "$ref": "#/definitions/CcpAuthConfig"
+        },
+        "request": {
+          "description": "The request configuration.",
+          "$ref": "#/definitions/RestApiPollerRequestConfig"
+        },
+        "dcrConfig": {
+          "description": "The DCR related properties.",
+          "$ref": "#/definitions/DCRConfiguration"
+        },
+        "isActive": {
+          "description": "Indicates whether the connector is active or not.",
+          "type": "boolean"
+        },
+        "dataType": {
+          "description": "The Log Analytics table destination.",
+          "type": "string"
+        },
+        "response": {
+          "description": "The response configuration.",
+          "$ref": "#/definitions/CcpResponseConfig"
+        },
+        "paging": {
+          "description": "The paging configuration.",
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        },
+        "addOnAttributes": {
+          "description": "The add on attributes. The key name will become attribute name (a column) and the value will become the attribute value in the payload.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "connectorDefinitionName",
+        "auth",
+        "request"
+      ]
+    },
+    "RestApiPollerRequestConfig": {
+      "type": "object",
+      "description": "The request configuration.",
+      "properties": {
+        "apiEndpoint": {
+          "description": "The API endpoint.",
+          "type": "string"
+        },
+        "rateLimitQPS": {
+          "description": "The Rate limit queries per second for the request..",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int32"
+        },
+        "queryWindowInMin": {
+          "description": "The query window in minutes for the request.",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int32"
+        },
+        "httpMethod": {
+          "description": "The HTTP method, default value GET.",
+          "enum": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "httpMethodVerb"
+          }
+        },
+        "queryTimeFormat": {
+          "description": "The query time format. A remote server can have a query to pull data from range 'start' to 'end'. This property indicate what is the expected time format the remote server know to parse.",
+          "example": "UnixTimestamp, UnixTimestampInMills, or more specific formats, for example: yyyy-MM-ddTHH:mm:ssZ",
+          "type": "string"
+        },
+        "retryCount": {
+          "description": "The retry count.",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int32"
+        },
+        "timeoutInSeconds": {
+          "description": "The timeout in seconds.",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int32"
+        },
+        "isPostPayloadJson": {
+          "description": "Flag to indicate if HTTP POST payload is in JSON format (vs form-urlencoded).",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "headers": {
+          "description": "The header for the request for the remote server.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "queryParameters": {
+          "description": "The HTTP query parameters to RESTful API.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "queryParametersTemplate": {
+          "description": "the query parameters template. Defines the query parameters template to use when passing query parameters in advanced scenarios.",
+          "type": "string"
+        },
+        "startTimeAttributeName": {
+          "description": "The query parameter name which the remote server expect to start query. This property goes hand to hand with `endTimeAttributeName`.",
+          "type": "string"
+        },
+        "endTimeAttributeName": {
+          "description": "The query parameter name which the remote server expect to end query. This property goes hand to hand with `startTimeAttributeName`",
+          "type": "string"
+        },
+        "queryTimeIntervalAttributeName": {
+          "description": "The query parameter name which we need to send the server for query logs in time interval. Should be defined with `queryTimeIntervalPrepend` and `queryTimeIntervalDelimiter`",
+          "type": "string"
+        },
+        "queryTimeIntervalPrepend": {
+          "description": "The string prepend to the value of the query parameter in `queryTimeIntervalAttributeName`.",
+          "type": "string"
+        },
+        "queryTimeIntervalDelimiter": {
+          "description": "The delimiter string between 2 QueryTimeFormat in the query parameter `queryTimeIntervalAttributeName`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apiEndpoint"
+      ]
+    },
+    "RestApiPollerRequestPagingKind": {
+      "type": "string",
+      "enum": [
+        "LinkHeader",
+        "NextPageToken",
+        "NextPageUrl",
+        "PersistentToken",
+        "PersistentLinkHeader",
+        "Offset",
+        "CountBasedPaging"
+      ],
+      "description": "Type of paging",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "RestApiPollerRequestPagingKind",
+        "values": [
+          {
+            "value": "LinkHeader"
+          },
+          {
+            "value": "NextPageToken"
+          },
+          {
+            "value": "NextPageUrl"
+          },
+          {
+            "value": "PersistentToken"
+          },
+          {
+            "value": "PersistentLinkHeader"
+          },
+          {
+            "value": "Offset"
+          },
+          {
+            "value": "CountBasedPaging"
+          }
+        ]
+      }
+    },
+    "RestApiPollerRequestPagingConfig": {
+      "description": "The request paging configuration.",
+      "type": "object",
+      "properties": {
+        "pagingType": {
+          "type": "string",
+          "$ref": "#/definitions/RestApiPollerRequestPagingKind",
+          "description": "Type of paging"
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "Page size",
+          "format": "int32"
+        },
+        "pageSizeParameterName": {
+          "type": "string",
+          "description": "Page size parameter name"
+        }
+      },
+      "x-ms-discriminator": {
+        "propertyName": "pagingType",
+        "mapping": {
+          "LinkHeader": "#/components/schemas/RestApiPollerRequestPagingLinkHeaderConfig",
+          "NextPageToken": "#/components/schemas/RestApiPollerRequestPagingTokenConfig",
+          "NextPageUrl": "#/components/schemas/RestApiPollerRequestPagingNextPageUrlConfig",
+          "PersistentToken": "#/components/schemas/RestApiPollerRequestPagingTokenConfig",
+          "PersistentLinkHeader": "#/components/schemas/RestApiPollerRequestPagingLinkHeaderConfig",
+          "Offset": "#/components/schemas/RestApiPollerRequestPagingOffsetConfig",
+          "CountBasedPaging": "#/components/schemas/RestApiPollerRequestPagingCountBaseConfig"
+        }
+      },
+      "required": [
+        "pagingType"
+      ]
+    },
+    "RestApiPollerRequestPagingLinkHeaderConfig": {
+      "description": "The request paging configuration for LinkHeader and PersistentLinkHeader paging type parameters.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "linkHeaderTokenJsonPath": {
+          "type": "string",
+          "description": "JSON path of link header token in HTTP response payload"
+        },
+        "linkHeaderRelLinkName": {
+          "type": "string",
+          "description": "Rel link name from the link header"
+        }
+      }
+    },
+    "RestApiPollerRequestPagingTokenConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "description": "The request paging configuration for NextPageToken and PersistentToken paging type parameters.",
+      "type": "object",
+      "properties": {
+        "nextPageTokenJsonPath": {
+          "type": "string",
+          "description": "JSON path of next page token in HTTP response payload"
+        },
+        "hasNextFlagJsonPath": {
+          "type": "string",
+          "description": "JSON path of flag in HTTP response payload to indicate more pages"
+        },
+        "nextPageTokenResponseHeader": {
+          "type": "string",
+          "description": "HTTP response header name of next page token"
+        },
+        "nextPageParaName": {
+          "type": "string",
+          "description": "Next page parameter name in HTTP request"
+        },
+        "nextPageRequestHeader": {
+          "type": "string",
+          "description": "Next page header name in the request"
+        }
+      }
+    },
+    "RestApiPollerRequestPagingNextPageUrlConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "description": "The request paging configuration for NextPageUrl paging type parameters.",
+      "type": "object",
+      "properties": {
+        "nextPageUrl": {
+          "type": "string",
+          "description": "Next page URL"
+        },
+        "nextPageUrlQueryParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Query parameters of next page URL"
+        },
+        "nextPageUrlQueryParametersTemplate": {
+          "type": "string",
+          "description": "Paging query parameters in string template format"
+        },
+        "nextPageParaName": {
+          "type": "string",
+          "description": "Next page parameter name in HTTP request"
+        },
+        "nextPageRequestHeader": {
+          "type": "string",
+          "description": "Next page header name in the request"
+        },
+        "hasNextFlagJsonPath": {
+          "type": "string",
+          "description": "JSON path of flag in HTTP response payload to indicate more pages"
+        }
+      }
+    },
+    "RestApiPollerRequestPagingOffsetConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "description": "The request paging configuration for Offset paging type parameters.",
+      "type": "object",
+      "properties": {
+        "offsetParaName": {
+          "type": "string",
+          "description": "Offset parameter name in HTTP request"
+        }
+      }
+    },
+    "RestApiPollerRequestPagingCountBaseConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "description": "The request paging configuration for Count base paging type parameters.",
+      "type": "object",
+      "properties": {
+        "zeroBasedIndexing": {
+          "type": "boolean",
+          "description": "Indicates whether the count is zero based"
+        },
+        "pageCountJsonPath": {
+          "type": "string",
+          "description": "JSON path of page count in HTTP response payload"
+        },
+        "pageNumberParaName": {
+          "type": "string",
+          "description": "Parameter name of page number in HTTP request"
+        },
+        "pageNumberJsonPath": {
+          "type": "string",
+          "description": "JSON path of page number in HTTP response payload"
+        },
+        "totalResultsJsonPath": {
+          "type": "string",
+          "description": "JSON path of total number of results in HTTP response payload"
+        }
+      }
+    },
+    "DCRConfiguration": {
+      "description": "The configuration of the destination of the data.",
+      "properties": {
+        "dataCollectionEndpoint": {
+          "description": "Represents the data collection ingestion endpoint in log analytics.",
+          "type": "string"
+        },
+        "dataCollectionRuleImmutableId": {
+          "description": "The data collection rule immutable id, the rule defines the transformation and data destination.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The stream we are sending the data to.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataCollectionEndpoint",
+        "dataCollectionRuleImmutableId",
+        "streamName"
+      ]
+    },
+    "CcpAuthType": {
+      "type": "string",
+      "enum": [
+        "Basic",
+        "APIKey",
+        "OAuth2",
+        "AWS",
+        "GCP",
+        "Session",
+        "JwtToken",
+        "GitHub",
+        "ServiceBus",
+        "Oracle",
+        "None"
+      ],
+      "description": "Type of paging",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "CcpAuthType",
+        "values": [
+          {
+            "value": "Basic"
+          },
+          {
+            "value": "APIKey"
+          },
+          {
+            "value": "OAuth2"
+          },
+          {
+            "value": "AWS"
+          },
+          {
+            "value": "GCP"
+          },
+          {
+            "value": "Session"
+          },
+          {
+            "value": "JwtToken"
+          },
+          {
+            "value": "GitHub"
+          },
+          {
+            "value": "ServiceBus"
+          },
+          {
+            "value": "Oracle"
+          },
+          {
+            "value": "None"
+          }
+        ]
+      }
+    },
+    "CcpAuthConfig": {
+      "description": "Base Model for API authentication.",
+      "properties": {
+        "type": {
+          "description": "The auth type",
+          "$ref": "#/definitions/CcpAuthType",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "ApiKeyAuthModel": {
+      "description": "Model for authentication with the API Key. Will result in additional header on the request (default behavior) to the remote server: 'ApiKeyName: ApiKeyIdentifier ApiKey'. If 'IsApiKeyInPostPayload' is true it will send it in the body of the request and not the header.",
+      "example": "ApiKey = placeholderApiKey, ApiKeyName = 'Authorization', ApiKeyIdentifier = 'token', IsApiKeyInPostPayload = false. will result in a new header on the request: 'Authorization: token placeholderApiKey'",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for the user secret key credential"
+        },
+        "apiKeyName": {
+          "type": "string",
+          "description": "API Key name"
+        },
+        "apiKeyIdentifier": {
+          "type": "string",
+          "description": "API Key Identifier"
+        },
+        "isApiKeyInPostPayload": {
+          "type": "boolean",
+          "description": "Flag to indicate if API key is set in HTTP POST payload"
+        }
+      },
+      "required": [
+        "apiKey",
+        "apiKeyName"
+      ],
+      "x-ms-discriminator-value": "APIKey"
+    },
+    "AWSAuthModel": {
+      "description": "Model for API authentication with AWS.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "roleArn": {
+          "type": "string",
+          "description": "AWS STS assume role ARN",
+          "example": "arn:aws:iam::123456789012:role/your-role-name"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "AWS STS assume role external ID. This is used to prevent the confused deputy problem: 'https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html'"
+        }
+      },
+      "required": [
+        "roleArn"
+      ],
+      "x-ms-discriminator-value": "AWS"
+    },
+    "BasicAuthModel": {
+      "description": "Model for API authentication with basic flow - user name + password.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user name."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password"
+        }
+      },
+      "required": [
+        "userName",
+        "password"
+      ],
+      "x-ms-discriminator-value": "Basic"
+    },
+    "GCPAuthModel": {
+      "description": "Model for API authentication for all GCP kind connectors.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "serviceAccountEmail": {
+          "type": "string",
+          "description": "GCP Service Account Email"
+        },
+        "projectNumber": {
+          "type": "string",
+          "description": "GCP Project Number"
+        },
+        "workloadIdentityProviderId": {
+          "type": "string",
+          "description": "GCP Workload Identity Provider ID"
+        }
+      },
+      "required": [
+        "serviceAccountEmail",
+        "projectNumber",
+        "workloadIdentityProviderId"
+      ],
+      "x-ms-discriminator-value": "GCP"
+    },
+    "GenericBlobSbsAuthModel": {
+      "description": "Model for API authentication for working with service bus or storage account.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "credentialsConfig": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Credentials for service bus namespace, keyvault uri for access key"
+        },
+        "storageAccountCredentialsConfig": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Credentials for storage account, keyvault uri for access key"
+        }
+      },
+      "x-ms-discriminator-value": "ServiceBus"
+    },
+    "GitHubAuthModel": {
+      "description": "Model for API authentication for GitHub. For this authentication first we need to approve the Router app (Microsoft Security DevOps) to access the GitHub account, Then we only need the InstallationId to get the access token from https://api.github.com/app/installations/{installId}/access_tokens.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "installationId": {
+          "type": "string",
+          "description": "The GitHubApp auth installation id."
+        }
+      },
+      "x-ms-discriminator-value": "GitHub"
+    },
+    "NoneAuthModel": {
+      "description": "Model for API authentication with no authentication method - public API.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "None"
+    },
+    "JwtAuthModel": {
+      "description": "Model for API authentication with JWT. Simple exchange between user name + password to access token.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "properties": {
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "Token endpoint to request JWT"
+        },
+        "userName": {
+          "description": "The user name. If user name and password sent in header request we only need to populate the `value` property with the user name (Same as basic auth). If user name and password sent in body request we need to specify the `Key` and `Value`.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "password": {
+          "description": "The password",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "queryParameters": {
+          "description": "The custom query parameter we want to add once we send request to token endpoint.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "headers": {
+          "description": "The custom headers we want to add once we send request to token endpoint.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isCredentialsInHeaders": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag indicating whether we want to send the user name and password to token endpoint in the headers."
+        },
+        "isJsonRequest": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": false,
+          "description": "Flag indicating whether the body request is JSON (header Content-Type = application/json), meaning its a Form URL encoded request (header Content-Type = application/x-www-form-urlencoded)."
+        },
+        "requestTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "default": 100,
+          "maximum": 180,
+          "description": "Request timeout in seconds."
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "JwtToken",
+      "required": [
+        "tokenEndpoint",
+        "userName",
+        "password"
+      ]
+    },
+    "OAuthModel": {
+      "description": "Model for API authentication with OAuth2.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "properties": {
+        "authorizationCode": {
+          "type": "string",
+          "description": "The user's authorization code."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "The Application (client) secret that the OAuth provider assigned to your app."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The Application (client) ID that the OAuth provider assigned to your app."
+        },
+        "isCredentialsInHeaders": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": false,
+          "description": "Indicating whether we want to send the clientId and clientSecret to token endpoint in the headers."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The Application (client) Scope that the OAuth provider assigned to your app."
+        },
+        "redirectUri": {
+          "type": "string",
+          "description": "The Application redirect url that the user config in the OAuth provider."
+        },
+        "grantType": {
+          "type": "string",
+          "description": "The grant type, usually will be 'authorization code'."
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "The token endpoint. Defines the OAuth2 refresh token."
+        },
+        "tokenEndpointHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The token endpoint headers."
+        },
+        "tokenEndpointQueryParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The token endpoint query parameters."
+        },
+        "authorizationEndpoint": {
+          "type": "string",
+          "description": "The authorization endpoint."
+        },
+        "authorizationEndpointHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The authorization endpoint headers."
+        },
+        "authorizationEndpointQueryParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The authorization endpoint query parameters."
+        },
+        "isJwtBearerFlow": {
+          "type": "boolean",
+          "description": "A value indicating whether it's a JWT flow."
+        },
+        "accessTokenPrepend": {
+          "type": "string",
+          "description": "Access token prepend. Default is 'Bearer'."
+        }
+      },
+      "required": [
+        "clientSecret",
+        "clientId",
+        "grantType",
+        "tokenEndpoint"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "OAuth2"
+    },
+    "OracleAuthModel": {
+      "description": "Model for API authentication for Oracle.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Oracle tenant ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Oracle user ID"
+        },
+        "publicFingerprint": {
+          "type": "string",
+          "description": "Public Fingerprint"
+        },
+        "pemFile": {
+          "type": "string",
+          "description": "Content of the PRM file"
+        }
+      },
+      "type": "object",
+      "required": [
+        "tenantId",
+        "userId",
+        "publicFingerprint",
+        "pemFile"
+      ],
+      "x-ms-discriminator-value": "Oracle"
+    },
+    "SessionAuthModel": {
+      "description": "Model for API authentication with session cookie.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "properties": {
+        "userName": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user name attribute key value."
+        },
+        "password": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The password attribute name."
+        },
+        "queryParameters": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "Query parameters to session service endpoint."
+        },
+        "isPostPayloadJson": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Indicating whether API key is set in HTTP POST payload."
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "HTTP request headers to session service endpoint."
+        },
+        "sessionTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Session timeout in minutes."
+        },
+        "sessionIdName": {
+          "type": "string",
+          "description": "Session id attribute name from HTTP response header."
+        },
+        "sessionLoginRequestUri": {
+          "type": "string",
+          "description": "HTTP request URL to session service endpoint."
+        }
+      },
+      "type": "object",
+      "required": [
+        "userName",
+        "password"
+      ],
+      "x-ms-discriminator-value": "Session"
+    },
+    "CcpResponseConfig": {
+      "description": "A custom response configuration for a rule.",
+      "properties": {
+        "eventsJsonPaths": {
+          "description": "The json paths, '$' char is the json root.",
+          "example": "'$', '$.someProperty'",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "successStatusJsonPath": {
+          "description": "The value where the status message/code should appear in the response.",
+          "type": "string"
+        },
+        "successStatusValue": {
+          "description": "The the status value.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "isGzipCompressed": {
+          "description": "The value indicating whether the remote server support Gzip and we should expect Gzip response.",
+          "type": "boolean"
+        },
+        "compressionAlgo": {
+          "description": "The compression algorithm.",
+          "type": "string"
+        },
+        "format": {
+          "description": "The response format. possible values are json,csv,xml",
+          "type": "string",
+          "default": "json"
+        },
+        "csvDelimiter": {
+          "description": "The csv delimiter, in case the response format is CSV.",
+          "type": "string"
+        },
+        "hasCsvBoundary": {
+          "description": "The value indicating whether the response has CSV boundary in case the response in CSV format.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "hasCsvHeader": {
+          "description": "The value indicating whether the response has headers in case the response in CSV format.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "convertChildPropertiesToArray": {
+          "description": "The a value indicating whether the response isn't an array of events / logs.  By setting this flag to true it means the remote server will response with an object which each property has as a value an array of events / logs.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "csvEscape": {
+          "description": "Th character used to escape characters in CSV.",
+          "type": "string",
+          "x-nullable": true,
+          "default": "\"",
+          "minLength": 1,
+          "maxLength": 1
+        }
+      },
+      "type": "object",
+      "required": [
+        "eventsJsonPaths"
+      ]
+    },
     "DataConnector": {
       "allOf": [
         {
@@ -425,7 +1378,8 @@
         "Office365",
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
-        "MicrosoftDefenderAdvancedThreatProtection"
+        "MicrosoftDefenderAdvancedThreatProtection",
+        "RestApiPoller"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -455,6 +1409,9 @@
           },
           {
             "value": "MicrosoftDefenderAdvancedThreatProtection"
+          },
+          {
+            "value": "RestApiPoller"
           }
         ]
       }
@@ -737,4 +1694,3 @@
     }
   }
 }
-
