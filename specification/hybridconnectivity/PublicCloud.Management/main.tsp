@@ -341,7 +341,7 @@ interface PublicCloudConnectors {
   testPermissions is ArmResourceActionAsync<
     PublicCloudConnector,
     void,
-    TestPermissionResult
+    Azure.ResourceManager.Foundations.OperationStatusResult
   >;
 }
 
