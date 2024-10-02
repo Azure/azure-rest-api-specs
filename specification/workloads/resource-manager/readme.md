@@ -30,7 +30,6 @@ openapi-subtype: rpaas
 tag: package-2023-04
 ```
 
-
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.

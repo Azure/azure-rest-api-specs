@@ -10,10 +10,10 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.Reflection;
-using Azure.ResourceManager.Foundations;
 
 @versioned(LiftrBase.Storage.Versions)
 @armLibraryNamespace
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace LiftrBase.Storage;
 
 @doc("Supported versions for LiftrBase.Storage resource model")
@@ -21,13 +21,15 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v1_preview: "2023-06-01-preview",
 }
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
 @doc("Reservation resource type.")
 @friendlyName("Reservation")
 model Reservation<TProperties extends Model = ReservationProperties>
-  is TrackedResource<TProperties> {
+  is Azure.ResourceManager.TrackedResource<TProperties> {
   @doc("The name of the reservation.")
   @segment("reservations")
   @key("reservationName")
@@ -41,12 +43,18 @@ model Reservation<TProperties extends Model = ReservationProperties>
 
 @armResourceOperations
 interface Reservations<
-  TReservation extends ArmResource = Reservation,
+  TReservation extends Foundations.Resource = Reservation,
   TReservationProperties extends Model = ReservationProperties
 > {
   get is ArmResourceRead<TReservation>;
   create is ArmResourceCreateOrUpdateAsync<TReservation>;
-  update is ArmResourcePatchAsync<TReservation, TReservationProperties>;
+  update is ArmCustomPatchAsync<
+    TReservation,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      TReservation,
+      TReservationProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<TReservation>;
   listByResourceGroup is ArmResourceListByParent<TReservation>;
   listBySubscription is ArmListBySubscription<TReservation>;

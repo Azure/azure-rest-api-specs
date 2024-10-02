@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -12,34 +11,41 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
+
 @doc("Specifies the state of the transitHub.")
-enum TransitHubState {
+union TransitHubState {
   @doc("TransitHubState Type PendingApproval")
-  PendingApproval,
+  PendingApproval: "PendingApproval",
 
   @doc("TransitHubState Type Approved")
-  Approved,
+  Approved: "Approved",
 
   @doc("TransitHubState Type PendingUpdate")
-  PendingUpdate,
+  PendingUpdate: "PendingUpdate",
 
   @doc("TransitHubState Type Active")
-  Active,
+  Active: "Active",
 
   @doc("TransitHubState Type Failed")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("Specifies the type of the transitOption.")
-enum TransitOptionType {
+union TransitOptionType {
   @doc("TransitOptionType ExpressRoute")
-  ExpressRoute,
+  ExpressRoute: "ExpressRoute",
 
   @doc("TransitOptionType Gateway")
-  Gateway,
+  Gateway: "Gateway",
 
   @doc("TransitOptionType Peering")
-  Peering,
+  Peering: "Peering",
+
+  string,
 }
 
 @doc("TransitOptionParams Properties")

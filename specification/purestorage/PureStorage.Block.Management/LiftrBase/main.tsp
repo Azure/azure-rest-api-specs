@@ -16,21 +16,31 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v1_preview: "2023-06-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2_preview: "2024-06-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v3_preview: "2024-08-01-preview",
 }
 
 @doc("Marketplace subscription status of a resource.")
-enum MarketplaceSubscriptionStatus {
-  @doc("Purchased but not yet activated")
+union MarketplaceSubscriptionStatus {
+  /** Purchased but not yet activated */
   PendingFulfillmentStart: "PendingFulfillmentStart",
 
-  @doc("Marketplace subscription is activated")
+  /** Marketplace subscription is activated */
   Subscribed: "Subscribed",
 
-  @doc("This state indicates that a customer's payment for the Marketplace service was not received")
+  /** This state indicates that a customer's payment for the Marketplace service was not received */
   Suspended: "Suspended",
 
-  @doc("Customer has cancelled the subscription")
+  /** Customer has cancelled the subscription */
   Unsubscribed: "Unsubscribed",
+
+  string,
 }
 
 @doc("A string that represents a URI.")
@@ -47,6 +57,13 @@ model MarketplaceDetails {
 
   @doc("Offer details for the marketplace that is selected by the user")
   offerDetails: OfferDetails;
+}
+
+@added(Versions.v2_preview)
+@doc("Marketplace plan details")
+model MarketplacePlanUpdate {
+  @doc("The plan id to change to.")
+  planId: string;
 }
 
 @doc("Offer details for the marketplace that is selected by the user")
@@ -112,6 +129,7 @@ model UserCompanyDetails {
 
 alias UserDetailsDefaultExtraProperties = UserCompanyDetails;
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
 @doc("Details of the User.")
 @friendlyName("UserDetails")
 model UserDetails<TExtraProperties extends Model = UserDetailsDefaultExtraProperties> {
@@ -167,25 +185,29 @@ model SingleSignOnProperties {
 }
 
 @doc("Various states of the SSO resource")
-enum SingleSignOnStates {
-  @doc("Initial state of the SSO resource")
-  Initial,
+union SingleSignOnStates {
+  /** Initial state of the SSO resource */
+  Initial: "Initial",
 
-  @doc("State of the SSO resource when it is enabled")
-  Enable,
+  /** State of the SSO resource when it is enabled */
+  Enable: "Enable",
 
-  @doc("State of the SSO resource when it is disabled")
-  Disable,
+  /** State of the SSO resource when it is disabled */
+  Disable: "Disable",
+
+  string,
 }
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
-  @doc("Deletion in progress")
-  Deleting,
+  /** Deletion in progress */
+  Deleting: "Deleting",
 
-  @doc("Change accepted for processing")
-  Accepted,
+  /** Change accepted for processing */
+  Accepted: "Accepted",
+
+  string,
 }

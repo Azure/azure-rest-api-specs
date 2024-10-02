@@ -6,15 +6,15 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The network interface resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@extension("x-ms-azure-resource", true)
 model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @doc("Name of the network interface")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -37,14 +37,14 @@ interface NetworkInterfaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<NetworkInterface>;
 
   @doc("The operation to delete a network interface.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;
 
   @doc("Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.")
-  list is ArmResourceListByParent<NetworkInterface>;
+  listByResourceGroup is ArmResourceListByParent<NetworkInterface>;
 
   @doc("Lists all of the network interfaces in the specified subscription. Use the nextLink property in the response to get the next page of network interfaces.")
   listAll is ArmListBySubscription<NetworkInterface>;

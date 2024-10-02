@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -15,25 +14,30 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
+
 @doc("Enclave Endpoint Protocol Enum")
-enum EnclaveEndpointProtocol {
+union EnclaveEndpointProtocol {
   @doc("EndpointProtocol Type ANY")
-  ANY,
+  ANY: "ANY",
 
   @doc("EndpointProtocol Type TCP")
-  TCP,
+  TCP: "TCP",
 
   @doc("EndpointProtocol Type UDP")
-  UDP,
+  UDP: "UDP",
 
   @doc("EndpointProtocol Type ICMP")
-  ICMP,
+  ICMP: "ICMP",
 
   @doc("EndpointProtocol Type ESP")
-  ESP,
+  ESP: "ESP",
 
   @doc("EndpointProtocol Type AH")
-  AH,
+  AH: "AH",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
@@ -74,10 +78,14 @@ model EnclaveEndpointProperties {
   endpointRuleCollection?: EnclaveEndpointRule[];
 
   @added(Microsoft.Mission.Versions.v2024_01_01_preview)
-  @doc("List of resource ids created by enclave endpoint.")
+  @doc("List of resource ids created by community endpoint.")
   resourceCollection?: string[];
 
   @doc("Provisioning State.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @doc("Whether approval is needed for the connection (True or False).")
+  approvalRequired?: boolean;
 }

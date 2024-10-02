@@ -5,7 +5,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -39,6 +38,7 @@ interface AvailabilitySets {
       Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates the AvailabilitySets resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements the AvailabilitySets PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -52,7 +52,7 @@ interface AvailabilitySets {
   delete is ArmResourceDeleteWithoutOkAsync<
     AvailabilitySet,
     {
-      ...BaseParameters<AvailabilitySet>;
+      ...Foundations.BaseParameters<AvailabilitySet>;
       ...QueryForceDelete;
     },
     LroHeaders = ArmAsyncOperationHeader &

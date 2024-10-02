@@ -23,6 +23,7 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2_preview: "2024-02-01-preview",
 }
 
@@ -115,7 +116,7 @@ model FileSystemResourceUpdate {
   /**
    * The managed service identities assigned to this resource.
    */
-  identity?: ManagedIdentityProperties;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Resource tags.
@@ -152,7 +153,8 @@ model FileSystemResourceUpdateProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
-model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
+model FileSystemResource
+  is Azure.ResourceManager.TrackedResource<FileSystemResourceProperties> {
   /**
    * Name of the File System resource
    */
@@ -163,5 +165,5 @@ model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
   @pattern("^[a-zA-Z0-9_-]*$")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }

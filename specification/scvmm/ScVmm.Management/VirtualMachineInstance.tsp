@@ -1,11 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -37,7 +37,8 @@ model VirtualMachineInstanceUpdate
     "properties"
   >> {
   /** The update properties of the VirtualMachineInstance. */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: VirtualMachineInstanceUpdateProperties;
 }
 
@@ -61,6 +62,7 @@ interface VirtualMachineInstances {
   @summary("Implements virtual machine PUT method.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineInstance>;
   /** The operation to update a virtual machine instance. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Updates a virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -73,6 +75,7 @@ interface VirtualMachineInstances {
     VirtualMachineInstanceUpdate
   >;
   /** The operation to delete a virtual machine instance. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Deletes an virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -83,7 +86,7 @@ interface VirtualMachineInstances {
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
     {
-      ...BaseParameters<VirtualMachineInstance>;
+      ...Foundations.BaseParameters<VirtualMachineInstance>;
       ...QueryForceDelete;
 
       /** Whether to disable the VM from azure and also delete it from Vmm. */
@@ -93,7 +96,7 @@ interface VirtualMachineInstances {
   >;
   /** Lists all of the virtual machine instances within the specified parent resource. */
   @summary("Implements List virtual machine instances.")
-  listByArm is ArmResourceListByParent<VirtualMachineInstance>;
+  list is ArmResourceListByParent<VirtualMachineInstance>;
   /** The operation to power off (stop) a virtual machine instance. */
   @summary("Implements the operation to stop a virtual machine.")
   stop is ArmResourceActionNoResponseContentAsync<

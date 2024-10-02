@@ -55,7 +55,7 @@
       "name": "Community"
     },
     {
-      "name": "Catalog"
+      "name": "CatalogInterface"
     },
     {
       "name": "InternalConnections"
@@ -105,7 +105,7 @@
       "get": {
         "operationId": "Catalog_ListBySubscription",
         "tags": [
-          "Catalog"
+          "CatalogInterface"
         ],
         "description": "List CatalogResource resources by subscription ID",
         "parameters": [
@@ -394,7 +394,7 @@
       "get": {
         "operationId": "Catalog_ListByResourceGroup",
         "tags": [
-          "Catalog"
+          "CatalogInterface"
         ],
         "description": "List CatalogResource resources by resource group",
         "parameters": [
@@ -436,7 +436,7 @@
       "get": {
         "operationId": "Catalog_Get",
         "tags": [
-          "Catalog"
+          "CatalogInterface"
         ],
         "description": "Get a CatalogResource",
         "parameters": [
@@ -481,7 +481,7 @@
       "put": {
         "operationId": "Catalog_CreateOrUpdate",
         "tags": [
-          "Catalog"
+          "CatalogInterface"
         ],
         "description": "Create a CatalogResource",
         "parameters": [
@@ -552,7 +552,7 @@
       "patch": {
         "operationId": "Catalog_Update",
         "tags": [
-          "Catalog"
+          "CatalogInterface"
         ],
         "description": "Update a CatalogResource",
         "parameters": [
@@ -593,14 +593,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -624,7 +624,7 @@
       "delete": {
         "operationId": "Catalog_Delete",
         "tags": [
-          "Catalog"
+          "CatalogInterface"
         ],
         "description": "Delete a CatalogResource",
         "parameters": [
@@ -653,14 +653,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -888,14 +888,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -948,14 +948,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1183,14 +1183,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1243,14 +1243,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1478,14 +1478,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1538,14 +1538,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1773,14 +1773,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1833,14 +1833,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2100,14 +2100,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2168,14 +2168,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2435,14 +2435,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2503,14 +2503,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2537,6 +2537,24 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "BlobCatalog": {
       "type": "object",
       "description": "Blob Catalog type.",
@@ -2601,11 +2619,7 @@
         "properties": {
           "$ref": "#/definitions/CatalogProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2637,49 +2651,19 @@
     },
     "CatalogResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the CatalogResource.",
+      "description": "Catalog Model Resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/CatalogResourceUpdateProperties",
+          "$ref": "#/definitions/CatalogProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      }
-    },
-    "CatalogResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the CatalogResource.",
-      "properties": {
-        "ownedBy": {
-          "type": "string",
-          "description": "Owning Resource of the Catalog."
-        },
-        "communityResourceId": {
-          "type": "string",
-          "description": "Community Resource Id."
-        },
-        "enclaveResourceId": {
-          "type": "string",
-          "description": "Virtual Enclave Resource Id."
-        },
-        "catalog": {
-          "$ref": "#/definitions/Catalog",
-          "description": "Catalog Connection properties."
-        },
-        "packageCollection": {
-          "type": "array",
-          "description": "List of packages for catalog.",
-          "items": {
-            "$ref": "#/definitions/Package"
-          }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "CatalogStorageType": {
       "type": "string",
@@ -2753,11 +2737,7 @@
         "properties": {
           "$ref": "#/definitions/CommunityProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2801,62 +2781,19 @@
     },
     "CommunityResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the CommunityResource.",
+      "description": "Community Model Resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/CommunityResourceUpdateProperties",
+          "$ref": "#/definitions/CommunityProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      }
-    },
-    "CommunityResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the CommunityResource.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Community Description."
-        },
-        "addressSpace": {
-          "type": "string",
-          "description": "Address Space."
-        },
-        "dnsServers": {
-          "type": "array",
-          "description": "Dns Servers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by communities.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "virtualEnclaveList": {
-          "type": "array",
-          "description": "List of virtual enclaves that a community contains.",
-          "items": {
-            "$ref": "#/definitions/EnclaveListItem"
-          }
-        },
-        "virtualEnclaveCollection": {
-          "type": "object",
-          "description": "Dictionary of virtual enclaves that a community contains.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EnclaveListItem"
-          }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "EnclaveDefaultSettings": {
       "type": "object",
@@ -2910,11 +2847,7 @@
         "properties": {
           "$ref": "#/definitions/VirtualEnclaveProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2946,49 +2879,19 @@
     },
     "EnclaveResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the EnclaveResource.",
+      "description": "Virtual Enclave Model Resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/EnclaveResourceUpdateProperties",
+          "$ref": "#/definitions/VirtualEnclavePropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      }
-    },
-    "EnclaveResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the EnclaveResource.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Virtual Enclave Description."
-        },
-        "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetworkUpdate",
-          "description": "Virtual Network."
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettings",
-          "description": "Default Settings"
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by Virtual Enclave.",
-          "items": {
-            "type": "string"
-          }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "EnclaveVirtualNetwork": {
       "type": "object",
@@ -3101,11 +3004,7 @@
         "properties": {
           "$ref": "#/definitions/EndpointProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3149,40 +3048,19 @@
     },
     "EndpointResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the EndpointResource.",
+      "description": "Endpoint Model Resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/EndpointResourceUpdateProperties",
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      }
-    },
-    "EndpointResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the EndpointResource.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Endpoint Description."
-        },
-        "endpointRuleCollection": {
-          "type": "array",
-          "description": "Endpoint Rule Collection.",
-          "items": {
-            "$ref": "#/definitions/EndpointRule"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "EndpointRule": {
       "type": "object",
@@ -3213,11 +3091,7 @@
         "properties": {
           "$ref": "#/definitions/ExternalConnectionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3292,56 +3166,9 @@
         "externalCidrs"
       ]
     },
-    "ExternalConnectionState": {
-      "type": "string",
-      "description": "Specifies the state of the externalConnection.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Active"
-      ],
-      "x-ms-enum": {
-        "name": "ExternalConnectionState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "ExternalConnectionState Type Pending"
-          },
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "ExternalConnectionState Type Approved"
-          },
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "ExternalConnectionState Type Active"
-          }
-        ]
-      }
-    },
-    "ExternalConnectionUpdate": {
+    "ExternalConnectionPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the ExternalConnection.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ExternalConnectionUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ExternalConnectionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the ExternalConnection.",
+      "description": "Describes the properties of an External Connection.",
       "properties": {
         "state": {
           "$ref": "#/definitions/ExternalConnectionState",
@@ -3374,6 +3201,52 @@
         }
       }
     },
+    "ExternalConnectionState": {
+      "type": "string",
+      "description": "Specifies the state of the externalConnection.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Active"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalConnectionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "ExternalConnectionState Type Pending"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "ExternalConnectionState Type Approved"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "ExternalConnectionState Type Active"
+          }
+        ]
+      }
+    },
+    "ExternalConnectionUpdate": {
+      "type": "object",
+      "description": "Describes an External Connection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExternalConnectionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "InternalConnection": {
       "type": "object",
       "description": "Describes an Internal Connection.",
@@ -3381,11 +3254,7 @@
         "properties": {
           "$ref": "#/definitions/InternalConnectionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3472,80 +3341,9 @@
         "sourceCidrs"
       ]
     },
-    "InternalConnectionState": {
-      "type": "string",
-      "description": "Specifies the state of the internalConnection.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Active"
-      ],
-      "x-ms-enum": {
-        "name": "InternalConnectionState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "InternalConnectionState Type Pending Approval"
-          },
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "InternalConnectionState Type Approved"
-          },
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "InternalConnectionState Type Active"
-          }
-        ]
-      }
-    },
-    "InternalConnectionType": {
-      "type": "string",
-      "description": "Specifies the different types of network connections.",
-      "enum": [
-        "PrivateLink",
-        "NetworkSecurityGroup"
-      ],
-      "x-ms-enum": {
-        "name": "InternalConnectionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PrivateLink",
-            "value": "PrivateLink",
-            "description": "InternalConnectionType Type PrivateLink"
-          },
-          {
-            "name": "NetworkSecurityGroup",
-            "value": "NetworkSecurityGroup",
-            "description": "InternalConnectionType Type NetworkSecurityGroup."
-          }
-        ]
-      }
-    },
-    "InternalConnectionUpdate": {
+    "InternalConnectionPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the InternalConnection.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/InternalConnectionUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "InternalConnectionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the InternalConnection.",
+      "description": "Describes the properties of an Internal Connection.",
       "properties": {
         "connectionType": {
           "$ref": "#/definitions/InternalConnectionType",
@@ -3586,6 +3384,76 @@
           }
         }
       }
+    },
+    "InternalConnectionState": {
+      "type": "string",
+      "description": "Specifies the state of the internalConnection.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Active"
+      ],
+      "x-ms-enum": {
+        "name": "InternalConnectionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "InternalConnectionState Type Pending"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "InternalConnectionState Type Approved"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "InternalConnectionState Type Active"
+          }
+        ]
+      }
+    },
+    "InternalConnectionType": {
+      "type": "string",
+      "description": "Specifies the different types of network connections.",
+      "enum": [
+        "PrivateLink",
+        "NetworkSecurityGroup"
+      ],
+      "x-ms-enum": {
+        "name": "InternalConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PrivateLink",
+            "value": "PrivateLink",
+            "description": "InternalConnectionType Type PrivateLink"
+          },
+          {
+            "name": "NetworkSecurityGroup",
+            "value": "NetworkSecurityGroup",
+            "description": "InternalConnectionType Type NetworkSecurityGroup."
+          }
+        ]
+      }
+    },
+    "InternalConnectionUpdate": {
+      "type": "object",
+      "description": "Describes an Internal Connection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InternalConnectionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "KeyVaultResourceId": {
       "type": "string",
@@ -3634,7 +3502,7 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning State Enum",
+      "description": "The provisioning status of the resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -3714,7 +3582,8 @@
             "description": "Provisioning State Type Updating"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "StorageAccountResourceId": {
       "type": "string",
@@ -3766,6 +3635,35 @@
         "communityResourceId"
       ]
     },
+    "VirtualEnclavePropertiesUpdate": {
+      "type": "object",
+      "description": "Virtual Enclave Resource properties",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Virtual Enclave Description."
+        },
+        "enclaveVirtualNetwork": {
+          "$ref": "#/definitions/EnclaveVirtualNetworkUpdate",
+          "description": "Virtual Network."
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id."
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettings",
+          "description": "Default Settings"
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by Virtual Enclave.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "VirtualEnclaveResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -3811,11 +3709,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3847,41 +3741,19 @@
     },
     "WorkloadResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the WorkloadResource.",
+      "description": "Workload Model Resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/WorkloadResourceUpdateProperties",
+          "$ref": "#/definitions/WorkloadProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      }
-    },
-    "WorkloadResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the WorkloadResource.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Workload Description."
-        },
-        "enclaveResourceId": {
-          "$ref": "#/definitions/VirtualEnclaveResourceId",
-          "description": "Virtual Enclave Resource Id."
-        },
-        "managedResourceGroups": {
-          "type": "array",
-          "description": "Managed Resource Groups.",
-          "items": {
-            "type": "string"
-          }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     }
   },
   "parameters": {}

@@ -28,6 +28,9 @@ enum Versions {
 
   @doc("2024-05-01-preview, added AksArcDisk storage class type")
   v2024_05_01_preview: "2024-05-01-preview",
+
+  @doc("2024-08-01, added BFD profile type; add more fields in BGP peer")
+  v2024_08_01: "2024-08-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

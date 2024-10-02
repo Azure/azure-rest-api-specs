@@ -1,0 +1,208 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName",
+    "kubernetesClusterName": "kubernetesClusterName",
+    "agentPoolName": "agentPoolName",
+    "agentPoolUpdateParameters": {
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
+      },
+      "properties": {
+        "administratorConfiguration": {
+          "sshPublicKeys": [
+            {
+              "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+            }
+          ]
+        },
+        "count": 3,
+        "upgradeSettings": {
+          "maxSurge": "1",
+          "maxUnavailable": "0",
+          "drainTimeout": 1800
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/agentPools/agentPoolName",
+        "name": "default",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/kubernetesClusters/agentPools",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "administratorConfiguration": {
+            "adminUsername": "azure",
+            "sshPublicKeys": [
+              {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              }
+            ]
+          },
+          "agentOptions": {
+            "hugepagesCount": 96,
+            "hugepagesSize": "1G"
+          },
+          "attachedNetworkConfiguration": {
+            "l2Networks": [
+              {
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                "pluginType": "DPDK"
+              }
+            ],
+            "l3Networks": [
+              {
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                "pluginType": "SRIOV",
+                "ipamEnabled": "False"
+              }
+            ],
+            "trunkedNetworks": [
+              {
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                "pluginType": "MACVLAN"
+              }
+            ]
+          },
+          "availabilityZones": [
+            "1",
+            "2",
+            "3"
+          ],
+          "count": 3,
+          "labels": [
+            {
+              "key": "kubernetes.label",
+              "value": "true"
+            }
+          ],
+          "mode": "System",
+          "taints": [
+            {
+              "key": "kubernetes.taint",
+              "value": "true"
+            }
+          ],
+          "upgradeSettings": {
+            "maxSurge": "1"
+          },
+          "vmSkuName": "NC_XXXX",
+          "provisioningState": "Succeeded",
+          "kubernetesVersion": "1.XX.Y",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Agent pool is available"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/agentPools/agentPoolName",
+        "name": "default",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/kubernetesClusters/agentPools",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "administratorConfiguration": {
+            "adminUsername": "azure",
+            "sshPublicKeys": [
+              {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              }
+            ]
+          },
+          "agentOptions": {
+            "hugepagesCount": 96,
+            "hugepagesSize": "1G"
+          },
+          "attachedNetworkConfiguration": {
+            "l2Networks": [
+              {
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                "pluginType": "DPDK"
+              }
+            ],
+            "l3Networks": [
+              {
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                "pluginType": "SRIOV",
+                "ipamEnabled": "False"
+              }
+            ],
+            "trunkedNetworks": [
+              {
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                "pluginType": "MACVLAN"
+              }
+            ]
+          },
+          "availabilityZones": [
+            "1",
+            "2",
+            "3"
+          ],
+          "count": 3,
+          "labels": [
+            {
+              "key": "kubernetes.label",
+              "value": "true"
+            }
+          ],
+          "mode": "System",
+          "taints": [
+            {
+              "key": "kubernetes.taint",
+              "value": "true"
+            }
+          ],
+          "upgradeSettings": {
+            "maxSurge": "1"
+          },
+          "vmSkuName": "NC_XXXX",
+          "provisioningState": "Accepted",
+          "kubernetesVersion": "1.XX.Y",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Agent pool is available"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview"
+      }
+    }
+  }
+}

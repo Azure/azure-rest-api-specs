@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
+import "@azure-tools/typespec-azure-portal-core";
 import "../shared/main.tsp";
 
 using TypeSpec.Http;
@@ -14,6 +15,7 @@ using OpenAPI;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
+using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
@@ -34,6 +36,13 @@ enum Versions {
 
 //---------------------------------------------- S3BucketPolicies ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@about({
+  displayNames: {
+    singular: "S3 Bucket Policy",
+    plural: "S3 Bucket Policies",
+  },
+  keywords: ["Microsoft.AwsConnector", "S3", "Bucket", "Policy"],
+})
 @doc("A Microsoft.AwsConnector resource")
 model S3BucketPolicy is TrackedResource<S3BucketPolicyProperties> {
   @doc("Name of S3BucketPolicy")

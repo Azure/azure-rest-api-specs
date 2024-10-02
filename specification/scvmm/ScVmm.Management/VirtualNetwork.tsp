@@ -5,7 +5,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -35,6 +34,7 @@ interface VirtualNetworks {
   @summary("Implements VirtualNetworks PUT method.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualNetwork>;
   /** Updates the VirtualNetworks resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements the VirtualNetworks PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -44,6 +44,7 @@ interface VirtualNetworks {
   )
   update is ArmTagsPatchAsync<VirtualNetwork>;
   /** Deregisters the ScVmm virtual network from Azure. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements VirtualNetwork DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -54,7 +55,7 @@ interface VirtualNetworks {
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
     {
-      ...BaseParameters<VirtualNetwork>;
+      ...Foundations.BaseParameters<VirtualNetwork>;
       ...QueryForceDelete;
     }
   >;

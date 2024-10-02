@@ -22,23 +22,20 @@
   ],
   "security": [
     {
-      "AADToken": [
-        "https://management.azure.com/read",
-        "https://management.azure.com/write"
+      "azure_auth": [
+        "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "AADToken": {
+    "azure_auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
-      "authorizationUrl": "https://api.example.com/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "https://management.azure.com/read": "",
-        "https://management.azure.com/write": ""
-      },
-      "tokenUrl": "https://api.example.com/oauth2/token"
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "tags": [
@@ -84,53 +81,6 @@
       }
     }
   },
-  "definitions": {
-    "AADToken": {
-      "type": "object",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        },
-        "defaultScopes": {
-          "type": "array",
-          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows",
-        "defaultScopes"
-      ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-02-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_02_01_preview",
-            "value": "2024-02-01-preview",
-            "description": "The 2024-02-01-preview API version."
-          }
-        ]
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

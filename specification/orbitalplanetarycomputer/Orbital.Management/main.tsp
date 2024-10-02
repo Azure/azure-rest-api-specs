@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -14,11 +13,16 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.Orbital")
 @service({
   title: "Microsoft.Orbital.AOPC",
-  version: "2024-01-31-preview",
 })
 @doc("AOPC Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Spatio;
+
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-01-31-preview`,
+}
 
 // Operations API is explicitly excluded since this specification
 // represents a partial service that will be deployed under an ARM
@@ -36,27 +40,29 @@ model GeoCatalog is TrackedResource<GeoCatalogProperties> {
 }
 
 @doc("The Azure Orbital Planetary Computer GeoCatalog tier")
-enum CatalogTier {
+union CatalogTier {
   @doc("The basic tier that utilizes shared resources across catalog instances")
-  Basic,
+  Basic: "Basic",
+
+  string,
 }
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
   @doc("The catalog is being provisioned.")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("The catalog is being updated.")
-  Updating,
+  Updating: "Updating",
 
   @doc("The catalog is being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The catalog request has been accepted.")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Details of the AOPC GeoCatalog.")

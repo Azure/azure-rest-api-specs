@@ -54,7 +54,7 @@ model StandbyVirtualMachinePoolResourceProperties {
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  attachedVirtualMachineScaleSetId?: ResourceIdentifier<[
+  attachedVirtualMachineScaleSetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachineScaleSet";
     }
@@ -66,12 +66,18 @@ model StandbyVirtualMachinePoolResourceProperties {
 }
 
 @doc("State of standby virtual machines")
-enum VirtualMachineState {
+union VirtualMachineState {
   @doc("The virtual machine is up and running.")
-  Running,
+  Running: "Running",
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
-  Deallocated,
+  Deallocated: "Deallocated",
+
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+  @doc("The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
+  Hibernated: "Hibernated",
+
+  string,
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
@@ -94,9 +100,12 @@ interface StandbyVirtualMachinePools {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     StandbyVirtualMachinePoolResource,
-    StandbyVirtualMachinePoolResourceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyVirtualMachinePoolResource,
+      StandbyVirtualMachinePoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyVirtualMachinePoolResource>;
   listBySubscription is ArmListBySubscription<StandbyVirtualMachinePoolResource>;

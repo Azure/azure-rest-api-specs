@@ -77,8 +77,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalTenantCompileFileProperties"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -303,8 +302,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalExtension"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -320,6 +318,10 @@
               "$ref": "#/definitions/PortalExtension"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -377,8 +379,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchablePortalExtension"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -459,7 +460,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -498,8 +499,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalExtensionAlter"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -530,7 +530,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -569,8 +569,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalExtensionCompileFile"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -596,7 +595,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/deployments": {
       "get": {
-        "operationId": "PortalExtensionDeployments_ListByPortalExtension",
+        "operationId": "PortalExtensionDeployments_ListByExtensions",
         "tags": [
           "PortalExtensionDeployments"
         ],
@@ -763,6 +762,10 @@
               "$ref": "#/definitions/ExtensionDeployment"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -836,8 +839,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchableExtensionDeployment"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -1008,8 +1010,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalExtensionExport"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -1046,7 +1047,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1102,7 +1103,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/slots": {
       "get": {
-        "operationId": "PortalExtensionSlots_ListByPortalExtension",
+        "operationId": "PortalExtensionSlots_ListByExtensions",
         "tags": [
           "PortalExtensionSlots"
         ],
@@ -1269,6 +1270,10 @@
               "$ref": "#/definitions/ExtensionSlot"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1336,8 +1341,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchableExtensionSlot"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -1420,7 +1424,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/versions": {
       "get": {
-        "operationId": "PortalExtensionVersions_ListByPortalExtension",
+        "operationId": "PortalExtensionVersions_ListByExtensions",
         "tags": [
           "PortalExtensionVersions"
         ],
@@ -1505,7 +1509,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^([A-Za-z0-9-]+(.){0,1})+$"
           }
         ],
         "responses": {
@@ -1562,7 +1566,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^([A-Za-z0-9-]+(.){0,1})+$"
           },
           {
             "name": "resource",
@@ -1587,6 +1591,10 @@
               "$ref": "#/definitions/ExtensionVersion"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1648,7 +1656,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^([A-Za-z0-9-]+(.){0,1})+$"
           },
           {
             "name": "parameters",
@@ -1657,8 +1665,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchableExtensionVersion"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -1715,7 +1722,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^([A-Za-z0-9-]+(.){0,1})+$"
           }
         ],
         "responses": {
@@ -1749,7 +1756,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1866,11 +1873,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionDeploymentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1971,11 +1974,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionSlotProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2046,11 +2045,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2225,11 +2220,7 @@
         "properties": {
           "$ref": "#/definitions/PortalExtensionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2372,19 +2363,19 @@
       "type": "object",
       "description": "The content metadata of a file",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for PortalExtensionListSourcesFile."
-        },
         "lastModifiedAt": {
           "type": "string",
           "description": "The last time stamp the file was modified."
+        },
+        "kind": {
+          "$ref": "#/definitions/SourceFileKind",
+          "description": "The kind of source file."
         }
       },
       "discriminator": "kind",
       "required": [
-        "kind",
-        "lastModifiedAt"
+        "lastModifiedAt",
+        "kind"
       ]
     },
     "PortalExtensionListSourcesFolder": {
@@ -2745,6 +2736,41 @@
             "name": "GA",
             "value": "GA",
             "description": "The extension is in GA."
+          }
+        ]
+      }
+    },
+    "SourceFileKind": {
+      "type": "string",
+      "enum": [
+        "Svg",
+        "AssetType",
+        "View",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "SourceFileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Svg",
+            "value": "Svg",
+            "description": "The file is a SVG image."
+          },
+          {
+            "name": "AssetType",
+            "value": "AssetType",
+            "description": "The file is an asset type."
+          },
+          {
+            "name": "View",
+            "value": "View",
+            "description": "The file is a view."
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "The file is of other kind."
           }
         ]
       }

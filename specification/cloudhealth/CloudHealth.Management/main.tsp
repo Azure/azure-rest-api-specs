@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace(ProviderName)
 @service({
@@ -46,15 +45,13 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A HealthModel resource")
 model HealthModel is TrackedResource<HealthModelProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of health model resource")
   @key("healthModelName")
   @path
   @segment("healthmodels")
   name: stringResourceName;
 
-  ...ManagedServiceIdentity;
-  ...ResourceSku;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("HealthModel properties")
@@ -69,18 +66,17 @@ model HealthModelProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Not supported with ProviderHub emitter currently"
 @doc("Health Model provisioning states")
-enum HealthModelProvisioningState {
-  ...ResourceProvisioningState, // include standard provisioning states
-  Creating,
-  Deleting,
+union HealthModelProvisioningState {
+  string,
+  ResourceProvisioningState, // include standard provisioning states
+  Creating: "Creating",
+  Deleting: "Deleting",
 }
 
 @doc("A signal definition in a health model")
 @parentResource(HealthModel)
 model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the signal definition. Must be unique within a health model.")
   @key("signalDefinitionName")
   @segment("signaldefinitions")
@@ -268,13 +264,10 @@ model LogAnalyticsQuerySignalDefinitionProperties
   @maxLength(100)
   timeGrain?: string;
 
-  @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified.")
+  @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified. The column must be numeric.")
   @minLength(1)
   @maxLength(100)
   valueColumnName?: string;
-
-  @doc("Data type of the result")
-  dataType: ResultDataType;
 }
 
 @doc("Prometheus Metrics Signal Definition properties")
@@ -312,9 +305,6 @@ union SignalOperator {
 
   @doc("Equal to")
   Equals: "Equals",
-
-  @doc("Contains (only applicable for text data type)")
-  Contains: "Contains",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -329,18 +319,9 @@ union MetricAggregationType {
   Total: "Total",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
-@doc("Result data type")
-union ResultDataType {
-  string,
-  Numeric: "Numeric",
-  Text: "Text",
-}
-
 @doc("An authentication setting in a health model")
 @parentResource(HealthModel)
 model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the authentication setting. Must be unique within a health model.")
   @key("authenticationSettingName")
   @segment("authenticationsettings")
@@ -387,7 +368,6 @@ model ManagedIdentityAuthenticationSettingProperties
 @doc("An entity (aka node) of a health model")
 @parentResource(HealthModel)
 model Entity is ProxyResource<EntityProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the entity. Must be unique within a health model.")
   @key("entityName")
   @segment("entities")
@@ -438,6 +418,58 @@ model EntityProperties {
   @visibility("read")
   @doc("Health state of this entity")
   healthState?: HealthState;
+
+  @doc("Alert configuration for this entity")
+  alerts?: EntityAlerts;
+}
+
+@doc("Alert configuration for an entity")
+model EntityAlerts {
+  @doc("Alert to be triggered on state change to unhealthy")
+  unhealthy?: AlertConfiguration;
+
+  @doc("Alert to be triggered on state change to degraded")
+  degraded?: AlertConfiguration;
+}
+
+@doc("Alert configuration details")
+model AlertConfiguration {
+  @doc("The severity of triggered alert.")
+  severity: AlertSeverity;
+
+  @doc("The alert rule description.")
+  @maxLength(1000)
+  @minLength(1)
+  description?: string;
+
+  @doc("List of action group resource IDs to be notified when the alert is triggered.")
+  @maxItems(5)
+  @minItems(1)
+  actionGroupIds: armResourceIdentifier<[
+    {
+      type: "Microsoft.Insights/actionGroups";
+    }
+  ]>[];
+}
+
+@doc("Severity of an alert")
+union AlertSeverity {
+  string,
+
+  @doc("Critical")
+  Sev0: "Sev0",
+
+  @doc("Error")
+  Sev1: "Sev1",
+
+  @doc("Warning")
+  Sev2: "Sev2",
+
+  @doc("Informational")
+  Sev3: "Sev3",
+
+  @doc("Verbose")
+  Sev4: "Sev4",
 }
 
 @doc("Visual icon definition of an entity")
@@ -505,11 +537,6 @@ model AzureResourceSignalGroup is SignalAssignmentGroup {
 model LogAnalyticsSignalGroup is SignalAssignmentGroup {
   @doc("Log Analytics Workspace resource ID")
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
-
-  @doc("Log Analytics workspace ID") // Ideally, we dont need this since we also have the Resource Id. But at the moment we need this ID for querying
-  @minLength(36)
-  @maxLength(36)
-  logAnalyticsWorkspaceId: string;
 }
 
 @doc("A grouping of signal assignments for a Azure Monitor Workspace")
@@ -578,7 +605,6 @@ scalar AzureMonitorWorkspaceResourceId
 @doc("A relationship (aka edge) between two entities in a health model")
 @parentResource(HealthModel)
 model Relationship is ProxyResource<RelationshipProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the relationship. Must be unique within a health model. For example, a concatenation of parentEntityName and childEntityName can be used as the name.")
   @key("relationshipName")
   @segment("relationships")
@@ -621,7 +647,6 @@ model RelationshipProperties {
 @doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
 @parentResource(HealthModel)
 model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the discovery rule. Must be unique within a health model.")
   @key("discoveryRuleName")
   @segment("discoveryrules")
@@ -695,69 +720,79 @@ alias TimestampQueryParam = {
   timestamp?: utcDateTime;
 };
 
-@armResourceOperations
+@armResourceOperations(HealthModel)
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
-  update is ArmResourcePatchAsync<HealthModel, HealthModelProperties>;
+  update is ArmCustomPatchAsync<
+    HealthModel,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      HealthModel,
+      HealthModelProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
   listByResourceGroup is ArmResourceListByParent<HealthModel>;
   listBySubscription is ArmListBySubscription<HealthModel>;
 }
 
-@armResourceOperations
+@armResourceOperations(SignalDefinition)
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
   delete is ArmResourceDeleteSync<SignalDefinition>;
 
-  listByParent is ArmResourceListByParent<
+  listByHealthModel is ArmResourceListByParent<
     SignalDefinition,
-    BaseParameters<SignalDefinition> & TimestampQueryParam
+    Azure.ResourceManager.Foundations.BaseParameters<SignalDefinition> &
+      TimestampQueryParam
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(AuthenticationSetting)
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
   delete is ArmResourceDeleteSync<AuthenticationSetting>;
 
-  listByParent is ArmResourceListByParent<AuthenticationSetting>;
+  listByHealthModel is ArmResourceListByParent<AuthenticationSetting>;
 }
 
-@armResourceOperations
+@armResourceOperations(Entity)
 interface Entities {
   get is ArmResourceRead<Entity>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
   delete is ArmResourceDeleteSync<Entity>;
 
-  listByParent is ArmResourceListByParent<
+  listByHealthModel is ArmResourceListByParent<
     Entity,
-    BaseParameters<Entity> & TimestampQueryParam
+    Azure.ResourceManager.Foundations.BaseParameters<Entity> &
+      TimestampQueryParam
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(Relationship)
 interface Relationships {
   get is ArmResourceRead<Relationship>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
   delete is ArmResourceDeleteSync<Relationship>;
 
-  listByParent is ArmResourceListByParent<
+  listByHealthModel is ArmResourceListByParent<
     Relationship,
-    BaseParameters<Relationship> & TimestampQueryParam
+    Azure.ResourceManager.Foundations.BaseParameters<Relationship> &
+      TimestampQueryParam
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(DiscoveryRule)
 interface DiscoveryRules {
   get is ArmResourceRead<DiscoveryRule>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
   delete is ArmResourceDeleteSync<DiscoveryRule>;
 
-  listByParent is ArmResourceListByParent<
+  listByHealthModel is ArmResourceListByParent<
     DiscoveryRule,
-    BaseParameters<DiscoveryRule> & TimestampQueryParam
+    Azure.ResourceManager.Foundations.BaseParameters<DiscoveryRule> &
+      TimestampQueryParam
   >;
 }

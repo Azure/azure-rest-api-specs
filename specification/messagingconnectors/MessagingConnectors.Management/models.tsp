@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -12,129 +11,188 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
+@doc("Microsoft.MessagingConnectors Resource Provider management API.")
+@armProviderNamespace
+@service({
+  title: "Microsoft.MessagingConnectors management service",
+})
+@versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
 @doc("Provisioning states of Connector ARM Resource")
 @lroStatus
-enum ConnectorProvisioningState {
-  ...ResourceProvisioningState,
+union ConnectorProvisioningState {
+  @doc("Resource has been created.")
+  Succeeded: "Succeeded",
+
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
 
   @doc("Accepted State")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Creating State")
-  Creating,
+  Creating: "Creating",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
+
+  string,
 }
 
 @doc("Business State of Connector")
-enum ConnectorState {
+union ConnectorState {
   @doc("Unknown State")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Creating State")
-  Creating,
+  Creating: "Creating",
 
   @doc("Initializing State")
-  Initializing,
+  Initializing: "Initializing",
 
   @doc("Running State")
-  Running,
+  Running: "Running",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
 
   @doc("Degraded State")
-  Degraded,
+  Degraded: "Degraded",
 
   @doc("Stopped State")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Paused State")
-  Paused,
+  Paused: "Paused",
 
   @doc("Deleting State")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Failed State")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("Enum of Directions of Connector")
-enum Direction {
+union Direction {
   @doc("Unknown direction")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Source Connector")
-  Source,
+  Source: "Source",
 
   @doc("Sink Connector")
-  Sink,
+  Sink: "Sink",
+
+  string,
 }
 
 @doc("Enum of the type of Connector")
-enum ConnectorType {
+union ConnectorType {
   @doc("Unknown source connector.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Google pub sub source connector.")
-  GooglePubSubSource,
+  GooglePubSubSource: "GooglePubSubSource",
 
   @doc("Amazon kinesis source connector.")
-  KinesisSource,
+  KinesisSource: "KinesisSource",
 
   @doc("Postgre sql source connector.")
-  PostgreSqlSource,
+  PostgreSqlSource: "PostgreSqlSource",
 
   @doc("Sql server source connector.")
-  SqlServerSource,
+  SqlServerSource: "SqlServerSource",
 
   @doc("Cosmos db source connector.")
-  CosmosDbSource,
+  CosmosDbSource: "CosmosDbSource",
 
   @doc("BitCoin source connector.")
-  BitCoinSource,
+  BitCoinSource: "BitCoinSource",
 
   @doc("Kafka source connector.")
-  KafkaSource,
+  KafkaSource: "KafkaSource",
 
   @doc("confluent source connector.")
-  ConfluentSource,
+  ConfluentSource: "ConfluentSource",
 
   @doc("mysql source connector.")
-  MySqlSource,
+  MySqlSource: "MySqlSource",
+
+  @doc("servicebus source connector.")
+  AzureServiceBusSource: "AzureServiceBusSource",
+
+  string,
 }
 
 @doc("Enum of the type of Converter")
-enum ConverterType {
+union ConverterType {
   @doc("Unknown converter.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("This represents a converter for byte arrays format.")
-  ByteArrayConverter,
+  ByteArrayConverter: "ByteArrayConverter",
 
   @doc("This represents a converter for string format.")
-  StringConverter,
+  StringConverter: "StringConverter",
 
   @doc("This represents a converter for json format.")
-  JsonConverter,
+  JsonConverter: "JsonConverter",
 
   @doc("This represents a converter for Avro format.")
-  AvroConverter,
+  AvroConverter: "AvroConverter",
 
   @doc("This represents a converter for csv format.")
-  CsvConverter,
+  CsvConverter: "CsvConverter",
+
+  string,
 }
 
 @doc("Enum of the OffsetPolicy for CosmosDB connector")
-enum OffsetPolicyForCosmosDB {
-  @doc("use the latest (most recent) source offset,")
-  UseLatestSourceOffset,
+union OffsetPolicyForCosmosDB {
+  @doc("use the latest (most recent) source offset")
+  UseLatestSourceOffset: "UseLatestSourceOffset",
 
   @doc("use the earliest recorded offset")
-  UseEarliestRecordedOffset,
+  UseEarliestRecordedOffset: "UseEarliestRecordedOffset",
+
+  string,
+}
+
+@doc("Enum of the SaslMechanism for Confluent connector")
+union SaslMechanismForConfluent {
+  @doc("The PLAIN sasl mechanism.")
+  Plain: "PLAIN",
+
+  @doc("The SCRAM-SHA-256 sasl mechanism.")
+  ScramSha256: "SCRAM-SHA-256",
+
+  @doc("The SCRAM-SHA-512 sasl mechanism.")
+  ScramSha512: "SCRAM-SHA-512",
+
+  string,
+}
+
+@doc("Enum of the SecurityProtocol for Confluent connector")
+union SecurityProtocolForConfluent {
+  @doc("The SASL_PLAINTEXT security protocol.")
+  SaslPlainText: "SASL_PLAINTEXT",
+
+  @doc("The PLAINTEXT security protocol.")
+  PlainText: "PLAINTEXT",
+
+  @doc("The SASL_SSL security protocol.")
+  SaslSsl: "SASL_SSL",
+
+  @doc("The SSL security protocol.")
+  Ssl: "SSL",
+
+  string,
 }
 
 @doc("Basic info for EventHub")
@@ -148,6 +206,183 @@ model EventHubConfig {
   @doc("connectionString of the EventHub.")
   @secret
   connectionString: string;
+}
+
+@doc("Source data format Types")
+union SourceDataFormatTypes {
+  @doc("None config")
+  None: "None",
+
+  @doc("JSON format")
+  JSON: "JSON",
+
+  @doc("CSV format")
+  CSV: "CSV",
+
+  string,
+}
+
+@doc("Source data format base model")
+@discriminator("type")
+model SourceDataFormat {
+  @doc("Type of data format")
+  type: SourceDataFormatTypes;
+}
+
+@doc("JSON source data format model")
+model JsonSourceDataFormat extends SourceDataFormat {
+  @doc("Type of data format")
+  type: SourceDataFormatTypes.JSON;
+
+  @doc("Charset supported by Java language")
+  textCharset: string;
+}
+
+@doc("Delimiter for csv")
+union CsvDelimiters {
+  @doc("Pipe delimiter")
+  Pipe: "Pipe",
+
+  @doc("Comma delimiter")
+  Comma: "Comma",
+
+  @doc("SemiColon delimiter")
+  SemiColon: "SemiColon",
+
+  @doc("Space delimiter")
+  Space: "Space",
+
+  @doc("Tab delimiter")
+  Tab: "Tab",
+
+  string,
+}
+
+@doc("CsvHeader types")
+union CsvHeaderTypes {
+  @doc("include CSV header")
+  IncludeHeader: "IncludeHeader",
+
+  @doc("exclude CSV header")
+  ExcludeHeader: "ExcludeHeader",
+
+  string,
+}
+
+@doc("CSV Source data format model")
+model CsvSourceDataFormat extends SourceDataFormat {
+  @doc("Type of data format")
+  type: SourceDataFormatTypes.CSV;
+
+  @doc("CSV header type")
+  header: CsvHeaderTypes;
+
+  @doc("CSV Delimiter")
+  delimiter: CsvDelimiters;
+
+  @doc("Charset supported by Java language")
+  textCharset: string;
+}
+
+@doc("Base class for Converter config")
+@discriminator("type")
+model ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType;
+}
+
+@doc("CsvConverter config")
+model CsvConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.CsvConverter;
+}
+
+@doc("AvroConverter config")
+model AvroConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.AvroConverter;
+}
+
+@doc("StringConverter config")
+model StringConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.StringConverter;
+}
+
+@doc("ByteArrayConverter config")
+model ByteArrayConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.ByteArrayConverter;
+}
+
+@doc("Json Decimal Format configuration")
+union JsonDecimalFormat {
+  @doc("Type of Base64.")
+  Base64: "Base64",
+
+  @doc("Type of Numeric.")
+  Numeric: "Numeric",
+
+  string,
+}
+
+@doc("JsonConverter config")
+model JsonConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.JsonConverter;
+
+  @doc("Whether schemas enabled.")
+  schemasEnabled?: boolean;
+
+  @doc("Format for Decimal type.")
+  decimalFormat?: JsonDecimalFormat;
+}
+
+@doc("CloudEvents types")
+union CloudEventsTypes {
+  @doc("Do not use CloudEventsConfig")
+  None: "None",
+
+  @doc("CatalogCloudEventsConfig")
+  Catalog: "Catalog",
+
+  string,
+}
+
+@doc("Cloud events config")
+@discriminator("type")
+model CloudEventsConfig {
+  @doc("Type of CloudEventsConfig.")
+  type: CloudEventsTypes;
+}
+
+@doc("Catalog schema id config")
+model CatalogSchemaId {
+  @doc("SchemaGroup id.")
+  schemaGroupId: string;
+
+  @doc("Schema id.")
+  schemaId: string;
+
+  @doc("Endpoint.")
+  endpoint: string;
+}
+
+@doc("Catalog cloud events transform config.")
+model CatalogCloudEventsConfig extends CloudEventsConfig {
+  @doc("Type of CatalogCloudEventsConfig.")
+  type: CloudEventsTypes.Catalog;
+
+  @doc("Whether auto-register new schemas.")
+  autoRegisterSchemas: boolean;
+
+  @doc("Catalog schemaIds.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  catalogSchemaIds: CatalogSchemaId[];
+
+  @doc("access token.")
+  @secret
+  accessToken: string;
 }
 
 @doc("Properties of one arm resource")
@@ -169,6 +404,9 @@ model ConnectorProperties {
   @doc("Type of the Connector.")
   valueConverter: ConverterType;
 
+  @doc("Type of the Connector.")
+  converterConfig: ConverterConfig;
+
   @doc("Direction of the Connector.")
   connectorDirection?: Direction;
 
@@ -177,6 +415,12 @@ model ConnectorProperties {
 
   @doc("connectionString of the EventHub.")
   eventHubConfig: EventHubConfig;
+
+  @doc("Data format of the data source")
+  sourceDataFormat?: SourceDataFormat;
+
+  @doc("Cloud events config")
+  cloudEventsConfig?: CloudEventsConfig;
 
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
@@ -217,6 +461,12 @@ model ConfluentSourceConnectorProperties extends ConnectorProperties {
   @doc("Password of the Confluent.")
   @secret
   password: string;
+
+  @doc("Sasl mechanism of the confluent.")
+  saslMechanism: SaslMechanismForConfluent;
+
+  @doc("Security protocol of the confluent.")
+  securityProtocol: SecurityProtocolForConfluent;
 }
 
 @doc("Configuration for CosmosDbSourceConnector")
@@ -266,6 +516,26 @@ model GooglePubSubSourceConnectorProperties extends ConnectorProperties {
   accountKey: string;
 }
 
+@doc("StartPosition types for Kinesis")
+union KinesisStartPositionType {
+  @doc("TrimHorizon type")
+  TrimHorizon: "TrimHorizon",
+
+  @doc("Latest type")
+  Latest: "Latest",
+
+  @doc("AtSequenceNumber type")
+  AtSequenceNumber: "AtSequenceNumber",
+
+  @doc("AfterSequenceNumber type")
+  AfterSequenceNumber: "AfterSequenceNumber",
+
+  @doc("AtTimestamp type")
+  AtTimestamp: "AtTimestamp",
+
+  string,
+}
+
 @doc("Configuration for KinesisSourceConnector")
 model KinesisSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of KinesisSourceConnector")
@@ -286,6 +556,15 @@ model KinesisSourceConnectorProperties extends ConnectorProperties {
 
   @doc("StreamName in AWS Kinesis Server.")
   awsKinesisStreamName: string;
+
+  @doc("startPosition supported by Kinesis.")
+  startPosition: KinesisStartPositionType;
+
+  @doc("startSequence for startPosition.")
+  startSequence?: string;
+
+  @doc("startTime for startPosition.")
+  startTime?: utcDateTime;
 }
 
 @doc("Configuration for PostgreSqlSourceConnector")
@@ -376,4 +655,81 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 
   @doc("Tables used as source.")
   tableNames: string;
+}
+
+@doc("Type of AzureServiceBusType")
+union AzureServiceBusType {
+  @doc("Topic type")
+  Topic: "Topic",
+
+  @doc("Queue type")
+  Queue: "Queue",
+
+  string,
+}
+@doc("Configuration for AzureServiceBusSourceConnector")
+model AzureServiceBusSourceConnectorProperties extends ConnectorProperties {
+  @doc("Type of AzureServiceBusSource")
+  connectorType: ConnectorType.AzureServiceBusSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("Name for topic Or Queue.")
+  topicOrQueueName: string;
+
+  @doc("Name for subscription.")
+  subscriptionName?: string;
+
+  @doc("connectionString for AzureServiceBusSource.")
+  connectionString: string;
+
+  @doc("AzureServiceBusSource type.")
+  serviceBusType: AzureServiceBusType;
+}
+
+@doc("Type of DataRange")
+union DataRangeType {
+  @doc("Unknown type")
+  Unknown: "Unknown",
+
+  @doc("Max limit range type")
+  Limit: "Limit",
+
+  string,
+}
+
+@doc("Base config for DataRange")
+@discriminator("type")
+model DataRangeBaseConfig {
+  @doc("type of dataRange")
+  type: DataRangeType;
+}
+
+@doc("DataRange by max records limit")
+model DataRangeLimit extends DataRangeBaseConfig {
+  @doc("Limit type of DataRange")
+  type: DataRangeType.Limit;
+
+  @doc("Max Limit for DataRange")
+  limit: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@doc("Properties of one DataPreview")
+model DataPreviewProperties {
+  @doc("Properties of one Connector Source")
+  connectorProperties: ConnectorProperties;
+
+  @doc("DataRange for DataPreview")
+  dataRange: DataRangeBaseConfig;
+}
+
+@doc("Properties of DataPreview results")
+model DataPreviewResults {
+  @doc("Count of DataPreview results")
+  count: int32;
+
+  @doc("Content of DataPreview results")
+  results: string[];
 }

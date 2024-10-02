@@ -776,6 +776,24 @@
         "location"
       ]
     },
+    "NotificationType": {
+      "type": "string",
+      "description": "The type of notification we want to send for auto actions operations.",
+      "enum": [
+        "Email"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Email",
+            "value": "Email",
+            "description": "Notify through e-mail"
+          }
+        ]
+      }
+    },
     "OperationState": {
       "type": "string",
       "description": "Values that define the states of operations in Scheduled Actions",
@@ -840,7 +858,8 @@
             "description": "Operations that are blocked"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "OptimizationPreference": {
       "type": "string",
@@ -872,6 +891,43 @@
         ]
       }
     },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ResourceOperation": {
       "type": "object",
       "description": "High level response from an operation on a resource",
@@ -892,10 +948,7 @@
           "$ref": "#/definitions/ResourceOperationDetails",
           "description": "Details of the operation performed on a resource"
         }
-      },
-      "required": [
-        "resourceId"
-      ]
+      }
     },
     "ResourceOperationDetails": {
       "type": "object",
@@ -944,8 +997,7 @@
                 "description": "Hibernate operations on the resources"
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         },
         "subscriptionId": {
           "type": "string",
@@ -985,8 +1037,7 @@
                 "description": "Complete the operation by the given deadline."
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         },
         "state": {
           "type": "string",
@@ -1054,7 +1105,7 @@
               }
             ]
           },
-          "x-ms-enum.modelAsString": true
+          "readOnly": true
         },
         "timeZone": {
           "type": "string",
@@ -1212,8 +1263,7 @@
                 "description": "Complete the operation by the given deadline."
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         }
       },
       "required": [
@@ -1342,24 +1392,6 @@
         "resources",
         "correlationid"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "ComputeSchedule API versions",
-      "enum": [
-        "2024-06-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-06-01-preview",
-            "value": "2024-06-01-preview",
-            "description": "2024-06-01-preview version"
-          }
-        ]
-      }
     }
   },
   "parameters": {}

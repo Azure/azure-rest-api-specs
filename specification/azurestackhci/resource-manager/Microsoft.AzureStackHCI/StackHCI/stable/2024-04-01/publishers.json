@@ -1,0 +1,188 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCI",
+    "version": "2024-04-01",
+    "description": "Azure Stack HCI management service"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers": {
+      "get": {
+        "operationId": "Publishers_ListByCluster",
+        "description": "List Publishers available for the HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublisherList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Publisher resources by HCI Cluster": {
+            "$ref": "./examples/ListPublishersByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}": {
+      "get": {
+        "operationId": "Publishers_Get",
+        "description": "Get Publisher resource details of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Publisher"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Publisher": {
+            "$ref": "./examples/GetPublisher.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Publisher": {
+      "type": "object",
+      "description": "Publisher details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublisherProperties",
+          "description": "Publisher properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PublisherList": {
+      "type": "object",
+      "description": "List of Publisher proxy resources for the HCI cluster.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Publisher proxy resources.",
+          "items": {
+            "$ref": "#/definitions/Publisher"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "PublisherProperties": {
+      "type": "object",
+      "description": "Publisher properties.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning State",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "description": "The name of the cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherNameParameter": {
+      "name": "publisherName",
+      "in": "path",
+      "description": "The name of the publisher available within HCI cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

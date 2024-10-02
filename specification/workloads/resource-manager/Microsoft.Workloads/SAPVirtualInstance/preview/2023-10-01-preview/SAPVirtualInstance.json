@@ -443,6 +443,10 @@
           "SAPVirtualInstances"
         ],
         "operationId": "SAPVirtualInstances_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SAPVirtualInstances_Update": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Update.json"
@@ -475,8 +479,14 @@
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "Describes the Virtual Instance for SAP solutions resource which is successfully updated.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to poll for status updates."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
@@ -528,9 +538,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -831,9 +838,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1021,7 +1025,7 @@
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_Update.json"
           }
         },
-        "description": "Updates the Database resource.",
+        "description": "Updates the Database instance resource. This can be used to update tags on the resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1098,9 +1102,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1288,7 +1289,7 @@
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_Update.json"
           }
         },
-        "description": "Puts the SAP Application Server Instance resource.",
+        "description": "Updates the SAP Application server instance resource. This can be used to update tags on the resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1365,9 +1366,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "headers": {
               "Location": {
@@ -1448,10 +1446,10 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "SAPVirtualInstances_Start": {
+          "Start the SAP system": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Start.json"
           },
-          "SAPVirtualInstances_Start_WithInfraOperations": {
+          "Start the virtual machines and the SAP system": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Start_WithInfraOperations.json"
           }
         },
@@ -1805,7 +1803,7 @@
           "Stop the SAP Application Server Instance": {
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StopInstance.json"
           },
-          "Stop the SAP Application Server Instance and it's infrastructure.": {
+          "Stop the SAP Application Server Instance and the Virtual machine": {
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StopInstance_WithInfraOperations.json"
           }
         },
@@ -2316,6 +2314,17 @@
       },
       "description": "An error response from the Virtual Instance for SAP Workload service."
     },
+    "UpdateSAPVirtualInstanceProperties": {
+      "description": "Defines the properties to be updated for Virtual Instance for SAP.",
+      "type": "object",
+      "properties": {
+        "managedResourcesNetworkAccessType": {
+          "$ref": "#/definitions/ManagedResourcesNetworkAccessType",
+          "description": "Specifies the network access configuration for the resources that will be deployed in the Managed Resource Group. The options to choose from are Public and Private. If 'Private' is chosen, the Storage Account service tag should be enabled on the subnets in which the SAP VMs exist. This is required for establishing connectivity between VM extensions and the managed resource group storage account. This setting is currently applicable only to Storage Account. Learn more here https://go.microsoft.com/fwlink/?linkid=2247228",
+          "default": "Public"
+        }
+      }
+    },
     "UpdateSAPVirtualInstanceRequest": {
       "description": "Defines the request body for updating Virtual Instance for SAP.",
       "type": "object",
@@ -2330,10 +2339,8 @@
         "identity": {
           "$ref": "../../../common-types/v1/commonTypes.json#/definitions/UserAssignedServiceIdentity"
         },
-        "managedResourcesNetworkAccessType": {
-          "$ref": "#/definitions/ManagedResourcesNetworkAccessType",
-          "description": "Specifies the network access configuration for the resources that will be deployed in the Managed Resource Group. The options to choose from are Public and Private. If 'Private' is chosen, the Storage Account service tag should be enabled on the subnets in which the SAP VMs exist. This is required for establishing connectivity between VM extensions and the managed resource group storage account. This setting is currently applicable only to Storage Account. Learn more here https://go.microsoft.com/fwlink/?linkid=2247228",
-          "default": "Public"
+        "properties": {
+          "$ref": "#/definitions/UpdateSAPVirtualInstanceProperties"
         }
       }
     },
@@ -4410,7 +4417,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[A-Z][A-Z0-9]{2}$",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$",
       "description": "The name of the Virtual Instances for SAP solutions resource",
       "x-ms-parameter-location": "method"
     },

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -20,7 +19,6 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@useAuth(AADToken)
 namespace Microsoft.AzureStackHCI;
 
 /**
@@ -33,19 +31,32 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",
-}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "AADToken is the correct case."
-@doc("The Azure Active Directory OAuth2 Flow")
-model AADToken
-  is OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode;
-      authorizationUrl: "https://api.example.com/oauth2/authorize";
-      tokenUrl: "https://api.example.com/oauth2/token";
-      scopes: [
-        "https://management.azure.com/read",
-        "https://management.azure.com/write"
-      ];
-    }
-  ]>;
+  /**
+   * The 2024-05-01-preview API version for internal testing only.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_05_01_preview: "2024-05-01-preview",
+
+  /**
+   * The 2024-07-15-preview API version for internal testing only.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_07_15_preview: "2024-07-15-preview",
+
+  /**
+   * The 2024-08-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_08_01_preview: "2024-08-01-preview",
+
+  /**
+   * The 2024-09-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_09_01_preview: "2024-09-01-preview",
+}

@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "deploymentName": "myDeployment",
+    "configurationName": "default",
+    "requestBody": {
+      "config": {
+        "files": [
+          {
+            "content": "ABCDEF==",
+            "virtualPath": "/etc/nginx/nginx.conf"
+          }
+        ],
+        "package": {
+          "data": null
+        },
+        "rootFile": "/etc/nginx/nginx.conf"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "FAILED",
+        "data": {
+          "errors": [
+            {
+              "id": "config-analysis-error-1",
+              "directive": "worker_processes",
+              "description": "Directives outside the http context are not allowed",
+              "file": "/etc/nginx/nginx.conf",
+              "line": 2,
+              "message": "You are not allowed to set the worker_processes directive",
+              "rule": "nginx-azure-load-balancer-allowed-directives"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

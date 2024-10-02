@@ -16,7 +16,8 @@ namespace Microsoft.PortalServices;
 /**
  * The portal extension resource definition.
  */
-model PortalExtension is TrackedResource<PortalExtensionProperties> {
+model PortalExtension
+  is Azure.ResourceManager.TrackedResource<PortalExtensionProperties> {
   /**
    * The name of the portal extension.
    */
@@ -45,18 +46,11 @@ interface PortalExtensions {
   /**
    * Updates an existing portal extension.
    */
-  @parameterVisibility("read")
   update is ArmCustomPatchSync<PortalExtension, PatchablePortalExtension>;
 
   /**
    * Deletes the portal extension.
    */
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   delete is ArmResourceDeleteWithoutOkAsync<PortalExtension>;
 
   /**
@@ -72,12 +66,6 @@ interface PortalExtensions {
   /**
    * Alters portal extension source files.
    */
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   alter is ArmResourceActionAsync<PortalExtension, PortalExtensionAlter, never>;
 
   /**
@@ -92,12 +80,6 @@ interface PortalExtensions {
   /**
    * Exports the extension.
    */
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   export is ArmResourceActionAsync<
     PortalExtension,
     PortalExtensionExport,
@@ -131,35 +113,15 @@ interface PortalExtensions {
 );
 
 @@clientName(PortalExtensions.export::parameters.body, "portalExtensionExport");
-@@encodedName(PortalExtensions.export::parameters.body,
-  "application/json",
-  "portalExtensionExport"
-);
 
 @@clientName(PortalExtensions.compileFile::parameters.body,
   "portalExtensionCompileFile"
 );
-@@encodedName(PortalExtensions.compileFile::parameters.body,
-  "application/json",
-  "portalExtensionCompileFile"
-);
 
 @@clientName(PortalExtensions.alter::parameters.body, "portalExtensionAlter");
-@@encodedName(PortalExtensions.alter::parameters.body,
-  "application/json",
-  "portalExtensionAlter"
-);
 
 @@clientName(PortalExtensions.createOrUpdate::parameters.resource,
   "portalExtension"
 );
-@@encodedName(PortalExtensions.createOrUpdate::parameters.resource,
-  "application/json",
-  "portalExtension"
-);
 
 @@clientName(PortalExtensions.update::parameters.properties, "portalExtension");
-@@encodedName(PortalExtensions.update::parameters.properties,
-  "application/json",
-  "portalExtension"
-);

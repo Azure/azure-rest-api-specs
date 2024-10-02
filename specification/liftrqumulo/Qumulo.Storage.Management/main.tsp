@@ -29,12 +29,13 @@ namespace Qumulo.Storage;
  */
 enum Versions {
   /**
-   * The 2024-02-01-preview API version.
+   * The 2024-02-01 Stable API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2_preview)
-  v2_preview: "2024-02-01-preview",
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2_stable: "2024-06-19",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -44,14 +45,14 @@ interface FileSystems {
   /**
    * Get a FileSystemResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_Get")
   get is ArmResourceRead<FileSystemResource>;
 
   /**
    * Create a FileSystemResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FileSystemResource,
@@ -62,15 +63,15 @@ interface FileSystems {
   /**
    * Update a FileSystemResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  @parameterVisibility
   @operationId("FileSystems_Update")
   update is ArmCustomPatchSync<FileSystemResource, FileSystemResourceUpdate>;
 
   /**
    * Delete a FileSystemResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FileSystemResource,
@@ -81,14 +82,14 @@ interface FileSystems {
   /**
    * List FileSystemResource resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<FileSystemResource>;
 
   /**
    * List FileSystemResource resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_ListBySubscription")
   listBySubscription is ArmListBySubscription<FileSystemResource>;
 }

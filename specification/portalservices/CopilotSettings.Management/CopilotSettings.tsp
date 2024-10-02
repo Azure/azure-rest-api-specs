@@ -19,7 +19,8 @@ namespace Microsoft.PortalServices;
 @doc("The copilot settings tenant resource definition.")
 @singleton
 @tenantResource
-model CopilotSettingsResource is ProxyResource<CopilotSettingsProperties> {
+model CopilotSettingsResource
+  is Azure.ResourceManager.ProxyResource<CopilotSettingsProperties> {
   @doc("The default copilot settings, applying to entire tenant.")
   @segment("copilotSettings")
   @key

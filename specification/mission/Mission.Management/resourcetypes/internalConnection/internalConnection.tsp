@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -13,34 +12,45 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
+
 @doc("Specifies the different types of network connections.")
-enum InternalConnectionType {
+union InternalConnectionType {
   @doc("InternalConnectionType Type PrivateLink")
-  PrivateLink,
+  PrivateLink: "PrivateLink",
 
   @doc("InternalConnectionType Type NetworkSecurityGroup.")
-  NetworkSecurityGroup,
+  NetworkSecurityGroup: "NetworkSecurityGroup",
+
+  string,
 }
 
 @doc("Specifies the state of the internalConnection.")
-enum InternalConnectionState {
-  @renamedFrom(Microsoft.Mission.Versions.v2023_08_01_preview, "Pending")
+union InternalConnectionState {
+  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @doc("InternalConnectionState Type Pending")
+  Pending: "Pending",
+
+  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
   @doc("InternalConnectionState Type Pending Approval")
-  PendingApproval,
+  PendingApproval: "PendingApproval",
 
   @added(Microsoft.Mission.Versions.v2023_08_01_preview)
   @doc("InternalConnectionState Type Pending Update")
-  PendingUpdate,
+  PendingUpdate: "PendingUpdate",
 
   @doc("InternalConnectionState Type Approved")
-  Approved,
+  Approved: "Approved",
 
   @doc("InternalConnectionState Type Active")
-  Active,
+  Active: "Active",
 
   @added(Microsoft.Mission.Versions.v2023_08_01_preview)
   @doc("InternalConnectionState Type Failed")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("Describes the properties of an Internal Connection.")

@@ -166,6 +166,10 @@
               "$ref": "#/definitions/LandingZoneConfiguration"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -264,14 +268,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -385,14 +389,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -581,6 +585,10 @@
               "$ref": "#/definitions/LandingZoneRegistration"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -679,14 +687,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1060,12 +1068,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LandingZoneConfigurationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1249,7 +1252,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LandingZoneConfigurationUpdateProperties",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -1410,12 +1413,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LandingZoneRegistrationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1490,7 +1488,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LandingZoneRegistrationUpdateProperties",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -1692,30 +1690,6 @@
         "landingZoneConfigurationName",
         "authoringStatus"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The Microsoft Sovereign Provider version.",
-      "enum": [
-        "2023-09-28-preview",
-        "2024-03-31-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Preview20230928",
-            "value": "2023-09-28-preview",
-            "description": "Preview version."
-          },
-          {
-            "name": "Preview20240331",
-            "value": "2024-03-31-preview",
-            "description": "Second preview version."
-          }
-        ]
-      }
     }
   },
   "parameters": {}

@@ -104,6 +104,7 @@ union Status {
 @doc("Public Cloud Connector")
 model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @doc("Represent public cloud connectors resource.")
+  @pattern("^[a-zA-Z0-9-]{3,63}$")
   @key("publicCloudConnector")
   @path
   @segment("publicCloudConnectors")
@@ -122,6 +123,10 @@ model PublicCloudConnectorProperties {
   @doc("The resource provisioning state.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
+
+  @doc("Connector primary identifier.")
+  @visibility("read")
+  connectorPrimaryIdentifier?: string;
 }
 
 @doc("Enum of host cloud the public cloud connector is referencing.")
@@ -153,6 +158,7 @@ model AwsCloudProfile {
 model SolutionConfiguration
   is ExtensionResource<SolutionConfigurationProperties> {
   @doc("Represent Solution Configuration Resource.")
+  @pattern("^[a-zA-Z0-9-]{3,63}$")
   @key("solutionConfiguration")
   @path
   @segment("solutionConfigurations")
@@ -349,6 +355,12 @@ interface SolutionConfigurations {
   >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
   listByWidget is ArmResourceListAtScope<SolutionConfiguration>;
+
+  @doc("Trigger immediate sync with source cloud")
+  syncNow is ArmResourceActionNoResponseContentAsync<
+    SolutionConfiguration,
+    void
+  >;
 }
 
 @armResourceOperations

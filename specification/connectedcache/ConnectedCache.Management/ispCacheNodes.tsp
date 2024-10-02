@@ -7,7 +7,6 @@ import "./ispCustomers.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ConnectedCache;
 
@@ -38,7 +37,7 @@ interface IspCacheNodesOperations {
   @doc("This api deletes an existing ispCacheNode resource")
   delete is ArmResourceDeleteWithoutOkAsync<IspCacheNodeResource>;
   @doc("This api retrieves information about all ispCacheNode resources under the given subscription and resource group")
-  listByCustomers is ArmResourceListByParent<IspCacheNodeResource>;
+  listByIspCustomerResource is ArmResourceListByParent<IspCacheNodeResource>;
   @doc("This api gets ispCacheNode resource information")
   getBgpCidrs is ArmResourceActionSync<
     IspCacheNodeResource,

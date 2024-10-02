@@ -1,20 +1,20 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The logical network resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@extension("x-ms-azure-resource", true)
 model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
   @doc("Name of the logical network")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -37,14 +37,14 @@ interface LogicalNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LogicalNetwork>;
 
   @doc("The operation to update a logical network.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<LogicalNetwork, LogicalNetworksUpdateRequest>;
 
   @doc("The operation to delete a logical network.")
   delete is ArmResourceDeleteWithoutOkAsync<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
-  list is ArmResourceListByParent<LogicalNetwork>;
+  listByResourceGroup is ArmResourceListByParent<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified subscription. Use the nextLink property in the response to get the next page of logical networks.")
   listAll is ArmListBySubscription<LogicalNetwork>;

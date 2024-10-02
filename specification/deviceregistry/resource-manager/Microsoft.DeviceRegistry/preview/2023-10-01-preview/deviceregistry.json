@@ -83,7 +83,7 @@
           }
         },
         "x-ms-examples": {
-          "Returns list of operations.": {
+          "List_Operations": {
             "$ref": "./examples/List_Operations.json"
           }
         },
@@ -122,7 +122,7 @@
           }
         },
         "x-ms-examples": {
-          "List Asset Endpoint Profiles in a Subscription.": {
+          "List_AssetEndpointProfiles_Subscription": {
             "$ref": "./examples/List_AssetEndpointProfiles_Subscription.json"
           }
         },
@@ -161,7 +161,7 @@
           }
         },
         "x-ms-examples": {
-          "List Assets in a Subscription.": {
+          "List_Assets_Subscription": {
             "$ref": "./examples/List_Assets_Subscription.json"
           }
         },
@@ -200,7 +200,7 @@
           }
         },
         "x-ms-examples": {
-          "List devices in a subscription.": {
+          "List_Devices_Subscription": {
             "$ref": "./examples/List_Devices_Subscription.json"
           }
         },
@@ -245,7 +245,7 @@
           }
         },
         "x-ms-examples": {
-          "Get the status of an async operation.": {
+          "Get_OperationStatus": {
             "$ref": "./examples/Get_OperationStatus.json"
           }
         }
@@ -284,7 +284,7 @@
           }
         },
         "x-ms-examples": {
-          "List Asset Endpoint Profiles in a Resource Group.": {
+          "List_AssetEndpointProfiles_ResourceGroup": {
             "$ref": "./examples/List_AssetEndpointProfiles_ResourceGroup.json"
           }
         },
@@ -336,7 +336,7 @@
           }
         },
         "x-ms-examples": {
-          "Get an Asset Endpoint Profile.": {
+          "Get_AssetEndpointProfile": {
             "$ref": "./examples/Get_AssetEndpointProfile.json"
           }
         }
@@ -390,6 +390,10 @@
               "$ref": "#/definitions/AssetEndpointProfile"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -405,7 +409,7 @@
           }
         },
         "x-ms-examples": {
-          "Create an Asset Endpoint Profile.": {
+          "Create_AssetEndpointProfile": {
             "$ref": "./examples/Create_AssetEndpointProfile.json"
           }
         },
@@ -460,14 +464,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -479,7 +483,7 @@
           }
         },
         "x-ms-examples": {
-          "Patch an Asset Endpoint Profile.": {
+          "Update_AssetEndpointProfile": {
             "$ref": "./examples/Update_AssetEndpointProfile.json"
           }
         },
@@ -519,14 +523,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -541,7 +545,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an Asset Endpoint Profile.": {
+          "Delete_AssetEndpointProfile": {
             "$ref": "./examples/Delete_AssetEndpointProfile.json"
           }
         },
@@ -584,7 +588,7 @@
           }
         },
         "x-ms-examples": {
-          "List Assets in a Resource Group.": {
+          "List_Assets_ResourceGroup": {
             "$ref": "./examples/List_Assets_ResourceGroup.json"
           }
         },
@@ -636,11 +640,11 @@
           }
         },
         "x-ms-examples": {
-          "Get an Asset with Sync Status.": {
-            "$ref": "./examples/Get_Asset_With_SyncStatus.json"
-          },
-          "Get an Asset.": {
+          "Get_Asset": {
             "$ref": "./examples/Get_Asset.json"
+          },
+          "Get_Asset_With_SyncStatus": {
+            "$ref": "./examples/Get_Asset_With_SyncStatus.json"
           }
         }
       },
@@ -693,6 +697,10 @@
               "$ref": "#/definitions/Asset"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -708,13 +716,13 @@
           }
         },
         "x-ms-examples": {
-          "Create an Asset With External Asset Id.": {
+          "Create_Asset_With_ExternalAssetId": {
             "$ref": "./examples/Create_Asset_With_ExternalAssetId.json"
           },
-          "Create an Asset Without Display Name.": {
+          "Create_Asset_Without_DisplayName": {
             "$ref": "./examples/Create_Asset_Without_DisplayName.json"
           },
-          "Create an Asset Without External Asset Id.": {
+          "Create_Asset_Without_ExternalAssetId": {
             "$ref": "./examples/Create_Asset_Without_ExternalAssetId.json"
           }
         },
@@ -769,14 +777,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -788,7 +796,7 @@
           }
         },
         "x-ms-examples": {
-          "Patch an Asset.": {
+          "Update_Asset": {
             "$ref": "./examples/Update_Asset.json"
           }
         },
@@ -828,14 +836,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -850,7 +858,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an Asset.": {
+          "Delete_Asset": {
             "$ref": "./examples/Delete_Asset.json"
           }
         },
@@ -893,7 +901,7 @@
           }
         },
         "x-ms-examples": {
-          "List devices in a resource group.": {
+          "List_Devices_ResourceGroup": {
             "$ref": "./examples/List_Devices_ResourceGroup.json"
           }
         },
@@ -944,7 +952,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a device.": {
+          "Get_Device": {
             "$ref": "./examples/Get_Device.json"
           }
         }
@@ -997,6 +1005,10 @@
               "$ref": "#/definitions/Device"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1012,16 +1024,16 @@
           }
         },
         "x-ms-examples": {
-          "Create a device with attributes.": {
+          "Create_Device_With_Attributes": {
             "$ref": "./examples/Create_Device_With_Attributes.json"
           },
-          "Create a device with endpoints.": {
+          "Create_Device_With_Endpoints": {
             "$ref": "./examples/Create_Device_With_Endpoints.json"
           },
-          "Create a device with external device ID.": {
+          "Create_Device_With_ExternalDeviceId": {
             "$ref": "./examples/Create_Device_With_ExternalDeviceId.json"
           },
-          "Create a device without external device ID.": {
+          "Create_Device_Without_ExternalDeviceId": {
             "$ref": "./examples/Create_Device_Without_ExternalDeviceId.json"
           }
         },
@@ -1075,14 +1087,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1094,11 +1106,11 @@
           }
         },
         "x-ms-examples": {
-          "Update a device with new endpoints.": {
-            "$ref": "./examples/Update_Device_With_New_Endpoints.json"
-          },
-          "Update a device.": {
+          "Update_Device": {
             "$ref": "./examples/Update_Device.json"
+          },
+          "Update_Device_With_New_Endpoints": {
+            "$ref": "./examples/Update_Device_With_New_Endpoints.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1136,14 +1148,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1158,7 +1170,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a device.": {
+          "Delete_Device": {
             "$ref": "./examples/Delete_Device.json"
           }
         },
@@ -1176,12 +1188,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -1207,12 +1214,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssetEndpointProfileProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -1246,8 +1248,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1278,7 +1279,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1290,26 +1291,9 @@
         "targetAddress"
       ]
     },
-    "AssetEndpointProfileUpdate": {
+    "AssetEndpointProfilePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AssetEndpointProfile.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/AssetEndpointProfileUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AssetEndpointProfileUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AssetEndpointProfile.",
+      "description": "Defines the Asset Endpoint Profile properties.",
       "properties": {
         "targetAddress": {
           "type": "string",
@@ -1326,9 +1310,24 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
         }
       }
+    },
+    "AssetEndpointProfileUpdate": {
+      "type": "object",
+      "description": "Asset Endpoint Profile definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssetEndpointProfilePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "AssetListResult": {
       "type": "object",
@@ -1344,8 +1343,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1438,15 +1436,15 @@
         },
         "defaultDataPointsConfiguration": {
           "type": "string",
-          "description": "Protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+          "description": "Stringified JSON that contains protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here."
         },
         "defaultEventsConfiguration": {
           "type": "string",
-          "description": "Protocol-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
         },
         "dataPoints": {
           "type": "array",
-          "description": "Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration. See below for more details for the definition of the dataPoints element.",
+          "description": "Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration.",
           "items": {
             "$ref": "#/definitions/DataPoint"
           },
@@ -1454,7 +1452,7 @@
         },
         "events": {
           "type": "array",
-          "description": "Array of events that are part of the asset. Each event can reference an asset type capability and have per-event configuration. See below for more details about the definition of the events element.",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
           "items": {
             "$ref": "#/definitions/Event"
           },
@@ -1475,60 +1473,9 @@
         "assetEndpointProfileUri"
       ]
     },
-    "AssetStatus": {
+    "AssetPropertiesUpdate": {
       "type": "object",
-      "description": "Defines the asset status properties.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Array object to transfer and persist errors that originate from the Edge.",
-          "items": {
-            "$ref": "#/definitions/AssetStatusError"
-          },
-          "x-ms-identifiers": []
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version."
-        }
-      }
-    },
-    "AssetStatusError": {
-      "type": "object",
-      "description": "Defines the asset status error properties.",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.)."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”)."
-        }
-      }
-    },
-    "AssetUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Asset.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/AssetUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AssetUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Asset.",
+      "description": "Defines the asset properties.",
       "properties": {
         "assetType": {
           "type": "string",
@@ -1585,15 +1532,15 @@
         },
         "defaultDataPointsConfiguration": {
           "type": "string",
-          "description": "Protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+          "description": "Stringified JSON that contains protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here."
         },
         "defaultEventsConfiguration": {
           "type": "string",
-          "description": "Protocol-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
         },
         "dataPoints": {
           "type": "array",
-          "description": "Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration. See below for more details for the definition of the dataPoints element.",
+          "description": "Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration.",
           "items": {
             "$ref": "#/definitions/DataPoint"
           },
@@ -1601,7 +1548,7 @@
         },
         "events": {
           "type": "array",
-          "description": "Array of events that are part of the asset. Each event can reference an asset type capability and have per-event configuration. See below for more details about the definition of the events element.",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
           "items": {
             "$ref": "#/definitions/Event"
           },
@@ -1609,7 +1556,87 @@
         }
       }
     },
+    "AssetStatus": {
+      "type": "object",
+      "description": "Defines the asset status properties.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Array object to transfer and persist errors that originate from the Edge.",
+          "items": {
+            "$ref": "#/definitions/AssetStatusError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetStatusError": {
+      "type": "object",
+      "description": "Defines the asset status error properties.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”).",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetUpdate": {
+      "type": "object",
+      "description": "Asset definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssetPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "DataPoint": {
+      "type": "object",
+      "description": "Defines the data point properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataPointBase"
+        }
+      ]
+    },
+    "DataPointBase": {
       "type": "object",
       "description": "Defines the data point properties.",
       "properties": {
@@ -1670,7 +1697,7 @@
         },
         "dataPointConfiguration": {
           "type": "string",
-          "description": "Protocol-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
         }
       },
       "required": [
@@ -1725,12 +1752,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         },
         "etag": {
           "type": "string",
@@ -1826,8 +1848,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1915,26 +1936,9 @@
         }
       }
     },
-    "DeviceUpdate": {
+    "DevicePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Device.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/DeviceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DeviceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Device.",
+      "description": "Defines the device properties.",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -1956,6 +1960,21 @@
         }
       }
     },
+    "DeviceUpdate": {
+      "type": "object",
+      "description": "Device Model as ARM resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DevicePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "Endpoint": {
       "type": "object",
       "description": "Connection endpoint url a device can use to connect to a service.",
@@ -1971,6 +1990,15 @@
       }
     },
     "Event": {
+      "type": "object",
+      "description": "Defines the event properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventBase"
+        }
+      ]
+    },
+    "EventBase": {
       "type": "object",
       "description": "Defines the event properties.",
       "properties": {
@@ -2013,7 +2041,7 @@
         },
         "eventConfiguration": {
           "type": "string",
-          "description": "Protocol-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+          "description": "Stringified JSON that contains connector-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
         }
       },
       "required": [
@@ -2154,7 +2182,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Defines the mode to authenticate the user of the client at the server.",
+          "description": "Defines the method to authenticate the user of the client at the server.",
           "default": "Certificate",
           "enum": [
             "Anonymous",
@@ -2168,17 +2196,17 @@
               {
                 "name": "Anonymous",
                 "value": "Anonymous",
-                "description": "The user authentication mode is anonymous."
+                "description": "The user authentication method is anonymous."
               },
               {
                 "name": "Certificate",
                 "value": "Certificate",
-                "description": "The user authentication mode is an x509 certificate."
+                "description": "The user authentication method is an x509 certificate."
               },
               {
                 "name": "UsernamePassword",
                 "value": "UsernamePassword",
-                "description": "The user authentication mode is a username and password."
+                "description": "The user authentication method is a username and password."
               }
             ]
           }
@@ -2198,7 +2226,7 @@
     },
     "UserAuthenticationMode": {
       "type": "string",
-      "description": "The mode to authenticate the user of the client at the server.",
+      "description": "The method to authenticate the user of the client at the server.",
       "enum": [
         "Anonymous",
         "Certificate",
@@ -2211,17 +2239,17 @@
           {
             "name": "Anonymous",
             "value": "Anonymous",
-            "description": "The user authentication mode is anonymous."
+            "description": "The user authentication method is anonymous."
           },
           {
             "name": "Certificate",
             "value": "Certificate",
-            "description": "The user authentication mode is an x509 certificate."
+            "description": "The user authentication method is an x509 certificate."
           },
           {
             "name": "UsernamePassword",
             "value": "UsernamePassword",
-            "description": "The user authentication mode is a username and password."
+            "description": "The user authentication method is a username and password."
           }
         ]
       }
@@ -2232,7 +2260,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Defines the mode to authenticate the user of the client at the server.",
+          "description": "Defines the method to authenticate the user of the client at the server.",
           "default": "Certificate",
           "enum": [
             "Anonymous",
@@ -2246,17 +2274,17 @@
               {
                 "name": "Anonymous",
                 "value": "Anonymous",
-                "description": "The user authentication mode is anonymous."
+                "description": "The user authentication method is anonymous."
               },
               {
                 "name": "Certificate",
                 "value": "Certificate",
-                "description": "The user authentication mode is an x509 certificate."
+                "description": "The user authentication method is an x509 certificate."
               },
               {
                 "name": "UsernamePassword",
                 "value": "UsernamePassword",
-                "description": "The user authentication mode is a username and password."
+                "description": "The user authentication method is a username and password."
               }
             ]
           }
@@ -2301,24 +2329,6 @@
           "type": "string",
           "description": "A reference to secret containing the password."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Microsoft.DeviceRegistry Resource Provider supported API versions.",
-      "enum": [
-        "2023-10-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_10_01_preview",
-            "value": "2023-10-01-preview",
-            "description": "Microsoft.DeviceRegistry Resource Provider management API version 2023-10-01-preview."
-          }
-        ]
       }
     },
     "X509Credentials": {

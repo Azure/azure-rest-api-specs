@@ -17,13 +17,14 @@ namespace Microsoft.PortalServices;
  * Extension Version
  */
 @parentResource(PortalExtension)
-model ExtensionVersion is TrackedResource<ExtensionVersionProperties> {
+model ExtensionVersion
+  is Azure.ResourceManager.TrackedResource<ExtensionVersionProperties> {
   /**
    * The name of the version
    */
   @maxLength(64)
   @minLength(3)
-  @pattern("^[a-zA-Z0-9]+$")
+  @pattern("^([A-Za-z0-9-]+(.){0,1})+$")
   @path
   @key("versionName")
   @segment("versions")
@@ -46,18 +47,11 @@ interface PortalExtensionVersions {
   /**
    * Updates an existing portal extension version.
    */
-  @parameterVisibility("read")
   update is ArmCustomPatchSync<ExtensionVersion, PatchableExtensionVersion>;
 
   /**
    * Deletes the portal extension.
    */
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   delete is ArmResourceDeleteWithoutOkAsync<ExtensionVersion>;
 
   /**
@@ -74,9 +68,5 @@ interface PortalExtensionVersions {
 );
 
 @@clientName(PortalExtensionVersions.update::parameters.properties,
-  "parameters"
-);
-@@encodedName(PortalExtensionVersions.update::parameters.properties,
-  "application/json",
   "parameters"
 );

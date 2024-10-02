@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -15,46 +14,53 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
+
 @doc("Community Endpoint Protocol Enum")
-enum CommunityEndpointProtocol {
+union CommunityEndpointProtocol {
   @doc("CommunityEndpointProtocol Type ANY")
-  ANY,
+  ANY: "ANY",
 
   @doc("CommunityEndpointProtocol Type TCP")
-  TCP,
+  TCP: "TCP",
 
   @doc("CommunityEndpointProtocol Type UDP")
-  UDP,
+  UDP: "UDP",
 
   @doc("CommunityEndpointProtocol Type ICMP")
-  ICMP,
+  ICMP: "ICMP",
 
   @doc("CommunityEndpointProtocol Type ESP")
-  ESP,
+  ESP: "ESP",
 
   @doc("CommunityEndpointProtocol Type AH")
-  AH,
+  AH: "AH",
 
   @doc("CommunityEndpointProtocol Type HTTPS")
-  HTTPS,
+  HTTPS: "HTTPS",
 
   @doc("CommunityEndpointProtocol Type HTTP")
-  HTTP,
+  HTTP: "HTTP",
+
+  string,
 }
 
 @doc("Destination Type Enum")
-enum DestinationType {
+union DestinationType {
   @doc("DestinationType Type FQDN")
-  FQDN,
+  FQDN: "FQDN",
 
   @doc("DestinationType Type FQDNTag")
-  FQDNTag,
+  FQDNTag: "FQDNTag",
 
   @doc("DestinationType Type IPAddress")
-  IPAddress,
+  IPAddress: "IPAddress",
 
   @doc("DestinationType Type PrivateNetwork")
-  PrivateNetwork,
+  PrivateNetwork: "PrivateNetwork",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
@@ -113,4 +119,8 @@ model CommunityEndpointProperties {
   @doc("Provisioning State.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @doc("Whether approval is needed for the connection (True or False).")
+  approvalRequired?: boolean;
 }

@@ -14,11 +14,14 @@ namespace Microsoft.MessagingCatalog;
 /**
  * A Messaging Catalog resource
  */
-model MessagingCatalog is TrackedResource<MessagingCatalogProperties> {
+model MessagingCatalog
+  is Azure.ResourceManager.TrackedResource<MessagingCatalogProperties> {
   /**
    * The name of the Messaging Catalog
    */
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,60}$")
+  @minLength(3)
+  @maxLength(60)
   @path
   @key("catalogName")
   @segment("catalogs")
@@ -36,12 +39,12 @@ interface MessagingCatalogs {
   /**
    * Create or update a messaging catalog
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<MessagingCatalog>;
+  create is ArmResourceCreateOrReplaceAsync<MessagingCatalog>;
 
   /**
    * Update a messaging catalogs
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<MessagingCatalog, MessagingCatalogUpdate>;
 
   /**
@@ -52,7 +55,7 @@ interface MessagingCatalogs {
   /**
    * List MessagingCatalog resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("MessagingCatalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<MessagingCatalog>;
 
@@ -60,4 +63,11 @@ interface MessagingCatalogs {
    * List MessagingCatalog resources by subscription ID
    */
   listBySubscription is ArmListBySubscription<MessagingCatalog>;
+
+  associate is ArmResourceActionAsync<
+    MessagingCatalog,
+    Association,
+    Association,
+    BaseParameters<Association>
+  >;
 }

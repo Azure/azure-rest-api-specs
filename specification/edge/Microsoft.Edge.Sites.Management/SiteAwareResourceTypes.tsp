@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -28,7 +27,7 @@ model SiteAwareResourceType is ProxyResource<SiteAwareResourceTypeProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
 @armResourceOperations
 @encodedName("application/json", "SiteAwareResourceTypes")
 interface SiteAwareResourceTypes {
@@ -36,5 +35,5 @@ interface SiteAwareResourceTypes {
   get is ArmResourceRead<SiteAwareResourceType>;
 
   @doc("List operation on SiteAwareResourceType resource")
-  list is ArmResourceListByParent<SiteAwareResourceType>;
+  listByTenant is ArmResourceListByParent<SiteAwareResourceType>;
 }

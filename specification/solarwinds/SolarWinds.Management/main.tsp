@@ -1,14 +1,11 @@
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
 @service({
   title: "SolarWinds.Observability",
-  version: "2023-08-23-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace SolarWinds.Observability;
 
 using Azure.ResourceManager;
@@ -16,6 +13,14 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
+
+@doc("Supported versions for SolarWinds.Observability")
+enum Versions {
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_08_23_preview: "2023-08-23-preview",
+}
 
 @doc("Reusable representation of an email address")
 @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
@@ -31,7 +36,7 @@ model SolarWindsOrganizationResource
   @path
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -44,7 +49,7 @@ interface Organizations {
     SolarWindsOrganizationResource,
     SolarWindsOrganizationResourceUpdate
   >;
-  delete is ArmResourceDeleteAsync<SolarWindsOrganizationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<SolarWindsOrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<SolarWindsOrganizationResource>;
   listBySubscription is ArmListBySubscription<SolarWindsOrganizationResource>;
   @post
@@ -101,7 +106,7 @@ interface TagRules {
   listBySolarWindsOrganizationResource is ArmResourceListByParent<TagRule>;
   get is ArmResourceRead<TagRule>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<TagRule>;
-  delete is ArmResourceDeleteAsync<TagRule>;
+  delete is ArmResourceDeleteWithoutOkAsync<TagRule>;
   update is ArmCustomPatchAsync<TagRule, TagsPatchModel>;
 }
 
@@ -235,51 +240,49 @@ model UserDetails {
 
 @doc("Provisioning State of the Monitor resource")
 @lroStatus
-enum ProvisioningState {
-  ...Azure.ResourceManager.ResourceProvisioningState,
+union ProvisioningState {
+  Azure.ResourceManager.ResourceProvisioningState,
 
   @doc("Monitor resource creation request accepted")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Monitor resource creation started")
-  Creating,
+  Creating: "Creating",
 
   @doc("Monitor resource is being updated")
-  Updating,
+  Updating: "Updating",
 
   @doc("Monitor resource deletion started")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Monitor resource is deleted")
-  Deleted,
+  Deleted: "Deleted",
 
   @doc("Monitor resource state is unknown")
-  NotSpecified,
+  NotSpecified: "NotSpecified",
 }
 
 @doc("Flag specifying if the resource monitoring is enabled or disabled.")
-enum MonitoringStatusValues {
+union MonitoringStatus {
+  string,
+
   @doc("monitoring is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("monitoring is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
-
-@knownValues(MonitoringStatusValues)
-scalar MonitoringStatus extends string;
 
 @doc("Liftr Resource category.")
-enum LiftrResourceCategoriesValues {
+union LiftrResourceCategories {
+  string,
+
   @doc("Liftr Resource category is unknown")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Liftr Resource category is monitor logs")
-  MonitorLogs,
+  MonitorLogs: "MonitorLogs",
 }
-
-@knownValues(LiftrResourceCategoriesValues)
-scalar LiftrResourceCategories extends string;
 
 @doc("Get Metrics Status Parameter specification.")
 model MetricsStatusRequestParameter {
@@ -339,50 +342,49 @@ model MetricRules {
   filteringTags?: FilteringTag[];
 }
 
-@doc("Indicates whether AAD logs are being sent.")
-enum SendAadLogsStatusValues {
-  @doc("AAD logs are enabled")
-  Enabled,
-
-  @doc("AAD logs are disabled")
-  Disabled,
-}
-
 @doc("Indicates whether metrics are being sent.")
-enum SendMetricsStatus {
+union SendMetricsStatus {
+  string,
+
   @doc("Metrics are enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Metrics are disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
-@knownValues(SendAadLogsStatusValues)
-scalar SendAadLogsStatus extends string;
+@doc("Indicates whether AAD logs are being sent.")
+union SendAadLogsStatus {
+  string,
+
+  @doc("AAD logs are enabled")
+  Enabled: "Enabled",
+
+  @doc("AAD logs are disabled")
+  Disabled: "Disabled",
+}
 
 @doc("Indicates whether subscription logs are being sent.")
-enum SendSubscriptionLogsStatusValues {
+union SendSubscriptionLogsStatus {
+  string,
+
   @doc("subscription logs are enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("subscription logs are disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
-
-@knownValues(SendSubscriptionLogsStatusValues)
-scalar SendSubscriptionLogsStatus extends string;
 
 @doc("Indicates whether activity logs are being sent.")
-enum SendActivityLogsStatusValues {
+union SendActivityLogsStatus {
+  string,
+
   @doc("Activity logs are enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Activity logs are disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
-
-@knownValues(SendActivityLogsStatusValues)
-scalar SendActivityLogsStatus extends string;
 
 @doc("The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.")
 model FilteringTag {
@@ -397,16 +399,15 @@ model FilteringTag {
 }
 
 @doc("Valid actions for a filtering tag. Exclusion takes priority over inclusion.")
-enum TagActionValues {
+union TagAction {
+  string,
+
   @doc("tags are included")
-  Include,
+  Include: "Include",
 
   @doc("tags are excluded")
-  Exclude,
+  Exclude: "Exclude",
 }
-
-@knownValues(TagActionValues)
-scalar TagAction extends string;
 
 @doc("Details of resource being monitored by SolarWinds monitor resource")
 model MonitoredResource {
@@ -447,46 +448,45 @@ model CompanyDetails {
   numberOfEmployees?: int32;
 }
 
-@doc("Indicates whether logs are being sent.")
-enum SendingLogsStatusValues {
-  @doc("logs are enabled")
-  Enabled,
-
-  @doc("logs are disabled")
-  Disabled,
-}
-
 @doc("Indicates whether metrics are being sent.")
-enum SendingMetricsStatus {
+union SendingMetricsStatus {
+  string,
+
   @doc("Metrics are enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Metrics are disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
-@knownValues(SendingLogsStatusValues)
-scalar SendingLogsStatus extends string;
+@doc("Indicates whether logs are being sent.")
+union SendingLogsStatus {
+  string,
+
+  @doc("logs are enabled")
+  Enabled: "Enabled",
+
+  @doc("logs are disabled")
+  Disabled: "Disabled",
+}
 
 @doc("List of all the resources being monitored by SolarWinds organization resource")
-model MonitoredResourceListResponse
-  extends Azure.Core.Page<MonitoredResource> {}
+model MonitoredResourceListResponse is Azure.Core.Page<MonitoredResource>;
 
 @doc("Billing source")
-enum BillingSourceValues {
-  @doc("Billing source is Azure")
-  AZURE,
-}
+union BillingSource {
+  string,
 
-@knownValues(BillingSourceValues)
-scalar BillingSource extends string;
+  @doc("Billing source is Azure")
+  AZURE: "AZURE",
+}
 
 // additional models for Organizations_patch
 
 model SolarWindsOrganizationResourceUpdate
   is OptionalProperties<UpdateableProperties<OmitProperties<
     SolarWindsOrganizationResource,
-    "name"
+    "name" | "properties"
   >>> {
   /** Patchable Properties of the Organization observability resource */
   properties?: OrganizationPropertiesCustomUpdate;

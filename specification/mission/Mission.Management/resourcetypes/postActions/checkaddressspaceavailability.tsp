@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -11,6 +10,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
 
 @doc("Request to the action call to check address space availability.")
 model CheckAddressSpaceAvailabilityRequest {

@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -17,14 +16,15 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning State")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Resource is updating.")
-  Updating,
+  Updating: "Updating",
 
   @doc("Resource is deleting.")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 @doc("Details of the Message Catalog.")
@@ -84,11 +84,9 @@ model ResourceLabel {
 
 @doc("The type used for update operations of the Messaging Catalog.")
 model MessagingCatalogUpdate {
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("The updatable properties of the Messaging Catalog.")
-  @extension("x-ms-client-flatten", true)
   properties?: MessagingCatalogUpdateProperties;
 }
 
@@ -121,4 +119,31 @@ model ProblemDetails {
 
   @doc("Details about the error result.")
   instance?: string;
+}
+
+@doc("An association between external entities and catalog resources.")
+model Association {
+  @doc("Id of the association.")
+  id?: string;
+
+  @doc("Type of association.")
+  associationType: string;
+
+  @doc("Details about the Association.")
+  definition: AssociationDefinition;
+}
+
+@doc("Details about the catalog association.")
+model AssociationDefinition {
+  @doc("The tenant id to associate.")
+  tenantId?: string;
+
+  @doc("The workspace id to associate.")
+  workspaceId?: string;
+
+  @doc("The message group id to associate.")
+  messageGroupId?: string;
+
+  @doc("The schema group id to associate.")
+  schemaGroupId?: string;
 }

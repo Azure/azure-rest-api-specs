@@ -45,5 +45,5 @@ model StandbyVirtualMachineResourceProperties {
 @armResourceOperations
 interface StandbyVirtualMachines {
   get is ArmResourceRead<StandbyVirtualMachineResource>;
-  listByStandbyPool is ArmResourceListByParent<StandbyVirtualMachineResource>;
+  listByStandbyVirtualMachinePoolResource is ArmResourceListByParent<StandbyVirtualMachineResource>;
 }

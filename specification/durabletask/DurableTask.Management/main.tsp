@@ -31,7 +31,7 @@ enum Versions {
 }
 
 @doc("A DurableTaskService resource")
-model Namespace is TrackedResource<NamespaceProperties> {
+model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
   @doc("The name of the service")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
   @key("namespaceName")
@@ -39,16 +39,11 @@ model Namespace is TrackedResource<NamespaceProperties> {
   @path
   @visibility("read", "create")
   name: string;
-
-  ...ManagedServiceIdentity;
 }
 
 @doc("Update namespace")
 model NamespaceUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** Updatable managed service identity */
-  identity?: ManagedServiceIdentityUpdate;
 
   /** RP-specific properties */
   properties?: NamespaceProperties;
@@ -56,9 +51,6 @@ model NamespaceUpdate {
 
 model NamespacePropertiesUpdate
   is OptionalProperties<UpdateableProperties<NamespaceProperties>>;
-
-model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
 
 @doc("Details of the Namespace.")
 model NamespaceProperties {
@@ -70,13 +62,17 @@ model NamespaceProperties {
   @visibility("read")
   url?: string;
 
+  @doc("URL of the durable task service dashboard")
+  @visibility("read")
+  dashboardUrl?: string;
+
   @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")
   ipAllowlist?: string[];
 }
 
 @doc("An Task Hub resource belonging to the namespace.")
 @parentResource(Namespace)
-model TaskHub is ProxyResource<TaskHubProperties> {
+model TaskHub is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
   @doc("Task Hub name")
   @key("taskHubName")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
@@ -84,6 +80,8 @@ model TaskHub is ProxyResource<TaskHubProperties> {
   @path
   @visibility("read", "create")
   name: string;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("The properties of Task Hub")
@@ -91,6 +89,15 @@ model TaskHubProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  @doc("URL of the durable task service dashboard")
+  @visibility("read")
+  dashboardUrl?: url;
+}
+
+@doc("Update Task Hub")
+model TaskHubUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("The status of the current operation.")
@@ -118,7 +125,7 @@ interface Namespaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
   update is ArmCustomPatchAsync<Namespace, NamespaceUpdate>;
   //update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
-  delete is ArmResourceDeleteSync<Namespace>;
+  delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
   listBySubscription is ArmListBySubscription<Namespace>;
 }
@@ -129,8 +136,10 @@ interface TaskHubs {
   get is ArmResourceRead<TaskHub>;
   @doc("Create or update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
+  @doc("Update a Task Hub")
+  update is ArmCustomPatchSync<TaskHub, TaskHubUpdate>;
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteSync<TaskHub>;
   @doc("List Task Hubs")
-  listByParent is ArmResourceListByParent<TaskHub>;
+  listByNamespace is ArmResourceListByParent<TaskHub>;
 }

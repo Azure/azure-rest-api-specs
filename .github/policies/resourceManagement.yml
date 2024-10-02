@@ -2531,18 +2531,6 @@ configuration:
           label: no-recent-activity
       description: 
     - if:
-      - payloadType: Issue_Comment
-      - and:
-        - isPullRequest
-      then:
-      - if:
-        - commentContains:
-            pattern: "^/pr RequestMerge$"
-            isRegex: true
-        then:
-        - addLabel:
-            label: MergeRequested
-    - if:
       - payloadType: Pull_Request
       then:
       - if:

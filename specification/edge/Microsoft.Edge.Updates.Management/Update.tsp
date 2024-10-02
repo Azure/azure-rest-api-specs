@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -38,14 +37,14 @@ interface Updates {
    */
   createOrModify is ArmResourceCreateOrReplaceAsync<
     Update,
-    BaseParameters<Update>,
+    Azure.ResourceManager.Foundations.BaseParameters<Update>,
     Azure.Core.Foundations.RetryAfterHeader & ArmAsyncOperationHeader
   >;
 
   /**
    * Update a Update
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   modify is ArmCustomPatchSync<Update, ModifyUpdate>;
 
   /**
@@ -56,7 +55,7 @@ interface Updates {
   /**
    * List Update resources by parent
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Updates_List")
   list is ArmResourceListByParent<Update>;
 }

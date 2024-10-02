@@ -3,10 +3,10 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+import "./resourcetypes/approvals/approvals.tsp";
 import "./resourcetypes/community/community.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
 import "./resourcetypes/workload/workload.tsp";

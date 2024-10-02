@@ -62,6 +62,14 @@ input-file:
   - Microsoft.KubernetesRuntime/preview/2024-05-01-preview/kubernetesruntime.json
 ```
 
+### Tag: package-2024-08-01
+
+These settings apply only when `--tag=package-2024-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-01'
+input-file:
+  - Microsoft.KubernetesRuntime/stable/2024-08-01/kubernetesruntime.json
+```
 
 ---
 

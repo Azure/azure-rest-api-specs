@@ -26,9 +26,9 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
           - repo: azure-sdk-for-js
         ``` <EOL>
         ```
-    2. For TypeSpec PR, filter the list of tspconfig.yaml: find the `options` config in tspconfig.yaml, and see if the specified language is configure for that tsp-location.yaml.
+    2. For TypeSpec PR, filter the list of tspconfig.yaml: find the `options` config in tspconfig.yaml, and see if the specified language emitter is configured.
     
-    If the configured language is not found here, generation for this typespec project will be skipped.
+    If the specific language is not configured here, generation for this typespec project will be skipped.
 
 4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
 
@@ -46,19 +46,17 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
 
 11. Launch __buildScript__ to build the package. Collect the artifacts by config __artifactPathFromFileSearch__. This step could be skipped if it's not defined in [SwaggerToSdkConfig](#swaggertosdkconfig) and it's covered by __generateScript__ and the result could be found in [generateOutput.json](#generateoutput).
 
-12. Upload all the package related artifacts to Azure Storage Blob Container. All the artifact for one package is uploaded in one folder. These file could be downloaded on URL prefixed by __downloadUrlPrefix__ defined in [InstallInstructionScriptInput](#installinstructionscriptinput). It's redirected by openapiHub by design, and for SDK Automation on public repo the redirect don't need auth, but for SDK Automation in private repo it requires microsoft AAD auth. User could authenticate and download via web page oauth in browser or bearer token auth with `az rest --resource` in command line.
+12. Launch __changelogScript__ to get changelog and detect breaking change. This step could be skipped if changelog and breaking change could be found in [generateOutput.json](#generateoutput). If breaking change is found, the spec PR will be labelled with `BreakingChange-<Lang>-Sdk`.
 
-13. Launch __changelogScript__ to get changelog and detect breaking change. This step could be skipped if changelog and breaking change could be found in [generateOutput.json](#generateoutput). If breaking change is found, the spec PR will be labelled with `CI-BreakingChange-<Lang>`.
+13. Launch __installInstructionScript__ to get install instruction for that package. This step could be skipped if install instruction could be found in [generateOutput.json](#generateoutput). The lite install instruction will be shown in spec PR comment, the full install instruction will be shown in generated SDK PR.
 
-14. Launch __installInstructionScript__ to get install instruction for that package. This step could be skipped if install instruction could be found in [generateOutput.json](#generateoutput). The lite install instruction will be shown in spec PR comment, the full install instruction will be shown in generated SDK PR.
-
-15. Commit the package related code in SDK repository. Force push to [GenerationBranch](#generationbranch) in __integrationRepository__. Create or update [GenerationPR](#generationpr) from [GenerationBranch](#generationbranch) to [MainBranch](#mainbranch) in __integrationRepository__. If __integrationRepository__ is a fork of __mainRepository__, its [MainBranch](#mainbranch) should be synced once a day.
+14. Commit the package related code in SDK repository. Force push to [GenerationBranch](#generationbranch) in __integrationRepository__. Create or update [GenerationPR](#generationpr) from [GenerationBranch](#generationbranch) to [MainBranch](#mainbranch) in __integrationRepository__. If __integrationRepository__ is a fork of __mainRepository__, its [MainBranch](#mainbranch) should be synced once a day.
 
 ### Continuous Integration (PR Merged) Trigger
 
-Almost the same as opened PR trigger, with different on step 15:
+Almost the same as opened PR trigger, with different on step 14:
 
-15. Commit the package related code in SDK repository. Close [GenerationPR](#generationpr) and delete [GenerationBranch](#generationbranch). Force push to [IntegrationBranch](#integrationbranch) in __integrationRepository__. Create or update [IntegrationPR](#integrationpr) from [IntegrationBranch](#integrationbranch) to [MainBranch](#mainbranch) in __mainRepository__. Close the [integrationPR](#integrationPR) if __closeIntegrationPR__ in [SwaggerToSdkConfig](#swaggertosdkconfig) is set to true.
+14. Commit the package related code in SDK repository. Close [GenerationPR](#generationpr) and delete [GenerationBranch](#generationbranch). Force push to [IntegrationBranch](#integrationbranch) in __integrationRepository__. Create or update [IntegrationPR](#integrationpr) from [IntegrationBranch](#integrationbranch) to [MainBranch](#mainbranch) in __mainRepository__. Close the [integrationPR](#integrationPR) if __closeIntegrationPR__ in [SwaggerToSdkConfig](#swaggertosdkconfig) is set to true.
 
 
 ## Definitions
@@ -78,16 +76,6 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
       "integrationRepository": "AzureSDKAutomation/azure-sdk-for-python",
       "mainRepository": "Azure/azure-sdk-for-python",
       "mainBranch": "release/v3"
-    },
-    "azure-sdk-for-python-track2": {
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-python",
-      "mainRepository": "Azure/azure-sdk-for-python"
-    },
-    "azure-sdk-for-trenton": {
-      "integrationRepository": "Azure/azure-sdk-for-trenton",
-      "mainRepository": "Azure/azure-sdk-for-trenton",
-      "secondaryRepository": "Azure/azure-sdk-for-trenton",
-      "secondaryBranch": "secondary"
     }
   },
   "overrides": {
@@ -101,10 +89,6 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
           "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
           "mainRepository": "Azure/azure-sdk-for-python-pr",
           "mainBranch": "release/v3"
-        },
-        "azure-sdk-for-python-track2": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
-          "mainRepository": "Azure/azure-sdk-for-python-pr"
         }
       }
     }
@@ -175,7 +159,7 @@ The working folder of all the scripts is the __root folder of sdk repo__.
       "breakingChangeDetect": "Breaking Change"
     },
 
-    "breakingChangeLabel": "CI-BreakingChange-DotNet"
+    "breakingChangesLabel": "BreakingChange-DotNet-Sdk"
   },
   "artifactOptions": {
     // Param: <path_to_installInstructionInput.json> <path_to_installInstructionOutput.json>
@@ -214,7 +198,6 @@ Input file for generate script.
   ],
   "installInstructionInput": {
     "isPublic": false,
-    "downloadUrlPrefix": "https://openapihub.test.azure-devex-tools.com/api/sdk-dl-pub?p=Azure/1234/azure-sdk-for-net/",
     "downloadCommandTemplate": "curl -L \"{URL}\" -o {FILENAME}",
     "trigger": "pullRequest"
   }
@@ -278,7 +261,6 @@ Input of install instruction script.
     "sdk/cdn/cdn.snuget"
   ],
   "isPublic": true,
-  "downloadUrlPrefix": "https://portal.azure-devex-tools.com/api/sdk-dl-pub?p=Azure/azure-rest-api-specs/1234/azure-sdk-for-net/",
   "downloadCommandTemplate": "curl -L \"{URL}\" -o {FILENAME}",
   "trigger": "pullRequest",
 }

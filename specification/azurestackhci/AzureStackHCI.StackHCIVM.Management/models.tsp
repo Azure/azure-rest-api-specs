@@ -2,14 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../Operations.Management/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -215,6 +215,18 @@ union VmSizeEnum {
   string,
 }
 
+@added(Versions.v2024_05_01_preview)
+@doc("Gpu Assignment types")
+union GpuAssignmentTypeEnum {
+  @doc("Attach Graphics Processing Unit (GPU) using Discrete Device Assignment (DDA)")
+  GpuDDA: "GpuDDA",
+
+  @doc("Attach Graphics Processing Unit (GPU) using GPU Partitioning")
+  GpuP: "GpuP",
+
+  string,
+}
+
 @doc("Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.")
 union SecurityTypes {
   @doc("Trusted Launch security type")
@@ -345,6 +357,30 @@ union AttestHealthStatusEnum {
   string,
 }
 
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of hardware platform from attestation token.")
+union AttestHWPlatformEnum {
+  @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
+  SEVSNP: "SEVSNP",
+
+  @doc("AttestHWPlatform is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of managed disk security encryption type from attestation token.")
+union AttestDiskSecurityEncryptionTypeEnum {
+  @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
+  NonPersistedTPM: "NonPersistedTPM",
+
+  @doc("Disk security encryption type is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
 @doc("Defines the different types of operations for guest agent.")
 union ProvisioningAction {
   @doc("Install guest agent")
@@ -370,6 +406,15 @@ union OperatingSystemTypes {
   string,
 }
 
+@added(Versions.v2024_08_01_preview)
+@doc("Encryption type of the managed disk enum.")
+union SecurityEncryptionType {
+  @doc("Non-persisted TPM encryption type")
+  NonPersistedTPM: "NonPersistedTPM",
+
+  string,
+}
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("Type of the IP Pool [vm, vippool]")
 union IPPoolTypeEnum {
@@ -386,6 +431,16 @@ union IPPoolTypeEnum {
 model NetworkInterfaceArmReference {
   @doc("The ARM ID for a Network Interface.")
   id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    }
+  ]>;
+}
+@doc("The ARM ID for a Network Interface.")
+model SubnetIpConfigurationReference {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
+  @doc("The ARM ID for a Network Interface.")
+  ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
     }
@@ -408,6 +463,18 @@ model LogicalNetworkArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l2Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l3Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
   ]>;
 }
@@ -433,11 +500,15 @@ model StorageContainerArmReference {
 }
 
 @doc("The ARM ID for a Gallery Image.")
-model GalleryImageArmReference {
-  @doc("The ARM ID for a Storage Container.")
+model ImageArmReference {
+  @doc("The ARM ID for an image resource used by the virtual machine instance.")
+  @visibility("create", "read")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/galleryImages";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/marketplaceGalleryImages";
     }
   ]>;
 }
@@ -462,6 +533,7 @@ model GalleryImageProperties {
   ]>;
 
   @doc("location of the image the gallery image should be created from")
+  @secret
   imagePath?: string;
 
   @doc("Operating system type that the gallery image uses [Windows, Linux]")
@@ -473,6 +545,10 @@ model GalleryImageProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The credentials used to login to the image repository that has access to the specified image")
+  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
 
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
@@ -487,6 +563,25 @@ model GalleryImageProperties {
   @doc("The observed state of gallery images")
   @visibility("read")
   status?: GalleryImageStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("Resource ID of the source virtual machine from whose OS disk the gallery image is created.")
+  sourceVirtualMachineId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualMachineInstance";
+    }
+  ]>;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The credentials used to login to the image repository that has access to the specified image")
+model VmImageRepositoryCredentials {
+  @doc("Username for accessing image repository")
+  username: string;
+
+  @doc("Password for accessing image repository")
+  @secret
+  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -506,8 +601,9 @@ model GalleryImageVersion {
   @doc("This is the version of the gallery image.")
   name?: string;
 
+  #suppress "deprecated" "Legacy flattening"
   @doc("Describes the properties of a gallery image version.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: GalleryImageVersionProperties;
 }
 
@@ -583,6 +679,7 @@ model ExtendedLocation {
 
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -593,7 +690,7 @@ model LogicalNetworkProperties {
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
   @doc("Subnet - list of subnets under the logical network")
-  @extension("x-ms-identifiers", ["properties", "name"])
+  @OpenAPI.extension("x-ms-identifiers", [])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
@@ -616,8 +713,9 @@ model LogicalNetworkPropertiesDhcpOptions {
 
 @doc("Properties of the subnet.")
 model Subnet {
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the subnet.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: SubnetProperties;
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -637,7 +735,8 @@ model SubnetProperties {
   ipAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
-  ipConfigurationReferences?: NetworkInterfaceArmReference[];
+  @extension("x-ms-identifiers", [])
+  ipConfigurationReferences?: SubnetIpConfigurationReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
@@ -646,7 +745,7 @@ model SubnetProperties {
   routeTable?: RouteTable;
 
   @doc("network associated pool of IP Addresses")
-  @extension("x-ms-identifiers", ["ipPoolType", "name", "start", "end", "info"])
+  @extension("x-ms-identifiers", [])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
@@ -667,22 +766,24 @@ model RouteTable {
   @visibility("read")
   type?: string;
 
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route table.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteTableProperties;
 }
 
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
   @doc("Collection of routes contained within a route table.")
-  @extension("x-ms-identifiers", ["properties", "name"])
+  @extension("x-ms-identifiers", [])
   routes?: Route[];
 }
 
 @doc("Route - Route resource.")
 model Route {
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteProperties;
 
   @doc("Name - name of the subnet")
@@ -736,15 +837,12 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaceReferences?: NetworkInterfaceArmReference[];
+  @extension("x-ms-identifiers", [])
+  networkInterfaces?: NetworkInterfaceArmReference[];
 
-  @doc("A collection of references to subnets that are currently using this NSG")
+  @doc("A collection of references to logical networks that are currently using this NSG")
   @visibility("read")
   subnets?: LogicalNetworkArmReference[];
-
-  @doc("The resource GUID property of the network security group resource.")
-  @visibility("read")
-  resourceGuid?: string;
 
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
@@ -788,7 +886,7 @@ model SecurityRuleProperties {
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
-  @extension("x-ms-identifiers", ["name", "properties"])
+  @extension("x-ms-identifiers", [])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -807,9 +905,14 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @added(Versions.v2024_09_01_preview)
+  @doc("Boolean indicating whether this is a local network interface or if one should be created.")
+  createFromLocal?: boolean = false;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+#suppress "deprecated" "Legacy flattening"
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -850,6 +953,7 @@ model InterfaceDNSSettings {
   dnsServers?: string[];
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of network interfaces")
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
@@ -871,6 +975,7 @@ model NetworkInterfaceStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of logical networks")
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
@@ -894,6 +999,7 @@ model LogicalNetworkStatusProvisioningStatus {
 
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -932,6 +1038,7 @@ model MarketplaceGalleryImageProperties {
   status?: MarketplaceGalleryImageStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of marketplace gallery images")
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
@@ -968,18 +1075,21 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("Tags object for patch operations.")
 model TagsObject {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -998,6 +1108,7 @@ model StorageContainerProperties {
   status?: StorageContainerStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of storage containers")
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
@@ -1029,6 +1140,7 @@ model StorageContainerStatusProvisioningStatus {
 
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1050,6 +1162,19 @@ model VirtualHardDiskProperties {
 
   @doc("Physical sector in bytes")
   physicalSectorBytes?: int32;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.")
+  @secret
+  downloadUrl?: string;
+
+  @added(Versions.v2024_09_01_preview)
+  @doc("Boolean indicating whether this is a local hard disk or if one should be created.")
+  createFromLocal?: boolean = false;
+
+  @added(Versions.v2024_09_01_preview)
+  @doc("Operating system type of the OS disk. Possible values are: Windows, Linux.")
+  osType?: OperatingSystemTypes;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
@@ -1074,6 +1199,7 @@ model VirtualHardDiskProperties {
   status?: VirtualHardDiskStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual hard disks")
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
@@ -1084,6 +1210,14 @@ model VirtualHardDiskStatus {
 
   @doc("Provisioning status of the vhd")
   provisioningStatus?: VirtualHardDiskStatusProvisioningStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("The download status of the virtual hard disk")
+  downloadStatus?: VirtualHardDiskDownloadStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("VHD Status provisioning status")
@@ -1095,10 +1229,52 @@ model VirtualHardDiskStatusProvisioningStatus {
   status?: Status;
 }
 
+@added(Versions.v2024_05_01_preview)
+@doc("The download status of the virtual hard disk")
+model VirtualHardDiskDownloadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The downloaded sized of the virtual hard disk in MB")
+  downloadedSizeInMB?: int64;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("The upload status of the virtual hard disk")
+model VirtualHardDiskUploadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The uploaded sized of the virtual hard disk in MB")
+  uploadedSizeInMB?: int64;
+
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Request for uploading virtual hard disk.")
+model VirtualHardDiskUploadRequest {
+  @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
+  @secret
+  azureManagedDiskUploadUrl: string;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Response for uploading virtual hard disk.")
+model VirtualHardDiskUploadResponse {
+  @doc("The ARM ID for a Virtual Hard Disk.")
+  virtualHardDiskId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    }
+  ]>;
+
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("Properties under the virtual machine instance resource")
@@ -1142,12 +1318,16 @@ model VirtualMachineInstanceProperties {
 
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
+
+  @added(Versions.v2024_09_01_preview)
+  @doc("Boolean indicating whether this is a local virtual machine or if one should be created.")
+  createFromLocal?: boolean = false;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
 model VirtualMachineInstancePropertiesHardwareProfile {
   @doc("Enum of VM Sizes")
-  vmSize?: VmSizeEnum;
+  vmSize?: VmSizeEnum = VmSizeEnum.Default;
 
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
@@ -1158,6 +1338,12 @@ model VirtualMachineInstancePropertiesHardwareProfile {
 
   @doc("Dynamic memory config")
   dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
+  @added(Versions.v2024_05_01_preview)
+  @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
+  @extension("x-ms-identifiers", [])
+  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
 @doc("Dynamic memory config")
@@ -1174,9 +1360,25 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
   targetMemoryBuffer?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
+@added(Versions.v2024_05_01_preview)
+@doc("GPU properties - describes the GPU configuration.")
+model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
+  @doc("GPU assignment type")
+  assignmentType: GpuAssignmentTypeEnum;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
+  @doc("Size of gpu partition in MB for GPU-P")
+  partitionSizeMB?: int64;
+
+  @doc("Name of the GPU")
+  gpuName?: string;
+}
+
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
+  @extension("x-ms-identifiers", [])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
@@ -1184,6 +1386,7 @@ model VirtualMachineInstancePropertiesNetworkProfile {
 model VirtualMachineInstancePropertiesOsProfile {
   @doc("AdminPassword - admin password")
   @visibility("create")
+  @secret
   adminPassword?: string;
 
   @doc("AdminUsername - admin username")
@@ -1219,7 +1422,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
-  @extension("x-ms-identifiers", ["path", "keyData"])
+  @extension("x-ms-identifiers", ["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -1256,7 +1459,7 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
 model VirtualMachineInstancePropertiesSecurityProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "TPM is a short form. It is the correct case"
   @doc("Enable TPM flag")
-  enableTPM?: boolean;
+  enableTPM?: boolean = false;
 
   @doc("Uefi settings of the virtual machine instance")
   uefiSettings?: VirtualMachineInstancePropertiesSecurityProfileUefiSettings;
@@ -1268,7 +1471,7 @@ model VirtualMachineInstancePropertiesSecurityProfile {
 @doc("Uefi settings - Specifies whether secure boot should be enabled on the virtual machine instance.")
 model VirtualMachineInstancePropertiesSecurityProfileUefiSettings {
   @doc("Specifies whether secure boot should be enabled on the virtual machine instance.")
-  secureBootEnabled?: boolean;
+  secureBootEnabled?: boolean = false;
 }
 
 @doc("StorageProfile - contains information about the disks and storage information for the virtual machine instance")
@@ -1278,7 +1481,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
 
   @doc("Which Image to use for the virtual machine instance")
   @visibility("read", "create")
-  imageReference?: GalleryImageArmReference;
+  imageReference?: ImageArmReference;
 
   @doc("VHD to attach as OS disk")
   osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
@@ -1296,14 +1499,35 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   is VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk parameters.")
+  managedDisk?: VirtualMachineInstanceManagedDiskParameters;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The parameters of a managed disk.")
+model VirtualMachineInstanceManagedDiskParameters {
+  @doc("Specifies the security profile for the managed disk.")
+  securityProfile?: VMDiskSecurityProfile;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
+@added(Versions.v2024_08_01_preview)
+@doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
+model VMDiskSecurityProfile {
+  @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
+  securityEncryptionType?: SecurityEncryptionType;
 }
 
 @doc("HTTP Proxy configuration for the VM.")
 model HttpProxyConfiguration {
   @doc("The HTTP proxy server endpoint to use.")
+  @secret
   httpProxy?: string;
 
   @doc("The HTTPS proxy server endpoint to use.")
+  @secret
   httpsProxy?: string;
 
   @doc("The endpoints that should not go through proxy.")
@@ -1325,10 +1549,7 @@ model VirtualMachineConfigAgentInstanceView {
   vmConfigAgentVersion?: string;
 
   @doc("The resource status information.")
-  @extension(
-    "x-ms-identifiers",
-    ["code", "level", "displayStatus", "message", "time"]
-  )
+  @extension("x-ms-identifiers", [])
   statuses?: InstanceViewStatus[];
 }
 
@@ -1351,6 +1572,7 @@ model InstanceViewStatus {
   time?: utcDateTime;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual machine instances")
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")
@@ -1396,7 +1618,7 @@ model GuestAgentInstallStatus {
 
   @doc("Details about the error state.")
   @visibility("read")
-  errorDetails?: ErrorDetail[];
+  errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
 
 @doc("Identity for the resource.")
@@ -1448,6 +1670,12 @@ model HardwareProfileUpdate {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("RAM in MB for the virtual machine instance")
   memoryMB?: int64;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
+  @added(Versions.v2024_05_01_preview)
+  @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
+  @extension("x-ms-identifiers", [])
+  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
 @doc("Storage profile update")
@@ -1459,6 +1687,7 @@ model StorageProfileUpdate {
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
+  @extension("x-ms-identifiers", [])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
@@ -1546,6 +1775,16 @@ model AttestationStatusProperties {
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
+  @visibility("read")
+  @added(Versions.v2024_08_01_preview)
+  attestHardwarePlatform?: AttestHWPlatformEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
+  @visibility("read")
+  attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;
 }
 
 @doc("Defines the resource properties.")
@@ -1572,5 +1811,6 @@ model GuestCredential {
 
   @doc("The password to connect with the guest.")
   @visibility("create", "update")
+  @secret
   password?: string;
 }
