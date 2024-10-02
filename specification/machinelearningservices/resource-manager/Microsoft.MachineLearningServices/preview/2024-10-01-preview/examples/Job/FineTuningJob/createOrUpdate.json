@@ -9,6 +9,7 @@
       "properties": {
         "jobType": "FineTuning",
         "experimentName": "llm-finetuning",
+        "computeId": "gpu-compute",
         "fineTuningDetails": {
           "taskType": "TextCompletion",
           "modelProvider": "Custom",
@@ -24,6 +25,12 @@
             "mode": "ReadOnlyMount",
             "description": null
           }
+        },        
+        "resources": {
+            "instanceTypes": ["Standard_NC6"]
+        },
+        "queueSettings":{
+            "jobTier": "Standard"
         },
         "outputs": {
           "string": {
@@ -74,6 +81,12 @@
               "mode": "ReadOnlyMount",
               "description": null
             }
+          },
+          "resources": {
+            "instanceTypes": ["Standard_NC6"]
+          },
+          "queueSettings":{
+            "jobTier": "Standard"
           },
           "componentId": "string",
           "notificationSetting": {
@@ -140,7 +153,16 @@
               "uri": "azureml://datastores/workspaceblobstore/paths/UI/2023-06-06_175927_UTC/small_train.jsonl",
               "mode": "ReadOnlyMount",
               "description": null
+            },
+            "queueSettings":{
+              "jobTier": "Standard"
             }
+          },        
+          "resources": {
+              "instanceTypes": ["Standard_NC6"]
+          },
+          "queueSettings":{
+              "jobTier": "Standard"
           },
           "componentId": "string",
           "notificationSetting": {
