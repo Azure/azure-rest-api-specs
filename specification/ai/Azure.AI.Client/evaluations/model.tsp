@@ -36,20 +36,9 @@ model InputData {
   id: string;
 }
 
-@doc("Data Source for Application Insight.")
-model AppInsightsConfiguration extends InputData {
-  type: "app_insights";
-
-  @doc("Application Insight connection string.")
-  connectionString: string;
-
-  @doc("Query to fetch data.")
-  query: string;
-}
-
 @doc("Dataset as source for evaluation.")
-model Dataset extends InputData {
-  type: "dataset";
+model Dataset {
+  uri: string;
 }
 
 @doc("Evaluation Definition")
@@ -58,7 +47,7 @@ model Evaluation {
   id?: string;
 
   @doc("Data for evaluation.")
-  data: InputData;
+  data: Dataset;
 
   @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
   displayName?: string;
