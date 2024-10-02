@@ -233,9 +233,9 @@ union EvictionPolicy {
 model AdditionalCapabilities {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ultraSSDEnabled which does not follow camel casing"
   @doc("""
-  The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS.
-  Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.
-  """)
+    The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS.
+    Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.
+    """)
   ultraSSDEnabled?: boolean;
 
   @doc("The flag that enables or disables hibernation capability on the VM.")
@@ -262,7 +262,7 @@ union VMAttributeSupport {
 
   @doc("All VMSizes having the feature support will be excluded.")
   Excluded: "Excluded",
-  
+
   @doc(" VMSizes that have the feature support and that do not have the feature support will be used. Included is a union of Excluded and Required.")
   Included: "Included",
 
@@ -272,44 +272,44 @@ union VMAttributeSupport {
 
 @added(Versions.v2024_11_01)
 @doc("""
-VMCategories defined for Azure VMs.
-See: https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose
-""")
+  VMCategories defined for Azure VMs.
+  See: https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose
+  """)
 union VMCategory {
   string,
 
   @doc("""
-  General purpose VM sizes provide balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.
-  """)
+    General purpose VM sizes provide balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.
+    """)
   GeneralPurpose: "GeneralPurpose",
 
   @doc("""
-  Compute optimized VM sizes have a high CPU-to-memory ratio. These sizes are good for medium traffic web servers, network appliances, batch processes, and application servers.
-  """)
+    Compute optimized VM sizes have a high CPU-to-memory ratio. These sizes are good for medium traffic web servers, network appliances, batch processes, and application servers.
+    """)
   ComputeOptimized: "ComputeOptimized",
 
   @doc("""
-  Memory optimized VM sizes offer a high memory-to-CPU ratio that is great for relational database servers, medium to large caches, and in-memory analytics.
-  """)
+    Memory optimized VM sizes offer a high memory-to-CPU ratio that is great for relational database servers, medium to large caches, and in-memory analytics.
+    """)
   MemoryOptimized: "MemoryOptimized",
 
   @doc("""
-  Storage optimized virtual machine (VM) sizes offer high disk throughput and IO, and are ideal for Big Data, SQL, NoSQL databases, data warehousing, and large transactional databases. 
-  Examples include Cassandra, MongoDB, Cloudera, and Redis.
-  """)
+    Storage optimized virtual machine (VM) sizes offer high disk throughput and IO, and are ideal for Big Data, SQL, NoSQL databases, data warehousing, and large transactional databases. 
+    Examples include Cassandra, MongoDB, Cloudera, and Redis.
+    """)
   StorageOptimized: "StorageOptimized",
 
   @doc("""
-  GPU optimized VM sizes are specialized virtual machines available with single, multiple, or fractional GPUs. 
-  These sizes are designed for compute-intensive, graphics-intensive, and visualization workloads.
-  """)
+    GPU optimized VM sizes are specialized virtual machines available with single, multiple, or fractional GPUs. 
+    These sizes are designed for compute-intensive, graphics-intensive, and visualization workloads.
+    """)
   GpuAccelerated: "GpuAccelerated",
 
   @doc("""
-  FPGA optimized VM sizes are specialized virtual machines available with single or multiple FPGA. 
-  These sizes are designed for compute-intensive workloads. This article provides information about the number and type of FPGA, vCPUs, data disks, and NICs. 
-  Storage throughput and network bandwidth are also included for each size in this grouping.
-  """)
+    FPGA optimized VM sizes are specialized virtual machines available with single or multiple FPGA. 
+    These sizes are designed for compute-intensive workloads. This article provides information about the number and type of FPGA, vCPUs, data disks, and NICs. 
+    Storage throughput and network bandwidth are also included for each size in this grouping.
+    """)
   FpgaAccelerated: "FpgaAccelerated",
 }
 
