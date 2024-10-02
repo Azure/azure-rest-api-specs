@@ -198,6 +198,9 @@ model LinkedResourceInformation {
 
   @doc("List of cluster nodes.")
   clusterNodes?: string[];
+
+  @doc("Resource location of linked resource.")
+  resourceLocation?: string;
 }
 
 @doc("Definition of nullable date time property info.")
@@ -255,30 +258,6 @@ model RegionSpecificPropertiesForProtectedItem {
 
   @doc("Minimum retention period in days.")
   configuredMaximumRetentionInDays: NullableIntPropertyInfo;
-}
-
-@doc("Definition of temporary properties.")
-model TemporaryProperties {
-  @doc("Deferred delete sync time.")
-  deferredDeleteSyncTime?: string;
-
-  @doc("Deferred delete time remaining.")
-  deferredDeleteTimeRemaining?: string;
-
-  @doc("Scheduled purge time.")
-  scheduledPurgeTime?: string;
-
-  @doc("Policy id.")
-  policyId?: string;
-
-  @doc("Workload type.")
-  workloadType: string;
-
-  @doc("Cluster type.")
-  clusterType?: ClusterType;
-
-  @doc("Cluster node names.")
-  clusterNodes?: string[];
 }
 
 @doc("Definition of provider specific properties.")
@@ -488,9 +467,6 @@ model SolutionSpecificProtectedItem {
 
   @doc("BCDR Security score of protected item.")
   bcdrDataSecurityLevel: BCDRDataSecurityLevel;
-
-  @doc("Temporary properties.")
-  temporaryProperties: TemporaryProperties;
 
   @doc("Provider specific properties.")
   providerSpecificProperties?: ProviderSpecificProperties;
