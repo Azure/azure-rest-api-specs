@@ -59,42 +59,6 @@ input-file:
   - GitHub.Network/preview/2024-04-01-preview/GitHub.Network.json
 ```
 
-### Tag: package-2023-11-01-rc
-
-These settings apply only when `--tag=package-2023-11-01-rc` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-11-01-rc'
-input-file:
-  - GitHub.Network/preview/2023-11-01-rc/GitHub.Network.json
-```
-
-### Tag: package-2023-11-01-preview
-
-These settings apply only when `--tag=package-2023-11-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-11-01-preview'
-input-file:
-  - GitHub.Network/preview/2023-11-01-preview/GitHub.Network.json
-```
-
-### Tag: package-2023-03-15-beta
-
-These settings apply only when `--tag=package-2023-03-15-beta` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-03-15-beta'
-input-file:
-  - GitHub.Network/preview/2023-03-15-beta/GitHub.Network.json
-```
-
-### Tag: package-2023-03-15-alpha
-
-These settings apply only when `--tag=package-2023-03-15-alpha` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-03-15-alpha'
-input-file:
-  - GitHub.Network/preview/2023-03-15-alpha/GitHub.Network.json
-```
-
 # Code Generation
 
 ## Swagger to SDK
