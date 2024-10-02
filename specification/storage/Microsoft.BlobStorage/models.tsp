@@ -10,7 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
-namespace Azure.Storage.Blob;
+namespace Storage.Blob;
 
 /** The error response. */
 @error

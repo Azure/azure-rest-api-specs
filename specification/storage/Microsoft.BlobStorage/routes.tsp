@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "./models.tsp";
 
-namespace Azure.Storage.Blob;
+namespace Storage.Blob;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

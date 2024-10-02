@@ -18,7 +18,7 @@ using Azure.Core;
   ]>
 )
 @service({
-  title: "Azure.Storage.Blob service",
+  title: "Azure Storage Blob service",
 })
 @server(
   "{endpoint}",
@@ -29,7 +29,7 @@ using Azure.Core;
   }
 )
 @versioned(Versions)
-namespace Azure.Storage.Blob;
+namespace Storage.Blob;
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard typespec recommendation"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Following standard typespec recommendation"
