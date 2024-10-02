@@ -1,43 +1,52 @@
 // @ts-check
 
-// const { existsSync } = require("fs");
-// const { addLabelIfNotExists, removeLabelIfExists } = require("./util");
+const { addLabelIfNotExists, removeLabelIfExists } = require("./util");
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('github-script').AsyncFunctionArguments["github"]} github
+ * @param {import('github-script').AsyncFunctionArguments["context"]} context
+ * @param {import('github-script').AsyncFunctionArguments["core"]} core
  */
-module.exports = async ({ github, context, core }) => {
+module.exports = async (github, context, core) => {
   console.log("context: " + JSON.stringify(context, null, 2));
 
-  if (context.eventName !== "workflow_run" || context.action == "completed" ) {
-    throw new Error(`Invalid context: '${context.eventName}:${context.action}'.  Expected 'workflow_run:completed'.`);
+  if (context.eventName !== "workflow_run" || context.action == "completed") {
+    throw new Error(
+      `Invalid context: '${context.eventName}:${context.action}'.  Expected 'workflow_run:completed'.`,
+    );
   }
 
-  const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (context.payload);
+  const payload =
+    /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
+      context.payload
+    );
 
   const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-    owner: payload.repository.owner.login,
-    repo: payload.repository.name,
+    owner: payload.workflow_run.repository.owner.login,
+    repo: payload.workflow_run.repository.name,
     run_id: payload.workflow_run.id,
   });
 
   console.log("artifacts: " + JSON.stringify(artifacts, null, 2));
 
-  // const specLifecycleDataPlaneBrownfield = existsSync("spec-lifecycle-data-plane-brownfield");
-  // const specLifecycleResourceManagerBrownfield = existsSync("spec-lifecycle-resource-manager-brownfield");
+  const artifactNames = artifacts.data.artifacts.map((a) => a.name);
 
-  // console.log(`specLifecycleDataPlaneBrownfield: ${specLifecycleDataPlaneBrownfield}`);
-  // console.log(`specLifecycleResourceManagerBrownfield: ${specLifecycleResourceManagerBrownfield}`);
-
-  // const label = "brownfield";
-  // if (specLifecycleDataPlaneBrownfield || specLifecycleResourceManagerBrownfield) {
-  //   await addLabelIfNotExists(github, context, core, label);
-  // }
-  // else {
-  //   await removeLabelIfExists(github, context, core, label);
-  // }
-
-  //   const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (context.payload);
+  const label = "brownfield";
+  if (
+    artifactNames.includes("spec-lifecycle-data-plane-brownfield") ||
+    artifactNames.includes("spec-lifecycle-resource-manager-brownfield")
+  ) {
+    await addLabelIfNotExists(
+      /** @type {import('github-script').AsyncFunctionArguments} */ ({
+        github,
+        context,
+        core,
+      }),
+      label,
+    );
+  } else {
+    await removeLabelIfExists(github, context, core, label);
+  }
 
   //   const owner = payload.workflow_run.head_repository.owner.login;
   //   const repo = payload.workflow_run.head_repository.name;
@@ -45,13 +54,19 @@ module.exports = async ({ github, context, core }) => {
 
   //   console.log(`Finding pull requests for '/${owner}/${repo}/${sha}'`);
 
-  //   // Must call this API, since 'payload.workflow_run.pull_requests' is empty for fork PRs
-  //   const { data: pullRequests } =
-  //     await github.rest.repos.listPullRequestsAssociatedWithCommit({
-  //       owner: owner,
-  //       repo: repo,
-  //       commit_sha: sha,
-  //     });
+  //   (property) listPullRequestsAssociatedWithCommit: {
+  //     parameters: RequestParameters & Endpoints["GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls"]["parameters"];
+  //     response: Endpoints["GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls"]["response"];
+  // }
+
+  // Must call this API, since 'payload.workflow_run.pull_requests' is empty for fork PRs
+  // Must use 'head_repository' instead of 'repository',
+  // const { data: pullRequests } =
+  //   await github.rest.repos.listPullRequestsAssociatedWithCommit({
+  //     owner: owner,
+  //     repo: repo,
+  //     commit_sha: sha,
+  //   });
 
   //   console.log(`Found ${pullRequests.length}`);
   //   if (pullRequests.length === 0) {
