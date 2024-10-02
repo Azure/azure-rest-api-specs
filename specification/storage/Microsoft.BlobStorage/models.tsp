@@ -222,7 +222,6 @@ model ContainerProperties {
   @Xml.name("DefaultEncryptionScope") defaultEncryptionScope?: string;
 
   /** Whether to prevent encryption scope override. */
-  @clientName("PreventEncryptionScopeOverride")
   @Xml.name("DenyEncryptionScopeOverride")
   denyEncryptionScopeOverride?: boolean;
 
@@ -239,7 +238,6 @@ model ContainerProperties {
   @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
 
   /** Whether immutable storage with versioning is enabled. */
-  @clientName("IsImmutableStorageWithVersioningEnabled")
   @Xml.name("ImmutableStorageWithVersioningEnabled")
   immutableStorageWithVersioningEnabled?: boolean;
 }
@@ -621,13 +619,11 @@ model BlobPropertiesInternal {
 
   /** The expire time of the blob. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @clientName("ExpiresOn")
   @encode("date-time-rfc1123")
   @Xml.name("Expiry-Time")
   expiryTime?: utcDateTime;
 
   /** Whether the blob is sealed. */
-  @clientName("IsSealed")
   @Xml.name("Sealed")
   sealed?: boolean;
 
@@ -642,7 +638,6 @@ model BlobPropertiesInternal {
 
   /** The immutability policy until time of the blob. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @clientName("ImmutabilityPolicyExpiresOn")
   @encode("date-time-rfc1123")
   @Xml.name("ImmutabilityPolicyUntilDate")
   immutabilityPolicyUntilDate?: utcDateTime;
@@ -2058,7 +2053,6 @@ alias BlobContentTypeParameter = {
 /** The optional premium page blob access tier parameter. */
 model PremiumPageBlobAccessTierOptional {
   /** Optional. Indicates the tier to be set on the page blob. */
-  @clientName("tier")
   @header("x-ms-access-tier")
   accessTier?: PremiumPageBlobAccessTier;
 }
