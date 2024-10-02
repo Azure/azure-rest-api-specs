@@ -26,7 +26,6 @@ op StorageOperation<
 interface Service {
   /** Get the properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/?restype=service&comp=properties")
@@ -44,7 +43,6 @@ interface Service {
 
   /** Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("/?restype=service&comp=properties")
   getProperties is StorageOperation<
@@ -59,7 +57,6 @@ interface Service {
 
   /** Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("/?restype=service&comp=stats")
   getStatistics is StorageOperation<
@@ -73,7 +70,6 @@ interface Service {
 
   /** The List Containers Segment operation returns a list of the containers under the specified account */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("/?comp=list")
@@ -92,7 +88,6 @@ interface Service {
 
   /** The Get User Delegation Key operation gets the user delegation key for the Blob service. This is only a valid operation when using User Delegation SAS. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas\">Create a user delegation SAS</a>. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @post
   @route("/?restype=service&comp=userdelegationkey")
   getUserDelegationKey is StorageOperation<
@@ -112,7 +107,6 @@ interface Service {
 
   /** Returns the sku name and account kind. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
   @route("/?restype=account&comp=properties")
@@ -129,7 +123,6 @@ interface Service {
 
   /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("/?comp=batch")
@@ -145,7 +138,6 @@ interface Service {
 
   /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("/?comp=blobs")
@@ -169,7 +161,6 @@ interface Service {
 interface Container {
   /** Creates a new container under the specified account. If the container with the same name already exists, the operation fails. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}?restype=container")
@@ -194,7 +185,6 @@ interface Container {
 
   /** returns all user-defined metadata and system properties for the specified container. The data returned does not include the container's list of blobs */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
   @route("/{containerName}?restype=container")
@@ -226,7 +216,6 @@ interface Container {
 
   /** operation marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
   @route("/{containerName}?restype=container")
@@ -246,7 +235,6 @@ interface Container {
 
   /** operation sets one or more user-defined name-value pairs for the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -271,7 +259,6 @@ interface Container {
 
   /** gets the permissions for the specified container. The permissions indicate whether container data may be accessed publicly. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("/{containerName}?restype=container&comp=acl")
   getAccessPolicy is StorageOperation<
@@ -292,7 +279,6 @@ interface Container {
 
   /** sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -316,7 +302,6 @@ interface Container {
 
   /** Restores a previously-deleted container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -336,7 +321,6 @@ interface Container {
 
   /** Renames an existing container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -356,7 +340,6 @@ interface Container {
 
   /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("/{containerName}?restype=container&comp=batch")
@@ -377,7 +360,6 @@ interface Container {
 
   /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("/{containerName}?restype=container&comp=blobs")
@@ -399,7 +381,6 @@ interface Container {
 
   /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -424,7 +405,6 @@ interface Container {
 
   /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -447,7 +427,6 @@ interface Container {
 
   /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -471,7 +450,6 @@ interface Container {
 
   /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}?comp=lease&restype=container&break")
@@ -495,7 +473,6 @@ interface Container {
 
   /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -521,7 +498,6 @@ interface Container {
 
   /** [Update] The List Blobs operation returns a list of the blobs under the specified container */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("/{containerName}?restype=container&comp=list&flat")
@@ -543,7 +519,6 @@ interface Container {
 
   /** [Update] The List Blobs operation returns a list of the blobs under the specified container */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("/{containerName}?restype=container&comp=list&hierarchy")
@@ -566,7 +541,6 @@ interface Container {
 
   /** Returns the sku name and account kind */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
   @route("/{containerName}?restype=account&comp=properties")
@@ -588,7 +562,6 @@ interface Container {
 interface Blob {
   /** The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -660,7 +633,6 @@ interface Blob {
 
   /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @head
   getProperties is StorageOperation<
@@ -734,7 +706,6 @@ interface Blob {
 
   /** If the storage account's soft delete feature is disabled then, when a blob is deleted, it is permanently removed from the storage account. If the storage account's soft delete feature is enabled, then, when a blob is deleted, it is marked for deletion and becomes inaccessible immediately. However, the blob service retains the blob or snapshot for the number of days specified by the DeleteRetentionPolicy section of [Storage service properties] (Set-Blob-Service-Properties.md). After the specified number of days has passed, the blob's data is permanently removed from the storage account. Note that you continue to be charged for the soft-deleted blob's storage until it is permanently removed. Use the List Blobs API and specify the \"include=deleted\" query parameter to discover which blobs and snapshots have been soft deleted. You can then use the Undelete Blob API to restore a soft-deleted blob. All other operations on a soft-deleted blob or snapshot causes the service to return an HTTP status code of 404 (ResourceNotFound). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
   delete is StorageOperation<
@@ -761,7 +732,6 @@ interface Blob {
 
   /** "Undelete a blob that was previously soft deleted" */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @route("?comp=undelete")
   @post
@@ -778,7 +748,6 @@ interface Blob {
 
   /** "Set the expiration time of a blob" */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("?comp=expiry")
@@ -799,7 +768,6 @@ interface Blob {
 
   /** The Set HTTP Headers operation sets system properties on the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -833,7 +801,6 @@ interface Blob {
 
   /** "Set the immutability policy of a blob" */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -859,7 +826,6 @@ interface Blob {
 
   /** The Delete Immutability Policy operation deletes the immutability policy on the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
   @route("?comp=immutabilityPolicies")
@@ -877,7 +843,6 @@ interface Blob {
 
   /** The Set Legal Hold operation sets a legal hold on the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -898,7 +863,6 @@ interface Blob {
 
   /** The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -935,7 +899,6 @@ interface Blob {
 
   /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -964,7 +927,6 @@ interface Blob {
 
   /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -991,7 +953,6 @@ interface Blob {
 
   /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1019,7 +980,6 @@ interface Blob {
 
   /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1048,7 +1008,6 @@ interface Blob {
 
   /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("?comp=lease&break")
@@ -1075,7 +1034,6 @@ interface Blob {
 
   /** The Create Snapshot operation creates a read-only snapshot of a blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("?comp=snapshot")
@@ -1110,7 +1068,6 @@ interface Blob {
 
   /** The Start Copy From URL operation copies a blob or an internet resource to a new blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("?comp=copy")
@@ -1155,7 +1112,6 @@ interface Blob {
 
   /** The Copy From URL operation copies a blob or an internet resource to a new blob. It will not return a response until the copy is complete. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("?comp=copy&sync")
@@ -1203,7 +1159,6 @@ interface Blob {
 
   /** The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @put
   @route("?comp=copy&copyid")
   abortCopyFromUrl is StorageOperation<
@@ -1222,7 +1177,6 @@ interface Blob {
 
   /** The Set Tier operation sets the tier on a block blob. The operation is allowed on a page blob or block blob, but not on an append blob. A block blob's tier determines Hot/Cool/Archive storage type. This operation does not update the blob's ETag. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1245,7 +1199,6 @@ interface Blob {
 
   /** Returns the sku name and account kind */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
   @route("?restype=account&comp=properties")
@@ -1264,7 +1217,6 @@ interface Blob {
 
   /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @post
   @route("/{containerName}/{blob}?comp=query")
   query is StorageOperation<
@@ -1323,7 +1275,6 @@ interface Blob {
 
   /** The Get Blob Tags operation enables users to get tags on a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("/{containerName}/{blob}?comp=tags")
   getTags is StorageOperation<
@@ -1345,7 +1296,6 @@ interface Blob {
 
   /** The Set Tags operation enables users to set tags on a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=tags")
   setTags is StorageOperation<
@@ -1371,7 +1321,6 @@ interface Blob {
 interface PageBlob {
   /** The Create operation creates a new page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?PageBlob")
@@ -1421,7 +1370,6 @@ interface PageBlob {
 
   /** The Upload Pages operation writes a range of pages to a page blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1468,7 +1416,6 @@ interface PageBlob {
 
   /** The Clear Pages operation clears a range of pages from a page blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1501,7 +1448,6 @@ interface PageBlob {
 
   /** The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=page&update&fromUrl")
@@ -1551,7 +1497,6 @@ interface PageBlob {
 
   /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("/{containerName}/{blob}?comp=pagelist")
   getPageRanges is StorageOperation<
@@ -1581,7 +1526,6 @@ interface PageBlob {
 
   /** The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("/{containerName}/{blob}?comp=pagelist&diff")
   getPageRangesDiff is StorageOperation<
@@ -1614,7 +1558,6 @@ interface PageBlob {
 
   /** The Resize operation increases the size of the page blob to the specified size. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1647,7 +1590,6 @@ interface PageBlob {
 
   /** The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1677,7 +1619,6 @@ interface PageBlob {
 
   /** The Copy Incremental operation copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. The copied snapshots are complete copies of the original snapshot and can be read or copied from as usual. This API is supported since REST version 2016-05-31. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=incrementalcopy")
@@ -1710,7 +1651,6 @@ interface PageBlob {
 interface AppendBlob {
   /** The Create operation creates a new append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   create is StorageOperation<
@@ -1757,7 +1697,6 @@ interface AppendBlob {
 
   /** The Append Block operation commits a new block of data to the end of an append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1804,7 +1743,6 @@ interface AppendBlob {
 
   /** The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1850,7 +1788,6 @@ interface AppendBlob {
 
   /** The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1882,7 +1819,6 @@ interface AppendBlob {
 interface BlockBlob {
   /** The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1935,7 +1871,6 @@ interface BlockBlob {
 
   /** The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -1991,7 +1926,6 @@ interface BlockBlob {
 
   /** The Stage Block operation creates a new block to be committed as part of a blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -2025,7 +1959,6 @@ interface BlockBlob {
 
   /** The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -2065,7 +1998,6 @@ interface BlockBlob {
 
   /** The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
@@ -2117,7 +2049,6 @@ interface BlockBlob {
 
   /** The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("?comp=blocklist")
   getBlockList is StorageOperation<
