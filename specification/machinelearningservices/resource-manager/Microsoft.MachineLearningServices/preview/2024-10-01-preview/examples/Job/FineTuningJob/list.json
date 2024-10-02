@@ -49,12 +49,14 @@
                   "mode": "ReadOnlyMount",
                   "description": null
                 }
-              },        
-              "resources": {
-                  "instanceTypes": ["Standard_NC6"]
               },
-              "queueSettings":{
-                  "jobTier": "Standard"
+              "resources": {
+                "instanceTypes": [
+                  "Standard_NC6"
+                ]
+              },
+              "queueSettings": {
+                "jobTier": "Standard"
               },
               "componentId": "string",
               "notificationSetting": {
@@ -67,11 +69,8 @@
               },
               "jobType": "FineTuning",
               "outputs": {
-                "string": {
-                  "description": "string",
-                  "uri": "string",
-                  "mode": "ReadWriteMount",
-                  "jobOutputType": "mlflow_model"
+                "registered_model": {
+                  "assetname": "Phi-3-mini-128k-instruct-Finetune"
                 }
               }
             },
