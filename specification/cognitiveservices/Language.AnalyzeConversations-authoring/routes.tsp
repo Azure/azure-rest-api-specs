@@ -77,7 +77,6 @@ interface ConversationalAnalysisAuthoring {
     ErrorResponse
   >;
 
-
   /**
    * Generates a copy project operation authorization to the current target Azure
    * resource.
