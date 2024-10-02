@@ -474,7 +474,7 @@
       "properties": {
         "ultraSSDEnabled": {
           "type": "boolean",
-          "description": "The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
+          "description": "The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS.\nManaged disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
         },
         "hibernationEnabled": {
           "type": "boolean",
@@ -629,14 +629,14 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Intel",
+            "name": "X86",
             "value": "Intel",
-            "description": "Intel Architecture"
+            "description": "X86 Architecture"
           },
           {
-            "name": "AMD",
+            "name": "AMD64",
             "value": "AMD",
-            "description": "AMD Architecture"
+            "description": "AMD64 Architecture"
           }
         ]
       }
@@ -1534,13 +1534,9 @@
         },
         "virtualMachineProfileOverride": {
           "$ref": "#/definitions/BaseVirtualMachineProfile",
-          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
+          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\". \nAn override for the base virtual machine profile specific to this region. This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location."
         }
-      },
-      "required": [
-        "location",
-        "virtualMachineProfileOverride"
-      ]
+      }
     },
     "ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -2358,12 +2354,14 @@
         "min": {
           "type": "integer",
           "format": "int32",
-          "description": "Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified."
+          "description": "Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.",
+          "minimum": 0
         },
         "max": {
           "type": "integer",
           "format": "int32",
-          "description": "Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified."
+          "description": "Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.",
+          "maximum": 4294967295
         }
       }
     },
@@ -2387,12 +2385,12 @@
           {
             "name": "Included",
             "value": "Included",
-            "description": "SDD DiskType."
+            "description": " VMSizes that have the feature support and that do not have the feature support will be used. Included is a union of Excluded and Required."
           },
           {
             "name": "Required",
             "value": "Required",
-            "description": "VMSizes that have the feature support and that do not have the feature support will be used."
+            "description": "Only the VMSizes having the feature support will be used."
           }
         ]
       }
@@ -2504,41 +2502,12 @@
       },
       "required": [
         "vCpuCount",
-        "memoryInMiB",
-        "localStorageDiskType",
-        "localStorageInGB",
-        "localStorageDiskTypes",
-        "dataDiskCount",
-        "networkInterfaceCount",
-        "networkBandwidthInMbps",
-        "rdmaNetworkInterfaceCount",
-        "gpuManufacturers",
-        "vmCategories",
-        "architectureTypes",
-        "cpuManufacturers",
-        "excludedVMSizes"
-      ]
-    },
-    "VMAttributesList": {
-      "type": "object",
-      "description": "List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.",
-      "properties": {
-        "vmAttributes": {
-          "type": "array",
-          "description": "List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.",
-          "items": {
-            "$ref": "#/definitions/VMAttributes"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "vmAttributes"
+        "memoryInMiB"
       ]
     },
     "VMCategory": {
       "type": "string",
-      "description": "VMCategories defined for Azure VMs.",
+      "description": "VMCategories defined for Azure VMs.\nSee: https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose",
       "enum": [
         "GeneralPurpose",
         "ComputeOptimized",
@@ -2554,32 +2523,32 @@
           {
             "name": "GeneralPurpose",
             "value": "GeneralPurpose",
-            "description": "GeneralPurpose VM."
+            "description": "General purpose VM sizes provide balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers."
           },
           {
             "name": "ComputeOptimized",
             "value": "ComputeOptimized",
-            "description": "ComputeOptimized VM."
+            "description": "Compute optimized VM sizes have a high CPU-to-memory ratio. These sizes are good for medium traffic web servers, network appliances, batch processes, and application servers."
           },
           {
             "name": "MemoryOptimized",
             "value": "MemoryOptimized",
-            "description": "MemoryOptimized VM."
+            "description": "Memory optimized VM sizes offer a high memory-to-CPU ratio that is great for relational database servers, medium to large caches, and in-memory analytics."
           },
           {
             "name": "StorageOptimized",
             "value": "StorageOptimized",
-            "description": "StorageOptimized VM."
+            "description": "Storage optimized virtual machine (VM) sizes offer high disk throughput and IO, and are ideal for Big Data, SQL, NoSQL databases, data warehousing, and large transactional databases. \nExamples include Cassandra, MongoDB, Cloudera, and Redis."
           },
           {
             "name": "GpuAccelerated",
             "value": "GpuAccelerated",
-            "description": "GpuAccelerated VM."
+            "description": "GPU optimized VM sizes are specialized virtual machines available with single, multiple, or fractional GPUs. \nThese sizes are designed for compute-intensive, graphics-intensive, and visualization workloads."
           },
           {
             "name": "FpgaAccelerated",
             "value": "FpgaAccelerated",
-            "description": "FpgaAccelerated VM."
+            "description": "FPGA optimized VM sizes are specialized virtual machines available with single or multiple FPGAs. These sizes are designed for compute-intensive workloads. This article provides information about the number and type of FPGAs, vCPUs, data disks, and NICs. \nStorage throughput and network bandwidth are also included for each size in this grouping."
           }
         ]
       }

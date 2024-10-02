@@ -232,7 +232,10 @@ union EvictionPolicy {
 @doc("AdditionalCapabilities for VM.")
 model AdditionalCapabilities {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ultraSSDEnabled which does not follow camel casing"
-  @doc("The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.")
+  @doc("""
+  The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS.
+  Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.
+  """)
   ultraSSDEnabled?: boolean;
 
   @doc("The flag that enables or disables hibernation capability on the VM.")
@@ -243,9 +246,11 @@ model AdditionalCapabilities {
 @added(Versions.v2024_11_01)
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
 model VMAttributeMinMax {
+  @minValue(0)
   @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
   min?: int32;
 
+  @maxValue(4294967295)
   @doc("Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
   max?: int32;
 }
@@ -257,35 +262,53 @@ union VMAttributeSupport {
 
   @doc("All VMSizes having the feature support will be excluded.")
   Excluded: "Excluded",
-
-  @doc("SDD DiskType.")
+  
+  @doc(" VMSizes that have the feature support and that do not have the feature support will be used. Included is a union of Excluded and Required.")
   Included: "Included",
 
-  @doc("VMSizes that have the feature support and that do not have the feature support will be used.")
+  @doc("Only the VMSizes having the feature support will be used.")
   Required: "Required",
 }
 
 @added(Versions.v2024_11_01)
-@doc("VMCategories defined for Azure VMs.")
+@doc("""
+VMCategories defined for Azure VMs.
+See: https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose
+""")
 union VMCategory {
   string,
 
-  @doc("GeneralPurpose VM.")
+  @doc("""
+  General purpose VM sizes provide balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.
+  """)
   GeneralPurpose: "GeneralPurpose",
 
-  @doc("ComputeOptimized VM.")
+  @doc("""
+  Compute optimized VM sizes have a high CPU-to-memory ratio. These sizes are good for medium traffic web servers, network appliances, batch processes, and application servers.
+  """)
   ComputeOptimized: "ComputeOptimized",
 
-  @doc("MemoryOptimized VM.")
+  @doc("""
+  Memory optimized VM sizes offer a high memory-to-CPU ratio that is great for relational database servers, medium to large caches, and in-memory analytics.
+  """)
   MemoryOptimized: "MemoryOptimized",
 
-  @doc("StorageOptimized VM.")
+  @doc("""
+  Storage optimized virtual machine (VM) sizes offer high disk throughput and IO, and are ideal for Big Data, SQL, NoSQL databases, data warehousing, and large transactional databases. 
+  Examples include Cassandra, MongoDB, Cloudera, and Redis.
+  """)
   StorageOptimized: "StorageOptimized",
 
-  @doc("GpuAccelerated VM.")
+  @doc("""
+  GPU optimized VM sizes are specialized virtual machines available with single, multiple, or fractional GPUs. 
+  These sizes are designed for compute-intensive, graphics-intensive, and visualization workloads.
+  """)
   GpuAccelerated: "GpuAccelerated",
 
-  @doc("FpgaAccelerated VM.")
+  @doc("""
+  FPGA optimized VM sizes are specialized virtual machines available with single or multiple FPGAs. These sizes are designed for compute-intensive workloads. This article provides information about the number and type of FPGAs, vCPUs, data disks, and NICs. 
+  Storage throughput and network bandwidth are also included for each size in this grouping.
+  """)
   FpgaAccelerated: "FpgaAccelerated",
 }
 
@@ -318,11 +341,11 @@ union LocalStorageDiskType {
 union ArchitectureType {
   string,
 
-  @doc("Intel Architecture")
-  Intel: "Intel",
+  @doc("X86 Architecture")
+  X86: "Intel",
 
-  @doc("AMD Architecture")
-  AMD: "AMD",
+  @doc("AMD64 Architecture")
+  AMD64: "AMD",
 }
 
 @added(Versions.v2024_11_01)
@@ -355,67 +378,68 @@ model VMAttributes {
 
   @extension("x-ms-identifiers", [])
   @doc("The local storage disk types specified as a list. If gpuSupport is Excluded, this VMAttribute can not be used.")
-  localStorageDiskType: Array<LocalStorageDiskType>;
+  localStorageDiskType?: Array<LocalStorageDiskType>;
 
   @doc("The range of local storage in GB specified from Min to Max.")
-  localStorageInGB: VMAttributeMinMax;
+  localStorageInGB?: VMAttributeMinMax;
 
   @extension("x-ms-identifiers", [])
   @doc("The local storage disk types specified as a list.")
-  localStorageDiskTypes: Array<LocalStorageDiskType>;
+  localStorageDiskTypes?: Array<LocalStorageDiskType>;
 
   @doc("The range of data disk count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
-  dataDiskCount: VMAttributeMinMax;
+  dataDiskCount?: VMAttributeMinMax;
 
   @doc("The range of network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
-  networkInterfaceCount: VMAttributeMinMax;
+  networkInterfaceCount?: VMAttributeMinMax;
 
   @doc("The range of network bandwidth in Mbps specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
-  networkBandwidthInMbps: VMAttributeMinMax;
+  networkBandwidthInMbps?: VMAttributeMinMax;
 
   @doc("Specifies whether the VMSize supporting RDMA (Remote Direct Memory Access) should be used to build Fleet or not.")
   rdmaSupport?: VMAttributeSupport;
 
   @doc("The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
-  rdmaNetworkInterfaceCount: VMAttributeMinMax;
+  rdmaNetworkInterfaceCount?: VMAttributeMinMax;
 
   @doc("Specifies whether the VMSize supporting GPU should be used to build Fleet or not.")
   gpuSupport?: VMAttributeSupport;
 
   @extension("x-ms-identifiers", [])
   @doc("The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are ANY of the valid values.")
-  gpuManufacturers: Array<GpuManufacturer>;
+  gpuManufacturers?: Array<GpuManufacturer>;
 
   @extension("x-ms-identifiers", [])
   @doc("The VM category specified as a list. Optional parameter.")
-  vmCategories: Array<VMCategory>;
+  vmCategories?: Array<VMCategory>;
 
   @extension("x-ms-identifiers", [])
   @doc("The VM architecture types specified as a list. Optional parameter.")
-  architectureTypes: Array<ArchitectureType>;
+  architectureTypes?: Array<ArchitectureType>;
 
   @extension("x-ms-identifiers", [])
   @doc("The VM CPU manufacturers specified as a list. Optional parameter.")
-  cpuManufacturers: Array<CpuManufacturer>;
+  cpuManufacturers?: Array<CpuManufacturer>;
 
   @doc("Specifies whether the VMSize supporting burstable capability should be used to build Fleet or not.")
   burstableSupport?: VMAttributeSupport;
 
   @extension("x-ms-identifiers", [])
   @doc("Specifies which VMSizes should be excluded while building Fleet. Optional parameter.")
-  excludedVMSizes: Array<string>;
+  excludedVMSizes?: Array<string>;
 }
 
 @added(Versions.v2024_11_01)
 @doc("Represents the profile for a single additional location in the Fleet. The location and the (optional).")
 model LocationProfile {
   @doc("The ARM location name of the additional region.")
-  location: string;
+  location?: string;
 
   @doc("""
-    Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
+    Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile". 
+    An override for the base virtual machine profile specific to this region. This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
     """)
-  virtualMachineProfileOverride: BaseVirtualMachineProfile;
+  virtualMachineProfileOverride?: BaseVirtualMachineProfile;
 }
 
 @added(Versions.v2024_11_01)
@@ -424,15 +448,6 @@ model AdditionalLocationsProfile {
   @extension("x-ms-identifiers", [])
   @doc("The list of location profiles.")
   locationProfiles: Array<LocationProfile>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributesList which does not follow camel casing"
-@added(Versions.v2024_11_01)
-@doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
-model VMAttributesList {
-  @extension("x-ms-identifiers", [])
-  @doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
-  vmAttributes: Array<VMAttributes>;
 }
 
 @armResourceOperations
