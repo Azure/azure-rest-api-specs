@@ -11,16 +11,18 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+/** Azure Storage Blob basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model,
   TError = StorageError
->(
-  ...TParams,
-  ...ApiVersionParameter,
-  ...ClientRequestIdParameter,
-): TResponse | TError;
+>(...TParams, ...ApiVersionParameter, ...ClientRequestIdParameter): (TResponse &
+  VersionResponseHeader &
+  RequestIdResponseHeader &
+  ClientRequestIdResponseHeader) | TError;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {
   /** Get the properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -37,9 +39,6 @@ interface Service {
     },
     {
       @statusCode statusCode: 202;
-      ...ClientRequestIdResponseHeader;
-      ...RequestIdResponseHeader;
-      ...VersionResponseHeader;
     }
   >;
 
@@ -48,33 +47,24 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("/?restype=service&comp=properties")
-  getProperties(
-    ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: StorageServiceProperties;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
-  } | StorageError;
+  getProperties is StorageOperation<
+    {
+      ...TimeoutParameter;
+    },
+    {
+      @statusCode statusCode: 200;
+      @body body: StorageServiceProperties;
+    }
+  >;
 
   /** Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   @get
   @route("/?restype=service&comp=stats")
-  getStatistics(
-    ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
-  ): {
+  getStatistics(...TimeoutParameter): {
     @statusCode statusCode: 200;
     @body body: StorageServiceStats;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -89,14 +79,9 @@ interface Service {
     ...TimeoutParameter,
     ...MarkerParameter,
     ...MaxResultsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     @body body: ListContainersSegmentResponse;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
   } | StorageError;
 
   /** The Get User Delegation Key operation gets the user delegation key for the Blob service. This is only a valid operation when using User Delegation SAS. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas\">Create a user delegation SAS</a>. */
@@ -109,17 +94,11 @@ interface Service {
     @body body: KeyInfo,
 
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
 
     /** The user delegation key. */
     @body body: UserDelegationKey;
-
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
   } | StorageError;
 
   /** Returns the sku name and account kind. */
@@ -130,9 +109,6 @@ interface Service {
   @route("/?restype=account&comp=properties")
   getAccountInfo(...ApiVersionParameter): {
     @statusCode statusCode: 200;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...SkuNameResponseHeader;
     ...AccountKindResponseHeader;
@@ -145,15 +121,8 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("/?comp=batch")
-  submitBatch(
-    ...ContentLengthParameter,
-    ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
-  ): {
+  submitBatch(...ContentLengthParameter, ...TimeoutParameter): {
     @statusCode statusCode: 200;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
   } | StorageError;
 
   /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
@@ -168,18 +137,14 @@ interface Service {
     ...TimeoutParameter,
     ...MarkerParameter,
     ...MaxResultsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     @body body: FilterBlobSegment;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 }
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Container {
   /** Creates a new container under the specified account. If the container with the same name already exists, the operation fails. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -196,15 +161,10 @@ interface Container {
     ...DefaultEncryptionScopeParameter,
     ...DenyEncryptionScopeOverrideParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 201;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -217,8 +177,6 @@ interface Container {
   getProperties(
     ...ContainerNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseIdOptionalParameter,
   ): {
     @statusCode statusCode: 200;
@@ -227,9 +185,6 @@ interface Container {
     ...EtagResponseHeader;
 
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...LeaseDurationResponseHeader;
     ...LeaseStateResponseHeader;
@@ -251,16 +206,11 @@ interface Container {
   delete(
     ...ContainerNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseIdOptionalParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
   ): {
     @statusCode statusCode: 202;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -277,17 +227,12 @@ interface Container {
     // TODO: ...MetadataParameter;
     ...TimeoutParameter,
 
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...IfModifiedSinceParameter,
     ...LeaseIdOptionalParameter,
   ): {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -299,8 +244,6 @@ interface Container {
   getAccessPolicy(
     ...ContainerNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseIdOptionalParameter,
   ): {
     @statusCode statusCode: 200;
@@ -308,9 +251,6 @@ interface Container {
     ...PublicAccessResponseHeader;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -325,8 +265,6 @@ interface Container {
     ...ContainerNameParameter,
     ...ContainerAclParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
     ...LeaseIdOptionalParameter,
@@ -334,9 +272,6 @@ interface Container {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -352,13 +287,8 @@ interface Container {
     ...DeletedContainerNameParameter,
     ...DeletedContainerVersionParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 201;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -374,13 +304,8 @@ interface Container {
     ...SourceContainerNameParameter,
     ...SourceLeaseIdParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -397,13 +322,9 @@ interface Container {
     ...ContainerNameParameter,
     ...ContentLengthParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 202;
     @body body: bytes;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
   } | StorageError;
 
   /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
@@ -419,14 +340,9 @@ interface Container {
     ...FilterBlobsWhereParameter,
     ...FilterBlobsIncludeParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     @body body: FilterBlobSegment;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -441,8 +357,6 @@ interface Container {
     ...ContainerNameParameter,
     ...LeaseDurationParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...ProposedLeaseIdOptionalParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
@@ -451,9 +365,6 @@ interface Container {
     ...LeaseIdResponseHeader;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -468,17 +379,12 @@ interface Container {
     ...ContainerNameParameter,
     ...LeaseIdRequiredParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
   ): {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -493,8 +399,6 @@ interface Container {
     ...ContainerNameParameter,
     ...LeaseIdRequiredParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
   ): {
@@ -502,9 +406,6 @@ interface Container {
     ...LeaseIdResponseHeader;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -517,8 +418,6 @@ interface Container {
   breakLease(
     ...ContainerNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
     ...LeaseBreakPeriodParameter,
@@ -528,7 +427,6 @@ interface Container {
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...LeaseIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -544,8 +442,6 @@ interface Container {
     ...LeaseIdRequiredParameter,
     ...ProposedLeaseIdRequiredParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
   ): {
@@ -554,8 +450,6 @@ interface Container {
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...LeaseTimeResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -572,14 +466,9 @@ interface Container {
     ...MaxResultsParameter,
     ...ListBlobsIncludeParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     @body body: ListBlobsFlatSegmentResponse;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -597,14 +486,9 @@ interface Container {
     ...MaxResultsParameter,
     ...ListBlobsIncludeParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     @body body: ListBlobsHierarchySegmentResponse;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -616,15 +500,13 @@ interface Container {
   @route("/{containerName}?restype=account&comp=properties")
   getAccountInfo(...ContainerNameParameter, ...ApiVersionParameter): {
     @statusCode statusCode: 200;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...SkuNameResponseHeader;
     ...AccountKindResponseHeader;
   } | StorageError;
 }
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 @route("/{containerName}/{blob}")
 interface Blob {
   /** The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot. */
@@ -651,8 +533,6 @@ interface Blob {
     ...IfTagsParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
-    ...ClientRequestIdParameter,
-    ...ApiVersionParameter,
   ): {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
     @statusCode statusCode: 200 | 206;
@@ -681,7 +561,6 @@ interface Blob {
     ...LeaseDurationResponseHeader;
     ...LeaseStateResponseHeader;
     ...LeaseStatusResponseHeader;
-    ...VersionResponseHeader;
     ...VersionIdResponseHeader;
     ...IsCurrentVersionResponseHeader;
     ...AcceptRangesResponseHeader;
@@ -718,8 +597,6 @@ interface Blob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ClientRequestIdParameter,
-    ...ApiVersionParameter,
   ): {
     @statusCode statusCode: 200;
 
@@ -750,9 +627,6 @@ interface Blob {
     ...ContentDispositionResponseHeader;
     ...ContentLanguageResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...AcceptRangesResponseHeader;
     ...BlobCommittedBlockCountResponseHeader;
@@ -793,14 +667,9 @@ interface Blob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...BlobDeleteTypeParameter,
   ): {
     @statusCode statusCode: 202;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -810,16 +679,8 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @route("?comp=undelete")
   @post
-  undelete(
-    ...ContainerNameParameter,
-    ...BlobNameParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
-  ): {
+  undelete(...ContainerNameParameter, ...BlobNameParameter): {
     @statusCode statusCode: 200;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -832,17 +693,12 @@ interface Blob {
   setExpiry(
     ...ContainerNameParameter,
     ...BlobNameParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...BlobExpiryOptionsParameter,
     ...BlobExpiryTimeParameter,
   ): {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -869,16 +725,11 @@ interface Blob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -894,17 +745,12 @@ interface Blob {
     ...BlobNameParameter,
     ...TimeoutParameter,
     ...IfUnmodifiedSinceParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...ImmutabilityPolicyExpiryParameter,
     ...ImmutabilityPolicyModeParameter,
   ): {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...ImmutabilityPolicyExpiryResponseHeader;
     ...ImmutabilityPolicyModeResponseHeader;
@@ -920,13 +766,8 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -941,14 +782,9 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LegalHoldRequiredParameter,
   ): {
     @statusCode statusCode: 200;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...LegalHoldResponseHeader;
   } | StorageError;
@@ -964,8 +800,6 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
 
     // TODO: Metadata ...MetadataParameter;
     ...LeaseIdOptionalParameter,
@@ -983,9 +817,6 @@ interface Blob {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
@@ -1003,8 +834,6 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseDurationParameter,
     ...ProposedLeaseIdOptionalParameter,
     ...IfModifiedSinceParameter,
@@ -1016,9 +845,6 @@ interface Blob {
     @statusCode statusCode: 201;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...LeaseIdResponseHeader;
   } | StorageError;
@@ -1034,8 +860,6 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseIdRequiredParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
@@ -1046,9 +870,6 @@ interface Blob {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -1063,8 +884,6 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseIdRequiredParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
@@ -1075,9 +894,6 @@ interface Blob {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...LeaseIdResponseHeader;
   } | StorageError;
@@ -1093,8 +909,6 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseIdRequiredParameter,
     ...ProposedLeaseIdOptionalParameter,
     ...IfModifiedSinceParameter,
@@ -1106,9 +920,6 @@ interface Blob {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...LeaseIdResponseHeader;
   } | StorageError;
@@ -1123,8 +934,6 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseBreakPeriodParameter,
     ...IfModifiedSinceParameter,
     ...IfUnmodifiedSinceParameter,
@@ -1135,9 +944,6 @@ interface Blob {
     @statusCode statusCode: 202;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...LeaseTimeResponseHeader;
   } | StorageError;
@@ -1165,15 +971,10 @@ interface Blob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 201;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...SnapshotResponseHeader;
     ...DateResponseHeader;
     ...IsServerEncryptedResponseHeader;
@@ -1206,8 +1007,6 @@ interface Blob {
     ...IfTagsParameter,
     ...CopySourceParameter,
     ...LeaseIdOptionalParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...BlobTagsHeaderParameter,
     ...SealBlobParameter,
     ...ImmutabilityPolicyExpiryParameter,
@@ -1217,9 +1016,6 @@ interface Blob {
     @statusCode statusCode: 202;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...VersionIdResponseHeader;
     ...DateResponseHeader;
     ...CopyIdResponseHeader;
@@ -1251,8 +1047,6 @@ interface Blob {
     ...IfTagsParameter,
     ...CopySourceParameter,
     ...LeaseIdOptionalParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...SourceContentMd5Parameter,
     ...BlobTagsHeaderParameter,
     ...ImmutabilityPolicyExpiryParameter,
@@ -1265,9 +1059,6 @@ interface Blob {
     @statusCode statusCode: 202;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...CopyIdResponseHeader;
     ...CopyStatusResponseHeader;
@@ -1287,13 +1078,8 @@ interface Blob {
     ...TimeoutParameter,
     ...CopyIdParameter,
     ...LeaseIdOptionalParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 204;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -1310,20 +1096,12 @@ interface Blob {
     ...TimeoutParameter,
     ...AccessTierRequiredParameter,
     ...RehydratePriorityParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...LeaseIdOptionalParameter,
     ...IfTagsParameter,
   ): {
     @statusCode statusCode: 200;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
   } | {
     @statusCode statusCode: 202;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
   } | StorageError;
 
   /** Returns the sku name and account kind */
@@ -1332,16 +1110,8 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
   @route("?restype=account&comp=properties")
-  getAccountInfo(
-    ...ContainerNameParameter,
-    ...BlobNameParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
-  ): {
+  getAccountInfo(...ContainerNameParameter, ...BlobNameParameter): {
     @statusCode statusCode: 200;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...AccountKindResponseHeader;
     ...SkuNameResponseHeader;
@@ -1367,8 +1137,6 @@ interface Blob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
     @statusCode statusCode: 200 | 206;
@@ -1396,9 +1164,6 @@ interface Blob {
     ...LeaseDurationResponseHeader;
     ...LeaseStateResponseHeader;
     ...LeaseStatusResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...AcceptRangesResponseHeader;
     ...BlobCommittedBlockCountResponseHeader;
@@ -1417,8 +1182,6 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...SnapshotParameter,
     ...VersionIdParameter,
     ...LeaseIdOptionalParameter,
@@ -1426,9 +1189,6 @@ interface Blob {
   ): {
     @statusCode statusCode: 200;
     @body body: BlobTags;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -1441,8 +1201,6 @@ interface Blob {
     ...ContainerNameParameter,
     ...BlobNameParameter,
     ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...VersionIdParameter,
     ...LeaseIdOptionalParameter,
     ...ContentMd5Parameter,
@@ -1451,13 +1209,11 @@ interface Blob {
     ...BlobTagsBodyParameter,
   ): {
     @statusCode statusCode: 204;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 }
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface PageBlob {
   /** The Create operation creates a new page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -1491,8 +1247,6 @@ interface PageBlob {
     ...IfTagsParameter,
     ...BlobContentLengthRequiredParameter,
     ...BlobSequenceNumberParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...BlobTagsHeaderParameter,
     ...ImmutabilityPolicyExpiryParameter,
     ...LegalHoldOptionalParameter,
@@ -1501,9 +1255,6 @@ interface PageBlob {
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ContentMd5ResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...VersionIdResponseHeader;
     ...DateResponseHeader;
     ...IsServerEncryptedResponseHeader;
@@ -1542,8 +1293,6 @@ interface PageBlob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 201;
     ...EtagResponseHeader;
@@ -1551,9 +1300,6 @@ interface PageBlob {
     ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
@@ -1582,16 +1328,11 @@ interface PageBlob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 201;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -1628,16 +1369,11 @@ interface PageBlob {
     ...SourceIfUnmodifiedSinceParameter,
     ...SourceIfMatchParameter,
     ...SourceIfNoneMatchParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...CopySourceAuthorizationParameter,
   ): {
     @statusCode statusCode: 202;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
@@ -1655,8 +1391,6 @@ interface PageBlob {
   getPageRanges(
     ...ContainerNameParameter,
     ...BlobNameParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...SnapshotParameter,
     ...RangeParameter,
     ...LeaseIdOptionalParameter,
@@ -1673,9 +1407,6 @@ interface PageBlob {
     ...LastModifiedResponseHeader;
     ...EtagResponseHeader;
     ...BlobContentLengthResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -1687,8 +1418,6 @@ interface PageBlob {
   getPageRangesDiff(
     ...ContainerNameParameter,
     ...BlobNameParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...SnapshotParameter,
     ...TimeoutParameter,
     ...PrevSnapshotParameter,
@@ -1708,9 +1437,6 @@ interface PageBlob {
     ...LastModifiedResponseHeader;
     ...EtagResponseHeader;
     ...BlobContentLengthResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -1736,16 +1462,11 @@ interface PageBlob {
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
     ...BlobContentLengthRequiredParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -1768,16 +1489,11 @@ interface PageBlob {
     ...IfTagsParameter,
     ...SequenceNumberActionParameter,
     ...SequenceNumberParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 
@@ -1798,21 +1514,17 @@ interface PageBlob {
     ...IfTagsParameter,
     ...LeaseIdOptionalParameter,
     ...CopySourceParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 202;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...CopyIdResponseHeader;
     ...CopyStatusResponseHeader;
   } | StorageError;
 }
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 @route("/{containerName}/{blob}?AppendBlob")
 interface AppendBlob {
   /** The Create operation creates a new append blob. */
@@ -1843,8 +1555,6 @@ interface AppendBlob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...BlobTagsHeaderParameter,
     ...ImmutabilityPolicyExpiryParameter,
     ...ImmutabilityPolicyModeParameter,
@@ -1854,9 +1564,6 @@ interface AppendBlob {
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ContentMd5ResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...VersionIdResponseHeader;
     ...DateResponseHeader;
     ...IsServerEncryptedResponseHeader;
@@ -1893,16 +1600,11 @@ interface AppendBlob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 201;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
@@ -1941,16 +1643,11 @@ interface AppendBlob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...CopySourceAuthorizationParameter,
   ): {
     @statusCode statusCode: 201;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
@@ -1979,20 +1676,16 @@ interface AppendBlob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 200;
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...IsSealedResponseHeader;
   } | StorageError;
 }
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface BlockBlob {
   /** The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -2027,8 +1720,6 @@ interface BlockBlob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...BlobTagsHeaderParameter,
     ...ImmutabilityPolicyExpiryParameter,
     ...ImmutabilityPolicyModeParameter,
@@ -2039,9 +1730,6 @@ interface BlockBlob {
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ContentMd5ResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...VersionIdResponseHeader;
     ...DateResponseHeader;
     ...IsServerEncryptedResponseHeader;
@@ -2086,8 +1774,6 @@ interface BlockBlob {
     ...SourceIfMatchParameter,
     ...SourceIfNoneMatchParameter,
     ...SourceIfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...SourceContentMd5Parameter,
     ...BlobTagsHeaderParameter,
     ...CopySourceParameter,
@@ -2099,8 +1785,6 @@ interface BlockBlob {
     ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ContentMd5ResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
@@ -2127,13 +1811,8 @@ interface BlockBlob {
     ...EncryptionKeySha256Parameter,
     ...EncryptionAlgorithmParameter,
     ...EncryptionScopeParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
   ): {
     @statusCode statusCode: 201;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
@@ -2152,8 +1831,6 @@ interface BlockBlob {
   stageBlockFromUrl(
     ...ContainerNameParameter,
     ...BlobNameParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...BlockIdParameter,
     ...ContentLengthParameter,
     ...SourceUrlParameter,
@@ -2173,9 +1850,6 @@ interface BlockBlob {
     ...CopySourceAuthorizationParameter,
   ): {
     @statusCode statusCode: 201;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
@@ -2217,8 +1891,6 @@ interface BlockBlob {
     ...IfMatchParameter,
     ...IfNoneMatchParameter,
     ...IfTagsParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...BlobTagsHeaderParameter,
     ...ImmutabilityPolicyExpiryParameter,
     ...ImmutabilityPolicyModeParameter,
@@ -2229,9 +1901,6 @@ interface BlockBlob {
     ...LastModifiedResponseHeader;
     ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
@@ -2246,8 +1915,6 @@ interface BlockBlob {
   getBlockList(
     ...ContainerNameParameter,
     ...BlobNameParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
     ...SnapshotParameter,
     ...BlockListTypeParameter,
     ...LeaseIdOptionalParameter,
@@ -2258,9 +1925,6 @@ interface BlockBlob {
     ...LastModifiedResponseHeader;
     ...EtagResponseHeader;
     ...BlobContentLengthResponseHeader;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
 }
