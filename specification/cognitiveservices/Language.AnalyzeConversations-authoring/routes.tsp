@@ -12,7 +12,7 @@ using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.Authoring;
+namespace Language.Authoring.Conversations;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
@@ -141,14 +141,14 @@ interface ConversationalAnalysisAuthoring {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
       @query("format")
-      ExportedProjectFormat?: ConversationalAnalysisAuthoringExportedProjectFormat;
+      ExportedProjectFormat?: ExportedProjectFormat;
 
       /**
        * Specifies the method used to interpret string offsets. For additional
        * information see https://aka.ms/text-analytics-offsets.
        */
       @query("stringIndexType")
-      stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
+      stringIndexType: StringIndexType;
 
       /**
        * Kind of asset to export.
@@ -189,7 +189,7 @@ interface ConversationalAnalysisAuthoring {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
       @query("format")
-      ExportedProjectFormat?: ConversationalAnalysisAuthoringExportedProjectFormat;
+      ExportedProjectFormat?: ExportedProjectFormat;
 
       /**
        * The project data to import.
@@ -740,7 +740,7 @@ interface ConversationalAnalysisAuthoring {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
       @query("projectKind")
-      ProjectKind: ConversationalAnalysisAuthoringProjectKind;
+      ProjectKind: ProjectKind;
 
       /**
        * The maximum number of resources to return from the collection.
@@ -825,7 +825,7 @@ interface ConversationalAnalysisAuthoring {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
       @query("projectKind")
-      ProjectKind: ConversationalAnalysisAuthoringProjectKind;
+      ProjectKind: ProjectKind;
 
       /**
        * The maximum number of resources to return from the collection.

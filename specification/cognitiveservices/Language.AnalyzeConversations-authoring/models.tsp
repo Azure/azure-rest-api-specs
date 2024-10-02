@@ -11,11 +11,10 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Language.Authoring;
+namespace Language.Authoring.Conversations;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ProjectKind", "csharp")
-union ConversationalAnalysisAuthoringProjectKind {
+union ProjectKind {
   string,
 
   /**
@@ -84,8 +83,7 @@ union InnerErrorCode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ExportedProjectFormat", "csharp")
-union ConversationalAnalysisAuthoringExportedProjectFormat {
+union ExportedProjectFormat {
   string,
 
   /**
@@ -101,7 +99,7 @@ union ConversationalAnalysisAuthoringExportedProjectFormat {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("StringIndexType", "csharp")
-union ConversationalAnalysisAuthoringStringIndexType {
+union StringIndexType {
   string,
 
   /**
@@ -113,8 +111,7 @@ union ConversationalAnalysisAuthoringStringIndexType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("TrainingMode", "csharp")
-union ConversationalAnalysisAuthoringTrainingMode {
+union TrainingMode {
   string,
 
   /**
@@ -130,8 +127,7 @@ union ConversationalAnalysisAuthoringTrainingMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("EvaluationKind", "csharp")
-union ConversationalAnalysisAuthoringEvaluationKind {
+union EvaluationKind {
   string,
 
   /**
@@ -148,8 +144,7 @@ union ConversationalAnalysisAuthoringEvaluationKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @lroStatus
-@clientName("JobStatus", "csharp")
-union ConversationalAnalysisAuthoringJobStatus {
+union JobStatus {
   string,
   notStarted: "notStarted",
   running: "running",
@@ -168,8 +163,7 @@ union ConversationalAnalysisAuthoringJobStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("CompositionSetting", "csharp")
-union ConversationalAnalysisAuthoringCompositionSetting {
+union CompositionSetting {
   string,
 
   /**
@@ -200,7 +194,7 @@ union ConversationalAnalysisAuthoringCompositionSetting {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("OrchestrationTargetProjectKind", "csharp")
-union ConversationalAnalysisAuthoringOrchestrationTargetProjectKind {
+union OrchestrationTargetProjectKind {
   string,
   Luis: "Luis",
   Conversation: "Conversation",
@@ -253,7 +247,7 @@ model ConversationalAnalysisAuthoringProjectMetadata {
    * Represents the project kind.
    */
   @visibility("create", "read")
-  projectKind: ConversationalAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * The project settings.
@@ -389,7 +383,7 @@ model ConversationalAnalysisAuthoringCreateProjectOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: ConversationalAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * The project settings.
@@ -432,7 +426,7 @@ model ConversationalAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: ConversationalAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * The name of the storage container.
@@ -455,7 +449,7 @@ model ConversationalAnalysisAuthoringCopyProjectOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: ConversationalAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * The project name to be copied-into.
@@ -497,7 +491,7 @@ model ConversationalAnalysisAuthoringExportedProject {
    * Specifies the method used to interpret string offsets. For additional
    * information see https://aka.ms/text-analytics-offsets.
    */
-  stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
+  stringIndexType: StringIndexType;
 
   /**
    * Represents the project metadata.
@@ -519,7 +513,7 @@ model ConversationalAnalysisAuthoringExportedProjectAssets {
   /**
    * The type of project containing the assets.
    */
-  projectKind: ConversationalAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 }
 
 /**
@@ -541,7 +535,7 @@ model ConversationalAnalysisAuthoringTrainingJobOptions {
   /**
    * Represents the mode of the training operation.
    */
-  trainingMode: ConversationalAnalysisAuthoringTrainingMode;
+  trainingMode: TrainingMode;
 
   /**
    * Represents the evaluation options. By default, the evaluation kind is
@@ -560,7 +554,7 @@ model ConversationalAnalysisAuthoringEvaluationOptions {
    * Represents the evaluation kind. By default, the evaluation kind is set to
    * percentage.
    */
-  kind?: ConversationalAnalysisAuthoringEvaluationKind;
+  kind?: EvaluationKind;
 
   /**
    * Represents the training dataset split percentage. Only needed in case the
@@ -616,7 +610,7 @@ model ConversationalAnalysisAuthoringJobState {
   /**
    * The job status.
    */
-  status: ConversationalAnalysisAuthoringJobStatus;
+  status: JobStatus;
 
   /**
    * The warnings that were encountered while executing the job.
@@ -950,7 +944,7 @@ model StringIndexTypeQueryParameter {
    * information see https://aka.ms/text-analytics-offsets.
    */
   @query("stringIndexType")
-  stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
+  stringIndexType: StringIndexType;
 }
 
 /**
@@ -1426,7 +1420,7 @@ model ConversationalAnalysisAuthoringTrainingJobResult {
   /**
    * Represents the mode of the training operation.
    */
-  trainingMode?: ConversationalAnalysisAuthoringTrainingMode;
+  trainingMode?: TrainingMode;
 
   /**
    * Represents the model training status.
@@ -1467,7 +1461,7 @@ model ConversationalAnalysisAuthoringSubTrainingJobState {
   /**
    * Represents the status of the sub-operation.
    */
-  status: ConversationalAnalysisAuthoringJobStatus;
+  status: JobStatus;
 }
 
 /**
@@ -1648,7 +1642,7 @@ model ConversationalAnalysisAuthoringConversationExportedEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  compositionSetting?: ConversationalAnalysisAuthoringCompositionSetting;
+  compositionSetting?: CompositionSetting;
 
   /**
    * The list component of the entity.
@@ -1931,7 +1925,7 @@ model ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions
 @discriminator("targetProjectKind")
 @clientName("ExportedOrchestrationOptions", "csharp")
 model ConversationalAnalysisAuthoringExportedOrchestrationOptions {
-  targetProjectKind: ConversationalAnalysisAuthoringOrchestrationTargetProjectKind;
+  targetProjectKind: OrchestrationTargetProjectKind;
 }
 
 /**

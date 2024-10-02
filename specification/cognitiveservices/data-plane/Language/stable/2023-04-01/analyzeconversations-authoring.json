@@ -94,7 +94,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -129,13 +129,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectMetadata"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -169,7 +169,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateProjectOptions"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringCreateProjectOptions"
             }
           }
         ],
@@ -177,19 +177,19 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectMetadata"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectMetadata"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -229,7 +229,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -268,7 +268,7 @@
               "Luis"
             ],
             "x-ms-enum": {
-              "name": "ConversationalAnalysisAuthoringExportedProjectFormat",
+              "name": "ExportedProjectFormat",
               "modelAsString": true,
               "values": [
                 {
@@ -295,7 +295,7 @@
               "Utf16CodeUnit"
             ],
             "x-ms-enum": {
-              "name": "ConversationalAnalysisAuthoringStringIndexType",
+              "name": "StringIndexType",
               "modelAsString": true,
               "values": [
                 {
@@ -335,7 +335,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -374,7 +374,7 @@
               "Luis"
             ],
             "x-ms-enum": {
-              "name": "ConversationalAnalysisAuthoringExportedProjectFormat",
+              "name": "ExportedProjectFormat",
               "modelAsString": true,
               "values": [
                 {
@@ -397,7 +397,7 @@
             "description": "The project data to import.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProject"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedProject"
             }
           }
         ],
@@ -415,7 +415,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -449,7 +449,7 @@
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobOptions"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringTrainingJobOptions"
             }
           }
         ],
@@ -467,7 +467,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -515,7 +515,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -557,13 +557,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -601,7 +601,7 @@
             "description": "The new deployment info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateDeploymentOptions"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringCreateDeploymentOptions"
             }
           }
         ],
@@ -619,7 +619,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -667,7 +667,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -714,13 +714,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentJobState"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringDeploymentJobState"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -753,7 +753,7 @@
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringSwapDeploymentsOptions"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringSwapDeploymentsOptions"
             }
           }
         ],
@@ -771,7 +771,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -811,13 +811,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringSwapDeploymentsJobState"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringSwapDeploymentsJobState"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -856,13 +856,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportProjectJobState"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportProjectJobState"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -901,13 +901,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringImportProjectJobState"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringImportProjectJobState"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -954,7 +954,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -996,13 +996,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1042,7 +1042,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1091,7 +1091,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1136,7 +1136,7 @@
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
-            "$ref": "#/parameters/StringIndexTypeQueryParameter"
+            "$ref": "#/parameters/Conversations.StringIndexTypeQueryParameter"
           }
         ],
         "responses": {
@@ -1149,7 +1149,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1191,13 +1191,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationSummary"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringEvaluationSummary"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1243,13 +1243,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringLoadSnapshotJobState"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringLoadSnapshotJobState"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1296,7 +1296,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1338,13 +1338,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobState"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringTrainingJobState"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1393,7 +1393,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1425,13 +1425,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeletionJobState"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectDeletionJobState"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1461,7 +1461,7 @@
               "Orchestration"
             ],
             "x-ms-enum": {
-              "name": "ConversationalAnalysisAuthoringProjectKind",
+              "name": "ProjectKind",
               "modelAsString": true,
               "values": [
                 {
@@ -1507,13 +1507,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringSupportedLanguages"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringSupportedLanguages"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1575,13 +1575,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringPrebuiltEntities"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringPrebuiltEntities"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1611,7 +1611,7 @@
               "Orchestration"
             ],
             "x-ms-enum": {
-              "name": "ConversationalAnalysisAuthoringProjectKind",
+              "name": "ProjectKind",
               "modelAsString": true,
               "values": [
                 {
@@ -1657,13 +1657,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingConfigVersions"
+              "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringTrainingConfigVersions"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Conversations.ErrorResponse"
             }
           }
         },
@@ -1681,7 +1681,7 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "ConversationalAnalysisAuthoringCompositionSetting": {
+    "Conversations.CompositionSetting": {
       "type": "string",
       "enum": [
         "returnLongestOverlap",
@@ -1690,7 +1690,7 @@
         "combineComponents"
       ],
       "x-ms-enum": {
-        "name": "ConversationalAnalysisAuthoringCompositionSetting",
+        "name": "CompositionSetting",
         "modelAsString": true,
         "values": [
           {
@@ -1716,13 +1716,13 @@
         ]
       }
     },
-    "ConversationalAnalysisAuthoringConfusionMatrix": {
+    "Conversations.ConversationalAnalysisAuthoringConfusionMatrix": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrixRow"
+        "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringConfusionMatrixRow"
       }
     },
-    "ConversationalAnalysisAuthoringConfusionMatrixCell": {
+    "Conversations.ConversationalAnalysisAuthoringConfusionMatrixCell": {
       "type": "object",
       "description": "Represents a cell in a confusion matrix.",
       "properties": {
@@ -1742,13 +1742,13 @@
         "rawValue"
       ]
     },
-    "ConversationalAnalysisAuthoringConfusionMatrixRow": {
+    "Conversations.ConversationalAnalysisAuthoringConfusionMatrixRow": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrixCell"
+        "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringConfusionMatrixCell"
       }
     },
-    "ConversationalAnalysisAuthoringConversationExportedEntity": {
+    "Conversations.ConversationalAnalysisAuthoringConversationExportedEntity": {
       "type": "object",
       "description": "Represents an entity with its components.",
       "properties": {
@@ -1757,23 +1757,23 @@
           "description": "The category of the entity."
         },
         "compositionSetting": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringCompositionSetting",
+          "$ref": "#/definitions/Conversations.CompositionSetting",
           "description": "The behavior to follow when the entity's components overlap with each other."
         },
         "list": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityList",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedEntityList",
           "description": "The list component of the entity."
         },
         "prebuilts": {
           "type": "array",
           "description": "The prebuilt entities components.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedPrebuiltEntity"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedPrebuiltEntity"
           },
           "x-ms-identifiers": []
         },
         "regex": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityRegex",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedEntityRegex",
           "description": "The regex component of the entity."
         },
         "requiredComponents": {
@@ -1788,7 +1788,7 @@
         "category"
       ]
     },
-    "ConversationalAnalysisAuthoringConversationExportedIntent": {
+    "Conversations.ConversationalAnalysisAuthoringConversationExportedIntent": {
       "type": "object",
       "description": "Represents an exported intent of a conversational project.",
       "properties": {
@@ -1801,7 +1801,7 @@
         "category"
       ]
     },
-    "ConversationalAnalysisAuthoringConversationExportedProjectAssets": {
+    "Conversations.ConversationalAnalysisAuthoringConversationExportedProjectAssets": {
       "type": "object",
       "description": "Represents the exported assets of a conversational project.",
       "properties": {
@@ -1809,7 +1809,7 @@
           "type": "array",
           "description": "The intents defined in the project.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedIntent"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringConversationExportedIntent"
           },
           "x-ms-identifiers": []
         },
@@ -1817,7 +1817,7 @@
           "type": "array",
           "description": "The entities defined in the project.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedEntity"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringConversationExportedEntity"
           },
           "x-ms-identifiers": []
         },
@@ -1825,19 +1825,19 @@
           "type": "array",
           "description": "The utterances defined in the project.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedUtterance"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringConversationExportedUtterance"
           },
           "x-ms-identifiers": []
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "x-ms-discriminator-value": "Conversation"
     },
-    "ConversationalAnalysisAuthoringConversationExportedUtterance": {
+    "Conversations.ConversationalAnalysisAuthoringConversationExportedUtterance": {
       "type": "object",
       "description": "Represents an exported utterance for a conversational project.",
       "properties": {
@@ -1845,7 +1845,7 @@
           "type": "array",
           "description": "Represents the entity labels of the utterance.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedUtteranceEntityLabel"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedUtteranceEntityLabel"
           },
           "x-ms-identifiers": []
         },
@@ -1871,7 +1871,7 @@
         "intent"
       ]
     },
-    "ConversationalAnalysisAuthoringCreateDeploymentOptions": {
+    "Conversations.ConversationalAnalysisAuthoringCreateDeploymentOptions": {
       "type": "object",
       "description": "Represents the options for creating or updating a project deployment.",
       "properties": {
@@ -1884,16 +1884,16 @@
         "trainedModelLabel"
       ]
     },
-    "ConversationalAnalysisAuthoringCreateProjectOptions": {
+    "Conversations.ConversationalAnalysisAuthoringCreateProjectOptions": {
       "type": "object",
       "description": "Represents the options used to create or update a project.",
       "properties": {
         "projectKind": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
+          "$ref": "#/definitions/Conversations.ProjectKind",
           "description": "Represents the project kind."
         },
         "settings": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectSettings",
           "description": "The project settings."
         },
         "projectName": {
@@ -1919,7 +1919,7 @@
         "language"
       ]
     },
-    "ConversationalAnalysisAuthoringDeploymentJobState": {
+    "Conversations.ConversationalAnalysisAuthoringDeploymentJobState": {
       "type": "object",
       "description": "Represents the state of a deployment job.",
       "properties": {
@@ -1943,14 +1943,14 @@
           "description": "The expiration date time of the job."
         },
         "status": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "$ref": "#/definitions/Conversations.JobStatus",
           "description": "The job status."
         },
         "warnings": {
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/Conversations.Warning"
           },
           "x-ms-identifiers": []
         },
@@ -1958,7 +1958,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Conversations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -1970,19 +1970,19 @@
         "status"
       ]
     },
-    "ConversationalAnalysisAuthoringEntitiesEvaluationSummary": {
+    "Conversations.ConversationalAnalysisAuthoringEntitiesEvaluationSummary": {
       "type": "object",
       "description": "Represents the evaluation result summary for the project's entities.",
       "properties": {
         "confusionMatrix": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrix",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringConfusionMatrix",
           "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
         },
         "entities": {
           "type": "object",
           "description": "Represents the entities evaluation summary.",
           "additionalProperties": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringEntityEvaluationSummary"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringEntityEvaluationSummary"
           }
         },
         "microF1": {
@@ -2027,7 +2027,7 @@
         "macroRecall"
       ]
     },
-    "ConversationalAnalysisAuthoringEntityEvaluationSummary": {
+    "Conversations.ConversationalAnalysisAuthoringEntityEvaluationSummary": {
       "type": "object",
       "description": "Represents the evaluation result for an entity.",
       "properties": {
@@ -2077,35 +2077,12 @@
         "falseNegativeCount"
       ]
     },
-    "ConversationalAnalysisAuthoringEvaluationKind": {
-      "type": "string",
-      "enum": [
-        "percentage",
-        "manual"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationalAnalysisAuthoringEvaluationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "percentage",
-            "value": "percentage",
-            "description": "Split the data into training and test sets according to user-defined\npercentages."
-          },
-          {
-            "name": "manual",
-            "value": "manual",
-            "description": "Split the data according to the chosen dataset for every example in the data."
-          }
-        ]
-      }
-    },
-    "ConversationalAnalysisAuthoringEvaluationOptions": {
+    "Conversations.ConversationalAnalysisAuthoringEvaluationOptions": {
       "type": "object",
       "description": "Represents the options used running the evaluation.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationKind",
+          "$ref": "#/definitions/Conversations.EvaluationKind",
           "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
         },
         "trainingSplitPercentage": {
@@ -2120,20 +2097,20 @@
         }
       }
     },
-    "ConversationalAnalysisAuthoringEvaluationSummary": {
+    "Conversations.ConversationalAnalysisAuthoringEvaluationSummary": {
       "type": "object",
       "description": "Represents the evaluation result summary.",
       "properties": {
         "entitiesEvaluation": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEntitiesEvaluationSummary",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringEntitiesEvaluationSummary",
           "description": "Contains the data related to entities evaluation."
         },
         "intentsEvaluation": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentsEvaluationSummary",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringIntentsEvaluationSummary",
           "description": "Contains the data related to intents evaluation."
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringEvaluationOptions",
           "description": "The options that were used while running the evaluation."
         }
       },
@@ -2142,7 +2119,7 @@
         "intentsEvaluation"
       ]
     },
-    "ConversationalAnalysisAuthoringExportProjectJobState": {
+    "Conversations.ConversationalAnalysisAuthoringExportProjectJobState": {
       "type": "object",
       "description": "Represents the state of an export job.",
       "properties": {
@@ -2166,14 +2143,14 @@
           "description": "The expiration date time of the job."
         },
         "status": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "$ref": "#/definitions/Conversations.JobStatus",
           "description": "The job status."
         },
         "warnings": {
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/Conversations.Warning"
           },
           "x-ms-identifiers": []
         },
@@ -2181,7 +2158,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Conversations.Error"
           },
           "x-ms-identifiers": []
         },
@@ -2197,7 +2174,7 @@
         "status"
       ]
     },
-    "ConversationalAnalysisAuthoringExportedConversationOrchestration": {
+    "Conversations.ConversationalAnalysisAuthoringExportedConversationOrchestration": {
       "type": "object",
       "description": "Defines the orchestration details for a Conversational project target.",
       "properties": {
@@ -2215,12 +2192,12 @@
         "deploymentName"
       ]
     },
-    "ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions": {
+    "Conversations.ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions": {
       "type": "object",
       "description": "Represents the orchestration options for a Conversational project target.",
       "properties": {
         "conversationOrchestration": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedConversationOrchestration",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedConversationOrchestration",
           "description": "The Conversational project target details."
         }
       },
@@ -2229,12 +2206,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedOrchestrationOptions"
         }
       ],
       "x-ms-discriminator-value": "Conversation"
     },
-    "ConversationalAnalysisAuthoringExportedEntityList": {
+    "Conversations.ConversationalAnalysisAuthoringExportedEntityList": {
       "type": "object",
       "description": "Represents a list component of an entity.",
       "properties": {
@@ -2242,13 +2219,13 @@
           "type": "array",
           "description": "The sub-lists of the list component.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntitySublist"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedEntitySublist"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "ConversationalAnalysisAuthoringExportedEntityListSynonym": {
+    "Conversations.ConversationalAnalysisAuthoringExportedEntityListSynonym": {
       "type": "object",
       "description": "Represents a list of synonyms inside a list component",
       "properties": {
@@ -2265,7 +2242,7 @@
         }
       }
     },
-    "ConversationalAnalysisAuthoringExportedEntityRegex": {
+    "Conversations.ConversationalAnalysisAuthoringExportedEntityRegex": {
       "type": "object",
       "description": "Represents a regex component of an entity.",
       "properties": {
@@ -2273,13 +2250,13 @@
           "type": "array",
           "description": "The regex expressions of the regex component. These expressions follow the .NET\nregex syntax. For reference, check here:\nhttps://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityRegexExpression"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedEntityRegexExpression"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "ConversationalAnalysisAuthoringExportedEntityRegexExpression": {
+    "Conversations.ConversationalAnalysisAuthoringExportedEntityRegexExpression": {
       "type": "object",
       "description": "Represents a regex expression inside a regex component. This expression follows\nthe .NET regex syntax. For reference, check here:\nhttps://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
       "properties": {
@@ -2297,7 +2274,7 @@
         }
       }
     },
-    "ConversationalAnalysisAuthoringExportedEntitySublist": {
+    "Conversations.ConversationalAnalysisAuthoringExportedEntitySublist": {
       "type": "object",
       "description": "Represents a sub-list inside a list component.",
       "properties": {
@@ -2309,13 +2286,13 @@
           "type": "array",
           "description": "The phrases of that correspond to the sub-list.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityListSynonym"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedEntityListSynonym"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "ConversationalAnalysisAuthoringExportedLuisOrchestration": {
+    "Conversations.ConversationalAnalysisAuthoringExportedLuisOrchestration": {
       "type": "object",
       "description": "Defines the orchestration details for a LUIS application target.",
       "properties": {
@@ -2336,12 +2313,12 @@
         "appId"
       ]
     },
-    "ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions": {
+    "Conversations.ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions": {
       "type": "object",
       "description": "Represents the orchestration options for a LUIS application target.",
       "properties": {
         "luisOrchestration": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedLuisOrchestration",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedLuisOrchestration",
           "description": "The LUIS application target details."
         }
       },
@@ -2350,17 +2327,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedOrchestrationOptions"
         }
       ],
       "x-ms-discriminator-value": "Luis"
     },
-    "ConversationalAnalysisAuthoringExportedOrchestrationOptions": {
+    "Conversations.ConversationalAnalysisAuthoringExportedOrchestrationOptions": {
       "type": "object",
       "description": "Represents the options used to define the orchestration behavior of an intent.",
       "properties": {
         "targetProjectKind": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationTargetProjectKind"
+          "$ref": "#/definitions/Conversations.OrchestrationTargetProjectKind"
         }
       },
       "discriminator": "targetProjectKind",
@@ -2368,7 +2345,7 @@
         "targetProjectKind"
       ]
     },
-    "ConversationalAnalysisAuthoringExportedPrebuiltEntity": {
+    "Conversations.ConversationalAnalysisAuthoringExportedPrebuiltEntity": {
       "type": "object",
       "description": "Represents an exported prebuilt entity component",
       "properties": {
@@ -2381,7 +2358,7 @@
         "category"
       ]
     },
-    "ConversationalAnalysisAuthoringExportedProject": {
+    "Conversations.ConversationalAnalysisAuthoringExportedProject": {
       "type": "object",
       "description": "Represents an exported project.",
       "properties": {
@@ -2390,15 +2367,15 @@
           "description": "The version of the exported file."
         },
         "stringIndexType": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringStringIndexType",
+          "$ref": "#/definitions/Conversations.StringIndexType",
           "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
         },
         "metadata": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateProjectOptions",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringCreateProjectOptions",
           "description": "Represents the project metadata."
         },
         "assets": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedProjectAssets",
           "description": "Represents the project assets."
         }
       },
@@ -2408,12 +2385,12 @@
         "metadata"
       ]
     },
-    "ConversationalAnalysisAuthoringExportedProjectAssets": {
+    "Conversations.ConversationalAnalysisAuthoringExportedProjectAssets": {
       "type": "object",
       "description": "Represents the assets of an exported project.",
       "properties": {
         "projectKind": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
+          "$ref": "#/definitions/Conversations.ProjectKind",
           "description": "The type of project containing the assets."
         }
       },
@@ -2422,7 +2399,7 @@
         "projectKind"
       ]
     },
-    "ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration": {
+    "Conversations.ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration": {
       "type": "object",
       "description": "Defines the orchestration details for a Question Answering project target.",
       "properties": {
@@ -2435,12 +2412,12 @@
         "projectName"
       ]
     },
-    "ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions": {
+    "Conversations.ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions": {
       "type": "object",
       "description": "Represents the orchestration options for a Question Answering project target.",
       "properties": {
         "questionAnsweringOrchestration": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration",
           "description": "The Question Answering project details."
         }
       },
@@ -2449,12 +2426,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedOrchestrationOptions"
         }
       ],
       "x-ms-discriminator-value": "QuestionAnswering"
     },
-    "ConversationalAnalysisAuthoringExportedUtteranceEntityLabel": {
+    "Conversations.ConversationalAnalysisAuthoringExportedUtteranceEntityLabel": {
       "type": "object",
       "description": "Represents an entity label for an utterance.",
       "properties": {
@@ -2479,7 +2456,7 @@
         "length"
       ]
     },
-    "ConversationalAnalysisAuthoringImportProjectJobState": {
+    "Conversations.ConversationalAnalysisAuthoringImportProjectJobState": {
       "type": "object",
       "description": "Represents the state of an import job.",
       "properties": {
@@ -2503,14 +2480,14 @@
           "description": "The expiration date time of the job."
         },
         "status": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "$ref": "#/definitions/Conversations.JobStatus",
           "description": "The job status."
         },
         "warnings": {
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/Conversations.Warning"
           },
           "x-ms-identifiers": []
         },
@@ -2518,7 +2495,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Conversations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -2530,7 +2507,7 @@
         "status"
       ]
     },
-    "ConversationalAnalysisAuthoringIntentEvaluationSummary": {
+    "Conversations.ConversationalAnalysisAuthoringIntentEvaluationSummary": {
       "type": "object",
       "description": "The evaluation summary for an intent.",
       "properties": {
@@ -2580,19 +2557,19 @@
         "falseNegativeCount"
       ]
     },
-    "ConversationalAnalysisAuthoringIntentsEvaluationSummary": {
+    "Conversations.ConversationalAnalysisAuthoringIntentsEvaluationSummary": {
       "type": "object",
       "description": "Represents the evaluation summary for the project's intents.",
       "properties": {
         "confusionMatrix": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrix",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringConfusionMatrix",
           "description": "Represents the confusion matrix between two intents (the two intents can be the\nsame). The matrix is between the intent that was labelled and the intent that\nwas predicted."
         },
         "intents": {
           "type": "object",
           "description": "Represents the intents evaluation summary.",
           "additionalProperties": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentEvaluationSummary"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringIntentEvaluationSummary"
           }
         },
         "microF1": {
@@ -2637,53 +2614,7 @@
         "macroRecall"
       ]
     },
-    "ConversationalAnalysisAuthoringJobStatus": {
-      "type": "string",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed",
-        "cancelled",
-        "cancelling",
-        "partiallyCompleted"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationalAnalysisAuthoringJobStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "notStarted",
-            "value": "notStarted"
-          },
-          {
-            "name": "running",
-            "value": "running"
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded"
-          },
-          {
-            "name": "failed",
-            "value": "failed"
-          },
-          {
-            "name": "cancelled",
-            "value": "cancelled"
-          },
-          {
-            "name": "cancelling",
-            "value": "cancelling"
-          },
-          {
-            "name": "partiallyCompleted",
-            "value": "partiallyCompleted"
-          }
-        ]
-      }
-    },
-    "ConversationalAnalysisAuthoringLoadSnapshotJobState": {
+    "Conversations.ConversationalAnalysisAuthoringLoadSnapshotJobState": {
       "type": "object",
       "description": "Represents the state of loading a snapshot job.",
       "properties": {
@@ -2707,14 +2638,14 @@
           "description": "The expiration date time of the job."
         },
         "status": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "$ref": "#/definitions/Conversations.JobStatus",
           "description": "The job status."
         },
         "warnings": {
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/Conversations.Warning"
           },
           "x-ms-identifiers": []
         },
@@ -2722,7 +2653,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Conversations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -2734,12 +2665,12 @@
         "status"
       ]
     },
-    "ConversationalAnalysisAuthoringOrchestrationExportedIntent": {
+    "Conversations.ConversationalAnalysisAuthoringOrchestrationExportedIntent": {
       "type": "object",
       "description": "Represents an exported intent for an orchestration project.",
       "properties": {
         "orchestration": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedOrchestrationOptions",
           "description": "Specifies the behavior of this intent in the orchestration flow."
         },
         "category": {
@@ -2751,7 +2682,7 @@
         "category"
       ]
     },
-    "ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets": {
+    "Conversations.ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets": {
       "type": "object",
       "description": "Represents the assets of an orchestration project.",
       "properties": {
@@ -2759,7 +2690,7 @@
           "type": "array",
           "description": "Represents the intents of the project.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationExportedIntent"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringOrchestrationExportedIntent"
           },
           "x-ms-identifiers": []
         },
@@ -2767,19 +2698,19 @@
           "type": "array",
           "description": "Represents the utterances of the project.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationExportedUtterance"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringOrchestrationExportedUtterance"
           },
           "x-ms-identifiers": []
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "x-ms-discriminator-value": "Orchestration"
     },
-    "ConversationalAnalysisAuthoringOrchestrationExportedUtterance": {
+    "Conversations.ConversationalAnalysisAuthoringOrchestrationExportedUtterance": {
       "type": "object",
       "description": "Represents an utterance of an orchestration project.",
       "properties": {
@@ -2805,33 +2736,7 @@
         "intent"
       ]
     },
-    "ConversationalAnalysisAuthoringOrchestrationTargetProjectKind": {
-      "type": "string",
-      "enum": [
-        "Luis",
-        "Conversation",
-        "QuestionAnswering"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationalAnalysisAuthoringOrchestrationTargetProjectKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Luis",
-            "value": "Luis"
-          },
-          {
-            "name": "Conversation",
-            "value": "Conversation"
-          },
-          {
-            "name": "QuestionAnswering",
-            "value": "QuestionAnswering"
-          }
-        ]
-      }
-    },
-    "ConversationalAnalysisAuthoringPrebuiltEntities": {
+    "Conversations.ConversationalAnalysisAuthoringPrebuiltEntities": {
       "type": "object",
       "description": "Represents a list of the retrieved supported prebuilt entities.",
       "properties": {
@@ -2839,7 +2744,7 @@
           "type": "array",
           "description": "The supported prebuilt entities.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringPrebuiltEntity"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringPrebuiltEntity"
           },
           "x-ms-identifiers": []
         },
@@ -2852,7 +2757,7 @@
         "value"
       ]
     },
-    "ConversationalAnalysisAuthoringPrebuiltEntity": {
+    "Conversations.ConversationalAnalysisAuthoringPrebuiltEntity": {
       "type": "object",
       "description": "Represents a supported prebuilt entity.",
       "properties": {
@@ -2875,7 +2780,7 @@
         "examples"
       ]
     },
-    "ConversationalAnalysisAuthoringProjectDeletionJobState": {
+    "Conversations.ConversationalAnalysisAuthoringProjectDeletionJobState": {
       "type": "object",
       "description": "Represents the state of a project deletion job.",
       "properties": {
@@ -2899,14 +2804,14 @@
           "description": "The expiration date time of the job."
         },
         "status": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "$ref": "#/definitions/Conversations.JobStatus",
           "description": "The job status."
         },
         "warnings": {
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/Conversations.Warning"
           },
           "x-ms-identifiers": []
         },
@@ -2914,7 +2819,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Conversations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -2926,7 +2831,7 @@
         "status"
       ]
     },
-    "ConversationalAnalysisAuthoringProjectDeployment": {
+    "Conversations.ConversationalAnalysisAuthoringProjectDeployment": {
       "type": "object",
       "description": "Represents a project deployment.",
       "properties": {
@@ -2967,30 +2872,7 @@
         "modelTrainingConfigVersion"
       ]
     },
-    "ConversationalAnalysisAuthoringProjectKind": {
-      "type": "string",
-      "enum": [
-        "Conversation",
-        "Orchestration"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationalAnalysisAuthoringProjectKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Conversation",
-            "value": "Conversation",
-            "description": "A project to build natural language into apps, bots, and IoT devices."
-          },
-          {
-            "name": "Orchestration",
-            "value": "Orchestration",
-            "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
-          }
-        ]
-      }
-    },
-    "ConversationalAnalysisAuthoringProjectMetadata": {
+    "Conversations.ConversationalAnalysisAuthoringProjectMetadata": {
       "type": "object",
       "description": "Represents the metadata of a project.",
       "properties": {
@@ -3015,7 +2897,7 @@
           "description": "Represents the project last deployed datetime."
         },
         "projectKind": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
+          "$ref": "#/definitions/Conversations.ProjectKind",
           "description": "Represents the project kind.",
           "x-ms-mutability": [
             "read",
@@ -3023,7 +2905,7 @@
           ]
         },
         "settings": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectSettings",
           "description": "The project settings.",
           "x-ms-mutability": [
             "read",
@@ -3072,7 +2954,7 @@
         "language"
       ]
     },
-    "ConversationalAnalysisAuthoringProjectSettings": {
+    "Conversations.ConversationalAnalysisAuthoringProjectSettings": {
       "type": "object",
       "description": "Represents the settings used to define the project behavior.",
       "properties": {
@@ -3086,7 +2968,7 @@
         "confidenceThreshold"
       ]
     },
-    "ConversationalAnalysisAuthoringProjectTrainedModel": {
+    "Conversations.ConversationalAnalysisAuthoringProjectTrainedModel": {
       "type": "object",
       "description": "Represents a trained model.",
       "properties": {
@@ -3132,24 +3014,7 @@
         "hasSnapshot"
       ]
     },
-    "ConversationalAnalysisAuthoringStringIndexType": {
-      "type": "string",
-      "enum": [
-        "Utf16CodeUnit"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationalAnalysisAuthoringStringIndexType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Utf16CodeUnit",
-            "value": "Utf16CodeUnit",
-            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
-          }
-        ]
-      }
-    },
-    "ConversationalAnalysisAuthoringSubTrainingJobState": {
+    "Conversations.ConversationalAnalysisAuthoringSubTrainingJobState": {
       "type": "object",
       "description": "Represents the detailed state of a training sub-operation.",
       "properties": {
@@ -3169,7 +3034,7 @@
           "description": "Represents the end date time."
         },
         "status": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "$ref": "#/definitions/Conversations.JobStatus",
           "description": "Represents the status of the sub-operation."
         }
       },
@@ -3178,7 +3043,7 @@
         "status"
       ]
     },
-    "ConversationalAnalysisAuthoringSupportedLanguage": {
+    "Conversations.ConversationalAnalysisAuthoringSupportedLanguage": {
       "type": "object",
       "description": "Represents a supported language.",
       "properties": {
@@ -3196,7 +3061,7 @@
         "languageCode"
       ]
     },
-    "ConversationalAnalysisAuthoringSupportedLanguages": {
+    "Conversations.ConversationalAnalysisAuthoringSupportedLanguages": {
       "type": "object",
       "description": "Represents a list of retrieved languages.",
       "properties": {
@@ -3204,7 +3069,7 @@
           "type": "array",
           "description": "The list of the languages.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringSupportedLanguage"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringSupportedLanguage"
           },
           "x-ms-identifiers": []
         },
@@ -3217,7 +3082,7 @@
         "value"
       ]
     },
-    "ConversationalAnalysisAuthoringSwapDeploymentsJobState": {
+    "Conversations.ConversationalAnalysisAuthoringSwapDeploymentsJobState": {
       "type": "object",
       "description": "Represents the state of a deployment job.",
       "properties": {
@@ -3241,14 +3106,14 @@
           "description": "The expiration date time of the job."
         },
         "status": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "$ref": "#/definitions/Conversations.JobStatus",
           "description": "The job status."
         },
         "warnings": {
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/Conversations.Warning"
           },
           "x-ms-identifiers": []
         },
@@ -3256,7 +3121,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Conversations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -3268,7 +3133,7 @@
         "status"
       ]
     },
-    "ConversationalAnalysisAuthoringSwapDeploymentsOptions": {
+    "Conversations.ConversationalAnalysisAuthoringSwapDeploymentsOptions": {
       "type": "object",
       "description": "Represents the options for swapping two deployments together.",
       "properties": {
@@ -3286,7 +3151,7 @@
         "secondDeploymentName"
       ]
     },
-    "ConversationalAnalysisAuthoringTrainingConfigVersion": {
+    "Conversations.ConversationalAnalysisAuthoringTrainingConfigVersion": {
       "type": "object",
       "description": "Represents a training config version.",
       "properties": {
@@ -3305,7 +3170,7 @@
         "modelExpirationDate"
       ]
     },
-    "ConversationalAnalysisAuthoringTrainingConfigVersions": {
+    "Conversations.ConversationalAnalysisAuthoringTrainingConfigVersions": {
       "type": "object",
       "description": "Represents a list of training config versions.",
       "properties": {
@@ -3313,7 +3178,7 @@
           "type": "array",
           "description": "The list of the training config versions.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingConfigVersion"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringTrainingConfigVersion"
           },
           "x-ms-identifiers": []
         },
@@ -3326,7 +3191,7 @@
         "value"
       ]
     },
-    "ConversationalAnalysisAuthoringTrainingJobOptions": {
+    "Conversations.ConversationalAnalysisAuthoringTrainingJobOptions": {
       "type": "object",
       "description": "Represents the options for starting a new training job.",
       "properties": {
@@ -3339,11 +3204,11 @@
           "description": "Represents training config version. By default, \"latest\" value is used which\nuses the latest released training config version."
         },
         "trainingMode": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingMode",
+          "$ref": "#/definitions/Conversations.TrainingMode",
           "description": "Represents the mode of the training operation."
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringEvaluationOptions",
           "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
         }
       },
@@ -3352,7 +3217,7 @@
         "trainingMode"
       ]
     },
-    "ConversationalAnalysisAuthoringTrainingJobResult": {
+    "Conversations.ConversationalAnalysisAuthoringTrainingJobResult": {
       "type": "object",
       "description": "Represents the output of a training job.",
       "properties": {
@@ -3365,15 +3230,15 @@
           "description": "Represents training config version."
         },
         "trainingMode": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingMode",
+          "$ref": "#/definitions/Conversations.TrainingMode",
           "description": "Represents the mode of the training operation."
         },
         "trainingStatus": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringSubTrainingJobState",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringSubTrainingJobState",
           "description": "Represents the model training status."
         },
         "evaluationStatus": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringSubTrainingJobState",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringSubTrainingJobState",
           "description": "Represents model evaluation status."
         },
         "estimatedEndDateTime": {
@@ -3388,7 +3253,7 @@
         "trainingStatus"
       ]
     },
-    "ConversationalAnalysisAuthoringTrainingJobState": {
+    "Conversations.ConversationalAnalysisAuthoringTrainingJobState": {
       "type": "object",
       "description": "Represents the state of a training job.",
       "properties": {
@@ -3412,14 +3277,14 @@
           "description": "The expiration date time of the job."
         },
         "status": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "$ref": "#/definitions/Conversations.JobStatus",
           "description": "The job status."
         },
         "warnings": {
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/Conversations.Warning"
           },
           "x-ms-identifiers": []
         },
@@ -3427,12 +3292,12 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Conversations.Error"
           },
           "x-ms-identifiers": []
         },
         "result": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobResult",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringTrainingJobResult",
           "description": "Represents training tasks detailed result."
         }
       },
@@ -3444,30 +3309,7 @@
         "result"
       ]
     },
-    "ConversationalAnalysisAuthoringTrainingMode": {
-      "type": "string",
-      "enum": [
-        "advanced",
-        "standard"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationalAnalysisAuthoringTrainingMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "advanced",
-            "value": "advanced",
-            "description": "Trains using fine-tuned neural network transformer models. Can train\nmultilingual projects."
-          },
-          {
-            "name": "standard",
-            "value": "standard",
-            "description": "Faster training times for quicker iterations."
-          }
-        ]
-      }
-    },
-    "ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult": {
+    "Conversations.ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult": {
       "type": "object",
       "description": "Represents the comparison between the expected and predicted entities for an\nutterance.",
       "properties": {
@@ -3475,7 +3317,7 @@
           "type": "array",
           "description": "Represents the expected entity labels.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult"
           },
           "x-ms-identifiers": []
         },
@@ -3483,7 +3325,7 @@
           "type": "array",
           "description": "Represents the predicted entity labels.",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult"
           },
           "x-ms-identifiers": []
         }
@@ -3493,7 +3335,7 @@
         "predictedEntities"
       ]
     },
-    "ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult": {
+    "Conversations.ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult": {
       "type": "object",
       "description": "Represents the evaluation output of an entity label or prediction.",
       "properties": {
@@ -3518,7 +3360,7 @@
         "length"
       ]
     },
-    "ConversationalAnalysisAuthoringUtteranceEvaluationResult": {
+    "Conversations.ConversationalAnalysisAuthoringUtteranceEvaluationResult": {
       "type": "object",
       "description": "Represents the evaluation result for an utterance.",
       "properties": {
@@ -3531,11 +3373,11 @@
           "description": "Represents the utterance language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
         },
         "entitiesResult": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult",
           "description": "Represents the entities results for the utterance."
         },
         "intentsResult": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult",
+          "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult",
           "description": "Represents the intents results for the utterance."
         }
       },
@@ -3546,7 +3388,7 @@
         "intentsResult"
       ]
     },
-    "ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult": {
+    "Conversations.ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult": {
       "type": "object",
       "description": "Represents the comparison between the expected and the predicted intent for an\nutterance.",
       "properties": {
@@ -3564,12 +3406,12 @@
         "predictedIntent"
       ]
     },
-    "Error": {
+    "Conversations.Error": {
       "type": "object",
       "description": "The error object.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/ErrorCode",
+          "$ref": "#/definitions/Conversations.ErrorCode",
           "description": "One of a server-defined set of error codes."
         },
         "message": {
@@ -3584,12 +3426,12 @@
           "type": "array",
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Conversations.Error"
           },
           "x-ms-identifiers": []
         },
         "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
+          "$ref": "#/definitions/Conversations.InnerErrorModel",
           "description": "An object containing more specific information than the current object about\nthe error."
         }
       },
@@ -3598,7 +3440,7 @@
         "message"
       ]
     },
-    "ErrorCode": {
+    "Conversations.ErrorCode": {
       "type": "string",
       "description": "Human-readable error code.",
       "enum": [
@@ -3700,12 +3542,12 @@
         ]
       }
     },
-    "ErrorResponse": {
+    "Conversations.ErrorResponse": {
       "type": "object",
       "description": "Error response.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "#/definitions/Conversations.Error",
           "description": "The error object."
         }
       },
@@ -3713,7 +3555,30 @@
         "error"
       ]
     },
-    "InnerErrorCode": {
+    "Conversations.EvaluationKind": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "manual"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "percentage",
+            "value": "percentage",
+            "description": "Split the data into training and test sets according to user-defined\npercentages."
+          },
+          {
+            "name": "manual",
+            "value": "manual",
+            "description": "Split the data according to the chosen dataset for every example in the data."
+          }
+        ]
+      }
+    },
+    "Conversations.InnerErrorCode": {
       "type": "string",
       "description": "Human-readable error code.",
       "enum": [
@@ -3795,12 +3660,12 @@
         ]
       }
     },
-    "InnerErrorModel": {
+    "Conversations.InnerErrorModel": {
       "type": "object",
       "description": "An object containing more specific information about the error. As per\nMicrosoft One API guidelines -\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/InnerErrorCode",
+          "$ref": "#/definitions/Conversations.InnerErrorCode",
           "description": "One of a server-defined set of error codes."
         },
         "message": {
@@ -3819,8 +3684,161 @@
           "description": "Error target."
         },
         "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
+          "$ref": "#/definitions/Conversations.InnerErrorModel",
           "description": "An object containing more specific information than the current object about\nthe error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Conversations.JobStatus": {
+      "type": "string",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "cancelling",
+        "partiallyCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notStarted",
+            "value": "notStarted"
+          },
+          {
+            "name": "running",
+            "value": "running"
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded"
+          },
+          {
+            "name": "failed",
+            "value": "failed"
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "cancelling",
+            "value": "cancelling"
+          },
+          {
+            "name": "partiallyCompleted",
+            "value": "partiallyCompleted"
+          }
+        ]
+      }
+    },
+    "Conversations.OrchestrationTargetProjectKind": {
+      "type": "string",
+      "enum": [
+        "Luis",
+        "Conversation",
+        "QuestionAnswering"
+      ],
+      "x-ms-enum": {
+        "name": "OrchestrationTargetProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Luis",
+            "value": "Luis"
+          },
+          {
+            "name": "Conversation",
+            "value": "Conversation"
+          },
+          {
+            "name": "QuestionAnswering",
+            "value": "QuestionAnswering"
+          }
+        ]
+      }
+    },
+    "Conversations.ProjectKind": {
+      "type": "string",
+      "enum": [
+        "Conversation",
+        "Orchestration"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Conversation",
+            "value": "Conversation",
+            "description": "A project to build natural language into apps, bots, and IoT devices."
+          },
+          {
+            "name": "Orchestration",
+            "value": "Orchestration",
+            "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
+          }
+        ]
+      }
+    },
+    "Conversations.StringIndexType": {
+      "type": "string",
+      "enum": [
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Utf16CodeUnit",
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+          }
+        ]
+      }
+    },
+    "Conversations.TrainingMode": {
+      "type": "string",
+      "enum": [
+        "advanced",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "TrainingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "advanced",
+            "value": "advanced",
+            "description": "Trains using fine-tuned neural network transformer models. Can train\nmultilingual projects."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Faster training times for quicker iterations."
+          }
+        ]
+      }
+    },
+    "Conversations.Warning": {
+      "type": "object",
+      "description": "Represents a warning that was encountered while executing the request.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The warning message."
         }
       },
       "required": [
@@ -3836,7 +3854,7 @@
           "type": "array",
           "description": "The ConversationalAnalysisAuthoringProjectDeployment items on this page",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectDeployment"
           },
           "x-ms-identifiers": []
         },
@@ -3858,7 +3876,7 @@
           "type": "array",
           "description": "The ConversationalAnalysisAuthoringProjectMetadata items on this page",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectMetadata"
           },
           "x-ms-identifiers": []
         },
@@ -3880,7 +3898,7 @@
           "type": "array",
           "description": "The ConversationalAnalysisAuthoringProjectTrainedModel items on this page",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringProjectTrainedModel"
           },
           "x-ms-identifiers": []
         },
@@ -3902,7 +3920,7 @@
           "type": "array",
           "description": "The ConversationalAnalysisAuthoringTrainingJobState items on this page",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobState"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringTrainingJobState"
           },
           "x-ms-identifiers": []
         },
@@ -3924,7 +3942,7 @@
           "type": "array",
           "description": "The ConversationalAnalysisAuthoringUtteranceEvaluationResult items on this page",
           "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEvaluationResult"
+            "$ref": "#/definitions/Conversations.ConversationalAnalysisAuthoringUtteranceEvaluationResult"
           },
           "x-ms-identifiers": []
         },
@@ -3936,24 +3954,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "Warning": {
-      "type": "object",
-      "description": "Represents a warning that was encountered while executing the request.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The warning code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The warning message."
-        }
-      },
-      "required": [
-        "code",
-        "message"
       ]
     }
   },
@@ -3996,7 +3996,7 @@
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "StringIndexTypeQueryParameter": {
+    "Conversations.StringIndexTypeQueryParameter": {
       "name": "stringIndexType",
       "in": "query",
       "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
@@ -4006,7 +4006,7 @@
         "Utf16CodeUnit"
       ],
       "x-ms-enum": {
-        "name": "ConversationalAnalysisAuthoringStringIndexType",
+        "name": "StringIndexType",
         "modelAsString": true,
         "values": [
           {
