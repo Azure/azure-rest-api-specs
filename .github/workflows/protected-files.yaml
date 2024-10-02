@@ -6,6 +6,9 @@ jobs:
   protected-files:
     name: Protected Files
 
+    # Always allow bot account 'azure-sdk' to update protected files
+    if: ${{ github.event.pull_request.user.login != 'azure-sdk' }}
+
     runs-on: ubuntu-latest
 
     steps:
