@@ -7,6 +7,11 @@ using TypeSpec.Http;
 
 namespace SearchClient;
 
+model IndexNameParameter {
+  @path
+  indexName: string;
+}
+@route("/indexes({indexName})")
 interface DocumentsOperations {
   /**
    * Queries the number of documents in the index.
@@ -15,6 +20,7 @@ interface DocumentsOperations {
   @get
   count is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * The tracking ID sent with the request to help with debugging.
        */
@@ -31,6 +37,7 @@ interface DocumentsOperations {
   @get
   searchGet is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * A full-text search query expression; Use "*" or omit this parameter to match
        * all documents.
@@ -275,6 +282,7 @@ interface DocumentsOperations {
   @post
   searchPost is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * The tracking ID sent with the request to help with debugging.
        */
@@ -297,6 +305,7 @@ interface DocumentsOperations {
   @get
   get is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * The key of the document to retrieve.
        */
@@ -329,6 +338,7 @@ interface DocumentsOperations {
   @get
   suggestGet is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * The search text to use to suggest documents. Must be at least 1 character, and
        * no more than 100 characters.
@@ -440,6 +450,7 @@ interface DocumentsOperations {
   @post
   suggestPost is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * The tracking ID sent with the request to help with debugging.
        */
@@ -462,6 +473,7 @@ interface DocumentsOperations {
   @post
   index is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * The tracking ID sent with the request to help with debugging.
        */
@@ -485,6 +497,7 @@ interface DocumentsOperations {
   @get
   autocompleteGet is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * The tracking ID sent with the request to help with debugging.
        */
@@ -580,6 +593,7 @@ interface DocumentsOperations {
   @post
   autocompletePost is Azure.Core.Foundations.Operation<
     {
+      ...IndexNameParameter;
       /**
        * The tracking ID sent with the request to help with debugging.
        */

@@ -7,6 +7,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "./routes-service.tsp";
+import "./routes-index.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
