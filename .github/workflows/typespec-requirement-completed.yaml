@@ -18,23 +18,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        path: repo
         sparse-checkout: |
           .github/workflows
-
-    # TODO: List artifacts from JS instead of downloading from YAML
-    # - uses: actions/download-artifact@v4
-    #   with:
-    #     # Must use "pattern" instead of "name" to avoid errors if artifact doesn't exist
-    #     pattern: spec-lifecycle-*
-    #     # Must specify token and repository, to pull from the base fork in fork PRs
-    #     github-token: ${{ github.token }}
-    #     repository: ${{ github.repository }}
-    #     run-id: ${{ github.event.workflow_run.id }}
 
     - name: Add label if artifact
       uses: actions/github-script@v7
       with:
         script: |
-          const typespecRequirementCompleted = require('./repo/.github/workflows/scripts/typespec-requirement-completed.js')
+          const typespecRequirementCompleted = require('./.github/workflows/scripts/typespec-requirement-completed.js')
           await typespecRequirementCompleted({ github, context, core });
