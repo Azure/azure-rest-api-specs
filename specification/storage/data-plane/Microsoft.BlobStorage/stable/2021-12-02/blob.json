@@ -272,6 +272,14 @@
             "format": "int32"
           },
           {
+            "name": "x-ms-lease-id",
+            "in": "header",
+            "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "leaseId"
+          },
+          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
@@ -286,14 +294,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "requestId"
-          },
-          {
-            "name": "x-ms-lease-id",
-            "in": "header",
-            "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "leaseId"
           }
         ],
         "responses": {
@@ -653,6 +653,10 @@
               "format": "byte"
             },
             "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
               "x-ms-request-id": {
                 "type": "string",
                 "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
@@ -691,22 +695,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-lease-id",
             "in": "header",
             "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
@@ -731,6 +719,22 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -909,20 +913,20 @@
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -1018,6 +1022,10 @@
                     }
                   ]
                 }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
               },
               "x-ms-copy-completion-time": {
                 "type": "string",
@@ -1230,6 +1238,10 @@
               "x-ms-or-policy-id": {
                 "type": "string",
                 "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -1343,6 +1355,10 @@
                   ]
                 }
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
               "x-ms-copy-completion-time": {
                 "type": "string",
                 "format": "date-time-rfc1123",
@@ -1554,6 +1570,10 @@
               "x-ms-or-policy-id": {
                 "type": "string",
                 "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -1963,22 +1983,6 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "deletetype",
             "in": "query",
             "description": "Optional.  Only possible value is 'permanent', which specifies to permanently delete a blob if blob soft delete is enabled.",
@@ -2005,6 +2009,22 @@
               ]
             },
             "x-ms-client-name": "blobDeleteType"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -2149,20 +2169,20 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -2713,22 +2733,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "snapshot",
             "in": "query",
             "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to retrieve. For more information on working with blob snapshots, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/creating-a-snapshot-of-a-blob\">Creating a Snapshot of a Blob.</a>",
@@ -2758,6 +2762,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -2824,22 +2844,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "versionid",
             "in": "header",
             "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
@@ -2878,6 +2882,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           },
           {
             "name": "tags",
@@ -3623,22 +3643,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
@@ -3654,6 +3658,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -3718,6 +3738,14 @@
             "format": "int32"
           },
           {
+            "name": "x-ms-lease-id",
+            "in": "header",
+            "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "leaseId"
+          },
+          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
@@ -3732,14 +3760,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "requestId"
-          },
-          {
-            "name": "x-ms-lease-id",
-            "in": "header",
-            "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "leaseId"
           }
         ],
         "responses": {
@@ -3834,22 +3854,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
@@ -3874,6 +3878,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           },
           {
             "name": "acl",
@@ -4254,22 +4274,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-proposed-lease-id",
             "in": "header",
             "description": "Optional.  The proposed lease ID for the container.",
@@ -4294,6 +4298,22 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -4370,22 +4390,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
@@ -4402,6 +4406,22 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -4474,22 +4494,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
@@ -4506,6 +4510,22 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -4574,22 +4594,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
@@ -4615,6 +4619,22 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "breakPeriod"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -4635,6 +4655,10 @@
                 "format": "date-time-rfc1123",
                 "description": "The date/time that the container was last modified."
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
@@ -4643,6 +4667,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "Approximate time remaining in the lease period, in seconds."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
               },
               "x-ms-version": {
                 "type": "string",
@@ -4696,22 +4724,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
@@ -4728,6 +4740,22 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -4760,6 +4788,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "Approximate time remaining in the lease period, in seconds."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
               },
               "x-ms-version": {
                 "type": "string",
@@ -5148,6 +5180,14 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -5457,22 +5497,6 @@
             "x-ms-client-name": "blobSequenceNumber"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-tags",
             "in": "header",
             "description": "Optional.  Used to set blob tags in various blob operations.",
@@ -5496,6 +5520,22 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -6234,6 +6274,14 @@
             "x-ms-client-name": "sourceIfNoneMatch"
           },
           {
+            "name": "x-ms-copy-source-authorization",
+            "in": "header",
+            "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "copySourceAuthorization"
+          },
+          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
@@ -6248,14 +6296,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "requestId"
-          },
-          {
-            "name": "x-ms-copy-source-authorization",
-            "in": "header",
-            "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "copySourceAuthorization"
           }
         ],
         "responses": {
@@ -6347,22 +6387,6 @@
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "snapshot",
             "in": "query",
             "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to retrieve. For more information on working with blob snapshots, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/creating-a-snapshot-of-a-blob\">Creating a Snapshot of a Blob.</a>",
@@ -6441,6 +6465,22 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -6513,22 +6553,6 @@
             "minLength": 1,
             "maxLength": 1024,
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
           },
           {
             "name": "snapshot",
@@ -6632,6 +6656,22 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -7409,22 +7449,6 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-tags",
             "in": "header",
             "description": "Optional.  Used to set blob tags in various blob operations.",
@@ -7482,6 +7506,22 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -7814,22 +7854,6 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-tags",
             "in": "header",
             "description": "Optional.  Used to set blob tags in various blob operations.",
@@ -7895,6 +7919,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "transactionalContentCrc64"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           },
           {
             "name": "body",
@@ -8279,22 +8319,6 @@
             "x-ms-client-name": "sourceIfTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-source-content-md5",
             "in": "header",
             "description": "Specify the md5 calculated for the range of bytes that must be read from the copy source.",
@@ -8341,6 +8365,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "copySourceTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -8379,6 +8419,10 @@
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
               }
             }
           },
@@ -9003,6 +9047,14 @@
             "x-ms-client-name": "ifTags"
           },
           {
+            "name": "x-ms-copy-source-authorization",
+            "in": "header",
+            "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "copySourceAuthorization"
+          },
+          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
@@ -9017,14 +9069,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "requestId"
-          },
-          {
-            "name": "x-ms-copy-source-authorization",
-            "in": "header",
-            "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "copySourceAuthorization"
           }
         ],
         "responses": {
@@ -9508,22 +9552,6 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-tags",
             "in": "header",
             "description": "Optional.  Used to set blob tags in various blob operations.",
@@ -9589,6 +9617,22 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -9994,22 +10038,6 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-source-content-md5",
             "in": "header",
             "description": "Specify the md5 calculated for the range of bytes that must be read from the copy source.",
@@ -10099,6 +10127,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "copySourceTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -10217,22 +10261,6 @@
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-expiry-option",
             "in": "header",
             "description": "Required. Indicates mode of the expiry time",
@@ -10279,6 +10307,22 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "ExpiresOn"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -10362,22 +10406,6 @@
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-immutability-policy-until-date",
             "in": "header",
             "description": "Specifies the date time when the blobs immutability policy is set to expire.",
@@ -10419,6 +10447,22 @@
               ]
             },
             "x-ms-client-name": "immutabilityPolicyMode"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -10607,22 +10651,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-lease-duration",
             "in": "header",
             "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change.",
@@ -10680,6 +10708,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -10758,22 +10802,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-lease-break-period",
             "in": "header",
             "description": "For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately.",
@@ -10823,6 +10851,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -10902,22 +10946,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-lease-id",
             "in": "header",
             "description": "Required.  A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match.",
@@ -10974,6 +11002,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -11052,22 +11096,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-lease-id",
             "in": "header",
             "description": "Required.  A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match.",
@@ -11116,6 +11144,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -11190,22 +11234,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-lease-id",
             "in": "header",
             "description": "Required.  A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match.",
@@ -11254,6 +11282,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -11332,6 +11376,14 @@
             "format": "int32"
           },
           {
+            "name": "x-ms-legal-hold",
+            "in": "header",
+            "description": "Required.  Specifies the legal hold status to set on the blob.",
+            "required": true,
+            "type": "boolean",
+            "x-ms-client-name": "legalHold"
+          },
+          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
@@ -11346,14 +11398,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "requestId"
-          },
-          {
-            "name": "x-ms-legal-hold",
-            "in": "header",
-            "description": "Required.  Specifies the legal hold status to set on the blob.",
-            "required": true,
-            "type": "boolean",
-            "x-ms-client-name": "legalHold"
           }
         ],
         "responses": {
@@ -11421,22 +11465,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
           },
           {
             "name": "x-ms-lease-id",
@@ -11519,6 +11547,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -11911,22 +11955,6 @@
             "x-ms-client-name": "rehydratePriority"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-lease-id",
             "in": "header",
             "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
@@ -11941,6 +11969,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -12185,6 +12229,10 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
               "x-ms-request-id": {
                 "type": "string",
                 "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
@@ -12345,22 +12393,6 @@
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "blockid",
             "in": "query",
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
@@ -12498,6 +12530,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "copySourceAuthorization"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -12821,22 +12869,6 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "x-ms-tags",
             "in": "header",
             "description": "Optional.  Used to set blob tags in various blob operations.",
@@ -12894,6 +12926,22 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           },
           {
             "name": "blocks",
@@ -12989,22 +13037,6 @@
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "requestId"
-          },
-          {
             "name": "snapshot",
             "in": "query",
             "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to retrieve. For more information on working with blob snapshots, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/creating-a-snapshot-of-a-blob\">Creating a Snapshot of a Blob.</a>",
@@ -13060,6 +13092,22 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
@@ -13205,6 +13253,14 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "requestId"
           }
         ],
         "responses": {
