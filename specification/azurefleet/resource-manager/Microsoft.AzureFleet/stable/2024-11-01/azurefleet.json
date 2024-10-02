@@ -621,22 +621,22 @@
       "type": "string",
       "description": "Architecture types supported by Azure VMs.",
       "enum": [
-        "Intel",
-        "AMD"
+        "AMD64",
+        "X86"
       ],
       "x-ms-enum": {
         "name": "ArchitectureType",
         "modelAsString": true,
         "values": [
           {
-            "name": "X86",
-            "value": "Intel",
-            "description": "X86 Architecture"
+            "name": "AMD64",
+            "value": "AMD64",
+            "description": "AMD64 Architecture"
           },
           {
-            "name": "AMD64",
-            "value": "AMD",
-            "description": "AMD64 Architecture"
+            "name": "X86",
+            "value": "X86",
+            "description": "X86 Architecture"
           }
         ]
       }
@@ -1526,11 +1526,11 @@
     },
     "LocationProfile": {
       "type": "object",
-      "description": "Represents the profile for a single additional location in the Fleet. The location and the (optional).",
+      "description": "Represents the profile for a single additional location in the Fleet. The location and the virtualMachineProfileOverride (optional).",
       "properties": {
         "location": {
           "type": "string",
-          "description": "The ARM location name of the additional region."
+          "description": "The ARM location name of the additional region. An override for the base virtual machine profile specific to this region. \nThis override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location."
         },
         "virtualMachineProfileOverride": {
           "$ref": "#/definitions/BaseVirtualMachineProfile",

@@ -342,11 +342,11 @@ union LocalStorageDiskType {
 union ArchitectureType {
   string,
 
-  @doc("X86 Architecture")
-  X86: "Intel",
-
   @doc("AMD64 Architecture")
-  AMD64: "AMD",
+  AMD64: "AMD64",
+
+  @doc("X86 Architecture")
+  X86: "X86",
 }
 
 @added(Versions.v2024_11_01)
@@ -431,9 +431,12 @@ model VMAttributes {
 }
 
 @added(Versions.v2024_11_01)
-@doc("Represents the profile for a single additional location in the Fleet. The location and the (optional).")
+@doc("Represents the profile for a single additional location in the Fleet. The location and the virtualMachineProfileOverride (optional).")
 model LocationProfile {
-  @doc("The ARM location name of the additional region.")
+  @doc("""
+  The ARM location name of the additional region. An override for the base virtual machine profile specific to this region. 
+  This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
+  """)
   location?: string;
 
   @doc("""
