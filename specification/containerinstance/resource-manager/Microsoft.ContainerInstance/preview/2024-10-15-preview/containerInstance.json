@@ -983,7 +983,7 @@
             "$ref": "#/parameters/NGroupsNameParameter"
           },
           {
-            "name": "parameters",
+            "name": "nGroup",
             "in": "body",
             "required": true,
             "schema": {
@@ -1273,6 +1273,56 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}": {
+      "put": {
+        "operationId": "ContainerGroupProfile_CreateOrUpdate",
+        "x-ms-examples": {},
+        "summary": "Create or Update a ContainerGroupProfile",
+        "description": "Create a CGProfile if it doesn't exist or update an existing CGProfile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          },
+          {
+            "name": "ContainerGroupProfile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfile"
+            },
+            "description": "The ContainerGroupProfile object."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "NoContent",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -1919,33 +1969,16 @@
               ]
             },
             "restartPolicy": {
-              "type": "string",
               "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
-              "enum": [
-                "Always",
-                "OnFailure",
-                "Never"
-              ],
-              "x-ms-enum": {
-                "name": "ContainerGroupRestartPolicy",
-                "modelAsString": true
-              }
+              "$ref":"#/definitions/ContainerGroupRestartPolicy"
             },
             "ipAddress": {
               "description": "The IP address type of the container group.",
               "$ref": "#/definitions/IpAddress"
             },
             "osType": {
-              "type": "string",
               "description": "The operating system type required by the containers in the container group.",
-              "enum": [
-                "Windows",
-                "Linux"
-              ],
-              "x-ms-enum": {
-                "name": "OperatingSystemTypes",
-                "modelAsString": true
-              }
+              "$ref": "#/definitions/OSType"
             },
             "volumes": {
               "type": "array",
@@ -2029,16 +2062,8 @@
               "$ref": "#/definitions/ConfidentialComputeProperties"
             },
             "priority": {
-              "type": "string",
               "description": "The priority of the container group.",
-              "enum": [
-                "Regular",
-                "Spot"
-              ],
-              "x-ms-enum": {
-                "name": "ContainerGroupPriority",
-                "modelAsString": true
-              }
+              "$ref": "#/definitions/Priority"
             }
           },
           "required": [
@@ -2796,12 +2821,38 @@
       "description": "The container group SKU.",
       "type": "string",
       "enum": [
+        "NotSpecified",
         "Standard",
         "Dedicated",
         "Confidential"
       ],
       "x-ms-enum": {
         "name": "ContainerGroupSku",
+        "modelAsString": true
+      }
+    },
+    "ContainerGroupRestartPolicy": {
+      "type": "string",
+      "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
+      "enum": [
+        "Always",
+        "OnFailure",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "ContainerGroupRestartPolicy",
+        "modelAsString": true
+      }
+    },
+    "OSType": {
+      "type": "string",
+      "description": "The operating system type required by the containers in the container group.",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OperatingSystemTypes",
         "modelAsString": true
       }
     },
@@ -2980,6 +3031,18 @@
           "type": "string",
           "description": "The base64 encoded confidential compute enforcement policy"
         }
+      }
+    },
+    "Priority": {
+      "type": "string",
+      "description": "The priority of the container group.",
+      "enum": [
+        "Regular",
+        "Spot"
+      ],
+      "x-ms-enum": {
+        "name": "ContainerGroupPriority",
+        "modelAsString": true
       }
     },
     "NGroupsSkusList": {
@@ -3174,7 +3237,133 @@
         }
       },
       "description": "The API entity reference."
+    },
+    "ContainerGroupProfile": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Gets the container group profile type - Microsoft.ContainerInstance/containerGroupProfiles"
+        },
+        "properties": {
+          "$ref": "#/definitions/ContainerGroupProfileProperties"
+        }
+      }
+    },
+    "ContainerGroupProfileProperties": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "description": "The SKU for a container group.",
+          "$ref": "#/definitions/ContainerGroupSku"
+        },
+        "encryptionProperties": {
+          "description": "The encryption properties for a container group.",
+          "$ref": "#/definitions/EncryptionProperties"
+        },
+        "containers": {
+          "type": "array",
+          "description": "The containers within the container group.",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "initContainers": {
+          "type": "array",
+          "description": "The init containers for a container group.",
+          "items": {
+            "$ref": "#/definitions/InitContainerDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "extensions": {
+          "type": "array",
+          "description": "extensions used by virtual kubelet",
+          "items": {
+            "$ref": "#/definitions/DeploymentExtensionSpec"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "imageRegistryCredentials": {
+          "type": "array",
+          "description": "The image registry credentials by which the container group is created from.",
+          "items": {
+            "$ref": "#/definitions/ImageRegistryCredential"
+          },
+          "x-ms-identifiers": [
+            "username"
+          ]
+        },
+        "restartPolicy": {
+          "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
+          "$ref":"#/definitions/ContainerGroupRestartPolicy"
+        },
+        "shutdownGracePeriod": {
+          "description": "Shutdown grace period for containers in a container group.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "ipAddress": {
+          "description": "The IP address type of the container group.",
+          "$ref": "#/definitions/IpAddress"
+        },
+        "timeToLive": {
+          "description": "Post completion time to live for containers of a CG",
+          "type": "string",
+          "format": "date-time"
+        },
+        "osType": {
+          "description": "The operating system type required by the containers in the container group.",
+          "$ref": "#/definitions/OSType"
+        },
+        "volumes": {
+          "type": "array",
+          "description": "The list of volumes that can be mounted by containers in this container group.",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "diagnostics": {
+          "description": "The diagnostic information for a container group.",
+          "$ref": "#/definitions/ContainerGroupDiagnostics"
+        },
+        "priority": {
+          "description": "The priority of the container group.",
+          "$ref": "#/definitions/Priority"
+        },
+        "confidentialComputeProperties": {
+          "description": "The properties for confidential container group",
+          "$ref": "#/definitions/ConfidentialComputeProperties"
+        },
+        "securityContext": {
+          "description": "The container security properties.",
+          "$ref": "#/definitions/SecurityContextDefinition"
+        },
+        "revision": {
+          "description": "Container group profile current revision number",
+          "type": "integer"
+        },
+        "registeredRevisions": {
+          "type": "array",
+          "description": "Registered revisions are calculated at request time based off the records in the table logs."
+        },
+        "useKrypton": {
+          "type": "boolean",
+          "description": "Gets or sets Krypton use property."
+        }
+      }
     }
+
   },
   "parameters": {
     "SubscriptionIdParameter": {
@@ -3250,6 +3439,17 @@
       "minLength": 1,
       "maxLength": 63,
       "description": "The N Groups name.",
+      "x-ms-parameter-location": "method"
+    },
+    "ContainerGroupProfileNameParameter": {
+      "name": "CGProfileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "minLength": 1,
+      "maxLength": 63,
+      "description": "ContainerGroupProfile name.",
       "x-ms-parameter-location": "method"
     }
   }
