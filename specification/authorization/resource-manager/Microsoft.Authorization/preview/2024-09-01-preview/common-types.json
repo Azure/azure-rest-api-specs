@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-02-01-preview",
+    "version": "2024-09-01-preview",
     "title": "AuthorizationManagementClient"
   },
   "securityDefinitions": {
@@ -275,6 +275,13 @@
         "maximumDuration": {
           "type": "string",
           "description": "The maximum duration of expiration in timespan."
+        },
+        "exceptionMembers": {
+          "type": "array",
+          "description": "The members not restricted by expiration rule.",
+          "items": {
+            "$ref": "#/definitions/UserSet"
+          }
         }
       }
     },
