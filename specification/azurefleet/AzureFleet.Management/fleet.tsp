@@ -434,9 +434,9 @@ model VMAttributes {
 @doc("Represents the profile for a single additional location in the Fleet. The location and the virtualMachineProfileOverride (optional).")
 model LocationProfile {
   @doc("""
-  The ARM location name of the additional region. An override for the base virtual machine profile specific to this region. 
-  This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
-  """)
+    The ARM location name of the additional region. An override for the base virtual machine profile specific to this region. 
+    This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
+    """)
   location?: string;
 
   @doc("""
