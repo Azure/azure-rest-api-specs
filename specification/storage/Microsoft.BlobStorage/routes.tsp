@@ -11,6 +11,16 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+op StorageOperation<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  TError = StorageError
+>(
+  ...TParams,
+  ...ApiVersionParameter,
+  ...ClientRequestIdParameter,
+): TResponse | TError;
+
 interface Service {
   /** Get the properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -18,19 +28,20 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/?restype=service&comp=properties")
-  setProperties(
-    /** The storage service properties that specifies the analytics and CORS rules to set on the Blob service. */
-    @body body: StorageServiceProperties,
+  setProperties is StorageOperation<
+    {
+      /** The storage service properties that specifies the analytics and CORS rules to set on the Blob service. */
+      @body body: StorageServiceProperties;
 
-    ...TimeoutParameter,
-    ...ApiVersionParameter,
-    ...ClientRequestIdParameter,
-  ): {
-    @statusCode statusCode: 202;
-    ...ClientRequestIdResponseHeader;
-    ...RequestIdResponseHeader;
-    ...VersionResponseHeader;
-  } | StorageError;
+      ...TimeoutParameter;
+    },
+    {
+      @statusCode statusCode: 202;
+      ...ClientRequestIdResponseHeader;
+      ...RequestIdResponseHeader;
+      ...VersionResponseHeader;
+    }
+  >;
 
   /** Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
