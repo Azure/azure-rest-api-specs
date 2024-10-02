@@ -325,9 +325,6 @@ union DataflowEndpointKafkaPartitionStrategy {
 model DataflowEndpointLocalStorage {
   @doc("Persistent volume claim name.")
   persistentVolumeClaimRef: string;
-
-  @doc("Local storage endpoint batching configuration.")
-  batching?: BatchingConfiguration;
 }
 
 @doc("Broker endpoint properties")
