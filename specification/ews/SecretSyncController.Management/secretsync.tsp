@@ -15,7 +15,7 @@ namespace Microsoft.SecretSyncController;
 model SecretSync is TrackedResource<SecretSyncProperties> {
   ...ResourceNameParameter<
     SecretSync,
-    NamePattern="^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+    NamePattern = "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
   >;
   ...ExtendedLocationProperty;
 }

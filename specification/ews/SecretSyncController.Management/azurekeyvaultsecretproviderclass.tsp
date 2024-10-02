@@ -17,7 +17,7 @@ model AzureKeyVaultSecretProviderClass
   is TrackedResource<AzureKeyVaultSecretProviderClassProperties> {
   ...ResourceNameParameter<
     AzureKeyVaultSecretProviderClass,
-    NamePattern="^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+    NamePattern = "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
   >;
   ...ExtendedLocationProperty;
 }
