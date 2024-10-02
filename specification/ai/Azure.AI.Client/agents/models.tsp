@@ -4,8 +4,6 @@ import "../agents.common/models.tsp";
 //import "../tools/tool_resources.tsp";
 import "../main.tsp";
 
-namespace Azure.AI.Client.Agents;
-
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
