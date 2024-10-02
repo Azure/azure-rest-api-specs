@@ -6,15 +6,17 @@ module.exports = {
   removeLabelIfExists,
 };
 
-/** @type {Map<number, Set<string>>} */
-const labelCache = new Map();
+// /** @type {Map<number, Set<string>>} */
+// const labelCache = new Map();
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('github-script').AsyncFunctionArguments["github"]} github
+ * @param {import('github-script').AsyncFunctionArguments["context"]} context
+ * @param {import('github-script').AsyncFunctionArguments["core"]} core
  * @param {string} name
  * @returns {Promise<void>}
  */
-async function addLabelIfNotExists({github, context, core}, name) {
+async function addLabelIfNotExists(github, context, core, name) {
 //   await group(`addLabelIfNotExists("${name}")`, async () => {
 //     // TODO: Add support for workflow_run from a pull_request context
 //     if (!context.payload.pull_request) {
@@ -59,11 +61,13 @@ async function group(name, fn) {
 }
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('github-script').AsyncFunctionArguments["github"]} github
+ * @param {import('github-script').AsyncFunctionArguments["context"]} context
+ * @param {import('github-script').AsyncFunctionArguments["core"]} core
  * @param {string} name
  * @returns {Promise<void>}
  */
-async function removeLabelIfExists({github, context, core}, name) {
+async function removeLabelIfExists(github, context, core, name) {
 //   await group(`removeLabelIfExists("${name}")`, async () => {
 //     if (!context.payload.pull_request) {
 //       throw new Error("May only run in context of a pull request");

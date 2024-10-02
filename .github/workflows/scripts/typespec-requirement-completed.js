@@ -37,11 +37,9 @@ module.exports = async (github, context, core) => {
     artifactNames.includes("spec-lifecycle-resource-manager-brownfield")
   ) {
     await addLabelIfNotExists(
-      /** @type {import('github-script').AsyncFunctionArguments} */ ({
-        github,
-        context,
-        core,
-      }),
+      github,
+      context,
+      core,
       label,
     );
   } else {
