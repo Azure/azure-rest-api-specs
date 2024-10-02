@@ -59,8 +59,24 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Deletes a project.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}")
+  @delete
   @pollingOperation(ConversationalAnalysisAuthoring.getProjectDeletionStatus)
-  deleteProject is languageOperations.LongRunningResourceDelete<ConversationalAnalysisAuthoringProjectMetadata>;
+  deleteProject is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
+  >;
+
 
   /**
    * Generates a copy project operation authorization to the current target Azure
@@ -80,64 +96,95 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Copies an existing project to another Azure resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
-  @actionSeparator("/:")
-  @action("copy")
-  copyProject is languageOperations.LongRunningResourceAction<
-    ConversationalAnalysisAuthoringProjectMetadata,
-    ConversationalAnalysisAuthoringCopyProjectOptions,
-    ConversationalAnalysisAuthoringProjectMetadata
+  copyProject is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The copy project info.
+       */
+      @body
+      body: ConversationalAnalysisAuthoringCopyProjectOptions;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Triggers a job to export a project's data.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/:export")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getExportStatus)
-  @actionSeparator("/:")
-  export is languageOperations.LongRunningResourceAction<
-    ConversationalAnalysisAuthoringProjectMetadata,
+  export is Foundations.LongRunningOperation<
     {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
       /**
        * The format of the exported project file to use.
        */
-      @query
-      format?: ConversationalAnalysisAuthoringExportedProjectFormat;
+      #suppress "@azure-tools/typespec-azure-core/casing-style"
+      @query("format")
+      ExportedProjectFormat?: ConversationalAnalysisAuthoringExportedProjectFormat;
 
       /**
        * Specifies the method used to interpret string offsets. For additional
        * information see https://aka.ms/text-analytics-offsets.
        */
-      @query
+      @query("stringIndexType")
       stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
 
       /**
        * Kind of asset to export.
        */
-      @query
+      @query("assetKind")
       assetKind?: string;
 
       /**
        * Trained model label to export. If the trainedModelLabel is null, the default behavior is to export the current working copy.
        */
-      @query
+      @query("trainedModelLabel")
       trainedModelLabel?: string;
     },
-    ConversationalAnalysisAuthoringProjectMetadata
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Triggers a job to import a project. If a project with the same name already
    * exists, the data of that project is replaced.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/:import")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getImportStatus)
-  @actionSeparator("/:")
-  `import` is languageOperations.LongRunningResourceAction<
-    ConversationalAnalysisAuthoringProjectMetadata,
+  `import` is Foundations.LongRunningOperation<
     {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
       /**
        * The format of the exported project file to use.
        */
@@ -151,19 +198,36 @@ interface ConversationalAnalysisAuthoring {
       @body
       body: ConversationalAnalysisAuthoringExportedProject;
     },
-    ConversationalAnalysisAuthoringProjectMetadata
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Triggers a training job for a project.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/:train")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getTrainingStatus)
-  @actionSeparator("/:")
-  train is languageOperations.LongRunningResourceAction<
-    ConversationalAnalysisAuthoringProjectMetadata,
-    ConversationalAnalysisAuthoringTrainingJobOptions,
-    ConversationalAnalysisAuthoringProjectMetadata
+  train is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The training input parameters.
+       */
+      @body
+      body: ConversationalAnalysisAuthoringTrainingJobOptions;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -183,13 +247,28 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Swaps two existing deployments with each other.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
+  @post
   @pollingOperation(ConversationalAnalysisAuthoring.getSwapDeploymentsStatus)
-  @actionSeparator("/:")
-  @action("swap")
-  swapDeployments is languageOperations.LongRunningResourceCollectionAction<
-    ConversationalAnalysisAuthoringProjectDeployment,
-    ConversationalAnalysisAuthoringSwapDeploymentsOptions,
-    ConversationalAnalysisAuthoringProjectDeployment
+  swapDeployments is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The job object to swap two deployments.
+       */
+      @body
+      body: ConversationalAnalysisAuthoringSwapDeploymentsOptions;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -234,22 +313,64 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Deletes a project deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
+  @delete
   @pollingOperation(ConversationalAnalysisAuthoring.getDeploymentStatus)
-  deleteDeployment is languageOperations.LongRunningResourceDelete<ConversationalAnalysisAuthoringProjectDeployment>;
+  deleteDeployment is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The name of the specific deployment of the project to use.
+       */
+      @path
+      deploymentName: string;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
+  >;
 
   /**
    * Deletes a project deployment from the specified assigned resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
+  @post
   @pollingOperation(
     ConversationalAnalysisAuthoring.getDeploymentDeleteFromResourcesStatus
   )
-  @action("delete-from-resources")
-  @actionSeparator("/:")
   @added(Versions.v2023_04_15_preview)
-  deleteDeploymentFromResources is languageOperations.LongRunningResourceAction<
-    ConversationalAnalysisAuthoringProjectDeployment,
-    ConversationalAnalysisAuthoringDeleteDeploymentOptions,
-    ConversationalAnalysisAuthoringProjectDeployment
+  deleteDeploymentFromResources is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The name of the specific deployment of the project to use.
+       */
+      @path
+      deploymentName: string;
+
+      /**
+       * The options for deleting the deployment.
+       */
+      @body
+      body: ConversationalAnalysisAuthoringDeleteDeploymentOptions;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -300,27 +421,63 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Triggers evaluation operation on a trained model.
    */
-  @action("evaluate")
-  @actionSeparator("/:")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
+  @post
   @pollingOperation(ConversationalAnalysisAuthoring.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
-  evaluateModel is languageOperations.LongRunningResourceAction<
-    ConversationalAnalysisAuthoringProjectTrainedModel,
-    ConversationalAnalysisAuthoringEvaluationOptions,
-    ConversationalAnalysisAuthoringProjectTrainedModel
+  evaluateModel is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The trained model label.
+       */
+      @path
+      trainedModelLabel: string;
+
+      /**
+       * The training input parameters.
+       */
+      @body
+      body: ConversationalAnalysisAuthoringEvaluationOptions;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Restores the snapshot of this trained model to be the current working directory
    * of the project.
    */
-  @action("load-snapshot")
-  @actionSeparator("/:")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
+  @post
   @pollingOperation(ConversationalAnalysisAuthoring.getLoadSnapshotStatus)
-  loadSnapshot is languageOperations.LongRunningResourceAction<
-    ConversationalAnalysisAuthoringProjectTrainedModel,
+  loadSnapshot is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The trained model label.
+       */
+      @path
+      trainedModelLabel: string;
+    },
+    AcceptedResponse,
     {},
-    ConversationalAnalysisAuthoringProjectTrainedModel
+    ErrorResponse
   >;
 
   /**
@@ -387,32 +544,62 @@ interface ConversationalAnalysisAuthoring {
    * check here:
    * https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
-  @action("assign")
-  @actionSeparator("/:")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
+  @post
   @pollingOperation(
     ConversationalAnalysisAuthoring.getAssignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
-  assignDeploymentResources is languageOperations.LongRunningResourceCollectionAction<
-    ConversationalAnalysisAuthoringAssignedDeploymentResource,
-    ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions,
-    ConversationalAnalysisAuthoringAssignedDeploymentResource
+  assignDeploymentResources is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The new project resources info.
+       */
+      @body
+      body: ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Unassign resources from a project. This disallows deploying new deployments to
    * these resources, and deletes existing deployments assigned to them.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
+  @post
   @pollingOperation(
     ConversationalAnalysisAuthoring.getUnassignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
-  @action("unassign")
-  @actionSeparator("/:")
-  unassignDeploymentResources is languageOperations.LongRunningResourceCollectionAction<
-    ConversationalAnalysisAuthoringAssignedDeploymentResource,
-    ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions,
-    ConversationalAnalysisAuthoringAssignedDeploymentResource
+  unassignDeploymentResources is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The info for the deployment resources to be deleted.
+       */
+      @body
+      body: ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -464,13 +651,28 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Triggers a cancellation for a running training job.
    */
-  @actionSeparator("/:")
-  @action("cancel")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
+  @post
   @pollingOperation(ConversationalAnalysisAuthoring.getTrainingStatus)
-  cancelTrainingJob is languageOperations.LongRunningResourceAction<
-    ConversationalAnalysisAuthoringTrainingJobState,
+  cancelTrainingJob is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The job ID.
+       */
+      @path
+      jobId: string;
+    },
+    AcceptedResponse,
     {},
-    ConversationalAnalysisAuthoringTrainingJobState
+    ErrorResponse
   >;
 
   /**
