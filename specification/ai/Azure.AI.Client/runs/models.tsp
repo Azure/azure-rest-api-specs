@@ -146,7 +146,6 @@ model ThreadRun {
 }
 
 /** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
-@added(ServiceApiVersions.v2024_02_15_preview)
 union IncompleteRunDetails {
   string,
 
@@ -160,7 +159,6 @@ union IncompleteRunDetails {
 /**
  * Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
  */
-@added(ServiceApiVersions.v2024_02_15_preview)
 model RunCompletionUsage {
   @doc("Number of completion tokens used over the course of the run.")
   @encodedName("application/json", "completion_tokens")
@@ -176,7 +174,6 @@ model RunCompletionUsage {
 }
 
 @doc("The details used when creating a new run of an agent thread.")
-@added(ServiceApiVersions.v2024_02_15_preview)
 model CreateRunOptions {
   @doc("The ID of the agent that should run the thread.")
   @encodedName("application/json", "agent_id")
@@ -201,7 +198,6 @@ model CreateRunOptions {
   /** Adds additional messages to the thread before creating the run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "additional_messages")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   additionalMessages?: ThreadMessage[] | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
@@ -212,7 +208,6 @@ model CreateRunOptions {
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
    */
-  @added(ServiceApiVersions.v2024_02_15_preview)
   stream?: boolean;
 
   /**
@@ -222,7 +217,6 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @minValue(0)
   @maxValue(2)
-  @added(ServiceApiVersions.v2024_05_01_preview)
   temperature?: float32 | null = 1;
 
   /**
@@ -236,7 +230,6 @@ model CreateRunOptions {
   @minValue(0)
   @maxValue(1)
   @encodedName("application/json", "top_p")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   topP?: float32 | null = 1;
 
   /**
@@ -247,7 +240,6 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @minValue(256)
   @encodedName("application/json", "max_prompt_tokens")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   maxPromptTokens?: int32 | null;
 
   /**
@@ -258,32 +250,27 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @minValue(256)
   @encodedName("application/json", "max_completion_tokens")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   maxCompletionTokens?: int32 | null;
 
   /** The strategy to use for dropping messages as the context windows moves forward. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "truncation_strategy")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   truncationStrategy?: TruncationObject | null;
 
   /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_choice")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   toolChoice?: AgentsApiToolChoiceOption | null;
 
   /** Specifies the format that the model must output. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   responseFormat?: AgentsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }
 
 @doc("The details of an error as encountered by an agent thread run.")
-@added(ServiceApiVersions.v2024_02_15_preview)
 model RunError {
   @doc("The status for the error.")
   code: string;
@@ -293,7 +280,6 @@ model RunError {
 }
 
 @doc("Possible values for the status of an agent thread run.")
-@added(ServiceApiVersions.v2024_02_15_preview)
 union RunStatus {
   string,
 
@@ -324,7 +310,6 @@ union RunStatus {
 
 @discriminator("type")
 @doc("An abstract representation of a required action for an agent thread run to continue.")
-@added(ServiceApiVersions.v2024_02_15_preview)
 model RequiredAction {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
@@ -332,7 +317,6 @@ model RequiredAction {
 }
 
 @doc("The details for required tool calls that must be submitted for an agent thread run to continue.")
-@added(ServiceApiVersions.v2024_02_15_preview)
 model SubmitToolOutputsAction extends RequiredAction {
   @doc("The object type, which is always 'submit_tool_outputs'.")
   type: "submit_tool_outputs";
@@ -343,7 +327,6 @@ model SubmitToolOutputsAction extends RequiredAction {
 }
 
 @doc("The details describing tools that should be called to submit tool outputs.")
-@added(ServiceApiVersions.v2024_02_15_preview)
 model SubmitToolOutputsDetails {
   @encodedName("application/json", "tool_calls")
   @doc("The list of tool calls that must be resolved for the agent thread run to continue.")
@@ -351,7 +334,6 @@ model SubmitToolOutputsDetails {
 }
 
 @doc("The details used when creating and immediately running a new agent thread.")
-@added(ServiceApiVersions.v2024_02_15_preview)
 model CreateAndRunThreadOptions {
   @encodedName("application/json", "agent_id")
   @doc("The ID of the agent for which the thread should be created.")
@@ -378,14 +360,12 @@ model CreateAndRunThreadOptions {
   /** Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   toolResources?: UpdateToolResourcesOptions | null;
 
   /**
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
    */
-  @added(ServiceApiVersions.v2024_02_15_preview)
   stream?: boolean;
 
   /**
@@ -395,7 +375,6 @@ model CreateAndRunThreadOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @minValue(0)
   @maxValue(2)
-  @added(ServiceApiVersions.v2024_05_01_preview)
   temperature?: float32 | null = 1;
 
   /**
@@ -409,7 +388,6 @@ model CreateAndRunThreadOptions {
   @minValue(0)
   @maxValue(1)
   @encodedName("application/json", "top_p")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   topP?: float32 | null = 1;
 
   /**
@@ -420,7 +398,6 @@ model CreateAndRunThreadOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @minValue(256)
   @encodedName("application/json", "max_prompt_tokens")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   maxPromptTokens?: int32 | null;
 
   /**
@@ -431,25 +408,21 @@ model CreateAndRunThreadOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @minValue(256)
   @encodedName("application/json", "max_completion_tokens")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   maxCompletionTokens?: int32 | null;
 
   /** The strategy to use for dropping messages as the context windows moves forward. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "truncation_strategy")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   truncationStrategy?: TruncationObject | null;
 
   /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_choice")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   toolChoice?: AgentsApiToolChoiceOption | null;
 
   /** Specifies the format that the model must output. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  @added(ServiceApiVersions.v2024_05_01_preview)
   responseFormat?: AgentsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
@@ -459,7 +432,6 @@ model CreateAndRunThreadOptions {
  * Controls for how a thread will be truncated prior to the run. Use this to control the initial
  * context window of the run.
  */
-@added(ServiceApiVersions.v2024_05_01_preview)
 model TruncationObject {
   /**
    * The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will
@@ -473,7 +445,6 @@ model TruncationObject {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @minValue(1)
-  @added(ServiceApiVersions.v2024_05_01_preview)
   @encodedName("application/json", "last_messages")
   lastMessages?: int32 | null;
 }
@@ -481,7 +452,6 @@ model TruncationObject {
 /**
  * Possible truncation strategies for the thread.
  */
-@added(ServiceApiVersions.v2024_05_01_preview)
 union TruncationStrategy {
   string,
 
