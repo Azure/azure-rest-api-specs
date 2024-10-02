@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace KeyVaultClient;
+namespace KeyVault;
 
 interface HSMSecurityDomainOperations {
   /**

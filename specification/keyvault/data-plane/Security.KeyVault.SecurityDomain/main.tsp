@@ -11,22 +11,32 @@ import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+
 /**
  * The key vault client performs cryptographic key operations and vault operations
  * against the Key Vault service.
  */
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://vault.azure.net/.default"],
+    }
+  ]>
+)
 @service({
-  title: "KeyVaultClient",
+  title: "Key Vault",
 })
 @versioned(Versions)
 @server(
   "{vaultBaseUrl}",
   "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
   {
-    vaultBaseUrl: string,
+    vaultBaseUrl: url,
   }
 )
-namespace KeyVaultClient;
+namespace KeyVault;
 
 /**
  * The available API versions.
@@ -35,6 +45,6 @@ enum Versions {
   /**
    * The 7.5 API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v7_5: "7.5",
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `v7.5`: "7.5",
 }

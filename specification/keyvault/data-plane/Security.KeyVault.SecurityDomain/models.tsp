@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace KeyVaultClient;
+namespace KeyVault;
 
 /**
  * operation status
