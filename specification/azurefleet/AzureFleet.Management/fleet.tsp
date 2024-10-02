@@ -306,7 +306,8 @@ union VMCategory {
   GpuAccelerated: "GpuAccelerated",
 
   @doc("""
-  FPGA optimized VM sizes are specialized virtual machines available with single or multiple FPGAs. These sizes are designed for compute-intensive workloads. This article provides information about the number and type of FPGAs, vCPUs, data disks, and NICs. 
+  FPGA optimized VM sizes are specialized virtual machines available with single or multiple FPGA. 
+  These sizes are designed for compute-intensive workloads. This article provides information about the number and type of FPGA, vCPUs, data disks, and NICs. 
   Storage throughput and network bandwidth are also included for each size in this grouping.
   """)
   FpgaAccelerated: "FpgaAccelerated",
