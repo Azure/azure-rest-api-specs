@@ -144,7 +144,7 @@ model MediaNotificationContentBase {
 #deprecated "`MediaNotificationContent` is being deprecated, we encourage you to use the new `ImageNotificationContent` for sending images instead."
 @access(Access.internal, "python")
 @added(Versions.c2024_08_30)
-@doc("A request to send an image notification.")
+@doc("@deprecated A request to send an image notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image_v0;
