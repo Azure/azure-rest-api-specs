@@ -9,8 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Always allow bot account 'azure-sdk' to update protected files.
-      # Since check is required, the job itself cannot be skipped, but all steps can.
+      # Allow bot account 'azure-sdk' to update protected files.
+      # Since check is required, the job itself cannot be skipped.
+      - name: Allow bot account 'azure-sdk'
+        if: github.event.pull_request.user.login == 'azure-sdk'
+        run: echo "Bot account 'azure-sdk' is allowed to update protected files"
 
       - uses: actions/checkout@v4
         if: github.event.pull_request.user.login != 'azure-sdk'
