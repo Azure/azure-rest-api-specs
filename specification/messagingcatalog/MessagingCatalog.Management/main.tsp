@@ -25,8 +25,8 @@ namespace Microsoft.MessagingCatalog;
  * The available API versions.
  */
 enum Versions {
-  @doc("The 2024-06-01-preview API version.")
+  @doc("The 2024-10-01-preview API version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_03_01_preview: "2024-06-01-preview",
+  v2024_10_01_preview: "2024-10-01-preview",
 }
