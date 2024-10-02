@@ -5053,10 +5053,6 @@
       "type": "object",
       "description": "Diagnostic Log properties",
       "properties": {
-        "opentelemetryExportConfig": {
-          "$ref": "#/definitions/OpenTelemetryLogExportConfig",
-          "description": "The open telemetry export configuration."
-        },
         "level": {
           "type": "string",
           "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
@@ -5548,10 +5544,6 @@
       "type": "object",
       "description": "Diagnostic Metrics properties",
       "properties": {
-        "opentelemetryExportConfig": {
-          "$ref": "#/definitions/OpenTelemetryExportConfig",
-          "description": "The open telemetry export configuration."
-        },
         "prometheusPort": {
           "type": "integer",
           "format": "int32",
@@ -5632,53 +5624,6 @@
       "type": "string",
       "description": "A string with a minimum length of 1.",
       "minLength": 1
-    },
-    "OpenTelemetryExportConfig": {
-      "type": "object",
-      "description": "OpenTelemetry Export Configuration properties",
-      "properties": {
-        "otlpGrpcEndpoint": {
-          "type": "string",
-          "description": "The open telemetry collector endpoint to export to."
-        },
-        "intervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to export the metrics to the open telemetry collector.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
-        }
-      },
-      "required": [
-        "otlpGrpcEndpoint"
-      ]
-    },
-    "OpenTelemetryLogExportConfig": {
-      "type": "object",
-      "description": "OpenTelemetry Log Export Configuration properties",
-      "properties": {
-        "otlpGrpcEndpoint": {
-          "type": "string",
-          "description": "The open telemetry collector endpoint to export to."
-        },
-        "intervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to export the metrics to the open telemetry collector.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
-        },
-        "level": {
-          "type": "string",
-          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
-          "default": "error"
-        }
-      },
-      "required": [
-        "otlpGrpcEndpoint"
-      ]
     },
     "OperationType": {
       "type": "string",
@@ -6427,10 +6372,6 @@
               }
             ]
           }
-        },
-        "opentelemetryExportConfig": {
-          "$ref": "#/definitions/OpenTelemetryExportConfig",
-          "description": "The open telemetry export configuration."
         },
         "cacheSizeMegabytes": {
           "type": "integer",
