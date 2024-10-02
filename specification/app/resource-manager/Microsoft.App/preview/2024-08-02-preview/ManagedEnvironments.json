@@ -932,7 +932,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ManagedHttpRoute"
+              "$ref": "./CommonDefinitions.json#/definitions/HttpRouteConfig"
             }
           },
           "default": {
@@ -981,7 +981,7 @@
             "in": "body",
             "description": "Http Route config to be created or updated",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ManagedHttpRoute"
+              "$ref": "./CommonDefinitions.json#/definitions/HttpRouteConfig"
             }
           },
           {
@@ -992,13 +992,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ManagedHttpRoute"
+              "$ref": "./CommonDefinitions.json#/definitions/HttpRouteConfig"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ManagedHttpRoute"
+              "$ref": "./CommonDefinitions.json#/definitions/HttpRouteConfig"
             }
           },
           "default": {
@@ -1060,7 +1060,7 @@
           "200": {
             "description": "Managed Http Routes updated successfully.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ManagedHttpRoute"
+              "$ref": "./CommonDefinitions.json#/definitions/HttpRouteConfig"
             }
           },
           "default": {
@@ -1149,7 +1149,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"

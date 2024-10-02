@@ -1627,8 +1627,8 @@
         }
       }
     },
-    "ManagedHttpRoute": {
-      "description": "Managed certificates used for Custom Domain bindings of Container Apps in a Managed Environment",
+    "HttpRouteConfig": {
+      "description": "Advanced Ingress routing for path/header based routing for a Container App Environment",
       "type": "object",
       "allOf": [
         {
@@ -1641,8 +1641,16 @@
           "type": "object",
           "properties": {
             "provisioningState": {
-              "description": "The scale configuration of the session pool.",
+              "description": "The provisioning state of the Http Route Config in cluster",
               "$ref": "#/definitions/HttpRouteProvisioningState"
+            },
+            "provisioningErrors": {
+              "description": "List of errors when trying to reconcile http routes",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HttpRouteProvisioningErrors"
+              },
+              "readOnly": true
             },
             "fqdn": {
               "description": "FQDN of the route resource.",
@@ -1700,6 +1708,23 @@
         "certificateId": {
           "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
+        }
+      }
+    },
+    "HttpRouteProvisioningErrors": {
+      "description": "List of provisioning errors for a http route config object",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "Timestamp error occured at",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description or error message",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1848,7 +1873,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedHttpRoute"
+            "$ref": "#/definitions/HttpRouteConfig"
           }
         },
         "nextLink": {
