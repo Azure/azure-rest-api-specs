@@ -2,7 +2,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.versioned(Azure.AI.Client.Agents.ServiceApiVersions)
 namespace Azure.AI.Client.Agents {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
