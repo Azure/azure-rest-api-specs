@@ -232,25 +232,21 @@ model ConversationalAnalysisAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
 
   /**
    * Represents the project creation datetime.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime: utcDateTime;
 
   /**
    * Represents the project last trained datetime.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime?: utcDateTime;
 
   /**
    * Represents the project last deployed datetime.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 
   /**
@@ -474,7 +470,6 @@ model ConversationalAnalysisAuthoringCopyProjectOptions {
   /**
    * The expiration of the access token.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiresAt: utcDateTime;
 
   /**
@@ -606,19 +601,16 @@ model ConversationalAnalysisAuthoringJobState {
   /**
    * The creation date time of the job.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
 
   /**
    * The last date time the job was updated.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime: utcDateTime;
 
   /**
    * The expiration date time of the job.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationDateTime?: utcDateTime;
 
   /**
@@ -690,13 +682,11 @@ model ConversationalAnalysisAuthoringProjectDeployment {
   /**
    * Represents deployment last trained time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime: utcDateTime;
 
   /**
    * Represents deployment last deployed time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime: utcDateTime;
 
   /**
@@ -875,7 +865,6 @@ model ConversationalAnalysisAuthoringProjectTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime: utcDateTime;
 
   /**
@@ -1452,7 +1441,6 @@ model ConversationalAnalysisAuthoringTrainingJobResult {
   /**
    * Represents the estimated end date time for training and evaluation.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   estimatedEndDateTime?: utcDateTime;
 }
 
@@ -1469,13 +1457,11 @@ model ConversationalAnalysisAuthoringSubTrainingJobState {
   /**
    * Represents the start date time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
   /**
    * Represents the end date time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
   /**
@@ -1540,7 +1526,6 @@ model ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents deployment last deployed time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime: utcDateTime;
 
   /**
