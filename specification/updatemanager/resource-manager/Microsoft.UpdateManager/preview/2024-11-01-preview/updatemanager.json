@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.UpdateManager service",
-    "version": "2024-10-01-preview",
+    "version": "2024-11-01-preview",
     "description": "Microsoft.UpdateManager Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -402,6 +402,16 @@
     }
   },
   "definitions": {
+    "Availability": {
+      "type": "object",
+      "description": "Availability policy.",
+      "properties": {
+        "vmAvailabilitySet": {
+          "$ref": "#/definitions/VMAvailabilitySet",
+          "description": "The availability set."
+        }
+      }
+    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -446,6 +456,21 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "Policies": {
+      "type": "object",
+      "description": "Policies properties.",
+      "properties": {
+        "availability": {
+          "$ref": "#/definitions/Availability",
+          "description": "The availability policy."
+        },
+        "installWindowsPatchesAfter": {
+          "type": "string",
+          "description": "Approve windows patches after the mentioned date.",
+          "pattern": "(?<!\\w)(2Tuesday)\\+Offset([0-6](?!\\d))(?!\\w)|(?<!\\w)Days(1(?!\\d)|([1-9]|1[0-4])(?!\\d))(?!\\w)"
         }
       }
     },
@@ -556,12 +581,9 @@
           "$ref": "#/definitions/LinuxParameters",
           "description": "linux parameter."
         },
-        "approvePatchesAfterDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Approve patches after days.",
-          "minimum": 0,
-          "maximum": 35
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "policies properties."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -584,6 +606,24 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "VMAvailabilitySet": {
+      "type": "string",
+      "description": "VMAvailabilitySet property.",
+      "enum": [
+        "Bypass"
+      ],
+      "x-ms-enum": {
+        "name": "VMAvailabilitySet",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bypass",
+            "value": "Bypass",
+            "description": "Bypass the availability set."
+          }
+        ]
+      }
     },
     "WindowsParameters": {
       "type": "object",
