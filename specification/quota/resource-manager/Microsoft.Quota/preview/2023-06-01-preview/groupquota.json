@@ -769,8 +769,8 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests/{resourceName}": {
-      "put": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests/{resourceName}/update": {
+      "post": {
         "tags": [
           "GroupQuotaLimitRequest"
         ],
@@ -819,7 +819,7 @@
               "$ref": "#/definitions/SubmittedResourceRequestStatus"
             }
           },
-          "201": {
+          "202": {
             "description": "Request Accepted, Create or Update",
             "headers": {
               "Retry-After": {
@@ -835,9 +835,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -1211,8 +1208,8 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests/{resourceName}": {
-      "put": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests/{resourceName}/update": {
+      "post": {
         "tags": [
           "SubscriptionQuotaAllocationRequest"
         ],
@@ -1264,7 +1261,7 @@
               "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
-          "201": {
+          "202": {
             "description": "Request Created. Create or Update",
             "headers": {
               "Retry-After": {
@@ -1280,9 +1277,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
