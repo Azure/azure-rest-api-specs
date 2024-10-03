@@ -242,17 +242,31 @@ model AdditionalCapabilities {
   hibernationEnabled?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMax which does not follow camel casing"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxInteger which does not follow camel casing"
 @added(Versions.v2024_11_01)
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
-model VMAttributeMinMax {
+model VMAttributeMinMaxInteger {
   @minValue(0)
   @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
   min?: int32;
 
   @maxValue(4294967295)
-  @doc("Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
+  @doc("Max VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
   max?: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxDouble which does not follow camel casing"
+@added(Versions.v2024_11_01)
+@doc("VMAttributes using double values.")
+model VMAttributeMinMaxDouble{
+
+  @minValue(0.0)
+  @doc("Minimum value. default 0. Double.MinValue()")
+  min?: float64;
+
+  @maxValue(1.7976931348623157e+308)
+  @doc("Maximum value. Double.MaxValue(1.7976931348623157E+308)")
+  max?: float64;
 }
 
 @added(Versions.v2024_11_01)
@@ -311,10 +325,16 @@ union VMCategory {
     Storage throughput and network bandwidth are also included for each size in this grouping.
     """)
   FpgaAccelerated: "FpgaAccelerated",
+  
+  @doc("""
+  Azure High Performance Compute VMs are optimized for various HPC workloads such as computational fluid dynamics, finite element analysis, frontend and backend EDA, 
+  rendering, molecular dynamics, computational geoscience, weather simulation, and financial risk analysis.
+  """)
+  HighPerformanceCompute: "HighPerformanceCompute",
 }
 
 @added(Versions.v2024_11_01)
-@doc("Architecture types supported by Azure VMs.")
+@doc("Cpu Manufacturers  supported by Azure VMs.")
 union CpuManufacturer {
   string,
 
@@ -323,6 +343,12 @@ union CpuManufacturer {
 
   @doc("AMD CPU.")
   AMD: "AMD",
+
+  @doc("Microsoft CPU.")
+  Microsoft: "Microsoft",
+
+  @doc("Ampere CPU.")
+  Ampere: "Ampere",
 }
 
 @added(Versions.v2024_11_01)
@@ -350,18 +376,30 @@ union ArchitectureType {
 }
 
 @added(Versions.v2024_11_01)
-@doc("Gpu manufacturers supported by Azure VMs.")
-union GpuManufacturer {
+@doc("Accelerator manufacturers supported by Azure VMs.")
+union AcceleratorManufacturer {
   string,
-
-  @doc("Intel GpuType")
-  Intel: "Intel",
 
   @doc("AMD GpuType")
   AMD: "AMD",
 
   @doc("Nvidia GpuType")
   Nvidia: "Nvidia",
+
+  @doc("Xilinx GpuType")
+  Xilinx: "Xilinx",
+}
+
+@added(Versions.v2024_11_01)
+@doc("Accelerator types supported by Azure VMs.")
+union AcceleratorType {
+  string,
+
+  @doc("GPU Accelerator")
+  GPU: "GPU",
+
+  @doc("FPGA Accelerator")
+  FPGA: "FPGA",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributes which does not follow camel casing"
@@ -369,46 +407,56 @@ union GpuManufacturer {
 @doc("VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
 model VMAttributes {
   @doc("The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
-  vCpuCount: VMAttributeMinMax;
+  vCpuCount: VMAttributeMinMaxInteger;
 
   @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
-  memoryInMiB: VMAttributeMinMax;
+  memoryInGiB: VMAttributeMinMaxDouble;
 
+  @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
+  memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
+  
   @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
   localStorageSupport?: VMAttributeSupport;
-
-  @extension("x-ms-identifiers", [])
-  @doc("The local storage disk types specified as a list. If gpuSupport is Excluded, this VMAttribute can not be used.")
-  localStorageDiskType?: Array<LocalStorageDiskType>;
-
+  
   @doc("The range of local storage in GB specified from Min to Max.")
-  localStorageInGB?: VMAttributeMinMax;
-
+  localStorageInGB?: VMAttributeMinMaxDouble;
+ 
   @extension("x-ms-identifiers", [])
-  @doc("The local storage disk types specified as a list.")
+  @doc("""
+  The local storage disk types specified as a list. LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
+  If localStorageSupport is "Excluded", this VMAttribute can not be used.
+  """)
   localStorageDiskTypes?: Array<LocalStorageDiskType>;
 
   @doc("The range of data disk count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
-  dataDiskCount?: VMAttributeMinMax;
+  dataDiskCount?: VMAttributeMinMaxInteger;
 
   @doc("The range of network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
-  networkInterfaceCount?: VMAttributeMinMax;
+  networkInterfaceCount?: VMAttributeMinMaxInteger;
 
   @doc("The range of network bandwidth in Mbps specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
-  networkBandwidthInMbps?: VMAttributeMinMax;
+  networkBandwidthInMbps?: VMAttributeMinMaxDouble;
 
   @doc("Specifies whether the VMSize supporting RDMA (Remote Direct Memory Access) should be used to build Fleet or not.")
   rdmaSupport?: VMAttributeSupport;
 
   @doc("The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
-  rdmaNetworkInterfaceCount?: VMAttributeMinMax;
+  rdmaNetworkInterfaceCount?: VMAttributeMinMaxInteger;
 
-  @doc("Specifies whether the VMSize supporting GPU should be used to build Fleet or not.")
-  gpuSupport?: VMAttributeSupport;
+  @doc("Specifies whether the VMSize supporting accelerator should be used to build Fleet or not.")
+  acceleratorSupport?: VMAttributeSupport;
 
   @extension("x-ms-identifiers", [])
-  @doc("The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are ANY of the valid values.")
-  gpuManufacturers?: Array<GpuManufacturer>;
+  @doc("The accelerator manufacturers specified as a list. acceleratorSupport should be set to Included or Required to use this VMAttribute.")
+  acceleratorManufacturers?: Array<AcceleratorManufacturer>;
+
+  @extension("x-ms-identifiers", [])
+  @doc("The accelerator types specified as a list. acceleratorSupport should be set to Included or Required to use this VMAttribute.")
+  acceleratorTypes?: Array<AcceleratorType>;
+
+  @doc("The range of accelerator count specified from min to max.. Optional parameter. Either Min or Max is required if specified.")
+  acceleratorCount?: VMAttributeMinMaxInteger;
+
 
   @extension("x-ms-identifiers", [])
   @doc("The VM category specified as a list. Optional parameter.")

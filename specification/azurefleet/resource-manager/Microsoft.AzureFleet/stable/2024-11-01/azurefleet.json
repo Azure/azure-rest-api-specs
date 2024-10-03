@@ -468,6 +468,60 @@
     }
   },
   "definitions": {
+    "AcceleratorManufacturer": {
+      "type": "string",
+      "description": "Accelerator manufacturers supported by Azure VMs.",
+      "enum": [
+        "AMD",
+        "Nvidia",
+        "Xilinx"
+      ],
+      "x-ms-enum": {
+        "name": "AcceleratorManufacturer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD GpuType"
+          },
+          {
+            "name": "Nvidia",
+            "value": "Nvidia",
+            "description": "Nvidia GpuType"
+          },
+          {
+            "name": "Xilinx",
+            "value": "Xilinx",
+            "description": "Xilinx GpuType"
+          }
+        ]
+      }
+    },
+    "AcceleratorType": {
+      "type": "string",
+      "description": "Accelerator types supported by Azure VMs.",
+      "enum": [
+        "GPU",
+        "FPGA"
+      ],
+      "x-ms-enum": {
+        "name": "AcceleratorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GPU",
+            "value": "GPU",
+            "description": "GPU Accelerator"
+          },
+          {
+            "name": "FPGA",
+            "value": "FPGA",
+            "description": "FPGA Accelerator"
+          }
+        ]
+      }
+    },
     "AdditionalCapabilities": {
       "type": "object",
       "description": "AdditionalCapabilities for VM.",
@@ -810,10 +864,12 @@
     },
     "CpuManufacturer": {
       "type": "string",
-      "description": "Architecture types supported by Azure VMs.",
+      "description": "Cpu Manufacturers  supported by Azure VMs.",
       "enum": [
         "Intel",
-        "AMD"
+        "AMD",
+        "Microsoft",
+        "Ampere"
       ],
       "x-ms-enum": {
         "name": "CpuManufacturer",
@@ -828,6 +884,16 @@
             "name": "AMD",
             "value": "AMD",
             "description": "AMD CPU."
+          },
+          {
+            "name": "Microsoft",
+            "value": "Microsoft",
+            "description": "Microsoft CPU."
+          },
+          {
+            "name": "Ampere",
+            "value": "Ampere",
+            "description": "Ampere CPU."
           }
         ]
       }
@@ -1229,36 +1295,6 @@
           "$ref": "#/definitions/FleetProperties",
           "description": "RP-specific updatable properties"
         }
-      }
-    },
-    "GpuManufacturer": {
-      "type": "string",
-      "description": "Gpu manufacturers supported by Azure VMs.",
-      "enum": [
-        "Intel",
-        "AMD",
-        "Nvidia"
-      ],
-      "x-ms-enum": {
-        "name": "GpuManufacturer",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Intel",
-            "value": "Intel",
-            "description": "Intel GpuType"
-          },
-          {
-            "name": "AMD",
-            "value": "AMD",
-            "description": "AMD GpuType"
-          },
-          {
-            "name": "Nvidia",
-            "value": "Nvidia",
-            "description": "Nvidia GpuType"
-          }
-        ]
       }
     },
     "IPVersion": {
@@ -2347,7 +2383,25 @@
         }
       }
     },
-    "VMAttributeMinMax": {
+    "VMAttributeMinMaxDouble": {
+      "type": "object",
+      "description": "VMAttributes using double values.",
+      "properties": {
+        "min": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum value. default 0. Double.MinValue()",
+          "minimum": 0
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum value. Double.MaxValue(1.7976931348623157E+308)",
+          "maximum": 1.7976931348623157e+308
+        }
+      }
+    },
+    "VMAttributeMinMaxInteger": {
       "type": "object",
       "description": "While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.",
       "properties": {
@@ -2360,7 +2414,7 @@
         "max": {
           "type": "integer",
           "format": "int32",
-          "description": "Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.",
+          "description": "Max VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.",
           "maximum": 4294967295
         }
       }
@@ -2400,47 +2454,43 @@
       "description": "VMAttributes that will be used to filter VMSizes which will be used to build Fleet.",
       "properties": {
         "vCpuCount": {
-          "$ref": "#/definitions/VMAttributeMinMax",
+          "$ref": "#/definitions/VMAttributeMinMaxInteger",
           "description": "The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
         },
-        "memoryInMiB": {
-          "$ref": "#/definitions/VMAttributeMinMax",
+        "memoryInGiB": {
+          "$ref": "#/definitions/VMAttributeMinMaxDouble",
+          "description": "The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
+        },
+        "memoryInGiBPerVCpu": {
+          "$ref": "#/definitions/VMAttributeMinMaxDouble",
           "description": "The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
         },
         "localStorageSupport": {
           "$ref": "#/definitions/VMAttributeSupport",
           "description": "Specifies whether the VMSize supporting local storage should be used to build Fleet or not."
         },
-        "localStorageDiskType": {
-          "type": "array",
-          "description": "The local storage disk types specified as a list. If gpuSupport is Excluded, this VMAttribute can not be used.",
-          "items": {
-            "$ref": "#/definitions/LocalStorageDiskType"
-          },
-          "x-ms-identifiers": []
-        },
         "localStorageInGB": {
-          "$ref": "#/definitions/VMAttributeMinMax",
+          "$ref": "#/definitions/VMAttributeMinMaxDouble",
           "description": "The range of local storage in GB specified from Min to Max."
         },
         "localStorageDiskTypes": {
           "type": "array",
-          "description": "The local storage disk types specified as a list.",
+          "description": "The local storage disk types specified as a list. LocalStorageSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf localStorageSupport is \"Excluded\", this VMAttribute can not be used.",
           "items": {
             "$ref": "#/definitions/LocalStorageDiskType"
           },
           "x-ms-identifiers": []
         },
         "dataDiskCount": {
-          "$ref": "#/definitions/VMAttributeMinMax",
+          "$ref": "#/definitions/VMAttributeMinMaxInteger",
           "description": "The range of data disk count specified from Min to Max. Optional parameter. Either Min or Max is required if specified."
         },
         "networkInterfaceCount": {
-          "$ref": "#/definitions/VMAttributeMinMax",
+          "$ref": "#/definitions/VMAttributeMinMaxInteger",
           "description": "The range of network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified."
         },
         "networkBandwidthInMbps": {
-          "$ref": "#/definitions/VMAttributeMinMax",
+          "$ref": "#/definitions/VMAttributeMinMaxDouble",
           "description": "The range of network bandwidth in Mbps specified from Min to Max. Optional parameter. Either Min or Max is required if specified."
         },
         "rdmaSupport": {
@@ -2448,20 +2498,32 @@
           "description": "Specifies whether the VMSize supporting RDMA (Remote Direct Memory Access) should be used to build Fleet or not."
         },
         "rdmaNetworkInterfaceCount": {
-          "$ref": "#/definitions/VMAttributeMinMax",
+          "$ref": "#/definitions/VMAttributeMinMaxInteger",
           "description": "The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified."
         },
-        "gpuSupport": {
+        "acceleratorSupport": {
           "$ref": "#/definitions/VMAttributeSupport",
-          "description": "Specifies whether the VMSize supporting GPU should be used to build Fleet or not."
+          "description": "Specifies whether the VMSize supporting accelerator should be used to build Fleet or not."
         },
-        "gpuManufacturers": {
+        "acceleratorManufacturers": {
           "type": "array",
-          "description": "The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are ANY of the valid values.",
+          "description": "The accelerator manufacturers specified as a list. acceleratorSupport should be set to Included or Required to use this VMAttribute.",
           "items": {
-            "$ref": "#/definitions/GpuManufacturer"
+            "$ref": "#/definitions/AcceleratorManufacturer"
           },
           "x-ms-identifiers": []
+        },
+        "acceleratorTypes": {
+          "type": "array",
+          "description": "The accelerator types specified as a list. acceleratorSupport should be set to Included or Required to use this VMAttribute.",
+          "items": {
+            "$ref": "#/definitions/AcceleratorType"
+          },
+          "x-ms-identifiers": []
+        },
+        "acceleratorCount": {
+          "$ref": "#/definitions/VMAttributeMinMaxInteger",
+          "description": "The range of accelerator count specified from min to max.. Optional parameter. Either Min or Max is required if specified."
         },
         "vmCategories": {
           "type": "array",
@@ -2502,7 +2564,7 @@
       },
       "required": [
         "vCpuCount",
-        "memoryInMiB"
+        "memoryInGiB"
       ]
     },
     "VMCategory": {
@@ -2514,7 +2576,8 @@
         "MemoryOptimized",
         "StorageOptimized",
         "GpuAccelerated",
-        "FpgaAccelerated"
+        "FpgaAccelerated",
+        "HighPerformanceCompute"
       ],
       "x-ms-enum": {
         "name": "VMCategory",
@@ -2549,6 +2612,11 @@
             "name": "FpgaAccelerated",
             "value": "FpgaAccelerated",
             "description": "FPGA optimized VM sizes are specialized virtual machines available with single or multiple FPGA. \nThese sizes are designed for compute-intensive workloads. This article provides information about the number and type of FPGA, vCPUs, data disks, and NICs. \nStorage throughput and network bandwidth are also included for each size in this grouping."
+          },
+          {
+            "name": "HighPerformanceCompute",
+            "value": "HighPerformanceCompute",
+            "description": "Azure High Performance Compute VMs are optimized for various HPC workloads such as computational fluid dynamics, finite element analysis, frontend and backend EDA, \nrendering, molecular dynamics, computational geoscience, weather simulation, and financial risk analysis."
           }
         ]
       }
