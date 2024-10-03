@@ -9,6 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get repository permissions for user
+        id: repo-permissions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            
+
       # Allow bot account 'azure-sdk' to update protected files.
       # Since check is required, the job itself cannot be skipped.
       - name: Allow bot account 'azure-sdk'
