@@ -88,14 +88,6 @@ union AnalyzeTextLROTaskKind {
   /** Abstractive summarization task */
   @added(Versions.v2023_04_01)
   AbstractiveSummarization: "AbstractiveSummarization",
-
-  /** Custom sentiment analysis task */
-  @added(Versions.v2023_11_15_preview)
-  CustomSentimentAnalysis: "CustomSentimentAnalysis",
-
-  /** Custom abstractive summarization task */
-  @added(Versions.v2023_11_15_preview)
-  CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
 }
 
 /** The kind of the response object returned by the analyze-text task. */
@@ -163,14 +155,6 @@ union AnalyzeTextLROResultsKind {
   /** Abstractive summarization LRO results */
   @added(Versions.v2023_04_01)
   AbstractiveSummarizationLROResults: "AbstractiveSummarizationLROResults",
-
-  /** Custom sentiment analysis LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomSentimentAnalysisLROResults: "CustomSentimentAnalysisLROResults",
-
-  /** Custom abstractive summarization LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomAbstractiveSummarizationLROResults: "CustomAbstractiveSummarizationLROResults",
 }
 
 /** Collection of input documents to be analyzed by the service. */

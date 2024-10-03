@@ -19,7 +19,7 @@ model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** (Optional) If provided, the query will be used to extract most relevant sentences from the document. */
-  @added(Versions.v2024_11_01)
+  @added(Versions.v2024_11_15_preview)
   query?: string;
 }
 
@@ -40,7 +40,7 @@ model ExtractiveSummarizationResult is PreBuiltResult {
   /** Response by document */
   @added(Versions.v2023_04_01)
   @typeChangedFrom(
-    Versions.v2024_11_01,
+    Versions.v2024_11_15_preview,
     Array<ExtractedSummaryDocumentResult>
   )
   documents: Array<ExtractedSummaryDocumentResultWithDetectedLanguage>;
@@ -116,7 +116,7 @@ model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
 
   /** (Optional) If provided, the query will be used to generate the summary. */
-  @added(Versions.v2024_11_01)
+  @added(Versions.v2024_11_15_preview)
   query?: string;
 }
 
@@ -137,7 +137,7 @@ model AbstractiveSummarizationResultBase {
   /** Response by document */
   @added(Versions.v2023_04_01)
   @typeChangedFrom(
-    Versions.v2024_11_01,
+    Versions.v2024_11_15_preview,
     Array<AbstractiveSummaryDocumentResult>
   )
   documents: Array<AbstractiveSummaryDocumentResultWithDetectedLanguage>;
@@ -171,40 +171,4 @@ model AbstractiveSummary {
 
   /** The context list of the summary. */
   contexts?: Array<SummaryContext>;
-}
-
-/** An object representing the task definition for an Custom Abstractive Summarization task. */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_11_15_preview)
-model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
-  /** The Custom Abstractive Summarization kind of the long running task. */
-  kind: AnalyzeTextLROTaskKind.CustomAbstractiveSummarization;
-
-  /** Parameters for the Custom Abstractive Summarization task. */
-  parameters: CustomAbstractiveSummarizationTaskParameters;
-}
-
-/** Supported parameters for the Custom Abstractive Summarization task. */
-@added(Versions.v2023_11_15_preview)
-model CustomAbstractiveSummarizationTaskParameters
-  is AbstractiveSummarizationTaskParametersBase {
-  ...CustomTaskParameters;
-}
-
-/** An object representing the results for an Custom Abstractive Summarization task. */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_11_15_preview)
-model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
-  /** Kind of the task. */
-  kind: AnalyzeTextLROResultsKind.CustomAbstractiveSummarizationLROResults;
-
-  /** Results of the task. */
-  results: CustomAbstractiveSummarizationResult;
-}
-
-/** An object representing the custom summarization results of each document. */
-@added(Versions.v2023_11_15_preview)
-model CustomAbstractiveSummarizationResult
-  is AbstractiveSummarizationResultBase {
-  ...CustomResult;
 }

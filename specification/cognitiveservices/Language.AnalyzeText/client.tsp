@@ -1010,10 +1010,6 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AbstractiveSummaryActionResult",
   "csharp"
 );
-@@clientName(CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
-  "CustomHealthcareActionResult",
-  "csharp"
-);
 @@clientName(CustomLabelClassificationResultWithDocumentDetectedLanguage,
   "CustomLabelClassificationActionResult",
   "csharp"
