@@ -357,9 +357,10 @@ interface SolutionConfigurations {
   listByWidget is ArmResourceListAtScope<SolutionConfiguration>;
 
   @doc("Trigger immediate sync with source cloud")
-  syncNow is ArmResourceActionNoResponseContentAsync<
+  syncNow is ArmResourceActionAsync<
     SolutionConfiguration,
-    void
+    void,
+    Azure.ResourceManager.Foundations.OperationStatusResult
   >;
 }
 
