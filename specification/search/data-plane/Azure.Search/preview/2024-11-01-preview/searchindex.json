@@ -469,6 +469,15 @@
             }
           },
           {
+            "name": "semanticQuery",
+            "in": "query",
+            "type": "string",
+            "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "queryRewrites",
             "in": "query",
             "type": "string",
@@ -534,15 +543,6 @@
               ]
             },
             "description": "Enables a debugging tool that can be used to further explore your search results.",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
-            "name": "semanticQuery",
-            "in": "query",
-            "type": "string",
-            "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
