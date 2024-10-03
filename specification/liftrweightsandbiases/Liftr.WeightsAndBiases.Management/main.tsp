@@ -34,22 +34,22 @@ enum Versions {
 union Region {
   string,
 
-  @doc("eastus region")
+  @doc("Region: East US")
   eastus: "eastus",
 
-  @doc("centralus region")
+  @doc("Region: Central US")
   centralus: "centralus",
 
-  @doc("westus region")
+  @doc("Region: West US")
   westus: "westus",
 
-  @doc("westeurope region")
+  @doc("Region: West Europe")
   westeurope: "westeurope",
 
-  @doc("japaneast region")
+  @doc("Region: Japan East")
   japaneast: "japaneast",
 
-  @doc("koreacentral region")
+  @doc("Region: Korea Central")
   koreacentral: "koreacentral",
 }
 
