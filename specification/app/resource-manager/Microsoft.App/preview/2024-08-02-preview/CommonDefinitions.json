@@ -1615,7 +1615,7 @@
       }
     },
     "ManagedHttpRoutePatch": {
-      "description": "A managed http route to update",
+      "description": "A Http Route Config to update",
       "type": "object",
       "properties": {
         "tags": {
@@ -1637,7 +1637,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Certificate resource specific properties",
+          "description": "Http Route Config properties",
           "type": "object",
           "properties": {
             "provisioningState": {
@@ -1683,7 +1683,7 @@
       "x-ms-client-flatten": true
     },
     "CustomDomain": {
-      "description": "Custom Domain of a Container App",
+      "description": "Custom Domain of a Http Route Config",
       "type": "object",
       "required": [
         "name"
@@ -1784,7 +1784,7 @@
       }
     },
     "HttpRoute": {
-      "description": "Custom container configuration.",
+      "description": "Http Routes configuration, including paths to match on and whether or not rewrites are to be done.",
       "type": "object",
       "properties": {
         "match": {
@@ -1812,7 +1812,7 @@
           ]
         },
         "routes": {
-          "description": "Targets- container apps, revisions, labels",
+          "description": "Routing configuration that will allow matches on specific paths/headers.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HttpRoute"
