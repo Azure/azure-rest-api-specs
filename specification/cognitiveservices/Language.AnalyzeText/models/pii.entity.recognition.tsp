@@ -32,12 +32,33 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_15_preview)
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  /** Character to be used for redaction. Default in '*'. */
-  @added(Versions.v2023_11_15_preview)
-  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
+  @added(Versions.v2024_11_15_preview)
+  redactionPolicy?: RedactionPolicy; 
+}
+
+@added(Versions.v2024_11_15_preview)
+model RedactionPolicy {
+  policyKind?: redactionPolicyKind.maskWithRedactionCharacter;
+
+  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk
+}
+
+/** Kinds of redaction policies supported. */
+@added(Versions.v2024_11_15_preview)
+union redactionPolicyKind {
+  string,
+
+  /** Represents DoNotRedact */
+  doNotRedact: "doNotRedact",
+
+  /** Represents MaskWithRedactionCharacter */
+  maskWithRedactionCharacter : "maskWithRedactionCharacter",
+
+  /** Represents MaskWithEntityType */
+  MaskWithEntityType : "maskWithEntityType",
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
@@ -65,7 +86,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 model PiiResult is PreBuiltResult {
   /** Response by document */
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
+    Versions.v2024_11_15_preview,
     Array<PiiEntitiesDocumentResult>
   )
   documents: Array<PiiResultWithDetectedLanguage>;
@@ -192,6 +213,7 @@ union PiiCategoriesExclude {
   BENationalNumber: "BENationalNumber",
 
   /** BE National Number V2 */
+  @removed(Versions.v2024_11_15_preview)
   BENationalNumberV2: "BENationalNumberV2",
 
   /** BE Value Added Tax Number */
@@ -243,6 +265,7 @@ union PiiCategoriesExclude {
   HRNationalIDNumber: "HRNationalIDNumber",
 
   /** HR Personal Identification Number */
+  @removed(Versions.v2024_11_15_preview)
   HRPersonalIdentificationNumber: "HRPersonalIdentificationNumber",
 
   /** HR Personal Identification OIB Number V2 */
@@ -258,12 +281,14 @@ union PiiCategoriesExclude {
   CZPersonalIdentityNumber: "CZPersonalIdentityNumber",
 
   /** CZ Personal Identity V2 */
+  @removed(Versions.v2024_11_15_preview)
   CZPersonalIdentityV2: "CZPersonalIdentityV2",
 
   /** DK Personal Identification Number */
   DKPersonalIdentificationNumber: "DKPersonalIdentificationNumber",
 
   /** DK Personal Identification V2 */
+  @removed(Versions.v2024_11_15_preview)
   DKPersonalIdentificationV2: "DKPersonalIdentificationV2",
 
   /** Drug Enforcement Agency Number */
@@ -300,6 +325,7 @@ union PiiCategoriesExclude {
   FINationalID: "FINationalID",
 
   /** FI National ID V2 */
+  @removed(Versions.v2024_11_15_preview)
   FINationalIDV2: "FINationalIDV2",
 
   /** FI Passport Number */
@@ -345,6 +371,7 @@ union PiiCategoriesExclude {
   GRNationalIDCard: "GRNationalIDCard",
 
   /** GR National ID V2 */
+  @removed(Versions.v2024_11_15_preview)
   GRNationalIDV2: "GRNationalIDV2",
 
   /** GR Tax Identification Number */
@@ -378,6 +405,7 @@ union PiiCategoriesExclude {
   IEPersonalPublicServiceNumber: "IEPersonalPublicServiceNumber",
 
   /** IE Personal Public Service Number V2 */
+  @removed(Versions.v2024_11_15_preview)
   IEPersonalPublicServiceNumberV2: "IEPersonalPublicServiceNumberV2",
 
   /** IL Bank Account Number */
@@ -444,6 +472,7 @@ union PiiCategoriesExclude {
   NLCitizensServiceNumber: "NLCitizensServiceNumber",
 
   /** NL Citizens Service Number V2 */
+  @removed(Versions.v2024_11_15_preview)
   NLCitizensServiceNumberV2: "NLCitizensServiceNumberV2",
 
   /** NL Tax Identification Number */
@@ -495,6 +524,7 @@ union PiiCategoriesExclude {
   PTCitizenCardNumber: "PTCitizenCardNumber",
 
   /** PT Citizen Card Number V2 */
+  @removed(Versions.v2024_11_15_preview)
   PTCitizenCardNumberV2: "PTCitizenCardNumberV2",
 
   /** PT Tax Identification Number */
@@ -546,6 +576,7 @@ union PiiCategoriesExclude {
   SENationalID: "SENationalID",
 
   /** SE National ID V2 */
+  @removed(Versions.v2024_11_15_preview)
   SENationalIDV2: "SENationalIDV2",
 
   /** SE Passport Number */
