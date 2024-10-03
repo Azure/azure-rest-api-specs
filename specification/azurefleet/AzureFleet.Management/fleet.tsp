@@ -327,7 +327,7 @@ union VMCategory {
   
   @doc("""
   Azure High Performance Compute VMs are optimized for various HPC workloads such as computational fluid dynamics, finite element analysis, frontend and backend EDA, 
-  rendering, molecular dynamics, computational geoscience, weather simulation, and financial risk analysis.
+  rendering, molecular dynamics, computational geo science, weather simulation, and financial risk analysis.
   """)
   HighPerformanceCompute: "HighPerformanceCompute",
 }
