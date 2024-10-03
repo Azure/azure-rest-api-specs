@@ -250,7 +250,6 @@ model VMAttributeMinMaxInteger {
   @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
   min?: int32;
 
-  @maxValue(4294967295)
   @doc("Max VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
   max?: int32;
 }
@@ -482,14 +481,13 @@ model VMAttributes {
 @doc("Represents the profile for a single additional location in the Fleet. The location and the virtualMachineProfileOverride (optional).")
 model LocationProfile {
   @doc("""
-    The ARM location name of the additional region. An override for the base virtual machine profile specific to this region. 
-    This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
+    The ARM location name of the additional region.
     """)
   location?: string;
 
   @doc("""
-    Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile". 
-    An override for the base virtual machine profile specific to this region. This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
+    An override for computeProfile.baseVirtualMachineProfile specific to this region. 
+    This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
     """)
   virtualMachineProfileOverride?: BaseVirtualMachineProfile;
 }
