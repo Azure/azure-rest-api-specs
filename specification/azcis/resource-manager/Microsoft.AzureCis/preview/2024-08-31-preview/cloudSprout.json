@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure CIS FRP",
-    "version": "2024-06-11-preview",
+    "version": "2024-08-31-preview",
     "description": "CloudSprout Service",
     "x-typespec-generated": [
       {
@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "PublishConfigValues"
+      "name": "SharedConfigValues"
     }
   ],
   "paths": {
@@ -74,8 +74,8 @@
           }
         },
         "x-ms-examples": {
-          "List Operations PublishConfigValue": {
-            "$ref": "./examples/PublishConfigValues_Operations.json"
+          "List Operations SharedConfigValues": {
+            "$ref": "./examples/SharedConfigValues_Operations.json"
           }
         },
         "x-ms-pageable": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/publishConfigValues": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/sharedConfigValues": {
       "get": {
-        "operationId": "PublishConfigValues_ListBySubscription",
+        "operationId": "SharedConfigValues_ListBySubscription",
         "tags": [
-          "PublishConfigValues"
+          "SharedConfigValues"
         ],
-        "description": "List PublishConfigValuesResource resources by subscription ID",
+        "description": "List SharedConfigValuesResource resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PublishConfigValuesResourceListResult"
+              "$ref": "#/definitions/SharedConfigValuesResourceListResult"
             }
           },
           "default": {
@@ -113,8 +113,8 @@
           }
         },
         "x-ms-examples": {
-          "ListBySubscription PublishConfigValue": {
-            "$ref": "./examples/PublishConfigValues_ListBySubscription.json"
+          "ListBySubscription SharedConfigValues": {
+            "$ref": "./examples/SharedConfigValues_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -122,13 +122,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/publishConfigValues": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/sharedConfigValues": {
       "get": {
-        "operationId": "PublishConfigValues_ListByResourceGroup",
+        "operationId": "SharedConfigValues_ListByResourceGroup",
         "tags": [
-          "PublishConfigValues"
+          "SharedConfigValues"
         ],
-        "description": "List PublishConfigValuesResource resources by resource group",
+        "description": "List SharedConfigValuesResource resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PublishConfigValuesResourceListResult"
+              "$ref": "#/definitions/SharedConfigValuesResourceListResult"
             }
           },
           "default": {
@@ -155,8 +155,8 @@
           }
         },
         "x-ms-examples": {
-          "ListByResourceGroup PublishConfigValue": {
-            "$ref": "./examples/PublishConfigValues_ListByResourceGroup.json"
+          "ListByResourceGroup SharedConfigValues": {
+            "$ref": "./examples/SharedConfigValues_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -164,13 +164,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/publishConfigValues/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/sharedConfigValues/{resourceName}": {
       "get": {
-        "operationId": "PublishConfigValues_Get",
+        "operationId": "SharedConfigValues_Get",
         "tags": [
-          "PublishConfigValues"
+          "SharedConfigValues"
         ],
-        "description": "Get a PublishConfigValuesResource",
+        "description": "Get a SharedConfigValuesResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -194,7 +194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PublishConfigValuesResource"
+              "$ref": "#/definitions/SharedConfigValuesResource"
             }
           },
           "default": {
@@ -205,17 +205,17 @@
           }
         },
         "x-ms-examples": {
-          "Get PublishConfigValue": {
-            "$ref": "./examples/PublishConfigValues_Get.json"
+          "Get SharedConfigValues": {
+            "$ref": "./examples/SharedConfigValues_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "PublishConfigValues_CreateOrUpdate",
+        "operationId": "SharedConfigValues_CreateOrUpdate",
         "tags": [
-          "PublishConfigValues"
+          "SharedConfigValues"
         ],
-        "description": "Create a PublishConfigValuesResource",
+        "description": "Create a SharedConfigValuesResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -240,21 +240,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PublishConfigValuesResource"
+              "$ref": "#/definitions/SharedConfigValuesResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PublishConfigValuesResource' update operation succeeded",
+            "description": "Resource 'SharedConfigValuesResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PublishConfigValuesResource"
+              "$ref": "#/definitions/SharedConfigValuesResource"
             }
           },
           "201": {
-            "description": "Resource 'PublishConfigValuesResource' create operation succeeded",
+            "description": "Resource 'SharedConfigValuesResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PublishConfigValuesResource"
+              "$ref": "#/definitions/SharedConfigValuesResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -276,19 +276,97 @@
           }
         },
         "x-ms-examples": {
-          "Create PublishConfigValue": {
-            "$ref": "./examples/PublishConfigValues_CreateOrUpdate.json"
+          "Create SharedConfigValues": {
+            "$ref": "./examples/SharedConfigValues_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SharedConfigValues_Delete",
+        "tags": [
+          "SharedConfigValues"
+        ],
+        "description": "Delete a SharedConfigValuesResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete SharedConfigValues": {
+            "$ref": "./examples/SharedConfigValues_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "PublishConfigValuesProvisioningState": {
+    "Scope": {
+      "type": "object",
+      "description": "GeoScope. Optional.",
+      "properties": {
+        "geoType": {
+          "type": "string",
+          "description": "GeoType. The valid value is Cloud."
+        },
+        "geoValue": {
+          "type": "string",
+          "description": "The GeoValue for the specified GeoType. If GeoType is Cloud, GeoValue is the applicable cloud name for the Moniker value."
+        }
+      },
+      "required": [
+        "geoType",
+        "geoValue"
+      ]
+    },
+    "SharedConfigValuesProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
       "enum": [
@@ -298,7 +376,7 @@
         "Accepted"
       ],
       "x-ms-enum": {
-        "name": "PublishConfigValuesProvisioningState",
+        "name": "SharedConfigValuesProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -325,12 +403,12 @@
       },
       "readOnly": true
     },
-    "PublishConfigValuesResource": {
+    "SharedConfigValuesResource": {
       "type": "object",
-      "description": "publishConfigValues Resource",
+      "description": "sharedConfigValues Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PublishConfigValuesResourceProperties",
+          "$ref": "#/definitions/SharedConfigValuesResourceProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -340,15 +418,15 @@
         }
       ]
     },
-    "PublishConfigValuesResourceListResult": {
+    "SharedConfigValuesResourceListResult": {
       "type": "object",
-      "description": "The response of a PublishConfigValuesResource list operation.",
+      "description": "The response of a SharedConfigValuesResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PublishConfigValuesResource items on this page",
+          "description": "The SharedConfigValuesResource items on this page",
           "items": {
-            "$ref": "#/definitions/PublishConfigValuesResource"
+            "$ref": "#/definitions/SharedConfigValuesResource"
           }
         },
         "nextLink": {
@@ -361,39 +439,39 @@
         "value"
       ]
     },
-    "PublishConfigValuesResourceProperties": {
+    "SharedConfigValuesResourceProperties": {
       "type": "object",
-      "description": "PublishConfigValuesResource properties",
+      "description": "SharedConfigValuesResource properties",
       "properties": {
-        "publishValues": {
+        "sharedValues": {
           "type": "array",
-          "description": "The array of config whose value needs to be published.",
+          "description": "The array of config values needs to be published or consumed.",
           "items": {
-            "$ref": "#/definitions/PublishValue"
+            "$ref": "#/definitions/SharedValue"
           },
           "x-ms-identifiers": []
         },
         "cloudSproutEnv": {
           "type": "string",
-          "description": "CloudSprout environment to publish the value to. Optional."
+          "description": "CloudSprout environment to publish or consume the value to. Optional."
         },
         "provisioningState": {
-          "$ref": "#/definitions/PublishConfigValuesProvisioningState",
+          "$ref": "#/definitions/SharedConfigValuesProvisioningState",
           "description": "Resource Provisioning state",
           "readOnly": true
         }
       },
       "required": [
-        "publishValues"
+        "sharedValues"
       ]
     },
-    "PublishValue": {
+    "SharedValue": {
       "type": "object",
-      "description": "The config whose value needs to be published.",
+      "description": "The config whose value needs to be published or consumed.",
       "properties": {
         "moniker": {
           "type": "string",
-          "description": "The unique name in CloudSprout whose value needs to be published."
+          "description": "The unique name in CloudSprout whose value needs to be published or consumed."
         },
         "value": {
           "type": "string",
@@ -405,26 +483,7 @@
         }
       },
       "required": [
-        "moniker",
-        "value"
-      ]
-    },
-    "Scope": {
-      "type": "object",
-      "description": "Scope. Optional.",
-      "properties": {
-        "geoType": {
-          "type": "string",
-          "description": "GeoType. The valid value is Cloud."
-        },
-        "geoValue": {
-          "type": "string",
-          "description": "The GeoValue for the specified GeoType. If GeoType is Cloud, GeoValue is the applicable cloud name for the Moniker value."
-        }
-      },
-      "required": [
-        "geoType",
-        "geoValue"
+        "moniker"
       ]
     }
   },

@@ -1,5 +1,5 @@
 import "./versions.tsp";
-import "./publishConfigValues.tsp";
+import "./sharedConfigValues.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -15,7 +15,7 @@ namespace Microsoft.AzureCis;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning status of the resource.")
-union PublishConfigValuesProvisioningState {
+union SharedConfigValuesProvisioningState {
   string,
   ResourceProvisioningState,
 
