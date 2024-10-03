@@ -386,7 +386,7 @@ model MultiLanguageInput {
 }
 
 /** Defines the detected language for the document. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model DocumentDetectedLanguage {
   /** If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document. */
   detectedLanguage?: DetectedLanguage;
