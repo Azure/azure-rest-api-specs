@@ -262,7 +262,6 @@ model VMAttributeMinMaxDouble {
   @doc("Minimum value. default 0. Double.MinValue()")
   min?: float64;
 
-  @maxValue(1.7976931348623157e+308)
   @doc("Maximum value. Double.MaxValue(1.7976931348623157E+308)")
   max?: float64;
 }
