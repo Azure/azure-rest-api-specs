@@ -1,0 +1,36 @@
+{
+  "operationId": "ConversationalAnalysisAuthoring_GetExportResult",
+  "title": "Successful Get Export Result",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "projectName": "SampleProject",
+    "jobId": "job12345"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "projectFileVersion": "1.0.0",
+        "stringIndexType": "Utf16CodeUnit",
+        "metadata": {
+          "projectKind": "Conversation",
+          "projectName": "SampleProject",
+          "language": "en",
+          "settings": {
+            "confidenceThreshold": 0.8,
+            "normalizeCasing": true,
+            "augmentDiacritics": false
+          },
+          "storageInputContainerName": "project-container",
+          "multilingual": false,
+          "description": "Sample project description"
+        },
+        "assets": {
+          "projectKind": "Conversation"
+        }
+      }
+    }
+  }
+}

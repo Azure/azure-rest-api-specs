@@ -1,0 +1,21 @@
+parameters:
+  "service-dir":
+    default: "sdk/cognitivelanguage/authoring/analyzeconversations"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Language/{version-status}/{version}/analyzeconversations-authoring.json"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.Language.Authoring.Analyzeconversations"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.AI.Language.Authoring.Analyzeconversations"
+    flavor: azure
