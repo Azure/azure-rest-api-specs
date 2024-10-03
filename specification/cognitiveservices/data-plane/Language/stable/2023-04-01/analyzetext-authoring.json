@@ -75,35 +75,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectsMetadata"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -117,6 +102,9 @@
           "SuccessfulListProjects": {
             "$ref": "./examples/SuccessfulListProjects.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -131,7 +119,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -172,7 +160,8 @@
             "in": "path",
             "description": "The new project name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 100
           },
           {
             "name": "body",
@@ -1905,6 +1894,28 @@
         "message"
       ]
     },
+    "PagedTextAnalysisAuthoringProjectMetadata": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringProjectMetadata items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringProjectMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "TextAnalysisAuthoringConfusionMatrix": {
       "type": "object",
       "additionalProperties": {
@@ -3247,7 +3258,8 @@
         },
         "projectName": {
           "type": "string",
-          "description": "The new project name."
+          "description": "The new project name.",
+          "maxLength": 100
         },
         "multilingual": {
           "type": "boolean",
@@ -3337,27 +3349,6 @@
           "description": "The list of projects.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "TextAnalysisAuthoringProjectsMetadata": {
-      "type": "object",
-      "description": "Represents a list of retrieved projects' metadata.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
           },
           "x-ms-identifiers": []
         },
@@ -3780,6 +3771,34 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -205,25 +205,21 @@ model TextAnalysisAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
 
   /**
    * Represents the project last modification datetime.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime: utcDateTime;
 
   /**
    * Represents the project last training datetime.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime?: utcDateTime;
 
   /**
    * Represents the project last deployment datetime.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 
   /**
@@ -246,6 +242,7 @@ model TextAnalysisAuthoringProjectMetadata {
    */
   @key("projectName")
   @visibility
+  @maxLength(100)
   projectName: string;
 
   /**
@@ -462,7 +459,6 @@ model TextAnalysisAuthoringCopyProjectOptions {
   /**
    * The expiration of the access token.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiresAt: utcDateTime;
 
   /**
@@ -574,19 +570,16 @@ model TextAnalysisAuthoringJobState {
   /**
    * The creation date time of the job.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
 
   /**
    * The last date time the job was updated.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime: utcDateTime;
 
   /**
    * The expiration date time of the job.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationDateTime?: utcDateTime;
 
   /**
@@ -652,13 +645,11 @@ model TextAnalysisAuthoringProjectDeployment {
   /**
    * Represents deployment last trained time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime: utcDateTime;
 
   /**
    * Represents deployment last deployed time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime: utcDateTime;
 
   /**

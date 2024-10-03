@@ -14,60 +14,27 @@ using TypeSpec.Versioning;
 
 namespace Language.Authoring.Text;
 
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
+
 interface TextAnalysisAuthoring {
   /**
    * Lists the existing projects.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects")
-  @get
-  listProjects is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringProjectsMetadata,
-    {},
-    ErrorResponse
+  listProjects is languageOperations.ResourceList<
+    TextAnalysisAuthoringProjectMetadata,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}")
-  @get
-  getProject is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-    },
-    TextAnalysisAuthoringProjectMetadata,
-    {},
-    ErrorResponse
-  >;
+  getProject is languageOperations.ResourceRead<TextAnalysisAuthoringProjectMetadata>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
-  //@pollingOperation(Widgets.getWidgetOperationStatus)
   @createsOrUpdatesResource(TextAnalysisAuthoringProjectMetadata)
   @parameterVisibility
   @patch
@@ -111,28 +78,15 @@ interface TextAnalysisAuthoring {
    * Generates a copy project operation authorization to the current target Azure
    * resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/:authorize-copy")
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
   @post
   @added(Versions.v2023_04_15_preview)
-  copyProjectAuthorization is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The copy project authorization info.
-       */
-      @body
-      body: TextAnalysisAuthoringCopyAuthorizationOptions;
-    },
-    TextAnalysisAuthoringCopyProjectOptions,
-    {},
-    ErrorResponse
+  @actionSeparator("/:")
+  @action("authorize-copy")
+  copyProjectAuthorization is languageOperations.ResourceAction<
+    TextAnalysisAuthoringProjectMetadata,
+    TextAnalysisAuthoringCopyAuthorizationOptions,
+    TextAnalysisAuthoringCopyProjectOptions
   >;
 
   /**
