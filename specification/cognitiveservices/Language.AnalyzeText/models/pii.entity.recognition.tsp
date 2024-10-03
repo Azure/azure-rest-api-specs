@@ -107,7 +107,8 @@ union PiiDomain {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntitiesDocumentResult is DocumentResult {
   /** Returns redacted text. */
-  redactedText: string;
+  @typeChangedFrom(Versions.v2024_11_15_preview, redactedText: string)
+  redactedText?: string;
 
   /** Recognized entities in the document. */
   entities: Array<Entity>;
