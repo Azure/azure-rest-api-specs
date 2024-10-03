@@ -218,7 +218,19 @@
             }
           },
           "202": {
-            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -262,7 +274,19 @@
             "description": "The cluster was successfully deleted."
           },
           "202": {
-            "description": "The cluster delete operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The cluster delete operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "204": {
             "description": "The cluster was successfully deleted."
@@ -560,7 +584,19 @@
             }
           },
           "202": {
-            "description": "The database update operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The database update operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -652,7 +688,19 @@
             "description": "Successfully deleted the database."
           },
           "202": {
-            "description": "The database delete operation started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The database delete operation started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "204": {
             "description": "Successfully deleted the database."
@@ -763,7 +811,19 @@
             }
           },
           "202": {
-            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -822,7 +882,19 @@
             "description": "Import operation succeeded."
           },
           "202": {
-            "description": "The import operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The import operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -881,7 +953,19 @@
             "description": "Export operation succeeded."
           },
           "202": {
-            "description": "Export operation successfully enqueued; follow the Location header to poll for final outcome."
+            "description": "Export operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1188,8 +1272,20 @@
             "description": "Force unlink operation succeeded. The unlinked database must be deleted before it can be recreated and linked again."
           },
           "202": {
-            "description": "Force unlink operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome."
-          },
+            "description": "Force unlink operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+		  },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2029,6 +2125,7 @@
   "parameters": {
     "ClusterNameParameter": {
       "name": "clusterName",
+      "pattern": "^[A-Za-z0-9]{1,60}$",
       "in": "path",
       "required": true,
       "type": "string",
@@ -2037,6 +2134,7 @@
     },
     "DatabaseNameParameter": {
       "name": "databaseName",
+      "pattern": "^[A-Za-z0-9]{1,60}$",
       "in": "path",
       "required": true,
       "type": "string",
