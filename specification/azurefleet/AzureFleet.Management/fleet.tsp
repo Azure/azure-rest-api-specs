@@ -257,8 +257,7 @@ model VMAttributeMinMaxInteger {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxDouble which does not follow camel casing"
 @added(Versions.v2024_11_01)
 @doc("VMAttributes using double values.")
-model VMAttributeMinMaxDouble{
-
+model VMAttributeMinMaxDouble {
   @minValue(0.0)
   @doc("Minimum value. default 0. Double.MinValue()")
   min?: float64;
@@ -324,11 +323,11 @@ union VMCategory {
     Storage throughput and network bandwidth are also included for each size in this grouping.
     """)
   FpgaAccelerated: "FpgaAccelerated",
-  
+
   @doc("""
-  Azure High Performance Compute VMs are optimized for various HPC workloads such as computational fluid dynamics, finite element analysis, frontend and backend EDA, 
-  rendering, molecular dynamics, computational geo science, weather simulation, and financial risk analysis.
-  """)
+    Azure High Performance Compute VMs are optimized for various HPC workloads such as computational fluid dynamics, finite element analysis, frontend and backend EDA, 
+    rendering, molecular dynamics, computational geo science, weather simulation, and financial risk analysis.
+    """)
   HighPerformanceCompute: "HighPerformanceCompute",
 }
 
@@ -413,18 +412,18 @@ model VMAttributes {
 
   @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
   memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
-  
+
   @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
   localStorageSupport?: VMAttributeSupport;
-  
+
   @doc("The range of local storage in GB specified from Min to Max.")
   localStorageInGB?: VMAttributeMinMaxDouble;
- 
+
   @extension("x-ms-identifiers", [])
   @doc("""
-  The local storage disk types specified as a list. LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
-  If localStorageSupport is "Excluded", this VMAttribute can not be used.
-  """)
+    The local storage disk types specified as a list. LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If localStorageSupport is "Excluded", this VMAttribute can not be used.
+    """)
   localStorageDiskTypes?: Array<LocalStorageDiskType>;
 
   @doc("The range of data disk count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
@@ -455,7 +454,6 @@ model VMAttributes {
 
   @doc("The range of accelerator count specified from min to max.. Optional parameter. Either Min or Max is required if specified.")
   acceleratorCount?: VMAttributeMinMaxInteger;
-
 
   @extension("x-ms-identifiers", [])
   @doc("The VM category specified as a list. Optional parameter.")
