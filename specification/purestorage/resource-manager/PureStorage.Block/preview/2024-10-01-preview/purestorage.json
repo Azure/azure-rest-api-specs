@@ -439,76 +439,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/changePlan": {
-      "post": {
-        "operationId": "Reservations_ChangePlan",
-        "tags": [
-          "Reservations"
-        ],
-        "description": "Change the marketplace plan of the reservation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "reservationName",
-            "in": "path",
-            "description": "The name of the reservation.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "changePlanParameters",
-            "in": "body",
-            "description": "The payload containing change plan parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LiftrBase.MarketplacePlanUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource Operation accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/getResourceLimits": {
       "post": {
         "operationId": "Reservations_GetResourceLimits",
@@ -2401,11 +2331,6 @@
           "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
-        },
         "provisionedLimit": {
           "type": "integer",
           "format": "int64",
@@ -2994,19 +2919,6 @@
       },
       "required": [
         "offerDetails"
-      ]
-    },
-    "LiftrBase.MarketplacePlanUpdate": {
-      "type": "object",
-      "description": "Marketplace plan details",
-      "properties": {
-        "planId": {
-          "type": "string",
-          "description": "The plan id to change to."
-        }
-      },
-      "required": [
-        "planId"
       ]
     },
     "LiftrBase.MarketplaceSubscriptionStatus": {

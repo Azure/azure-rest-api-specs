@@ -63,6 +63,7 @@ interface Reservations
   ): ArmResponse<LimitDetails> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @added(Versions.v2_preview)
   @doc("Change the marketplace plan of the reservation.")
   @armResourceAction(Reservation)
@@ -768,6 +769,7 @@ model AvsStorageContainerProperties {
   @visibility("read")
   resourceName: string;
 
+  @removed(Versions.v4_preview)
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;

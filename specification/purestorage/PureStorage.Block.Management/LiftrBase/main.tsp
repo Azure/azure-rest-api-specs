@@ -63,6 +63,7 @@ model MarketplaceDetails {
   offerDetails: OfferDetails;
 }
 
+@removed(Versions.v4_preview)
 @added(Versions.v2_preview)
 @doc("Marketplace plan details")
 model MarketplacePlanUpdate {
