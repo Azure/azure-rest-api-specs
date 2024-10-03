@@ -247,7 +247,7 @@
       "type": "object",
       "description": "Maintenance schedule entry for a managed environment.",
       "properties": {
-        "dayOfWeek": {
+        "weekDay": {
           "type": "string",
           "description": "Day of the week when a managed environment can be patched.",
           "enum": [
@@ -262,7 +262,7 @@
             "Weekend"
           ],
           "x-ms-enum": {
-            "name": "DayOfWeek",
+            "name": "WeekDay",
             "modelAsString": false
           }
         },
@@ -278,7 +278,7 @@
         }
       },
       "required": [
-        "dayOfWeek",
+        "weekDay",
         "startHourUtc"
       ]
     },
