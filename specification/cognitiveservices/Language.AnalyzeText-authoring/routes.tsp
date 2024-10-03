@@ -12,7 +12,7 @@ using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.Authoring;
+namespace Language.Authoring.Text;
 
 interface TextAnalysisAuthoring {
   /**

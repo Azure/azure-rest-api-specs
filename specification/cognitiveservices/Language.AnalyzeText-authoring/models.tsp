@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Language.Authoring;
+namespace Language.Authoring.Text;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 union TextAnalysisAuthoringProjectKind {
