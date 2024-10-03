@@ -789,19 +789,6 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 
-@@clientName(CustomAbstractiveSummarizationLROTask,
-  "CustomAbstractiveSummarizationOperationAction",
-  "csharp"
-);
-@@clientName(CustomAbstractiveSummarizationLROTask.parameters,
-  "ActionContent",
-  "csharp"
-);
-@@clientName(CustomAbstractiveSummarizationTaskParameters,
-  "CustomAbstractiveSummarizationActionContent",
-  "csharp"
-);
-
 @@clientName(PiiLROTask, "PiiOperationAction", "csharp");
 @@clientName(PiiLROTask.parameters, "ActionContent", "csharp");
 
@@ -848,16 +835,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(CustomEntitiesLROTask.parameters, "ActionContent", "csharp");
 @@clientName(CustomEntitiesTaskParameters,
   "CustomEntitiesActionContent",
-  "csharp"
-);
-
-@@clientName(CustomHealthcareLROTask,
-  "CustomHealthcareOperationAction",
-  "csharp"
-);
-@@clientName(CustomHealthcareLROTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomHealthcareTaskParameters,
-  "CustomHealthcareActionContent",
   "csharp"
 );
 
@@ -916,23 +893,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AbstractiveSummarizationOperationResults",
   "csharp"
 );
-@@clientName(AnalyzeTextLROResultsKind.CustomHealthcareLROResults,
-  "CustomHealthcareOperationResults",
-  "csharp"
-);
-@@clientName(AnalyzeTextLROResultsKind.CustomSentimentAnalysisLROResults,
-  "CustomSentimentAnalysisOperationResults",
-  "csharp"
-);
-@@clientName(AnalyzeTextLROResultsKind.CustomAbstractiveSummarizationLROResults,
-  "CustomAbstractiveSummarizationOperationResults",
-  "csharp"
-);
 
-@@clientName(CustomAbstractiveSummarizationLROResult,
-  "CustomAbstractiveSummarizationOperationResult",
-  "csharp"
-);
 @@clientName(AbstractiveSummarizationLROResult,
   "AbstractiveSummarizationOperationResult",
   "csharp"
@@ -970,10 +931,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(CustomEntityRecognitionLROResult,
   "CustomEntityRecognitionOperationResult",
-  "csharp"
-);
-@@clientName(CustomHealthcareLROResult,
-  "CustomHealthcareOperationResult",
   "csharp"
 );
 
