@@ -36,15 +36,6 @@ input-file:
   - Microsoft.AzureCis/stable/2023-08-22/plannedQuota.json
 ```
 
-### Tag: 2024-06-11-preview
-
-These settings apply only when `--tag=2024-06-11-preview` is specified on the command line.
-
-```yaml $(tag) == '2024-06-11-preview'
-input-file:
-  - Microsoft.AzureCis/preview/2024-06-11-preview/cloudSprout.json
-```
-
 ### Tag: 2024-06-24-preview
 
 These settings apply only when `--tag=2024-06-24-preview` is specified on the command line.
@@ -56,6 +47,15 @@ input-file:
   - Microsoft.AzureCis/preview/2024-06-24-preview/environment.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
+```
+
+### Tag: 2024-08-31-preview
+
+These settings apply only when `--tag=2024-08-31-preview` is specified on the command line.
+
+```yaml $(tag) == '2024-08-31-preview'
+input-file:
+  - Microsoft.AzureCis/preview/2024-08-31-preview/cloudSprout.json
 ```
 
 ## Suppression

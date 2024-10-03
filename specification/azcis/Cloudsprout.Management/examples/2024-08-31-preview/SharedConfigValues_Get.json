@@ -1,20 +1,20 @@
 {
-  "title": "Get PublishConfigValue",
-  "operationId": "PublishConfigValues_Get",
+  "title": "Get SharedConfigValues",
+  "operationId": "SharedConfigValues_Get",
   "parameters": {
     "subscriptionId": "123e4567-e89b-12d3-a456-426614174000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "prodUSEastAzcis",
-    "api-version": "2024-06-11-preview"
+    "api-version": "2024-08-31-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/123e4567-e89b-12d3-a456-426614174000/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/publishConfigValues/prodUSEastAzcis",
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426614174000/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/sharedConfigValues/prodUSEastAzcis",
         "name": "prodUSEastAzcis",
-        "type": "Microsoft.AzureCis/publishConfigValues",
+        "type": "Microsoft.AzureCis/sharedConfigValues",
         "properties": {
-          "publishValues": [
+          "sharedValues": [
             {
               "moniker": "test_namespace_one.test_label_one",
               "value": "test_value_one",
@@ -32,7 +32,7 @@
               }
             }
           ],
-          "cloudSproutEnv": "Test"
+          "cloudSproutEnv": "Prod"
         }
       }
     }
