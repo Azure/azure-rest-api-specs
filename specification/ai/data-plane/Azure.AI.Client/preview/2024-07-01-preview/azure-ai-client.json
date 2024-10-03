@@ -13,27 +13,34 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+    "hostTemplate": "{endpoint}/{subscriptionId}/{resourceGroupName}/{workspaceName}",
     "useSchemePrefix": false,
     "parameters": [
       {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The Azure AI Studio project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.",
+        "required": true,
+        "type": "string"
+      },
+      {
         "name": "subscriptionId",
         "in": "path",
-        "description": "The ID of the target subscription.",
+        "description": "The Azure subscription ID.",
         "required": true,
         "type": "string"
       },
       {
         "name": "resourceGroupName",
         "in": "path",
-        "description": "The name of the Resource Group.",
+        "description": "The name of the Azure Resource Group.",
         "required": true,
         "type": "string"
       },
       {
         "name": "workspaceName",
         "in": "path",
-        "description": "The name of the workspace (Azure AI Studio hub).",
+        "description": "The name of the Azure AI Studio hub.",
         "required": true,
         "type": "string"
       }
