@@ -413,145 +413,122 @@
       "description": "The properties of the EA price sheet. Properties added with version 2023-09-01 are marked with *",
       "type": "object",
       "properties": {
-        "enrollmentNumber": {
+        "EnrollmentNumber": {
           "description": "Unique identifier for the EA billing account.",
           "type": "string",
-          "readOnly": true,
-          "name": "EnrollmentNumber"
+          "readOnly": true
         },
-        "serviceFamily": {
+        "ServiceFamily*": {
           "description": "Type of Azure service. For example, Compute, Analytics, and Security.",
           "type": "number",
-          "readOnly": true,
-          "name": "ServiceFamily*"
+          "readOnly": true
         },
-        "product": {
+        "Product*": {
           "description": "Name of the product accruing the charges.",
           "type": "string",
-          "readOnly": true,
-          "name": "Product*"        
+          "readOnly": true
         },
-        "productId": {
+        "ProductId*": {
           "description": "Unique identifier for the product whose meter is consumed.",
           "type": "string",
-          "readOnly": true,
-          "name": "ProductId*"
+          "readOnly": true
         },
-        "skuId": {
+        "SkuId*": {
           "description": "Unique identifier of the SKU",
           "type": "string",
-          "readOnly": true,
-          "name": "SkuId*"
+          "readOnly": true
         },
-        "unitOfMeasure": {
-          "description": "How usage is measured for the service. ** The field “Unit” has been removed with version 2023-09-01 as a duplicate of “UnitofMeasure”, please use the field “UnitOfMeasure”. ",
+        "UnitOfMeasure*¹": {
+          "description": "How usage is measured for the service. [1] The field “Unit” has been removed with version 2023-09-01 as a duplicate of “UnitofMeasure”, please use the field “UnitOfMeasure”. ",
           "type": "string",
-          "readOnly": true,
-          "name": "UnitOfMeasure**"
+          "readOnly": true
         },
-        "meterId": {
+        "MeterId": {
           "description": "Unique identifier of the meter ",
           "type": "string",
-          "readOnly": true,
-          "name": "MeterId"
+          "readOnly": true
         },
-        "meterName": {
+        "MeterName": {
           "description": "Name of the meter. The meter represents the deployable resource of an Azure service.",
           "type": "string",
-          "readOnly": true,
-          "name": "MeterName"
+          "readOnly": true
         },
-        "meterType": {
+        "MeterType*": {
           "description": "Name of the meter type",
           "type": "string",
-          "readOnly": true,
-          "name": "MeterType*"
+          "readOnly": true
         },
-        "offerId" :{
+        "OfferId*": {
           "description": "Determines the Azure offer associated with this meter. [Learn more about Azure offers] (https://azure.microsoft.com/en-us/support/legal/offer-details/)",
           "type": "string",
-          "readOnly": true,
-          "name": "OfferId*"
+          "readOnly": true
         },
-        "meterCategory": {
+        "MeterCategory": {
           "description": "Name of the classification category for the meter. For example, Cloud services, Networking, etc. ",
           "type": "string",
-          "readOnly": true,
-          "name": "MeterCategory"
+          "readOnly": true
         },
-        "meterSubCategory": {
+        "MeterSubCategory": {
           "description": "Name of the meter subclassification category.",
           "type": "string",
-          "readOnly": true,
-          "name": "MeterSubCategory"
+          "readOnly": true
         },
-        "meterRegion": {
+        "MeterRegion": {
           "description": "Name of the Azure region where the meter for the service is available.",
           "type": "string",
-          "readOnly": true,
-          "name": "MeterRegion"
+          "readOnly": true
         },
-        "effectiveStartDate": {
+        "EffectiveStartDate*": {
           "description": "Effective start date of the Price Sheet billing period",
           "type": "string",
           "format": "date-time",
-          "readOnly": true,
-          "name": "EffectiveEndDate*"
+          "readOnly": true
         },
-        "effectiveEndDate": {
+        "EffectiveEndDate*": {
           "description": "Effective end date of the Price Sheet billing period",
           "type": "string",
           "format": "date-time",
-          "readOnly": true,
-          "name": "EffectiveEndDate*"
+          "readOnly": true
         },
-        "unitPrice": {
+        "UnitPrice": {
           "description": "The per-unit price at the time of billing for a given product or service, inclusive of any negotiated discounts on top of the market price.\n\n For PriceType ReservedInstance, unit price reflects the total cost of the 1 or 3-year commitment including discounts.\n\n Note: The unit price isn't the same as the effective price in usage details downloads when services have differential prices across tiers.\n\n If services have multi-tiered pricing, the effective price is a blended rate across the tiers and doesn't show a tier-specific unit price. The blended price or effective price is the net price for the consumed quantity spanning across the multiple tiers (where each tier has a specific unit price).",
           "type": "string",
-          "readOnly": true,
-          "name": "UnitPrice"
+          "readOnly": true
         },
-        "basePrice": {
+        "BasePrice*": {
           "description": "The unit price at the time the customer signs on or the unit price at the time of service meter GA launch if it is after sign-on. May appear as null or 0 where not applicable. Base price is unavailable for ReservedInstance meters. ",
           "type": "string",
-          "readOnly": true,
-          "name": "BasePrice*"
+          "readOnly": true
         },
-        "marketPrice": {
+        "MarketPrice*": {
           "description": "The current list price for a given product or service. This price is without any negotiations and is based on your Microsoft Agreement type.\n\n For PriceType Consumption, market price is reflected as the pay-as-you-go price.\n\n For PriceType Savings Plan, market price reflects the Savings plan benefit on top of pay-as-you-go price for the corresponding commitment term.\n\n For PriceType ReservedInstance, market price reflects the total price of the 1 or 3-year commitment.\n\n Note: For EA customers with no negotiations, market price may appear rounded to a different decimal precision than unit price.",
           "type": "string",
-          "readOnly": true,
-          "name": "MarketPrice*"
+          "readOnly": true
         },
-        "includedQuantity": {
+        "IncludedQuantity*": {
           "description": "Quantities of a specific service to which an EA customer is entitled to consume without incremental charges.",
           "type": "string",
-          "readOnly": true,
-          "name": "IncludedQuantity*"
+          "readOnly": true
         },
-        "currencyCode": {
+        "CurrencyCode": {
           "description": "Currency in which the Enterprise Agreement was signed",
           "type": "string",
-          "readOnly": true,
-          "name": "CurrencyCode"
+          "readOnly": true
         },
-        "term": {
+        "Term": {
           "description": "Term length for Azure Savings Plan or Reservation term – one year or three years (P1Y or P3Y)",
           "type": "string",
-          "readOnly": true,
-          "name": "Term"
+          "readOnly": true
         },
-        "priceType": {
+        "PriceType*": {
           "description": "Price type for a product. For example, an Azure resource with a pay-as-you-go rate with priceType as Consumption. Other price types include ReservedInstance and Savings Plan.",
           "type": "string",
-          "readOnly": true,
-          "name": "PriceType*"
+          "readOnly": true
         },
-        "partNumber": {
+        "PartNumber": {
           "description": "Part number associated with the meter",
           "type": "string",
-          "readOnly": true,
-          "name": "PartNumber"
+          "readOnly": true
         }
       }
     }
