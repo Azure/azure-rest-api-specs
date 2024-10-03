@@ -89,10 +89,6 @@ union AnalyzeTextLROTaskKind {
   @added(Versions.v2023_04_01)
   AbstractiveSummarization: "AbstractiveSummarization",
 
-  /** Custom healthcare task */
-  @added(Versions.v2023_11_15_preview)
-  CustomHealthcare: "CustomHealthcare",
-
   /** Custom sentiment analysis task */
   @added(Versions.v2023_11_15_preview)
   CustomSentimentAnalysis: "CustomSentimentAnalysis",
@@ -168,10 +164,6 @@ union AnalyzeTextLROResultsKind {
   @added(Versions.v2023_04_01)
   AbstractiveSummarizationLROResults: "AbstractiveSummarizationLROResults",
 
-  /** Custom healthcare LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomHealthcareLROResults: "CustomHealthcareLROResults",
-
   /** Custom sentiment analysis LRO results */
   @added(Versions.v2023_11_15_preview)
   CustomSentimentAnalysisLROResults: "CustomSentimentAnalysisLROResults",
@@ -220,7 +212,7 @@ model AnalyzeTextJobsInput {
   tasks: Array<AnalyzeTextLROTask>;
 
   /** Default language to use for records requesting automatic language detection. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_15_preview)
   defaultLanguage?: string;
 }
 

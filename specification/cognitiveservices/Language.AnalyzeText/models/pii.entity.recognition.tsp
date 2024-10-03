@@ -116,17 +116,16 @@ model PiiEntityWithTags is Entity {
   mask?: string;
 
   /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”.*/
-  maskOffset?: int;
+  maskOffset?: int32;
 
   /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
-  maskLength?: int;
+  maskLength?: int32;
 }
 
 /** Contains the PII results. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntitiesDocumentResult is DocumentResult {
   /** Returns redacted text. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, redactedText: string)
   redactedText?: string;
 
   /** Recognized entities in the document. */
