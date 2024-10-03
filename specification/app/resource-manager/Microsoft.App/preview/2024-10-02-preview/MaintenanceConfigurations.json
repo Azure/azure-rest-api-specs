@@ -243,7 +243,7 @@
     }
   },
   "definitions": {
-    "ScheduleEntry": {
+    "ScheduledEntry": {
       "type": "object",
       "description": "Maintenance schedule entry for a managed environment.",
       "properties": {
@@ -282,22 +282,22 @@
         "startHourUtc"
       ]
     },
-    "ScheduleEntries": {
+    "ScheduledEntries": {
       "type": "object",
       "description": "List of maintenance schedules for a managed environment.",
       "properties": {
-        "scheduleEntries": {
-          "x-ms-client-name": "ScheduleEntries",
+        "scheduledEntries": {
+          "x-ms-client-name": "ScheduledEntries",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ScheduleEntry"
+            "$ref": "#/definitions/ScheduledEntry"
           },
           "x-ms-identifiers": [],
           "description": "List of maintenance schedules for a managed environment."
         }
       },
       "required": [
-        "scheduleEntries"
+        "scheduledEntries"
       ]
     },
     "MaintenanceConfigurationResource": {
@@ -310,7 +310,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ScheduleEntries",
+          "$ref": "#/definitions/ScheduledEntries",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
