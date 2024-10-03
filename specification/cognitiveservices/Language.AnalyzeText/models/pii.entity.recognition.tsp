@@ -103,6 +103,25 @@ union PiiDomain {
   none: "none",
 }
 
+/** Entity object with tags. */
+@added(Versions.v2024_11_15_preview)
+model PiiEntityWithTags is Entity {
+  /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
+  type: string;
+
+  /** List of entity tags. Tags are to express some similarities/affinity between entities. */
+  tags: Array<EntityTag>;
+
+  /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
+  mask?: string;
+
+  /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”.*/
+  maskOffset?: int;
+
+  /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
+  maskLength?: int;
+}
+
 /** Contains the PII results. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntitiesDocumentResult is DocumentResult {
@@ -111,7 +130,8 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText?: string;
 
   /** Recognized entities in the document. */
-  entities: Array<Entity>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, Array<Entity>)
+  entities: Array<PiiEntityWithTags>;
 }
 
 /** Contains the PII results with detected language. */
