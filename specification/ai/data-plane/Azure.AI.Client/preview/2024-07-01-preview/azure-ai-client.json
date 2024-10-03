@@ -13,13 +13,13 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{hostName}/{subscriptionId}/{resourceGroupName}/{workspaceName}",
+    "hostTemplate": "{endpoint}/{subscriptionId}/{resourceGroupName}/{workspaceName}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "hostName",
+        "name": "endpoint",
         "in": "path",
-        "description": "The Azure AI Studio project host name, in the format `<azure-region>.api.azureml.ms` or `<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.",
+        "description": "The Azure AI Studio project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.",
         "required": true,
         "type": "string"
       },

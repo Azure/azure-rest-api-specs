@@ -30,11 +30,11 @@ namespace Azure.AI {
   title: "Azure AI",
 })
 @server(
-  "https://{hostName}/{subscriptionId}/{resourceGroupName}/{workspaceName}",
+  "{endpoint}/{subscriptionId}/{resourceGroupName}/{workspaceName}",  // This URL is a placeholder only. It is not used by emitted SDKs. SDKs have custom code to contruct conneciton URLs for different operations.
   "Azure AI",
   {
-    @doc("The Azure AI Studio project host name, in the format `<azure-region>.api.azureml.ms` or `<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.")
-    hostName: string,
+    @doc("The Azure AI Studio project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.")
+    endpoint: string,
 
     @doc("The Azure subscription ID.")
     subscriptionId: string,
