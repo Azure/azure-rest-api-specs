@@ -53,10 +53,14 @@ enum Versions {
   /** Version 2023-04-01 */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",
-
-  /** Version 2023-11-15-preview */
+  
+  /** Version 2024-11-01 */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_11_15_preview: "2023-11-15-preview",
+  v2024_11_01: "2024-11-01",
+
+  /** Version 2024-11-15-preview */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_11_15_preview: "2024-11-15-preview",
 }
 
 alias ServiceTraits = NoRepeatableRequests &
