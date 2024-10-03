@@ -2258,6 +2258,18 @@
         "configFileName": {
           "type": "string",
           "description": "Optional. The name to assign the downloaded config file on the VM. This is limited to 4096 characters. If not specified, the config file will be named the Gallery Application name appended with \"_config\"."
+        },
+        "scriptBehaviorAfterReboot": {
+          "type": "string",
+          "description": "Optional. The action to be taken with regards to install/update/remove of the gallery application in the event of a reboot.",
+          "enum": [
+            "None",
+            "Rerun"
+          ],
+          "x-ms-enum": {
+            "name": "GalleryApplicationScriptRebootBehavior",
+            "modelAsString": true
+          }
         }
       },
       "description": "Additional settings for the VM app that contains the target package and config file name when it is deployed to target VM or VM scale set."
