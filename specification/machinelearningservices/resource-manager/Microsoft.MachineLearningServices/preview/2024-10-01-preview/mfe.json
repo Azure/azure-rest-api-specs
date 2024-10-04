@@ -13909,6 +13909,11 @@
       "description": "Asset output type.",
       "type": "object",
       "properties": {
+        "assetName": {
+          "description": "Output Asset Name.",
+          "type": "string",
+          "x-nullable": true
+        },
         "mode": {
           "description": "Output Asset Delivery Mode.",
           "default": "ReadWriteMount",
@@ -18775,7 +18780,7 @@
       "properties": {
         "model": {
           "description": "[Required] Input model for fine tuning.",
-          "$ref": "#/definitions/MLFlowModelJobInput"
+          "$ref": "#/definitions/JobInput"
         },
         "modelProvider": {
           "description": "[Required] Enum to determine the type of fine tuning.",
