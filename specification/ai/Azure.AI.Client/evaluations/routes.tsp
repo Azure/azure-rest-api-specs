@@ -11,62 +11,15 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Client.Evaluations;
+namespace Azure.AI.Client;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Creates an evaluation.")
-@route("/evaluations/create")
-@post
-op create is Azure.Core.Foundations.Operation<
-  {
-    @doc("Properties of Evaluation.")
-    @body
-    evaluation: Evaluation;
-  },
-  ResourceCreatedResponse<Evaluation>
->;
+alias ServiceTraits = SupportsRepeatableRequests &
+  SupportsConditionalRequests &
+  SupportsClientRequestId;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("List evaluations")
-@route("/evaluations")
-@get
-op list is Azure.Core.Foundations.Operation<
-  {
-    ...StandardListQueryParameters;
-  },
-  PagedEvaluation
->;
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Update an evaluation.")
-@route("/evaluations/{id}")
-@patch
-op update is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the evaluation.")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-    @maxLength(254)
-    @path
-    id: string;
+interface Evaluations {
+    getEvaluation is Operations.ResourceRead<Evaluation>;
+}
 
-    @doc("Update evaluation request.")
-    @body
-    updateRequest: UpdateEvaluationRequest;
-  },
-  OkResponse<Evaluation>
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Get an evaluation.")
-@route("/evaluations/{id}")
-@get
-op get is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the evaluation.")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-    @maxLength(254)
-    @path
-    id: string;
-  },
-  OkResponse<Evaluation>
->;

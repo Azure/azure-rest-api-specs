@@ -55,6 +55,7 @@ model Dataset extends InputData {
 }
 
 @doc("Evaluation Definition")
+@resource("evaluation")
 model Evaluation {
   @doc("Identifier of the evaluation.")
   id?: string;
