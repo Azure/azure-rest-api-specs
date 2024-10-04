@@ -1,0 +1,79 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-liftr-base";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using LiftrBase;
+
+/* Pilot.Samplerp Resource Provider management API. */
+@armProviderNamespace
+@service({
+  title: "Pilot.Samplerp management service",
+})
+@versioned(Pilot.Samplerp.Versions)
+namespace Pilot.Samplerp;
+
+interface Operations extends Azure.ResourceManager.Operations {}
+
+/** The available API versions. */
+enum Versions {
+  /** 2024-10-03-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2024_10_03_preview: "2024-10-03-preview",
+}
+
+@doc("Partner's specific Properties")
+model PartnerProperties{
+}
+
+/** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
+ * BaseResourceProperties contains Marketplace, useDetail related properties*/
+@doc("Properties specific to Organizations")
+model OrganizationsProperties is BaseResourceProperties {
+
+  @doc("partner properties")
+  partnerProperties?: PartnerProperties;
+}
+
+model OrganizationsResource is Azure.ResourceManager.TrackedResource<OrganizationsProperties> {
+  @key("organizationsname")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
+  @segment("organizations")
+  @minLength(1)
+  @maxLength(50)
+  @doc("Name of the Organizations resource")
+  @path
+  name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+/**
+ * The type used for update operations of the Organizations Resource.
+ */
+model OrganizationsResourceUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** Updatable managed service identity */
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+@armResourceOperations
+interface Organizations {
+  get is ArmResourceRead<OrganizationsResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationsResource>;
+  update is ArmCustomPatchSync<OrganizationsResource, OrganizationsResourceUpdate>;
+  delete is ArmResourceDeleteWithoutOkAsync<OrganizationsResource>;
+  listByResourceGroup is ArmResourceListByParent<OrganizationsResource>;
+  listBySubscription is ArmListBySubscription<OrganizationsResource>;
+}
