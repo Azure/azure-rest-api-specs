@@ -73,51 +73,6 @@
   },
   "tags": [],
   "paths": {
-    "/evalations/{id}": {
-      "get": {
-        "operationId": "Evaluations_Get",
-        "description": "Get an evalution.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the evaluation.",
-            "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/evaluations": {
       "get": {
         "operationId": "Evaluations_List",
@@ -158,18 +113,48 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Evaluations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
-          },
-          "Evaluations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Evaluations_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
     "/evaluations/{id}": {
+      "get": {
+        "operationId": "Evaluations_Get",
+        "description": "Get an evaluation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "operationId": "Evaluations_Update",
         "description": "Update an evaluation.",
@@ -215,11 +200,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Evaluations_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Evaluations_Update_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -260,20 +240,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Evaluations_Create_MaximumSet_Gen": {
-            "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
-          },
-          "Evaluations_Create_MinimumSet_Gen": {
-            "$ref": "./examples/Evaluations_Create_MinimumSet_Gen.json"
-          }
         }
       }
     }
   },
   "definitions": {
-    "AppInsight": {
+    "AppInsightsConfiguration": {
       "type": "object",
       "description": "Data Source for Application Insight.",
       "properties": {
@@ -292,7 +264,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Data"
+          "$ref": "#/definitions/InputData"
         }
       ],
       "x-ms-discriminator-value": "app_insights"
@@ -362,13 +334,17 @@
       "type": "object",
       "description": "Base Model and prompt for evaluation.",
       "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "Base model for evaluation."
+        "model_config": {
+          "type": "object",
+          "description": "Base model for evaluation.",
+          "additionalProperties": {
+            "additionalProperties": {},
+            "type": "object"
+          }
         },
         "prompt": {
           "type": "string",
-          "description": "System prompt to be used with base model."
+          "description": "System prompt to be used with base model. This property will hold prompt asset id."
         },
         "parameters": {
           "type": "object",
@@ -379,7 +355,7 @@
         }
       },
       "required": [
-        "endpoint",
+        "model_config",
         "prompt",
         "parameters"
       ],
@@ -390,31 +366,12 @@
       ],
       "x-ms-discriminator-value": "base_model"
     },
-    "Data": {
-      "type": "object",
-      "description": "Abstract data class.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Discriminator property for Data."
-        },
-        "id": {
-          "type": "string",
-          "description": "Data identifier."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type",
-        "id"
-      ]
-    },
     "Dataset": {
       "type": "object",
       "description": "Dataset as source for evaluation.",
       "allOf": [
         {
-          "$ref": "#/definitions/Data"
+          "$ref": "#/definitions/InputData"
         }
       ],
       "x-ms-discriminator-value": "dataset"
@@ -428,7 +385,7 @@
           "description": "Identifier of the evaluation."
         },
         "data": {
-          "$ref": "#/definitions/Data",
+          "$ref": "#/definitions/InputData",
           "description": "Data for evaluation."
         },
         "displayName": {
@@ -469,10 +426,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/EvaluatorConfiguration"
           }
-        },
-        "outputLocation": {
-          "type": "string",
-          "description": "Output location for the evaluation."
         },
         "evaluationTarget": {
           "$ref": "#/definitions/EvaluationTarget",
@@ -526,6 +479,25 @@
         }
       },
       "required": [
+        "id"
+      ]
+    },
+    "InputData": {
+      "type": "object",
+      "description": "Abstract data class.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for InputData."
+        },
+        "id": {
+          "type": "string",
+          "description": "Evaluation input data"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
         "id"
       ]
     },
@@ -589,6 +561,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
         }
       }
     }
