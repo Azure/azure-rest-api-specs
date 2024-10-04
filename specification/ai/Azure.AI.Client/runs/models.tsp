@@ -138,6 +138,7 @@ model ThreadRun {
   ...RequiredNullableMetadata;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis")
   @encodedName("application/json", "tool_resources")
   toolResources?: UpdateToolResourcesOptions | null;
 
@@ -359,6 +360,7 @@ model CreateAndRunThreadOptions {
 
   /** Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis")
   @encodedName("application/json", "tool_resources")
   toolResources?: UpdateToolResourcesOptions | null;
 

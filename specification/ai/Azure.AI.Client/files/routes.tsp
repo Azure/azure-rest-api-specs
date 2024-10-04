@@ -23,9 +23,11 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/files")
-op listFiles is Azure.Core.RpcOperation<
+op listFiles is Azure.Core.Foundations.Operation<
   {
-    @query purpose?: FilePurpose
+    @doc("The purpose of the file.")
+    @query
+    purpose?: FilePurpose;
   },
   FileListResponse
 >;
@@ -45,11 +47,18 @@ op listFiles is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
 @post
 @route("/files")
-op uploadFile is Azure.Core.RpcOperation<
+op uploadFile is Azure.Core.Foundations.Operation<
   {
-    @header contentType: "multipart/form-data",
-    @clientName("Data", "csharp") file: bytes,
-    purpose: FilePurpose,
+    @doc("The name of the file to upload.")
+    @header
+    contentType: "multipart/form-data";
+
+    @doc("The file data, in bytes.")
+    @clientName("Data", "csharp")
+    file: bytes;
+
+    @doc("The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
+    purpose: FilePurpose;
 
     /*
      * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
@@ -58,7 +67,8 @@ op uploadFile is Azure.Core.RpcOperation<
      *            file input, like curl does) but should remain configurable when using a stream or other data source
      *            lacking an a priori name.
      */
-    filename?: string
+    @doc("The name of the file.")
+    filename?: string;
   },
   OpenAIFile
 >;
@@ -69,12 +79,12 @@ op uploadFile is Azure.Core.RpcOperation<
 @delete
 @doc("Delete a previously uploaded file.")
 @route("/files/{fileId}")
-op deleteFile is Azure.Core.RpcOperation<
+op deleteFile is Azure.Core.Foundations.Operation<
   {
     @doc("The ID of the file to delete.")
     @encodedName("application/json", "file_id")
     @path
-    fileId: string
+    fileId: string;
   },
   FileDeletionStatus
 >;
@@ -86,12 +96,12 @@ op deleteFile is Azure.Core.RpcOperation<
 @get
 @route("/files/{fileId}")
 @doc("Returns information about a specific file. Does not retrieve file content.")
-op getFile is Azure.Core.RpcOperation<
+op getFile is Azure.Core.Foundations.Operation<
   {
     @doc("The ID of the file to retrieve.")
     @path
     @encodedName("application/json", "file_id")
-    fileId: string
+    fileId: string;
   },
   OpenAIFile
 >;
@@ -101,12 +111,12 @@ op getFile is Azure.Core.RpcOperation<
 @get
 @route("/files/{fileId}/content")
 @doc("Returns information about a specific file. Does not retrieve file content.")
-op getFileContent is Azure.Core.RpcOperation<
+op getFileContent is Azure.Core.Foundations.Operation<
   {
     @doc("The ID of the file to retrieve.")
     @path
     @encodedName("application/json", "file_id")
-    fileId: string
+    fileId: string;
   },
   FileContentResponse
 >;

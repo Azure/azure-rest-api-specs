@@ -19,20 +19,23 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/vector_stores/{vectorStoreId}/file_batches")
-op createVectorStoreFileBatch is Azure.Core.RpcOperation<
+op createVectorStoreFileBatch is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store for which to create a File Batch. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /** A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files. */
     @minItems(1)
     @maxItems(500)
     @encodedName("application/json", "file_ids")
-    fileIds: string[],
+    @doc("List of file identifiers.")
+    fileIds: string[];
 
     /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. */
     @encodedName("application/json", "chunking_strategy")
-    chunkingStrategy?: VectorStoreChunkingStrategyRequest
+    chunkingStrategy?: VectorStoreChunkingStrategyRequest;
   },
   VectorStoreFileBatch
 >;
@@ -45,13 +48,17 @@ op createVectorStoreFileBatch is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}")
-op getVectorStoreFileBatch is Azure.Core.RpcOperation<
+op getVectorStoreFileBatch is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store that the file batch belongs to. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /** The ID of the file batch being retrieved. */
-    @path batchId: string
+    @doc("Identifier of the file batch.")
+    @path
+    batchId: string;
   },
   VectorStoreFileBatch
 >;
@@ -64,13 +71,17 @@ op getVectorStoreFileBatch is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel")
-op cancelVectorStoreFileBatch is Azure.Core.RpcOperation<
+op cancelVectorStoreFileBatch is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store that the file batch belongs to. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /** The ID of the file batch to cancel. */
-    @path batchId: string
+    @doc("Identifier of the file batch.")
+    @path
+    batchId: string;
   },
   VectorStoreFileBatch
 >;
@@ -83,18 +94,22 @@ op cancelVectorStoreFileBatch is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/files")
-op listVectorStoreFileBatchFiles is Azure.Core.RpcOperation<
+op listVectorStoreFileBatchFiles is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store that the file batch belongs to. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /** The ID of the file batch that the files belong to. */
-    @path batchId: string,
+    @doc("Identifier of the file batch.")
+    @path
+    batchId: string;
 
     /** Filter by file status. */
-    @query filter?: VectorStoreFileStatusFilter,
+    @query filter?: VectorStoreFileStatusFilter;
 
-    ...OpenAIListRequestOptions
+    ...OpenAIListRequestOptions;
   },
   OpenAIPageableListOf<VectorStoreFile>
 >;

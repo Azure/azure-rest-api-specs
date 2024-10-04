@@ -19,15 +19,17 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/vector_stores/{vectorStoreId}/files")
-op listVectorStoreFiles is Azure.Core.RpcOperation<
+op listVectorStoreFiles is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store that the files belong to. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /** Filter by file status. */
-    @query filter?: VectorStoreFileStatusFilter,
+    @query filter?: VectorStoreFileStatusFilter;
 
-    ...OpenAIListRequestOptions
+    ...OpenAIListRequestOptions;
   },
   OpenAIPageableListOf<VectorStoreFile>
 >;
@@ -40,18 +42,21 @@ op listVectorStoreFiles is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/vector_stores/{vectorStoreId}/files")
-op createVectorStoreFile is Azure.Core.RpcOperation<
+op createVectorStoreFile is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store for which to create a File. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /** A File ID that the vector store should use. Useful for tools like `file_search` that can access files. */
+    @doc("Identifier of the file.")
     @encodedName("application/json", "file_id")
-    fileId: string,
+    fileId: string;
 
     /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. */
     @encodedName("application/json", "chunking_strategy")
-    chunkingStrategy?: VectorStoreChunkingStrategyRequest
+    chunkingStrategy?: VectorStoreChunkingStrategyRequest;
   },
   VectorStoreFile
 >;
@@ -64,13 +69,17 @@ op createVectorStoreFile is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/vector_stores/{vectorStoreId}/files/{fileId}")
-op getVectorStoreFile is Azure.Core.RpcOperation<
+op getVectorStoreFile is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store that the file belongs to. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /** The ID of the file being retrieved. */
-    @path fileId: string
+    @doc("Identifier of the file.")
+    @path
+    fileId: string;
   },
   VectorStoreFile
 >;
@@ -84,13 +93,17 @@ op getVectorStoreFile is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @route("/vector_stores/{vectorStoreId}/files/{fileId}")
-op deleteVectorStoreFile is Azure.Core.RpcOperation<
+op deleteVectorStoreFile is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store that the file belongs to. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /** The ID of the file to delete its relationship to the vector store. */
-    @path fileId: string
+    @doc("Identifier of the file.")
+    @path
+    fileId: string;
   },
   VectorStoreFileDeletionStatus
 >;

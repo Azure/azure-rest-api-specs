@@ -23,11 +23,19 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}/runs/{runId}/steps/{stepId}")
-op getRunStep is Azure.Core.RpcOperation<
+op getRunStep is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    @path runId: string,
-    @path stepId: string
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
+
+    @doc("Identifier of the run.")
+    @path
+    runId: string;
+
+    @doc("Identifier of the run step.")
+    @path
+    stepId: string;
   },
   RunStep
 >;
@@ -45,11 +53,17 @@ op getRunStep is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/runs/{runId}/steps")
-op listRunSteps is Azure.Core.RpcOperation<
+op listRunSteps is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    @path runId: string,
-    ...OpenAIListRequestOptions
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
+
+    @doc("Identifier of the run.")
+    @path
+    runId: string;
+
+    ...OpenAIListRequestOptions;
   },
   OpenAIPageableListOf<RunStep>
 >;

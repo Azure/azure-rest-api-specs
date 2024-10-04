@@ -5,10 +5,7 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Client.Agents {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
-  @@clientName(AgentDeletionStatus,
-    "InternalAgentDeletionStatus",
-    "csharp"
-  );
+  @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");
   @@access(deleteAgent, Access.internal, "csharp");
   @@clientName(deleteAgent, "InternalDeleteAgent", "csharp");
   @@access(deleteThread, Access.internal, "csharp");
@@ -248,7 +245,7 @@ namespace Azure.AI.Client.Agents {
 
   //@override(Azure.AI.Agents.createAgent, "java")
   //op createAgentCustomization(createAgentOptions: CreateAgentOptions): Agent;
-  
+
   //@@clientName(updateAgent::parameters.body,
   //  "updateAgentOptions",
   //  "java"

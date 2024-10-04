@@ -27,12 +27,14 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/messages")
-op createMessage is Azure.Core.RpcOperation<
+op createMessage is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
 
     /** A single message within an agent thread, as provided during that thread's creation for its initial state. */
-    ...ThreadMessageOptions
+    ...ThreadMessageOptions;
   },
   ThreadMessage
 >;
@@ -49,15 +51,17 @@ op createMessage is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/messages")
-op listMessages is Azure.Core.RpcOperation<
+op listMessages is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
 
     /** Filter messages by the run ID that generated them. */
     @query
-    runId?: string,
+    runId?: string;
 
-    ...OpenAIListRequestOptions
+    ...OpenAIListRequestOptions;
   },
   OpenAIPageableListOf<ThreadMessage>
 >;
@@ -75,10 +79,15 @@ op listMessages is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}/messages/{messageId}")
-op getMessage is Azure.Core.RpcOperation<
+op getMessage is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    @path messageId: string
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
+
+    @doc("Identifier of the message.")
+    @path
+    messageId: string;
   },
   ThreadMessage
 >;
@@ -95,11 +104,17 @@ op getMessage is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/messages/{messageId}")
-op updateMessage is Azure.Core.RpcOperation<
+op updateMessage is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    @path messageId: string,
-    ...OptionalNullableMetadata
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
+
+    @doc("Identifier of the message.")
+    @path
+    messageId: string;
+
+    ...OptionalNullableMetadata;
   },
   ThreadMessage
 >;

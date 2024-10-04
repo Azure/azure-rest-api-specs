@@ -19,12 +19,12 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads")
-op createThread is Azure.Core.RpcOperation<
+op createThread is Azure.Core.Foundations.Operation<
   {
     /**
      * The details used to create a new agent thread.
      */
-    ...AgentThreadCreationOptions
+    ...AgentThreadCreationOptions;
   },
   AgentThread
 >;
@@ -43,9 +43,11 @@ op createThread is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}")
-op getThread is Azure.Core.RpcOperation<
+op getThread is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
   },
   AgentThread
 >;
@@ -62,12 +64,12 @@ op getThread is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}")
-op updateThread is Azure.Core.RpcOperation<
+op updateThread is Azure.Core.Foundations.Operation<
   {
     /**
      * The details used to update an existing agent thread.
      */
-    ...UpdateAgentThreadOptions
+    ...UpdateAgentThreadOptions;
   },
   AgentThread
 >;
@@ -83,9 +85,11 @@ op updateThread is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @route("/threads/{threadId}")
-op deleteThread is Azure.Core.RpcOperation<
+op deleteThread is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
   },
   ThreadDeletionStatus
 >;

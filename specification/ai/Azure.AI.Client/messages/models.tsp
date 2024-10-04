@@ -382,8 +382,7 @@ model MessageDeltaTextFileCitationAnnotationObject {
 }
 
 /** Represents a streamed file path annotation applied to a streaming text content part. */
-model MessageDeltaTextFilePathAnnotation
-  extends MessageDeltaTextAnnotation {
+model MessageDeltaTextFilePathAnnotation extends MessageDeltaTextAnnotation {
   /** The type of the text content annotation, which is always "file_path." */
   type: "file_path";
 

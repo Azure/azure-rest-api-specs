@@ -20,9 +20,9 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/vector_stores")
-op listVectorStores is Azure.Core.RpcOperation<
+op listVectorStores is Azure.Core.Foundations.Operation<
   {
-    ...OpenAIListRequestOptions
+    ...OpenAIListRequestOptions;
   },
   OpenAIPageableListOf<VectorStore>
 >;
@@ -35,12 +35,12 @@ op listVectorStores is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/vector_stores")
-op createVectorStore is Azure.Core.RpcOperation<
+op createVectorStore is Azure.Core.Foundations.Operation<
   {
     /**
      * Request object for creating a vector store.
      */
-    ...VectorStoreOptions
+    ...VectorStoreOptions;
   },
   VectorStore
 >;
@@ -53,10 +53,12 @@ op createVectorStore is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/vector_stores/{vectorStoreId}")
-op getVectorStore is Azure.Core.RpcOperation<
+op getVectorStore is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store to retrieve. */
-    @path vectorStoreId: string
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
   },
   VectorStore
 >;
@@ -69,15 +71,17 @@ op getVectorStore is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/vector_stores/{vectorStoreId}")
-op modifyVectorStore is Azure.Core.RpcOperation<
+op modifyVectorStore is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store to modify. */
-    @path vectorStoreId: string,
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
 
     /**
      * Request object for updating a vector store.
      */
-    ...VectorStoreUpdateOptions
+    ...VectorStoreUpdateOptions;
   },
   VectorStore
 >;
@@ -90,10 +94,12 @@ op modifyVectorStore is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @route("/vector_stores/{vectorStoreId}")
-op deleteVectorStore is Azure.Core.RpcOperation<
+op deleteVectorStore is Azure.Core.Foundations.Operation<
   {
     /** The ID of the vector store to delete. */
-    @path vectorStoreId: string
+    @doc("Identifier of the vector store.")
+    @path
+    vectorStoreId: string;
   },
   VectorStoreDeletionStatus
 >;

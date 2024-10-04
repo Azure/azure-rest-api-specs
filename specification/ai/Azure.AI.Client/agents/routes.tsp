@@ -19,9 +19,9 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/assistants")
-op createAgent is Azure.Core.RpcOperation<
+op createAgent is Azure.Core.Foundations.Operation<
   {
-    ...CreateAgentOptions
+    ...CreateAgentOptions;
   },
   Agent
 >;
@@ -37,9 +37,9 @@ op createAgent is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/assistants")
-op listAgents is Azure.Core.RpcOperation<
+op listAgents is Azure.Core.Foundations.Operation<
   {
-    ...OpenAIListRequestOptions
+    ...OpenAIListRequestOptions;
   },
   OpenAIPageableListOf<Agent>
 >;
@@ -56,9 +56,11 @@ op listAgents is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/assistants/{agentId}")
-op getAgent is Azure.Core.RpcOperation<
+op getAgent is Azure.Core.Foundations.Operation<
   {
-    @path agentId: string
+    @doc("Identifier of the agent.")
+    @path
+    agentId: string;
   },
   Agent
 >;
@@ -74,12 +76,12 @@ op getAgent is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/assistants/{agentId}")
-op updateAgent is Azure.Core.RpcOperation<
+op updateAgent is Azure.Core.Foundations.Operation<
   {
     /**
      * The request details to use when modifying an existing agent.
      */
-    ...UpdateAgentOptions
+    ...UpdateAgentOptions;
   },
   Agent
 >;
@@ -95,9 +97,11 @@ op updateAgent is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @route("/assistants/{agentId}")
-op deleteAgent is Azure.Core.RpcOperation<
+op deleteAgent is Azure.Core.Foundations.Operation<
   {
-    @path agentId: string
+    @doc("Identifier of the agent.")
+    @path
+    agentId: string;
   },
   AgentDeletionStatus
 >;

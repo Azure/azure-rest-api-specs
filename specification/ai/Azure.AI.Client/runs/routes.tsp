@@ -27,14 +27,16 @@ namespace Azure.AI.Client.Agents;
 @post
 @route("/threads/{threadId}/runs")
 @doc("Creates a new run for an agent thread.")
-op createRun is Azure.Core.RpcOperation<
+op createRun is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
 
     /**
      * The details used when creating a new run of an agent thread.
      */
-    ...CreateRunOptions
+    ...CreateRunOptions;
   },
   ThreadRun
 >;
@@ -51,10 +53,13 @@ op createRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/runs")
-op listRuns is Azure.Core.RpcOperation<
+op listRuns is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    ...OpenAIListRequestOptions
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
+
+    ...OpenAIListRequestOptions;
   },
   OpenAIPageableListOf<ThreadRun>
 >;
@@ -72,10 +77,15 @@ op listRuns is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}/runs/{runId}")
-op getRun is Azure.Core.RpcOperation<
+op getRun is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    @path runId: string
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
+
+    @doc("Identifier of the run.")
+    @path
+    runId: string;
   },
   ThreadRun
 >;
@@ -92,11 +102,17 @@ op getRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/runs/{runId}")
-op updateRun is Azure.Core.RpcOperation<
+op updateRun is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    @path runId: string,
-    ...OptionalNullableMetadata
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
+
+    @doc("Identifier of the run.")
+    @path
+    runId: string;
+
+    ...OptionalNullableMetadata;
   },
   ThreadRun
 >;
@@ -115,16 +131,23 @@ op updateRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/runs/{runId}/submit_tool_outputs")
-op submitToolOutputsToRun is Azure.Core.RpcOperation<
+op submitToolOutputsToRun is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    @path runId: string,
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
 
+    @doc("Identifier of the run.")
+    @path
+    runId: string;
+
+    @doc("A list of tools for which the outputs are being submitted")
     @encodedName("application/json", "tool_outputs")
-    toolOutputs: ToolOutput[],
+    toolOutputs: ToolOutput[];
 
     #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-    stream?: boolean | null
+    @doc("If true, returns a stream of events that happen during the Run as server-sent events, terminating when the run enters a terminal state.")
+    stream?: boolean | null;
   },
   ThreadRun
 >;
@@ -141,10 +164,15 @@ op submitToolOutputsToRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/runs/{runId}/cancel")
-op cancelRun is Azure.Core.RpcOperation<
+op cancelRun is Azure.Core.Foundations.Operation<
   {
-    @path threadId: string,
-    @path runId: string
+    @doc("Identifier of the thread.")
+    @path
+    threadId: string;
+
+    @doc("Identifier of the run.")
+    @path
+    runId: string;
   },
   ThreadRun
 >;
@@ -160,12 +188,12 @@ op cancelRun is Azure.Core.RpcOperation<
 @post
 @route("/threads/runs")
 @doc("Creates a new agent thread and immediately starts a run using that new thread.")
-op createThreadAndRun is Azure.Core.RpcOperation<
+op createThreadAndRun is Azure.Core.Foundations.Operation<
   {
     /**
      * The details used when creating and immediately running a new agent thread.
      */
-    ...CreateAndRunThreadOptions
+    ...CreateAndRunThreadOptions;
   },
   ThreadRun
 >;
