@@ -347,7 +347,7 @@
               "readOnly": true
             },
             "customDomains": {
-              "description": "custom domain bindings for http Routes' hostnames.",
+              "description": "Custom domain bindings for http Routes' hostnames.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/CustomDomain"
@@ -396,7 +396,11 @@
         },
         "certificateId": {
           "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -436,7 +440,9 @@
         "weight": {
           "description": "Weighted routing",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "minimum":0,
+          "maximum":100
         }
       }
     },
