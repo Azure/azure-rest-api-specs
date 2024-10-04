@@ -66,6 +66,7 @@ input-file:
   - Microsoft.App/preview/2024-08-02-preview/SourceControls.json
   - Microsoft.App/preview/2024-08-02-preview/Subscriptions.json
   - Microsoft.App/preview/2024-08-02-preview/Usages.json
+  - Microsoft.App/preview/2024-08-02-preview/HttpRouteConfig.json
 ```
 
 ### Tag: package-preview-2024-02
