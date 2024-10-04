@@ -487,6 +487,7 @@ model DeploymentProperties {
   customProperties?: CustomProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 @summary("Custom Properties")
 @doc("The custom metadata defined for API catalog entities.")
 model CustomProperties {}
