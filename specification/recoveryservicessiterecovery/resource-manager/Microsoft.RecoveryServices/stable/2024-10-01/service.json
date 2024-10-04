@@ -5901,93 +5901,93 @@
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/addIdentity": {
-	  "post": {
-		"tags": [
-			"ReplicationProtectionContainerMapping"
-		],
-		"summary": "Adds identity to protection container mapping.",
-		"description": "The operation to add identity to a protection container mapping.",
-		"operationId": "ReplicationProtectionContainerMapping_AddIdentity",
-		"consumes": [
-			"application/json"
-		],
-		"produces": [
-			"application/json"
-		],
-		"parameters": [
-			{
-				"required": true,
-				"$ref": "#/parameters/ApiVersion"
-			},
-			{
-				"required": true,
-				"$ref": "#/parameters/ResourceName"
-			},
-			{
-				"required": true,
-				"$ref": "#/parameters/ResourceGroupName"
-			},
-			{
-				"required": true,
-				"$ref": "#/parameters/SubscriptionId"
-			},
-			{
-				"name": "fabricName",
-				"in": "path",
-				"description": "Fabric name.",
-				"required": true,
-				"type": "string"
-			},
-			{
-				"name": "protectionContainerName",
-				"in": "path",
-				"description": "Protection container name.",
-				"required": true,
-				"type": "string"
-			},
-			{
-				"name": "mappingName",
-				"in": "path",
-				"description": "Protection container mapping name.",
-				"required": true,
-				"type": "string"
-			},
-			{
-				"name": "addIdentityInput",
-				"in": "body",
-				"description": "Add identity input.",
-				"required": true,
-				"schema": {
-					"$ref": "#/definitions/ProtectionContainerMappingAddIdentityInput"
-				}
-			}
-		],
-		"responses": {
-			"200": {
-				"description": "OK",
-				"schema": {
-					"$ref": "#/definitions/ProtectionContainerMapping"
-				}
-			},
-			"202": {
-				"description": "Accepted"
-			},
-			"default": {
-				"description": "Automation error response describing why the operation failed.",
-				"schema": {
-					"$ref": "#/definitions/ServiceDefaultError"
-				}
-			}
-		},
-		"x-ms-long-running-operation": true,
-		"x-ms-examples": {
-			"Adds identity to protection container mapping.": {
-				"$ref": "./examples/ReplicationProtectionContainerMapping_AddIdentity.json"
-			}
-		}
-	  }
-	},
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/remove": {
+      "post": {
+        "tags": [
+          "ReplicationProtectionContainerMapping"
+        ],
+        "summary": "Adds identity to protection container mapping.",
+        "description": "The operation to add identity to a protection container mapping.",
+        "operationId": "ReplicationProtectionContainerMapping_AddIdentity",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "required": true,
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "required": true,
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "required": true,
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "required": true,
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "Protection container mapping name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addIdentityInput",
+            "in": "body",
+            "description": "Add identity input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainerMappingAddIdentityInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainerMapping"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Adds identity to protection container mapping.": {
+            "$ref": "./examples/ReplicationProtectionContainerMapping_AddIdentity.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/remove": {
       "post": {
         "tags": [
           "ReplicationProtectionContainerMappings"
@@ -14786,17 +14786,17 @@
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
     },
-	"HyperVReplicaAzureProtectionContainerMappingAddIdentityInput": {
-		"description": "HyperVReplicaAzure protection container mapping add identity input.",
-		"type": "object",
-		"allOf": [
-			{
-				"$ref": "#/definitions/ProtectionContainerMappingAddIdentityReplicationProviderSpecificInput"
-			}
-		],
-		"properties": {},
-		"x-ms-discriminator-value": "HyperVReplicaAzure"
-	},
+    "HyperVReplicaAzureProtectionContainerMappingAddIdentityInput": {
+      "description": "HyperVReplicaAzure protection container mapping add identity input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionContainerMappingAddIdentityReplicationProviderSpecificInput"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "HyperVReplicaAzure"
+    },
     "HyperVReplicaAzureReplicationDetails": {
       "description": "Hyper V Replica Azure provider specific settings.",
       "type": "object",
@@ -22276,37 +22276,37 @@
         }
       }
     },
-	"ProtectionContainerMappingAddIdentityInput": {
-		"description": "Protection container mapping add identity input.",
-		"type": "object",
-		"properties": {
-			"properties": {
-				"$ref": "#/definitions/ProtectionContainerMappingAddIdentityInputProperties",
-				"description": "Add identity protection container mapping input properties."
-			}
-		}
-	},
-	"ProtectionContainerMappingAddIdentityInputProperties": {
-		"description": "Protection container mapping add identity input properties.",
-		"type": "object",
-		"properties": {
-			"providerSpecificInput": {
-				"$ref": "#/definitions/ProtectionContainerMappingAddIdentityReplicationProviderSpecificInput",
-				"description": "Provider specific input for adding identity to container mapping."
-			}
-		}
-	},
+    "ProtectionContainerMappingAddIdentityInput": {
+      "description": "Protection container mapping add identity input.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProtectionContainerMappingAddIdentityInputProperties",
+          "description": "Add identity protection container mapping input properties."
+        }
+      }
+    },
+    "ProtectionContainerMappingAddIdentityInputProperties": {
+      "description": "Protection container mapping add identity input properties.",
+      "type": "object",
+      "properties": {
+        "providerSpecificInput": {
+          "$ref": "#/definitions/ProtectionContainerMappingAddIdentityReplicationProviderSpecificInput",
+          "description": "Provider specific input for adding identity to container mapping."
+        }
+      }
+    },
     "ProtectionContainerMappingAddIdentityReplicationProviderSpecificInput": {
-		"description": "Provider specific input for protection container mapping add identity operation.",
-		"type": "object",
-		"properties": {
-			"instanceType": {
-				"description": "The class type.",
-				"type": "string"
-			}
-		},
-		"discriminator": "instanceType"
-	},
+      "description": "Provider specific input for protection container mapping add identity operation.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
     "ProtectionContainerMappingCollection": {
       "description": "Protection container mapping collection class.",
       "type": "object",
