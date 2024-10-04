@@ -750,19 +750,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(SentimentAnalysisLROTask.parameters, "ActionContent", "csharp");
 
-@@clientName(CustomSentimentAnalysisLROTask,
-  "CustomSentimentAnalysisOperationAction",
-  "csharp"
-);
-@@clientName(CustomSentimentAnalysisLROTask.parameters,
-  "ActionContent",
-  "csharp"
-);
-@@clientName(CustomSentimentAnalysisTaskParameters,
-  "CustomSentimentAnalysisActionContent",
-  "csharp"
-);
-
 @@clientName(ExtractiveSummarizationLROTask,
   "ExtractiveSummarizationOperationAction",
   "csharp"
