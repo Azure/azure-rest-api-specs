@@ -613,7 +613,6 @@
           "MidConnections"
         ],
         "summary": "Recognize media from call.",
-        "description": "Recognize media from call.",
         "operationId": "CallMedia_Recognize",
         "parameters": [
           {
@@ -752,7 +751,6 @@
           "MidConnections"
         ],
         "summary": "Send dtmf tones.",
-        "description": "Send dtmf tones.",
         "operationId": "CallMedia_SendDtmfTones",
         "parameters": [
           {
@@ -863,7 +861,6 @@
           "MidConnections"
         ],
         "summary": "Hold participant from the call using identifier.",
-        "description": "Hold participant from the call using identifier.",
         "operationId": "CallMedia_Hold",
         "parameters": [
           {
@@ -910,7 +907,6 @@
           "MidConnections"
         ],
         "summary": "Unhold participants from the call using identifier.",
-        "description": "Unhold participants from the call using identifier.",
         "operationId": "CallMedia_Unhold",
         "parameters": [
           {
@@ -957,7 +953,6 @@
           "MidConnections"
         ],
         "summary": "Hold participant from the call using identifier.",
-        "description": "Hold participant from the call using identifier.",
         "operationId": "CallMedia_StartHoldMusic",
         "parameters": [
           {
@@ -1004,7 +999,6 @@
           "MidConnections"
         ],
         "summary": "Unhold participants from the call using identifier.",
-        "description": "Unhold participants from the call using identifier.",
         "operationId": "CallMedia_StopHoldMusic",
         "parameters": [
           {
@@ -1198,28 +1192,23 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Stop a dialog.",
-        "description": "Stop a dialog.",
         "operationId": "CallDialog_StopDialog",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
-            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
             "name": "dialogId",
             "in": "path",
-            "description": "The dialog id",
             "required": true,
             "type": "string"
           },
           {
             "name": "operationCallbackUri",
             "in": "query",
-            "description": "Operation callback URI.",
             "required": false,
             "type": "string"
           },
@@ -1709,6 +1698,242 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}/recordings": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Start recording the call.",
+        "operationId": "CallRecording_StartRecording",
+        "parameters": [
+          {
+            "name": "startCallRecording",
+            "in": "body",
+            "description": "The request body of start call recording request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartCallRecordingConnectionRequest"
+            }
+          },
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The ConnectionId from the request endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Returns the start call recording response.",
+            "schema": {
+              "$ref": "#/definitions/RecordingStateResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallRecording_StartRecording": {
+            "$ref": "./examples/CallRecording_StartRecording.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/recordings/{recordingId}": {
+      "get": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Get call recording properties.",
+        "operationId": "CallRecording_GetRecordingProperties",
+        "parameters": [
+          {
+            "name": "recordingId",
+            "in": "path",
+            "description": "The recording id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the recording properties.",
+            "schema": {
+              "$ref": "#/definitions/RecordingStateResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallRecording_GetRecordingProperties": {
+            "$ref": "./examples/CallRecording_GetRecordingProperties.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Stop recording the call.",
+        "operationId": "CallRecording_StopRecording",
+        "parameters": [
+          {
+            "name": "recordingId",
+            "in": "path",
+            "description": "The recording id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "Returns the stop call recording response."
+          }
+        },
+        "x-ms-examples": {
+          "CallRecording_StopRecording": {
+            "$ref": "./examples/CallRecording_StopRecording.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/recordings/{recordingId}:pause": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Pause recording the call.",
+        "operationId": "CallRecording_PauseRecording",
+        "parameters": [
+          {
+            "name": "recordingId",
+            "in": "path",
+            "description": "The recording id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the pause request and will begin processing it."
+          }
+        },
+        "x-ms-examples": {
+          "CallRecording_PauseRecording": {
+            "$ref": "./examples/CallRecording_PauseRecording.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/recordings/{recordingId}:resume": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Resume recording the call.",
+        "operationId": "CallRecording_ResumeRecording",
+        "parameters": [
+          {
+            "name": "recordingId",
+            "in": "path",
+            "description": "The recording id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the resume request and will begin processing it."
+          }
+        },
+        "x-ms-examples": {
+          "CallRecording_ResumeRecording": {
+            "$ref": "./examples/CallRecording_ResumeRecording.json"
+          }
+        }
+      }
+    },
     "/calling/recordings": {
       "post": {
         "tags": [
@@ -1943,6 +2168,10 @@
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the source of the call"
         },
+        "opsSource": {
+          "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
+          "description": "The identifier of the source in an OPS call"
+        },
         "operationContext": {
           "description": "A customer set value used to track the answering of a call.",
           "type": "string"
@@ -1989,6 +2218,21 @@
     },
     "CommunicationUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationUserIdentifierModel"
+    },
+    "AzureOpenAIDialogUpdate": {
+      "description": "Azure Open AI Dialog for UpdateDialog API Call",
+      "required": [],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DialogUpdateBase"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "azureOpenAI"
+    },
+    "MicrosoftTeamsAppIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
     },
     "MediaStreamingTransportType": {
       "description": "The type of transport to be used for media streaming, eg. Websocket",
@@ -2118,23 +2362,8 @@
         }
       }
     },
-    "AzureOpenAIDialogUpdate": {
-      "description": "Azure Open AI Dialog for UpdateDialog API Call",
-      "required": [],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DialogUpdateBase"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "azureOpenAI"
-    },
     "MicrosoftTeamsUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
-    },
-    "MicrosoftTeamsAppIdentifierModel": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
@@ -3279,11 +3508,8 @@
         "modelAsString": true
       }
     },
-    "StartCallRecordingRequest": {
+    "StartCallRecordingConnectionRequest": {
       "description": "The request payload start for call recording operation with call locator.",
-      "required": [
-        "callLocator"
-      ],
       "type": "object",
       "properties": {
         "callLocator": {
@@ -3438,6 +3664,54 @@
         },
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
+        }
+      }
+    },
+    "StartCallRecordingRequest": {
+      "description": "The request payload start for call recording operation with call locator.",
+      "required": [
+        "callLocator"
+      ],
+      "type": "object",
+      "properties": {
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
+        },
+        "recordingStateCallbackUri": {
+          "description": "The uri to send notifications to.",
+          "type": "string"
+        },
+        "recordingContentType": {
+          "$ref": "#/definitions/RecordingContentType"
+        },
+        "recordingChannelType": {
+          "$ref": "#/definitions/RecordingChannelType"
+        },
+        "recordingFormatType": {
+          "$ref": "#/definitions/RecordingFormatType"
+        },
+        "audioChannelParticipantOrdering": {
+          "description": "The sequential order in which audio channels are assigned to participants in the unmixed recording.\r\nWhen 'recordingChannelType' is set to 'unmixed' and `audioChannelParticipantOrdering is not specified,\r\nthe audio channel to participant mapping will be automatically assigned based on the order in which participant\r\nfirst audio was detected.  Channel to participant mapping details can be found in the metadata of the recording.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
+        },
+        "channelAffinity": {
+          "description": "The channel affinity of call recording\r\nWhen 'recordingChannelType' is set to 'unmixed', if channelAffinity is not specified, 'channel' will be automatically assigned.\r\nChannel-Participant mapping details can be found in the metadata of the recording.\r\n///",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChannelAffinity"
+          }
+        },
+        "externalStorage": {
+          "$ref": "#/definitions/ExternalStorage",
+          "description": "Optional property to specify location where recording will be stored"
+        },
+        "pauseOnStart": {
+          "description": "When set to true will start recording in Pause mode, which can be resumed.",
+          "type": "boolean"
         }
       }
     },
