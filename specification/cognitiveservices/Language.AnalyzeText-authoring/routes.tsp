@@ -224,93 +224,21 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing copy project job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/copy/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getCopyProjectStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringCopyProjectJobState,
-    {},
-    ErrorResponse
-  >;
+  getCopyProjectStatus is languageOperations.ResourceRead<TextAnalysisAuthoringCopyProjectJobState>;
 
   /**
    * Lists the deployments belonging to a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/deployments")
-  @get
-  listDeployments is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringProjectDeployments,
-    {},
-    ErrorResponse
+  listDeployments is languageOperations.ResourceList<
+    TextAnalysisAuthoringProjectDeployment,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
-  @get
-  getDeployment is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-    },
-    TextAnalysisAuthoringProjectDeployment,
-    {},
-    ErrorResponse
-  >;
+  getDeployment is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeployment>;
 
   /**
    * Creates a new deployment or replaces an existing one.
@@ -411,67 +339,13 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getDeploymentDeleteFromResourcesStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringDeploymentJobState,
-    {},
-    ErrorResponse
-  >;
+  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
    * Gets the status of an existing deployment job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
-  @get
-  getDeploymentStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringDeploymentJobState,
-    {},
-    ErrorResponse
-  >;
+  getDeploymentStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentJobState>;
 
   /**
    * Swaps two existing deployments with each other.
@@ -503,121 +377,26 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing swap deployment job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/deployments/swap/jobs/{jobId}")
-  @get
-  getSwapDeploymentsStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringDeploymentJobState,
-    {},
-    ErrorResponse
-  >;
+  getSwapDeploymentsStatus is languageOperations.ResourceRead<TextAnalysisAuthoringSwapDeploymentsJobState>;
 
   /**
    * Gets the status of an export job. Once job completes, returns the project
    * metadata, and assets.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/export/jobs/{jobId}")
-  @get
-  getExportStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringExportProjectJobState,
-    {},
-    ErrorResponse
-  >;
+  getExportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportProjectJobState>;
 
   /**
    * Lists the exported models belonging to a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/exported-models")
-  @get
-  @added(Versions.v2023_04_15_preview)
-  listExportedModels is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringExportedTrainedModels,
-    {},
-    ErrorResponse
+  listExportedModels is languageOperations.ResourceList<
+    TextAnalysisAuthoringExportedTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of an exported model.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
-  @get
-  @added(Versions.v2023_04_15_preview)
-  getExportedModel is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The exported model name.
-       */
-      @path
-      exportedModelName: string;
-    },
-    TextAnalysisAuthoringExportedTrainedModel,
-    {},
-    ErrorResponse
-  >;
+  getExportedModel is languageOperations.ResourceRead<TextAnalysisAuthoringExportedTrainedModel>;
 
   /**
    * Creates a new exported model or replaces an existing one.
@@ -684,178 +463,39 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for an existing job to create or update an exported model.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getExportedModelJobStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The exported model name.
-       */
-      @path
-      exportedModelName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringExportedModelJobState,
-    {},
-    ErrorResponse
-  >;
+  getExportedModelJobStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportedModelJobState>;
 
   /**
    * Gets the details and URL needed to download the exported model.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/manifest")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getExportedModelManifest is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The exported model name.
-       */
-      @path
-      exportedModelName: string;
-    },
-    TextAnalysisAuthoringExportedModelManifest,
-    {},
-    ErrorResponse
+  getExportedModelManifest is languageOperations.ResourceList<
+    TextAnalysisAuthoringModelFile
   >;
 
   /**
    * Gets the status for an import.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/import/jobs/{jobId}")
-  @get
-  getImportStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringImportProjectJobState,
-    {},
-    ErrorResponse
-  >;
+  getImportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringImportProjectJobState>;
 
   /**
    * Lists the trained models belonging to a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/models")
-  @get
-  listTrainedModels is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringProjectTrainedModels,
-    {},
-    ErrorResponse
+   listTrainedModels is languageOperations.ResourceList<
+    TextAnalysisAuthoringProjectTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a trained model.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}")
-  @get
-  getTrainedModel is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-    },
-    TextAnalysisAuthoringProjectTrainedModel,
-    {},
-    ErrorResponse
-  >;
+  getTrainedModel is languageOperations.ResourceRead<TextAnalysisAuthoringProjectTrainedModel>;
 
   /**
    * Deletes an existing trained model.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}")
-  @delete
-  deleteTrainedModel is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-    },
-    void,
-    {},
-    ErrorResponse
-  >;
+  deleteTrainedModel is languageOperations.ResourceDelete<TextAnalysisAuthoringProjectTrainedModel>;
 
   /**
    * Triggers evaluation operation on a trained model.
@@ -918,86 +558,17 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for an evaluation job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getEvaluationStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringEvaluationJobState,
-    {},
-    ErrorResponse
-  >;
+  getEvaluationStatus is languageOperations.ResourceRead<TextAnalysisAuthoringEvaluationJobState>;
 
   /**
    * Gets the detailed results of the evaluation for a trained model. This includes
    * the raw inference results for the data included in the evaluation process.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/result")
-  @get
-  getModelEvaluationResults is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-
-      /**
-       * Specifies the method used to interpret string offsets. For additional
-       * information see https://aka.ms/text-analytics-offsets.
-       */
-      @query("stringIndexType")
-      stringIndexType: TextAnalysisAuthoringStringIndexType;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringEvaluationResults,
-    {},
-    ErrorResponse
+  getModelEvaluationResults is languageOperations.ResourceList<
+    TextAnalysisAuthoringDocumentEvaluationResult,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      StringIndexTypeQueryParameter>
   >;
 
   /**
@@ -1007,7 +578,7 @@ interface TextAnalysisAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
   @get
-  getModelEvaluationSummary is Azure.Core.Foundations.Operation<
+  getModelEvaluationSummary is Foundations.Operation<
     {
       /**
        * The name of the project to use.
@@ -1030,72 +601,15 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for loading a snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
-  @get
-  getLoadSnapshotStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringLoadSnapshotJobState,
-    {},
-    ErrorResponse
-  >;
+  getLoadSnapshotStatus is languageOperations.ResourceRead<TextAnalysisAuthoringLoadSnapshotJobState>;
 
   /**
    * Lists the deployments resources assigned to the project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/resources")
-  @get
   @added(Versions.v2023_04_15_preview)
-  listDeploymentResources is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringAssignedDeploymentResources,
-    {},
-    ErrorResponse
+  listDeploymentResources is languageOperations.ResourceList<
+    TextAnalysisAuthoringAssignedDeploymentResource,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
@@ -1162,120 +676,27 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/resources/assign/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringDeploymentResourcesJobState,
-    {},
-    ErrorResponse
-  >;
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringAssignDeploymentResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign deployment resources job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
-  @get
-  @added(Versions.v2023_04_15_preview)
-  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringDeploymentResourcesJobState,
-    {},
-    ErrorResponse
-  >;
+ @added(Versions.v2023_04_15_preview)
+  getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
 
   /**
    * Lists the non-expired training jobs created for a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/train/jobs")
-  @get
-  listTrainingJobs is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringTrainingJobs,
-    {},
-    ErrorResponse
+  listTrainingJobs is languageOperations.ResourceList<
+    TextAnalysisAuthoringTrainingJobState,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the status for a training job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}")
-  @get
-  getTrainingStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringTrainingJobState,
-    {},
-    ErrorResponse
-  >;
+  getTrainingStatus is languageOperations.ResourceRead<TextAnalysisAuthoringTrainingJobState>;
 
   /**
    * Triggers a cancellation for a running training job.
@@ -1307,184 +728,45 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for a project deletion job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/global/deletion-jobs/{jobId}")
-  @get
-  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    TextAnalysisAuthoringProjectDeletionJobState,
-    {},
-    ErrorResponse
-  >;
+  getProjectDeletionStatus is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeletionJobState>;
 
   /**
    * Lists the deployments to which an Azure resource is assigned. This doesn't
    * return deployments belonging to projects owned by this resource. It only
    * returns deployments belonging to projects owned by other resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/global/deployments/resources")
-  @get
   @added(Versions.v2023_04_15_preview)
-  listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringAssignedResourceDeploymentsMetadata,
-    {},
-    ErrorResponse
+  listAssignedResourceDeployments is languageOperations.ResourceList<
+  TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
+  ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Lists the supported languages.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/global/languages")
-  @get
-  getSupportedLanguages is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The project kind, default value is CustomSingleLabelClassification.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("projectKind")
-      ProjectKind?: TextAnalysisAuthoringProjectKind;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringSupportedLanguages,
-    {},
-    ErrorResponse
-  >;
+  getSupportedLanguages is languageOperations.ResourceList<
+  TextAnalysisAuthoringSupportedLanguage,
+  ListQueryParametersTrait<ProjectKindQueryParameter &
+      StandardListQueryParameters>
+>;
 
   /**
    * Lists the supported prebuilt entities that can be used while creating composed
    * entities.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/global/prebuilt-entities")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The project kind, default value is CustomSingleLabelClassification.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("projectKind")
-      ProjectKind?: TextAnalysisAuthoringProjectKind;
-
-      /**
-       * The language to get supported prebuilt entities for. Required if multilingual
-       * is false. This is BCP-47 representation of a language. For example, use "en"
-       * for English, "en-gb" for English (UK), "es" for Spanish etc.
-       */
-      @query("language")
-      language?: string;
-
-      /**
-       * Whether to get the support prebuilt entities for multilingual or monolingual
-       * projects. If true, the language parameter is ignored.
-       */
-      @query("multilingual")
-      multilingual?: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringPrebuiltEntities,
-    {},
-    ErrorResponse
-  >;
+  getSupportedPrebuiltEntities is languageOperations.ResourceList<
+  TextAnalysisAuthoringPrebuiltEntity,
+  SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
+>;
 
   /**
    * Lists the support training config version for a given project type.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/global/training-config-versions")
-  @get
-  listTrainingConfigVersions is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The project kind.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("projectKind")
-      ProjectKind: TextAnalysisAuthoringProjectKind;
+  listTrainingConfigVersions is languageOperations.ResourceList<
+  TextAnalysisAuthoringTrainingConfigVersion,
+  ListQueryParametersTrait<ProjectKindQueryParameter &
+      StandardListQueryParameters>
+>;
 
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    TextAnalysisAuthoringTrainingConfigVersions,
-    {},
-    ErrorResponse
-  >;
 }

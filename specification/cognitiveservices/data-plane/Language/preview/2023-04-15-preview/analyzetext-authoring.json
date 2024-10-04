@@ -539,7 +539,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -584,41 +584,26 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployments"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -632,6 +617,9 @@
           "SuccessfulListDeployments": {
             "$ref": "./examples/SuccessfulListDeployments.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -646,7 +634,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -654,7 +642,7 @@
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "The name of the specific deployment of the project to use.",
+            "description": "Represents deployment name.",
             "required": true,
             "type": "string"
           }
@@ -855,7 +843,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -863,7 +851,7 @@
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "The name of the specific deployment of the project to use.",
+            "description": "Represents deployment name.",
             "required": true,
             "type": "string"
           },
@@ -879,7 +867,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState"
             }
           },
           "default": {
@@ -907,7 +895,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -915,7 +903,7 @@
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "The name of the specific deployment of the project to use.",
+            "description": "Represents deployment name.",
             "required": true,
             "type": "string"
           },
@@ -1011,7 +999,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1028,7 +1016,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringSwapDeploymentsJobState"
             }
           },
           "default": {
@@ -1056,7 +1044,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1101,41 +1089,26 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModels"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringExportedTrainedModel"
             }
           },
           "default": {
@@ -1149,6 +1122,9 @@
           "SuccessfulListExportedModels": {
             "$ref": "./examples/SuccessfulListExportedModels.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1163,7 +1139,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1313,7 +1289,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1365,7 +1341,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1382,7 +1358,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringExportedModelManifest"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringModelFile"
             }
           },
           "default": {
@@ -1396,6 +1372,9 @@
           "SuccessfulGetExportedModelManifest": {
             "$ref": "./examples/SuccessfulGetExportedModelManifest.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1410,7 +1389,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1455,41 +1434,26 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModels"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -1503,6 +1467,9 @@
           "SuccessfulListModels": {
             "$ref": "./examples/SuccessfulListModels.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1517,7 +1484,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1560,7 +1527,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1711,7 +1678,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1763,7 +1730,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1776,56 +1743,23 @@
             "type": "string"
           },
           {
-            "name": "stringIndexType",
-            "in": "query",
-            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Utf16CodeUnit"
-            ],
-            "x-ms-enum": {
-              "name": "TextAnalysisAuthoringStringIndexType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Utf16CodeUnit",
-                  "value": "Utf16CodeUnit",
-                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
-                }
-              ]
-            }
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/StringIndexTypeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringEvaluationResults"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringDocumentEvaluationResult"
             }
           },
           "default": {
@@ -1839,6 +1773,9 @@
           "SuccessfulGetModelEvaluation": {
             "$ref": "./examples/SuccessfulGetModelEvaluation.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1898,7 +1835,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1950,41 +1887,26 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringAssignedDeploymentResources"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringAssignedDeploymentResource"
             }
           },
           "default": {
@@ -1998,6 +1920,9 @@
           "SuccessfulListDeploymentResources": {
             "$ref": "./examples/SuccessfulListDeploymentResources.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2116,7 +2041,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -2133,7 +2058,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResourcesJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringAssignDeploymentResourcesJobState"
             }
           },
           "default": {
@@ -2161,7 +2086,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -2178,7 +2103,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResourcesJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringUnassignDeploymentResourcesJobState"
             }
           },
           "default": {
@@ -2206,41 +2131,26 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobs"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringTrainingJobState"
             }
           },
           "default": {
@@ -2254,6 +2164,9 @@
           "SuccessfulListTrainingJobs": {
             "$ref": "./examples/SuccessfulListTrainingJobs.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2268,7 +2181,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -2352,7 +2265,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-text/projects/global/deletion-jobs/{jobId}": {
+    "/projects/global/deletion-jobs/{jobId}": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetProjectDeletionStatus",
         "description": "Gets the status for a project deletion job.",
@@ -2389,7 +2302,7 @@
         }
       }
     },
-    "/authoring/analyze-text/projects/global/deployments/resources": {
+    "/projects/global/deployments/resources": {
       "get": {
         "operationId": "TextAnalysisAuthoring_ListAssignedResourceDeployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
@@ -2398,35 +2311,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringAssignedResourceDeploymentsMetadata"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringAssignedProjectDeploymentsMetadata"
             }
           },
           "default": {
@@ -2440,10 +2338,13 @@
           "SuccessfulListAssignedResourceDeployments": {
             "$ref": "./examples/SuccessfulListAssignedResourceDeployments.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/authoring/analyze-text/projects/global/languages": {
+    "/projects/global/languages": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetSupportedLanguages",
         "description": "Lists the supported languages.",
@@ -2452,87 +2353,23 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectKind",
-            "in": "query",
-            "description": "The project kind, default value is CustomSingleLabelClassification.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "CustomSingleLabelClassification",
-              "CustomMultiLabelClassification",
-              "CustomEntityRecognition",
-              "CustomAbstractiveSummarization",
-              "CustomHealthcare",
-              "CustomTextSentiment"
-            ],
-            "x-ms-enum": {
-              "name": "TextAnalysisAuthoringProjectKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "CustomSingleLabelClassification",
-                  "value": "CustomSingleLabelClassification",
-                  "description": "For building a classification model to classify text using your own data. Each\nfile will have only one label. For example, file 1 is classified as A and file\n2 is classified as B."
-                },
-                {
-                  "name": "CustomMultiLabelClassification",
-                  "value": "CustomMultiLabelClassification",
-                  "description": "For building a classification model to classify text using your own data. Each\nfile can have one or many labels. For example, file 1 is classified as A, B,\nand C and file 2 is classified as B and C."
-                },
-                {
-                  "name": "CustomEntityRecognition",
-                  "value": "CustomEntityRecognition",
-                  "description": "For building an extraction model to identify your domain categories using your\nown data."
-                },
-                {
-                  "name": "CustomAbstractiveSummarization",
-                  "value": "CustomAbstractiveSummarization",
-                  "description": "For building an abstractive summarization models which are able to summarize\nlong documents."
-                },
-                {
-                  "name": "CustomHealthcare",
-                  "value": "CustomHealthcare",
-                  "description": "For building an text analytics for health model to identify your health domain\ndata."
-                },
-                {
-                  "name": "CustomTextSentiment",
-                  "value": "CustomTextSentiment",
-                  "description": "For building a sentiment models which are able to extract sentiment for long\ndocuments."
-                }
-              ]
-            },
-            "x-ms-client-name": "ProjectKind"
+            "$ref": "#/parameters/ProjectKindQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringSupportedLanguages"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringSupportedLanguage"
             }
           },
           "default": {
@@ -2546,113 +2383,26 @@
           "SuccessfulGetSupportedLanguages": {
             "$ref": "./examples/SuccessfulGetSupportedLanguages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/authoring/analyze-text/projects/global/prebuilt-entities": {
+    "/projects/global/prebuilt-entities": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed\nentities.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectKind",
-            "in": "query",
-            "description": "The project kind, default value is CustomSingleLabelClassification.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "CustomSingleLabelClassification",
-              "CustomMultiLabelClassification",
-              "CustomEntityRecognition",
-              "CustomAbstractiveSummarization",
-              "CustomHealthcare",
-              "CustomTextSentiment"
-            ],
-            "x-ms-enum": {
-              "name": "TextAnalysisAuthoringProjectKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "CustomSingleLabelClassification",
-                  "value": "CustomSingleLabelClassification",
-                  "description": "For building a classification model to classify text using your own data. Each\nfile will have only one label. For example, file 1 is classified as A and file\n2 is classified as B."
-                },
-                {
-                  "name": "CustomMultiLabelClassification",
-                  "value": "CustomMultiLabelClassification",
-                  "description": "For building a classification model to classify text using your own data. Each\nfile can have one or many labels. For example, file 1 is classified as A, B,\nand C and file 2 is classified as B and C."
-                },
-                {
-                  "name": "CustomEntityRecognition",
-                  "value": "CustomEntityRecognition",
-                  "description": "For building an extraction model to identify your domain categories using your\nown data."
-                },
-                {
-                  "name": "CustomAbstractiveSummarization",
-                  "value": "CustomAbstractiveSummarization",
-                  "description": "For building an abstractive summarization models which are able to summarize\nlong documents."
-                },
-                {
-                  "name": "CustomHealthcare",
-                  "value": "CustomHealthcare",
-                  "description": "For building an text analytics for health model to identify your health domain\ndata."
-                },
-                {
-                  "name": "CustomTextSentiment",
-                  "value": "CustomTextSentiment",
-                  "description": "For building a sentiment models which are able to extract sentiment for long\ndocuments."
-                }
-              ]
-            },
-            "x-ms-client-name": "ProjectKind"
-          },
-          {
-            "name": "language",
-            "in": "query",
-            "description": "The language to get supported prebuilt entities for. Required if multilingual\nis false. This is BCP-47 representation of a language. For example, use \"en\"\nfor English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "multilingual",
-            "in": "query",
-            "description": "Whether to get the support prebuilt entities for multilingual or monolingual\nprojects. If true, the language parameter is ignored.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringPrebuiltEntities"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringPrebuiltEntity"
             }
           },
           "default": {
@@ -2666,10 +2416,13 @@
           "SuccessfulGetSupportedPrebuiltEntities": {
             "$ref": "./examples/SuccessfulGetSupportedPrebuiltEntities.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/authoring/analyze-text/projects/global/training-config-versions": {
+    "/projects/global/training-config-versions": {
       "get": {
         "operationId": "TextAnalysisAuthoring_ListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
@@ -2678,87 +2431,23 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectKind",
-            "in": "query",
-            "description": "The project kind.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "CustomSingleLabelClassification",
-              "CustomMultiLabelClassification",
-              "CustomEntityRecognition",
-              "CustomAbstractiveSummarization",
-              "CustomHealthcare",
-              "CustomTextSentiment"
-            ],
-            "x-ms-enum": {
-              "name": "TextAnalysisAuthoringProjectKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "CustomSingleLabelClassification",
-                  "value": "CustomSingleLabelClassification",
-                  "description": "For building a classification model to classify text using your own data. Each\nfile will have only one label. For example, file 1 is classified as A and file\n2 is classified as B."
-                },
-                {
-                  "name": "CustomMultiLabelClassification",
-                  "value": "CustomMultiLabelClassification",
-                  "description": "For building a classification model to classify text using your own data. Each\nfile can have one or many labels. For example, file 1 is classified as A, B,\nand C and file 2 is classified as B and C."
-                },
-                {
-                  "name": "CustomEntityRecognition",
-                  "value": "CustomEntityRecognition",
-                  "description": "For building an extraction model to identify your domain categories using your\nown data."
-                },
-                {
-                  "name": "CustomAbstractiveSummarization",
-                  "value": "CustomAbstractiveSummarization",
-                  "description": "For building an abstractive summarization models which are able to summarize\nlong documents."
-                },
-                {
-                  "name": "CustomHealthcare",
-                  "value": "CustomHealthcare",
-                  "description": "For building an text analytics for health model to identify your health domain\ndata."
-                },
-                {
-                  "name": "CustomTextSentiment",
-                  "value": "CustomTextSentiment",
-                  "description": "For building a sentiment models which are able to extract sentiment for long\ndocuments."
-                }
-              ]
-            },
-            "x-ms-client-name": "ProjectKind"
+            "$ref": "#/parameters/ProjectKindQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringTrainingConfigVersions"
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringTrainingConfigVersion"
             }
           },
           "default": {
@@ -2772,6 +2461,9 @@
           "SuccessfulGetSupportedTrainingConfigVersions": {
             "$ref": "./examples/SuccessfulGetSupportedTrainingConfigVersions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -3041,6 +2733,160 @@
         "message"
       ]
     },
+    "PagedTextAnalysisAuthoringAssignedDeploymentResource": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringAssignedDeploymentResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringAssignedDeploymentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringAssignedDeploymentResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringAssignedProjectDeploymentsMetadata": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringAssignedProjectDeploymentsMetadata items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringAssignedProjectDeploymentsMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringAssignedProjectDeploymentsMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringDocumentEvaluationResult": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringDocumentEvaluationResult items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringDocumentEvaluationResult items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringExportedTrainedModel": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringExportedTrainedModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringExportedTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringModelFile": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringModelFile items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringModelFile items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringModelFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringPrebuiltEntity": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringPrebuiltEntity items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringPrebuiltEntity items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringPrebuiltEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringProjectDeployment": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringProjectDeployment items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringProjectDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedTextAnalysisAuthoringProjectMetadata": {
       "type": "object",
       "description": "Paged collection of TextAnalysisAuthoringProjectMetadata items",
@@ -3061,6 +2907,145 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringProjectTrainedModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringProjectTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringSupportedLanguage": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringSupportedLanguage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringSupportedLanguage items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringSupportedLanguage"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringTrainingConfigVersion": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringTrainingConfigVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringTrainingConfigVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringTrainingConfigVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextAnalysisAuthoringTrainingJobState": {
+      "type": "object",
+      "description": "Paged collection of TextAnalysisAuthoringTrainingJobState items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextAnalysisAuthoringTrainingJobState items on this page",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobState"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TextAnalysisAuthoringAssignDeploymentResourcesJobState": {
+      "type": "object",
+      "description": "Represents the state of a assign deployment resources job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringAssignDeploymentResourcesOptions": {
@@ -3096,27 +3081,6 @@
       "required": [
         "azureResourceId",
         "region"
-      ]
-    },
-    "TextAnalysisAuthoringAssignedDeploymentResources": {
-      "type": "object",
-      "description": "Represents the assigned deployment resources.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringAssignedDeploymentResource"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TextAnalysisAuthoringAssignedProjectDeploymentMetadata": {
@@ -3164,27 +3128,6 @@
       "required": [
         "projectName",
         "deploymentsMetadata"
-      ]
-    },
-    "TextAnalysisAuthoringAssignedResourceDeploymentsMetadata": {
-      "type": "object",
-      "description": "Represents the metadata for deployments assigned to a resource.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringAssignedProjectDeploymentsMetadata"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TextAnalysisAuthoringCompositionSetting": {
@@ -3616,6 +3559,57 @@
         }
       }
     },
+    "TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState": {
+      "type": "object",
+      "description": "Represents the state of an existing delete deployment from specific resources job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
     "TextAnalysisAuthoringDeploymentJobState": {
       "type": "object",
       "description": "Represents the state of a deployment job.",
@@ -3683,57 +3677,6 @@
       "required": [
         "resourceId",
         "region"
-      ]
-    },
-    "TextAnalysisAuthoringDeploymentResourcesJobState": {
-      "type": "object",
-      "description": "Represents the state of a deployment resources job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID."
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
       ]
     },
     "TextAnalysisAuthoringDocumentEntityLabelEvaluationResult": {
@@ -4183,27 +4126,6 @@
           "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
         }
       }
-    },
-    "TextAnalysisAuthoringEvaluationResults": {
-      "type": "object",
-      "description": "Represents a list of results for an evaluation operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "TextAnalysisAuthoringEvaluationSummary": {
       "type": "object",
@@ -4800,23 +4722,6 @@
         "status"
       ]
     },
-    "TextAnalysisAuthoringExportedModelManifest": {
-      "type": "object",
-      "description": "Represents the properties for the exported model manifest.",
-      "properties": {
-        "modelFiles": {
-          "type": "array",
-          "description": "The model files belonging to this model.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringModelFile"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "modelFiles"
-      ]
-    },
     "TextAnalysisAuthoringExportedModelOptions": {
       "type": "object",
       "description": "Represents the options for creating or replacing an exported model.",
@@ -4922,27 +4827,6 @@
         "lastExportedModelDateTime",
         "modelExpirationDate",
         "modelTrainingConfigVersion"
-      ]
-    },
-    "TextAnalysisAuthoringExportedTrainedModels": {
-      "type": "object",
-      "description": "Represents a list of exported trained models.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TextAnalysisAuthoringImportProjectJobState": {
@@ -5214,27 +5098,6 @@
         "macroRecall"
       ]
     },
-    "TextAnalysisAuthoringPrebuiltEntities": {
-      "type": "object",
-      "description": "Represents a list of the retrieved supported prebuilt entities.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringPrebuiltEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TextAnalysisAuthoringPrebuiltEntity": {
       "type": "object",
       "description": "Represents a supported prebuilt entity.",
@@ -5357,27 +5220,6 @@
         "deploymentExpirationDate",
         "modelTrainingConfigVersion",
         "assignedResources"
-      ]
-    },
-    "TextAnalysisAuthoringProjectDeployments": {
-      "type": "object",
-      "description": "Represents a list of retrieved deployments.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployment"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TextAnalysisAuthoringProjectKind": {
@@ -5562,27 +5404,6 @@
         "modelExpirationDate",
         "modelTrainingConfigVersion",
         "hasSnapshot"
-      ]
-    },
-    "TextAnalysisAuthoringProjectTrainedModels": {
-      "type": "object",
-      "description": "Represents a list of retrieved trained models.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TextAnalysisAuthoringResourceMetadata": {
@@ -5912,25 +5733,55 @@
         "languageCode"
       ]
     },
-    "TextAnalysisAuthoringSupportedLanguages": {
+    "TextAnalysisAuthoringSwapDeploymentsJobState": {
       "type": "object",
-      "description": "Represents a list of retrieved languages.",
+      "description": "Represents the state of a deployment job.",
       "properties": {
-        "value": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
           "type": "array",
-          "description": "The list of projects.",
+          "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringSupportedLanguage"
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
           },
           "x-ms-identifiers": []
         },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "value"
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringSwapDeploymentsOptions": {
@@ -6017,27 +5868,6 @@
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
-      ]
-    },
-    "TextAnalysisAuthoringTrainingConfigVersions": {
-      "type": "object",
-      "description": "Represents a list of training config versions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringTrainingConfigVersion"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TextAnalysisAuthoringTrainingJobOptions": {
@@ -6150,25 +5980,55 @@
         "result"
       ]
     },
-    "TextAnalysisAuthoringTrainingJobs": {
+    "TextAnalysisAuthoringUnassignDeploymentResourcesJobState": {
       "type": "object",
-      "description": "Represents a list of retrieved training jobs.",
+      "description": "Represents the state of a unassign deployment resources job.",
       "properties": {
-        "value": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
           "type": "array",
-          "description": "The list of projects.",
+          "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobState"
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
           },
           "x-ms-identifiers": []
         },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "value"
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringUnassignDeploymentResourcesOptions": {
@@ -6243,6 +6103,81 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ProjectKindQueryParameter": {
+      "name": "projectKind",
+      "in": "query",
+      "description": "The project kind, default value is CustomSingleLabelClassification.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "CustomSingleLabelClassification",
+        "CustomMultiLabelClassification",
+        "CustomEntityRecognition",
+        "CustomAbstractiveSummarization",
+        "CustomHealthcare",
+        "CustomTextSentiment"
+      ],
+      "x-ms-enum": {
+        "name": "TextAnalysisAuthoringProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomSingleLabelClassification",
+            "value": "CustomSingleLabelClassification",
+            "description": "For building a classification model to classify text using your own data. Each\nfile will have only one label. For example, file 1 is classified as A and file\n2 is classified as B."
+          },
+          {
+            "name": "CustomMultiLabelClassification",
+            "value": "CustomMultiLabelClassification",
+            "description": "For building a classification model to classify text using your own data. Each\nfile can have one or many labels. For example, file 1 is classified as A, B,\nand C and file 2 is classified as B and C."
+          },
+          {
+            "name": "CustomEntityRecognition",
+            "value": "CustomEntityRecognition",
+            "description": "For building an extraction model to identify your domain categories using your\nown data."
+          },
+          {
+            "name": "CustomAbstractiveSummarization",
+            "value": "CustomAbstractiveSummarization",
+            "description": "For building an abstractive summarization models which are able to summarize\nlong documents."
+          },
+          {
+            "name": "CustomHealthcare",
+            "value": "CustomHealthcare",
+            "description": "For building an text analytics for health model to identify your health domain\ndata."
+          },
+          {
+            "name": "CustomTextSentiment",
+            "value": "CustomTextSentiment",
+            "description": "For building a sentiment models which are able to extract sentiment for long\ndocuments."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ProjectKind"
+    },
+    "StringIndexTypeQueryParameter": {
+      "name": "stringIndexType",
+      "in": "query",
+      "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "TextAnalysisAuthoringStringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Utf16CodeUnit",
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     }
   }

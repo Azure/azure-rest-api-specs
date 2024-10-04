@@ -554,6 +554,10 @@ model TextAnalysisAuthoringEvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
+@added(Versions.v2023_04_15_preview)
+@clientName("CopyProjectJobState", "csharp")
+@resource("copy/jobs")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringCopyProjectJobState {
   ...TextAnalysisAuthoringJobState;
 }
@@ -561,10 +565,13 @@ model TextAnalysisAuthoringCopyProjectJobState {
 /**
  * Represents a job's state.
  */
+@clientName("JobState", "csharp")
 model TextAnalysisAuthoringJobState {
   /**
    * The job ID.
    */
+  @key("jobId")
+  @visibility
   jobId: string;
 
   /**
@@ -631,10 +638,15 @@ model TextAnalysisAuthoringProjectDeployments {
 /**
  * Represents a project deployment.
  */
+@clientName("ProjectDeployment", "csharp")
+@resource("deployments")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringProjectDeployment {
   /**
    * Represents deployment name.
    */
+  @key("deploymentName")
+  @visibility
   deploymentName: string;
 
   /**
@@ -720,9 +732,33 @@ model TextAnalysisAuthoringDeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
+@clientName("DeploymentJobState", "csharp")
+@parentResource(TextAnalysisAuthoringProjectDeployment)
+@resource("jobs")
 model TextAnalysisAuthoringDeploymentJobState {
   ...TextAnalysisAuthoringJobState;
 }
+
+/**
+ * Represents the state of an existing delete deployment from specific resources job.
+ */
+@clientName("DeploymentDeleteFromResourcesJobState", "csharp")
+@parentResource(TextAnalysisAuthoringProjectDeployment)
+@resource("delete-from-resources/jobs")
+model TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState {
+  ...TextAnalysisAuthoringJobState;
+}
+
+/**
+ * Represents the state of a deployment job.
+ */
+@clientName("SwapDeploymentsJobState", "csharp")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
+@resource("deployments/swap/jobs")
+model TextAnalysisAuthoringSwapDeploymentsJobState {
+  ...TextAnalysisAuthoringJobState;
+}
+
 
 /**
  * Represents the options for swapping two deployments together.
@@ -742,6 +778,9 @@ model TextAnalysisAuthoringSwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
+@clientName("ExportProjectJobState", "csharp")
+@resource("export/jobs")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringExportProjectJobState {
   ...TextAnalysisAuthoringJobState;
 
@@ -769,10 +808,15 @@ model TextAnalysisAuthoringExportedTrainedModels {
 /**
  * Represents an exported trained model.
  */
+@clientName("ExportedTrainedModel", "csharp")
+@resource("exported-models")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringExportedTrainedModel {
   /**
    * The exported model name.
    */
+  @key("exportedModelName")
+  @visibility
   exportedModelName: string;
 
   /**
@@ -816,6 +860,9 @@ model TextAnalysisAuthoringExportedModelOptions {
 /**
  * Represents the state of a job to create or updated an exported model.
  */
+@clientName("ExportedModelJobState", "csharp")
+@resource("jobs")
+@parentResource(TextAnalysisAuthoringExportedTrainedModel)
 model TextAnalysisAuthoringExportedModelJobState {
   ...TextAnalysisAuthoringJobState;
 }
@@ -833,10 +880,15 @@ model TextAnalysisAuthoringExportedModelManifest {
 /**
  * Represents the properties for the model file.
  */
+@clientName("ModelFile", "csharp")
+@resource("manifest")
+@parentResource(TextAnalysisAuthoringExportedTrainedModel)
 model TextAnalysisAuthoringModelFile {
   /**
    * The name of the file.
    */
+  @key("name")
+  @visibility
   name: string;
 
   /**
@@ -848,6 +900,9 @@ model TextAnalysisAuthoringModelFile {
 /**
  * Represents the state of an import job.
  */
+@clientName("ImportProjectJobState", "csharp")
+@resource("import/jobs")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringImportProjectJobState {
   ...TextAnalysisAuthoringJobState;
 }
@@ -870,10 +925,15 @@ model TextAnalysisAuthoringProjectTrainedModels {
 /**
  * Represents a trained model.
  */
+@clientName("ProjectTrainedModel", "csharp")
+@resource("models")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringProjectTrainedModel {
   /**
    * The trained model label.
    */
+  @key("trainedModelLabel")
+  @visibility
   label: string;
 
   /**
@@ -911,6 +971,9 @@ model TextAnalysisAuthoringProjectTrainedModel {
 /**
  * Represents the state of a evaluation job.
  */
+@clientName("EvaluationJobState", "csharp")
+@resource("evaluate/jobs")
+@parentResource(TextAnalysisAuthoringProjectTrainedModel)
 model TextAnalysisAuthoringEvaluationJobState {
   ...TextAnalysisAuthoringJobState;
 
@@ -961,11 +1024,16 @@ model TextAnalysisAuthoringEvaluationResults {
 /**
  * Represents the evaluation result of a document.
  */
+@clientName("DocumentEvaluationResult", "csharp")
+@resource("evaluation/result")
+@parentResource( TextAnalysisAuthoringProjectTrainedModel)
 @discriminator("projectKind")
 model TextAnalysisAuthoringDocumentEvaluationResult {
   /**
    * Represents the project kind.
    */
+  @key
+  @visibility
   projectKind: TextAnalysisAuthoringProjectKind;
 
   /**
@@ -979,6 +1047,51 @@ model TextAnalysisAuthoringDocumentEvaluationResult {
    * etc.
    */
   language: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model StringIndexTypeQueryParameter {
+  /**
+   * Specifies the method used to interpret string offsets. For additional
+   * information see https://aka.ms/text-analytics-offsets.
+   */
+  @query("stringIndexType")
+  stringIndexType: TextAnalysisAuthoringStringIndexType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ProjectKindQueryParameter {
+  /**
+   * The project kind, default value is CustomSingleLabelClassification.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @query("projectKind")
+  ProjectKind?: TextAnalysisAuthoringProjectKind;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model SupportedPrebuiltEntitiesQueryParameter {
+  /**
+       * The project kind, default value is CustomSingleLabelClassification.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style"
+      @query("projectKind")
+      ProjectKind?: TextAnalysisAuthoringProjectKind;
+
+      /**
+       * The language to get supported prebuilt entities for. Required if multilingual
+       * is false. This is BCP-47 representation of a language. For example, use "en"
+       * for English, "en-gb" for English (UK), "es" for Spanish etc.
+       */
+      @query("language")
+      language?: string;
+
+      /**
+       * Whether to get the support prebuilt entities for multilingual or monolingual
+       * projects. If true, the language parameter is ignored.
+       */
+      @query("multilingual")
+      multilingual?: string;
 }
 
 /**
@@ -1000,6 +1113,9 @@ model TextAnalysisAuthoringEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
+@clientName("LoadSnapshotJobState", "csharp")
+@resource("load-snapshot/jobs")
+@parentResource(TextAnalysisAuthoringProjectTrainedModel)
 model TextAnalysisAuthoringLoadSnapshotJobState {
   ...TextAnalysisAuthoringJobState;
 }
@@ -1007,6 +1123,7 @@ model TextAnalysisAuthoringLoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringAssignedDeploymentResources {
   /**
    * The list of projects.
@@ -1022,10 +1139,16 @@ model TextAnalysisAuthoringAssignedDeploymentResources {
 /**
  * Represents the assigned deployment resource.
  */
+@added(Versions.v2023_04_15_preview)
+@clientName("AssignedDeploymentResource", "csharp")
+@resource("resources")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringAssignedDeploymentResource {
   /**
    * The resource ID.
    */
+  @key
+  @visibility
   azureResourceId: string;
 
   /**
@@ -1076,9 +1199,24 @@ model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
 }
 
 /**
- * Represents the state of a deployment resources job.
+ * Represents the state of a assign deployment resources job.
  */
-model TextAnalysisAuthoringDeploymentResourcesJobState {
+@added(Versions.v2023_04_15_preview)
+@clientName("AssignDeploymentResourcesJobState", "csharp")
+@resource("resources/assign/jobs")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
+model TextAnalysisAuthoringAssignDeploymentResourcesJobState {
+  ...TextAnalysisAuthoringJobState;
+}
+
+/**
+ * Represents the state of a unassign deployment resources job.
+ */
+@added(Versions.v2023_04_15_preview)
+@clientName("UnassignDeploymentResourcesJobState", "csharp")
+@resource("resources/unassign/jobs")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
+model TextAnalysisAuthoringUnassignDeploymentResourcesJobState {
   ...TextAnalysisAuthoringJobState;
 }
 
@@ -1100,6 +1238,9 @@ model TextAnalysisAuthoringTrainingJobs {
 /**
  * Represents the state of a training job.
  */
+@clientName("TrainingJobState", "csharp")
+@resource("train/jobs")
+@parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringTrainingJobState {
   ...TextAnalysisAuthoringJobState;
 
@@ -1170,6 +1311,8 @@ model TextAnalysisAuthoringSubTrainingJobState {
 /**
  * Represents the state of a project deletion job.
  */
+@resource("projects/global/deletion-jobs")
+@clientName("ProjectDeletionJobState", "csharp")
 model TextAnalysisAuthoringProjectDeletionJobState {
   ...TextAnalysisAuthoringJobState;
 }
@@ -1177,6 +1320,7 @@ model TextAnalysisAuthoringProjectDeletionJobState {
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of projects.
@@ -1192,10 +1336,15 @@ model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
 /**
  * Represents the metadata for assigned deployments for a project.
  */
+@resource("projects/global/deployments/resources")
+@clientName("AssignedProjectDeploymentsMetadata", "csharp")
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringAssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
    */
+  @key
+  @visibility
   projectName: string;
 
   /**
@@ -1243,10 +1392,14 @@ model TextAnalysisAuthoringSupportedLanguages {
 /**
  * Represents a supported language.
  */
+@resource("projects/global/languages")
+@clientName("SupportedLanguage", "csharp")
 model TextAnalysisAuthoringSupportedLanguage {
   /**
    * The language name.
    */
+  @key
+  @visibility
   languageName: string;
 
   /**
@@ -1259,6 +1412,7 @@ model TextAnalysisAuthoringSupportedLanguage {
 /**
  * Represents a list of the retrieved supported prebuilt entities.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringPrebuiltEntities {
   /**
    * The list of projects.
@@ -1274,10 +1428,15 @@ model TextAnalysisAuthoringPrebuiltEntities {
 /**
  * Represents a supported prebuilt entity.
  */
+@added(Versions.v2023_04_15_preview)
+@resource("projects/global/prebuilt-entities")
+@clientName("PrebuiltEntity", "csharp")
 model TextAnalysisAuthoringPrebuiltEntity {
   /**
    * The prebuilt entity category.
    */
+  @key
+  @visibility
   category: string;
 
   /**
@@ -1309,10 +1468,14 @@ model TextAnalysisAuthoringTrainingConfigVersions {
 /**
  * Represents a training config version.
  */
+@resource("projects/global/training-config-versions")
+@clientName("TrainingConfigVersion", "csharp")
 model TextAnalysisAuthoringTrainingConfigVersion {
   /**
    * Represents the version of the config.
    */
+  @key
+  @visibility
   trainingConfigVersion: string;
 
   /**
