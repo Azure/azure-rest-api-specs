@@ -2524,6 +2524,16 @@
           "format": "int32",
           "description": "The number of replicas of the Image Version to be created per region. This property is updatable."
         },
+        "additionalReplicaSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalReplicaSet"
+          },
+          "x-ms-identifiers": [
+            "storageAccountType"
+          ],
+          "description": "A list of Direct Drive Replicas to be created"
+        },
         "storageAccountType": {
           "type": "string",
           "description": "Specifies the storage account type to be used to store the image. This property is not updatable.",
@@ -2549,6 +2559,27 @@
         "name"
       ],
       "description": "Describes the target region information."
+    },
+    "AdditionalReplicaSet": {
+      "properties": {
+        "storageAccountType": {
+          "type": "string",
+          "description": "Specifies the storage account type to be used to create the direct drive replicas",
+          "enum": [
+            "PremiumV2_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        },
+        "regionalReplicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of direct drive replicas of the Image Version to be created.This Property is updatable"
+        }
+      },
+      "description": "Describes the additional replica set information."
     },
     "GalleryTargetExtendedLocation": {
       "type": "object",
