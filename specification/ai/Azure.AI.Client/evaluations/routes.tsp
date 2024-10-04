@@ -55,3 +55,18 @@ op update is Azure.Core.Foundations.Operation<
   },
   OkResponse<Evaluation>
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+@doc("Update an evaluation.")
+@route("evaluations/{id}")
+@get
+op update is Azure.Core.Foundations.Operation<
+  {
+    @doc("Identifier of the evaluation.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    id: string;
+  },
+  OkResponse<Evaluation>
+>;
