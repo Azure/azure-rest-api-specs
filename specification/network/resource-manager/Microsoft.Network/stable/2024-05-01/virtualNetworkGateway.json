@@ -1231,6 +1231,298 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetFailoverAllTestDetails",
+        "description": "This operation retrieves the details of all the failover tests performed on the gateway for different peering locations",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The type of failover test"
+          },
+          {
+            "name": "fetchLatest",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "description": "Fetch only the latest tests for each peering location"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failover test details for the gateway",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteFailoverAllTestDetails"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayGetFailoverAllTestsDetails": {
+            "$ref": "./examples/VirtualNetworkGatewayGetFailoverAllTestsDetails.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetFailoverSingleTestDetails",
+        "description": "This operation retrieves the details of a particular failover test performed on the gateway based on the test Guid",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Peering location of the test"
+          },
+          {
+            "name": "failoverTestId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The unique Guid value which identifies the test"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the failover test",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetailsObject"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayGetFailoverSingleTestDetails": {
+            "$ref": "./examples/VirtualNetworkGatewayGetFailoverSingleTestDetails.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_StartExpressRouteSiteFailoverSimulation",
+        "description": "This operation starts failover simulation on the gateway for the specified peering location",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Peering location of the test"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation start failover simulation started on virtual network gateway.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayStartSiteFailoverSimulation": {
+            "$ref": "./examples/VirtualNetworkGatewayStartSiteFailoverSimulation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_StopExpressRouteSiteFailoverSimulation",
+        "description": "This operation stops failover simulation on the gateway for the specified peering location",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "stopParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteFailoverStopApiParameters"
+            },
+            "description": "Virtual network gateway stop simulation parameters supplied to stop failover simulation on gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Request successful. Started the operation stop failover simulation on virtual network gateway.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayStopSiteFailoverSimulation": {
+            "$ref": "./examples/VirtualNetworkGatewayStopSiteFailoverSimulation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
       "put": {
         "tags": [
@@ -4443,6 +4735,262 @@
         "filterData": {
           "type": "string",
           "description": "Start Packet capture parameters."
+        }
+      },
+      "description": "Start packet capture parameters on virtual network gateway."
+    },
+    "ExpressRouteFailoverAllTestDetails": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+      },
+      "description": "Gateway Failover All Test Details"
+    },
+    "ExpressRouteFailoverTestDetails": {
+      "type": "object",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "circuits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverCircuitResourceDetails"
+          },
+          "description": "All circuits in the peering location"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the test",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Running",
+            "StartFailed",
+            "Stopping",
+            "Completed",
+            "StopFailed",
+            "Invalid",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverTestStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Time when the test was started"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Time when the test was completed"
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverConnectionResourceDetails"
+          },
+          "description": "All connections to the circuits in the peering location"
+        },
+        "testGuid": {
+          "type": "string",
+          "description": "The unique GUID associated with the test"
+        },
+        "testType": {
+          "type": "string",
+          "description": "The type of failover test",
+          "enum": [
+            "SingleSiteFailover",
+            "MultiSiteFailover",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverTestType",
+            "modelAsString": true
+          }
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of all issues with the test"
+        }
+      },
+      "description": "ExpressRoute failover test details"
+    },
+    "ExpressRouteFailoverCircuitResourceDetails": {
+      "type": "object",
+      "properties": {
+        "nrpResourceUri": {
+          "type": "string",
+          "description": "NRP Resource URI of the circuit",
+          "format": "arm-id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Circuit Name"
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Connection name associated with the circuit"
+        }
+      }
+    },
+    "ExpressRouteFailoverConnectionResourceDetails": {
+      "type": "object",
+      "properties": {
+        "nrpResourceUri": {
+          "type": "string",
+          "description": "NRP Resource URI of the connection",
+          "format": "arm-id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Connection Name"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the connection",
+          "enum": [
+            "Connected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "Time when the connection was last updated"
+        }
+      }
+    },
+    "ExpressRouteFailoverSingleTestDetailsObject": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
+      },
+      "description": "Gateway Failover Single Test Details Object"
+    },
+    "ExpressRouteFailoverSingleTestDetails": {
+      "type": "object",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the test",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Running",
+            "StartFailed",
+            "Stopping",
+            "Completed",
+            "StopFailed",
+            "Invalid",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverTestStatusForSingleTest",
+            "modelAsString": true
+          }
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Time when the test was started"
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "Time when the test was completed"
+        },
+        "redundantRoutes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverRedundantRoute"
+          },
+          "description": "List of routes received from this peering as well as some other peering location"
+        },
+        "nonRedundantRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of al the routes that were received only from this peering location"
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not"
+        },
+        "failoverConnectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FailoverConnectionDetails"
+          },
+          "description": "List of all the failover connections for this peering location"
+        }
+      },
+      "description": "ExpressRoute failover single test details"
+    },
+    "ExpressRouteFailoverRedundantRoute": {
+      "type": "object",
+      "properties": {
+        "peeringLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of all the peering locations for the redundant routes"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of all the redundant routes in the peering locations"
+        }
+      }
+    },
+    "FailoverConnectionDetails": {
+      "type": "object",
+      "properties": {
+        "failoverConnectionName": {
+          "type": "string",
+          "description": "Name of the failover connection"
+        },
+        "failoverLocation": {
+          "type": "string",
+          "description": "Location of the failover connection"
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "Whether the customer was able to establish connectivity through this failover connection or not"
+        }
+      }
+    },
+    "ExpressRouteFailoverStopApiParameters": {
+      "type": "object",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FailoverConnectionDetails"
+          },
+          "description": "List of all the failover connections for this peering location"
         }
       },
       "description": "Start packet capture parameters on virtual network gateway."
