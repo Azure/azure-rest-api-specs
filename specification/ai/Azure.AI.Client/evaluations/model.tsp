@@ -33,6 +33,7 @@ model EvaluatorConfiguration {
 @discriminator("type")
 model InputData {
   @doc("Evaluation input data")
+  @encodedName("application/json", "Uri")
   id: string;
 }
 
@@ -49,6 +50,7 @@ model AppInsightsConfiguration extends InputData {
 
 @doc("Dataset as source for evaluation.")
 model Dataset extends InputData {
+  @visibility("read")
   type: "dataset";
 }
 

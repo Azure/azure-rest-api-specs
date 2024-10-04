@@ -276,7 +276,7 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
-            "name": "body",
+            "name": "updateRequest",
             "in": "body",
             "description": "Update evaluation request.",
             "required": true,
@@ -316,7 +316,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "evaluation",
             "in": "body",
             "description": "Properties of Evaluation.",
             "required": true,
@@ -751,15 +751,16 @@
           "type": "string",
           "description": "Discriminator property for InputData."
         },
-        "id": {
+        "Uri": {
           "type": "string",
-          "description": "Evaluation input data"
+          "description": "Evaluation input data",
+          "x-ms-client-name": "id"
         }
       },
       "discriminator": "type",
       "required": [
         "type",
-        "id"
+        "Uri"
       ]
     },
     "Evaluations.PagedEvaluation": {
