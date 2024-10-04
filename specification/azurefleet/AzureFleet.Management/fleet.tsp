@@ -250,6 +250,7 @@ model VMAttributeMinMaxInteger {
   @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
   min?: int32;
 
+  @minValue(0)
   @doc("Max VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
   max?: int32;
 }
@@ -262,6 +263,7 @@ model VMAttributeMinMaxDouble {
   @doc("Minimum value. default 0. Double.MinValue()")
   min?: float64;
 
+  @minValue(0.0)
   @doc("Maximum value. Double.MaxValue(1.7976931348623157E+308)")
   max?: float64;
 }
@@ -365,8 +367,8 @@ union LocalStorageDiskType {
 union ArchitectureType {
   string,
 
-  @doc("AMD64 Architecture")
-  AMD64: "AMD64",
+  @doc("ARM64 Architecture")
+  ARM64: "ARM64",
 
   @doc("X86 Architecture")
   X86: "X86",
@@ -409,14 +411,11 @@ model VMAttributes {
   @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
   memoryInGiB: VMAttributeMinMaxDouble;
 
-  @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
-  memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
-
   @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
   localStorageSupport?: VMAttributeSupport;
 
   @doc("The range of local storage in GB specified from Min to Max.")
-  localStorageInGB?: VMAttributeMinMaxDouble;
+  localStorageInGiB?: VMAttributeMinMaxDouble;
 
   @extension("x-ms-identifiers", [])
   @doc("""
