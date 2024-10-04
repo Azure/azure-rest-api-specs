@@ -3739,6 +3739,10 @@
                 "nullable": true,
                 "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.\n"
               },
+              "parallel_tool_calls": {
+                "$ref": "#/components/schemas/ParallelToolCalls",
+                "nullable": true
+              },
               "response_format": {
                 "description": "An object specifying the format that the model must output. Compatible with [GPT-4o](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models), [GPT-4o mini](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models), [GPT-4 Turbo](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models) and all [GPT-3.5](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35) Turbo models newer than `gpt-3.5-turbo-1106`.\n\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which guarantees the model will match your supplied JSON schema.\n\nSetting to `{ \"type\": \"json_object\" }` enables JSON mode, which guarantees the message the model generates is valid JSON.\n\n**Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if `finish_reason=\"length\"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.\n",
                 "oneOf": [
@@ -3784,6 +3788,10 @@
                 "type": "boolean",
                 "nullable": true,
                 "default": false
+              },
+              "stream_options": {
+                "$ref": "#/components/schemas/chatCompletionStreamOptions",
+                "nullable": true
               },
               "temperature": {
                 "type": "number",
@@ -8202,10 +8210,6 @@
             "nullable": true,
             "description": "If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.\n"
           },
-          "stream_options": {
-            "$ref": "#/components/schemas/chatCompletionStreamOptions",
-            "nullable": true
-          },
           "max_prompt_tokens": {
             "type": "integer",
             "nullable": true,
@@ -8225,6 +8229,9 @@
           "tool_choice": {
             "$ref": "#/components/schemas/assistantsApiToolChoiceOption",
             "nullable": true
+          },
+          "parallel_tool_calls": {
+            "$ref": "#/components/schemas/ParallelToolCalls"
           },
           "response_format": {
             "$ref": "#/components/schemas/assistantsApiResponseFormatOption",
@@ -8485,6 +8492,9 @@
           "tool_choice": {
             "$ref": "#/components/schemas/assistantsApiToolChoiceOption",
             "nullable": true
+          },
+          "parallel_tool_calls": {
+            "$ref": "#/components/schemas/ParallelToolCalls"
           },
           "response_format": {
             "$ref": "#/components/schemas/assistantsApiResponseFormatOption",
