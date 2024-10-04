@@ -60,7 +60,7 @@ op update is Azure.Core.Foundations.Operation<
 @doc("Update an evaluation.")
 @route("evaluations/{id}")
 @get
-op update is Azure.Core.Foundations.Operation<
+op get is Azure.Core.Foundations.Operation<
   {
     @doc("Identifier of the evaluation.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
