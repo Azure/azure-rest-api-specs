@@ -33,7 +33,7 @@ model EvaluatorConfiguration {
 @discriminator("type")
 model InputData {
   @doc("Evaluation input data")
-  @encodedName("id", "Uri")
+  @encodedName("application/json", "Uri")
   id: string;
 }
 
