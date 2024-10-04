@@ -3762,6 +3762,12 @@ directive:
   - suppress: XmsIdentifierValidation
     from: networkManagerGroupMembership.json
     reason: By design, no id is needed for groupmembership resources.
+  - suppress: ResourceNameRestriction
+    from: virtualNetworkGateway.json
+    reason: The resource name parameter 'virtualNetworkGatewayName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
+  - suppress: ParametersInPost
+    from: virtualNetworkGateway.json
+    reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
 ```
 
 ---
