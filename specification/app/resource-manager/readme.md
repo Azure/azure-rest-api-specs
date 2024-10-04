@@ -54,6 +54,7 @@ input-file:
   - Microsoft.App/preview/2024-08-02-preview/DotNetComponents.json
   - Microsoft.App/preview/2024-08-02-preview/FunctionsExtension.json
   - Microsoft.App/preview/2024-08-02-preview/Global.json
+  - Microsoft.App/preview/2024-08-02-preview/HttpRouteConfig.json
   - Microsoft.App/preview/2024-08-02-preview/JavaComponents.json
   - Microsoft.App/preview/2024-08-02-preview/Jobs.json
   - Microsoft.App/preview/2024-08-02-preview/LogicAppsExtension.json
@@ -66,7 +67,6 @@ input-file:
   - Microsoft.App/preview/2024-08-02-preview/SourceControls.json
   - Microsoft.App/preview/2024-08-02-preview/Subscriptions.json
   - Microsoft.App/preview/2024-08-02-preview/Usages.json
-  - Microsoft.App/preview/2024-08-02-preview/HttpRouteConfig.json
 ```
 
 ### Tag: package-preview-2024-02
