@@ -1,13 +1,13 @@
 {
-  "title": "UpdateRules_CreateOrUpdate",
-  "operationId": "UpdateRules_CreateOrUpdate",
+  "title": "UpdateRules_Update",
+  "operationId": "UpdateRules_Update",
   "parameters": {
-    "api-version": "2024-10-01-preview",
+    "api-version": "2024-11-01-preview",
     "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
     "resourceGroupName": "rgopenapi",
     "updateRuleName": "updaterule1",
-    "resource": {
-      "location": "westus",
+    "properties": {
+      "tags": {},
       "properties": {
         "rebootSettings": "IfRequired",
         "windowsParameters": {
@@ -32,6 +32,12 @@
           "classificationsToInclude": [
             "Security"
           ]
+        },
+        "policies": {
+          "availability": {
+            "vmAvailabilitySet": "Bypass"
+          },
+          "installWindowsPatchesAfter": "Days1"
         }
       }
     }
@@ -39,7 +45,6 @@
   "responses": {
     "200": {
       "body": {
-        "location": "westus",
         "properties": {
           "rebootSettings": "IfRequired",
           "windowsParameters": {
@@ -65,59 +70,18 @@
               "Security"
             ]
           },
-          "approvePatchesAfterDays": 14,
+          "policies": {
+            "availability": {
+              "vmAvailabilitySet": "Bypass"
+            },
+            "installWindowsPatchesAfter": "Days1"
+          },
           "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.UpdateManager/updaterules/updaterule1",
-        "name": "updaterule1",
-        "type": "Microsoft.UpdateManager/updaterules",
-        "systemData": {
-          "createdBy": "iewyxsnriqktsvp",
-          "createdByType": "User",
-          "createdAt": "2023-05-19T00:28:48.610Z",
-          "lastModifiedBy": "xrchbnnuzierzpxw",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
-        }
-      }
-    },
-    "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
-      },
-      "body": {
+        "tags": {},
         "location": "westus",
-        "properties": {
-          "rebootSettings": "IfRequired",
-          "windowsParameters": {
-            "kbNumbersToExclude": [
-              "4025925"
-            ],
-            "kbNumbersToInclude": [
-              "4025924"
-            ],
-            "classificationsToInclude": [
-              "Critical"
-            ],
-            "excludeKbsRequiringReboot": true
-          },
-          "linuxParameters": {
-            "packageNameMasksToExclude": [
-              "vlan"
-            ],
-            "packageNameMasksToInclude": [
-              "openssh"
-            ],
-            "classificationsToInclude": [
-              "Security"
-            ]
-          },
-          "approvePatchesAfterDays": 14,
-          "provisioningState": "Succeeded"
-        },
         "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.UpdateManager/updaterules/updaterule1",
-        "name": "updaterule1",
-        "type": "Microsoft.UpdateManager/updaterules",
+        "name": "updateruleset1",
         "systemData": {
           "createdBy": "iewyxsnriqktsvp",
           "createdByType": "User",
