@@ -6,4 +6,4 @@ import "./evaluations/client.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Azure.AI, "AzureAIClient");
+@@clientName(Azure.AI.Client, "AzureAIClient");
