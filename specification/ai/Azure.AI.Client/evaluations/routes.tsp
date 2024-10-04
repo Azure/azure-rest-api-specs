@@ -15,7 +15,7 @@ namespace Azure.AI.Client.Evaluations;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
 @doc("Creates an evaluation.")
-@route("evaluations/create")
+@route("/evaluations/create")
 @post
 op create is Azure.Core.Foundations.Operation<
   {
@@ -39,7 +39,7 @@ op list is Azure.Core.Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
 @doc("Update an evaluation.")
-@route("evaluations/{id}")
+@route("/evaluations/{id}")
 @patch
 op update is Azure.Core.Foundations.Operation<
   {
@@ -57,8 +57,8 @@ op update is Azure.Core.Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Update an evaluation.")
-@route("evaluations/{id}")
+@doc("Get an evaluation.")
+@route("/evaluations/{id}")
 @get
 op get is Azure.Core.Foundations.Operation<
   {
