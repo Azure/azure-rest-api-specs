@@ -514,7 +514,8 @@
               "disabled",
               "semantic",
               "vector",
-              "queryRewrites"
+              "queryRewrites",
+              "all"
             ],
             "x-ms-enum": {
               "name": "QueryDebugMode",
@@ -539,6 +540,11 @@
                   "value": "queryRewrites",
                   "name": "QueryRewrites",
                   "description": "Allows the user to explore the list of query rewrites generated for their search request."
+                },
+                {
+                  "value": "all",
+                  "name": "All",
+                  "description": "Turn on all debug options."
                 }
               ]
             },
@@ -585,7 +591,7 @@
               "lexicon"
             ],
             "x-ms-enum": {
-              "name": "Speller",
+              "name": "QuerySpellerType",
               "modelAsString": true,
               "values": [
                 {
@@ -1348,10 +1354,10 @@
           "x-ms-client-name": "SemanticPartialResponseType",
           "description": "Type of partial response that was returned for a semantic ranking request."
         },
-        "@search.semanticQueryRewriteResultType": {
-          "$ref": "#/definitions/SemanticQueryRewriteResultType",
+        "@search.semanticQueryRewritesResultType": {
+          "$ref": "#/definitions/SemanticQueryRewritesResultType",
           "readOnly": true,
-          "x-ms-client-name": "SemanticQueryRewriteResultType",
+          "x-ms-client-name": "SemanticQueryRewritesResultType",
           "description": "Type of query rewrite that was used to retrieve documents."
         }
       },
@@ -1573,7 +1579,7 @@
           }
         ]
       },
-      "description": "Enables a debugging tool that can be used to further explore your search results."
+      "description": "Enables a debugging tool that can be used to further explore your search results. You can enable multiple debug modes simultaneously by separating them with a | character, for example: semantic|queryRewrites."
     },
     "SearchMode": {
       "type": "string",
@@ -2877,13 +2883,13 @@
       },
       "description": "Type of partial response that was returned for a semantic ranking request."
     },
-    "SemanticQueryRewriteResultType": {
+    "SemanticQueryRewritesResultType": {
       "type": "string",
       "enum": [
         "originalQueryOnly"
       ],
       "x-ms-enum": {
-        "name": "SemanticQueryRewriteResultType",
+        "name": "SemanticQueryRewritesResultType",
         "modelAsString": true,
         "values": [
           {
@@ -2989,7 +2995,7 @@
           }
         ]
       },
-      "description": "When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`."
+      "description": "This parameter is only valid if the query type is `semantic`. When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`."
     },
     "DebugInfo": {
       "type": "object",
@@ -3196,17 +3202,14 @@
       "type": "object",
       "properties": {
         "text": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "$ref": "#/definitions/QueryRewritesValuesDebugInfo",
           "readOnly": true,
           "description": "List of query rewrites generated for the text query."
         },
         "vectors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VectorQueryRewritesDebugInfo"
+            "$ref": "#/definitions/QueryRewritesValuesDebugInfo"
           },
           "readOnly": true,
           "description": "List of query rewrites generated for the vectorizable text queries."
@@ -3215,13 +3218,20 @@
       "readOnly": true,
       "description": "Contains debugging information specific to query rewrites."
     },
-    "VectorQueryRewritesDebugInfo": {
-      "type": "array",
-      "items": {
-        "type": "string"
+    "QueryRewritesValuesDebugInfo": {
+      "type": "object",
+      "properties": {
+        "rewrites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "List of query rewrites."
+        }
       },
       "readOnly": true,
-      "description": "List of query rewrites generated for the vectorizable text queries."
+      "description": "Contains debugging information specific to query rewrites."
     }
   },
   "parameters": {
