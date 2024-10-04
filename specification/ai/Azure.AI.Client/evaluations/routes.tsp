@@ -51,7 +51,7 @@ op update is Azure.Core.Foundations.Operation<
 
     @doc("Update evaluation request.")
     @body
-    update_request: UpdateEvaluationRequest;
+    updateRequest: UpdateEvaluationRequest;
   },
   OkResponse<Evaluation>
 >;
