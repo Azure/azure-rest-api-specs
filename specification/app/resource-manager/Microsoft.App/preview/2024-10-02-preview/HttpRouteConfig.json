@@ -350,7 +350,7 @@
               "description": "Custom domain bindings for http Routes' hostnames.",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CustomDomain"
+                "$ref": "./ContainerApps.json#/definitions/CustomDomain"
               },
               "x-ms-identifiers": [
                 "name"
@@ -370,39 +370,6 @@
         }
       },
       "x-ms-client-flatten": true
-    },
-    "CustomDomain": {
-      "description": "Custom Domain of a Http Route Config",
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "description": "Hostname.",
-          "type": "string"
-        },
-        "bindingType": {
-          "description": "Custom Domain binding type.",
-          "enum": [
-            "Disabled",
-            "SniEnabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "bindingType",
-            "modelAsString": true
-          }
-        },
-        "certificateId": {
-          "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      }
     },
     "HttpRouteProvisioningErrors": {
       "description": "List of provisioning errors for a http route config object",
