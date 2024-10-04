@@ -107,6 +107,7 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - edgeDeviceJobs.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -183,6 +184,7 @@ suppressions:
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
+      - edgeDeviceJobs.json
 
   - code: XmsPageableForListCalls
     reason: already used in GA api version, fixing it will cause breaking change
@@ -245,6 +247,7 @@ input-file:
   - preview/2024-09-01-preview/clusters.json
   - preview/2024-09-01-preview/deploymentSettings.json
   - preview/2024-09-01-preview/edgeDevices.json
+  - preview/2024-09-01-preview/edgeDeviceJobs.json
   - preview/2024-09-01-preview/extensions.json
   - preview/2024-09-01-preview/hciCommon.json
   - preview/2024-09-01-preview/offers.json
