@@ -3,11 +3,14 @@
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
     "resourceGroupName": "Default-NotificationRules",
     "actionGroupName": "SampleActionGroup",
-    "api-version": "2023-09-01-preview",
+    "api-version": "2024-10-01-preview",
     "actionGroupPatch": {
       "tags": {
         "key1": "value1",
         "key2": "value2"
+      },
+      "identity": {
+        "type": "SystemAssigned"
       },
       "properties": {
         "enabled": false
@@ -25,6 +28,11 @@
         "tags": {
           "key1": "value1",
           "key2": "value2"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "principalId": "f11979a4-36d1-45d0-9097-a0da3c7e855d"
         },
         "properties": {
           "groupShortName": "sample",
