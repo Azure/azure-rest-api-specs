@@ -1,0 +1,3009 @@
+{
+  "operationId": "TrialMatcher_CreateJob",
+  "title": "Creates a Trial Matcher job with the given request body.",
+  "parameters": {
+    "endpoint": "{endpoint}/health-insights/trial-matcher/jobs/{id}?api-version={api-version}",
+    "api-version": "2024-08-01-preview",
+    "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d11",
+    "resource": {
+      "jobData": {
+        "patients": [
+          {
+            "id": "Patient ID Example 2",
+            "details": {
+              "sex": "female",
+              "birthDate": "1976-09-10",
+              "clinicalInfo": [
+                {
+                  "resourceType": "Condition",
+                  "code": {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C0041296",
+                        "display": "Tuberculosis"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "code": {
+                    "coding": [
+                      {
+                        "code": "C0006826",
+                        "display": "MalignantNeoplasms",
+                        "system": "http://www.nlm.nih.gov/research/umls"
+                      }
+                    ]
+                  },
+                  "resourceType": "Observation",
+                  "status": "unknown",
+                  "valueBoolean": true
+                },
+                {
+                  "code": {
+                    "coding": [
+                      {
+                        "code": "C0018802",
+                        "display": "MalignantNeoplasms",
+                        "system": "http://www.nlm.nih.gov/research/umls"
+                      }
+                    ]
+                  },
+                  "resourceType": "Observation",
+                  "status": "unknown",
+                  "valueBoolean": true
+                }
+              ]
+            }
+          }
+        ],
+        "configuration": {
+          "verbose": true,
+          "includeEvidence": true,
+          "clinicalTrials": {
+            "customTrials": [
+              {
+                "resourceType": "ResearchStudy",
+                "contained": [
+                  {
+                    "resourceType": "PlanDefinition",
+                    "id": "1b5bc5d5-9413-43f7-9da6-70db2606b7cd",
+                    "name": "Rilpivirine",
+                    "title": "Rilpivirine",
+                    "type": {
+                      "coding": [
+                        {
+                          "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+                          "code": "workflow-definition",
+                          "display": "Workflow Definition"
+                        }
+                      ]
+                    },
+                    "status": "active",
+                    "action": [
+                      {
+                        "title": "Rilpivirine",
+                        "description": "Patients will receive rilpivirine tablet 25 milligram or adjusted dose orally once daily for 240 weeks.",
+                        "code": [
+                          {
+                            "text": "Drug"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "PlanDefinition",
+                    "id": "30f45f8a-a0f5-4eed-a5e1-4819137c10b2",
+                    "name": "Zidovudine",
+                    "title": "Zidovudine",
+                    "type": {
+                      "coding": [
+                        {
+                          "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+                          "code": "workflow-definition",
+                          "display": "Workflow Definition"
+                        }
+                      ]
+                    },
+                    "status": "active",
+                    "action": [
+                      {
+                        "title": "Zidovudine",
+                        "description": "Type=exact, form= appropriate pediatric formulation, unit=mg, route=oral. The patients will receive this selected NRTI once daily for 240 weeks.",
+                        "code": [
+                          {
+                            "text": "Drug"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "PlanDefinition",
+                    "id": "8958e19c-17db-4152-874d-cf68c3918769",
+                    "name": "Abacavir",
+                    "title": "Abacavir",
+                    "type": {
+                      "coding": [
+                        {
+                          "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+                          "code": "workflow-definition",
+                          "display": "Workflow Definition"
+                        }
+                      ]
+                    },
+                    "status": "active",
+                    "action": [
+                      {
+                        "title": "Abacavir",
+                        "description": "Type=exact, form=appropriate pediatric formulation, unit=mg, route=oral. The patients will receive this selected NRTI once daily for 240 weeks.",
+                        "code": [
+                          {
+                            "text": "Drug"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "PlanDefinition",
+                    "id": "bef1c7b6-1e1a-4fb4-8bcd-b9d965dd09e6",
+                    "name": "Tenofovir disoproxil fumarate",
+                    "title": "Tenofovir disoproxil fumarate",
+                    "type": {
+                      "coding": [
+                        {
+                          "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+                          "code": "workflow-definition",
+                          "display": "Workflow Definition"
+                        }
+                      ]
+                    },
+                    "status": "active",
+                    "action": [
+                      {
+                        "title": "Tenofovir disoproxil fumarate",
+                        "description": "Type=exact, form=appropriate pediatric formulation, unit=mg, route=oral. The patients will receive this selected NRTI once daily for 240 weeks.",
+                        "code": [
+                          {
+                            "text": "Drug"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "PlanDefinition",
+                    "id": "ec554338-0167-4034-98dd-ee1cd5860430",
+                    "name": "Lamivudine",
+                    "title": "Lamivudine",
+                    "type": {
+                      "coding": [
+                        {
+                          "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+                          "code": "workflow-definition",
+                          "display": "Workflow Definition"
+                        }
+                      ]
+                    },
+                    "status": "active",
+                    "action": [
+                      {
+                        "title": "Lamivudine",
+                        "description": "Type=exact, form=appropriate pediatric formulation, unit=mg, route=oral. The patients will receive this selected NRTI once daily for 240 weeks.",
+                        "code": [
+                          {
+                            "text": "Drug"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "PlanDefinition",
+                    "id": "8ddc695e-efab-441e-bd49-c1decfdb80bf",
+                    "name": "Emtricitabine",
+                    "title": "Emtricitabine",
+                    "type": {
+                      "coding": [
+                        {
+                          "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+                          "code": "workflow-definition",
+                          "display": "Workflow Definition"
+                        }
+                      ]
+                    },
+                    "status": "active",
+                    "action": [
+                      {
+                        "title": "Emtricitabine",
+                        "description": "Type=exact, form=appropriate pediatric formulation, unit=mg, route=oral. The patients will receive this selected NRTI once daily for 240 weeks.",
+                        "code": [
+                          {
+                            "text": "Drug"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "73e459c6-9b92-479d-b122-0712d18a9131",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "TreatmentName"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0723712",
+                              "display": "therapeutic"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                              "code": "220281",
+                              "display": "therapeutic"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000046327",
+                              "display": "therapeutic"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mmsl",
+                              "code": "7381",
+                              "display": "therapeutic"
+                            }
+                          ],
+                          "text": "therapeutic"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "47519-4",
+                              "display": "History of Procedures"
+                            }
+                          ],
+                          "text": "History of Procedures"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "TreatmentName"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0086413",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://ncimeta.nci.nih.gov",
+                              "code": "C1325",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                              "code": "347399",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/cvx",
+                              "code": "61",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/hl7v2.5",
+                              "code": "61",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/hl7v3.0",
+                              "code": "61",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D016915",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000015914",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/csp",
+                              "code": "3059-5000",
+                              "display": "HIV vaccine"
+                            },
+                            {
+                              "system": "http://loinc.org",
+                              "code": "LP183501-8",
+                              "display": "HIV vaccine"
+                            }
+                          ],
+                          "text": "HIV vaccine"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "47519-4",
+                              "display": "History of Procedures"
+                            }
+                          ],
+                          "text": "History of Procedures"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "127161fc-b30f-4efc-ae14-2d064dc6084b",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#73e459c6-9b92-479d-b122-0712d18a9131",
+                          "type": "Group"
+                        },
+                        "exclude": true
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "MedicationClass"
+                            }
+                          ],
+                          "text": "HIV drug",
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "somecode",
+                              "display": "somecode"
+                            }
+                          ]
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "10160-0",
+                              "display": "History of medication use"
+                            }
+                          ],
+                          "text": "History of medication use"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "c26ff014-3da3-419b-9338-6e4b4d49031e",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "one-or-more",
+                          "display": "One Or More"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "MedicationName"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0132326",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D019829",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/drugbank",
+                              "code": "DB00238",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/pdq",
+                              "code": "CDR0000712787",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                              "code": "99DK7FVK1H",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mthspl",
+                              "code": "99DK7FVK1H",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/ndfrt",
+                              "code": "4020991",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://ncimeta.nci.nih.gov",
+                              "code": "C29277",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://snomed.info/sctv",
+                              "code": "108704001",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                              "code": "75157",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.whocc.no/atc",
+                              "code": "J05AG01",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nddf",
+                              "code": "006062",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                              "code": "eiK..",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://loinc.org",
+                              "code": "LP21317-0",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mmsl",
+                              "code": "175112",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/lch_nw",
+                              "code": "sh2010013984",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000016392",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/gs",
+                              "code": "2030",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/csp",
+                              "code": "4007-0088",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                              "code": "53654",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/usp",
+                              "code": "m56485",
+                              "display": "nevirapine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/uspmg",
+                              "code": "MTHU000656",
+                              "display": "nevirapine"
+                            }
+                          ],
+                          "text": "nevirapine"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "10160-0",
+                              "display": "History of medication use"
+                            }
+                          ],
+                          "text": "History of medication use"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "MedicationName"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0043474",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/pdq",
+                              "code": "CDR0000040121",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://ncimeta.nci.nih.gov",
+                              "code": "C947",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D015215",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/csp",
+                              "code": "2109-4800",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://snomed.info/sctv",
+                              "code": "387151007",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/psy",
+                              "code": "05223",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                              "code": "41905",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/drugbank",
+                              "code": "DB00495",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://snomed.info/sct",
+                              "code": "C-55B60",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                              "code": "ei5..",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000013273",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                              "code": "CDR0000044478",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/ndfrt",
+                              "code": "4019502",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                              "code": "11413",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://loinc.org",
+                              "code": "LP16744-2",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_dtp",
+                              "code": "NSC0602670",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/usp",
+                              "code": "m89510",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mthspl",
+                              "code": "4B9XT59T7S",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/gs",
+                              "code": "2650",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_ctrp",
+                              "code": "C947",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                              "code": "4B9XT59T7S",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mmsl",
+                              "code": "d00034",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.whocc.no/atc",
+                              "code": "J05AF01",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/uspmg",
+                              "code": "MTHU000671",
+                              "display": "zidovudine"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nddf",
+                              "code": "003019",
+                              "display": "zidovudine"
+                            }
+                          ],
+                          "text": "zidovudine"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "10160-0",
+                              "display": "History of medication use"
+                            }
+                          ],
+                          "text": "History of medication use"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "9ab418f5-9bf1-4bb7-a55f-0eed1244addb",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#c26ff014-3da3-419b-9338-6e4b4d49031e",
+                          "type": "Group"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "SymptomOrSign"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0282474",
+                              "display": "mother-to-child transmission"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D018445",
+                              "display": "mother-to-child transmission"
+                            }
+                          ],
+                          "text": "mother-to-child transmission"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "c31f130b-c0e7-411a-a32b-57f07ea62559",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#127161fc-b30f-4efc-ae14-2d064dc6084b",
+                          "type": "Group"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#9ab418f5-9bf1-4bb7-a55f-0eed1244addb",
+                          "type": "Group"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "1d943af4-3b3e-4363-9e82-bc0e59b8c3e1",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "one-or-more",
+                          "display": "One Or More"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "MedicationName"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0132326",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D019829",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/drugbank",
+                              "code": "DB00238",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/pdq",
+                              "code": "CDR0000712787",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                              "code": "99DK7FVK1H",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mthspl",
+                              "code": "99DK7FVK1H",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/ndfrt",
+                              "code": "4020991",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://ncimeta.nci.nih.gov",
+                              "code": "C29277",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://snomed.info/sctv",
+                              "code": "108704001",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                              "code": "75157",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.whocc.no/atc",
+                              "code": "J05AG01",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nddf",
+                              "code": "006062",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                              "code": "eiK..",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://loinc.org",
+                              "code": "LP21317-0",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mmsl",
+                              "code": "175112",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/lch_nw",
+                              "code": "sh2010013984",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000016392",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/gs",
+                              "code": "2030",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/csp",
+                              "code": "4007-0088",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                              "code": "53654",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/usp",
+                              "code": "m56485",
+                              "display": "NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/uspmg",
+                              "code": "MTHU000656",
+                              "display": "NVP"
+                            }
+                          ],
+                          "text": "NVP"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "10160-0",
+                              "display": "History of medication use"
+                            }
+                          ],
+                          "text": "History of medication use"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "MedicationName"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0043474",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/pdq",
+                              "code": "CDR0000040121",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://ncimeta.nci.nih.gov",
+                              "code": "C947",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D015215",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/csp",
+                              "code": "2109-4800",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://snomed.info/sctv",
+                              "code": "387151007",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/psy",
+                              "code": "05223",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                              "code": "41905",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/drugbank",
+                              "code": "DB00495",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://snomed.info/sct",
+                              "code": "C-55B60",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                              "code": "ei5..",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000013273",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                              "code": "CDR0000044478",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/ndfrt",
+                              "code": "4019502",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                              "code": "11413",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://loinc.org",
+                              "code": "LP16744-2",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_dtp",
+                              "code": "NSC0602670",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/usp",
+                              "code": "m89510",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mthspl",
+                              "code": "4B9XT59T7S",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/gs",
+                              "code": "2650",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_ctrp",
+                              "code": "C947",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                              "code": "4B9XT59T7S",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mmsl",
+                              "code": "d00034",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.whocc.no/atc",
+                              "code": "J05AF01",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/uspmg",
+                              "code": "MTHU000671",
+                              "display": "AZT"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nddf",
+                              "code": "003019",
+                              "display": "AZT"
+                            }
+                          ],
+                          "text": "AZT"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "10160-0",
+                              "display": "History of medication use"
+                            }
+                          ],
+                          "text": "History of medication use"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "8eddc9da-cdfc-43d9-a9fc-5306d66362f3",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#1d943af4-3b3e-4363-9e82-bc0e59b8c3e1",
+                          "type": "Group"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "SymptomOrSign"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0282474",
+                              "display": "mother-to-child transmission"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D018445",
+                              "display": "mother-to-child transmission"
+                            }
+                          ],
+                          "text": "mother-to-child transmission"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "4ee79ae8-bf19-4474-a72e-3616ac0a9fdf",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "MedicationClass"
+                            }
+                          ],
+                          "text": "ARVs"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "10160-0",
+                              "display": "History of medication use"
+                            }
+                          ],
+                          "text": "History of medication use"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#8eddc9da-cdfc-43d9-a9fc-5306d66362f3",
+                          "type": "Group"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "583a9867-c95e-4225-bd19-47c324e26c0f",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "ExaminationName"
+                            }
+                          ],
+                          "text": "Plasma viral load"
+                        },
+                        "valueQuantity": {
+                          "value": 100000,
+                          "comparator": ">"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "35d36257-564c-48e0-9c65-b2551870b0bb",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "MedicationName"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0132326",
+                              "display": "with NVP"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D005838",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/psy",
+                              "code": "20920",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000005452",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://loinc.org",
+                              "code": "LP345004-8",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://ncimeta.nci.nih.gov",
+                              "code": "C16631",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://snomed.info/sctv",
+                              "code": "145681002",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                              "code": "CDR0000660739",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/aod",
+                              "code": "0000002877",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://snomed.info/sct",
+                              "code": "F-E0280",
+                              "display": "genotypic"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/csp",
+                              "code": "1258-5784",
+                              "display": "genotypic"
+                            }
+                          ],
+                          "text": "genotypic"
+                        },
+                        "valueCodeableConcept": {
+                          "text": "value:"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "SymptomOrSign"
+                            }
+                          ],
+                          "text": "non-nucleoside reverse transcriptase inhibitor resistance"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "bdcbe31b-c0f7-4205-9b75-34a8418cfdb2",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "one-or-more",
+                          "display": "One Or More"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "Diagnosis"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0041296",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medlineplus",
+                              "code": "41",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://ncimeta.nci.nih.gov",
+                              "code": "C3423",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                              "code": "31051",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000012630",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://snomed.info/sctv",
+                              "code": "56717001",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                              "code": "A1...",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D014376",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/cst",
+                              "code": "INFECT",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                              "code": "CDR0000513048",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icpc-2",
+                              "code": "MTHU076452",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mdr",
+                              "code": "10021870",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/who",
+                              "code": "0923",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://snomed.info/sct",
+                              "code": "DE-14800",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                              "code": "A15-A19",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/bi",
+                              "code": "BI00198",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/dxp",
+                              "code": "U004166",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_nichd",
+                              "code": "C3423",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://loinc.org",
+                              "code": "LA10513-2",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/lch_nw",
+                              "code": "sh85138408",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://snomed.info/sct",
+                              "code": "D-0188",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/lch",
+                              "code": "U004809",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icpc-2",
+                              "code": "A70012",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icd-10",
+                              "code": "A15-A19.9",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icd-10",
+                              "code": "A15-A19.9",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/ccs",
+                              "code": "1",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/ccs_10",
+                              "code": "1",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_cptac",
+                              "code": "C3423",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/csp",
+                              "code": "0368-2498",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/aod",
+                              "code": "0000004838",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                              "code": "010-018.99",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/icpc2eeng",
+                              "code": "A70",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/costar",
+                              "code": "754",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/ccpss",
+                              "code": "1018255",
+                              "display": "tuberculosis"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/psy",
+                              "code": "54410",
+                              "display": "tuberculosis"
+                            }
+                          ],
+                          "text": "tuberculosis"
+                        },
+                        "valueCodeableConcept": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "ConditionQualifier"
+                            }
+                          ],
+                          "text": "active"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "TreatmentName"
+                            }
+                          ],
+                          "text": "treated for tuberculosis"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "47519-4",
+                              "display": "History of Procedures"
+                            }
+                          ],
+                          "text": "History of Procedures"
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  },
+                  {
+                    "resourceType": "Group",
+                    "id": "2a43edc4-0000-0000-0000-000000000000",
+                    "extension": [
+                      {
+                        "id": "GroupQuantifier",
+                        "valueCoding": {
+                          "system": "http://hl7.org/fhir/action-selection-behavior",
+                          "code": "all",
+                          "display": "All"
+                        }
+                      }
+                    ],
+                    "type": "person",
+                    "actual": false,
+                    "characteristic": [
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "Diagnosis"
+                            }
+                          ],
+                          "text": "human immuno deficiency virus infection"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "ExaminationName"
+                            }
+                          ],
+                          "text": "HIV-1 plasma viral load"
+                        },
+                        "valueQuantity": {
+                          "value": 500,
+                          "unit": "HIV-1"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#c31f130b-c0e7-411a-a32b-57f07ea62559",
+                          "type": "Group"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#4ee79ae8-bf19-4474-a72e-3616ac0a9fdf",
+                          "type": "Group"
+                        },
+                        "exclude": true
+                      },
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#583a9867-c95e-4225-bd19-47c324e26c0f",
+                          "type": "Group"
+                        },
+                        "exclude": true
+                      },
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#35d36257-564c-48e0-9c65-b2551870b0bb",
+                          "type": "Group"
+                        },
+                        "exclude": true
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "TreatmentName"
+                            }
+                          ],
+                          "text": "disallowed concomitant therapy"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "47519-4",
+                              "display": "History of Procedures"
+                            }
+                          ],
+                          "text": "History of Procedures"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "Diagnosis"
+                            }
+                          ],
+                          "coding": [
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls",
+                              "code": "C0001175",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                              "code": "B20",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/ram",
+                              "code": "DX272",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/qmr",
+                              "code": "R0121441",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                              "code": "A788z",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://snomed.info/sctv",
+                              "code": "186715004",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                              "code": "1684",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/chv",
+                              "code": "0000000649",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/icpc",
+                              "code": "B90",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/mdr",
+                              "code": "10000563",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                              "code": "31779",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/psy",
+                              "code": "00595",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_nichd",
+                              "code": "C2851",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/msh",
+                              "code": "D000163",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/aod",
+                              "code": "0000023174",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://ncimeta.nci.nih.gov",
+                              "code": "C2851",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/cst",
+                              "code": "HIV SYND",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icpc-2",
+                              "code": "B90001",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/icpc2eeng",
+                              "code": "B90",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_cptac",
+                              "code": "C2851",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/medlineplus",
+                              "code": "1",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/bi",
+                              "code": "BI00716",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://snomed.info/sct",
+                              "code": "DE-36310",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/who",
+                              "code": "1233",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icpc-2",
+                              "code": "MTHU080583",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                              "code": "CDR0000044365",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/csp",
+                              "code": "1560-6271",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                              "code": "042",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/costar",
+                              "code": "023",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://loinc.org",
+                              "code": "LA10430-9",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            },
+                            {
+                              "system": "http://www.nlm.nih.gov/research/umls/ccpss",
+                              "code": "1014998",
+                              "display": "Acquired Immunodeficiency Syndrome"
+                            }
+                          ],
+                          "text": "Acquired Immunodeficiency Syndrome"
+                        },
+                        "valueCodeableConcept": {
+                          "extension": [
+                            {
+                              "id": "CharacteristicCodeType",
+                              "valueString": "ConditionQualifier"
+                            }
+                          ],
+                          "text": "currently active"
+                        },
+                        "exclude": false
+                      },
+                      {
+                        "code": {
+                          "text": "LogicalGroup"
+                        },
+                        "valueReference": {
+                          "reference": "#bdcbe31b-c0f7-4205-9b75-34a8418cfdb2",
+                          "type": "Group"
+                        },
+                        "exclude": true
+                      },
+                      {
+                        "code": {
+                          "coding": [
+                            {
+                              "system": "http://loinc.org",
+                              "code": "63900-5",
+                              "display": "age"
+                            }
+                          ],
+                          "text": "age"
+                        },
+                        "valueRange": {
+                          "low": {
+                            "value": 6,
+                            "unit": "years",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "a"
+                          },
+                          "high": {
+                            "value": 17,
+                            "unit": "years",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "a"
+                          }
+                        },
+                        "exclude": false
+                      }
+                    ]
+                  }
+                ],
+                "identifier": [
+                  {
+                    "use": "official",
+                    "value": "CR002677",
+                    "assigner": {
+                      "display": "Janssen Sciences Ireland UC"
+                    }
+                  },
+                  {
+                    "use": "usual",
+                    "value": "NCTtesttest",
+                    "assigner": {
+                      "display": "ClinicalTrials.gov"
+                    }
+                  },
+                  {
+                    "use": "secondary",
+                    "value": "TMC278-TiDP38-C213"
+                  },
+                  {
+                    "use": "secondary",
+                    "value": "2008-001696-30"
+                  }
+                ],
+                "title": "A Study to Evaluate the Pharmacokinetics, Safety, Tolerability, and Antiviral Efficacy of Rilpivirine (TMC278) in Human Immunodeficiency Virus Infected Adolescents and Children Aged Greater Than or Equal to 6 Years",
+                "protocol": [
+                  {
+                    "reference": "#1b5bc5d5-9413-43f7-9da6-70db2606b7cd",
+                    "type": "PlanDefinition",
+                    "display": "Rilpivirine"
+                  },
+                  {
+                    "reference": "#30f45f8a-a0f5-4eed-a5e1-4819137c10b2",
+                    "type": "PlanDefinition",
+                    "display": "Zidovudine"
+                  },
+                  {
+                    "reference": "#8958e19c-17db-4152-874d-cf68c3918769",
+                    "type": "PlanDefinition",
+                    "display": "Abacavir"
+                  },
+                  {
+                    "reference": "#bef1c7b6-1e1a-4fb4-8bcd-b9d965dd09e6",
+                    "type": "PlanDefinition",
+                    "display": "Tenofovir disoproxil fumarate"
+                  },
+                  {
+                    "reference": "#ec554338-0167-4034-98dd-ee1cd5860430",
+                    "type": "PlanDefinition",
+                    "display": "Lamivudine"
+                  },
+                  {
+                    "reference": "#8ddc695e-efab-441e-bd49-c1decfdb80bf",
+                    "type": "PlanDefinition",
+                    "display": "Emtricitabine"
+                  }
+                ],
+                "status": "active",
+                "primaryPurposeType": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/research-study-prim-purp-type",
+                      "version": "4.0.0",
+                      "code": "treatment",
+                      "display": "Treatment"
+                    }
+                  ],
+                  "text": "Treatment"
+                },
+                "phase": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/research-study-phase",
+                      "version": "4.0.0",
+                      "code": "phase-2",
+                      "display": "Phase 2"
+                    }
+                  ],
+                  "text": "Phase 2"
+                },
+                "category": [
+                  {
+                    "coding": [
+                      {
+                        "system": "http://terminology.hl7.org/CodeSystem/research-study-prim-purp-type",
+                        "version": "4.0.0",
+                        "code": "treatment",
+                        "display": "Treatment"
+                      }
+                    ],
+                    "text": "Treatment"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://clinicaltrials.gov",
+                        "code": "Interventional",
+                        "display": "Interventional"
+                      }
+                    ],
+                    "text": "Interventional"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://clinicaltrials.gov",
+                        "code": "Single Group Assignment",
+                        "display": "Single Group Assignment"
+                      }
+                    ],
+                    "text": "Single Group Assignment"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://clinicaltrials.gov",
+                        "code": "None (Open Label)",
+                        "display": "None (Open Label)"
+                      }
+                    ],
+                    "text": "None (Open Label)"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://clinicaltrials.gov",
+                        "code": "NoneRetained",
+                        "display": "NoneRetained"
+                      }
+                    ],
+                    "text": "NoneRetained"
+                  }
+                ],
+                "focus": [
+                  {
+                    "text": "Drug"
+                  }
+                ],
+                "condition": [
+                  {
+                    "text": "Human Immuno Deficiency (HIV) Infection"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C0021051",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://snomed.info/sctv",
+                        "code": "234532001",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                        "code": "39922",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-10",
+                        "code": "D84.9",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                        "code": "CDR0000045724",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                        "code": "D84.9",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-10",
+                        "code": "D84.9",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "D-4600",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/csp",
+                        "code": "1560-5885",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/mdr",
+                        "code": "10021460",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/chv",
+                        "code": "0000006602",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://ncimeta.nci.nih.gov",
+                        "code": "C3131",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/hpo",
+                        "code": "HP:0002721",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/omim",
+                        "code": "MTHU032911",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "234532001",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icpc-2",
+                        "code": "B99011",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                        "code": "2156",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/msh",
+                        "code": "D007153",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_nichd",
+                        "code": "C39725",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                        "code": "279.3",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                        "code": "X20GZ",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "F-C0450",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/costar",
+                        "code": "U000355",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://loinc.org",
+                        "code": "MTHU054768",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nanda-i",
+                        "code": "02515",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/lch_nw",
+                        "code": "sh85064574",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/ccpss",
+                        "code": "1007151",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icpc-2",
+                        "code": "MTHU037620",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/aod",
+                        "code": "0000004832",
+                        "display": "Immunologic Deficiency Syndromes"
+                      }
+                    ],
+                    "text": "Immunologic Deficiency Syndromes"
+                  }
+                ],
+                "contact": [
+                  {
+                    "name": "Use link at the bottom of the page to see if you qualify for an enrolling site (see list). If you still have questions:",
+                    "telecom": [
+                      {
+                        "system": "email",
+                        "value": "JNJ.CT@sylogent.com",
+                        "use": "work"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "StudyDirector Janssen Sciences Ireland UC Clinical Trial"
+                  }
+                ],
+                "keyword": [
+                  {
+                    "text": "HIV Infection"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C0599685",
+                        "display": "Antiretroviral"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/msh",
+                        "code": "D044966",
+                        "display": "Antiretroviral"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                        "code": "250564",
+                        "display": "Antiretroviral"
+                      },
+                      {
+                        "system": "http://snomed.info/sctv",
+                        "code": "713540004",
+                        "display": "Antiretroviral"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/csp",
+                        "code": "0715-4905",
+                        "display": "Antiretroviral"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/lch_nw",
+                        "code": "sh2003006231",
+                        "display": "Antiretroviral"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/chv",
+                        "code": "0000042059",
+                        "display": "Antiretroviral"
+                      }
+                    ],
+                    "text": "Antiretroviral"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C0019704",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://snomed.info/sctv",
+                        "code": "243598007",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_cdisc",
+                        "code": "C14220",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_ctrp",
+                        "code": "C14220",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                        "code": "X73kd",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://loinc.org",
+                        "code": "MTHU009425",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://ncimeta.nci.nih.gov",
+                        "code": "C14220",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "L-35211",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/mdr",
+                        "code": "10020455",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/csp",
+                        "code": "3130-7357",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/msh",
+                        "code": "D015497",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/ncbi",
+                        "code": "11676",
+                        "display": "HIV-1"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/chv",
+                        "code": "0000006190",
+                        "display": "HIV-1"
+                      }
+                    ],
+                    "text": "HIV-1"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C0001175",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                        "code": "B20",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/ram",
+                        "code": "DX272",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/qmr",
+                        "code": "R0121441",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                        "code": "A788z",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://snomed.info/sctv",
+                        "code": "186715004",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                        "code": "1684",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/chv",
+                        "code": "0000000649",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/icpc",
+                        "code": "B90",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/mdr",
+                        "code": "10000563",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                        "code": "31779",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/psy",
+                        "code": "00595",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_nichd",
+                        "code": "C2851",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/msh",
+                        "code": "D000163",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/aod",
+                        "code": "0000023174",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://ncimeta.nci.nih.gov",
+                        "code": "C2851",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/cst",
+                        "code": "HIV SYND",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icpc-2",
+                        "code": "B90001",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/icpc2eeng",
+                        "code": "B90",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_cptac",
+                        "code": "C2851",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/medlineplus",
+                        "code": "1",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/bi",
+                        "code": "BI00716",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "DE-36310",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/who",
+                        "code": "1233",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icpc-2",
+                        "code": "MTHU080583",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                        "code": "CDR0000044365",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/csp",
+                        "code": "1560-6271",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                        "code": "042",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/costar",
+                        "code": "023",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://loinc.org",
+                        "code": "LA10430-9",
+                        "display": "AIDS"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/ccpss",
+                        "code": "1014998",
+                        "display": "AIDS"
+                      }
+                    ],
+                    "text": "AIDS"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C0008059",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "S-10170",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://snomed.info/sctv",
+                        "code": "67822003",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://ncimeta.nci.nih.gov",
+                        "code": "C16423",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/lch_nw",
+                        "code": "sh85023418",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/aod",
+                        "code": "0000007008",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/msh",
+                        "code": "D002648",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/chv",
+                        "code": "0000002765",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/ccpss",
+                        "code": "0060058",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/csp",
+                        "code": "0635-1343",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/lch",
+                        "code": "U005340",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/hl7v3.0",
+                        "code": "CHD",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://loinc.org",
+                        "code": "LA9949-4",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_nichd",
+                        "code": "C16423",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/dxp",
+                        "code": "U000730",
+                        "display": "Children"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                        "code": "C16423",
+                        "display": "Children"
+                      }
+                    ],
+                    "text": "Children"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C1566826",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                        "code": "309423",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.whocc.no/atc",
+                        "code": "J05AG05",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://ncimeta.nci.nih.gov",
+                        "code": "C76929",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://snomed.info/sctv",
+                        "code": "703777002",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://loinc.org",
+                        "code": "MTHU042155",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/drugbank",
+                        "code": "DB08864",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/mmsl",
+                        "code": "d07776",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/mthspl",
+                        "code": "FI96A8X663",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                        "code": "FI96A8X663",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/ndfrt",
+                        "code": "4030730",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                        "code": "1102270",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/gs",
+                        "code": "4688",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/usp",
+                        "code": "m7163",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/msh",
+                        "code": "D000068696",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/uspmg",
+                        "code": "MTHU002683",
+                        "display": "Rilpivirine"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nddf",
+                        "code": "013795",
+                        "display": "Rilpivirine"
+                      }
+                    ],
+                    "text": "Rilpivirine (TMC278)"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C1521725",
+                        "display": "Pediatric"
+                      },
+                      {
+                        "system": "http://loinc.org",
+                        "code": "LP100615-6",
+                        "display": "Pediatric"
+                      },
+                      {
+                        "system": "http://ncimeta.nci.nih.gov",
+                        "code": "C39299",
+                        "display": "Pediatric"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                        "code": "CDR0000046245",
+                        "display": "Pediatric"
+                      }
+                    ],
+                    "text": "Pediatric"
+                  },
+                  {
+                    "text": "Human Immuno Deficiency (HIV) Infection"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C0021051",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://snomed.info/sctv",
+                        "code": "234532001",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/medcin",
+                        "code": "39922",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-10",
+                        "code": "D84.9",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_nci-gloss",
+                        "code": "CDR0000045724",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                        "code": "D84.9",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-10",
+                        "code": "D84.9",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "D-4600",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/csp",
+                        "code": "1560-5885",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/mdr",
+                        "code": "10021460",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/chv",
+                        "code": "0000006602",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://ncimeta.nci.nih.gov",
+                        "code": "C3131",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/hpo",
+                        "code": "HP:0002721",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/omim",
+                        "code": "MTHU032911",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "234532001",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icpc-2",
+                        "code": "B99011",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_fda",
+                        "code": "2156",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/msh",
+                        "code": "D007153",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nci_nichd",
+                        "code": "C39725",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                        "code": "279.3",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/rcd",
+                        "code": "X20GZ",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://snomed.info/sct",
+                        "code": "F-C0450",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/costar",
+                        "code": "U000355",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://loinc.org",
+                        "code": "MTHU054768",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/nanda-i",
+                        "code": "02515",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/lch_nw",
+                        "code": "sh85064574",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/ccpss",
+                        "code": "1007151",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://hl7.org/fhir/sid/icpc-2",
+                        "code": "MTHU037620",
+                        "display": "Immunologic Deficiency Syndromes"
+                      },
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls/aod",
+                        "code": "0000004832",
+                        "display": "Immunologic Deficiency Syndromes"
+                      }
+                    ],
+                    "text": "Immunologic Deficiency Syndromes"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://hl7.org/fhir/administrative-gender",
+                        "code": "Unknown",
+                        "display": "Unknown"
+                      }
+                    ],
+                    "text": "Unknown"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://decades-value-set.ctm.microsoft.org",
+                        "code": "0",
+                        "display": "Age keyword for indexing - 0"
+                      }
+                    ],
+                    "text": "Age keyword for indexing - 0"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "http://decades-value-set.ctm.microsoft.org",
+                        "code": "10",
+                        "display": "Age keyword for indexing - 10"
+                      }
+                    ],
+                    "text": "Age keyword for indexing - 10"
+                  }
+                ],
+                "description": "This is a Phase II, open-label (all people involved know the identity of the assigned drug)\r\n      and single arm study. The study will consist of a screening period of maximum 8 weeks, an\r\n      initial treatment period of 48 weeks, a post week 48 treatment extension period of 4 years,\r\n      and a 4 week follow-up period. A follow-up period will take place regardless of the presence\r\n      of serious adverse events (SAEs) if patients withdraw early (ie, before Week 48) or if\r\n      patients do not participate in the extension after Week 48; after Week 48, a 4-week follow-up\r\n      visit is only required in case of ongoing (S)AEs at the final on treatment visit. The initial\r\n      48-week treatment period will be structured into 2 age Cohorts; Cohort 1 (Aged greater than\r\n      or equal to [>=] 12 to less than [<] 18 years) and Cohort 2 (Children Aged >= 6 to < 12\r\n      years) and each Cohort will have 2 parts. The first part of the trial (Part 1) is designed to\r\n      evaluate the steady-state pharmacokinetic (PK) profile and the short-term safety and\r\n      antiviral activity of rilpivirine 25 mg or adjusted dose once daily when administered in\r\n      combination with 2 NRTIs. At Week 2/4, intensive PK will be done and an analysis together\r\n      with short-term safety and antiviral activity will be reviewed by a data monitoring committee\r\n      (DMC). For adolescents (Cohort 1) if the mean steady-state exposure in this first group of\r\n      patients is comparable to that of the adult population (ie, is within 80-125 percentage of\r\n      the mean exposure of the 25 mg once daily dose group in study, TMC278-C204), and the Week 2/4\r\n      safety and antiviral activity results have been reviewed and deemed satisfactory by the DMC,\r\n      the second part of the trial will start. The second part of the trial will evaluate long-term\r\n      (48 weeks and 240 weeks) safety, efficacy, and pharmacokinetics of rilpivirine in combination\r\n      with the background regimen of 2 NRTIs with a primary analysis time point at 24 weeks. For\r\n      patients aged greater than or equal to (>=) 6 to less than (<) 12 years (Cohort 2), after\r\n      being treated for at least 4 weeks and the Week 2 intensive PK and Week 4 safety and\r\n      antiviral activity have been reviewed and results are satisfactory, recruitment in Part 1\r\n      will resume and additional subjects will be enrolled to have at least 10 subjects in Part 1.\r\n      Once an appropriate RPV dose has been selected, Part 1 of Cohort 2 will be considered\r\n      complete and Part 2 will start. All patients from Part 1 will roll over in Part 2 and\r\n      additional patients will be recruited in Part 2 to have at least 25 subjects (including those\r\n      from Part 1) overall. In both cohorts of the trial, the ART will consist of rilpivirine 25 mg\r\n      or adjusted dose once daily and an investigator-selected background regimen containing 2\r\n      NRTIs. Patients safety will be monitored throughout the study and during the follow up\r\n      visits.",
+                "enrollment": [
+                  {
+                    "reference": "#2a43edc4-0000-0000-0000-000000000000",
+                    "type": "Group"
+                  }
+                ],
+                "period": {
+                  "start": "2011-01",
+                  "end": "2027-08"
+                },
+                "arm": [
+                  {
+                    "name": "Rilpivirine (TMC278)",
+                    "type": {
+                      "text": "Experimental"
+                    },
+                    "description": "The patients will receive rilpivirine with 2 nucleoside/nucleotide reverse transcriptase inhibitors (NRTIs) as a background regimen in Cohort 1 [Aged greater than or equal to (> =) 12 to less than (<) 18 years] and Cohort 2 (children aged > = 6 to < 12 years). The NRTIs includes zidovudine, abacavir, or tenofovir disoproxil fumarate in combination with lamivudine or emtricitabine."
+                  }
+                ]
+              }
+            ],
+            "registryFilters": [
+              {
+                "studyTypes": [
+                  "interventional",
+                  "observational"
+                ],
+                "recruitmentStatuses": [
+                  "recruiting",
+                  "enrollingByInvitation"
+                ],
+                "phases": [
+                  "phase2",
+                  "phase3"
+                ],
+                "purposes": [
+                  "diagnostic",
+                  "prevention",
+                  "basicScience"
+                ],
+                "sources": [
+                  "clinicaltrials.gov"
+                ],
+                "facilityLocations": [
+                  {
+                    "city": "Basel",
+                    "countryOrRegion": "Switzerland"
+                  },
+                  {
+                    "city": "Allschwil",
+                    "countryOrRegion": "Switzerland"
+                  }
+                ]
+              },
+              {
+                "sponsors": [
+                  "Janssen"
+                ],
+                "sources": [
+                  "clinicaltrials.gov"
+                ],
+                "facilityAreas": [
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        7.588576,
+                        47.559601
+                      ]
+                    },
+                    "properties": {
+                      "subType": "Circle",
+                      "radius": 80000
+                    }
+                  }
+                ]
+              },
+              {
+                "ids": [
+                  "NCT04006015",
+                  "NCT04545788",
+                  "NCT04773711"
+                ],
+                "sources": [
+                  "clinicaltrials.gov"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "c7e9a8d7-6b5f-4e3d-9a2c-1f8b0e2c3f4a",
+        "Operation-Location": "{endpoint}/health-insights/trial-matcher/jobs/{id}?api-version=2024-08-01-preview"
+      },
+      "body": {
+        "status": "notStarted",
+        "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d12"
+      }
+    },
+    "201": {
+      "headers": {
+        "x-ms-request-id": "c7e9a8d7-6b5f-4e3d-9a2c-1f8b0e2c3f4a",
+        "Operation-Location": "{endpoint}/health-insights/trial-matcher/jobs/{id}?api-version=2024-08-01-preview"
+      },
+      "body": {
+        "status": "notStarted",
+        "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d12"
+      }
+    }
+  }
+}
