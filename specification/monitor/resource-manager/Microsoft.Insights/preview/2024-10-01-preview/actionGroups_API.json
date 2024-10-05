@@ -5,7 +5,7 @@
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     },
-    "version": "2023-09-01-preview"
+    "version": "2024-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -142,10 +142,10 @@
             "$ref": "#/parameters/ActionGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -168,7 +168,7 @@
         "operationId": "ActionGroups_Update",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -177,7 +177,7 @@
             "$ref": "#/parameters/ActionGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "actionGroupPatch",
@@ -225,7 +225,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -234,7 +234,7 @@
             "$ref": "#/parameters/ActionGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "notificationRequest",
@@ -282,7 +282,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -294,7 +294,7 @@
             "$ref": "#/parameters/NotificationIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -327,10 +327,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -366,10 +366,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -414,10 +414,10 @@
             "description": "The receiver to re-enable."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -470,6 +470,9 @@
           },
           "type": "object",
           "description": "Resource tags"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       },
       "required": [
@@ -905,6 +908,10 @@
         "tenantId": {
           "type": "string",
           "description": "Indicates the tenant id for aad auth."
+        },
+        "managedIdentity": {
+          "type": "string",
+          "description": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" "
         }
       },
       "required": [
@@ -973,6 +980,10 @@
         "subscriptionId": {
           "type": "string",
           "description": "The Id for the subscription containing this event hub"
+        },
+        "managedIdentity": {
+          "type": "string",
+          "description": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" "
         }
       },
       "required": [
@@ -1089,6 +1100,10 @@
           "type": "boolean",
           "default": false,
           "description": "Indicates whether to use common alert schema."
+        },
+        "managedIdentity": {
+          "type": "string",
+          "description": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" "
         }
       },
       "required": [
@@ -1141,6 +1156,10 @@
           "type": "boolean",
           "default": false,
           "description": "Indicates whether to use common alert schema."
+        },
+        "managedIdentity": {
+          "type": "string",
+          "description": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" "
         }
       },
       "required": [
@@ -1173,6 +1192,10 @@
           "type": "boolean",
           "default": false,
           "description": "Indicates whether to use common alert schema."
+        },
+        "managedIdentity": {
+          "type": "string",
+          "description": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" "
         }
       },
       "required": [
@@ -1255,6 +1278,9 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "x-ms-client-flatten": true,
