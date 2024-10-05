@@ -637,6 +637,15 @@
           },
           "description": "List of private endpoint connections associated with the specified resource.",
           "readOnly": true
+        },
+        "cluster": {
+          "$ref": "#/definitions/Cluster",
+          "default": null,
+          "description": "Cluster properties of a server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "description": "The properties of a server."
@@ -1205,6 +1214,72 @@
           "format": "int32",
           "default": 0,
           "description": "day of week for maintenance window"
+        }
+      }
+    },
+    "ClusterConfigurationProperties": {
+      "type": "object",
+      "description": "Additional properties of cluster.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The node count."
+        },
+        "value": {
+          "type": "string",
+          "description": "The parameter value."
+        }
+      }
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "Properties of cluster.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The cluster type."
+        },
+        "customerResourceId": {
+          "type": "string",
+          "description": "The customer resource id."
+        },
+        "clusterGroupName": {
+          "type": "string",
+          "description": "Cluster group name"
+        },
+        "fullyQualifiedClusterGroupReadWriteDomainName": {
+          "type": "string",
+          "description": "Fully Qualified Cluster Group Read Write Domain Name."
+        },
+        "fullyQualifiedClusterGroupReadOnlyDomainName": {
+          "type": "string",
+          "description": "Fully Qualified Cluster Group Read Only Domain Name."
+        },
+        "sourceClusterLocation": {
+          "type": "string",
+          "description": "Location of source cluster."
+        },
+        "clusterParameters": {
+          "$ref": "#/definitions/ClusterConfigurationProperties",
+          "x-ms-client-flatten": true,
+          "description": "Additional properties of cluster."
+        }
+      }
+    },
+    "Cluster": {
+      "type": "object",
+      "description": "Cluster properties of a server.",
+      "properties": {
+        "clusterSize": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0,
+          "description": "The node count for the cluster."
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of cluster."
         }
       }
     }
