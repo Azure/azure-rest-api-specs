@@ -96,8 +96,20 @@ interface BatchClient {
 // Api overrides
 @@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
 @@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
+@@clientName(BatchClient.jobScheduleExists,
+  "jobScheduleExistsInternal",
+  "csharp"
+);
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
+@@clientName(BatchClient.getTaskFileProperties,
+  "getTaskFilePropertiesInternal",
+  "csharp"
+);
 @@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "csharp");
+@@clientName(BatchClient.getNodeFileProperties,
+  "getNodeFilePropertiesInternal",
+  "csharp"
+);
 
 /* JAVA OVERRIDES */
 // client name overrides
