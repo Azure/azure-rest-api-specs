@@ -5933,13 +5933,28 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/FabricName"
+            "name": "fabricName",
+            "in": "path",
+            "description": "fabric name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
-            "$ref": "#/parameters/ProtectionContainerName"
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "The protection container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
-            "$ref": "#/parameters/MappingName"
+            "name": "mappingName",
+            "in": "path",
+            "description": "The mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "addIdentityInput",
