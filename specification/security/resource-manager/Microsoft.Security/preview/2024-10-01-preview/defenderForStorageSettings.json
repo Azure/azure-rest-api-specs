@@ -160,7 +160,7 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/cancelMalwareScan/{scanId}": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/cancelMalwareScan": {
       "post": {
         "x-ms-examples": {
           "Cancel a Defender for Storage malware scan for the specified resource.": {
@@ -183,9 +183,6 @@
           },
           {
             "$ref": "#/parameters/DefenderForStorageSettingName"
-          },
-          {
-            "$ref": "#/parameters/ScanId"
           }
         ],
         "responses": {
@@ -204,11 +201,11 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/getMalwareScanStatus/{scanId}": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScanStatus/{scanId}": {
       "get": {
         "x-ms-examples": {
           "Gets the status of a Defender for Storage malware scan for the specified resource.": {
-            "$ref": "./examples/DefenderForStorage/GetMalwareScanStatus_example.json"
+            "$ref": "./examples/DefenderForStorage/MalwareScanStatus_example.json"
           }
         },
         "tags": [
