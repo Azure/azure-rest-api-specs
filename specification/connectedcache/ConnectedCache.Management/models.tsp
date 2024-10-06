@@ -10,6 +10,7 @@ namespace Microsoft.ConnectedCache;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("provisioning state of the resource")
+@visibility("read")
 union ProvisioningState {
   string,
   ResourceProvisioningState,
