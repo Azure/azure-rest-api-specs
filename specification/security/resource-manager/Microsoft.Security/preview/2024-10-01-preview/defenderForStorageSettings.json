@@ -122,7 +122,7 @@
     "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan": {
       "post": {
         "x-ms-examples": {
-          "Initiate a Defender for Storage malware scan for the specified resource.": {
+          "Initiate a Defender for Storage malware scan for the specified storage account.": {
             "$ref": "./examples/DefenderForStorage/StartMalwareScan_example.json"
           }
         },
@@ -148,7 +148,7 @@
           "200": {
             "description": "The status of the malware scan operation.",
             "schema": {
-              "$ref": "#/definitions/MalwareScanStatus"
+              "$ref": "#/definitions/MalwareScan"
             }
           },
           "default": {
@@ -160,7 +160,7 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/cancelMalwareScan": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelScan": {
       "post": {
         "x-ms-examples": {
           "Cancel a Defender for Storage malware scan for the specified resource.": {
@@ -183,13 +183,16 @@
           },
           {
             "$ref": "#/parameters/DefenderForStorageSettingName"
+          },
+          {
+            "$ref": "#/parameters/ScanId"
           }
         ],
         "responses": {
           "200": {
             "description": "The status of the malware scan operation.",
             "schema": {
-              "$ref": "#/definitions/MalwareScanStatus"
+              "$ref": "#/definitions/MalwareScan"
             }
           },
           "default": {
@@ -201,11 +204,11 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScanStatus/{scanId}": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}": {
       "get": {
         "x-ms-examples": {
-          "Gets the status of a Defender for Storage malware scan for the specified resource.": {
-            "$ref": "./examples/DefenderForStorage/MalwareScanStatus_example.json"
+          "Gets the Defender for Storage malware scan for the specified storage resource.": {
+            "$ref": "./examples/DefenderForStorage/GetMalwareScan_example.json"
           }
         },
         "tags": [
@@ -213,8 +216,8 @@
           "Antimalware",
           "Scan"
         ],
-        "description": "Gets the status of a Defender for Storage malware scan for the specified storage account.",
-        "operationId": "DefenderForStorage_GetMalwareScanStatus",
+        "description": "Gets the Defender for Storage malware scan for the specified storage resource.",
+        "operationId": "DefenderForStorage_GetMalwareScan",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -231,9 +234,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The status of the malware scan operation.",
+            "description": "The state of the malware scan operation.",
             "schema": {
-              "$ref": "#/definitions/MalwareScanStatus"
+              "$ref": "#/definitions/MalwareScan"
             }
           },
           "default": {
@@ -345,16 +348,16 @@
         }
       }
     },
-    "MalwareScanStatus": {
+    "MalwareScan": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MalwareScanStatusProperties"
+          "$ref": "#/definitions/MalwareScanProperties"
         }
       },
-      "description": "Describes the status of a malware scan operation."
+      "description": "Describes the state of a malware scan operation."
     },
-    "MalwareScanStatusProperties": {
+    "MalwareScanProperties": {
       "type": "object",
       "properties": {
         "scanId": {
