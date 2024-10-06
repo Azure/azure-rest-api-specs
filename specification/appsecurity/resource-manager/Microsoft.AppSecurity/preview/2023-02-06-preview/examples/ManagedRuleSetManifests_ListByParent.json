@@ -1,0 +1,74 @@
+{
+  "operationId": "AppProtectManagedRuleSetManifests_ListByParent",
+  "title": "AppProtectManagedRuleSetManifests_ListByParent1",
+  "parameters": {
+    "api-version": "2023-02-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "managedRuleSetManifestName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.AppSecurity/AppProtectManagedRuleSetManifests/default",
+            "name": "default",
+            "type": "Microsoft.AppSecurity/AppProtectManagedRuleSetManifests",
+            "location": "global",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "defaultRuleSet": {
+                "ruleSetType": "DRS",
+                "ruleSetVersion": "3.2"
+              },
+              "availableRuleSets": [
+                {
+                  "ruleSetType": "DRS",
+                  "ruleSetVersion": "3.2",
+                  "ruleGroups": [
+                    {
+                      "ruleGroupName": "General",
+                      "description": "",
+                      "rules": [
+                        {
+                          "ruleId": "200002",
+                          "description": "Failed to Parse Request Body.",
+                          "defaultAction": "AnomalyScoring",
+                          "defaultState": "Enabled"
+                        },
+                        {
+                          "ruleId": "200003",
+                          "description": "Multipart Request Body Strict Validation.",
+                          "defaultAction": "AnomalyScoring",
+                          "defaultState": "Enabled"
+                        },
+                        {
+                          "ruleId": "200004",
+                          "description": "Possible Multipart Unmatched Boundary.",
+                          "defaultAction": "AnomalyScoring",
+                          "defaultState": "Enabled"
+                        }
+                      ]
+                    },
+                    {
+                      "ruleGroupName": "REQUEST-911-METHOD-ENFORCEMENT",
+                      "description": "",
+                      "rules": [
+                        {
+                          "ruleId": "911100",
+                          "description": "Method is not allowed by policy",
+                          "defaultAction": "AnomalyScoring",
+                          "defaultState": "Enabled"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
