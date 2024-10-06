@@ -4,16 +4,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager;
 namespace Microsoft.ConnectedCache;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("provisioning state of the resource")
-@visibility("read")
 union ProvisioningState {
   string,
-  ResourceProvisioningState,
+  Azure.ResourceManager.ResourceProvisioningState,
 
   /** unknown  state of the provisioning state */
   Unknown: "Unknown",
