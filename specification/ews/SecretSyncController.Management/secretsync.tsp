@@ -13,9 +13,14 @@ namespace Microsoft.SecretSyncController;
 
 @doc("The SecretSync resource.")
 model SecretSync is TrackedResource<SecretSyncProperties> {
-  ...ResourceNameParameter<SecretSync>;
+  ...ResourceNameParameter<
+    SecretSync,
+    NamePattern = "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+  >;
   ...ExtendedLocationProperty;
 }
+
+@@maxLength(SecretSync.name, 253);
 
 @doc("The properties of the SecretSync instance.")
 model SecretSyncProperties {

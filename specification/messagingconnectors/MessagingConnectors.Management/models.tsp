@@ -210,6 +210,9 @@ model EventHubConfig {
 
 @doc("Source data format Types")
 union SourceDataFormatTypes {
+  @doc("None config")
+  None: "None",
+
   @doc("JSON format")
   JSON: "JSON",
 
@@ -335,6 +338,53 @@ model JsonConverterConfig extends ConverterConfig {
   decimalFormat?: JsonDecimalFormat;
 }
 
+@doc("CloudEvents types")
+union CloudEventsTypes {
+  @doc("Do not use CloudEventsConfig")
+  None: "None",
+
+  @doc("CatalogCloudEventsConfig")
+  Catalog: "Catalog",
+
+  string,
+}
+
+@doc("Cloud events config")
+@discriminator("type")
+model CloudEventsConfig {
+  @doc("Type of CloudEventsConfig.")
+  type: CloudEventsTypes;
+}
+
+@doc("Catalog schema id config")
+model CatalogSchemaId {
+  @doc("SchemaGroup id.")
+  schemaGroupId: string;
+
+  @doc("Schema id.")
+  schemaId: string;
+
+  @doc("Endpoint.")
+  endpoint: string;
+}
+
+@doc("Catalog cloud events transform config.")
+model CatalogCloudEventsConfig extends CloudEventsConfig {
+  @doc("Type of CatalogCloudEventsConfig.")
+  type: CloudEventsTypes.Catalog;
+
+  @doc("Whether auto-register new schemas.")
+  autoRegisterSchemas: boolean;
+
+  @doc("Catalog schemaIds.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  catalogSchemaIds: CatalogSchemaId[];
+
+  @doc("access token.")
+  @secret
+  accessToken: string;
+}
+
 @doc("Properties of one arm resource")
 model ResourceProperties {
   @doc("Properties of one Connector")
@@ -368,6 +418,9 @@ model ConnectorProperties {
 
   @doc("Data format of the data source")
   sourceDataFormat?: SourceDataFormat;
+
+  @doc("Cloud events config")
+  cloudEventsConfig?: CloudEventsConfig;
 
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
@@ -614,10 +667,9 @@ union AzureServiceBusType {
 
   string,
 }
-
 @doc("Configuration for AzureServiceBusSourceConnector")
 model AzureServiceBusSourceConnectorProperties extends ConnectorProperties {
-  @doc("Type of AzureServiceBusSourceConnector")
+  @doc("Type of AzureServiceBusSource")
   connectorType: ConnectorType.AzureServiceBusSource;
 
   @doc("Direction of the Source Connector.")
