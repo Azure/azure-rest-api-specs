@@ -1,0 +1,447 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workloads Client",
+    "version": "2024-10-01-preview",
+    "description": "Workloads client provides access to various workload operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ConfigurationValidationResultsOperations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Workloads/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/configurationValidationResults/{configurationValidationResultResourceName}": {
+      "get": {
+        "operationId": "ConfigurationValidationResultsOperations_Get",
+        "tags": [
+          "ConfigurationValidationResultsOperations"
+        ],
+        "description": "The get on configuration validation results.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationValidationResultResourceName",
+            "in": "path",
+            "description": "The name of the ConfigurationValidationResults",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,80}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationValidationResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfigurationResults": {
+      "type": "object",
+      "description": "Represents the results of configuration quality checks on a resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the quality check."
+        },
+        "executionLayer": {
+          "$ref": "#/definitions/QualityCheckExecutionLayer",
+          "description": "The execution layer where the quality check was performed."
+        },
+        "recommendedState": {
+          "type": "string",
+          "description": "The configuration recommended state for the quality check."
+        },
+        "customizedState": {
+          "type": "string",
+          "description": "The customized state provided by the user."
+        },
+        "actualStateOnResource": {
+          "type": "string",
+          "description": "The actual state of the resource."
+        },
+        "configurationDeviation": {
+          "$ref": "#/definitions/QualityCheckConfigurationDeviation",
+          "description": "Describes the deviation from the recommended state."
+        },
+        "recommendedAction": {
+          "type": "string",
+          "description": "The mitigation steps to follow best practices."
+        },
+        "recommendationDetails": {
+          "type": "string",
+          "description": "Detailed explanation of the recommendation."
+        },
+        "checkType": {
+          "$ref": "#/definitions/QualityCheckType",
+          "description": "The type of quality check."
+        },
+        "checkCategory": {
+          "type": "string",
+          "description": "The category of the quality check."
+        },
+        "checkVersion": {
+          "type": "string",
+          "description": "The version of the quality check."
+        },
+        "impactLevel": {
+          "$ref": "#/definitions/QualityCheckImpactLevel",
+          "description": "The impact level of the quality check."
+        }
+      },
+      "required": [
+        "name",
+        "executionLayer",
+        "recommendedState",
+        "actualStateOnResource",
+        "configurationDeviation",
+        "recommendedAction",
+        "recommendationDetails",
+        "checkType",
+        "checkCategory",
+        "checkVersion",
+        "impactLevel"
+      ]
+    },
+    "ConfigurationValidationResults": {
+      "type": "object",
+      "description": "Configuration validation results.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationValidationResultsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConfigurationValidationResultsErrorDetails": {
+      "type": "object",
+      "description": "The configuration validation results error details.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "The error code generated by the quality check execution.",
+          "readOnly": true
+        },
+        "errorCategory": {
+          "type": "string",
+          "description": "The category of the error.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "Detailed information about the error.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "errorCode",
+        "errorCategory",
+        "errorDetails"
+      ]
+    },
+    "ConfigurationValidationResultsProperties": {
+      "type": "object",
+      "description": "Configuration validation results properties.",
+      "properties": {
+        "workloadInstanceArmId": {
+          "type": "string",
+          "description": "The workload instance ARM ID."
+        },
+        "environment": {
+          "type": "string",
+          "description": "The environment of the resource being validated."
+        },
+        "componentName": {
+          "type": "string",
+          "description": "The name of the component being validated."
+        },
+        "roleName": {
+          "type": "string",
+          "description": "The name of the role being validated."
+        },
+        "resourceArmIds": {
+          "type": "array",
+          "description": "The ARM IDs of resources associated with this validation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "qualityChecksTemplateId": {
+          "type": "string",
+          "description": "The template ID of the quality checks being applied."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ConfigurationValidationResultsErrorDetails",
+          "description": "Error details related to the quality check execution.",
+          "readOnly": true
+        },
+        "configurationResults": {
+          "$ref": "#/definitions/ConfigurationResults",
+          "description": "The results of the configuration validation."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ValidationConfigurationResultsProvisioningState",
+          "description": "The provisioning state of the validation results resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "workloadInstanceArmId",
+        "environment",
+        "roleName",
+        "resourceArmIds",
+        "qualityChecksTemplateId",
+        "configurationResults"
+      ]
+    },
+    "QualityCheckConfigurationDeviation": {
+      "type": "string",
+      "description": "Defines the deviation status for a quality check configuration.",
+      "enum": [
+        "Yes",
+        "No",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "QualityCheckConfigurationDeviation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Yes",
+            "value": "Yes",
+            "description": "A configuration deviation between the actual state and the recommended/customized state."
+          },
+          {
+            "name": "No",
+            "value": "No",
+            "description": "No deviation; the actual state matches the recommended/customized state."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The deviation status is unknown as the quality checks couldn't be executed."
+          }
+        ]
+      }
+    },
+    "QualityCheckExecutionLayer": {
+      "type": "string",
+      "description": "The execution layer of a quality check.",
+      "enum": [
+        "AzureResourceManager",
+        "OperatingSystem"
+      ],
+      "x-ms-enum": {
+        "name": "QualityCheckExecutionLayer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureResourceManager",
+            "value": "AzureResourceManager",
+            "description": "The Azure Resource Manager execution layer for quality checks."
+          },
+          {
+            "name": "OperatingSystem",
+            "value": "OperatingSystem",
+            "description": "The operating system execution layer for quality checks."
+          }
+        ]
+      }
+    },
+    "QualityCheckImpactLevel": {
+      "type": "string",
+      "description": "The level of impact associated with a quality check.",
+      "enum": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "QualityCheckImpactLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High-impact level for quality checks."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium-impact level for quality checks."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low-impact level for quality checks."
+          }
+        ]
+      }
+    },
+    "QualityCheckType": {
+      "type": "string",
+      "description": "The types of quality checks that can be performed.",
+      "enum": [
+        "Default",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "QualityCheckType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "The default quality check type."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "The custom quality check type."
+          }
+        ]
+      }
+    },
+    "ValidationConfigurationResultsProvisioningState": {
+      "type": "string",
+      "description": "Represents the provisioning states of a resource.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Creating",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationConfigurationResultsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Provisioning has succeeded."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Provisioning is updating."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Provisioning is creating resources."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning has failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Provisioning is deleting resources."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning has been canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}
