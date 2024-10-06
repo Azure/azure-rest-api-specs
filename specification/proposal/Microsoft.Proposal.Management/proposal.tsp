@@ -26,12 +26,10 @@ model ProposalResourceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
   @doc("The proposal product code.")
   productCode: string;
-
   @doc("The proposal status.")
-  status?: ProposalStatus;
+  status?: ProposalStatus
 }
 
 @armResourceOperations(ProposalResource)
@@ -40,6 +38,5 @@ interface ProposalResources {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ProposalResource>;
   update is ArmResourcePatchSync<ProposalResource, ProposalResourceProperties>;
   delete is ArmResourceDeleteSync<ProposalResource>;
-  listByResourceGroup is ArmResourceListByParent<ProposalResource>;
-  listBySubscription is ArmListBySubscription<ProposalResource>;
+  listByScope is ArmResourceListAtScope<ProposalResource>;
 }

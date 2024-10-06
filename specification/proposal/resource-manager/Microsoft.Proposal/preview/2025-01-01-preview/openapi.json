@@ -51,7 +51,7 @@
   "paths": {
     "/{resourceUri}/providers/Microsoft.Proposal/products": {
       "get": {
-        "operationId": "ProductResources_ListByParent",
+        "operationId": "ProductResources_List",
         "tags": [
           "ProductResources"
         ],
@@ -76,11 +76,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ProductResources_ListByParent": {
-            "$ref": "./examples/ProductResources_ListByParent_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -123,11 +118,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ProductResources_Get": {
-            "$ref": "./examples/ProductResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -193,11 +183,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ProductResources_CreateOrUpdate": {
-            "$ref": "./examples/ProductResources_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -238,11 +223,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ProductResources_Delete": {
-            "$ref": "./examples/ProductResources_Delete_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -272,50 +252,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Proposal/proposals": {
-      "get": {
-        "operationId": "ProposalResources_ListBySubscription",
-        "tags": [
-          "ProposalResources"
-        ],
-        "description": "List ProposalResource resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProposalResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ProposalResources_ListBySubscription": {
-            "$ref": "./examples/ProposalResources_ListBySubscription_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -323,7 +259,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Proposal/proposals": {
       "get": {
-        "operationId": "ProposalResources_ListByResourceGroup",
+        "operationId": "ProposalResources_ListByScope",
         "tags": [
           "ProposalResources"
         ],
@@ -351,11 +287,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ProposalResources_ListByResourceGroup": {
-            "$ref": "./examples/ProposalResources_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -401,11 +332,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ProposalResources_Get": {
-            "$ref": "./examples/ProposalResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -474,11 +400,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ProposalResources_CreateOrUpdate": {
-            "$ref": "./examples/ProposalResources_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -531,11 +452,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ProposalResources_Update": {
-            "$ref": "./examples/ProposalResources_Update_MaximumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -575,11 +491,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ProposalResources_Delete": {
-            "$ref": "./examples/ProposalResources_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -860,7 +771,8 @@
             "description": "Change accepted for processing"
           }
         ]
-      }
+      },
+      "readOnly": true
     }
   },
   "parameters": {
