@@ -1,0 +1,521 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-08-01-preview",
+    "title": "SubscriptionClient",
+    "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Subscription/transfers/default": {
+      "put": {
+        "description": "Transfer subscriptions to destination email id.",
+        "operationId": "Transfers_ExportTransfer",
+        "x-ms-examples": {
+          "CreateTransfer": {
+            "$ref": "./examples/CreateTransfer.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Transfer Details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Transfer creation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferCreationRequest"
+            }
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/transfer/{transferId}": {
+      "get": {
+        "operationId": "Transfers_GetTransferDetails",
+        "x-ms-examples": {
+          "GetTransferById": {
+            "$ref": "./examples/GetTransferById.json"
+          },
+          "GetLatestTransferBySubscriptionId": {
+            "$ref": "./examples/GetLatestTransferBySubscriptionId.json"
+          }
+        },
+        "description": "Get transfer details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/transferIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/default": {
+      "get": {
+        "operationId": "Subscription_GetSubscriptionDetails",
+        "x-ms-examples": {
+          "GetSubscriptionById": {
+            "$ref": "./examples/GetSubscriptionById.json"
+          },
+          "GetSubscriptionsByUser": {
+            "$ref": "./examples/GetSubscriptionsByUser.json"
+          }
+        },
+        "description": "Get subscription details",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/operations": {
+      "get": {
+        "description": "Lists all of the available Microsoft.Subscription API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "getOperations": {
+            "$ref": "./examples/getOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ProxyResourceWithTags": {
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "description": "Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TransferSourceOrDestination":{
+      "description": "Transfer Source or Destination.",
+      "type": "object",
+      "properties": {
+        "billingChannel": {
+          "description": "Billing Channel.",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "description": "Last updated time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "tenantId": {
+          "description": "tenantId id.",
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "upn": {
+          "description": "User principal name (upn).",
+          "type": "string"
+        }
+      }
+    },
+    "Products": {
+      "description": "Product Details.",
+      "type": "object",
+      "properties": {
+        "productType": {
+          "description": "product type",
+          "type": "string"
+        },
+        "productId": {
+          "description": "product Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "product name",
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "product sku description",
+          "type": "string"
+        },
+        "status": {
+          "description": "product transfer status",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransferProductStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TransferCreationRequest": {
+      "description": "Transfer creation request",
+      "type": "object",
+      "properties": {
+        "destinationEmailId": {
+          "description": "Destination email id.",
+          "type": "string"
+        },
+        "transferServiceOwnership": {
+          "description": "Transfer Service Ownership.",
+          "type": "boolean"
+        },
+        "subscriptionIds": {
+          "description": "Subscription ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "description": "Locale information.",
+          "type": "string"
+        }
+      }
+    },
+    "TransferResponse":{
+      "description": "Transfer Response Details.",
+      "type": "object",
+      "properties": {
+        "transferId": {
+          "description": "Transfer id.",
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "source": {
+          "$ref": "#/definitions/TransferSourceOrDestination"
+        },
+        "destination": {
+          "$ref": "#/definitions/TransferSourceOrDestination"
+        },
+        "lastUpdatedTime": {
+          "description": "Last updated time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "expirationTime": {
+          "description": "Expiration time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "description": "Transfer status",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "InProgress",
+            "Completed",
+            "CompletedWithError",
+            "Failed",
+            "Canceled",
+            "Declined",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "TransferStatus",
+            "modelAsString": true
+          }
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Products"
+          }
+        },
+        "transferServiceOwnership": {
+          "description": "Transfer service ownership.",
+          "type": "boolean"
+        }
+      }
+    },
+    "TransferDetails": {
+      "description": "Transfer details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TransferResponse"
+        }
+      }
+    },
+    "BillingDetails":{
+      "description": "Billing details.",
+      "type": "object",
+      "properties": {
+        "billingType":{
+          "description": "Billing type.",
+          "type": "string"
+        },
+        "channelType":{
+          "description": "Channel type.",
+          "type": "string"
+        },
+        "paymentType":{
+          "description": "Payment type.",
+          "type": "string"
+        },
+        "workloadType":{
+          "description": "Workload type.",
+          "type": "string"
+        },
+        "billingAccountId":{
+          "description": "Billing account id.",
+          "type": "string"
+        },
+        "billingProfileId":{
+          "description": "Billing profile Id.",
+          "type": "string"
+        },
+        "invoiceSectionId":{
+          "description": "Invoice section Id.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionDetails": {
+      "description": "Subscription details.",
+      "type": "object",
+      "properties": {
+        "billingDetails": {
+          "$ref": "#/definitions/BillingDetails"
+        },
+        "friendlyName": {
+          "description": "Friendly name.",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Offer Id.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Subscription state.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription Id.",
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "suspensionReason": {
+          "description": "Suspension reason.",
+          "type": "string"
+        },
+        "ownerTenantId": {
+          "description": "Owner tenant id.",
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "ownerObjectId": {
+          "description": "Owner object id.",
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Subscription",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "type": "string",
+      "description": "Subscription Id."
+    },
+    "TransferIdParameter": {
+      "name": "transferId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "Transfer Id."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
