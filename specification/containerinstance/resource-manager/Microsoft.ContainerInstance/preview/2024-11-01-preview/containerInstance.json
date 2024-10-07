@@ -3413,9 +3413,48 @@
             "name": "NGroupProvisioningState",
             "modelAsString": true
           }
+        },
+        "updateProfile": {
+          "$ref": "#/definitions/UpdateProfile",
+          "description": "Used by the customer to specify the way to update the Container Groups in NGroup."
         }
       },
       "description": "Describes the properties of a nGroup."
+    },
+    "UpdateProfile": {
+      "type": "object",
+      "description": "Used by the customer to specify the way to update the Container Groups in NGroup.",
+      "properties": {
+        "updateMode": {
+          "type": "string",
+          "enum": [
+            "Manual",
+            "Rolling"
+          ]
+        },
+        "rollingUpdateProfile": {
+          "type": "object",
+          "description": "This profile allows the customers to customize the rolling update.",
+          "properties": {
+            "maxBatchPercent": {
+              "type": "integer",
+              "description": "Maximum percentage of total Container Groups which can be updated simultaneously by rolling update in one batch."
+            },
+            "maxUnhealthyPercent": {
+              "type": "integer",
+              "description": "Maximum percentage of the updated Container Groups which can be in unhealthy state after each batch is updated."
+            },
+            "pauseTimeBetweenBatches": {
+              "type": "string",
+              "description": "The wait time between batches after completing the one batch of the rolling update and starting the next batch. The time duration should be specified in ISO 8601 format for duration."
+            },
+            "inPlaceUpdate": {
+              "type": "boolean",
+              "description": "Default is false. If set to true, the CGs will be updated in-place instead of creating new CG and deleting old ones."
+            }
+          }
+        }
+      }
     },
     "PlacementProfile": {
       "type": "object",
