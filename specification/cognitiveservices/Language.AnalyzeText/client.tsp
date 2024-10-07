@@ -695,23 +695,6 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 
-@@clientName(AnalyzeTextDynamicClassificationInput,
-  "TextDynamicClassificationInput",
-  "csharp"
-);
-@@clientName(AnalyzeTextDynamicClassificationInput.parameters,
-  "ActionContent",
-  "csharp"
-);
-@@clientName(AnalyzeTextDynamicClassificationInput.analysisInput,
-  "TextInput",
-  "csharp"
-);
-@@clientName(DynamicClassificationTaskParameters,
-  "DynamicClassificationActionContent",
-  "csharp"
-);
-
 @@clientName(AnalyzeTextTaskResult, "AnalyzeTextResult", "csharp");
 @@clientName(AnalyzeTextTaskResultsKind, "AnalyzeTextResultsKind", "csharp");
 
@@ -724,10 +707,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(EntitiesTaskResult, "AnalyzeTextEntitiesResult", "csharp");
 @@clientName(EntityLinkingTaskResult,
   "AnalyzeTextEntityLinkingResult",
-  "csharp"
-);
-@@clientName(DynamicClassificationTaskResult,
-  "AnalyzeTextDynamicClassificationResult",
   "csharp"
 );
 @@clientName(KeyPhraseTaskResult, "AnalyzeTextKeyPhraseResult", "csharp");

@@ -35,14 +35,18 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   @added(Versions.v2024_11_15_preview)
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
+  /** RedactionPolicy to be used on the input. */
   @added(Versions.v2024_11_15_preview)
   redactionPolicy?: RedactionPolicy; 
 }
 
+/** Represents the redaction policy to be used. Default policy kind is to maskWithRedactionCharacter and redactionCharacter.asterisk.*/
 @added(Versions.v2024_11_15_preview)
 model RedactionPolicy {
+  /** Redaction Policy kind that can be used. Default is maskWithRedactionCharacter. Can also use doNotRedact and maskWithEntityType.*/
   policyKind?: redactionPolicyKind.maskWithRedactionCharacter;
 
+  /** Redaction Character to be used for masking if maskWithRedactionCharacter is policyKind. Redaction characters allowed: !,#,$,%,&,*,+,-,=,?,@,^,_,~ */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk
 }
 
@@ -58,7 +62,7 @@ union redactionPolicyKind {
   maskWithRedactionCharacter : "maskWithRedactionCharacter",
 
   /** Represents MaskWithEntityType */
-  MaskWithEntityType : "maskWithEntityType",
+  maskWithEntityType : "maskWithEntityType",
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
