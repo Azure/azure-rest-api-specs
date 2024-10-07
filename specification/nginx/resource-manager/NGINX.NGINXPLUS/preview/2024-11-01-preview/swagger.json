@@ -1995,6 +1995,12 @@
               "items": {
                 "$ref": "#/definitions/AnalysisDiagnostic"
               }
+            },
+            "diagnostics": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalysisDiagnosticWarning"
+              }
             }
           }
         }
@@ -2040,6 +2046,64 @@
         "rule": {
           "type": "string",
           "example": "nginx-azure-load-balancer-allowed-directives"
+        }
+      }
+    },
+    "AnalysisDiagnosticWarning": {
+      "type": "object",
+      "description": "A config diagnostic object found during the analysis of an NGINX configuration that can be a warning or recommendation.",
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule",
+        "level"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the error"
+        },
+        "directive": {
+          "type": "string",
+          "example": "worker_processes"
+        },
+        "description": {
+          "type": "string",
+          "example": "Directives outside the http context are not allowed"
+        },
+        "file": {
+          "type": "string",
+          "description": "the filepath of the most relevant config file",
+          "example": "nginx.conf"
+        },
+        "line": {
+          "type": "number",
+          "example": 2
+        },
+        "message": {
+          "type": "string",
+          "example": "You are not allowed to set the worker_processes directive"
+        },
+        "rule": {
+          "type": "string",
+          "example": "nginx-azure-load-balancer-allowed-directives"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Info",
+            "Warning"
+          ],
+          "description": "Warning or Info",
+          "example": "Warning"
+        },
+        "category": {
+          "type": "string",
+          "description": "category of warning",
+          "example": "Security"
         }
       }
     },
