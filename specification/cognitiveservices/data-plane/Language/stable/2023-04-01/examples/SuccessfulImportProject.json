@@ -1,91 +1,70 @@
 {
-  "operationId": "TextAnalysisAuthoring_Import",
-  "title": "SuccessfulImportProject",
+  "operationId": "ConversationalAnalysisAuthoring_Import",
+  "title": "Successful Import Project",
   "parameters": {
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "Content-Type": "application/json",
     "api-version": "2023-04-01",
-    "projectName": "LoanAgreements",
+    "projectName": "EmailApp",
     "body": {
       "projectFileVersion": "2022-05-01",
       "stringIndexType": "Utf16CodeUnit",
       "metadata": {
-        "projectKind": "CustomEntityRecognition",
-        "storageInputContainerName": "loanagreements",
-        "settings": {},
-        "projectName": "LoanAgreements",
-        "multilingual": false,
-        "description": "This is a sample dataset provided by the Azure Language service team to help users get started with [Custom named entity recognition](https://aka.ms/ct-docs). The provided sample dataset contains 20 loan agreements drawn up between two entities.",
-        "language": "en"
+        "projectKind": "Conversation",
+        "settings": {
+          "confidenceThreshold": 0.7
+        },
+        "projectName": "EmailApp",
+        "multilingual": true,
+        "description": "Trying out CLU",
+        "language": "en-us"
       },
       "assets": {
-        "projectKind": "CustomEntityRecognition",
-        "entities": [
+        "projectKind": "Conversation",
+        "intents": [
           {
-            "category": "Date"
+            "category": "Read"
           },
           {
-            "category": "LenderName"
-          },
-          {
-            "category": "LenderAddress"
+            "category": "Delete"
           }
         ],
-        "documents": [
+        "entities": [
           {
-            "location": "01.txt",
-            "language": "en-us",
+            "category": "Sender"
+          },
+          {
+            "category": "Number",
+            "regex": {
+              "expressions": [
+                {
+                  "regexKey": "UK Phone numbers",
+                  "language": "en-us",
+                  "regexPattern": "/^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$/"
+                }
+              ]
+            }
+          }
+        ],
+        "utterances": [
+          {
+            "text": "Open Blake's email",
+            "dataset": "Train",
+            "intent": "Read",
             "entities": [
               {
-                "regionOffset": 0,
-                "regionLength": 1793,
-                "labels": [
-                  {
-                    "category": "Date",
-                    "offset": 5,
-                    "length": 9
-                  },
-                  {
-                    "category": "LenderName",
-                    "offset": 273,
-                    "length": 14
-                  },
-                  {
-                    "category": "LenderAddress",
-                    "offset": 314,
-                    "length": 15
-                  }
-                ]
+                "category": "Sender",
+                "offset": 5,
+                "length": 5
               }
             ]
           },
           {
-            "location": "02.txt",
-            "language": "en-us",
-            "entities": [
-              {
-                "regionOffset": 0,
-                "regionLength": 1804,
-                "labels": [
-                  {
-                    "category": "Date",
-                    "offset": 5,
-                    "length": 10
-                  },
-                  {
-                    "category": "LenderName",
-                    "offset": 284,
-                    "length": 10
-                  },
-                  {
-                    "category": "LenderAddress",
-                    "offset": 321,
-                    "length": 20
-                  }
-                ]
-              }
-            ]
+            "text": "Delete last email",
+            "language": "en-gb",
+            "dataset": "Test",
+            "intent": "Delete",
+            "entities": []
           }
         ]
       }
@@ -94,7 +73,7 @@
   "responses": {
     "202": {
       "headers": {
-        "operation-location": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/import/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version=2022-05-01"
+        "operation-location": "{Endpoint}/language/authoring/analyze-conversations/projects/EmailApp/import/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version=2023-04-01"
       }
     }
   }
