@@ -3,10 +3,10 @@
   "operationId": "HealthValidations_Get",
   "parameters": {
     "api-version": "2024-10-01-preview",
-    "subscriptionId": "FEC32040-8ABD-48B7-A5B1-144A35E3404D",
+    "subscriptionId": "6f53185c-ea09-4fc3-9075-318dec805303",
     "resourceGroupName": "rgWatcher",
-    "watcherName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-    "healthValidationName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$"
+    "watcherName": "testWatcher",
+    "healthValidationName": "testHealthValidation"
   },
   "responses": {
     "200": {
@@ -14,30 +14,30 @@
         "properties": {
           "startTime": "2024-10-07T19:42:55.594Z",
           "endTime": "2024-10-07T19:42:55.594Z",
-          "status": "NotStarted",
+          "status": "Succeeded",
           "issues": [
             {
-              "errorCode": "yupklhwetdfbmq",
-              "errorMessage": "ufylyqhtdvcawv",
-              "additionalDetails": "irfksgkekpgvobiozifgprgtzl",
-              "recommendationMessage": "xblnr",
-              "recommendationUrl": "https://microsoft.com/a",
-              "validationResourceId": "mijcvygj",
-              "validationResourceType": "gsmpywpbhizysehhjrer"
+              "errorCode": "ReadDatasetError",
+              "errorMessage": "Invalid operation. The connection is closed.",
+              "additionalDetails": "There seems to be a connection issue.",
+              "recommendationMessage": "Please check the connection.",
+              "recommendationUrl": "https://aka.ms/issuerecommendation",
+              "validationResourceId": "/subscriptions/fbe17af0-27d2-4dee-bc5e-44622527449e/resourceGroups/scale-setup-dbw/providers/Microsoft.Sql/servers/dbw-scale-setup/databases/scaledb-1",
+              "validationResourceType": "Microsoft.Sql/servers"
             }
           ],
           "provisioningState": "Succeeded"
         },
-        "id": "k",
-        "name": "smvqzhvqv",
-        "type": "lqbeudghwpdcyoaiiabyxnrkep",
+        "id": "/subscriptions/469DD77C-C8DB-47B7-B9E1-72D29F8C878Be/resourceGroups/rgWatcher/providers/microsoft.databasewatcher/watchers/testWatcher/healthValidations/testHealthValidation",
+        "name": "testHealthValidation",
+        "type": "microsoft.databasewatcher/watchers/healthValidations",
         "systemData": {
-          "createdBy": "xwvsnaajywtmfvpf",
+          "createdBy": "enbpvlpqbwd",
           "createdByType": "User",
-          "createdAt": "2024-10-07T19:42:54.456Z",
-          "lastModifiedBy": "nfndtdpxeusmyljkrbs",
+          "createdAt": "2024-07-25T15:38:47.092Z",
+          "lastModifiedBy": "mxp",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-10-07T19:42:54.457Z"
+          "lastModifiedAt": "2024-07-25T15:38:47.092Z"
         }
       }
     }
