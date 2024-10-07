@@ -1,0 +1,219 @@
+{
+  "title": "SqlAssessmentV2Operations_Create",
+  "operationId": "SqlAssessmentV2Operations_Create",
+  "parameters": {
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "4bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "resourceGroupName": "rgmigrate",
+    "projectName": "fci-test6904project",
+    "groupName": "test_fci_hadr",
+    "assessmentName": "test_swagger_1",
+    "resource": {
+      "properties": {
+        "entityUptime": {
+          "daysPerMonth": 30,
+          "hoursPerDay": 24
+        },
+        "osLicense": "Unknown",
+        "optimizationLogic": "MinimizeCost",
+        "azureSqlManagedInstanceSettings": {
+          "azureSqlServiceTier": "Automatic",
+          "azureSqlInstanceType": "SingleInstance"
+        },
+        "azureSqlDatabaseSettings": {
+          "azureSqlServiceTier": "Automatic",
+          "azureSqlDataBaseType": "SingleDatabase",
+          "azureSqlComputeTier": "Automatic",
+          "azureSqlPurchaseModel": "VCore"
+        },
+        "azureSqlVmSettings": {
+          "instanceSeries": [
+            "Eadsv5_series"
+          ]
+        },
+        "environmentType": "Production",
+        "reservedInstance": "None",
+        "reservedInstanceForVm": "None",
+        "sqlServerLicense": "Unknown",
+        "azureLocation": "SoutheastAsia",
+        "azureOfferCode": "MSAZR0003P",
+        "azureOfferCodeForVm": "MSAZR0003P",
+        "currency": "USD",
+        "percentile": "Percentile95",
+        "scalingFactor": 1,
+        "timeRange": "Day",
+        "discountPercentage": 0,
+        "sizingCriterion": "PerformanceBased",
+        "multiSubnetIntent": "DisasterRecovery",
+        "asyncCommitModeIntent": "DisasterRecovery",
+        "disasterRecoveryLocation": "EastAsia",
+        "enableHadrAssessment": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/bansalankit-rg/providers/Microsoft.Migrate/assessmentprojects/fci-ankit-test6904project/groups/test_fci_hadr/sqlAssessments/test_swagger_1",
+        "name": "test_swagger_1",
+        "systemData": {
+          "createdAt": "0001-01-01T00:00:00",
+          "createdBy": null,
+          "createdByType": null,
+          "lastModifiedAt": "0001-01-01T00:00:00",
+          "lastModifiedBy": null,
+          "lastModifiedByType": null
+        },
+        "type": "Microsoft.Migrate/assessmentprojects/groups/sqlAssessments",
+        "properties": {
+          "osLicense": "Yes",
+          "environmentType": "Production",
+          "entityUptime": {
+            "daysPerMonth": 31,
+            "hoursPerDay": 24
+          },
+          "optimizationLogic": "MinimizeCost",
+          "reservedInstanceForVm": "RI3Year",
+          "azureOfferCodeForVm": "MSAZR0003P",
+          "eaSubscriptionId": null,
+          "azureSqlManagedInstanceSettings": {
+            "azureSqlServiceTier": "Automatic",
+            "azureSqlInstanceType": "SingleInstance"
+          },
+          "azureSqlDatabaseSettings": {
+            "azureSqlServiceTier": "Automatic",
+            "azureSqlDataBaseType": "SingleDatabase",
+            "azureSqlComputeTier": "Provisioned",
+            "azureSqlPurchaseModel": "VCore"
+          },
+          "azureSqlVmSettings": {
+            "instanceSeries": [
+              "Dadsv5_series",
+              "Dasv4_series",
+              "Ddsv4_series",
+              "Ddsv5_series",
+              "Eadsv5_series",
+              "Easv4_series",
+              "Ebdsv5_series",
+              "Ebsv5_series",
+              "Edsv4_series",
+              "Edsv5_series",
+              "M_series",
+              "Mdsv2_series"
+            ]
+          },
+          "multiSubnetIntent": "HighAvailability",
+          "asyncCommitModeIntent": "HighAvailability",
+          "isInternetAccessAvailable": false,
+          "disasterRecoveryLocation": "EastAsia",
+          "enableHadrAssessment": true,
+          "azureSecurityOfferingType": "NO",
+          "reservedInstance": "RI3Year",
+          "sqlServerLicense": "Yes",
+          "groupType": "Default",
+          "assessmentType": "SqlAssessment",
+          "azureLocation": "SoutheastAsia",
+          "azureOfferCode": "MSAZR0003P",
+          "currency": "USD",
+          "scalingFactor": 1.0,
+          "percentile": "Percentile95",
+          "timeRange": "Day",
+          "perfDataStartTime": "2023-09-07T05:21:45.9644382Z",
+          "perfDataEndTime": "2023-09-08T05:21:45.9644382Z",
+          "stage": "InProgress",
+          "discountPercentage": 0.0,
+          "sizingCriterion": "PerformanceBased",
+          "confidenceRatingInPercentage": 0.0,
+          "pricesTimestamp": "2023-08-16T00:00:00",
+          "createdTimestamp": "2023-09-08T05:21:45.9800654Z",
+          "updatedTimestamp": "2023-09-08T05:23:45.2686461Z",
+          "status": "Completed",
+          "schemaVersion": "2.0"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/bansalankit-rg/providers/Microsoft.Migrate/assessmentprojects/fci-ankit-test6904project/groups/test_fci_hadr/sqlAssessments/test_swagger_1",
+        "name": "test_swagger_1",
+        "systemData": {
+          "createdAt": "0001-01-01T00:00:00",
+          "createdBy": null,
+          "createdByType": null,
+          "lastModifiedAt": "0001-01-01T00:00:00",
+          "lastModifiedBy": null,
+          "lastModifiedByType": null
+        },
+        "type": "Microsoft.Migrate/assessmentprojects/groups/sqlAssessments",
+        "properties": {
+          "osLicense": "Yes",
+          "environmentType": "Production",
+          "entityUptime": {
+            "daysPerMonth": 31,
+            "hoursPerDay": 24
+          },
+          "optimizationLogic": "MinimizeCost",
+          "reservedInstanceForVm": "RI3Year",
+          "azureOfferCodeForVm": "MSAZR0003P",
+          "eaSubscriptionId": null,
+          "azureSqlManagedInstanceSettings": {
+            "azureSqlServiceTier": "Automatic",
+            "azureSqlInstanceType": "SingleInstance"
+          },
+          "azureSqlDatabaseSettings": {
+            "azureSqlServiceTier": "Automatic",
+            "azureSqlDataBaseType": "SingleDatabase",
+            "azureSqlComputeTier": "Provisioned",
+            "azureSqlPurchaseModel": "VCore"
+          },
+          "azureSqlVmSettings": {
+            "instanceSeries": [
+              "Dadsv5_series",
+              "Dasv4_series",
+              "Ddsv4_series",
+              "Ddsv5_series",
+              "Eadsv5_series",
+              "Easv4_series",
+              "Ebdsv5_series",
+              "Ebsv5_series",
+              "Edsv4_series",
+              "Edsv5_series",
+              "M_series",
+              "Mdsv2_series"
+            ]
+          },
+          "multiSubnetIntent": "HighAvailability",
+          "asyncCommitModeIntent": "HighAvailability",
+          "isInternetAccessAvailable": false,
+          "disasterRecoveryLocation": "EastAsia",
+          "enableHadrAssessment": true,
+          "azureSecurityOfferingType": "NO",
+          "reservedInstance": "RI3Year",
+          "sqlServerLicense": "Yes",
+          "groupType": "Default",
+          "assessmentType": "SqlAssessment",
+          "azureLocation": "SoutheastAsia",
+          "azureOfferCode": "MSAZR0003P",
+          "currency": "USD",
+          "scalingFactor": 1.0,
+          "percentile": "Percentile95",
+          "timeRange": "Day",
+          "perfDataStartTime": "2023-09-07T05:21:45.9644382Z",
+          "perfDataEndTime": "2023-09-08T05:21:45.9644382Z",
+          "stage": "InProgress",
+          "discountPercentage": 0.0,
+          "sizingCriterion": "PerformanceBased",
+          "confidenceRatingInPercentage": 0.0,
+          "pricesTimestamp": "2023-08-16T00:00:00",
+          "createdTimestamp": "2023-09-08T05:21:45.9800654Z",
+          "updatedTimestamp": "2023-09-08T05:23:45.2686461Z",
+          "status": "Completed",
+          "schemaVersion": "2.0"
+        }
+      }
+    }
+  }
+}
