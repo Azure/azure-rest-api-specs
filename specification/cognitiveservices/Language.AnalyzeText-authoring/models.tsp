@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 namespace Language.Authoring.Text;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-union TextAnalysisAuthoringProjectKind {
+union ProjectKind {
   string,
 
   /**
@@ -108,7 +108,7 @@ union InnerErrorCode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-union TextAnalysisAuthoringStringIndexType {
+union StringIndexType {
   string,
 
   /**
@@ -120,7 +120,7 @@ union TextAnalysisAuthoringStringIndexType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-union TextAnalysisAuthoringEvaluationKind {
+union EvaluationKind {
   string,
 
   /**
@@ -138,7 +138,7 @@ union TextAnalysisAuthoringEvaluationKind {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @lroStatus
 @clientName("JobStatus", "csharp")
-union TextAnalysisAuthoringJobStatus {
+union JobStatus {
   string,
   notStarted: "notStarted",
   running: "running",
@@ -157,7 +157,7 @@ union TextAnalysisAuthoringJobStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-union TextAnalysisAuthoringSentiment {
+union Sentiment {
   string,
   positive: "positive",
   negative: "negative",
@@ -165,7 +165,7 @@ union TextAnalysisAuthoringSentiment {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-union TextAnalysisAuthoringCompositionSetting {
+union CompositionSetting {
   string,
 
   /**
@@ -225,7 +225,7 @@ model TextAnalysisAuthoringProjectMetadata {
   /**
    * The project kind.
    */
-  projectKind: TextAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * The storage container name.
@@ -380,7 +380,7 @@ model TextAnalysisAuthoringCreateProjectOptions {
   /**
    * The project kind.
    */
-  projectKind: TextAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * The storage container name.
@@ -422,7 +422,7 @@ model TextAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: TextAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * The name of the storage container.
@@ -444,7 +444,7 @@ model TextAnalysisAuthoringCopyProjectOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: TextAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * The project name to be copied-into.
@@ -485,7 +485,7 @@ model TextAnalysisAuthoringExportedProject {
    * Specifies the method used to interpret string offsets. For additional
    * information see https://aka.ms/text-analytics-offsets.
    */
-  stringIndexType: TextAnalysisAuthoringStringIndexType;
+  stringIndexType: StringIndexType;
 
   /**
    * Represents the project metadata.
@@ -503,7 +503,7 @@ model TextAnalysisAuthoringExportedProject {
  */
 @discriminator("projectKind")
 model TextAnalysisAuthoringExportedProjectAssets {
-  projectKind: TextAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 }
 
 /**
@@ -536,7 +536,7 @@ model TextAnalysisAuthoringEvaluationOptions {
    * Represents the evaluation kind. By default, the evaluation kind is set to
    * percentage.
    */
-  kind?: TextAnalysisAuthoringEvaluationKind;
+  kind?: EvaluationKind;
 
   /**
    * Represents the training dataset split percentage. Only needed in case the
@@ -592,7 +592,7 @@ model TextAnalysisAuthoringJobState {
   /**
    * The job status.
    */
-  status: TextAnalysisAuthoringJobStatus;
+  status: JobStatus;
 
   /**
    * The warnings that were encountered while executing the job.
@@ -1032,7 +1032,7 @@ model TextAnalysisAuthoringDocumentEvaluationResult {
    */
   @key
   @visibility
-  projectKind: TextAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * Represents the document path.
@@ -1054,7 +1054,7 @@ model StringIndexTypeQueryParameter {
    * information see https://aka.ms/text-analytics-offsets.
    */
   @query("stringIndexType")
-  stringIndexType: TextAnalysisAuthoringStringIndexType;
+  stringIndexType: StringIndexType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -1064,7 +1064,7 @@ model ProjectKindQueryParameter {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @query("projectKind")
-  ProjectKind?: TextAnalysisAuthoringProjectKind;
+  ProjectKind?: ProjectKind;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -1074,7 +1074,7 @@ model SupportedPrebuiltEntitiesQueryParameter {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
       @query("projectKind")
-      ProjectKind?: TextAnalysisAuthoringProjectKind;
+      ProjectKind?: ProjectKind;
 
       /**
        * The language to get supported prebuilt entities for. Required if multilingual
@@ -1100,7 +1100,7 @@ model TextAnalysisAuthoringEvaluationSummary {
   /**
    * Represents the project type that the evaluation ran on.
    */
-  projectKind: TextAnalysisAuthoringProjectKind;
+  projectKind: ProjectKind;
 
   /**
    * Represents the options used running the evaluation.
@@ -1303,7 +1303,7 @@ model TextAnalysisAuthoringSubTrainingJobState {
   /**
    * Represents the status of the sub-operation.
    */
-  status: TextAnalysisAuthoringJobStatus;
+  status: JobStatus;
 }
 
 /**
@@ -2050,7 +2050,7 @@ model TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult {
   /**
    * Represents the sentiment category.
    */
-  category: TextAnalysisAuthoringSentiment;
+  category: Sentiment;
 
   /**
    * Represents the sentiment offset index relative to the original text.
@@ -2232,7 +2232,7 @@ model TextAnalysisAuthoringExportedCompositeEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  compositionSetting?: TextAnalysisAuthoringCompositionSetting;
+  compositionSetting?: CompositionSetting;
 
   /**
    * The list component of the entity.
@@ -2631,7 +2631,7 @@ model TextAnalysisAuthoringExportedDocumentSentimentLabel {
   /**
    * The sentiment category.
    */
-  category?: TextAnalysisAuthoringSentiment;
+  category?: Sentiment;
 
   /**
    * Start position for the sentiment text.

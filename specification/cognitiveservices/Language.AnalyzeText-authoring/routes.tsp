@@ -138,7 +138,7 @@ interface TextAnalysisAuthoring {
        * information see https://aka.ms/text-analytics-offsets.
        */
       @query("stringIndexType")
-      stringIndexType: TextAnalysisAuthoringStringIndexType;
+      stringIndexType: StringIndexType;
 
       /**
        * Kind of asset to export.
