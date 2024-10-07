@@ -732,7 +732,7 @@
           {
             "name": "healthValidationName",
             "in": "path",
-            "description": "The health validation proxy resource name.",
+            "description": "The health validation resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$"
@@ -765,7 +765,7 @@
         "tags": [
           "HealthValidations"
         ],
-        "description": "Starts a health validation.",
+        "description": "Starts health validation for a watcher.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -787,7 +787,7 @@
           {
             "name": "healthValidationName",
             "in": "path",
-            "description": "The health validation proxy resource name.",
+            "description": "The health validation resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$"
@@ -1718,18 +1718,18 @@
     },
     "HealthValidationProperties": {
       "type": "object",
-      "description": "The generic properties of the health validation proxy resource.",
+      "description": "The generic properties of the health validation resource.",
       "properties": {
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the health validation.",
+          "description": "The start time of health validation, in UTC.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the health validation.",
+          "description": "The end time of health validation, in UTC.",
           "readOnly": true
         },
         "status": {
@@ -2165,24 +2165,24 @@
         },
         "additionalDetails": {
           "type": "string",
-          "description": "The additional details of the issue.",
+          "description": "The additional details for the issue.",
           "readOnly": true
         },
         "recommendationMessage": {
           "type": "string",
-          "description": "The recommendation message for fixing the issue.",
+          "description": "The recommendation for resolving the issue.",
           "readOnly": true
         },
         "recommendationUrl": {
           "type": "string",
           "format": "uri",
-          "description": "The recommendation url for fixing the issue.",
+          "description": "The URL related to resolving the issue.",
           "readOnly": true
         },
         "validationResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of the validated resource.",
+          "description": "The resource ID of the Azure resource related to the issue.",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": []
@@ -2190,7 +2190,7 @@
         },
         "validationResourceType": {
           "type": "string",
-          "description": "The type of the validated resource.",
+          "description": "The type of the Azure resource related to the issue.",
           "readOnly": true
         }
       },
