@@ -37,7 +37,7 @@ model HealthValidation is ProxyResource<HealthValidationProperties> {
 @added(Versions.v2024_10_01_preview)
 model HealthValidationProperties {
   @visibility("read")
-  @doc("The start time of the health validation.")
+  @doc("The start time of health validation, in UTC.")
   startTime: utcDateTime;
 
   @visibility("read")
