@@ -102,7 +102,7 @@ model ValidationIssue {
   recommendationMessage: string;
 
   @visibility("read")
-  @doc("The recommendation url for fixing the issue.")
+  @doc("The URL related to resolving the issue.")
   recommendationUrl?: url;
 
   @visibility("read")
