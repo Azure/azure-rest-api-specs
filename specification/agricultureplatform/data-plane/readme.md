@@ -27,18 +27,18 @@ These are the global settings for the agfood.
 ```yaml
 openapi-type: data-plane
 
-tag: package-2023-11-01-preview
+tag: package-2024-11-01-preview
 
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
-### Tag: package-2021-03-31-preview
+### Tag: package-2024-11-01-preview
 
-These settings apply only when `--tag=package-2021-03-31-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03-31-preview'
+```yaml $(tag) == 'package-2024-11-01-preview'
 input-file:
   - Microsoft.AgriculturePlatform/preview/2024-11-01-preview/agricultureplatform.json
 ```
