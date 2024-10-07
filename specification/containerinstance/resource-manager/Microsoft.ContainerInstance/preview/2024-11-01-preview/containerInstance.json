@@ -3316,6 +3316,13 @@
           },
           "description": "The nGroups zones. NOTE: Availability zones can only be set when you create the scale set"
         },
+        "tags": {
+          "type": "object",
+          "description": "Tags is a dictionary where customer can provide flags to enable certain features. Eg: autoscale.enabled: true",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
           "x-ms-mutability": [
@@ -3348,7 +3355,7 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the container scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the nGroup.",
+          "description": "The type of identity used for the nGroup. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the nGroup.",
           "enum": [
             "SystemAssigned",
             "UserAssigned",
@@ -3362,7 +3369,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The list of user identities associated with the container scale set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "description": "The list of user identities associated with the nGroups. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
             "type": "object",
             "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
@@ -3376,6 +3383,10 @@
         "elasticProfile": {
           "$ref": "#/definitions/ElasticProfile",
           "description": "The elastic profile."
+        },
+        "placementProfile": {
+          "$ref": "#/definitions/PlacementProfile",
+          "description": "Provides options w.r.t allocation and management w.r.t certain placement policies. These utilize capabilities provided by the underlying Azure infrastructure. They are typically used for high availability scenarios. E.g., distributing CGs across fault domains."
         },
         "containerGroupProfiles": {
           "type": "array",
@@ -3404,7 +3415,17 @@
           }
         }
       },
-      "description": "Describes the properties of a Container Scale Set."
+      "description": "Describes the properties of a nGroup."
+    },
+    "PlacementProfile": {
+      "type": "object",
+      "description": "Provides options w.r.t allocation and management w.r.t certain placement policies. These utilize capabilities provided by the underlying Azure infrastructure. They are typically used for high availability scenarios. E.g., distributing CGs across fault domains.",
+      "properties": {
+        "faultDomainCount": {
+          "type": "integer",
+          "description": "The number of fault domains to be used to spread CGs in a nGroup. This can only be specified during nGroup creation and is immutable after that."
+        }
+      }
     },
     "ElasticProfile": {
       "type": "object",
@@ -3412,18 +3433,108 @@
         "desiredCount": {
           "type": "integer",
           "format": "int32"
+        },
+        "maintainDesiredCount": {
+          "type": "boolean",
+          "description": "Flag that indicates whether desiredCount should be maintained when customer deletes SPECIFIC container groups (CGs) from the NGroups. In this case, new CGs will be created by NGroup to compensate for the specific deleted ones."
+        },
+        "containerGroupNamingPolicy": {
+          "type": "object",
+          "description": "Container Groups are named on a generic guid based naming scheme/policy. Customer can modify naming policy to add prefix to CG names during scale out operation.",
+          "properties": {
+            "guidNamingPolicy": {
+              "type": "object",
+              "properties": {
+                "prefix": {
+                  "description": "The prefix can be used when there are tooling limitations (e.g. on the Azure portal where CGs from multiple nGroups exist in the same RG). The prefix with the suffixed resource name must still follow Azure resource naming guidelines.",
+                  "type": "string"
+                }
+              }
+            }
+          }
         }
       },
-      "description": "Describes the elastic profile of the Container Scale Set"
+      "description": "Describes the elastic profile of the nGroup"
     },
     "ContainerGroupProfileStub": {
       "type": "object",
       "properties": {
         "resource": {
-          "$ref": "#/definitions/ApiEntityReference"
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "A reference to the container group profile ARM resource hosted in ACI RP."
+        },
+        "revision": {
+          "type": "integer",
+          "description": "The revision of the CG profile is an optional property. If customer does not to provide a revision then nGroups will pickup the latest revision of CGProfile."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "A network profile for network settings of a ContainerGroupProfile."
         }
       },
       "description": "The object that contains a reference to a Container Group Profile"
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "A network profile for network settings of a ContainerGroupProfile. Used to manage load balancer and application gateway backend pools, specifically updating the IP addresses of CGs within the backend pool.",
+      "properties": {
+        "loadBalancer": {
+          "$ref": "#/definitions/LoadBalancer",
+          "description": "LoadBalancer the CG profile will use to interact with CGs in a backend pool"
+        },
+        "applicationGateway": {
+          "$ref": "#/definitions/ApplicationGateway",
+          "description": "Application Gateway the CG profile will use to interact with CGs in a backend pool"
+        }
+      }
+    },
+    "ApplicationGateway": {
+      "type": "object",
+      "description": "Application Gateway the CG profile will use to interact with CGs in a backend pool",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "The Application Gateway ARM resource Id."
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "description": "List of Application Gateway Backend Address Pools.",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+          }
+        }
+      }
+    },
+    "LoadBalancer": {
+      "type": "object",
+      "description": "LoadBalancer the CG profile will use to interact with CGs in a backend pool",
+      "properties": {
+        "backendAddressPools": {
+          "type": "array",
+          "description": "List of Load Balancer Backend Address Pools.",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerBackendAddressPool"
+          }
+        }
+      }
+    },
+    "LoadBalancerBackendAddressPool": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "The Load Balancer backend address pool ARM resource Id."
+        }
+      }
+    },
+    "ApplicationGatewayBackendAddressPool": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "The application gateway backend address pool ARM resource Id."
+        }
+      }
     },
     "ApiEntityReference": {
       "type": "object",
