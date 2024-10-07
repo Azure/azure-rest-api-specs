@@ -269,7 +269,7 @@ model PeeringSetting is TrackedResource<PeeringSettingProperties> {
  */
 model PeeringSettingProperties {
   /**
-   * SDDCs in a source vnet.
+   * Tenant Ids in a source vnet.
    */
   tenantIds: string[];
 

@@ -86,43 +86,6 @@
         }
       }
     },
-    "/providers/Microsoft.BareMetal/utilization/clusters/region/{location}": {
-      "get": {
-        "operationId": "Utilization_List",
-        "description": "Get the Utilization for all clusters in the given location\nOld API route from prior to 2024-09-01-preview",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ClusterList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Utilization_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "clusters"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetal/bareMetalConnections": {
       "get": {
         "operationId": "BareMetalConnections_ListSubscription",
@@ -613,86 +576,6 @@
         }
       }
     },
-    "ClusterList": {
-      "type": "object",
-      "description": "List of cluster properties",
-      "properties": {
-        "clusters": {
-          "type": "array",
-          "description": "Items on this page",
-          "items": {
-            "$ref": "#/definitions/ClusterProperties"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Link to the next page of data"
-        }
-      },
-      "required": [
-        "clusters"
-      ]
-    },
-    "ClusterProperties": {
-      "type": "object",
-      "description": "Cluster object representation",
-      "properties": {
-        "clusterName": {
-          "type": "string",
-          "description": "Name of the cluster"
-        },
-        "vrfCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of VRFs currently on the cluster",
-          "readOnly": true
-        },
-        "vrfLimit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max number of VRFs for the cluster",
-          "readOnly": true
-        },
-        "routeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of routes currently on the cluster",
-          "readOnly": true
-        },
-        "routeLimit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max number of routes for the cluster",
-          "readOnly": true
-        },
-        "allocatedRoutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Potential number of routes for the cluster",
-          "readOnly": true
-        },
-        "tier2Alias": {
-          "type": "string",
-          "description": "Alias of the T2 device",
-          "readOnly": true
-        },
-        "sdnAppliancePlacement": {
-          "$ref": "#/definitions/SDNAppliancePlacement",
-          "description": "Placement of the SDN Appliance",
-          "readOnly": true
-        },
-        "sdnApplianceEnabled": {
-          "type": "boolean",
-          "description": "True if Rotterdam, else False",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "clusterName"
-      ]
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The current provisioning state.",
@@ -825,30 +708,6 @@
         "logicalContainerId",
         "availabilityZone"
       ]
-    },
-    "SDNAppliancePlacement": {
-      "type": "string",
-      "description": "Placement of the SDN Appliance",
-      "enum": [
-        "T1",
-        "T2"
-      ],
-      "x-ms-enum": {
-        "name": "SDNAppliancePlacement",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "T1",
-            "value": "T1",
-            "description": "T1 device"
-          },
-          {
-            "name": "T2",
-            "value": "T2",
-            "description": "T2 device"
-          }
-        ]
-      }
     },
     "UpdateRoutesOnVirtualNetwork": {
       "type": "object",

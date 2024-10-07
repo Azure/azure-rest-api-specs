@@ -20,7 +20,7 @@ interface PeeringSettings {
   get is ArmResourceRead<PeeringSetting>;
 
   /**
-   * Create or update the PeetingSetting.
+   * Create or update the PeeringSetting.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PeeringSetting>;
 
