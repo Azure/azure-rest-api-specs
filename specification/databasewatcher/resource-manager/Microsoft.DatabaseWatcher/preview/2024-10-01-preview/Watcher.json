@@ -1622,7 +1622,7 @@
           },
           "readOnly": true,
           "x-ms-identifiers": [
-            "category"
+            "errorCode"
           ]
         },
         "provisioningState": {
@@ -2030,40 +2030,53 @@
       "type": "object",
       "description": "The model of the issue generated from the health validation.",
       "properties": {
-        "category": {
+        "errorCode": {
           "type": "string",
-          "description": "The category of the issue.",
+          "description": "The error code of the issue.",
           "readOnly": true
         },
-        "details": {
+        "errorMessage": {
           "type": "string",
-          "description": "The details of the issue.",
+          "description": "The error message of the issue.",
           "readOnly": true
         },
-        "recommendation": {
+        "additionalDetails": {
           "type": "string",
-          "description": "The recommendation for fixing the issue.",
+          "description": "The additional details of the issue.",
           "readOnly": true
         },
-        "affectedResourceId": {
+        "recommendationMessage": {
+          "type": "string",
+          "description": "The recommendation message for fixing the issue.",
+          "readOnly": true
+        },
+        "recommendationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The recommendation url for fixing the issue.",
+          "readOnly": true
+        },
+        "validationResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of the affected resource.",
+          "description": "The resource ID of the validated resource.",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": []
           }
         },
-        "affectedResourceType": {
+        "validationResourceType": {
           "type": "string",
-          "description": "The type of the affected resource.",
+          "description": "The type of the validated resource.",
           "readOnly": true
         }
       },
       "required": [
-        "category",
-        "details",
-        "recommendation"
+        "errorCode",
+        "errorMessage",
+        "additionalDetails",
+        "recommendationMessage",
+        "recommendationUrl"
       ]
     },
     "VaultSecret": {
