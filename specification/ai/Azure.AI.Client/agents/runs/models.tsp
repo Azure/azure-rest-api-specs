@@ -1,6 +1,6 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
-import "../agents/common/models.tsp";
+import "../common/models.tsp";
 import "../threads/models.tsp";
 import "../tools/models.tsp";
 

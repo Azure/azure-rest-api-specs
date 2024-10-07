@@ -47,8 +47,8 @@ namespace Azure.AI.OpenAI {
   }
 )
 @versioned(ServiceApiVersions)
-@doc("Azure APIs for Agents.")
-namespace Azure.AI.Client.Agents {
+@doc("Azure OpenAI APIs for Assistants.")
+namespace Azure.AI.OpenAI.Assistants {
   @doc("The known set of supported API versions.")
   enum ServiceApiVersions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)

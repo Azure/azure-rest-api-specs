@@ -1,7 +1,7 @@
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "../main.tsp";
+import "../vector_stores/common/main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

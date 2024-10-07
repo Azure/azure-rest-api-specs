@@ -1,7 +1,7 @@
 import "@typespec/versioning";
 
 import "../tools/tool_resources.tsp";
-import "../agents/common/models.tsp";
+import "../common/models.tsp";
 import "../messages/models.tsp";
 
 using TypeSpec.Http;

@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "../main.tsp";
 import "../threads/models.tsp";
 import "../runs/models.tsp";
 import "./models.tsp";

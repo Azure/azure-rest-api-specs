@@ -1,4 +1,3 @@
-import "../main.tsp";
 import "../tools/models.tsp";
 
 import "@typespec/versioning";

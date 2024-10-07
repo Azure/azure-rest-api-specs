@@ -3,8 +3,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "../main.tsp";
-import "../agents/common/models.tsp";
+import "../common/models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Rest;

@@ -1,7 +1,5 @@
 import "@typespec/versioning";
 
-import "../main.tsp";
-
 namespace Azure.AI.Client.Agents;
 
 using TypeSpec.Versioning;
