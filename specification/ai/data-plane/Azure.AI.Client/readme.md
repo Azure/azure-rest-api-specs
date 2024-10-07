@@ -19,4 +19,8 @@ These settings apply only when `--tag=2024-07-01-preview` is specified on the co
 ``` yaml $(tag) == '2024-07-01-preview'
 input-file:
   - preview/2024-07-01-preview/azure-ai-client.json
+suppressions:
+  - code: AvoidAnonymousParameter
+    from: azure-ai-client.json
+    reason: Anonymous parameters were not used. This error makes no sense.
 ```
