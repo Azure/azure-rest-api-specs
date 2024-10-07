@@ -5,8 +5,6 @@ import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 
 using TypeSpec.Rest;
 
-using TypeSpec.Versioning;
-
 namespace AzureHealthInsights;
 
 @doc("The body of the Trial Matcher request.")
@@ -30,20 +28,10 @@ model TrialMatcherModelConfiguration {
   clinicalTrials: ClinicalTrials;
 }
 
-@added(ApiVersion.v2024_08_01_preview)
-@doc("Response for the Trial Matcher request.")
 @resource("trial-matcher/jobs")
-model TrialMatcherJob {
-  @doc("The request data for the operation.")
-  @visibility("read", "create")
-  jobData?: TrialMatcherData;
-
-  @doc("The result of the operation.")
-  @visibility("read")
-  result?: TrialMatcherInferenceResult;
-
-  ...HealthInsightsJobBase;
-}
+@doc("The response for the Trial Matcher request.")
+model TrialMatcherResult
+  is HealthInsightsOperationStatus<TrialMatcherInferenceResult>;
 
 @doc("The inference results for the Trial Matcher request.")
 model TrialMatcherInferenceResult {

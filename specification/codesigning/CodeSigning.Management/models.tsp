@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -12,7 +11,6 @@ using Azure.Core;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
 namespace Microsoft.CodeSigning;
 
@@ -160,15 +158,7 @@ model CodeSigningAccountPatch {
 @doc("Properties of the trusted signing account.")
 model CodeSigningAccountPatchProperties {
   @doc("SKU of the trusted signing account.")
-  @typeChangedFrom(Versions.v2024_09_30_preview, AccountSku)
-  sku?: AccountSkuPatch;
-}
-
-@doc("SKU of the trusted signing account.")
-@added(Versions.v2024_09_30_preview)
-model AccountSkuPatch {
-  @doc("Name of the SKU.")
-  name?: SkuName;
+  sku?: AccountSku;
 }
 
 @doc("Properties of the certificate profile.")
@@ -176,22 +166,18 @@ model CertificateProfileProperties {
   @doc("Profile type of the certificate.")
   profileType: ProfileType;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as CN in the certificate subject name.")
   @visibility("read")
   commonName?: string;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as O in the certificate subject name.")
   @visibility("read")
   organization?: string;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as OU in the private trust certificate subject name.")
   @visibility("read")
   organizationUnit?: string;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as STREET in the certificate subject name.")
   @visibility("read")
   streetAddress?: string;
@@ -199,7 +185,6 @@ model CertificateProfileProperties {
   @doc("Whether to include STREET in the certificate subject name.")
   includeStreetAddress?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as L in the certificate subject name.")
   @visibility("read")
   city?: string;
@@ -207,7 +192,6 @@ model CertificateProfileProperties {
   @doc("Whether to include L in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeCity?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as S in the certificate subject name.")
   @visibility("read")
   state?: string;
@@ -215,7 +199,6 @@ model CertificateProfileProperties {
   @doc("Whether to include S in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeState?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as C in the certificate subject name.")
   @visibility("read")
   country?: string;
@@ -223,7 +206,6 @@ model CertificateProfileProperties {
   @doc("Whether to include C in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeCountry?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as PC in the certificate subject name.")
   @visibility("read")
   postalCode?: string;
@@ -231,14 +213,12 @@ model CertificateProfileProperties {
   @doc("Whether to include PC in the certificate subject name.")
   includePostalCode?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Enhanced key usage of the certificate.")
   @visibility("read")
   enhancedKeyUsage?: string;
 
   @doc("Identity validation id used for the certificate subject name.")
-  @madeRequired(Versions.v2024_09_30_preview)
-  identityValidationId: string;
+  identityValidationId?: string;
 
   @doc("Status of the current operation on certificate profile.")
   @visibility("read")
@@ -260,10 +240,6 @@ model CertificateProfileProperties {
 model Certificate {
   @doc("Serial number of the certificate.")
   serialNumber?: string;
-
-  @doc("Enhanced key usage of the certificate.")
-  @added(Versions.v2024_09_30_preview)
-  enhancedKeyUsage?: string;
 
   @doc("Subject name of the certificate.")
   subjectName?: string;

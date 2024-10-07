@@ -31,7 +31,6 @@ directive:
       - Microsoft.VideoIndexer/preview/2022-07-20-preview/vi.json
       - Microsoft.VideoIndexer/preview/2024-04-01-preview/vi.json
       - Microsoft.VideoIndexer/preview/2024-06-01-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2024-09-23-preview/vi.json
       - Microsoft.VideoIndexer/stable/2022-08-01/vi.json
 
     where:
@@ -52,16 +51,6 @@ title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2024-01
-```
-
-### Tag: package-2024-09-23-preview
-
-These settings apply only when `--tag=2024-09-23-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-09-23-preview'
-version-with-underscores: 2024_09_23_preview
-input-file:
-  - Microsoft.VideoIndexer/preview/2024-09-23-preview/vi.json
 ```
 
 ### Tag: package-2024-06-01-preview

@@ -106,11 +106,7 @@ interface VirtualMachineInstances {
   @summary("Implements the operation to stop a virtual machine.")
   stop is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    {
-      /** The content of the action request */
-      @body
-      body?: StopVirtualMachineOptions;
-    }
+    StopVirtualMachineOptions
   >;
   /** The operation to start a virtual machine instance. */
   @summary("Implements the operation to start a virtual machine.")
