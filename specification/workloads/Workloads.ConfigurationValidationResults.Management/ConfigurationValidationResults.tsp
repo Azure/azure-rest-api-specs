@@ -12,8 +12,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Workloads;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 @doc("Configuration validation results.")
 model ConfigurationValidationResults
   is ProxyResource<ConfigurationValidationResultsProperties> {

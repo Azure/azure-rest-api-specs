@@ -40,44 +40,10 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "ConfigurationValidationResultsOperations"
     }
   ],
   "paths": {
-    "/providers/Microsoft.Workloads/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/configurationValidationResults/{configurationValidationResultName}": {
       "get": {
         "operationId": "ConfigurationValidationResultsOperations_Get",
@@ -116,6 +82,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationValidationResults_Get": {
+            "$ref": "./examples/ConfigurationValidationResults_Get.json"
           }
         }
       }
