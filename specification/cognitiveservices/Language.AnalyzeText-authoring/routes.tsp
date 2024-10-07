@@ -503,7 +503,7 @@ interface TextAnalysisAuthoring {
   /**
    * Lists the trained models belonging to a project.
    */
-   listTrainedModels is languageOperations.ResourceList<
+  listTrainedModels is languageOperations.ResourceList<
     TextAnalysisAuthoringProjectTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -703,7 +703,7 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing unassign deployment resources job.
    */
- @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_04_15_preview)
   getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
 
   /**
@@ -758,18 +758,18 @@ interface TextAnalysisAuthoring {
    */
   @added(Versions.v2023_04_15_preview)
   listAssignedResourceDeployments is languageOperations.ResourceList<
-  TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
-  ListQueryParametersTrait<StandardListQueryParameters>
+    TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Lists the supported languages.
    */
   getSupportedLanguages is languageOperations.ResourceList<
-  TextAnalysisAuthoringSupportedLanguage,
-  ListQueryParametersTrait<ProjectKindQueryParameter &
+    TextAnalysisAuthoringSupportedLanguage,
+    ListQueryParametersTrait<ProjectKindQueryParameter &
       StandardListQueryParameters>
->;
+  >;
 
   /**
    * Lists the supported prebuilt entities that can be used while creating composed
@@ -777,17 +777,16 @@ interface TextAnalysisAuthoring {
    */
   @added(Versions.v2023_04_15_preview)
   getSupportedPrebuiltEntities is languageOperations.ResourceList<
-  TextAnalysisAuthoringPrebuiltEntity,
-  SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
->;
+    TextAnalysisAuthoringPrebuiltEntity,
+    SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
+  >;
 
   /**
    * Lists the support training config version for a given project type.
    */
   listTrainingConfigVersions is languageOperations.ResourceList<
-  TextAnalysisAuthoringTrainingConfigVersion,
-  ListQueryParametersTrait<ProjectKindQueryParameter &
+    TextAnalysisAuthoringTrainingConfigVersion,
+    ListQueryParametersTrait<ProjectKindQueryParameter &
       StandardListQueryParameters>
->;
-
+  >;
 }
