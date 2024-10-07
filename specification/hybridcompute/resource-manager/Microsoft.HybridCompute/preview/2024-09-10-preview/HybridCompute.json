@@ -1686,7 +1686,7 @@
           }
         },
         "x-ms-examples": {
-          "GET a V2 extension metadata": {
+          "GET an extension metadata": {
             "$ref": "./examples/extension/ExtensionMetadataV2_Get.json"
           }
         }
@@ -1736,10 +1736,10 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GET a list of V2 extensions": {
+          "GET a list of extension metadata": {
             "$ref": "./examples/extension/ExtensionMetadataV2_List.json"
           }
         }
@@ -1782,7 +1782,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GET a list of extension types": {
@@ -1821,7 +1821,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GET a list of extension publishers": {
@@ -2975,19 +2975,19 @@
           "items": {
             "$ref": "#/definitions/ExtensionValueV2"
           },
-          "description": "The list of V2 extension metadata.",
+          "description": "The list of extension metadata.",
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of extension metadata. Call ListNext() with this URI to fetch the next page of extension metadata."
         }
       },
-      "description": "The List Extension Metadata V2 response."
+      "description": "The List Extension Metadata response."
     },
     "ExtensionValueV2": {
       "type": "object",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The location of the extension."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExtensionValueV2Properties",
@@ -2999,7 +2999,7 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Describes a V2 Extension Metadata"
+      "description": "Describes an Extension Metadata."
     },
     "ExtensionValueV2Properties": {
       "type": "object",
@@ -3018,12 +3018,6 @@
           "readOnly": true,
           "format": "uri",
           "description": "Location of the signature files for the extension."
-        },
-        "extensionPackageSizeMb": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "The size of extension package in megabytes."
         },
         "operatingSystem": {
           "type": "string",
@@ -3049,7 +3043,7 @@
           "$ref": "#/definitions/ExtensionValueProperties"
         }
       ],
-      "description": "Describes V2 Extension Metadata properties"
+      "description": "Describes Extension Metadata properties."
     },
     "ExtensionTypeListResult": {
       "type": "object",
@@ -3062,6 +3056,10 @@
           },
           "description": "The list of extension types.",
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of extension types. Call ListNext() with this URI to fetch the next page of extension types."
         }
       },
       "description": "The List of Extension Types"
@@ -3095,9 +3093,13 @@
           },
           "description": "The list of extension publishers.",
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of extension publishers. Call ListNext() with this URI to fetch the next page of extension publishers."
         }
       },
-      "description": "The List of Extension Publishers"
+      "description": "The List of Extension Publishers."
     },
     "ExtensionPublisher": {
       "type": "object",
