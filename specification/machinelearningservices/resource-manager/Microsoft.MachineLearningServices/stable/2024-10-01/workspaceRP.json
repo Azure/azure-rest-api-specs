@@ -2698,6 +2698,10 @@
         "status": {
           "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+        },
+        "firewallSku": {
+          "description": "Firewall Sku used for FQDN Rules",
+          "$ref": "#/definitions/FirewallSku"
         }
       }
     },
@@ -3660,6 +3664,18 @@
           "description": "The properties that the machine learning workspace connection will be updated with.",
           "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
         }
+      }
+    },
+    "FirewallSku": {
+      "description": "Firewall Sku used for FQDN Rules",
+      "enum": [
+        "Standard",
+        "Basic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FirewallSku",
+        "modelAsString": true
       }
     }
   }
