@@ -1,33 +1,17 @@
+import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "./models.tsp";
-import "./Monitor.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Private;
+using TypeSpec.Versioning;
 
-namespace Microsoft.Workloads;
-/**
- * configuration associated with SAP Landscape Monitor Dashboard.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "This is a singleton resource and the name is fixed."
-@singleton("default")
-@parentResource(Monitor)
-model SapLandscapeMonitorResource
-  is ProxyResource<SapLandscapeMonitorProperties> {
-  /**
-   * The name of the resource.
-   */
-  @key
-  @path
-  @segment("sapLandscapeMonitor")
-  @visibility("read")
-  name: string;
-}
+namespace Microsoft.Workloads.SapLandscapeMonitor;
 
 @armResourceOperations
 interface SapLandscapeMonitor {

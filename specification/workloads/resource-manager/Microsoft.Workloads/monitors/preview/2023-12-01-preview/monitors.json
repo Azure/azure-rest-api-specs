@@ -161,7 +161,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Monitor"
+              "$ref": "#/definitions/Monitor.Monitor"
             }
           },
           "default": {
@@ -207,7 +207,7 @@
             "description": "Request body representing a SAP monitor",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Monitor"
+              "$ref": "#/definitions/Monitor.Monitor"
             }
           }
         ],
@@ -215,13 +215,13 @@
           "200": {
             "description": "Resource 'Monitor' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Monitor"
+              "$ref": "#/definitions/Monitor.Monitor"
             }
           },
           "201": {
             "description": "Resource 'Monitor' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Monitor"
+              "$ref": "#/definitions/Monitor.Monitor"
             },
             "headers": {
               "Retry-After": {
@@ -281,7 +281,7 @@
             "description": "The Update SAP workload monitor request body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateMonitorRequest"
+              "$ref": "#/definitions/Monitor.UpdateMonitorRequest"
             }
           }
         ],
@@ -289,7 +289,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Monitor"
+              "$ref": "#/definitions/Monitor.Monitor"
             }
           },
           "202": {
@@ -393,7 +393,7 @@
         "tags": [
           "ProviderInstances"
         ],
-        "description": "Gets a list of provider instances in the specified SAP monitor. The operations returns various properties of each provider instances.",
+        "description": "List ProviderInstance resources by Monitor",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -475,7 +475,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProviderInstance"
+              "$ref": "#/definitions/Provider.ProviderInstance"
             }
           },
           "default": {
@@ -544,7 +544,7 @@
             "description": "Request body representing a provider instance associated with a SAP monitor.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProviderInstance"
+              "$ref": "#/definitions/Provider.ProviderInstance"
             }
           }
         ],
@@ -552,13 +552,13 @@
           "200": {
             "description": "Resource 'ProviderInstance' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ProviderInstance"
+              "$ref": "#/definitions/Provider.ProviderInstance"
             }
           },
           "201": {
             "description": "Resource 'ProviderInstance' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ProviderInstance"
+              "$ref": "#/definitions/Provider.ProviderInstance"
             },
             "headers": {
               "Retry-After": {
@@ -767,7 +767,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SapLandscapeMonitorResource"
+              "$ref": "#/definitions/SapLandscapeMonitor.SapLandscapeMonitorResource"
             }
           },
           "default": {
@@ -813,7 +813,7 @@
             "description": "Request body representing a configuration for Sap Landscape Monitor Dashboard",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SapLandscapeMonitorResource"
+              "$ref": "#/definitions/SapLandscapeMonitor.SapLandscapeMonitorResource"
             }
           }
         ],
@@ -821,13 +821,13 @@
           "200": {
             "description": "Resource 'SapLandscapeMonitorResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SapLandscapeMonitorResource"
+              "$ref": "#/definitions/SapLandscapeMonitor.SapLandscapeMonitorResource"
             }
           },
           "201": {
             "description": "Resource 'SapLandscapeMonitorResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SapLandscapeMonitorResource"
+              "$ref": "#/definitions/SapLandscapeMonitor.SapLandscapeMonitorResource"
             }
           },
           "default": {
@@ -873,7 +873,7 @@
             "description": "Request body representing a configuration for Sap Landscape Monitor Dashboard",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SapLandscapeMonitorResource"
+              "$ref": "#/definitions/SapLandscapeMonitor.SapLandscapeMonitorResource"
             }
           }
         ],
@@ -881,7 +881,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SapLandscapeMonitorResource"
+              "$ref": "#/definitions/SapLandscapeMonitor.SapLandscapeMonitorResource"
             }
           },
           "default": {
@@ -945,12 +945,12 @@
     }
   },
   "definitions": {
-    "AppServicePlanConfiguration": {
+    "Monitor.AppServicePlanConfiguration": {
       "type": "object",
       "description": "Configuration details of app service plan",
       "properties": {
         "tier": {
-          "$ref": "#/definitions/AppServicePlanTier",
+          "$ref": "#/definitions/Monitor.AppServicePlanTier",
           "description": "The App Service plan tier."
         },
         "capacity": {
@@ -961,7 +961,7 @@
         }
       }
     },
-    "AppServicePlanTier": {
+    "Monitor.AppServicePlanTier": {
       "type": "string",
       "description": "The App Service plan tier.",
       "enum": [
@@ -985,7 +985,228 @@
         ]
       }
     },
-    "Db2ProviderInstanceProperties": {
+    "Monitor.ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "description": "Managed resource group configuration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    },
+    "Monitor.Monitor": {
+      "type": "object",
+      "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Monitor.Properties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Monitor.Properties": {
+      "type": "object",
+      "description": "Describes the properties of a SAP monitor.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "State of provisioning of the SAP monitor.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Defines the SAP monitor errors.",
+          "readOnly": true
+        },
+        "appLocation": {
+          "type": "string",
+          "description": "The SAP monitor resources will be deployed in the SAP monitoring region. The subnet region should be same as the SAP monitoring region."
+        },
+        "routingPreference": {
+          "$ref": "#/definitions/Monitor.RoutingPreference",
+          "description": "Sets the routing preference of the SAP monitor. By default only RFC1918 traffic is routed to the customer VNET."
+        },
+        "zoneRedundancyPreference": {
+          "type": "string",
+          "description": "Sets the preference for zone redundancy on resources created for the SAP monitor. By default resources will be created which do not support zone redundancy."
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/Monitor.ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration"
+        },
+        "logAnalyticsWorkspaceArmId": {
+          "type": "string",
+          "description": "The ARM ID of the Log Analytics Workspace that is used for SAP monitoring."
+        },
+        "monitorSubnet": {
+          "type": "string",
+          "description": "The subnet which the SAP monitor will be deployed in"
+        },
+        "appServicePlanConfiguration": {
+          "$ref": "#/definitions/Monitor.AppServicePlanConfiguration",
+          "description": "App service plan configuration"
+        },
+        "msiArmId": {
+          "type": "string",
+          "description": "The ARM ID of the MSI used for SAP monitoring.",
+          "readOnly": true
+        },
+        "storageAccountArmId": {
+          "type": "string",
+          "description": "The ARM ID of the Storage account used for SAP monitoring.",
+          "readOnly": true
+        }
+      }
+    },
+    "Monitor.RoutingPreference": {
+      "type": "string",
+      "description": "Sets the routing preference of the SAP monitor.",
+      "enum": [
+        "Default",
+        "RouteAll"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingPreference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default routing preference. Only RFC1918 traffic is routed to the customer VNET."
+          },
+          {
+            "name": "RouteAll",
+            "value": "RouteAll",
+            "description": "Route all traffic to the customer VNET."
+          }
+        ]
+      }
+    },
+    "Monitor.UpdateMonitorRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating SAP monitor resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "MonitorListResult": {
+      "type": "object",
+      "description": "The response of a Monitor list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Monitor items on this page",
+          "items": {
+            "$ref": "#/definitions/Monitor.Monitor"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Provider.Health": {
+      "type": "object",
+      "description": "Resource health details",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/Provider.WorkloadProviderInstanceHealthState",
+          "description": "Health state of the resource",
+          "readOnly": true
+        },
+        "impactingReasons": {
+          "type": "string",
+          "description": "Reasons impacting health state",
+          "readOnly": true
+        }
+      }
+    },
+    "Provider.Properties": {
+      "type": "object",
+      "description": "Describes the properties of a provider instance.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "State of provisioning of the provider instance",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/Provider.Health",
+          "description": "Resource health details",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Defines the provider instance errors.",
+          "readOnly": true
+        },
+        "providerSettings": {
+          "$ref": "#/definitions/Provider.ProviderSpecificProperties",
+          "description": "Defines the provider specific properties."
+        }
+      }
+    },
+    "Provider.ProviderInstance": {
+      "type": "object",
+      "description": "A provider instance associated with SAP monitor.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Provider.Properties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "Provider.ProviderSpecificProperties": {
+      "type": "object",
+      "description": "Gets or sets the provider specific properties.",
+      "properties": {
+        "providerType": {
+          "$ref": "#/definitions/ProviderType",
+          "description": "The provider type. For example, the value can be SapHana.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "providerType",
+      "required": [
+        "providerType"
+      ]
+    },
+    "Provider.ProviderTypes.Db2Properties": {
       "type": "object",
       "description": "Gets or sets the DB2 provider properties.",
       "properties": {
@@ -1020,7 +1241,7 @@
           "description": "Gets or sets the SAP System Identifier"
         },
         "sslPreference": {
-          "$ref": "#/definitions/SslPreference",
+          "$ref": "#/definitions/Provider.SslPreference",
           "description": "Gets or sets certificate preference if secure communication is enabled."
         },
         "sslCertificateUri": {
@@ -1030,14 +1251,14 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProviderSpecificProperties"
+          "$ref": "#/definitions/Provider.ProviderSpecificProperties"
         }
       ],
       "x-ms-discriminator-value": "Db2"
     },
-    "HanaDbProviderInstanceProperties": {
+    "Provider.ProviderTypes.HanaDbProperties": {
       "type": "object",
-      "description": "Gets or sets the provider properties.",
+      "description": "Gets or sets the Sap Hana Db provider properties.",
       "properties": {
         "hostname": {
           "type": "string",
@@ -1078,7 +1299,7 @@
           "description": "Gets or sets the hostname(s) in the SSL certificate."
         },
         "sslPreference": {
-          "$ref": "#/definitions/SslPreference",
+          "$ref": "#/definitions/Provider.SslPreference",
           "description": "Gets or sets certificate preference if secure communication is enabled."
         },
         "sapSid": {
@@ -1088,133 +1309,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProviderSpecificProperties"
+          "$ref": "#/definitions/Provider.ProviderSpecificProperties"
         }
       ],
       "x-ms-discriminator-value": "SapHana"
     },
-    "Health": {
-      "type": "object",
-      "description": "Resource health details",
-      "properties": {
-        "healthState": {
-          "$ref": "#/definitions/WorkloadProviderInstanceHealthState",
-          "description": "Health state of the resource",
-          "readOnly": true
-        },
-        "impactingReasons": {
-          "type": "string",
-          "description": "Reasons impacting health state",
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedResourceGroupConfiguration": {
-      "type": "object",
-      "description": "Managed resource group configuration",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Managed resource group name"
-        }
-      }
-    },
-    "Monitor": {
-      "type": "object",
-      "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MonitorProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "MonitorListResult": {
-      "type": "object",
-      "description": "The response of a Monitor list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Monitor items on this page",
-          "items": {
-            "$ref": "#/definitions/Monitor"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "MonitorProperties": {
-      "type": "object",
-      "description": "Describes the properties of a SAP monitor.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/WorkloadMonitorProvisioningState",
-          "description": "State of provisioning of the SAP monitor.",
-          "readOnly": true
-        },
-        "errors": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "Defines the SAP monitor errors.",
-          "readOnly": true
-        },
-        "appLocation": {
-          "type": "string",
-          "description": "The SAP monitor resources will be deployed in the SAP monitoring region. The subnet region should be same as the SAP monitoring region."
-        },
-        "routingPreference": {
-          "$ref": "#/definitions/RoutingPreference",
-          "description": "Sets the routing preference of the SAP monitor. By default only RFC1918 traffic is routed to the customer VNET."
-        },
-        "zoneRedundancyPreference": {
-          "type": "string",
-          "description": "Sets the preference for zone redundancy on resources created for the SAP monitor. By default resources will be created which do not support zone redundancy."
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration"
-        },
-        "logAnalyticsWorkspaceArmId": {
-          "type": "string",
-          "description": "The ARM ID of the Log Analytics Workspace that is used for SAP monitoring."
-        },
-        "monitorSubnet": {
-          "type": "string",
-          "description": "The subnet which the SAP monitor will be deployed in"
-        },
-        "appServicePlanConfiguration": {
-          "$ref": "#/definitions/AppServicePlanConfiguration",
-          "description": "App service plan configuration"
-        },
-        "msiArmId": {
-          "type": "string",
-          "description": "The ARM ID of the MSI used for SAP monitoring.",
-          "readOnly": true
-        },
-        "storageAccountArmId": {
-          "type": "string",
-          "description": "The ARM ID of the Storage account used for SAP monitoring.",
-          "readOnly": true
-        }
-      }
-    },
-    "MsSqlServerProviderInstanceProperties": {
+    "Provider.ProviderTypes.MsSqlServerProperties": {
       "type": "object",
       "description": "Gets or sets the SQL server provider properties.",
       "properties": {
@@ -1245,7 +1345,7 @@
           "description": "Gets or sets the SAP System Identifier"
         },
         "sslPreference": {
-          "$ref": "#/definitions/SslPreference",
+          "$ref": "#/definitions/Provider.SslPreference",
           "description": "Gets or sets certificate preference if secure communication is enabled."
         },
         "sslCertificateUri": {
@@ -1255,12 +1355,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProviderSpecificProperties"
+          "$ref": "#/definitions/Provider.ProviderSpecificProperties"
         }
       ],
       "x-ms-discriminator-value": "MsSqlServer"
     },
-    "PrometheusHaClusterProviderInstanceProperties": {
+    "Provider.ProviderTypes.PrometheusHaClusterProperties": {
       "type": "object",
       "description": "Gets or sets the PrometheusHaCluster provider properties.",
       "properties": {
@@ -1281,7 +1381,7 @@
           "description": "Gets or sets the clusterName."
         },
         "sslPreference": {
-          "$ref": "#/definitions/SslPreference",
+          "$ref": "#/definitions/Provider.SslPreference",
           "description": "Gets or sets certificate preference if secure communication is enabled."
         },
         "sslCertificateUri": {
@@ -1291,12 +1391,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProviderSpecificProperties"
+          "$ref": "#/definitions/Provider.ProviderSpecificProperties"
         }
       ],
       "x-ms-discriminator-value": "PrometheusHaCluster"
     },
-    "PrometheusOsProviderInstanceProperties": {
+    "Provider.ProviderTypes.PrometheusOsProperties": {
       "type": "object",
       "description": "Gets or sets the PrometheusOS provider properties.",
       "properties": {
@@ -1305,7 +1405,7 @@
           "description": "URL of the Node Exporter endpoint"
         },
         "sslPreference": {
-          "$ref": "#/definitions/SslPreference",
+          "$ref": "#/definitions/Provider.SslPreference",
           "description": "Gets or sets certificate preference if secure communication is enabled."
         },
         "sslCertificateUri": {
@@ -1319,295 +1419,14 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProviderSpecificProperties"
+          "$ref": "#/definitions/Provider.ProviderSpecificProperties"
         }
       ],
       "x-ms-discriminator-value": "PrometheusOS"
     },
-    "ProviderInstance": {
+    "Provider.ProviderTypes.SapNetWeaverProperties": {
       "type": "object",
-      "description": "A provider instance associated with SAP monitor.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProviderInstanceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ProviderInstanceListResult": {
-      "type": "object",
-      "description": "The response of a ProviderInstance list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProviderInstance items on this page",
-          "items": {
-            "$ref": "#/definitions/ProviderInstance"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ProviderInstanceProperties": {
-      "type": "object",
-      "description": "Describes the properties of a provider instance.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/WorkloadMonitorProvisioningState",
-          "description": "State of provisioning of the provider instance",
-          "readOnly": true
-        },
-        "health": {
-          "$ref": "#/definitions/Health",
-          "description": "Resource health details",
-          "readOnly": true
-        },
-        "errors": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "Defines the provider instance errors.",
-          "readOnly": true
-        },
-        "providerSettings": {
-          "$ref": "#/definitions/ProviderSpecificProperties",
-          "description": "Defines the provider specific properties."
-        }
-      }
-    },
-    "ProviderSpecificProperties": {
-      "type": "object",
-      "description": "Gets or sets the provider specific properties.",
-      "properties": {
-        "providerType": {
-          "type": "string",
-          "description": "The provider type. For example, the value can be SapHana.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "discriminator": "providerType",
-      "required": [
-        "providerType"
-      ]
-    },
-    "RoutingPreference": {
-      "type": "string",
-      "description": "Sets the routing preference of the SAP monitor.",
-      "enum": [
-        "Default",
-        "RouteAll"
-      ],
-      "x-ms-enum": {
-        "name": "RoutingPreference",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Default",
-            "value": "Default",
-            "description": "Default routing preference. Only RFC1918 traffic is routed to the customer VNET."
-          },
-          {
-            "name": "RouteAll",
-            "value": "RouteAll",
-            "description": "Route all traffic to the customer VNET."
-          }
-        ]
-      }
-    },
-    "SapLandscapeMonitorMetricThresholds": {
-      "type": "object",
-      "description": "Gets or sets the Threshold Values for Top Metrics Health.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the threshold."
-        },
-        "green": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets the threshold value for Green."
-        },
-        "yellow": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets the threshold value for Yellow."
-        },
-        "red": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets the threshold value for Red."
-        }
-      }
-    },
-    "SapLandscapeMonitorProperties": {
-      "type": "object",
-      "description": "Gets or sets the properties for Sap Landscape Monitor Dashboard.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/SapLandscapeMonitorProvisioningState",
-          "description": "State of provisioning of the SAP monitor.",
-          "readOnly": true
-        },
-        "grouping": {
-          "$ref": "#/definitions/SapLandscapeMonitorPropertiesGrouping",
-          "description": "Gets or sets the SID groupings by landscape and Environment."
-        },
-        "topMetricsThresholds": {
-          "type": "array",
-          "description": "Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SapLandscapeMonitorMetricThresholds"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "SapLandscapeMonitorPropertiesGrouping": {
-      "type": "object",
-      "description": "Gets or sets the SID groupings by landscape and Environment.",
-      "properties": {
-        "landscape": {
-          "type": "array",
-          "description": "Gets or sets the list of landscape to SID mappings.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SapLandscapeMonitorSidMapping"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "sapApplication": {
-          "type": "array",
-          "description": "Gets or sets the list of Sap Applications to SID mappings.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SapLandscapeMonitorSidMapping"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "SapLandscapeMonitorProvisioningState": {
-      "type": "string",
-      "description": "State of provisioning of the SAP monitor.",
-      "enum": [
-        "Accepted",
-        "Created",
-        "Failed",
-        "Succeeded",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "SapLandscapeMonitorProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource request has been accepted."
-          },
-          {
-            "name": "Created",
-            "value": "Created",
-            "description": "The resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The resource operation has failed."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The resource operation has succeeded."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The resource operation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "SapLandscapeMonitorResource": {
-      "type": "object",
-      "description": "configuration associated with SAP Landscape Monitor Dashboard.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SapLandscapeMonitorProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SapLandscapeMonitorResourceListResult": {
-      "type": "object",
-      "description": "The response of a SapLandscapeMonitorResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SapLandscapeMonitorResource items on this page",
-          "items": {
-            "$ref": "#/definitions/SapLandscapeMonitorResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SapLandscapeMonitorSidMapping": {
-      "type": "object",
-      "description": "Gets or sets the mapping for SID to Environment/Applications.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the grouping."
-        },
-        "topSid": {
-          "type": "array",
-          "description": "Gets or sets the list of SID's.",
-          "maxItems": 50,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SapNetWeaverProviderInstanceProperties": {
-      "type": "object",
-      "description": "Gets or sets the provider properties.",
+      "description": "Gets or sets the Sap Net Weaver provider properties.",
       "properties": {
         "sapSid": {
           "type": "string",
@@ -1655,18 +1474,18 @@
           "description": "Gets or sets the blob URI to SSL certificate for the SAP system."
         },
         "sslPreference": {
-          "$ref": "#/definitions/SslPreference",
+          "$ref": "#/definitions/Provider.SslPreference",
           "description": "Gets or sets certificate preference if secure communication is enabled."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProviderSpecificProperties"
+          "$ref": "#/definitions/Provider.ProviderSpecificProperties"
         }
       ],
       "x-ms-discriminator-value": "SapNetWeaver"
     },
-    "SslPreference": {
+    "Provider.SslPreference": {
       "type": "string",
       "description": "Gets or sets certificate preference if secure communication is enabled.",
       "enum": [
@@ -1696,24 +1515,112 @@
         ]
       }
     },
-    "UpdateMonitorRequest": {
-      "type": "object",
-      "description": "Defines the request body for updating SAP monitor resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
+    "Provider.WorkloadProviderInstanceHealthState": {
+      "type": "string",
+      "description": "State of health of the provider instance",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Unavailable",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadProviderInstanceHealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "The resource health status is Healthy"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The resource health status is Degraded"
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The resource health status is Unavailable"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The resource health status is Unknown"
           }
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
+        ]
       }
     },
-    "WorkloadMonitorProvisioningState": {
+    "ProviderInstanceListResult": {
+      "type": "object",
+      "description": "The response of a ProviderInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProviderInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/Provider.ProviderInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProviderType": {
+      "type": "string",
+      "description": "The Provider Types for Monitor.",
+      "enum": [
+        "SapHana",
+        "SapNetWeaver",
+        "PrometheusOS",
+        "MsSqlServer",
+        "PrometheusHaCluster",
+        "Db2"
+      ],
+      "x-ms-enum": {
+        "name": "ProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SapHana",
+            "value": "SapHana",
+            "description": "SapHana Provider."
+          },
+          {
+            "name": "SapNetWeaver",
+            "value": "SapNetWeaver",
+            "description": "SapNetWeaver Provider."
+          },
+          {
+            "name": "PrometheusOS",
+            "value": "PrometheusOS",
+            "description": "PrometheusOS Provider."
+          },
+          {
+            "name": "MsSqlServer",
+            "value": "MsSqlServer",
+            "description": "MsSqlServer Provider."
+          },
+          {
+            "name": "PrometheusHaCluster",
+            "value": "PrometheusHaCluster",
+            "description": "PrometheusHaCluster Provider."
+          },
+          {
+            "name": "Db2",
+            "value": "Db2",
+            "description": "Db2 Provider."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
       "type": "string",
       "description": "State of provisioning of the SAP monitor.",
       "enum": [
@@ -1727,7 +1634,7 @@
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "WorkloadMonitorProvisioningState",
+        "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -1774,41 +1681,182 @@
       },
       "readOnly": true
     },
-    "WorkloadProviderInstanceHealthState": {
+    "SapLandscapeMonitor.MetricThresholds": {
+      "type": "object",
+      "description": "Gets or sets the Threshold Values for Top Metrics Health.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the threshold."
+        },
+        "green": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets the threshold value for Green."
+        },
+        "yellow": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets the threshold value for Yellow."
+        },
+        "red": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets the threshold value for Red."
+        }
+      }
+    },
+    "SapLandscapeMonitor.Properties": {
+      "type": "object",
+      "description": "Gets or sets the properties for Sap Landscape Monitor Dashboard.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/SapLandscapeMonitor.SapLandscapeMonitorProvisioningState",
+          "description": "State of provisioning of the SAP monitor.",
+          "readOnly": true
+        },
+        "grouping": {
+          "$ref": "#/definitions/SapLandscapeMonitor.PropertyGrouping",
+          "description": "Gets or sets the SID groupings by landscape and Environment."
+        },
+        "topMetricsThresholds": {
+          "type": "array",
+          "description": "Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitor.MetricThresholds"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SapLandscapeMonitor.PropertyGrouping": {
+      "type": "object",
+      "description": "Gets or sets the SID groupings by landscape and Environment.",
+      "properties": {
+        "landscape": {
+          "type": "array",
+          "description": "Gets or sets the list of landscape to SID mappings.",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitor.SidMapping"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "sapApplication": {
+          "type": "array",
+          "description": "Gets or sets the list of Sap Applications to SID mappings.",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitor.SidMapping"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SapLandscapeMonitor.SapLandscapeMonitorProvisioningState": {
       "type": "string",
-      "description": "State of health of the provider instance",
+      "description": "State of provisioning of the SAP monitor.",
       "enum": [
-        "Healthy",
-        "Degraded",
-        "Unavailable",
-        "Unknown"
+        "Accepted",
+        "Created",
+        "Failed",
+        "Succeeded",
+        "Canceled"
       ],
       "x-ms-enum": {
-        "name": "WorkloadProviderInstanceHealthState",
+        "name": "SapLandscapeMonitorProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Healthy",
-            "value": "Healthy",
-            "description": "The resource health status is Healthy"
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource request has been accepted."
           },
           {
-            "name": "Degraded",
-            "value": "Degraded",
-            "description": "The resource health status is Degraded"
+            "name": "Created",
+            "value": "Created",
+            "description": "The resource has been created."
           },
           {
-            "name": "Unavailable",
-            "value": "Unavailable",
-            "description": "The resource health status is Unavailable"
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource operation has failed."
           },
           {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The resource health status is Unknown"
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource operation has succeeded."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource operation was canceled."
           }
         ]
+      },
+      "readOnly": true
+    },
+    "SapLandscapeMonitor.SapLandscapeMonitorResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SapLandscapeMonitor.Properties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SapLandscapeMonitor.SidMapping": {
+      "type": "object",
+      "description": "Gets or sets the mapping for SID to Environment/Applications.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the grouping."
+        },
+        "topSid": {
+          "type": "array",
+          "description": "Gets or sets the list of SID's.",
+          "maxItems": 50,
+          "items": {
+            "type": "string"
+          }
+        }
       }
+    },
+    "SapLandscapeMonitorResourceListResult": {
+      "type": "object",
+      "description": "The response of a SapLandscapeMonitorResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SapLandscapeMonitorResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitor.SapLandscapeMonitorResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {}
