@@ -18,9 +18,9 @@ model RunStep {
   @doc("The type of run step, which can be either message_creation or tool_calls.")
   type: RunStepType;
 
-  @encodedName("application/json", "agent_id")
+  @encodedName("application/json", "assistant_id")
   @doc("The ID of the agent associated with the run step.")
-  agentId: string;
+  assistantId: string;
 
   @encodedName("application/json", "thread_id")
   @doc("The ID of the thread that was run.")

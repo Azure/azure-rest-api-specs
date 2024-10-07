@@ -47,7 +47,7 @@ op listAgents is Azure.Core.Foundations.Operation<
 /**
  * Retrieves an existing agent.
  *
- * @param agentId The ID of the agent to retrieve.
+ * @param assistantId The ID of the agent to retrieve.
  * @returns The requested agent instance.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -55,12 +55,12 @@ op listAgents is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/assistants/{agentId}")
+@route("/assistants/{assistantId}")
 op getAgent is Azure.Core.Foundations.Operation<
   {
     @doc("Identifier of the agent.")
     @path
-    agentId: string;
+    assistantId: string;
   },
   Agent
 >;
@@ -75,7 +75,7 @@ op getAgent is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/assistants/{agentId}")
+@route("/assistants/{assistantId}")
 op updateAgent is Azure.Core.Foundations.Operation<
   {
     /**
@@ -89,19 +89,19 @@ op updateAgent is Azure.Core.Foundations.Operation<
 /**
  * Deletes an agent.
  *
- * @param agentId The ID of the agent to delete.
+ * @param assistantId The ID of the agent to delete.
  * @returns Status information about the requested deletion operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
-@route("/assistants/{agentId}")
+@route("/assistants/{assistantId}")
 op deleteAgent is Azure.Core.Foundations.Operation<
   {
     @doc("Identifier of the agent.")
     @path
-    agentId: string;
+    assistantId: string;
   },
   AgentDeletionStatus
 >;
