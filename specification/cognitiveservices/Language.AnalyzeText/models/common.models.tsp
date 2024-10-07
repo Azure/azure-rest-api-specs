@@ -44,10 +44,6 @@ union AnalyzeTextTaskKind {
 
   /** Entity linking task */
   EntityLinking: "EntityLinking",
-
-  /** Dynamic classification task */
-  @added(Versions.v2023_11_15_preview)
-  DynamicClassification: "DynamicClassification",
 }
 
 /** The kind of the long running analyze text tasks supported. */
@@ -111,10 +107,6 @@ union AnalyzeTextTaskResultsKind {
 
   /** Entity linking results */
   EntityLinkingResults: "EntityLinkingResults",
-
-  /** Dynamic classification results */
-  @added(Versions.v2023_11_15_preview)
-  DynamicClassificationResults: "DynamicClassificationResults",
 }
 
 /** The kind of the response object returned by the analyze-text long running task. */
