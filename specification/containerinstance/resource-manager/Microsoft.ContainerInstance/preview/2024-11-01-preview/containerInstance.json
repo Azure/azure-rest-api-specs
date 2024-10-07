@@ -1274,7 +1274,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
-        "operationId": "ContainerGroupProfiles_ListBySubscription",
+        "operationId": "ContainerGroupProfile_ListBySubscription",
         "x-ms-examples": {},
         "summary": "Gets a list of all container group profiles under a subscription.",
         "description": "Gets a list of all container group profiles under a subscription.",
@@ -1307,7 +1307,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
-        "operationId": "ContainerGroupProfiles_ListByResourceGroup",
+        "operationId": "ContainerGroupProfile_ListByResourceGroup",
         "x-ms-examples": {},
         "summary": "Gets a list of all container group profiles under a resource group.",
         "description": "Gets a list of all container group profiles under a resource group.",
@@ -1371,13 +1371,24 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "NoContent",
+          "200": {
+            "description": "OK",
             "headers": {
-              "Azure-AsyncOperation": {
+              "x-ms-correlation-request-id": {
                 "type": "string"
-              },
-              "Location": {
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfile"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfile"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
                 "type": "string"
               }
             }
@@ -1503,7 +1514,7 @@
           "202": {
             "description": "Accepted",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Ax-ms-correlation-request-id": {
                 "type": "string"
               },
               "Location": {
@@ -3733,15 +3744,14 @@
     },
     "ContainerGroupProfile": {
       "type": "object",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Gets the container group profile type - Microsoft.ContainerInstance/containerGroupProfiles"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         },
-        "properties": {
+        {
           "$ref": "#/definitions/ContainerGroupProfileProperties"
         }
-      }
+      ]
     },
     "ContainerGroupProfileProperties": {
       "type": "object",
