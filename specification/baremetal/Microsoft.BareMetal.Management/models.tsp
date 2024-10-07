@@ -319,20 +319,20 @@ model PeeringSettingUpdate {
   /**
    * SDDCs in a source vnet.
    */
-  tenantIds: string[];
+  tenantIds?: string[];
 
   /**
    * Source vnet ID in the following format: "Source/VNET/ARM/Resource/ID"
    */
-  virtualNetworkId: string;
+  virtualNetworkId?: string;
 
   /**
    * Source vnet GUID.
    */
-  virtualNetworkGuid: string;
+  virtualNetworkGuid?: string;
 
   /**
    * List of remote vnet Ids that are enabled for sync.
    */
-  remoteVnetIds: string[];
+  remoteVnetIds?: string[];
 }

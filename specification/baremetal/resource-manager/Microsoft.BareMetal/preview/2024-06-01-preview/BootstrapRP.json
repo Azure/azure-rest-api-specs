@@ -140,12 +140,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "A location in a subscription",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "updateRoutesOnVirtualNetworkObject",
@@ -490,7 +485,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BareMetalConnectionProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "etag": {
           "type": "string",
