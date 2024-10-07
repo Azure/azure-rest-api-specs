@@ -14,7 +14,7 @@ using TypeSpec.Rest;
 interface HealthValidations {
   get is ArmResourceRead<HealthValidation>;
   listByParent is ArmResourceListByParent<HealthValidation>;
-  @doc("Starts a health validation.")
+  @doc("Starts health validation for a watcher.")
   startValidation is ArmResourceActionAsync<
     HealthValidation,
     void,
