@@ -1341,7 +1341,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The name of the project to use.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1358,7 +1358,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringModelFile"
+              "$ref": "#/definitions/TextAnalysisAuthoringExportedModelManifest"
             }
           },
           "default": {
@@ -1372,9 +1372,6 @@
           "SuccessfulGetExportedModelManifest": {
             "$ref": "./examples/TextAnalysisAuthoring_SuccessfulGetExportedModelManifest.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2808,28 +2805,6 @@
           "description": "The TextAnalysisAuthoringExportedTrainedModel items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedTextAnalysisAuthoringModelFile": {
-      "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringModelFile items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TextAnalysisAuthoringModelFile items on this page",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringModelFile"
           },
           "x-ms-identifiers": []
         },
@@ -4720,6 +4695,23 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "status"
+      ]
+    },
+    "TextAnalysisAuthoringExportedModelManifest": {
+      "type": "object",
+      "description": "Represents the properties for the exported model manifest.",
+      "properties": {
+        "modelFiles": {
+          "type": "array",
+          "description": "The model files belonging to this model.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringModelFile"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "modelFiles"
       ]
     },
     "TextAnalysisAuthoringExportedModelOptions": {

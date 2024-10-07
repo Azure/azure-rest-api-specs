@@ -870,6 +870,7 @@ model TextAnalysisAuthoringExportedModelJobState {
 /**
  * Represents the properties for the exported model manifest.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringExportedModelManifest {
   /**
    * The model files belonging to this model.
@@ -881,14 +882,11 @@ model TextAnalysisAuthoringExportedModelManifest {
  * Represents the properties for the model file.
  */
 @clientName("ModelFile", "csharp")
-@resource("manifest")
-@parentResource(TextAnalysisAuthoringExportedTrainedModel)
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringModelFile {
   /**
    * The name of the file.
    */
-  @key("name")
-  @visibility
   name: string;
 
   /**

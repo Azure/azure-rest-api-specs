@@ -469,9 +469,28 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the details and URL needed to download the exported model.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/manifest")
+  @get
   @added(Versions.v2023_04_15_preview)
-  getExportedModelManifest is languageOperations.ResourceList<
-    TextAnalysisAuthoringModelFile
+  getExportedModelManifest is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The exported model name.
+       */
+      @path
+      exportedModelName: string;
+    },
+    TextAnalysisAuthoringExportedModelManifest,
+    {},
+    ErrorResponse
   >;
 
   /**
