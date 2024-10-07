@@ -95,7 +95,7 @@ model ValidationIssue {
 
   @visibility("read")
   @doc("The additional details of the issue.")
-  additionalDetails: string;
+  additionalDetails?: string;
 
   @visibility("read")
   @doc("The recommendation message for fixing the issue.")
@@ -103,7 +103,7 @@ model ValidationIssue {
 
   @visibility("read")
   @doc("The recommendation url for fixing the issue.")
-  recommendationUrl: url;
+  recommendationUrl?: url;
 
   @visibility("read")
   @doc("The resource ID of the validated resource.")
