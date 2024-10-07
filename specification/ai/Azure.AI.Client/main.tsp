@@ -2,8 +2,17 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./endpoints/routes.tsp";
 import "./agents/routes.tsp";
+import "./agents/threads/routes.tsp";
+import "./agents/messages/routes.tsp";
+import "./agents/runs/routes.tsp";
+import "./agents/run_steps/routes.tsp";
+import "./agents/files/routes.tsp";
+import "./agents/streaming/events.tsp";
+import "./agents/vector_stores/routes.tsp";
+import "./agents/vector_stores/files/routes.tsp";
+import "./agents/vector_stores/file_batches/routes.tsp";
+import "./endpoints/routes.tsp";
 import "./evaluations/routes.tsp";
 
 using TypeSpec.Http;
