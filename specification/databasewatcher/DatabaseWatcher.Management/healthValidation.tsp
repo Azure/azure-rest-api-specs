@@ -110,6 +110,6 @@ model ValidationIssue {
   validationResourceId?: Azure.Core.armResourceIdentifier<[]>;
 
   @visibility("read")
-  @doc("The type of the validated resource.")
+  @doc("The type of the Azure resource related to the issue.")
   validationResourceType?: string;
 }
