@@ -94,7 +94,7 @@ model ValidationIssue {
   errorMessage: string;
 
   @visibility("read")
-  @doc("The additional details of the issue.")
+  @doc("The additional details for the issue.")
   additionalDetails?: string;
 
   @visibility("read")
