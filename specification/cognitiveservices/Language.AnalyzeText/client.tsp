@@ -889,10 +889,6 @@ namespace Language.AnalyzeTextClientCustomizations;
   "ExtractiveSummarizationOperationResult",
   "csharp"
 );
-@@clientName(CustomSentimentAnalysisLROResult,
-  "CustomSentimentAnalysisOperationResult",
-  "csharp"
-);
 @@clientName(SentimentLROResult, "SentimentOperationResult", "csharp");
 @@clientName(PiiEntityRecognitionLROResult,
   "PiiEntityRecognitionOperationResult",
