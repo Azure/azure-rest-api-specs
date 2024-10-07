@@ -7,8 +7,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Workloads.configurationvalidationresults
+  namespace: Microsoft.Workloads.ConfigurationValidationResults
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/workloads/Microsoft.Workloads.configurationvalidationresults/src/Generated
+  output-folder: $(csharp-sdks-folder)/workloads/Microsoft.Workloads.ConfigurationValidationResults/src/Generated
   clear-output-folder: true
 ```
