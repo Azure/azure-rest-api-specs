@@ -33,7 +33,7 @@ model HealthValidation is ProxyResource<HealthValidationProperties> {
   name: string;
 }
 
-@doc("The generic properties of the health validation proxy resource.")
+@doc("The generic properties of the health validation resource.")
 @added(Versions.v2024_10_01_preview)
 model HealthValidationProperties {
   @visibility("read")
