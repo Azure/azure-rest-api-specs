@@ -415,9 +415,9 @@ model VMAttributes {
   localStorageSupport?: VMAttributeSupport;
 
   @doc("""
-  LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
-  If localStorageSupport is "Excluded", this VMAttribute can not be used." should be added to the description for localStorageInGiB.
-  """)
+    LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If localStorageSupport is "Excluded", this VMAttribute can not be used." should be added to the description for localStorageInGiB.
+    """)
   localStorageInGiB?: VMAttributeMinMaxDouble;
 
   @extension("x-ms-identifiers", [])
@@ -440,39 +440,39 @@ model VMAttributes {
   rdmaSupport?: VMAttributeSupport;
 
   @doc("""
-  The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.
-  rdmaSupport should be set to "Included" or "Required" to use this VMAttribute. 
-  If rdmaSupport is "Excluded", this VMAttribute can not be used.
-  """)
+    The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.
+    rdmaSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If rdmaSupport is "Excluded", this VMAttribute can not be used.
+    """)
   rdmaNetworkInterfaceCount?: VMAttributeMinMaxInteger;
 
   @doc("""
-  Specifies whether the VMSize supporting accelerator should be used to build Fleet or not.
-  acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
-  If acceleratorSupport is "Excluded", this VMAttribute can not be used.
-  """)
+    Specifies whether the VMSize supporting accelerator should be used to build Fleet or not.
+    acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If acceleratorSupport is "Excluded", this VMAttribute can not be used.
+    """)
   acceleratorSupport?: VMAttributeSupport;
 
   @extension("x-ms-identifiers", [])
   @doc("""
-  The accelerator manufacturers specified as a list. 
-  acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
-  If acceleratorSupport is "Excluded", this VMAttribute can not be used.
-  """)
+    The accelerator manufacturers specified as a list. 
+    acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If acceleratorSupport is "Excluded", this VMAttribute can not be used.
+    """)
   acceleratorManufacturers?: Array<AcceleratorManufacturer>;
 
   @extension("x-ms-identifiers", [])
   @doc("""
-  The accelerator types specified as a list. acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
-  If acceleratorSupport is "Excluded", this VMAttribute can not be used.
-  """)
+    The accelerator types specified as a list. acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If acceleratorSupport is "Excluded", this VMAttribute can not be used.
+    """)
   acceleratorTypes?: Array<AcceleratorType>;
 
   @doc("""
-  The range of accelerator count specified from min to max. Optional parameter. Either Min or Max is required if specified.
-  acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
-  If acceleratorSupport is "Excluded", this VMAttribute can not be used.
-  """)
+    The range of accelerator count specified from min to max. Optional parameter. Either Min or Max is required if specified.
+    acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If acceleratorSupport is "Excluded", this VMAttribute can not be used.
+    """)
   acceleratorCount?: VMAttributeMinMaxInteger;
 
   @extension("x-ms-identifiers", [])
@@ -503,7 +503,7 @@ model LocationProfile {
     """)
   location: string;
 
-@doc("""
+  @doc("""
     An override for computeProfile.baseVirtualMachineProfile specific to this region. 
     This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
     """)
