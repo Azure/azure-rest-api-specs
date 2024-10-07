@@ -49,7 +49,7 @@ model HealthValidationProperties {
   status: validationStatus;
 
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["category"])
+  @OpenAPI.extension("x-ms-identifiers", ["errorCode"])
   @doc("The list of issues generated from the health validation.")
   issues: ValidationIssue[];
 
@@ -86,22 +86,30 @@ union validationStatus {
 @added(Versions.v2024_10_01_preview)
 model ValidationIssue {
   @visibility("read")
-  @doc("The category of the issue.")
-  category: string;
+  @doc("The error code of the issue.")
+  errorCode: string;
 
   @visibility("read")
-  @doc("The details of the issue.")
-  details: string;
+  @doc("The error message of the issue.")
+  errorMessage: string;
 
   @visibility("read")
-  @doc("The recommendation for fixing the issue.")
-  recommendation: string;
+  @doc("The additional details of the issue.")
+  additionalDetails: string;
 
   @visibility("read")
-  @doc("The resource ID of the affected resource.")
-  affectedResourceId?: Azure.Core.armResourceIdentifier<[]>;
+  @doc("The recommendation message for fixing the issue.")
+  recommendationMessage: string;
 
   @visibility("read")
-  @doc("The type of the affected resource.")
-  affectedResourceType?: string;
+  @doc("The recommendation url for fixing the issue.")
+  recommendationUrl: url;
+
+  @visibility("read")
+  @doc("The resource ID of the validated resource.")
+  validationResourceId?: Azure.Core.armResourceIdentifier<[]>;
+
+  @visibility("read")
+  @doc("The type of the validated resource.")
+  validationResourceType?: string;
 }
