@@ -282,7 +282,7 @@ model ConfigurationValidationResultsProperties {
    * The template ID of the quality checks being applied to the workload instance.
    */
   @doc("The template ID of the quality checks being applied.")
-  qualityChecksTemplateId: string;
+  qualityChecksTemplateId?: string;
 
   /**
    * Contains detailed information about errors encountered during the execution of the quality

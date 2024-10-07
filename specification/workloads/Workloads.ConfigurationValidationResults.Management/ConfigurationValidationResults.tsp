@@ -22,7 +22,7 @@ model ConfigurationValidationResults
    */
   ...ResourceNameParameter<
     Resource = ConfigurationValidationResults,
-    KeyName = "configurationValidationResultResourceName",
+    KeyName = "configurationValidationResultName",
     SegmentName = "configurationValidationResults",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9_-]{2,80}"
   >;
