@@ -817,91 +817,6 @@
         }
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/exported-models": {
-      "get": {
-        "operationId": "TextAnalysisAuthoring_ListExportedModels",
-        "description": "Lists the exported models belonging to a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringExportedTrainedModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}": {
-      "get": {
-        "operationId": "TextAnalysisAuthoring_GetExportedModel",
-        "description": "Gets the details of an exported model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "exportedModelName",
-            "in": "path",
-            "description": "The exported model name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/authoring/analyze-text/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetImportStatus",
@@ -1836,28 +1751,6 @@
           "description": "The TextAnalysisAuthoringDocumentEvaluationResult items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedTextAnalysisAuthoringExportedTrainedModel": {
-      "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringExportedTrainedModel items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TextAnalysisAuthoringExportedTrainedModel items on this page",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
           },
           "x-ms-identifiers": []
         },
@@ -2892,47 +2785,6 @@
       "discriminator": "projectKind",
       "required": [
         "projectKind"
-      ]
-    },
-    "TextAnalysisAuthoringExportedTrainedModel": {
-      "type": "object",
-      "description": "Represents an exported trained model.",
-      "properties": {
-        "exportedModelName": {
-          "type": "string",
-          "description": "The exported model name."
-        },
-        "modelId": {
-          "type": "string",
-          "description": "The model ID."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last trained date time of the model."
-        },
-        "lastExportedModelDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last exported date time of the model."
-        },
-        "modelExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "The model expiration date."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "The model training config version."
-        }
-      },
-      "required": [
-        "exportedModelName",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastExportedModelDateTime",
-        "modelExpirationDate",
-        "modelTrainingConfigVersion"
       ]
     },
     "TextAnalysisAuthoringImportProjectJobState": {

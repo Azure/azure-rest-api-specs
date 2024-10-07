@@ -388,6 +388,7 @@ interface TextAnalysisAuthoring {
   /**
    * Lists the exported models belonging to a project.
    */
+  @added(Versions.v2023_04_15_preview)
   listExportedModels is languageOperations.ResourceList<
     TextAnalysisAuthoringExportedTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
@@ -396,6 +397,7 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the details of an exported model.
    */
+  @added(Versions.v2023_04_15_preview)
   getExportedModel is languageOperations.ResourceRead<TextAnalysisAuthoringExportedTrainedModel>;
 
   /**
