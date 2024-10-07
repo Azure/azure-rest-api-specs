@@ -106,7 +106,7 @@ model ValidationIssue {
   recommendationUrl?: url;
 
   @visibility("read")
-  @doc("The resource ID of the validated resource.")
+  @doc("The resource ID of the Azure resource related to the issue.")
   validationResourceId?: Azure.Core.armResourceIdentifier<[]>;
 
   @visibility("read")
