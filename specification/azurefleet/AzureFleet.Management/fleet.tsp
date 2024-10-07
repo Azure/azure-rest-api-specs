@@ -416,7 +416,7 @@ model VMAttributes {
 
   @doc("""
   LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
-  If localStorageSupport is "Excluded", this VMAttribute can not be used." should be added to the description for localStorageinGiB.
+  If localStorageSupport is "Excluded", this VMAttribute can not be used." should be added to the description for localStorageInGiB.
   """)
   localStorageInGiB?: VMAttributeMinMaxDouble;
 
