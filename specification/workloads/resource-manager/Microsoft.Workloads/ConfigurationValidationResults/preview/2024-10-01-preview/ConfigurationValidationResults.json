@@ -233,13 +233,21 @@
           "description": "The template ID of the quality checks being applied."
         },
         "errorDetails": {
-          "$ref": "#/definitions/ConfigurationValidationResultsErrorDetails",
+          "type": "array",
           "description": "Error details related to the quality check execution.",
-          "readOnly": true
+          "items": {
+            "$ref": "#/definitions/ConfigurationValidationResultsErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "configurationResults": {
-          "$ref": "#/definitions/ConfigurationResults",
-          "description": "The results of the configuration validation."
+          "type": "array",
+          "description": "The results of the configuration validation.",
+          "items": {
+            "$ref": "#/definitions/ConfigurationResults"
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ValidationConfigurationResultsProvisioningState",

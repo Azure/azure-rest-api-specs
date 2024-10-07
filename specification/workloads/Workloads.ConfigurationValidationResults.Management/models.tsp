@@ -290,14 +290,16 @@ model ConfigurationValidationResultsProperties {
    */
   @doc("Error details related to the quality check execution.")
   @visibility("read")
-  errorDetails?: ConfigurationValidationResultsErrorDetails;
+  @OpenAPI.extension("x-ms-identifiers", [])
+  errorDetails?: ConfigurationValidationResultsErrorDetails[];
 
   /**
    * Contains the results of the configuration validation, including details about the checks and
    * their outcomes.
    */
   @doc("The results of the configuration validation.")
-  configurationResults: ConfigurationResults;
+  @OpenAPI.extension("x-ms-identifiers", [])
+  configurationResults: ConfigurationResults[];
 
   /**
    * The provisioning state of the validation results resource.
