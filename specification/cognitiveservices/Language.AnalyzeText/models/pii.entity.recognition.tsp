@@ -37,17 +37,17 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** RedactionPolicy to be used on the input. */
   @added(Versions.v2024_11_15_preview)
-  redactionPolicy?: RedactionPolicy; 
+  redactionPolicy?: RedactionPolicy;
 }
 
-/** Represents the redaction policy to be used. Default policy kind is to maskWithRedactionCharacter and redactionCharacter.asterisk.*/
+/** Represents the redaction policy to be used. Default policy kind is to maskWithRedactionCharacter and redactionCharacter.asterisk. */
 @added(Versions.v2024_11_15_preview)
 model RedactionPolicy {
-  /** Redaction Policy kind that can be used. Default is maskWithRedactionCharacter. Can also use doNotRedact and maskWithEntityType.*/
+  /** Redaction Policy kind that can be used. Default is maskWithRedactionCharacter. Can also use doNotRedact and maskWithEntityType. */
   policyKind?: redactionPolicyKind.maskWithRedactionCharacter;
 
   /** Redaction Character to be used for masking if maskWithRedactionCharacter is policyKind. Redaction characters allowed: !,#,$,%,&,*,+,-,=,?,@,^,_,~ */
-  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk
+  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
 /** Kinds of redaction policies supported. */
@@ -59,10 +59,10 @@ union redactionPolicyKind {
   doNotRedact: "doNotRedact",
 
   /** Represents MaskWithRedactionCharacter */
-  maskWithRedactionCharacter : "maskWithRedactionCharacter",
+  maskWithRedactionCharacter: "maskWithRedactionCharacter",
 
   /** Represents MaskWithEntityType */
-  maskWithEntityType : "maskWithEntityType",
+  maskWithEntityType: "maskWithEntityType",
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
@@ -119,7 +119,7 @@ model PiiEntityWithTags is Entity {
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
   mask?: string;
 
-  /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”.*/
+  /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
   maskOffset?: int32;
 
   /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
