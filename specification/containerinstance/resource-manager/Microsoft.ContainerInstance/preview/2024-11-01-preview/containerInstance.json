@@ -3513,9 +3513,76 @@
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile for storage related settings of a container group profile."
+        },
+        "containerGroupProperties": {
+          "$ref": "#/definitions/NGroupContainerGroupProperties",
+          "description": " Container Group properties which can be set while creating or updating the nGroups."
         }
       },
-      "description": "The object that contains a reference to a Container Group Profile"
+      "description": "The object that contains a reference to a Container Group Profile and it's other related properties."
+    },
+    "NGroupContainerGroupProperties": {
+      "type": "object",
+      "description": "Container Group properties which can be set while creating or updating the nGroups.",
+      "properties": {
+        "subnetIds": {
+          "type": "array",
+          "description": "Contains information about Virtual Network Subnet ARM Resource",
+          "items": {
+            "$ref": "#/definitions/ContainerGroupSubnetId"
+          }
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Contains information about the volumes that can be mounted by Containers in the Container Groups.",
+          "items": {
+            "Volume": {
+              "description": "The properties of the volume.",
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "description": "The name of the volume.",
+                  "type": "string"
+                },
+                "azureFile": {
+                  "description": "The Azure File volume.",
+                  "$ref": "#/definitions/AzureFileVolume"
+                }
+              }
+            }
+          }
+        },
+        "containers": {
+          "type": "array",
+          "description": "Contains information about Container which can be set while creating or updating the nGroups.",
+          "items": {
+            "Container": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "container name"
+                },
+                "properties": {
+                  "type": "object",
+                  "description": "container properties",
+                  "properties": {
+                    "volumeMounts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/VolumeMount"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "StorageProfile": {
       "type": "object",
