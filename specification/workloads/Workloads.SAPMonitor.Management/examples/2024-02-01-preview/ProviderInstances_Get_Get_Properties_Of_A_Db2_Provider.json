@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "monitorName": "mySapMonitor",
+    "providerInstanceName": "myProviderInstance",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProviderInstance",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
+        "properties": {
+          "health": {
+            "healthState": "Healthy",
+            "impactingReasons": "None"
+          },
+          "providerSettings": {
+            "dbName": "OPA",
+            "dbPasswordUri": "",
+            "dbPort": "5912",
+            "dbUsername": "Db2OPA",
+            "hostname": "vmname.azure.com",
+            "providerType": "Db2",
+            "sapSid": "SID",
+            "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+            "sslPreference": "ServerCertificate"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ProviderInstances_Get",
+  "title": "Get properties of a Db2 provider"
+}

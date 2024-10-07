@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "resource": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "westus",
+      "properties": {
+        "appLocation": "westus",
+        "appServicePlanConfiguration": {
+          "capacity": 1,
+          "tier": "ElasticPremium"
+        },
+        "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+        "managedResourceGroupConfiguration": {
+          "name": "myManagedRg"
+        },
+        "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+        "routingPreference": "RouteAll"
+      },
+      "tags": {
+        "key": "value"
+      }
+    },
+    "api-version": "2023-12-01-preview",
+    "monitorName": "mySapMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySapMonitor",
+        "type": "Microsoft.Workloads/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "cac47a92-2856-11ed-a261-0242ac120002",
+          "tenantId": "cac47a92-2856-11ed-a261-0242ac120002"
+        },
+        "location": "westus",
+        "properties": {
+          "appLocation": "eastus",
+          "errors": {
+            "code": "0000",
+            "message": "Error message",
+            "target": "Error target",
+            "details": []
+          },
+          "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+          "managedResourceGroupConfiguration": {
+            "name": "myManagedRg"
+          },
+          "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+          "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi",
+          "provisioningState": "Succeeded",
+          "routingPreference": "RouteAll",
+          "storageAccountArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+          "zoneRedundancyPreference": "ZoneRedundantApp"
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mySapMonitor",
+        "type": "Microsoft.Workloads/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "cac47a92-2856-11ed-a261-0242ac120002",
+          "tenantId": "cac47a92-2856-11ed-a261-0242ac120002"
+        },
+        "location": "westus",
+        "properties": {
+          "appLocation": "eastus",
+          "errors": {
+            "code": "0000",
+            "message": "Error message",
+            "target": "Error target",
+            "details": []
+          },
+          "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+          "managedResourceGroupConfiguration": {
+            "name": "myManagedRg"
+          },
+          "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+          "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi",
+          "provisioningState": "Accepted",
+          "routingPreference": "RouteAll",
+          "storageAccountArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    }
+  },
+  "operationId": "Monitors_Create",
+  "title": "Create a SAP monitor with system assigned identity"
+}

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "monitorName": "mySapMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySapMonitor1",
+        "type": "Microsoft.Workloads/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor",
+        "location": "westus",
+        "properties": {
+          "appLocation": "eastus",
+          "appServicePlanConfiguration": {
+            "capacity": 1,
+            "tier": "ElasticPremium"
+          },
+          "errors": {
+            "code": "0000",
+            "message": "Error message",
+            "target": "Error target",
+            "details": []
+          },
+          "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+          "managedResourceGroupConfiguration": {
+            "name": "myManagedRg"
+          },
+          "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+          "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi",
+          "provisioningState": "Succeeded",
+          "routingPreference": "RouteAll",
+          "storageAccountArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+          "zoneRedundancyPreference": "ZoneRedundantApp"
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    }
+  },
+  "operationId": "Monitors_Get",
+  "title": "Get properties of a SAP monitor"
+}
