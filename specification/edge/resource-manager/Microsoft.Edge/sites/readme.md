@@ -21,12 +21,9 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ``` yaml
 directive:
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    from: sites.json
-    reason: RP is in PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
   - suppress: OperationsAPIImplementation
     from: sites.json
-    reason: RP is in PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
+    reason: RP is in PublicPreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
 ```
 
 ## Configuration
