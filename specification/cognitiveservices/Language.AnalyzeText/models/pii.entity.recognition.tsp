@@ -46,7 +46,7 @@ model RedactionPolicy {
   /** Redaction Policy kind that can be used. Default is maskWithRedactionCharacter. Can also use doNotRedact and maskWithEntityType. */
   policyKind?: redactionPolicyKind.maskWithRedactionCharacter;
 
-  /** Redaction Character to be used for masking if maskWithRedactionCharacter is policyKind. Redaction characters allowed: !,#,$,%,&,*,+,-,=,?,@,^,_,~ */
+  /** Redaction Character to be used for masking if maskWithRedactionCharacter is policyKind. Redaction characters allowed: !,#,$,%,&,*,+,-,=,?,`@`,^,_,~ */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
