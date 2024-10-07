@@ -1466,7 +1466,7 @@ model TextAnalysisAuthoringTrainingConfigVersions {
 /**
  * Represents a training config version.
  */
-@resource("projects/global/training-config-versions")
+@resource("authoring/analyze-text/projects/global/training-config-versions")
 @clientName("TrainingConfigVersion", "csharp")
 model TextAnalysisAuthoringTrainingConfigVersion {
   /**

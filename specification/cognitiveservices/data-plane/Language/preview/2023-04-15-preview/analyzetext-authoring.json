@@ -2377,49 +2377,7 @@
         }
       }
     },
-    "/projects/global/deployments/resources": {
-      "get": {
-        "operationId": "TextAnalysisAuthoring_ListAssignedResourceDeployments",
-        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringAssignedProjectDeploymentsMetadata"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulListAssignedResourceDeployments": {
-            "$ref": "./examples/TextAnalysisAuthoring_SuccessfulListAssignedResourceDeployments.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/global/training-config-versions": {
+    "/authoring/analyze-text/projects/global/training-config-versions": {
       "get": {
         "operationId": "TextAnalysisAuthoring_ListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
@@ -2457,6 +2415,48 @@
         "x-ms-examples": {
           "SuccessfulGetSupportedTrainingConfigVersions": {
             "$ref": "./examples/TextAnalysisAuthoring_SuccessfulGetSupportedTrainingConfigVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/global/deployments/resources": {
+      "get": {
+        "operationId": "TextAnalysisAuthoring_ListAssignedResourceDeployments",
+        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringAssignedProjectDeploymentsMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulListAssignedResourceDeployments": {
+            "$ref": "./examples/TextAnalysisAuthoring_SuccessfulListAssignedResourceDeployments.json"
           }
         },
         "x-ms-pageable": {
