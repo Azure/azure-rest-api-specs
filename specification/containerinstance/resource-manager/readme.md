@@ -33,7 +33,7 @@ tag: package-preview-2024-05
 
 These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-10'
+```yaml $(tag) == 'package-preview-2024-11'
 input-file:
   - Microsoft.ContainerInstance/preview/2024-11-01-preview/containerInstance.json
 ```
