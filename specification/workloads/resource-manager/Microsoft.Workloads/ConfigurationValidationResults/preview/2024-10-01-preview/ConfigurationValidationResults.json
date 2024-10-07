@@ -44,13 +44,84 @@
     }
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/configurationValidationResults": {
+      "get": {
+        "operationId": "ConfigurationValidationResultsOperations_ListBySubscription",
+        "tags": [
+          "ConfigurationValidationResultsOperations"
+        ],
+        "description": "Gets all configuration validation results in a Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationValidationResultsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/configurationValidationResults": {
+      "get": {
+        "operationId": "ConfigurationValidationResultsOperations_ListByResourceGroup",
+        "tags": [
+          "ConfigurationValidationResultsOperations"
+        ],
+        "description": "Gets all configuration validation results in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationValidationResultsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/configurationValidationResults/{configurationValidationResultName}": {
       "get": {
         "operationId": "ConfigurationValidationResultsOperations_Get",
         "tags": [
           "ConfigurationValidationResultsOperations"
         ],
-        "description": "The get on configuration validation results.",
+        "description": "Gets a configuration validation result for a resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -199,6 +270,27 @@
         "errorCode",
         "errorCategory",
         "errorDetails"
+      ]
+    },
+    "ConfigurationValidationResultsListResult": {
+      "type": "object",
+      "description": "The response of a ConfigurationValidationResults list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfigurationValidationResults items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfigurationValidationResults"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ConfigurationValidationResultsProperties": {

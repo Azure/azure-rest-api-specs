@@ -30,7 +30,17 @@ model ConfigurationValidationResults
 @doc("Operations related to retrieving configuration validation results.")
 interface ConfigurationValidationResultsOperations {
   /**
-   * The get on configuration validation results.
+   * Gets a configuration validation result for a resource.
    */
   get is ArmResourceRead<ConfigurationValidationResults>;
+
+  /**
+   * Gets all configuration validation results in a resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<ConfigurationValidationResults>;
+
+  /**
+   * Gets all configuration validation results in a Subscription.
+   */
+  listBySubscription is ArmListBySubscription<ConfigurationValidationResults>;
 }
