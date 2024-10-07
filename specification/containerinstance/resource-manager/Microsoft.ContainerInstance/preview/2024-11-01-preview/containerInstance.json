@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-10-01-preview",
+    "version": "2024-11-01-preview",
     "title": "ContainerInstanceManagementClient"
   },
   "host": "management.azure.com",
@@ -1597,6 +1597,10 @@
                 "name": "ContainerGroupPriority",
                 "modelAsString": true
               }
+            },
+            "identityAcls": {
+              "description": "The access control levels of the identities.",
+              "$ref": "#/definitions/IdentityAcls"
             }
           },
           "required": [
@@ -2539,6 +2543,56 @@
           "description": "The base64 encoded confidential compute enforcement policy"
         }
       }
+    },
+    "IdentityAcls": {
+      "description": "The access control levels of the identities.",
+      "type": "object",
+      "properties": {
+        "defaultAccess": {
+          "description": "The default access level.",
+          "type": "string",
+          "enum": [
+            "All",
+            "System",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityAccessLevel",
+            "modelAsString": true
+          }
+        },
+        "acls": {
+          "description": "The access control levels for each identity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentityAccessControl"
+          }
+        }
+      }
+    },
+    "IdentityAccessControl": {
+      "description": "The access control for an identity",
+      "type": "object",
+      "properties": {
+        "access": {
+          "description": "The access level of the identity.",
+          "type": "string",
+          "enum": [
+            "All",
+            "System",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityAccessLevel",
+            "modelAsString": true
+          }
+        },
+        "identity": {
+          "description": "An identity.",
+          "type": "string"
+        }
+      }
+
     }
   },
   "parameters": {
