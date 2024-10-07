@@ -25,7 +25,7 @@ interface HealthValidations {
 @parentResource(Watcher)
 @added(Versions.v2024_10_01_preview)
 model HealthValidation is ProxyResource<HealthValidationProperties> {
-  @doc("The health validation proxy resource name.")
+  @doc("The health validation resource name.")
   @key("healthValidationName")
   @pattern("^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$")
   @segment("healthValidations")
