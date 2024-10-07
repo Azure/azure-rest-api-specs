@@ -1,0 +1,102 @@
+{
+  "title": "PeeringSettings_CreateOrUpdate",
+  "operationId": "PeeringSettings_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "F99B5DF9-0AB6-4430-ABCC-1AA6374FBE57",
+    "resourceGroupName": "rgBootstrapRP",
+    "peeringSettingName": "myPeeringSetting",
+    "peeringSettingObject": {
+      "properties": {
+        "tenantIds": [
+          "tenantId1"
+        ],
+        "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnetName",
+        "virtualNetworkGuid": "e2f6d3e2-4bba-4d49-bb1e-9e2d1e6c3c5f",
+        "remotePeeringLinks": [
+          {
+            "remoteVirtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnetName2"
+          }
+        ]
+      },
+      "etag": "c5d1b5ef-1f65-4b2a-9c6e-5f3e49d5c3d7",
+      "tags": {
+        "key9892": "fz"
+      },
+      "location": "westcentralus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "tenantIds": [
+            "tenantId1"
+          ],
+          "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnetName",
+          "virtualNetworkGuid": "e2f6d3e2-4bba-4d49-bb1e-9e2d1e6c3c5f",
+          "remotePeeringLinks": [
+            {
+              "remoteVirtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnetName2",
+              "provisioningState": "Creating"
+            }
+          ],
+          "provisioningState": "Creating"
+        },
+        "etag": "c5d1b5ef-1f65-4b2a-9c6e-5f3e49d5c3d7",
+        "tags": {
+          "key9892": "fz"
+        },
+        "location": "westcentralus",
+        "id": "/subscriptions/subscriptionId/resourceGroups/rg-1/providers/Microsoft.BareMetal/peeringSetting/peringSetting1",
+        "name": "peeringSetting1",
+        "type": "Microsoft.BareMetal/peeringSetting",
+        "systemData": {
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "createdAt": "2024-10-05T22:36:22.772Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-10-05T22:36:22.772Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://eastus2euap.management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Workloads/locations/WCUS/operationStatuses/sample-op-status?api-version=2023-12-01"
+      },
+      "body": {
+        "properties": {
+          "tenantIds": [
+            "tenantId1"
+          ],
+          "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnetName",
+          "virtualNetworkGuid": "e2f6d3e2-4bba-4d49-bb1e-9e2d1e6c3c5f",
+          "remotePeeringLinks": [
+            {
+              "remoteVirtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnetName2",
+              "provisioningState": "Creating"
+            }
+          ],
+          "provisioningState": "Creating"
+        },
+        "etag": "c5d1b5ef-1f65-4b2a-9c6e-5f3e49d5c3d7",
+        "tags": {
+          "key9892": "fz"
+        },
+        "location": "westcentralus",
+        "id": "/subscriptions/subscriptionId/resourceGroups/rg-1/providers/Microsoft.BareMetal/peeringSetting/peringSetting1",
+        "name": "peeringSetting1",
+        "type": "Microsoft.BareMetal/peeringSetting",
+        "systemData": {
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "createdAt": "2024-10-05T22:36:22.772Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-10-05T22:36:22.772Z"
+        }
+      }
+    }
+  }
+}

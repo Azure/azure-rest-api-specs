@@ -17,15 +17,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Locations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template for async post request with body"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Decorator exists as previously approved by ARM"
   @doc("Update Routes on Virtual Network.")
   @autoRoute
-  @OpenAPI.extension("x-ms-long-running-operation", true)
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
   @action
   @post
   updateRoutesOnVirtualNetwork(
@@ -36,10 +30,7 @@ interface Locations {
     updateRoutesOnVirtualNetworkObject: UpdateRoutesOnVirtualNetwork,
   ): ArmResponse<UpdateRoutesOnVirtualNetwork> | {
     ...AcceptedResponse;
-
-    // @doc("Operation accepted.")
     ...Azure.Core.Foundations.RetryAfterHeader;
-
-    ...LocationHeader;
+    ...ArmLroLocationHeader<FinalResult = UpdateRoutesOnVirtualNetwork>;
   } | ErrorResponse;
 }

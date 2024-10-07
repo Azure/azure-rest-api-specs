@@ -32,6 +32,31 @@ union ProvisioningState {
 }
 
 /**
+ * The current provisioning state for a peering setting.
+ */
+union PeeringSettingProvisioningState {
+  string,
+
+  @doc("is creating")
+  Creating: "Creating",
+
+  @doc("is deleting")
+  Deleting: "Deleting",
+
+  @doc("is succeeded")
+  Succeeded: "Succeeded",
+
+  @doc("is failed")
+  Failed: "Failed",
+
+  @doc("is canceled")
+  Canceled: "Canceled",
+
+  @doc("is removed")
+  Removed: "Removed",
+}
+
+/**
  * Status of the route to virtualNetwork.
  */
 union RouteToVirtualNetworkOperationStatus {
@@ -65,10 +90,6 @@ model Location is ProxyResource<LocationProperties> {
   @key("location")
   @path
   @segment("locations")
-  @Azure.ResourceManager.Private.armCommonParameter(
-    "LocationParameter",
-    Azure.ResourceManager.CommonTypes.Versions.v5
-  )
   name: string;
 }
 
@@ -148,6 +169,7 @@ model BareMetalConnectionUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Type exists as previously approved by ARM"
   @visibility("read", "create", "update")
   tags?: Record<string>;
 }
@@ -169,7 +191,7 @@ model UpdateRoutesOnVirtualNetworkProperties {
   /**
    * List of Routes that needs to updated for VirtualNetwork.
    */
-  @extension("x-ms-identifiers", ["vnetId", "routeAddress"])
+  @OpenAPI.extension("x-ms-identifiers", ["vnetId", "routeAddress"])
   routesToVirtualNetwork: RoutesToVirtualNetworkOperationsProperties[];
 
   /**
@@ -218,4 +240,99 @@ model RoutesToVirtualNetworkOperationsProperties {
    */
   @visibility("read")
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
+/**
+ * Model representing a Peering Setting object.
+ */
+model PeeringSetting is TrackedResource<PeeringSettingProperties> {
+  /**
+   * The name of the Peering Setting. The name is case insensitive.
+   */
+  @maxLength(101)
+  @minLength(36)
+  @pattern("^[-\\w\\._\\(\\)]+$")
+  @path
+  @key("peeringSettingName")
+  @segment("peeringSetting")
+  @visibility("read")
+  name: string;
+
+  /**
+   * Resource Etag.
+   */
+  ...EntityTagProperty;
+}
+
+/**
+ * Basic Peering Setting properties needed for the request and response.
+ */
+model PeeringSettingProperties {
+  /**
+   * SDDCs in a source vnet.
+   */
+  tenantIds: string[];
+
+  /**
+   * Source vnet ID in the following format: "Source/VNET/ARM/Resource/ID"
+   */
+  virtualNetworkId: string;
+
+  /**
+   * Source vnet GUID.
+   */
+  virtualNetworkGuid: string;
+
+  /**
+   * Peering links from a source vnet to remote vnet(s).
+   */
+  @OpenAPI.extension("x-ms-identifiers", [])
+  remotePeeringLinks: RemotePeeringLink[];
+
+  /**
+   * The current provisioning state.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Model representing a Remote Peering Link
+ */
+model RemotePeeringLink {
+  /**
+   * Remote vnet ID in the following format: "Remote/VNET/ARM/Resource/ID"
+   */
+  remoteVirtualNetworkId: string;
+
+  /**
+   * The current provisioning state for a peering setting.
+   */
+  @visibility("read")
+  provisioningState?: PeeringSettingProvisioningState;
+}
+
+/**
+ * Updated peering setting object
+ */
+model PeeringSettingUpdate {
+  /**
+   * SDDCs in a source vnet.
+   */
+  tenantIds: string[];
+
+  /**
+   * Source vnet ID in the following format: "Source/VNET/ARM/Resource/ID"
+   */
+  virtualNetworkId: string;
+
+  /**
+   * Source vnet GUID.
+   */
+  virtualNetworkGuid: string;
+
+  /**
+   * List of remote vnet Ids that are enabled for sync.
+   */
+  remoteVnetIds: string[];
 }

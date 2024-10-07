@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BootstrapRP",
-    "version": "2024-06-01-preview",
+    "version": "2024-10-01-preview",
     "description": "Microsoft BareMetal Azure Resource Provider specification",
     "x-typespec-generated": [
       {
@@ -43,6 +43,9 @@
       "name": "BareMetalConnections"
     },
     {
+      "name": "PeeringSettings"
+    },
+    {
       "name": "Operations"
     },
     {
@@ -76,50 +79,16 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.BareMetal/utilization/clusters/region/{location}": {
-      "get": {
-        "operationId": "Utilization_List",
-        "description": "Get the Utilization for all clusters in the given location\nOld API route from prior to 2024-09-01-preview",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ClusterList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
         },
         "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Utilization_List.json"
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "clusters"
         }
       }
     },
@@ -152,13 +121,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "BareMetalConnections list subscription": {
-            "$ref": "./examples/BareMetalConnections_ListSubscription.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BareMetalConnections_ListSubscription_MaximumSet_Gen": {
+            "$ref": "./examples/BareMetalConnections_ListSubscription_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -222,15 +191,54 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Locations_UpdateRoutesOnVirtualNetwork": {
-            "$ref": "./examples/Locations_UpdateRoutesOnVirtualNetwork.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Locations_UpdateRoutesOnVirtualNetwork_MaximumSet_Gen": {
+            "$ref": "./examples/Locations_UpdateRoutesOnVirtualNetwork_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetal/peeringSetting": {
+      "get": {
+        "operationId": "PeeringSettings_ListSubscription",
+        "tags": [
+          "PeeringSettings"
+        ],
+        "description": "List all PeeringSetting objects in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PeeringSettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PeeringSettings_ListSubscription_MaximumSet_Gen": {
+            "$ref": "./examples/PeeringSettings_ListSubscription_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetal/bareMetalConnections": {
@@ -265,13 +273,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "BareMetalConnections list resource group": {
-            "$ref": "./examples/BareMetalConnections_ListResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BareMetalConnections_ListResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/BareMetalConnections_ListResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -318,8 +326,8 @@
           }
         },
         "x-ms-examples": {
-          "BareMetalConnections get": {
-            "$ref": "./examples/BareMetalConnections_Get.json"
+          "BareMetalConnections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/BareMetalConnections_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -356,7 +364,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/BareMetalConnection"
-            }
+            },
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -390,15 +399,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "BareMetalConnections create or update": {
-            "$ref": "./examples/BareMetalConnections_CreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BareMetalConnections_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/BareMetalConnections_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "operationId": "BareMetalConnections_Update",
@@ -433,7 +442,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/BareMetalConnectionUpdate"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -451,8 +461,8 @@
           }
         },
         "x-ms-examples": {
-          "BareMetalConnections patch": {
-            "$ref": "./examples/BareMetalConnections_Update.json"
+          "BareMetalConnections_Update_MaximumSet_Gen": {
+            "$ref": "./examples/BareMetalConnections_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -508,15 +518,303 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "BareMetalConnections delete": {
-            "$ref": "./examples/BareMetalConnections_Delete.json"
+          "BareMetalConnections_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/BareMetalConnections_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetal/peeringSetting": {
+      "get": {
+        "operationId": "PeeringSettings_ListResourceGroup",
+        "tags": [
+          "PeeringSettings"
+        ],
+        "description": "List all PeeringSetting objects in the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PeeringSettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PeeringSettings_ListResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/PeeringSettings_ListResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetal/peeringSetting/{peeringSettingName}": {
+      "get": {
+        "operationId": "PeeringSettings_Get",
+        "tags": [
+          "PeeringSettings"
+        ],
+        "description": "Get the PeeringSetting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "peeringSettingName",
+            "in": "path",
+            "description": "The name of the Peering Setting. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 101,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PeeringSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PeeringSettings_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PeeringSettings_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PeeringSettings_CreateOrUpdate",
+        "tags": [
+          "PeeringSettings"
+        ],
+        "description": "Create or update the PeetingSetting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "peeringSettingName",
+            "in": "path",
+            "description": "The name of the Peering Setting. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 101,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "peeringSettingObject",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PeeringSetting"
+            },
+            "x-ms-client-name": "resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PeeringSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PeeringSetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'PeeringSetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PeeringSetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PeeringSettings_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/PeeringSettings_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PeeringSettings_Update",
+        "tags": [
+          "PeeringSettings"
+        ],
+        "description": "Patch the PeeringSetting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "peeringSettingName",
+            "in": "path",
+            "description": "The name of the Peering Setting. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 101,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "peeringSettingUpdateObject",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PeeringSetting"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PeeringSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PeeringSettings_Update_MaximumSet_Gen": {
+            "$ref": "./examples/PeeringSettings_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PeeringSettings_Delete",
+        "tags": [
+          "PeeringSettings"
+        ],
+        "description": "Delete the PeeringSetting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "peeringSettingName",
+            "in": "path",
+            "description": "The name of the Peering Setting. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 101,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PeeringSettings_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PeeringSettings_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     }
   },
@@ -613,85 +911,135 @@
         }
       }
     },
-    "ClusterList": {
+    "PeeringSetting": {
       "type": "object",
-      "description": "List of cluster properties",
+      "description": "Model representing a Peering Setting object.",
       "properties": {
-        "clusters": {
+        "properties": {
+          "$ref": "#/definitions/PeeringSettingProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PeeringSettingListResult": {
+      "type": "object",
+      "description": "The response of a PeeringSetting list operation.",
+      "properties": {
+        "value": {
           "type": "array",
-          "description": "Items on this page",
+          "description": "The PeeringSetting items on this page",
           "items": {
-            "$ref": "#/definitions/ClusterProperties"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/PeeringSetting"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "Link to the next page of data"
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "clusters"
+        "value"
       ]
     },
-    "ClusterProperties": {
+    "PeeringSettingProperties": {
       "type": "object",
-      "description": "Cluster object representation",
+      "description": "Basic Peering Setting properties needed for the request and response.",
       "properties": {
-        "clusterName": {
+        "tenantIds": {
+          "type": "array",
+          "description": "SDDCs in a source vnet.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualNetworkId": {
           "type": "string",
-          "description": "Name of the cluster"
+          "description": "Source vnet ID in the following format: \"Source/VNET/ARM/Resource/ID\""
         },
-        "vrfCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of VRFs currently on the cluster",
-          "readOnly": true
-        },
-        "vrfLimit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max number of VRFs for the cluster",
-          "readOnly": true
-        },
-        "routeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of routes currently on the cluster",
-          "readOnly": true
-        },
-        "routeLimit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max number of routes for the cluster",
-          "readOnly": true
-        },
-        "allocatedRoutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Potential number of routes for the cluster",
-          "readOnly": true
-        },
-        "tier2Alias": {
+        "virtualNetworkGuid": {
           "type": "string",
-          "description": "Alias of the T2 device",
-          "readOnly": true
+          "description": "Source vnet GUID."
         },
-        "sdnAppliancePlacement": {
-          "$ref": "#/definitions/SDNAppliancePlacement",
-          "description": "Placement of the SDN Appliance",
-          "readOnly": true
+        "remotePeeringLinks": {
+          "type": "array",
+          "description": "Peering links from a source vnet to remote vnet(s).",
+          "items": {
+            "$ref": "#/definitions/RemotePeeringLink"
+          },
+          "x-ms-identifiers": []
         },
-        "sdnApplianceEnabled": {
-          "type": "boolean",
-          "description": "True if Rotterdam, else False",
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The current provisioning state.",
           "readOnly": true
         }
       },
       "required": [
-        "clusterName"
+        "tenantIds",
+        "virtualNetworkId",
+        "virtualNetworkGuid",
+        "remotePeeringLinks"
       ]
+    },
+    "PeeringSettingProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state for a peering setting.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Removed"
+      ],
+      "x-ms-enum": {
+        "name": "PeeringSettingProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "is creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "is deleting"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "is succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "is failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "is canceled"
+          },
+          {
+            "name": "Removed",
+            "value": "Removed",
+            "description": "is removed"
+          }
+        ]
+      },
+      "readOnly": true
     },
     "ProvisioningState": {
       "type": "string",
@@ -735,6 +1083,24 @@
         ]
       },
       "readOnly": true
+    },
+    "RemotePeeringLink": {
+      "type": "object",
+      "description": "Model representing a Remote Peering Link",
+      "properties": {
+        "remoteVirtualNetworkId": {
+          "type": "string",
+          "description": "Remote vnet ID in the following format: \"Remote/VNET/ARM/Resource/ID\""
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PeeringSettingProvisioningState",
+          "description": "The current provisioning state for a peering setting.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "remoteVirtualNetworkId"
+      ]
     },
     "RouteToVirtualNetworkOperationStatus": {
       "type": "string",
@@ -825,30 +1191,6 @@
         "logicalContainerId",
         "availabilityZone"
       ]
-    },
-    "SDNAppliancePlacement": {
-      "type": "string",
-      "description": "Placement of the SDN Appliance",
-      "enum": [
-        "T1",
-        "T2"
-      ],
-      "x-ms-enum": {
-        "name": "SDNAppliancePlacement",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "T1",
-            "value": "T1",
-            "description": "T1 device"
-          },
-          {
-            "name": "T2",
-            "value": "T2",
-            "description": "T2 device"
-          }
-        ]
-      }
     },
     "UpdateRoutesOnVirtualNetwork": {
       "type": "object",
