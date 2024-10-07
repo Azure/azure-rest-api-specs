@@ -729,7 +729,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PeeringSetting"
+              "$ref": "#/definitions/PeeringSettingUpdate"
             },
             "x-ms-client-name": "properties"
           }
@@ -1040,6 +1040,60 @@
         ]
       },
       "readOnly": true
+    },
+    "PeeringSettingUpdate": {
+      "type": "object",
+      "description": "Model representing a Peering Setting object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PeeringSettingUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PeeringSettingUpdateProperties": {
+      "type": "object",
+      "description": "Basic Peering Setting properties needed for the request and response.",
+      "properties": {
+        "tenantIds": {
+          "type": "array",
+          "description": "Tenant Ids in a source vnet.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "description": "Source vnet ID in the following format: \"Source/VNET/ARM/Resource/ID\""
+        },
+        "virtualNetworkGuid": {
+          "type": "string",
+          "description": "Source vnet GUID."
+        },
+        "remotePeeringLinks": {
+          "type": "array",
+          "description": "Peering links from a source vnet to remote vnet(s).",
+          "items": {
+            "$ref": "#/definitions/RemotePeeringLink"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The current provisioning state.",
+          "readOnly": true
+        }
+      }
     },
     "ProvisioningState": {
       "type": "string",
