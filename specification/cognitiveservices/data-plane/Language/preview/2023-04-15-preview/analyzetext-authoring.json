@@ -2262,7 +2262,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/global/deletion-jobs/{jobId}": {
+    "/authoring/analyze-text/projects/global/deletion-jobs/{jobId}": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetProjectDeletionStatus",
         "description": "Gets the status for a project deletion job.",
@@ -2299,49 +2299,7 @@
         }
       }
     },
-    "/projects/global/deployments/resources": {
-      "get": {
-        "operationId": "TextAnalysisAuthoring_ListAssignedResourceDeployments",
-        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringAssignedProjectDeploymentsMetadata"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulListAssignedResourceDeployments": {
-            "$ref": "./examples/TextAnalysisAuthoring_SuccessfulListAssignedResourceDeployments.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/global/languages": {
+    "/authoring/analyze-text/projects/global/languages": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetSupportedLanguages",
         "description": "Lists the supported languages.",
@@ -2386,7 +2344,7 @@
         }
       }
     },
-    "/projects/global/prebuilt-entities": {
+    "/authoring/analyze-text/projects/global/prebuilt-entities": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed\nentities.",
@@ -2412,6 +2370,48 @@
         "x-ms-examples": {
           "SuccessfulGetSupportedPrebuiltEntities": {
             "$ref": "./examples/TextAnalysisAuthoring_SuccessfulGetSupportedPrebuiltEntities.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/global/deployments/resources": {
+      "get": {
+        "operationId": "TextAnalysisAuthoring_ListAssignedResourceDeployments",
+        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextAnalysisAuthoringAssignedProjectDeploymentsMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulListAssignedResourceDeployments": {
+            "$ref": "./examples/TextAnalysisAuthoring_SuccessfulListAssignedResourceDeployments.json"
           }
         },
         "x-ms-pageable": {

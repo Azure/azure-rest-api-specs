@@ -1309,7 +1309,7 @@ model TextAnalysisAuthoringSubTrainingJobState {
 /**
  * Represents the state of a project deletion job.
  */
-@resource("projects/global/deletion-jobs")
+@resource("authoring/analyze-text/projects/global/deletion-jobs")
 @clientName("ProjectDeletionJobState", "csharp")
 model TextAnalysisAuthoringProjectDeletionJobState {
   ...TextAnalysisAuthoringJobState;
@@ -1390,7 +1390,7 @@ model TextAnalysisAuthoringSupportedLanguages {
 /**
  * Represents a supported language.
  */
-@resource("projects/global/languages")
+@resource("authoring/analyze-text/projects/global/languages")
 @clientName("SupportedLanguage", "csharp")
 model TextAnalysisAuthoringSupportedLanguage {
   /**
@@ -1427,7 +1427,7 @@ model TextAnalysisAuthoringPrebuiltEntities {
  * Represents a supported prebuilt entity.
  */
 @added(Versions.v2023_04_15_preview)
-@resource("projects/global/prebuilt-entities")
+@resource("authoring/analyze-text/projects/global/prebuilt-entities")
 @clientName("PrebuiltEntity", "csharp")
 model TextAnalysisAuthoringPrebuiltEntity {
   /**
