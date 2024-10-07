@@ -1,15 +1,9 @@
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
 import "../Monitor/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Private;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Workloads.SapLandscapeMonitor;
 
