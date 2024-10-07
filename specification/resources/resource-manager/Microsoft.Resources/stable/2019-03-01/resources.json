@@ -2534,6 +2534,10 @@
         "onErrorDeployment": {
           "$ref": "#/definitions/OnErrorDeployment",
           "description": "The deployment on error behavior."
+        },
+        "validationLevel": {
+          "$ref": "#/definitions/ValidationLevel",
+          "description": "The validation level of the deployment"
         }
       },
       "required": [
@@ -2840,6 +2844,10 @@
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "The deployment error."
+        },
+        "validationLevel": {
+          "$ref": "#/definitions/ValidationLevel",
+          "description": "The validation level of the deployment"
         }
       },
       "description": "Deployment properties with additional details."
@@ -3609,6 +3617,17 @@
             "type": "string"
           }
         }
+      }
+    },
+    "ValidationLevel": {
+      "type": "string",
+      "description": "The level of validation performed on the deployment. This value can be either Template or Provider. At Template level, static analysis and validation of the template is performed. At Provider level, static analysis of the template is performed and resource declarations are sent to resource providers for semantic validation.",
+      "enum": [
+        "Template",
+        "Provider"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationLevel"
       }
     }
   },
