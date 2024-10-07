@@ -107,6 +107,9 @@
           },
           "Create a community gallery.": {
             "$ref": "./examples/galleryExamples/CommunityGallery_Create.json"
+          },
+          "Create or update a simple gallery with system-assigned and user-assigned managed identities.": {
+            "$ref": "./examples/galleryExamples/Gallery_Create_WithManagedIdentity.json"
           }
         }
       },
@@ -231,6 +234,9 @@
           },
           "Get a community gallery.": {
             "$ref": "./examples/galleryExamples/CommunityGallery_Get.json"
+          },
+          "Get a gallery with system-assigned and user-assigned managed identities.": {
+            "$ref": "./examples/galleryExamples/Gallery_Get_WithManagedIdentity.json"
           }
         }
       },
@@ -1747,6 +1753,10 @@
           "$ref": "#/definitions/GalleryProperties"
         }
       },
+      "identity": {
+        "$ref": "#/definitions/GalleryIdentity",
+        "description": "The identity of the gallery, if configured."
+      },
       "allOf": [
         {
           "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
@@ -1760,6 +1770,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GalleryProperties"
         }
+      },
+      "identity": {
+        "$ref": "#/definitions/GalleryIdentity",
+        "description": "The identity of the gallery, if configured."
       },
       "allOf": [
         {
@@ -1959,6 +1973,39 @@
           "description": "Details of gallery regional sharing failure."
         }
       }
+    },
+    "GalleryIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the gallery identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The AAD tenant id of the gallery identity. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the gallery. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove all identities from the gallery.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "$ref": "../../../common-types/v1/common.json#/definitions/UserAssignedIdentities",
+          "description": "The list of user identities associated with the gallery. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the virtual machine."
     },
     "GalleryApplication": {
       "properties": {
