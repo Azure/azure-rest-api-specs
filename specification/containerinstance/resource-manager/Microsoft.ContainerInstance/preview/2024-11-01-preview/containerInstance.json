@@ -3470,9 +3470,71 @@
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "A network profile for network settings of a ContainerGroupProfile."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile for storage related settings of a container group profile."
         }
       },
       "description": "The object that contains a reference to a Container Group Profile"
+    },
+    "StorageProfile": {
+      "type": "object",
+      "description": "Storage profile for storage related settings of a container group profile.",
+      "properties": {
+        "fileShares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileShare",
+            "description": "List of file shares that will be created and mounted on CGs."
+          }
+        }
+      }
+    },
+    "FileShare": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "type": "string"
+        },
+        "storageAccountName": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "shareAccessType": {
+              "type": "string",
+              "description": " Specifies how Container Groups can access the Azure file share i.e. all CG will share same Azure file share or going to have exclusive file share.",
+              "enum": [
+                "Shared",
+                "Exclusive"
+              ],
+              "x-ms-enum": {
+                "name": "AzureFileShareAccessType",
+                "modelAsString": false
+              }
+            },
+            "shareAccessTier": {
+              "type": "string",
+              "description": "learn more at: https://learn.microsoft.com/en-us/rest/api/storagerp/file-shares/create?tabs=HTTP#shareaccesstier",
+              "enum": [
+                "cool",
+                "hot",
+                "premium",
+                "transactionoptimized"
+              ],
+              "x-ms-enum": {
+                "name": "AzureFileShareAccessTier",
+                "modelAsString": false
+              }
+            }
+          }
+        }
+      }
     },
     "NetworkProfile": {
       "type": "object",
