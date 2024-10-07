@@ -503,7 +503,7 @@ model LocationProfile {
     """)
   location: string;
 
-  @doc("""
+@doc("""
     An override for computeProfile.baseVirtualMachineProfile specific to this region. 
     This override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location.
     """)
