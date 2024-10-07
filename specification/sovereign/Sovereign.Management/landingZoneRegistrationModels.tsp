@@ -1,7 +1,10 @@
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
+
 namespace Microsoft.Sovereign;
 
+@removed(Versions.Preview20241031)
 @doc("The properties of the Landing Zone registration resource type.")
 model LandingZoneRegistrationProperties {
   @visibility("read")
