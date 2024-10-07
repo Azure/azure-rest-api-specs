@@ -1,12 +1,12 @@
 {
-  "operationId": "TextAnalysisAuthoring_GetModelEvaluationResults",
-  "title": "SuccessfulGetModelEvaluation",
+  "operationId": "ConversationalAnalysisAuthoring_GetModelEvaluationResults",
+  "title": "Successful Get Model Evaluation",
   "parameters": {
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "api-version": "2023-04-15-preview",
-    "projectName": "LoanAgreements",
-    "trainedModelLabel": "model2",
+    "projectName": "EmailApp",
+    "trainedModelLabel": "model1",
     "stringIndexType": "Utf16CodeUnit",
     "maxpagesize": 10
   },
@@ -16,281 +16,270 @@
       "body": {
         "value": [
           {
-            "location": "11.txt",
+            "text": "send the email",
             "language": "en-us",
-            "projectKind": "CustomEntityRecognition",
-            "customEntityRecognitionResult": {
-              "entities": [
-                {
-                  "expectedEntities": [
-                    {
-                      "category": "Date",
-                      "offset": 5,
-                      "length": 9
-                    },
-                    {
-                      "category": "BorrowerName",
-                      "offset": 160,
-                      "length": 13
-                    },
-                    {
-                      "category": "BorrowerAddress",
-                      "offset": 181,
-                      "length": 34
-                    },
-                    {
-                      "category": "BorrowerCity",
-                      "offset": 225,
-                      "length": 6
-                    },
-                    {
-                      "category": "BorrowerState",
-                      "offset": 242,
-                      "length": 8
-                    },
-                    {
-                      "category": "LenderName",
-                      "offset": 271,
-                      "length": 12
-                    },
-                    {
-                      "category": "LenderAddress",
-                      "offset": 310,
-                      "length": 20
-                    },
-                    {
-                      "category": "LenderCity",
-                      "offset": 340,
-                      "length": 8
-                    },
-                    {
-                      "category": "LenderState",
-                      "offset": 359,
-                      "length": 11
-                    },
-                    {
-                      "category": "LoanAmountWords",
-                      "offset": 448,
-                      "length": 52
-                    },
-                    {
-                      "category": "LoanAmountNumbers",
-                      "offset": 502,
-                      "length": 10
-                    },
-                    {
-                      "category": "Interest",
-                      "offset": 588,
-                      "length": 2
-                    }
-                  ],
-                  "predictedEntities": [
-                    {
-                      "category": "Date",
-                      "offset": 5,
-                      "length": 9
-                    },
-                    {
-                      "category": "BorrowerName",
-                      "offset": 160,
-                      "length": 13
-                    },
-                    {
-                      "category": "BorrowerAddress",
-                      "offset": 200,
-                      "length": 15
-                    },
-                    {
-                      "category": "BorrowerCity",
-                      "offset": 225,
-                      "length": 6
-                    },
-                    {
-                      "category": "BorrowerState",
-                      "offset": 242,
-                      "length": 8
-                    },
-                    {
-                      "category": "LenderName",
-                      "offset": 271,
-                      "length": 12
-                    },
-                    {
-                      "category": "LenderAddress",
-                      "offset": 310,
-                      "length": 20
-                    },
-                    {
-                      "category": "LenderCity",
-                      "offset": 340,
-                      "length": 8
-                    },
-                    {
-                      "category": "LenderState",
-                      "offset": 359,
-                      "length": 11
-                    },
-                    {
-                      "category": "LoanAmountWords",
-                      "offset": 448,
-                      "length": 52
-                    },
-                    {
-                      "category": "LoanAmountNumbers",
-                      "offset": 502,
-                      "length": 10
-                    },
-                    {
-                      "category": "Interest",
-                      "offset": 588,
-                      "length": 2
-                    }
-                  ],
-                  "regionOffset": 0,
-                  "regionLength": 1780
-                }
-              ]
+            "entitiesResult": {
+              "expectedEntities": [],
+              "predictedEntities": []
+            },
+            "intentsResult": {
+              "expectedIntent": "SendEmail",
+              "predictedIntent": "SendEmail"
             }
           },
           {
-            "location": "01.txt",
+            "text": "send a mail to daniel",
             "language": "en-us",
-            "projectKind": "CustomEntityRecognition",
-            "customEntityRecognitionResult": {
-              "entities": [
+            "entitiesResult": {
+              "expectedEntities": [
                 {
-                  "expectedEntities": [
-                    {
-                      "category": "Date",
-                      "offset": 5,
-                      "length": 9
-                    },
-                    {
-                      "category": "BorrowerName",
-                      "offset": 160,
-                      "length": 13
-                    },
-                    {
-                      "category": "BorrowerAddress",
-                      "offset": 200,
-                      "length": 13
-                    },
-                    {
-                      "category": "BorrowerCity",
-                      "offset": 223,
-                      "length": 9
-                    },
-                    {
-                      "category": "BorrowerState",
-                      "offset": 243,
-                      "length": 8
-                    },
-                    {
-                      "category": "LenderName",
-                      "offset": 273,
-                      "length": 14
-                    },
-                    {
-                      "category": "LenderAddress",
-                      "offset": 314,
-                      "length": 15
-                    },
-                    {
-                      "category": "LenderCity",
-                      "offset": 339,
-                      "length": 10
-                    },
-                    {
-                      "category": "LenderState",
-                      "offset": 360,
-                      "length": 8
-                    },
-                    {
-                      "category": "LoanAmountWords",
-                      "offset": 446,
-                      "length": 66
-                    },
-                    {
-                      "category": "LoanAmountNumbers",
-                      "offset": 514,
-                      "length": 11
-                    },
-                    {
-                      "category": "Interest",
-                      "offset": 601,
-                      "length": 2
-                    }
-                  ],
-                  "predictedEntities": [
-                    {
-                      "category": "Date",
-                      "offset": 5,
-                      "length": 9
-                    },
-                    {
-                      "category": "BorrowerName",
-                      "offset": 160,
-                      "length": 13
-                    },
-                    {
-                      "category": "BorrowerAddress",
-                      "offset": 200,
-                      "length": 13
-                    },
-                    {
-                      "category": "BorrowerCity",
-                      "offset": 223,
-                      "length": 9
-                    },
-                    {
-                      "category": "BorrowerState",
-                      "offset": 243,
-                      "length": 8
-                    },
-                    {
-                      "category": "LenderName",
-                      "offset": 273,
-                      "length": 14
-                    },
-                    {
-                      "category": "LenderAddress",
-                      "offset": 314,
-                      "length": 15
-                    },
-                    {
-                      "category": "LenderCity",
-                      "offset": 339,
-                      "length": 10
-                    },
-                    {
-                      "category": "LenderState",
-                      "offset": 360,
-                      "length": 8
-                    },
-                    {
-                      "category": "LoanAmountWords",
-                      "offset": 446,
-                      "length": 66
-                    },
-                    {
-                      "category": "LoanAmountNumbers",
-                      "offset": 514,
-                      "length": 11
-                    },
-                    {
-                      "category": "Interest",
-                      "offset": 601,
-                      "length": 2
-                    }
-                  ],
-                  "regionOffset": 0,
-                  "regionLength": 1793
+                  "category": "ContactName",
+                  "offset": 15,
+                  "length": 6
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 15,
+                  "length": 6
                 }
               ]
+            },
+            "intentsResult": {
+              "expectedIntent": "SendEmail",
+              "predictedIntent": "SendEmail"
+            }
+          },
+          {
+            "text": "i forgot to add an important part to that email to james . please set it up to edit",
+            "language": "en-us",
+            "entitiesResult": {
+              "expectedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 51,
+                  "length": 5
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "Category",
+                  "offset": 19,
+                  "length": 9
+                },
+                {
+                  "category": "ContactName",
+                  "offset": 51,
+                  "length": 5
+                }
+              ]
+            },
+            "intentsResult": {
+              "expectedIntent": "AddMore",
+              "predictedIntent": "AddMore"
+            }
+          },
+          {
+            "text": "send email to a and tian",
+            "language": "en-us",
+            "entitiesResult": {
+              "expectedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 14,
+                  "length": 1
+                },
+                {
+                  "category": "ContactName",
+                  "offset": 20,
+                  "length": 4
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 14,
+                  "length": 1
+                },
+                {
+                  "category": "ContactName",
+                  "offset": 20,
+                  "length": 4
+                }
+              ]
+            },
+            "intentsResult": {
+              "expectedIntent": "SendEmail",
+              "predictedIntent": "SendEmail"
+            }
+          },
+          {
+            "text": "send thomas an email",
+            "language": "en-us",
+            "entitiesResult": {
+              "expectedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 5,
+                  "length": 6
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 5,
+                  "length": 6
+                }
+              ]
+            },
+            "intentsResult": {
+              "expectedIntent": "SendEmail",
+              "predictedIntent": "SendEmail"
+            }
+          },
+          {
+            "text": "i need to add more to the email message i am sending to vincent",
+            "language": "en-us",
+            "entitiesResult": {
+              "expectedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 56,
+                  "length": 7
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 56,
+                  "length": 7
+                }
+              ]
+            },
+            "intentsResult": {
+              "expectedIntent": "AddMore",
+              "predictedIntent": "AddMore"
+            }
+          },
+          {
+            "text": "send an email to lily roth and abc123@microsoft.com",
+            "language": "en-us",
+            "entitiesResult": {
+              "expectedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 17,
+                  "length": 9
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 17,
+                  "length": 9
+                }
+              ]
+            },
+            "intentsResult": {
+              "expectedIntent": "SendEmail",
+              "predictedIntent": "SendEmail"
+            }
+          },
+          {
+            "text": "i need to add something else to my email to cheryl",
+            "language": "en-us",
+            "entitiesResult": {
+              "expectedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 44,
+                  "length": 6
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 44,
+                  "length": 6
+                }
+              ]
+            },
+            "intentsResult": {
+              "expectedIntent": "AddMore",
+              "predictedIntent": "AddMore"
+            }
+          },
+          {
+            "text": "send an email to larry , joseph and billy larkson",
+            "language": "en-us",
+            "entitiesResult": {
+              "expectedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 17,
+                  "length": 5
+                },
+                {
+                  "category": "ContactName",
+                  "offset": 25,
+                  "length": 6
+                },
+                {
+                  "category": "ContactName",
+                  "offset": 36,
+                  "length": 13
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 17,
+                  "length": 5
+                },
+                {
+                  "category": "ContactName",
+                  "offset": 25,
+                  "length": 6
+                },
+                {
+                  "category": "ContactName",
+                  "offset": 36,
+                  "length": 13
+                }
+              ]
+            },
+            "intentsResult": {
+              "expectedIntent": "SendEmail",
+              "predictedIntent": "SendEmail"
+            }
+          },
+          {
+            "text": "send mail to dorothy",
+            "language": "en-us",
+            "entitiesResult": {
+              "expectedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 13,
+                  "length": 7
+                }
+              ],
+              "predictedEntities": [
+                {
+                  "category": "ContactName",
+                  "offset": 13,
+                  "length": 7
+                }
+              ]
+            },
+            "intentsResult": {
+              "expectedIntent": "SendEmail",
+              "predictedIntent": "SendEmail"
             }
           }
         ],
-        "nextLink": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/models/model2/evaluation/result/?api-version=2023-04-15-preview&top=2147483645&skip={maxpagesize}&maxpagesize={maxpagesize}"
+        "nextLink": "https://api.example.com/language/authoring/analyze-conversations/projects/EmailApp/models/model1/evaluation/result/?api-version=2023-04-15-preview&top=2147483637&skip=100&maxpagesize=100"
       }
     }
   }
