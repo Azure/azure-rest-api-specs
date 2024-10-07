@@ -1211,17 +1211,13 @@
         "description": "Gets a list of all nGroups under a resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1276,6 +1272,75 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
+      "get": {
+        "operationId": "ContainerGroupProfiles_ListBySubscription",
+        "x-ms-examples": {},
+        "summary": "Gets a list of all container group profiles under a subscription.",
+        "description": "Gets a list of all container group profiles under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
+      "get": {
+        "operationId": "ContainerGroupProfiles_ListByResourceGroup",
+        "x-ms-examples": {},
+        "summary": "Gets a list of all container group profiles under a resource group.",
+        "description": "Gets a list of all container group profiles under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}": {
       "put": {
         "operationId": "ContainerGroupProfile_CreateOrUpdate",
@@ -1285,9 +1350,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1303,6 +1365,9 @@
               "$ref": "#/definitions/ContainerGroupProfile"
             },
             "description": "The ContainerGroupProfile object."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1316,6 +1381,138 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ContainerGroupProfile_Update",
+        "x-ms-examples": {},
+        "summary": "Update a specified ContainerGroupProfile.",
+        "description": "Update a specified container group profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          },
+          {
+            "name": "ContainerGroupProfile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfile"
+            },
+            "description": "The ContainerGroupProfile object."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfile"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "ContainerGroupProfile Updated",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "ContainerGroupProfile_Get",
+        "x-ms-examples": {},
+        "summary": "Display information about a specified ContainerGroupProfile.",
+        "description": "Get the properties of the specified container group profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ContainerGroupProfile_Delete",
+        "x-ms-examples": {},
+        "summary": "Delete a ContainerGroupProfile.",
+        "description": "Deletes a container group profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3238,6 +3435,23 @@
       },
       "description": "The API entity reference."
     },
+    "ContainerGroupProfileListResult": {
+      "description": "The container group profile list response",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerGroupProfile"
+          },
+          "description": "The list of ContainerGroupProfiles under a subscription or resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Container Group Profiles."
+        }
+      }
+    },
     "ContainerGroupProfile": {
       "type": "object",
       "properties": {
@@ -3355,6 +3569,9 @@
         },
         "registeredRevisions": {
           "type": "array",
+          "items": {
+            "type": "integer"
+          },
           "description": "Registered revisions are calculated at request time based off the records in the table logs."
         },
         "useKrypton": {
@@ -3442,7 +3659,7 @@
       "x-ms-parameter-location": "method"
     },
     "ContainerGroupProfileNameParameter": {
-      "name": "CGProfileName",
+      "name": "ContainerGroupProfileName",
       "in": "path",
       "required": true,
       "type": "string",
