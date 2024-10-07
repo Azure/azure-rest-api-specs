@@ -96,7 +96,7 @@ model AwsIamGroupProperties {
 @doc("Definition of Policy")
 model Policy {
   @doc("The policy document.")
-  policyDocument?: string;
+  policyDocument?: Record<unknown>;
 
   @doc("The friendly name (not ARN) identifying the policy.")
   policyName?: string;

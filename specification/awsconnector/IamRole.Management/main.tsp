@@ -115,7 +115,7 @@ model AwsIamRoleProperties {
 @doc("Definition of Policy")
 model Policy {
   @doc("The entire contents of the policy that defines permissions. For more information, see [Overview of JSON policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json).")
-  policyDocument?: string;
+  policyDocument?: Record<unknown>;
 
   @doc("The friendly name (not ARN) identifying the policy.")
   policyName?: string;
