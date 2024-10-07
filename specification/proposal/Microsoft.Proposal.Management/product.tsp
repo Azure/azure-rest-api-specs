@@ -33,9 +33,9 @@ model ProductResource is ExtensionResource<ProductResourceProperties> {
   @armResourceOperations(ProductResource)
   interface ProductResources {
     get is ArmResourceRead<ProductResource>;
-    createOrUpdate is ArmResourceCreateOrReplaceAsync<ProductResource>;
-    delete is ArmResourceDeleteSync<ProductResource>;
-    listByScope is ArmResourceListAtScope<ProductResource>;
+    // createOrUpdate is ArmResourceCreateOrReplaceAsync<ProductResource>;
+    // delete is ArmResourceDeleteSync<ProductResource>;
+    // listByScope is ArmResourceListAtScope<ProductResource>;
   }
   
   
