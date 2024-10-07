@@ -205,7 +205,7 @@ union FileFormat {
 interface Ec2FlowLogs {
   get is ArmResourceRead<Ec2FlowLog>;
   @doc("Create a Ec2FlowLog. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2FlowLog>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2FlowLog>;
   update is ArmCustomPatchAsync<
     Ec2FlowLog,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2FlowLog>

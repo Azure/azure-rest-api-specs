@@ -63,82 +63,126 @@ model EksClusterProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEksCluster")
 model AwsEksClusterProperties {
-  @doc("An object representing the Access Config to use for the cluster.")
-  accessConfig?: AccessConfig;
+  @doc("<p>The access configuration for the cluster.</p>")
+  accessConfig?: AccessConfigResponse;
 
-  @doc("The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.")
+  @doc("<p>The Amazon Resource Name (ARN) of the cluster.</p>")
   arn?: string;
 
-  @doc("The certificate-authority-data for your cluster.")
-  certificateAuthorityData?: string;
+  @doc("<p>The <code>certificate-authority-data</code> for your cluster.</p>")
+  certificateAuthority?: Certificate;
 
-  @doc("The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.")
-  clusterSecurityGroupId?: string;
+  @doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>")
+  clientRequestToken?: string;
 
-  @doc("Property encryptionConfig")
+  @doc("<p>The configuration used to connect to a cluster for registration.</p>")
+  connectorConfig?: ConnectorConfigResponse;
+
+  @doc("<p>The Unix epoch timestamp at object creation.</p>")
+  createdAt?: utcDateTime;
+
+  @doc("<p>The encryption configuration for the cluster.</p>")
   @extension("x-ms-identifiers", [])
   encryptionConfig?: EncryptionConfig[];
 
-  @doc("Amazon Resource Name (ARN) or alias of the customer master key (CMK).")
-  encryptionConfigKeyArn?: string;
-
-  @doc("The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.")
+  @doc("<p>The endpoint for your Kubernetes API server.</p>")
   endpoint?: string;
 
-  @doc("The unique ID given to your cluster.")
+  @doc("<p>An object representing the health of your local Amazon EKS cluster on an Amazon Web Services Outpost. This object isn't available for clusters on the Amazon Web Services cloud.</p>")
+  health?: ClusterHealth;
+
+  @doc("<p>The ID of your local Amazon EKS cluster on an Amazon Web Services Outpost. This property isn't available for an Amazon EKS cluster on the Amazon Web Services cloud.</p>")
   id?: string;
 
-  @doc("The Kubernetes network configuration for the cluster.")
-  kubernetesNetworkConfig?: KubernetesNetworkConfig;
+  @doc("<p>The identity provider information for the cluster.</p>")
+  identity?: Identity;
 
-  @doc("Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs.")
+  @doc("<p>The Kubernetes network configuration for the cluster.</p>")
+  kubernetesNetworkConfig?: KubernetesNetworkConfigResponse;
+
+  @doc("<p>The logging configuration for your cluster.</p>")
   logging?: Logging;
 
-  @doc("The unique name to give to your cluster.")
+  @doc("<p>The name of your cluster.</p>")
   name?: string;
 
-  @doc("The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.")
-  openIdConnectIssuerUrl?: string;
+  @doc("<p>An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. This object isn't available for clusters on the Amazon Web Services cloud.</p>")
+  outpostConfig?: OutpostConfigResponse;
 
-  @doc("An object representing the Outpost configuration to use for AWS EKS outpost cluster.")
-  outpostConfig?: OutpostConfig;
+  @doc("<p>The platform version of your Amazon EKS cluster. For more information about clusters deployed on the Amazon Web Services Cloud, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html'>Platform versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>. For more information about local clusters deployed on an Outpost, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-platform-versions.html'>Amazon EKS local cluster platform versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>")
+  platformVersion?: string;
 
-  @doc("An object representing the VPC configuration to use for an Amazon EKS cluster.")
-  resourcesVpcConfig?: ResourcesVpcConfig;
+  @doc("<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html'>Cluster VPC considerations</a> and <a href='https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html'>Cluster security group considerations</a> in the <i>Amazon EKS User Guide</i>.</p>")
+  resourcesVpcConfig?: VpcConfigResponse;
 
-  @doc("The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.")
+  @doc("<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf.</p>")
   roleArn?: string;
 
-  @doc("An array of key-value pairs to apply to this resource.")
-  @extension("x-ms-identifiers", [])
-  tags?: Tag[];
+  @doc("<p>The current status of the cluster.</p>")
+  status?: ClusterStatusEnumValue;
 
-  @doc("The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.")
+  @doc("<p>Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.</p>")
+  tags?: Record<string>;
+
+  @doc("<p>The Kubernetes server version for the cluster.</p>")
   version?: string;
+}
+
+@doc("ClusterStatus enum")
+union ClusterStatus {
+  @doc("ClusterStatus enum ACTIVE")
+  ACTIVE: "ACTIVE",
+
+  @doc("ClusterStatus enum CREATING")
+  CREATING: "CREATING",
+
+  @doc("ClusterStatus enum DELETING")
+  DELETING: "DELETING",
+
+  @doc("ClusterStatus enum FAILED")
+  FAILED: "FAILED",
+
+  @doc("ClusterStatus enum PENDING")
+  PENDING: "PENDING",
+
+  @doc("ClusterStatus enum UPDATING")
+  UPDATING: "UPDATING",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
-@doc("Definition of AccessConfig")
-model AccessConfig {
-  @doc("Specify the authentication mode that should be used to create your cluster.")
-  authenticationMode?: AccessConfigAuthenticationMode;
+@doc("Definition of ClusterStatusEnumValue")
+model ClusterStatusEnumValue {
+  @doc("Property value")
+  value?: ClusterStatus;
+}
 
-  @doc("Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of AccessConfigResponse")
+model AccessConfigResponse {
+  @doc("<p>The current authentication mode of the cluster.</p>")
+  authenticationMode?: AuthenticationModeEnumValue;
+
+  @doc("<p>Specifies whether or not the cluster creator IAM principal was set as a cluster admin access entry during cluster creation time.</p>")
   bootstrapClusterCreatorAdminPermissions?: boolean;
 }
 
-@doc("AccessConfigAuthenticationMode enum")
-union AccessConfigAuthenticationMode {
-  @doc("AccessConfigAuthenticationMode enum API")
+@doc("AuthenticationMode enum")
+union AuthenticationMode {
+  @doc("AuthenticationMode enum API")
   API: "API",
 
-  @doc("AccessConfigAuthenticationMode enum API_AND_CONFIG_MAP")
+  @doc("AuthenticationMode enum API_AND_CONFIG_MAP")
   API_AND_CONFIG_MAP: "API_AND_CONFIG_MAP",
 
-  @doc("AccessConfigAuthenticationMode enum CONFIG_MAP")
+  @doc("AuthenticationMode enum CONFIG_MAP")
   CONFIG_MAP: "CONFIG_MAP",
 
   string,
@@ -148,12 +192,54 @@ union AccessConfigAuthenticationMode {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of AuthenticationModeEnumValue")
+model AuthenticationModeEnumValue {
+  @doc("Property value")
+  value?: AuthenticationMode;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of Certificate")
+model Certificate {
+  @doc("<p>The Base64-encoded certificate data required to communicate with your cluster. Add this to the <code>certificate-authority-data</code> section of the <code>kubeconfig</code> file for your cluster.</p>")
+  data?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of ConnectorConfigResponse")
+model ConnectorConfigResponse {
+  @doc("<p>A unique code associated with the cluster for registration purposes.</p>")
+  activationCode?: string;
+
+  @doc("<p>The expiration time of the connected cluster. The cluster's YAML file must be applied through the native provider.</p>")
+  activationExpiry?: utcDateTime;
+
+  @doc("<p>A unique ID associated with the cluster for registration purposes.</p>")
+  activationId?: string;
+
+  @doc("<p>The cluster's cloud service provider.</p>")
+  provider?: string;
+
+  @doc("<p>The Amazon Resource Name (ARN) of the role to communicate with services from the connected Kubernetes cluster.</p>")
+  roleArn?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EncryptionConfig")
 model EncryptionConfig {
-  @doc("The encryption provider for the cluster.")
+  @doc("<p>Key Management Service (KMS) key. Either the ARN or the alias can be used.</p>")
   provider?: Provider;
 
-  @doc("Specifies the resources to be encrypted. The only supported value is 'secrets'.")
+  @doc("<p>Specifies the resources to be encrypted. The only supported value is <code>secrets</code>.</p>")
   @extension("x-ms-identifiers", [])
   resources?: string[];
 }
@@ -162,27 +248,58 @@ model EncryptionConfig {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
-@doc("Definition of KubernetesNetworkConfig")
-model KubernetesNetworkConfig {
-  @doc("Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on")
-  ipFamily?: KubernetesNetworkConfigIpFamily;
+@doc("Definition of ClusterHealth")
+model ClusterHealth {
+  @doc("<p>An object representing the health issues of your local Amazon EKS cluster on an Amazon Web Services Outpost.</p>")
+  @extension("x-ms-identifiers", [])
+  issues?: ClusterIssue[];
+}
 
-  @doc("The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of Identity")
+model Identity {
+  @doc("<p>An object representing the <a href='https://openid.net/connect/'>OpenID Connect</a> identity provider information.</p>")
+  oidc?: OIDC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of KubernetesNetworkConfigResponse")
+model KubernetesNetworkConfigResponse {
+  @doc("<p>The IP family used to assign Kubernetes <code>Pod</code> and <code>Service</code> objects IP addresses. The IP family is always <code>ipv4</code>, unless you have a <code>1.21</code> or later cluster running version <code>1.10.1</code> or later of the Amazon VPC CNI plugin for Kubernetes and specified <code>ipv6</code> when you created the cluster. </p>")
+  ipFamily?: IpFamilyEnumValue;
+
+  @doc("<p>The CIDR block that Kubernetes <code>Pod</code> and <code>Service</code> object IP addresses are assigned from. Kubernetes assigns addresses from an <code>IPv4</code> CIDR block assigned to a subnet that the node is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes assigns addresses from either the <code>10.100.0.0/16</code> or <code>172.20.0.0/16</code> CIDR blocks. If this was specified, then it was specified when the cluster was created and it can't be changed.</p>")
   serviceIpv4Cidr?: string;
 
-  @doc("The CIDR block to assign Kubernetes service IP addresses from.")
+  @doc("<p>The CIDR block that Kubernetes pod and service IP addresses are assigned from if you created a 1.21 or later cluster with version 1.10.1 or later of the Amazon VPC CNI add-on and specified <code>ipv6</code> for <b>ipFamily</b> when you created the cluster. Kubernetes assigns service addresses from the unique local address range (<code>fc00::/7</code>) because you can't specify a custom IPv6 CIDR block when you create the cluster.</p>")
   serviceIpv6Cidr?: string;
 }
 
-@doc("KubernetesNetworkConfigIpFamily enum")
-union KubernetesNetworkConfigIpFamily {
-  @doc("KubernetesNetworkConfigIpFamily enum ipv4")
-  ipv4: "ipv4",
+@doc("IpFamily enum")
+union IpFamily {
+  @doc("IpFamily enum ipv4")
+  Ipv4: "ipv4",
 
-  @doc("KubernetesNetworkConfigIpFamily enum ipv6")
-  ipv6: "ipv6",
+  @doc("IpFamily enum ipv6")
+  Ipv6: "ipv6",
 
   string,
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of IpFamilyEnumValue")
+model IpFamilyEnumValue {
+  @doc("Property value")
+  value?: IpFamily;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -191,23 +308,24 @@ union KubernetesNetworkConfigIpFamily {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Logging")
 model Logging {
-  @doc("The cluster control plane logging configuration for your cluster.  The cluster control plane logging configuration for your cluster.")
-  clusterLogging?: ClusterLogging;
+  @doc("<p>The cluster control plane logging configuration for your cluster.</p>")
+  @extension("x-ms-identifiers", [])
+  clusterLogging?: LogSetup[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
-@doc("Definition of OutpostConfig")
-model OutpostConfig {
-  @doc("Specify the Instance type of the machines that should be used to create your cluster.")
+@doc("Definition of OutpostConfigResponse")
+model OutpostConfigResponse {
+  @doc("<p>The Amazon EC2 instance type used for the control plane. The instance type is the same for all control plane instances.</p>")
   controlPlaneInstanceType?: string;
 
-  @doc("Specify the placement group of the control plane machines for your cluster. Specify the placement group of the control plane machines for your cluster.")
-  controlPlanePlacement?: ControlPlanePlacement;
+  @doc("<p>An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html'>Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>")
+  controlPlanePlacement?: ControlPlanePlacementResponse;
 
-  @doc("Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.")
+  @doc("<p>The ARN of the Outpost that you specified for use with your local Amazon EKS cluster on Outposts.</p>")
   @extension("x-ms-identifiers", [])
   outpostArns?: string[];
 }
@@ -216,38 +334,31 @@ model OutpostConfig {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
-@doc("Definition of ResourcesVpcConfig")
-model ResourcesVpcConfig {
-  @doc("Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.")
+@doc("Definition of VpcConfigResponse")
+model VpcConfigResponse {
+  @doc("<p>The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.</p>")
+  clusterSecurityGroupId?: string;
+
+  @doc("<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html'>Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>")
   endpointPrivateAccess?: boolean;
 
-  @doc("Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server.")
+  @doc("<p>Whether the public API server endpoint is enabled.</p>")
   endpointPublicAccess?: boolean;
 
-  @doc("The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.")
+  @doc("<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint.</p>")
   @extension("x-ms-identifiers", [])
   publicAccessCidrs?: string[];
 
-  @doc("Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.")
+  @doc("<p>The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Kubernetes control plane.</p>")
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
-  @doc("Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.")
+  @doc("<p>The subnets associated with your cluster.</p>")
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
-}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
-@doc("Definition of Tag")
-model Tag {
-  @doc("The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
-  key?: string;
-
-  @doc("The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
-  value?: string;
+  @doc("<p>The VPC associated with your cluster.</p>")
+  vpcId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -256,7 +367,7 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Provider")
 model Provider {
-  @doc("Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.")
+  @doc("<p>Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric and created in the same Amazon Web Services Region as the cluster. If the KMS key was created in a different account, the <a href='https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html'>IAM principal</a> must have access to the KMS key. For more information, see <a href='https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html'>Allowing users in other accounts to use a KMS key</a> in the <i>Key Management Service Developer Guide</i>.</p>")
   keyArn?: string;
 }
 
@@ -264,51 +375,153 @@ model Provider {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
-@doc("Definition of ClusterLogging")
-model ClusterLogging {
-  @doc("Enable control plane logs for your cluster, all log types will be disabled if the array is empty")
+@doc("Definition of ClusterIssue")
+model ClusterIssue {
+  @doc("<p>The error code of the issue.</p>")
+  code?: ClusterIssueCodeEnumValue;
+
+  @doc("<p>A description of the issue.</p>")
+  message?: string;
+
+  @doc("<p>The resource IDs that the issue relates to.</p>")
   @extension("x-ms-identifiers", [])
-  enabledTypes?: LoggingTypeConfig[];
+  resourceIds?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
-@doc("Definition of ControlPlanePlacement")
-model ControlPlanePlacement {
-  @doc("Specify the placement group name of the control place machines for your cluster.")
-  groupName?: string;
-}
+@doc("ClusterIssueCode enum")
+union ClusterIssueCode {
+  @doc("ClusterIssueCode enum AccessDenied")
+  AccessDenied: "AccessDenied",
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
-@doc("Definition of LoggingTypeConfig")
-model LoggingTypeConfig {
-  @doc("name of the log type")
-  type?: LoggingTypeConfigType;
-}
+  @doc("ClusterIssueCode enum ClusterUnreachable")
+  ClusterUnreachable: "ClusterUnreachable",
 
-@doc("LoggingTypeConfigType enum")
-union LoggingTypeConfigType {
-  @doc("LoggingTypeConfigType enum api")
-  api: "api",
+  @doc("ClusterIssueCode enum ConfigurationConflict")
+  ConfigurationConflict: "ConfigurationConflict",
 
-  @doc("LoggingTypeConfigType enum audit")
-  audit: "audit",
+  @doc("ClusterIssueCode enum Ec2SecurityGroupNotFound")
+  Ec2SecurityGroupNotFound: "Ec2SecurityGroupNotFound",
 
-  @doc("LoggingTypeConfigType enum authenticator")
-  authenticator: "authenticator",
+  @doc("ClusterIssueCode enum Ec2ServiceNotSubscribed")
+  Ec2ServiceNotSubscribed: "Ec2ServiceNotSubscribed",
 
-  @doc("LoggingTypeConfigType enum controllerManager")
-  controllerManager: "controllerManager",
+  @doc("ClusterIssueCode enum Ec2SubnetNotFound")
+  Ec2SubnetNotFound: "Ec2SubnetNotFound",
 
-  @doc("LoggingTypeConfigType enum scheduler")
-  scheduler: "scheduler",
+  @doc("ClusterIssueCode enum IamRoleNotFound")
+  IamRoleNotFound: "IamRoleNotFound",
+
+  @doc("ClusterIssueCode enum InsufficientFreeAddresses")
+  InsufficientFreeAddresses: "InsufficientFreeAddresses",
+
+  @doc("ClusterIssueCode enum InternalFailure")
+  InternalFailure: "InternalFailure",
+
+  @doc("ClusterIssueCode enum KmsGrantRevoked")
+  KmsGrantRevoked: "KmsGrantRevoked",
+
+  @doc("ClusterIssueCode enum KmsKeyDisabled")
+  KmsKeyDisabled: "KmsKeyDisabled",
+
+  @doc("ClusterIssueCode enum KmsKeyMarkedForDeletion")
+  KmsKeyMarkedForDeletion: "KmsKeyMarkedForDeletion",
+
+  @doc("ClusterIssueCode enum KmsKeyNotFound")
+  KmsKeyNotFound: "KmsKeyNotFound",
+
+  @doc("ClusterIssueCode enum Other")
+  Other: "Other",
+
+  @doc("ClusterIssueCode enum ResourceLimitExceeded")
+  ResourceLimitExceeded: "ResourceLimitExceeded",
+
+  @doc("ClusterIssueCode enum ResourceNotFound")
+  ResourceNotFound: "ResourceNotFound",
+
+  @doc("ClusterIssueCode enum StsRegionalEndpointDisabled")
+  StsRegionalEndpointDisabled: "StsRegionalEndpointDisabled",
+
+  @doc("ClusterIssueCode enum UnsupportedVersion")
+  UnsupportedVersion: "UnsupportedVersion",
+
+  @doc("ClusterIssueCode enum VpcNotFound")
+  VpcNotFound: "VpcNotFound",
 
   string,
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of ClusterIssueCodeEnumValue")
+model ClusterIssueCodeEnumValue {
+  @doc("Property value")
+  value?: ClusterIssueCode;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of OIDC")
+model OIDC {
+  @doc("<p>The issuer URL for the OIDC identity provider.</p>")
+  issuer?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of LogSetup")
+model LogSetup {
+  @doc("<p>If a log type is enabled, that log type exports its control plane logs to CloudWatch Logs. If a log type isn't enabled, that log type doesn't export its control plane logs. Each individual log type can be enabled or disabled independently.</p>")
+  enabled?: boolean;
+
+  @doc("<p>The available cluster control plane log types.</p>")
+  @extension("x-ms-identifiers", [])
+  types?: LogType[];
+}
+
+@doc("LogType enum")
+union LogType {
+  @doc("LogType enum api")
+  Api: "api",
+
+  @doc("LogType enum audit")
+  Audit: "audit",
+
+  @doc("LogType enum authenticator")
+  Authenticator: "authenticator",
+
+  @doc("LogType enum controllerManager")
+  ControllerManager: "controllerManager",
+
+  @doc("LogType enum scheduler")
+  Scheduler: "scheduler",
+
+  string,
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of LogTypeEnumValue")
+model LogTypeEnumValue {
+  @doc("Property value")
+  value?: LogType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of ControlPlanePlacementResponse")
+model ControlPlanePlacementResponse {
+  @doc("<p>The name of the placement group for the Kubernetes control plane instances.</p>")
+  groupName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
@@ -316,7 +529,7 @@ union LoggingTypeConfigType {
 interface EksClusters {
   get is ArmResourceRead<EksCluster>;
   @doc("Create a EksCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EksCluster>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EksCluster>;
   delete is ArmResourceDeleteWithoutOkAsync<EksCluster>;
   list is ArmResourceListByParent<EksCluster>;
 }
@@ -325,5 +538,11 @@ interface EksClusters {
 // This TypeSpec was auto genrated by aws2SwaggerMain.js tool
 //
 // Input used to generate TypeSpec:
-// Cloud Control API Type: AWS::EKS::Cluster
+// AWS Service Model: generator\ServiceModels\eks\eks-2017-11-01.normal.json
+// AWS Shape: Cluster
+//
+// Related information for backend service:
+// AWS Servcie : EKS
+// Product Version : 3.7.798.0
+// SDK Version : 3.7.305.19
 //--------------------------------------------------------------------------------------------

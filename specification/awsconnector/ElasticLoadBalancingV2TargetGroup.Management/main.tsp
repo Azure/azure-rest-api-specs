@@ -214,7 +214,7 @@ model TargetDescription {
 interface ElasticLoadBalancingV2TargetGroups {
   get is ArmResourceRead<ElasticLoadBalancingV2TargetGroup>;
   @doc("Create a ElasticLoadBalancingV2TargetGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticLoadBalancingV2TargetGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ElasticLoadBalancingV2TargetGroup>;
   update is ArmCustomPatchAsync<
     ElasticLoadBalancingV2TargetGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ElasticLoadBalancingV2TargetGroup>

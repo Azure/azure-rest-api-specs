@@ -140,7 +140,7 @@ union Tier {
 interface SsmParameters {
   get is ArmResourceRead<SsmParameter>;
   @doc("Create a SsmParameter. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SsmParameter>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SsmParameter>;
   update is ArmCustomPatchAsync<
     SsmParameter,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SsmParameter>

@@ -222,7 +222,7 @@ model Tag {
 interface Ec2NetworkInterfaces {
   get is ArmResourceRead<Ec2NetworkInterface>;
   @doc("Create a Ec2NetworkInterface. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2NetworkInterface>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2NetworkInterface>;
   update is ArmCustomPatchAsync<
     Ec2NetworkInterface,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2NetworkInterface>

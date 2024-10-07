@@ -307,7 +307,7 @@ model Dimension {
 interface NetworkFirewallFirewallPolicies {
   get is ArmResourceRead<NetworkFirewallFirewallPolicy>;
   @doc("Create a NetworkFirewallFirewallPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<NetworkFirewallFirewallPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFirewallFirewallPolicy>;
   update is ArmCustomPatchAsync<
     NetworkFirewallFirewallPolicy,
     Azure.ResourceManager.Foundations.TagsUpdateModel<NetworkFirewallFirewallPolicy>

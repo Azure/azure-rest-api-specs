@@ -416,7 +416,7 @@ model Tag {
 interface RdsDBInstances {
   get is ArmResourceRead<RdsDBInstance>;
   @doc("Create a RdsDBInstance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<RdsDBInstance>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<RdsDBInstance>;
   update is ArmCustomPatchAsync<
     RdsDBInstance,
     Azure.ResourceManager.Foundations.TagsUpdateModel<RdsDBInstance>

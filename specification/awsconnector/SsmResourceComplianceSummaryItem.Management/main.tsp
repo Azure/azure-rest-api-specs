@@ -230,7 +230,7 @@ model SeveritySummary {
 interface SsmResourceComplianceSummaryItems {
   get is ArmResourceRead<SsmResourceComplianceSummaryItem>;
   @doc("Create a SsmResourceComplianceSummaryItem. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SsmResourceComplianceSummaryItem>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SsmResourceComplianceSummaryItem>;
   update is ArmCustomPatchAsync<
     SsmResourceComplianceSummaryItem,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SsmResourceComplianceSummaryItem>

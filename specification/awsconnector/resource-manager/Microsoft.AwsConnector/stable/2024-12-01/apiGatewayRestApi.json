@@ -493,8 +493,9 @@
           "x-ms-identifiers": []
         },
         "body": {
-          "type": "string",
-          "description": "An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format."
+          "type": "object",
+          "description": "An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.",
+          "additionalProperties": {}
         },
         "bodyS3Location": {
           "$ref": "#/definitions/S3Location",
@@ -541,8 +542,9 @@
           }
         },
         "policy": {
-          "type": "string",
-          "description": "A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``."
+          "type": "object",
+          "description": "A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``.",
+          "additionalProperties": {}
         },
         "restApiId": {
           "type": "string",

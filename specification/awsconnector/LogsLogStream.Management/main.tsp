@@ -83,7 +83,7 @@ model AwsLogsLogStreamProperties {
 interface LogsLogStreams {
   get is ArmResourceRead<LogsLogStream>;
   @doc("Create a LogsLogStream. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LogsLogStream>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LogsLogStream>;
   update is ArmCustomPatchAsync<
     LogsLogStream,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LogsLogStream>

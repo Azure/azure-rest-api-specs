@@ -339,7 +339,7 @@ model Port {
 interface LightsailInstances {
   get is ArmResourceRead<LightsailInstance>;
   @doc("Create a LightsailInstance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LightsailInstance>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LightsailInstance>;
   update is ArmCustomPatchAsync<
     LightsailInstance,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LightsailInstance>

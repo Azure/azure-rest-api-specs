@@ -114,7 +114,7 @@ model Tag {
 interface RdsEventSubscriptions {
   get is ArmResourceRead<RdsEventSubscription>;
   @doc("Create a RdsEventSubscription. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<RdsEventSubscription>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<RdsEventSubscription>;
   update is ArmCustomPatchAsync<
     RdsEventSubscription,
     Azure.ResourceManager.Foundations.TagsUpdateModel<RdsEventSubscription>

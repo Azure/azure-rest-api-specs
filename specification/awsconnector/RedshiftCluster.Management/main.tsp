@@ -285,7 +285,7 @@ model Tag {
 interface RedshiftClusters {
   get is ArmResourceRead<RedshiftCluster>;
   @doc("Create a RedshiftCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<RedshiftCluster>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<RedshiftCluster>;
   update is ArmCustomPatchAsync<
     RedshiftCluster,
     Azure.ResourceManager.Foundations.TagsUpdateModel<RedshiftCluster>

@@ -255,7 +255,7 @@ model DataResource {
 interface CloudTrailTrails {
   get is ArmResourceRead<CloudTrailTrail>;
   @doc("Create a CloudTrailTrail. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudTrailTrail>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudTrailTrail>;
   update is ArmCustomPatchAsync<
     CloudTrailTrail,
     Azure.ResourceManager.Foundations.TagsUpdateModel<CloudTrailTrail>

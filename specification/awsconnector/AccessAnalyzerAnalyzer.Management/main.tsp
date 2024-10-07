@@ -160,7 +160,7 @@ model Filter {
 interface AccessAnalyzerAnalyzers {
   get is ArmResourceRead<AccessAnalyzerAnalyzer>;
   @doc("Create a AccessAnalyzerAnalyzer. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<AccessAnalyzerAnalyzer>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AccessAnalyzerAnalyzer>;
   update is ArmCustomPatchAsync<
     AccessAnalyzerAnalyzer,
     Azure.ResourceManager.Foundations.TagsUpdateModel<AccessAnalyzerAnalyzer>

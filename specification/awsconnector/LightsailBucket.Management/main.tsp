@@ -136,7 +136,7 @@ model Tag {
 interface LightsailBuckets {
   get is ArmResourceRead<LightsailBucket>;
   @doc("Create a LightsailBucket. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LightsailBucket>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LightsailBucket>;
   update is ArmCustomPatchAsync<
     LightsailBucket,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LightsailBucket>

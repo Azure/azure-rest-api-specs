@@ -215,7 +215,7 @@ model Dimension {
 interface LogsMetricFilters {
   get is ArmResourceRead<LogsMetricFilter>;
   @doc("Create a LogsMetricFilter. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LogsMetricFilter>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LogsMetricFilter>;
   update is ArmCustomPatchAsync<
     LogsMetricFilter,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LogsMetricFilter>

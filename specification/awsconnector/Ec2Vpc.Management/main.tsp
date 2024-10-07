@@ -129,7 +129,7 @@ model Tag {
 interface Ec2Vpcs {
   get is ArmResourceRead<Ec2Vpc>;
   @doc("Create a Ec2Vpc. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2Vpc>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2Vpc>;
   update is ArmCustomPatchAsync<
     Ec2Vpc,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2Vpc>

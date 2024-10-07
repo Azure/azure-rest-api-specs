@@ -367,7 +367,7 @@ model TagCriterionPairForJob {
 interface Macie2JobSummaries {
   get is ArmResourceRead<Macie2JobSummary>;
   @doc("Create a Macie2JobSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Macie2JobSummary>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Macie2JobSummary>;
   update is ArmCustomPatchAsync<
     Macie2JobSummary,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Macie2JobSummary>

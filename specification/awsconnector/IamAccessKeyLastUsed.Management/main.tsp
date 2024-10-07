@@ -86,7 +86,7 @@ model AwsIamAccessKeyLastUsedProperties {
 interface IamAccessKeyLastUseds {
   get is ArmResourceRead<IamAccessKeyLastUsed>;
   @doc("Create a IamAccessKeyLastUsed. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<IamAccessKeyLastUsed>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamAccessKeyLastUsed>;
   update is ArmCustomPatchAsync<
     IamAccessKeyLastUsed,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamAccessKeyLastUsed>

@@ -145,7 +145,7 @@ model MaxCountRule {
 interface ElasticBeanstalkApplications {
   get is ArmResourceRead<ElasticBeanstalkApplication>;
   @doc("Create a ElasticBeanstalkApplication. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBeanstalkApplication>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ElasticBeanstalkApplication>;
   update is ArmCustomPatchAsync<
     ElasticBeanstalkApplication,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ElasticBeanstalkApplication>

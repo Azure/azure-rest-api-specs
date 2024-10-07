@@ -560,7 +560,7 @@ model VCpuCountRequest {
 interface AutoScalingAutoScalingGroups {
   get is ArmResourceRead<AutoScalingAutoScalingGroup>;
   @doc("Create a AutoScalingAutoScalingGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<AutoScalingAutoScalingGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AutoScalingAutoScalingGroup>;
   update is ArmCustomPatchAsync<
     AutoScalingAutoScalingGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<AutoScalingAutoScalingGroup>

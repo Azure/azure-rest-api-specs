@@ -252,7 +252,7 @@ model AvailabilityZone {
 interface DatabaseMigrationServiceReplicationInstances {
   get is ArmResourceRead<DatabaseMigrationServiceReplicationInstance>;
   @doc("Create a DatabaseMigrationServiceReplicationInstance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DatabaseMigrationServiceReplicationInstance>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DatabaseMigrationServiceReplicationInstance>;
   update is ArmCustomPatchAsync<
     DatabaseMigrationServiceReplicationInstance,
     Azure.ResourceManager.Foundations.TagsUpdateModel<DatabaseMigrationServiceReplicationInstance>

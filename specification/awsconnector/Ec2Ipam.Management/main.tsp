@@ -222,7 +222,7 @@ model Tag {
 interface Ec2Ipams {
   get is ArmResourceRead<Ec2Ipam>;
   @doc("Create a Ec2Ipam. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2Ipam>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2Ipam>;
   update is ArmCustomPatchAsync<
     Ec2Ipam,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2Ipam>

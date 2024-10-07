@@ -147,7 +147,7 @@ model ExportSourceTypeEnumValue {
 interface RdsExportTasks {
   get is ArmResourceRead<RdsExportTask>;
   @doc("Create a RdsExportTask. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<RdsExportTask>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<RdsExportTask>;
   update is ArmCustomPatchAsync<
     RdsExportTask,
     Azure.ResourceManager.Foundations.TagsUpdateModel<RdsExportTask>

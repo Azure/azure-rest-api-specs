@@ -93,7 +93,7 @@ model AwsEfsMountTargetProperties {
 interface EfsMountTargets {
   get is ArmResourceRead<EfsMountTarget>;
   @doc("Create a EfsMountTarget. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EfsMountTarget>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EfsMountTarget>;
   update is ArmCustomPatchAsync<
     EfsMountTarget,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EfsMountTarget>

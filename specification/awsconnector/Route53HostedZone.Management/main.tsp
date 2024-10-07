@@ -147,7 +147,7 @@ model VPC {
 interface Route53HostedZones {
   get is ArmResourceRead<Route53HostedZone>;
   @doc("Create a Route53HostedZone. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Route53HostedZone>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Route53HostedZone>;
   update is ArmCustomPatchAsync<
     Route53HostedZone,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Route53HostedZone>

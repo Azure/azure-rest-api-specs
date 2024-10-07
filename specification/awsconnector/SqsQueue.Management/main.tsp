@@ -111,10 +111,10 @@ model AwsSqsQueueProperties {
   receiveMessageWaitTimeSeconds?: int32;
 
   @doc("The string that includes the parameters for the permissions for the dead-letter queue redrive permission and which source queues can specify dead-letter queues as a JSON object. The parameters are as follows:  +  ``redrivePermission``: The permission type that defines which source queues can specify the current queue as the dead-letter queue. Valid values are:  +  ``allowAll``: (Default) Any source queues in this AWS account in the same Region can specify this queue as the dead-letter queue.  +  ``denyAll``: No source queues can specify this queue as the dead-letter queue.  +  ``byQueue``: Only queues specified by the ``sourceQueueArns`` parameter can specify this queue as the dead-letter queue.    +  ``sourceQueueArns``: The Amazon Resource Names (ARN)s of the source queues that can specify this queue as the dead-letter queue and redrive messages. You can specify this parameter only when the ``redrivePermission`` parameter is set to ``byQueue``. You can specify up to 10 source queue ARNs. To allow more than 10 source queues to specify dead-letter queues, set the ``redrivePermission`` parameter to ``allowAll``.")
-  redriveAllowPolicy?: string;
+  redriveAllowPolicy?: Record<unknown>;
 
   @doc("The string that includes the parameters for the dead-letter queue functionality of the source queue as a JSON object. The parameters are as follows:  +  ``deadLetterTargetArn``: The Amazon Resource Name (ARN) of the dead-letter queue to which SQS moves messages after the value of ``maxReceiveCount`` is exceeded.  +  ``maxReceiveCount``: The number of times a message is delivered to the source queue before being moved to the dead-letter queue. When the ``ReceiveCount`` for a message exceeds the ``maxReceiveCount`` for a queue, SQS moves the message to the dead-letter-queue.    The dead-letter queue of a FIFO queue must also be a FIFO queue. Similarly, the dead-letter queue of a standard queue must also be a standard queue.   *JSON*   ``{ 'deadLetterTargetArn' : String, 'maxReceiveCount' : Integer }``   *YAML*   ``deadLetterTargetArn : String``   ``maxReceiveCount : Integer``")
-  redrivePolicy?: string;
+  redrivePolicy?: Record<unknown>;
 
   @doc("Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (for example, [SSE-KMS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html) or [SSE-SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html)). When ``SqsManagedSseEnabled`` is not defined, ``SSE-SQS`` encryption is enabled by default.")
   sqsManagedSseEnabled?: boolean;
@@ -145,7 +145,7 @@ model Tag {
 interface SqsQueues {
   get is ArmResourceRead<SqsQueue>;
   @doc("Create a SqsQueue. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SqsQueue>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SqsQueue>;
   update is ArmCustomPatchAsync<
     SqsQueue,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SqsQueue>

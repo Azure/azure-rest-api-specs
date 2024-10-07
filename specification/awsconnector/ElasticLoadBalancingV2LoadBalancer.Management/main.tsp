@@ -181,7 +181,7 @@ model Tag {
 interface ElasticLoadBalancingV2LoadBalancers {
   get is ArmResourceRead<ElasticLoadBalancingV2LoadBalancer>;
   @doc("Create a ElasticLoadBalancingV2LoadBalancer. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticLoadBalancingV2LoadBalancer>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ElasticLoadBalancingV2LoadBalancer>;
   update is ArmCustomPatchAsync<
     ElasticLoadBalancingV2LoadBalancer,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ElasticLoadBalancingV2LoadBalancer>

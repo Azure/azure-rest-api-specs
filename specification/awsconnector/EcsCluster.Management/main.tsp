@@ -205,7 +205,7 @@ model ExecuteCommandLogConfiguration {
 interface EcsClusters {
   get is ArmResourceRead<EcsCluster>;
   @doc("Create a EcsCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EcsCluster>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EcsCluster>;
   update is ArmCustomPatchAsync<
     EcsCluster,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EcsCluster>

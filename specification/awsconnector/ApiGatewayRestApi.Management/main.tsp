@@ -79,7 +79,7 @@ model AwsApiGatewayRestApiProperties {
   binaryMediaTypes?: string[];
 
   @doc("An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.")
-  body?: string;
+  body?: Record<unknown>;
 
   @doc("The Amazon Simple Storage Service (Amazon S3) location that points to an OpenAPI file, which defines a set of RESTful APIs in JSON or YAML format. ``S3Location`` is a property of the [AWS::ApiGateway::RestApi](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html) resource that specifies the Amazon S3 location of a OpenAPI (formerly Swagger) file that defines a set of RESTful APIs in JSON or YAML. On January 1, 2016, the Swagger Specification was donated to the [OpenAPI initiative](https://docs.aws.amazon.com/https://www.openapis.org/), becoming the foundation of the OpenAPI Specification.")
   bodyS3Location?: S3Location;
@@ -112,7 +112,7 @@ model AwsApiGatewayRestApiProperties {
   parameters?: Record<string>;
 
   @doc("A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``.")
-  policy?: string;
+  policy?: Record<unknown>;
 
   @doc("Property restApiId")
   restApiId?: string;
@@ -177,7 +177,7 @@ model Tag {
 interface ApiGatewayRestApis {
   get is ArmResourceRead<ApiGatewayRestApi>;
   @doc("Create a ApiGatewayRestApi. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ApiGatewayRestApi>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApiGatewayRestApi>;
   update is ArmCustomPatchAsync<
     ApiGatewayRestApi,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ApiGatewayRestApi>

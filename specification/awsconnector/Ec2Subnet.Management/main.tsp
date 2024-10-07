@@ -168,7 +168,7 @@ model Tag {
 interface Ec2Subnets {
   get is ArmResourceRead<Ec2Subnet>;
   @doc("Create a Ec2Subnet. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2Subnet>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2Subnet>;
   update is ArmCustomPatchAsync<
     Ec2Subnet,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2Subnet>

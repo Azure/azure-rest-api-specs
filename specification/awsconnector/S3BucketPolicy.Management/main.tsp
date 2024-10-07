@@ -38,10 +38,17 @@ enum Versions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
 @about({
   displayNames: {
-    singular: "S3 Bucket Policy",
+    singular: "S3 Get Bucket Policy Output",
     plural: "S3 Bucket Policies",
   },
-  keywords: ["Microsoft.AwsConnector", "S3", "Bucket", "Policy"],
+  keywords: [
+    "Microsoft.AwsConnector",
+    "S3",
+    "Get",
+    "Bucket",
+    "Policy",
+    "Output"
+  ],
 })
 @doc("A Microsoft.AwsConnector resource")
 model S3BucketPolicy is TrackedResource<S3BucketPolicyProperties> {
@@ -71,11 +78,8 @@ model S3BucketPolicyProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsS3BucketPolicy")
 model AwsS3BucketPolicyProperties {
-  @doc("The name of the Amazon S3 bucket to which the policy applies.")
-  bucket?: string;
-
-  @doc("A policy document containing permissions to add to the specified bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM. For more information, see the AWS::IAM::Policy [PolicyDocument](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html#cfn-iam-policy-policydocument) resource description in this guide and [Access Policy Language Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the *Amazon S3 User Guide*.")
-  policyDocument?: string;
+  @doc("<p>The bucket policy as a JSON document.</p>")
+  policy?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
@@ -83,7 +87,7 @@ model AwsS3BucketPolicyProperties {
 interface S3BucketPolicies {
   get is ArmResourceRead<S3BucketPolicy>;
   @doc("Create a S3BucketPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<S3BucketPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<S3BucketPolicy>;
   update is ArmCustomPatchAsync<
     S3BucketPolicy,
     Azure.ResourceManager.Foundations.TagsUpdateModel<S3BucketPolicy>
@@ -97,5 +101,11 @@ interface S3BucketPolicies {
 // This TypeSpec was auto genrated by aws2SwaggerMain.js tool
 //
 // Input used to generate TypeSpec:
-// Cloud Control API Type: AWS::S3::BucketPolicy
+// AWS Service Model: generator\ServiceModels\s3\s3-2006-03-01.normal.json
+// AWS Shape: GetBucketPolicyOutput
+//
+// Related information for backend service:
+// AWS Servcie : S3
+// Product Version : 3.7.798.0
+// SDK Version : 3.7.307.24
 //--------------------------------------------------------------------------------------------

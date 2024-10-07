@@ -166,7 +166,7 @@ model Tag {
 interface SecretsManagerSecrets {
   get is ArmResourceRead<SecretsManagerSecret>;
   @doc("Create a SecretsManagerSecret. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SecretsManagerSecret>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecretsManagerSecret>;
   update is ArmCustomPatchAsync<
     SecretsManagerSecret,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SecretsManagerSecret>

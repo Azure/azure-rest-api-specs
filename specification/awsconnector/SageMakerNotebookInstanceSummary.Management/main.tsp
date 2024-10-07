@@ -638,7 +638,7 @@ model NotebookInstanceStatusEnumValue {
 interface SageMakerNotebookInstanceSummaries {
   get is ArmResourceRead<SageMakerNotebookInstanceSummary>;
   @doc("Create a SageMakerNotebookInstanceSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SageMakerNotebookInstanceSummary>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SageMakerNotebookInstanceSummary>;
   update is ArmCustomPatchAsync<
     SageMakerNotebookInstanceSummary,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SageMakerNotebookInstanceSummary>

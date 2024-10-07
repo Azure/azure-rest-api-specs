@@ -342,7 +342,7 @@ model Tag {
 interface SageMakerApps {
   get is ArmResourceRead<SageMakerApp>;
   @doc("Create a SageMakerApp. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SageMakerApp>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SageMakerApp>;
   update is ArmCustomPatchAsync<
     SageMakerApp,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SageMakerApp>

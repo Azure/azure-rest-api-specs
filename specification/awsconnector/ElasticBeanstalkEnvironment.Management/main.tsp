@@ -167,7 +167,7 @@ model Tier {
 interface ElasticBeanstalkEnvironments {
   get is ArmResourceRead<ElasticBeanstalkEnvironment>;
   @doc("Create a ElasticBeanstalkEnvironment. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBeanstalkEnvironment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ElasticBeanstalkEnvironment>;
   update is ArmCustomPatchAsync<
     ElasticBeanstalkEnvironment,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ElasticBeanstalkEnvironment>

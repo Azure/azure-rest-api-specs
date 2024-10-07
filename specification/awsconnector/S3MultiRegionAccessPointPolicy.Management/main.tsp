@@ -116,7 +116,7 @@ union IsPublic {
 interface S3MultiRegionAccessPointPolicies {
   get is ArmResourceRead<S3MultiRegionAccessPointPolicy>;
   @doc("Create a S3MultiRegionAccessPointPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<S3MultiRegionAccessPointPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<S3MultiRegionAccessPointPolicy>;
   update is ArmCustomPatchAsync<
     S3MultiRegionAccessPointPolicy,
     Azure.ResourceManager.Foundations.TagsUpdateModel<S3MultiRegionAccessPointPolicy>

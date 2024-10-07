@@ -96,7 +96,7 @@ model AwsRoute53DomainsDomainSummaryProperties {
 interface Route53DomainsDomainSummaries {
   get is ArmResourceRead<Route53DomainsDomainSummary>;
   @doc("Create a Route53DomainsDomainSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Route53DomainsDomainSummary>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Route53DomainsDomainSummary>;
   update is ArmCustomPatchAsync<
     Route53DomainsDomainSummary,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Route53DomainsDomainSummary>

@@ -276,7 +276,7 @@ model SecurityGroupMembership {
 interface DaxClusters {
   get is ArmResourceRead<DaxCluster>;
   @doc("Create a DaxCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DaxCluster>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DaxCluster>;
   update is ArmCustomPatchAsync<
     DaxCluster,
     Azure.ResourceManager.Foundations.TagsUpdateModel<DaxCluster>

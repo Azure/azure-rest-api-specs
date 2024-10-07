@@ -83,7 +83,7 @@ model AwsWafWebACLSummaryProperties {
 interface WafWebACLSummaries {
   get is ArmResourceRead<WafWebACLSummary>;
   @doc("Create a WafWebACLSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<WafWebACLSummary>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<WafWebACLSummary>;
   update is ArmCustomPatchAsync<
     WafWebACLSummary,
     Azure.ResourceManager.Foundations.TagsUpdateModel<WafWebACLSummary>

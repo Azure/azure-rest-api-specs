@@ -469,7 +469,7 @@ model VpcConfig {
 interface LambdaFunctions {
   get is ArmResourceRead<LambdaFunction>;
   @doc("Create a LambdaFunction. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LambdaFunction>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LambdaFunction>;
   update is ArmCustomPatchAsync<
     LambdaFunction,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LambdaFunction>

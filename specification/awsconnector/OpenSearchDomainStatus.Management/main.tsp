@@ -1169,7 +1169,7 @@ model WindowStartTime {
 interface OpenSearchDomainStatuses {
   get is ArmResourceRead<OpenSearchDomainStatus>;
   @doc("Create a OpenSearchDomainStatus. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<OpenSearchDomainStatus>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OpenSearchDomainStatus>;
   update is ArmCustomPatchAsync<
     OpenSearchDomainStatus,
     Azure.ResourceManager.Foundations.TagsUpdateModel<OpenSearchDomainStatus>

@@ -93,7 +93,7 @@ model AwsEcrRepositoryProperties {
   repositoryName?: string;
 
   @doc("The JSON repository policy text to apply to the repository. For more information, see [Amazon ECR repository policies](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html) in the *Amazon Elastic Container Registry User Guide*.")
-  repositoryPolicyText?: string;
+  repositoryPolicyText?: Record<unknown>;
 
   @doc("Property repositoryUri")
   repositoryUri?: string;
@@ -179,7 +179,7 @@ model Tag {
 interface EcrRepositories {
   get is ArmResourceRead<EcrRepository>;
   @doc("Create a EcrRepository. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EcrRepository>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EcrRepository>;
   update is ArmCustomPatchAsync<
     EcrRepository,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EcrRepository>

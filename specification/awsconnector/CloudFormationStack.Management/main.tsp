@@ -270,7 +270,7 @@ model Tag {
 interface CloudFormationStacks {
   get is ArmResourceRead<CloudFormationStack>;
   @doc("Create a CloudFormationStack. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudFormationStack>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudFormationStack>;
   update is ArmCustomPatchAsync<
     CloudFormationStack,
     Azure.ResourceManager.Foundations.TagsUpdateModel<CloudFormationStack>

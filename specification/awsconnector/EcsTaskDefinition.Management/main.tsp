@@ -821,7 +821,7 @@ model FSxAuthorizationConfig {
 interface EcsTaskDefinitions {
   get is ArmResourceRead<EcsTaskDefinition>;
   @doc("Create a EcsTaskDefinition. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EcsTaskDefinition>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EcsTaskDefinition>;
   update is ArmCustomPatchAsync<
     EcsTaskDefinition,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EcsTaskDefinition>

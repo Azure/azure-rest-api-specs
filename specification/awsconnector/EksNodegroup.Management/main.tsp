@@ -215,7 +215,7 @@ model UpdateConfig {
 interface EksNodegroups {
   get is ArmResourceRead<EksNodegroup>;
   @doc("Create a EksNodegroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EksNodegroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EksNodegroup>;
   update is ArmCustomPatchAsync<
     EksNodegroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EksNodegroup>

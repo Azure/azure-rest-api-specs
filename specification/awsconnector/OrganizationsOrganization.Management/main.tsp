@@ -110,7 +110,7 @@ union FeatureSet {
 interface OrganizationsOrganizations {
   get is ArmResourceRead<OrganizationsOrganization>;
   @doc("Create a OrganizationsOrganization. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<OrganizationsOrganization>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationsOrganization>;
   update is ArmCustomPatchAsync<
     OrganizationsOrganization,
     Azure.ResourceManager.Foundations.TagsUpdateModel<OrganizationsOrganization>

@@ -109,7 +109,7 @@ model Tag {
 interface SageMakerImages {
   get is ArmResourceRead<SageMakerImage>;
   @doc("Create a SageMakerImage. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SageMakerImage>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SageMakerImage>;
   update is ArmCustomPatchAsync<
     SageMakerImage,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SageMakerImage>

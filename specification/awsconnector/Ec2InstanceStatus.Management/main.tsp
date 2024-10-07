@@ -305,7 +305,7 @@ model StatusTypeEnumValue {
 interface Ec2InstanceStatuses {
   get is ArmResourceRead<Ec2InstanceStatus>;
   @doc("Create a Ec2InstanceStatus. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2InstanceStatus>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2InstanceStatus>;
   update is ArmCustomPatchAsync<
     Ec2InstanceStatus,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2InstanceStatus>
