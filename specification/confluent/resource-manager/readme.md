@@ -28,9 +28,17 @@ These are the global settings for the Confluent API.
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-02
+tag: package-2024-07
 ```
 
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07'
+input-file:
+  - Microsoft.Confluent/stable/2024-07-01/confluent.json
+```
 
 ### Tag: package-2024-02
 
@@ -40,6 +48,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 input-file:
   - Microsoft.Confluent/stable/2024-02-13/confluent.json
 ```
+
 ### Tag: package-2023-08-22
 
 These settings apply only when `--tag=package-2023-08-22` is specified on the command line.
@@ -145,6 +154,7 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
 ### AutoRest v3 Suppressions
 
 ``` yaml
@@ -154,6 +164,7 @@ suppressions:
     reason: We don't want the the organization name values to be restricted by the regular expressions and we have few more specific logic for validation in the backend code that involves replacing some of the chars and passing the check instead of failing at the ARM level. So the "pattern" property is not defined.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: The property fields are in camel case to match the request and response payload of the confluent APIs.
+- code: RequiredPropertiesMissingInResourceModel
+    reason: Our service is RPaaS service and this is coming because of new validation rule. Adding the suppression as recommended by the breaking change team, as the values were marked as optional in earlier PRs.
      
-
 ```
