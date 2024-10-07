@@ -40,7 +40,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/acmCertificateSummary.json
   - Microsoft.AwsConnector/stable/2024-12-01/apiGatewayRestApi.json
   - Microsoft.AwsConnector/stable/2024-12-01/apiGatewayStage.json
-  - Microsoft.AwsConnector/stable/2024-12-01/applicationAutoScalingScalableTarget.json
   - Microsoft.AwsConnector/stable/2024-12-01/appSyncGraphqlApi.json
   - Microsoft.AwsConnector/stable/2024-12-01/autoScalingAutoScalingGroup.json
   - Microsoft.AwsConnector/stable/2024-12-01/cloudFormationStack.json
@@ -90,7 +89,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/elasticLoadBalancingV2Listener.json
   - Microsoft.AwsConnector/stable/2024-12-01/elasticLoadBalancingV2LoadBalancer.json
   - Microsoft.AwsConnector/stable/2024-12-01/elasticLoadBalancingV2TargetGroup.json
-  - Microsoft.AwsConnector/stable/2024-12-01/elasticsearchDomain.json
   - Microsoft.AwsConnector/stable/2024-12-01/emrCluster.json
   - Microsoft.AwsConnector/stable/2024-12-01/emrClusterSummary.json
   - Microsoft.AwsConnector/stable/2024-12-01/guardDutyDetector.json
@@ -103,12 +101,10 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyVersion.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamRole.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamServerCertificate.json
-  - Microsoft.AwsConnector/stable/2024-12-01/iamUser.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamVirtualMFADevice.json
   - Microsoft.AwsConnector/stable/2024-12-01/kmsAlias.json
   - Microsoft.AwsConnector/stable/2024-12-01/kmsKey.json
   - Microsoft.AwsConnector/stable/2024-12-01/lambdaFunction.json
-  - Microsoft.AwsConnector/stable/2024-12-01/licenseManagerLicense.json
   - Microsoft.AwsConnector/stable/2024-12-01/lightsailBucket.json
   - Microsoft.AwsConnector/stable/2024-12-01/lightsailInstance.json
   - Microsoft.AwsConnector/stable/2024-12-01/logsLogGroup.json
@@ -143,8 +139,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/s3MultiRegionAccessPointPolicy.json
   - Microsoft.AwsConnector/stable/2024-12-01/sageMakerApp.json
   - Microsoft.AwsConnector/stable/2024-12-01/sageMakerDevice.json
-  - Microsoft.AwsConnector/stable/2024-12-01/sageMakerDeviceSummary.json
-  - Microsoft.AwsConnector/stable/2024-12-01/sageMakerImage.json
   - Microsoft.AwsConnector/stable/2024-12-01/sageMakerNotebookInstanceSummary.json
   - Microsoft.AwsConnector/stable/2024-12-01/secretsManagerResourcePolicy.json
   - Microsoft.AwsConnector/stable/2024-12-01/secretsManagerSecret.json
@@ -154,10 +148,7 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/ssmInstanceInformation.json
   - Microsoft.AwsConnector/stable/2024-12-01/ssmParameter.json
   - Microsoft.AwsConnector/stable/2024-12-01/ssmResourceComplianceSummaryItem.json
-  - Microsoft.AwsConnector/stable/2024-12-01/wafv2IPSet.json
   - Microsoft.AwsConnector/stable/2024-12-01/wafv2LoggingConfiguration.json
-  - Microsoft.AwsConnector/stable/2024-12-01/wafv2WebACL.json
-  - Microsoft.AwsConnector/stable/2024-12-01/wafv2WebACLAssociation.json
   - Microsoft.AwsConnector/stable/2024-12-01/wafWebACLSummary.json
 ```
 
