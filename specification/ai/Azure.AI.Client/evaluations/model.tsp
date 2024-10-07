@@ -62,7 +62,7 @@ model Evaluation {
   @doc("Data for evaluation.")
   data: InputData;
 
-  @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
+  @doc("Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique.")
   displayName?: string;
 
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
