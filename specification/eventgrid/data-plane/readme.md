@@ -4,7 +4,6 @@
 
 This is the AutoRest configuration file for EventGrid.
 
-
 Multiple Azure services publish events to Azure Event Grid. This is the configuration file for generating
 the Publish API and the schemas for those events. Each Azure service publishing to Azure Event Grid has its own tag OpenAPI specification
 that describes the schemas for its events.
@@ -156,7 +155,6 @@ input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
-- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
@@ -191,8 +189,8 @@ input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
-- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/preview/2023-10-01-preview/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
@@ -218,13 +216,13 @@ input-file:
 
 These settings apply only when `--tag=package-2023-11-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-01-preview'
+``` yaml $(tag) == 'package-2023-11-01'
 input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
-- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/stable/2023-11-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
