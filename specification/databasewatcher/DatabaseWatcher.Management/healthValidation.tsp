@@ -41,7 +41,7 @@ model HealthValidationProperties {
   startTime: utcDateTime;
 
   @visibility("read")
-  @doc("The end time of the health validation.")
+  @doc("The end time of health validation, in UTC.")
   endTime: utcDateTime;
 
   @visibility("read")
