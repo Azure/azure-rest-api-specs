@@ -2142,7 +2142,14 @@
             "description": "Represents an environment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentUpdate"
+              "type": "object",
+              "properties": {
+                "expirationDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
+                }
+              }
             }
           }
         ],
@@ -4079,22 +4086,6 @@
             "description": "The environment type is not enabled for use in the project."
           }
         ]
-      }
-    },
-    "EnvironmentUpdate": {
-      "type": "object",
-      "description": "Properties of an environment.",
-      "properties": {
-        "expirationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Parameters object for the environment.",
-          "additionalProperties": {}
-        }
       }
     },
     "HardwareProfile": {
