@@ -45,8 +45,8 @@ model SessionCodeExecutionResponse {
   @doc("The error of this code execution if failed.")
   error: Foundations.ErrorResponse;
 
-  ...OperationIdHeader;
-  ...Foundations.LongRunningStatusLocation;
+  // ...OperationIdHeader;
+  // ...Foundations.LongRunningStatusLocation;
 }
 
 @doc("Code input type.")
