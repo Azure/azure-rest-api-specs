@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Azure OpenAI
   description: Azure OpenAI APIs for Assistants.
-  version: 2024-07-01-preview
+  version: 2024-09-01-preview
 tags: []
 paths:
   /assistants:
@@ -3740,6 +3740,10 @@ components:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         response_format:
           oneOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
