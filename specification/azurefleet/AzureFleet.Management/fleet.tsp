@@ -412,7 +412,7 @@ model VMAttributes {
   memoryInGiB: VMAttributeMinMaxDouble;
 
   @doc("The range of memory in GiB per vCPU specified from min to max (Optional). Either Min or Max is required if specified.")
-  memoryInGiBPerVCpu?:VMAttributeMinMaxDouble;
+  memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
 
   @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
   localStorageSupport?: VMAttributeSupport;
