@@ -726,7 +726,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PeeringSetting"
+              "$ref": "#/definitions/PeeringSettingUpdate"
             }
           }
         ],
@@ -1036,6 +1036,47 @@
         ]
       },
       "readOnly": true
+    },
+    "PeeringSettingUpdate": {
+      "type": "object",
+      "description": "Updated peering setting object",
+      "properties": {
+        "tenantIds": {
+          "type": "array",
+          "description": "SDDCs in a source vnet.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "description": "Source vnet ID in the following format: \"Source/VNET/ARM/Resource/ID\""
+        },
+        "virtualNetworkGuid": {
+          "type": "string",
+          "description": "Source vnet GUID."
+        },
+        "remotePeeringLinks": {
+          "type": "array",
+          "description": "Peering links from a source vnet to remote vnet(s).",
+          "items": {
+            "$ref": "#/definitions/RemotePeeringLink"
+          },
+          "x-ms-identifiers": []
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "ProvisioningState": {
       "type": "string",

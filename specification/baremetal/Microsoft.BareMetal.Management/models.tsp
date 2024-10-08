@@ -332,7 +332,15 @@ model PeeringSettingUpdate {
   virtualNetworkGuid?: string;
 
   /**
-   * List of remote vnet Ids that are enabled for sync.
+   * Peering links from a source vnet to remote vnet(s).
    */
-  remoteVnetIds?: string[];
+  @OpenAPI.extension("x-ms-identifiers", [])
+  remotePeeringLinks: RemotePeeringLink[];
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Type exists as previously approved by ARM"
+  @visibility("read", "create", "update")
+  tags?: Record<string>;
 }
