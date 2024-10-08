@@ -15,6 +15,11 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.IoTOperations"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
