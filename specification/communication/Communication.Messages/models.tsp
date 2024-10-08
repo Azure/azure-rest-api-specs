@@ -161,11 +161,8 @@ model ImageNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image;
 
-  @removed(Versions.c2024_08_30)
-  @doc("Optional text content.")
-  content?: string;
-
-  @added(Versions.c2024_08_30)
+  @renamedFrom(Versions.c2024_08_30, "content")
+  @clientName("content", "python")
   @doc("Optional text content.")
   caption?: string;
 
@@ -179,6 +176,7 @@ model DocumentNotificationContent extends NotificationContent {
   kind: CommunicationMessageKind.document;
 
   @doc("Optional text content.")
+  @clientName("content", "python")
   caption?: string;
 
   @doc("Optional name for the file.")
@@ -194,6 +192,7 @@ model VideoNotificationContent extends NotificationContent {
   kind: CommunicationMessageKind.video;
 
   @doc("Optional text content.")
+  @clientName("content", "python")
   caption?: string;
 
   ...MediaNotificationContentBase;
