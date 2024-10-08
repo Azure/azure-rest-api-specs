@@ -836,12 +836,64 @@
           "final-state-via": "azure-async-operation"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/estimateRestoreSnapshot": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_EstimateRestoreSnapshot",
+        "x-ms-examples": {
+          "Estimate to create a server as a point in time restore": {
+            "$ref": "./examples/ServerEstimateRestoreSnapshot.json"
+          }
+        },
+        "description": "Estimate a restore snapshot operation of a source server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerForEstimateRestoreSnapshotParameter"
+            },
+            "description": "The required parameters for estimating a restore snapshot operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerForEstimateRestoreSnapshotResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false
+      }
     }
   },
   "definitions": {
     "ServerVersion": {
       "type": "string",
-      "description": "The version of a server.",
+      "description": "The major version of a server. 8.0.21 stands for MySQL 8.0, 5.7.44 stands for MySQL 5.7",
       "enum": [
         "5.7",
         "8.0.21"
@@ -1190,7 +1242,14 @@
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
-          "description": "Server version."
+          "description": "Major version of MySQL. 8.0.21 stands for MySQL 8.0, 5.7.44 stands for MySQL 5.7"
+        },
+        "fullVersion": {
+          "type": "string",
+          "description": "Major version and actual engine version",
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "availabilityZone": {
           "type": "string",
@@ -1557,6 +1616,90 @@
         "name": "PatchStrategy",
         "modelAsString": true
       }
+    },
+    "ServerForEstimateRestoreSnapshotParameter": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/MySQLServerSku",
+          "description": "The SKU (pricing tier) of the server."
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "description": "Storage related properties of a server."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location to restore a new MySQL server."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "The mode to restore a new MySQL server.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore",
+            "Replica",
+            "GeoRestore"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          }
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "description": "The parameters to estimate RestoreSnapshot."
+    },
+    "ServerForEstimateRestoreSnapshotResponse": {
+      "type": "object",
+      "properties": {
+        "estimatedDurationInSecondsMin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The min estimated completion time."
+        },
+        "estimatedDurationInSecondsMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max estimated completion time."
+        },
+        "subTasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerForEstimateRestoreSnapshotResponseSubTask"
+          },
+          "description": "Sub tasks",
+          "readOnly": true
+        }
+      },
+      "description": "The parameters to estimate RestoreSnapshot."
+    },
+    "ServerForEstimateRestoreSnapshotResponseSubTask": {
+      "type": "object",
+      "properties": {
+        "estimatedDurationInSecondsMin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The min estimated completion time."
+        },
+        "estimatedDurationInSecondsMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max estimated completion time."
+        },
+        "taskName": {
+          "type": "string",
+          "description": "Sub task name"
+        }
+      },
+      "description": "The parameters to estimate RestoreSnapshot."
     }
   }
 }

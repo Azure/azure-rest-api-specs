@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "serverName": "sourceserver",
+    "resourceGroupName": "SourceResourceGroup",
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "SoutheastAsia",
+      "sku": {
+        "name": "Standard_D2ds_v4",
+        "tier": "GeneralPurpose"
+      },
+      "storage": {
+        "storageSizeGB": 100,
+        "iops": 600,
+        "autoGrow": "Disabled",
+        "storageRedundancy": "LocalRedundancy"
+      },
+      "restorePointInTime": "2024-01-01T00:00:37.467Z",
+      "createMode": "PointInTimeRestore"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "estimatedDurationInSecondsMin": 780,
+        "estimatedDurationInSecondsMax": 1480,
+        "subTasks": [
+          {
+            "taskName": "Data Copy",
+            "estimatedDurationInSecondsMin": 120,
+            "estimatedDurationInSecondsMax": 160
+          },
+          {
+            "taskName": "Crash Recovery",
+            "estimatedDurationInSecondsMin": 60,
+            "estimatedDurationInSecondsMax": 120
+          },
+          {
+            "taskName": "Binlog Replay",
+            "estimatedDurationInSecondsMin": 600,
+            "estimatedDurationInSecondsMax": 1200
+          }
+        ]
+      }
+    }
+  }
+}

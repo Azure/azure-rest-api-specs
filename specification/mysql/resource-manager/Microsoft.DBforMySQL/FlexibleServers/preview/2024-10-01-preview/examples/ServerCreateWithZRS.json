@@ -5,12 +5,6 @@
     "api-version": "2024-10-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity": {}
-        }
-      },
       "sku": {
         "name": "Standard_D2ds_v4",
         "tier": "GeneralPurpose"
@@ -20,12 +14,13 @@
         "administratorLoginPassword": "your_password",
         "availabilityZone": "1",
         "version": "5.7",
+        "fullVersion": "5.7.44",
         "createMode": "Default",
         "storage": {
           "storageSizeGB": 100,
           "iops": 600,
           "autoGrow": "Disabled",
-          "storageRedundancy": "LocalRedundancy"
+          "storageRedundancy": "ZoneRedundancy"
         },
         "backup": {
           "backupRetentionDays": 7,
@@ -33,15 +28,7 @@
           "geoRedundantBackup": "Disabled"
         },
         "highAvailability": {
-          "mode": "ZoneRedundant",
-          "standbyAvailabilityZone": "3"
-        },
-        "dataEncryption": {
-          "type": "AzureKeyVault",
-          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity",
-          "primaryKeyURI": "https://test.vault.azure.net/keys/key/c8a92236622244c0a4fdb892666f671a",
-          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-identity",
-          "geoBackupKeyURI": "https://test-geo.vault.azure.net/keys/key/c8a92236622244c0a4fdb892666f671a"
+          "mode": "Disabled"
         }
       },
       "location": "southeastasia",
@@ -91,9 +78,8 @@
             "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
           },
           "highAvailability": {
-            "mode": "ZoneRedundant",
-            "state": "Healthy",
-            "standbyAvailabilityZone": "3"
+            "mode": "Disabled",
+            "state": "NotEnabled"
           },
           "databasePort": 3306
         },
@@ -111,7 +97,7 @@
         "sku": {
           "name": "Standard_D2ds_v4",
           "tier": "GeneralPurpose"
-        },
+          },
         "properties": {
           "administratorLogin": "cloudsa",
           "storage": {
@@ -143,9 +129,8 @@
             "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
           },
           "highAvailability": {
-            "mode": "ZoneRedundant",
-            "state": "Healthy",
-            "standbyAvailabilityZone": "3"
+            "mode": "Disabled",
+            "state": "NotEnabled"
           },
           "databasePort": 3306
         },

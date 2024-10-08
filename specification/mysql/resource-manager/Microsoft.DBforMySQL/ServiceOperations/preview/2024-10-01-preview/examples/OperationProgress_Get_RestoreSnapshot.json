@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "locationName": "westus",
+    "operationId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/westus/operationProgress/00000000-0000-0000-0000-000000000000",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "status": "InProgress",
+        "startTime": "2024-01-01T01:34:02.328326Z",
+        "percentComplete": 10,
+        "properties": {
+          "estimatedCompletionTime": "2024-07-24T03:34:02.328326Z",
+          "operationParameters": "<InternalRestoreSnapshotArguments xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><CustomerSubscriptionId>cb9d743d-2140-4e73-b871-cd31abab1d2f</CustomerSubscriptionId><CustomerResourceGroup>yinyuw05</CustomerResourceGroup><Location>australiaeast</Location><RestoreFromServerName>testha</RestoreFromServerName><RestoreToServerName>testha-r-3</RestoreToServerName><RestoreToTime>2024-07-22T03:24:00Z</RestoreToTime><SnapshotType>PITR</SnapshotType><OperationType>Create</OperationType><GeneratedOrcasInstanceId>5507323c-a16c-4a35-870e-c7a90b6e00b2</GeneratedOrcasInstanceId><RestoreFromServerOrcasInstanceId>f40bb6f3-c60f-483a-a14c-a4616eafeac1</RestoreFromServerOrcasInstanceId><Tags>{\"ElasticServer\":\"test\"}</Tags><SpecId xsi:nil=\"true\" /><RollbackSpecId xsi:nil=\"true\" /><Mode>PointInTimeRestore</Mode><GeoRedundantBackupEnabled>false</GeoRedundantBackupEnabled><CloneSourceServerIdentity xsi:nil=\"true\" /><ServerEdition>GeneralPurpose</ServerEdition><ServerSku>Standard_D2ds_v4</ServerSku><VCore>2</VCore><StorageLimitInMb>16777216</StorageLimitInMb><StorageIops xsi:nil=\"true\" /><BackupRetentionMinutes xsi:nil=\"true\" /><StorageAutogrowEnabled>false</StorageAutogrowEnabled><LogOnDiskEnabled xsi:nil=\"true\" /><SourceServerLocation>onebox</SourceServerLocation><PublicNetworkAccess>Enabled</PublicNetworkAccess><DatabasePort>3306</DatabasePort></InternalRestoreSnapshotArguments>",
+          "retryTimes": 0,
+          "subTasks": [
+            {
+              "taskName": "Data Copy",
+              "startTime": "2024-01-01T01:00:00Z",
+              "endTime": "2024-01-01T01:05:00Z",
+              "estimatedEndTime": "2024-01-01T01:05:00Z",
+              "percentComplete": 100,
+              "status": "Completed",
+              "detail": "",
+              "errorMessage": "",
+              "objectType": "RestoreSnapshotResponseSubTask"
+            },
+            {
+              "taskName": "Crash Recovery",
+              "startTime": "2024-01-01T01:05:00Z",
+              "endTime": "2024-01-01T01:15:00Z",
+              "estimatedEndTime": "2024-01-01T01:15:00Z",
+              "percentComplete": 100,
+              "status": "Completed",
+              "detail": "",
+              "errorMessage": "",
+              "objectType": "RestoreSnapshotResponseSubTask"
+            },
+            {
+              "taskName": "Binlog Replay",
+              "startTime": "2024-01-01T01:15:00Z",
+              "estimatedEndTime": "2024-01-01T02:00:00Z",
+              "percentComplete": 50,
+              "status": "In Progress",
+              "detail": "replaying binlog sequence 0005, 7 binlog files remaining",
+              "errorMessage": "",
+              "objectType": "RestoreSnapshotResponseSubTask"
+            }
+          ],
+          "detail": "",
+          "objectType": "RestoreSnapshotResponse"
+        }
+      }
+    }
+  }
+}

@@ -396,6 +396,9 @@
           },
           "OperationProgress_Get ImportFromStorage": {
             "$ref": "./examples/OperationProgress_Get_ImportFromStorage.json"
+          },
+          "OperationProgress_Get RestoreSnapshot": {
+            "$ref": "./examples/OperationProgress_Get_RestoreSnapshot.json"
           }
         }
       }
@@ -466,6 +469,55 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/operationsOngoing": {
+      "get": {
+        "tags": [
+          "OperationsOngoing"
+        ],
+        "operationId": "OperationsOngoing_List",
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationsOngoingList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists all of operations according to specific operation type under a sub.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/v2/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The operation type to query."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationOngoingListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -623,6 +675,22 @@
         "name": {
           "type": "string",
           "description": "server version",
+          "readOnly": true
+        }
+      },
+      "description": "Server version capabilities."
+    },
+    "FeatureProperty": {
+      "type": "object",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "feature name",
+          "readOnly": true
+        },
+        "featureValue": {
+          "type": "string",
+          "description": "feature value",
           "readOnly": true
         }
       },
@@ -808,6 +876,15 @@
           },
           "x-ms-identifiers": [],
           "readOnly": true
+        },
+        "supportedFeatures": {
+          "description": "A list of supported features.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeatureProperty"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
         }
       },
       "description": "Location capability."
@@ -976,6 +1053,65 @@
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "OperationOngoing": {
+      "description": "REST API operation ongoing definition.",
+      "type": "object",
+      "properties": {
+        "operationRequestId": {
+          "type": "string",
+          "description": "The operation id."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription id."
+        },
+        "state": {
+          "type": "string",
+          "description": "State of the operation."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The operation type."
+        },
+        "operationParameters": {
+          "type": "string",
+          "description": "The operation parameters."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time."
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "The last updated time."
+        }
+      }
+    },
+    "OperationOngoingListResult": {
+      "description": "A list of ongoing operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of ongoing operations",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/OperationOngoing"
+          }
+        },
+        "nextLink": {
           "type": "string"
         }
       }
