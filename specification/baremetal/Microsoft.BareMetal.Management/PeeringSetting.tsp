@@ -46,16 +46,14 @@ interface PeeringSettings {
   listSubscription is ArmListBySubscription<PeeringSetting>;
 }
 
-@@encodedName(PeeringSettings.createOrUpdate::parameters.resource,
-  "application/json",
+@@Azure.ClientGenerator.Core.clientName(PeeringSettings.createOrUpdate::parameters.resource,
   "peeringSettingObject"
 );
 @@clientName(PeeringSettings.createOrUpdate::parameters.resource,
   "peeringSettingObject"
 );
 
-@@encodedName(PeeringSettings.update::parameters.properties,
-  "application/json",
+@@Azure.ClientGenerator.Core.clientName(PeeringSettings.update::parameters.properties,
   "peeringSettingUpdateObject"
 );
 @@clientName(PeeringSettings.update::parameters.properties,

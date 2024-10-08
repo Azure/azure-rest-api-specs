@@ -48,16 +48,14 @@ interface BareMetalConnections {
   listSubscription is ArmListBySubscription<BareMetalConnection>;
 }
 
-@@encodedName(BareMetalConnections.createOrUpdate::parameters.resource,
-  "application/json",
+@@Azure.ClientGenerator.Core.clientName(BareMetalConnections.createOrUpdate::parameters.resource,
   "bareMetalConnectionObject"
 );
 @@clientName(BareMetalConnections.createOrUpdate::parameters.resource,
   "bareMetalConnectionObject"
 );
 
-@@encodedName(BareMetalConnections.update::parameters.properties,
-  "application/json",
+@@Azure.ClientGenerator.Core.clientName(BareMetalConnections.update::parameters.properties,
   "bareMetalConnectionObject"
 );
 @@clientName(BareMetalConnections.update::parameters.properties,
