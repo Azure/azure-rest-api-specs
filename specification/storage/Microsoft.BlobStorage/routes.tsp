@@ -14,13 +14,25 @@ using Azure.Core;
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperation<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
   TError = StorageError
->(...TParams, ...ApiVersionParameter, ...ClientRequestIdParameter): (TResponse &
-  VersionResponseHeader &
-  RequestIdResponseHeader &
-  ClientRequestIdResponseHeader) | TError;
+>(
+  ...TParams,
+
+  /** Specifies the version of the operation to use for this request. */
+  @header("x-ms-version")
+  version: string,
+
+  ...ClientRequestIdHeader,
+): (TResponse & {
+  /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
+  @header("x-ms-version")
+  version: string;
+
+  ...RequestIdResponseHeader;
+  ...ClientRequestIdHeader;
+}) | TError;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {

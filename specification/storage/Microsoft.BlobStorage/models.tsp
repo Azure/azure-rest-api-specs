@@ -1718,13 +1718,6 @@ alias VersionIdResponseHeader = {
   versionId: string;
 };
 
-/** The version response header. */
-alias VersionResponseHeader = {
-  /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-  @header("x-ms-version")
-  version: string;
-};
-
 /** The creation time response header. */
 alias CreationTimeResponseHeader = {
   /** Returns the date and time the blob was created. */
@@ -1741,20 +1734,6 @@ alias LastModifiedResponseHeader = {
   @encode("date-time-rfc1123")
   @header("Last-Modified")
   lastModified: utcDateTime;
-};
-
-/** The request ID response header. */
-alias RequestIdResponseHeader = {
-  /** This header uniquely identifies the request that was made and can be used for troubleshooting the request. */
-  @header("x-ms-request-id")
-  requestId: string;
-};
-
-/** The client request ID response header. */
-alias ClientRequestIdResponseHeader = {
-  /** If a client request id header is sent in the request, this header will be present in the response with the same value. */
-  @header("x-ms-client-request-id")
-  clientRequestId?: string;
 };
 
 /** The Date response header */
