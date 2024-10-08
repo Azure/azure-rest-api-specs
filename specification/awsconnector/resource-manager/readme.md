@@ -138,7 +138,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/s3BucketPolicy.json
   - Microsoft.AwsConnector/stable/2024-12-01/s3ControlMultiRegionAccessPointPolicyDocument.json
   - Microsoft.AwsConnector/stable/2024-12-01/sageMakerApp.json
-  - Microsoft.AwsConnector/stable/2024-12-01/sageMakerDevice.json
   - Microsoft.AwsConnector/stable/2024-12-01/sageMakerNotebookInstanceSummary.json
   - Microsoft.AwsConnector/stable/2024-12-01/secretsManagerResourcePolicy.json
   - Microsoft.AwsConnector/stable/2024-12-01/secretsManagerSecret.json
