@@ -2921,6 +2921,17 @@
         "refusal"
       ]
     },
+    "ChatCompletionStreamOptions": {
+      "type": "object",
+      "description": "Options for streaming response. Only set this when you set `stream: true`.",
+      "properties": {
+        "include_usage": {
+          "type": "boolean",
+          "description": "If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.",
+          "x-ms-client-name": "includeUsage"
+        }
+      }
+    },
     "ChatCompletions": {
       "type": "object",
       "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -3165,6 +3176,17 @@
         "stream": {
           "type": "boolean",
           "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "stream_options": {
+          "type": "object",
+          "description": "Options for streaming response. Only set this when you set `stream: true`.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ChatCompletionStreamOptions"
+            }
+          ],
+          "x-ms-client-name": "streamOptions"
         },
         "model": {
           "type": "string",
@@ -3868,6 +3890,17 @@
         "stream": {
           "type": "boolean",
           "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "stream_options": {
+          "type": "object",
+          "description": "Options for streaming response. Only set this when you set `stream: true`.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ChatCompletionStreamOptions"
+            }
+          ],
+          "x-ms-client-name": "streamOptions"
         },
         "model": {
           "type": "string",
