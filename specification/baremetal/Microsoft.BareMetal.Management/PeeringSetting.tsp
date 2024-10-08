@@ -27,7 +27,7 @@ interface PeeringSettings {
   /**
    * Patch the PeeringSetting.
    */
-  update is ArmCustomPatchSync<PeeringSetting, PeeringSettingUpdate>;
+  update is ArmCustomPatchAsync<PeeringSetting, PeeringSettingUpdate>;
 
   /**
    * Delete the PeeringSetting.
@@ -53,8 +53,8 @@ interface PeeringSettings {
 );
 
 @@Azure.ClientGenerator.Core.clientName(PeeringSettings.update::parameters.properties,
-  "peeringSettingUpdateObject"
+  "peeringSettingObject"
 );
 @@clientName(PeeringSettings.update::parameters.properties,
-  "peeringSettingUpdateObject"
+  "peeringSettingObject"
 );

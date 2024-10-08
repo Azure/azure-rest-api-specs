@@ -721,7 +721,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "peeringSettingUpdateObject",
+            "name": "peeringSettingObject",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
@@ -737,6 +737,20 @@
               "$ref": "#/definitions/PeeringSetting"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -748,7 +762,11 @@
           "PeeringSettings_Update": {
             "$ref": "./examples/PeeringSettings_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PeeringSettings_Delete",
@@ -988,6 +1006,35 @@
         "remotePeeringLinks"
       ]
     },
+    "PeeringSettingPropertiesUpdate": {
+      "type": "object",
+      "description": "Basic Peering Setting properties needed for the request and response.",
+      "properties": {
+        "tenantIds": {
+          "type": "array",
+          "description": "Tenant Ids in a source vnet.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "description": "Source vnet ID in the following format: \"Source/VNET/ARM/Resource/ID\""
+        },
+        "virtualNetworkGuid": {
+          "type": "string",
+          "description": "Source vnet GUID."
+        },
+        "remotePeeringLinks": {
+          "type": "array",
+          "description": "Peering links from a source vnet to remote vnet(s).",
+          "items": {
+            "$ref": "#/definitions/RemotePeeringLink"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "PeeringSettingProvisioningState": {
       "type": "string",
       "description": "The current provisioning state for a peering setting.",
@@ -1041,28 +1088,9 @@
       "type": "object",
       "description": "Updated peering setting object",
       "properties": {
-        "tenantIds": {
-          "type": "array",
-          "description": "SDDCs in a source vnet.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "virtualNetworkId": {
-          "type": "string",
-          "description": "Source vnet ID in the following format: \"Source/VNET/ARM/Resource/ID\""
-        },
-        "virtualNetworkGuid": {
-          "type": "string",
-          "description": "Source vnet GUID."
-        },
-        "remotePeeringLinks": {
-          "type": "array",
-          "description": "Peering links from a source vnet to remote vnet(s).",
-          "items": {
-            "$ref": "#/definitions/RemotePeeringLink"
-          },
-          "x-ms-identifiers": []
+        "properties": {
+          "$ref": "#/definitions/PeeringSettingPropertiesUpdate",
+          "description": "properties"
         },
         "tags": {
           "type": "object",
@@ -1075,6 +1103,10 @@
             "update",
             "create"
           ]
+        },
+        "location": {
+          "type": "string",
+          "description": "location"
         }
       }
     },
