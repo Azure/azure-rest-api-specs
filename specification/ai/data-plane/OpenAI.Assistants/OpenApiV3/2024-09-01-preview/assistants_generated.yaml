@@ -1754,6 +1754,10 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           nullable: true
           description: The overridden list of enabled tools the assistant should use to run the thread.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         tool_resources:
           type: object
           allOf:
@@ -1909,6 +1913,10 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           nullable: true
           description: The overridden list of enabled tools that the assistant should use to run the thread.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         stream:
           type: boolean
           description: |-
