@@ -78,6 +78,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SessionCodeExecutionResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           },
           "202": {
@@ -94,6 +100,10 @@
               "operation-id": {
                 "type": "string",
                 "description": "The async code execution operation id."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           },
@@ -141,6 +151,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SessionCodeExecutionResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           },
           "default": {
@@ -579,6 +595,10 @@
           "type": "integer",
           "format": "int64",
           "description": "The execution time of the code in milliseconds."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "The error of this code execution if failed."
         }
       },
       "required": [
@@ -587,7 +607,8 @@
         "stdout",
         "stderr",
         "result",
-        "executionTimeInMilliseconds"
+        "executionTimeInMilliseconds",
+        "error"
       ]
     },
     "SessionCodeExecutionRequest": {
@@ -647,6 +668,10 @@
           "type": "integer",
           "format": "int64",
           "description": "The execution time of the code in milliseconds."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "The error of this code execution if failed."
         }
       },
       "required": [
@@ -655,7 +680,8 @@
         "stdout",
         "stderr",
         "result",
-        "executionTimeInMilliseconds"
+        "executionTimeInMilliseconds",
+        "error"
       ]
     },
     "SessionResourceFile": {

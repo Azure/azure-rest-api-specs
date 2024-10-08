@@ -41,6 +41,9 @@ model SessionCodeExecutionResponse {
 
   @doc("The execution time of the code in milliseconds.")
   executionTimeInMilliseconds: int64;
+
+  @doc("The error of this code execution if failed.")
+  error: Foundations.ErrorResponse;
 }
 
 @doc("The response of the async code execution.")
