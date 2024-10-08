@@ -64,7 +64,7 @@
             "$ref": "#/parameters/SessionIdentifier"
           },
           {
-            "$ref": "#/parameters/OperationIdHeader"
+            "$ref": "#/parameters/ExecutionIdHeader"
           },
           {
             "name": "codeExecutionRequest",
@@ -658,8 +658,7 @@
         "stdout",
         "stderr",
         "result",
-        "executionTimeInMilliseconds",
-        "error"
+        "executionTimeInMilliseconds"
       ]
     },
     "SessionResourceFile": {
@@ -734,14 +733,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "OperationIdHeader": {
-      "name": "operation-id",
+    "ExecutionIdHeader": {
+      "name": "execution-id",
       "in": "header",
       "description": "The operation id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "x-ms-client-name": "operationId"
+      "x-ms-client-name": "executionId"
     },
     "SessionIdentifier": {
       "name": "sessionId",

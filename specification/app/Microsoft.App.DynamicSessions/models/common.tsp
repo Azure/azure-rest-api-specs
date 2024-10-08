@@ -7,11 +7,11 @@ using TypeSpec.Rest;
 namespace Microsoft.App.DynamicSessions;
 using OpenAPI;
 
-@doc("The optional operation id header.")
-model OperationIdHeader {
+@doc("The optional execution id header.")
+model ExecutionIdHeader {
   @header
   @doc("The operation id.")
-  operationId: string;
+  executionId: string;
 }
 
 @doc("Session identifier query parameter.")

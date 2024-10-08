@@ -43,7 +43,7 @@ model SessionCodeExecutionResponse {
   executionTimeInMilliseconds: int64;
 
   @doc("The error of this code execution if failed.")
-  error: Foundations.ErrorResponse;
+  error?: Foundations.ErrorResponse;
 }
 
 @doc("Code input type.")

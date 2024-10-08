@@ -4,6 +4,7 @@
   "parameters": {
     "api-version": "2024-10-02-preview",
     "sessionId": "testidentidier",
+    "executionId": "testexecutionid",
     "codeExecutionRequest": {
       "codeInputType": "Inline",
       "executionType": "Synchronous",
@@ -12,28 +13,22 @@
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "id": "1",
-        "status": "Succeeded",
-        "stdout": "63/n",
-        "stderr": "",
-        "result": "",
-        "executionTimeInMilliseconds": 4
-      }
-    },
     "202": {
       "headers": {
-        "Operation_Id": "test-execution-id",
+        "Operation_Id": "testexecutionid",
         "Operation-Location": "location"
       },
       "body": {
         "id": "1",
-        "status": "",
-        "stdout": "test-execution-id",
-        "stderr": "",
-        "result": null,
-        "executionTimeInMilliseconds": 0
+        "status": "Succeeded",
+        "result": {
+          "executionId": "testexecutionid",
+          "status": "Succeeded",
+          "stdout": "63/n",
+          "stderr": "",
+          "result": "",
+          "executionTimeInMilliseconds": 4
+        }
       }
     }
   }

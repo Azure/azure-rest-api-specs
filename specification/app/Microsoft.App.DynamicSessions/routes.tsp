@@ -28,7 +28,7 @@ interface CodeExecution {
   executeCode is LongRunningRpcOperation<
     {
       ...SessionIdentifier;
-      ...OperationIdHeader;
+      ...ExecutionIdHeader;
 
       @doc("The request to execute code.")
       @body
