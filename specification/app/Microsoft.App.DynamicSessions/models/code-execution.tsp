@@ -84,10 +84,10 @@ union CodeExecutionStatus {
   string,
 
   @doc("The code execution succeeded.")
-  Success: "Success",
+  Succeeded: "Succeeded",
 
   @doc("The code execution failed.")
-  Failure: "Failure",
+  Failed: "Failed",
 
   @doc("The code execution canceled.")
   Canceled: "Canceled",
