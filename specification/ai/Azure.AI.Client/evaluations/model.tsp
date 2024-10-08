@@ -48,7 +48,7 @@ model AppInsightsConfiguration extends InputData {
   query: string;
 
   @doc("Service name.")
-  serviceName: string
+  serviceName: string;
 }
 
 @doc("Dataset as source for evaluation.")
@@ -127,61 +127,61 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
 alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Need to add documentation"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Need to add documentation"
 @doc("Frequency of the schedule - day, week, month, hour, minute")
 union Frequency {
-    Month: "Month",
-    Week:  "Week",
-    Day: "Day",
-    Hour: "Hour",
-    Minute: "Minute",
-    string
+  Month: "Month",
+  Week: "Week",
+  Day: "Day",
+  Hour: "Hour",
+  Minute: "Minute",
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Need to add documentation"
 @doc("WeekDay of the schedule - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday")
 union WeekDays {
-    Monday: "Monday",
-    Tuesday: "Tuesday",
-    Wednesday: "Wednesday",
-    Thursday: "Thursday",
-    Friday: "Friday",
-    Saturday: "Saturday",
-    Sunday: "Sunday",
-    string
+  Monday: "Monday",
+  Tuesday: "Tuesday",
+  Wednesday: "Wednesday",
+  Thursday: "Thursday",
+  Friday: "Friday",
+  Saturday: "Saturday",
+  Sunday: "Sunday",
+  string,
 }
 
 @doc("Recurrence Definition")
 model Recurrence {
-    @doc("The frequency to trigger schedule.")
-    frequency: Frequency;
+  @doc("The frequency to trigger schedule.")
+  frequency: Frequency;
 
-    @doc("Specifies schedule interval in conjunction with frequency")
-    interval: int32;
+  @doc("Specifies schedule interval in conjunction with frequency")
+  interval: int32;
 
-    @doc("The recurrence schedule.")
-    schedule: RecurrenceSchedule;
+  @doc("The recurrence schedule.")
+  schedule: RecurrenceSchedule;
 }
 
 @doc("RecurrenceSchedule Definition")
 model RecurrenceSchedule {
-    @doc("List of hours for the schedule.")
-    hours: int32[];
+  @doc("List of hours for the schedule.")
+  hours: int32[];
 
-    @doc("List of minutes for the schedule.")
-    minutes: int32[];
+  @doc("List of minutes for the schedule.")
+  minutes: int32[];
 
-    @doc("List of days for the schedule.")
-    weekDays: WeekDays[];
+  @doc("List of days for the schedule.")
+  weekDays: WeekDays[];
 
-    @doc("List of month days for the schedule")
-    monthDays: int32[];
+  @doc("List of month days for the schedule")
+  monthDays: int32[];
 }
 
 @doc("SamplingStrategy Definition")
 model SamplingStrategy {
-    @doc("Sampling rate")
-    rate: float32;
+  @doc("Sampling rate")
+  rate: float32;
 }
 
 @doc("Evaluation Schedule Definition")
@@ -191,7 +191,7 @@ model EvaluationSchedule {
   @doc("Recurrence pattern for the evaluation.")
   recurrence?: Recurrence;
 
-  @doc ("Cron expression for the evaluation.")
+  @doc("Cron expression for the evaluation.")
   cronExpression?: string;
 
   @doc("Sampling strategy for the evaluation.")

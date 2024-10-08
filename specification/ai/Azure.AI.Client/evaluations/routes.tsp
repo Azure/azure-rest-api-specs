@@ -95,7 +95,6 @@ op getSchedule is Azure.Core.Foundations.Operation<
     @maxLength(254)
     @path
     id: string;
-
   },
   EvaluationSchedule
 >;
@@ -122,6 +121,7 @@ op listScheduleEvaluations is Azure.Core.Foundations.Operation<
     @maxLength(254)
     @path
     id: string;
+
     ...StandardListQueryParameters;
   },
   PagedEvaluation
