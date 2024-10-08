@@ -371,7 +371,7 @@ union ArchitectureType {
   ARM64: "ARM64",
 
   @doc("X64 Architecture")
-  X86: "X64",
+  X64: "X64",
 }
 
 @added(Versions.v2024_11_01)
@@ -411,12 +411,15 @@ model VMAttributes {
   @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
   memoryInGiB: VMAttributeMinMaxDouble;
 
+  @doc("The range of memory in GiB per vCPU specified from min to max (Optional). Either Min or Max is required if specified.")
+  memoryInGiBPerVCpu?:VMAttributeMinMaxDouble;
+
   @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
   localStorageSupport?: VMAttributeSupport;
 
   @doc("""
     LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
-    If localStorageSupport is "Excluded", this VMAttribute can not be used." should be added to the description for localStorageInGiB.
+    If localStorageSupport is "Excluded", this VMAttribute can not be used.
     """)
   localStorageInGiB?: VMAttributeMinMaxDouble;
 

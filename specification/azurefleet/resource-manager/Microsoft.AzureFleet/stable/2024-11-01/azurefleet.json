@@ -688,7 +688,7 @@
             "description": "ARM64 Architecture"
           },
           {
-            "name": "X86",
+            "name": "X64",
             "value": "X64",
             "description": "X64 Architecture"
           }
@@ -2464,13 +2464,17 @@
           "$ref": "#/definitions/VMAttributeMinMaxDouble",
           "description": "The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
         },
+        "memoryInGiBPerVCpu": {
+          "$ref": "#/definitions/VMAttributeMinMaxDouble",
+          "description": "The range of memory in GiB per vCPU specified from min to max (Optional). Either Min or Max is required if specified."
+        },
         "localStorageSupport": {
           "$ref": "#/definitions/VMAttributeSupport",
           "description": "Specifies whether the VMSize supporting local storage should be used to build Fleet or not."
         },
         "localStorageInGiB": {
           "$ref": "#/definitions/VMAttributeMinMaxDouble",
-          "description": "LocalStorageSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf localStorageSupport is \"Excluded\", this VMAttribute can not be used.\" should be added to the description for localStorageInGiB."
+          "description": "LocalStorageSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf localStorageSupport is \"Excluded\", this VMAttribute can not be used."
         },
         "localStorageDiskTypes": {
           "type": "array",
