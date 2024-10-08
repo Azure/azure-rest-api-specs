@@ -23,6 +23,7 @@ multiapi: true
 default-api-version: "2023-05-01"
 clear-output-folder: true
 batch:
+  - tag: package-2024-11
   - tag: package-preview-2024-04-only
   - tag: package-2023-05
   - tag: package-2022-11
@@ -45,6 +46,15 @@ batch:
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2024-11 and python
+
+These settings apply only when `--tag=package-2024-11 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11'
+namespace: azure.mgmt.kubernetesconfiguration.v2024_11_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2024_11_01
 ```
 
 ### Tag: package-preview-2024-04-only and python
