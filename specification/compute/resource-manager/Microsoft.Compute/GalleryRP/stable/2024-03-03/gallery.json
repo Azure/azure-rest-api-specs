@@ -2528,14 +2528,6 @@
           "format": "int32",
           "description": "The number of replicas of the Image Version to be created per region. This property is updatable."
         },
-        "additionalReplicaSets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdditionalReplicaSet"
-          },
-          "x-ms-identifiers": [],
-          "description": "List of storage sku with replica count to create direct drive replicas."
-        },
         "storageAccountType": {
           "type": "string",
           "description": "Specifies the storage account type to be used to store the image. This property is not updatable.",
@@ -2549,6 +2541,14 @@
             "name": "StorageAccountType",
             "modelAsString": true
           }
+        },
+        "additionalReplicaSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalReplicaSet"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of storage sku with replica count to create direct drive replicas."
         },
         "encryption": {
           "$ref": "#/definitions/EncryptionImages"
