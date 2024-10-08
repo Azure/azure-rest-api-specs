@@ -89,6 +89,7 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/elasticLoadBalancingV2Listener.json
   - Microsoft.AwsConnector/stable/2024-12-01/elasticLoadBalancingV2LoadBalancer.json
   - Microsoft.AwsConnector/stable/2024-12-01/elasticLoadBalancingV2TargetGroup.json
+  - Microsoft.AwsConnector/stable/2024-12-01/elasticLoadBalancingV2TargetHealthDescription.json
   - Microsoft.AwsConnector/stable/2024-12-01/emrCluster.json
   - Microsoft.AwsConnector/stable/2024-12-01/emrClusterSummary.json
   - Microsoft.AwsConnector/stable/2024-12-01/guardDutyDetector.json
@@ -105,6 +106,7 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/kmsAlias.json
   - Microsoft.AwsConnector/stable/2024-12-01/kmsKey.json
   - Microsoft.AwsConnector/stable/2024-12-01/lambdaFunction.json
+  - Microsoft.AwsConnector/stable/2024-12-01/lambdaFunctionCodeLocation.json
   - Microsoft.AwsConnector/stable/2024-12-01/lightsailBucket.json
   - Microsoft.AwsConnector/stable/2024-12-01/lightsailInstance.json
   - Microsoft.AwsConnector/stable/2024-12-01/logsLogGroup.json
