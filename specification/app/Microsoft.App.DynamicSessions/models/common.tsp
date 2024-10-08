@@ -7,11 +7,11 @@ using TypeSpec.Rest;
 namespace Microsoft.App.DynamicSessions;
 using OpenAPI;
 
-@doc("The session resource file name parameter.")
-model SessionResourceFileNameParameter {
-  @doc("The name of the file.")
-  @path
-  name: string;
+@doc("The optional operation id header.")
+model OperationIdHeader {
+  @header
+  @doc("The operation id.")
+  operationId: string;
 }
 
 @doc("Session identifier query parameter.")
@@ -33,4 +33,11 @@ model SessionResourceFilePathParameter {
   @doc("The path of the file after uploaded.")
   @query
   path: string;
+}
+
+@doc("The session resource file name parameter.")
+model SessionResourceFileNameParameter {
+  @doc("The name of the file.")
+  @path
+  name: string;
 }

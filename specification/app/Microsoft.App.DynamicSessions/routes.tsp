@@ -22,23 +22,25 @@ alias SessionTraits = NoRepeatableRequests &
 alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 
 interface CodeExecution {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Execute code in a session.")
-  @route("/execute")
-  executeCode is Foundations.Operation<
+  @route("/executions")
+  @pollingOperation(CodeExecution.getResult)
+  executeCode is LongRunningRpcOperation<
     {
       ...SessionIdentifier;
+      ...OperationIdHeader;
 
       @doc("The request to execute code.")
       @body
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
-    Foundations.AcceptedResponse<SessionCodeExecutionAsyncResponse> | Foundations.ResourceOkResponse<SessionCodeExecutionResponse>
+    SessionCodeExecutionResponse,
+    SessionCodeExecutionResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the code execution result.")
-  @route("/execute/{executionId}")
+  @route("/executions/{executionId}")
   getResult is Foundations.Operation<
     {
       ...SessionIdentifier;

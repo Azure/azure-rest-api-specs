@@ -52,7 +52,7 @@
   },
   "tags": [],
   "paths": {
-    "/execute": {
+    "/executions": {
       "post": {
         "operationId": "CodeExecution_ExecuteCode",
         "description": "Execute code in a session.",
@@ -62,6 +62,9 @@
           },
           {
             "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "codeExecutionRequest",
@@ -74,22 +77,33 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          },
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResponse"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/SessionCodeExecutionResponse",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
               "Operation-Location": {
@@ -99,7 +113,7 @@
               },
               "operation-id": {
                 "type": "string",
-                "description": "The async code execution operation id."
+                "description": "The operation id."
               },
               "x-ms-error-code": {
                 "type": "string",
@@ -131,7 +145,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/execute/{executionId}": {
+    "/executions/{executionId}": {
       "get": {
         "operationId": "CodeExecution_GetResult",
         "description": "Get the code execution result.",
@@ -153,6 +167,15 @@
               "$ref": "#/definitions/SessionCodeExecutionResponse"
             },
             "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "operation-id": {
+                "type": "string",
+                "description": "The operation id."
+              },
               "x-ms-error-code": {
                 "type": "string",
                 "description": "String error code indicating what went wrong."
@@ -461,13 +484,57 @@
         }
       }
     },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "CodeExecutionStatus": {
       "type": "string",
       "description": "Code execution status.",
       "enum": [
         "Succeeded",
         "Failed",
-        "Canceled"
+        "Canceled",
+        "NotStarte",
+        "Running"
       ],
       "x-ms-enum": {
         "name": "CodeExecutionStatus",
@@ -487,6 +554,16 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "The code execution canceled."
+          },
+          {
+            "name": "NotStarte",
+            "value": "NotStarte",
+            "description": "The code execution is not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The code execution is still running."
           }
         ]
       }
@@ -567,50 +644,6 @@
         "value"
       ]
     },
-    "SessionCodeExecutionAsyncResponse": {
-      "type": "object",
-      "description": "The response of the async code execution.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Session code execution id.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/CodeExecutionStatus",
-          "description": "The status of the code execution, indicates whether succeeded or not."
-        },
-        "stdout": {
-          "type": "string",
-          "description": "The standard output of the code execution."
-        },
-        "stderr": {
-          "type": "string",
-          "description": "The standard error of the code execution."
-        },
-        "result": {
-          "description": "The result of the code execution. The type of this field is same as the type of actual result of the code execution after being Json serialized."
-        },
-        "executionTimeInMilliseconds": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The execution time of the code in milliseconds."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
-          "description": "The error of this code execution if failed."
-        }
-      },
-      "required": [
-        "id",
-        "status",
-        "stdout",
-        "stderr",
-        "result",
-        "executionTimeInMilliseconds",
-        "error"
-      ]
-    },
     "SessionCodeExecutionRequest": {
       "type": "object",
       "description": "The request to execute code.",
@@ -644,7 +677,7 @@
       "type": "object",
       "description": "The response containing the result of the code execution.",
       "properties": {
-        "id": {
+        "executionId": {
           "type": "string",
           "description": "Session code execution id.",
           "readOnly": true
@@ -675,7 +708,7 @@
         }
       },
       "required": [
-        "id",
+        "executionId",
         "status",
         "stdout",
         "stderr",
@@ -755,6 +788,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "OperationIdHeader": {
+      "name": "operation-id",
+      "in": "header",
+      "description": "The operation id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "operationId"
     },
     "SessionIdentifier": {
       "name": "sessionId",

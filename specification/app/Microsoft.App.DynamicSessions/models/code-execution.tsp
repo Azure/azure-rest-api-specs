@@ -24,7 +24,7 @@ model SessionCodeExecutionRequest {
 model SessionCodeExecutionResponse {
   @visibility("read")
   @doc("Session code execution id.")
-  id: string;
+  executionId: string;
 
   @doc("The status of the code execution, indicates whether succeeded or not.")
   status: CodeExecutionStatus;
@@ -44,16 +44,8 @@ model SessionCodeExecutionResponse {
 
   @doc("The error of this code execution if failed.")
   error: Foundations.ErrorResponse;
-}
 
-@doc("The response of the async code execution.")
-model SessionCodeExecutionAsyncResponse {
-  ...SessionCodeExecutionResponse;
-
-  @header
-  @doc("The async code execution operation id.")
-  operationId: string;
-
+  ...OperationIdHeader;
   ...Foundations.LongRunningStatusLocation;
 }
 
@@ -94,4 +86,10 @@ union CodeExecutionStatus {
 
   @doc("The code execution canceled.")
   Canceled: "Canceled",
+
+  @doc("The code execution is not started.")
+  NotStarte: "NotStarte",
+
+  @doc("The code execution is still running.")
+  Running: "Running",
 }
