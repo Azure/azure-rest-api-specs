@@ -143,7 +143,7 @@ model ThreadRun {
    */
   @added(ServiceApiVersions.v2024_09_01_preview)
   @encodedName("application/json", "parallel_tool_calls")
-  parallelToolCalls?: boolean = true;
+  parallelToolCalls: boolean = true;
 
   /** The response format of the tool calls used in this run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
