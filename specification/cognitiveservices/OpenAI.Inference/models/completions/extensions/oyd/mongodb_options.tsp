@@ -38,7 +38,7 @@ model MongoDBChatExtensionParameters {
     authentication.
     """)
   @clientName("Authentication", "csharp")
-  authentication?: OnYourDataAuthenticationOptions;
+  authentication?: OnYourDataUsernameAndPasswordAuthenticationOptions;
 
   @doc("The endpoint name for MongoDB.")
   endpoint: string;
