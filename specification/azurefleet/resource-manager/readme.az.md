@@ -15,8 +15,6 @@ python-sdk-output-folder: "$(az-output-folder)/azext_computefleet/vendored_sdks/
 # refer to the faq.md for more details
 ```
 
-
-
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:

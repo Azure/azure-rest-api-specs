@@ -439,4 +439,15 @@ interface DevBoxes {
     },
     OperationStatus
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
+  @doc("Captures a manual snapshot of the Dev Box.")
+  @added(APIVersions.v2024_10_01_preview)
+  @pollingOperation(OperationStatuses.get)
+  @action("captureSnapshot")
+  captureSnapshotDevBox is DevCenterOps.LongRunningResourceAction<
+    DevBox,
+    {},
+    OperationStatus
+  >;
 }

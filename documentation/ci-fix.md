@@ -88,7 +88,7 @@ If you have an issue or with any of checks listed in the first column of the tab
 
 | Check name                        | Owner          |
 |-----------------------------------|----------------|
-| `SDK azure-sdk-for-go`            | Ray Chen       |
+| `SDK azure-sdk-for-go`            | Chenjie Shi    |
 | `SDK azure-sdk-for-java`          | Weidong Xu     |
 | `SDK azure-sdk-for-js`            | Qiaoqiao Zhang |
 | `SDK azure-sdk-for-net`           | Wei Hu         |
