@@ -974,9 +974,6 @@
         "x-ms-examples": {
           "Pools_Get": {
             "$ref": "examples/Pools_Get.json"
-          },
-          "Pools_Get_CustomThroughput": {
-            "$ref": "examples/Pools_Get_CustomThroughput.json"
           }
         }
       },
@@ -1040,9 +1037,6 @@
         "x-ms-examples": {
           "Pools_CreateOrUpdate": {
             "$ref": "examples/Pools_CreateOrUpdate.json"
-          },
-          "Pools_CreateOrUpdate_CustomThroughput": {
-            "$ref": "examples/Pools_CreateOrUpdate_CustomThroughput.json"
           }
         }
       },
@@ -1103,9 +1097,6 @@
         "x-ms-examples": {
           "Pools_Update": {
             "$ref": "examples/Pools_Update.json"
-          },
-          "Pools_Update_CustomThroughput": {
-            "$ref": "examples/Pools_Update_CustomThroughput.json"
           }
         }
       },
@@ -6337,12 +6328,6 @@
           "example": 164.221,
           "readOnly": true
         },
-        "customThroughputMibps": {
-          "title": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level",
-          "type": "number",
-          "x-nullable": true,
-          "example": 128
-        },
         "qosType": {
           "title": "qosType",
           "type": "string",
@@ -6481,12 +6466,6 @@
           "type": "boolean",
           "example": false,
           "description": "If enabled (true) the pool can contain cool Access enabled volumes."
-        },
-        "customThroughputMibps": {
-          "title": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level",
-          "type": "number",
-          "x-nullable": true,
-          "example": 128
         }
       }
     },
@@ -8369,8 +8348,7 @@
         "Standard",
         "Premium",
         "Ultra",
-        "StandardZRS",
-        "Flexible"
+        "StandardZRS"
       ],
       "default": "Premium",
       "x-ms-enum": {
@@ -8392,10 +8370,6 @@
           {
             "value": "StandardZRS",
             "description": "Zone redundant storage service level"
-          },
-          {
-            "value": "Flexible",
-            "description": "Flexible service level"
           }
         ]
       }
