@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "jobName": "testcontainerAppsJob0",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "name": "testcontainerAppJob-27944454",
+            "properties": {
+              "status": "Running",
+              "startTime": "2023-02-13T20:37:30+00:00",
+              "endTime": "2023-02-13T20:47:30+00:00",
+              "detailedStatus": {
+                "replicas": [
+                  {
+                    "name": "testcontainerappsjob0-0",
+                    "containers": [
+                      {
+                        "name": "container1",
+                        "code": 0,
+                        "additionalInformation": "Completed",
+                        "status": "Succeeded"
+                      },
+                      {
+                        "name": "container2",
+                        "code": 0,
+                        "additionalInformation": "Completed",
+                        "status": "Succeeded"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerappsjob0:v4",
+                    "name": "testcontainerappsjob0",
+                    "resources": {
+                      "cpu": 0.5,
+                      "memory": "1Gi"
+                    }
+                  }
+                ],
+                "initContainers": [
+                  {
+                    "image": "repo/testcontainerappsjob0:v4",
+                    "name": "testinitcontainerAppsJob0",
+                    "resources": {
+                      "cpu": 0.5,
+                      "memory": "1Gi"
+                    },
+                    "command": [
+                      "/bin/sh"
+                    ],
+                    "args": [
+                      "-c",
+                      "while true; do echo hello; sleep 10;done"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

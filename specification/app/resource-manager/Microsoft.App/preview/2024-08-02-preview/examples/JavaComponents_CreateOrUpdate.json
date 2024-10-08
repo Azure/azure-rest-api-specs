@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "name": "myjavacomponent",
+    "api-version": "2024-08-02-preview",
+    "javaComponentEnvelope": {
+      "properties": {
+        "componentType": "SpringBootAdmin",
+        "configurations": [
+          {
+            "propertyName": "spring.boot.admin.ui.enable-toasts",
+            "value": "true"
+          },
+          {
+            "propertyName": "spring.boot.admin.monitor.status-interval",
+            "value": "10000ms"
+          }
+        ],
+        "scale": {
+          "minReplicas": 1,
+          "maxReplicas": 1
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/myjavacomponent",
+        "name": "myjavacomponent",
+        "type": "Microsoft.App/managedEnvironments/javaComponents",
+        "properties": {
+          "componentType": "SpringBootAdmin",
+          "provisioningState": "Succeeded",
+          "configurations": [
+            {
+              "propertyName": "spring.boot.admin.ui.enable-toasts",
+              "value": "true"
+            },
+            {
+              "propertyName": "spring.boot.admin.monitor.status-interval",
+              "value": "10000ms"
+            }
+          ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 1
+          },
+          "ingress": {
+            "fqdn": "myjavacomponent.myenvironment.test.net"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/myjavacomponent",
+        "name": "myjavacomponent",
+        "type": "Microsoft.App/managedEnvironments/javaComponents",
+        "properties": {
+          "componentType": "SpringBootAdmin",
+          "provisioningState": "InProgress",
+          "configurations": [
+            {
+              "propertyName": "spring.boot.admin.ui.enable-toasts",
+              "value": "true"
+            },
+            {
+              "propertyName": "spring.boot.admin.monitor.status-interval",
+              "value": "10000ms"
+            }
+          ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 1
+          },
+          "ingress": {
+            "fqdn": "myjavacomponent.myenvironment.test.net"
+          }
+        }
+      }
+    }
+  }
+}
