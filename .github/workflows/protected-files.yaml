@@ -17,7 +17,7 @@ jobs:
             const membership = await github.rest.teams.getMembershipForUserInOrg({
               org: "Azure",
               team_slug: "azure-sdk-eng",
-              username: payload.pull_request.user.login,
+              username: context.payload.pull_request.user.login,
             })
           
             console.log(JSON.stringify(membership, null, 2));
