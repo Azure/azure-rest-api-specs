@@ -721,7 +721,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "peeringSettingObject",
+            "name": "peeringSettingUpdateObject",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
@@ -1044,7 +1044,8 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Removed"
+        "Removed",
+        "Accepted"
       ],
       "x-ms-enum": {
         "name": "PeeringSettingProvisioningState",
@@ -1079,6 +1080,11 @@
             "name": "Removed",
             "value": "Removed",
             "description": "is removed"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "is accepted"
           }
         ]
       },
@@ -1090,7 +1096,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PeeringSettingPropertiesUpdate",
-          "description": "properties"
+          "description": "Properties of the resource."
         },
         "tags": {
           "type": "object",
@@ -1103,10 +1109,6 @@
             "update",
             "create"
           ]
-        },
-        "location": {
-          "type": "string",
-          "description": "location"
         }
       }
     },

@@ -54,6 +54,9 @@ union PeeringSettingProvisioningState {
 
   @doc("is removed")
   Removed: "Removed",
+
+  @doc("is accepted")
+  Accepted: "Accepted",
 }
 
 /**
@@ -316,8 +319,10 @@ model RemotePeeringLink {
  * Updated peering setting object
  */
 model PeeringSettingUpdate {
+  /**
+   * Properties of the resource.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/OBJECT_ADDITIONAL_PROPERTIES" "properties is a managed property."
-  @doc("properties")
   properties?: PeeringSettingProperties;
 
   /**
@@ -327,7 +332,10 @@ model PeeringSettingUpdate {
   @visibility("read", "create", "update")
   tags?: Record<string>;
 
+  /**
+   * Location of the resource.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/OBJECT_ADDITIONAL_PROPERTIES" "location is a managed property."
-  @doc("location")
+  @visibility("read")
   location?: string;
 }

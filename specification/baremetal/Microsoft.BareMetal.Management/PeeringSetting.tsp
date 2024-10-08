@@ -53,8 +53,8 @@ interface PeeringSettings {
 );
 
 @@Azure.ClientGenerator.Core.clientName(PeeringSettings.update::parameters.properties,
-  "peeringSettingObject"
+  "peeringSettingUpdateObject"
 );
 @@clientName(PeeringSettings.update::parameters.properties,
-  "peeringSettingObject"
+  "peeringSettingUpdateObject"
 );
