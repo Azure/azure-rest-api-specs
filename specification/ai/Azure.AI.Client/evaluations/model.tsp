@@ -29,29 +29,36 @@ model EvaluatorConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
-@doc("Abstract data class.")
+@doc("Abstract data class for input data configuration.")
 @discriminator("type")
 model InputData {
-  @doc("Evaluation input data")
-  @encodedName("application/json", "Uri")
-  id: string;
+  @doc("Type of the data.")
+  type: string;
 }
 
 @doc("Data Source for Application Insight.")
 model AppInsightsConfiguration extends InputData {
+  @visibility("read")
   type: "app_insights";
 
-  @doc("Application Insight connection string.")
-  connectionString: string;
+  @doc("LogAnalytic Workspace resourceID associated with AppInsights")
+  resourceId: string;
 
-  @doc("Query to fetch data.")
+  @doc("Query to fetch the data.")
   query: string;
+
+  @doc("Service name.")
+  serviceName: string
 }
 
 @doc("Dataset as source for evaluation.")
 model Dataset extends InputData {
   @visibility("read")
   type: "dataset";
+
+  @doc("Evaluation input data")
+  @encodedName("application/json", "Uri")
+  id: string;
 }
 
 @doc("Evaluation Definition")
@@ -119,3 +126,87 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Need to add documentation"
+@doc("Frequency of the schedule - day, week, month, hour, minute")
+union Frequency {
+    Month: "Month",
+    Week:  "Week",
+    Day: "Day",
+    Hour: "Hour",
+    Minute: "Minute",
+    string
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Need to add documentation"
+@doc("WeekDay of the schedule - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday")
+union WeekDays {
+    Monday: "Monday",
+    Tuesday: "Tuesday",
+    Wednesday: "Wednesday",
+    Thursday: "Thursday",
+    Friday: "Friday",
+    Saturday: "Saturday",
+    Sunday: "Sunday",
+    string
+}
+
+@doc("Recurrence Definition")
+model Recurrence {
+    @doc("The frequency to trigger schedule.")
+    frequency: Frequency;
+
+    @doc("Specifies schedule interval in conjunction with frequency")
+    interval: int32;
+
+    @doc("The recurrence schedule.")
+    schedule: RecurrenceSchedule;
+}
+
+@doc("RecurrenceSchedule Definition")
+model RecurrenceSchedule {
+    @doc("List of hours for the schedule.")
+    hours: int32[];
+
+    @doc("List of minutes for the schedule.")
+    minutes: int32[];
+
+    @doc("List of days for the schedule.")
+    weekDays: WeekDays[];
+
+    @doc("List of month days for the schedule")
+    monthDays: int32[];
+}
+
+@doc("SamplingStrategy Definition")
+model SamplingStrategy {
+    @doc("Sampling rate")
+    rate: float32;
+}
+
+@doc("Evaluation Schedule Definition")
+model EvaluationSchedule {
+  ...Evaluation;
+
+  @doc("Recurrence pattern for the evaluation.")
+  recurrence?: Recurrence;
+
+  @doc ("Cron expression for the evaluation.")
+  cronExpression?: string;
+
+  @doc("Sampling strategy for the evaluation.")
+  samplingStrategy: SamplingStrategy;
+}
+
+@doc("Paged evaluation schedule items")
+@pagedResult
+model PagedEvaluationSchedule {
+  @doc("The list of Evaluation Schedules.")
+  @extension("x-ms-identifiers", [])
+  @items
+  value: EvaluationSchedule[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<EvaluationSchedule>;
+}
