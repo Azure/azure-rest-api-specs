@@ -15,17 +15,17 @@ jobs:
     steps:
       # Since check is required, the job must pass instead of being skipped
       - name: User allowed
-        if: ${{ env.user-allowed }}
+        if: ${{ env.user-allowed == 'true' }}
         run: echo "Account '${{ github.event.pull_request.user.login }}' is allowed to update protected files"
 
       - uses: actions/checkout@v4
-        if: ${{ !env.user-allowed }}
+        if: ${{ env.user-allowed != 'true' }}
         with:
           # Required since "HEAD^" is passed to Get-ChangedFiles
           fetch-depth: 2
 
       - name: Detect changes to protected files
-        if: ${{ !env.user-allowed }}
+        if: ${{ env.user-allowed != 'true' }}
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
 
