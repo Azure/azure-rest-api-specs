@@ -26,8 +26,8 @@ model SessionCodeExecutionResponse {
   @doc("Session code execution id.")
   executionId: string;
 
-  @doc("The status of the code execution, indicates whether succeeded or not.")
-  status: CodeExecutionStatus;
+  @doc("The status of the code execution operation, indicates whether succeeded or not.")
+  status: Foundations.OperationState;
 
   @doc("The standard output of the code execution.")
   stdout: string;
@@ -44,9 +44,6 @@ model SessionCodeExecutionResponse {
 
   @doc("The error of this code execution if failed.")
   error: Foundations.ErrorResponse;
-
-  // ...OperationIdHeader;
-  // ...Foundations.LongRunningStatusLocation;
 }
 
 @doc("Code input type.")
@@ -72,24 +69,4 @@ union ExecutionType {
 
   @doc("Asynchronous")
   asynchronous: "Asynchronous",
-}
-
-@doc("Code execution status.")
-union CodeExecutionStatus {
-  string,
-
-  @doc("The code execution succeeded.")
-  Succeeded: "Succeeded",
-
-  @doc("The code execution failed.")
-  Failed: "Failed",
-
-  @doc("The code execution canceled.")
-  Canceled: "Canceled",
-
-  @doc("The code execution is not started.")
-  NotStarte: "NotStarte",
-
-  @doc("The code execution is still running.")
-  Running: "Running",
 }

@@ -513,48 +513,6 @@
         ]
       }
     },
-    "CodeExecutionStatus": {
-      "type": "string",
-      "description": "Code execution status.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "NotStarte",
-        "Running"
-      ],
-      "x-ms-enum": {
-        "name": "CodeExecutionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The code execution succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The code execution failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The code execution canceled."
-          },
-          {
-            "name": "NotStarte",
-            "value": "NotStarte",
-            "description": "The code execution is not started."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The code execution is still running."
-          }
-        ]
-      }
-    },
     "CodeInputType": {
       "type": "string",
       "description": "Code input type.",
@@ -670,8 +628,8 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/CodeExecutionStatus",
-          "description": "The status of the code execution, indicates whether succeeded or not."
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the code execution operation, indicates whether succeeded or not."
         },
         "stdout": {
           "type": "string",
