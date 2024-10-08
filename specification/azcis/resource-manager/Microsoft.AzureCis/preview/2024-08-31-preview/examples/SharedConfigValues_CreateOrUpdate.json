@@ -1,0 +1,91 @@
+{
+  "title": "Create SharedConfigValues",
+  "operationId": "SharedConfigValues_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "123e4567-e89b-12d3-a456-426614174000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2024-08-31-preview",
+    "resource": {
+      "properties": {
+        "sharedValues": [
+          {
+            "moniker": "test_namespace_one.test_label_one",
+            "value": "test_value_one",
+            "scope": {
+              "geoType": "Cloud",
+              "geoValue": "Public"
+            }
+          },
+          {
+            "moniker": "test_namespace_two.test_label_two",
+            "value": "test_value_two",
+            "scope": {
+              "geoType": "Cloud",
+              "geoValue": "Public"
+            }
+          }
+        ],
+        "cloudSproutEnv": "Prod"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426614174000/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/sharedConfigValues/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/sharedConfigValues",
+        "properties": {
+          "sharedValues": [
+            {
+              "moniker": "test_namespace_one.test_label_one",
+              "value": "test_value_one",
+              "scope": {
+                "geoType": "Cloud",
+                "geoValue": "Public"
+              }
+            },
+            {
+              "moniker": "test_namespace_two.test_label_two",
+              "value": "test_value_two",
+              "scope": {
+                "geoType": "Cloud",
+                "geoValue": "Public"
+              }
+            }
+          ],
+          "cloudSproutEnv": "Prod"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426614174000/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/sharedConfigValues/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/sharedConfigValues",
+        "properties": {
+          "sharedValues": [
+            {
+              "moniker": "test_namespace_one.test_label_one",
+              "value": "test_value_one",
+              "scope": {
+                "geoType": "Cloud",
+                "geoValue": "Public"
+              }
+            },
+            {
+              "moniker": "test_namespace_two.test_label_two",
+              "value": "test_value_two",
+              "scope": {
+                "geoType": "Cloud",
+                "geoValue": "Public"
+              }
+            }
+          ],
+          "cloudSproutEnv": "Prod"
+        }
+      }
+    }
+  }
+}
