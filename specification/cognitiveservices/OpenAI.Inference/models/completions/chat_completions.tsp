@@ -123,10 +123,9 @@ model ChatCompletionsOptions {
    *
    * This value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.
    */
-  @encodedName("application/json", "max_tokens")
   #deprecated "Field deprecated sicnce v2024-09-01-preview service version."
+  @encodedName("application/json", "max_tokens")
   maxTokens?: int32;
-
 
   /**
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens.
@@ -215,9 +214,9 @@ model ChatCompletionsOptions {
   /**
    * Options for streaming response. Only set this when you set `stream: true`.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
   @encodedName("application/json", "stream_options")
   @added(ServiceApiVersions.v2024_09_01_Preview)
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
   streamOptions?: ChatCompletionStreamOptions | null;
 
   @doc("""

@@ -135,9 +135,9 @@ model CompletionsOptions {
   /**
    * Options for streaming response. Only set this when you set `stream: true`.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
   @encodedName("application/json", "stream_options")
   @added(ServiceApiVersions.v2024_09_01_Preview)
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
   streamOptions?: ChatCompletionStreamOptions | null;
 
   @doc("""

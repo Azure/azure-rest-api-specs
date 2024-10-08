@@ -218,8 +218,8 @@ model CreateRunOptions {
   tools?: ToolDefinition[] | null;
 
   /**
- * Whether to enable parallel function calling during tool use.
- */
+   * Whether to enable parallel function calling during tool use.
+   */
   @added(ServiceApiVersions.v2024_09_01_preview)
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean = true;
@@ -391,12 +391,12 @@ model CreateAndRunThreadOptions {
   @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[] | null;
 
-    /**
+  /**
    * Whether to enable parallel function calling during tool use.
    */
-    @added(ServiceApiVersions.v2024_09_01_preview)
-    @encodedName("application/json", "parallel_tool_calls")
-    parallelToolCalls?: boolean = true;
+  @added(ServiceApiVersions.v2024_09_01_preview)
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean = true;
 
   /** Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
