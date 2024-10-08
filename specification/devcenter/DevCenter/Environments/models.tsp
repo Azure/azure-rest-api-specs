@@ -232,7 +232,7 @@ model EnvironmentPatchProperties {
     """)
   @added(APIVersions.v2024_02_01)
   expirationDate?: utcDateTime;
-};
+}
 
 @doc("Outputs from environment deployment.")
 @added(APIVersions.v2024_02_01)
