@@ -9,16 +9,6 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 alias OnYourDataCommonChatExtensionConfiguration = {
-  @doc("""
-    The authentication method to use when accessing the defined data source.
-    Each data source type supports a specific set of available authentication methods; please see the documentation of
-    the data source for supported mechanisms.
-    If not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)
-    authentication.
-    """)
-  @clientName("Authentication", "csharp")
-  authentication?: OnYourDataAuthenticationOptions;
-
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The configured top number of documents to feature for the configured query.")
   @clientName("DocumentCount", "csharp")

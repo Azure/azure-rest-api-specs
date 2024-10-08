@@ -30,6 +30,16 @@ model MongoDBChatExtensionConfiguration
 model MongoDBChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
+  @doc("""
+    The authentication method to use when accessing the defined data source.
+    Each data source type supports a specific set of available authentication methods; please see the documentation of
+    the data source for supported mechanisms.
+    If not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)
+    authentication.
+    """)
+  @clientName("Authentication", "csharp")
+  authentication?: OnYourDataAuthenticationOptions;
+
   @doc("The endpoint name for MongoDB.")
   endpoint: string;
 

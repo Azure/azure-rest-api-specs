@@ -2276,10 +2276,6 @@
       "type": "object",
       "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for\nMongoDB vCore. The supported authentication type is ConnectionString.",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
-        },
         "top_n_documents": {
           "type": "integer",
           "format": "int32",
@@ -2317,6 +2313,10 @@
             "$ref": "#/definitions/OnYourDataContextProperty"
           },
           "x-ms-client-name": "includeContexts"
+        },
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
         "database_name": {
           "type": "string",
@@ -2514,10 +2514,6 @@
       "type": "object",
       "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are APIKey, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
-        },
         "top_n_documents": {
           "type": "integer",
           "format": "int32",
@@ -2555,6 +2551,10 @@
             "$ref": "#/definitions/OnYourDataContextProperty"
           },
           "x-ms-client-name": "includeContexts"
+        },
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
         "endpoint": {
           "type": "string",
@@ -4097,8 +4097,7 @@
         }
       },
       "required": [
-        "filtered",
-        "details"
+        "filtered"
       ]
     },
     "ContentFilterDetectionResult": {
@@ -4346,10 +4345,6 @@
       "type": "object",
       "description": "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are KeyAndKeyId and EncodedAPIKey.",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
-        },
         "top_n_documents": {
           "type": "integer",
           "format": "int32",
@@ -4387,6 +4382,10 @@
             "$ref": "#/definitions/OnYourDataContextProperty"
           },
           "x-ms-client-name": "includeContexts"
+        },
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
         "endpoint": {
           "type": "string",
@@ -5107,10 +5106,6 @@
       "type": "object",
       "description": "Parameters for the MongoDB chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
-        },
         "top_n_documents": {
           "type": "integer",
           "format": "int32",
@@ -5148,6 +5143,10 @@
             "$ref": "#/definitions/OnYourDataContextProperty"
           },
           "x-ms-client-name": "includeContexts"
+        },
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
         "endpoint": {
           "type": "string",
@@ -5765,10 +5764,6 @@
       "type": "object",
       "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is APIKey.",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
-        },
         "top_n_documents": {
           "type": "integer",
           "format": "int32",
@@ -5806,6 +5801,10 @@
             "$ref": "#/definitions/OnYourDataContextProperty"
           },
           "x-ms-client-name": "includeContexts"
+        },
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
         "environment": {
           "type": "string",
