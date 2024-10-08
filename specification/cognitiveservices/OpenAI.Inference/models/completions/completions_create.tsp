@@ -132,6 +132,14 @@ model CompletionsOptions {
   @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
+  /**
+   * Options for streaming response. Only set this when you set `stream: true`.
+   */
+  @encodedName("application/json", "stream_options")
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  streamOptions?: ChatCompletionStreamOptions | null;
+
   @doc("""
     The model name to provide as part of this completions request.
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
