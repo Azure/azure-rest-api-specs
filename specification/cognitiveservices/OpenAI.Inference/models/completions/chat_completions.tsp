@@ -127,6 +127,7 @@ model ChatCompletionsOptions {
    * This value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.
    */
   @encodedName("application/json", "max_tokens")
+  #deprecated "Field deprecated sicnce v2024-09-01-preview service version."
   maxTokens?: int32;
 
 
