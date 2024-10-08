@@ -121,9 +121,22 @@ model ChatCompletionsOptions {
   @added(ServiceApiVersions.v2023_07_01_Preview)
   functionCall?: FunctionCallConfig;
 
+  /**
+   * The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).
+   *
+   * This value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+  */
   @doc("The maximum number of tokens to generate.")
   @encodedName("application/json", "max_tokens")
   maxTokens?: int32;
+
+  @doc("""
+    An upper bound for the number of tokens that can be generated for a completion, including visible output
+    tokens and reasoning tokens.
+    """)
+  @encodedName("application/json", "max_completion_tokens")
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  maxCompletionTokens?: int32;
 
   @doc("""
     The sampling temperature to use that controls the apparent creativity of generated completions.
