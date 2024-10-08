@@ -18,7 +18,7 @@ model SessionResourceFileNameParameter {
 model SessionIdentifier {
   @doc("The identifier of the session.")
   @query
-  identifier: string;
+  sessionId: string;
 }
 
 @doc("Session code execution identifier query parameter.")
