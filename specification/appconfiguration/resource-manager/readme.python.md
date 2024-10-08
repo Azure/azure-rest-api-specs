@@ -8,6 +8,8 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-appconfiguration
 package-version: 1.0.0b1
 no-namespace-folders: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Python multi-api
