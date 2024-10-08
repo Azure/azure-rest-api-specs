@@ -258,6 +258,17 @@
           },
           "description": "Supported high availability mode",
           "readOnly": true
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "The supported features.",
+          "items": {
+            "$ref": "#/definitions/SupportedFeature"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
         }
       },
       "allOf": [
@@ -298,6 +309,17 @@
             "type": "string"
           },
           "description": "Supported servers versions to upgrade",
+          "readOnly": true
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "The supported features.",
+          "items": {
+            "$ref": "#/definitions/SupportedFeature"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       },
@@ -340,6 +362,30 @@
         }
       ],
       "description": "Storage edition capability"
+    },
+    "SupportedFeature": {
+      "type": "object",
+      "description": "The supported features.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of feature",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of feature ",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "supportedFeatureStatusEnum",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "FastProvisioningEditionCapability": {
       "type": "object",
@@ -456,9 +502,20 @@
           "description": "The list of server versions supported for this capability.",
           "readOnly": true
         },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "The supported features.",
+          "items": {
+            "$ref": "#/definitions/SupportedFeature"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
         "fastProvisioningSupported": {
           "type": "string",
-          "description": "Gets a value indicating whether fast provisioning is supported. \"Enabled\" means fast provisioning is supported. \"Disabled\" stands for fast provisioning is not supported.",
+          "description": "Gets a value indicating whether fast provisioning is supported. \"Enabled\" means fast provisioning is supported. \"Disabled\" stands for fast provisioning is not supported. Will be deprecated in future, please look to Supported Features for \"FastProvisioning\".",
           "readOnly": true,
           "enum": [
             "Enabled",
@@ -482,7 +539,7 @@
         },
         "geoBackupSupported": {
           "type": "string",
-          "description": "Determines if geo-backup is supported in this region. \"Enabled\" means geo-backup is supported. \"Disabled\" stands for geo-back is not supported.",
+          "description": "Determines if geo-backup is supported in this region. \"Enabled\" means geo-backup is supported. \"Disabled\" stands for geo-back is not supported. Will be deprecated in future, please look to Supported Features for \"GeoBackup\".",
           "readOnly": true,
           "enum": [
             "Enabled",
@@ -495,7 +552,7 @@
         },
         "zoneRedundantHaSupported": {
           "type": "string",
-          "description": "A value indicating whether Zone Redundant HA is supported in this region. \"Enabled\" means zone redundant HA is supported. \"Disabled\" stands for zone redundant HA is not supported.",
+          "description": "A value indicating whether Zone Redundant HA is supported in this region. \"Enabled\" means zone redundant HA is supported. \"Disabled\" stands for zone redundant HA is not supported. Will be deprecated in future, please look to Supported Features for \"ZoneRedundantHa\".",
           "readOnly": true,
           "enum": [
             "Enabled",
@@ -508,7 +565,7 @@
         },
         "zoneRedundantHaAndGeoBackupSupported": {
           "type": "string",
-          "description": "A value indicating whether Zone Redundant HA and Geo-backup is supported in this region. \"Enabled\" means zone redundant HA and geo-backup is supported. \"Disabled\" stands for zone redundant HA and geo-backup is not supported.",
+          "description": "A value indicating whether Zone Redundant HA and Geo-backup is supported in this region. \"Enabled\" means zone redundant HA and geo-backup is supported. \"Disabled\" stands for zone redundant HA and geo-backup is not supported. Will be deprecated in future, please look to Supported Features for \"ZoneRedundantHaAndGeoBackup\".",
           "readOnly": true,
           "enum": [
             "Enabled",
@@ -521,7 +578,7 @@
         },
         "storageAutoGrowthSupported": {
           "type": "string",
-          "description": "A value indicating whether storage auto-grow is supported in this region. \"Enabled\" means storage auto-grow is supported. \"Disabled\" stands for storage auto-grow is not supported.",
+          "description": "A value indicating whether storage auto-grow is supported in this region. \"Enabled\" means storage auto-grow is supported. \"Disabled\" stands for storage auto-grow is not supported. Will be deprecated in future, please look to Supported Features for \"StorageAutoGrowth\".",
           "readOnly": true,
           "enum": [
             "Enabled",
@@ -534,7 +591,7 @@
         },
         "onlineResizeSupported": {
           "type": "string",
-          "description": "A value indicating whether online resize is supported in this region for the given subscription. \"Enabled\" means storage online resize is supported. \"Disabled\" means storage online resize is not supported.",
+          "description": "A value indicating whether online resize is supported in this region for the given subscription. \"Enabled\" means storage online resize is supported. \"Disabled\" means storage online resize is not supported. Will be deprecated in future, please look to Supported Features for \"OnlineResize\".",
           "readOnly": true,
           "enum": [
             "Enabled",
@@ -547,7 +604,7 @@
         },
         "restricted": {
           "type": "string",
-          "description": "A value indicating whether this region is restricted. \"Enabled\" means region is restricted. \"Disabled\" stands for region is not restricted.",
+          "description": "A value indicating whether this region is restricted. \"Enabled\" means region is restricted. \"Disabled\" stands for region is not restricted. Will be deprecated in future, please look to Supported Features for \"Restricted\".",
           "readOnly": true,
           "enum": [
             "Enabled",
@@ -560,7 +617,7 @@
         },
         "indexTuningSupported": {
           "type": "string",
-          "description": "A value indicating whether in this region for the given subscription or server sku/version/replica-role has index tuning supported. \"Enabled\" means index tuning is supported. \"Disabled\" stands for index tuning is not supported.",
+          "description": "A value indicating whether in this region for the given subscription or server sku/version/replica-role has index tuning supported. \"Enabled\" means index tuning is supported. \"Disabled\" stands for index tuning is not supported. Will be deprecated in future, please look to Supported Features for \"IndexTuning\".",
           "readOnly": true,
           "enum": [
             "Enabled",
