@@ -3,4 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.AzurePlaywrightService, "PlaywrightTestingMgmt", "python");
+@@clientName(Microsoft.AzurePlaywrightService,
+  "PlaywrightTestingMgmt",
+  "python"
+);
