@@ -1470,7 +1470,7 @@ model ReplicationTimeValue {
 interface S3Buckets {
   get is ArmResourceRead<S3Bucket>;
   @doc("Create a S3Bucket. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<S3Bucket>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<S3Bucket>;
   update is ArmCustomPatchAsync<
     S3Bucket,
     Azure.ResourceManager.Foundations.TagsUpdateModel<S3Bucket>

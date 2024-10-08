@@ -141,7 +141,7 @@ model SourceConfiguration {
 interface ElasticBeanstalkConfigurationTemplates {
   get is ArmResourceRead<ElasticBeanstalkConfigurationTemplate>;
   @doc("Create a ElasticBeanstalkConfigurationTemplate. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ElasticBeanstalkConfigurationTemplate>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ElasticBeanstalkConfigurationTemplate>;
   update is ArmCustomPatchAsync<
     ElasticBeanstalkConfigurationTemplate,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ElasticBeanstalkConfigurationTemplate>

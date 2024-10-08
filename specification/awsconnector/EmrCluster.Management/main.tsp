@@ -574,7 +574,7 @@ model StringMap {}
 interface EmrClusters {
   get is ArmResourceRead<EmrCluster>;
   @doc("Create a EmrCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EmrCluster>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EmrCluster>;
   update is ArmCustomPatchAsync<
     EmrCluster,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EmrCluster>

@@ -87,7 +87,7 @@ model AwsS3BucketPolicyProperties {
 interface S3BucketPolicies {
   get is ArmResourceRead<S3BucketPolicy>;
   @doc("Create a S3BucketPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<S3BucketPolicy>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<S3BucketPolicy>;
   update is ArmCustomPatchAsync<
     S3BucketPolicy,
     Azure.ResourceManager.Foundations.TagsUpdateModel<S3BucketPolicy>

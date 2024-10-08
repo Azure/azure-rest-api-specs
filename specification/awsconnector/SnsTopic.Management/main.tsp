@@ -184,7 +184,7 @@ model Tag {
 interface SnsTopics {
   get is ArmResourceRead<SnsTopic>;
   @doc("Create a SnsTopic. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SnsTopic>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<SnsTopic>;
   update is ArmCustomPatchAsync<
     SnsTopic,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SnsTopic>

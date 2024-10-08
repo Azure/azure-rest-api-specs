@@ -89,7 +89,7 @@ model AwsIamPolicyVersionProperties {
 interface IamPolicyVersions {
   get is ArmResourceRead<IamPolicyVersion>;
   @doc("Create a IamPolicyVersion. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamPolicyVersion>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamPolicyVersion>;
   update is ArmCustomPatchAsync<
     IamPolicyVersion,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamPolicyVersion>

@@ -681,7 +681,7 @@ model OriginGroupMember {
 interface CloudFrontDistributions {
   get is ArmResourceRead<CloudFrontDistribution>;
   @doc("Create a CloudFrontDistribution. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudFrontDistribution>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<CloudFrontDistribution>;
   update is ArmCustomPatchAsync<
     CloudFrontDistribution,
     Azure.ResourceManager.Foundations.TagsUpdateModel<CloudFrontDistribution>

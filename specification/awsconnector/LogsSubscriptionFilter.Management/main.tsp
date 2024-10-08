@@ -107,7 +107,7 @@ union Distribution {
 interface LogsSubscriptionFilters {
   get is ArmResourceRead<LogsSubscriptionFilter>;
   @doc("Create a LogsSubscriptionFilter. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<LogsSubscriptionFilter>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<LogsSubscriptionFilter>;
   update is ArmCustomPatchAsync<
     LogsSubscriptionFilter,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LogsSubscriptionFilter>

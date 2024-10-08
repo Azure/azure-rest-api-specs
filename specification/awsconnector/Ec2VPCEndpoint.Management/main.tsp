@@ -132,7 +132,7 @@ union VpcEndpointType {
 interface Ec2VPCEndpoints {
   get is ArmResourceRead<Ec2VPCEndpoint>;
   @doc("Create a Ec2VPCEndpoint. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2VPCEndpoint>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2VPCEndpoint>;
   update is ArmCustomPatchAsync<
     Ec2VPCEndpoint,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2VPCEndpoint>

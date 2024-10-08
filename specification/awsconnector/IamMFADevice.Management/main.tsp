@@ -86,7 +86,7 @@ model AwsIamMFADeviceProperties {
 interface IamMFADevices {
   get is ArmResourceRead<IamMFADevice>;
   @doc("Create a IamMFADevice. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamMFADevice>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamMFADevice>;
   update is ArmCustomPatchAsync<
     IamMFADevice,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamMFADevice>

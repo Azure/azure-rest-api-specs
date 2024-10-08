@@ -113,7 +113,7 @@ model Tag {
 interface Ec2VPCPeeringConnections {
   get is ArmResourceRead<Ec2VPCPeeringConnection>;
   @doc("Create a Ec2VPCPeeringConnection. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2VPCPeeringConnection>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2VPCPeeringConnection>;
   update is ArmCustomPatchAsync<
     Ec2VPCPeeringConnection,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2VPCPeeringConnection>

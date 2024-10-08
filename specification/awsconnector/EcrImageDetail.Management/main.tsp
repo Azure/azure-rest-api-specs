@@ -179,7 +179,7 @@ model ScanStatusEnumValue {
 interface EcrImageDetails {
   get is ArmResourceRead<EcrImageDetail>;
   @doc("Create a EcrImageDetail. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EcrImageDetail>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EcrImageDetail>;
   update is ArmCustomPatchAsync<
     EcrImageDetail,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EcrImageDetail>

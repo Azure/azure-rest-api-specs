@@ -83,7 +83,7 @@ model AwsKmsAliasProperties {
 interface KmsAliases {
   get is ArmResourceRead<KmsAlias>;
   @doc("Create a KmsAlias. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<KmsAlias>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<KmsAlias>;
   update is ArmCustomPatchAsync<
     KmsAlias,
     Azure.ResourceManager.Foundations.TagsUpdateModel<KmsAlias>

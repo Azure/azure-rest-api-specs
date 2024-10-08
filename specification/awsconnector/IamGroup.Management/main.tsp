@@ -107,7 +107,7 @@ model Policy {
 interface IamGroups {
   get is ArmResourceRead<IamGroup>;
   @doc("Create a IamGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamGroup>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamGroup>;
   update is ArmCustomPatchAsync<
     IamGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamGroup>

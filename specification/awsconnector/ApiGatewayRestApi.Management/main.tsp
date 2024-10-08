@@ -112,7 +112,7 @@ model AwsApiGatewayRestApiProperties {
   parameters?: Record<string>;
 
   @doc("A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``.")
-  policy?: Record<unknown>;
+  policy?: string;
 
   @doc("Property restApiId")
   restApiId?: string;
@@ -177,7 +177,7 @@ model Tag {
 interface ApiGatewayRestApis {
   get is ArmResourceRead<ApiGatewayRestApi>;
   @doc("Create a ApiGatewayRestApi. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApiGatewayRestApi>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ApiGatewayRestApi>;
   update is ArmCustomPatchAsync<
     ApiGatewayRestApi,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ApiGatewayRestApi>

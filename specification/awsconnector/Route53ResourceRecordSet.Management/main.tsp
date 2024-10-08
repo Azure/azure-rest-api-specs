@@ -394,7 +394,7 @@ model Coordinates {
 interface Route53ResourceRecordSets {
   get is ArmResourceRead<Route53ResourceRecordSet>;
   @doc("Create a Route53ResourceRecordSet. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Route53ResourceRecordSet>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Route53ResourceRecordSet>;
   update is ArmCustomPatchAsync<
     Route53ResourceRecordSet,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Route53ResourceRecordSet>

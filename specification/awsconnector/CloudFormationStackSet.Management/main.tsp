@@ -295,7 +295,7 @@ union DeploymentTargetsAccountFilterType {
 interface CloudFormationStackSets {
   get is ArmResourceRead<CloudFormationStackSet>;
   @doc("Create a CloudFormationStackSet. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudFormationStackSet>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<CloudFormationStackSet>;
   update is ArmCustomPatchAsync<
     CloudFormationStackSet,
     Azure.ResourceManager.Foundations.TagsUpdateModel<CloudFormationStackSet>

@@ -359,7 +359,7 @@ model Tag {
 interface RdsDBClusters {
   get is ArmResourceRead<RdsDBCluster>;
   @doc("Create a RdsDBCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RdsDBCluster>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<RdsDBCluster>;
   update is ArmCustomPatchAsync<
     RdsDBCluster,
     Azure.ResourceManager.Foundations.TagsUpdateModel<RdsDBCluster>

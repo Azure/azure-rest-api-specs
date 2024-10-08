@@ -225,7 +225,7 @@ model ReplicationDestination {
 interface EfsFileSystems {
   get is ArmResourceRead<EfsFileSystem>;
   @doc("Create a EfsFileSystem. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EfsFileSystem>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EfsFileSystem>;
   update is ArmCustomPatchAsync<
     EfsFileSystem,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EfsFileSystem>

@@ -220,7 +220,7 @@ model SnapshotStateEnumValue {
 interface Ec2Snapshots {
   get is ArmResourceRead<Ec2Snapshot>;
   @doc("Create a Ec2Snapshot. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2Snapshot>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2Snapshot>;
   update is ArmCustomPatchAsync<
     Ec2Snapshot,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2Snapshot>

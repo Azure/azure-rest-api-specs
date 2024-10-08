@@ -243,7 +243,7 @@ model StringMap {}
 interface EmrClusterSummaries {
   get is ArmResourceRead<EmrClusterSummary>;
   @doc("Create a EmrClusterSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EmrClusterSummary>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EmrClusterSummary>;
   update is ArmCustomPatchAsync<
     EmrClusterSummary,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EmrClusterSummary>

@@ -179,7 +179,7 @@ model Tag {
 interface EcrRepositories {
   get is ArmResourceRead<EcrRepository>;
   @doc("Create a EcrRepository. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EcrRepository>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EcrRepository>;
   update is ArmCustomPatchAsync<
     EcrRepository,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EcrRepository>

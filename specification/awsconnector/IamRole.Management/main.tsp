@@ -139,7 +139,7 @@ model Tag {
 interface IamRoles {
   get is ArmResourceRead<IamRole>;
   @doc("Create a IamRole. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamRole>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamRole>;
   update is ArmCustomPatchAsync<
     IamRole,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamRole>

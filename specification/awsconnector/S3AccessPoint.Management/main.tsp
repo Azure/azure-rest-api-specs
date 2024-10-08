@@ -144,7 +144,7 @@ model VpcConfiguration {
 interface S3AccessPoints {
   get is ArmResourceRead<S3AccessPoint>;
   @doc("Create a S3AccessPoint. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<S3AccessPoint>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<S3AccessPoint>;
   update is ArmCustomPatchAsync<
     S3AccessPoint,
     Azure.ResourceManager.Foundations.TagsUpdateModel<S3AccessPoint>

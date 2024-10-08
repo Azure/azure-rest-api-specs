@@ -562,7 +562,7 @@ model VolumeTypeEnumValue {
 interface Ec2Images {
   get is ArmResourceRead<Ec2Image>;
   @doc("Create a Ec2Image. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2Image>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2Image>;
   update is ArmCustomPatchAsync<
     Ec2Image,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2Image>

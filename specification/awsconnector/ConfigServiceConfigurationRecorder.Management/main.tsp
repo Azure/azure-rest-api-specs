@@ -1452,7 +1452,7 @@ model RecordingModeOverride {
 interface ConfigServiceConfigurationRecorders {
   get is ArmResourceRead<ConfigServiceConfigurationRecorder>;
   @doc("Create a ConfigServiceConfigurationRecorder. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigServiceConfigurationRecorder>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ConfigServiceConfigurationRecorder>;
   update is ArmCustomPatchAsync<
     ConfigServiceConfigurationRecorder,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ConfigServiceConfigurationRecorder>

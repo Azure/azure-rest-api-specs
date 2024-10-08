@@ -3713,7 +3713,7 @@ model InstanceAttachmentEnaSrdUdpSpecification {
 interface Ec2Instances {
   get is ArmResourceRead<Ec2Instance>;
   @doc("Create a Ec2Instance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2Instance>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2Instance>;
   delete is ArmResourceDeleteWithoutOkAsync<Ec2Instance>;
   list is ArmResourceListByParent<Ec2Instance>;
 }

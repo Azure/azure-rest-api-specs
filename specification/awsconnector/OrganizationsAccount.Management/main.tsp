@@ -147,7 +147,7 @@ union Status {
 interface OrganizationsAccounts {
   get is ArmResourceRead<OrganizationsAccount>;
   @doc("Create a OrganizationsAccount. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationsAccount>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<OrganizationsAccount>;
   update is ArmCustomPatchAsync<
     OrganizationsAccount,
     Azure.ResourceManager.Foundations.TagsUpdateModel<OrganizationsAccount>

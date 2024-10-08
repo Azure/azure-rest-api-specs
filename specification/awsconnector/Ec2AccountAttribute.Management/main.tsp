@@ -94,7 +94,7 @@ model AccountAttributeValue {
 interface Ec2AccountAttributes {
   get is ArmResourceRead<Ec2AccountAttribute>;
   @doc("Create a Ec2AccountAttribute. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2AccountAttribute>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2AccountAttribute>;
   update is ArmCustomPatchAsync<
     Ec2AccountAttribute,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2AccountAttribute>

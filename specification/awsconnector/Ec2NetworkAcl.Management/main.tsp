@@ -100,7 +100,7 @@ model Tag {
 interface Ec2NetworkAcls {
   get is ArmResourceRead<Ec2NetworkAcl>;
   @doc("Create a Ec2NetworkAcl. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2NetworkAcl>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2NetworkAcl>;
   update is ArmCustomPatchAsync<
     Ec2NetworkAcl,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2NetworkAcl>

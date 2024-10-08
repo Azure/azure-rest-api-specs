@@ -632,7 +632,7 @@ model ServiceConnectTlsCertificateAuthority {
 interface EcsServices {
   get is ArmResourceRead<EcsService>;
   @doc("Create a EcsService. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EcsService>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EcsService>;
   update is ArmCustomPatchAsync<
     EcsService,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EcsService>

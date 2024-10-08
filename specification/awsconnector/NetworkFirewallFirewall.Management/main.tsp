@@ -143,7 +143,7 @@ model Tag {
 interface NetworkFirewallFirewalls {
   get is ArmResourceRead<NetworkFirewallFirewall>;
   @doc("Create a NetworkFirewallFirewall. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFirewallFirewall>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<NetworkFirewallFirewall>;
   update is ArmCustomPatchAsync<
     NetworkFirewallFirewall,
     Azure.ResourceManager.Foundations.TagsUpdateModel<NetworkFirewallFirewall>

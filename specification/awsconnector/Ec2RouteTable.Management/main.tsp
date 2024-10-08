@@ -100,7 +100,7 @@ model Tag {
 interface Ec2RouteTables {
   get is ArmResourceRead<Ec2RouteTable>;
   @doc("Create a Ec2RouteTable. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2RouteTable>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2RouteTable>;
   update is ArmCustomPatchAsync<
     Ec2RouteTable,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2RouteTable>

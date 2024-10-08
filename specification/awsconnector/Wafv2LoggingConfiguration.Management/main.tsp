@@ -244,7 +244,7 @@ model LabelNameConditionModelProperties {
 interface Wafv2LoggingConfigurations {
   get is ArmResourceRead<Wafv2LoggingConfiguration>;
   @doc("Create a Wafv2LoggingConfiguration. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Wafv2LoggingConfiguration>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Wafv2LoggingConfiguration>;
   update is ArmCustomPatchAsync<
     Wafv2LoggingConfiguration,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Wafv2LoggingConfiguration>

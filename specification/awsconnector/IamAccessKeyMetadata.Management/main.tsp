@@ -110,7 +110,7 @@ model statusTypeEnumValue {
 interface IamAccessKeyMetadataInfo {
   get is ArmResourceRead<IamAccessKeyMetadata>;
   @doc("Create a IamAccessKeyMetadata. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamAccessKeyMetadata>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamAccessKeyMetadata>;
   update is ArmCustomPatchAsync<
     IamAccessKeyMetadata,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamAccessKeyMetadata>

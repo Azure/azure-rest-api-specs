@@ -572,7 +572,7 @@ model TCPFlagField {
 interface NetworkFirewallRuleGroups {
   get is ArmResourceRead<NetworkFirewallRuleGroup>;
   @doc("Create a NetworkFirewallRuleGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFirewallRuleGroup>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<NetworkFirewallRuleGroup>;
   update is ArmCustomPatchAsync<
     NetworkFirewallRuleGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<NetworkFirewallRuleGroup>

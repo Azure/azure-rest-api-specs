@@ -105,7 +105,7 @@ model DBSnapshotAttribute {
 interface RdsDBSnapshotAttributesResults {
   get is ArmResourceRead<RdsDBSnapshotAttributesResult>;
   @doc("Create a RdsDBSnapshotAttributesResult. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RdsDBSnapshotAttributesResult>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<RdsDBSnapshotAttributesResult>;
   update is ArmCustomPatchAsync<
     RdsDBSnapshotAttributesResult,
     Azure.ResourceManager.Foundations.TagsUpdateModel<RdsDBSnapshotAttributesResult>

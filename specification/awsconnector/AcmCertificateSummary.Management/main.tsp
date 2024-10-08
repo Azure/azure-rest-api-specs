@@ -351,7 +351,7 @@ model RenewalEligibilityEnumValue {
 interface AcmCertificateSummaries {
   get is ArmResourceRead<AcmCertificateSummary>;
   @doc("Create a AcmCertificateSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AcmCertificateSummary>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<AcmCertificateSummary>;
   update is ArmCustomPatchAsync<
     AcmCertificateSummary,
     Azure.ResourceManager.Foundations.TagsUpdateModel<AcmCertificateSummary>

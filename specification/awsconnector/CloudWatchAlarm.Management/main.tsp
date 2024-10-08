@@ -242,7 +242,7 @@ model Metric {
 interface CloudWatchAlarms {
   get is ArmResourceRead<CloudWatchAlarm>;
   @doc("Create a CloudWatchAlarm. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudWatchAlarm>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<CloudWatchAlarm>;
   update is ArmCustomPatchAsync<
     CloudWatchAlarm,
     Azure.ResourceManager.Foundations.TagsUpdateModel<CloudWatchAlarm>

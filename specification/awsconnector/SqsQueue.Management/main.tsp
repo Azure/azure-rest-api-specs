@@ -145,7 +145,7 @@ model Tag {
 interface SqsQueues {
   get is ArmResourceRead<SqsQueue>;
   @doc("Create a SqsQueue. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SqsQueue>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<SqsQueue>;
   update is ArmCustomPatchAsync<
     SqsQueue,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SqsQueue>

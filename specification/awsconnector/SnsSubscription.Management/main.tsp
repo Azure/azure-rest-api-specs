@@ -92,7 +92,7 @@ model AwsSnsSubscriptionProperties {
 interface SnsSubscriptions {
   get is ArmResourceRead<SnsSubscription>;
   @doc("Create a SnsSubscription. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SnsSubscription>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<SnsSubscription>;
   update is ArmCustomPatchAsync<
     SnsSubscription,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SnsSubscription>

@@ -154,7 +154,7 @@ model Tag {
 interface Ec2Addresses {
   get is ArmResourceRead<Ec2Address>;
   @doc("Create a Ec2Address. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2Address>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2Address>;
   update is ArmCustomPatchAsync<
     Ec2Address,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2Address>

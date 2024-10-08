@@ -130,7 +130,7 @@ model Tag {
 interface Ec2Volumes {
   get is ArmResourceRead<Ec2Volume>;
   @doc("Create a Ec2Volume. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2Volume>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2Volume>;
   update is ArmCustomPatchAsync<
     Ec2Volume,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2Volume>

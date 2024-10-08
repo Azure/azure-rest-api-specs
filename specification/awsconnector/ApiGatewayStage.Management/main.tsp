@@ -203,7 +203,7 @@ model Tag {
 interface ApiGatewayStages {
   get is ArmResourceRead<ApiGatewayStage>;
   @doc("Create a ApiGatewayStage. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApiGatewayStage>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ApiGatewayStage>;
   update is ArmCustomPatchAsync<
     ApiGatewayStage,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ApiGatewayStage>

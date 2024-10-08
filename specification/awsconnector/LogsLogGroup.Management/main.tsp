@@ -123,7 +123,7 @@ model Tag {
 interface LogsLogGroups {
   get is ArmResourceRead<LogsLogGroup>;
   @doc("Create a LogsLogGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<LogsLogGroup>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<LogsLogGroup>;
   update is ArmCustomPatchAsync<
     LogsLogGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LogsLogGroup>

@@ -107,7 +107,7 @@ model Tag {
 interface IamVirtualMFADevices {
   get is ArmResourceRead<IamVirtualMFADevice>;
   @doc("Create a IamVirtualMFADevice. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamVirtualMFADevice>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamVirtualMFADevice>;
   update is ArmCustomPatchAsync<
     IamVirtualMFADevice,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamVirtualMFADevice>

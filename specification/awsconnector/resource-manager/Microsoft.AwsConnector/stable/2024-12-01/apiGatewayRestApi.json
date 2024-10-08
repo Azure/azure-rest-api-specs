@@ -172,7 +172,7 @@
         }
       },
       "put": {
-        "operationId": "ApiGatewayRestApis_CreateOrUpdate",
+        "operationId": "ApiGatewayRestApis_CreateOrReplace",
         "tags": [
           "ApiGatewayRestApis"
         ],
@@ -237,8 +237,8 @@
           }
         },
         "x-ms-examples": {
-          "ApiGatewayRestApis_CreateOrUpdate": {
-            "$ref": "./examples/ApiGatewayRestApis_CreateOrUpdate.json"
+          "ApiGatewayRestApis_CreateOrReplace": {
+            "$ref": "./examples/ApiGatewayRestApis_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -542,9 +542,8 @@
           }
         },
         "policy": {
-          "type": "object",
-          "description": "A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``.",
-          "additionalProperties": {}
+          "type": "string",
+          "description": "A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``."
         },
         "restApiId": {
           "type": "string",

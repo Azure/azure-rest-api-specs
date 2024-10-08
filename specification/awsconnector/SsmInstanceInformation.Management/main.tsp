@@ -247,7 +247,7 @@ model SourceTypeEnumValue {
 interface SsmInstanceInformations {
   get is ArmResourceRead<SsmInstanceInformation>;
   @doc("Create a SsmInstanceInformation. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SsmInstanceInformation>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<SsmInstanceInformation>;
   update is ArmCustomPatchAsync<
     SsmInstanceInformation,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SsmInstanceInformation>

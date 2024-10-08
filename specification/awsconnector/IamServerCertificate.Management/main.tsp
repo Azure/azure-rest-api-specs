@@ -112,7 +112,7 @@ model Tag {
 interface IamServerCertificates {
   get is ArmResourceRead<IamServerCertificate>;
   @doc("Create a IamServerCertificate. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamServerCertificate>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamServerCertificate>;
   update is ArmCustomPatchAsync<
     IamServerCertificate,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamServerCertificate>

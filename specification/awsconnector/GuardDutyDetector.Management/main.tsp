@@ -217,7 +217,7 @@ model CFNScanEc2InstanceWithFindingsConfiguration {
 interface GuardDutyDetectors {
   get is ArmResourceRead<GuardDutyDetector>;
   @doc("Create a GuardDutyDetector. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<GuardDutyDetector>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<GuardDutyDetector>;
   update is ArmCustomPatchAsync<
     GuardDutyDetector,
     Azure.ResourceManager.Foundations.TagsUpdateModel<GuardDutyDetector>

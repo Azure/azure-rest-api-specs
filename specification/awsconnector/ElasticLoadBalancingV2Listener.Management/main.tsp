@@ -327,7 +327,7 @@ model TargetGroupTuple {
 interface ElasticLoadBalancingV2Listeners {
   get is ArmResourceRead<ElasticLoadBalancingV2Listener>;
   @doc("Create a ElasticLoadBalancingV2Listener. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ElasticLoadBalancingV2Listener>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ElasticLoadBalancingV2Listener>;
   update is ArmCustomPatchAsync<
     ElasticLoadBalancingV2Listener,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ElasticLoadBalancingV2Listener>

@@ -127,7 +127,7 @@ model Tag {
 interface RedshiftClusterParameterGroups {
   get is ArmResourceRead<RedshiftClusterParameterGroup>;
   @doc("Create a RedshiftClusterParameterGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RedshiftClusterParameterGroup>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<RedshiftClusterParameterGroup>;
   update is ArmCustomPatchAsync<
     RedshiftClusterParameterGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<RedshiftClusterParameterGroup>

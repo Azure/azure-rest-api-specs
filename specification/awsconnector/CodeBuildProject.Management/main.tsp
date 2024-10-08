@@ -1074,7 +1074,7 @@ model WebhookFilterTypeEnumValue {
 interface CodeBuildProjects {
   get is ArmResourceRead<CodeBuildProject>;
   @doc("Create a CodeBuildProject. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CodeBuildProject>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<CodeBuildProject>;
   update is ArmCustomPatchAsync<
     CodeBuildProject,
     Azure.ResourceManager.Foundations.TagsUpdateModel<CodeBuildProject>

@@ -133,7 +133,7 @@ model RecorderStatusEnumValue {
 interface ConfigServiceConfigurationRecorderStatuses {
   get is ArmResourceRead<ConfigServiceConfigurationRecorderStatus>;
   @doc("Create a ConfigServiceConfigurationRecorderStatus. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigServiceConfigurationRecorderStatus>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ConfigServiceConfigurationRecorderStatus>;
   update is ArmCustomPatchAsync<
     ConfigServiceConfigurationRecorderStatus,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ConfigServiceConfigurationRecorderStatus>

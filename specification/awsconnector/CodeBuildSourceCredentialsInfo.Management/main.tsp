@@ -154,7 +154,7 @@ model ServerTypeEnumValue {
 interface CodeBuildSourceCredentialsInfos {
   get is ArmResourceRead<CodeBuildSourceCredentialsInfo>;
   @doc("Create a CodeBuildSourceCredentialsInfo. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CodeBuildSourceCredentialsInfo>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<CodeBuildSourceCredentialsInfo>;
   update is ArmCustomPatchAsync<
     CodeBuildSourceCredentialsInfo,
     Azure.ResourceManager.Foundations.TagsUpdateModel<CodeBuildSourceCredentialsInfo>

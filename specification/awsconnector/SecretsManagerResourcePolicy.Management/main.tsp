@@ -96,7 +96,7 @@ model AwsSecretsManagerResourcePolicyProperties {
 interface SecretsManagerResourcePolicies {
   get is ArmResourceRead<SecretsManagerResourcePolicy>;
   @doc("Create a SecretsManagerResourcePolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecretsManagerResourcePolicy>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<SecretsManagerResourcePolicy>;
   update is ArmCustomPatchAsync<
     SecretsManagerResourcePolicy,
     Azure.ResourceManager.Foundations.TagsUpdateModel<SecretsManagerResourcePolicy>

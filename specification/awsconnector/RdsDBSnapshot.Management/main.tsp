@@ -213,7 +213,7 @@ model Tag {
 interface RdsDBSnapshots {
   get is ArmResourceRead<RdsDBSnapshot>;
   @doc("Create a RdsDBSnapshot. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RdsDBSnapshot>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<RdsDBSnapshot>;
   update is ArmCustomPatchAsync<
     RdsDBSnapshot,
     Azure.ResourceManager.Foundations.TagsUpdateModel<RdsDBSnapshot>

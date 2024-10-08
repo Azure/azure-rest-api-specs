@@ -107,7 +107,7 @@ model AwsIamPasswordPolicyProperties {
 interface IamPasswordPolicies {
   get is ArmResourceRead<IamPasswordPolicy>;
   @doc("Create a IamPasswordPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IamPasswordPolicy>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamPasswordPolicy>;
   update is ArmCustomPatchAsync<
     IamPasswordPolicy,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamPasswordPolicy>

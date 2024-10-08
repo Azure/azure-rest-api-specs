@@ -149,7 +149,7 @@ model PointInTimeRecoveryStatusEnumValue {
 interface DynamoDBContinuousBackupsDescriptions {
   get is ArmResourceRead<DynamoDBContinuousBackupsDescription>;
   @doc("Create a DynamoDBContinuousBackupsDescription. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamoDBContinuousBackupsDescription>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<DynamoDBContinuousBackupsDescription>;
   update is ArmCustomPatchAsync<
     DynamoDBContinuousBackupsDescription,
     Azure.ResourceManager.Foundations.TagsUpdateModel<DynamoDBContinuousBackupsDescription>

@@ -469,7 +469,7 @@ model CognitoUserPoolConfig {
 interface AppSyncGraphqlApis {
   get is ArmResourceRead<AppSyncGraphqlApi>;
   @doc("Create a AppSyncGraphqlApi. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AppSyncGraphqlApi>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<AppSyncGraphqlApi>;
   update is ArmCustomPatchAsync<
     AppSyncGraphqlApi,
     Azure.ResourceManager.Foundations.TagsUpdateModel<AppSyncGraphqlApi>

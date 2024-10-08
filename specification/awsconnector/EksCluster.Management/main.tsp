@@ -529,7 +529,7 @@ model ControlPlanePlacementResponse {
 interface EksClusters {
   get is ArmResourceRead<EksCluster>;
   @doc("Create a EksCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EksCluster>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EksCluster>;
   delete is ArmResourceDeleteWithoutOkAsync<EksCluster>;
   list is ArmResourceListByParent<EksCluster>;
 }

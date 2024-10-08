@@ -142,7 +142,7 @@ model MaximumExecutionFrequencyEnumValue {
 interface ConfigServiceDeliveryChannels {
   get is ArmResourceRead<ConfigServiceDeliveryChannel>;
   @doc("Create a ConfigServiceDeliveryChannel. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigServiceDeliveryChannel>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ConfigServiceDeliveryChannel>;
   update is ArmCustomPatchAsync<
     ConfigServiceDeliveryChannel,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ConfigServiceDeliveryChannel>

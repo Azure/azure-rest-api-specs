@@ -202,7 +202,7 @@ union KeyUsage {
 interface KmsKeys {
   get is ArmResourceRead<KmsKey>;
   @doc("Create a KmsKey. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<KmsKey>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<KmsKey>;
   update is ArmCustomPatchAsync<
     KmsKey,
     Azure.ResourceManager.Foundations.TagsUpdateModel<KmsKey>

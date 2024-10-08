@@ -403,7 +403,7 @@ model Csv {
 interface DynamoDBTables {
   get is ArmResourceRead<DynamoDBTable>;
   @doc("Create a DynamoDBTable. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamoDBTable>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<DynamoDBTable>;
   update is ArmCustomPatchAsync<
     DynamoDBTable,
     Azure.ResourceManager.Foundations.TagsUpdateModel<DynamoDBTable>

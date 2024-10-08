@@ -167,7 +167,7 @@ model S3WordsList {
 interface MacieAllowLists {
   get is ArmResourceRead<MacieAllowList>;
   @doc("Create a MacieAllowList. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<MacieAllowList>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<MacieAllowList>;
   update is ArmCustomPatchAsync<
     MacieAllowList,
     Azure.ResourceManager.Foundations.TagsUpdateModel<MacieAllowList>

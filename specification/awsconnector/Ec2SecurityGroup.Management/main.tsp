@@ -217,7 +217,7 @@ model UserIdGroupPair {
 interface Ec2SecurityGroups {
   get is ArmResourceRead<Ec2SecurityGroup>;
   @doc("Create a Ec2SecurityGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Ec2SecurityGroup>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2SecurityGroup>;
   update is ArmCustomPatchAsync<
     Ec2SecurityGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2SecurityGroup>
