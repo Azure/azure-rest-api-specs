@@ -3029,14 +3029,7 @@
             "description": "Represents an environment.",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "expirationDate": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
-                }
-              }
+              "$ref": "#/definitions/EnvironmentPatchProperties"
             }
           }
         ],
@@ -5355,6 +5348,17 @@
           "additionalProperties": {
             "$ref": "#/definitions/EnvironmentOutput"
           }
+        }
+      }
+    },
+    "EnvironmentPatchProperties": {
+      "type": "object",
+      "description": "Properties of an environment. These properties can be updated via PATCH after the resource has been created.",
+      "properties": {
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
         }
       }
     },
