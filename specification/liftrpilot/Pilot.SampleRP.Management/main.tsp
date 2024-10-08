@@ -46,7 +46,7 @@ model OrganizationsProperties is BaseResourceProperties {
 }
 
 model OrganizationsResource is Azure.ResourceManager.TrackedResource<OrganizationsProperties> {
-  @key("organizationsname")
+  @key("organizationName")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
   @segment("organizations")
   @minLength(1)
