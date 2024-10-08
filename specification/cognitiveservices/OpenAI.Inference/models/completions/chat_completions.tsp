@@ -131,7 +131,7 @@ model ChatCompletionsOptions {
 
 
   /**
-   *  An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens.
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens.
    */
   @encodedName("application/json", "max_completion_tokens")
   @added(ServiceApiVersions.v2024_09_01_Preview)
