@@ -236,7 +236,6 @@ input-file:
   - preview/2024-09-01-preview/updates.json
 ```
 
-### Tag: package-preview-2024-07
 
 These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
 
