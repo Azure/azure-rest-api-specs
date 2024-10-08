@@ -285,6 +285,13 @@ model ChatCompletionsOptions {
     If specified, the model will configure which of the provided tools it can use for the chat completions response.
     """)
   toolChoice?: ChatCompletionsToolSelection;
+
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean = true;
 }
 
 @doc("""

@@ -138,6 +138,13 @@ model ThreadRun {
   @added(ServiceApiVersions.v2024_05_01_preview)
   toolChoice: AssistantsApiToolChoiceOption | null;
 
+    /**
+   * Whether to enable parallel function calling during tool use.
+   */
+    @added(ServiceApiVersions.v2024_09_01_preview)
+    @encodedName("application/json", "parallel_tool_calls")
+    parallelToolCalls?: boolean = true;
+
   /** The response format of the tool calls used in this run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
