@@ -191,5 +191,5 @@ model ContentFilterDetailedResults {
   ...FilteredResultBase;
 
   @doc("The collection of detailed blocklist result information.")
-  details: ContentFilterBlocklistIdResult[];
+  details?: ContentFilterBlocklistIdResult[];
 }
