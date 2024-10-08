@@ -13,17 +13,17 @@ model SessionResourceFileCollection {
 @doc("Code execution file resource.")
 @resource("files")
 model SessionResourceFile {
-  @key("fileName")
+  @key("name")
   @segment("files")
   @doc("The name of the file.")
   @visibility("read", "query", "create", "update", "delete")
-  fileName: string;
+  name: string;
+
+  @doc("The type of the session resource file.")
+  type: string;
 
   @doc("The size of the file.")
   sizeInBytes: int64;
-
-  @doc("The date time in RFC3339 format when the file was uploaded.")
-  createdAt: utcDateTime;
 
   @doc("The date time in RFC3339 format when the file was last modified.")
   lastModifiedAt: utcDateTime;

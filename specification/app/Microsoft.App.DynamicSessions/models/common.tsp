@@ -11,7 +11,7 @@ using OpenAPI;
 model SessionResourceFileNameParameter {
   @doc("The name of the file.")
   @path
-  fileName: string;
+  name: string;
 }
 
 @doc("Session identifier query parameter.")

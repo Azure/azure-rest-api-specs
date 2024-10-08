@@ -77,7 +77,7 @@ interface SessionResourceFiles {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Upload a file to a session.")
-  @route("/files/{fileName}/content")
+  @route("/files/{name}/content")
   getFileContent is Foundations.Operation<
     {
       ...SessionIdentifier;

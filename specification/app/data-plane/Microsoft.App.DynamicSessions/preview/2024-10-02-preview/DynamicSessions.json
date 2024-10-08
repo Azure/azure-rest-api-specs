@@ -268,7 +268,7 @@
         }
       }
     },
-    "/files/{fileName}": {
+    "/files/{name}": {
       "get": {
         "operationId": "SessionResourceFiles_GetFileMetadata",
         "description": "Get the file resource.",
@@ -277,7 +277,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "fileName",
+            "name": "name",
             "in": "path",
             "description": "The name of the file.",
             "required": true,
@@ -321,7 +321,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "fileName",
+            "name": "name",
             "in": "path",
             "description": "The name of the file.",
             "required": true,
@@ -355,7 +355,7 @@
         }
       }
     },
-    "/files/{fileName}/content": {
+    "/files/{name}/content": {
       "get": {
         "operationId": "SessionResourceFiles_GetFileContent",
         "description": "Upload a file to a session.",
@@ -688,7 +688,7 @@
       "type": "object",
       "description": "Code execution file resource.",
       "properties": {
-        "fileName": {
+        "name": {
           "type": "string",
           "description": "The name of the file.",
           "x-ms-mutability": [
@@ -697,15 +697,14 @@
             "create"
           ]
         },
+        "type": {
+          "type": "string",
+          "description": "The type of the session resource file."
+        },
         "sizeInBytes": {
           "type": "integer",
           "format": "int64",
           "description": "The size of the file."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date time in RFC3339 format when the file was uploaded."
         },
         "lastModifiedAt": {
           "type": "string",
@@ -714,9 +713,9 @@
         }
       },
       "required": [
-        "fileName",
+        "name",
+        "type",
         "sizeInBytes",
-        "createdAt",
         "lastModifiedAt"
       ]
     },
@@ -766,7 +765,7 @@
       "x-ms-parameter-location": "method"
     },
     "SessionResourceFileNameParameter": {
-      "name": "fileName",
+      "name": "name",
       "in": "path",
       "description": "The name of the file.",
       "required": true,
