@@ -1252,6 +1252,130 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations/instance": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspLoggingConfiguration"
+        ],
+        "operationId": "NspLoggingConfiguration_Get",
+        "description": "Gets the NSP logging configuration.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns NSP logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationGet": {
+            "$ref": "./examples/NspLoggingConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NspLoggingConfiguration"
+        ],
+        "operationId": "NspLoggingConfiguration_CreateOrUpdate",
+        "description": "Creates or updates NSP logging configuration.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            },
+            "description": "Parameters that hold the NspLoggingConfiguration to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing NspLoggingConfiguration is updated. Returns the logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspLoggingConfiguration created.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationPut": {
+            "$ref": "./examples/NspLoggingConfigurationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NspLoggingConfiguration"
+        ],
+        "operationId": "NspLoggingConfiguration_Delete",
+        "description": "Deletes an NSP Logging configuration.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Delete in progress.",
+            "headers": {
+              "location": {
+                "description": "location header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The logging configuration does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NspLinkDelete": {
+            "$ref": "./examples/NspLoggingConfigurationDelete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1978,6 +2102,34 @@
         }
       },
       "description": "Properties of NSP LinkReference resource."
+    },
+    "NspLoggingConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the NSP logging configuration."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspLoggingConfigurationProperties",
+          "description": "Properties of the NSP logging configuration."
+        }
+      },
+      "description": "The NSP logging configuration"
+    },
+    "NspLoggingConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The name of the NSP logging configuration."
+        }
+      },
+      "description": "The NSP logging configuration properties."
     }
   },
   "parameters": {
