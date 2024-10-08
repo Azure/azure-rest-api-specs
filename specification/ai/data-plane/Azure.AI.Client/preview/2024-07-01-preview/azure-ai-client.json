@@ -704,6 +704,216 @@
         }
       }
     },
+    "/evaluations/schedules": {
+      "get": {
+        "operationId": "Evaluations_ListSchedules",
+        "description": "List evaluation schedules",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluations.PagedEvaluationSchedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluations/schedules/{id}": {
+      "get": {
+        "operationId": "Evaluations_GetSchedule",
+        "description": "Get an evaluation schedule along with runs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation schedule.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluations.EvaluationSchedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Evaluations_DeleteSchedule",
+        "description": "Delete an evaluation schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation schedule.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluations/schedules/{id}/runs": {
+      "get": {
+        "operationId": "Evaluations_ListScheduleEvaluations",
+        "description": "List evaluations under a schedule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation schedule.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluations.PagedEvaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluations/schedules/create": {
+      "post": {
+        "operationId": "Evaluations_CreateSchedule",
+        "description": "Creates an evaluation schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Properties of Evaluation Schedule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Evaluations.EvaluationSchedule"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Evaluations.EvaluationSchedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/files": {
       "get": {
         "operationId": "Agents_ListFiles",
@@ -8086,18 +8296,23 @@
       "type": "object",
       "description": "Data Source for Application Insight.",
       "properties": {
-        "connectionString": {
+        "resourceId": {
           "type": "string",
-          "description": "Application Insight connection string."
+          "description": "LogAnalytic Workspace resourceID associated with AppInsights"
         },
         "query": {
           "type": "string",
-          "description": "Query to fetch data."
+          "description": "Query to fetch the data."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "Service name."
         }
       },
       "required": [
-        "connectionString",
-        "query"
+        "resourceId",
+        "query",
+        "serviceName"
       ],
       "allOf": [
         {
@@ -8109,6 +8324,16 @@
     "Evaluations.Dataset": {
       "type": "object",
       "description": "Dataset as source for evaluation.",
+      "properties": {
+        "Uri": {
+          "type": "string",
+          "description": "Evaluation input data",
+          "x-ms-client-name": "id"
+        }
+      },
+      "required": [
+        "Uri"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Evaluations.InputData"
@@ -8130,7 +8355,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development."
+          "description": "Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique."
         },
         "description": {
           "type": "string",
@@ -8173,6 +8398,76 @@
         "evaluators"
       ]
     },
+    "Evaluations.EvaluationSchedule": {
+      "type": "object",
+      "description": "Evaluation Schedule Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluation."
+        },
+        "data": {
+          "$ref": "#/definitions/Evaluations.InputData",
+          "description": "Data for evaluation."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evaluation. It is set by service and is read-only.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Evaluations.EvaluatorConfiguration"
+          }
+        },
+        "recurrence": {
+          "$ref": "#/definitions/Evaluations.Recurrence",
+          "description": "Recurrence pattern for the evaluation."
+        },
+        "cronExpression": {
+          "type": "string",
+          "description": "Cron expression for the evaluation."
+        },
+        "samplingStrategy": {
+          "$ref": "#/definitions/Evaluations.SamplingStrategy",
+          "description": "Sampling strategy for the evaluation."
+        }
+      },
+      "required": [
+        "data",
+        "evaluators",
+        "samplingStrategy"
+      ]
+    },
     "Evaluations.EvaluatorConfiguration": {
       "type": "object",
       "description": "Evaluator Configuration",
@@ -8198,24 +8493,55 @@
         "id"
       ]
     },
+    "Evaluations.Frequency": {
+      "type": "string",
+      "description": "Frequency of the schedule - day, week, month, hour, minute",
+      "enum": [
+        "Month",
+        "Week",
+        "Day",
+        "Hour",
+        "Minute"
+      ],
+      "x-ms-enum": {
+        "name": "Frequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Month",
+            "value": "Month"
+          },
+          {
+            "name": "Week",
+            "value": "Week"
+          },
+          {
+            "name": "Day",
+            "value": "Day"
+          },
+          {
+            "name": "Hour",
+            "value": "Hour"
+          },
+          {
+            "name": "Minute",
+            "value": "Minute"
+          }
+        ]
+      }
+    },
     "Evaluations.InputData": {
       "type": "object",
-      "description": "Abstract data class.",
+      "description": "Abstract data class for input data configuration.",
       "properties": {
         "type": {
           "type": "string",
-          "description": "Discriminator property for InputData."
-        },
-        "Uri": {
-          "type": "string",
-          "description": "Evaluation input data",
-          "x-ms-client-name": "id"
+          "description": "Type of the data."
         }
       },
       "discriminator": "type",
       "required": [
-        "type",
-        "Uri"
+        "type"
       ]
     },
     "Evaluations.PagedEvaluation": {
@@ -8240,6 +8566,109 @@
         "value"
       ]
     },
+    "Evaluations.PagedEvaluationSchedule": {
+      "type": "object",
+      "description": "Paged evaluation schedule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of Evaluation Schedules.",
+          "items": {
+            "$ref": "#/definitions/Evaluations.EvaluationSchedule"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Evaluations.Recurrence": {
+      "type": "object",
+      "description": "Recurrence Definition",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/Evaluations.Frequency",
+          "description": "The frequency to trigger schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies schedule interval in conjunction with frequency"
+        },
+        "schedule": {
+          "$ref": "#/definitions/Evaluations.RecurrenceSchedule",
+          "description": "The recurrence schedule."
+        }
+      },
+      "required": [
+        "frequency",
+        "interval",
+        "schedule"
+      ]
+    },
+    "Evaluations.RecurrenceSchedule": {
+      "type": "object",
+      "description": "RecurrenceSchedule Definition",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "description": "List of hours for the schedule.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "description": "List of minutes for the schedule.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "weekDays": {
+          "type": "array",
+          "description": "List of days for the schedule.",
+          "items": {
+            "$ref": "#/definitions/Evaluations.WeekDays"
+          }
+        },
+        "monthDays": {
+          "type": "array",
+          "description": "List of month days for the schedule",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "hours",
+        "minutes",
+        "weekDays",
+        "monthDays"
+      ]
+    },
+    "Evaluations.SamplingStrategy": {
+      "type": "object",
+      "description": "SamplingStrategy Definition",
+      "properties": {
+        "rate": {
+          "type": "number",
+          "format": "float",
+          "description": "Sampling rate"
+        }
+      },
+      "required": [
+        "rate"
+      ]
+    },
     "Evaluations.UpdateEvaluationRequest": {
       "type": "object",
       "description": "Update Evaluation Request",
@@ -8259,6 +8688,53 @@
           "type": "string",
           "description": "Description"
         }
+      }
+    },
+    "Evaluations.WeekDays": {
+      "type": "string",
+      "description": "WeekDay of the schedule - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "WeekDays",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday"
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday"
+          }
+        ]
       }
     },
     "SystemData": {
