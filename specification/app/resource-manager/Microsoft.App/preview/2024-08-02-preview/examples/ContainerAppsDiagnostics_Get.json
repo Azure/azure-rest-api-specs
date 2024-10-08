@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "f07f3711-b45e-40fe-a941-4e6d93f851e6",
+    "resourceGroupName": "mikono-workerapp-test-rg",
+    "containerAppName": "mikono-capp-stage1",
+    "detectorName": "cappcontainerappnetworkIO",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/f07f3711-b45e-40fe-a941-4e6d93f851e6/resourceGroups/mikono-workerapp-test-rg/providers/Microsoft.App/containerApps/mikono-capp-stage1/detectors/cappcontainerappnetworkIO",
+        "name": "cappcontainerappnetworkIO",
+        "type": "Microsoft.App/containerapps/detectors",
+        "properties": {
+          "metadata": {
+            "id": "cappcontainerappnetworkIO",
+            "name": "Container App Network Inbound and Outbound",
+            "description": "This detector shows the Container App Network Inbound and Outbound.",
+            "author": "",
+            "category": "Availability and Performance",
+            "supportTopicList": [],
+            "type": "Detector",
+            "score": 0
+          },
+          "dataset": [
+            {
+              "table": {
+                "tableName": "",
+                "columns": [
+                  {
+                    "columnName": "TimeStamp",
+                    "dataType": "DateTime"
+                  },
+                  {
+                    "columnName": "Metric",
+                    "dataType": "String"
+                  },
+                  {
+                    "columnName": "Average",
+                    "dataType": "Double"
+                  }
+                ],
+                "rows": [
+                  [
+                    "2022-03-15T21:35:00",
+                    "RxBytes",
+                    0
+                  ]
+                ]
+              },
+              "renderingProperties": {
+                "type": 8,
+                "title": "Container Apps Network Inbound ",
+                "description": "",
+                "isVisible": true
+              }
+            }
+          ],
+          "status": {
+            "statusId": 3
+          }
+        }
+      }
+    }
+  }
+}
