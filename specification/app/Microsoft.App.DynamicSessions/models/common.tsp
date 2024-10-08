@@ -11,7 +11,7 @@ using OpenAPI;
 model ExecutionIdHeader {
   @header
   @doc("The operation id.")
-  executionId: string;
+  executionId?: string;
 }
 
 @doc("Session identifier query parameter.")
