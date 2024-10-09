@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Assessment Service",
-    "version": "2023-05-01-preview",
+    "version": "2023-09-09-preview",
     "description": "Azure Migrate Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -9187,7 +9187,8 @@
         "2023-03-15",
         "2023-04-01-preview",
         "2023-05-01-preview",
-        "2023-07-07-preview"
+        "2023-07-07-preview",
+        "2023-09-09-preview"
       ],
       "x-ms-enum": {
         "name": "ApiVersions",
@@ -9242,6 +9243,11 @@
             "name": "v2023_07_07_preview",
             "value": "2023-07-07-preview",
             "description": "2023-07-07-preview API Version."
+          },
+          {
+            "name": "v2023_09_09_preview",
+            "value": "2023-09-09-preview",
+            "description": "2023-09-09-preview API Version."
           }
         ]
       }
@@ -12059,7 +12065,7 @@
         },
         "avsEstimatedNodes": {
           "type": "array",
-          "description": "EstimatedNodes AVS SKU for Assessment.",
+          "description": "Estimated AVS SKU for Assessment.",
           "items": {
             "$ref": "#/definitions/AvsEstimatedNode"
           },
@@ -12083,6 +12089,11 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "cpuHeadroom": {
+          "type": "number",
+          "format": "float",
+          "description": "CPU Headroom"
         },
         "numberOfMachines": {
           "type": "integer",
@@ -12569,6 +12580,93 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
+      }
+    },
+    "AzureArcManagementSettings": {
+      "type": "object",
+      "description": "Azure Arc Management settings.",
+      "properties": {
+        "monitoringSettings": {
+          "$ref": "#/definitions/AzureArcMonitoringSettings",
+          "description": "Gets the azure arc monitoring settings."
+        }
+      },
+      "required": [
+        "monitoringSettings"
+      ]
+    },
+    "AzureArcMonitoringSettings": {
+      "type": "object",
+      "description": "Azure Arc Monitoring settings.",
+      "properties": {
+        "logsVolumeInGB": {
+          "type": "number",
+          "format": "float",
+          "description": "Logs volume settings."
+        },
+        "alertRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of alert rules settings."
+        }
+      },
+      "required": [
+        "logsVolumeInGB",
+        "alertRulesCount"
+      ]
+    },
+    "AzureArcSettings": {
+      "type": "object",
+      "description": "Azure arc settings for a business case.",
+      "properties": {
+        "azureArcState": {
+          "$ref": "#/definitions/AzureArcState",
+          "description": "AzureArc state indicates whether to include azure arc related costs in on-premises or not."
+        },
+        "laborCostPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets Azure arc labour cost percentage.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "managementSettings": {
+          "$ref": "#/definitions/AzureArcManagementSettings",
+          "description": "Management settings."
+        }
+      },
+      "required": [
+        "azureArcState"
+      ]
+    },
+    "AzureArcState": {
+      "type": "string",
+      "description": "AzureArc state values.",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AzureArcState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "AzureArc state disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "AzureArc state enabled."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "AzureArc state unknown."
+          }
+        ]
       }
     },
     "AzureAvsNodeType": {
@@ -17637,6 +17735,21 @@
           "$ref": "#/definitions/CostDetails",
           "description": "The on premises AVS decommissioned cost.",
           "readOnly": true
+        },
+        "futureCostDetails": {
+          "$ref": "#/definitions/CostDetails",
+          "description": "Future state cost which includes Azure cost and Arc enabled on-premises cost based on the final migration percentage.",
+          "readOnly": true
+        },
+        "azureArcEnabledOnPremisesCostDetails": {
+          "$ref": "#/definitions/CostDetails",
+          "description": "The Azure arc enabled on-premises cost.",
+          "readOnly": true
+        },
+        "futureAzureArcEnabledOnPremisesCostDetails": {
+          "$ref": "#/definitions/CostDetails",
+          "description": "The final azure arc enabled on-premises cost based on the final migration percentage.",
+          "readOnly": true
         }
       }
     },
@@ -17924,6 +18037,12 @@
           "type": "number",
           "format": "float",
           "description": "esu savings.",
+          "readOnly": true
+        },
+        "facilitiesCost": {
+          "type": "number",
+          "format": "float",
+          "description": "The facilities cost.",
           "readOnly": true
         }
       }
@@ -18787,15 +18906,12 @@
       "type": "object",
       "description": "Facility settings.",
       "properties": {
-        "facilitiesCost": {
+        "facilitiesCostPerKwh": {
           "type": "number",
           "format": "float",
           "description": "The facilities cost."
         }
-      },
-      "required": [
-        "facilitiesCost"
-      ]
+      }
     },
     "FttAndRaidLevel": {
       "type": "string",
@@ -19901,7 +20017,9 @@
         "OtherPatchingCost",
         "AzureMonitoringCost",
         "AzurePatchingCost",
-        "AzureDataProtectionCost"
+        "AzureDataProtectionCost",
+        "AzureArcMonitoringCost",
+        "AzureArcPatchingCost"
       ],
       "x-ms-enum": {
         "name": "ManagementCostComponentName",
@@ -19956,6 +20074,16 @@
             "name": "AzureDataProtectionCost",
             "value": "AzureDataProtectionCost",
             "description": "Azure Data Protection Cost."
+          },
+          {
+            "name": "AzureArcMonitoringCost",
+            "value": "AzureArcMonitoringCost",
+            "description": "Azure Arc Monitoring Cost."
+          },
+          {
+            "name": "AzureArcPatchingCost",
+            "value": "AzureArcPatchingCost",
+            "description": "Azure Arc Patching Cost."
           }
         ]
       }
@@ -19989,10 +20117,6 @@
           "$ref": "#/definitions/HypervVirtualizationManagementSettings",
           "description": "HyperV Virtualization Management Settings."
         },
-        "vsphereManagementSettings": {
-          "$ref": "#/definitions/VsphereManagementSettings",
-          "description": "vSphere Management Settings."
-        },
         "thirdPartyManagementSettings": {
           "$ref": "#/definitions/ThirdPartyManagementSettings",
           "description": "Third Party Management Settings."
@@ -20004,7 +20128,6 @@
       },
       "required": [
         "hypervVirtualizationManagementSettings",
-        "vsphereManagementSettings",
         "thirdPartyManagementSettings",
         "otherManagementCostsSettings"
       ]
@@ -20851,6 +20974,66 @@
         "paasDistribution": {
           "$ref": "#/definitions/PaasDistribution",
           "description": "Shows the distribution of platforms.",
+          "readOnly": true
+        },
+        "azureArcEnabledOnPremisesCost": {
+          "type": "number",
+          "format": "float",
+          "description": "The total Azure arc enabled on-premises cost assuming all on-premises infra is arc enabled.",
+          "readOnly": true
+        },
+        "futureCostIncludingAzureArc": {
+          "type": "number",
+          "format": "float",
+          "description": "The final cost including azure and azure arc enabled on-premises considering the remaining on-prem infra is arc enabled.",
+          "readOnly": true
+        },
+        "futureEsuSavingsFor4YearsIncludingAzureArc": {
+          "type": "number",
+          "format": "float",
+          "description": "ESU Savings in 4 Years considering the remaining on-prem infra each year is arc enabled.",
+          "readOnly": true
+        },
+        "futureManagementCostSavingsIncludingAzureArc": {
+          "type": "number",
+          "format": "float",
+          "description": "The management cost saving considering the remaining on-prem infra is arc enabled",
+          "readOnly": true
+        },
+        "futureSecurityCostSavingsIncludingAzureArc": {
+          "type": "number",
+          "format": "float",
+          "description": "The security cost saving considering the remaining on-prem infra is arc enabled.",
+          "readOnly": true
+        },
+        "azureArcServicesCost": {
+          "type": "number",
+          "format": "float",
+          "description": "The total cost of services offered by azure arc.",
+          "readOnly": true
+        },
+        "futureAzureIaasCost": {
+          "type": "number",
+          "format": "float",
+          "description": "The Iaas component of the future azure cost based on the final migration percentage.",
+          "readOnly": true
+        },
+        "futureAzurePaasCost": {
+          "type": "number",
+          "format": "float",
+          "description": "The Paas component of the future azure cost based on the final migration percentage.",
+          "readOnly": true
+        },
+        "futureAzureArcEnabledOnPremisesCost": {
+          "type": "number",
+          "format": "float",
+          "description": "The future azure arc cost based on the final migration percentage.",
+          "readOnly": true
+        },
+        "futureAzureArcServicesCost": {
+          "type": "number",
+          "format": "float",
+          "description": "The total cost of services offered by azure arc based on the final migration percentage.",
           "readOnly": true
         }
       }
@@ -21935,6 +22118,10 @@
         "onPremiseSettings": {
           "$ref": "#/definitions/OnPremiseSettings",
           "description": "On-premise settings."
+        },
+        "azureArcSettings": {
+          "$ref": "#/definitions/AzureArcSettings",
+          "description": "Azure arc settings."
         }
       },
       "required": [
@@ -23692,30 +23879,14 @@
       "type": "object",
       "description": "Virtualization software settings.",
       "properties": {
-        "numberOfPhysicalCoresPerLicense": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of physical cores per licence.",
-          "minimum": 1
-        },
-        "softwareAssuranceCost": {
+        "vMwareCloudFoundationLicenseCost": {
           "type": "number",
           "format": "float",
-          "description": "Software Assurance cost."
-        },
-        "licenseAndSupportList": {
-          "type": "array",
-          "description": "Licence and support list.",
-          "items": {
-            "$ref": "#/definitions/VsphereLicense"
-          },
-          "x-ms-identifiers": []
+          "description": "VMware cloud foundation license cost."
         }
       },
       "required": [
-        "numberOfPhysicalCoresPerLicense",
-        "softwareAssuranceCost",
-        "licenseAndSupportList"
+        "vMwareCloudFoundationLicenseCost"
       ]
     },
     "VmFamilyOptions": {
@@ -24740,6 +24911,60 @@
         }
       }
     },
+    "Year": {
+      "type": "string",
+      "description": "Year values.",
+      "enum": [
+        "Year0",
+        "Year1",
+        "Year2",
+        "Year3"
+      ],
+      "x-ms-enum": {
+        "name": "Year",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Year0",
+            "value": "Year0",
+            "description": "Year 0."
+          },
+          {
+            "name": "Year1",
+            "value": "Year1",
+            "description": "Year 1."
+          },
+          {
+            "name": "Year2",
+            "value": "Year2",
+            "description": "Year 2."
+          },
+          {
+            "name": "Year3",
+            "value": "Year3",
+            "description": "Year 3."
+          }
+        ]
+      }
+    },
+    "YearOnYearCost": {
+      "type": "object",
+      "description": "Year on Year cost.",
+      "properties": {
+        "year": {
+          "$ref": "#/definitions/Year",
+          "description": "Year value."
+        },
+        "cost": {
+          "type": "number",
+          "format": "float",
+          "description": "Cost for the specified year."
+        }
+      },
+      "required": [
+        "year"
+      ]
+    },
     "YearOnYearEstimates": {
       "type": "object",
       "description": "Shows the year-on-year cost overall.",
@@ -24812,6 +25037,42 @@
           "format": "int32",
           "description": "Payback period.",
           "readOnly": true
+        },
+        "azureArcEnabledOnPremisesCost": {
+          "type": "array",
+          "description": "Year-on-Year azure arc enabled on-premises cost.",
+          "items": {
+            "$ref": "#/definitions/YearOnYearCost"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "futureCost": {
+          "type": "array",
+          "description": "Year-on-Year azure with arc enabled on-premises cost.",
+          "items": {
+            "$ref": "#/definitions/YearOnYearCost"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "futureAzureArcEnabledOnPremisesEsuCost": {
+          "type": "array",
+          "description": "Year-on-Year azure arc enabled on-premises esu cost of the remaining infra on-premises.",
+          "items": {
+            "$ref": "#/definitions/YearOnYearCost"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "futureOnPremisesEsuCost": {
+          "type": "array",
+          "description": "Year-on-Year on-premises esu cost of the remaining infra on-premises.",
+          "items": {
+            "$ref": "#/definitions/YearOnYearCost"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     }
