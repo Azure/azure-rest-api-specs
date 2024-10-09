@@ -176,7 +176,6 @@ model DocumentNotificationContent extends NotificationContent {
   kind: CommunicationMessageKind.document;
 
   @doc("Optional text content.")
-  @clientName("content", "python")
   caption?: string;
 
   @doc("Optional name for the file.")
@@ -192,7 +191,6 @@ model VideoNotificationContent extends NotificationContent {
   kind: CommunicationMessageKind.video;
 
   @doc("Optional text content.")
-  @clientName("content", "python")
   caption?: string;
 
   ...MediaNotificationContentBase;
