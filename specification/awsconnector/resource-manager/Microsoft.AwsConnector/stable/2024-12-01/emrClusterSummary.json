@@ -1,0 +1,788 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EmrClusterSummaries"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/emrClusterSummaries": {
+      "get": {
+        "operationId": "EmrClusterSummaries_ListBySubscription",
+        "tags": [
+          "EmrClusterSummaries"
+        ],
+        "description": "List EmrClusterSummary resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EmrClusterSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusterSummaries_ListBySubscription": {
+            "$ref": "./examples/EmrClusterSummaries_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/emrClusterSummaries": {
+      "get": {
+        "operationId": "EmrClusterSummaries_ListByResourceGroup",
+        "tags": [
+          "EmrClusterSummaries"
+        ],
+        "description": "List EmrClusterSummary resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EmrClusterSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusterSummaries_ListByResourceGroup": {
+            "$ref": "./examples/EmrClusterSummaries_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/emrClusterSummaries/{name}": {
+      "get": {
+        "operationId": "EmrClusterSummaries_Get",
+        "tags": [
+          "EmrClusterSummaries"
+        ],
+        "description": "Get a EmrClusterSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EmrClusterSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EmrClusterSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusterSummaries_Get": {
+            "$ref": "./examples/EmrClusterSummaries_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EmrClusterSummaries_CreateOrReplace",
+        "tags": [
+          "EmrClusterSummaries"
+        ],
+        "description": "Create a EmrClusterSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EmrClusterSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmrClusterSummary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EmrClusterSummary' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EmrClusterSummary"
+            }
+          },
+          "201": {
+            "description": "Resource 'EmrClusterSummary' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EmrClusterSummary"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusterSummaries_CreateOrReplace": {
+            "$ref": "./examples/EmrClusterSummaries_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EmrClusterSummaries_Update",
+        "tags": [
+          "EmrClusterSummaries"
+        ],
+        "description": "Update a EmrClusterSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EmrClusterSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmrClusterSummaryTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EmrClusterSummary"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusterSummaries_Update": {
+            "$ref": "./examples/EmrClusterSummaries_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EmrClusterSummaries_Delete",
+        "tags": [
+          "EmrClusterSummaries"
+        ],
+        "description": "Delete a EmrClusterSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EmrClusterSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusterSummaries_Delete": {
+            "$ref": "./examples/EmrClusterSummaries_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsEmrClusterSummaryProperties": {
+      "type": "object",
+      "description": "Definition of awsEmrClusterSummary",
+      "properties": {
+        "clusterArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name of the cluster.</p>"
+        },
+        "id": {
+          "type": "string",
+          "description": "<p>The unique identifier for the cluster.</p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the cluster.</p>"
+        },
+        "normalizedInstanceHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
+        },
+        "outpostArn": {
+          "type": "string",
+          "description": "<p> The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. </p>"
+        },
+        "status": {
+          "$ref": "#/definitions/ClusterStatus",
+          "description": "<p>The details about the current status of the cluster.</p>"
+        }
+      }
+    },
+    "ClusterState": {
+      "type": "string",
+      "description": "ClusterState enum",
+      "enum": [
+        "BOOTSTRAPPING",
+        "RUNNING",
+        "STARTING",
+        "TERMINATED",
+        "TERMINATED_WITH_ERRORS",
+        "TERMINATING",
+        "WAITING"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BOOTSTRAPPING",
+            "value": "BOOTSTRAPPING",
+            "description": "ClusterState enum BOOTSTRAPPING"
+          },
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "ClusterState enum RUNNING"
+          },
+          {
+            "name": "STARTING",
+            "value": "STARTING",
+            "description": "ClusterState enum STARTING"
+          },
+          {
+            "name": "TERMINATED",
+            "value": "TERMINATED",
+            "description": "ClusterState enum TERMINATED"
+          },
+          {
+            "name": "TERMINATED_WITH_ERRORS",
+            "value": "TERMINATED_WITH_ERRORS",
+            "description": "ClusterState enum TERMINATED_WITH_ERRORS"
+          },
+          {
+            "name": "TERMINATING",
+            "value": "TERMINATING",
+            "description": "ClusterState enum TERMINATING"
+          },
+          {
+            "name": "WAITING",
+            "value": "WAITING",
+            "description": "ClusterState enum WAITING"
+          }
+        ]
+      }
+    },
+    "ClusterStateChangeReason": {
+      "type": "object",
+      "description": "Definition of ClusterStateChangeReason",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ClusterStateChangeReasonCodeEnumValue",
+          "description": "<p>The programmatic code for the state change reason.</p>"
+        },
+        "message": {
+          "type": "string",
+          "description": "<p>The descriptive message for the state change reason.</p>"
+        }
+      }
+    },
+    "ClusterStateChangeReasonCode": {
+      "type": "string",
+      "description": "ClusterStateChangeReasonCode enum",
+      "enum": [
+        "ALL_STEPS_COMPLETED",
+        "BOOTSTRAP_FAILURE",
+        "INSTANCE_FAILURE",
+        "INSTANCE_FLEET_TIMEOUT",
+        "INTERNAL_ERROR",
+        "STEP_FAILURE",
+        "USER_REQUEST",
+        "VALIDATION_ERROR"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterStateChangeReasonCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALL_STEPS_COMPLETED",
+            "value": "ALL_STEPS_COMPLETED",
+            "description": "ClusterStateChangeReasonCode enum ALL_STEPS_COMPLETED"
+          },
+          {
+            "name": "BOOTSTRAP_FAILURE",
+            "value": "BOOTSTRAP_FAILURE",
+            "description": "ClusterStateChangeReasonCode enum BOOTSTRAP_FAILURE"
+          },
+          {
+            "name": "INSTANCE_FAILURE",
+            "value": "INSTANCE_FAILURE",
+            "description": "ClusterStateChangeReasonCode enum INSTANCE_FAILURE"
+          },
+          {
+            "name": "INSTANCE_FLEET_TIMEOUT",
+            "value": "INSTANCE_FLEET_TIMEOUT",
+            "description": "ClusterStateChangeReasonCode enum INSTANCE_FLEET_TIMEOUT"
+          },
+          {
+            "name": "INTERNAL_ERROR",
+            "value": "INTERNAL_ERROR",
+            "description": "ClusterStateChangeReasonCode enum INTERNAL_ERROR"
+          },
+          {
+            "name": "STEP_FAILURE",
+            "value": "STEP_FAILURE",
+            "description": "ClusterStateChangeReasonCode enum STEP_FAILURE"
+          },
+          {
+            "name": "USER_REQUEST",
+            "value": "USER_REQUEST",
+            "description": "ClusterStateChangeReasonCode enum USER_REQUEST"
+          },
+          {
+            "name": "VALIDATION_ERROR",
+            "value": "VALIDATION_ERROR",
+            "description": "ClusterStateChangeReasonCode enum VALIDATION_ERROR"
+          }
+        ]
+      }
+    },
+    "ClusterStateChangeReasonCodeEnumValue": {
+      "type": "object",
+      "description": "Definition of ClusterStateChangeReasonCodeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ClusterStateChangeReasonCode",
+          "description": "Property value"
+        }
+      }
+    },
+    "ClusterStateEnumValue": {
+      "type": "object",
+      "description": "Definition of ClusterStateEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ClusterState",
+          "description": "Property value"
+        }
+      }
+    },
+    "ClusterStatus": {
+      "type": "object",
+      "description": "Definition of ClusterStatus",
+      "properties": {
+        "errorDetails": {
+          "type": "array",
+          "description": "<p>A list of tuples that provides information about the errors that caused a cluster to terminate. This structure can contain up to 10 different <code>ErrorDetail</code> tuples.</p>",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "state": {
+          "$ref": "#/definitions/ClusterStateEnumValue",
+          "description": "<p>The current state of the cluster.</p>"
+        },
+        "stateChangeReason": {
+          "$ref": "#/definitions/ClusterStateChangeReason",
+          "description": "<p>The reason for the cluster status change.</p>"
+        },
+        "timeline": {
+          "$ref": "#/definitions/ClusterTimeline",
+          "description": "<p>A timeline that represents the status of a cluster over the lifetime of the cluster.</p>"
+        }
+      }
+    },
+    "ClusterTimeline": {
+      "type": "object",
+      "description": "Definition of ClusterTimeline",
+      "properties": {
+        "creationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The creation date and time of the cluster.</p>"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time when the cluster was terminated.</p>"
+        },
+        "readyDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time when the cluster was ready to run steps.</p>"
+        }
+      }
+    },
+    "EmrClusterSummary": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EmrClusterSummaryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EmrClusterSummaryListResult": {
+      "type": "object",
+      "description": "The response of a EmrClusterSummary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EmrClusterSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/EmrClusterSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EmrClusterSummaryProperties": {
+      "type": "object",
+      "description": "Definition of EmrClusterSummary",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEmrClusterSummaryProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "EmrClusterSummaryTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in EmrClusterSummary resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Definition of ErrorDetail",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "<p>The name or code associated with the error.</p>"
+        },
+        "errorData": {
+          "type": "array",
+          "description": "<p>A list of key value pairs that provides contextual information about why an error occured.</p>",
+          "items": {
+            "$ref": "#/definitions/StringMap"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "<p>A message that describes the error.</p>"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StringMap": {
+      "type": "object",
+      "description": "Definition of StringMap"
+    }
+  },
+  "parameters": {}
+}
