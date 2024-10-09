@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-12-01-preview",
+    "version": "2024-10-01-preview",
     "title": "Common types"
   },
   "paths": {},
@@ -60,7 +60,8 @@
           "type": "string",
           "enum": [
             "BackupAndExportResponse",
-            "ImportFromStorageResponse"
+            "ImportFromStorageResponse",
+            "RestoreSnapshotResponse"
           ],
           "x-ms-enum": {
             "name": "ObjectType",
@@ -106,6 +107,92 @@
           "format": "date-time"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationProgressResponseType"
+        }
+      ]
+    },
+    "RestoreSnapshotResponseType": {
+      "description": "RestoreSnapshot Response Properties",
+      "type": "object",
+      "x-ms-discriminator-value": "RestoreSnapshotResponse",
+      "properties": {
+        "estimatedCompletionTime": {
+          "description": "The estimated time of operation completion.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "operationParameters": {
+          "description": "The operation parameters.",
+          "type": "string"
+        },
+        "retryTimes": {
+          "description": "Retry times.",
+          "type": "integer"
+        },
+        "subTasks": {
+          "description": "Sub tasks.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/RestoreSnapshotResponseSubTask"
+          }
+        },
+        "detail": {
+          "description": "Detail log.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationProgressResponseType"
+        }
+      ]
+    },
+    "RestoreSnapshotResponseSubTask": {
+      "description": "Sub tasks of RestoreSnapshot",
+      "type": "object",
+      "properties": {
+        "taskName": {
+          "description": "The task name.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "estimatedEndTime": {
+          "description": "The estimated end time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "description": "The percent complete.",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Sub task status.",
+          "type": "string"
+        },
+        "detail": {
+          "description": "Detail log.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "taskName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/OperationProgressResponseType"
