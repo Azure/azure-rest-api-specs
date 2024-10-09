@@ -91,7 +91,7 @@ interface SolutionBindings {
   @doc("Post request to deploy")
   deploy is ArmResourceActionNoResponseContentAsync<
     SolutionBinding,
-    SolutionInstanceProperties
+    SolutionInstance
   >;
 
   @doc("Post request to resolve configuration")
@@ -104,7 +104,7 @@ interface SolutionBindings {
   @doc("Post request to publish")
   publish is ArmResourceActionAsync<
     SolutionBinding,
-    SolutionInstanceProperties,
+    SolutionInstance,
     SolutionInstance
   >;
 }
