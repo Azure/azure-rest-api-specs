@@ -32,9 +32,9 @@ union ProvisioningState {
 }
 
 /**
- * The current provisioning state for a peering setting.
+ * The current provisioning state for a peering link.
  */
-union PeeringSettingProvisioningState {
+union PeeringLinkProvisioningState {
   string,
 
   @doc("is succeeded")
@@ -297,10 +297,10 @@ model RemotePeeringLink {
   remoteVirtualNetworkId: string;
 
   /**
-   * The current provisioning state for a peering setting.
+   * The current provisioning state for a peering link.
    */
   @visibility("read")
-  provisioningState?: PeeringSettingProvisioningState;
+  provisioningState?: PeeringLinkProvisioningState;
 }
 
 /**

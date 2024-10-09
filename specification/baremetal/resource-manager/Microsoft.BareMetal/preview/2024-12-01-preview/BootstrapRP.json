@@ -925,6 +925,37 @@
         }
       }
     },
+    "PeeringLinkProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state for a peering link.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Removed"
+      ],
+      "x-ms-enum": {
+        "name": "PeeringLinkProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "is succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "is failed"
+          },
+          {
+            "name": "Removed",
+            "value": "Removed",
+            "description": "is removed"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "PeeringSetting": {
       "type": "object",
       "description": "Model representing a Peering Setting object.",
@@ -1005,37 +1036,6 @@
         "virtualNetworkGuid",
         "remotePeeringLinks"
       ]
-    },
-    "PeeringSettingProvisioningState": {
-      "type": "string",
-      "description": "The current provisioning state for a peering setting.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Removed"
-      ],
-      "x-ms-enum": {
-        "name": "PeeringSettingProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "is succeeded"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "is failed"
-          },
-          {
-            "name": "Removed",
-            "value": "Removed",
-            "description": "is removed"
-          }
-        ]
-      },
-      "readOnly": true
     },
     "PeeringSettingUpdate": {
       "type": "object",
@@ -1145,8 +1145,8 @@
           "description": "Remote vnet ID in the following format: \"Remote/VNET/ARM/Resource/ID\""
         },
         "provisioningState": {
-          "$ref": "#/definitions/PeeringSettingProvisioningState",
-          "description": "The current provisioning state for a peering setting.",
+          "$ref": "#/definitions/PeeringLinkProvisioningState",
+          "description": "The current provisioning state for a peering link.",
           "readOnly": true
         }
       },
