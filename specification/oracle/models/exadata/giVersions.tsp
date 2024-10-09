@@ -19,8 +19,7 @@ model GiVersion is ProxyResource<GiVersionProperties> {
 @doc("GiVersion resource model")
 model GiVersionProperties {
   @doc("A valid Oracle Grid Infrastructure (GI) software version.")
-  @visibility("read")
   @minLength(1)
   @maxLength(255)
-  version?: string;
+  version: string;
 }

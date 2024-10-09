@@ -21,94 +21,72 @@ model DbNode is ProxyResource<DbNodeProperties> {
 @doc("The properties of DbNodeResource")
 model DbNodeProperties {
   @doc("DbNode OCID")
-  @visibility("read")
-  ocid?: Ocid;
+  ocid: Ocid;
 
   @doc("Additional information about the planned maintenance.")
-  @visibility("read")
   additionalDetails?: string;
 
   @doc("The OCID of the backup IP address associated with the database node.")
-  @visibility("read")
   backupIpId?: Ocid;
 
   @doc("The OCID of the second backup VNIC.")
-  @visibility("read")
   backupVnic2Id?: Ocid;
 
   @doc("The OCID of the backup VNIC.")
-  @visibility("read")
   backupVnicId?: Ocid;
 
   @doc("The number of CPU cores enabled on the Db node.")
-  @visibility("read")
   cpuCoreCount?: int32;
 
   @doc("The allocated local node storage in GBs on the Db node.")
-  @visibility("read")
   dbNodeStorageSizeInGbs?: int32;
 
   @doc("The OCID of the Exacc Db server associated with the database node.")
-  @visibility("read")
   dbServerId?: Ocid;
 
   @doc("The OCID of the DB system.")
-  @visibility("read")
-  dbSystemId?: Ocid;
+  dbSystemId: Ocid;
 
   @doc("The name of the Fault Domain the instance is contained in.")
   @minLength(1)
   @maxLength(255)
-  @visibility("read")
   faultDomain?: string;
 
   @doc("The OCID of the host IP address associated with the database node.")
-  @visibility("read")
   hostIpId?: Ocid;
 
   @doc("The host name for the database node.")
-  @visibility("read")
   hostname?: string;
 
   @doc("The current state of the database node.")
-  @visibility("read")
-  lifecycleState?: DbNodeProvisioningState;
+  lifecycleState: DbNodeProvisioningState;
 
   @doc("Lifecycle details of Db Node.")
-  @visibility("read")
   lifecycleDetails?: string;
 
   @doc("The type of database node maintenance.")
-  @visibility("read")
   maintenanceType?: DbNodeMaintenanceType;
 
   @doc("The allocated memory in GBs on the Db node.")
-  @visibility("read")
   memorySizeInGbs?: int32;
 
   @doc("The size (in GB) of the block storage volume allocation for the DB system. This attribute applies only for virtual machine DB systems.")
-  @visibility("read")
   softwareStorageSizeInGb?: int32;
 
   @doc("The date and time that the database node was created.")
-  @visibility("read")
-  timeCreated?: utcDateTime;
+  timeCreated: utcDateTime;
 
   @doc("End date and time of maintenance window.")
-  @visibility("read")
   timeMaintenanceWindowEnd?: utcDateTime;
 
   @doc("Start date and time of maintenance window.")
-  @visibility("read")
   timeMaintenanceWindowStart?: utcDateTime;
 
   @doc("The OCID of the second VNIC.")
-  @visibility("read")
   vnic2Id?: Ocid;
 
   @doc("The OCID of the VNIC.")
-  @visibility("read")
-  vnicId?: Ocid;
+  vnicId: Ocid;
 
   @doc("Azure resource provisioning state.")
   @visibility("read")
