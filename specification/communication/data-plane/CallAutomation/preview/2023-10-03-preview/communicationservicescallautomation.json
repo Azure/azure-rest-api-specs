@@ -1718,7 +1718,7 @@
           {
             "name": "callConnectionId",
             "in": "path",
-            "description": "The ConnectionId from the request endpoint.",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
@@ -1748,7 +1748,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the start call recording request and will begin processing it.",
+            "description": "The service has accepted the start call recording request and will begin processing it. You will receive either a StartRecordingFailed event or RecordingStateChanged to active event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/RecordingStateResponse"
             }
@@ -1770,15 +1770,16 @@
         "operationId": "CallRecording_GetRecordingProperties",
         "parameters": [
           {
-            "name": "recordingId",
+            "name": "callConnectionId",
             "in": "path",
-            "description": "The recording id.",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
-            "name": "callConnectionId",
+            "name": "recordingId",
             "in": "path",
+            "description": "The recording id.",
             "required": true,
             "type": "string"
           },
@@ -1814,15 +1815,16 @@
         "operationId": "CallRecording_StopRecording",
         "parameters": [
           {
-            "name": "recordingId",
+            "name": "callConnectionId",
             "in": "path",
-            "description": "The recording id.",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
-            "name": "callConnectionId",
+            "name": "recordingId",
             "in": "path",
+            "description": "The recording id.",
             "required": true,
             "type": "string"
           },
@@ -1857,15 +1859,16 @@
         "operationId": "CallRecording_PauseRecording",
         "parameters": [
           {
-            "name": "recordingId",
+            "name": "callConnectionId",
             "in": "path",
-            "description": "The recording id.",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
-            "name": "callConnectionId",
+            "name": "recordingId",
             "in": "path",
+            "description": "The recording id.",
             "required": true,
             "type": "string"
           },
@@ -1900,15 +1903,16 @@
         "operationId": "CallRecording_ResumeRecording",
         "parameters": [
           {
-            "name": "recordingId",
+            "name": "callConnectionId",
             "in": "path",
-            "description": "The recording id.",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
-            "name": "callConnectionId",
+            "name": "recordingId",
             "in": "path",
+            "description": "The recording id.",
             "required": true,
             "type": "string"
           },
