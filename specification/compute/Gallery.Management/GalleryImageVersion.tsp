@@ -63,7 +63,10 @@ interface GalleryImageVersions {
   /**
    * List gallery image versions in a gallery image definition.
    */
-  listByGalleryImage is ArmResourceListByParent<GalleryImageVersion>;
+  listByGalleryImage is ArmResourceListByParent<
+    GalleryImageVersion,
+    Response = GalleryImageVersionList
+  >;
 }
 
 @@doc(GalleryImageVersion.name,

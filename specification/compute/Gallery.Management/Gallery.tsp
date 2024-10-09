@@ -66,12 +66,15 @@ interface Galleries {
   /**
    * List galleries under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Gallery>;
+  listByResourceGroup is ArmResourceListByParent<
+    Gallery,
+    Response = GalleryList
+  >;
 
   /**
    * List galleries under a subscription.
    */
-  list is ArmListBySubscription<Gallery>;
+  list is ArmListBySubscription<Gallery, Response = GalleryList>;
 
   /**
    * Update sharing profile of a gallery.

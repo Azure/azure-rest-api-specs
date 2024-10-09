@@ -12,6 +12,59 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Compute;
 
 /**
+ * The List Galleries operation response.
+ */
+model GalleryList is Azure.Core.Page<Gallery>;
+
+/**
+ * The List Community Gallery Images operation response.
+ */
+model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
+
+/**
+ * The List Community Gallery Image versions operation response.
+ */
+model CommunityGalleryImageVersionList
+  is Azure.Core.Page<CommunityGalleryImageVersion>;
+
+/**
+ * The List Shared Galleries operation response.
+ */
+model SharedGalleryList is Azure.Core.Page<SharedGallery>;
+
+/**
+ * The List Shared Gallery Images operation response.
+ */
+model SharedGalleryImageList is Azure.Core.Page<SharedGalleryImage>;
+
+/**
+ * The List Shared Gallery Image versions operation response.
+ */
+model SharedGalleryImageVersionList
+  is Azure.Core.Page<SharedGalleryImageVersion>;
+
+/**
+ * The List Gallery Images operation response.
+ */
+model GalleryImageList is Azure.Core.Page<GalleryImage>;
+
+/**
+ * The List Gallery Image version operation response.
+ */
+model GalleryImageVersionList is Azure.Core.Page<GalleryImageVersion>;
+
+/**
+ * The List Gallery Applications operation response.
+ */
+model GalleryApplicationList is Azure.Core.Page<GalleryApplication>;
+
+/**
+ * The List Gallery Application version operation response.
+ */
+model GalleryApplicationVersionList
+  is Azure.Core.Page<GalleryApplicationVersion>;
+
+/**
  * The provisioning state, which only appears in the response.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"

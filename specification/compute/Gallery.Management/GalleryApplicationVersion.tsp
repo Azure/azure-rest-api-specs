@@ -66,7 +66,10 @@ interface GalleryApplicationVersions {
   /**
    * List gallery Application Versions in a gallery Application Definition.
    */
-  listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
+  listByGalleryApplication is ArmResourceListByParent<
+    GalleryApplicationVersion,
+    Response = GalleryApplicationVersionList
+  >;
 }
 
 @@doc(GalleryApplicationVersion.name,

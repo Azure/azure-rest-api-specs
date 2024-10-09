@@ -54,7 +54,10 @@ interface GalleryApplications {
   /**
    * List gallery Application Definitions in a gallery.
    */
-  listByGallery is ArmResourceListByParent<GalleryApplication>;
+  listByGallery is ArmResourceListByParent<
+    GalleryApplication,
+    Response = GalleryApplicationList
+  >;
 }
 
 @@doc(GalleryApplication.name,

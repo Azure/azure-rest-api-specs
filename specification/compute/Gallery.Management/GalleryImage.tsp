@@ -54,7 +54,10 @@ interface GalleryImages {
   /**
    * List gallery image definitions in a gallery.
    */
-  listByGallery is ArmResourceListByParent<GalleryImage>;
+  listByGallery is ArmResourceListByParent<
+    GalleryImage,
+    Response = GalleryImageList
+  >;
 }
 
 @@doc(GalleryImage.name,
