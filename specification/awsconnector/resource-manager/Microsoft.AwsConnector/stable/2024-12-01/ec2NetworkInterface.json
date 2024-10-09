@@ -1,0 +1,741 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Ec2NetworkInterfaces"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/ec2NetworkInterfaces": {
+      "get": {
+        "operationId": "Ec2NetworkInterfaces_ListBySubscription",
+        "tags": [
+          "Ec2NetworkInterfaces"
+        ],
+        "description": "List Ec2NetworkInterface resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2NetworkInterfaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2NetworkInterfaces_ListBySubscription": {
+            "$ref": "./examples/Ec2NetworkInterfaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2NetworkInterfaces": {
+      "get": {
+        "operationId": "Ec2NetworkInterfaces_ListByResourceGroup",
+        "tags": [
+          "Ec2NetworkInterfaces"
+        ],
+        "description": "List Ec2NetworkInterface resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2NetworkInterfaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2NetworkInterfaces_ListByResourceGroup": {
+            "$ref": "./examples/Ec2NetworkInterfaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2NetworkInterfaces/{name}": {
+      "get": {
+        "operationId": "Ec2NetworkInterfaces_Get",
+        "tags": [
+          "Ec2NetworkInterfaces"
+        ],
+        "description": "Get a Ec2NetworkInterface",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2NetworkInterface",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2NetworkInterface"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2NetworkInterfaces_Get": {
+            "$ref": "./examples/Ec2NetworkInterfaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Ec2NetworkInterfaces_CreateOrReplace",
+        "tags": [
+          "Ec2NetworkInterfaces"
+        ],
+        "description": "Create a Ec2NetworkInterface. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2NetworkInterface",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2NetworkInterface"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Ec2NetworkInterface' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2NetworkInterface"
+            }
+          },
+          "201": {
+            "description": "Resource 'Ec2NetworkInterface' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2NetworkInterface"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2NetworkInterfaces_CreateOrReplace": {
+            "$ref": "./examples/Ec2NetworkInterfaces_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Ec2NetworkInterfaces_Update",
+        "tags": [
+          "Ec2NetworkInterfaces"
+        ],
+        "description": "Update a Ec2NetworkInterface",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2NetworkInterface",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2NetworkInterfaceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2NetworkInterface"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2NetworkInterfaces_Update": {
+            "$ref": "./examples/Ec2NetworkInterfaces_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Ec2NetworkInterfaces_Delete",
+        "tags": [
+          "Ec2NetworkInterfaces"
+        ],
+        "description": "Delete a Ec2NetworkInterface",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2NetworkInterface",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2NetworkInterfaces_Delete": {
+            "$ref": "./examples/Ec2NetworkInterfaces_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsEc2NetworkInterfaceProperties": {
+      "type": "object",
+      "description": "Definition of awsEc2NetworkInterface",
+      "properties": {
+        "connectionTrackingSpecification": {
+          "$ref": "#/definitions/ConnectionTrackingSpecification",
+          "description": "Property connectionTrackingSpecification"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for the network interface."
+        },
+        "enablePrimaryIpv6": {
+          "type": "boolean",
+          "description": "If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address."
+        },
+        "groupSet": {
+          "type": "array",
+          "description": "A list of security group IDs associated with this network interface.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "description": "Network interface id."
+        },
+        "interfaceType": {
+          "type": "string",
+          "description": "Indicates the type of network interface."
+        },
+        "ipv4PrefixCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses."
+        },
+        "ipv4Prefixes": {
+          "type": "array",
+          "description": "Assigns a list of IPv4 prefixes to the network interface. If you want EC2 to automatically assign IPv4 prefixes, use the Ipv4PrefixCount property and do not specify this property. Presently, only /28 prefixes are supported. You can't specify IPv4 prefixes if you've specified one of the following: a count of IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.",
+          "items": {
+            "$ref": "#/definitions/Ipv4PrefixSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "ipv6AddressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property."
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property.",
+          "items": {
+            "$ref": "#/definitions/InstanceIpv6Address"
+          },
+          "x-ms-identifiers": []
+        },
+        "ipv6PrefixCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses."
+        },
+        "ipv6Prefixes": {
+          "type": "array",
+          "description": "Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.",
+          "items": {
+            "$ref": "#/definitions/Ipv6PrefixSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "primaryIpv6Address": {
+          "type": "string",
+          "description": "The primary IPv6 address"
+        },
+        "primaryPrivateIpAddress": {
+          "type": "string",
+          "description": "Returns the primary private IP address of the network interface."
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "description": "Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property."
+        },
+        "privateIpAddresses": {
+          "type": "array",
+          "description": "Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.",
+          "items": {
+            "$ref": "#/definitions/PrivateIpAddressSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "secondaryPrivateIpAddressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses"
+        },
+        "secondaryPrivateIpAddresses": {
+          "type": "array",
+          "description": "Returns the secondary private IP addresses of the network interface.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "sourceDestCheck": {
+          "type": "boolean",
+          "description": "Indicates whether traffic to or from the instance is validated."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The ID of the subnet to associate with the network interface."
+        },
+        "tags": {
+          "type": "array",
+          "description": "An arbitrary set of tags (key-value pairs) for this network interface.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "The ID of the VPC"
+        }
+      }
+    },
+    "ConnectionTrackingSpecification": {
+      "type": "object",
+      "description": "Definition of ConnectionTrackingSpecification",
+      "properties": {
+        "tcpEstablishedTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property tcpEstablishedTimeout"
+        },
+        "udpStreamTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property udpStreamTimeout"
+        },
+        "udpTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property udpTimeout"
+        }
+      }
+    },
+    "Ec2NetworkInterface": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Ec2NetworkInterfaceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Ec2NetworkInterfaceListResult": {
+      "type": "object",
+      "description": "The response of a Ec2NetworkInterface list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Ec2NetworkInterface items on this page",
+          "items": {
+            "$ref": "#/definitions/Ec2NetworkInterface"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Ec2NetworkInterfaceProperties": {
+      "type": "object",
+      "description": "Definition of Ec2NetworkInterface",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEc2NetworkInterfaceProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Ec2NetworkInterfaceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Ec2NetworkInterface resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InstanceIpv6Address": {
+      "type": "object",
+      "description": "Definition of InstanceIpv6Address",
+      "properties": {
+        "ipv6Address": {
+          "type": "string",
+          "description": "Property ipv6Address"
+        }
+      }
+    },
+    "Ipv4PrefixSpecification": {
+      "type": "object",
+      "description": "Definition of Ipv4PrefixSpecification",
+      "properties": {
+        "ipv4Prefix": {
+          "type": "string",
+          "description": "Property ipv4Prefix"
+        }
+      }
+    },
+    "Ipv6PrefixSpecification": {
+      "type": "object",
+      "description": "Definition of Ipv6PrefixSpecification",
+      "properties": {
+        "ipv6Prefix": {
+          "type": "string",
+          "description": "Property ipv6Prefix"
+        }
+      }
+    },
+    "PrivateIpAddressSpecification": {
+      "type": "object",
+      "description": "Definition of PrivateIpAddressSpecification",
+      "properties": {
+        "primary": {
+          "type": "boolean",
+          "description": "Property primary"
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "description": "Property privateIpAddress"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,2007 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CodeBuildProjects"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/codeBuildProjects": {
+      "get": {
+        "operationId": "CodeBuildProjects_ListBySubscription",
+        "tags": [
+          "CodeBuildProjects"
+        ],
+        "description": "List CodeBuildProject resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeBuildProjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeBuildProjects_ListBySubscription": {
+            "$ref": "./examples/CodeBuildProjects_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/codeBuildProjects": {
+      "get": {
+        "operationId": "CodeBuildProjects_ListByResourceGroup",
+        "tags": [
+          "CodeBuildProjects"
+        ],
+        "description": "List CodeBuildProject resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeBuildProjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeBuildProjects_ListByResourceGroup": {
+            "$ref": "./examples/CodeBuildProjects_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/codeBuildProjects/{name}": {
+      "get": {
+        "operationId": "CodeBuildProjects_Get",
+        "tags": [
+          "CodeBuildProjects"
+        ],
+        "description": "Get a CodeBuildProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CodeBuildProject",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeBuildProject"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeBuildProjects_Get": {
+            "$ref": "./examples/CodeBuildProjects_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CodeBuildProjects_CreateOrReplace",
+        "tags": [
+          "CodeBuildProjects"
+        ],
+        "description": "Create a CodeBuildProject. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CodeBuildProject",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeBuildProject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CodeBuildProject' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeBuildProject"
+            }
+          },
+          "201": {
+            "description": "Resource 'CodeBuildProject' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeBuildProject"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeBuildProjects_CreateOrReplace": {
+            "$ref": "./examples/CodeBuildProjects_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CodeBuildProjects_Update",
+        "tags": [
+          "CodeBuildProjects"
+        ],
+        "description": "Update a CodeBuildProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CodeBuildProject",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeBuildProjectTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeBuildProject"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeBuildProjects_Update": {
+            "$ref": "./examples/CodeBuildProjects_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CodeBuildProjects_Delete",
+        "tags": [
+          "CodeBuildProjects"
+        ],
+        "description": "Delete a CodeBuildProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CodeBuildProject",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeBuildProjects_Delete": {
+            "$ref": "./examples/CodeBuildProjects_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ArtifactNamespace": {
+      "type": "string",
+      "description": "ArtifactNamespace enum",
+      "enum": [
+        "BUILD_ID",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactNamespace",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BUILD_ID",
+            "value": "BUILD_ID",
+            "description": "ArtifactNamespace enum BUILD_ID"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ArtifactNamespace enum NONE"
+          }
+        ]
+      }
+    },
+    "ArtifactNamespaceEnumValue": {
+      "type": "object",
+      "description": "Definition of ArtifactNamespaceEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ArtifactNamespace",
+          "description": "Property value"
+        }
+      }
+    },
+    "ArtifactPackaging": {
+      "type": "string",
+      "description": "ArtifactPackaging enum",
+      "enum": [
+        "NONE",
+        "ZIP"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactPackaging",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ArtifactPackaging enum NONE"
+          },
+          {
+            "name": "ZIP",
+            "value": "ZIP",
+            "description": "ArtifactPackaging enum ZIP"
+          }
+        ]
+      }
+    },
+    "ArtifactPackagingEnumValue": {
+      "type": "object",
+      "description": "Definition of ArtifactPackagingEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ArtifactPackaging",
+          "description": "Property value"
+        }
+      }
+    },
+    "ArtifactsType": {
+      "type": "string",
+      "description": "ArtifactsType enum",
+      "enum": [
+        "CODEPIPELINE",
+        "NO_ARTIFACTS",
+        "S3"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CODEPIPELINE",
+            "value": "CODEPIPELINE",
+            "description": "ArtifactsType enum CODEPIPELINE"
+          },
+          {
+            "name": "NO_ARTIFACTS",
+            "value": "NO_ARTIFACTS",
+            "description": "ArtifactsType enum NO_ARTIFACTS"
+          },
+          {
+            "name": "S3",
+            "value": "S3",
+            "description": "ArtifactsType enum S3"
+          }
+        ]
+      }
+    },
+    "ArtifactsTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of ArtifactsTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ArtifactsType",
+          "description": "Property value"
+        }
+      }
+    },
+    "AwsCodeBuildProjectProperties": {
+      "type": "object",
+      "description": "Definition of awsCodeBuildProject",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the build project.</p>"
+        },
+        "artifacts": {
+          "$ref": "#/definitions/ProjectArtifacts",
+          "description": "<p>Information about the build output artifacts for the build project.</p>"
+        },
+        "badge": {
+          "$ref": "#/definitions/ProjectBadge",
+          "description": "<p>Information about the build badge for the build project.</p>"
+        },
+        "buildBatchConfig": {
+          "$ref": "#/definitions/ProjectBuildBatchConfig",
+          "description": "<p>A <a>ProjectBuildBatchConfig</a> object that defines the batch build options for the project.</p>"
+        },
+        "cache": {
+          "$ref": "#/definitions/ProjectCache",
+          "description": "<p>Information about the cache for the build project.</p>"
+        },
+        "concurrentBuildLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The maximum number of concurrent builds that are allowed for this project.</p> <p>New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run.</p>"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>When the build project was created, expressed in Unix time format.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "<p>A description that makes the build project easy to identify.</p>"
+        },
+        "encryptionKey": {
+          "type": "string",
+          "description": "<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). If you don't specify a value, CodeBuild uses the managed CMK for Amazon Simple Storage Service (Amazon S3). </p>"
+        },
+        "environment": {
+          "$ref": "#/definitions/ProjectEnvironment",
+          "description": "<p>Information about the build environment for this build project.</p>"
+        },
+        "fileSystemLocations": {
+          "type": "array",
+          "description": "<p> An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. </p>",
+          "items": {
+            "$ref": "#/definitions/ProjectFileSystemLocation"
+          },
+          "x-ms-identifiers": []
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>When the build project's settings were last modified, expressed in Unix time format.</p>"
+        },
+        "logsConfig": {
+          "$ref": "#/definitions/LogsConfig",
+          "description": "<p>Information about logs for the build project. A project can create logs in CloudWatch Logs, an S3 bucket, or both. </p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the build project.</p>"
+        },
+        "projectVisibility": {
+          "$ref": "#/definitions/ProjectVisibilityTypeEnumValue",
+          "description": "Property projectVisibility"
+        },
+        "publicProjectAlias": {
+          "type": "string",
+          "description": "<p>Contains the project identifier used with the public build APIs. </p>"
+        },
+        "queuedTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The number of minutes a build is allowed to be queued before it times out. </p>"
+        },
+        "resourceAccessRole": {
+          "type": "string",
+          "description": "<p>The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for the project's builds.</p>"
+        },
+        "secondaryArtifacts": {
+          "type": "array",
+          "description": "<p>An array of <code>ProjectArtifacts</code> objects. </p>",
+          "items": {
+            "$ref": "#/definitions/ProjectArtifacts"
+          },
+          "x-ms-identifiers": []
+        },
+        "secondarySourceVersions": {
+          "type": "array",
+          "description": "<p>An array of <code>ProjectSourceVersion</code> objects. If <code>secondarySourceVersions</code> is specified at the build level, then they take over these <code>secondarySourceVersions</code> (at the project level). </p>",
+          "items": {
+            "$ref": "#/definitions/ProjectSourceVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "secondarySources": {
+          "type": "array",
+          "description": "<p>An array of <code>ProjectSource</code> objects. </p>",
+          "items": {
+            "$ref": "#/definitions/ProjectSource"
+          },
+          "x-ms-identifiers": []
+        },
+        "serviceRole": {
+          "type": "string",
+          "description": "<p>The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.</p>"
+        },
+        "source": {
+          "$ref": "#/definitions/ProjectSource",
+          "description": "<p>Information about the build input source code for this build project.</p>"
+        },
+        "sourceVersion": {
+          "type": "string",
+          "description": "<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:</p> <ul> <li> <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p>If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p>For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html'>Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
+        },
+        "tags": {
+          "type": "array",
+          "description": "<p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.</p>",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "timeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.</p>"
+        },
+        "vpcConfig": {
+          "$ref": "#/definitions/VpcConfig",
+          "description": "<p>Information about the VPC configuration that CodeBuild accesses.</p>"
+        },
+        "webhook": {
+          "$ref": "#/definitions/Webhook",
+          "description": "<p>Information about a webhook that connects repository events to a build project in CodeBuild.</p>"
+        }
+      }
+    },
+    "BatchReportModeType": {
+      "type": "string",
+      "description": "BatchReportModeType enum",
+      "enum": [
+        "REPORT_AGGREGATED_BATCH",
+        "REPORT_INDIVIDUAL_BUILDS"
+      ],
+      "x-ms-enum": {
+        "name": "BatchReportModeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "REPORT_AGGREGATED_BATCH",
+            "value": "REPORT_AGGREGATED_BATCH",
+            "description": "BatchReportModeType enum REPORT_AGGREGATED_BATCH"
+          },
+          {
+            "name": "REPORT_INDIVIDUAL_BUILDS",
+            "value": "REPORT_INDIVIDUAL_BUILDS",
+            "description": "BatchReportModeType enum REPORT_INDIVIDUAL_BUILDS"
+          }
+        ]
+      }
+    },
+    "BatchReportModeTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of BatchReportModeTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/BatchReportModeType",
+          "description": "Property value"
+        }
+      }
+    },
+    "BatchRestrictions": {
+      "type": "object",
+      "description": "Definition of BatchRestrictions",
+      "properties": {
+        "computeTypesAllowed": {
+          "type": "array",
+          "description": "<p>An array of strings that specify the compute types that are allowed for the batch build. See <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html'>Build environment compute types</a> in the <i>CodeBuild User Guide</i> for these values. </p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "maximumBuildsAllowed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the maximum number of builds allowed.</p>"
+        }
+      }
+    },
+    "BucketOwnerAccess": {
+      "type": "string",
+      "description": "BucketOwnerAccess enum",
+      "enum": [
+        "FULL",
+        "NONE",
+        "READ_ONLY"
+      ],
+      "x-ms-enum": {
+        "name": "BucketOwnerAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FULL",
+            "value": "FULL",
+            "description": "BucketOwnerAccess enum FULL"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "BucketOwnerAccess enum NONE"
+          },
+          {
+            "name": "READ_ONLY",
+            "value": "READ_ONLY",
+            "description": "BucketOwnerAccess enum READ_ONLY"
+          }
+        ]
+      }
+    },
+    "BucketOwnerAccessEnumValue": {
+      "type": "object",
+      "description": "Definition of BucketOwnerAccessEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/BucketOwnerAccess",
+          "description": "Property value"
+        }
+      }
+    },
+    "BuildStatusConfig": {
+      "type": "object",
+      "description": "Definition of BuildStatusConfig",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "<p>Specifies the context of the build status CodeBuild sends to the source provider. The usage of this parameter depends on the source provider.</p> <dl> <dt>Bitbucket</dt> <dd> <p>This parameter is used for the <code>name</code> parameter in the Bitbucket commit status. For more information, see <a href='https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build'>build</a> in the Bitbucket API documentation.</p> </dd> <dt>GitHub/GitHub Enterprise Server</dt> <dd> <p>This parameter is used for the <code>context</code> parameter in the GitHub commit status. For more information, see <a href='https://developer.github.com/v3/repos/statuses/#create-a-commit-status'>Create a commit status</a> in the GitHub developer guide.</p> </dd> </dl>"
+        },
+        "targetUrl": {
+          "type": "string",
+          "description": "<p>Specifies the target url of the build status CodeBuild sends to the source provider. The usage of this parameter depends on the source provider.</p> <dl> <dt>Bitbucket</dt> <dd> <p>This parameter is used for the <code>url</code> parameter in the Bitbucket commit status. For more information, see <a href='https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build'>build</a> in the Bitbucket API documentation.</p> </dd> <dt>GitHub/GitHub Enterprise Server</dt> <dd> <p>This parameter is used for the <code>target_url</code> parameter in the GitHub commit status. For more information, see <a href='https://developer.github.com/v3/repos/statuses/#create-a-commit-status'>Create a commit status</a> in the GitHub developer guide.</p> </dd> </dl>"
+        }
+      }
+    },
+    "CacheMode": {
+      "type": "string",
+      "description": "CacheMode enum",
+      "enum": [
+        "LOCAL_CUSTOM_CACHE",
+        "LOCAL_DOCKER_LAYER_CACHE",
+        "LOCAL_SOURCE_CACHE"
+      ],
+      "x-ms-enum": {
+        "name": "CacheMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LOCAL_CUSTOM_CACHE",
+            "value": "LOCAL_CUSTOM_CACHE",
+            "description": "CacheMode enum LOCAL_CUSTOM_CACHE"
+          },
+          {
+            "name": "LOCAL_DOCKER_LAYER_CACHE",
+            "value": "LOCAL_DOCKER_LAYER_CACHE",
+            "description": "CacheMode enum LOCAL_DOCKER_LAYER_CACHE"
+          },
+          {
+            "name": "LOCAL_SOURCE_CACHE",
+            "value": "LOCAL_SOURCE_CACHE",
+            "description": "CacheMode enum LOCAL_SOURCE_CACHE"
+          }
+        ]
+      }
+    },
+    "CacheModeEnumValue": {
+      "type": "object",
+      "description": "Definition of CacheModeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/CacheMode",
+          "description": "Property value"
+        }
+      }
+    },
+    "CacheType": {
+      "type": "string",
+      "description": "CacheType enum",
+      "enum": [
+        "LOCAL",
+        "NO_CACHE",
+        "S3"
+      ],
+      "x-ms-enum": {
+        "name": "CacheType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LOCAL",
+            "value": "LOCAL",
+            "description": "CacheType enum LOCAL"
+          },
+          {
+            "name": "NO_CACHE",
+            "value": "NO_CACHE",
+            "description": "CacheType enum NO_CACHE"
+          },
+          {
+            "name": "S3",
+            "value": "S3",
+            "description": "CacheType enum S3"
+          }
+        ]
+      }
+    },
+    "CacheTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of CacheTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/CacheType",
+          "description": "Property value"
+        }
+      }
+    },
+    "CloudWatchLogsConfig": {
+      "type": "object",
+      "description": "Definition of CloudWatchLogsConfig",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "<p> The group name of the logs in CloudWatch Logs. For more information, see <a href='https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html'>Working with Log Groups and Log Streams</a>. </p>"
+        },
+        "status": {
+          "$ref": "#/definitions/LogsConfigStatusTypeEnumValue",
+          "description": "<p>The current status of the logs in CloudWatch Logs for a build project. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: CloudWatch Logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: CloudWatch Logs are not enabled for this build project.</p> </li> </ul>"
+        },
+        "streamName": {
+          "type": "string",
+          "description": "<p> The prefix of the stream name of the CloudWatch Logs. For more information, see <a href='https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html'>Working with Log Groups and Log Streams</a>. </p>"
+        }
+      }
+    },
+    "CodeBuildProject": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeBuildProjectProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CodeBuildProjectListResult": {
+      "type": "object",
+      "description": "The response of a CodeBuildProject list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CodeBuildProject items on this page",
+          "items": {
+            "$ref": "#/definitions/CodeBuildProject"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CodeBuildProjectProperties": {
+      "type": "object",
+      "description": "Definition of CodeBuildProject",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsCodeBuildProjectProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CodeBuildProjectTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in CodeBuildProject resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ComputeType": {
+      "type": "string",
+      "description": "ComputeType enum",
+      "enum": [
+        "BUILD_GENERAL1_2XLARGE",
+        "BUILD_GENERAL1_LARGE",
+        "BUILD_GENERAL1_MEDIUM",
+        "BUILD_GENERAL1_SMALL",
+        "BUILD_GENERAL1_XLARGE",
+        "BUILD_LAMBDA_10GB",
+        "BUILD_LAMBDA_1GB",
+        "BUILD_LAMBDA_2GB",
+        "BUILD_LAMBDA_4GB",
+        "BUILD_LAMBDA_8GB"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BUILD_GENERAL1_2XLARGE",
+            "value": "BUILD_GENERAL1_2XLARGE",
+            "description": "ComputeType enum BUILD_GENERAL1_2XLARGE"
+          },
+          {
+            "name": "BUILD_GENERAL1_LARGE",
+            "value": "BUILD_GENERAL1_LARGE",
+            "description": "ComputeType enum BUILD_GENERAL1_LARGE"
+          },
+          {
+            "name": "BUILD_GENERAL1_MEDIUM",
+            "value": "BUILD_GENERAL1_MEDIUM",
+            "description": "ComputeType enum BUILD_GENERAL1_MEDIUM"
+          },
+          {
+            "name": "BUILD_GENERAL1_SMALL",
+            "value": "BUILD_GENERAL1_SMALL",
+            "description": "ComputeType enum BUILD_GENERAL1_SMALL"
+          },
+          {
+            "name": "BUILD_GENERAL1_XLARGE",
+            "value": "BUILD_GENERAL1_XLARGE",
+            "description": "ComputeType enum BUILD_GENERAL1_XLARGE"
+          },
+          {
+            "name": "BUILD_LAMBDA_10GB",
+            "value": "BUILD_LAMBDA_10GB",
+            "description": "ComputeType enum BUILD_LAMBDA_10GB"
+          },
+          {
+            "name": "BUILD_LAMBDA_1GB",
+            "value": "BUILD_LAMBDA_1GB",
+            "description": "ComputeType enum BUILD_LAMBDA_1GB"
+          },
+          {
+            "name": "BUILD_LAMBDA_2GB",
+            "value": "BUILD_LAMBDA_2GB",
+            "description": "ComputeType enum BUILD_LAMBDA_2GB"
+          },
+          {
+            "name": "BUILD_LAMBDA_4GB",
+            "value": "BUILD_LAMBDA_4GB",
+            "description": "ComputeType enum BUILD_LAMBDA_4GB"
+          },
+          {
+            "name": "BUILD_LAMBDA_8GB",
+            "value": "BUILD_LAMBDA_8GB",
+            "description": "ComputeType enum BUILD_LAMBDA_8GB"
+          }
+        ]
+      }
+    },
+    "ComputeTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of ComputeTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ComputeType",
+          "description": "Property value"
+        }
+      }
+    },
+    "CredentialProviderType": {
+      "type": "string",
+      "description": "CredentialProviderType enum",
+      "enum": [
+        "SECRETS_MANAGER"
+      ],
+      "x-ms-enum": {
+        "name": "CredentialProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SECRETS_MANAGER",
+            "value": "SECRETS_MANAGER",
+            "description": "CredentialProviderType enum SECRETS_MANAGER"
+          }
+        ]
+      }
+    },
+    "CredentialProviderTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of CredentialProviderTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/CredentialProviderType",
+          "description": "Property value"
+        }
+      }
+    },
+    "EnvironmentType": {
+      "type": "string",
+      "description": "EnvironmentType enum",
+      "enum": [
+        "ARM_CONTAINER",
+        "ARM_LAMBDA_CONTAINER",
+        "LINUX_CONTAINER",
+        "LINUX_GPU_CONTAINER",
+        "LINUX_LAMBDA_CONTAINER",
+        "WINDOWS_CONTAINER",
+        "WINDOWS_SERVER_2019_CONTAINER"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ARM_CONTAINER",
+            "value": "ARM_CONTAINER",
+            "description": "EnvironmentType enum ARM_CONTAINER"
+          },
+          {
+            "name": "ARM_LAMBDA_CONTAINER",
+            "value": "ARM_LAMBDA_CONTAINER",
+            "description": "EnvironmentType enum ARM_LAMBDA_CONTAINER"
+          },
+          {
+            "name": "LINUX_CONTAINER",
+            "value": "LINUX_CONTAINER",
+            "description": "EnvironmentType enum LINUX_CONTAINER"
+          },
+          {
+            "name": "LINUX_GPU_CONTAINER",
+            "value": "LINUX_GPU_CONTAINER",
+            "description": "EnvironmentType enum LINUX_GPU_CONTAINER"
+          },
+          {
+            "name": "LINUX_LAMBDA_CONTAINER",
+            "value": "LINUX_LAMBDA_CONTAINER",
+            "description": "EnvironmentType enum LINUX_LAMBDA_CONTAINER"
+          },
+          {
+            "name": "WINDOWS_CONTAINER",
+            "value": "WINDOWS_CONTAINER",
+            "description": "EnvironmentType enum WINDOWS_CONTAINER"
+          },
+          {
+            "name": "WINDOWS_SERVER_2019_CONTAINER",
+            "value": "WINDOWS_SERVER_2019_CONTAINER",
+            "description": "EnvironmentType enum WINDOWS_SERVER_2019_CONTAINER"
+          }
+        ]
+      }
+    },
+    "EnvironmentTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of EnvironmentTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/EnvironmentType",
+          "description": "Property value"
+        }
+      }
+    },
+    "EnvironmentVariable": {
+      "type": "object",
+      "description": "Definition of EnvironmentVariable",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "<p>The name or key of the environment variable.</p>"
+        },
+        "type": {
+          "$ref": "#/definitions/EnvironmentVariableTypeEnumValue",
+          "description": "<p>The type of environment variable. Valid values include:</p> <ul> <li> <p> <code>PARAMETER_STORE</code>: An environment variable stored in Systems Manager Parameter Store. For environment variables of this type, specify the name of the parameter as the <code>value</code> of the EnvironmentVariable. The parameter value will be substituted for the name at runtime. You can also define Parameter Store environment variables in the buildspec. To learn how to do so, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store'>env/parameter-store</a> in the <i>CodeBuild User Guide</i>.</p> </li> <li> <p> <code>PLAINTEXT</code>: An environment variable in plain text format. This is the default value.</p> </li> <li> <p> <code>SECRETS_MANAGER</code>: An environment variable stored in Secrets Manager. For environment variables of this type, specify the name of the secret as the <code>value</code> of the EnvironmentVariable. The secret value will be substituted for the name at runtime. You can also define Secrets Manager environment variables in the buildspec. To learn how to do so, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager'>env/secrets-manager</a> in the <i>CodeBuild User Guide</i>.</p> </li> </ul>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>The value of the environment variable.</p> <important> <p>We strongly discourage the use of <code>PLAINTEXT</code> environment variables to store sensitive values, especially Amazon Web Services secret key IDs. <code>PLAINTEXT</code> environment variables can be displayed in plain text using the CodeBuild console and the CLI. For sensitive values, we recommend you use an environment variable of type <code>PARAMETER_STORE</code> or <code>SECRETS_MANAGER</code>. </p> </important>"
+        }
+      }
+    },
+    "EnvironmentVariableType": {
+      "type": "string",
+      "description": "EnvironmentVariableType enum",
+      "enum": [
+        "PARAMETER_STORE",
+        "PLAINTEXT",
+        "SECRETS_MANAGER"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentVariableType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PARAMETER_STORE",
+            "value": "PARAMETER_STORE",
+            "description": "EnvironmentVariableType enum PARAMETER_STORE"
+          },
+          {
+            "name": "PLAINTEXT",
+            "value": "PLAINTEXT",
+            "description": "EnvironmentVariableType enum PLAINTEXT"
+          },
+          {
+            "name": "SECRETS_MANAGER",
+            "value": "SECRETS_MANAGER",
+            "description": "EnvironmentVariableType enum SECRETS_MANAGER"
+          }
+        ]
+      }
+    },
+    "EnvironmentVariableTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of EnvironmentVariableTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/EnvironmentVariableType",
+          "description": "Property value"
+        }
+      }
+    },
+    "FileSystemType": {
+      "type": "string",
+      "description": "FileSystemType enum",
+      "enum": [
+        "EFS"
+      ],
+      "x-ms-enum": {
+        "name": "FileSystemType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EFS",
+            "value": "EFS",
+            "description": "FileSystemType enum EFS"
+          }
+        ]
+      }
+    },
+    "FileSystemTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of FileSystemTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/FileSystemType",
+          "description": "Property value"
+        }
+      }
+    },
+    "FilterGroup": {
+      "type": "object",
+      "description": "Definition of FilterGroup",
+      "properties": {
+        "webhookFilter": {
+          "$ref": "#/definitions/WebhookFilter",
+          "description": "Property webhookFilter"
+        }
+      }
+    },
+    "GitSubmodulesConfig": {
+      "type": "object",
+      "description": "Definition of GitSubmodulesConfig",
+      "properties": {
+        "fetchSubmodules": {
+          "type": "boolean",
+          "description": "<p> Set to true to fetch Git submodules for your CodeBuild build project. </p>"
+        }
+      }
+    },
+    "ImagePullCredentialsType": {
+      "type": "string",
+      "description": "ImagePullCredentialsType enum",
+      "enum": [
+        "CODEBUILD",
+        "SERVICE_ROLE"
+      ],
+      "x-ms-enum": {
+        "name": "ImagePullCredentialsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CODEBUILD",
+            "value": "CODEBUILD",
+            "description": "ImagePullCredentialsType enum CODEBUILD"
+          },
+          {
+            "name": "SERVICE_ROLE",
+            "value": "SERVICE_ROLE",
+            "description": "ImagePullCredentialsType enum SERVICE_ROLE"
+          }
+        ]
+      }
+    },
+    "ImagePullCredentialsTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of ImagePullCredentialsTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ImagePullCredentialsType",
+          "description": "Property value"
+        }
+      }
+    },
+    "LogsConfig": {
+      "type": "object",
+      "description": "Definition of LogsConfig",
+      "properties": {
+        "cloudWatchLogs": {
+          "$ref": "#/definitions/CloudWatchLogsConfig",
+          "description": "<p> Information about CloudWatch Logs for a build project. CloudWatch Logs are enabled by default. </p>"
+        },
+        "s3Logs": {
+          "$ref": "#/definitions/S3LogsConfig",
+          "description": "<p> Information about logs built to an S3 bucket for a build project. S3 logs are not enabled by default. </p>"
+        }
+      }
+    },
+    "LogsConfigStatusType": {
+      "type": "string",
+      "description": "LogsConfigStatusType enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "LogsConfigStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "LogsConfigStatusType enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "LogsConfigStatusType enum ENABLED"
+          }
+        ]
+      }
+    },
+    "LogsConfigStatusTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of LogsConfigStatusTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/LogsConfigStatusType",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProjectArtifacts": {
+      "type": "object",
+      "description": "Definition of ProjectArtifacts",
+      "properties": {
+        "artifactIdentifier": {
+          "type": "string",
+          "description": "<p> An identifier for this artifact definition. </p>"
+        },
+        "bucketOwnerAccess": {
+          "$ref": "#/definitions/BucketOwnerAccessEnumValue",
+          "description": "Property bucketOwnerAccess"
+        },
+        "encryptionDisabled": {
+          "type": "boolean",
+          "description": "<p> Set to true if you do not want your output artifacts encrypted. This option is valid only if your artifacts type is Amazon S3. If this is set with another artifacts type, an invalidInputException is thrown. </p>"
+        },
+        "location": {
+          "type": "string",
+          "description": "<p>Information about the build output artifact location:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output locations instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output bucket.</p> </li> </ul>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output artifact object. If you set the name to be a forward slash ('/'), the artifact is stored in the root of the output bucket.</p> </li> </ul> <p>For example:</p> <ul> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, then the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip</code>. </p> </li> <li> <p> If <code>path</code> is empty, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to '<code>/</code>', the output artifact is stored in the root of the output bucket. </p> </li> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to '<code>/</code>', the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;</code>. </p> </li> </ul>"
+        },
+        "namespaceType": {
+          "$ref": "#/definitions/ArtifactNamespaceEnumValue",
+          "description": "<p>Along with <code>path</code> and <code>name</code>, the pattern that CodeBuild uses to determine the name and location to store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>BUILD_ID</code>: Include the build ID in the location of the build output artifact.</p> </li> <li> <p> <code>NONE</code>: Do not include the build ID. This is the default if <code>namespaceType</code> is not specified.</p> </li> </ul> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip</code>.</p>"
+        },
+        "overrideArtifactName": {
+          "type": "boolean",
+          "description": "<p> If this flag is set, a name specified in the buildspec file overrides the artifact name. The name specified in a buildspec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. </p>"
+        },
+        "packaging": {
+          "$ref": "#/definitions/ArtifactPackagingEnumValue",
+          "description": "<p>The type of build output artifact to create:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output artifacts instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: CodeBuild creates in the output bucket a folder that contains the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: CodeBuild creates in the output bucket a ZIP file that contains the build output.</p> </li> </ul> </li> </ul>"
+        },
+        "path": {
+          "type": "string",
+          "description": "<p>Along with <code>namespaceType</code> and <code>name</code>, the pattern that CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the path to the output artifact. If <code>path</code> is not specified, <code>path</code> is not used.</p> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in the output bucket at <code>MyArtifacts/MyArtifact.zip</code>.</p>"
+        },
+        "type": {
+          "$ref": "#/definitions/ArtifactsTypeEnumValue",
+          "description": "<p>The type of build output artifact. Valid values include:</p> <ul> <li> <p> <code>CODEPIPELINE</code>: The build project has build output generated through CodePipeline. </p> <note> <p>The <code>CODEPIPELINE</code> type is not supported for <code>secondaryArtifacts</code>.</p> </note> </li> <li> <p> <code>NO_ARTIFACTS</code>: The build project does not produce any build output.</p> </li> <li> <p> <code>S3</code>: The build project stores build output in Amazon S3.</p> </li> </ul>"
+        }
+      }
+    },
+    "ProjectBadge": {
+      "type": "object",
+      "description": "Definition of ProjectBadge",
+      "properties": {
+        "badgeEnabled": {
+          "type": "boolean",
+          "description": "<p>Set this to true to generate a publicly accessible URL for your project's build badge.</p>"
+        },
+        "badgeRequestUrl": {
+          "type": "string",
+          "description": "<p>The publicly-accessible URL through which you can access the build badge for your project. </p>"
+        }
+      }
+    },
+    "ProjectBuildBatchConfig": {
+      "type": "object",
+      "description": "Definition of ProjectBuildBatchConfig",
+      "properties": {
+        "batchReportMode": {
+          "$ref": "#/definitions/BatchReportModeTypeEnumValue",
+          "description": "<p>Specifies how build status reports are sent to the source provider for the batch build. This property is only used when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise, and your project is configured to report build statuses to the source provider.</p> <dl> <dt>REPORT_AGGREGATED_BATCH</dt> <dd> <p>(Default) Aggregate all of the build statuses into a single status report.</p> </dd> <dt>REPORT_INDIVIDUAL_BUILDS</dt> <dd> <p>Send a separate status report for each individual build.</p> </dd> </dl>"
+        },
+        "combineArtifacts": {
+          "type": "boolean",
+          "description": "<p>Specifies if the build artifacts for the batch build should be combined into a single artifact location.</p>"
+        },
+        "restrictions": {
+          "$ref": "#/definitions/BatchRestrictions",
+          "description": "<p>A <code>BatchRestrictions</code> object that specifies the restrictions for the batch build.</p>"
+        },
+        "serviceRole": {
+          "type": "string",
+          "description": "<p>Specifies the service role ARN for the batch build project.</p>"
+        },
+        "timeoutInMins": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the maximum amount of time, in minutes, that the batch build must be completed in.</p>"
+        }
+      }
+    },
+    "ProjectCache": {
+      "type": "object",
+      "description": "Definition of ProjectCache",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "<p>Information about the cache location: </p> <ul> <li> <p> <code>NO_CACHE</code> or <code>LOCAL</code>: This value is ignored.</p> </li> <li> <p> <code>S3</code>: This is the S3 bucket name/prefix.</p> </li> </ul>"
+        },
+        "modes": {
+          "type": "array",
+          "description": "<p>An array of strings that specify the local cache modes. You can use one or more local cache modes at the same time. This is only used for <code>LOCAL</code> cache types.</p> <p>Possible values are:</p> <dl> <dt>LOCAL_SOURCE_CACHE</dt> <dd> <p>Caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored. </p> </dd> <dt>LOCAL_DOCKER_LAYER_CACHE</dt> <dd> <p>Caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network. </p> <note> <ul> <li> <p>You can use a Docker layer cache in the Linux environment only. </p> </li> <li> <p>The <code>privileged</code> flag must be set so that your project has the required Docker permissions. </p> </li> <li> <p>You should consider the security implications before you use a Docker layer cache. </p> </li> </ul> </note> </dd> <dt>LOCAL_CUSTOM_CACHE</dt> <dd> <p>Caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache: </p> <ul> <li> <p>Only directories can be specified for caching. You cannot specify individual files. </p> </li> <li> <p>Symlinks are used to reference cached directories. </p> </li> <li> <p>Cached directories are linked to your build before it downloads its project sources. Cached items are overridden if a source item has the same name. Directories are specified using cache paths in the buildspec file. </p> </li> </ul> </dd> </dl>",
+          "items": {
+            "$ref": "#/definitions/CacheMode"
+          },
+          "x-ms-identifiers": []
+        },
+        "type": {
+          "$ref": "#/definitions/CacheTypeEnumValue",
+          "description": "<p>The type of cache used by the build project. Valid values include:</p> <ul> <li> <p> <code>NO_CACHE</code>: The build project does not use any cache.</p> </li> <li> <p> <code>S3</code>: The build project reads and writes from and to S3.</p> </li> <li> <p> <code>LOCAL</code>: The build project stores a cache locally on a build host that is only available to that build host.</p> </li> </ul>"
+        }
+      }
+    },
+    "ProjectEnvironment": {
+      "type": "object",
+      "description": "Definition of ProjectEnvironment",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "description": "<p>The ARN of the Amazon S3 bucket, path prefix, and object key that contains the PEM-encoded certificate for the build project. For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate'>certificate</a> in the <i>CodeBuild User Guide</i>.</p>"
+        },
+        "computeType": {
+          "$ref": "#/definitions/ComputeTypeEnumValue",
+          "description": "<p>Information about the compute resources the build project uses. Available values include:</p> <ul> <li> <p> <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GB memory and 8 vCPUs for builds, depending on your environment type.</p> </li> <li> <p> <code>BUILD_GENERAL1_XLARGE</code>: Use up to 70 GB memory and 36 vCPUs for builds, depending on your environment type.</p> </li> <li> <p> <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 145 GB memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker images up to 100 GB uncompressed.</p> </li> <li> <p> <code>BUILD_LAMBDA_1GB</code>: Use up to 1 GB memory for builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p> </li> <li> <p> <code>BUILD_LAMBDA_2GB</code>: Use up to 2 GB memory for builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p> </li> <li> <p> <code>BUILD_LAMBDA_4GB</code>: Use up to 4 GB memory for builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p> </li> <li> <p> <code>BUILD_LAMBDA_8GB</code>: Use up to 8 GB memory for builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p> </li> <li> <p> <code>BUILD_LAMBDA_10GB</code>: Use up to 10 GB memory for builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p> </li> </ul> <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p> <ul> <li> <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 3 GB memory and 2 vCPUs for builds. </p> </li> <li> <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16 GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p> </li> <li> <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GB memory and 2 vCPUs on ARM-based processors for builds.</p> </li> </ul> <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p> <ul> <li> <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 15 GB memory and 8 vCPUs for builds. </p> </li> <li> <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p> </li> <li> <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.</p> </li> </ul> <note> <p>If you're using compute fleets during project creation, <code>computeType</code> will be ignored.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html'>Build Environment Compute Types</a> in the <i>CodeBuild User Guide.</i> </p>"
+        },
+        "environmentVariables": {
+          "type": "array",
+          "description": "<p>A set of environment variables to make available to builds for this build project.</p>",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          },
+          "x-ms-identifiers": []
+        },
+        "fleet": {
+          "$ref": "#/definitions/ProjectFleet",
+          "description": "<p>A ProjectFleet object to use for this build project.</p>"
+        },
+        "image": {
+          "type": "string",
+          "description": "<p>The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:</p> <ul> <li> <p>For an image tag: <code>&lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;</code>. For example, in the Docker repository that CodeBuild uses to manage its Docker images, this would be <code>aws/codebuild/standard:4.0</code>. </p> </li> <li> <p>For an image digest: <code>&lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;</code>. For example, to specify an image with the digest 'sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,' use <code>&lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf</code>.</p> </li> </ul> <p>For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html'>Docker images provided by CodeBuild</a> in the <i>CodeBuild user guide</i>.</p>"
+        },
+        "imagePullCredentialsType": {
+          "$ref": "#/definitions/ImagePullCredentialsTypeEnumValue",
+          "description": "<p> The type of credentials CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust CodeBuild service principal. </p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that CodeBuild uses your build project's service role. </p> </li> </ul> <p> When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an CodeBuild curated image, you must use CODEBUILD credentials. </p>"
+        },
+        "privilegedMode": {
+          "type": "boolean",
+          "description": "<p>Enables running the Docker daemon inside a Docker container. Set to true only if the build project is used to build Docker images. Otherwise, a build that attempts to interact with the Docker daemon fails. The default setting is <code>false</code>.</p> <p>You can initialize the Docker daemon during the install phase of your build by adding one of the following sets of commands to the install phase of your buildspec file:</p> <p>If the operating system's base image is Ubuntu Linux:</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp;</code> </p> <p> <code>- timeout 15 sh -c 'until docker info; do echo .; sleep 1; done'</code> </p> <p>If the operating system's base image is Alpine Linux and the previous command does not work, add the <code>-t</code> argument to <code>timeout</code>:</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp;</code> </p> <p> <code>- timeout -t 15 sh -c 'until docker info; do echo .; sleep 1; done'</code> </p>"
+        },
+        "registryCredential": {
+          "$ref": "#/definitions/RegistryCredential",
+          "description": "<p> The credentials for access to a private registry.</p>"
+        },
+        "type": {
+          "$ref": "#/definitions/EnvironmentTypeEnumValue",
+          "description": "<p>The type of build environment to use for related builds.</p> <ul> <li> <p>The environment type <code>ARM_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).</p> </li> <li> <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> </li> <li> <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).</p> </li> </ul> <ul> <li> <p>The environment types <code>ARM_LAMBDA_CONTAINER</code> and <code>LINUX_LAMBDA_CONTAINER</code> are available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Mumbai), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), EU (Frankfurt), EU (Ireland), and South America (São Paulo).</p> </li> </ul> <ul> <li> <p>The environment types <code>WINDOWS_CONTAINER</code> and <code>WINDOWS_SERVER_2019_CONTAINER</code> are available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), and EU (Ireland).</p> </li> </ul> <note> <p>If you're using compute fleets during project creation, <code>type</code> will be ignored.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html'>Build environment compute types</a> in the <i>CodeBuild user guide</i>.</p>"
+        }
+      }
+    },
+    "ProjectFileSystemLocation": {
+      "type": "object",
+      "description": "Definition of ProjectFileSystemLocation",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "<p>The name used to access a file system created by Amazon EFS. CodeBuild creates an environment variable by appending the <code>identifier</code> in all capital letters to <code>CODEBUILD_</code>. For example, if you specify <code>my_efs</code> for <code>identifier</code>, a new environment variable is create named <code>CODEBUILD_MY_EFS</code>. </p> <p> The <code>identifier</code> is used to mount your file system. </p>"
+        },
+        "location": {
+          "type": "string",
+          "description": "<p>A string that specifies the location of the file system created by Amazon EFS. Its format is <code>efs-dns-name:/directory-path</code>. You can find the DNS name of file system when you view it in the Amazon EFS console. The directory path is a path to a directory in the file system that CodeBuild mounts. For example, if the DNS name of a file system is <code>fs-abcd1234.efs.us-west-2.amazonaws.com</code>, and its mount directory is <code>my-efs-mount-directory</code>, then the <code>location</code> is <code>fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory</code>. </p> <p>The directory path in the format <code>efs-dns-name:/directory-path</code> is optional. If you do not specify a directory path, the location is only the DNS name and CodeBuild mounts the entire file system. </p>"
+        },
+        "mountOptions": {
+          "type": "string",
+          "description": "<p> The mount options for a file system created by Amazon EFS. The default mount options used by CodeBuild are <code>nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2</code>. For more information, see <a href='https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html'>Recommended NFS Mount Options</a>. </p>"
+        },
+        "mountPoint": {
+          "type": "string",
+          "description": "<p>The location in the container where you mount the file system. </p>"
+        },
+        "type": {
+          "$ref": "#/definitions/FileSystemTypeEnumValue",
+          "description": "<p> The type of the file system. The one supported type is <code>EFS</code>. </p>"
+        }
+      }
+    },
+    "ProjectFleet": {
+      "type": "object",
+      "description": "Definition of ProjectFleet",
+      "properties": {
+        "fleetArn": {
+          "type": "string",
+          "description": "<p>Specifies the compute fleet ARN for the build project.</p>"
+        }
+      }
+    },
+    "ProjectSource": {
+      "type": "object",
+      "description": "Definition of ProjectSource",
+      "properties": {
+        "auth": {
+          "$ref": "#/definitions/SourceAuth",
+          "description": "<p>Information about the authorization settings for CodeBuild to access the source code to be built.</p> <p>This information is for the CodeBuild console's use only. Your code should not get or set this information directly.</p>"
+        },
+        "buildStatusConfig": {
+          "$ref": "#/definitions/BuildStatusConfig",
+          "description": "<p>Contains information that defines how the build project reports the build status to the source provider. This option is only used when the source provider is <code>GITHUB</code>, <code>GITHUB_ENTERPRISE</code>, or <code>BITBUCKET</code>.</p>"
+        },
+        "buildspec": {
+          "type": "string",
+          "description": "<p>The buildspec file declaration to use for the builds in this build project.</p> <p> If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket. The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec file using its ARN (for example, <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage'>Buildspec File Name and Storage Location</a>. </p>"
+        },
+        "gitCloneDepth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Information about the Git clone depth for the build project.</p>"
+        },
+        "gitSubmodulesConfig": {
+          "$ref": "#/definitions/GitSubmodulesConfig",
+          "description": "<p> Information about the Git submodules configuration for the build project. </p>"
+        },
+        "insecureSsl": {
+          "type": "boolean",
+          "description": "<p>Enable this flag to ignore SSL warnings while connecting to the project source code.</p>"
+        },
+        "location": {
+          "type": "string",
+          "description": "<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in CodePipeline, <code>location</code> should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source action instead of this value.</p> </li> <li> <p>For source code in an CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, <code>https://git-codecommit.&lt;region-ID&gt;.amazonaws.com/v1/repos/&lt;repo-name&gt;</code>).</p> </li> <li> <p>For source code in an Amazon S3 input bucket, one of the following. </p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>&lt;bucket-name&gt;/&lt;path&gt;/&lt;object-name&gt;.zip</code>). </p> </li> <li> <p>The path to the folder that contains the source code (for example, <code>&lt;bucket-name&gt;/&lt;path-to-source-code&gt;/&lt;folder&gt;/</code>). </p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitHub account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow CodeBuild to have access to, and then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object's <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in an GitLab or self-managed GitLab repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitLab account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitLab, on the Connections <b>Authorize application</b> page, choose <b>Authorize</b>. Then on the CodeConnections <b>Create GitLab connection</b> page, choose <b>Connect to GitLab</b>. (After you have connected to your GitLab account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to override the default connection and use this connection instead, set the <code>auth</code> object's <code>type</code> value to <code>CODECONNECTIONS</code> in the <code>source</code> object.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object's <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul> <p> If you specify <code>CODEPIPELINE</code> for the <code>Type</code> property, don't specify this property. For all of the other types, you must specify <code>Location</code>. </p>"
+        },
+        "reportBuildStatus": {
+          "type": "boolean",
+          "description": "<p> Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you use a different source provider, an <code>invalidInputException</code> is thrown. </p> <p>To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html'>Source provider access</a> in the <i>CodeBuild User Guide</i>.</p> <p>The status of a build triggered by a webhook is always reported to your source provider. </p> <p>If your project's builds are triggered by a webhook, you must push a new commit to the repo for a change to this property to take effect.</p>"
+        },
+        "sourceIdentifier": {
+          "type": "string",
+          "description": "<p>An identifier for this project source. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. </p>"
+        },
+        "type": {
+          "$ref": "#/definitions/SourceTypeEnumValue",
+          "description": "<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise Server repository.</p> </li> <li> <p> <code>GITLAB</code>: The source code is in a GitLab repository.</p> </li> <li> <p> <code>GITLAB_SELF_MANAGED</code>: The source code is in a self-managed GitLab repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon S3 bucket.</p> </li> </ul>"
+        }
+      }
+    },
+    "ProjectSourceVersion": {
+      "type": "object",
+      "description": "Definition of ProjectSourceVersion",
+      "properties": {
+        "sourceIdentifier": {
+          "type": "string",
+          "description": "<p>An identifier for a source in the build project. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. </p>"
+        },
+        "sourceVersion": {
+          "type": "string",
+          "description": "<p>The source version for the corresponding source identifier. If specified, must be one of:</p> <ul> <li> <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub or GitLab: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html'>Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
+        }
+      }
+    },
+    "ProjectVisibilityType": {
+      "type": "string",
+      "description": "ProjectVisibilityType enum",
+      "enum": [
+        "PRIVATE",
+        "PUBLIC_READ"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectVisibilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PRIVATE",
+            "value": "PRIVATE",
+            "description": "ProjectVisibilityType enum PRIVATE"
+          },
+          {
+            "name": "PUBLIC_READ",
+            "value": "PUBLIC_READ",
+            "description": "ProjectVisibilityType enum PUBLIC_READ"
+          }
+        ]
+      }
+    },
+    "ProjectVisibilityTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of ProjectVisibilityTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ProjectVisibilityType",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RegistryCredential": {
+      "type": "object",
+      "description": "Definition of RegistryCredential",
+      "properties": {
+        "credential": {
+          "type": "string",
+          "description": "<p> The Amazon Resource Name (ARN) or name of credentials created using Secrets Manager. </p> <note> <p> The <code>credential</code> can use the name of the credentials only if they exist in your current Amazon Web Services Region. </p> </note>"
+        },
+        "credentialProvider": {
+          "$ref": "#/definitions/CredentialProviderTypeEnumValue",
+          "description": "<p> The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for Secrets Manager. </p>"
+        }
+      }
+    },
+    "S3LogsConfig": {
+      "type": "object",
+      "description": "Definition of S3LogsConfig",
+      "properties": {
+        "bucketOwnerAccess": {
+          "$ref": "#/definitions/BucketOwnerAccessEnumValue",
+          "description": "Property bucketOwnerAccess"
+        },
+        "encryptionDisabled": {
+          "type": "boolean",
+          "description": "<p> Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. </p>"
+        },
+        "location": {
+          "type": "string",
+          "description": "<p> The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>arn:aws:s3:::my-bucket/build-log</code>. </p>"
+        },
+        "status": {
+          "$ref": "#/definitions/LogsConfigStatusTypeEnumValue",
+          "description": "<p>The current status of the S3 build logs. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: S3 build logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: S3 build logs are not enabled for this build project.</p> </li> </ul>"
+        }
+      }
+    },
+    "SourceAuth": {
+      "type": "object",
+      "description": "Definition of SourceAuth",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "<p>The resource value that applies to the specified authorization type.</p>"
+        },
+        "type": {
+          "$ref": "#/definitions/SourceAuthTypeEnumValue",
+          "description": "<p>The authorization type to use. Valid options are OAUTH or CODECONNECTIONS.</p>"
+        }
+      }
+    },
+    "SourceAuthType": {
+      "type": "string",
+      "description": "SourceAuthType enum",
+      "enum": [
+        "CODECONNECTIONS",
+        "OAUTH"
+      ],
+      "x-ms-enum": {
+        "name": "SourceAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CODECONNECTIONS",
+            "value": "CODECONNECTIONS",
+            "description": "SourceAuthType enum CODECONNECTIONS"
+          },
+          {
+            "name": "OAUTH",
+            "value": "OAUTH",
+            "description": "SourceAuthType enum OAUTH"
+          }
+        ]
+      }
+    },
+    "SourceAuthTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of SourceAuthTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SourceAuthType",
+          "description": "Property value"
+        }
+      }
+    },
+    "SourceType": {
+      "type": "string",
+      "description": "SourceType enum",
+      "enum": [
+        "BITBUCKET",
+        "CODECOMMIT",
+        "CODEPIPELINE",
+        "GITHUB",
+        "GITHUB_ENTERPRISE",
+        "GITLAB",
+        "GITLAB_SELF_MANAGED",
+        "NO_SOURCE",
+        "S3"
+      ],
+      "x-ms-enum": {
+        "name": "SourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BITBUCKET",
+            "value": "BITBUCKET",
+            "description": "SourceType enum BITBUCKET"
+          },
+          {
+            "name": "CODECOMMIT",
+            "value": "CODECOMMIT",
+            "description": "SourceType enum CODECOMMIT"
+          },
+          {
+            "name": "CODEPIPELINE",
+            "value": "CODEPIPELINE",
+            "description": "SourceType enum CODEPIPELINE"
+          },
+          {
+            "name": "GITHUB",
+            "value": "GITHUB",
+            "description": "SourceType enum GITHUB"
+          },
+          {
+            "name": "GITHUB_ENTERPRISE",
+            "value": "GITHUB_ENTERPRISE",
+            "description": "SourceType enum GITHUB_ENTERPRISE"
+          },
+          {
+            "name": "GITLAB",
+            "value": "GITLAB",
+            "description": "SourceType enum GITLAB"
+          },
+          {
+            "name": "GITLAB_SELF_MANAGED",
+            "value": "GITLAB_SELF_MANAGED",
+            "description": "SourceType enum GITLAB_SELF_MANAGED"
+          },
+          {
+            "name": "NO_SOURCE",
+            "value": "NO_SOURCE",
+            "description": "SourceType enum NO_SOURCE"
+          },
+          {
+            "name": "S3",
+            "value": "S3",
+            "description": "SourceType enum S3"
+          }
+        ]
+      }
+    },
+    "SourceTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of SourceTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SourceType",
+          "description": "Property value"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "<p>The tag's key.</p>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>The tag's value.</p>"
+        }
+      }
+    },
+    "VpcConfig": {
+      "type": "object",
+      "description": "Definition of VpcConfig",
+      "properties": {
+        "securityGroupIds": {
+          "type": "array",
+          "description": "<p>A list of one or more security groups IDs in your Amazon VPC.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnets": {
+          "type": "array",
+          "description": "<p>A list of one or more subnet IDs in your Amazon VPC.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "<p>The ID of the Amazon VPC.</p>"
+        }
+      }
+    },
+    "Webhook": {
+      "type": "object",
+      "description": "Definition of Webhook",
+      "properties": {
+        "branchFilter": {
+          "type": "string",
+          "description": "<p>A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.</p> <note> <p>It is recommended that you use <code>filterGroups</code> instead of <code>branchFilter</code>. </p> </note>"
+        },
+        "buildType": {
+          "$ref": "#/definitions/WebhookBuildTypeEnumValue",
+          "description": "<p>Specifies the type of build this webhook will trigger.</p>"
+        },
+        "filterGroups": {
+          "type": "array",
+          "description": "<p>An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p>For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>",
+          "items": {
+            "$ref": "#/definitions/FilterGroup"
+          },
+          "x-ms-identifiers": []
+        },
+        "lastModifiedSecret": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>A timestamp that indicates the last time a repository's secret token was modified. </p>"
+        },
+        "payloadUrl": {
+          "type": "string",
+          "description": "<p>The CodeBuild endpoint where webhook events are sent.</p>"
+        },
+        "secret": {
+          "type": "string",
+          "description": "<p>The secret token of the associated repository. </p> <note> <p>A Bitbucket webhook does not support <code>secret</code>. </p> </note>"
+        },
+        "url": {
+          "type": "string",
+          "description": "<p>The URL to the webhook.</p>"
+        }
+      }
+    },
+    "WebhookBuildType": {
+      "type": "string",
+      "description": "WebhookBuildType enum",
+      "enum": [
+        "BUILD",
+        "BUILD_BATCH"
+      ],
+      "x-ms-enum": {
+        "name": "WebhookBuildType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BUILD",
+            "value": "BUILD",
+            "description": "WebhookBuildType enum BUILD"
+          },
+          {
+            "name": "BUILD_BATCH",
+            "value": "BUILD_BATCH",
+            "description": "WebhookBuildType enum BUILD_BATCH"
+          }
+        ]
+      }
+    },
+    "WebhookBuildTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of WebhookBuildTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/WebhookBuildType",
+          "description": "Property value"
+        }
+      }
+    },
+    "WebhookFilter": {
+      "type": "object",
+      "description": "Definition of WebhookFilter",
+      "properties": {
+        "excludeMatchedPattern": {
+          "type": "boolean",
+          "description": "<p> Used to indicate that the <code>pattern</code> determines which webhook events do not trigger a build. If true, then a webhook event that does not match the <code>pattern</code> triggers a build. If false, then a webhook event that matches the <code>pattern</code> triggers a build. </p>"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "<p> For a <code>WebHookFilter</code> that uses <code>EVENT</code> type, a comma-separated string that specifies one or more events. For example, the webhook filter <code>PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED</code> allows all push, pull request created, and pull request updated events to trigger a build. </p> <p> For a <code>WebHookFilter</code> that uses any of the other filter types, a regular expression pattern. For example, a <code>WebHookFilter</code> that uses <code>HEAD_REF</code> for its <code>type</code> and the pattern <code>^refs/heads/</code> triggers a build when the head reference is a branch with a reference name <code>refs/heads/branch-name</code>. </p>"
+        },
+        "type": {
+          "$ref": "#/definitions/WebhookFilterTypeEnumValue",
+          "description": "<p> The type of webhook filter. There are nine webhook filter types: <code>EVENT</code>, <code>ACTOR_ACCOUNT_ID</code>, <code>HEAD_REF</code>, <code>BASE_REF</code>, <code>FILE_PATH</code>, <code>COMMIT_MESSAGE</code>, <code>TAG_NAME</code>, <code>RELEASE_NAME</code>, and <code>WORKFLOW_NAME</code>. </p> <ul> <li> <p> EVENT </p> <ul> <li> <p> A webhook event triggers a build when the provided <code>pattern</code> matches one of nine event types: <code>PUSH</code>, <code>PULL_REQUEST_CREATED</code>, <code>PULL_REQUEST_UPDATED</code>, <code>PULL_REQUEST_CLOSED</code>, <code>PULL_REQUEST_REOPENED</code>, <code>PULL_REQUEST_MERGED</code>, <code>RELEASED</code>, <code>PRERELEASED</code>, and <code>WORKFLOW_JOB_QUEUED</code>. The <code>EVENT</code> patterns are specified as a comma-separated string. For example, <code>PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED</code> filters all push, pull request created, and pull request updated events. </p> <note> <p> The <code>PULL_REQUEST_REOPENED</code> works with GitHub and GitHub Enterprise only. The <code>RELEASED</code>, <code>PRERELEASED</code>, and <code>WORKFLOW_JOB_QUEUED</code> work with GitHub only.</p> </note> </li> </ul> </li> <li> <p>ACTOR_ACCOUNT_ID</p> <ul> <li> <p> A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression <code>pattern</code>. </p> </li> </ul> </li> <li> <p>HEAD_REF</p> <ul> <li> <p> A webhook event triggers a build when the head reference matches the regular expression <code>pattern</code>. For example, <code>refs/heads/branch-name</code> and <code>refs/tags/tag-name</code>. </p> <note> <p> Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events.</p> </note> </li> </ul> </li> <li> <p>BASE_REF</p> <ul> <li> <p> A webhook event triggers a build when the base reference matches the regular expression <code>pattern</code>. For example, <code>refs/heads/branch-name</code>. </p> <note> <p> Works with pull request events only. </p> </note> </li> </ul> </li> <li> <p>FILE_PATH</p> <ul> <li> <p> A webhook triggers a build when the path of a changed file matches the regular expression <code>pattern</code>. </p> <note> <p> Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events. </p> </note> </li> </ul> </li> <li> <p>COMMIT_MESSAGE</p> <ul> <li> <p>A webhook triggers a build when the head commit message matches the regular expression <code>pattern</code>.</p> <note> <p> Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events. </p> </note> </li> </ul> </li> <li> <p>TAG_NAME</p> <ul> <li> <p>A webhook triggers a build when the tag name of the release matches the regular expression <code>pattern</code>.</p> <note> <p> Works with <code>RELEASED</code> and <code>PRERELEASED</code> events only. </p> </note> </li> </ul> </li> <li> <p>RELEASE_NAME</p> <ul> <li> <p>A webhook triggers a build when the release name matches the regular expression <code>pattern</code>.</p> <note> <p> Works with <code>RELEASED</code> and <code>PRERELEASED</code> events only. </p> </note> </li> </ul> </li> <li> <p>WORKFLOW_NAME</p> <ul> <li> <p>A webhook triggers a build when the workflow name matches the regular expression <code>pattern</code>.</p> <note> <p> Works with <code>WORKFLOW_JOB_QUEUED</code> events only. </p> </note> </li> </ul> </li> </ul>"
+        }
+      }
+    },
+    "WebhookFilterType": {
+      "type": "string",
+      "description": "WebhookFilterType enum",
+      "enum": [
+        "ACTOR_ACCOUNT_ID",
+        "BASE_REF",
+        "COMMIT_MESSAGE",
+        "EVENT",
+        "FILE_PATH",
+        "HEAD_REF",
+        "RELEASE_NAME",
+        "TAG_NAME",
+        "WORKFLOW_NAME"
+      ],
+      "x-ms-enum": {
+        "name": "WebhookFilterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACTOR_ACCOUNT_ID",
+            "value": "ACTOR_ACCOUNT_ID",
+            "description": "WebhookFilterType enum ACTOR_ACCOUNT_ID"
+          },
+          {
+            "name": "BASE_REF",
+            "value": "BASE_REF",
+            "description": "WebhookFilterType enum BASE_REF"
+          },
+          {
+            "name": "COMMIT_MESSAGE",
+            "value": "COMMIT_MESSAGE",
+            "description": "WebhookFilterType enum COMMIT_MESSAGE"
+          },
+          {
+            "name": "EVENT",
+            "value": "EVENT",
+            "description": "WebhookFilterType enum EVENT"
+          },
+          {
+            "name": "FILE_PATH",
+            "value": "FILE_PATH",
+            "description": "WebhookFilterType enum FILE_PATH"
+          },
+          {
+            "name": "HEAD_REF",
+            "value": "HEAD_REF",
+            "description": "WebhookFilterType enum HEAD_REF"
+          },
+          {
+            "name": "RELEASE_NAME",
+            "value": "RELEASE_NAME",
+            "description": "WebhookFilterType enum RELEASE_NAME"
+          },
+          {
+            "name": "TAG_NAME",
+            "value": "TAG_NAME",
+            "description": "WebhookFilterType enum TAG_NAME"
+          },
+          {
+            "name": "WORKFLOW_NAME",
+            "value": "WORKFLOW_NAME",
+            "description": "WebhookFilterType enum WORKFLOW_NAME"
+          }
+        ]
+      }
+    },
+    "WebhookFilterTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of WebhookFilterTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/WebhookFilterType",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
