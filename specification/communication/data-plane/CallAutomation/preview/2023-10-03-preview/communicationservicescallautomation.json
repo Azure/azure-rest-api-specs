@@ -1703,7 +1703,7 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Start recording the call.",
+        "summary": "Start recording the call with a connectionId.",
         "operationId": "CallRecording_StartRecording",
         "parameters": [
           {
@@ -1748,7 +1748,7 @@
             }
           },
           "202": {
-            "description": "Returns the start call recording response.",
+            "description": "The service has accepted the start call recording request and will begin processing it.",
             "schema": {
               "$ref": "#/definitions/RecordingStateResponse"
             }
@@ -3512,10 +3512,6 @@
       "description": "The request payload start for call recording operation with call locator.",
       "type": "object",
       "properties": {
-        "callLocator": {
-          "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
-        },
         "recordingStateCallbackUri": {
           "description": "The uri to send notifications to.",
           "type": "string"
@@ -3550,35 +3546,6 @@
         "pauseOnStart": {
           "description": "When set to true will start recording in Pause mode, which can be resumed.",
           "type": "boolean"
-        }
-      }
-    },
-    "CallLocatorKind": {
-      "description": "The call locator kind.",
-      "enum": [
-        "groupCallLocator",
-        "serverCallLocator"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CallLocatorKind",
-        "modelAsString": true
-      }
-    },
-    "CallLocator": {
-      "description": "The locator used for joining or taking action on a call",
-      "type": "object",
-      "properties": {
-        "groupCallId": {
-          "description": "The group call id",
-          "type": "string"
-        },
-        "serverCallId": {
-          "description": "The server call id.",
-          "type": "string"
-        },
-        "kind": {
-          "$ref": "#/definitions/CallLocatorKind"
         }
       }
     },
@@ -3712,6 +3679,35 @@
         "pauseOnStart": {
           "description": "When set to true will start recording in Pause mode, which can be resumed.",
           "type": "boolean"
+        }
+      }
+    },
+    "CallLocatorKind": {
+      "description": "The call locator kind.",
+      "enum": [
+        "groupCallLocator",
+        "serverCallLocator"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallLocatorKind",
+        "modelAsString": true
+      }
+    },
+    "CallLocator": {
+      "description": "The locator used for joining or taking action on a call",
+      "type": "object",
+      "properties": {
+        "groupCallId": {
+          "description": "The group call id",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "The server call id.",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/CallLocatorKind"
         }
       }
     },
