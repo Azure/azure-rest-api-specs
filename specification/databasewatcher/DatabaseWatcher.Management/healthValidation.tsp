@@ -66,7 +66,7 @@ union validationStatus {
   @doc("Health validation has not started.")
   NotStarted: "NotStarted",
 
-  @doc("The health validation is running.")
+  @doc("Health validation is running.")
   Running: "Running",
 
   @doc("The health validation has successfully completed.")
