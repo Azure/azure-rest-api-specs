@@ -53,30 +53,30 @@ namespace Microsoft.EventGrid.SystemEvents {
   alias KeyVaultCertificateBase = {
     /** The id of the object that triggered this event. */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    Id?: string;
+    Id: string;
 
     /** Key vault name of the object that triggered this event. */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    VaultName?: string;
+    VaultName: string;
 
     /** The type of the object that triggered this event */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    ObjectType?: string;
+    ObjectType: string;
 
     /** The name of the object that triggered this event */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    ObjectName?: string;
+    ObjectName: string;
 
     /** The version of the object that triggered this event */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    Version?: string;
+    Version: string;
 
     /** Not before date of the object that triggered this event */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    NBF?: float32;
+    NBF: float32;
 
     /** The expiration date of the object that triggered this event */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    EXP?: float32;
+    EXP: float32;
   };
 }
