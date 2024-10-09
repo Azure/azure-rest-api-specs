@@ -789,4 +789,6 @@ interface TextAnalysisAuthoring {
     ListQueryParametersTrait<ProjectKindQueryParameter &
       StandardListQueryParameters>
   >;
+
 }
+

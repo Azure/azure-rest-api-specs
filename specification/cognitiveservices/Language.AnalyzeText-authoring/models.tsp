@@ -244,7 +244,6 @@ model TextAnalysisAuthoringProjectMetadata {
    */
   @key("projectName")
   @visibility
-  @maxLength(100)
   projectName: string;
 
   /**
