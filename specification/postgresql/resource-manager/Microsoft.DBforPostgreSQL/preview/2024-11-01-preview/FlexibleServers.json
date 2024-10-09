@@ -1006,56 +1006,9 @@
       },
       "description": "Data encryption properties of a server"
     },
-    "UserIdentity": {
-      "description": "Describes a single user-assigned identity associated with the application.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "the object identifier of the Service Principal which this identity represents."
-        },
-        "clientId": {
-          "type": "string",
-          "description": "the client identifier of the Service Principal which this identity represents."
-        }
-      }
-    },
-    "UserAssignedIdentityMap": {
-      "type": "object",
-      "description": "Defines a map that contains user assigned identities.",
-      "additionalProperties": {
-        "$ref": "#/definitions/UserIdentity"
-      }
-    },
     "UserAssignedIdentity": {
-      "type": "object",
-      "properties": {
-        "userAssignedIdentities": {
-          "$ref": "#/definitions/UserAssignedIdentityMap",
-          "description": "represents user assigned identities map."
-        },
-        "type": {
-          "type": "string",
-          "description": "the types of identities associated with this resource",
-          "enum": [
-            "None",
-            "UserAssigned",
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          }
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant id of the server.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "type"
-      ],
+      "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+      "x-ms-client-flatten": true,
       "description": "Information describing the identities associated with this application."
     },
     "ReplicationRole": {
