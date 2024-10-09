@@ -3331,6 +3331,18 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/Owner"
+          },
+          {
+            "$ref": "#/parameters/Group"
+          },
+          {
+            "$ref": "#/parameters/FileMode"
+          },
+          {
+            "$ref": "#/parameters/NfsFileType"
           }
         ],
         "responses": {
@@ -3403,6 +3415,30 @@
                 "x-ms-client-name": "FileParentId",
                 "type": "string",
                 "description": "The parent fileId of the file."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-file-file-type": {
+                "x-ms-client-name": "nfsFileType",
+                "description": "NFS only. Type of the file or directory.",
+                "type": "string",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "Symlink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true
+                }
               }
             }
           },
@@ -7887,7 +7923,7 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "description": "Optional. The owner of the NFS file or directory.",
+      "description": "Optional, NFS only. The owner of the file or directory.",
       "x-ms-parameter-location": "method"
     },
     "Group": {
@@ -7896,16 +7932,16 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "description": "Optional. The owning group of the NFS file or directory.",
+      "description": "Optional, NFS only. The owning group of the file or directory.",
       "x-ms-parameter-location": "method"
     },
     "FileMode": {
       "name": "x-ms-mode",
       "x-ms-client-name": "fileMode",
-      "in": "head",
+      "in": "header",
       "required": false,
       "type": "string",
-      "description": "Optional. The file mode of the NFS file or directory",
+      "description": "Optional, NFS only. The file mode of the file or directory",
       "x-ms-parameter-location": "method"
     },
     "NfsFileType": {
@@ -7913,7 +7949,7 @@
       "x-ms-client-name": "nfsFileType",
       "in": "header",
       "required": false,
-      "description": "Optional. Type of the NFS file or directory.",
+      "description": "Optional, NFS only. Type of the file or directory.",
       "type": "string",
       "enum": [
         "Regular",
