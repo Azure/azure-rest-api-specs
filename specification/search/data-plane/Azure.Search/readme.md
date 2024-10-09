@@ -26,7 +26,7 @@ These are the global settings for SearchServiceClient and SearchIndexClient.
 title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
-tag: package-2024-07-01
+tag: package-2024-11-01-preview
 
 directive:
   - where:
@@ -165,6 +165,62 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
+```
+
+### Tag: package-2024-09-01-preview
+
+These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-01-preview'
+input-file:
+- preview/2024-11-01-preview/searchservice.json
+- preview/2024-11-01-preview/searchindex.json
+```
+
+### Tag: package-2024-11-searchservice-preview
+
+These settings apply only when `--tag=package-2024-11-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-searchservice-preview'
+input-file:
+- preview/2024-11-01-preview/searchservice.json
+```
+
+### Tag: package-2024-11-searchindex-preview
+
+These settings apply only when `--tag=package-2024-11-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-searchindex-preview'
+input-file:
+- preview/2024-11-01-preview/searchindex.json
+```
+
+### Tag: package-2024-09-01-preview
+
+These settings apply only when `--tag=package-2024-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-01-preview'
+input-file:
+- preview/2024-09-01-preview/searchservice.json
+- preview/2024-09-01-preview/searchindex.json
+```
+
+### Tag: package-2024-09-searchservice-preview
+
+These settings apply only when `--tag=package-2024-09-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-searchservice-preview'
+input-file:
+- preview/2024-09-01-preview/searchservice.json
+```
+
+### Tag: package-2024-09-searchindex-preview
+
+These settings apply only when `--tag=package-2024-09-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-searchindex-preview'
+input-file:
+- preview/2024-09-01-preview/searchindex.json
 ```
 
 ### Tag: package-2024-07-01
