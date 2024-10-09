@@ -7880,6 +7880,51 @@
       "in": "header",
       "required": false,
       "type": "boolean"
+    },
+    "Owner": {
+      "name": "x-ms-owner",
+      "x-ms-client-name": "owner",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Optional. The owner of the NFS file or directory.",
+      "x-ms-parameter-location": "method"
+    },
+    "Group": {
+      "name": "x-ms-group",
+      "x-ms-client-name": "group",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Optional. The owning group of the NFS file or directory.",
+      "x-ms-parameter-location": "method"
+    },
+    "FileMode": {
+      "name": "x-ms-mode",
+      "x-ms-client-name": "fileMode",
+      "in": "head",
+      "required": false,
+      "type": "string",
+      "description": "Optional. The file mode of the NFS file or directory",
+      "x-ms-parameter-location": "method"
+    },
+    "NfsFileType": {
+      "name": "x-ms-file-file-type",
+      "x-ms-client-name": "nfsFileType",
+      "in": "header",
+      "required": false,
+      "description": "Optional. Type of the NFS file or directory.",
+      "type": "string",
+      "enum": [
+        "Regular",
+        "Directory",
+        "Symlink"
+      ],
+      "x-ms-enum": {
+        "name": "NfsFileType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }
