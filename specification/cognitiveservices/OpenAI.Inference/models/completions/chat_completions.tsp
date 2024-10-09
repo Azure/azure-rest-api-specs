@@ -126,7 +126,6 @@ model ChatCompletionsOptions {
    *
    * This value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.
    */
-  @doc("The maximum number of tokens to generate.")
   @encodedName("application/json", "max_tokens")
   maxTokens?: int32;
 
