@@ -335,10 +335,10 @@ model ScalingConfiguration {
 @doc("Definition of ServerlessV2ScalingConfiguration")
 model ServerlessV2ScalingConfiguration {
   @doc("The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.")
-  maxCapacity?: decimal128;
+  maxCapacity?: float32;
 
   @doc("The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.")
-  minCapacity?: decimal128;
+  minCapacity?: float32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
