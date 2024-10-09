@@ -410,4 +410,7 @@ suppressions:
     from: HybridCompute.json
     where: $.definitions.AgentVersion
     reason: Previously approved and released, would require potentially breaking changes
+  - code: GetCollectionResponseSchema
+    from: HybridCompute.json
+    reason: False positive
 ```
