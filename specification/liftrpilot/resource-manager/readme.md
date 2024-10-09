@@ -36,4 +36,8 @@ These settings apply only when `--tag=package-2024-10-03-preview` is specified o
 ```yaml $(tag) == 'package-2024-10-03-preview'
 input-file:
   - Pilot.Samplerp/preview/2024-10-03-preview/pilot.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    where: $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
+    reason: User Assigned Managed Identity Type inline definition is automtaically added to json.
 ```
