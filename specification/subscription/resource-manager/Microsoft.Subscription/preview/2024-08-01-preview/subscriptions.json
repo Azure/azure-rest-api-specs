@@ -754,16 +754,33 @@
         }
       }
     },
-    "/providers/Microsoft.Subscription/transfers/{transferId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/exportTransfer/{transferId}": {
       "put": {
         "description": "Transfer subscriptions to destination email id.",
         "operationId": "Transfers_ExportTransfer",
         "x-ms-examples": {
           "CreateTransfer": {
-            "$ref": "./examples/CreateTransfer.json"
+            "$ref": "./examples/createTransfer.json"
           }
         },
         "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Transfer creation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferCreationRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Transfer Details.",
@@ -777,30 +794,16 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Transfer creation request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TransferCreationRequest"
-            }
-          }
-        ]
+        }
       },
       "get": {
-        "operationId": "Transfers_GetTransferById",
+        "operationId": "Transfers_GetLatestTransferBySubscriptionId",
         "x-ms-examples": {
-          "GetTransferById": {
-            "$ref": "./examples/GetTransferById.json"
+          "GetLatestTransferBySubscriptionId": {
+            "$ref": "./examples/getLatestTransferBySubscriptionId.json"
           }
         },
-        "description": "Get transfer details by transfer id.",
+        "description": "Get transfer details by subscription id.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -828,15 +831,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/transfers/default": {
+    "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "get": {
-        "operationId": "Transfers_GetLatestTransferBySubscriptionId",
+        "get": {
+        "operationId": "Transfers_GetTransferById",
         "x-ms-examples": {
-          "GetLatestTransferBySubscriptionId": {
-            "$ref": "./examples/GetLatestTransferBySubscriptionId.json"
+          "GetTransferById": {
+            "$ref": "./examples/getTransferById.json"
           }
         },
-        "description": "Get transfer details by subscription id.",
+        "description": "Get transfer details by transfer id.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
