@@ -372,4 +372,7 @@ directive:
   - from: OperationalInsights.json
     suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
     reason: properties etag defined as eTag in model
+  - suppress: GuidUsage
+    from: Clusters.json
+    reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
