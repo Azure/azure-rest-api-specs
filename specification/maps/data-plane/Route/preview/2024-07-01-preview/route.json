@@ -1284,7 +1284,7 @@
         "type"
       ]
     },
-    "RouteDirectionsPointGeometry": {
+    "PointGeometry": {
       "type": "object",
       "description": "The origin point passed as a valid `GeoJSON` Geometry object, from which the range polygon should be calculated. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.\n\n`Note`: The API will snap the requested origin point to the nearest road network and will use that for range calculation. It will be returned as a `center` point in the response.",
       "x-ms-discriminator-value": "Point",
@@ -1297,7 +1297,7 @@
         }
       ]
     },
-    "RouteDirectionsMultiLineStringGeometry": {
+    "MultiLineStringGeometry": {
       "type": "object",
       "description": "Specifies the `GeoJSON` MultiLineString Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "x-ms-discriminator-value": "MultiLineString",
@@ -1341,7 +1341,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJsonGeometry"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPointData"
@@ -1353,7 +1353,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJsonGeometry"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPointData"
@@ -1365,7 +1365,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJsonGeometry"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineStringData"
@@ -1377,96 +1377,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJsonGeometry"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPolygonData"
         }
       ]
-    },
-    "GeoJsonGeometry": {
-      "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJsonObject"
-        }
-      ]
-    },
-    "GeoJsonObject": {
-      "description": "A valid `GeoJSON` object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
-      "type": "object",
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "type": {
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object type",
-          "type": "string",
-          "enum": [
-            "Point",
-            "MultiPoint",
-            "LineString",
-            "MultiLineString",
-            "Polygon",
-            "MultiPolygon",
-            "GeometryCollection",
-            "Feature",
-            "FeatureCollection"
-          ],
-          "x-ms-enum": {
-            "name": "GeoJsonObjectType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "Point",
-                "description": "`GeoJSON Point` geometry.",
-                "name": "GeoJsonPoint"
-              },
-              {
-                "value": "MultiPoint",
-                "description": "`GeoJSON MultiPoint` geometry.",
-                "name": "GeoJsonMultiPoint"
-              },
-              {
-                "value": "LineString",
-                "description": "`GeoJSON LineString` geometry.",
-                "name": "GeoJsonLineString"
-              },
-              {
-                "value": "MultiLineString",
-                "description": "`GeoJSON MultiLineString` geometry.",
-                "name": "GeoJsonMultiLineString"
-              },
-              {
-                "value": "Polygon",
-                "description": "`GeoJSON Polygon` geometry.",
-                "name": "GeoJsonPolygon"
-              },
-              {
-                "value": "MultiPolygon",
-                "description": "`GeoJSON MultiPolygon` geometry.",
-                "name": "GeoJsonMultiPolygon"
-              },
-              {
-                "value": "GeometryCollection",
-                "description": "`GeoJSON GeometryCollection` geometry.",
-                "name": "GeoJsonGeometryCollection"
-              },
-              {
-                "value": "Feature",
-                "description": "`GeoJSON Feature` object.",
-                "name": "GeoJsonFeature"
-              },
-              {
-                "value": "FeatureCollection",
-                "description": "`GeoJSON FeatureCollection` object.",
-                "name": "GeoJsonFeatureCollection"
-              }
-            ]
-          }
-        }
-      }
     },
     "InputWaypointFeaturesItem": {
       "type": "object",
