@@ -78,7 +78,7 @@ union validationStatus {
   @doc("Health validation was canceled.")
   Canceled: "Canceled",
 
-  @doc("The health validation has timed out.")
+  @doc("Health validation timed out.")
   TimedOut: "TimedOut",
 }
 
