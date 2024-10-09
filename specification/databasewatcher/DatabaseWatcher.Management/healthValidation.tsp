@@ -58,7 +58,7 @@ model HealthValidationProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("The current status of health validation.")
+@doc("Health validation status.")
 @added(Versions.v2024_10_01_preview)
 union validationStatus {
   string,
