@@ -45,7 +45,7 @@ model HealthValidationProperties {
   endTime: utcDateTime;
 
   @visibility("read")
-  @doc("The current status of the validation.")
+  @doc("The current health validation status.")
   status: validationStatus;
 
   @visibility("read")
