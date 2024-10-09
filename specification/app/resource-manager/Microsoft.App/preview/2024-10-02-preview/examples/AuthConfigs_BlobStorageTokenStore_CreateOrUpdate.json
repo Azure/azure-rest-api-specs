@@ -61,6 +61,14 @@
           "encryptionSettings": {
             "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
             "containerAppAuthSigningSecretName": "testSigningSecretName"
+          },
+          "login": {
+            "tokenStore": {
+              "blobStorage": {
+                "blobContainerUri": "https://test.blob.core.windows.net/container1",
+                "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+              }
+            }
           }
         }
       }
