@@ -1363,7 +1363,7 @@ model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
 /**
  * Represents the metadata for assigned deployments for a project.
  */
-@resource("projects/global/deployments/resources")
+@resource("authoring/analyze-text/projects/global/deployments/resources")
 @clientName("AssignedProjectDeploymentsMetadata", "csharp")
 @added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringAssignedProjectDeploymentsMetadata {
