@@ -37,26 +37,14 @@ union ProvisioningState {
 union PeeringSettingProvisioningState {
   string,
 
-  @doc("is creating")
-  Creating: "Creating",
-
-  @doc("is deleting")
-  Deleting: "Deleting",
-
   @doc("is succeeded")
   Succeeded: "Succeeded",
 
   @doc("is failed")
   Failed: "Failed",
 
-  @doc("is canceled")
-  Canceled: "Canceled",
-
   @doc("is removed")
   Removed: "Removed",
-
-  @doc("is accepted")
-  Accepted: "Accepted",
 }
 
 /**
