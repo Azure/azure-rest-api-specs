@@ -320,10 +320,29 @@ model RemotePeeringLink {
  */
 model PeeringSettingUpdate {
   /**
-   * Properties of the resource.
+   * Tenant Ids in a source vnet.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/OBJECT_ADDITIONAL_PROPERTIES" "properties is a managed property."
-  properties?: PeeringSettingProperties;
+  @visibility("update")
+  tenantIds?: string[];
+
+  /**
+   * Source vnet ID in the following format: "Source/VNET/ARM/Resource/ID"
+   */
+  @visibility("update")
+  virtualNetworkId?: string;
+
+  /**
+   * Source vnet GUID.
+   */
+  @visibility("update")
+  virtualNetworkGuid?: string;
+
+  /**
+   * Peering links from a source vnet to remote vnet(s).
+   */
+  @visibility("update")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  remotePeeringLinks?: RemotePeeringLink[];
 
   /**
    * Resource tags.

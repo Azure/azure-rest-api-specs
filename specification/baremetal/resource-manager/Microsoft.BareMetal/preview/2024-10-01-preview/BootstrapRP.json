@@ -758,6 +758,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PeeringSettings_Update": {
+            "$ref": "./examples/PeeringSettings_Update_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1060,9 +1065,40 @@
       "type": "object",
       "description": "Updated peering setting object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/PeeringSettingProperties",
-          "description": "Properties of the resource."
+        "tenantIds": {
+          "type": "array",
+          "description": "Tenant Ids in a source vnet.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "description": "Source vnet ID in the following format: \"Source/VNET/ARM/Resource/ID\"",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "virtualNetworkGuid": {
+          "type": "string",
+          "description": "Source vnet GUID.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "remotePeeringLinks": {
+          "type": "array",
+          "description": "Peering links from a source vnet to remote vnet(s).",
+          "items": {
+            "$ref": "#/definitions/RemotePeeringLink"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "tags": {
           "type": "object",
