@@ -1734,12 +1734,12 @@
         },
         "status": {
           "$ref": "#/definitions/validationStatus",
-          "description": "The current status of the validation.",
+          "description": "The current health validation status.",
           "readOnly": true
         },
         "issues": {
           "type": "array",
-          "description": "The list of issues generated from the health validation.",
+          "description": "The list of issues found by health validation.",
           "items": {
             "$ref": "#/definitions/ValidationIssue"
           },
@@ -2151,7 +2151,7 @@
     },
     "ValidationIssue": {
       "type": "object",
-      "description": "The model of the issue generated from the health validation.",
+      "description": "The model of a health validation issue.",
       "properties": {
         "errorCode": {
           "type": "string",
@@ -2413,7 +2413,7 @@
     },
     "validationStatus": {
       "type": "string",
-      "description": "The current status of health validation.",
+      "description": "Health validation status.",
       "enum": [
         "NotStarted",
         "Running",
@@ -2429,32 +2429,32 @@
           {
             "name": "NotStarted",
             "value": "NotStarted",
-            "description": "The health validation has not started yet."
+            "description": "Health validation has not started."
           },
           {
             "name": "Running",
             "value": "Running",
-            "description": "The health validation is running."
+            "description": "Health validation is running."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The health validation has successfully completed."
+            "description": "Health validation completed successfully."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The health validation haa failed."
+            "description": "Health validation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The health validation has been canceled."
+            "description": "Health validation was canceled."
           },
           {
             "name": "TimedOut",
             "value": "TimedOut",
-            "description": "The health validation has timed out."
+            "description": "Health validation timed out."
           }
         ]
       },
