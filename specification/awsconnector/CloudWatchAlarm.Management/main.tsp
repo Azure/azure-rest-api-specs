@@ -135,7 +135,7 @@ model AwsCloudWatchAlarmProperties {
   tags?: Tag[];
 
   @doc("The value to compare with the specified statistic.")
-  threshold?: int32;
+  threshold?: float32;
 
   @doc("In an alarm based on an anomaly detection model, this is the ID of the ``ANOMALY_DETECTION_BAND`` function used as the threshold for the alarm.")
   thresholdMetricId?: string;
