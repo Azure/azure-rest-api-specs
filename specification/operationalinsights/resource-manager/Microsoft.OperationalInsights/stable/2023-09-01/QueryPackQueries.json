@@ -347,9 +347,8 @@
           "description": "Azure resource type"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true,
-          "description": "Read only system data"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "description": "An Azure resource QueryPack-Query object"
@@ -521,53 +520,6 @@
           "type": "string",
           "description": "The URI to get the next set of Log Analytics QueryPack definitions if too many QueryPack-Queries where returned in the result set."
         }
-      }
-    },
-    "SystemData": {
-      "description": "Read only system data",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "An identifier for the identity that created the resource"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that created the resource"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "An identifier for the identity that last modified the resource"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that last modified the resource"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
-    },
-    "IdentityType": {
-      "description": "The type of identity that creates/modifies resources",
-      "type": "string",
-      "enum": [
-        "user",
-        "application",
-        "managedIdentity",
-        "key"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true
       }
     }
   },
