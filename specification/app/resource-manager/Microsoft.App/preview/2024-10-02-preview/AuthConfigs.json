@@ -175,8 +175,11 @@
           "Create or Update Container App AuthConfig": {
             "$ref": "./examples/AuthConfigs_CreateOrUpdate.json"
           },
-          "Create or Update Container App AuthConfig with msi blob storage token store": {
+          "Create or Update Container App AuthConfig with msi managedIdentityResourceId blob storage token store": {
             "$ref": "./examples/AuthConfigs_BlobStorageTokenStore_CreateOrUpdate.json"
+          },
+          "Create or Update Container App AuthConfig with msi clientID blob storage token store": {
+            "$ref": "./examples/AuthConfigs_BlobStorageTokenStore_ClientId_CreateOrUpdate.json"
           }
         }
       },
@@ -479,19 +482,19 @@
       "type": "object",
       "properties": {
         "sasUrlSettingName": {
-          "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens. Should not be used along with blob container URI.",
+          "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens. Should not be used along with blobContainerUri.",
           "type": "string"
         },
         "blobContainerUri": {
-          "description": "The URI of the blob storage containing the tokens. Should not be used along with SAS Url.",
+          "description": "The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.",
           "type": "string"
         },
         "clientId": {
-          "description": "The Client ID of a User-Assigned Managed Identity. Should not be used along with Resource ID.",
+          "description": "The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.",
           "type": "string"
         },
         "managedIdentityResourceId": {
-          "description": "The Resource ID of a User-Assigned Managed Identity. Should not be used along with Client ID.",
+          "description": "The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.",
           "type": "string"
         }
       }
