@@ -474,12 +474,21 @@
     "BlobStorageTokenStore": {
       "description": "The configuration settings of the storage of the tokens if blob storage is used.",
       "type": "object",
-      "required": [
-        "sasUrlSettingName"
-      ],
       "properties": {
         "sasUrlSettingName": {
-          "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens.",
+          "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens. Should not be used along with blob container URI.",
+          "type": "string"
+        },
+        "blobContainerUri": {
+          "description": "The URI of the blob storage containing the tokens. Should not be used along with SAS Url.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The Client ID of a User-Assigned Managed Identity. Should not be used along with Resource ID.",
+          "type": "string"
+        },
+        "managedIdentityResourceId": {
+          "description": "The Resource ID of a User-Assigned Managed Identity. Should not be used along with Client ID.",
           "type": "string"
         }
       }
