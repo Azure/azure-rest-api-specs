@@ -2125,16 +2125,16 @@
   "parameters": {
     "ClusterNameParameter": {
       "name": "clusterName",
-      "pattern": "^[A-Za-z0-9]{1,60}$",
+      "pattern": "^(?=.{1,60}$)[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Redis Enterprise cluster.",
+      "description": "The name of the Redis Enterprise cluster. Name must be 1-60 characters long. Allowed characters(A-Z, a-z, 0-9) and hyphen(-). There can be no leading nor trailing nor consecutive hyphens",
       "x-ms-parameter-location": "method"
     },
     "DatabaseNameParameter": {
       "name": "databaseName",
-      "pattern": "^[A-Za-z0-9]{1,60}$",
+      "pattern": "^(?=.{1,60}$)[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
       "in": "path",
       "required": true,
       "type": "string",
