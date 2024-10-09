@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Subscription/transfers/default": {
+    "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "put": {
         "description": "Transfer subscriptions to destination email id.",
         "operationId": "Transfers_ExportTransfer",
@@ -54,20 +54,15 @@
             }
           }
         ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/transfers/{transferId}": {
+      },
       "get": {
-        "operationId": "Transfers_GetTransferDetails",
+        "operationId": "Transfers_GetTransferById",
         "x-ms-examples": {
           "GetTransferById": {
             "$ref": "./examples/GetTransferById.json"
-          },
-          "GetLatestTransferBySubscriptionId": {
-            "$ref": "./examples/GetLatestTransferBySubscriptionId.json"
           }
         },
-        "description": "Get transfer details.",
+        "description": "Get transfer details by transfer id.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -95,21 +90,21 @@
         }
       }
     },
-    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/transfers/default": {
       "get": {
-        "operationId": "Subscription_GetSubscriptionDetails",
+        "operationId": "Transfers_GetLatestTransferBySubscriptionId",
         "x-ms-examples": {
-          "GetSubscriptionById": {
-            "$ref": "./examples/GetSubscriptionById.json"
-          },
-          "GetSubscriptionsByUser": {
-            "$ref": "./examples/GetSubscriptionsByUser.json"
+          "GetLatestTransferBySubscriptionId": {
+            "$ref": "./examples/GetLatestTransferBySubscriptionId.json"
           }
         },
-        "description": "Get subscription details",
+        "description": "Get transfer details by subscription id.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/transferIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -117,9 +112,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Subscription details.",
+            "description": "Transfer details.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionDetails"
+              "$ref": "#/definitions/TransferDetails"
             }
           },
           "default": {
