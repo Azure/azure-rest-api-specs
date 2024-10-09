@@ -753,6 +753,116 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Subscription/transfers/{transferId}": {
+      "put": {
+        "description": "Transfer subscriptions to destination email id.",
+        "operationId": "Transfers_ExportTransfer",
+        "x-ms-examples": {
+          "CreateTransfer": {
+            "$ref": "./examples/CreateTransfer.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Transfer Details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Transfer creation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferCreationRequest"
+            }
+          }
+        ]
+      },
+      "get": {
+        "operationId": "Transfers_GetTransferById",
+        "x-ms-examples": {
+          "GetTransferById": {
+            "$ref": "./examples/GetTransferById.json"
+          }
+        },
+        "description": "Get transfer details by transfer id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/transferIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/transfers/default": {
+      "get": {
+        "operationId": "Transfers_GetLatestTransferBySubscriptionId",
+        "x-ms-examples": {
+          "GetLatestTransferBySubscriptionId": {
+            "$ref": "./examples/GetLatestTransferBySubscriptionId.json"
+          }
+        },
+        "description": "Get transfer details by subscription id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/transferIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1373,6 +1483,162 @@
           "format": "date-time"
         }
       }
+    },
+    "TransferSourceOrDestination":{
+      "description": "Transfer Source or Destination.",
+      "type": "object",
+      "properties": {
+        "billingChannel": {
+          "description": "Billing Channel.",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "description": "Last updated time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "tenantId": {
+          "description": "tenantId id.",
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "upn": {
+          "description": "User principal name (upn).",
+          "type": "string"
+        }
+      }
+    },
+    "Products": {
+      "description": "Product Details.",
+      "type": "object",
+      "properties": {
+        "productType": {
+          "description": "product type",
+          "type": "string"
+        },
+        "productId": {
+          "description": "product Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "product name",
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "product sku description",
+          "type": "string"
+        },
+        "status": {
+          "description": "product transfer status",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransferProductStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TransferCreationRequest": {
+      "description": "Transfer creation request",
+      "type": "object",
+      "properties": {
+        "destinationEmailId": {
+          "description": "Destination email id.",
+          "type": "string"
+        },
+        "transferServiceOwnership": {
+          "description": "Transfer Service Ownership.",
+          "type": "boolean"
+        },
+        "subscriptionIds": {
+          "description": "Subscription ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "description": "Locale information.",
+          "type": "string"
+        }
+      }
+    },
+    "TransferResponse":{
+      "description": "Transfer Response Details.",
+      "type": "object",
+      "properties": {
+        "transferId": {
+          "description": "Transfer id.",
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "source": {
+          "$ref": "#/definitions/TransferSourceOrDestination"
+        },
+        "destination": {
+          "$ref": "#/definitions/TransferSourceOrDestination"
+        },
+        "lastUpdatedTime": {
+          "description": "Last updated time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "expirationTime": {
+          "description": "Expiration time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "description": "Transfer status",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "InProgress",
+            "Completed",
+            "CompletedWithError",
+            "Failed",
+            "Canceled",
+            "Declined",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "TransferStatus",
+            "modelAsString": true
+          }
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Products"
+          }
+        },
+        "transferServiceOwnership": {
+          "description": "Transfer service ownership.",
+          "type": "boolean"
+        }
+      }
+    },
+    "TransferDetails": {
+      "description": "Transfer details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TransferResponse"
+        }
+      }
     }
   },
   "parameters": {
@@ -1427,6 +1693,14 @@
       "schema": {
         "$ref": "#/definitions/TargetDirectoryRequest"
       }
+    },
+    "transferIdParameter": {
+      "name": "transferId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "Transfer Id."
     }
   },
   "security": [
