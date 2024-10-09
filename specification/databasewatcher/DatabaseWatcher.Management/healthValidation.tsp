@@ -82,7 +82,7 @@ union validationStatus {
   TimedOut: "TimedOut",
 }
 
-@doc("The model of the issue generated from the health validation.")
+@doc("The model of a health validation issue.")
 @added(Versions.v2024_10_01_preview)
 model ValidationIssue {
   @visibility("read")
