@@ -11788,46 +11788,22 @@
       "type": "string",
       "description": "BatchNodePlacementPolicyType enums",
       "enum": [
-        "Shared",
-        "Startup",
-        "VfsMounts",
-        "Task",
-        "JobPrep",
-        "Applications"
+        "regional",
+        "zonal"
       ],
       "x-ms-enum": {
         "name": "BatchNodePlacementPolicyType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Shared",
-            "value": "Shared",
-            "description": "The path for multi-instances task to shared their files."
+            "name": "Regional",
+            "value": "regional",
+            "description": "All nodes in the pool will be allocated in the same region."
           },
           {
-            "name": "Startup",
-            "value": "Startup",
-            "description": "The path for start task."
-          },
-          {
-            "name": "VfsMounts",
-            "value": "VfsMounts",
-            "description": "The path contains all virtual file systems are mounted on this node."
-          },
-          {
-            "name": "Task",
-            "value": "Task",
-            "description": "The task path."
-          },
-          {
-            "name": "JobPrep",
-            "value": "JobPrep",
-            "description": "The job-prep task path."
-          },
-          {
-            "name": "Applications",
-            "value": "Applications",
-            "description": "The applications path."
+            "name": "Zonal",
+            "value": "zonal",
+            "description": "Nodes in the pool will be spread across different availability zones with best effort balancing."
           }
         ]
       }
@@ -14645,22 +14621,46 @@
       "type": "string",
       "description": "The paths which will be mounted to container task's container.",
       "enum": [
-        "regional",
-        "zonal"
+        "Shared",
+        "Startup",
+        "VfsMounts",
+        "Task",
+        "JobPrep",
+        "Applications"
       ],
       "x-ms-enum": {
         "name": "ContainerHostDataPath",
         "modelAsString": true,
         "values": [
           {
-            "name": "Regional",
-            "value": "regional",
-            "description": "All nodes in the pool will be allocated in the same region."
+            "name": "Shared",
+            "value": "Shared",
+            "description": "The path for multi-instances task to shared their files."
           },
           {
-            "name": "Zonal",
-            "value": "zonal",
-            "description": "Nodes in the pool will be spread across different availability zones with best effort balancing."
+            "name": "Startup",
+            "value": "Startup",
+            "description": "The path for start task."
+          },
+          {
+            "name": "VfsMounts",
+            "value": "VfsMounts",
+            "description": "The path contains all virtual file systems are mounted on this node."
+          },
+          {
+            "name": "Task",
+            "value": "Task",
+            "description": "The task path."
+          },
+          {
+            "name": "JobPrep",
+            "value": "JobPrep",
+            "description": "The job-prep task path."
+          },
+          {
+            "name": "Applications",
+            "value": "Applications",
+            "description": "The applications path."
           }
         ]
       }

@@ -172,8 +172,8 @@ union DiskEncryptionTarget {
   TemporaryDisk: "temporarydisk",
 }
 
-@doc("BatchNodePlacementPolicyType enums")
-union BatchNodePlacementPolicyType {
+@doc("The paths which will be mounted to container task's container.")
+union ContainerHostDataPath {
   string,
 
   @doc("The path for multi-instances task to shared their files.")
@@ -195,8 +195,8 @@ union BatchNodePlacementPolicyType {
   Applications: "Applications",
 }
 
-@doc("The paths which will be mounted to container task's container.")
-union ContainerHostDataPath {
+@doc("BatchNodePlacementPolicyType enums")
+union BatchNodePlacementPolicyType {
   string,
 
   @doc("All nodes in the pool will be allocated in the same region.")
