@@ -331,11 +331,4 @@ model PeeringSettingUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Type exists as previously approved by ARM"
   @visibility("read", "create", "update")
   tags?: Record<string>;
-
-  /**
-   * Location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/OBJECT_ADDITIONAL_PROPERTIES" "location is a managed property."
-  @visibility("read")
-  location?: string;
 }

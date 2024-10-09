@@ -758,11 +758,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "PeeringSettings_Update": {
-            "$ref": "./examples/PeeringSettings_Update_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1006,35 +1001,6 @@
         "remotePeeringLinks"
       ]
     },
-    "PeeringSettingPropertiesUpdate": {
-      "type": "object",
-      "description": "Basic Peering Setting properties needed for the request and response.",
-      "properties": {
-        "tenantIds": {
-          "type": "array",
-          "description": "Tenant Ids in a source vnet.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "virtualNetworkId": {
-          "type": "string",
-          "description": "Source vnet ID in the following format: \"Source/VNET/ARM/Resource/ID\""
-        },
-        "virtualNetworkGuid": {
-          "type": "string",
-          "description": "Source vnet GUID."
-        },
-        "remotePeeringLinks": {
-          "type": "array",
-          "description": "Peering links from a source vnet to remote vnet(s).",
-          "items": {
-            "$ref": "#/definitions/RemotePeeringLink"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "PeeringSettingProvisioningState": {
       "type": "string",
       "description": "The current provisioning state for a peering setting.",
@@ -1095,7 +1061,7 @@
       "description": "Updated peering setting object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PeeringSettingPropertiesUpdate",
+          "$ref": "#/definitions/PeeringSettingProperties",
           "description": "Properties of the resource."
         },
         "tags": {
