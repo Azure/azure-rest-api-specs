@@ -2,7 +2,7 @@
   "title": "BusinessCaseAvsSummaryOperations_Get",
   "operationId": "BusinessCaseAvsSummaryOperations_Get",
   "parameters": {
-    "api-version": "2023-05-01-preview",
+    "api-version": "2023-09-09-preview",
     "subscriptionId": "ADC896AD-6A38-454E-9A62-AFC618F5F4BC",
     "resourceGroupName": "rgopenapi",
     "projectName": "multipleto8617project",
@@ -57,14 +57,70 @@
                 "Year2": 391410.525616625,
                 "Year3": 396114.705
               },
-              "paybackPeriod": 0
-            },
-            "avsNodeSummary": {
-              "serversSuitableForMigration": 28,
-              "totalNumberOfServers": 4,
-              "cores": 17,
-              "memoryGb": 19,
-              "avsNodeCostDetails": {
+              "paybackPeriod": 0,
+              "avsNodeSummary": {
+                "serversSuitableForMigration": 28,
+                "totalNumberOfServers": 4,
+                "cores": 17,
+                "memoryGb": 19,
+                "avsNodeCostDetails": {
+                  "storageCost": 27,
+                  "computeCost": 19,
+                  "itLaborCost": 29,
+                  "networkCost": 28,
+                  "linuxAhubSavings": 18,
+                  "ahubSavings": 1,
+                  "securityCost": 4,
+                  "managementCostDetails": {
+                    "managementCost": 22,
+                    "managementCostComponents": [
+                      {
+                        "name": "Unknown",
+                        "value": 16
+                      }
+                    ]
+                  },
+                  "esuSavings": 28,
+                  "facilitiesCost": 19
+                },
+                "estimatedCost": 29,
+                "osLicensingCost": 18,
+                "estimatedCostByRecommendedOffer": [
+                  {
+                    "offerName": "3 Year RI",
+                    "cost": 17
+                  }
+                ],
+                "recommendedAvsNodeTypeSummary": [
+                  {
+                    "avsNodeType": "AV36",
+                    "numberOfNodes": 16,
+                    "failuresToTolerateAndRaidLevel": "Ftt1Raid1"
+                  }
+                ],
+                "estimatedExternalStorage": [
+                  {
+                    "storageType": "AnfStandard",
+                    "totalStorageInGB": 1024.0,
+                    "storageUtilization": 97.0,
+                    "totalStorageCost": 250
+                  },
+                  {
+                    "storageType": "AnfPremium",
+                    "totalStorageInGB": 1024.0,
+                    "storageUtilization": 99.0,
+                    "totalStorageCost": 350
+                  }
+                ],
+                "estimatedNetwork": [
+                  {
+                    "skuType": "ExpressRouteUltra",
+                    "cost": 200
+                  }
+                ],
+                "estimatedCostWithVcfByol": 24.0
+              },
+              "avsCostDetails": {
                 "storageCost": 27,
                 "computeCost": 19,
                 "itLaborCost": 29,
@@ -81,187 +137,135 @@
                     }
                   ]
                 },
-                "esuSavings": 28
-              },
-              "estimatedCost": 29,
-              "osLicensingCost": 18,
-              "estimatedCostByRecommendedOffer": [
-                {
-                  "offerName": "3 Year RI",
-                  "cost": 17
-                }
-              ],
-              "recommendedAvsNodeTypeSummary": [
-                {
-                  "avsNodeType": "AV36",
-                  "numberOfNodes": 16,
-                  "failuresToTolerateAndRaidLevel": "Ftt1Raid1"
-                }
-              ],
-              "estimatedExternalStorage": [
-                {
-                  "storageType": "AnfStandard",
-                  "totalStorageInGB": 1024.0,
-                  "storageUtilization": 97.0,
-                  "totalStorageCost": 250
-                },
-                {
-                  "storageType": "AnfPremium",
-                  "totalStorageInGB": 1024.0,
-                  "storageUtilization": 99.0,
-                  "totalStorageCost": 350
-                }
-              ],
-              "estimatedNetwork": [
-                {
-                  "skuType": "ExpressRouteUltra",
-                  "cost": 200
-                }
-              ],
-              "estimatedCostWithVcfByol": 24.0
+                "esuSavings": 28,
+                "facilitiesCost": 19
+              }
             },
-            "avsCostDetails": {
-              "storageCost": 27,
-              "computeCost": 19,
-              "itLaborCost": 29,
-              "networkCost": 28,
-              "linuxAhubSavings": 18,
-              "ahubSavings": 1,
-              "securityCost": 4,
-              "managementCostDetails": {
-                "managementCost": 22,
-                "managementCostComponents": [
-                  {
-                    "name": "Unknown",
-                    "value": 16
-                  }
-                ]
+            "onPremisesAvsSummary": {
+              "servers": 29,
+              "cores": 26,
+              "memoryGb": 4,
+              "cpuUtilization": 24,
+              "memoryUtilization": 10,
+              "storageUtilization": 26,
+              "onPremisesIaasCostDetails": {
+                "storageCost": 27,
+                "computeCost": 19,
+                "itLaborCost": 29,
+                "networkCost": 28,
+                "ahubSavings": 1,
+                "linuxAhubSavings": 18,
+                "securityCost": 4,
+                "managementCostDetails": {
+                  "managementCost": 22,
+                  "managementCostComponents": [
+                    {
+                      "name": "Unknown",
+                      "value": 16
+                    }
+                  ]
+                },
+                "esuSavings": 28,
+                "facilitiesCost": 19
               },
-              "esuSavings": 28
+              "onPremisesIaasCostForDecommissioned": {
+                "storageCost": 27,
+                "computeCost": 19,
+                "itLaborCost": 29,
+                "networkCost": 28,
+                "ahubSavings": 1,
+                "linuxAhubSavings": 18,
+                "securityCost": 4,
+                "managementCostDetails": {
+                  "managementCost": 22,
+                  "managementCostComponents": [
+                    {
+                      "name": "Unknown",
+                      "value": 16
+                    }
+                  ]
+                },
+                "esuSavings": 28,
+                "facilitiesCost": 19
+              },
+              "osLicensingDetails": [
+                {
+                  "osType": "Windows",
+                  "totalCost": 11,
+                  "decomissionCost": 29
+                }
+              ],
+              "distributionByOperatingSystem": [
+                {
+                  "osClassificationType": "WindowsOSInSupport",
+                  "count": 4
+                }
+              ],
+              "onPremisesUtilizationData": {
+                "numberOfActiveEntities": 10,
+                "numberOfInactiveEntities": 18,
+                "numberOfDecommisionEntities": 10,
+                "numberOfUnknownEntities": 13
+              },
+              "distributionByVirtualization": [
+                {
+                  "virtualizationType": "Vmware",
+                  "count": 30
+                }
+              ],
+              "iaasOsSupportStatusDistribution": {
+                "unknownSupport": 2,
+                "mainStream": 20,
+                "extended": 26,
+                "outOfSupport": 29
+              },
+              "iaasSqlSupportStatusDistribution": {
+                "unknownSupport": 2,
+                "mainStream": 20,
+                "extended": 26,
+                "outOfSupport": 29
+              },
+              "osServicePackInsight": {
+                "unknownServicePack": 3,
+                "patched": 14,
+                "unpatched": 5
+              },
+              "sqlServicePackInsight": {
+                "unknownServicePack": 3,
+                "patched": 14,
+                "unpatched": 5
+              },
+              "distributionByOperatingSystemVersion": [
+                {
+                  "type": "Microsoft Windows Server 2016 Datacenter",
+                  "count": 27
+                }
+              ],
+              "distributionBySqlVersion": [
+                {
+                  "type": "SQL Server 2012",
+                  "count": 27
+                }
+              ],
+              "distributionBySqlEdition": [
+                {
+                  "type": "Enterprise Evaluation Edition",
+                  "count": 27
+                }
+              ]
             }
           },
-          "onPremisesAvsSummary": {
-            "servers": 29,
-            "cores": 26,
-            "memoryGb": 4,
-            "cpuUtilization": 24,
-            "memoryUtilization": 10,
-            "storageUtilization": 26,
-            "onPremisesIaasCostDetails": {
-              "storageCost": 27,
-              "computeCost": 19,
-              "itLaborCost": 29,
-              "networkCost": 28,
-              "ahubSavings": 1,
-              "linuxAhubSavings": 18,
-              "securityCost": 4,
-              "managementCostDetails": {
-                "managementCost": 22,
-                "managementCostComponents": [
-                  {
-                    "name": "Unknown",
-                    "value": 16
-                  }
-                ]
-              },
-              "esuSavings": 28
-            },
-            "onPremisesIaasCostForDecommissioned": {
-              "storageCost": 27,
-              "computeCost": 19,
-              "itLaborCost": 29,
-              "networkCost": 28,
-              "ahubSavings": 1,
-              "linuxAhubSavings": 18,
-              "securityCost": 4,
-              "managementCostDetails": {
-                "managementCost": 22,
-                "managementCostComponents": [
-                  {
-                    "name": "Unknown",
-                    "value": 16
-                  }
-                ]
-              },
-              "esuSavings": 28
-            },
-            "osLicensingDetails": [
-              {
-                "osType": "Windows",
-                "totalCost": 11,
-                "decomissionCost": 29
-              }
-            ],
-            "distributionByOperatingSystem": [
-              {
-                "osClassificationType": "WindowsOSInSupport",
-                "count": 4
-              }
-            ],
-            "onPremisesUtilizationData": {
-              "numberOfActiveEntities": 10,
-              "numberOfInactiveEntities": 18,
-              "numberOfDecommisionEntities": 10,
-              "numberOfUnknownEntities": 13
-            },
-            "distributionByVirtualization": [
-              {
-                "virtualizationType": "Vmware",
-                "count": 30
-              }
-            ],
-            "iaasOsSupportStatusDistribution": {
-              "unknownSupport": 2,
-              "mainStream": 20,
-              "extended": 26,
-              "outOfSupport": 29
-            },
-            "iaasSqlSupportStatusDistribution": {
-              "unknownSupport": 2,
-              "mainStream": 20,
-              "extended": 26,
-              "outOfSupport": 29
-            },
-            "osServicePackInsight": {
-              "unknownServicePack": 3,
-              "patched": 14,
-              "unpatched": 5
-            },
-            "sqlServicePackInsight": {
-              "unknownServicePack": 3,
-              "patched": 14,
-              "unpatched": 5
-            },
-            "distributionByOperatingSystemVersion": [
-              {
-                "type": "Microsoft Windows Server 2016 Datacenter",
-                "count": 27
-              }
-            ],
-            "distributionBySqlVersion": [
-              {
-                "type": "SQL Server 2012",
-                "count": 27
-              }
-            ],
-            "distributionBySqlEdition": [
-              {
-                "type": "Enterprise Evaluation Edition",
-                "count": 27
-              }
-            ]
+          "id": "/subscriptions/ADC896AD-6A38-454E-9A62-AFC618F5F4BC/resourceGroups/rgopenapi/providers/Microsoft.Migrate/assessmentProjects/multipleto8617project/businessCases/sample-business-case/avsSummaries/default",
+          "name": "default",
+          "type": "Microsoft.Migrate/assessmentProjects/businessCases/avsSummaries",
+          "systemData": {
+            "createdBy": "t72jdt@company.com",
+            "createdByType": "User",
+            "createdAt": "2023-11-08T07:09:55.036Z",
+            "lastModifiedBy": "t72jdt@company.com",
+            "lastModifiedByType": "User",
+            "lastModifiedAt": "2023-11-08T07:09:55.036Z"
           }
-        },
-        "id": "/subscriptions/ADC896AD-6A38-454E-9A62-AFC618F5F4BC/resourceGroups/rgopenapi/providers/Microsoft.Migrate/assessmentProjects/multipleto8617project/businessCases/sample-business-case/avsSummaries/default",
-        "name": "default",
-        "type": "Microsoft.Migrate/assessmentProjects/businessCases/avsSummaries",
-        "systemData": {
-          "createdBy": "t72jdt@company.com",
-          "createdByType": "User",
-          "createdAt": "2023-11-08T07:09:55.036Z",
-          "lastModifiedBy": "t72jdt@company.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-11-08T07:09:55.036Z"
         }
       }
     }
