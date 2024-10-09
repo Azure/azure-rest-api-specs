@@ -125,6 +125,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "List batch operations": {
+            "$ref": "./examples/get_batches.json"
+          }
         }
       },
       "post": {
@@ -147,6 +152,11 @@
             "schema": {
               "$ref": "#/definitions/Batch"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new batch job": {
+            "$ref": "./examples/post_batch.json"
           }
         }
       }
@@ -171,6 +181,11 @@
               "$ref": "#/definitions/Batch"
             }
           }
+        },
+        "x-ms-examples": {
+          "Retrieve a batch job": {
+            "$ref": "./examples/get_batch.json"
+          }
         }
       }
     },
@@ -193,6 +208,11 @@
             "schema": {
               "$ref": "#/definitions/Batch"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel an in-progress batch job": {
+            "$ref": "./examples/cancel_batch.json"
           }
         }
       }
@@ -238,6 +258,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Generates text-to-speech audio from the input text.": {
+            "$ref": "./examples/generated_audio_speech.json"
           }
         }
       }
@@ -407,6 +432,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/generated_audio_transcription_text.json"
+          }
         }
       }
     },
@@ -534,6 +564,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets English language transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/generated_audio_translation_text.json"
+          }
         }
       }
     },
@@ -574,6 +609,29 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion based on Azure Cognitive Services data and system-assigned managed identity. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_azure_search_minimum.json"
+          },
+          "Creates a completion based on Azure Cognitive Services image vector data. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_azure_search_image_vector.json"
+          },
+          "Creates a completion based on Azure Cognitive Services vector data and user-assigned managed identity. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_azure_search_advanced.json"
+          },
+          "Creates a completion for the provided Azure Cosmos DB. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_cosmos_db.json"
+          },
+          "Creates a completion for the provided Elasticsearch. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_elasticsearch.json"
+          },
+          "Creates a completion for the provided Pinecone resource. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_pinecone.json"
+          },
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/generated_chat_completions.json"
           }
         }
       }
@@ -616,6 +674,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/generated_completions.json"
+          }
         }
       }
     },
@@ -657,6 +720,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Return the embeddings for a given prompt.": {
+            "$ref": "./examples/generated_embeddings.json"
+          }
         }
       }
     },
@@ -697,6 +765,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates images given a prompt.": {
+            "$ref": "./examples/generated_image_generation.json"
           }
         }
       }
@@ -770,6 +843,11 @@
             "schema": {
               "$ref": "#/definitions/FileListResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a list of files filtered by purpose": {
+            "$ref": "./examples/list_file.json"
           }
         }
       },
@@ -859,6 +937,11 @@
               "$ref": "#/definitions/OpenAIFile"
             }
           }
+        },
+        "x-ms-examples": {
+          "Uploads a file": {
+            "$ref": "./examples/upload_file.json"
+          }
         }
       }
     },
@@ -882,6 +965,11 @@
               "$ref": "#/definitions/OpenAIFile"
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a file": {
+            "$ref": "./examples/get_file.json"
+          }
         }
       },
       "delete": {
@@ -902,6 +990,11 @@
             "schema": {
               "$ref": "#/definitions/FileDeletionStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a previously uploaded file.": {
+            "$ref": "./examples/delete_file.json"
           }
         }
       }
@@ -926,6 +1019,11 @@
               "type": "string",
               "format": "byte"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the content of a file": {
+            "$ref": "./examples/get_file_content.json"
           }
         }
       }
@@ -952,6 +1050,11 @@
               "$ref": "#/definitions/Upload"
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates a new file upload.": {
+            "$ref": "./examples/generated_upload_file_start.json"
+          }
         }
       }
     },
@@ -974,6 +1077,11 @@
             "schema": {
               "$ref": "#/definitions/Upload"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancels a file upload.": {
+            "$ref": "./examples/generated_upload_file_cancel.json"
           }
         }
       }
@@ -1007,6 +1115,11 @@
               "$ref": "#/definitions/Upload"
             }
           }
+        },
+        "x-ms-examples": {
+          "Finalizes a file upload.": {
+            "$ref": "./examples/generated_upload_file_complete.json"
+          }
         }
       }
     },
@@ -1039,6 +1152,11 @@
             "schema": {
               "$ref": "#/definitions/UploadPart"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Adds a part to a file upload.": {
+            "$ref": "./examples/generated_upload_file_part.json"
           }
         }
       }
@@ -1206,6 +1324,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/generated_audio_transcription_object.json"
+          }
         }
       }
     },
@@ -1328,6 +1451,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets English language transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/generated_audio_translation_object.json"
           }
         }
       }
