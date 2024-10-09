@@ -41,49 +41,131 @@ interface SingleDocumentTranslationClient {
   documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
 
-// model overrides
-@@access(DocumentTranslation.DocumentTranslateResult,
-  Access.internal,
-  "python"
+@@clientName(DocumentTranslation.DocumentTranslateBody.body,
+  "documentTranslateContent",
+  "csharp"
 );
-@@access(DocumentTranslation.FileFormatType, Access.internal, "python");
-@@access(DocumentTranslation.StorageSource, Access.internal, "python");
-@@access(DocumentTranslation.AdditionalOutputFileFormat,
-  Access.internal,
-  "python"
-);
-@@access(DocumentTranslation.StorageInputType, Access.internal, "python");
-@@access(DocumentTranslation.TranslationErrorCode, Access.internal, "python");
-@@access(DocumentTranslation.Status, Access.internal, "python");
-@@access(DocumentTranslation.StartTranslationDetails,
-  Access.internal,
-  "python"
-);
-@@access(DocumentTranslation.BatchRequest, Access.internal, "python");
-@@access(DocumentTranslation.SourceInput, Access.internal, "python");
-@@access(DocumentTranslation.DocumentFilter, Access.internal, "python");
-@@access(DocumentTranslation.TargetInput, Access.internal, "python");
-@@access(DocumentTranslation.Glossary, Access.internal, "python");
-@@access(DocumentTranslation.TranslationErrorResponse,
-  Access.internal,
-  "python"
-);
-@@access(DocumentTranslation.TranslationError, Access.internal, "python");
-@@access(DocumentTranslation.InnerTranslationError, Access.internal, "python");
-@@access(DocumentTranslation.TranslationsStatus, Access.internal, "python");
-@@access(DocumentTranslation.TranslationStatus, Access.internal, "python");
-@@access(DocumentTranslation.StatusSummary, Access.internal, "python");
-@@access(DocumentTranslation.DocumentStatus, Access.internal, "python");
-@@access(DocumentTranslation.DocumentsStatus, Access.internal, "python");
-@@access(DocumentTranslation.SupportedFileFormats, Access.internal, "python");
-@@access(DocumentTranslation.FileFormat, Access.internal, "python");
 
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
-  "csharp,java"
+  "java"
 );
 
 @@clientName(DocumentTranslation.StartTranslationBody.body,
   "startTranslationDetails",
-  "csharp,java"
+  "csharp"
 );
+
+@@clientName(DocumentTranslation.StartTranslationBody.body,
+  "startTranslationDetails",
+  "java"
+);
+
+@@access(DocumentTranslationClient.getSupportedFormats,
+  Access.internal,
+  "python"
+);
+@@access(DocumentTranslation.FileFormat, Access.public, "python");
+@@usage(DocumentTranslation.FileFormat, Usage.output, "python");
+@@access(DocumentTranslation.FileFormatType, Access.public, "python");
+@@usage(DocumentTranslation.FileFormatType, Usage.output, "python");
+
+@@clientName(DocumentTranslationClient.startTranslation,
+  "_begin_translation",
+  "python"
+);
+
+@@clientName(DocumentTranslationClient.getDocumentsStatus,
+  "list_document_statuses",
+  "python"
+);
+
+@@clientName(DocumentTranslationClient.getTranslationsStatus,
+  "list_translation_statuses",
+  "python"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
+  "created_on",
+  "python"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
+  "last_updated_on",
+  "python"
+);
+
+@@clientName(DocumentTranslation.Glossary.format, "file_format", "python");
+
+@@clientName(DocumentTranslation.Glossary.version, "format_version", "python");
+
+@@clientName(DocumentTranslation.Glossary, "TranslationGlossary", "python");
+
+@@clientName(DocumentTranslation.DocumentStatus.createdDateTimeUtc,
+  "created_on",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.lastActionDateTimeUtc,
+  "last_updated_on",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.path,
+  "translated_document_url",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.sourcePath,
+  "source_document_url",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.to, "translated_to", "python");
+
+@@clientName(DocumentTranslation.DocumentStatus.progress,
+  "translation_progress",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.characterCharged,
+  "characters_charged",
+  "python"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
+  "total_characters_charged",
+  "python"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.cancelled, "canceled", "python");
+
+@@clientName(DocumentTranslation.FileFormat.format, "file_format", "python");
+
+@@clientName(DocumentTranslation.FileFormat.defaultVersion,
+  "default_format_version",
+  "python"
+);
+
+@@clientName(DocumentTranslation.FileFormat.versions,
+  "format_versions",
+  "python"
+);
+
+@@clientName(DocumentTranslation.FileFormat,
+  "DocumentTranslationFileFormat",
+  "python"
+);
+
+@@clientName(DocumentTranslation.TargetInput.category, "category_id", "python");
+
+@@clientName(DocumentTranslation.TargetInput, "TranslationTarget", "python");
+
+@@clientName(DocumentTranslation.TranslationError,
+  "DocumentTranslationError",
+  "python"
+);
+
+@@clientName(DocumentTranslation.Status.Cancelled, "canceled", "python");
+
+@@clientName(DocumentTranslation.Status.Cancelling, "canceling", "python");
