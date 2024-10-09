@@ -754,7 +754,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/exportTransfers/{transferId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/exportTransfers/default": {
       "put": {
         "description": "Transfer subscriptions to destination email id.",
         "operationId": "Transfers_ExportTransfer",
@@ -809,9 +809,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/transferIdParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -833,7 +830,6 @@
     },
     "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "get": {
-        "get": {
         "operationId": "Transfers_GetTransferById",
         "x-ms-examples": {
           "GetTransferById": {
@@ -842,9 +838,6 @@
         },
         "description": "Get transfer details by transfer id.",
         "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
           {
             "$ref": "#/parameters/transferIdParameter"
           },
@@ -1507,7 +1500,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "TransferSourceOrDestination":{
+    "TransferSourceOrDestination": {
       "description": "Transfer Source or Destination.",
       "type": "object",
       "properties": {
@@ -1593,7 +1586,7 @@
         }
       }
     },
-    "TransferResponse":{
+    "TransferResponse": {
       "description": "Transfer Response Details.",
       "type": "object",
       "properties": {
