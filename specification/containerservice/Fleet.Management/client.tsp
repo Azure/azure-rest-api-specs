@@ -4,3 +4,5 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.ContainerService, "ContainerServiceFleetManagementClient", "java");
+
+@@clientName(Microsoft.ContainerService.APIServerAccessProfile, "ApiServerAccessProfile", "java");
