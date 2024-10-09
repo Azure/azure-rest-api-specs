@@ -333,7 +333,7 @@ model PeeringSettingUpdate {
 }
 
 /**
- * Basic Peering Setting properties needed for the request and response.
+ * (Optional) Peering Setting properties for patch.
  */
 model PeeringSettingUpdateProperties {
   /**
