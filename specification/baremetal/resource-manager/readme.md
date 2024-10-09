@@ -25,16 +25,16 @@ title: BootstrapRP
 description: BootstrapRP Client
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2024-10-01-preview
+tag: package-2024-12-01-preview
 ```
 
-### Tag: 2024-10-01-preview
+### Tag: 2024-12-01-preview
 
-These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-10-01-preview'
+``` yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
-    - Microsoft.BareMetal/preview/2024-10-01-preview/BootstrapRP.json
+    - Microsoft.BareMetal/preview/2024-12-01-preview/BootstrapRP.json
 ```
 
 ### Tag: 2024-06-01-preview
