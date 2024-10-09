@@ -26,8 +26,10 @@ model ProposalResourceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
   @doc("The proposal product code.")
   productCode: string;
+
   @doc("The proposal status.")
   status?: ProposalStatus;
 }
