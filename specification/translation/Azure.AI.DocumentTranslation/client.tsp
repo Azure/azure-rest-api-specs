@@ -71,7 +71,7 @@ interface SingleDocumentTranslationClient {
 @@usage(DocumentTranslation.FileFormatType, Usage.output, "python");
 
 @@clientName(DocumentTranslationClient.startTranslation,
-  "_begin_start_translation",
+  "_begin_translation",
   "python"
 );
 
