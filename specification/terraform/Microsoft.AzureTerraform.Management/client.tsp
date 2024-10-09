@@ -1,0 +1,8 @@
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.AzureTerraform;
+
+@@clientName(ExportTerraform.exportTerraform, "ExportTerraform", "csharp");
+@@clientName(ExportTerraform.operationStatuses, "OperationStatuses", "csharp");
