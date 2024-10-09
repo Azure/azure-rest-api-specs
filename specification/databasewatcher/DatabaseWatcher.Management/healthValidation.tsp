@@ -69,7 +69,7 @@ union validationStatus {
   @doc("Health validation is running.")
   Running: "Running",
 
-  @doc("The health validation has successfully completed.")
+  @doc("Health validation completed successfully.")
   Succeeded: "Succeeded",
 
   @doc("The health validation haa failed.")
