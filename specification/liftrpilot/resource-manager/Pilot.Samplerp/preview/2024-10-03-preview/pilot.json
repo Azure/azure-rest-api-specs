@@ -91,7 +91,7 @@
         "tags": [
           "Organizations"
         ],
-        "description": "List OrganizationsResource resources by subscription ID",
+        "description": "List OrganizationResource resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -104,7 +104,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OrganizationsResourceListResult"
+              "$ref": "#/definitions/OrganizationResourceListResult"
             }
           },
           "default": {
@@ -130,7 +130,7 @@
         "tags": [
           "Organizations"
         ],
-        "description": "List OrganizationsResource resources by resource group",
+        "description": "List OrganizationResource resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -146,7 +146,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OrganizationsResourceListResult"
+              "$ref": "#/definitions/OrganizationResourceListResult"
             }
           },
           "default": {
@@ -172,7 +172,7 @@
         "tags": [
           "Organizations"
         ],
-        "description": "Get a OrganizationsResource",
+        "description": "Get a OrganizationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -186,7 +186,7 @@
           {
             "name": "organizationName",
             "in": "path",
-            "description": "Name of the Organizations resource",
+            "description": "Name of the Organization resource",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -198,7 +198,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OrganizationsResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           },
           "default": {
@@ -219,7 +219,7 @@
         "tags": [
           "Organizations"
         ],
-        "description": "Create a OrganizationsResource",
+        "description": "Create a OrganizationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -233,7 +233,7 @@
           {
             "name": "organizationName",
             "in": "path",
-            "description": "Name of the Organizations resource",
+            "description": "Name of the Organization resource",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -246,21 +246,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OrganizationsResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OrganizationsResource' update operation succeeded",
+            "description": "Resource 'OrganizationResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/OrganizationsResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           },
           "201": {
-            "description": "Resource 'OrganizationsResource' create operation succeeded",
+            "description": "Resource 'OrganizationResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/OrganizationsResource"
+              "$ref": "#/definitions/OrganizationResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -296,7 +296,7 @@
         "tags": [
           "Organizations"
         ],
-        "description": "Update a OrganizationsResource",
+        "description": "Update a OrganizationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -310,7 +310,7 @@
           {
             "name": "organizationName",
             "in": "path",
-            "description": "Name of the Organizations resource",
+            "description": "Name of the Organization resource",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -323,7 +323,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OrganizationsResourceUpdate"
+              "$ref": "#/definitions/OrganizationResourceUpdate"
             }
           }
         ],
@@ -331,7 +331,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OrganizationsResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           },
           "202": {
@@ -370,7 +370,7 @@
         "tags": [
           "Organizations"
         ],
-        "description": "Delete a OrganizationsResource",
+        "description": "Delete a OrganizationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -384,7 +384,7 @@
           {
             "name": "organizationName",
             "in": "path",
-            "description": "Name of the Organizations resource",
+            "description": "Name of the Organization resource",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -613,9 +613,9 @@
       "description": "Reusable representation of an email address.",
       "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
     },
-    "OrganizationsProperties": {
+    "OrganizationProperties": {
       "type": "object",
-      "description": "Properties specific to Organizations",
+      "description": "Properties specific to Organization",
       "properties": {
         "marketplace": {
           "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
@@ -644,12 +644,12 @@
         "user"
       ]
     },
-    "OrganizationsResource": {
+    "OrganizationResource": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OrganizationsProperties",
+          "$ref": "#/definitions/OrganizationProperties",
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
@@ -663,15 +663,15 @@
         }
       ]
     },
-    "OrganizationsResourceListResult": {
+    "OrganizationResourceListResult": {
       "type": "object",
-      "description": "The response of a OrganizationsResource list operation.",
+      "description": "The response of a OrganizationResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OrganizationsResource items on this page",
+          "description": "The OrganizationResource items on this page",
           "items": {
-            "$ref": "#/definitions/OrganizationsResource"
+            "$ref": "#/definitions/OrganizationResource"
           }
         },
         "nextLink": {
@@ -684,9 +684,9 @@
         "value"
       ]
     },
-    "OrganizationsResourceUpdate": {
+    "OrganizationResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Organizations Resource.",
+      "description": "The type used for update operations of the Organization Resource.",
       "properties": {
         "tags": {
           "type": "object",

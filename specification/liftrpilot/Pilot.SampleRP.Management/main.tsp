@@ -38,20 +38,20 @@ model PartnerProperties{
 
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
  * BaseResourceProperties contains Marketplace, useDetail related properties*/
-@doc("Properties specific to Organizations")
-model OrganizationsProperties is BaseResourceProperties {
+@doc("Properties specific to Organization")
+model OrganizationProperties is BaseResourceProperties {
 
   @doc("partner properties")
   partnerProperties?: PartnerProperties;
 }
 
-model OrganizationsResource is Azure.ResourceManager.TrackedResource<OrganizationsProperties> {
+model OrganizationResource is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
   @segment("organizations")
   @minLength(1)
   @maxLength(50)
-  @doc("Name of the Organizations resource")
+  @doc("Name of the Organization resource")
   @path
   name: string;
 
@@ -59,9 +59,9 @@ model OrganizationsResource is Azure.ResourceManager.TrackedResource<Organizatio
 }
 
 /**
- * The type used for update operations of the Organizations Resource.
+ * The type used for update operations of the Organization Resource.
  */
-model OrganizationsResourceUpdate {
+model OrganizationResourceUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** Updatable managed service identity */
@@ -70,10 +70,10 @@ model OrganizationsResourceUpdate {
 
 @armResourceOperations
 interface Organizations {
-  get is ArmResourceRead<OrganizationsResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationsResource>;
-  update is ArmCustomPatchSync<OrganizationsResource, OrganizationsResourceUpdate>;
-  delete is ArmResourceDeleteWithoutOkAsync<OrganizationsResource>;
-  listByResourceGroup is ArmResourceListByParent<OrganizationsResource>;
-  listBySubscription is ArmListBySubscription<OrganizationsResource>;
+  get is ArmResourceRead<OrganizationResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
+  update is ArmCustomPatchSync<OrganizationResource, OrganizationResourceUpdate>;
+  delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
+  listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
+  listBySubscription is ArmListBySubscription<OrganizationResource>;
 }
