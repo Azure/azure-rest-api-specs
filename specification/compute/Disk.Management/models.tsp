@@ -1513,9 +1513,25 @@ model DiskEncryptionSetUpdateProperties {
 }
 
 /**
+ * FIXME: Custom Page for string
+ */
+@Azure.Core.pagedResult
+@friendlyName("Paged{name}", Resource)
+@doc("Paged collection of string items")
+model CustomPage<Resource extends string> {
+  @doc("The items on this page")
+  @Azure.Core.items
+  value: Resource[];
+
+  @doc("The link to the next page of items")
+  @Azure.Core.nextLink
+  nextLink?: url;
+}
+
+/**
  * The List resources which are encrypted with the disk encryption set.
  */
-model ResourceUriList is Azure.Core.Page<string>;
+model ResourceUriList is CustomPage<string>;
 
 /**
  * Properties of an incremental disk restore point

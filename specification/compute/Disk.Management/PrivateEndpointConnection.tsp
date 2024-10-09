@@ -28,7 +28,8 @@ model PrivateEndpointConnection
    * private endpoint connection Id
    */
   @visibility("read")
-  id?: string;
+  //FIXME: Review string vs Azure.Core.armResourceIdentifier in V3 reference
+  id?: Azure.Core.armResourceIdentifier;
 
   /**
    * private endpoint connection type
