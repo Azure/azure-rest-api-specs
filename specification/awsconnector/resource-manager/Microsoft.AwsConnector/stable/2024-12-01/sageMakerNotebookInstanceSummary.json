@@ -1,0 +1,1616 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SageMakerNotebookInstanceSummaries"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/sageMakerNotebookInstanceSummaries": {
+      "get": {
+        "operationId": "SageMakerNotebookInstanceSummaries_ListBySubscription",
+        "tags": [
+          "SageMakerNotebookInstanceSummaries"
+        ],
+        "description": "List SageMakerNotebookInstanceSummary resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SageMakerNotebookInstanceSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerNotebookInstanceSummaries_ListBySubscription": {
+            "$ref": "./examples/SageMakerNotebookInstanceSummaries_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/sageMakerNotebookInstanceSummaries": {
+      "get": {
+        "operationId": "SageMakerNotebookInstanceSummaries_ListByResourceGroup",
+        "tags": [
+          "SageMakerNotebookInstanceSummaries"
+        ],
+        "description": "List SageMakerNotebookInstanceSummary resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SageMakerNotebookInstanceSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerNotebookInstanceSummaries_ListByResourceGroup": {
+            "$ref": "./examples/SageMakerNotebookInstanceSummaries_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/sageMakerNotebookInstanceSummaries/{name}": {
+      "get": {
+        "operationId": "SageMakerNotebookInstanceSummaries_Get",
+        "tags": [
+          "SageMakerNotebookInstanceSummaries"
+        ],
+        "description": "Get a SageMakerNotebookInstanceSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SageMakerNotebookInstanceSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SageMakerNotebookInstanceSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerNotebookInstanceSummaries_Get": {
+            "$ref": "./examples/SageMakerNotebookInstanceSummaries_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SageMakerNotebookInstanceSummaries_CreateOrReplace",
+        "tags": [
+          "SageMakerNotebookInstanceSummaries"
+        ],
+        "description": "Create a SageMakerNotebookInstanceSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SageMakerNotebookInstanceSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SageMakerNotebookInstanceSummary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SageMakerNotebookInstanceSummary' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SageMakerNotebookInstanceSummary"
+            }
+          },
+          "201": {
+            "description": "Resource 'SageMakerNotebookInstanceSummary' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SageMakerNotebookInstanceSummary"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerNotebookInstanceSummaries_CreateOrReplace": {
+            "$ref": "./examples/SageMakerNotebookInstanceSummaries_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SageMakerNotebookInstanceSummaries_Update",
+        "tags": [
+          "SageMakerNotebookInstanceSummaries"
+        ],
+        "description": "Update a SageMakerNotebookInstanceSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SageMakerNotebookInstanceSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SageMakerNotebookInstanceSummaryTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SageMakerNotebookInstanceSummary"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerNotebookInstanceSummaries_Update": {
+            "$ref": "./examples/SageMakerNotebookInstanceSummaries_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SageMakerNotebookInstanceSummaries_Delete",
+        "tags": [
+          "SageMakerNotebookInstanceSummaries"
+        ],
+        "description": "Delete a SageMakerNotebookInstanceSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SageMakerNotebookInstanceSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerNotebookInstanceSummaries_Delete": {
+            "$ref": "./examples/SageMakerNotebookInstanceSummaries_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsSageMakerNotebookInstanceSummaryProperties": {
+      "type": "object",
+      "description": "Definition of awsSageMakerNotebookInstanceSummary",
+      "properties": {
+        "additionalCodeRepositories": {
+          "type": "array",
+          "description": "<p>An array of up to three Git repositories associated with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in <a href='https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html'>Amazon Web Services CodeCommit</a> or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance. For more information, see <a href='https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html'>Associating Git Repositories with SageMaker Notebook Instances</a>.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>A timestamp that shows when the notebook instance was created.</p>"
+        },
+        "defaultCodeRepository": {
+          "type": "string",
+          "description": "<p>The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in <a href='https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html'>Amazon Web Services CodeCommit</a> or in any other Git repository. When you open a notebook instance, it opens in the directory that contains this repository. For more information, see <a href='https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html'>Associating Git Repositories with SageMaker Notebook Instances</a>.</p>"
+        },
+        "instanceType": {
+          "$ref": "#/definitions/InstanceTypeEnumValue",
+          "description": "<p>The type of ML compute instance that the notebook instance is running on.</p>"
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>A timestamp that shows when the notebook instance was last modified.</p>"
+        },
+        "notebookInstanceArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the notebook instance.</p>"
+        },
+        "notebookInstanceLifecycleConfigName": {
+          "type": "string",
+          "description": "<p>The name of a notebook instance lifecycle configuration associated with this notebook instance.</p> <p>For information about notebook instance lifestyle configurations, see <a href='https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html'>Step 2.1: (Optional) Customize a Notebook Instance</a>.</p>"
+        },
+        "notebookInstanceName": {
+          "type": "string",
+          "description": "<p>The name of the notebook instance that you want a summary for.</p>"
+        },
+        "notebookInstanceStatus": {
+          "$ref": "#/definitions/NotebookInstanceStatusEnumValue",
+          "description": "<p>The status of the notebook instance.</p>"
+        },
+        "url": {
+          "type": "string",
+          "description": "<p>The URL that you use to connect to the Jupyter notebook running in your notebook instance. </p>"
+        }
+      }
+    },
+    "InstanceType": {
+      "type": "string",
+      "description": "InstanceType enum",
+      "enum": [
+        "ml.c4.2xlarge",
+        "ml.c4.4xlarge",
+        "ml.c4.8xlarge",
+        "ml.c4.xlarge",
+        "ml.c5.18xlarge",
+        "ml.c5.2xlarge",
+        "ml.c5.4xlarge",
+        "ml.c5.9xlarge",
+        "ml.c5.xlarge",
+        "ml.c5d.18xlarge",
+        "ml.c5d.2xlarge",
+        "ml.c5d.4xlarge",
+        "ml.c5d.9xlarge",
+        "ml.c5d.xlarge",
+        "ml.c6i.12xlarge",
+        "ml.c6i.16xlarge",
+        "ml.c6i.24xlarge",
+        "ml.c6i.2xlarge",
+        "ml.c6i.32xlarge",
+        "ml.c6i.4xlarge",
+        "ml.c6i.8xlarge",
+        "ml.c6i.large",
+        "ml.c6i.xlarge",
+        "ml.c6id.12xlarge",
+        "ml.c6id.16xlarge",
+        "ml.c6id.24xlarge",
+        "ml.c6id.2xlarge",
+        "ml.c6id.32xlarge",
+        "ml.c6id.4xlarge",
+        "ml.c6id.8xlarge",
+        "ml.c6id.large",
+        "ml.c6id.xlarge",
+        "ml.c7i.12xlarge",
+        "ml.c7i.16xlarge",
+        "ml.c7i.24xlarge",
+        "ml.c7i.2xlarge",
+        "ml.c7i.48xlarge",
+        "ml.c7i.4xlarge",
+        "ml.c7i.8xlarge",
+        "ml.c7i.large",
+        "ml.c7i.xlarge",
+        "ml.g4dn.12xlarge",
+        "ml.g4dn.16xlarge",
+        "ml.g4dn.2xlarge",
+        "ml.g4dn.4xlarge",
+        "ml.g4dn.8xlarge",
+        "ml.g4dn.xlarge",
+        "ml.g5.12xlarge",
+        "ml.g5.16xlarge",
+        "ml.g5.24xlarge",
+        "ml.g5.2xlarge",
+        "ml.g5.48xlarge",
+        "ml.g5.4xlarge",
+        "ml.g5.8xlarge",
+        "ml.g5.xlarge",
+        "ml.inf1.24xlarge",
+        "ml.inf1.2xlarge",
+        "ml.inf1.6xlarge",
+        "ml.inf1.xlarge",
+        "ml.m4.10xlarge",
+        "ml.m4.16xlarge",
+        "ml.m4.2xlarge",
+        "ml.m4.4xlarge",
+        "ml.m4.xlarge",
+        "ml.m5.12xlarge",
+        "ml.m5.24xlarge",
+        "ml.m5.2xlarge",
+        "ml.m5.4xlarge",
+        "ml.m5.xlarge",
+        "ml.m5d.12xlarge",
+        "ml.m5d.16xlarge",
+        "ml.m5d.24xlarge",
+        "ml.m5d.2xlarge",
+        "ml.m5d.4xlarge",
+        "ml.m5d.8xlarge",
+        "ml.m5d.large",
+        "ml.m5d.xlarge",
+        "ml.m6i.12xlarge",
+        "ml.m6i.16xlarge",
+        "ml.m6i.24xlarge",
+        "ml.m6i.2xlarge",
+        "ml.m6i.32xlarge",
+        "ml.m6i.4xlarge",
+        "ml.m6i.8xlarge",
+        "ml.m6i.large",
+        "ml.m6i.xlarge",
+        "ml.m6id.12xlarge",
+        "ml.m6id.16xlarge",
+        "ml.m6id.24xlarge",
+        "ml.m6id.2xlarge",
+        "ml.m6id.32xlarge",
+        "ml.m6id.4xlarge",
+        "ml.m6id.8xlarge",
+        "ml.m6id.large",
+        "ml.m6id.xlarge",
+        "ml.m7i.12xlarge",
+        "ml.m7i.16xlarge",
+        "ml.m7i.24xlarge",
+        "ml.m7i.2xlarge",
+        "ml.m7i.48xlarge",
+        "ml.m7i.4xlarge",
+        "ml.m7i.8xlarge",
+        "ml.m7i.large",
+        "ml.m7i.xlarge",
+        "ml.p2.16xlarge",
+        "ml.p2.8xlarge",
+        "ml.p2.xlarge",
+        "ml.p3.16xlarge",
+        "ml.p3.2xlarge",
+        "ml.p3.8xlarge",
+        "ml.p3dn.24xlarge",
+        "ml.p4d.24xlarge",
+        "ml.p4de.24xlarge",
+        "ml.p5.48xlarge",
+        "ml.r5.12xlarge",
+        "ml.r5.16xlarge",
+        "ml.r5.24xlarge",
+        "ml.r5.2xlarge",
+        "ml.r5.4xlarge",
+        "ml.r5.8xlarge",
+        "ml.r5.large",
+        "ml.r5.xlarge",
+        "ml.r6i.12xlarge",
+        "ml.r6i.16xlarge",
+        "ml.r6i.24xlarge",
+        "ml.r6i.2xlarge",
+        "ml.r6i.32xlarge",
+        "ml.r6i.4xlarge",
+        "ml.r6i.8xlarge",
+        "ml.r6i.large",
+        "ml.r6i.xlarge",
+        "ml.r6id.12xlarge",
+        "ml.r6id.16xlarge",
+        "ml.r6id.24xlarge",
+        "ml.r6id.2xlarge",
+        "ml.r6id.32xlarge",
+        "ml.r6id.4xlarge",
+        "ml.r6id.8xlarge",
+        "ml.r6id.large",
+        "ml.r6id.xlarge",
+        "ml.r7i.12xlarge",
+        "ml.r7i.16xlarge",
+        "ml.r7i.24xlarge",
+        "ml.r7i.2xlarge",
+        "ml.r7i.48xlarge",
+        "ml.r7i.4xlarge",
+        "ml.r7i.8xlarge",
+        "ml.r7i.large",
+        "ml.r7i.xlarge",
+        "ml.t2.2xlarge",
+        "ml.t2.large",
+        "ml.t2.medium",
+        "ml.t2.xlarge",
+        "ml.t3.2xlarge",
+        "ml.t3.large",
+        "ml.t3.medium",
+        "ml.t3.xlarge"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MlC42xlarge",
+            "value": "ml.c4.2xlarge",
+            "description": "InstanceType enum ml.c4.2xlarge"
+          },
+          {
+            "name": "MlC44xlarge",
+            "value": "ml.c4.4xlarge",
+            "description": "InstanceType enum ml.c4.4xlarge"
+          },
+          {
+            "name": "MlC48xlarge",
+            "value": "ml.c4.8xlarge",
+            "description": "InstanceType enum ml.c4.8xlarge"
+          },
+          {
+            "name": "MlC4Xlarge",
+            "value": "ml.c4.xlarge",
+            "description": "InstanceType enum ml.c4.xlarge"
+          },
+          {
+            "name": "MlC518xlarge",
+            "value": "ml.c5.18xlarge",
+            "description": "InstanceType enum ml.c5.18xlarge"
+          },
+          {
+            "name": "MlC52xlarge",
+            "value": "ml.c5.2xlarge",
+            "description": "InstanceType enum ml.c5.2xlarge"
+          },
+          {
+            "name": "MlC54xlarge",
+            "value": "ml.c5.4xlarge",
+            "description": "InstanceType enum ml.c5.4xlarge"
+          },
+          {
+            "name": "MlC59xlarge",
+            "value": "ml.c5.9xlarge",
+            "description": "InstanceType enum ml.c5.9xlarge"
+          },
+          {
+            "name": "MlC5Xlarge",
+            "value": "ml.c5.xlarge",
+            "description": "InstanceType enum ml.c5.xlarge"
+          },
+          {
+            "name": "MlC5d18xlarge",
+            "value": "ml.c5d.18xlarge",
+            "description": "InstanceType enum ml.c5d.18xlarge"
+          },
+          {
+            "name": "MlC5d2xlarge",
+            "value": "ml.c5d.2xlarge",
+            "description": "InstanceType enum ml.c5d.2xlarge"
+          },
+          {
+            "name": "MlC5d4xlarge",
+            "value": "ml.c5d.4xlarge",
+            "description": "InstanceType enum ml.c5d.4xlarge"
+          },
+          {
+            "name": "MlC5d9xlarge",
+            "value": "ml.c5d.9xlarge",
+            "description": "InstanceType enum ml.c5d.9xlarge"
+          },
+          {
+            "name": "MlC5dXlarge",
+            "value": "ml.c5d.xlarge",
+            "description": "InstanceType enum ml.c5d.xlarge"
+          },
+          {
+            "name": "MlC6i12xlarge",
+            "value": "ml.c6i.12xlarge",
+            "description": "InstanceType enum ml.c6i.12xlarge"
+          },
+          {
+            "name": "MlC6i16xlarge",
+            "value": "ml.c6i.16xlarge",
+            "description": "InstanceType enum ml.c6i.16xlarge"
+          },
+          {
+            "name": "MlC6i24xlarge",
+            "value": "ml.c6i.24xlarge",
+            "description": "InstanceType enum ml.c6i.24xlarge"
+          },
+          {
+            "name": "MlC6i2xlarge",
+            "value": "ml.c6i.2xlarge",
+            "description": "InstanceType enum ml.c6i.2xlarge"
+          },
+          {
+            "name": "MlC6i32xlarge",
+            "value": "ml.c6i.32xlarge",
+            "description": "InstanceType enum ml.c6i.32xlarge"
+          },
+          {
+            "name": "MlC6i4xlarge",
+            "value": "ml.c6i.4xlarge",
+            "description": "InstanceType enum ml.c6i.4xlarge"
+          },
+          {
+            "name": "MlC6i8xlarge",
+            "value": "ml.c6i.8xlarge",
+            "description": "InstanceType enum ml.c6i.8xlarge"
+          },
+          {
+            "name": "MlC6iLarge",
+            "value": "ml.c6i.large",
+            "description": "InstanceType enum ml.c6i.large"
+          },
+          {
+            "name": "MlC6iXlarge",
+            "value": "ml.c6i.xlarge",
+            "description": "InstanceType enum ml.c6i.xlarge"
+          },
+          {
+            "name": "MlC6id12xlarge",
+            "value": "ml.c6id.12xlarge",
+            "description": "InstanceType enum ml.c6id.12xlarge"
+          },
+          {
+            "name": "MlC6id16xlarge",
+            "value": "ml.c6id.16xlarge",
+            "description": "InstanceType enum ml.c6id.16xlarge"
+          },
+          {
+            "name": "MlC6id24xlarge",
+            "value": "ml.c6id.24xlarge",
+            "description": "InstanceType enum ml.c6id.24xlarge"
+          },
+          {
+            "name": "MlC6id2xlarge",
+            "value": "ml.c6id.2xlarge",
+            "description": "InstanceType enum ml.c6id.2xlarge"
+          },
+          {
+            "name": "MlC6id32xlarge",
+            "value": "ml.c6id.32xlarge",
+            "description": "InstanceType enum ml.c6id.32xlarge"
+          },
+          {
+            "name": "MlC6id4xlarge",
+            "value": "ml.c6id.4xlarge",
+            "description": "InstanceType enum ml.c6id.4xlarge"
+          },
+          {
+            "name": "MlC6id8xlarge",
+            "value": "ml.c6id.8xlarge",
+            "description": "InstanceType enum ml.c6id.8xlarge"
+          },
+          {
+            "name": "MlC6idLarge",
+            "value": "ml.c6id.large",
+            "description": "InstanceType enum ml.c6id.large"
+          },
+          {
+            "name": "MlC6idXlarge",
+            "value": "ml.c6id.xlarge",
+            "description": "InstanceType enum ml.c6id.xlarge"
+          },
+          {
+            "name": "MlC7i12xlarge",
+            "value": "ml.c7i.12xlarge",
+            "description": "InstanceType enum ml.c7i.12xlarge"
+          },
+          {
+            "name": "MlC7i16xlarge",
+            "value": "ml.c7i.16xlarge",
+            "description": "InstanceType enum ml.c7i.16xlarge"
+          },
+          {
+            "name": "MlC7i24xlarge",
+            "value": "ml.c7i.24xlarge",
+            "description": "InstanceType enum ml.c7i.24xlarge"
+          },
+          {
+            "name": "MlC7i2xlarge",
+            "value": "ml.c7i.2xlarge",
+            "description": "InstanceType enum ml.c7i.2xlarge"
+          },
+          {
+            "name": "MlC7i48xlarge",
+            "value": "ml.c7i.48xlarge",
+            "description": "InstanceType enum ml.c7i.48xlarge"
+          },
+          {
+            "name": "MlC7i4xlarge",
+            "value": "ml.c7i.4xlarge",
+            "description": "InstanceType enum ml.c7i.4xlarge"
+          },
+          {
+            "name": "MlC7i8xlarge",
+            "value": "ml.c7i.8xlarge",
+            "description": "InstanceType enum ml.c7i.8xlarge"
+          },
+          {
+            "name": "MlC7iLarge",
+            "value": "ml.c7i.large",
+            "description": "InstanceType enum ml.c7i.large"
+          },
+          {
+            "name": "MlC7iXlarge",
+            "value": "ml.c7i.xlarge",
+            "description": "InstanceType enum ml.c7i.xlarge"
+          },
+          {
+            "name": "MlG4dn12xlarge",
+            "value": "ml.g4dn.12xlarge",
+            "description": "InstanceType enum ml.g4dn.12xlarge"
+          },
+          {
+            "name": "MlG4dn16xlarge",
+            "value": "ml.g4dn.16xlarge",
+            "description": "InstanceType enum ml.g4dn.16xlarge"
+          },
+          {
+            "name": "MlG4dn2xlarge",
+            "value": "ml.g4dn.2xlarge",
+            "description": "InstanceType enum ml.g4dn.2xlarge"
+          },
+          {
+            "name": "MlG4dn4xlarge",
+            "value": "ml.g4dn.4xlarge",
+            "description": "InstanceType enum ml.g4dn.4xlarge"
+          },
+          {
+            "name": "MlG4dn8xlarge",
+            "value": "ml.g4dn.8xlarge",
+            "description": "InstanceType enum ml.g4dn.8xlarge"
+          },
+          {
+            "name": "MlG4dnXlarge",
+            "value": "ml.g4dn.xlarge",
+            "description": "InstanceType enum ml.g4dn.xlarge"
+          },
+          {
+            "name": "MlG512xlarge",
+            "value": "ml.g5.12xlarge",
+            "description": "InstanceType enum ml.g5.12xlarge"
+          },
+          {
+            "name": "MlG516xlarge",
+            "value": "ml.g5.16xlarge",
+            "description": "InstanceType enum ml.g5.16xlarge"
+          },
+          {
+            "name": "MlG524xlarge",
+            "value": "ml.g5.24xlarge",
+            "description": "InstanceType enum ml.g5.24xlarge"
+          },
+          {
+            "name": "MlG52xlarge",
+            "value": "ml.g5.2xlarge",
+            "description": "InstanceType enum ml.g5.2xlarge"
+          },
+          {
+            "name": "MlG548xlarge",
+            "value": "ml.g5.48xlarge",
+            "description": "InstanceType enum ml.g5.48xlarge"
+          },
+          {
+            "name": "MlG54xlarge",
+            "value": "ml.g5.4xlarge",
+            "description": "InstanceType enum ml.g5.4xlarge"
+          },
+          {
+            "name": "MlG58xlarge",
+            "value": "ml.g5.8xlarge",
+            "description": "InstanceType enum ml.g5.8xlarge"
+          },
+          {
+            "name": "MlG5Xlarge",
+            "value": "ml.g5.xlarge",
+            "description": "InstanceType enum ml.g5.xlarge"
+          },
+          {
+            "name": "MlInf124xlarge",
+            "value": "ml.inf1.24xlarge",
+            "description": "InstanceType enum ml.inf1.24xlarge"
+          },
+          {
+            "name": "MlInf12xlarge",
+            "value": "ml.inf1.2xlarge",
+            "description": "InstanceType enum ml.inf1.2xlarge"
+          },
+          {
+            "name": "MlInf16xlarge",
+            "value": "ml.inf1.6xlarge",
+            "description": "InstanceType enum ml.inf1.6xlarge"
+          },
+          {
+            "name": "MlInf1Xlarge",
+            "value": "ml.inf1.xlarge",
+            "description": "InstanceType enum ml.inf1.xlarge"
+          },
+          {
+            "name": "MlM410xlarge",
+            "value": "ml.m4.10xlarge",
+            "description": "InstanceType enum ml.m4.10xlarge"
+          },
+          {
+            "name": "MlM416xlarge",
+            "value": "ml.m4.16xlarge",
+            "description": "InstanceType enum ml.m4.16xlarge"
+          },
+          {
+            "name": "MlM42xlarge",
+            "value": "ml.m4.2xlarge",
+            "description": "InstanceType enum ml.m4.2xlarge"
+          },
+          {
+            "name": "MlM44xlarge",
+            "value": "ml.m4.4xlarge",
+            "description": "InstanceType enum ml.m4.4xlarge"
+          },
+          {
+            "name": "MlM4Xlarge",
+            "value": "ml.m4.xlarge",
+            "description": "InstanceType enum ml.m4.xlarge"
+          },
+          {
+            "name": "MlM512xlarge",
+            "value": "ml.m5.12xlarge",
+            "description": "InstanceType enum ml.m5.12xlarge"
+          },
+          {
+            "name": "MlM524xlarge",
+            "value": "ml.m5.24xlarge",
+            "description": "InstanceType enum ml.m5.24xlarge"
+          },
+          {
+            "name": "MlM52xlarge",
+            "value": "ml.m5.2xlarge",
+            "description": "InstanceType enum ml.m5.2xlarge"
+          },
+          {
+            "name": "MlM54xlarge",
+            "value": "ml.m5.4xlarge",
+            "description": "InstanceType enum ml.m5.4xlarge"
+          },
+          {
+            "name": "MlM5Xlarge",
+            "value": "ml.m5.xlarge",
+            "description": "InstanceType enum ml.m5.xlarge"
+          },
+          {
+            "name": "MlM5d12xlarge",
+            "value": "ml.m5d.12xlarge",
+            "description": "InstanceType enum ml.m5d.12xlarge"
+          },
+          {
+            "name": "MlM5d16xlarge",
+            "value": "ml.m5d.16xlarge",
+            "description": "InstanceType enum ml.m5d.16xlarge"
+          },
+          {
+            "name": "MlM5d24xlarge",
+            "value": "ml.m5d.24xlarge",
+            "description": "InstanceType enum ml.m5d.24xlarge"
+          },
+          {
+            "name": "MlM5d2xlarge",
+            "value": "ml.m5d.2xlarge",
+            "description": "InstanceType enum ml.m5d.2xlarge"
+          },
+          {
+            "name": "MlM5d4xlarge",
+            "value": "ml.m5d.4xlarge",
+            "description": "InstanceType enum ml.m5d.4xlarge"
+          },
+          {
+            "name": "MlM5d8xlarge",
+            "value": "ml.m5d.8xlarge",
+            "description": "InstanceType enum ml.m5d.8xlarge"
+          },
+          {
+            "name": "MlM5dLarge",
+            "value": "ml.m5d.large",
+            "description": "InstanceType enum ml.m5d.large"
+          },
+          {
+            "name": "MlM5dXlarge",
+            "value": "ml.m5d.xlarge",
+            "description": "InstanceType enum ml.m5d.xlarge"
+          },
+          {
+            "name": "MlM6i12xlarge",
+            "value": "ml.m6i.12xlarge",
+            "description": "InstanceType enum ml.m6i.12xlarge"
+          },
+          {
+            "name": "MlM6i16xlarge",
+            "value": "ml.m6i.16xlarge",
+            "description": "InstanceType enum ml.m6i.16xlarge"
+          },
+          {
+            "name": "MlM6i24xlarge",
+            "value": "ml.m6i.24xlarge",
+            "description": "InstanceType enum ml.m6i.24xlarge"
+          },
+          {
+            "name": "MlM6i2xlarge",
+            "value": "ml.m6i.2xlarge",
+            "description": "InstanceType enum ml.m6i.2xlarge"
+          },
+          {
+            "name": "MlM6i32xlarge",
+            "value": "ml.m6i.32xlarge",
+            "description": "InstanceType enum ml.m6i.32xlarge"
+          },
+          {
+            "name": "MlM6i4xlarge",
+            "value": "ml.m6i.4xlarge",
+            "description": "InstanceType enum ml.m6i.4xlarge"
+          },
+          {
+            "name": "MlM6i8xlarge",
+            "value": "ml.m6i.8xlarge",
+            "description": "InstanceType enum ml.m6i.8xlarge"
+          },
+          {
+            "name": "MlM6iLarge",
+            "value": "ml.m6i.large",
+            "description": "InstanceType enum ml.m6i.large"
+          },
+          {
+            "name": "MlM6iXlarge",
+            "value": "ml.m6i.xlarge",
+            "description": "InstanceType enum ml.m6i.xlarge"
+          },
+          {
+            "name": "MlM6id12xlarge",
+            "value": "ml.m6id.12xlarge",
+            "description": "InstanceType enum ml.m6id.12xlarge"
+          },
+          {
+            "name": "MlM6id16xlarge",
+            "value": "ml.m6id.16xlarge",
+            "description": "InstanceType enum ml.m6id.16xlarge"
+          },
+          {
+            "name": "MlM6id24xlarge",
+            "value": "ml.m6id.24xlarge",
+            "description": "InstanceType enum ml.m6id.24xlarge"
+          },
+          {
+            "name": "MlM6id2xlarge",
+            "value": "ml.m6id.2xlarge",
+            "description": "InstanceType enum ml.m6id.2xlarge"
+          },
+          {
+            "name": "MlM6id32xlarge",
+            "value": "ml.m6id.32xlarge",
+            "description": "InstanceType enum ml.m6id.32xlarge"
+          },
+          {
+            "name": "MlM6id4xlarge",
+            "value": "ml.m6id.4xlarge",
+            "description": "InstanceType enum ml.m6id.4xlarge"
+          },
+          {
+            "name": "MlM6id8xlarge",
+            "value": "ml.m6id.8xlarge",
+            "description": "InstanceType enum ml.m6id.8xlarge"
+          },
+          {
+            "name": "MlM6idLarge",
+            "value": "ml.m6id.large",
+            "description": "InstanceType enum ml.m6id.large"
+          },
+          {
+            "name": "MlM6idXlarge",
+            "value": "ml.m6id.xlarge",
+            "description": "InstanceType enum ml.m6id.xlarge"
+          },
+          {
+            "name": "MlM7i12xlarge",
+            "value": "ml.m7i.12xlarge",
+            "description": "InstanceType enum ml.m7i.12xlarge"
+          },
+          {
+            "name": "MlM7i16xlarge",
+            "value": "ml.m7i.16xlarge",
+            "description": "InstanceType enum ml.m7i.16xlarge"
+          },
+          {
+            "name": "MlM7i24xlarge",
+            "value": "ml.m7i.24xlarge",
+            "description": "InstanceType enum ml.m7i.24xlarge"
+          },
+          {
+            "name": "MlM7i2xlarge",
+            "value": "ml.m7i.2xlarge",
+            "description": "InstanceType enum ml.m7i.2xlarge"
+          },
+          {
+            "name": "MlM7i48xlarge",
+            "value": "ml.m7i.48xlarge",
+            "description": "InstanceType enum ml.m7i.48xlarge"
+          },
+          {
+            "name": "MlM7i4xlarge",
+            "value": "ml.m7i.4xlarge",
+            "description": "InstanceType enum ml.m7i.4xlarge"
+          },
+          {
+            "name": "MlM7i8xlarge",
+            "value": "ml.m7i.8xlarge",
+            "description": "InstanceType enum ml.m7i.8xlarge"
+          },
+          {
+            "name": "MlM7iLarge",
+            "value": "ml.m7i.large",
+            "description": "InstanceType enum ml.m7i.large"
+          },
+          {
+            "name": "MlM7iXlarge",
+            "value": "ml.m7i.xlarge",
+            "description": "InstanceType enum ml.m7i.xlarge"
+          },
+          {
+            "name": "MlP216xlarge",
+            "value": "ml.p2.16xlarge",
+            "description": "InstanceType enum ml.p2.16xlarge"
+          },
+          {
+            "name": "MlP28xlarge",
+            "value": "ml.p2.8xlarge",
+            "description": "InstanceType enum ml.p2.8xlarge"
+          },
+          {
+            "name": "MlP2Xlarge",
+            "value": "ml.p2.xlarge",
+            "description": "InstanceType enum ml.p2.xlarge"
+          },
+          {
+            "name": "MlP316xlarge",
+            "value": "ml.p3.16xlarge",
+            "description": "InstanceType enum ml.p3.16xlarge"
+          },
+          {
+            "name": "MlP32xlarge",
+            "value": "ml.p3.2xlarge",
+            "description": "InstanceType enum ml.p3.2xlarge"
+          },
+          {
+            "name": "MlP38xlarge",
+            "value": "ml.p3.8xlarge",
+            "description": "InstanceType enum ml.p3.8xlarge"
+          },
+          {
+            "name": "MlP3dn24xlarge",
+            "value": "ml.p3dn.24xlarge",
+            "description": "InstanceType enum ml.p3dn.24xlarge"
+          },
+          {
+            "name": "MlP4d24xlarge",
+            "value": "ml.p4d.24xlarge",
+            "description": "InstanceType enum ml.p4d.24xlarge"
+          },
+          {
+            "name": "MlP4de24xlarge",
+            "value": "ml.p4de.24xlarge",
+            "description": "InstanceType enum ml.p4de.24xlarge"
+          },
+          {
+            "name": "MlP548xlarge",
+            "value": "ml.p5.48xlarge",
+            "description": "InstanceType enum ml.p5.48xlarge"
+          },
+          {
+            "name": "MlR512xlarge",
+            "value": "ml.r5.12xlarge",
+            "description": "InstanceType enum ml.r5.12xlarge"
+          },
+          {
+            "name": "MlR516xlarge",
+            "value": "ml.r5.16xlarge",
+            "description": "InstanceType enum ml.r5.16xlarge"
+          },
+          {
+            "name": "MlR524xlarge",
+            "value": "ml.r5.24xlarge",
+            "description": "InstanceType enum ml.r5.24xlarge"
+          },
+          {
+            "name": "MlR52xlarge",
+            "value": "ml.r5.2xlarge",
+            "description": "InstanceType enum ml.r5.2xlarge"
+          },
+          {
+            "name": "MlR54xlarge",
+            "value": "ml.r5.4xlarge",
+            "description": "InstanceType enum ml.r5.4xlarge"
+          },
+          {
+            "name": "MlR58xlarge",
+            "value": "ml.r5.8xlarge",
+            "description": "InstanceType enum ml.r5.8xlarge"
+          },
+          {
+            "name": "MlR5Large",
+            "value": "ml.r5.large",
+            "description": "InstanceType enum ml.r5.large"
+          },
+          {
+            "name": "MlR5Xlarge",
+            "value": "ml.r5.xlarge",
+            "description": "InstanceType enum ml.r5.xlarge"
+          },
+          {
+            "name": "MlR6i12xlarge",
+            "value": "ml.r6i.12xlarge",
+            "description": "InstanceType enum ml.r6i.12xlarge"
+          },
+          {
+            "name": "MlR6i16xlarge",
+            "value": "ml.r6i.16xlarge",
+            "description": "InstanceType enum ml.r6i.16xlarge"
+          },
+          {
+            "name": "MlR6i24xlarge",
+            "value": "ml.r6i.24xlarge",
+            "description": "InstanceType enum ml.r6i.24xlarge"
+          },
+          {
+            "name": "MlR6i2xlarge",
+            "value": "ml.r6i.2xlarge",
+            "description": "InstanceType enum ml.r6i.2xlarge"
+          },
+          {
+            "name": "MlR6i32xlarge",
+            "value": "ml.r6i.32xlarge",
+            "description": "InstanceType enum ml.r6i.32xlarge"
+          },
+          {
+            "name": "MlR6i4xlarge",
+            "value": "ml.r6i.4xlarge",
+            "description": "InstanceType enum ml.r6i.4xlarge"
+          },
+          {
+            "name": "MlR6i8xlarge",
+            "value": "ml.r6i.8xlarge",
+            "description": "InstanceType enum ml.r6i.8xlarge"
+          },
+          {
+            "name": "MlR6iLarge",
+            "value": "ml.r6i.large",
+            "description": "InstanceType enum ml.r6i.large"
+          },
+          {
+            "name": "MlR6iXlarge",
+            "value": "ml.r6i.xlarge",
+            "description": "InstanceType enum ml.r6i.xlarge"
+          },
+          {
+            "name": "MlR6id12xlarge",
+            "value": "ml.r6id.12xlarge",
+            "description": "InstanceType enum ml.r6id.12xlarge"
+          },
+          {
+            "name": "MlR6id16xlarge",
+            "value": "ml.r6id.16xlarge",
+            "description": "InstanceType enum ml.r6id.16xlarge"
+          },
+          {
+            "name": "MlR6id24xlarge",
+            "value": "ml.r6id.24xlarge",
+            "description": "InstanceType enum ml.r6id.24xlarge"
+          },
+          {
+            "name": "MlR6id2xlarge",
+            "value": "ml.r6id.2xlarge",
+            "description": "InstanceType enum ml.r6id.2xlarge"
+          },
+          {
+            "name": "MlR6id32xlarge",
+            "value": "ml.r6id.32xlarge",
+            "description": "InstanceType enum ml.r6id.32xlarge"
+          },
+          {
+            "name": "MlR6id4xlarge",
+            "value": "ml.r6id.4xlarge",
+            "description": "InstanceType enum ml.r6id.4xlarge"
+          },
+          {
+            "name": "MlR6id8xlarge",
+            "value": "ml.r6id.8xlarge",
+            "description": "InstanceType enum ml.r6id.8xlarge"
+          },
+          {
+            "name": "MlR6idLarge",
+            "value": "ml.r6id.large",
+            "description": "InstanceType enum ml.r6id.large"
+          },
+          {
+            "name": "MlR6idXlarge",
+            "value": "ml.r6id.xlarge",
+            "description": "InstanceType enum ml.r6id.xlarge"
+          },
+          {
+            "name": "MlR7i12xlarge",
+            "value": "ml.r7i.12xlarge",
+            "description": "InstanceType enum ml.r7i.12xlarge"
+          },
+          {
+            "name": "MlR7i16xlarge",
+            "value": "ml.r7i.16xlarge",
+            "description": "InstanceType enum ml.r7i.16xlarge"
+          },
+          {
+            "name": "MlR7i24xlarge",
+            "value": "ml.r7i.24xlarge",
+            "description": "InstanceType enum ml.r7i.24xlarge"
+          },
+          {
+            "name": "MlR7i2xlarge",
+            "value": "ml.r7i.2xlarge",
+            "description": "InstanceType enum ml.r7i.2xlarge"
+          },
+          {
+            "name": "MlR7i48xlarge",
+            "value": "ml.r7i.48xlarge",
+            "description": "InstanceType enum ml.r7i.48xlarge"
+          },
+          {
+            "name": "MlR7i4xlarge",
+            "value": "ml.r7i.4xlarge",
+            "description": "InstanceType enum ml.r7i.4xlarge"
+          },
+          {
+            "name": "MlR7i8xlarge",
+            "value": "ml.r7i.8xlarge",
+            "description": "InstanceType enum ml.r7i.8xlarge"
+          },
+          {
+            "name": "MlR7iLarge",
+            "value": "ml.r7i.large",
+            "description": "InstanceType enum ml.r7i.large"
+          },
+          {
+            "name": "MlR7iXlarge",
+            "value": "ml.r7i.xlarge",
+            "description": "InstanceType enum ml.r7i.xlarge"
+          },
+          {
+            "name": "MlT22xlarge",
+            "value": "ml.t2.2xlarge",
+            "description": "InstanceType enum ml.t2.2xlarge"
+          },
+          {
+            "name": "MlT2Large",
+            "value": "ml.t2.large",
+            "description": "InstanceType enum ml.t2.large"
+          },
+          {
+            "name": "MlT2Medium",
+            "value": "ml.t2.medium",
+            "description": "InstanceType enum ml.t2.medium"
+          },
+          {
+            "name": "MlT2Xlarge",
+            "value": "ml.t2.xlarge",
+            "description": "InstanceType enum ml.t2.xlarge"
+          },
+          {
+            "name": "MlT32xlarge",
+            "value": "ml.t3.2xlarge",
+            "description": "InstanceType enum ml.t3.2xlarge"
+          },
+          {
+            "name": "MlT3Large",
+            "value": "ml.t3.large",
+            "description": "InstanceType enum ml.t3.large"
+          },
+          {
+            "name": "MlT3Medium",
+            "value": "ml.t3.medium",
+            "description": "InstanceType enum ml.t3.medium"
+          },
+          {
+            "name": "MlT3Xlarge",
+            "value": "ml.t3.xlarge",
+            "description": "InstanceType enum ml.t3.xlarge"
+          }
+        ]
+      }
+    },
+    "InstanceTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of InstanceTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/InstanceType",
+          "description": "Property value"
+        }
+      }
+    },
+    "NotebookInstanceStatus": {
+      "type": "string",
+      "description": "NotebookInstanceStatus enum",
+      "enum": [
+        "Deleting",
+        "Failed",
+        "InService",
+        "Pending",
+        "Stopped",
+        "Stopping",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "NotebookInstanceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "NotebookInstanceStatus enum Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "NotebookInstanceStatus enum Failed"
+          },
+          {
+            "name": "InService",
+            "value": "InService",
+            "description": "NotebookInstanceStatus enum InService"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "NotebookInstanceStatus enum Pending"
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "NotebookInstanceStatus enum Stopped"
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "NotebookInstanceStatus enum Stopping"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "NotebookInstanceStatus enum Updating"
+          }
+        ]
+      }
+    },
+    "NotebookInstanceStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of NotebookInstanceStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/NotebookInstanceStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SageMakerNotebookInstanceSummary": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SageMakerNotebookInstanceSummaryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SageMakerNotebookInstanceSummaryListResult": {
+      "type": "object",
+      "description": "The response of a SageMakerNotebookInstanceSummary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SageMakerNotebookInstanceSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/SageMakerNotebookInstanceSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SageMakerNotebookInstanceSummaryProperties": {
+      "type": "object",
+      "description": "Definition of SageMakerNotebookInstanceSummary",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsSageMakerNotebookInstanceSummaryProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SageMakerNotebookInstanceSummaryTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SageMakerNotebookInstanceSummary resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
