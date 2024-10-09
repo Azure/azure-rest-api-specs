@@ -63,7 +63,7 @@ model HealthValidationProperties {
 union validationStatus {
   string,
 
-  @doc("The health validation has not started yet.")
+  @doc("Health validation has not started.")
   NotStarted: "NotStarted",
 
   @doc("The health validation is running.")
