@@ -105,7 +105,7 @@ namespace FaceAdministrationClient {
   /**
    * Client options for LargePersonGroupClient
    */
-  model LargePersonGroupOptions {
+  model LargePersonGroupClientOptions {
     /**
      * ID of LargePersonGroup.
      */
@@ -152,7 +152,7 @@ namespace FaceAdministrationClient {
 
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup
-  @clientInitialization(LargePersonGroupOptions, "csharp,java")
+  @clientInitialization(LargePersonGroupClientOptions, "csharp,java")
   @clientName("LargePersonGroupClientImpl", "csharp")
   interface LargePersonGroup {
     @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/create-large-person-group for more details.")
