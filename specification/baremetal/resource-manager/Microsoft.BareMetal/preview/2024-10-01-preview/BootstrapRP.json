@@ -998,13 +998,7 @@
           "description": "The current provisioning state.",
           "readOnly": true
         }
-      },
-      "required": [
-        "tenantIds",
-        "virtualNetworkId",
-        "virtualNetworkGuid",
-        "remotePeeringLinks"
-      ]
+      }
     },
     "PeeringSettingProvisioningState": {
       "type": "string",
@@ -1065,28 +1059,9 @@
       "type": "object",
       "description": "Updated peering setting object",
       "properties": {
-        "tenantIds": {
-          "type": "array",
-          "description": "Tenant Ids in a source vnet.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "virtualNetworkId": {
-          "type": "string",
-          "description": "Source vnet ID in the following format: \"Source/VNET/ARM/Resource/ID\""
-        },
-        "virtualNetworkGuid": {
-          "type": "string",
-          "description": "Source vnet GUID."
-        },
-        "remotePeeringLinks": {
-          "type": "array",
-          "description": "Peering links from a source vnet to remote vnet(s).",
-          "items": {
-            "$ref": "#/definitions/RemotePeeringLink"
-          },
-          "x-ms-identifiers": []
+        "properties": {
+          "$ref": "#/definitions/PeeringSettingProperties",
+          "description": "Patch properties."
         },
         "tags": {
           "type": "object",

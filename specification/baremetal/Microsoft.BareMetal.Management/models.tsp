@@ -274,23 +274,23 @@ model PeeringSettingProperties {
   /**
    * Tenant Ids in a source vnet.
    */
-  tenantIds: string[];
+  tenantIds?: string[];
 
   /**
    * Source vnet ID in the following format: "Source/VNET/ARM/Resource/ID"
    */
-  virtualNetworkId: string;
+  virtualNetworkId?: string;
 
   /**
    * Source vnet GUID.
    */
-  virtualNetworkGuid: string;
+  virtualNetworkGuid?: string;
 
   /**
    * Peering links from a source vnet to remote vnet(s).
    */
   @OpenAPI.extension("x-ms-identifiers", [])
-  remotePeeringLinks: RemotePeeringLink[];
+  remotePeeringLinks?: RemotePeeringLink[];
 
   /**
    * The current provisioning state.
@@ -320,25 +320,9 @@ model RemotePeeringLink {
  */
 model PeeringSettingUpdate {
   /**
-   * Tenant Ids in a source vnet.
+   * Patch properties.
    */
-  tenantIds?: string[];
-
-  /**
-   * Source vnet ID in the following format: "Source/VNET/ARM/Resource/ID"
-   */
-  virtualNetworkId?: string;
-
-  /**
-   * Source vnet GUID.
-   */
-  virtualNetworkGuid?: string;
-
-  /**
-   * Peering links from a source vnet to remote vnet(s).
-   */
-  @OpenAPI.extension("x-ms-identifiers", [])
-  remotePeeringLinks?: RemotePeeringLink[];
+  properties?: PeeringSettingProperties;
 
   /**
    * Resource tags.
