@@ -80,7 +80,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}": {
-      "patch": {
+      "put": {
         "tags": [
           "Tables"
         ],
@@ -125,15 +125,66 @@
             }
           },
           "202": {
-            "description": "Accepted response definition (Long running operation).",
-            "headers": {
-              "Location": {
-                "type": "string"
-              },
-              "azure-asyncoperation": {
-                "type": "string"
-              }
+            "description": "Accepted response definition (Long running operation)."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TablesUpsert": {
+            "$ref": "./examples/TablesUpsert.json"
+          }
+        },
+        "operationId": "Tables_Update",
+        "description": "Update a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/TableNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            },
+            "description": "The parameters required to update table properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "202": {
+            "description": "Accepted response definition (Long running operation)."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -689,8 +740,7 @@
           "description": "Instruct the system how to handle and charge the logs ingested to this table.",
           "enum": [
             "Basic",
-            "Analytics",
-            "Auxiliary"
+            "Analytics"
           ],
           "x-ms-enum": {
             "name": "TablePlanEnum",
@@ -703,10 +753,6 @@
               {
                 "value": "Analytics",
                 "description": "Logs  that allow monitoring and analytics."
-              },
-              {
-                "value": "Auxiliary",
-                "description": "TBD."
               }
             ]
           }
