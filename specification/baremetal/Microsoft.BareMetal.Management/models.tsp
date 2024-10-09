@@ -322,25 +322,21 @@ model PeeringSettingUpdate {
   /**
    * Tenant Ids in a source vnet.
    */
-  @visibility("update")
   tenantIds?: string[];
 
   /**
    * Source vnet ID in the following format: "Source/VNET/ARM/Resource/ID"
    */
-  @visibility("update")
   virtualNetworkId?: string;
 
   /**
    * Source vnet GUID.
    */
-  @visibility("update")
   virtualNetworkGuid?: string;
 
   /**
    * Peering links from a source vnet to remote vnet(s).
    */
-  @visibility("update")
   @OpenAPI.extension("x-ms-identifiers", [])
   remotePeeringLinks?: RemotePeeringLink[];
 
