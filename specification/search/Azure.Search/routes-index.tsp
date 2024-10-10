@@ -7,11 +7,8 @@ using TypeSpec.Http;
 
 namespace SearchClient;
 
-model IndexNameParameter {
-  @path
-  indexName: string;
-}
-@route("/indexes({indexName})")
+
+@route("/indexes('{indexName}')")
 interface DocumentsOperations {
   /**
    * Queries the number of documents in the index.
@@ -20,12 +17,9 @@ interface DocumentsOperations {
   @get
   count is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...indexNameParameter;
+
+      ...clientRequestIdHeader;
     },
     void
   >;
@@ -37,13 +31,14 @@ interface DocumentsOperations {
   @get
   searchGet is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
+      ...indexNameParameter;
+
       /**
        * A full-text search query expression; Use "*" or omit this parameter to match
        * all documents.
        */
       @query("search")
-      SearchText?: string;
+      searchText?: string;
 
       /**
        * A value that specifies whether to fetch the total count of results. Default is
@@ -51,7 +46,7 @@ interface DocumentsOperations {
        * count returned is an approximation.
        */
       @query("$count")
-      IncludeTotalResultCount?: boolean;
+      includeTotalResultCount?: boolean;
 
       /**
        * The list of facet expressions to apply to the search query. Each facet
@@ -62,7 +57,7 @@ interface DocumentsOperations {
         name: "facet",
         format: "multi",
       })
-      Facets?: string[];
+      facets?: string[];
 
       /**
        * The OData $filter expression to apply to the search query.
@@ -78,7 +73,7 @@ interface DocumentsOperations {
         name: "highlight",
         format: "csv",
       })
-      HighlightFields?: string[];
+      highlightFields?: string[];
 
       /**
        * A string tag that is appended to hit highlights. Must be set with
@@ -116,7 +111,7 @@ interface DocumentsOperations {
         name: "$orderby",
         format: "csv",
       })
-      OrderBy?: string[];
+      orderBy?: string[];
 
       /**
        * A value that specifies the syntax of the search query. The default is 'simple'.
@@ -135,7 +130,7 @@ interface DocumentsOperations {
         name: "scoringParameter",
         format: "multi",
       })
-      ScoringParameters?: string[];
+      scoringParameters?: string[];
 
       /**
        * The name of a scoring profile to evaluate match scores for matching documents
@@ -211,11 +206,7 @@ interface DocumentsOperations {
       @query("$top")
       $top?: int32;
 
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...clientRequestIdHeader;
 
       /**
        * The name of the semantic configuration that lists which fields should be used
@@ -282,12 +273,9 @@ interface DocumentsOperations {
   @post
   searchPost is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...indexNameParameter;
+
+      ...clientRequestIdHeader;
 
       /**
        * The definition of the Search request.
@@ -305,7 +293,8 @@ interface DocumentsOperations {
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
+      ...indexNameParameter;
+
       /**
        * The key of the document to retrieve.
        */
@@ -320,13 +309,9 @@ interface DocumentsOperations {
         name: "$select",
         format: "csv",
       })
-      SelectedFields?: string[];
+      selectedFields?: string[];
 
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...clientRequestIdHeader;
     },
     void
   >;
@@ -338,13 +323,14 @@ interface DocumentsOperations {
   @get
   suggestGet is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
+      ...indexNameParameter;
+
       /**
        * The search text to use to suggest documents. Must be at least 1 character, and
        * no more than 100 characters.
        */
       @query("search")
-      SearchText: string;
+      searchText: string;
 
       /**
        * The name of the suggester as specified in the suggesters collection that's part
@@ -367,7 +353,7 @@ interface DocumentsOperations {
        * suggestions queries are slower and consume more resources.
        */
       @query("fuzzy")
-      UseFuzzyMatching?: boolean;
+      useFuzzyMatching?: boolean;
 
       /**
        * A string tag that is appended to hit highlights. Must be set with
@@ -405,7 +391,7 @@ interface DocumentsOperations {
         name: "$orderby",
         format: "csv",
       })
-      OrderBy?: string[];
+      orderBy?: string[];
 
       /**
        * The list of field names to search for the specified search text. Target fields
@@ -434,11 +420,7 @@ interface DocumentsOperations {
       @query("$top")
       $top?: int32;
 
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...clientRequestIdHeader;
     },
     SuggestDocumentsResult
   >;
@@ -450,12 +432,9 @@ interface DocumentsOperations {
   @post
   suggestPost is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...indexNameParameter;
+
+      ...clientRequestIdHeader;
 
       /**
        * The Suggest request.
@@ -473,12 +452,9 @@ interface DocumentsOperations {
   @post
   index is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...indexNameParameter;
+
+      ...clientRequestIdHeader;
 
       /**
        * The batch of index actions.
@@ -497,18 +473,15 @@ interface DocumentsOperations {
   @get
   autocompleteGet is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...indexNameParameter;
+
+      ...clientRequestIdHeader;
 
       /**
        * The incomplete term which should be auto-completed.
        */
       @query("search")
-      SearchText: string;
+      searchText: string;
 
       /**
        * The name of the suggester as specified in the suggesters collection that's part
@@ -540,7 +513,7 @@ interface DocumentsOperations {
        * autocomplete queries are slower and consume more resources.
        */
       @query("fuzzy")
-      UseFuzzyMatching?: boolean;
+      useFuzzyMatching?: boolean;
 
       /**
        * A string tag that is appended to hit highlights. Must be set with
@@ -593,12 +566,9 @@ interface DocumentsOperations {
   @post
   autocompletePost is Azure.Core.Foundations.Operation<
     {
-      ...IndexNameParameter;
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
-      @header
-      `x-ms-client-request-id`?: string;
+      ...indexNameParameter;
+
+      ...clientRequestIdHeader;
 
       /**
        * The definition of the Autocomplete request.

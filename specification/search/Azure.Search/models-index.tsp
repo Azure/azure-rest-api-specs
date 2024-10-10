@@ -159,7 +159,9 @@ union SemanticSearchResultsType {
  * Specifies the syntax of the search query. The default is 'simple'. Use 'full'
  * if your query uses the Lucene query syntax.
  */
-enum QueryType {
+union QueryType {
+  string,
+
   /**
    * Uses the simple query syntax for searches. Search text is interpreted using a
    * simple query language that allows for symbols such as +, * and "". Queries are
@@ -187,7 +189,9 @@ enum QueryType {
  * Specifies whether any or all of the search terms must be matched in order to
  * count the document as a match.
  */
-enum SearchMode {
+union SearchMode {
+  string,
+
   /**
    * Any of the search terms must be matched in order to count the document as a
    * match.
@@ -208,7 +212,9 @@ enum SearchMode {
  * globally before scoring. Using global scoring statistics can increase latency
  * of search queries.
  */
-enum ScoringStatistics {
+union ScoringStatistics {
+  string,
+
   /**
    * The scoring statistics will be calculated locally for lower latency.
    */
@@ -223,7 +229,9 @@ enum ScoringStatistics {
 /**
  * The operation to perform on a document in an indexing batch.
  */
-enum IndexActionType {
+union IndexActionType {
+  string,
+
   /**
    * Inserts the document into the index if it is new and updates it if it exists.
    * All fields are replaced in the update case.
@@ -259,7 +267,8 @@ enum IndexActionType {
  * to get shingles and 'oneTermWithContext' to use the current context in
  * producing autocomplete terms.
  */
-enum AutocompleteMode {
+union AutocompleteMode {
+  string,
   /**
    * Only one term is suggested. If the query has two terms, only the last term is
    * completed. For example, if the input is 'washington medic', the suggested terms

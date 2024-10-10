@@ -21,32 +21,11 @@ interface DataSourcesOperations {
             @path
             dataSourceName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
+            ...matchingHeader;
 
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
-
-            /**
-             * For HTTP PUT requests, instructs the service to return the created/updated
-             * resource on success.
-             */
-            @header
-            Prefer: Enum0;
+            ...preferHeader;
 
             /**
              * The definition of the datasource to create or update.
@@ -70,25 +49,9 @@ interface DataSourcesOperations {
             @path
             dataSourceName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
-
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
+            ...matchingHeader;
         },
         void
     >;
@@ -106,11 +69,7 @@ interface DataSourcesOperations {
             @path
             dataSourceName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         SearchIndexerDataSource
     >;
@@ -130,11 +89,7 @@ interface DataSourcesOperations {
             @query("$select")
             $select?: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         ListDataSourcesResult
     >;
@@ -146,11 +101,7 @@ interface DataSourcesOperations {
     @post
     create is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
             /**
              * The definition of the datasource to create.
@@ -170,17 +121,9 @@ interface IndexersOperations {
     @post
     reset is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the indexer to reset.
-             */
-            @path
-            indexerName: string;
+            ...indexerNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         void
     >;
@@ -192,17 +135,9 @@ interface IndexersOperations {
     @post
     run is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the indexer to run.
-             */
-            @path
-            indexerName: string;
+            ...indexerNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         void
     >;
@@ -214,38 +149,13 @@ interface IndexersOperations {
     @put
     createOrUpdate is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the indexer to create or update.
-             */
-            @path
-            indexerName: string;
+            ...indexerNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
+            ...matchingHeader;
 
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
-
-            /**
-             * For HTTP PUT requests, instructs the service to return the created/updated
-             * resource on success.
-             */
-            @header
-            Prefer: Enum0;
+            ...preferHeader;
 
             /**
              * The definition of the indexer to create or update.
@@ -263,31 +173,11 @@ interface IndexersOperations {
     @delete
     delete is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the indexer to delete.
-             */
-            @path
-            indexerName: string;
+            ...indexerNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
-
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
+            ...matchingHeader;
         },
         void
     >;
@@ -299,17 +189,9 @@ interface IndexersOperations {
     @get
     get is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the indexer to retrieve.
-             */
-            @path
-            indexerName: string;
+            ...indexerNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         SearchIndexer
     >;
@@ -329,11 +211,7 @@ interface IndexersOperations {
             @query("$select")
             $select?: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         ListIndexersResult
     >;
@@ -345,11 +223,7 @@ interface IndexersOperations {
     @post
     create is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
             /**
              * The definition of the indexer to create.
@@ -367,17 +241,9 @@ interface IndexersOperations {
     @get
     getStatus is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the indexer for which to retrieve status.
-             */
-            @path
-            indexerName: string;
+            ...indexerNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         SearchIndexerStatus
     >;
@@ -398,32 +264,11 @@ interface SkillsetsOperations {
             @path
             skillsetName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
+            ...matchingHeader;
 
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
-
-            /**
-             * For HTTP PUT requests, instructs the service to return the created/updated
-             * resource on success.
-             */
-            @header
-            Prefer: Enum0;
+            ...preferHeader;
 
             /**
              * The skillset containing one or more skills to create or update in a search
@@ -448,25 +293,9 @@ interface SkillsetsOperations {
             @path
             skillsetName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
-
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
+            ...matchingHeader;
         },
         void
     >;
@@ -484,11 +313,7 @@ interface SkillsetsOperations {
             @path
             skillsetName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         SearchIndexerSkillset
     >;
@@ -508,11 +333,7 @@ interface SkillsetsOperations {
             @query("$select")
             $select?: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         ListSkillsetsResult
     >;
@@ -524,11 +345,7 @@ interface SkillsetsOperations {
     @post
     create is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
             /**
              * The skillset containing one or more skills to create in a search service.
@@ -554,32 +371,11 @@ interface SynonymMapsOperations {
             @path
             synonymMapName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
+            ...matchingHeader;
 
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
-
-            /**
-             * For HTTP PUT requests, instructs the service to return the created/updated
-             * resource on success.
-             */
-            @header
-            Prefer: Enum0;
+            ...preferHeader;
 
             /**
              * The definition of the synonym map to create or update.
@@ -603,25 +399,9 @@ interface SynonymMapsOperations {
             @path
             synonymMapName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
-
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
+            ...matchingHeader;
         },
         void
     >;
@@ -639,11 +419,7 @@ interface SynonymMapsOperations {
             @path
             synonymMapName: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         SynonymMap
     >;
@@ -663,11 +439,7 @@ interface SynonymMapsOperations {
             @query("$select")
             $select?: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         ListSynonymMapsResult
     >;
@@ -679,11 +451,7 @@ interface SynonymMapsOperations {
     @post
     create is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
             /**
              * The definition of the synonym map to create.
@@ -703,11 +471,7 @@ interface IndexesOperations {
     @post
     create is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
             /**
              * The definition of the index to create.
@@ -733,11 +497,7 @@ interface IndexesOperations {
             @query("$select")
             $select?: string;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         ListIndexesResult
     >;
@@ -749,11 +509,7 @@ interface IndexesOperations {
     @put
     createOrUpdate is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The definition of the index to create or update.
-             */
-            @path
-            indexName: string;
+            ...indexNameParameter;
 
             /**
              * Allows new analyzers, tokenizers, token filters, or char filters to be added to
@@ -765,32 +521,11 @@ interface IndexesOperations {
             @query("allowIndexDowntime")
             allowIndexDowntime?: boolean;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
+            ...matchingHeader;
 
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
-
-            /**
-             * For HTTP PUT requests, instructs the service to return the created/updated
-             * resource on success.
-             */
-            @header
-            Prefer: Enum0;
+            ...preferHeader;
 
             /**
              * The definition of the index to create or update.
@@ -811,31 +546,9 @@ interface IndexesOperations {
     @delete
     delete is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the index to delete.
-             */
-            @path
-            indexName: string;
+            ...indexNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
-
-            /**
-             * Defines the If-Match condition. The operation will be performed only if the
-             * ETag on the server matches this value.
-             */
-            @header
-            `If-Match`?: string;
-
-            /**
-             * Defines the If-None-Match condition. The operation will be performed only if
-             * the ETag on the server does not match this value.
-             */
-            @header
-            `If-None-Match`?: string;
+            ...matchingHeader;
         },
         void
     >;
@@ -847,17 +560,9 @@ interface IndexesOperations {
     @get
     get is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the index to retrieve.
-             */
-            @path
-            indexName: string;
+            ...indexNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         SearchIndex
     >;
@@ -870,17 +575,9 @@ interface IndexesOperations {
     @get
     getStatistics is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the index for which to retrieve statistics.
-             */
-            @path
-            indexName: string;
+            ...indexNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
         },
         GetIndexStatisticsResult
     >;
@@ -892,17 +589,9 @@ interface IndexesOperations {
     @post
     analyze is Azure.Core.Foundations.Operation<
         {
-            /**
-             * The name of the index for which to test an analyzer.
-             */
-            @path
-            indexName: string;
+            ...indexNameParameter;
 
-            /**
-             * The tracking ID sent with the request to help with debugging.
-             */
-            @header
-            `x-ms-client-request-id`?: string;
+            ...clientRequestIdHeader;
 
             /**
              * The text and analyzer or analysis components to test.
@@ -921,11 +610,7 @@ interface IndexesOperations {
 @get
 op getServiceStatistics is Azure.Core.Foundations.Operation<
     {
-        /**
-         * The tracking ID sent with the request to help with debugging.
-         */
-        @header
-        `x-ms-client-request-id`?: string;
+        ...clientRequestIdHeader;
     },
     SearchServiceStatistics
 >;

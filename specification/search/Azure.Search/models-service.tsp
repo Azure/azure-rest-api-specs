@@ -9,11 +9,6 @@ using Azure.Core;
 
 namespace SearchClient;
 
-union Enum0 {
-    string,
-    `return=representation`: "return=representation",
-}
-
 /**
  * Defines the type of a datasource.
  */
@@ -3441,7 +3436,9 @@ union TextTranslationSkillLanguage {
 /**
  * Represents the overall indexer status.
  */
-enum IndexerStatus {
+union IndexerStatus {
+    string,
+
     /**
      * Indicates that the indexer is in an unknown state.
      */
@@ -3462,7 +3459,9 @@ enum IndexerStatus {
 /**
  * Represents the status of an individual indexer execution.
  */
-enum IndexerExecutionStatus {
+union IndexerExecutionStatus {
+    string,
+
     /**
      * An indexer invocation has failed, but the failure may be transient. Indexer
      * invocations will continue per schedule.
@@ -3489,7 +3488,9 @@ enum IndexerExecutionStatus {
  * Defines the function used to interpolate score boosting across a range of
  * documents.
  */
-enum ScoringFunctionInterpolation {
+union ScoringFunctionInterpolation {
+    string,
+
     /**
      * Boosts scores by a linearly decreasing amount. This is the default
      * interpolation for scoring functions.
@@ -3520,7 +3521,9 @@ enum ScoringFunctionInterpolation {
  * Defines the aggregation function used to combine the results of all the scoring
  * functions in a scoring profile.
  */
-enum ScoringFunctionAggregation {
+union ScoringFunctionAggregation {
+    string,
+
     /**
      * Boost scores by the sum of all scoring function results.
      */
@@ -3550,7 +3553,9 @@ enum ScoringFunctionAggregation {
 /**
  * Represents classes of characters on which a token filter can operate.
  */
-enum TokenCharacterKind {
+union TokenCharacterKind {
+    string,
+
     /**
      * Keeps letters in tokens.
      */
@@ -3580,7 +3585,9 @@ enum TokenCharacterKind {
 /**
  * Lists the languages supported by the Microsoft language tokenizer.
  */
-enum MicrosoftTokenizerLanguage {
+union MicrosoftTokenizerLanguage {
+    string,
+
     /**
      * Selects the Microsoft tokenizer for Bangla.
      */
@@ -3795,7 +3802,9 @@ enum MicrosoftTokenizerLanguage {
 /**
  * Lists the languages supported by the Microsoft language stemming tokenizer.
  */
-enum MicrosoftStemmingTokenizerLanguage {
+union MicrosoftStemmingTokenizerLanguage {
+    string,
+
     /**
      * Selects the Microsoft stemming tokenizer for Arabic.
      */
@@ -4025,7 +4034,9 @@ enum MicrosoftStemmingTokenizerLanguage {
 /**
  * Scripts that can be ignored by CjkBigramTokenFilter.
  */
-enum CjkBigramTokenFilterScripts {
+union CjkBigramTokenFilterScripts {
+    string,
+
     /**
      * Ignore Han script when forming bigrams of CJK terms.
      */
@@ -4050,7 +4061,9 @@ enum CjkBigramTokenFilterScripts {
 /**
  * Specifies which side of the input an n-gram should be generated from.
  */
-enum EdgeNGramTokenFilterSide {
+union EdgeNGramTokenFilterSide {
+    string,
+
     /**
      * Specifies that the n-gram should be generated from the front of the input.
      */
@@ -4065,7 +4078,9 @@ enum EdgeNGramTokenFilterSide {
 /**
  * Identifies the type of phonetic encoder to use with a PhoneticTokenFilter.
  */
-enum PhoneticEncoder {
+union PhoneticEncoder {
+    string,
+
     /**
      * Encodes a token into a Metaphone value.
      */
@@ -4125,7 +4140,9 @@ enum PhoneticEncoder {
 /**
  * The language to use for a Snowball token filter.
  */
-enum SnowballTokenFilterLanguage {
+union SnowballTokenFilterLanguage {
+    string,
+
     /**
      * Selects the Lucene Snowball stemming tokenizer for Armenian.
      */
@@ -4244,7 +4261,9 @@ enum SnowballTokenFilterLanguage {
 /**
  * The language to use for a stemmer token filter.
  */
-enum StemmerTokenFilterLanguage {
+union StemmerTokenFilterLanguage {
+    string,
+
     /**
      * Selects the Lucene stemming tokenizer for Arabic.
      */
@@ -4528,7 +4547,9 @@ enum StemmerTokenFilterLanguage {
 /**
  * Identifies a predefined list of language-specific stopwords.
  */
-enum StopwordsList {
+union StopwordsList {
+    string,
+
     /**
      * Selects the stopword list for Arabic.
      */
@@ -4907,7 +4928,7 @@ model SearchIndexer {
      * A value indicating whether the indexer is disabled. Default is false.
      */
     @encodedName("application/json", "disabled")
-    IsDisabled?: boolean;
+    isDisabled?: boolean;
 
     /**
      * The ETag of the indexer.
