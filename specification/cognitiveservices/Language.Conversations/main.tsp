@@ -51,9 +51,9 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_05_01: "2024-05-01",
 
-  /** Version 2024-05-15-preview" */
+  /** Version 2024-11-15-preview" */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_05_15_preview: "2024-05-15-preview",
+  v2024_11_15_preview: "2024-11-15-preview",
 }
 
 /** These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts. */
@@ -361,7 +361,7 @@ model EntitySubtype extends BaseExtraInformation {
   value?: string;
 
   @doc("List of entity tags. Tags express similarities between entity categories for the extracted entity type.")
-  @added(Versions.v2024_05_15_preview)
+  @added(Versions.v2024_11_15_preview)
   tags?: Array<EntityTag>;
 }
 
@@ -389,7 +389,7 @@ model RegexKey extends BaseExtraInformation {
 
 /** The abstract base class for entity resolutions. */
 @doc("Tags express similarities between entity categories for the extracted entity type.")
-@added(Versions.v2024_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model EntityTag {
   @doc("The name of the tag.")
   name: string;
@@ -666,7 +666,7 @@ union AnalyzeConversationLROTaskKind {
   ConversationalPIITask: "ConversationalPIITask",
 
   /** Custom Conversational Summarization Task */
-  @added(Versions.v2024_05_15_preview)
+  @added(Versions.v2024_11_15_preview)
   CustomConversationalSummarizationTask: "CustomConversationalSummarizationTask",
 }
 
@@ -684,7 +684,7 @@ union AnalyzeConversationResultsKind {
   ConversationalPIIResults: "conversationalPIIResults",
 
   /** Custom Conversational Summarization Results */
-  @added(Versions.v2024_05_15_preview)
+  @added(Versions.v2024_11_15_preview)
   CustomConversationalSummarizationResults: "customConversationalSummarizationResults",
 }
 
@@ -916,6 +916,18 @@ model Entity {
 
   /** Confidence score between 0 and 1 of the extracted entity. */
   confidenceScore: float64;
+
+  @added(Versions.v2024_11_15_preview)
+  /** Exact mask text to mask the PII entity */
+  mask?: string;
+
+  @added(Versions.v2024_11_15_preview)
+  /** Offset of the mask text */
+  maskOffset?: int32;
+
+  @added(Versions.v2024_11_15_preview)
+  /** Length of the mask text */
+  maskLength?: int32;
 }
 
 /** Result from the personally identifiable information detection and redaction operation performed on a list of conversations. */
@@ -994,6 +1006,57 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
   /** List of categories that need to be excluded instead of included. */
   @added(Versions.v2024_05_01)
   excludePiiCategories?: Array<ConversationPiiCategoriesExclude>;
+
+  /** Optional parameter determine what type of redaction to use. */
+  @added(Versions.v2024_11_15_preview)
+  redactionPolicy?: BaseRedactionPolicy;
+}
+
+@added(Versions.v2024_11_15_preview)
+/** Kinds of redaction policies supported. */
+union RedactionPolicyKind {
+  string,
+
+  /** Do not redact detected entities */
+  DoNotRedact: "DoNotRedact",
+
+  /** Redact detected entities with redaction character */
+  MaskWithRedactionCharacter: "MaskWithRedactionCharacter",
+
+  /** Redact detected entities with entity type */
+  MaskWithEntityType: "MaskWithEntityType", 
+}
+
+/** The abstract base class for RedactionPolicy. */
+@added(Versions.v2024_11_15_preview)
+@discriminator("policyKind")
+model BaseRedactionPolicy{
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind = RedactionPolicyKind.MaskWithRedactionCharacter;
+}
+
+/** Represents the policy of redacting with a redaction character */
+@added(Versions.v2024_11_15_preview)
+model MaskWithRedactionCharacterPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.MaskWithRedactionCharacter;
+
+  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
+  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
+}
+
+/** Represents the policy of not redacting found PII. */
+@added(Versions.v2024_11_15_preview)
+model DoNotRedactPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.DoNotRedact;
+}
+
+/** Represents the policy of redacting PII with the entity type. */
+@added(Versions.v2024_11_15_preview)
+model MaskWithEntityTypePolicyType extends BaseRedactionPolicy {
+  /** The entity OverlapPolicy object kind. */
+  policyKind: RedactionPolicyKind.MaskWithEntityType;
 }
 
 /** Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language. */
@@ -1078,7 +1141,7 @@ union TranscriptContentType {
 }
 
 /** Task definition for custom conversational summarization. */
-@added(Versions.v2024_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model AnalyzeCustomConversationSummarizationTask
   extends AnalyzeConversationLROTask {
   /** discriminator kind */
@@ -1113,7 +1176,7 @@ model ConversationSummarizationTaskParameters is PreBuiltTaskParameters {
 }
 
 /** Supported parameters for a custom conversation summarization task. */
-@added(Versions.v2024_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model CustomConversationSummarizationTaskParameters is CustomTaskParameters {
   /** It controls the approximate number of sentences in the output summaries. */
   sentenceCount?: int32;
@@ -1150,7 +1213,7 @@ union SummaryAspect {
   recap: "recap",
 
   /** Action items and tasks that arose during a meeting. */
-  @added(Versions.v2024_05_15_preview)
+  @added(Versions.v2024_11_15_preview)
   followUpTasks: "follow-up tasks",
 }
 
@@ -1166,7 +1229,7 @@ model AnalyzeConversationSummarizationResult
 }
 
 /** Result for the custom summarization task on the conversation. */
-@added(Versions.v2024_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model AnalyzeCustomConversationSummarizationResult
   extends AnalyzeConversationJobResult {
   /** discriminator kind */
@@ -1191,7 +1254,7 @@ model SummaryResult {
 }
 
 /** Custom Summary Results */
-@added(Versions.v2024_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model CustomSummaryResult {
   ...SummaryResultBase;
   ...CustomResult;
