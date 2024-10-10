@@ -1,0 +1,7 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/compute/armcompute
+      breaking-changes:
+        - Operation `*TablesClient.Update` has been changed to LRO, use `*TablesClient.BeginUpdate` instead.
+        - Type of `Cluster.Identity` has been changed from `*Identity` to `*ManagedServiceIdentity`
+        - Type of `ClusterPatch.Identity` has been changed from `*Identity` to `*ManagedServiceIdentity`
