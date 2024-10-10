@@ -32,12 +32,37 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_15_preview)
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  /** Character to be used for redaction. Default in '*'. */
-  @added(Versions.v2023_11_15_preview)
+  /** RedactionPolicy to be used on the input. */
+  @added(Versions.v2024_11_15_preview)
+  redactionPolicy?: RedactionPolicy;
+}
+
+/** Represents the redaction policy to be used. Default policy kind is to maskWithRedactionCharacter and redactionCharacter.asterisk. */
+@added(Versions.v2024_11_15_preview)
+model RedactionPolicy {
+  /** Redaction Policy kind that can be used. Default is maskWithRedactionCharacter. Can also use doNotRedact and maskWithEntityType. */
+  policyKind?: redactionPolicyKind.maskWithRedactionCharacter;
+
+  /** Redaction Character to be used for masking if maskWithRedactionCharacter is policyKind. Redaction characters allowed: !,#,$,%,&,*,+,-,=,?,`@`,^,_,~ */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
+}
+
+/** Kinds of redaction policies supported. */
+@added(Versions.v2024_11_15_preview)
+union redactionPolicyKind {
+  string,
+
+  /** Represents DoNotRedact */
+  doNotRedact: "doNotRedact",
+
+  /** Represents MaskWithRedactionCharacter */
+  maskWithRedactionCharacter: "maskWithRedactionCharacter",
+
+  /** Represents MaskWithEntityType */
+  maskWithEntityType: "maskWithEntityType",
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
@@ -65,7 +90,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 model PiiResult is PreBuiltResult {
   /** Response by document */
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
+    Versions.v2024_11_15_preview,
     Array<PiiEntitiesDocumentResult>
   )
   documents: Array<PiiResultWithDetectedLanguage>;
@@ -82,14 +107,34 @@ union PiiDomain {
   none: "none",
 }
 
+/** Entity object with tags. */
+@added(Versions.v2024_11_15_preview)
+model PiiEntityWithTags is Entity {
+  /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
+  type: string;
+
+  /** List of entity tags. Tags are to express some similarities/affinity between entities. */
+  tags: Array<EntityTag>;
+
+  /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
+  mask?: string;
+
+  /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
+  maskOffset?: int32;
+
+  /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
+  maskLength?: int32;
+}
+
 /** Contains the PII results. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntitiesDocumentResult is DocumentResult {
   /** Returns redacted text. */
-  redactedText: string;
+  redactedText?: string;
 
   /** Recognized entities in the document. */
-  entities: Array<Entity>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, Array<Entity>)
+  entities: Array<PiiEntityWithTags>;
 }
 
 /** Contains the PII results with detected language. */
@@ -192,6 +237,7 @@ union PiiCategoriesExclude {
   BENationalNumber: "BENationalNumber",
 
   /** BE National Number V2 */
+  @removed(Versions.v2024_11_15_preview)
   BENationalNumberV2: "BENationalNumberV2",
 
   /** BE Value Added Tax Number */
@@ -243,6 +289,7 @@ union PiiCategoriesExclude {
   HRNationalIDNumber: "HRNationalIDNumber",
 
   /** HR Personal Identification Number */
+  @removed(Versions.v2024_11_15_preview)
   HRPersonalIdentificationNumber: "HRPersonalIdentificationNumber",
 
   /** HR Personal Identification OIB Number V2 */
@@ -258,12 +305,14 @@ union PiiCategoriesExclude {
   CZPersonalIdentityNumber: "CZPersonalIdentityNumber",
 
   /** CZ Personal Identity V2 */
+  @removed(Versions.v2024_11_15_preview)
   CZPersonalIdentityV2: "CZPersonalIdentityV2",
 
   /** DK Personal Identification Number */
   DKPersonalIdentificationNumber: "DKPersonalIdentificationNumber",
 
   /** DK Personal Identification V2 */
+  @removed(Versions.v2024_11_15_preview)
   DKPersonalIdentificationV2: "DKPersonalIdentificationV2",
 
   /** Drug Enforcement Agency Number */
@@ -300,6 +349,7 @@ union PiiCategoriesExclude {
   FINationalID: "FINationalID",
 
   /** FI National ID V2 */
+  @removed(Versions.v2024_11_15_preview)
   FINationalIDV2: "FINationalIDV2",
 
   /** FI Passport Number */
@@ -345,6 +395,7 @@ union PiiCategoriesExclude {
   GRNationalIDCard: "GRNationalIDCard",
 
   /** GR National ID V2 */
+  @removed(Versions.v2024_11_15_preview)
   GRNationalIDV2: "GRNationalIDV2",
 
   /** GR Tax Identification Number */
@@ -378,6 +429,7 @@ union PiiCategoriesExclude {
   IEPersonalPublicServiceNumber: "IEPersonalPublicServiceNumber",
 
   /** IE Personal Public Service Number V2 */
+  @removed(Versions.v2024_11_15_preview)
   IEPersonalPublicServiceNumberV2: "IEPersonalPublicServiceNumberV2",
 
   /** IL Bank Account Number */
@@ -444,6 +496,7 @@ union PiiCategoriesExclude {
   NLCitizensServiceNumber: "NLCitizensServiceNumber",
 
   /** NL Citizens Service Number V2 */
+  @removed(Versions.v2024_11_15_preview)
   NLCitizensServiceNumberV2: "NLCitizensServiceNumberV2",
 
   /** NL Tax Identification Number */
@@ -495,6 +548,7 @@ union PiiCategoriesExclude {
   PTCitizenCardNumber: "PTCitizenCardNumber",
 
   /** PT Citizen Card Number V2 */
+  @removed(Versions.v2024_11_15_preview)
   PTCitizenCardNumberV2: "PTCitizenCardNumberV2",
 
   /** PT Tax Identification Number */
@@ -546,6 +600,7 @@ union PiiCategoriesExclude {
   SENationalID: "SENationalID",
 
   /** SE National ID V2 */
+  @removed(Versions.v2024_11_15_preview)
   SENationalIDV2: "SENationalIDV2",
 
   /** SE Passport Number */
