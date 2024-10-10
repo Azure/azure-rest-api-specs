@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2024-06-01-preview"
+    "version": "2024-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -524,11 +524,28 @@
             "$ref": "./examples/NodeTypePatchOperationAutoScale_example.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NodeType"
+            }
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1507,7 +1524,7 @@
       "properties": {
         "certificateUrl": {
           "type": "string",
-          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  \"data\":\"<Base64-encoded-certificate>\",<br>  \"dataType\":\"pfx\",<br>  \"password\":\"<pfx-file-password>\"<br>}"
+          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add)."
         },
         "certificateStore": {
           "type": "string",
@@ -2050,7 +2067,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-06-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-09-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
