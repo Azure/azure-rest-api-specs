@@ -14,6 +14,10 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Azure.ResourceManager.EntityTagProperty.eTag, "etag", "java");
 
+@@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+  "ManagedServiceIdentity"
+);
+
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.TrackedResource.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
