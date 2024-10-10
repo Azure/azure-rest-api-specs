@@ -112,9 +112,9 @@ override-info:
 
 ### Tag: package-policy-2024-05
 
-These settings apply only when `--tag=package-policy-2024-05-stable` is specified on the command line.
+These settings apply only when `--tag=package-policy-2024-05` is specified on the command line.
 
-```yaml $(tag) == 'package-policy-2024-05-stable'
+```yaml $(tag) == 'package-policy-2024-05'
 input-file:
 - Microsoft.Authorization/stable/2024-05-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2024-05-01/policyDefinitionVersions.json
