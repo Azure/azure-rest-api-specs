@@ -24,20 +24,20 @@ model SessionCodeExecutionRequest {
 model SessionCodeExecutionResponse {
   @visibility("read")
   @doc("Session code execution id.")
-  executionId: string;
+  executionId?: string;
 
   @doc("The status of the code execution operation, indicates whether succeeded or not.")
   status: Foundations.OperationState;
 
   @doc("The standard output of the code execution.")
-  stdout: string;
+  stdout?: string;
 
   @doc("The standard error of the code execution.")
-  stderr: string;
+  stderr?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   @doc("The result of the code execution. The type of this field is same as the type of actual result of the code execution after being Json serialized.")
-  result: unknown;
+  result?: unknown;
 
   @doc("The execution time of the code in milliseconds.")
   executionTimeInMilliseconds: int64;
