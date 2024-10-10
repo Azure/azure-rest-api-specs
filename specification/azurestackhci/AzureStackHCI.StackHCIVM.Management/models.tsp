@@ -357,6 +357,30 @@ union AttestHealthStatusEnum {
   string,
 }
 
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of hardware platform from attestation token.")
+union AttestHWPlatformEnum {
+  @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
+  SEVSNP: "SEVSNP",
+
+  @doc("AttestHWPlatform is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of managed disk security encryption type from attestation token.")
+union AttestDiskSecurityEncryptionTypeEnum {
+  @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
+  NonPersistedTPM: "NonPersistedTPM",
+
+  @doc("Disk security encryption type is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
 @doc("Defines the different types of operations for guest agent.")
 union ProvisioningAction {
   @doc("Install guest agent")
@@ -378,6 +402,15 @@ union OperatingSystemTypes {
 
   @doc("Linux operating system")
   Linux: "Linux",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Encryption type of the managed disk enum.")
+union SecurityEncryptionType {
+  @doc("Non-persisted TPM encryption type")
+  NonPersistedTPM: "NonPersistedTPM",
 
   string,
 }
@@ -430,6 +463,18 @@ model LogicalNetworkArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l2Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l3Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
   ]>;
 }
@@ -501,6 +546,10 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
+  @added(Versions.v2024_08_01_preview)
+  @doc("The credentials used to login to the image repository that has access to the specified image")
+  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
+
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -522,6 +571,17 @@ model GalleryImageProperties {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
     }
   ]>;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The credentials used to login to the image repository that has access to the specified image")
+model VmImageRepositoryCredentials {
+  @doc("Username for accessing image repository")
+  username: string;
+
+  @doc("Password for accessing image repository")
+  @secret
+  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -1417,6 +1477,25 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   is VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk parameters.")
+  managedDisk?: VirtualMachineInstanceManagedDiskParameters;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The parameters of a managed disk.")
+model VirtualMachineInstanceManagedDiskParameters {
+  @doc("Specifies the security profile for the managed disk.")
+  securityProfile?: VMDiskSecurityProfile;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
+@added(Versions.v2024_08_01_preview)
+@doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
+model VMDiskSecurityProfile {
+  @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
+  securityEncryptionType?: SecurityEncryptionType;
 }
 
 @doc("HTTP Proxy configuration for the VM.")
@@ -1673,6 +1752,16 @@ model AttestationStatusProperties {
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
+  @visibility("read")
+  @added(Versions.v2024_08_01_preview)
+  attestHardwarePlatform?: AttestHWPlatformEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
+  @visibility("read")
+  attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;
 }
 
 @doc("Defines the resource properties.")
