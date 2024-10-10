@@ -74,7 +74,7 @@ model InstanceResource
   is Azure.ResourceManager.TrackedResource<InstanceProperties> {
   @key("instancename")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
-  @segment("instance")
+  @segment("instances")
   @minLength(1)
   @maxLength(50)
   @doc("Name of the Instance resource")
