@@ -676,7 +676,7 @@
       "description": "Architecture types supported by Azure VMs.",
       "enum": [
         "ARM64",
-        "X86"
+        "X64"
       ],
       "x-ms-enum": {
         "name": "ArchitectureType",
@@ -688,9 +688,9 @@
             "description": "ARM64 Architecture"
           },
           {
-            "name": "X86",
-            "value": "X86",
-            "description": "X86 Architecture"
+            "name": "X64",
+            "value": "X64",
+            "description": "X64 Architecture"
           }
         ]
       }
@@ -1566,13 +1566,16 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The ARM location name of the additional region."
+          "description": "The ARM location name of the additional region. If LocationProfile is specified, then location is required."
         },
         "virtualMachineProfileOverride": {
           "$ref": "#/definitions/BaseVirtualMachineProfile",
           "description": "An override for computeProfile.baseVirtualMachineProfile specific to this region. \nThis override is merged with the base virtual machine profile to define the final virtual machine profile for the resources deployed in this location."
         }
-      }
+      },
+      "required": [
+        "location"
+      ]
     },
     "ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -2461,13 +2464,17 @@
           "$ref": "#/definitions/VMAttributeMinMaxDouble",
           "description": "The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
         },
+        "memoryInGiBPerVCpu": {
+          "$ref": "#/definitions/VMAttributeMinMaxDouble",
+          "description": "The range of memory in GiB per vCPU specified from min to max. Optional parameter. Either Min or Max is required if specified."
+        },
         "localStorageSupport": {
           "$ref": "#/definitions/VMAttributeSupport",
           "description": "Specifies whether the VMSize supporting local storage should be used to build Fleet or not."
         },
         "localStorageInGiB": {
           "$ref": "#/definitions/VMAttributeMinMaxDouble",
-          "description": "The range of local storage in GB specified from Min to Max."
+          "description": "LocalStorageSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf localStorageSupport is \"Excluded\", this VMAttribute can not be used."
         },
         "localStorageDiskTypes": {
           "type": "array",
@@ -2495,15 +2502,15 @@
         },
         "rdmaNetworkInterfaceCount": {
           "$ref": "#/definitions/VMAttributeMinMaxInteger",
-          "description": "The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified."
+          "description": "The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.\nrdmaSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf rdmaSupport is \"Excluded\", this VMAttribute can not be used."
         },
         "acceleratorSupport": {
           "$ref": "#/definitions/VMAttributeSupport",
-          "description": "Specifies whether the VMSize supporting accelerator should be used to build Fleet or not."
+          "description": "Specifies whether the VMSize supporting accelerator should be used to build Fleet or not.\nacceleratorSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf acceleratorSupport is \"Excluded\", this VMAttribute can not be used."
         },
         "acceleratorManufacturers": {
           "type": "array",
-          "description": "The accelerator manufacturers specified as a list. acceleratorSupport should be set to Included or Required to use this VMAttribute.",
+          "description": "The accelerator manufacturers specified as a list. \nacceleratorSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf acceleratorSupport is \"Excluded\", this VMAttribute can not be used.",
           "items": {
             "$ref": "#/definitions/AcceleratorManufacturer"
           },
@@ -2511,7 +2518,7 @@
         },
         "acceleratorTypes": {
           "type": "array",
-          "description": "The accelerator types specified as a list. acceleratorSupport should be set to Included or Required to use this VMAttribute.",
+          "description": "The accelerator types specified as a list. acceleratorSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf acceleratorSupport is \"Excluded\", this VMAttribute can not be used.",
           "items": {
             "$ref": "#/definitions/AcceleratorType"
           },
@@ -2519,7 +2526,7 @@
         },
         "acceleratorCount": {
           "$ref": "#/definitions/VMAttributeMinMaxInteger",
-          "description": "The range of accelerator count specified from min to max.. Optional parameter. Either Min or Max is required if specified."
+          "description": "The range of accelerator count specified from min to max. Optional parameter. Either Min or Max is required if specified.\nacceleratorSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf acceleratorSupport is \"Excluded\", this VMAttribute can not be used."
         },
         "vmCategories": {
           "type": "array",
