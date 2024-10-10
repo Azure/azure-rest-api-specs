@@ -1,0 +1,26 @@
+{
+  "title": "Analyze image with image incidents",
+  "operationId": "ImageOperations_DetectImageIncidents",
+  "parameters": {
+    "api-version": "2024-09-15-preview",
+    "body": {
+      "image": {
+        "content": "YW5vdGhlciBiYXNlNjQgZW5jb2RlZCBpbWFnZSB0byBiZSBhbmFseXplZA=="
+      },
+      "incidentNames": [
+        "image-incident-example"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "incidentMatches": [
+          {
+            "incidentName": "image-incident-example"
+          }
+        ]
+      }
+    }
+  }
+}
