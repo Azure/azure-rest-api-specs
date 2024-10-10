@@ -170,7 +170,7 @@
             "required": true,
             "description": "Properties of http route config that need to be updated",
             "schema": {
-              "$ref": "#/definitions/HttpRouteConfig"
+              "$ref": "#/definitions/HttpRouteConfigPatch"
             }
           },
           {
@@ -323,6 +323,68 @@
         }
       ],
       "properties": {
+        "properties": {
+          "description": "Http Route Config properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "The provisioning state of the Http Route Config in cluster",
+              "$ref": "#/definitions/HttpRouteProvisioningState"
+            },
+            "provisioningErrors": {
+              "description": "List of errors when trying to reconcile http routes",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HttpRouteProvisioningErrors"
+              },
+              "readOnly": true
+            },
+            "fqdn": {
+              "description": "FQDN of the route resource.",
+              "type": "string",
+              "readOnly": true
+            },
+            "customDomains": {
+              "description": "Custom domain bindings for http Routes' hostnames.",
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/CustomDomain"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "rules": {
+              "description": "Routing Rules for http route resource.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HttpRouteRule"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            }
+          }
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "HttpRouteConfigPatch": {
+      "description": "Advanced Ingress routing for path/header based routing for a Container App Environment",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
         "properties": {
           "description": "Http Route Config properties",
           "type": "object",
