@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "locationName": "eastus",
+    "filter": "operationType eq 'RestoreSnapshot', restoreFromServerName eq 'test_server'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "operationRequestId": "00000000-0000-0000-0000-000000000000",
+            "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+            "state": "InProgress",
+            "operationType": "RestoreSnapshotManagementOperation",
+            "operationParameters": "<InternalRestoreSnapshotArguments xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><CustomerSubscriptionId>cb9d743d-2140-4e73-b871-cd31abab1d2f</CustomerSubscriptionId><CustomerResourceGroup>yinyuw05</CustomerResourceGroup><Location>australiaeast</Location><RestoreFromServerName>testha</RestoreFromServerName><RestoreToServerName>testha-r-3</RestoreToServerName><RestoreToTime>2024-07-22T03:24:00Z</RestoreToTime><SnapshotType>PITR</SnapshotType><OperationType>Create</OperationType><GeneratedOrcasInstanceId>5507323c-a16c-4a35-870e-c7a90b6e00b2</GeneratedOrcasInstanceId><RestoreFromServerOrcasInstanceId>f40bb6f3-c60f-483a-a14c-a4616eafeac1</RestoreFromServerOrcasInstanceId><Tags>{\"ElasticServer\":\"test\"}</Tags><SpecId xsi:nil=\"true\" /><RollbackSpecId xsi:nil=\"true\" /><Mode>PointInTimeRestore</Mode><GeoRedundantBackupEnabled>false</GeoRedundantBackupEnabled><CloneSourceServerIdentity xsi:nil=\"true\" /><ServerEdition>GeneralPurpose</ServerEdition><ServerSku>Standard_D2ds_v4</ServerSku><VCore>2</VCore><StorageLimitInMb>16777216</StorageLimitInMb><StorageIops xsi:nil=\"true\" /><BackupRetentionMinutes xsi:nil=\"true\" /><StorageAutogrowEnabled>false</StorageAutogrowEnabled><LogOnDiskEnabled xsi:nil=\"true\" /><SourceServerLocation>onebox</SourceServerLocation><PublicNetworkAccess>Enabled</PublicNetworkAccess><DatabasePort>3306</DatabasePort></InternalRestoreSnapshotArguments>",
+            "errorMessage": "",
+            "startTime": "2024-07-24T07:34:02.328326Z",
+            "endTime": "",
+            "lastUpdatedTime": "2024-07-24T07:34:02.328326Z"
+          }
+        ]
+      }
+    }
+  }
+}
