@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Client;
 
-@doc("to do")
+@doc("Response from the listSecrets operation")
 model ConnectionsListSecretsResponse {
   @doc("The name of the resource")
   name: string;
@@ -23,14 +23,14 @@ model ConnectionsListSecretsResponse {
   properties: ConnectionProperties;
 }
 
-@doc("to do")
+@doc("Response from the list operation")
 model ConnectionsListResponse {
-  @doc("to do")
+  @doc("A list of connection list secrets")
   value: ConnectionsListSecretsResponse[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
-@doc("to do")
+@doc("Connetion properties")
 @discriminator("authType")
 model ConnectionProperties {
   @doc("Authentication type of the connection target")
@@ -38,7 +38,7 @@ model ConnectionProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum"
-@doc("to do")
+@doc("Authentication type used by Azure AI service to connect to another service")
 enum AuthenticationType {
   @doc("API Key authentication")
   apiKey: "ApiKey",
@@ -61,7 +61,7 @@ model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsApiKeyAuth;
 
-  @doc("to do")
+  @doc("The connection URL to be used for this service")
   target: string;
 
   //@doc("to do")
@@ -77,7 +77,7 @@ model ConnectionPropertiesAADAuth extends ConnectionProperties {
   @doc("Category of the connection")
   category: EndpointType;
 
-  @doc("to do")
+  @doc("The connection URL to be used for this service")
   target: string;
 }
 
@@ -93,20 +93,20 @@ model ConnectionPropertiesSASAuth extends ConnectionProperties {
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsSASAuth;
 
-  @doc("to do")
+  @doc("The connection URL to be used for this service")
   target: string;
 }
 
-@doc("to do")
+@doc("The credentials needed for API key authentication")
 model CredentialsApiKeyAuth {
-  @doc("to do")
+  @doc("The API key")
   key: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("to do")
+@doc("The credentials neede for Shared Access Signatures (SAS) authentication")
 model CredentialsSASAuth {
-  @doc("to do")
+  @doc("The Shared Access Signatures (SAS) token")
   SAS: string;
 }
 
@@ -114,16 +114,11 @@ model CredentialsSASAuth {
 #suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("The Type (or category) of the connection")
 enum EndpointType {
-  @doc("Azure OpenAI")
+  @doc("Azure OpenAI service")
   AzureOpenAI: "AzureOpenAI", //TODO: In Python this results in .AZURE_OPEN_AI. How do I make it .AZURE_OPENAI?
 
-  @doc("Serverless API")
+  @doc("Serverless API service")
   Serverless: "Serverless",
-
-  // This is not part of the REST API, but client code returns the single Agent in the AI Project (if enabled)
-  // in the list of endpoints.
-  @doc("Agent")
-  Agent: "Agent",
 }
 
 /*
