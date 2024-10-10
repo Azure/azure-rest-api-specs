@@ -427,7 +427,7 @@ interface TextAnalysisAuthoring {
        * The exported model info.
        */
       @body
-      body: TextAnalysisAuthoringExportedModelOptions;
+      exportedModelOptions: TextAnalysisAuthoringExportedModelOptions;
     },
     AcceptedResponse,
     {},
