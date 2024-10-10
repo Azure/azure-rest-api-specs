@@ -703,6 +703,7 @@ model BlobMetadata is Record<string> {
 }
 
 /** The blob tags. */
+@Xml.name("Tag")
 model BlobTag {
   /** The key of the tag. */
   @Xml.name("Key") key: string;
@@ -852,7 +853,7 @@ model ListBlobsFlatSegmentResponse {
   containerName: string;
 
   /** The prefix of the blobs. */
-  @Xml.name("Prefix") rrefix?: string;
+  @Xml.name("Prefix") prefix?: string;
 
   /** The marker of the blobs. */
   @Xml.name("Marker") marker?: string;
@@ -860,6 +861,7 @@ model ListBlobsFlatSegmentResponse {
   /** The max results of the blobs. */
   @Xml.name("MaxResults") maxResults?: int32;
 
+  // TODO: is this correct? Looks like the name is wrong...should be "Blobs"
   /** The blob segment. */
   @Xml.name("Segment") segment: BlobFlatListSegment;
 
@@ -904,13 +906,6 @@ model ClearRange {
   /** The end of the byte range. */
   @Xml.name("End") end: int64;
 }
-
-/** The blob tags body parameter. */
-alias BlobTagsBodyParameter = {
-  /** The blob tags. */
-  @body
-  tags: BlobTags;
-};
 
 /** Represents blob tags. */
 @Xml.name("Tags")
@@ -1051,13 +1046,6 @@ alias BlobContentMd5ResponseHeader = {
   /** If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range */
   @header("x-ms-blob-content-md5")
   blobContentMd5: string;
-};
-
-/** The query request body parameter. */
-alias QueryRequestParameter = {
-  /** The query request */
-  @body
-  queryRequest: QueryRequest;
 };
 
 /** The blob append offset response header. */
@@ -1425,12 +1413,6 @@ union BlockListType {
   /** Extensible */
   string,
 }
-
-/** The blob blocks body parameter. */
-alias BlobBlocksParameter = {
-  /** Blob Blocks. */
-  @body blocks: BlockLookupList;
-};
 
 /** The source content CRC64 parameter. */
 alias SourceContentCrc64Parameter = {
@@ -2166,6 +2148,7 @@ model ListBlobsHierarchySegmentResponse {
   /** The max results of the blobs. */
   @Xml.name("MaxResults") maxResults?: int32;
 
+  // TODO: Is this correct? Looks like it should be blobs
   /** The blob segment. */
   @Xml.name("Segment") segment: BlobHierarchyListSegment;
 
@@ -2256,14 +2239,6 @@ alias DeletedContainerVersionParameter = {
   /** Optional.  Version 2019-12-12 and later.  Specifies the version of the deleted container to restore. */
   @header("x-ms-deleted-container-version")
   deletedContainerVersion?: string;
-};
-
-/** The container ACL parameter. */
-alias ContainerAclParameter = {
-  /** The access control list for the container. */
-  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
-  @body
-  acl: SignedIdentifiers;
 };
 
 /** The container name header */
