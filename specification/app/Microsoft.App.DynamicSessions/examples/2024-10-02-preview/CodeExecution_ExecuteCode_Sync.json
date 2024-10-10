@@ -1,0 +1,34 @@
+{
+  "title": "CodeExecution_ExecuteCode_Sync",
+  "operationId": "CodeExecution_ExecuteCode",
+  "parameters": {
+    "api-version": "2024-10-02-preview",
+    "sessionId": "testidentidier",
+    "codeExecutionRequest": {
+      "codeInputType": "Inline",
+      "executionType": "Synchronous",
+      "code": "print(7*9)",
+      "timeoutInSeconds": 60
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation_Id": "testexecutionid",
+        "Operation-Location": "location"
+      },
+      "body": {
+        "id": "testexecutionid",
+        "status": "Succeeded",
+        "result": {
+          "executionId": "testexecutionid",
+          "status": "Succeeded",
+          "stdout": "63/n",
+          "stderr": "",
+          "result": "",
+          "executionTimeInMilliseconds": 4
+        }
+      }
+    }
+  }
+}

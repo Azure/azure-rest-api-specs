@@ -1,0 +1,34 @@
+{
+  "title": "CodeExecution_ExecuteCode_Async",
+  "operationId": "CodeExecution_ExecuteCode",
+  "headers": {
+    "execution-id": "testexecutionid"
+  },
+  "parameters": {
+    "api-version": "2024-10-02-preview",
+    "sessionId": "testidentidier",
+    "codeExecutionRequest": {
+      "codeInputType": "Inline",
+      "executionType": "Asynchronous",
+      "code": "print(7*9)",
+      "timeoutInSeconds": 60
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation_Id": "testexecutionid",
+        "Operation-Location": "location"
+      },
+      "body": {
+        "id": "testexecutionid",
+        "status": "Running",
+        "result": {
+          "executionId": "testexecutionid",
+          "status": "Running",
+          "executionTimeInMilliseconds": 4
+        }
+      }
+    }
+  }
+}
