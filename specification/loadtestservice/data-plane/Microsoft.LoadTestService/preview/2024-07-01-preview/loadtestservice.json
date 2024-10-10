@@ -2151,10 +2151,10 @@
             "$ref": "#/parameters/ListTriggerQueryParams.states"
           },
           {
-            "$ref": "#/parameters/ListTriggerQueryParams.createdFrom"
+            "$ref": "#/parameters/ListTriggerQueryParams.lastModifiedStartTime"
           },
           {
-            "$ref": "#/parameters/ListTriggerQueryParams.createdTo"
+            "$ref": "#/parameters/ListTriggerQueryParams.lastModifiedEndTime"
           },
           {
             "$ref": "#/parameters/ListTriggerQueryParams.maxpagesize"
@@ -6413,19 +6413,19 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ListTriggerQueryParams.createdFrom": {
-      "name": "createdFrom",
+    "ListTriggerQueryParams.lastModifiedEndTime": {
+      "name": "lastModifiedEndTime",
       "in": "query",
-      "description": "Start DateTime of trigger creation time filter range. (RFC 3339 literal format)",
+      "description": "End DateTime(RFC 3339 literal format) of the last updated time range to filter triggers.",
       "required": false,
       "type": "string",
       "format": "date-time",
       "x-ms-parameter-location": "method"
     },
-    "ListTriggerQueryParams.createdTo": {
-      "name": "createdTo",
+    "ListTriggerQueryParams.lastModifiedStartTime": {
+      "name": "lastModifiedStartTime",
       "in": "query",
-      "description": "End DateTime of trigger creation time filter range. (RFC 3339 literal format)",
+      "description": "Start DateTime(RFC 3339 literal format) of the last updated time range to filter triggers.",
       "required": false,
       "type": "string",
       "format": "date-time",

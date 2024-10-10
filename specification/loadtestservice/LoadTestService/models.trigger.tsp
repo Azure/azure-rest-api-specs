@@ -263,13 +263,17 @@ model ListTriggerQueryParams {
   @query
   states?: TriggerState;
 
-  @doc("Start DateTime of trigger creation time filter range. (RFC 3339 literal format)")
+  @doc("""
+    Start DateTime(RFC 3339 literal format) of the last updated time range to filter triggers.
+    """)
   @query
-  createdFrom?: utcDateTime;
+  lastModifiedStartTime?: utcDateTime;
 
-  @doc("End DateTime of trigger creation time filter range. (RFC 3339 literal format)")
+  @doc("""
+    End DateTime(RFC 3339 literal format) of the last updated time range to filter triggers.
+    """)
   @query
-  createdTo?: utcDateTime;
+  lastModifiedEndTime?: utcDateTime;
 
   @doc("Number of results in response. Default page size is 50.")
   @query
