@@ -917,16 +917,16 @@ model Entity {
   /** Confidence score between 0 and 1 of the extracted entity. */
   confidenceScore: float64;
 
-  @added(Versions.v2024_11_15_preview)
   /** Exact mask text to mask the PII entity */
+  @added(Versions.v2024_11_15_preview)
   mask?: string;
 
-  @added(Versions.v2024_11_15_preview)
   /** Offset of the mask text */
+  @added(Versions.v2024_11_15_preview)
   maskOffset?: int32;
 
-  @added(Versions.v2024_11_15_preview)
   /** Length of the mask text */
+  @added(Versions.v2024_11_15_preview)
   maskLength?: int32;
 }
 
@@ -1012,8 +1012,8 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
   redactionPolicy?: BaseRedactionPolicy;
 }
 
-@added(Versions.v2024_11_15_preview)
 /** Kinds of redaction policies supported. */
+@added(Versions.v2024_11_15_preview)
 union RedactionPolicyKind {
   string,
 
@@ -1024,13 +1024,13 @@ union RedactionPolicyKind {
   MaskWithRedactionCharacter: "MaskWithRedactionCharacter",
 
   /** Redact detected entities with entity type */
-  MaskWithEntityType: "MaskWithEntityType", 
+  MaskWithEntityType: "MaskWithEntityType",
 }
 
 /** The abstract base class for RedactionPolicy. */
 @added(Versions.v2024_11_15_preview)
 @discriminator("policyKind")
-model BaseRedactionPolicy{
+model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind = RedactionPolicyKind.MaskWithRedactionCharacter;
 }
