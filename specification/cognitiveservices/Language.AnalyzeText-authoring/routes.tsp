@@ -219,6 +219,7 @@ interface TextAnalysisAuthoring {
     ErrorResponse
   >;
 
+
   /**
    * Gets the status of an existing copy project job.
    */
