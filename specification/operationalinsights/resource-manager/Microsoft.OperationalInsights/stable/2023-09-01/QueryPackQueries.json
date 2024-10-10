@@ -327,32 +327,6 @@
     }
   },
   "definitions": {
-    "AzureResourceProperties": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "format": "arm-id",
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      },
-      "description": "An Azure resource QueryPack-Query object"
-    },
     "LogAnalyticsQueryPackQuery": {
       "type": "object",
       "properties": {
@@ -364,7 +338,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResourceProperties"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "description": "A Log Analytics QueryPack-Query definition.",

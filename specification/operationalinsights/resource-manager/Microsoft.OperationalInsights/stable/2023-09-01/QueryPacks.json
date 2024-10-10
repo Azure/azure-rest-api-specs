@@ -328,51 +328,6 @@
     }
   },
   "definitions": {
-    "QueryPacksResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "format": "arm-id",
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
     "TagsResource": {
       "type": "object",
       "properties": {
@@ -397,7 +352,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/QueryPacksResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
