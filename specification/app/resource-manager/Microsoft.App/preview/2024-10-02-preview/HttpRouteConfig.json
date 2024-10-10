@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/httpRoutes/{httpRouteName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/httpRouteConfigs/{httpRouteName}": {
       "get": {
         "tags": [
           "HttpRouteConfig"
@@ -35,9 +35,7 @@
             "description": "Name of the Managed Environment.",
             "required": true,
             "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 3,
-            "maxLength": 63
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "httpRouteName",
@@ -350,7 +348,7 @@
               "description": "Custom domain bindings for http Routes' hostnames.",
               "type": "array",
               "items": {
-                "$ref": "./ContainerApps.json#/definitions/CustomDomain"
+                "$ref": "./CommonDefinitions.json#/definitions/CustomDomain"
               },
               "x-ms-identifiers": [
                 "name"
