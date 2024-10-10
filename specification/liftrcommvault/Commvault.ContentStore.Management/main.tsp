@@ -30,25 +30,6 @@ enum Versions {
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Provisioning state supported")
-@lroStatus
-union ProvisioningState {
-  ResourceProvisioningState,
-
-  /** The resource is being provisioned. */
-  Provisioning: "Provisioning",
-
-  /** The resource is being updated. */
-  Updating: "Updating",
-
-  /** The resource is being deleted. */
-  Deleting: "Deleting",
-
-  /** The resource provisioning request has been accepted. */
-  Accepted: "Accepted",
-
-  string,
-}
 /** 
 @tenantResource
 model Company is ProxyResource<CompanyProperties> {
@@ -91,6 +72,8 @@ model Entity is TrackedResource<EntityProperties> {
   @doc("Name of the Entity resource")
   @path
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -106,7 +89,8 @@ interface Entities {
 model EntityProperties is BaseResourceProperties;
 
 @doc("A Commvault Storage Resource")
-model Storage is TrackedResource<StorageProperties> {
+@parentResource(Entity)
+model Storage is ProxyResource<StorageProperties> {
   @key("storageName")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
   @segment("storages")
@@ -156,8 +140,7 @@ interface Storages {
   create is ArmResourceCreateOrReplaceAsync<Storage>;
   //update is ArmResourcePatchAsync<Storage, StorageProperties>; not suppported in Private preview
   delete is ArmResourceDeleteWithoutOkAsync<Storage>;
-  listByResourceGroup is ArmResourceListByParent<Storage>;
-  listBySubscription is ArmListBySubscription<Storage>;
+  listByParent is ArmResourceListByParent<Storage>;
 }
 
 @parentResource(Entity)

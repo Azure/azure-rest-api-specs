@@ -86,14 +86,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -128,50 +120,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Entities_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/Entities_ListBySubscription_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Commvault.ContentStore/storages": {
-      "get": {
-        "operationId": "Storages_ListBySubscription",
-        "tags": [
-          "Storages"
-        ],
-        "description": "List Storage resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StorageListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Storages_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/Storages_ListBySubscription_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -209,11 +157,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Entities_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Entities_ListByResourceGroup_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -257,11 +200,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Entities_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Entities_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -335,12 +273,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Entities_Create_MaximumSet_Gen": {
-            "$ref": "./examples/Entities_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Entities_Delete",
@@ -397,12 +330,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Entities_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Entities_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/entities/{entityName}/plans": {
@@ -449,11 +377,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Plans_ListByParent_MaximumSet_Gen": {
-            "$ref": "./examples/Plans_ListByParent_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -507,11 +430,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Plans_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -595,12 +513,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Plans_Create_MaximumSet_Gen": {
-            "$ref": "./examples/Plans_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Plans_Update",
@@ -679,12 +592,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Plans_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Plans_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Plans_Delete",
@@ -751,12 +659,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Plans_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Plans_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/entities/{entityName}/protectionGroups": {
@@ -803,11 +706,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ProtectionGroups_ListByParent_MaximumSet_Gen": {
-            "$ref": "./examples/ProtectionGroups_ListByParent_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -861,11 +759,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ProtectionGroups_Get_MaximumSet_Gen": {
-            "$ref": "./examples/ProtectionGroups_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -949,12 +842,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ProtectionGroups_Create_MaximumSet_Gen": {
-            "$ref": "./examples/ProtectionGroups_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ProtectionGroups_Update",
@@ -1033,12 +921,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ProtectionGroups_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ProtectionGroups_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ProtectionGroups_Delete",
@@ -1105,12 +988,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ProtectionGroups_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ProtectionGroups_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/entities/{entityName}/protectionGroups/{protectionGroupName}/protectedresources": {
@@ -1167,11 +1045,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ProtectedResources_ListByParent_MaximumSet_Gen": {
-            "$ref": "./examples/ProtectedResources_ListByParent_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1233,11 +1106,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ProtectedResources_Get_MaximumSet_Gen": {
-            "$ref": "./examples/ProtectedResources_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -1317,21 +1185,16 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ProtectionGroups_StopBackup_MaximumSet_Gen": {
-            "$ref": "./examples/ProtectionGroups_StopBackup_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/storages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/entities/{entityName}/storages": {
       "get": {
-        "operationId": "Storages_ListByResourceGroup",
+        "operationId": "Storages_ListByParent",
         "tags": [
           "Storages"
         ],
-        "description": "List Storage resources by resource group",
+        "description": "List Storage resources by Entity",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1341,6 +1204,16 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the Entity resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           }
         ],
         "responses": {
@@ -1359,15 +1232,10 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Storages_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Storages_ListByResourceGroup_MaximumSet_Gen.json"
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/storages/{storageName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/entities/{entityName}/storages/{storageName}": {
       "get": {
         "operationId": "Storages_Get",
         "tags": [
@@ -1383,6 +1251,16 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the Entity resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
             "name": "storageName",
@@ -1408,11 +1286,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Storages_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Storages_Get_MaximumSet_Gen.json"
-          }
         }
       },
       "put": {
@@ -1430,6 +1303,16 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the Entity resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
             "name": "storageName",
@@ -1485,12 +1368,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Storages_Create_MaximumSet_Gen": {
-            "$ref": "./examples/Storages_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Storages_Delete",
@@ -1507,6 +1385,16 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the Entity resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
             "name": "storageName",
@@ -1547,12 +1435,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Storages_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Storages_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1626,6 +1509,10 @@
           "$ref": "#/definitions/EntityProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -2390,61 +2277,6 @@
         ]
       }
     },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state supported",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is being updated."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource provisioning request has been accepted."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "Retention": {
       "type": "object",
       "description": "A Commvault Plan Retention Model",
@@ -2814,7 +2646,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
