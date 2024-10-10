@@ -27,7 +27,27 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-07
+tag: package-preview-2024-10
+```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/workspaceRP.json
+suppressions:
+  - code: NestedResourcesMustHaveListOperation
+    reason: This resource will have many kind and we currently only start with the first kind that will have a 1 to 1 
+        mapping with the parent resource, so right now we didn't implement List API, 
+        we will add whence needed in the future.
+    where:
+      - $.definitions["CapabilityHostResource"]
 ```
 
 ### Tag: package-preview-2024-07
