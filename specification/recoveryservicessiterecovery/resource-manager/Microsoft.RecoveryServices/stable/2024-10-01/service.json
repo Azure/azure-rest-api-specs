@@ -5900,108 +5900,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/addIdentity": {
-      "post": {
-        "tags": [
-          "ReplicationProtectionContainerMapping"
-        ],
-        "summary": "Adds identity to protection container mapping.",
-        "description": "The operation to add identity to a protection container mapping.",
-        "operationId": "ReplicationProtectionContainerMapping_AddIdentity",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
-          },
-          {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "The protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
-          },
-          {
-            "name": "mappingName",
-            "in": "path",
-            "description": "The mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
-          },
-          {
-            "name": "addIdentityInput",
-            "in": "body",
-            "description": "Add identity input.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProtectionContainerMappingAddIdentityInput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProtectionContainerMapping"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "type": "string"
-              },
-              "Retry-After": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Adds identity to protection container mapping.": {
-            "$ref": "./examples/ReplicationProtectionContainerMapping_AddIdentity.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/remove": {
       "post": {
         "tags": [
@@ -14801,17 +14699,6 @@
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
     },
-    "HyperVReplicaAzureProtectionContainerMappingAddIdentityInput": {
-      "description": "HyperVReplicaAzure protection container mapping add identity input.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionContainerMappingAddIdentityReplicationProviderSpecificInput"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "HyperVReplicaAzure"
-    },
     "HyperVReplicaAzureReplicationDetails": {
       "description": "Hyper V Replica Azure provider specific settings.",
       "type": "object",
@@ -22290,40 +22177,6 @@
           "description": "The custom data."
         }
       }
-    },
-    "ProtectionContainerMappingAddIdentityInput": {
-      "description": "Protection container mapping add identity input.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProtectionContainerMappingAddIdentityInputProperties",
-          "description": "Add identity protection container mapping input properties."
-        }
-      }
-    },
-    "ProtectionContainerMappingAddIdentityInputProperties": {
-      "description": "Protection container mapping add identity input properties.",
-      "type": "object",
-      "properties": {
-        "providerSpecificInput": {
-          "$ref": "#/definitions/ProtectionContainerMappingAddIdentityReplicationProviderSpecificInput",
-          "description": "Provider specific input for adding identity to container mapping."
-        }
-      }
-    },
-    "ProtectionContainerMappingAddIdentityReplicationProviderSpecificInput": {
-      "description": "Provider specific input for protection container mapping add identity operation.",
-      "required": [
-        "instanceType"
-      ],
-      "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "The class type.",
-          "type": "string"
-        }
-      },
-      "discriminator": "instanceType"
     },
     "ProtectionContainerMappingCollection": {
       "description": "Protection container mapping collection class.",
