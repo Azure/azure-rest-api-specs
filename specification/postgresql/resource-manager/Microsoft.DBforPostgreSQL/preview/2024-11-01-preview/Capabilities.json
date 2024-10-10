@@ -269,6 +269,11 @@
             "name"
           ],
           "readOnly": true
+        },
+        "securityProfile": {
+          "type": "string",
+          "description": "The value of security profile indicating if its confidential vm",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -612,19 +617,6 @@
           ],
           "x-ms-enum": {
             "name": "restrictedEnum",
-            "modelAsString": true
-          }
-        },
-        "indexTuningSupported": {
-          "type": "string",
-          "description": "A value indicating whether in this region for the given subscription or server sku/version/replica-role has index tuning supported. \"Enabled\" means index tuning is supported. \"Disabled\" stands for index tuning is not supported. Will be deprecated in future, please look to Supported Features for \"IndexTuning\".",
-          "readOnly": true,
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "fastProvisioningSupportedEnum",
             "modelAsString": true
           }
         }
