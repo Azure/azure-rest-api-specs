@@ -236,6 +236,7 @@ model CustomSentimentDocumentResult is DocumentResult {
 }
 
 /** Supported parameters for a Custom Sentiment Analysis task. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
   /** Specifies the method used to interpret string offsets. */
@@ -244,6 +245,7 @@ model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
 
 /** Use custom models to ease the process of sentiment analysis from documents like product reviews */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
   /** Kind of the task. */
@@ -254,6 +256,7 @@ model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
 }
 
 /** Custom Sentiment analysis results for the input documents. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisResult is CustomResult {
   /** The custom sentiment analysis results for each document in the input. */
@@ -269,6 +272,7 @@ model CustomSentimentAnalysisResultDocument {
 
 /** Custom Sentiment Analysis Analyze Text long tunning operation result object. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */

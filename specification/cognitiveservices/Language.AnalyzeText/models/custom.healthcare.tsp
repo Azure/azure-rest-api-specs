@@ -6,6 +6,7 @@ using TypeSpec.Versioning;
 
 namespace Language.Text;
 /** Supported parameters for a custom Healthcare task. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareTaskParameters is CustomTaskParameters {
   /** Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes). */
@@ -14,6 +15,7 @@ model CustomHealthcareTaskParameters is CustomTaskParameters {
 
 /** Contains the custom healthcare task definition. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareLROTask extends AnalyzeTextLROTask {
   /** Kind of the task. */
@@ -24,6 +26,7 @@ model CustomHealthcareLROTask extends AnalyzeTextLROTask {
 }
 
 /** Contains the custom healthcare result for the request. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareResult is CustomResult {
   /** List of custom healthcare results for the document. */
@@ -31,6 +34,7 @@ model CustomHealthcareResult is CustomResult {
 }
 
 /** Contains the document custom healthcare results with detected language. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is CustomHealthcareEntitiesDocumentResult {
@@ -38,6 +42,7 @@ model CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
 }
 
 /** Contains the document custom healthcare results. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareEntitiesDocumentResult is DocumentResult {
   /** Healthcare entities. */
@@ -48,6 +53,7 @@ model CustomHealthcareEntitiesDocumentResult is DocumentResult {
 }
 
 /** Contains the custom healthcare entity. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareEntity is HealthcareEntity {
   /** (Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare. */
@@ -56,6 +62,7 @@ model CustomHealthcareEntity is HealthcareEntity {
 
 /** Contains the custom healthcare job result. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
