@@ -17,6 +17,7 @@ using Azure.Core;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDevice,
@@ -27,6 +28,7 @@ model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 @doc("EdgeDevice Jobs resource")
 @parentResource(EdgeDevice)
 @discriminator("kind")
