@@ -7927,7 +7927,9 @@
       "x-ms-client-name": "owner",
       "in": "header",
       "required": false,
-      "type": "string",
+      "type": "integer",
+      "minimum": 0,
+      "format": "int64",
       "description": "Optional, NFS only. The owner of the file or directory.",
       "x-ms-parameter-location": "method"
     },
@@ -7936,7 +7938,9 @@
       "x-ms-client-name": "group",
       "in": "header",
       "required": false,
-      "type": "string",
+      "type": "integer",
+      "minimum": 0,
+      "format": "int64",
       "description": "Optional, NFS only. The owning group of the file or directory.",
       "x-ms-parameter-location": "method"
     },
