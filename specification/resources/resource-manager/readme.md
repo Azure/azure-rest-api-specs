@@ -110,7 +110,7 @@ override-info:
   title: PolicyClient
 ```
 
-### Tag: package-policy-2024-05-stable
+### Tag: package-policy-2024-05
 
 These settings apply only when `--tag=package-policy-2024-05-stable` is specified on the command line.
 
