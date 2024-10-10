@@ -14,13 +14,6 @@ using Azure.Core.Traits;
 
 namespace Microsoft.App.DynamicSessions;
 
-alias SessionTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId &
-  QueryParametersTrait<SessionIdentifier>;
-
-alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
-
 interface CodeExecution {
   @doc("Execute code in a session.")
   @route("/executions")
@@ -53,22 +46,32 @@ interface CodeExecution {
   >;
 }
 
+alias SessionResourceFilesTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId &
+  QueryParametersTrait<{
+    ...SessionIdentifier;
+    ...SessionResourceFilePathQueryParameter;
+  }>;
+
+alias SessionResourceFilesOperations = Azure.Core.ResourceOperations<SessionResourceFilesTraits>;
+
 interface SessionResourceFiles {
   @doc("List the file resources.")
-  listFilesMetadata is SessionOperations.ResourceList<SessionResourceFile>;
+  listFilesMetadata is SessionResourceFilesOperations.ResourceList<SessionResourceFile>;
 
   @doc("Get the file resource.")
-  getFileMetadata is SessionOperations.ResourceRead<SessionResourceFile>;
+  getFileMetadata is SessionResourceFilesOperations.ResourceRead<SessionResourceFile>;
 
   @doc("Delete the file.")
-  deleteFile is SessionOperations.ResourceDelete<SessionResourceFile>;
+  deleteFile is SessionResourceFilesOperations.ResourceDelete<SessionResourceFile>;
 
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   @doc("Upload a file to a session.")
   @route("/files")
   uploadFile is RpcOperation<
     {
-      ...SessionResourceFilePathParameter;
+      ...SessionResourceFilePathQueryParameter;
 
       @doc("The content type for the operation. Always multipart/form-data for this operation.")
       @header("content-type")
@@ -86,7 +89,8 @@ interface SessionResourceFiles {
   getFileContent is Foundations.Operation<
     {
       ...SessionIdentifier;
-      ...SessionResourceFileNameParameter;
+      ...SessionResourceFileNamePathParameter;
+      ...SessionResourceFilePathQueryParameter;
     },
     bytes
   >;

@@ -202,6 +202,9 @@
           },
           {
             "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
           }
         ],
         "responses": {
@@ -244,7 +247,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SessionResourceFilePathParameter"
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
           },
           {
             "name": "file",
@@ -298,6 +301,9 @@
           },
           {
             "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
           }
         ],
         "responses": {
@@ -342,6 +348,9 @@
           },
           {
             "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
           }
         ],
         "responses": {
@@ -380,7 +389,10 @@
             "$ref": "#/parameters/SessionIdentifier"
           },
           {
-            "$ref": "#/parameters/SessionResourceFileNameParameter"
+            "$ref": "#/parameters/SessionResourceFileNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
           }
         ],
         "responses": {
@@ -749,7 +761,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SessionResourceFileNameParameter": {
+    "SessionResourceFileNamePathParameter": {
       "name": "name",
       "in": "path",
       "description": "The name of the file.",
@@ -757,7 +769,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SessionResourceFilePathParameter": {
+    "SessionResourceFilePathQueryParameter": {
       "name": "path",
       "in": "query",
       "description": "The path of the file after uploaded.",

@@ -29,14 +29,14 @@ model CodeExecutionIdentifier {
 }
 
 @doc("The session resource file path parameter.")
-model SessionResourceFilePathParameter {
+model SessionResourceFilePathQueryParameter {
   @doc("The path of the file after uploaded.")
   @query
   path: string;
 }
 
 @doc("The session resource file name parameter.")
-model SessionResourceFileNameParameter {
+model SessionResourceFileNamePathParameter {
   @doc("The name of the file.")
   @path
   name: string;
