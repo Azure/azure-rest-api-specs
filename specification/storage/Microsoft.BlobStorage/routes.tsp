@@ -298,7 +298,12 @@ interface Container {
   setAccessPolicy is StorageOperation<
     {
       ...ContainerNameParameter;
-      ...ContainerAclParameter;
+
+      /** The access control list for the container. */
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
+      @body
+      acl: SignedIdentifiers;
+
       ...TimeoutParameter;
       ...IfModifiedSinceParameter;
       ...IfUnmodifiedSinceParameter;
@@ -1233,7 +1238,10 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=query")
   query is StorageOperation<
     {
-      ...QueryRequestParameter;
+      /** The query request */
+      @body
+      queryRequest: QueryRequest;
+
       ...ContainerNameParameter;
       ...BlobNameParameter;
       ...SnapshotParameter;
@@ -1320,7 +1328,10 @@ interface Blob {
       ...ContentMd5Parameter;
       ...ContentCrc64Parameter;
       ...IfTagsParameter;
-      ...BlobTagsBodyParameter;
+
+      /** The blob tags. */
+      @body
+      tags: BlobTags;
     },
     {
       @statusCode statusCode: 204;
@@ -2016,7 +2027,9 @@ interface BlockBlob {
   @route("?comp=blocklist")
   commitBlockList is StorageOperation<
     {
-      ...BlobBlocksParameter;
+      /** Blob Blocks. */
+      @body blocks: BlockLookupList;
+
       ...ContainerNameParameter;
       ...BlobNameParameter;
       ...TimeoutParameter;
