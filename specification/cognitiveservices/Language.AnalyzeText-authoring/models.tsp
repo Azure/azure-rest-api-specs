@@ -393,7 +393,7 @@ model TextAnalysisAuthoringCreateProjectOptions {
   /**
    * The project settings.
    */
-  settings?: TextAnalysisAuthoringProjectSettings;
+  projectSettings?: TextAnalysisAuthoringProjectSettings;
 
   /**
    * The new project name.
@@ -496,12 +496,12 @@ model TextAnalysisAuthoringExportedProject {
   /**
    * Represents the project metadata.
    */
-  metadata: TextAnalysisAuthoringCreateProjectOptions;
+  createProjectOptions: TextAnalysisAuthoringCreateProjectOptions;
 
   /**
    * Represents the project assets.
    */
-  assets?: TextAnalysisAuthoringExportedProjectAssets;
+  exportedProjectAssets?: TextAnalysisAuthoringExportedProjectAssets;
 }
 
 /**
@@ -545,7 +545,7 @@ model TextAnalysisAuthoringEvaluationOptions {
    * Represents the evaluation kind. By default, the evaluation kind is set to
    * percentage.
    */
-  kind?: EvaluationKind;
+  evaluationKind?: EvaluationKind;
 
   /**
    * Represents the training dataset split percentage. Only needed in case the

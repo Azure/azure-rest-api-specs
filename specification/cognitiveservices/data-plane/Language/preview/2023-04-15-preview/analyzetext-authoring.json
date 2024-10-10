@@ -157,7 +157,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "createProjectOptions",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -296,7 +296,7 @@
             "maxLength": 100
           },
           {
-            "name": "body",
+            "name": "copyProjectOptions",
             "in": "body",
             "description": "The copy project info.",
             "required": true,
@@ -433,7 +433,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "exportedProject",
             "in": "body",
             "description": "The project data to import.",
             "required": true,
@@ -485,7 +485,7 @@
             "maxLength": 100
           },
           {
-            "name": "body",
+            "name": "trainingJobOptions",
             "in": "body",
             "description": "The training input parameters.",
             "required": true,
@@ -940,7 +940,7 @@
             "maxLength": 100
           },
           {
-            "name": "body",
+            "name": "swapDeploymentsOptions",
             "in": "body",
             "description": "The job object to swap two deployments.",
             "required": true,
@@ -1557,7 +1557,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "evaluationOptions",
             "in": "body",
             "description": "The training input parameters.",
             "required": true,
@@ -1914,7 +1914,7 @@
             "maxLength": 100
           },
           {
-            "name": "body",
+            "name": "assignDeploymentResourcesOptions",
             "in": "body",
             "description": "The new project resources info.",
             "required": true,
@@ -1966,7 +1966,7 @@
             "maxLength": 100
           },
           {
-            "name": "body",
+            "name": "unassignDeploymentResourcesOptions",
             "in": "body",
             "description": "The info for the deployment resources to be deleted.",
             "required": true,
@@ -3432,7 +3432,7 @@
           "type": "string",
           "description": "The storage container name."
         },
-        "settings": {
+        "projectSettings": {
           "$ref": "#/definitions/TextAnalysisAuthoringProjectSettings",
           "description": "The project settings."
         },
@@ -4192,7 +4192,7 @@
       "type": "object",
       "description": "Represents the options used running the evaluation.",
       "properties": {
-        "kind": {
+        "evaluationKind": {
           "$ref": "#/definitions/EvaluationKind",
           "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
         },
@@ -4858,11 +4858,11 @@
           "$ref": "#/definitions/StringIndexType",
           "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
         },
-        "metadata": {
+        "createProjectOptions": {
           "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions",
           "description": "Represents the project metadata."
         },
-        "assets": {
+        "exportedProjectAssets": {
           "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets",
           "description": "Represents the project assets."
         }
@@ -4870,7 +4870,7 @@
       "required": [
         "projectFileVersion",
         "stringIndexType",
-        "metadata"
+        "createProjectOptions"
       ]
     },
     "TextAnalysisAuthoringExportedProjectAssets": {
