@@ -46,6 +46,7 @@ union AnalyzeTextTaskKind {
   EntityLinking: "EntityLinking",
 
   /** Dynamic classification task */
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2023_11_15_preview)
   DynamicClassification: "DynamicClassification",
 }
@@ -90,14 +91,17 @@ union AnalyzeTextLROTaskKind {
   AbstractiveSummarization: "AbstractiveSummarization",
 
   /** Custom healthcare task */
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2023_11_15_preview)
   CustomHealthcare: "CustomHealthcare",
 
   /** Custom sentiment analysis task */
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2023_11_15_preview)
   CustomSentimentAnalysis: "CustomSentimentAnalysis",
 
   /** Custom abstractive summarization task */
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2023_11_15_preview)
   CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
 }
@@ -125,6 +129,7 @@ union AnalyzeTextTaskResultsKind {
   EntityLinkingResults: "EntityLinkingResults",
 
   /** Dynamic classification results */
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2023_11_15_preview)
   DynamicClassificationResults: "DynamicClassificationResults",
 }
@@ -169,14 +174,17 @@ union AnalyzeTextLROResultsKind {
   AbstractiveSummarizationLROResults: "AbstractiveSummarizationLROResults",
 
   /** Custom healthcare LRO results */
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2023_11_15_preview)
   CustomHealthcareLROResults: "CustomHealthcareLROResults",
 
   /** Custom sentiment analysis LRO results */
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2023_11_15_preview)
   CustomSentimentAnalysisLROResults: "CustomSentimentAnalysisLROResults",
 
   /** Custom abstractive summarization LRO results */
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2023_11_15_preview)
   CustomAbstractiveSummarizationLROResults: "CustomAbstractiveSummarizationLROResults",
 }
@@ -386,6 +394,7 @@ model MultiLanguageInput {
 }
 
 /** Defines the detected language for the document. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model DocumentDetectedLanguage {
   /** If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document. */
