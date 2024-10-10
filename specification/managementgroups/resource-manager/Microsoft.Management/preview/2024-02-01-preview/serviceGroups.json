@@ -134,6 +134,61 @@
           "final-state-via": "azure-async-operation"
         }
       },
+      "patch": {
+        "tags": [
+          "ServiceGroups"
+        ],
+        "operationId": "UpdateServiceGroup",
+        "description": "Update a serviceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "updateServiceGroupRequest",
+            "description": "ServiceGroup update parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Group update request is completed",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroup"
+            }
+          },
+          "202": {
+            "description": "Service Group update request is accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error Response in making the request",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchServiceGroup": {
+            "$ref": "./examples/ServiceGroup_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
       "delete": {
         "tags": [
           "ServiceGroups"
@@ -226,6 +281,21 @@
         }
       ],
       "properties": {
+        "kind": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The kind of the serviceGroup."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The serviceGroup tags."
+        },
         "properties": {
           "title": "properties",
           "$ref": "#/definitions/ServiceGroupProperties"
