@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2024-05-01",
+    "version": "2025-01-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -108,6 +108,9 @@
           },
           "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
             "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
+          },
+          "Create or update a policy assignment to enforce policy effect only on enrolled resources during resource creation or update.": {
+            "$ref": "./examples/createPolicyAssignmentWithEnrollEnforcement.json"
           },
           "Create or update a policy assignment with resource selectors": {
             "$ref": "./examples/createPolicyAssignmentWithResourceSelectors.json"
@@ -768,10 +771,11 @@
         },
         "enforcementMode": {
           "type": "string",
-          "description": "The policy assignment enforcement mode. Possible values are Default and DoNotEnforce.",
+          "description": "The policy assignment enforcement mode. Possible values are Default, DoNotEnforce, and Enroll",
           "enum": [
             "Default",
-            "DoNotEnforce"
+            "DoNotEnforce",
+            "Enroll"
           ],
           "x-ms-enum": {
             "name": "enforcementMode",
@@ -784,6 +788,10 @@
               {
                 "value": "DoNotEnforce",
                 "description": "The policy effect is not enforced during resource creation or update."
+              },
+              {
+                "value": "Enroll",
+                "description": "The policy effect is not enforced during resource creation or update unless the resource is enrolled to the assignment instance. This mode is not supported assignments referencing policy definitions whose modes are neither 'Indexed' nor 'All', or referencing policy sets that reference such policy definitions."
               }
             ]
           },
@@ -829,6 +837,11 @@
             "name": "assignmentType",
             "modelAsString": true
           }
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "The instance ID of the policy assignment. This ID only and always changes when the assignment is deleted and recreated.",
+          "readOnly": true
         }
       },
       "description": "The policy assignment properties."
