@@ -77,20 +77,17 @@ model ChatCompletionsJsonSchemaResponseFormat
   };
 }
 
-// Deferred to a near-term future release after publish; see:
-// https://github.com/Azure/azure-rest-api-specs/pull/30087
-//
-// /**
-//  * Options for streaming response. Only set this when you set `stream: true`.
-//  */
-// @added(ServiceApiVersions.v2024_07_01_Preview)
-// model ChatCompletionStreamOptions {
-//   /**
-//    * If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.
-//    */
-//   #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
-//   include_usage?: boolean;
-// }
+/**
+ * Options for streaming response. Only set this when you set `stream: true`.
+ */
+@added(ServiceApiVersions.v2024_09_01_Preview)
+model ChatCompletionStreamOptions {
+  /**
+   * If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.
+   */
+  @encodedName("application/json", "include_usage")
+  includeUsage?: boolean;
+}
 
 @doc("""
   The configuration information for a chat completions request.
@@ -121,9 +118,21 @@ model ChatCompletionsOptions {
   @added(ServiceApiVersions.v2023_07_01_Preview)
   functionCall?: FunctionCallConfig;
 
-  @doc("The maximum number of tokens to generate.")
+  /**
+   * The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).
+   *
+   * This value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  #deprecated "Field deprecated since v2024-09-01-preview service version."
   @encodedName("application/json", "max_tokens")
   maxTokens?: int32;
+
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens.
+   */
+  @encodedName("application/json", "max_completion_tokens")
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  maxCompletionTokens?: int32;
 
   @doc("""
     The sampling temperature to use that controls the apparent creativity of generated completions.
@@ -202,16 +211,13 @@ model ChatCompletionsOptions {
   @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
-  // Deferred to a near-term future release after publish; see:
-  // https://github.com/Azure/azure-rest-api-specs/pull/30087
-  //
-  // /**
-  //  * Options for streaming response. Only set this when you set `stream: true`.
-  //  */
-  // #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
-  // #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
-  // @added(ServiceApiVersions.v2024_07_01_Preview)
-  // stream_options?: ChatCompletionStreamOptions | null;
+  /**
+   * Options for streaming response. Only set this when you set `stream: true`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @encodedName("application/json", "stream_options")
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  streamOptions?: ChatCompletionStreamOptions | null;
 
   @doc("""
     The model name to provide as part of this completions request.
@@ -278,6 +284,13 @@ model ChatCompletionsOptions {
     If specified, the model will configure which of the provided tools it can use for the chat completions response.
     """)
   toolChoice?: ChatCompletionsToolSelection;
+
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean = true;
 }
 
 @doc("""
