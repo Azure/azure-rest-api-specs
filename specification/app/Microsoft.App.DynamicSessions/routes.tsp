@@ -71,8 +71,6 @@ interface SessionResourceFiles {
   @route("/files")
   uploadFile is RpcOperation<
     {
-      ...SessionResourceFilePathQueryParameter;
-
       @doc("The content type for the operation. Always multipart/form-data for this operation.")
       @header("content-type")
       contentType: "multipart/form-data";
@@ -80,7 +78,8 @@ interface SessionResourceFiles {
       @doc("The file to upload.")
       file: bytes;
     },
-    SessionResourceFile
+    SessionResourceFile,
+    SessionResourceFilesTraits
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
