@@ -133,6 +133,12 @@
         "x-ms-examples": {
           "Create or Update Http Route": {
             "$ref": "./examples/HttpRouteConfig_CreateOrUpdate.json"
+          },
+          "Create or Update Http Route Prefix Rule": {
+            "$ref": "./examples/HttpRouteConfig_CreateOrUpdatePrefix.json"
+          },
+          "Create or Update Http Route Path Separated Prefix Rule": {
+            "$ref": "./examples/HttpRouteConfig_CreateOrUpdatePathSepPrefix.json"
           }
         }
       },
@@ -249,7 +255,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/httpRoutes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/httpRouteConfigs": {
       "get": {
         "tags": [
           "HttpRouteConfig"
@@ -545,6 +551,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of rule. Optional."
         }
       }
     },

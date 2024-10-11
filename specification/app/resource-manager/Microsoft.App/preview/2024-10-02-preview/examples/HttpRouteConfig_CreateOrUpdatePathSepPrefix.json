@@ -11,7 +11,7 @@
         "customDomains": [
           {
             "name": "example.com",
-            "bindingType": "SniEnabled",
+            "bindingType": "Disabled",
             "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-1"
           }
         ],
@@ -19,23 +19,20 @@
           {
             "targets": [
               {
-                "containerAppName": "capp-1",
-                "revisionName": "rev-1",
-                "weight": 100
+                "containerAppName": "capp-1"
               }
             ],
             "routes": [
               {
                 "match": {
-                  "path": "/v1",
+                  "pathSeparatedPrefix": "/v1",
                   "caseSensitive": true
                 },
                 "action": {
                   "prefixRewrite": "/v1/api"
                 }
               }
-            ],
-            "description": "random-description"
+            ]
           }
         ]
       }
@@ -54,7 +51,7 @@
           "customDomains": [
             {
               "name": "example.com",
-              "bindingType": "SniEnabled",
+              "bindingType": "Disabled",
               "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-1"
             }
           ],
@@ -70,7 +67,7 @@
               "routes": [
                 {
                   "match": {
-                    "path": "/v1",
+                    "pathSeparatedPrefix": "/v1",
                     "caseSensitive": true
                   },
                   "action": {
@@ -96,7 +93,7 @@
           "customDomains": [
             {
               "name": "example.com",
-              "bindingType": "SniEnabled",
+              "bindingType": "Disabled",
               "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-1"
             }
           ],
@@ -104,23 +101,20 @@
             {
               "targets": [
                 {
-                  "containerAppName": "capp-1",
-                  "revisionName": "rev-1",
-                  "weight": 100
+                  "containerAppName": "capp-1"
                 }
               ],
               "routes": [
                 {
                   "match": {
-                    "path": "/v1",
+                    "pathSeparatedPrefix": "/v1",
                     "caseSensitive": true
                   },
                   "action": {
                     "prefixRewrite": "/v1/api"
                   }
                 }
-              ],
-              "description": "random-description"
+              ]
             }
           ]
         }
