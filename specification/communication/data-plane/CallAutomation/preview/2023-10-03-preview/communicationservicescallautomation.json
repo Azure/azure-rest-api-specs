@@ -1698,46 +1698,6 @@
         }
       }
     },
-    "/calling/recordings/{recordingId}/recordingCompleteData": {
-      "get": {
-        "tags": [
-          "Recording"
-        ],
-        "summary": "Get recording complete data. This includes the download URLs for the recording chunks.",
-        "operationId": "CallRecording_GetRecordingCompleteData",
-        "parameters": [
-          {
-            "name": "recordingId",
-            "in": "path",
-            "description": "The recording id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Returns the recording complete data.",
-            "schema": {
-              "$ref": "#/definitions/RecordingCompleteData"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CallRecording_GetRecordingCompleteData": {
-            "$ref": "./examples/CallRecording_GetRecordingCompleteData.json"
-          }
-        }
-      }
-    },
     "/calling/recordings": {
       "post": {
         "tags": [
@@ -1939,6 +1899,46 @@
         "x-ms-examples": {
           "CallRecording_ResumeRecording": {
             "$ref": "./examples/CallRecording_ResumeRecording.json"
+          }
+        }
+      }
+    },
+    "/calling/recordings/{recordingId}/result": {
+      "get": {
+        "tags": [
+          "Recording"
+        ],
+        "summary": "Get recording complete data. This includes the download URLs for the recording chunks.",
+        "operationId": "CallRecording_GetRecordingResult",
+        "parameters": [
+          {
+            "name": "recordingId",
+            "in": "path",
+            "description": "The recording id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the recording result.",
+            "schema": {
+              "$ref": "#/definitions/RecordingResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallRecording_GetRecordingResult": {
+            "$ref": "./examples/CallRecording_GetRecordingResult.json"
           }
         }
       }
@@ -3275,171 +3275,6 @@
         }
       }
     },
-    "CallSessionEndReason": {
-      "description": "Reason call ended",
-      "enum": [
-        "sessionStillOngoing",
-        "callEnded",
-        "initiatorLeft",
-        "handedOverOrTransfered",
-        "maximumSessionTimeReached",
-        "callStartTimeout",
-        "mediaTimeout",
-        "audioStreamFailure",
-        "allInstancesBusy",
-        "teamsTokenConversionFailed",
-        "reportCallStateFailed",
-        "reportCallStateFailedAndSessionMustBeDiscarded",
-        "couldNotRejoinCall",
-        "invalidBotData",
-        "couldNotStart",
-        "appHostedMediaFailureOutcomeWithError",
-        "appHostedMediaFailureOutcomeGracefully",
-        "handedOverDueToMediaTimeout",
-        "handedOverDueToAudioStreamFailure",
-        "speechRecognitionSessionNonRetriableError",
-        "speechRecognitionSessionRetriableErrorMaxRetryCountReached",
-        "handedOverDueToChunkCreationFailure",
-        "chunkCreationFailed",
-        "handedOverDueToProcessingTimeout",
-        "processingTimeout",
-        "transcriptObjectCreationFailed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CallSessionEndReason",
-        "modelAsString": true
-      }
-    },
-    "RecordingStorageKind": {
-      "description": "Recording storage type",
-      "enum": [
-        "azureCommunicationServices",
-        "azureBlobStorage"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RecordingStorageKind",
-        "modelAsString": true
-      }
-    },
-    "RecordingCompleteData": {
-      "type": "object",
-      "properties": {
-        "recordingStorageInfo": {
-          "$ref": "#/definitions/RecordingStorageInfo",
-          "description": "Recording storage information"
-        },
-        "recordingStartTime": {
-          "format": "date-time",
-          "description": "Recording start time",
-          "type": "string"
-        },
-        "recordingDurationMs": {
-          "format": "int64",
-          "description": "Recording duration in milliseconds",
-          "type": "integer"
-        },
-        "sessionEndReason": {
-          "$ref": "#/definitions/CallSessionEndReason"
-        },
-        "storageType": {
-          "$ref": "#/definitions/RecordingStorageKind"
-        },
-        "recordingExpirationTime": {
-          "format": "date-time",
-          "description": "Recording expiration time. The recording will not be available after this time.",
-          "type": "string"
-        },
-        "errors": {
-          "description": "Errors",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "RecordingStorageInfo": {
-      "description": "Container for chunks",
-      "type": "object",
-      "properties": {
-        "recordingChunks": {
-          "description": "Collection of {Microsoft.Skype.Platform.ExecutionAgent.Azure.Communication.Service.ServerCalling.Content.Contracts.ALPHA3_2023_10_03_preview.Responses.RecordingChunkStorageInfo}",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecordingChunkStorageInfo"
-          }
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorValue"
-        }
-      }
-    },
-    "ChunkEndReason": {
-      "description": "Reason this chunk ended",
-      "enum": [
-        "chunkIsBeingRecorded",
-        "sessionEnded",
-        "chunkMaximumSizeExceeded",
-        "chunkMaximumTimeExceeded",
-        "chunkUploadFailure"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ChunkEndReason",
-        "modelAsString": true
-      }
-    },
-    "RecordingChunkStorageInfo": {
-      "description": "Recording chunk data",
-      "type": "object",
-      "properties": {
-        "documentId": {
-          "description": "Chunk document id",
-          "type": "string"
-        },
-        "index": {
-          "format": "int32",
-          "description": "Chunks order in a multi chunk recording",
-          "type": "integer"
-        },
-        "endReason": {
-          "$ref": "#/definitions/ChunkEndReason"
-        },
-        "contentLocation": {
-          "description": "Location of the chunk",
-          "type": "string"
-        },
-        "metadataLocation": {
-          "description": "Location of chunk metadata",
-          "type": "string"
-        },
-        "deleteLocation": {
-          "description": "Callback for deleting chunk",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorValue": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "innererror": {
-          "type": "object"
-        }
-      }
-    },
     "RecordingContentType": {
       "description": "The content type of call recording.",
       "enum": [
@@ -3574,6 +3409,18 @@
         }
       }
     },
+    "RecordingStorageKind": {
+      "description": "Defines the kind of external storage",
+      "enum": [
+        "azureCommunicationServices",
+        "azureBlobStorage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingStorageKind",
+        "modelAsString": true
+      }
+    },
     "ExternalStorage": {
       "required": [
         "recordingStorageKind"
@@ -3624,6 +3471,137 @@
         },
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
+        }
+      }
+    },
+    "CallSessionEndReason": {
+      "description": "Reason call ended",
+      "enum": [
+        "sessionStillOngoing",
+        "callEnded",
+        "initiatorLeft",
+        "handedOverOrTransfered",
+        "maximumSessionTimeReached",
+        "callStartTimeout",
+        "mediaTimeout",
+        "audioStreamFailure",
+        "allInstancesBusy",
+        "teamsTokenConversionFailed",
+        "reportCallStateFailed",
+        "reportCallStateFailedAndSessionMustBeDiscarded",
+        "couldNotRejoinCall",
+        "invalidBotData",
+        "couldNotStart",
+        "appHostedMediaFailureOutcomeWithError",
+        "appHostedMediaFailureOutcomeGracefully",
+        "handedOverDueToMediaTimeout",
+        "handedOverDueToAudioStreamFailure",
+        "speechRecognitionSessionNonRetriableError",
+        "speechRecognitionSessionRetriableErrorMaxRetryCountReached",
+        "handedOverDueToChunkCreationFailure",
+        "chunkCreationFailed",
+        "handedOverDueToProcessingTimeout",
+        "processingTimeout",
+        "transcriptObjectCreationFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallSessionEndReason",
+        "modelAsString": true
+      }
+    },
+    "RecordingResult": {
+      "type": "object",
+      "properties": {
+        "recordingStorageInfo": {
+          "$ref": "#/definitions/RecordingStorageInfo",
+          "description": "Recording storage information"
+        },
+        "recordingStartTime": {
+          "format": "date-time",
+          "description": "Recording start time",
+          "type": "string"
+        },
+        "recordingDurationMs": {
+          "format": "int64",
+          "description": "Recording duration in milliseconds",
+          "type": "integer"
+        },
+        "sessionEndReason": {
+          "$ref": "#/definitions/CallSessionEndReason"
+        },
+        "storageType": {
+          "$ref": "#/definitions/RecordingStorageKind"
+        },
+        "recordingExpirationTime": {
+          "format": "date-time",
+          "description": "Recording expiration time. The recording will not be available after this time.",
+          "type": "string"
+        },
+        "errors": {
+          "description": "Errors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationError"
+          }
+        }
+      }
+    },
+    "RecordingStorageInfo": {
+      "description": "Container for chunks",
+      "type": "object",
+      "properties": {
+        "recordingChunks": {
+          "description": "Collection of {Microsoft.Skype.Platform.ExecutionAgent.Azure.Communication.Service.ServerCalling.Content.Contracts.ALPHA3_2023_10_03_preview.Responses.RecordingChunkStorageInfo}",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecordingChunkStorageInfo"
+          }
+        }
+      }
+    },
+    "ChunkEndReason": {
+      "description": "Reason this chunk ended",
+      "enum": [
+        "chunkIsBeingRecorded",
+        "sessionEnded",
+        "chunkMaximumSizeExceeded",
+        "chunkMaximumTimeExceeded",
+        "chunkUploadFailure"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChunkEndReason",
+        "modelAsString": true
+      }
+    },
+    "RecordingChunkStorageInfo": {
+      "description": "Recording chunk data",
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "description": "Chunk document id",
+          "type": "string"
+        },
+        "index": {
+          "format": "int32",
+          "description": "Chunks order in a multi chunk recording",
+          "type": "integer"
+        },
+        "endReason": {
+          "$ref": "#/definitions/ChunkEndReason"
+        },
+        "contentLocation": {
+          "description": "Location of the chunk",
+          "type": "string"
+        },
+        "metadataLocation": {
+          "description": "Location of chunk metadata",
+          "type": "string"
+        },
+        "deleteLocation": {
+          "description": "Callback for deleting chunk",
+          "type": "string"
         }
       }
     },
