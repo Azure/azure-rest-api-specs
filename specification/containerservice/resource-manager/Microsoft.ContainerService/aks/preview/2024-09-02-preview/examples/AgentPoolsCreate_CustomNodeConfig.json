@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-07-02-preview",
+    "api-version": "2024-09-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "resourceName": "clustername1",
@@ -22,7 +22,8 @@
             "kernel.msg*",
             "net.core.somaxconn"
           ],
-          "failSwapOn": false
+          "failSwapOn": false,
+          "seccompDefault": "RuntimeDefault"
         },
         "linuxOSConfig": {
           "sysctls": {
@@ -63,7 +64,8 @@
               "kernel.msg*",
               "net.core.somaxconn"
             ],
-            "failSwapOn": false
+            "failSwapOn": false,
+            "seccompDefault": "RuntimeDefault"
           },
           "linuxOSConfig": {
             "sysctls": {
@@ -104,7 +106,8 @@
               "net.core.somaxconn"
             ],
             "failSwapOn": false,
-            "podMaxPids": 100
+            "podMaxPids": 100,
+            "seccompDefault": "RuntimeDefault"
           },
           "linuxOSConfig": {
             "sysctls": {
