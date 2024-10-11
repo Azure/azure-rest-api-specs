@@ -78,6 +78,7 @@ interface TextAnalysisAuthoring {
    * Generates a copy project operation authorization to the current target Azure
    * resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2023_04_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
