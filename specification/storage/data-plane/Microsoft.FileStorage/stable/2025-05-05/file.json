@@ -3423,12 +3423,16 @@
               },
               "x-ms-owner": {
                 "x-ms-client-name": "owner",
-                "type": "string",
+                "type": "integer",
+                "minimum": 0,
+                "format": "int64",
                 "description": "NFS only. The owner of the file or directory."
               },
               "x-ms-group": {
                 "x-ms-client-name": "group",
-                "type": "string",
+                "type": "integer",
+                "minimum": 0,
+                "format": "int64",
                 "description": "NFS only. The owning group of the file or directory."
               },
               "x-ms-file-file-type": {
