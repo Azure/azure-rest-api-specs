@@ -135,6 +135,7 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2024-04-01/mfe.json
   - Microsoft.MachineLearningServices/stable/2024-04-01/registries.json
   - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceRP.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     reason: This provisioningState property is marked as readOnly. 
