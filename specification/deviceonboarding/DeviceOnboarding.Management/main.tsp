@@ -115,6 +115,7 @@ model ResourceUpdatedResponse<T> is ArmResponse<T>;
 // Section 2: Discovery Service
 // ------------------------------------------------------------------
 @doc("A discovery resource.")
+@added(Versions.`2024-12-01-preview`)
 model DiscoveryService 
 is Azure.ResourceManager.TrackedResource<DiscoveryServiceProperties> {
   @doc("The name of the Discovery Resource.")
@@ -169,6 +170,7 @@ interface DiscoveryServices {
 // ------------------------------------------------------------------
 // TODO: does this cause issues with CMK
 @doc("Ownership voucher public key resource.")
+@added(Versions.`2024-12-01-preview`)
 @parentResource(DiscoveryService)
 model OwnershipVoucherPublicKey is Azure.ResourceManager.TrackedResource<OwnershipVoucherPublicKeyProperties> {
   @doc("The name of the ownership voucher public key resource.")
@@ -361,10 +363,12 @@ union BootstrapAuthenticationType {
   X509: "X509",
 
   @doc("The Fdo101 authentication type.")
+  @added(Versions.`2024-12-01-preview`)
   Fdo101: "Fdo101", // TODO: come up with a versioned name, follow up with Adarsh/Jesus
 }
 
 @doc("The Fdo101-based authentication rule for bootstrapping.")
+@added(Versions.`2024-12-01-preview`)
 model Fdo101BootstrapAuthenticationRule extends BootstrapAuthenticationRule {
   @doc("The type of authentication rule.")
   type: BootstrapAuthenticationType.Fdo101;
@@ -381,6 +385,7 @@ model Fdo101BootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 }
 
 @doc("Generic Ownership Voucher Storage type.")
+@added(Versions.`2024-12-01-preview`)
 @discriminator("type")
 model OwnershipVoucherStorage {
   @doc("The Ownership Voucher Storage type.")
@@ -388,6 +393,7 @@ model OwnershipVoucherStorage {
 }
 
 @doc("Storage Account Ownership Voucher Storage. Policy MI is used to access this storage")
+@added(Versions.`2024-12-01-preview`)
 model StorageAccountOwnershipVoucherStorage extends OwnershipVoucherStorage {
   @doc("The Ownership Voucher Storage type.")
   type: OwnershipVoucherStorageType.AzureBlobStorage;
@@ -399,7 +405,8 @@ model StorageAccountOwnershipVoucherStorage extends OwnershipVoucherStorage {
   containerUri: string;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.Storage/storageAccounts/(.+)$") // TODO: test removing to see if RPaaS behavior has changed
+@added(Versions.`2024-12-01-preview`)
+@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.Storage/storageAccounts/(.+)$")
 scalar StorageAccountResourceId
   extends armResourceIdentifier<[
     {
@@ -408,6 +415,7 @@ scalar StorageAccountResourceId
   ]>;
 
 @doc("The Ownership Voucher Storage Type.")
+@added(Versions.`2024-12-01-preview`)
 union OwnershipVoucherStorageType {
   string,
 
@@ -935,6 +943,7 @@ model DeviceStateProperties {
   registrationId: string;
 
   @doc("Indicates if the device is enabled for discovery")
+  @added(Versions.`2024-12-01-preview`)
   discoveryEnabled?: DiscoveryOptions;
 
   @visibility("read", "create", "update")
@@ -955,6 +964,7 @@ model DeviceStateProperties {
 
   @visibility("read")
   @doc("TTL until the device can be onboarded, in utcDateTime format")
+  @added(Versions.`2024-12-01-preview`)
   onboardUntilDate?: utcDateTime;
 }
 
@@ -984,6 +994,7 @@ union OnboardingStatus {
 }
 
 @doc("The properties passed in the readyToOnboard POST request.")
+@added(Versions.`2024-12-01-preview`)
 model ReadyToOnboardProperties{
   @doc("Desired TTL until the device can be onboarded")
   ttl: duration; // TODO, determine min/max enforcement, correct format here
