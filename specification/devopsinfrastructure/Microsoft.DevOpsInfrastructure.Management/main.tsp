@@ -21,10 +21,10 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-04-04-preview preview version */
+  /** 2024-10-19 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2024-04-04-preview`,
+  `2024-10-19`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
