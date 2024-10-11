@@ -2080,6 +2080,20 @@
         "modelAsExtensible": true
       }
     },
+    "AgentlessScanning": {
+      "description": "Agentless Scanning states.",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AgentlessScanning",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
     "AnnotateDefaultBranchState": {
       "description": "Configuration of PR Annotations on default branch.\r\n\r\nEnabled - PR Annotations are enabled on the resource's default branch.\r\nDisabled - PR Annotations are disabled on the resource's default branch.",
       "enum": [
@@ -2511,6 +2525,9 @@
           },
           "x-ms-identifiers": [],
           "readOnly": true
+        },
+        "agentlessScanning": {
+          "$ref": "#/definitions/AgentlessScanning"
         }
       }
     },
