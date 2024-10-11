@@ -492,6 +492,164 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/listAssociations": {
+      "post": {
+        "operationId": "MessagingCatalogs_ListAssociations",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssociationListRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssociationListResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_ListAssociations_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_ListAssociations_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_ListAssociations_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_ListAssociations_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/removeAssociation": {
+      "post": {
+        "operationId": "MessagingCatalogs_RemoveAssociation",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssociationRemoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssociationDeleteResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_RemoveAssociation_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_RemoveAssociation_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_RemoveAssociation_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_RemoveAssociation_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -542,6 +700,74 @@
           "description": "The schema group id to associate."
         }
       }
+    },
+    "AssociationDeleteResponse": {
+      "type": "object",
+      "description": "An response of a association deletion.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "A string detailing the result of the operation."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "AssociationListRequest": {
+      "type": "object",
+      "description": "An request to paginate a list of result.",
+      "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls how many results to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls how many results to retrieve."
+        }
+      }
+    },
+    "AssociationListResponse": {
+      "type": "object",
+      "description": "An response of paginated associations.",
+      "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls how many results to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls how many results to retrieve."
+        },
+        "associations": {
+          "type": "array",
+          "description": "List of associations.",
+          "items": {
+            "$ref": "#/definitions/Association"
+          }
+        }
+      },
+      "required": [
+        "associations"
+      ]
+    },
+    "AssociationRemoveRequest": {
+      "type": "object",
+      "description": "An request to remove an association.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the association."
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "MessagingCatalog": {
       "type": "object",

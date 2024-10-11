@@ -70,4 +70,16 @@ interface MessagingCatalogs {
     Association,
     BaseParameters<Association>
   >;
+
+  listAssociations is ArmResourceActionAsync<
+    MessagingCatalog,
+    AssociationListRequest,
+    AssociationListResponse
+  >;
+
+  removeAssociation is ArmResourceActionAsync<
+    MessagingCatalog,
+    AssociationRemoveRequest,
+    AssociationDeleteResponse
+  >;
 }
