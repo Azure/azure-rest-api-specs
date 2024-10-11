@@ -5,6 +5,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 import "./models.testprofile.tsp";
+import "./models.trigger.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -508,5 +509,20 @@ interface TestProfileRunAdministration {
   listTestProfileRuns is StandardResourceOperations.ResourceList<
     TestProfileRun,
     ListQueryParametersTrait<ListTestProfileRunQueryParams>
+  >;
+}
+
+@tag("Trigger")
+@added(APIVersions.v2024_07_01_preview)
+interface TriggerAdministration {
+  getTrigger is StandardResourceOperations.ResourceRead<Trigger>;
+
+  createOrUpdateTrigger is StandardResourceOperations.ResourceCreateOrUpdate<Trigger>;
+
+  deleteTrigger is StandardResourceOperations.ResourceDelete<Trigger>;
+
+  listTrigger is StandardResourceOperations.ResourceList<
+    Trigger,
+    ListQueryParametersTrait<ListTriggerQueryParams>
   >;
 }
