@@ -4811,23 +4811,23 @@ model SearchIndexerDataContainer {
 /**
  * Base type for data change detection policies.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model DataChangeDetectionPolicy {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 }
 
 /**
  * Base type for data deletion detection policies.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model DataDeletionDetectionPolicy {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 }
 
 /**
@@ -5459,12 +5459,12 @@ model SearchIndexerSkillset {
 /**
  * Base type for skills.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model SearchIndexerSkill {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 
     /**
      * The name of the skill which uniquely identifies it within the skillset. A skill
@@ -5542,12 +5542,12 @@ model OutputFieldMappingEntry {
 /**
  * Base type for describing any Azure AI service resource attached to a skillset.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model CognitiveServicesAccount {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 
     /**
      * Description of the Azure AI service resource attached to a skillset.
@@ -6156,12 +6156,12 @@ model SearchSuggester {
 /**
  * Base type for analyzers.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model LexicalAnalyzer {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 
     /**
      * The name of the analyzer. It must only contain letters, digits, spaces, dashes
@@ -6174,12 +6174,12 @@ model LexicalAnalyzer {
 /**
  * Base type for tokenizers.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model LexicalTokenizer {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 
     /**
      * The name of the tokenizer. It must only contain letters, digits, spaces, dashes
@@ -6192,12 +6192,12 @@ model LexicalTokenizer {
 /**
  * Base type for token filters.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model TokenFilter {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 
     /**
      * The name of the token filter. It must only contain letters, digits, spaces,
@@ -6210,12 +6210,12 @@ model TokenFilter {
 /**
  * Base type for character filters.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model CharFilter {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 
     /**
      * The name of the char filter. It must only contain letters, digits, spaces,
@@ -6231,12 +6231,12 @@ model CharFilter {
  * relevant the document is to that specific query. Those scores are used to rank
  * the search results.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model SimilarityAlgorithm {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 }
 
 /**
@@ -6699,7 +6699,7 @@ model CustomAnalyzer extends LexicalAnalyzer {
      * A URI fragment specifying the type of analyzer.
      */
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.CustomAnalyzer";
+    oDataType: "#Microsoft.Azure.Search.CustomAnalyzer";
 }
 
 /**
@@ -6733,7 +6733,7 @@ model PatternAnalyzer extends LexicalAnalyzer {
      * A URI fragment specifying the type of analyzer.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-    odataType: "#Microsoft.Azure.Search.PatternAnalyzer";
+    oDataType: "#Microsoft.Azure.Search.PatternAnalyzer";
 }
 
 /**
@@ -6758,7 +6758,7 @@ model LuceneStandardAnalyzer extends LexicalAnalyzer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.StandardAnalyzer";
+    oDataType: "#Microsoft.Azure.Search.StandardAnalyzer";
 }
 
 /**
@@ -6775,7 +6775,7 @@ model StopAnalyzer extends LexicalAnalyzer {
      * A URI fragment specifying the type of analyzer.
      */
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.StopAnalyzer";
+    oDataType: "#Microsoft.Azure.Search.StopAnalyzer";
 }
 
 /**
@@ -6795,7 +6795,7 @@ model ClassicTokenizer extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.ClassicTokenizer";
+    oDataType: "#Microsoft.Azure.Search.ClassicTokenizer";
 }
 
 /**
@@ -6826,7 +6826,7 @@ model EdgeNGramTokenizer extends LexicalTokenizer {
      * A URI fragment specifying the type of tokenizer.
      */
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
+    oDataType: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
 }
 
 /**
@@ -6844,7 +6844,7 @@ model KeywordTokenizer extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.KeywordTokenizer";
+    oDataType: "#Microsoft.Azure.Search.KeywordTokenizer";
 }
 
 /**
@@ -6864,7 +6864,7 @@ model KeywordTokenizerV2 extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.KeywordTokenizerV2";
+    oDataType: "#Microsoft.Azure.Search.KeywordTokenizerV2";
 }
 
 /**
@@ -6895,7 +6895,7 @@ model MicrosoftLanguageTokenizer extends LexicalTokenizer {
      * A URI fragment specifying the type of tokenizer.
      */
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer";
+    oDataType: "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer";
 }
 
 /**
@@ -6928,7 +6928,7 @@ model MicrosoftLanguageStemmingTokenizer extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer";
+    oDataType: "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer";
 }
 
 /**
@@ -6960,7 +6960,7 @@ model NGramTokenizer extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.NGramTokenizer";
+    oDataType: "#Microsoft.Azure.Search.NGramTokenizer";
 }
 
 /**
@@ -7001,7 +7001,7 @@ model PathHierarchyTokenizerV2 extends LexicalTokenizer {
      * A URI fragment specifying the type of tokenizer.
      */
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
+    oDataType: "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
 }
 
 /**
@@ -7032,7 +7032,7 @@ model PatternTokenizer extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.PatternTokenizer";
+    oDataType: "#Microsoft.Azure.Search.PatternTokenizer";
 }
 
 /**
@@ -7051,7 +7051,7 @@ model LuceneStandardTokenizer extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.StandardTokenizer";
+    oDataType: "#Microsoft.Azure.Search.StandardTokenizer";
 }
 
 /**
@@ -7071,7 +7071,7 @@ model LuceneStandardTokenizerV2 extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.StandardTokenizerV2";
+    oDataType: "#Microsoft.Azure.Search.StandardTokenizerV2";
 }
 
 /**
@@ -7091,7 +7091,7 @@ model UaxUrlEmailTokenizer extends LexicalTokenizer {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
+    oDataType: "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
 }
 
 /**
@@ -7111,7 +7111,7 @@ model AsciiFoldingTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
 }
 
 /**
@@ -7135,7 +7135,7 @@ model CjkBigramTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.CjkBigramTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.CjkBigramTokenFilter";
 }
 
 /**
@@ -7168,7 +7168,7 @@ model CommonGramTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.CommonGramTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.CommonGramTokenFilter";
 }
 
 /**
@@ -7213,7 +7213,7 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
 }
 
 /**
@@ -7243,7 +7243,7 @@ model EdgeNGramTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
 }
 
 /**
@@ -7276,7 +7276,7 @@ model EdgeNGramTokenFilterV2 extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2";
+    oDataType: "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2";
 }
 
 /**
@@ -7294,7 +7294,7 @@ model ElisionTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.ElisionTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.ElisionTokenFilter";
 }
 
 /**
@@ -7318,7 +7318,7 @@ model KeepTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.KeepTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.KeepTokenFilter";
 }
 
 /**
@@ -7341,7 +7341,7 @@ model KeywordMarkerTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
 }
 
 /**
@@ -7369,7 +7369,7 @@ model LengthTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.LengthTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.LengthTokenFilter";
 }
 
 /**
@@ -7393,7 +7393,7 @@ model LimitTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.LimitTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.LimitTokenFilter";
 }
 
 /**
@@ -7417,7 +7417,7 @@ model NGramTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.NGramTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.NGramTokenFilter";
 }
 
 /**
@@ -7444,7 +7444,7 @@ model NGramTokenFilterV2 extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.NGramTokenFilterV2";
+    oDataType: "#Microsoft.Azure.Search.NGramTokenFilterV2";
 }
 
 /**
@@ -7468,7 +7468,7 @@ model PatternCaptureTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
 }
 
 /**
@@ -7495,7 +7495,7 @@ model PatternReplaceTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
 }
 
 /**
@@ -7520,7 +7520,7 @@ model PhoneticTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.PhoneticTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.PhoneticTokenFilter";
 }
 
 /**
@@ -7571,7 +7571,7 @@ model ShingleTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.ShingleTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.ShingleTokenFilter";
 }
 
 /**
@@ -7589,7 +7589,7 @@ model SnowballTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.SnowballTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.SnowballTokenFilter";
 }
 
 /**
@@ -7607,7 +7607,7 @@ model StemmerTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.StemmerTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.StemmerTokenFilter";
 }
 
 /**
@@ -7629,7 +7629,7 @@ model StemmerOverrideTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
 }
 
 /**
@@ -7667,7 +7667,7 @@ model StopwordsTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.StopwordsTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.StopwordsTokenFilter";
 }
 
 /**
@@ -7706,7 +7706,7 @@ model SynonymTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.SynonymTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.SynonymTokenFilter";
 }
 
 /**
@@ -7725,7 +7725,7 @@ model TruncateTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.TruncateTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.TruncateTokenFilter";
 }
 
 /**
@@ -7744,7 +7744,7 @@ model UniqueTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.UniqueTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.UniqueTokenFilter";
 }
 
 /**
@@ -7817,7 +7817,7 @@ model WordDelimiterTokenFilter extends TokenFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
+    oDataType: "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
 }
 
 /**
@@ -7838,7 +7838,7 @@ model MappingCharFilter extends CharFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.MappingCharFilter";
+    oDataType: "#Microsoft.Azure.Search.MappingCharFilter";
 }
 
 /**
@@ -7865,7 +7865,7 @@ model PatternReplaceCharFilter extends CharFilter {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.PatternReplaceCharFilter";
+    oDataType: "#Microsoft.Azure.Search.PatternReplaceCharFilter";
 }
 
 /**
@@ -7877,7 +7877,7 @@ model PatternReplaceCharFilter extends CharFilter {
 model ClassicSimilarityAlgorithm extends SimilarityAlgorithm {
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.ClassicSimilarity";
+    oDataType: "#Microsoft.Azure.Search.ClassicSimilarity";
 }
 
 /**
@@ -7906,7 +7906,7 @@ model BM25SimilarityAlgorithm extends SimilarityAlgorithm {
 
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.BM25Similarity";
+    oDataType: "#Microsoft.Azure.Search.BM25Similarity";
 }
 
 /**
@@ -8091,12 +8091,12 @@ model AzureOpenAIVectorizerParameters {
 /**
  * Abstract base type for data identities.
  */
-@discriminator("odataType")
+@discriminator("oDataType")
 model SearchIndexerDataIdentity {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: string;
+    oDataType: string;
 }
 
 /**
@@ -8173,7 +8173,7 @@ model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.DataNoneIdentity";
+    oDataType: "#Microsoft.Azure.Search.DataNoneIdentity";
 }
 
 /**
@@ -8194,7 +8194,7 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
+    oDataType: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
 }
 
 /**
@@ -8212,7 +8212,7 @@ model HighWaterMarkChangeDetectionPolicy extends DataChangeDetectionPolicy {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
+    oDataType: "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
 }
 
 /**
@@ -8225,7 +8225,7 @@ model SqlIntegratedChangeTrackingPolicy extends DataChangeDetectionPolicy {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
+    oDataType: "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
 }
 
 /**
@@ -8250,7 +8250,7 @@ model SoftDeleteColumnDeletionDetectionPolicy
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
+    oDataType: "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
 }
 
 /**
@@ -8409,7 +8409,7 @@ model DefaultCognitiveServicesAccount extends CognitiveServicesAccount {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.DefaultCognitiveServices";
+    oDataType: "#Microsoft.Azure.Search.DefaultCognitiveServices";
 }
 
 /**
@@ -8428,7 +8428,7 @@ model CognitiveServicesAccountKey extends CognitiveServicesAccount {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Azure.Search.CognitiveServicesByKey";
+    oDataType: "#Microsoft.Azure.Search.CognitiveServicesByKey";
 }
 
 /**
@@ -8555,7 +8555,7 @@ model ConditionalSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Util.ConditionalSkill";
+    oDataType: "#Microsoft.Skills.Util.ConditionalSkill";
 }
 
 /**
@@ -8585,7 +8585,7 @@ model KeyPhraseExtractionSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
+    oDataType: "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
 }
 
 /**
@@ -8614,7 +8614,7 @@ model OcrSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Vision.OcrSkill";
+    oDataType: "#Microsoft.Skills.Vision.OcrSkill";
 }
 
 /**
@@ -8642,7 +8642,7 @@ model ImageAnalysisSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Vision.ImageAnalysisSkill";
+    oDataType: "#Microsoft.Skills.Vision.ImageAnalysisSkill";
 }
 
 /**
@@ -8669,7 +8669,7 @@ model LanguageDetectionSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.LanguageDetectionSkill";
+    oDataType: "#Microsoft.Skills.Text.LanguageDetectionSkill";
 }
 
 /**
@@ -8682,7 +8682,7 @@ model ShaperSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Util.ShaperSkill";
+    oDataType: "#Microsoft.Skills.Util.ShaperSkill";
 }
 
 /**
@@ -8707,7 +8707,7 @@ model MergeSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.MergeSkill";
+    oDataType: "#Microsoft.Skills.Text.MergeSkill";
 }
 
 /**
@@ -8744,7 +8744,7 @@ model EntityRecognitionSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.EntityRecognitionSkill";
+    oDataType: "#Microsoft.Skills.Text.EntityRecognitionSkill";
 }
 
 /**
@@ -8761,7 +8761,7 @@ model SentimentSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.SentimentSkill";
+    oDataType: "#Microsoft.Skills.Text.SentimentSkill";
 }
 
 /**
@@ -8795,7 +8795,7 @@ model SentimentSkillV3 extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.V3.SentimentSkill";
+    oDataType: "#Microsoft.Skills.Text.V3.SentimentSkill";
 }
 
 /**
@@ -8827,7 +8827,7 @@ model EntityLinkingSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.V3.EntityLinkingSkill";
+    oDataType: "#Microsoft.Skills.Text.V3.EntityLinkingSkill";
 }
 
 /**
@@ -8864,7 +8864,7 @@ model EntityRecognitionSkillV3 extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.V3.EntityRecognitionSkill";
+    oDataType: "#Microsoft.Skills.Text.V3.EntityRecognitionSkill";
 }
 
 /**
@@ -8923,7 +8923,7 @@ model PIIDetectionSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.PIIDetectionSkill";
+    oDataType: "#Microsoft.Skills.Text.PIIDetectionSkill";
 }
 
 /**
@@ -8964,7 +8964,7 @@ model SplitSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.SplitSkill";
+    oDataType: "#Microsoft.Skills.Text.SplitSkill";
 }
 
 /**
@@ -9012,7 +9012,7 @@ model CustomEntityLookupSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.CustomEntityLookupSkill";
+    oDataType: "#Microsoft.Skills.Text.CustomEntityLookupSkill";
 }
 
 /**
@@ -9043,7 +9043,7 @@ model TextTranslationSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.TranslationSkill";
+    oDataType: "#Microsoft.Skills.Text.TranslationSkill";
 }
 
 /**
@@ -9072,7 +9072,7 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Util.DocumentExtractionSkill";
+    oDataType: "#Microsoft.Skills.Util.DocumentExtractionSkill";
 }
 
 /**
@@ -9135,7 +9135,7 @@ model WebApiSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Custom.WebApiSkill";
+    oDataType: "#Microsoft.Skills.Custom.WebApiSkill";
 }
 
 /**
@@ -9157,5 +9157,5 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
      */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     @encodedName("application/json", "@odata.type")
-    odataType: "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill";
+    oDataType: "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill";
 }
