@@ -238,3 +238,16 @@ model EvaluationSchedule {
   @doc("Sampling strategy for the evaluation.")
   samplingStrategy: SamplingStrategy;
 }
+
+// Define the response model with status code 201
+// Needed since run is Operations.ResourceCollectionAction<Evaluation, {}, Evaluation>; returns 200 status code
+@doc("Response model for create evaluation")
+model CreatedEvaluationResponse {
+  @doc("HTTP status code")
+  @statusCode
+  status: 201;
+
+  @body
+  @doc("Evaluation created")
+  evaluation: Evaluation;
+}

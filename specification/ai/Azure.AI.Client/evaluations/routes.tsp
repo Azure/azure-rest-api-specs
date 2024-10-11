@@ -23,8 +23,18 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface Evaluations {
   get is Operations.ResourceRead<Evaluation>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  // create is Operations.ResourceCreateWithServiceProvidedName<Evaluation>;
+  // run is Operations.ResourceCollectionAction<Evaluation, {}, Evaluation>;
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  create is Operations.ResourceCreateWithServiceProvidedName<Evaluation>;
+  @route("runs:run")
+  @post
+  @doc("Run the evaluation.")
+  createEvaluation(
+    @body
+    @doc("Evaluation to run.")
+    evaluation: Evaluation,
+  ): CreatedEvaluationResponse;
 
   list is Operations.ResourceList<
     Evaluation,
