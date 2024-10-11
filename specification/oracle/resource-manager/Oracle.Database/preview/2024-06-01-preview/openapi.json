@@ -7126,129 +7126,113 @@
       "properties": {
         "ocid": {
           "$ref": "#/definitions/Ocid",
-          "description": "DbNode OCID",
-          "readOnly": true
+          "description": "DbNode OCID"
         },
         "additionalDetails": {
           "type": "string",
-          "description": "Additional information about the planned maintenance.",
-          "readOnly": true
+          "description": "Additional information about the planned maintenance."
         },
         "backupIpId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the backup IP address associated with the database node.",
-          "readOnly": true
+          "description": "The OCID of the backup IP address associated with the database node."
         },
         "backupVnic2Id": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the second backup VNIC.",
-          "readOnly": true
+          "description": "The OCID of the second backup VNIC."
         },
         "backupVnicId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the backup VNIC.",
-          "readOnly": true
+          "description": "The OCID of the backup VNIC."
         },
         "cpuCoreCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of CPU cores enabled on the Db node.",
-          "readOnly": true
+          "description": "The number of CPU cores enabled on the Db node."
         },
         "dbNodeStorageSizeInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The allocated local node storage in GBs on the Db node.",
-          "readOnly": true
+          "description": "The allocated local node storage in GBs on the Db node."
         },
         "dbServerId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the Exacc Db server associated with the database node.",
-          "readOnly": true
+          "description": "The OCID of the Exacc Db server associated with the database node."
         },
         "dbSystemId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the DB system.",
-          "readOnly": true
+          "description": "The OCID of the DB system."
         },
         "faultDomain": {
           "type": "string",
           "description": "The name of the Fault Domain the instance is contained in.",
           "minLength": 1,
-          "maxLength": 255,
-          "readOnly": true
+          "maxLength": 255
         },
         "hostIpId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the host IP address associated with the database node.",
-          "readOnly": true
+          "description": "The OCID of the host IP address associated with the database node."
         },
         "hostname": {
           "type": "string",
-          "description": "The host name for the database node.",
-          "readOnly": true
+          "description": "The host name for the database node."
         },
         "lifecycleState": {
           "$ref": "#/definitions/DbNodeProvisioningState",
-          "description": "The current state of the database node.",
-          "readOnly": true
+          "description": "The current state of the database node."
         },
         "lifecycleDetails": {
           "type": "string",
-          "description": "Lifecycle details of Db Node.",
-          "readOnly": true
+          "description": "Lifecycle details of Db Node."
         },
         "maintenanceType": {
           "$ref": "#/definitions/DbNodeMaintenanceType",
-          "description": "The type of database node maintenance.",
-          "readOnly": true
+          "description": "The type of database node maintenance."
         },
         "memorySizeInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The allocated memory in GBs on the Db node.",
-          "readOnly": true
+          "description": "The allocated memory in GBs on the Db node."
         },
         "softwareStorageSizeInGb": {
           "type": "integer",
           "format": "int32",
-          "description": "The size (in GB) of the block storage volume allocation for the DB system. This attribute applies only for virtual machine DB systems.",
-          "readOnly": true
+          "description": "The size (in GB) of the block storage volume allocation for the DB system. This attribute applies only for virtual machine DB systems."
         },
         "timeCreated": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time that the database node was created.",
-          "readOnly": true
+          "description": "The date and time that the database node was created."
         },
         "timeMaintenanceWindowEnd": {
           "type": "string",
           "format": "date-time",
-          "description": "End date and time of maintenance window.",
-          "readOnly": true
+          "description": "End date and time of maintenance window."
         },
         "timeMaintenanceWindowStart": {
           "type": "string",
           "format": "date-time",
-          "description": "Start date and time of maintenance window.",
-          "readOnly": true
+          "description": "Start date and time of maintenance window."
         },
         "vnic2Id": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the second VNIC.",
-          "readOnly": true
+          "description": "The OCID of the second VNIC."
         },
         "vnicId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the VNIC.",
-          "readOnly": true
+          "description": "The OCID of the VNIC."
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Azure resource provisioning state.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "ocid",
+        "dbSystemId",
+        "lifecycleState",
+        "timeCreated"
+      ]
     },
     "DbNodeProvisioningState": {
       "type": "string",
