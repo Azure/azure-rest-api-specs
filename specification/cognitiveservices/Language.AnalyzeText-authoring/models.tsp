@@ -120,7 +120,7 @@ union StringIndexType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("EvaluationKind", "csharp")
+@clientName("EvaluationKind")
 union EvaluationKind {
   string,
 
@@ -266,7 +266,7 @@ model TextAnalysisAuthoringProjectMetadata {
 /**
  * Represents the settings used to define the project behavior.
  */
-@clientName("ProjectSettings", "csharp")
+@clientName("ProjectSettings")
 model TextAnalysisAuthoringProjectSettings {
   /**
    * The threshold of the class with the highest confidence, at which the prediction
@@ -378,7 +378,7 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-@clientName("CreateProjectOptions", "csharp")
+@clientName("CreateProjectOptions")
 model TextAnalysisAuthoringCreateProjectOptions {
   /**
    * The project kind.
@@ -393,7 +393,7 @@ model TextAnalysisAuthoringCreateProjectOptions {
   /**
    * The project settings.
    */
-  projectSettings?: TextAnalysisAuthoringProjectSettings;
+  settings?: TextAnalysisAuthoringProjectSettings;
 
   /**
    * The new project name.
@@ -496,19 +496,19 @@ model TextAnalysisAuthoringExportedProject {
   /**
    * Represents the project metadata.
    */
-  createProjectOptions: TextAnalysisAuthoringCreateProjectOptions;
+  metadata: TextAnalysisAuthoringCreateProjectOptions;
 
   /**
    * Represents the project assets.
    */
-  exportedProjectAssets?: TextAnalysisAuthoringExportedProjectAssets;
+  assets?: TextAnalysisAuthoringExportedProjectAssets;
 }
 
 /**
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-@clientName("ExportedProjectAssets", "csharp")
+@clientName("ExportedProjectAssets")
 model TextAnalysisAuthoringExportedProjectAssets {
   projectKind: ProjectKind;
 }
@@ -545,7 +545,7 @@ model TextAnalysisAuthoringEvaluationOptions {
    * Represents the evaluation kind. By default, the evaluation kind is set to
    * percentage.
    */
-  evaluationKind?: EvaluationKind;
+  kind?: EvaluationKind;
 
   /**
    * Represents the training dataset split percentage. Only needed in case the

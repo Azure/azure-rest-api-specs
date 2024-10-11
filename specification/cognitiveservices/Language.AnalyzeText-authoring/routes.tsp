@@ -83,7 +83,8 @@ interface TextAnalysisAuthoring {
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
     TextAnalysisAuthoringProjectMetadata,
-    TextAnalysisAuthoringCopyAuthorizationOptions,
+    
+{@bodyRoot copyAuthorizationOptions : TextAnalysisAuthoringCopyAuthorizationOptions },
     TextAnalysisAuthoringCopyProjectOptions
   >;
 
