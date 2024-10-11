@@ -83,6 +83,8 @@ union WeekDays {
 @doc("Type of a trigger.")
 union TriggerType {
   string,
+
+  @doc("Trigger is a Scheduled Trigger on a Test.")
   ScheduleTestsTrigger: "ScheduleTestsTrigger",
 }
 
@@ -248,7 +250,7 @@ model Recurrence {
   @doc("Frequency of the recurrence.")
   frequency: Frequency;
 
-  @doc("Recurrence end model. You can specify the end either by providing a numberOfOccurrences (which will end the recurrence after the specified number of occurrences) or by providing an endDate (which will end the recurrence after the specified date). If neither value is provided, the recurrence will continue until it is manually ended. However, if both values are provided, an error will be thrown.")
+  @doc("Recurrence end model. You can specify the end either by providing a numberOfOccurrences (which will end the recurrence after the specified number of occurrences) or by providing an endDateTime (which will end the recurrence after the specified date). If neither value is provided, the recurrence will continue until it is manually ended. However, if both values are provided, an error will be thrown.")
   recurrenceEnd?: RecurrenceEnd;
 }
 
