@@ -667,6 +667,11 @@
           "description": "Optional. Max inactive revisions a Container App can have.",
           "type": "integer"
         },
+        "revisionTransitionThreshold": {
+          "format": "int32",
+          "description": "Optional. The percent of the total number of replicas that must be brought up before revision transition occurs. Defaults to 100 when none is given.",
+          "type": "integer"
+        },
         "service": {
           "$ref": "#/definitions/Service",
           "description": "Container App to be a dev Container App Service"
