@@ -33,6 +33,8 @@ model CustomEntitiesResult is CustomResult {
 }
 
 /** Contains the list of detected custom entities result for the documents along with detected language. */
+@added(Versions.v2024_11_15_preview)
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model CustomEntitiesResultWithDocumentDetectedLanguage is CustomResult {
   /** Enumeration of the document results with detected language. */
@@ -59,7 +61,7 @@ model CustomLabelClassificationResult is CustomResult {
 }
 
 /** Contains the custom label classification with detected language results. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model CustomLabelClassificationResultWithDocumentDetectedLanguage
   is CustomResult {
   /** Response by document */
@@ -107,7 +109,7 @@ model CustomEntityRecognitionLROResult extends AnalyzeTextLROResult {
   kind: AnalyzeTextLROResultsKind.CustomEntityRecognitionLROResults;
 
   /** List of results. */
-  @typeChangedFrom(Versions.v2023_11_15_preview, CustomEntitiesResult)
+  @typeChangedFrom(Versions.v2024_11_15_preview, CustomEntitiesResult)
   results: CustomEntitiesResultWithDocumentDetectedLanguage;
 }
 
@@ -119,7 +121,7 @@ model CustomSingleLabelClassificationLROResult extends AnalyzeTextLROResult {
 
   /** List of results. */
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
+    Versions.v2024_11_15_preview,
     CustomLabelClassificationResult
   )
   results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
@@ -133,13 +135,14 @@ model CustomMultiLabelClassificationLROResult extends AnalyzeTextLROResult {
 
   /** List of results. */
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
+    Versions.v2024_11_15_preview,
     CustomLabelClassificationResult
   )
   results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
 }
 
 /** Contains the analyze text dynamic classifications input. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
   /** Kind of the task. */
@@ -153,6 +156,7 @@ model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
 }
 
 /** Contains the Dynamic Classification document result. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model DynamicClassificationDocumentResult is DocumentResult {
   /** Array of classification results. */
@@ -160,6 +164,8 @@ model DynamicClassificationDocumentResult is DocumentResult {
 }
 
 /** This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully */
+@added(Versions.v2024_11_15_preview)
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 @discriminator("entityComponentKind")
 model EntityComponentInformation {
@@ -168,6 +174,8 @@ model EntityComponentInformation {
 }
 
 /** Kind of entity components supported. */
+@added(Versions.v2024_11_15_preview)
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 union entityComponentKind {
   string,
@@ -183,7 +191,7 @@ union entityComponentKind {
 }
 
 /** This object contains information of the prebuilt component of the detected entity. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model PrebuiltComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.PrebuiltComponent;
@@ -193,7 +201,7 @@ model PrebuiltComponent extends EntityComponentInformation {
 }
 
 /** This object contains information of the learned component of the detected entity. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model LearnedComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.LearnedComponent;
@@ -203,7 +211,7 @@ model LearnedComponent extends EntityComponentInformation {
 }
 
 /** This object contains information of the list component of the detected entity. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model ListComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.ListComponent;
@@ -213,6 +221,7 @@ model ListComponent extends EntityComponentInformation {
 }
 
 /** Supported parameters for a Dynamic Classification task. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
   /** Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document. */
@@ -223,6 +232,8 @@ model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
 }
 
 /** Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document. */
+@added(Versions.v2024_11_15_preview)
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 union ClassificationType {
   string,
@@ -235,6 +246,7 @@ union ClassificationType {
 }
 
 /** Contains the Dynamic Classification result. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model DynamicClassificationResult is PreBuiltResult {
   /** Response by document */
@@ -242,6 +254,7 @@ model DynamicClassificationResult is PreBuiltResult {
 }
 
 /** Result for Dynamic Classification task. */
+@removed(Versions.v2024_11_01)
 @added(Versions.v2023_11_15_preview)
 model DynamicClassificationTaskResult extends AnalyzeTextTaskResult {
   /** Kind of task result */
