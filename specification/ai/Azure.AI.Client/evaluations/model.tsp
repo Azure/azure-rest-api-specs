@@ -61,13 +61,58 @@ model Dataset extends InputData {
   id: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
+@doc("Abstract data class for input data configuration.")
+@discriminator("type")
+model Trigger {
+  @doc("Type of the data.")
+  type: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
+@doc("Abstract data class for input data configuration.")
+@discriminator("type")
+model RecurrenceTrigger extends Trigger {
+  @visibility("read")
+  type: "Recurrence";
+
+  @doc("The frequency to trigger schedule.")
+  frequency: Frequency;
+
+  @doc("Specifies schedule interval in conjunction with frequency")
+  interval: int32;
+
+  @doc("The recurrence schedule.")
+  schedule: RecurrenceSchedule;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
+@doc("Abstract data class for input data configuration.")
+@discriminator("type")
+model CronTrigger extends Trigger {
+  @visibility("read")
+  type: "Cron";
+
+  @doc("Cron expression for the trigger.")
+  expression: string;
+}
+
+@doc("Evaluation Definition"
+
 @doc("Evaluation Definition")
+@resource("evaluations")
 model Evaluation {
+  // NoteNote: Added @key, @visibility and moved @pattern, @maxLength here. Also removed optional flag `?`
+  @key("id")
+  @visibility("read")
   @doc("Identifier of the evaluation.")
-  id?: string;
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+  @maxLength(254)
+  id: string;
 
   @doc("Data for evaluation.")
-  data: InputData;
+  @visibility("read", "create")
+  data: InputData; //InputData;
 
   @doc("Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique.")
   displayName?: string;
@@ -77,7 +122,7 @@ model Evaluation {
 
   @doc("Metadata containing createdBy and modifiedBy information.")
   @visibility("read")
-  systemData?: SystemData;
+  systemData?: string; //SystemData;
 
   @doc("Status of the evaluation. It is set by service and is read-only.")
   @visibility("read")
@@ -87,23 +132,12 @@ model Evaluation {
   tags?: Record<string>;
 
   @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  @visibility("read", "create")
   properties?: Record<string>;
 
   @doc("Evaluators to be used for the evaluation.")
-  evaluators: Record<EvaluatorConfiguration>;
-}
-
-@doc("Paged evaluation items")
-@pagedResult
-model PagedEvaluation {
-  @doc("The list of Evaluations.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: Evaluation[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<Evaluation>;
+  @visibility("read", "create")
+  evaluators: Record<EvaluatorConfiguration>; // Record<EvaluatorConfiguration>;
 }
 
 @doc("Update Evaluation Request")
@@ -185,28 +219,49 @@ model SamplingStrategy {
 }
 
 @doc("Evaluation Schedule Definition")
+// NoteNote: I modeled ScheduledEvaluation as a type of Evaluation. But can also be modeled as a separate Schedule entity. We can discuss
+@resource("schedules")
 model EvaluationSchedule {
-  ...Evaluation;
+  @key("id")
+  @visibility("read")
+  @doc("Identifier of the evaluation.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+  @maxLength(254)
+  id: string;
 
-  @doc("Recurrence pattern for the evaluation.")
-  recurrence?: Recurrence;
+  @doc("Data for evaluation.")
+  @visibility("read", "create")
+  data: App; //InputData;
 
-  @doc("Cron expression for the evaluation.")
-  cronExpression?: string;
+  @doc("Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique.")
+  displayName?: string;
+
+  @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
+  description?: string;
+
+  @doc("Metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: string; //SystemData;
+
+  @doc("Status of the evaluation. It is set by service and is read-only.")
+  @visibility("read")
+  provisioningStatus?: string;
+
+  @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")
+  tags?: Record<string>;
+
+  @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  @visibility("read", "create")
+  properties?: Record<string>;
+
+  @doc("Evaluators to be used for the evaluation.")
+  @visibility("read", "create")
+  evaluators: Record<EvaluatorConfiguration>; // Record<EvaluatorConfiguration>;
+
+  @doc("Trigger for the evaluation.")
+  trigger: Trigger;
 
   @doc("Sampling strategy for the evaluation.")
-  samplingStrategy: SamplingStrategy;
+  samplingStrategy: string; //SamplingStrategy;
 }
 
-@doc("Paged evaluation schedule items")
-@pagedResult
-model PagedEvaluationSchedule {
-  @doc("The list of Evaluation Schedules.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: EvaluationSchedule[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<EvaluationSchedule>;
-}

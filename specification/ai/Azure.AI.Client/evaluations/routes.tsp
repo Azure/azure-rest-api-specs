@@ -13,131 +13,40 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Client.Evaluations;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Creates an evaluation.")
-@route("/evaluations/create")
-@post
-op create is Azure.Core.Foundations.Operation<
-  {
-    @doc("Properties of Evaluation.")
-    @body
-    evaluation: Evaluation;
-  },
-  ResourceCreatedResponse<Evaluation>
->;
+alias ServiceTraits = SupportsRepeatableRequests &
+  SupportsConditionalRequests &
+  SupportsClientRequestId;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("List evaluations")
-@route("/evaluations")
-@get
-op list is Azure.Core.Foundations.Operation<
-  {
-    ...StandardListQueryParameters;
-  },
-  PagedEvaluation
->;
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Update an evaluation.")
-@route("/evaluations/{id}")
-@patch
-op update is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the evaluation.")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-    @maxLength(254)
-    @path
-    id: string;
+interface Evaluations {
+  get is Operations.ResourceRead<Evaluation>;
 
-    @doc("Update evaluation request.")
-    @body
-    updateRequest: UpdateEvaluationRequest;
-  },
-  OkResponse<Evaluation>
->;
+  create is Operations.ResourceCreateWithServiceProvidedName<Evaluation>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Get an evaluation.")
-@route("/evaluations/{id}")
-@get
-op get is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the evaluation.")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-    @maxLength(254)
-    @path
-    id: string;
-  },
-  OkResponse<Evaluation>
->;
+  list is Operations.ResourceList<
+    Evaluation,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Creates an evaluation schedule.")
-@route("/evaluations/schedules/create")
-@post
-op createSchedule is Azure.Core.Foundations.Operation<
-  {
-    @doc("Properties of Evaluation Schedule.")
-    @body
-    body: EvaluationSchedule;
-  },
-  ResourceCreatedResponse<EvaluationSchedule>
->;
+  update is Operations.ResourceUpdate<Evaluation>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Get an evaluation schedule along with runs.")
-@route("/evaluations/schedules/{id}")
-@get
-op getSchedule is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the evaluation schedule.")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-    @maxLength(254)
-    @path
-    id: string;
-  },
-  EvaluationSchedule
->;
+  // NoteNote: You did not have a delete Evaluation. What's the cleanup story here
+  // delete is Operations.ResourceDelete<Evaluation>;
+}
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("List evaluation schedules")
-@route("/evaluations/schedules")
-@get
-op listSchedules is Azure.Core.Foundations.Operation<
-  {
-    ...StandardListQueryParameters;
-  },
-  PagedEvaluationSchedule
->;
+@route("evaluations")
+interface EvaluationSchedules {
+  create is Operations.ResourceCreateWithServiceProvidedName<
+    EvaluationSchedule
+  >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("List evaluations under a schedule")
-@route("/evaluations/schedules/{id}/runs")
-@get
-op listScheduleEvaluations is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the evaluation schedule.")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-    @maxLength(254)
-    @path
-    id: string;
+  list is Operations.ResourceList<
+    EvaluationSchedule,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 
-    ...StandardListQueryParameters;
-  },
-  PagedEvaluation
->;
+  delete is Operations.ResourceDelete<EvaluationSchedule>;
+}
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-@doc("Delete an evaluation schedule.")
-@route("/evaluations/schedules/{id}")
-@delete
-op deleteSchedule is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the evaluation schedule.")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-    @maxLength(254)
-    @path
-    id: string;
-  },
-  void
->;
+model EvaluationCollection is Page<Evaluation>;
