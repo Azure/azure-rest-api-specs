@@ -65,13 +65,12 @@ model Dataset extends InputData {
 @doc("Abstract data class for input data configuration.")
 @discriminator("type")
 model Trigger {
-  @doc("Type of the data.")
+  @doc("Type of the trigger.")
   type: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
-@doc("Abstract data class for input data configuration.")
-@discriminator("type")
+@doc("Recurrence Trigger Definition")
 model RecurrenceTrigger extends Trigger {
   @visibility("read")
   type: "Recurrence";
@@ -87,8 +86,7 @@ model RecurrenceTrigger extends Trigger {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
-@doc("Abstract data class for input data configuration.")
-@discriminator("type")
+@doc("Cron Trigger Definition")
 model CronTrigger extends Trigger {
   @visibility("read")
   type: "Cron";
@@ -97,12 +95,9 @@ model CronTrigger extends Trigger {
   expression: string;
 }
 
-@doc("Evaluation Definition"
-
 @doc("Evaluation Definition")
-@resource("evaluations")
+@resource("runs")
 model Evaluation {
-  // NoteNote: Added @key, @visibility and moved @pattern, @maxLength here. Also removed optional flag `?`
   @key("id")
   @visibility("read")
   @doc("Identifier of the evaluation.")
@@ -112,7 +107,7 @@ model Evaluation {
 
   @doc("Data for evaluation.")
   @visibility("read", "create")
-  data: InputData; //InputData;
+  data: InputData;
 
   @doc("Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique.")
   displayName?: string;
@@ -122,7 +117,7 @@ model Evaluation {
 
   @doc("Metadata containing createdBy and modifiedBy information.")
   @visibility("read")
-  systemData?: string; //SystemData;
+  systemData?: SystemData;
 
   @doc("Status of the evaluation. It is set by service and is read-only.")
   @visibility("read")
@@ -137,29 +132,8 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   @visibility("read", "create")
-  evaluators: Record<EvaluatorConfiguration>; // Record<EvaluatorConfiguration>;
+  evaluators: Record<EvaluatorConfiguration>;
 }
-
-@doc("Update Evaluation Request")
-model UpdateEvaluationRequest {
-  // Tags do we addition or overwrite?
-  @doc("Tags to be updated.")
-  tags: Record<string>;
-
-  @doc("Display Name")
-  displayName: string;
-
-  @doc("Description")
-  description: string;
-}
-
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
-  T;
-
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
-  T;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Need to add documentation"
 @doc("Frequency of the schedule - day, week, month, hour, minute")
@@ -231,7 +205,7 @@ model EvaluationSchedule {
 
   @doc("Data for evaluation.")
   @visibility("read", "create")
-  data: App; //InputData;
+  data: InputData;
 
   @doc("Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique.")
   displayName?: string;
@@ -241,7 +215,7 @@ model EvaluationSchedule {
 
   @doc("Metadata containing createdBy and modifiedBy information.")
   @visibility("read")
-  systemData?: string; //SystemData;
+  systemData?: SystemData;
 
   @doc("Status of the evaluation. It is set by service and is read-only.")
   @visibility("read")
@@ -256,12 +230,11 @@ model EvaluationSchedule {
 
   @doc("Evaluators to be used for the evaluation.")
   @visibility("read", "create")
-  evaluators: Record<EvaluatorConfiguration>; // Record<EvaluatorConfiguration>;
+  evaluators: Record<EvaluatorConfiguration>;
 
   @doc("Trigger for the evaluation.")
   trigger: Trigger;
 
   @doc("Sampling strategy for the evaluation.")
-  samplingStrategy: string; //SamplingStrategy;
+  samplingStrategy: SamplingStrategy;
 }
-

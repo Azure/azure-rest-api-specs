@@ -452,7 +452,7 @@
         }
       }
     },
-    "/evaluations": {
+    "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
         "description": "Resource list operation template.",
@@ -512,24 +512,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -546,38 +528,10 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
               "Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location of an instance of Evaluation"
-              },
-              "Repeatability-Result": {
-                "type": "string",
-                "description": "Indicates whether the repeatable request was accepted or rejected.",
-                "enum": [
-                  "accepted",
-                  "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -601,7 +555,7 @@
         }
       }
     },
-    "/evaluations/{id}": {
+    "/evaluations/runs/{id}": {
       "get": {
         "operationId": "Evaluations_Get",
         "description": "Resource read operation template.",
@@ -619,18 +573,6 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -641,10 +583,6 @@
               "$ref": "#/definitions/Evaluations.Evaluation"
             },
             "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -686,24 +624,6 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -723,34 +643,6 @@
               "$ref": "#/definitions/Evaluations.Evaluation"
             },
             "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Repeatability-Result": {
-                "type": "string",
-                "description": "Indicates whether the repeatable request was accepted or rejected.",
-                "enum": [
-                  "accepted",
-                  "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -824,31 +716,24 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "post": {
-        "operationId": "EvaluationSchedules_Create",
-        "description": "Resource create with service-provided name operation template.",
+      }
+    },
+    "/evaluations/schedules/{id}": {
+      "put": {
+        "operationId": "EvaluationSchedules_CreateOrReplace",
+        "description": "Create or replace operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -864,42 +749,25 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluations.EvaluationSchedule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Evaluations.EvaluationSchedule"
+            },
             "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of EvaluationSchedule"
-              },
-              "Repeatability-Result": {
-                "type": "string",
-                "description": "Indicates whether the repeatable request was accepted or rejected.",
-                "enum": [
-                  "accepted",
-                  "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -920,9 +788,7 @@
             }
           }
         }
-      }
-    },
-    "/evaluations/schedules/{id}": {
+      },
       "delete": {
         "operationId": "EvaluationSchedules_Delete",
         "description": "Resource delete operation template.",
@@ -940,24 +806,6 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -965,30 +813,6 @@
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
-              "Repeatability-Result": {
-                "type": "string",
-                "description": "Indicates whether the repeatable request was accepted or rejected.",
-                "enum": [
-                  "accepted",
-                  "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -8165,6 +7989,25 @@
       ],
       "x-ms-discriminator-value": "app_insights"
     },
+    "Evaluations.CronTrigger": {
+      "type": "object",
+      "description": "Cron Trigger Definition",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Cron expression for the trigger."
+        }
+      },
+      "required": [
+        "expression"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Evaluations.Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "Cron"
+    },
     "Evaluations.Dataset": {
       "type": "object",
       "description": "Dataset as source for evaluation.",
@@ -8213,7 +8056,7 @@
           "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
         },
         "systemData": {
-          "type": "string",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
@@ -8258,27 +8101,6 @@
         "evaluators"
       ]
     },
-    "Evaluations.EvaluationCollection": {
-      "type": "object",
-      "description": "Paged collection of Evaluation items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Evaluation items on this page",
-          "items": {
-            "$ref": "#/definitions/Evaluations.Evaluation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "Evaluations.EvaluationSchedule": {
       "type": "object",
       "description": "Evaluation Schedule Definition",
@@ -8307,11 +8129,11 @@
           "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
         },
         "systemData": {
-          "type": "string",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
-        "status": {
+        "provisioningStatus": {
           "type": "string",
           "description": "Status of the evaluation. It is set by service and is read-only.",
           "readOnly": true
@@ -8345,16 +8167,12 @@
             "create"
           ]
         },
-        "recurrence": {
-          "type": "string",
-          "description": "Recurrence pattern for the evaluation."
-        },
-        "cronExpression": {
-          "type": "string",
-          "description": "Cron expression for the evaluation."
+        "trigger": {
+          "$ref": "#/definitions/Evaluations.Trigger",
+          "description": "Trigger for the evaluation."
         },
         "samplingStrategy": {
-          "type": "string",
+          "$ref": "#/definitions/Evaluations.SamplingStrategy",
           "description": "Sampling strategy for the evaluation."
         }
       },
@@ -8362,6 +8180,7 @@
         "id",
         "data",
         "evaluators",
+        "trigger",
         "samplingStrategy"
       ]
     },
@@ -8529,6 +8348,36 @@
         "monthDays"
       ]
     },
+    "Evaluations.RecurrenceTrigger": {
+      "type": "object",
+      "description": "Recurrence Trigger Definition",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/Evaluations.Frequency",
+          "description": "The frequency to trigger schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies schedule interval in conjunction with frequency"
+        },
+        "schedule": {
+          "$ref": "#/definitions/Evaluations.RecurrenceSchedule",
+          "description": "The recurrence schedule."
+        }
+      },
+      "required": [
+        "frequency",
+        "interval",
+        "schedule"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Evaluations.Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "Recurrence"
+    },
     "Evaluations.SamplingStrategy": {
       "type": "object",
       "description": "SamplingStrategy Definition",
@@ -8543,30 +8392,18 @@
         "rate"
       ]
     },
-    "Evaluations.UpdateEvaluationRequest": {
+    "Evaluations.Trigger": {
       "type": "object",
-      "description": "Update Evaluation Request",
+      "description": "Abstract data class for input data configuration.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Tags to be updated.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "displayName": {
+        "type": {
           "type": "string",
-          "description": "Display Name"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description"
+          "description": "Type of the trigger."
         }
       },
+      "discriminator": "type",
       "required": [
-        "tags",
-        "displayName",
-        "description"
+        "type"
       ]
     },
     "Evaluations.WeekDays": {
@@ -8714,44 +8551,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "clientRequestId"
     },
-    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
-      "name": "If-Match",
-      "in": "header",
-      "description": "The request should only proceed if an entity matches this string.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifMatch"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
-      "name": "If-Modified-Since",
-      "in": "header",
-      "description": "The request should only proceed if the entity was modified after this time.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifModifiedSince"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
-      "name": "If-None-Match",
-      "in": "header",
-      "description": "The request should only proceed if no entity matches this string.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifNoneMatch"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
-      "name": "If-Unmodified-Since",
-      "in": "header",
-      "description": "The request should only proceed if the entity was not modified after this time.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifUnmodifiedSince"
-    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -8770,25 +8569,6 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
-      "name": "Repeatability-First-Sent",
-      "in": "header",
-      "description": "Specifies the date and time at which the request was first created.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "repeatabilityFirstSent"
-    },
-    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
-      "name": "Repeatability-Request-ID",
-      "in": "header",
-      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "repeatabilityRequestId"
     },
     "Azure.Core.SkipQueryParameter": {
       "name": "skip",

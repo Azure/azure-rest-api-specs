@@ -13,15 +13,17 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Client.Evaluations;
 
-alias ServiceTraits = SupportsRepeatableRequests &
-  SupportsConditionalRequests &
-  SupportsClientRequestId;
+alias ServiceTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests; // NoRetryRequests supresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
+@route("evaluations")
 interface Evaluations {
   get is Operations.ResourceRead<Evaluation>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
   create is Operations.ResourceCreateWithServiceProvidedName<Evaluation>;
 
   list is Operations.ResourceList<
@@ -30,16 +32,12 @@ interface Evaluations {
   >;
 
   update is Operations.ResourceUpdate<Evaluation>;
-
-  // NoteNote: You did not have a delete Evaluation. What's the cleanup story here
-  // delete is Operations.ResourceDelete<Evaluation>;
 }
 
 @route("evaluations")
 interface EvaluationSchedules {
-  create is Operations.ResourceCreateWithServiceProvidedName<
-    EvaluationSchedule
-  >;
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  createOrReplace is Operations.ResourceCreateOrReplace<EvaluationSchedule>;
 
   list is Operations.ResourceList<
     EvaluationSchedule,
@@ -49,4 +47,4 @@ interface EvaluationSchedules {
   delete is Operations.ResourceDelete<EvaluationSchedule>;
 }
 
-model EvaluationCollection is Page<Evaluation>;
+// model EvaluationCollection is Page<Evaluation>;
