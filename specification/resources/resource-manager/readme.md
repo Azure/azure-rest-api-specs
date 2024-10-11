@@ -1570,6 +1570,9 @@ directive:
   - suppress: GetCollectionResponseSchema
     from: dataBoundaries.json
     reason: "Do not have any list calls."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: policyAssignments.json
+    reason: "Policy assignments are not tracked."
 ```
 
 ---
