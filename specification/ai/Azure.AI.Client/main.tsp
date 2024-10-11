@@ -39,7 +39,7 @@ namespace Azure.AI {
   title: "Azure AI",
 })
 @server(
-  "{endpoint}/{subscriptionId}/{resourceGroupName}/{workspaceName}",  // This URL is a placeholder only. It is not used by emitted SDKs. SDKs have custom code to contruct conneciton URLs for different operations.
+  "{endpoint}/{subscriptionId}/{resourceGroupName}/{projectName}",  // This URL is a placeholder only. It is not used by emitted SDKs. SDKs have custom code to contruct conneciton URLs for different operations.
   "Azure AI",
   {
     @doc("The Azure AI Studio project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.")
@@ -51,8 +51,8 @@ namespace Azure.AI {
     @doc("The name of the Azure Resource Group.")
     resourceGroupName: string,
 
-    @doc("The name of the Azure AI Studio hub.")
-    workspaceName: string,
+    @doc("The Azure AI Studio project name.")
+    projectName: string,
   }
 )
 @versioned(Versions)
