@@ -20,13 +20,6 @@ using TypeSpec.Versioning;
   title: "SearchClient",
 })
 @versioned(Versions)
-@server(
-  "{endpoint}",
-  "Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.",
-  {
-    endpoint: string,
-  }
-)
 namespace SearchClient;
 
 /**

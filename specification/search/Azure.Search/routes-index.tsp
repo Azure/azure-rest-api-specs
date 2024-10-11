@@ -53,6 +53,7 @@ interface DocumentsOperations {
        * expression contains a field name, optionally followed by a comma-separated list
        * of name:value pairs.
        */
+      #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing"
       @query({
         name: "facet",
         format: "multi",
@@ -126,6 +127,7 @@ interface DocumentsOperations {
        * scoring profile defines a function with a parameter called 'mylocation' the
        * parameter string would be "mylocation--122.2,44.8" (without the quotes).
        */
+      #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing"
       @query({
         name: "scoringParameter",
         format: "multi",

@@ -379,6 +379,7 @@ model SearchDocumentsResult {
  * field value falling within a particular range or having a particular value or
  * interval.
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model FacetResult {
   ...Record<unknown>;
 
@@ -395,6 +396,7 @@ model FacetResult {
  * documents that matched the query. Answers are extracted from the top search
  * results. Answer candidates are scored and the top answers are selected.
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model QueryAnswerResult {
   ...Record<unknown>;
 
@@ -626,6 +628,7 @@ model SearchRequest {
 /**
  * The query parameters for vector and hybrid search queries.
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
 model VectorQuery {
   /**
@@ -669,6 +672,7 @@ model VectorQuery {
 /**
  * Contains a document found by a search query, plus associated metadata.
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model SearchResult {
   ...Record<unknown>;
 
@@ -713,6 +717,7 @@ model SearchResult {
  * the search query. They are often used as document summary. Captions are only
  * returned for queries of type `semantic`.
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model QueryCaptionResult {
   ...Record<unknown>;
 
@@ -755,6 +760,7 @@ model SuggestDocumentsResult {
  * A result containing a document found by a suggestion query, plus associated
  * metadata.
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model SuggestResult {
   ...Record<unknown>;
 
@@ -864,6 +870,7 @@ model IndexBatch {
 /**
  * Represents an index action that operates on a document.
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model IndexAction {
   ...Record<unknown>;
 
