@@ -104,7 +104,7 @@ These settings apply only when `--tag=package-2024-09-15` is specified on the co
 
 ```yaml $(tag) == 'package-2024-09-15'
 input-file:
-  - preview/2024-09-15/communicationservicescallautomation.json
+  - stable/2024-09-15/communicationservicescallautomation.json
 title:
   Azure Communication Services
 suppressions:
