@@ -412,6 +412,6 @@ suppressions:
     reason: Previously approved and released, would require potentially breaking changes
   - code: GetCollectionResponseSchema
     from: HybridCompute.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions"].get
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions"]
     reason: False positive
 ```
