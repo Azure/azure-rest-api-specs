@@ -13,12 +13,12 @@ interface DocumentsOperations {
   /**
    * Queries the number of documents in the index.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/$count")
   @get
   count is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
-
+      ...indexNamePath;
       ...clientRequestIdHeader;
     },
     void
@@ -27,11 +27,12 @@ interface DocumentsOperations {
   /**
    * Searches for documents in the index.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs")
   @get
   searchGet is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
+      ...indexNamePath;
 
       /**
        * A full-text search query expression; Use "*" or omit this parameter to match
@@ -271,14 +272,13 @@ interface DocumentsOperations {
   /**
    * Searches for documents in the index.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.search")
   @post
   searchPost is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
-
+      ...indexNamePath;
       ...clientRequestIdHeader;
-
       /**
        * The definition of the Search request.
        */
@@ -291,12 +291,12 @@ interface DocumentsOperations {
   /**
    * Retrieves a document from the index.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs('{key}')")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
-
+      ...indexNamePath;
       /**
        * The key of the document to retrieve.
        */
@@ -312,7 +312,6 @@ interface DocumentsOperations {
         format: "csv",
       })
       selectedFields?: string[];
-
       ...clientRequestIdHeader;
     },
     void
@@ -321,12 +320,12 @@ interface DocumentsOperations {
   /**
    * Suggests documents in the index that match the given partial query text.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.suggest")
   @get
   suggestGet is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
-
+      ...indexNamePath;
       /**
        * The search text to use to suggest documents. Must be at least 1 character, and
        * no more than 100 characters.
@@ -421,7 +420,6 @@ interface DocumentsOperations {
        */
       @query("$top")
       $top?: int32;
-
       ...clientRequestIdHeader;
     },
     SuggestDocumentsResult
@@ -430,14 +428,13 @@ interface DocumentsOperations {
   /**
    * Suggests documents in the index that match the given partial query text.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.suggest")
   @post
   suggestPost is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
-
+      ...indexNamePath;
       ...clientRequestIdHeader;
-
       /**
        * The Suggest request.
        */
@@ -450,14 +447,13 @@ interface DocumentsOperations {
   /**
    * Sends a batch of document write actions to the index.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.index")
   @post
   index is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
-
+      ...indexNamePath;
       ...clientRequestIdHeader;
-
       /**
        * The batch of index actions.
        */
@@ -471,14 +467,13 @@ interface DocumentsOperations {
    * Autocompletes incomplete query terms based on input text and matching terms in
    * the index.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.autocomplete")
   @get
   autocompleteGet is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
-
+      ...indexNamePath;
       ...clientRequestIdHeader;
-
       /**
        * The incomplete term which should be auto-completed.
        */
@@ -564,14 +559,13 @@ interface DocumentsOperations {
    * Autocompletes incomplete query terms based on input text and matching terms in
    * the index.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.autocomplete")
   @post
   autocompletePost is Azure.Core.Foundations.Operation<
     {
-      ...indexNameParameter;
-
+      ...indexNamePath;
       ...clientRequestIdHeader;
-
       /**
        * The definition of the Autocomplete request.
        */

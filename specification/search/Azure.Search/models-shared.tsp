@@ -30,16 +30,44 @@ alias preferHeader = {
   prefer: "return=representation";
 };
 
-alias indexNameParameter = {
+alias selectQuery = {
+  @doc("""
+       Selects which top-level properties to retrieve.
+       Specified as a comma-separated list of JSON property names,
+       or '*' for all properties. The default is all properties.
+       """)  
+  @query("$select")
+  $select?: string;
+};
+
+alias indexNamePath = {
   @doc("The name of the index.")
   @path
   indexName: string;
 };
 
-alias indexerNameParameter = {
+alias indexerNamePath = {
   @doc("The name of the indexer.")
   @path
   indexerName: string;
+};
+
+alias dataSourceNamePath = {
+  @doc("The name of the datasource.")
+  @path
+  dataSourceName: string;
+};
+
+alias skillsetNamePath = {
+  @doc("The name of the skillset.")
+  @path
+  skillsetName: string;
+};
+
+alias synonymMapNamePath = {
+  @doc("The name of the synonym map.")
+  @path
+  synonymMapName: string;
 };
 
 /**
