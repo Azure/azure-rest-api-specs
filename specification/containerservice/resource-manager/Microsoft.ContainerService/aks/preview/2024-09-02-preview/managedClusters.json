@@ -7656,6 +7656,28 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of processes per pod."
+        },
+        "seccompDefault": {
+          "type": "string",
+          "description": "Specifies the default seccomp profile applied to all workloads. If not specified, 'Unconfined' will be used by default.",
+          "enum": [
+            "Unconfined",
+            "RuntimeDefault"
+          ],
+          "x-ms-enum": {
+            "name": "SeccompDefault",
+            "modelAsString": true,
+            "values": [
+              {
+                "description": "No seccomp profile is applied, allowing all system calls.",
+                "value": "Unconfined"
+              },
+              {
+                "description": "Container runtime's default seccomp profile is applied, which restricts certain system calls for enhanced security.",
+                "value": "RuntimeDefault"
+              }
+            ]
+          }
         }
       }
     },
