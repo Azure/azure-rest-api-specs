@@ -437,6 +437,25 @@
         }
       }
     },
+    "DeviceKind": {
+      "type": "string",
+      "description": "Edge device kind.",
+      "enum": [
+        "HCI"
+      ],
+      "default": "HCI",
+      "x-ms-enum": {
+        "name": "DeviceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
+          }
+        ]
+      }
+    },
     "DeviceState": {
       "type": "string",
       "description": "The edge device state.",
@@ -502,7 +521,7 @@
       "description": "Edge device resource.",
       "properties": {
         "kind": {
-          "$ref": "./hciCommon.json#/definitions/EdgeDeviceKind",
+          "$ref": "#/definitions/DeviceKind",
           "description": "Device kind to support polymorphic resource.",
           "x-ms-mutability": [
             "create",
