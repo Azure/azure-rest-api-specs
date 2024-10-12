@@ -18,6 +18,11 @@ op StorageOperation<
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = StorageError
 >(
+  /** Content-Type header */
+  #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
+  @header("Content-Type")
+  contentType: "application/xml",
+
   ...TParams,
 
   /** Specifies the version of the operation to use for this request. */
@@ -26,6 +31,11 @@ op StorageOperation<
 
   ...ClientRequestIdHeader,
 ): (TResponse & {
+  /** Content-Type header */
+  #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
+  @header("Content-Type")
+  contentType: "application/xml";
+
   /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
   @header("x-ms-version")
   version: string;
