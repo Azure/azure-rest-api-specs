@@ -386,43 +386,6 @@
       },
       "readOnly": true
     },
-    "EceActionStatus": {
-      "type": "object",
-      "description": "Validation / deployment status details for Job.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Job status.",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of steps of Edge device job.",
-          "items": {
-            "$ref": "#/definitions/Step"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "EdgeDevice": {
-      "type": "object",
-      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "EdgeDeviceJob": {
       "type": "object",
       "description": "EdgeDevice Jobs resource",
@@ -697,7 +660,7 @@
           "description": "Remote support type."
         },
         "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
+          "$ref": "#/definitions/RemoteSupportJobReportedProperties",
           "description": "log collection job reported properties.",
           "readOnly": true
         }
@@ -725,12 +688,12 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/EceActionStatus",
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
           "description": "Validation status of job.",
           "readOnly": true
         },
         "deploymentStatus": {
-          "$ref": "#/definitions/EceActionStatus",
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
           "description": "Deployment status of job.",
           "readOnly": true
         }
@@ -832,12 +795,12 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/EceActionStatus",
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
           "description": "Validation status of job.",
           "readOnly": true
         },
         "deploymentStatus": {
-          "$ref": "#/definitions/EceActionStatus",
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
           "description": "Deployment status of job.",
           "readOnly": true
         },
@@ -1037,7 +1000,7 @@
           "description": "Remote support type."
         },
         "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
+          "$ref": "#/definitions/RemoteSupportJobReportedProperties",
           "description": "log collection job reported properties.",
           "readOnly": true
         }
@@ -1048,7 +1011,7 @@
         "type"
       ]
     },
-    "RemoteSupportNodeSettings": {
+    "RemoteSupportJobNodeSettings": {
       "type": "object",
       "description": "Represents the settings of a remote support node.",
       "properties": {
@@ -1081,7 +1044,7 @@
         }
       }
     },
-    "RemoteSupportReportedProperties": {
+    "RemoteSupportJobReportedProperties": {
       "type": "object",
       "description": "Represents the reported properties of a remote support job.",
       "properties": {
@@ -1092,17 +1055,17 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/EceActionStatus",
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
           "description": "Validation status of job.",
           "readOnly": true
         },
         "deploymentStatus": {
-          "$ref": "#/definitions/EceActionStatus",
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
           "description": "Deployment status of job.",
           "readOnly": true
         },
         "nodeSettings": {
-          "$ref": "#/definitions/RemoteSupportNodeSettings",
+          "$ref": "#/definitions/RemoteSupportJobNodeSettings",
           "description": "Optional settings for configuring the node for remote support.",
           "readOnly": true
         },
@@ -1174,61 +1137,6 @@
             "description": "Revokes previously granted remote support access for the edge device."
           }
         ]
-      }
-    },
-    "Step": {
-      "type": "object",
-      "description": "Step details during job execution.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of step.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of step.",
-          "readOnly": true
-        },
-        "fullStepIndex": {
-          "type": "string",
-          "description": "FullStepIndex of step.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "description": "Start time in utc of step.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "description": "End time in utc of step.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of nested steps during job execution..",
-          "items": {
-            "$ref": "#/definitions/Step"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "exception": {
-          "type": "array",
-          "description": "List of exceptions in job execution.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
       }
     }
   },
