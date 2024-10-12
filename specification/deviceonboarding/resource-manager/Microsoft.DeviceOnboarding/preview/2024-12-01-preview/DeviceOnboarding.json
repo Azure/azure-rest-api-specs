@@ -45,16 +45,16 @@
       "name": "OnboardingServices"
     },
     {
-      "name": "DiscoveryServices"
-    },
-    {
-      "name": "OwnershipVoucherPublicKeys"
-    },
-    {
       "name": "Policies"
     },
     {
       "name": "DeviceStates"
+    },
+    {
+      "name": "DiscoveryServices"
+    },
+    {
+      "name": "OwnershipVoucherPublicKeys"
     }
   ],
   "paths": {
@@ -87,13 +87,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DeviceStates_ListByParent_MaximumSet_Gen": {
+          "DeviceStates_ListByParent": {
             "$ref": "./examples/DeviceStates_ListByParent_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -127,7 +127,7 @@
           }
         },
         "x-ms-examples": {
-          "DeviceStates_Get_MaximumSet_Gen": {
+          "DeviceStates_Get": {
             "$ref": "./examples/DeviceStates_Get_MaximumSet_Gen.json"
           }
         }
@@ -176,7 +176,7 @@
           }
         },
         "x-ms-examples": {
-          "DeviceStates_CreateOrUpdate_MaximumSet_Gen": {
+          "DeviceStates_CreateOrUpdate": {
             "$ref": "./examples/DeviceStates_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
@@ -219,7 +219,7 @@
           }
         },
         "x-ms-examples": {
-          "DeviceStates_Update_MaximumSet_Gen": {
+          "DeviceStates_Update": {
             "$ref": "./examples/DeviceStates_Update_MaximumSet_Gen.json"
           }
         }
@@ -253,11 +253,8 @@
           }
         },
         "x-ms-examples": {
-          "DeviceStates_Delete_MaximumSet_Gen": {
+          "DeviceStates_Delete": {
             "$ref": "./examples/DeviceStates_Delete_MaximumSet_Gen.json"
-          },
-          "DeviceStates_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/DeviceStates_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -308,18 +305,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DeviceStates_ReadyToOnboard_MaximumSet_Gen": {
+          "DeviceStates_ReadyToOnboard": {
             "$ref": "./examples/DeviceStates_ReadyToOnboard_MaximumSet_Gen.json"
           },
           "DeviceStates_ReadyToOnboard_MinimumSet_Gen": {
             "$ref": "./examples/DeviceStates_ReadyToOnboard_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.DeviceOnboarding/operations": {
@@ -348,16 +345,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -390,13 +384,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DiscoveryServices_ListBySubscription_MaximumSet_Gen": {
+          "DiscoveryServices_ListBySubscription": {
             "$ref": "./examples/DiscoveryServices_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -429,13 +423,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "OnboardingServices_ListBySubscription_MaximumSet_Gen": {
+          "OnboardingServices_ListBySubscription": {
             "$ref": "./examples/OnboardingServices_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -471,13 +465,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DiscoveryServices_ListByResourceGroup_MaximumSet_Gen": {
+          "DiscoveryServices_ListByResourceGroup": {
             "$ref": "./examples/DiscoveryServices_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -523,7 +517,7 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryServices_Get_MaximumSet_Gen": {
+          "DiscoveryServices_Get": {
             "$ref": "./examples/DiscoveryServices_Get_MaximumSet_Gen.json"
           }
         }
@@ -594,15 +588,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DiscoveryServices_CreateOrUpdate": {
+            "$ref": "./examples/DiscoveryServices_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DiscoveryServices_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryServices_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "DiscoveryServices_Update",
@@ -667,15 +661,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DiscoveryServices_Update": {
+            "$ref": "./examples/DiscoveryServices_Update_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DiscoveryServices_Update_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryServices_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DiscoveryServices_Delete",
@@ -728,21 +722,18 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DiscoveryServices_Delete": {
+            "$ref": "./examples/DiscoveryServices_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DiscoveryServices_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryServices_Delete_MaximumSet_Gen.json"
-          },
-          "DiscoveryServices_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryServices_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/discoveryServices/{discoveryServiceName}/OwnershipVoucherPublicKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/discoveryServices/{discoveryServiceName}/ownershipVoucherPublicKeys": {
       "get": {
         "operationId": "OwnershipVoucherPublicKeys_ListByParent",
         "tags": [
@@ -783,17 +774,17 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "OwnershipVoucherPublicKeys_ListByParent_MaximumSet_Gen": {
+          "OwnershipVoucherPublicKeys_ListByParent": {
             "$ref": "./examples/OwnershipVoucherPublicKeys_ListByParent_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/discoveryServices/{discoveryServiceName}/OwnershipVoucherPublicKeys/{OwnershipVoucherPublicKeyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/discoveryServices/{discoveryServiceName}/ownershipVoucherPublicKeys/{ownershipVoucherPublicKeyName}": {
       "get": {
         "operationId": "OwnershipVoucherPublicKeys_Get",
         "tags": [
@@ -820,13 +811,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
           },
           {
-            "name": "OwnershipVoucherPublicKeyName",
+            "name": "ownershipVoucherPublicKeyName",
             "in": "path",
             "description": "The name of the ownership voucher public key resource.",
             "required": true,
             "type": "string",
             "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -844,7 +835,7 @@
           }
         },
         "x-ms-examples": {
-          "OwnershipVoucherPublicKeys_Get_MaximumSet_Gen": {
+          "OwnershipVoucherPublicKeys_Get": {
             "$ref": "./examples/OwnershipVoucherPublicKeys_Get_MaximumSet_Gen.json"
           }
         }
@@ -875,13 +866,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
           },
           {
-            "name": "OwnershipVoucherPublicKeyName",
+            "name": "ownershipVoucherPublicKeyName",
             "in": "path",
             "description": "The name of the ownership voucher public key resource.",
             "required": true,
             "type": "string",
             "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
           },
           {
             "name": "resource",
@@ -924,15 +915,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OwnershipVoucherPublicKeys_CreateOrUpdate": {
+            "$ref": "./examples/OwnershipVoucherPublicKeys_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "OwnershipVoucherPublicKeys_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/OwnershipVoucherPublicKeys_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "OwnershipVoucherPublicKeys_Update",
@@ -960,13 +951,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
           },
           {
-            "name": "OwnershipVoucherPublicKeyName",
+            "name": "ownershipVoucherPublicKeyName",
             "in": "path",
             "description": "The name of the ownership voucher public key resource.",
             "required": true,
             "type": "string",
             "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
           },
           {
             "name": "properties",
@@ -1006,15 +997,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OwnershipVoucherPublicKeys_Update": {
+            "$ref": "./examples/OwnershipVoucherPublicKeys_Update_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "OwnershipVoucherPublicKeys_Update_MaximumSet_Gen": {
-            "$ref": "./examples/OwnershipVoucherPublicKeys_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "OwnershipVoucherPublicKeys_Delete",
@@ -1042,13 +1033,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
           },
           {
-            "name": "OwnershipVoucherPublicKeyName",
+            "name": "ownershipVoucherPublicKeyName",
             "in": "path",
             "description": "The name of the ownership voucher public key resource.",
             "required": true,
             "type": "string",
             "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -1076,18 +1067,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OwnershipVoucherPublicKeys_Delete": {
+            "$ref": "./examples/OwnershipVoucherPublicKeys_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "OwnershipVoucherPublicKeys_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/OwnershipVoucherPublicKeys_Delete_MaximumSet_Gen.json"
-          },
-          "OwnershipVoucherPublicKeys_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/OwnershipVoucherPublicKeys_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices": {
@@ -1122,13 +1110,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "OnboardingServices_ListByResourceGroup_MaximumSet_Gen": {
+          "OnboardingServices_ListByResourceGroup": {
             "$ref": "./examples/OnboardingServices_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1174,7 +1162,7 @@
           }
         },
         "x-ms-examples": {
-          "OnboardingServices_Get_MaximumSet_Gen": {
+          "OnboardingServices_Get": {
             "$ref": "./examples/OnboardingServices_Get_MaximumSet_Gen.json"
           }
         }
@@ -1245,15 +1233,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OnboardingServices_CreateOrUpdate": {
+            "$ref": "./examples/OnboardingServices_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "OnboardingServices_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/OnboardingServices_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "OnboardingServices_Update",
@@ -1318,15 +1306,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OnboardingServices_Update": {
+            "$ref": "./examples/OnboardingServices_Update_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "OnboardingServices_Update_MaximumSet_Gen": {
-            "$ref": "./examples/OnboardingServices_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "OnboardingServices_Delete",
@@ -1379,18 +1367,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OnboardingServices_Delete": {
+            "$ref": "./examples/OnboardingServices_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "OnboardingServices_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/OnboardingServices_Delete_MaximumSet_Gen.json"
-          },
-          "OnboardingServices_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/OnboardingServices_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices/{onboardingServiceName}/policies": {
@@ -1434,13 +1419,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Policies_ListByParent_MaximumSet_Gen": {
+          "Policies_ListByParent": {
             "$ref": "./examples/Policies_ListByParent_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1495,7 +1480,7 @@
           }
         },
         "x-ms-examples": {
-          "Policies_Get_MaximumSet_Gen": {
+          "Policies_Get": {
             "$ref": "./examples/Policies_Get_MaximumSet_Gen.json"
           }
         }
@@ -1575,15 +1560,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Policies_CreateOrUpdate": {
+            "$ref": "./examples/Policies_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Policies_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Policies_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Policies_Update",
@@ -1657,15 +1642,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Policies_Update": {
+            "$ref": "./examples/Policies_Update_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Policies_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Policies_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Policies_Delete",
@@ -1727,18 +1712,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Policies_Delete": {
+            "$ref": "./examples/Policies_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Policies_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Policies_Delete_MaximumSet_Gen.json"
-          },
-          "Policies_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Policies_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1907,7 +1889,8 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "BootstrapAuthenticationRule": {
       "type": "object",
@@ -2259,16 +2242,6 @@
         ]
       }
     },
-    "DiscoveryPolicyResourceDetails": {
-      "type": "object",
-      "description": "Details of the OnboardingService Discovery Policy.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PolicyResourceDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
-    },
     "DiscoveryService": {
       "type": "object",
       "description": "A discovery resource.",
@@ -2385,10 +2358,9 @@
       "type": "object",
       "description": "The Fdo101-based authentication rule for bootstrapping.",
       "properties": {
-        "publicKey": {
-          "type": "string",
-          "format": "byte",
-          "description": "Per policy public key to represent this policy",
+        "publicKeys": {
+          "$ref": "#/definitions/PublicKeys",
+          "description": "Per policy public key(s) to extend ownership voucher to the customer.",
           "readOnly": true
         },
         "ownershipVoucherStorage": {
@@ -2401,6 +2373,7 @@
         }
       },
       "required": [
+        "publicKeys",
         "rendezvousEndpoint"
       ],
       "allOf": [
@@ -2846,6 +2819,46 @@
       ],
       "x-ms-discriminator-value": "EvenlyDistributed"
     },
+    "PatchFdo101BootstrapAuthenticationRule": {
+      "type": "object",
+      "description": "The Fdo101-based authentication rule for bootstrapping.",
+      "properties": {
+        "publicKey": {
+          "type": "string",
+          "format": "byte",
+          "description": "Per policy public key to represent this policy",
+          "readOnly": true
+        },
+        "ownershipVoucherStorage": {
+          "$ref": "#/definitions/OwnershipVoucherStorage",
+          "description": "Ownership Voucher storage link"
+        },
+        "rendezvousEndpoint": {
+          "type": "string",
+          "description": "Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchBootstrapAuthenticationRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Fdo101"
+    },
+    "PatchOwnershipVoucherStorage": {
+      "type": "object",
+      "description": "Generic Ownership Voucher Storage type.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OwnershipVoucherStorageType",
+          "description": "The Ownership Voucher Storage type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "PatchSelectedIdentity": {
       "type": "object",
       "description": "Information on the selected identity. Can be SystemAssigned or UserAssigned.",
@@ -2859,6 +2872,26 @@
           "description": "Resource id of the UserAssigned identity."
         }
       }
+    },
+    "PatchStorageAccountOwnershipVoucherStorage": {
+      "type": "object",
+      "description": "Storage Account Ownership Voucher Storage. Policy MI is used to access this storage",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "The storage resource id"
+        },
+        "containerUri": {
+          "type": "string",
+          "description": "Endpoint for the storage account"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchOwnershipVoucherStorage"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.Storage/storageAccounts"
     },
     "PatchX509BootstrapAuthenticationRule": {
       "type": "object",
@@ -3168,6 +3201,20 @@
           }
         ]
       }
+    },
+    "PublicKeys": {
+      "type": "object",
+      "description": "Owner public keys to extend ownership voucher to the customer.",
+      "properties": {
+        "secp256R1": {
+          "type": "string",
+          "format": "byte",
+          "description": "Public key as x5C with encryption type SECP256R1."
+        }
+      },
+      "required": [
+        "secp256R1"
+      ]
     },
     "PublicNetworkAccessOptions": {
       "type": "string",

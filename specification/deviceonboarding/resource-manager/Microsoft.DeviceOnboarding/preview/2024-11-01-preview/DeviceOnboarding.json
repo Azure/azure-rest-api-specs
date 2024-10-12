@@ -1397,6 +1397,10 @@
             "create"
           ]
         },
+        "discoveryEnabled": {
+          "$ref": "#/definitions/DiscoveryOptions",
+          "description": "Indicates if the device is enabled for discovery"
+        },
         "onboardingStatus": {
           "$ref": "#/definitions/OnboardingStatus",
           "description": "Onboarding status of the resource this DeviceState extends",
@@ -1405,10 +1409,6 @@
             "update",
             "create"
           ]
-        },
-        "discoveryEnabled": {
-          "$ref": "#/definitions/DiscoveryOptions",
-          "description": "Indicates if the device is enabled for discovery"
         },
         "policyResourceId": {
           "$ref": "#/definitions/PolicyResourceId",
@@ -1441,6 +1441,10 @@
       "type": "object",
       "description": "Details of the DeviceState",
       "properties": {
+        "discoveryEnabled": {
+          "$ref": "#/definitions/DiscoveryOptions",
+          "description": "Indicates if the device is enabled for discovery"
+        },
         "onboardingStatus": {
           "$ref": "#/definitions/OnboardingStatus",
           "description": "Onboarding status of the resource this DeviceState extends",
@@ -1449,10 +1453,6 @@
             "update",
             "create"
           ]
-        },
-        "discoveryEnabled": {
-          "$ref": "#/definitions/DiscoveryOptions",
-          "description": "Indicates if the device is enabled for discovery"
         },
         "policyResourceId": {
           "$ref": "#/definitions/PolicyResourceId",
@@ -1968,7 +1968,7 @@
     },
     "Policy": {
       "type": "object",
-      "description": "A provisioning policy resource.",
+      "description": "A onboarding policy resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PolicyProperties",
