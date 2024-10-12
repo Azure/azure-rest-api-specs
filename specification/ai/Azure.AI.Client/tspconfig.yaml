@@ -18,10 +18,13 @@ options:
     generate-sample: false
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    clear-output-folder: true
+    package-mode: "dataplane"
+    package-dir: "azure-ai-client"
+    package-name: "{package-dir}"
+    flavor: azure
     generate-test: false
     generate-sample: false
-    flavor: azure
+    examples-dir: "{project-root}/examples"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
