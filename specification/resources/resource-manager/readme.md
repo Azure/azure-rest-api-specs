@@ -26,73 +26,86 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-12
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-privatelinks)
-tag: package-privatelinks-2020-05
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-features)
-tag: package-features-2021-07
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-locks)
-tag: package-locks-2020-05
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2024-05-stable
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-databoundaries)
-tag: package-databoundaries-2024-08
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2024-03
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2024-07
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2022-12
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-links)
-tag: package-links-2016-09
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-managedapplications-2018-06
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2023-08
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2022-02
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-deploymentstacks)
-tag: package-deploymentstacks-2024-03
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-changes)
-tag: package-changes-2022-05
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-snapshots-2022-11
+tag: package-2025-01-01
 ```
 
 ``` yaml $(package-bicep)
-tag: package-bicep-2023-11
+tag: package-2025-01-01
 ```
 
+
+### Tag: package-2025-01-01
+
+These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - Microsoft.Authorization/stable/2025-01-01/policyAssignments.json
+  - Microsoft.Authorization/stable/2025-01-01/policyDefinitions.json
+  - Microsoft.Authorization/stable/2025-01-01/policyDefinitionVersions.json
+  - Microsoft.Authorization/stable/2025-01-01/policySetDefinitions.json
+  - Microsoft.Authorization/stable/2025-01-01/policySetDefinitionVersions.json
+```
 
 ### Tag: package-policy-2024-05-stable
 
