@@ -21,7 +21,8 @@ namespace Microsoft.DeviceOnboarding;
 @doc("Ownership voucher public key resource.")
 @added(Versions.v2024_12_01_preview)
 @parentResource(DiscoveryService)
-model OwnershipVoucherPublicKey is Azure.ResourceManager.TrackedResource<OwnershipVoucherPublicKeyProperties> {
+model OwnershipVoucherPublicKey
+  is Azure.ResourceManager.TrackedResource<OwnershipVoucherPublicKeyProperties> {
   @doc("The name of the ownership voucher public key resource.")
   @maxLength(128)
   @pattern("^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$")
@@ -30,44 +31,44 @@ model OwnershipVoucherPublicKey is Azure.ResourceManager.TrackedResource<Ownersh
   @path
   name: string;
 }
- 
+
 @doc("Details of the Allowed Ownership Voucher Public Key resource")
 @added(Versions.v2024_12_01_preview)
 model OwnershipVoucherPublicKeyProperties {
   @doc("Public key.")
   publicKeyDetails: PublicKeyDetails;
- 
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
 }
- 
+
 @doc("Details of public key type")
 @added(Versions.v2024_12_01_preview)
 @discriminator("type")
 model PublicKeyDetails {
-  type: PublicKeyType
+  type: PublicKeyType;
 }
- 
+
 @doc("Options of public key types to validate ownership vouchers.")
 @added(Versions.v2024_12_01_preview)
 union PublicKeyType {
   string,
- 
+
   @doc("Public key type represented by a X5Chain.")
   X5Chain: "X5Chain",
 }
- 
+
 @doc("X5Chain Public Key Details.")
 @added(Versions.v2024_12_01_preview)
 model X5ChainPublicKeyDetails extends PublicKeyDetails {
-  @doc("X5Chain type public key details")  
+  @doc("X5Chain type public key details")
   type: PublicKeyType.X5Chain;
- 
+
   @doc("X509CertificateChain used as a public key to validate Ownership Voucher.")
-  x5Chain: bytes
+  x5Chain: bytes;
 }
- 
+
 @armResourceOperations
 @added(Versions.v2024_12_01_preview)
 interface OwnershipVoucherPublicKeys {

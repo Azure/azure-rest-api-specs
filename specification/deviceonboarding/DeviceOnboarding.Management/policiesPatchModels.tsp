@@ -104,7 +104,8 @@ model PatchDiscoveryBootstrapAuthenticationRule
 
 @doc("The Fdo101-based authentication rule for bootstrapping.")
 @added(Versions.v2024_12_01_preview)
-model PatchFdo101BootstrapAuthenticationRule extends PatchBootstrapAuthenticationRule {
+model PatchFdo101BootstrapAuthenticationRule
+  extends PatchBootstrapAuthenticationRule {
   @doc("The type of authentication rule.")
   type: BootstrapAuthenticationType.Fdo101;
 
@@ -129,7 +130,8 @@ model PatchOwnershipVoucherStorage {
 
 @doc("Storage Account Ownership Voucher Storage. Policy MI is used to access this storage")
 @added(Versions.v2024_12_01_preview)
-model PatchStorageAccountOwnershipVoucherStorage extends PatchOwnershipVoucherStorage {
+model PatchStorageAccountOwnershipVoucherStorage
+  extends PatchOwnershipVoucherStorage {
   @doc("The Ownership Voucher Storage type.")
   type: OwnershipVoucherStorageType.AzureBlobStorage;
 

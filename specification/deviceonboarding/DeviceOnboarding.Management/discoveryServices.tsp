@@ -17,8 +17,8 @@ namespace Microsoft.DeviceOnboarding;
 // ------------------------------------------------------------------
 @doc("A discovery resource.")
 @added(Versions.v2024_12_01_preview)
-model DiscoveryService 
-is Azure.ResourceManager.TrackedResource<DiscoveryServiceProperties> {
+model DiscoveryService
+  is Azure.ResourceManager.TrackedResource<DiscoveryServiceProperties> {
   @doc("The name of the Discovery Resource.")
   @maxLength(64)
   @pattern("^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$")
@@ -34,7 +34,7 @@ model DiscoveryServiceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
-  
+
   @visibility("read")
   @doc("The discovery service rendezvous endpoints.")
   endpoints?: RendezvousEndpoints;
@@ -43,7 +43,7 @@ model DiscoveryServiceProperties {
 @doc("Rendezvous device endpoints.")
 @added(Versions.v2024_12_01_preview)
 model RendezvousEndpoints {
-  @doc("The device endpoint for discovery") 
+  @doc("The device endpoint for discovery")
   @visibility("read")
   deviceEndpoint?: RendezvousEndpoint;
 }
@@ -62,10 +62,7 @@ interface DiscoveryServices {
   get is ArmResourceRead<DiscoveryService>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiscoveryService>;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveryService>;
-  update is ArmResourcePatchAsync<
-    DiscoveryService,
-    DiscoveryServiceProperties
-  >;
+  update is ArmResourcePatchAsync<DiscoveryService, DiscoveryServiceProperties>;
   listByResourceGroup is ArmResourceListByParent<DiscoveryService>;
   listBySubscription is ArmListBySubscription<DiscoveryService>;
 }

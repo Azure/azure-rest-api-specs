@@ -107,7 +107,7 @@ union OnboardingStatus {
 
 @doc("The properties passed in the readyToOnboard POST request.")
 @added(Versions.v2024_12_01_preview)
-model ReadyToOnboardProperties{
+model ReadyToOnboardProperties {
   @doc("Desired TTL until the device can be onboarded")
   ttl: duration; // TODO, determine min/max enforcement, correct format here
 }
@@ -120,5 +120,8 @@ interface DeviceStates {
   update is ArmResourcePatchSync<DeviceState, DeviceStateProperties>;
   listByParent is ArmResourceListByParent<DeviceState>;
   @added(Versions.v2024_12_01_preview)
-  readyToOnboard is ArmResourceActionNoResponseContentAsync<DeviceState, ReadyToOnboardProperties>; // TODO: revisit error response body after private RP testing if needed
+  readyToOnboard is ArmResourceActionNoResponseContentAsync<
+    DeviceState,
+    ReadyToOnboardProperties
+  >; // TODO: revisit error response body after private RP testing if needed
 }
