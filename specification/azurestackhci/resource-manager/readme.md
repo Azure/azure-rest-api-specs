@@ -122,6 +122,11 @@ suppressions:
     from:
       - clusters.json
 
+  - code: PatchBodyParametersSchema
+    reason: We have used kind property as discriminator to support polymorphic resource and during patch also need to pass discriminator to allow patch on certain polymorphic resource type property.
+    from:
+      - hci.json
+
   - code: DeleteResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
     from:

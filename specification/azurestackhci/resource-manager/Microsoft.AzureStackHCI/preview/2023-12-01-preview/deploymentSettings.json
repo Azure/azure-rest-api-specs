@@ -318,13 +318,13 @@
           "type": "string",
           "description": "For Azure blob service endpoint type, select either Default or Custom domain. If you selected **Custom domain, enter the domain for the blob service in this format core.windows.net."
         },
-        "clusterType": {
-          "$ref": "#/definitions/ClusterType",
-          "description": "Cluster type supported."
+        "clusterPattern": {
+          "$ref": "./hciCommon.json#/definitions/ClusterPattern",
+          "description": "Cluster Storage type supported."
         },
         "replicationMode": {
           "$ref": "#/definitions/ReplicationMode",
-          "description": "Replication mode feature configuration for HCI cluster."
+          "description": "Replication mode feature configuration for stretch cluster."
         },
         "hardwareClass": {
           "$ref": "#/definitions/HardwareClass",
@@ -369,6 +369,10 @@
         "cluster": {
           "$ref": "#/definitions/DeploymentCluster",
           "description": "Observability config to deploy AzureStackHCI Cluster."
+        },
+        "identityProvider": {
+          "$ref": "./hciCommon.json#/definitions/IdentityProvider",
+          "description": "Identity Provider for the cluster"
         },
         "storage": {
           "$ref": "#/definitions/Storage",
@@ -430,6 +434,16 @@
         "optionalServices": {
           "$ref": "#/definitions/OptionalServices",
           "description": "OptionalServices config to deploy AzureStackHCI Cluster."
+        },
+        "localAvailabilityZones": {
+          "type": "array",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/LocalAvailabilityZones"
+          },
+          "description": "Local Availability Zone information for HCI cluster",
+          "x-ms-identifiers": [
+            "localAvailabilityZoneName"
+          ]
         }
       }
     },
@@ -593,6 +607,16 @@
           },
           "x-ms-identifiers": []
         },
+        "dnsZones": {
+          "type": "array",
+          "description": "Details of the DNS Zones to be configured.",
+          "items": {
+            "$ref": "#/definitions/DnsZones"
+          },
+          "x-ms-identifiers": [
+            "dnsZoneName"
+          ]
+        },
         "dnsServers": {
           "type": "array",
           "description": "IPv4 address of the DNS servers in your environment.",
@@ -671,6 +695,23 @@
         }
       }
     },
+    "DnsZones": {
+      "type": "object",
+      "description": "Details of the DNS Zones to be configured.",
+      "properties": {
+        "dnsZoneName": {
+          "type": "string",
+          "description": "Name of the DNS Zone to be configured."
+        },
+        "dnsForwarder": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Forwarder details of the DNS Zone to be configured."
+        }
+      }
+    },
     "NetworkController": {
       "type": "object",
       "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster.",
@@ -731,14 +772,6 @@
         "ipv4Address": {
           "type": "string",
           "description": "The IPv4 address assigned to each physical server on your Azure Stack HCI cluster."
-        },
-        "faultDomainName": {
-          "type": "string",
-          "description": "Fault domain name for HCI cluster. e.g. FaultDomainA, FaultDomainB"
-        },
-        "faultDomainMode": {
-          "$ref": "#/definitions/FaultDomainMode",
-          "description": "Fault Domain mode for HCI cluster."
         }
       }
     },
@@ -760,33 +793,9 @@
         }
       }
     },
-    "FaultDomainMode": {
-      "type": "string",
-      "description": "Fault Domain mode for HCI cluster.",
-      "enum": [
-        "Active",
-        "Passive"
-      ],
-      "x-ms-enum": {
-        "name": "FaultDomainMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Fault domain in active mode."
-          },
-          {
-            "name": "Passive",
-            "value": "Passive",
-            "description": "Fault domain in passive mode."
-          }
-        ]
-      }
-    },
     "ReplicationMode": {
       "type": "string",
-      "description": "Replication mode feature configuration for HCI cluster.",
+      "description": "Replication mode feature configuration for stretch cluster.",
       "enum": [
         "Sync",
         "Async"
@@ -1040,36 +1049,6 @@
         }
       }
     },
-    "ClusterType": {
-      "type": "string",
-      "description": "Supported cluster types.",
-      "enum": [
-        "Standard",
-        "Stretch",
-        "RackAware"
-      ],
-      "x-ms-enum": {
-        "name": "ClusterType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard cluster."
-          },
-          {
-            "name": "Stretch",
-            "value": "Stretch",
-            "description": "Stretch cluster."
-          },
-          {
-            "name": "RackAware",
-            "value": "RackAware",
-            "description": "RackAware cluster."
-          }
-        ]
-      }
-    },
     "HardwareClass": {
       "type": "string",
       "description": "Hardware class of the cluster.",
@@ -1078,6 +1057,7 @@
         "Medium",
         "Large"
       ],
+      "default": "Medium",
       "x-ms-enum": {
         "name": "HardwareClass",
         "modelAsString": true,
