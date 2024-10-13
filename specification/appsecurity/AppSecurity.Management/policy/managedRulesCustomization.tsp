@@ -8,11 +8,11 @@ namespace Microsoft.AppSecurity;
 model ManagedRulesCustomization {
   @doc("List of exclusions to be applied to the managed rules inspection. If not specified, then no exclusions are applied")
   @extension("x-ms-identifiers", ["name"])
-  exclusions: ManagedRulesExclusion[];
+  exclusions?: ManagedRulesExclusion[] = #[];
 
   @doc("List of managed rule set overrides. If not specified, then no overrides are applied")
   @extension("x-ms-identifiers", ["ruleSetType", "ruleSetVersion"])
-  overrides: ManagedRuleSetOverride[];
+  overrides?: ManagedRuleSetOverride[] = #[];
 }
 
 @doc("Enable exclusion of variables based on conditions from managed rules inspection")
@@ -26,7 +26,7 @@ model ManagedRulesExclusion {
 
   @doc("The scope of the exclusion. If not specified, then the exclusion is applied to all managed rules")
   @extension("x-ms-identifiers", ["ruleSetType", "ruleSetVersion"])
-  scope?: ManagedRuleSetScope[];
+  scope?: ManagedRuleSetScope[] = #[];
 }
 
 @doc("Defines a condition for the exclusion")
@@ -48,7 +48,7 @@ model ManagedRuleSetScope {
   @doc("Exclusion scope. If not specified, then the exclusion is applied to the entire rule set")
   @extension("x-ms-identifiers", ["ruleGroupName"])
   @maxItems(100)
-  ruleGroups?: RuleGroupScope[];
+  ruleGroups?: RuleGroupScope[] = #[];
 }
 
 @doc("Defines a rule group scope, which can be the entire rule group or a subset of rule within it")
@@ -58,7 +58,7 @@ model RuleGroupScope {
 
   @doc("Relevant rules within the specified rule group. If not specified, the scope is the entire rule group")
   @maxItems(100)
-  rules?: string[];
+  rules?: string[] = #[];
 }
 
 @doc("Defines a managed rule set override")
@@ -67,7 +67,7 @@ model ManagedRuleSetOverride {
 
   @doc("Rule group level overrides")
   @extension("x-ms-identifiers", ["ruleGroupName"])
-  ruleGroupOverrides?: RuleGroupOverride[];
+  ruleGroupOverrides?: RuleGroupOverride[] = #[];
 }
 
 // TODO - in the current model a RuleGroupOverride without groupOverride or rules is valid. We need to make sure at least one of them is valid.
@@ -84,7 +84,7 @@ model RuleGroupOverride {
   @doc("List of rule level overrides")
   @extension("x-ms-identifiers", ["ruleId"])
   @maxItems(100)
-  rules?: RuleOverride[];
+  rules?: RuleOverride[] = #[];
 }
 
 @doc("Defines a managed rule or rule group override")

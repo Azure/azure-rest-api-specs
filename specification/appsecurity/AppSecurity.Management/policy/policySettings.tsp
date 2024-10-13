@@ -24,15 +24,15 @@ model PolicySettings {
 
   @doc("Request body inspection settings overrides for endpoint types")
   @extension("x-ms-identifiers", ["endpointType"])
-  requestBodyInspections?: RequestBodyInspection[];
+  requestBodyInspections?: RequestBodyInspection[] = #[];
 
   @doc("Request body size limitation settings overrides for endpoint types")
   @extension("x-ms-identifiers", ["endpointType"])
-  requestBodySizeLimitations?: RequestBodySizeLimitation[];
+  requestBodySizeLimitations?: RequestBodySizeLimitation[] = #[];
 
   @doc("File upload size limitation settings overrides for endpoint types")
   @extension("x-ms-identifiers", ["endpointType"])
-  fileUploadSizeLimitations?: FileUploadSizeLimitation[];
+  fileUploadSizeLimitations?: FileUploadSizeLimitation[] = #[];
 }
 
 @doc("Supported policy modes")

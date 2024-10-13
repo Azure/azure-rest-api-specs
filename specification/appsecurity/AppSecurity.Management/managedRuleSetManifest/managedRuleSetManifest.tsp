@@ -24,13 +24,24 @@ model AppProtectManagedRuleSetManifestProperties {
 
   @doc("Default managed rule set ID.")
   @visibility("read")
-  defaultRuleSet: ManagedRuleSetId;
+  @extension("x-ms-identifiers", ["pillarType"])
+  defaultRuleSets: PillarTypeDefaultRuleSet[];
 
   @doc("List of available managed rule set definitions.")
   @visibility("read")
   @extension("x-ms-identifiers", ["ruleSetType", "ruleSetVersion"])
   availableRuleSets: ManagedRuleSetDefinition[];
 }
+
+@doc("Defines the default managed rule set of a pillar type")
+model PillarTypeDefaultRuleSet {
+  @doc("The pillar type.")
+  pillarType: PillarType;
+
+  @doc("The default rule set ID of the specified pillar type.")
+  defaultRuleSet: ManagedRuleSetId;
+}
+
 @doc("Definition of managed rule set.")
 model ManagedRuleSetDefinition {
   ...ManagedRuleSetId;
@@ -39,6 +50,32 @@ model ManagedRuleSetDefinition {
   @visibility("read")
   @extension("x-ms-identifiers", ["ruleGroupName"])
   ruleGroups: ManagedRuleGroupDefinition[];
+
+  @doc("Define the rule set pillar type")
+  pillarType: PillarType;
+
+  @doc("Define the supported actions for the rule set.")
+  supportedActions: ManagedRuleActionType[];
+
+  @doc("Define the default action for the rule set.")
+  defaultAction: ManagedRuleActionType;
+}
+
+@doc("Defines a managed rule set pillar type")
+union PillarType {
+  string,
+
+  @doc("Defines the web pillar type")
+  Web: "Web",
+
+  @doc("Defines the bot pillar type")
+  Bot: "Bot",
+
+  @doc("Defines the api pillar type")
+  Api: "Api",
+
+  @doc("Defines the DDoS pillar type")
+  Ddos: "Ddos",
 }
 
 @doc("Definition of a managed rule group.")

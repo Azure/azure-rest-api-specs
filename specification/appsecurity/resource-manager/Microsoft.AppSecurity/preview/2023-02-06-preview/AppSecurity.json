@@ -639,10 +639,16 @@
           "description": "The version of the manifest.",
           "readOnly": true
         },
-        "defaultRuleSet": {
-          "$ref": "#/definitions/ManagedRuleSetId",
+        "defaultRuleSets": {
+          "type": "array",
           "description": "Default managed rule set ID.",
-          "readOnly": true
+          "items": {
+            "$ref": "#/definitions/PillarTypeDefaultRuleSet"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "pillarType"
+          ]
         },
         "availableRuleSets": {
           "type": "array",
@@ -659,7 +665,7 @@
       },
       "required": [
         "version",
-        "defaultRuleSet",
+        "defaultRuleSets",
         "availableRuleSets"
       ]
     },
@@ -1519,12 +1525,30 @@
           "x-ms-identifiers": [
             "ruleGroupName"
           ]
+        },
+        "pillarType": {
+          "$ref": "#/definitions/PillarType",
+          "description": "Define the rule set pillar type"
+        },
+        "supportedActions": {
+          "type": "array",
+          "description": "Define the supported actions for the rule set.",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleActionType"
+          }
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/ManagedRuleActionType",
+          "description": "Define the default action for the rule set."
         }
       },
       "required": [
         "ruleSetType",
         "ruleSetVersion",
-        "ruleGroups"
+        "ruleGroups",
+        "pillarType",
+        "supportedActions",
+        "defaultAction"
       ]
     },
     "ManagedRuleSetId": {
@@ -1568,6 +1592,7 @@
         "ruleGroupOverrides": {
           "type": "array",
           "description": "Rule group level overrides",
+          "default": [],
           "items": {
             "$ref": "#/definitions/RuleGroupOverride"
           },
@@ -1600,6 +1625,7 @@
         "ruleGroups": {
           "type": "array",
           "description": "Exclusion scope. If not specified, then the exclusion is applied to the entire rule set",
+          "default": [],
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/RuleGroupScope"
@@ -1621,6 +1647,7 @@
         "exclusions": {
           "type": "array",
           "description": "List of exclusions to be applied to the managed rules inspection. If not specified, then no exclusions are applied",
+          "default": [],
           "items": {
             "$ref": "#/definitions/ManagedRulesExclusion"
           },
@@ -1631,6 +1658,7 @@
         "overrides": {
           "type": "array",
           "description": "List of managed rule set overrides. If not specified, then no overrides are applied",
+          "default": [],
           "items": {
             "$ref": "#/definitions/ManagedRuleSetOverride"
           },
@@ -1639,11 +1667,7 @@
             "ruleSetVersion"
           ]
         }
-      },
-      "required": [
-        "exclusions",
-        "overrides"
-      ]
+      }
     },
     "ManagedRulesExclusion": {
       "type": "object",
@@ -1664,6 +1688,7 @@
         "scope": {
           "type": "array",
           "description": "The scope of the exclusion. If not specified, then the exclusion is applied to all managed rules",
+          "default": [],
           "items": {
             "$ref": "#/definitions/ManagedRuleSetScope"
           },
@@ -1687,6 +1712,60 @@
         }
       ],
       "x-ms-discriminator-value": "MatchBased"
+    },
+    "PillarType": {
+      "type": "string",
+      "description": "Defines a managed rule set pillar type",
+      "enum": [
+        "Web",
+        "Bot",
+        "Api",
+        "Ddos"
+      ],
+      "x-ms-enum": {
+        "name": "PillarType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Web",
+            "value": "Web",
+            "description": "Defines the web pillar type"
+          },
+          {
+            "name": "Bot",
+            "value": "Bot",
+            "description": "Defines the bot pillar type"
+          },
+          {
+            "name": "Api",
+            "value": "Api",
+            "description": "Defines the api pillar type"
+          },
+          {
+            "name": "Ddos",
+            "value": "Ddos",
+            "description": "Defines the DDoS pillar type"
+          }
+        ]
+      }
+    },
+    "PillarTypeDefaultRuleSet": {
+      "type": "object",
+      "description": "Defines the default managed rule set of a pillar type",
+      "properties": {
+        "pillarType": {
+          "$ref": "#/definitions/PillarType",
+          "description": "The pillar type."
+        },
+        "defaultRuleSet": {
+          "$ref": "#/definitions/ManagedRuleSetId",
+          "description": "The default rule set ID of the specified pillar type."
+        }
+      },
+      "required": [
+        "pillarType",
+        "defaultRuleSet"
+      ]
     },
     "Policy": {
       "type": "object",
@@ -1769,6 +1848,7 @@
         "protectedEndpoints": {
           "type": "array",
           "description": "The list of endpoints this policy protects",
+          "default": [],
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/ProtectedEndpoint"
@@ -1784,6 +1864,7 @@
         "customRules": {
           "type": "array",
           "description": "User defined rules",
+          "default": [],
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/CustomRule"
@@ -1873,6 +1954,7 @@
         "requestBodyInspections": {
           "type": "array",
           "description": "Request body inspection settings overrides for endpoint types",
+          "default": [],
           "items": {
             "$ref": "#/definitions/RequestBodyInspection"
           },
@@ -1883,6 +1965,7 @@
         "requestBodySizeLimitations": {
           "type": "array",
           "description": "Request body size limitation settings overrides for endpoint types",
+          "default": [],
           "items": {
             "$ref": "#/definitions/RequestBodySizeLimitation"
           },
@@ -1893,6 +1976,7 @@
         "fileUploadSizeLimitations": {
           "type": "array",
           "description": "File upload size limitation settings overrides for endpoint types",
+          "default": [],
           "items": {
             "$ref": "#/definitions/FileUploadSizeLimitation"
           },
@@ -2248,6 +2332,7 @@
         "rules": {
           "type": "array",
           "description": "List of rule level overrides",
+          "default": [],
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/RuleOverride"
@@ -2272,6 +2357,7 @@
         "rules": {
           "type": "array",
           "description": "Relevant rules within the specified rule group. If not specified, the scope is the entire rule group",
+          "default": [],
           "maxItems": 100,
           "items": {
             "type": "string"

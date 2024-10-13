@@ -15,14 +15,27 @@
         "properties": {
           "version": "0.0.0",
           "provisioningState": "Succeeded",
-          "defaultRuleSet": {
-            "ruleSetType": "DRS",
-            "ruleSetVersion": "3.2"
-          },
+          "defaultRuleSets": [
+            {
+              "pillarType": "Web",
+              "defaultRuleSet": {
+                "ruleSetType": "DRS",
+                "ruleSetVersion": "3.2"
+              }
+            }
+          ],
           "availableRuleSets": [
             {
               "ruleSetType": "DRS",
               "ruleSetVersion": "3.2",
+              "pillarType": "Web",
+              "supportedActions": [
+                "Allow",
+                "Block",
+                "Log",
+                "AnomalyScoring"
+              ],
+              "defaultAction": "AnomalyScoring",
               "ruleGroups": [
                 {
                   "ruleGroupName": "General",

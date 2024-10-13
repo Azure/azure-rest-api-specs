@@ -33,7 +33,7 @@ model PolicyProperties {
   @doc("The list of endpoints this policy protects")
   @extension("x-ms-identifiers", ["endpointId"])
   @maxItems(MaxProtectedEndpointsCount)
-  protectedEndpoints?: ProtectedEndpoint[];
+  protectedEndpoints?: ProtectedEndpoint[] = #[];
 
   @doc("Rules for scrubbing sensitive log fields")
   logScrubbing?: LogScrubbing;
@@ -41,7 +41,7 @@ model PolicyProperties {
   @doc("User defined rules")
   @extension("x-ms-identifiers", ["name"])
   @maxItems(MaxCustomRulesCount) // AppGW custom rules limitation is 100
-  customRules?: CustomRule[];
+  customRules?: CustomRule[] = #[];
 
   @doc("Describes the web protection policy")
   webProtection?: WebProtection;
