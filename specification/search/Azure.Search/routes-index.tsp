@@ -4,6 +4,7 @@ import "./models-index.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace SearchClient;
 
@@ -16,10 +17,9 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/$count")
   @get
-  count is Azure.Core.Foundations.Operation<
+  count is SearchOperation<
     {
-      ...indexNamePath;
-      ...clientRequestIdHeader;
+      ...indexNamePath;      
     },
     void
   >;
@@ -30,7 +30,7 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs")
   @get
-  searchGet is Azure.Core.Foundations.Operation<
+  searchGet is SearchOperation<
     {
       ...indexNamePath;
 
@@ -209,8 +209,6 @@ interface DocumentsOperations {
       @query("$top")
       $top?: int32;
 
-      ...clientRequestIdHeader;
-
       /**
        * The name of the semantic configuration that lists which fields should be used
        * for semantic ranking, captions, highlights, and answers
@@ -275,10 +273,9 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.search")
   @post
-  searchPost is Azure.Core.Foundations.Operation<
+  searchPost is SearchOperation<
     {
       ...indexNamePath;
-      ...clientRequestIdHeader;
       /**
        * The definition of the Search request.
        */
@@ -294,7 +291,7 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs('{key}')")
   @get
-  get is Azure.Core.Foundations.Operation<
+  get is SearchOperation<
     {
       ...indexNamePath;
       /**
@@ -312,7 +309,6 @@ interface DocumentsOperations {
         format: "csv",
       })
       selectedFields?: string[];
-      ...clientRequestIdHeader;
     },
     void
   >;
@@ -323,7 +319,7 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.suggest")
   @get
-  suggestGet is Azure.Core.Foundations.Operation<
+  suggestGet is SearchOperation<
     {
       ...indexNamePath;
       /**
@@ -420,7 +416,6 @@ interface DocumentsOperations {
        */
       @query("$top")
       $top?: int32;
-      ...clientRequestIdHeader;
     },
     SuggestDocumentsResult
   >;
@@ -431,10 +426,9 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.suggest")
   @post
-  suggestPost is Azure.Core.Foundations.Operation<
+  suggestPost is SearchOperation<
     {
       ...indexNamePath;
-      ...clientRequestIdHeader;
       /**
        * The Suggest request.
        */
@@ -450,10 +444,9 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.index")
   @post
-  index is Azure.Core.Foundations.Operation<
+  index is SearchOperation<
     {
       ...indexNamePath;
-      ...clientRequestIdHeader;
       /**
        * The batch of index actions.
        */
@@ -470,10 +463,9 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.autocomplete")
   @get
-  autocompleteGet is Azure.Core.Foundations.Operation<
+  autocompleteGet is SearchOperation<
     {
       ...indexNamePath;
-      ...clientRequestIdHeader;
       /**
        * The incomplete term which should be auto-completed.
        */
@@ -562,10 +554,9 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.autocomplete")
   @post
-  autocompletePost is Azure.Core.Foundations.Operation<
+  autocompletePost is SearchOperation<
     {
       ...indexNamePath;
-      ...clientRequestIdHeader;
       /**
        * The definition of the Autocomplete request.
        */

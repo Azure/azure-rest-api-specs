@@ -8,21 +8,6 @@ using Azure.Core;
 
 namespace SearchClient;
 
-alias matchingHeader = {
-  @doc("Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.")
-  @header("If-Match")
-  ifMatch?: string;
-
-  @doc("Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.")
-  @header("If-None-Match")
-  ifNoneMatch?: string;
-};
-
-alias clientRequestIdHeader = {
-  @doc("The tracking ID sent with the request to help with debugging.")
-  @header("x-ms-client-request-id")
-  xMsClientRequestId?: string;
-};
 
 alias preferHeader = {
   @doc("For HTTP PUT requests, instructs the service to return the created/updated resource on success.")
@@ -69,6 +54,30 @@ alias synonymMapNamePath = {
   @path
   synonymMapName: string;
 };
+
+alias SearchOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchConditionalOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & ConditionalRequestHeaders,
+  TResponse,
+  Traits,
+  TError
+>;
 
 /**
  * Common error response for all Azure Resource Manager APIs to return error

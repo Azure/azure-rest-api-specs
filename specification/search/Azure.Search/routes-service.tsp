@@ -14,11 +14,9 @@ interface DataSourcesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/datasources('{dataSourceName}')")
     @put
-    createOrUpdate is Azure.Core.Foundations.Operation<
+    createOrUpdate is SearchConditionalOperation<
         {
             ...dataSourceNamePath;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
             ...preferHeader;
             /**
              * The definition of the datasource to create or update.
@@ -35,11 +33,9 @@ interface DataSourcesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/datasources('{dataSourceName}')")
     @delete
-    delete is Azure.Core.Foundations.Operation<
+    delete is SearchConditionalOperation<
         {
             ...dataSourceNamePath;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
         },
         void
     >;
@@ -50,10 +46,9 @@ interface DataSourcesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/datasources('{dataSourceName}')")
     @get
-    get is Azure.Core.Foundations.Operation<
+    get is SearchOperation<
         {
             ...dataSourceNamePath;
-            ...clientRequestIdHeader;
         },
         SearchIndexerDataSource
     >;
@@ -64,10 +59,9 @@ interface DataSourcesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/datasources")
     @get
-    list is Azure.Core.Foundations.Operation<
+    list is SearchOperation<
         {
             ...selectQuery;
-            ...clientRequestIdHeader;
         },
         ListDataSourcesResult
     >;
@@ -78,9 +72,8 @@ interface DataSourcesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/datasources")
     @post
-    create is Azure.Core.Foundations.Operation<
+    create is SearchOperation<
         {
-            ...clientRequestIdHeader;
             /**
              * The definition of the datasource to create.
              */
@@ -98,10 +91,9 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.reset")
     @post
-    reset is Azure.Core.Foundations.Operation<
+    reset is SearchOperation<
         {
             ...indexerNamePath;
-            ...clientRequestIdHeader;
         },
         void
     >;
@@ -112,10 +104,9 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.run")
     @post
-    run is Azure.Core.Foundations.Operation<
+    run is SearchOperation<
         {
             ...indexerNamePath;
-            ...clientRequestIdHeader;
         },
         void
     >;
@@ -126,11 +117,9 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')")
     @put
-    createOrUpdate is Azure.Core.Foundations.Operation<
+    createOrUpdate is SearchConditionalOperation<
         {
             ...indexerNamePath;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
             ...preferHeader;
             /**
              * The definition of the indexer to create or update.
@@ -147,11 +136,9 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')")
     @delete
-    delete is Azure.Core.Foundations.Operation<
+    delete is SearchConditionalOperation<
         {
             ...indexerNamePath;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
         },
         void
     >;
@@ -162,10 +149,9 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')")
     @get
-    get is Azure.Core.Foundations.Operation<
+    get is SearchOperation<
         {
             ...indexerNamePath;
-            ...clientRequestIdHeader;
         },
         SearchIndexer
     >;
@@ -176,10 +162,9 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers")
     @get
-    list is Azure.Core.Foundations.Operation<
+    list is SearchOperation<
         {
             ...selectQuery;
-            ...clientRequestIdHeader;
         },
         ListIndexersResult
     >;
@@ -190,9 +175,8 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers")
     @post
-    create is Azure.Core.Foundations.Operation<
+    create is SearchOperation<
         {
-            ...clientRequestIdHeader;
             /**
              * The definition of the indexer to create.
              */
@@ -208,10 +192,9 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.status")
     @get
-    getStatus is Azure.Core.Foundations.Operation<
+    getStatus is SearchOperation<
         {
             ...indexerNamePath;
-            ...clientRequestIdHeader;
         },
         SearchIndexerStatus
     >;
@@ -225,11 +208,9 @@ interface SkillsetsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/skillsets('{skillsetName}')")
     @put
-    createOrUpdate is Azure.Core.Foundations.Operation<
+    createOrUpdate is SearchConditionalOperation<
         {
             ...skillsetNamePath;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
             ...preferHeader;
             /**
              * The skillset containing one or more skills to create or update in a search
@@ -247,11 +228,9 @@ interface SkillsetsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/skillsets('{skillsetName}')")
     @delete
-    delete is Azure.Core.Foundations.Operation<
+    delete is SearchConditionalOperation<
         {
             ...skillsetNamePath;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
         },
         void
     >;
@@ -262,10 +241,9 @@ interface SkillsetsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/skillsets('{skillsetName}')")
     @get
-    get is Azure.Core.Foundations.Operation<
+    get is SearchOperation<
         {
             ...skillsetNamePath;
-            ...clientRequestIdHeader;
         },
         SearchIndexerSkillset
     >;
@@ -276,10 +254,9 @@ interface SkillsetsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/skillsets")
     @get
-    list is Azure.Core.Foundations.Operation<
+    list is SearchOperation<
         {
             ...selectQuery;
-            ...clientRequestIdHeader;
         },
         ListSkillsetsResult
     >;
@@ -290,9 +267,8 @@ interface SkillsetsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/skillsets")
     @post
-    create is Azure.Core.Foundations.Operation<
+    create is SearchOperation<
         {
-            ...clientRequestIdHeader;
             /**
              * The skillset containing one or more skills to create in a search service.
              */
@@ -310,11 +286,9 @@ interface SynonymMapsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/synonymmaps('{synonymMapName}')")
     @put
-    createOrUpdate is Azure.Core.Foundations.Operation<
+    createOrUpdate is SearchConditionalOperation<
         {
             ...synonymMapNamePath;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
             ...preferHeader;
             /**
              * The definition of the synonym map to create or update.
@@ -331,11 +305,9 @@ interface SynonymMapsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/synonymmaps('{synonymMapName}')")
     @delete
-    delete is Azure.Core.Foundations.Operation<
+    delete is SearchConditionalOperation<
         {
             ...synonymMapNamePath;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
         },
         void
     >;
@@ -346,10 +318,9 @@ interface SynonymMapsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/synonymmaps('{synonymMapName}')")
     @get
-    get is Azure.Core.Foundations.Operation<
+    get is SearchOperation<
         {
             ...synonymMapNamePath;
-            ...clientRequestIdHeader;
         },
         SynonymMap
     >;
@@ -360,10 +331,9 @@ interface SynonymMapsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/synonymmaps")
     @get
-    list is Azure.Core.Foundations.Operation<
+    list is SearchOperation<
         {
             ...selectQuery;
-            ...clientRequestIdHeader;
         },
         ListSynonymMapsResult
     >;
@@ -374,9 +344,8 @@ interface SynonymMapsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/synonymmaps")
     @post
-    create is Azure.Core.Foundations.Operation<
+    create is SearchOperation<
         {
-            ...clientRequestIdHeader;
             /**
              * The definition of the synonym map to create.
              */
@@ -394,9 +363,8 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes")
     @post
-    create is Azure.Core.Foundations.Operation<
+    create is SearchOperation<
         {
-            ...clientRequestIdHeader;
             /**
              * The definition of the index to create.
              */
@@ -412,10 +380,9 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes")
     @get
-    list is Azure.Core.Foundations.Operation<
+    list is SearchOperation<
         {
             ...selectQuery;
-            ...clientRequestIdHeader;
         },
         ListIndexesResult
     >;
@@ -426,7 +393,7 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes('{indexName}')")
     @put
-    createOrUpdate is Azure.Core.Foundations.Operation<
+    createOrUpdate is SearchConditionalOperation<
         {
             ...indexNamePath;
             /**
@@ -438,8 +405,6 @@ interface IndexesOperations {
              */
             @query("allowIndexDowntime")
             allowIndexDowntime?: boolean;
-            ...clientRequestIdHeader;
-            ...matchingHeader;
             ...preferHeader;
             /**
              * The definition of the index to create or update.
@@ -459,10 +424,9 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes('{indexName}')")
     @delete
-    delete is Azure.Core.Foundations.Operation<
+    delete is SearchConditionalOperation<
         {
             ...indexNamePath;
-            ...matchingHeader;
         },
         void
     >;
@@ -473,10 +437,9 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes('{indexName}')")
     @get
-    get is Azure.Core.Foundations.Operation<
+    get is SearchOperation<
         {
             ...indexNamePath;
-            ...clientRequestIdHeader;
         },
         SearchIndex
     >;
@@ -488,10 +451,9 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes('{indexName}')/search.stats")
     @get
-    getStatistics is Azure.Core.Foundations.Operation<
+    getStatistics is SearchOperation<
         {
             ...indexNamePath;
-            ...clientRequestIdHeader;
         },
         GetIndexStatisticsResult
     >;
@@ -502,11 +464,9 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes('{indexName}')/search.analyze")
     @post
-    analyze is Azure.Core.Foundations.Operation<
+    analyze is SearchOperation<
         {
             ...indexNamePath;
-            ...clientRequestIdHeader;
-
             /**
              * The text and analyzer or analysis components to test.
              */
@@ -523,9 +483,8 @@ interface IndexesOperations {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @route("/servicestats")
 @get
-op getServiceStatistics is Azure.Core.Foundations.Operation<
+op getServiceStatistics is SearchOperation<
     {
-        ...clientRequestIdHeader;
     },
     SearchServiceStatistics
 >;
