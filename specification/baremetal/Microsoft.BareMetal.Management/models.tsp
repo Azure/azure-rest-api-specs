@@ -245,7 +245,7 @@ model PeeringSetting is TrackedResource<PeeringSettingProperties> {
   @pattern("^[-\\w\\._\\(\\)]+$")
   @path
   @key("peeringSettingName")
-  @segment("peeringSetting")
+  @segment("peeringSettings")
   @visibility("read")
   name: string;
 
