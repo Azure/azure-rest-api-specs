@@ -355,7 +355,7 @@ model AgentsNamedToolChoice {
   function?: FunctionName;
 }
 
-/** Available tool types for agents named tools. TODO: Should new Agent tools types be added here? */
+/** Available tool types for agents named tools. */
 union AgentsNamedToolChoiceType {
   string,
 
