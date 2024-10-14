@@ -65,7 +65,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
     },
@@ -101,7 +100,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -128,7 +126,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -170,7 +167,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -205,7 +201,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -251,7 +246,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -284,7 +278,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -314,7 +307,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -358,7 +350,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -412,7 +403,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -446,7 +436,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -479,7 +468,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -530,7 +518,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -560,7 +547,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -603,7 +589,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -649,7 +634,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -678,7 +662,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
@@ -730,7 +713,6 @@ interface TextAnalysisAuthoring {
       /**
        * The name of the project to use.
        */
-      @maxLength(100)
       @path
       projectName: string;
 
