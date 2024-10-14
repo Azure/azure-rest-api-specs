@@ -36,7 +36,7 @@ model ToolResources {
 
   /** Resources to be used by the `sharepoint` tool consisting of connection IDs. */
   @encodedName("application/json", "sharepoint")
-  sharepoint?: ConnectionListResource;
+  sharePoint?: ConnectionListResource;
 
   /** Resources to be used by the `azure_ai_search` tool consisting of index IDs and names. */
   @encodedName("application/json", "azure_ai_search")
@@ -79,7 +79,7 @@ model ConnectionListResource {
    */
   @maxItems(1)
   @encodedName("application/json", "connections")
-  connections?: ConnectionResource[];
+  connectionList?: ConnectionResource[];
 }
 
 /**
@@ -103,7 +103,7 @@ model AzureAISearchResource {
    */
   @maxItems(1)
   @encodedName("application/json", "indexes")
-  indexes?: IndexResource[];
+  indexList?: IndexResource[];
 }
 
 /**
@@ -154,7 +154,7 @@ model CreateToolResourcesOptions {
 
   /** A list of connections to be used by the `sharepoint` tool consisting of connection IDs. */
   @encodedName("application/json", "sharepoint")
-  sharepoint?: ConnectionListResourceOptions;
+  sharePoint?: ConnectionListResourceOptions;
 
   /** Resources to be used by the `azure_ai_search` tool consisting of index IDs and names. */
   @encodedName("application/json", "azure_ai_search")
@@ -242,7 +242,7 @@ model UpdateToolResourcesOptions {
 
   /** Overrides the list of connections to be used by the `sharepoint` tool consisting of connection IDs. */
   @encodedName("application/json", "sharepoint")
-  sharepoint?: ConnectionListResourceOptions;
+  sharePoint?: ConnectionListResourceOptions;
 
   /** Overrides the resources to be used by the `azure_ai_search` tool consisting of index IDs and names. */
   @encodedName("application/json", "azure_ai_search")
