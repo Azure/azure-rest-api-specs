@@ -2,6 +2,10 @@ name: Protected Files
 
 on: pull_request
 
+env:
+  # Users allowed to edit protected files without failing check
+  user-allowed: ${{ github.event.pull_request.user.login == 'azure-sdk' || github.event.pull_request.user.login == 'dependabot[bot]' }}
+
 jobs:
   protected-files:
     name: Protected Files
@@ -9,26 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        # Required since "HEAD^" is passed to Get-ChangedFiles
-        fetch-depth: 2
+      # Since check is required, the job must pass instead of being skipped
+      - name: User allowed
+        if: ${{ env.user-allowed == 'true' }}
+        run: echo "Account '${{ github.event.pull_request.user.login }}' is allowed to update protected files"
 
-    - name: Detect changes to protected files
-      run: |
-        . eng/scripts/ChangedFiles-Functions.ps1
+      - uses: actions/checkout@v4
+        if: ${{ env.user-allowed != 'true' }}
+        with:
+          # Required since "HEAD^" is passed to Get-ChangedFiles
+          fetch-depth: 2
 
-        $protectedFiles = @("package.json", "package-lock.json")
-        $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -targetCommitish HEAD -diffFilter "")
-        $matchedFiles = @($protectedFiles | Where-Object { $changedFiles -contains $_})
+      - name: Detect changes to protected files
+        if: ${{ env.user-allowed != 'true' }}
+        run: |
+          . eng/scripts/ChangedFiles-Functions.ps1
 
-        if ($matchedFiles.Count -gt 0) {
-          foreach ($file in $matchedFiles) {
-            Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+          $protectedFiles = @("package.json", "package-lock.json")
+          $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -targetCommitish HEAD -diffFilter "")
+          $matchedFiles = @($protectedFiles | Where-Object { $changedFiles -contains $_})
+
+          if ($matchedFiles.Count -gt 0) {
+            foreach ($file in $matchedFiles) {
+              Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+            }
+            exit 1
           }
-          exit 1
-        }
-        else {
-          Write-Output "::notice::No changes to protected files: [$($protectedFiles -join ', ')]"
-        }
-      shell: pwsh
+          else {
+            Write-Output "No changes to protected files: [$($protectedFiles -join ', ')]"
+          }
+        shell: pwsh
