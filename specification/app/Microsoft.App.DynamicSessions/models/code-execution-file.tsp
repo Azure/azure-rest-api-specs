@@ -22,6 +22,9 @@ model SessionResourceFile {
   @doc("The type of the session resource file.")
   type: string;
 
+  @doc("The type of the content of this file.")
+  contentType: string;
+
   @doc("The size of the file.")
   sizeInBytes: int64;
 
