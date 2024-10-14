@@ -1,0 +1,23 @@
+name: Setup Node for REST API CI
+description: Uses specified Node version and runs npm commands to set up the environment for REST API CI
+
+inputs:
+  node-version:
+    description: 'Node version to use'
+    default: 20.x
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node ${{ inputs.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - run: npm ci
+      shell: pwsh
+
+    - run: npm ls -a
+      shell: pwsh
+      continue-on-error: true
