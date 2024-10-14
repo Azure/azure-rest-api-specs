@@ -181,6 +181,8 @@ model PatchDeviceRegistryPolicyResourceDetails
   resourceMetadata?: ResourceMetadata; // for customer to label the devices
 }
 
+@added(Versions.v2024_11_01_preview)
+@removed(Versions.v2024_12_01_preview)
 @doc("Details of the OnboardingService Discovery Policy.")
 model PatchDiscoveryPolicyResourceDetails extends PolicyPatchResourceDetails {
   @doc("The policy resource type for device registry devices.")
