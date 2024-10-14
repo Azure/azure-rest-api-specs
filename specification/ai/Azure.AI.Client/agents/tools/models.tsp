@@ -45,6 +45,32 @@ model FunctionToolDefinition extends ToolDefinition {
   function: FunctionDefinition;
 }
 
+// Azure Custom Tools
+
+@doc("The input definition information for a bing search tool as used to configure an agent.")
+model BingSearchToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'bing_search'.")
+  type: "bing_search";
+}
+
+@doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
+model MicrosoftFabricToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'microsoft_fabric'.")
+  type: "microsoft_fabric";
+}
+
+@doc("The input definition information for a sharepoint tool as used to configure an agent.")
+model SharepointToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'sharepoint'.")
+  type: "sharepoint";
+}
+
+@doc("The input definition information for an Azure AI search tool as used to configure an agent.")
+model AzureAISearchToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'azure_ai_search'.")
+  type: "azure_ai_search";
+}
+
 // Definition details: File Search
 
 /**
@@ -151,6 +177,58 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   @doc("Reserved for future use.")
   @encodedName("application/json", "file_search")
   fileSearch: Record<string>;
+}
+
+@doc("""
+  A record of a call to a bing search tool, issued by the model in evaluation of a defined tool, that represents
+  executed bing search.
+  """)
+model RunStepBingSearchToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'bing_search'.")
+  type: "bing_search";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "bing_search")
+  bingSearch: Record<string>;
+}
+
+@doc("""
+  A record of a call to an Azure AI Search tool, issued by the model in evaluation of a defined tool, that represents
+  executed Azure AI search.
+  """)
+model RunStepAzureAISearchToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'azure_ai_search'.")
+  type: "azure_ai_search";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "azure_ai_search")
+  azureAISearch: Record<string>;
+}
+
+@doc("""
+  A record of a call to a SharePoint tool, issued by the model in evaluation of a defined tool, that represents
+  executed SharePoint actions.
+  """)
+model RunStepSharepointToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'sharepoint'.")
+  type: "sharepoint";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "sharepoint")
+  sharePoint: Record<string>;
+}
+
+@doc("""
+  A record of a call to a Microsoft Fabric tool, issued by the model in evaluation of a defined tool, that represents
+  executed Microsoft Fabric operations.
+  """)
+model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'microsoft_fabric'.")
+  type: "microsoft_fabric";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "microsoft_fabric")
+  microsoftFabric: Record<string>;
 }
 
 @doc("""
@@ -277,7 +355,7 @@ model AgentsNamedToolChoice {
   function?: FunctionName;
 }
 
-/** Available tool types for agents named tools. */
+/** Available tool types for agents named tools. TODO: Should new Agent tools types be added here? */
 union AgentsNamedToolChoiceType {
   string,
 
@@ -289,6 +367,18 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `file_search` */
   fileSearch: "file_search",
+
+  /** Tool type `bing_grounding` */
+  bingGrounding: "bing_grounding",
+
+  /** Tool type `microsoft_fabric` */
+  microsoftFabric: "microsoft_fabric",
+
+  /** Tool type `sharepoint` */
+  sharepoint: "sharepoint",
+
+  /** Tool type `azure_ai_search` */
+  azureAISearch: "azure_ai_search",
 }
 
 /** The function name that will be used, if using the `function` tool */
