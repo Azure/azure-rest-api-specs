@@ -20,6 +20,7 @@ namespace Microsoft.KubernetesRuntime;
 @doc("Versions of KubernetesRuntime service")
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("2023-10-01-preview")
   v2023_10_01_preview: "2023-10-01-preview",
 
