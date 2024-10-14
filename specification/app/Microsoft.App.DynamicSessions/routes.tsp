@@ -27,10 +27,7 @@ interface CodeExecution {
       @body
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
-    {
-      ...SessionCodeExecutionResponse;
-      ...Foundations.LongRunningStatusLocation;
-    },
+    SessionCodeExecutionResponse,
     SessionCodeExecutionResponse
   >;
 
