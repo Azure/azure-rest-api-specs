@@ -141,7 +141,14 @@ model DeviceRegistryPolicyResourceDetails extends PolicyResourceDetails {
 @added(Versions.v2024_11_01_preview)
 @removed(Versions.v2024_12_01_preview)
 model DiscoveryPolicyResourceDetails extends PolicyResourceDetails {
-  @doc("The policy resource type for device registry devices.")
+  @doc("The policy resource type for hybrid compute machines.")
+  type: OnboardingResourceType.HybridComputeMachine;
+}
+
+@doc("Details of the OnboardingService Hybrid Compute Machines Policy.")
+@added(Versions.v2024_12_01_preview)
+model HybridComputePolicyResourceDetails extends PolicyResourceDetails {
+  @doc("The policy resource type for hybrid compute machines.")
   type: OnboardingResourceType.HybridComputeMachine;
 }
 
