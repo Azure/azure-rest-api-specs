@@ -20,29 +20,44 @@ model CommonExportTerraformParameters {
   ...SubscriptionIdParameter;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Cannot use @armResourceOperations decorator, the implied @autoRoute forces {subscriptionId} path param to be at the end"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Cannot use @armResourceOperations, the implied @autoRoute produces the wrong route for GET /operationStatuses/{operationId}"
+@route("/subscription/{subscriptionId}/providers/{provider}")
 interface ExportTerraform {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Cannot use @armResourceOperation, API is not bound to a single resource type"
+  @armResourceAction(ExportResult)
   @doc("Exports the Terraform configuration of the specified resource(s).")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform")
+  @route("/exportTerraform")
   @post
   @tag("ExportTerraform")
-  @pollingOperation(ExportTerraform.operationStatuses)
+  // Cannot use Azure.ResourceManager.ArmProviderActionAsync due to a bug
   exportTerraform(
-    ...CommonExportTerraformParameters,
+    ...DefaultBaseParameters<SubscriptionActionScope>,
+    ...ProviderNamespace<SubscriptionActionScope>,
 
-    @doc("The export parameter")
-    @body
-    exportParameter: BaseExportModel,
-  ): AcceptedLroResponse<"Export request accepted."> | ErrorResponse;
+    @doc("The resource(s) to be exported to Terraform")
+    @bodyRoot
+    body: BaseExportModel,
+  ): ArmAcceptedLroResponse<
+    "Resource operation accepted.",
+    ArmLroLocationHeader<
+      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+      OperationStatus,
+      string
+    > &
+      Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Cannot use @armResourceRead, API is not bound to a single resource type"
   @doc("Get the status of a long running azure asynchronous operation.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/operationStatuses/{operationId}")
+  @route("/operationStatuses/{operationId}")
   @get
   @tag("OperationStatuses")
-  operationStatuses(
-    ...OperationIdParameter,
-    ...CommonExportTerraformParameters,
-  ): OperationStatus | AcceptedLroResponse<"InProgress operation status"> | ErrorResponse;
+  operationStatuses is ArmReadOperation<
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+      ...ProviderNamespace<SubscriptionActionScope>;
+      ...OperationIdParameter;
+    },
+    OperationStatus | ArmAcceptedLroResponse,
+    ErrorResponse
+  >;
 }

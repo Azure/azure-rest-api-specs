@@ -86,7 +86,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
+    "/subscription/{subscriptionId}/providers/{provider}/exportTerraform": {
       "post": {
         "operationId": "ExportTerraform_ExportTerraform",
         "tags": [
@@ -101,9 +101,22 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "exportParameter",
+            "name": "provider",
+            "in": "path",
+            "description": "The provider namespace for the resource.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Microsoft.AzureTerraform"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "body",
             "in": "body",
-            "description": "The export parameter",
+            "description": "The resource(s) to be exported to Terraform",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BaseExportModel"
@@ -112,13 +125,8 @@
         ],
         "responses": {
           "202": {
-            "description": "Export request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -148,7 +156,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/operationStatuses/{operationId}": {
+    "/subscription/{subscriptionId}/providers/{provider}/operationStatuses/{operationId}": {
       "get": {
         "operationId": "ExportTerraform_OperationStatuses",
         "tags": [
@@ -157,13 +165,26 @@
         "description": "Get the status of a long running azure asynchronous operation.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "provider",
+            "in": "path",
+            "description": "The provider namespace for the resource.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Microsoft.AzureTerraform"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
@@ -174,13 +195,8 @@
             }
           },
           "202": {
-            "description": "InProgress operation status",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
