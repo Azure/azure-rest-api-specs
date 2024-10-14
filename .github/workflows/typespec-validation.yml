@@ -1,0 +1,30 @@
+name: Validated Impacted Specs
+
+on: pull_request
+
+jobs:
+  validate-impacted-specs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # TODO: Refactor common steps into a reusable action
+    - name: Use Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+
+    - run: npm ci
+      shell: pwsh
+
+    - run: npm ls -a
+      shell: pwsh
+      continue-on-error: true
+
+    - name: Validate Impacted Specs
+      run: pwsh $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+      shell: pwsh
+      # TODO: Verify this is correct
+      continue-on-error: true
