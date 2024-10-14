@@ -1318,12 +1318,6 @@
               "$ref": "#/definitions/NspLoggingConfiguration"
             }
           },
-          "201": {
-            "description": "Create - Returns the NspLoggingConfiguration created.",
-            "schema": {
-              "$ref": "#/definitions/NspLoggingConfiguration"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1347,15 +1341,6 @@
           "200": {
             "description": "Delete Succeed."
           },
-          "202": {
-            "description": "Delete in progress.",
-            "headers": {
-              "location": {
-                "description": "location header",
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "Request successful. The logging configuration does not exist."
           },
@@ -1371,7 +1356,7 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "NspLinkDelete": {
+          "NspLoggingConfigurationDelete": {
             "$ref": "./examples/NspLoggingConfigurationDelete.json"
           }
         }
@@ -2126,7 +2111,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The name of the NSP logging configuration."
+          "description": "The log categories to enable in the NSP logging configuration."
         }
       },
       "description": "The NSP logging configuration properties."
