@@ -10,10 +10,9 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "./data-plane"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Azure.Batch/preview/{version}/BatchService.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Batch"
+    package-dir: "Azure.Compute.Batch"
     clear-output-folder: true
     model-namespace: false
     head-as-boolean: false
@@ -30,6 +29,8 @@ options:
     package-dir: "azure-batch"
     package-name: "{package-dir}"
     flavor: azure
+    generate-test: true
+    generate-sample: true
   "@azure-tools/typespec-ts":
     package-dir: "batch-rest"
     packageDetails:

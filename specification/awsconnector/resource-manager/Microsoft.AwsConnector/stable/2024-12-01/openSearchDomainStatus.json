@@ -1,0 +1,2276 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "OpenSearchDomainStatuses"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/openSearchDomainStatuses": {
+      "get": {
+        "operationId": "OpenSearchDomainStatuses_ListBySubscription",
+        "tags": [
+          "OpenSearchDomainStatuses"
+        ],
+        "description": "List OpenSearchDomainStatus resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchDomainStatusListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchDomainStatuses_ListBySubscription": {
+            "$ref": "./examples/OpenSearchDomainStatuses_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/openSearchDomainStatuses": {
+      "get": {
+        "operationId": "OpenSearchDomainStatuses_ListByResourceGroup",
+        "tags": [
+          "OpenSearchDomainStatuses"
+        ],
+        "description": "List OpenSearchDomainStatus resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchDomainStatusListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchDomainStatuses_ListByResourceGroup": {
+            "$ref": "./examples/OpenSearchDomainStatuses_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/openSearchDomainStatuses/{name}": {
+      "get": {
+        "operationId": "OpenSearchDomainStatuses_Get",
+        "tags": [
+          "OpenSearchDomainStatuses"
+        ],
+        "description": "Get a OpenSearchDomainStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OpenSearchDomainStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchDomainStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchDomainStatuses_Get": {
+            "$ref": "./examples/OpenSearchDomainStatuses_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OpenSearchDomainStatuses_CreateOrReplace",
+        "tags": [
+          "OpenSearchDomainStatuses"
+        ],
+        "description": "Create a OpenSearchDomainStatus. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OpenSearchDomainStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenSearchDomainStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OpenSearchDomainStatus' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchDomainStatus"
+            }
+          },
+          "201": {
+            "description": "Resource 'OpenSearchDomainStatus' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchDomainStatus"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchDomainStatuses_CreateOrReplace": {
+            "$ref": "./examples/OpenSearchDomainStatuses_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OpenSearchDomainStatuses_Update",
+        "tags": [
+          "OpenSearchDomainStatuses"
+        ],
+        "description": "Update a OpenSearchDomainStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OpenSearchDomainStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenSearchDomainStatusTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchDomainStatus"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchDomainStatuses_Update": {
+            "$ref": "./examples/OpenSearchDomainStatuses_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OpenSearchDomainStatuses_Delete",
+        "tags": [
+          "OpenSearchDomainStatuses"
+        ],
+        "description": "Delete a OpenSearchDomainStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OpenSearchDomainStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchDomainStatuses_Delete": {
+            "$ref": "./examples/OpenSearchDomainStatuses_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AdvancedSecurityOptions": {
+      "type": "object",
+      "description": "Definition of AdvancedSecurityOptions",
+      "properties": {
+        "anonymousAuthDisableDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>Date and time when the migration period will be disabled. Only necessary when <a href='https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing'>enabling fine-grained access control on an existing domain</a>.</p>"
+        },
+        "anonymousAuthEnabled": {
+          "type": "boolean",
+          "description": "<p>True if a 30-day migration period is enabled, during which administrators can create role mappings. Only necessary when <a href='https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing'>enabling fine-grained access control on an existing domain</a>.</p>"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>True if fine-grained access control is enabled.</p>"
+        },
+        "internalUserDatabaseEnabled": {
+          "type": "boolean",
+          "description": "<p>True if the internal user database is enabled.</p>"
+        },
+        "samlOptions": {
+          "$ref": "#/definitions/SAMLOptionsOutput",
+          "description": "<p>Container for information about the SAML configuration for OpenSearch Dashboards.</p>"
+        }
+      }
+    },
+    "AutoTuneOptionsOutput": {
+      "type": "object",
+      "description": "Definition of AutoTuneOptionsOutput",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "<p>Any errors that occurred while enabling or disabling Auto-Tune.</p>"
+        },
+        "state": {
+          "$ref": "#/definitions/AutoTuneStateEnumValue",
+          "description": "<p>The current state of Auto-Tune on the domain.</p>"
+        },
+        "useOffPeakWindow": {
+          "type": "boolean",
+          "description": "<p>Whether the domain's off-peak window will be used to deploy Auto-Tune changes rather than a maintenance schedule.</p>"
+        }
+      }
+    },
+    "AutoTuneState": {
+      "type": "string",
+      "description": "AutoTuneState enum",
+      "enum": [
+        "DISABLED",
+        "DISABLED_AND_ROLLBACK_COMPLETE",
+        "DISABLED_AND_ROLLBACK_ERROR",
+        "DISABLED_AND_ROLLBACK_IN_PROGRESS",
+        "DISABLED_AND_ROLLBACK_SCHEDULED",
+        "DISABLE_IN_PROGRESS",
+        "ENABLED",
+        "ENABLE_IN_PROGRESS",
+        "ERROR"
+      ],
+      "x-ms-enum": {
+        "name": "AutoTuneState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "AutoTuneState enum DISABLED"
+          },
+          {
+            "name": "DISABLED_AND_ROLLBACK_COMPLETE",
+            "value": "DISABLED_AND_ROLLBACK_COMPLETE",
+            "description": "AutoTuneState enum DISABLED_AND_ROLLBACK_COMPLETE"
+          },
+          {
+            "name": "DISABLED_AND_ROLLBACK_ERROR",
+            "value": "DISABLED_AND_ROLLBACK_ERROR",
+            "description": "AutoTuneState enum DISABLED_AND_ROLLBACK_ERROR"
+          },
+          {
+            "name": "DISABLED_AND_ROLLBACK_IN_PROGRESS",
+            "value": "DISABLED_AND_ROLLBACK_IN_PROGRESS",
+            "description": "AutoTuneState enum DISABLED_AND_ROLLBACK_IN_PROGRESS"
+          },
+          {
+            "name": "DISABLED_AND_ROLLBACK_SCHEDULED",
+            "value": "DISABLED_AND_ROLLBACK_SCHEDULED",
+            "description": "AutoTuneState enum DISABLED_AND_ROLLBACK_SCHEDULED"
+          },
+          {
+            "name": "DISABLE_IN_PROGRESS",
+            "value": "DISABLE_IN_PROGRESS",
+            "description": "AutoTuneState enum DISABLE_IN_PROGRESS"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "AutoTuneState enum ENABLED"
+          },
+          {
+            "name": "ENABLE_IN_PROGRESS",
+            "value": "ENABLE_IN_PROGRESS",
+            "description": "AutoTuneState enum ENABLE_IN_PROGRESS"
+          },
+          {
+            "name": "ERROR",
+            "value": "ERROR",
+            "description": "AutoTuneState enum ERROR"
+          }
+        ]
+      }
+    },
+    "AutoTuneStateEnumValue": {
+      "type": "object",
+      "description": "Definition of AutoTuneStateEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AutoTuneState",
+          "description": "Property value"
+        }
+      }
+    },
+    "AwsOpenSearchDomainStatusProperties": {
+      "type": "object",
+      "description": "Definition of awsOpenSearchDomainStatus",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the domain. For more information, see <a href='https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html'>IAM identifiers </a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
+        },
+        "accessPolicies": {
+          "type": "string",
+          "description": "<p>Identity and Access Management (IAM) policy document specifying the access policies for the domain.</p>"
+        },
+        "advancedOptions": {
+          "type": "object",
+          "description": "<p>Key-value pairs that specify advanced configuration options.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "advancedSecurityOptions": {
+          "$ref": "#/definitions/AdvancedSecurityOptions",
+          "description": "<p>Settings for fine-grained access control.</p>"
+        },
+        "autoTuneOptions": {
+          "$ref": "#/definitions/AutoTuneOptionsOutput",
+          "description": "<p>Auto-Tune settings for the domain.</p>"
+        },
+        "changeProgressDetails": {
+          "$ref": "#/definitions/ChangeProgressDetails",
+          "description": "<p>Information about a configuration change happening on the domain.</p>"
+        },
+        "clusterConfig": {
+          "$ref": "#/definitions/ClusterConfig",
+          "description": "<p>Container for the cluster configuration of the domain.</p>"
+        },
+        "cognitoOptions": {
+          "$ref": "#/definitions/CognitoOptions",
+          "description": "<p>Key-value pairs to configure Amazon Cognito authentication for OpenSearch Dashboards.</p>"
+        },
+        "created": {
+          "type": "boolean",
+          "description": "<p>Creation status of an OpenSearch Service domain. True if domain creation is complete. False if domain creation is still in progress.</p>"
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "<p>Deletion status of an OpenSearch Service domain. True if domain deletion is complete. False if domain deletion is still in progress. Once deletion is complete, the status of the domain is no longer returned.</p>"
+        },
+        "domainEndpointOptions": {
+          "$ref": "#/definitions/DomainEndpointOptions",
+          "description": "<p>Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.</p>"
+        },
+        "domainId": {
+          "type": "string",
+          "description": "<p>Unique identifier for the domain.</p>"
+        },
+        "domainName": {
+          "type": "string",
+          "description": "<p>Name of the domain. Domain names are unique across all domains owned by the same account within an Amazon Web Services Region.</p>"
+        },
+        "domainProcessingStatus": {
+          "$ref": "#/definitions/DomainProcessingStatusTypeEnumValue",
+          "description": "<p>The status of any changes that are currently in progress for the domain.</p>"
+        },
+        "ebsOptions": {
+          "$ref": "#/definitions/EBSOptions",
+          "description": "<p>Container for EBS-based storage settings for the domain.</p>"
+        },
+        "encryptionAtRestOptions": {
+          "$ref": "#/definitions/EncryptionAtRestOptions",
+          "description": "<p>Encryption at rest settings for the domain.</p>"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "<p>Domain-specific endpoint used to submit index, search, and data upload requests to the domain.</p>"
+        },
+        "endpointV2": {
+          "type": "string",
+          "description": "<p>If <code>IPAddressType</code> to set to <code>dualstack</code>, a version 2 domain endpoint is provisioned. This endpoint functions like a normal endpoint, except that it works with both IPv4 and IPv6 IP addresses. Normal endpoints work only with IPv4 IP addresses. </p>"
+        },
+        "endpoints": {
+          "type": "object",
+          "description": "<p>The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints. Example <code>key, value</code>: <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "<p>Version of OpenSearch or Elasticsearch that the domain is running, in the format <code>Elasticsearch_X.Y</code> or <code>OpenSearch_X.Y</code>.</p>"
+        },
+        "ipAddressType": {
+          "$ref": "#/definitions/IPAddressTypeEnumValue",
+          "description": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
+        },
+        "logPublishingOptions": {
+          "type": "object",
+          "description": "<p>Log publishing options for the domain.</p>",
+          "additionalProperties": {
+            "$ref": "#/definitions/LogPublishingOption"
+          }
+        },
+        "modifyingProperties": {
+          "type": "array",
+          "description": "<p>Information about the domain properties that are currently being modified.</p>",
+          "items": {
+            "$ref": "#/definitions/ModifyingProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "nodeToNodeEncryptionOptions": {
+          "$ref": "#/definitions/NodeToNodeEncryptionOptions",
+          "description": "<p>Whether node-to-node encryption is enabled or disabled.</p>"
+        },
+        "offPeakWindowOptions": {
+          "$ref": "#/definitions/OffPeakWindowOptions",
+          "description": "<p>Options that specify a custom 10-hour window during which OpenSearch Service can perform configuration changes on the domain.</p>"
+        },
+        "processing": {
+          "type": "boolean",
+          "description": "<p>The status of the domain configuration. True if OpenSearch Service is processing configuration changes. False if the configuration is active.</p>"
+        },
+        "serviceSoftwareOptions": {
+          "$ref": "#/definitions/ServiceSoftwareOptions",
+          "description": "<p>The current status of the domain's service software.</p>"
+        },
+        "snapshotOptions": {
+          "$ref": "#/definitions/SnapshotOptions",
+          "description": "<p>DEPRECATED. Container for parameters required to configure automated snapshots of domain indexes.</p>"
+        },
+        "softwareUpdateOptions": {
+          "$ref": "#/definitions/SoftwareUpdateOptions",
+          "description": "<p>Service software update options for the domain.</p>"
+        },
+        "upgradeProcessing": {
+          "type": "boolean",
+          "description": "<p>The status of a domain version upgrade to a new version of OpenSearch or Elasticsearch. True if OpenSearch Service is in the process of a version upgrade. False if the configuration is active.</p>"
+        },
+        "vpcOptions": {
+          "$ref": "#/definitions/VPCDerivedInfo",
+          "description": "<p>The VPC configuration for the domain.</p>"
+        }
+      }
+    },
+    "ChangeProgressDetails": {
+      "type": "object",
+      "description": "Definition of ChangeProgressDetails",
+      "properties": {
+        "changeId": {
+          "type": "string",
+          "description": "<p>The ID of the configuration change.</p>"
+        },
+        "configChangeStatus": {
+          "$ref": "#/definitions/ConfigChangeStatusEnumValue",
+          "description": "<p>The current status of the configuration change.</p>"
+        },
+        "initiatedBy": {
+          "$ref": "#/definitions/InitiatedByEnumValue",
+          "description": "<p>The IAM principal who initiated the configuration change.</p>"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The last time that the configuration change was updated.</p>"
+        },
+        "message": {
+          "type": "string",
+          "description": "<p>A message corresponding to the status of the configuration change.</p>"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time that the configuration change was initiated, in Universal Coordinated Time (UTC).</p>"
+        }
+      }
+    },
+    "ClusterConfig": {
+      "type": "object",
+      "description": "Definition of ClusterConfig",
+      "properties": {
+        "coldStorageOptions": {
+          "$ref": "#/definitions/ColdStorageOptions",
+          "description": "<p>Container for cold storage configuration options.</p>"
+        },
+        "dedicatedMasterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Number of dedicated master nodes in the cluster. This number must be greater than 2 and not 4, otherwise you receive a validation exception.</p>"
+        },
+        "dedicatedMasterEnabled": {
+          "type": "boolean",
+          "description": "<p>Indicates whether dedicated master nodes are enabled for the cluster.<code>True</code> if the cluster will use a dedicated master node.<code>False</code> if the cluster will not.</p>"
+        },
+        "dedicatedMasterType": {
+          "$ref": "#/definitions/OpenSearchPartitionInstanceTypeEnumValue",
+          "description": "<p>OpenSearch Service instance type of the dedicated master nodes in the cluster.</p>"
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Number of data nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.</p>"
+        },
+        "instanceType": {
+          "$ref": "#/definitions/OpenSearchPartitionInstanceTypeEnumValue",
+          "description": "<p>Instance type of data nodes in the cluster.</p>"
+        },
+        "multiAZWithStandbyEnabled": {
+          "type": "boolean",
+          "description": "<p>A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more information, see <a href='https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html'>Configuring a multi-AZ domain in Amazon OpenSearch Service</a>. </p>"
+        },
+        "warmCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The number of warm nodes in the cluster.</p>"
+        },
+        "warmEnabled": {
+          "type": "boolean",
+          "description": "<p>Whether to enable warm storage for the cluster.</p>"
+        },
+        "warmType": {
+          "$ref": "#/definitions/OpenSearchWarmPartitionInstanceTypeEnumValue",
+          "description": "<p>The instance type for the cluster's warm nodes.</p>"
+        },
+        "zoneAwarenessConfig": {
+          "$ref": "#/definitions/ZoneAwarenessConfig",
+          "description": "<p>Container for zone awareness configuration options. Only required if <code>ZoneAwarenessEnabled</code> is <code>true</code>.</p>"
+        },
+        "zoneAwarenessEnabled": {
+          "type": "boolean",
+          "description": "<p>Indicates whether multiple Availability Zones are enabled. For more information, see <a href='https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html'>Configuring a multi-AZ domain in Amazon OpenSearch Service</a>.</p>"
+        }
+      }
+    },
+    "CognitoOptions": {
+      "type": "object",
+      "description": "Definition of CognitoOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>Whether to enable or disable Amazon Cognito authentication for OpenSearch Dashboards.</p>"
+        },
+        "identityPoolId": {
+          "type": "string",
+          "description": "<p>The Amazon Cognito identity pool ID that you want OpenSearch Service to use for OpenSearch Dashboards authentication.</p>"
+        },
+        "roleArn": {
+          "type": "string",
+          "description": "<p>The <code>AmazonOpenSearchServiceCognitoAccess</code> role that allows OpenSearch Service to configure your user pool and identity pool.</p>"
+        },
+        "userPoolId": {
+          "type": "string",
+          "description": "<p>The Amazon Cognito user pool ID that you want OpenSearch Service to use for OpenSearch Dashboards authentication.</p>"
+        }
+      }
+    },
+    "ColdStorageOptions": {
+      "type": "object",
+      "description": "Definition of ColdStorageOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>Whether to enable or disable cold storage on the domain. You must enable UltraWarm storage to enable cold storage.</p>"
+        }
+      }
+    },
+    "ConfigChangeStatus": {
+      "type": "string",
+      "description": "ConfigChangeStatus enum",
+      "enum": [
+        "ApplyingChanges",
+        "Cancelled",
+        "Completed",
+        "Initializing",
+        "Pending",
+        "PendingUserInput",
+        "Validating",
+        "ValidationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigChangeStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApplyingChanges",
+            "value": "ApplyingChanges",
+            "description": "ConfigChangeStatus enum ApplyingChanges"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "ConfigChangeStatus enum Cancelled"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "ConfigChangeStatus enum Completed"
+          },
+          {
+            "name": "Initializing",
+            "value": "Initializing",
+            "description": "ConfigChangeStatus enum Initializing"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "ConfigChangeStatus enum Pending"
+          },
+          {
+            "name": "PendingUserInput",
+            "value": "PendingUserInput",
+            "description": "ConfigChangeStatus enum PendingUserInput"
+          },
+          {
+            "name": "Validating",
+            "value": "Validating",
+            "description": "ConfigChangeStatus enum Validating"
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "ConfigChangeStatus enum ValidationFailed"
+          }
+        ]
+      }
+    },
+    "ConfigChangeStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of ConfigChangeStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ConfigChangeStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "DeploymentStatus": {
+      "type": "string",
+      "description": "DeploymentStatus enum",
+      "enum": [
+        "COMPLETED",
+        "ELIGIBLE",
+        "IN_PROGRESS",
+        "NOT_ELIGIBLE",
+        "PENDING_UPDATE"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "COMPLETED",
+            "value": "COMPLETED",
+            "description": "DeploymentStatus enum COMPLETED"
+          },
+          {
+            "name": "ELIGIBLE",
+            "value": "ELIGIBLE",
+            "description": "DeploymentStatus enum ELIGIBLE"
+          },
+          {
+            "name": "IN_PROGRESS",
+            "value": "IN_PROGRESS",
+            "description": "DeploymentStatus enum IN_PROGRESS"
+          },
+          {
+            "name": "NOT_ELIGIBLE",
+            "value": "NOT_ELIGIBLE",
+            "description": "DeploymentStatus enum NOT_ELIGIBLE"
+          },
+          {
+            "name": "PENDING_UPDATE",
+            "value": "PENDING_UPDATE",
+            "description": "DeploymentStatus enum PENDING_UPDATE"
+          }
+        ]
+      }
+    },
+    "DeploymentStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of DeploymentStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DeploymentStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "DomainEndpointOptions": {
+      "type": "object",
+      "description": "Definition of DomainEndpointOptions",
+      "properties": {
+        "customEndpoint": {
+          "type": "string",
+          "description": "<p>The fully qualified URL for the custom endpoint.</p>"
+        },
+        "customEndpointCertificateArn": {
+          "type": "string",
+          "description": "<p>The ARN for your security certificate, managed in Amazon Web Services Certificate Manager (ACM).</p>"
+        },
+        "customEndpointEnabled": {
+          "type": "boolean",
+          "description": "<p>Whether to enable a custom endpoint for the domain.</p>"
+        },
+        "enforceHTTPS": {
+          "type": "boolean",
+          "description": "<p>True to require that all traffic to the domain arrive over HTTPS.</p>"
+        },
+        "tlsSecurityPolicy": {
+          "$ref": "#/definitions/TLSSecurityPolicyEnumValue",
+          "description": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:</p> <ul> <li> <p> <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security policy that supports TLS version 1.0 to TLS version 1.2</p> </li> <li> <p> <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security policy that supports only TLS version 1.2</p> </li> <li> <p> <b>Policy-Min-TLS-1-2-PFS-2023-10:</b> TLS security policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</p> </li> </ul>"
+        }
+      }
+    },
+    "DomainProcessingStatusType": {
+      "type": "string",
+      "description": "DomainProcessingStatusType enum",
+      "enum": [
+        "Active",
+        "Creating",
+        "Deleting",
+        "Isolated",
+        "Modifying",
+        "UpdatingServiceSoftware",
+        "UpgradingEngineVersion"
+      ],
+      "x-ms-enum": {
+        "name": "DomainProcessingStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "DomainProcessingStatusType enum Active"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "DomainProcessingStatusType enum Creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "DomainProcessingStatusType enum Deleting"
+          },
+          {
+            "name": "Isolated",
+            "value": "Isolated",
+            "description": "DomainProcessingStatusType enum Isolated"
+          },
+          {
+            "name": "Modifying",
+            "value": "Modifying",
+            "description": "DomainProcessingStatusType enum Modifying"
+          },
+          {
+            "name": "UpdatingServiceSoftware",
+            "value": "UpdatingServiceSoftware",
+            "description": "DomainProcessingStatusType enum UpdatingServiceSoftware"
+          },
+          {
+            "name": "UpgradingEngineVersion",
+            "value": "UpgradingEngineVersion",
+            "description": "DomainProcessingStatusType enum UpgradingEngineVersion"
+          }
+        ]
+      }
+    },
+    "DomainProcessingStatusTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of DomainProcessingStatusTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DomainProcessingStatusType",
+          "description": "Property value"
+        }
+      }
+    },
+    "EBSOptions": {
+      "type": "object",
+      "description": "Definition of EBSOptions",
+      "properties": {
+        "ebsEnabled": {
+          "type": "boolean",
+          "description": "<p>Indicates whether EBS volumes are attached to data nodes in an OpenSearch Service domain.</p>"
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the <code>gp3</code> and provisioned IOPS EBS volume types.</p>"
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the <code>gp3</code> volume type.</p>"
+        },
+        "volumeSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the size (in GiB) of EBS volumes attached to data nodes.</p>"
+        },
+        "volumeType": {
+          "$ref": "#/definitions/VolumeTypeEnumValue",
+          "description": "<p>Specifies the type of EBS volumes attached to data nodes.</p>"
+        }
+      }
+    },
+    "EncryptionAtRestOptions": {
+      "type": "object",
+      "description": "Definition of EncryptionAtRestOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>True to enable encryption at rest.</p>"
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "<p>The KMS key ID. Takes the form <code>1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a</code>.</p>"
+        }
+      }
+    },
+    "IPAddressType": {
+      "type": "string",
+      "description": "IPAddressType enum",
+      "enum": [
+        "dualstack",
+        "ipv4"
+      ],
+      "x-ms-enum": {
+        "name": "IPAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dualstack",
+            "value": "dualstack",
+            "description": "IPAddressType enum dualstack"
+          },
+          {
+            "name": "Ipv4",
+            "value": "ipv4",
+            "description": "IPAddressType enum ipv4"
+          }
+        ]
+      }
+    },
+    "IPAddressTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of IPAddressTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/IPAddressType",
+          "description": "Property value"
+        }
+      }
+    },
+    "InitiatedBy": {
+      "type": "string",
+      "description": "InitiatedBy enum",
+      "enum": [
+        "CUSTOMER",
+        "SERVICE"
+      ],
+      "x-ms-enum": {
+        "name": "InitiatedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CUSTOMER",
+            "value": "CUSTOMER",
+            "description": "InitiatedBy enum CUSTOMER"
+          },
+          {
+            "name": "SERVICE",
+            "value": "SERVICE",
+            "description": "InitiatedBy enum SERVICE"
+          }
+        ]
+      }
+    },
+    "InitiatedByEnumValue": {
+      "type": "object",
+      "description": "Definition of InitiatedByEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/InitiatedBy",
+          "description": "Property value"
+        }
+      }
+    },
+    "LogPublishingOption": {
+      "type": "object",
+      "description": "Definition of LogPublishingOption",
+      "properties": {
+        "cloudWatchLogsLogGroupArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the CloudWatch Logs group to publish logs to.</p>"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>Whether the log should be published.</p>"
+        }
+      }
+    },
+    "ModifyingProperties": {
+      "type": "object",
+      "description": "Definition of ModifyingProperties",
+      "properties": {
+        "activeValue": {
+          "type": "string",
+          "description": "<p>The current value of the domain property that is being modified.</p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the property that is currently being modified.</p>"
+        },
+        "pendingValue": {
+          "type": "string",
+          "description": "<p>The value that the property that is currently being modified will eventually have.</p>"
+        },
+        "valueType": {
+          "$ref": "#/definitions/PropertyValueTypeEnumValue",
+          "description": "<p>The type of value that is currently being modified. Properties can have two types:</p> <ul> <li> <p> <code>PLAIN_TEXT</code>: Contain direct values such as '1', 'True', or 'c5.large.search'.</p> </li> <li> <p> <code>STRINGIFIED_JSON</code>: Contain content in JSON format, such as {'Enabled':'True'}'.</p> </li> </ul>"
+        }
+      }
+    },
+    "NodeToNodeEncryptionOptions": {
+      "type": "object",
+      "description": "Definition of NodeToNodeEncryptionOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>True to enable node-to-node encryption.</p>"
+        }
+      }
+    },
+    "OffPeakWindow": {
+      "type": "object",
+      "description": "Definition of OffPeakWindow",
+      "properties": {
+        "windowStartTime": {
+          "$ref": "#/definitions/WindowStartTime",
+          "description": "<p>A custom start time for the off-peak window, in Coordinated Universal Time (UTC). The window length will always be 10 hours, so you can't specify an end time. For example, if you specify 11:00 P.M. UTC as a start time, the end time will automatically be set to 9:00 A.M.</p>"
+        }
+      }
+    },
+    "OffPeakWindowOptions": {
+      "type": "object",
+      "description": "Definition of OffPeakWindowOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 16, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can't disable the off-peak window after it's enabled for a domain.</p>"
+        },
+        "offPeakWindow": {
+          "$ref": "#/definitions/OffPeakWindow",
+          "description": "<p>Off-peak window settings for the domain.</p>"
+        }
+      }
+    },
+    "OpenSearchDomainStatus": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OpenSearchDomainStatusProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OpenSearchDomainStatusListResult": {
+      "type": "object",
+      "description": "The response of a OpenSearchDomainStatus list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OpenSearchDomainStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/OpenSearchDomainStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OpenSearchDomainStatusProperties": {
+      "type": "object",
+      "description": "Definition of OpenSearchDomainStatus",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsOpenSearchDomainStatusProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OpenSearchDomainStatusTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in OpenSearchDomainStatus resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OpenSearchPartitionInstanceType": {
+      "type": "string",
+      "description": "OpenSearchPartitionInstanceType enum",
+      "enum": [
+        "c4.2xlarge.search",
+        "c4.4xlarge.search",
+        "c4.8xlarge.search",
+        "c4.large.search",
+        "c4.xlarge.search",
+        "c5.18xlarge.search",
+        "c5.2xlarge.search",
+        "c5.4xlarge.search",
+        "c5.9xlarge.search",
+        "c5.large.search",
+        "c5.xlarge.search",
+        "c6g.12xlarge.search",
+        "c6g.2xlarge.search",
+        "c6g.4xlarge.search",
+        "c6g.8xlarge.search",
+        "c6g.large.search",
+        "c6g.xlarge.search",
+        "d2.2xlarge.search",
+        "d2.4xlarge.search",
+        "d2.8xlarge.search",
+        "d2.xlarge.search",
+        "i2.2xlarge.search",
+        "i2.xlarge.search",
+        "i3.16xlarge.search",
+        "i3.2xlarge.search",
+        "i3.4xlarge.search",
+        "i3.8xlarge.search",
+        "i3.large.search",
+        "i3.xlarge.search",
+        "m3.2xlarge.search",
+        "m3.large.search",
+        "m3.medium.search",
+        "m3.xlarge.search",
+        "m4.10xlarge.search",
+        "m4.2xlarge.search",
+        "m4.4xlarge.search",
+        "m4.large.search",
+        "m4.xlarge.search",
+        "m5.12xlarge.search",
+        "m5.24xlarge.search",
+        "m5.2xlarge.search",
+        "m5.4xlarge.search",
+        "m5.large.search",
+        "m5.xlarge.search",
+        "m6g.12xlarge.search",
+        "m6g.2xlarge.search",
+        "m6g.4xlarge.search",
+        "m6g.8xlarge.search",
+        "m6g.large.search",
+        "m6g.xlarge.search",
+        "or1.12xlarge.search",
+        "or1.16xlarge.search",
+        "or1.2xlarge.search",
+        "or1.4xlarge.search",
+        "or1.8xlarge.search",
+        "or1.large.search",
+        "or1.medium.search",
+        "or1.xlarge.search",
+        "r3.2xlarge.search",
+        "r3.4xlarge.search",
+        "r3.8xlarge.search",
+        "r3.large.search",
+        "r3.xlarge.search",
+        "r4.16xlarge.search",
+        "r4.2xlarge.search",
+        "r4.4xlarge.search",
+        "r4.8xlarge.search",
+        "r4.large.search",
+        "r4.xlarge.search",
+        "r5.12xlarge.search",
+        "r5.24xlarge.search",
+        "r5.2xlarge.search",
+        "r5.4xlarge.search",
+        "r5.large.search",
+        "r5.xlarge.search",
+        "r6g.12xlarge.search",
+        "r6g.2xlarge.search",
+        "r6g.4xlarge.search",
+        "r6g.8xlarge.search",
+        "r6g.large.search",
+        "r6g.xlarge.search",
+        "r6gd.12xlarge.search",
+        "r6gd.16xlarge.search",
+        "r6gd.2xlarge.search",
+        "r6gd.4xlarge.search",
+        "r6gd.8xlarge.search",
+        "r6gd.large.search",
+        "r6gd.xlarge.search",
+        "t2.medium.search",
+        "t2.micro.search",
+        "t2.small.search",
+        "t3.2xlarge.search",
+        "t3.large.search",
+        "t3.medium.search",
+        "t3.micro.search",
+        "t3.nano.search",
+        "t3.small.search",
+        "t3.xlarge.search",
+        "t4g.medium.search",
+        "t4g.small.search",
+        "ultrawarm1.large.search",
+        "ultrawarm1.medium.search",
+        "ultrawarm1.xlarge.search"
+      ],
+      "x-ms-enum": {
+        "name": "OpenSearchPartitionInstanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "C42xlargeSearch",
+            "value": "c4.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c4.2xlarge.search"
+          },
+          {
+            "name": "C44xlargeSearch",
+            "value": "c4.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c4.4xlarge.search"
+          },
+          {
+            "name": "C48xlargeSearch",
+            "value": "c4.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c4.8xlarge.search"
+          },
+          {
+            "name": "C4LargeSearch",
+            "value": "c4.large.search",
+            "description": "OpenSearchPartitionInstanceType enum c4.large.search"
+          },
+          {
+            "name": "C4XlargeSearch",
+            "value": "c4.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c4.xlarge.search"
+          },
+          {
+            "name": "C518xlargeSearch",
+            "value": "c5.18xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c5.18xlarge.search"
+          },
+          {
+            "name": "C52xlargeSearch",
+            "value": "c5.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c5.2xlarge.search"
+          },
+          {
+            "name": "C54xlargeSearch",
+            "value": "c5.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c5.4xlarge.search"
+          },
+          {
+            "name": "C59xlargeSearch",
+            "value": "c5.9xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c5.9xlarge.search"
+          },
+          {
+            "name": "C5LargeSearch",
+            "value": "c5.large.search",
+            "description": "OpenSearchPartitionInstanceType enum c5.large.search"
+          },
+          {
+            "name": "C5XlargeSearch",
+            "value": "c5.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c5.xlarge.search"
+          },
+          {
+            "name": "C6g12xlargeSearch",
+            "value": "c6g.12xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c6g.12xlarge.search"
+          },
+          {
+            "name": "C6g2xlargeSearch",
+            "value": "c6g.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c6g.2xlarge.search"
+          },
+          {
+            "name": "C6g4xlargeSearch",
+            "value": "c6g.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c6g.4xlarge.search"
+          },
+          {
+            "name": "C6g8xlargeSearch",
+            "value": "c6g.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c6g.8xlarge.search"
+          },
+          {
+            "name": "C6gLargeSearch",
+            "value": "c6g.large.search",
+            "description": "OpenSearchPartitionInstanceType enum c6g.large.search"
+          },
+          {
+            "name": "C6gXlargeSearch",
+            "value": "c6g.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum c6g.xlarge.search"
+          },
+          {
+            "name": "D22xlargeSearch",
+            "value": "d2.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum d2.2xlarge.search"
+          },
+          {
+            "name": "D24xlargeSearch",
+            "value": "d2.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum d2.4xlarge.search"
+          },
+          {
+            "name": "D28xlargeSearch",
+            "value": "d2.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum d2.8xlarge.search"
+          },
+          {
+            "name": "D2XlargeSearch",
+            "value": "d2.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum d2.xlarge.search"
+          },
+          {
+            "name": "I22xlargeSearch",
+            "value": "i2.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum i2.2xlarge.search"
+          },
+          {
+            "name": "I2XlargeSearch",
+            "value": "i2.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum i2.xlarge.search"
+          },
+          {
+            "name": "I316xlargeSearch",
+            "value": "i3.16xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum i3.16xlarge.search"
+          },
+          {
+            "name": "I32xlargeSearch",
+            "value": "i3.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum i3.2xlarge.search"
+          },
+          {
+            "name": "I34xlargeSearch",
+            "value": "i3.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum i3.4xlarge.search"
+          },
+          {
+            "name": "I38xlargeSearch",
+            "value": "i3.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum i3.8xlarge.search"
+          },
+          {
+            "name": "I3LargeSearch",
+            "value": "i3.large.search",
+            "description": "OpenSearchPartitionInstanceType enum i3.large.search"
+          },
+          {
+            "name": "I3XlargeSearch",
+            "value": "i3.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum i3.xlarge.search"
+          },
+          {
+            "name": "M32xlargeSearch",
+            "value": "m3.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m3.2xlarge.search"
+          },
+          {
+            "name": "M3LargeSearch",
+            "value": "m3.large.search",
+            "description": "OpenSearchPartitionInstanceType enum m3.large.search"
+          },
+          {
+            "name": "M3MediumSearch",
+            "value": "m3.medium.search",
+            "description": "OpenSearchPartitionInstanceType enum m3.medium.search"
+          },
+          {
+            "name": "M3XlargeSearch",
+            "value": "m3.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m3.xlarge.search"
+          },
+          {
+            "name": "M410xlargeSearch",
+            "value": "m4.10xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m4.10xlarge.search"
+          },
+          {
+            "name": "M42xlargeSearch",
+            "value": "m4.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m4.2xlarge.search"
+          },
+          {
+            "name": "M44xlargeSearch",
+            "value": "m4.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m4.4xlarge.search"
+          },
+          {
+            "name": "M4LargeSearch",
+            "value": "m4.large.search",
+            "description": "OpenSearchPartitionInstanceType enum m4.large.search"
+          },
+          {
+            "name": "M4XlargeSearch",
+            "value": "m4.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m4.xlarge.search"
+          },
+          {
+            "name": "M512xlargeSearch",
+            "value": "m5.12xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m5.12xlarge.search"
+          },
+          {
+            "name": "M524xlargeSearch",
+            "value": "m5.24xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m5.24xlarge.search"
+          },
+          {
+            "name": "M52xlargeSearch",
+            "value": "m5.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m5.2xlarge.search"
+          },
+          {
+            "name": "M54xlargeSearch",
+            "value": "m5.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m5.4xlarge.search"
+          },
+          {
+            "name": "M5LargeSearch",
+            "value": "m5.large.search",
+            "description": "OpenSearchPartitionInstanceType enum m5.large.search"
+          },
+          {
+            "name": "M5XlargeSearch",
+            "value": "m5.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m5.xlarge.search"
+          },
+          {
+            "name": "M6g12xlargeSearch",
+            "value": "m6g.12xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m6g.12xlarge.search"
+          },
+          {
+            "name": "M6g2xlargeSearch",
+            "value": "m6g.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m6g.2xlarge.search"
+          },
+          {
+            "name": "M6g4xlargeSearch",
+            "value": "m6g.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m6g.4xlarge.search"
+          },
+          {
+            "name": "M6g8xlargeSearch",
+            "value": "m6g.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m6g.8xlarge.search"
+          },
+          {
+            "name": "M6gLargeSearch",
+            "value": "m6g.large.search",
+            "description": "OpenSearchPartitionInstanceType enum m6g.large.search"
+          },
+          {
+            "name": "M6gXlargeSearch",
+            "value": "m6g.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum m6g.xlarge.search"
+          },
+          {
+            "name": "Or112xlargeSearch",
+            "value": "or1.12xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum or1.12xlarge.search"
+          },
+          {
+            "name": "Or116xlargeSearch",
+            "value": "or1.16xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum or1.16xlarge.search"
+          },
+          {
+            "name": "Or12xlargeSearch",
+            "value": "or1.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum or1.2xlarge.search"
+          },
+          {
+            "name": "Or14xlargeSearch",
+            "value": "or1.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum or1.4xlarge.search"
+          },
+          {
+            "name": "Or18xlargeSearch",
+            "value": "or1.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum or1.8xlarge.search"
+          },
+          {
+            "name": "Or1LargeSearch",
+            "value": "or1.large.search",
+            "description": "OpenSearchPartitionInstanceType enum or1.large.search"
+          },
+          {
+            "name": "Or1MediumSearch",
+            "value": "or1.medium.search",
+            "description": "OpenSearchPartitionInstanceType enum or1.medium.search"
+          },
+          {
+            "name": "Or1XlargeSearch",
+            "value": "or1.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum or1.xlarge.search"
+          },
+          {
+            "name": "R32xlargeSearch",
+            "value": "r3.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r3.2xlarge.search"
+          },
+          {
+            "name": "R34xlargeSearch",
+            "value": "r3.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r3.4xlarge.search"
+          },
+          {
+            "name": "R38xlargeSearch",
+            "value": "r3.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r3.8xlarge.search"
+          },
+          {
+            "name": "R3LargeSearch",
+            "value": "r3.large.search",
+            "description": "OpenSearchPartitionInstanceType enum r3.large.search"
+          },
+          {
+            "name": "R3XlargeSearch",
+            "value": "r3.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r3.xlarge.search"
+          },
+          {
+            "name": "R416xlargeSearch",
+            "value": "r4.16xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r4.16xlarge.search"
+          },
+          {
+            "name": "R42xlargeSearch",
+            "value": "r4.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r4.2xlarge.search"
+          },
+          {
+            "name": "R44xlargeSearch",
+            "value": "r4.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r4.4xlarge.search"
+          },
+          {
+            "name": "R48xlargeSearch",
+            "value": "r4.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r4.8xlarge.search"
+          },
+          {
+            "name": "R4LargeSearch",
+            "value": "r4.large.search",
+            "description": "OpenSearchPartitionInstanceType enum r4.large.search"
+          },
+          {
+            "name": "R4XlargeSearch",
+            "value": "r4.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r4.xlarge.search"
+          },
+          {
+            "name": "R512xlargeSearch",
+            "value": "r5.12xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r5.12xlarge.search"
+          },
+          {
+            "name": "R524xlargeSearch",
+            "value": "r5.24xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r5.24xlarge.search"
+          },
+          {
+            "name": "R52xlargeSearch",
+            "value": "r5.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r5.2xlarge.search"
+          },
+          {
+            "name": "R54xlargeSearch",
+            "value": "r5.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r5.4xlarge.search"
+          },
+          {
+            "name": "R5LargeSearch",
+            "value": "r5.large.search",
+            "description": "OpenSearchPartitionInstanceType enum r5.large.search"
+          },
+          {
+            "name": "R5XlargeSearch",
+            "value": "r5.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r5.xlarge.search"
+          },
+          {
+            "name": "R6g12xlargeSearch",
+            "value": "r6g.12xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6g.12xlarge.search"
+          },
+          {
+            "name": "R6g2xlargeSearch",
+            "value": "r6g.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6g.2xlarge.search"
+          },
+          {
+            "name": "R6g4xlargeSearch",
+            "value": "r6g.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6g.4xlarge.search"
+          },
+          {
+            "name": "R6g8xlargeSearch",
+            "value": "r6g.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6g.8xlarge.search"
+          },
+          {
+            "name": "R6gLargeSearch",
+            "value": "r6g.large.search",
+            "description": "OpenSearchPartitionInstanceType enum r6g.large.search"
+          },
+          {
+            "name": "R6gXlargeSearch",
+            "value": "r6g.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6g.xlarge.search"
+          },
+          {
+            "name": "R6gd12xlargeSearch",
+            "value": "r6gd.12xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6gd.12xlarge.search"
+          },
+          {
+            "name": "R6gd16xlargeSearch",
+            "value": "r6gd.16xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6gd.16xlarge.search"
+          },
+          {
+            "name": "R6gd2xlargeSearch",
+            "value": "r6gd.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6gd.2xlarge.search"
+          },
+          {
+            "name": "R6gd4xlargeSearch",
+            "value": "r6gd.4xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6gd.4xlarge.search"
+          },
+          {
+            "name": "R6gd8xlargeSearch",
+            "value": "r6gd.8xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6gd.8xlarge.search"
+          },
+          {
+            "name": "R6gdLargeSearch",
+            "value": "r6gd.large.search",
+            "description": "OpenSearchPartitionInstanceType enum r6gd.large.search"
+          },
+          {
+            "name": "R6gdXlargeSearch",
+            "value": "r6gd.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum r6gd.xlarge.search"
+          },
+          {
+            "name": "T2MediumSearch",
+            "value": "t2.medium.search",
+            "description": "OpenSearchPartitionInstanceType enum t2.medium.search"
+          },
+          {
+            "name": "T2MicroSearch",
+            "value": "t2.micro.search",
+            "description": "OpenSearchPartitionInstanceType enum t2.micro.search"
+          },
+          {
+            "name": "T2SmallSearch",
+            "value": "t2.small.search",
+            "description": "OpenSearchPartitionInstanceType enum t2.small.search"
+          },
+          {
+            "name": "T32xlargeSearch",
+            "value": "t3.2xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum t3.2xlarge.search"
+          },
+          {
+            "name": "T3LargeSearch",
+            "value": "t3.large.search",
+            "description": "OpenSearchPartitionInstanceType enum t3.large.search"
+          },
+          {
+            "name": "T3MediumSearch",
+            "value": "t3.medium.search",
+            "description": "OpenSearchPartitionInstanceType enum t3.medium.search"
+          },
+          {
+            "name": "T3MicroSearch",
+            "value": "t3.micro.search",
+            "description": "OpenSearchPartitionInstanceType enum t3.micro.search"
+          },
+          {
+            "name": "T3NanoSearch",
+            "value": "t3.nano.search",
+            "description": "OpenSearchPartitionInstanceType enum t3.nano.search"
+          },
+          {
+            "name": "T3SmallSearch",
+            "value": "t3.small.search",
+            "description": "OpenSearchPartitionInstanceType enum t3.small.search"
+          },
+          {
+            "name": "T3XlargeSearch",
+            "value": "t3.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum t3.xlarge.search"
+          },
+          {
+            "name": "T4gMediumSearch",
+            "value": "t4g.medium.search",
+            "description": "OpenSearchPartitionInstanceType enum t4g.medium.search"
+          },
+          {
+            "name": "T4gSmallSearch",
+            "value": "t4g.small.search",
+            "description": "OpenSearchPartitionInstanceType enum t4g.small.search"
+          },
+          {
+            "name": "Ultrawarm1LargeSearch",
+            "value": "ultrawarm1.large.search",
+            "description": "OpenSearchPartitionInstanceType enum ultrawarm1.large.search"
+          },
+          {
+            "name": "Ultrawarm1MediumSearch",
+            "value": "ultrawarm1.medium.search",
+            "description": "OpenSearchPartitionInstanceType enum ultrawarm1.medium.search"
+          },
+          {
+            "name": "Ultrawarm1XlargeSearch",
+            "value": "ultrawarm1.xlarge.search",
+            "description": "OpenSearchPartitionInstanceType enum ultrawarm1.xlarge.search"
+          }
+        ]
+      }
+    },
+    "OpenSearchPartitionInstanceTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of OpenSearchPartitionInstanceTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/OpenSearchPartitionInstanceType",
+          "description": "Property value"
+        }
+      }
+    },
+    "OpenSearchWarmPartitionInstanceType": {
+      "type": "string",
+      "description": "OpenSearchWarmPartitionInstanceType enum",
+      "enum": [
+        "ultrawarm1.large.search",
+        "ultrawarm1.medium.search",
+        "ultrawarm1.xlarge.search"
+      ],
+      "x-ms-enum": {
+        "name": "OpenSearchWarmPartitionInstanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ultrawarm1LargeSearch",
+            "value": "ultrawarm1.large.search",
+            "description": "OpenSearchWarmPartitionInstanceType enum ultrawarm1.large.search"
+          },
+          {
+            "name": "Ultrawarm1MediumSearch",
+            "value": "ultrawarm1.medium.search",
+            "description": "OpenSearchWarmPartitionInstanceType enum ultrawarm1.medium.search"
+          },
+          {
+            "name": "Ultrawarm1XlargeSearch",
+            "value": "ultrawarm1.xlarge.search",
+            "description": "OpenSearchWarmPartitionInstanceType enum ultrawarm1.xlarge.search"
+          }
+        ]
+      }
+    },
+    "OpenSearchWarmPartitionInstanceTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of OpenSearchWarmPartitionInstanceTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/OpenSearchWarmPartitionInstanceType",
+          "description": "Property value"
+        }
+      }
+    },
+    "PropertyValueType": {
+      "type": "string",
+      "description": "PropertyValueType enum",
+      "enum": [
+        "PLAIN_TEXT",
+        "STRINGIFIED_JSON"
+      ],
+      "x-ms-enum": {
+        "name": "PropertyValueType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PLAIN_TEXT",
+            "value": "PLAIN_TEXT",
+            "description": "PropertyValueType enum PLAIN_TEXT"
+          },
+          {
+            "name": "STRINGIFIED_JSON",
+            "value": "STRINGIFIED_JSON",
+            "description": "PropertyValueType enum STRINGIFIED_JSON"
+          }
+        ]
+      }
+    },
+    "PropertyValueTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of PropertyValueTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PropertyValueType",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SAMLIdp": {
+      "type": "object",
+      "description": "Definition of SAMLIdp",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "<p>The unique entity ID of the application in the SAML identity provider.</p>"
+        },
+        "metadataContent": {
+          "type": "string",
+          "description": "<p>The metadata of the SAML application, in XML format.</p>"
+        }
+      }
+    },
+    "SAMLOptionsOutput": {
+      "type": "object",
+      "description": "Definition of SAMLOptionsOutput",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>True if SAML is enabled.</p>"
+        },
+        "idp": {
+          "$ref": "#/definitions/SAMLIdp",
+          "description": "<p>Describes the SAML identity provider's information.</p>"
+        },
+        "rolesKey": {
+          "type": "string",
+          "description": "<p>The key used for matching the SAML roles attribute.</p>"
+        },
+        "sessionTimeoutMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The duration, in minutes, after which a user session becomes inactive.</p>"
+        },
+        "subjectKey": {
+          "type": "string",
+          "description": "<p>The key used for matching the SAML subject attribute.</p>"
+        }
+      }
+    },
+    "ServiceSoftwareOptions": {
+      "type": "object",
+      "description": "Definition of ServiceSoftwareOptions",
+      "properties": {
+        "automatedUpdateDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.</p>"
+        },
+        "cancellable": {
+          "type": "boolean",
+          "description": "<p> True if you're able to cancel your service software version update. False if you can't cancel your service software update.</p>"
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "<p>The current service software version present on the domain.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "<p>A description of the service software update status.</p>"
+        },
+        "newVersion": {
+          "type": "string",
+          "description": "<p>The new service software version, if one is available.</p>"
+        },
+        "optionalDeployment": {
+          "type": "boolean",
+          "description": "<p>True if a service software is never automatically updated. False if a service software is automatically updated after the automated update date.</p>"
+        },
+        "updateAvailable": {
+          "type": "boolean",
+          "description": "<p>True if you're able to update your service software version. False if you can't update your service software version.</p>"
+        },
+        "updateStatus": {
+          "$ref": "#/definitions/DeploymentStatusEnumValue",
+          "description": "<p>The status of your service software update.</p>"
+        }
+      }
+    },
+    "SnapshotOptions": {
+      "type": "object",
+      "description": "Definition of SnapshotOptions",
+      "properties": {
+        "automatedSnapshotStartHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The time, in UTC format, when OpenSearch Service takes a daily automated snapshot of the specified domain. Default is <code>0</code> hours.</p>"
+        }
+      }
+    },
+    "SoftwareUpdateOptions": {
+      "type": "object",
+      "description": "Definition of SoftwareUpdateOptions",
+      "properties": {
+        "autoSoftwareUpdateEnabled": {
+          "type": "boolean",
+          "description": "<p>Whether automatic service software updates are enabled for the domain.</p>"
+        }
+      }
+    },
+    "TLSSecurityPolicy": {
+      "type": "string",
+      "description": "TLSSecurityPolicy enum",
+      "enum": [
+        "Policy-Min-TLS-1-0-2019-07",
+        "Policy-Min-TLS-1-2-2019-07",
+        "Policy-Min-TLS-1-2-PFS-2023-10"
+      ],
+      "x-ms-enum": {
+        "name": "TLSSecurityPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PolicyMinTLS10201907",
+            "value": "Policy-Min-TLS-1-0-2019-07",
+            "description": "TLSSecurityPolicy enum Policy-Min-TLS-1-0-2019-07"
+          },
+          {
+            "name": "PolicyMinTLS12201907",
+            "value": "Policy-Min-TLS-1-2-2019-07",
+            "description": "TLSSecurityPolicy enum Policy-Min-TLS-1-2-2019-07"
+          },
+          {
+            "name": "PolicyMinTLS12PFS202310",
+            "value": "Policy-Min-TLS-1-2-PFS-2023-10",
+            "description": "TLSSecurityPolicy enum Policy-Min-TLS-1-2-PFS-2023-10"
+          }
+        ]
+      }
+    },
+    "TLSSecurityPolicyEnumValue": {
+      "type": "object",
+      "description": "Definition of TLSSecurityPolicyEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/TLSSecurityPolicy",
+          "description": "Property value"
+        }
+      }
+    },
+    "VPCDerivedInfo": {
+      "type": "object",
+      "description": "Definition of VPCDerivedInfo",
+      "properties": {
+        "availabilityZones": {
+          "type": "array",
+          "description": "<p>The list of Availability Zones associated with the VPC subnets.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "securityGroupIds": {
+          "type": "array",
+          "description": "<p>The list of security group IDs associated with the VPC endpoints for the domain.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnetIds": {
+          "type": "array",
+          "description": "<p>A list of subnet IDs associated with the VPC endpoints for the domain.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "<p>The ID for your VPC. Amazon VPC generates this value when you create a VPC.</p>"
+        }
+      }
+    },
+    "VolumeType": {
+      "type": "string",
+      "description": "VolumeType enum",
+      "enum": [
+        "gp2",
+        "gp3",
+        "io1",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Gp2",
+            "value": "gp2",
+            "description": "VolumeType enum gp2"
+          },
+          {
+            "name": "Gp3",
+            "value": "gp3",
+            "description": "VolumeType enum gp3"
+          },
+          {
+            "name": "Io1",
+            "value": "io1",
+            "description": "VolumeType enum io1"
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "VolumeType enum standard"
+          }
+        ]
+      }
+    },
+    "VolumeTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of VolumeTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/VolumeType",
+          "description": "Property value"
+        }
+      }
+    },
+    "WindowStartTime": {
+      "type": "object",
+      "description": "Definition of WindowStartTime",
+      "properties": {
+        "hours": {
+          "type": "integer",
+          "format": "int64",
+          "description": "<p>The start hour of the window in Coordinated Universal Time (UTC), using 24-hour time. For example, <code>17</code> refers to 5:00 P.M. UTC.</p>"
+        },
+        "minutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "<p>The start minute of the window, in UTC.</p>"
+        }
+      }
+    },
+    "ZoneAwarenessConfig": {
+      "type": "object",
+      "description": "Definition of ZoneAwarenessConfig",
+      "properties": {
+        "availabilityZoneCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>If you enabled multiple Availability Zones, this value is the number of zones that you want the domain to use. Valid values are <code>2</code> and <code>3</code>. If your domain is provisioned within a VPC, this value be equal to number of subnets.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

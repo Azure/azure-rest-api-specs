@@ -39,6 +39,14 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 input-file:
   - Microsoft.NetApp/preview/2024-05-01-preview/netapp.json
 ```
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05'
+input-file:
+  - Microsoft.NetApp/stable/2024-05-01/netapp.json
+```
 
 ### Tag: package-2024-03
 
