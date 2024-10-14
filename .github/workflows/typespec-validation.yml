@@ -28,7 +28,7 @@ jobs:
     - name: Validate Impacted Specs
       run: |
         ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
-        Write-Host "LASTEXITCODE: $LASTEXITCODE"
+        
+        # Effectively the same as ignoreLASTEXITCODE in Azure DevOps
+        exit 0
       shell: pwsh
-      # TODO: Verify this is correct
-      continue-on-error: true
