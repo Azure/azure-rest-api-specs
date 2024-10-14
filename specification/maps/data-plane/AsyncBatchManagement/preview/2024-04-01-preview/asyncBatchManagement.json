@@ -2,12 +2,9 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Asynchronous Batch Management Service",
-    "version": "2024-07-01-preview",
+    "version": "2024-04-01-preview",
     "description": "Azure Maps Asynchronous Batch Management REST APIs"
   },
-  "schemes": [
-    "https"
-  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{geography}.atlas.microsoft.com",
     "parameters": [
@@ -16,29 +13,19 @@
       }
     ]
   },
-  "produces": [
-    "application/json"
+  "schemes": [
+    "https"
   ],
   "consumes": [],
-  "security": [
-    {
-      "AADToken": [
-        "https://atlas.microsoft.com/.default"
-      ]
-    },
-    {
-      "AzureKey": []
-    },
-    {
-      "SasToken": []
-    }
+  "produces": [
+    "application/json"
   ],
   "securityDefinitions": {
     "AADToken": {
       "type": "oauth2",
-      "description": "These are the [Microsoft Entra OAuth 2.0](/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n> [!NOTE]\n> * This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n> * The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n> * The Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n> * Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n> *  For more information on Microsoft identity platform, see [Microsoft identity platform overview](/entra/identity-platform/v2-overview).\n\n",
-      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Microsoft Entra OAuth 2.0](/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n> [!NOTE]\n> * This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n> * The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n> * The Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n> * Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n> *  For more information on Microsoft identity platform, see [Microsoft identity platform overview](/entra/identity-platform/v2-overview).\n\n",
       "scopes": {
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
@@ -56,11 +43,103 @@
       "in": "header"
     }
   },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "AzureKey": []
+    },
+    {
+      "SasToken": []
+    }
+  ],
+  "responses": {},
+  "parameters": {
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "OperationId": {
+      "name": "operationId",
+      "description": "System generated unique identifier for the asynchronous batch operation after it has been submitted.",
+      "type": "string",
+      "format": "uuid",
+      "maxLength": 36,
+      "minLength": 36,
+      "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$",
+      "in": "path",
+      "required": true
+    }
+  },
   "paths": {
+    "/asyncBatch/operations/{operationId}": {
+      "get": {
+        "description": "Get the status of an asynchronous batch operation by its operation ID.",
+        "operationId": "AsynchronousBatchManagement_GetOperation",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a not started operation status": {
+            "$ref": "./examples/GetOperationStatusNotStarted.json"
+          },
+          "Get a running operation status": {
+            "$ref": "./examples/GetOperationStatusRunning.json"
+          },
+          "Get a succeeded operation status": {
+            "$ref": "./examples/GetOperationStatusSucceeded.json"
+          },
+          "Get a failed operation status": {
+            "$ref": "./examples/GetOperationStatusFailed.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AsyncBatchOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
     "/asyncBatch/operations": {
       "get": {
-        "operationId": "AsynchronousBatchManagement_ListAllOperations",
         "description": "List the status of all asynchronous batch operations available to the user.",
+        "operationId": "AsynchronousBatchManagement_ListAllOperations",
+        "x-ms-examples": {
+          "Get operations with various status": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
@@ -90,88 +169,45 @@
             "x-ms-error-response": true
           }
         },
-        "x-ms-examples": {
-          "Get operations with various status": {
-            "$ref": "./examples/GetOperations.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/asyncBatch/operations/{id}": {
-      "get": {
-        "operationId": "AsynchronousBatchManagement_GetOperation",
-        "description": "Get the status of an asynchronous batch operation by its ID.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AsyncBatchOperation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error occurred.",
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Get a completed operation status": {
-            "$ref": "./examples/GetOperationStatusCompleted.json"
-          },
-          "Get a failed operation status": {
-            "$ref": "./examples/GetOperationStatusFailed.json"
-          },
-          "Get a not started operation status": {
-            "$ref": "./examples/GetOperationStatusNotStarted.json"
-          },
-          "Get a running operation status": {
-            "$ref": "./examples/GetOperationStatusRunning.json"
-          }
         }
       }
     }
   },
   "definitions": {
+    "AsyncBatchOperationResult": {
+      "type": "object",
+      "description": "The result of the asynchronous batch operation.",
+      "properties": {
+        "outputBlobUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the output blob containing the batch results."
+        }
+      },
+      "required": [
+        "outputBlobUrl"
+      ]
+    },
     "AsyncBatchOperation": {
       "type": "object",
       "description": "This object is returned from a successful Get Operation request.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the asynchronous batch operation."
+        "operationId": {
+          "description": "Unique identifier for the asynchronous batch operation.",
+          "type": "string"
         },
-        "kind": {
+        "operationType": {
           "type": "string",
-          "description": "Kind of asynchronous batch operation",
+          "description": "Type of asynchronous batch operation",
           "enum": [
             "Geocode",
             "ReverseGeocode",
             "RouteDirections"
           ],
           "x-ms-enum": {
-            "name": "KindEnum",
+            "name": "OperationTypeEnum",
             "modelAsString": true,
             "values": [
               {
@@ -189,19 +225,15 @@
             ]
           }
         },
-        "inputContainerUri": {
+        "inputBlobUrl": {
+          "description": "The URL to the input blob containing the batch of queries. This should be a valid URL pointing to a blob of an Azure Storage Account",
           "type": "string",
-          "format": "uri",
-          "description": "The URI for the Azure Blob Storage container with the input blobs to be processed."
+          "format": "uri"
         },
-        "outputContainerUri": {
+        "outputStorageUrl": {
+          "description": "The URL that points to a blob storage where the batch results will be stored.",
           "type": "string",
-          "format": "uri",
-          "description": "The URI for the Azure Blob Storage container where the output blobs will be stored."
-        },
-        "allowBlobOverwrite": {
-          "type": "boolean",
-          "description": "If a blob with the same name as the batch result output already exists in the output container, the transformation will terminate to avoid overwriting the existing blob. If allowBlobOverwrite option is set to true, the existing blob will be overwritten."
+          "format": "uri"
         },
         "msiClientId": {
           "type": "string",
@@ -217,15 +249,15 @@
           "format": "date-time",
           "description": "Timestamp when the operation status was updated."
         },
-        "processedBlobCount": {
+        "percentComplete": {
           "type": "integer",
           "format": "int32",
-          "description": "Indicate how many input blobs have been transformed."
+          "description": "Percentage indicating the completion status of the operation."
         },
-        "totalBlobCount": {
+        "totalItemCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Indicate how many input blobs to transform."
+          "description": "Total number of items in the batch operation."
         },
         "status": {
           "type": "string",
@@ -233,7 +265,7 @@
           "enum": [
             "NotStarted",
             "Running",
-            "Completed",
+            "Succeeded",
             "Failed",
             "Canceled"
           ],
@@ -250,8 +282,8 @@
                 "description": "The operation is running."
               },
               {
-                "value": "Completed",
-                "description": "The operation has completed."
+                "value": "Succeeded",
+                "description": "The operation has completed successfully."
               },
               {
                 "value": "Failed",
@@ -264,42 +296,45 @@
             ]
           }
         },
+        "result": {
+          "$ref": "#/definitions/AsyncBatchOperationResult"
+        },
         "error": {
           "type": "object",
           "description": "The error detail.",
           "properties": {
             "code": {
+              "readOnly": true,
               "type": "string",
-              "description": "The error code.",
-              "readOnly": true
+              "description": "The error code."
             },
             "message": {
+              "readOnly": true,
               "type": "string",
-              "description": "The error message.",
-              "readOnly": true
+              "description": "The error message."
             }
           }
         }
       },
       "required": [
-        "id",
-        "kind",
-        "inputContainerUri",
-        "outputContainerUri",
+        "operationId",
+        "operationType",
+        "inputBlobUrl",
+        "outputStorageUrl",
         "createdDateTime",
         "lastActionDateTime",
-        "processedBlobCount",
-        "totalBlobCount",
+        "percentComplete",
+        "totalItemCount",
         "status"
       ]
     },
     "AsyncBatchOperationsList": {
-      "type": "object",
       "description": "This object is returned from a successful Get Specific Operations request.",
+      "type": "object",
       "properties": {
         "value": {
-          "type": "array",
           "description": "Array containing the details of operations",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/AsyncBatchOperation"
           }
@@ -314,27 +349,5 @@
         "value"
       ]
     }
-  },
-  "parameters": {
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Version number of Azure Maps API.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "Id": {
-      "name": "id",
-      "in": "path",
-      "description": "System generated unique identifier for the asynchronous batch operation after it has been submitted.",
-      "required": true,
-      "type": "string",
-      "format": "uuid",
-      "minLength": 36,
-      "maxLength": 36,
-      "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
-    }
-  },
-  "responses": {}
+  }
 }
