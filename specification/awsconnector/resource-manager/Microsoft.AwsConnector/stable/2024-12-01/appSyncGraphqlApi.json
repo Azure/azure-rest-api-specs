@@ -1,0 +1,1120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AppSyncGraphqlApis"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/appSyncGraphqlApis": {
+      "get": {
+        "operationId": "AppSyncGraphqlApis_ListBySubscription",
+        "tags": [
+          "AppSyncGraphqlApis"
+        ],
+        "description": "List AppSyncGraphqlApi resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppSyncGraphqlApiListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AppSyncGraphqlApis_ListBySubscription": {
+            "$ref": "./examples/AppSyncGraphqlApis_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/appSyncGraphqlApis": {
+      "get": {
+        "operationId": "AppSyncGraphqlApis_ListByResourceGroup",
+        "tags": [
+          "AppSyncGraphqlApis"
+        ],
+        "description": "List AppSyncGraphqlApi resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppSyncGraphqlApiListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AppSyncGraphqlApis_ListByResourceGroup": {
+            "$ref": "./examples/AppSyncGraphqlApis_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/appSyncGraphqlApis/{name}": {
+      "get": {
+        "operationId": "AppSyncGraphqlApis_Get",
+        "tags": [
+          "AppSyncGraphqlApis"
+        ],
+        "description": "Get a AppSyncGraphqlApi",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of AppSyncGraphqlApi",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppSyncGraphqlApi"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AppSyncGraphqlApis_Get": {
+            "$ref": "./examples/AppSyncGraphqlApis_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AppSyncGraphqlApis_CreateOrReplace",
+        "tags": [
+          "AppSyncGraphqlApis"
+        ],
+        "description": "Create a AppSyncGraphqlApi. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of AppSyncGraphqlApi",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppSyncGraphqlApi"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AppSyncGraphqlApi' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AppSyncGraphqlApi"
+            }
+          },
+          "201": {
+            "description": "Resource 'AppSyncGraphqlApi' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AppSyncGraphqlApi"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AppSyncGraphqlApis_CreateOrReplace": {
+            "$ref": "./examples/AppSyncGraphqlApis_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AppSyncGraphqlApis_Update",
+        "tags": [
+          "AppSyncGraphqlApis"
+        ],
+        "description": "Update a AppSyncGraphqlApi",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of AppSyncGraphqlApi",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppSyncGraphqlApiTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppSyncGraphqlApi"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AppSyncGraphqlApis_Update": {
+            "$ref": "./examples/AppSyncGraphqlApis_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AppSyncGraphqlApis_Delete",
+        "tags": [
+          "AppSyncGraphqlApis"
+        ],
+        "description": "Delete a AppSyncGraphqlApi",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of AppSyncGraphqlApi",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AppSyncGraphqlApis_Delete": {
+            "$ref": "./examples/AppSyncGraphqlApis_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalAuthenticationProvider": {
+      "type": "object",
+      "description": "Definition of AdditionalAuthenticationProvider",
+      "properties": {
+        "authenticationType": {
+          "$ref": "#/definitions/AuthenticationTypeEnumValue",
+          "description": "<p>The authentication type: API key, Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda.</p>"
+        },
+        "lambdaAuthorizerConfig": {
+          "$ref": "#/definitions/LambdaAuthorizerConfig",
+          "description": "<p>Configuration for Lambda function authorization.</p>"
+        },
+        "openIDConnectConfig": {
+          "$ref": "#/definitions/OpenIDConnectConfig",
+          "description": "<p>The OIDC configuration.</p>"
+        },
+        "userPoolConfig": {
+          "$ref": "#/definitions/CognitoUserPoolConfig",
+          "description": "<p>The Amazon Cognito user pool configuration.</p>"
+        }
+      }
+    },
+    "AppSyncGraphqlApi": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppSyncGraphqlApiProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AppSyncGraphqlApiListResult": {
+      "type": "object",
+      "description": "The response of a AppSyncGraphqlApi list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AppSyncGraphqlApi items on this page",
+          "items": {
+            "$ref": "#/definitions/AppSyncGraphqlApi"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AppSyncGraphqlApiProperties": {
+      "type": "object",
+      "description": "Definition of AppSyncGraphqlApi",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsAppSyncGraphqlApiProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AppSyncGraphqlApiTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AppSyncGraphqlApi resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AuthenticationType": {
+      "type": "string",
+      "description": "AuthenticationType enum",
+      "enum": [
+        "AMAZON_COGNITO_USER_POOLS",
+        "API_KEY",
+        "AWS_IAM",
+        "AWS_LAMBDA",
+        "OPENID_CONNECT"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AMAZON_COGNITO_USER_POOLS",
+            "value": "AMAZON_COGNITO_USER_POOLS",
+            "description": "AuthenticationType enum AMAZON_COGNITO_USER_POOLS"
+          },
+          {
+            "name": "API_KEY",
+            "value": "API_KEY",
+            "description": "AuthenticationType enum API_KEY"
+          },
+          {
+            "name": "AWS_IAM",
+            "value": "AWS_IAM",
+            "description": "AuthenticationType enum AWS_IAM"
+          },
+          {
+            "name": "AWS_LAMBDA",
+            "value": "AWS_LAMBDA",
+            "description": "AuthenticationType enum AWS_LAMBDA"
+          },
+          {
+            "name": "OPENID_CONNECT",
+            "value": "OPENID_CONNECT",
+            "description": "AuthenticationType enum OPENID_CONNECT"
+          }
+        ]
+      }
+    },
+    "AuthenticationTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of AuthenticationTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "Property value"
+        }
+      }
+    },
+    "AwsAppSyncGraphqlApiProperties": {
+      "type": "object",
+      "description": "Definition of awsAppSyncGraphqlApi",
+      "properties": {
+        "additionalAuthenticationProviders": {
+          "type": "array",
+          "description": "<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>",
+          "items": {
+            "$ref": "#/definitions/AdditionalAuthenticationProvider"
+          },
+          "x-ms-identifiers": []
+        },
+        "apiId": {
+          "type": "string",
+          "description": "<p>The API ID.</p>"
+        },
+        "apiType": {
+          "$ref": "#/definitions/GraphQLApiTypeEnumValue",
+          "description": "<p>The value that indicates whether the GraphQL API is a standard API (<code>GRAPHQL</code>) or merged API (<code>MERGED</code>).</p>"
+        },
+        "arn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN).</p>"
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/AuthenticationTypeEnumValue",
+          "description": "<p>The authentication type.</p>"
+        },
+        "dns": {
+          "type": "object",
+          "description": "<p>The DNS records for the API.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "enhancedMetricsConfig": {
+          "$ref": "#/definitions/EnhancedMetricsConfig",
+          "description": "<p>The <code>enhancedMetricsConfig</code> object.</p>"
+        },
+        "introspectionConfig": {
+          "$ref": "#/definitions/GraphQLApiIntrospectionConfigEnumValue",
+          "description": "<p>Sets the value of the GraphQL API to enable (<code>ENABLED</code>) or disable (<code>DISABLED</code>) introspection. If no value is provided, the introspection configuration will be set to <code>ENABLED</code> by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled.</p> <p>For more information about introspection, see <a href='https://graphql.org/learn/introspection/'>GraphQL introspection</a>.</p>"
+        },
+        "lambdaAuthorizerConfig": {
+          "$ref": "#/definitions/LambdaAuthorizerConfig",
+          "description": "<p>Configuration for Lambda function authorization.</p>"
+        },
+        "logConfig": {
+          "$ref": "#/definitions/LogConfig",
+          "description": "<p>The Amazon CloudWatch Logs configuration.</p>"
+        },
+        "mergedApiExecutionRoleArn": {
+          "type": "string",
+          "description": "<p>The Identity and Access Management service role ARN for a merged API. The AppSync service assumes this role on behalf of the Merged API to validate access to source APIs at runtime and to prompt the <code>AUTO_MERGE</code> to update the merged API endpoint with the source API changes automatically.</p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The API name.</p>"
+        },
+        "openIDConnectConfig": {
+          "$ref": "#/definitions/OpenIDConnectConfig",
+          "description": "<p>The OpenID Connect configuration.</p>"
+        },
+        "owner": {
+          "type": "string",
+          "description": "<p>The account owner of the GraphQL API.</p>"
+        },
+        "ownerContact": {
+          "type": "string",
+          "description": "<p>The owner contact information for an API resource.</p> <p>This field accepts any string input with a length of 0 - 256 characters.</p>"
+        },
+        "queryDepthLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is <code>0</code> (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between <code>1</code> and <code>75</code> nested levels. This field will produce a limit error if the operation falls out of bounds.</p> <p>Note that fields can still be set to nullable or non-nullable. If a non-nullable field produces an error, the error will be thrown upwards to the first nullable field available.</p>"
+        },
+        "resolverCountLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The maximum number of resolvers that can be invoked in a single request. The default value is <code>0</code> (or unspecified), which will set the limit to <code>10000</code>. When specified, the limit value can be between <code>1</code> and <code>10000</code>. This field will produce a limit error if the operation falls out of bounds.</p>"
+        },
+        "tags": {
+          "type": "object",
+          "description": "<p>The tags.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "uris": {
+          "type": "object",
+          "description": "<p>The URIs.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "userPoolConfig": {
+          "$ref": "#/definitions/UserPoolConfig",
+          "description": "<p>The Amazon Cognito user pool configuration.</p>"
+        },
+        "visibility": {
+          "$ref": "#/definitions/GraphQLApiVisibilityEnumValue",
+          "description": "<p>Sets the value of the GraphQL API to public (<code>GLOBAL</code>) or private (<code>PRIVATE</code>). If no value is provided, the visibility will be set to <code>GLOBAL</code> by default. This value cannot be changed once the API has been created.</p>"
+        },
+        "wafWebAclArn": {
+          "type": "string",
+          "description": "<p>The ARN of the WAF access control list (ACL) associated with this <code>GraphqlApi</code>, if one exists.</p>"
+        },
+        "xrayEnabled": {
+          "type": "boolean",
+          "description": "<p>A flag indicating whether to use X-Ray tracing for this <code>GraphqlApi</code>.</p>"
+        }
+      }
+    },
+    "CognitoUserPoolConfig": {
+      "type": "object",
+      "description": "Definition of CognitoUserPoolConfig",
+      "properties": {
+        "appIdClientRegex": {
+          "type": "string",
+          "description": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn't set, no filtering is applied.</p>"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "<p>The Amazon Web Services Region in which the user pool was created.</p>"
+        },
+        "userPoolId": {
+          "type": "string",
+          "description": "<p>The user pool ID.</p>"
+        }
+      }
+    },
+    "DataSourceLevelMetricsBehavior": {
+      "type": "string",
+      "description": "DataSourceLevelMetricsBehavior enum",
+      "enum": [
+        "FULL_REQUEST_DATA_SOURCE_METRICS",
+        "PER_DATA_SOURCE_METRICS"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceLevelMetricsBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FULL_REQUEST_DATA_SOURCE_METRICS",
+            "value": "FULL_REQUEST_DATA_SOURCE_METRICS",
+            "description": "DataSourceLevelMetricsBehavior enum FULL_REQUEST_DATA_SOURCE_METRICS"
+          },
+          {
+            "name": "PER_DATA_SOURCE_METRICS",
+            "value": "PER_DATA_SOURCE_METRICS",
+            "description": "DataSourceLevelMetricsBehavior enum PER_DATA_SOURCE_METRICS"
+          }
+        ]
+      }
+    },
+    "DataSourceLevelMetricsBehaviorEnumValue": {
+      "type": "object",
+      "description": "Definition of DataSourceLevelMetricsBehaviorEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DataSourceLevelMetricsBehavior",
+          "description": "Property value"
+        }
+      }
+    },
+    "DefaultAction": {
+      "type": "string",
+      "description": "DefaultAction enum",
+      "enum": [
+        "ALLOW",
+        "DENY"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALLOW",
+            "value": "ALLOW",
+            "description": "DefaultAction enum ALLOW"
+          },
+          {
+            "name": "DENY",
+            "value": "DENY",
+            "description": "DefaultAction enum DENY"
+          }
+        ]
+      }
+    },
+    "DefaultActionEnumValue": {
+      "type": "object",
+      "description": "Definition of DefaultActionEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DefaultAction",
+          "description": "Property value"
+        }
+      }
+    },
+    "EnhancedMetricsConfig": {
+      "type": "object",
+      "description": "Definition of EnhancedMetricsConfig",
+      "properties": {
+        "dataSourceLevelMetricsBehavior": {
+          "$ref": "#/definitions/DataSourceLevelMetricsBehaviorEnumValue",
+          "description": "<p>Controls how data source metrics will be emitted to CloudWatch. Data source metrics include:</p> <ul> <li> <p>Requests: The number of invocations that occured during a request.</p> </li> <li> <p>Latency: The time to complete a data source invocation.</p> </li> <li> <p>Errors: The number of errors that occurred during a data source invocation.</p> </li> </ul> <p>These metrics can be emitted to CloudWatch per data source or for all data sources in the request. Metrics will be recorded by API ID and data source name. <code>dataSourceLevelMetricsBehavior</code> accepts one of these values at a time:</p> <ul> <li> <p> <code>FULL_REQUEST_DATA_SOURCE_METRICS</code>: Records and emits metric data for all data sources in the request.</p> </li> <li> <p> <code>PER_DATA_SOURCE_METRICS</code>: Records and emits metric data for data sources that have the <code>metricsConfig</code> value set to <code>ENABLED</code>.</p> </li> </ul>"
+        },
+        "operationLevelMetricsConfig": {
+          "$ref": "#/definitions/OperationLevelMetricsConfigEnumValue",
+          "description": "<p> Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:</p> <ul> <li> <p>Requests: The number of times a specified GraphQL operation was called.</p> </li> <li> <p>GraphQL errors: The number of GraphQL errors that occurred during a specified GraphQL operation.</p> </li> </ul> <p>Metrics will be recorded by API ID and operation name. You can set the value to <code>ENABLED</code> or <code>DISABLED</code>.</p>"
+        },
+        "resolverLevelMetricsBehavior": {
+          "$ref": "#/definitions/ResolverLevelMetricsBehaviorEnumValue",
+          "description": "<p>Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics include:</p> <ul> <li> <p>GraphQL errors: The number of GraphQL errors that occurred.</p> </li> <li> <p>Requests: The number of invocations that occurred during a request. </p> </li> <li> <p>Latency: The time to complete a resolver invocation.</p> </li> <li> <p>Cache hits: The number of cache hits during a request.</p> </li> <li> <p>Cache misses: The number of cache misses during a request.</p> </li> </ul> <p>These metrics can be emitted to CloudWatch per resolver or for all resolvers in the request. Metrics will be recorded by API ID and resolver name. <code>resolverLevelMetricsBehavior</code> accepts one of these values at a time:</p> <ul> <li> <p> <code>FULL_REQUEST_RESOLVER_METRICS</code>: Records and emits metric data for all resolvers in the request.</p> </li> <li> <p> <code>PER_RESOLVER_METRICS</code>: Records and emits metric data for resolvers that have the <code>metricsConfig</code> value set to <code>ENABLED</code>.</p> </li> </ul>"
+        }
+      }
+    },
+    "FieldLogLevel": {
+      "type": "string",
+      "description": "FieldLogLevel enum",
+      "enum": [
+        "ALL",
+        "ERROR",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "FieldLogLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALL",
+            "value": "ALL",
+            "description": "FieldLogLevel enum ALL"
+          },
+          {
+            "name": "ERROR",
+            "value": "ERROR",
+            "description": "FieldLogLevel enum ERROR"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "FieldLogLevel enum NONE"
+          }
+        ]
+      }
+    },
+    "FieldLogLevelEnumValue": {
+      "type": "object",
+      "description": "Definition of FieldLogLevelEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/FieldLogLevel",
+          "description": "Property value"
+        }
+      }
+    },
+    "GraphQLApiIntrospectionConfig": {
+      "type": "string",
+      "description": "GraphQLApiIntrospectionConfig enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "GraphQLApiIntrospectionConfig",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "GraphQLApiIntrospectionConfig enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "GraphQLApiIntrospectionConfig enum ENABLED"
+          }
+        ]
+      }
+    },
+    "GraphQLApiIntrospectionConfigEnumValue": {
+      "type": "object",
+      "description": "Definition of GraphQLApiIntrospectionConfigEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/GraphQLApiIntrospectionConfig",
+          "description": "Property value"
+        }
+      }
+    },
+    "GraphQLApiType": {
+      "type": "string",
+      "description": "GraphQLApiType enum",
+      "enum": [
+        "GRAPHQL",
+        "MERGED"
+      ],
+      "x-ms-enum": {
+        "name": "GraphQLApiType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GRAPHQL",
+            "value": "GRAPHQL",
+            "description": "GraphQLApiType enum GRAPHQL"
+          },
+          {
+            "name": "MERGED",
+            "value": "MERGED",
+            "description": "GraphQLApiType enum MERGED"
+          }
+        ]
+      }
+    },
+    "GraphQLApiTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of GraphQLApiTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/GraphQLApiType",
+          "description": "Property value"
+        }
+      }
+    },
+    "GraphQLApiVisibility": {
+      "type": "string",
+      "description": "GraphQLApiVisibility enum",
+      "enum": [
+        "GLOBAL",
+        "PRIVATE"
+      ],
+      "x-ms-enum": {
+        "name": "GraphQLApiVisibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GLOBAL",
+            "value": "GLOBAL",
+            "description": "GraphQLApiVisibility enum GLOBAL"
+          },
+          {
+            "name": "PRIVATE",
+            "value": "PRIVATE",
+            "description": "GraphQLApiVisibility enum PRIVATE"
+          }
+        ]
+      }
+    },
+    "GraphQLApiVisibilityEnumValue": {
+      "type": "object",
+      "description": "Definition of GraphQLApiVisibilityEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/GraphQLApiVisibility",
+          "description": "Property value"
+        }
+      }
+    },
+    "LambdaAuthorizerConfig": {
+      "type": "object",
+      "description": "Definition of LambdaAuthorizerConfig",
+      "properties": {
+        "authorizerResultTtlInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The number of seconds a response should be cached for. The default is 0 seconds, which disables caching. If you don't specify a value for <code>authorizerResultTtlInSeconds</code>, the default value is used. The maximum value is one hour (3600 seconds). The Lambda function can override this by returning a <code>ttlOverride</code> key in its response.</p>"
+        },
+        "authorizerUri": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the Lambda function to be called for authorization. This can be a standard Lambda ARN, a version ARN (<code>.../v3</code>), or an alias ARN. </p> <p> <b>Note</b>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the console, this is done for you. To use the Command Line Interface (CLI), run the following:</p> <p> <code>aws lambda add-permission --function-name 'arn:aws:lambda:us-east-2:111122223333:function:my-function' --statement-id 'appsync' --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>"
+        },
+        "identityValidationExpression": {
+          "type": "string",
+          "description": "<p>A regular expression for validation of tokens before the Lambda function is called.</p>"
+        }
+      }
+    },
+    "LogConfig": {
+      "type": "object",
+      "description": "Definition of LogConfig",
+      "properties": {
+        "cloudWatchLogsRoleArn": {
+          "type": "string",
+          "description": "<p>The service role that AppSync assumes to publish to CloudWatch logs in your account.</p>"
+        },
+        "excludeVerboseContent": {
+          "type": "boolean",
+          "description": "<p>Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.</p>"
+        },
+        "fieldLogLevel": {
+          "$ref": "#/definitions/FieldLogLevelEnumValue",
+          "description": "<p>The field logging level. Values can be NONE, ERROR, or ALL.</p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>"
+        }
+      }
+    },
+    "OpenIDConnectConfig": {
+      "type": "object",
+      "description": "Definition of OpenIDConnectConfig",
+      "properties": {
+        "authTTL": {
+          "type": "integer",
+          "format": "int64",
+          "description": "<p>The number of milliseconds that a token is valid after being authenticated.</p>"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "<p>The client identifier of the relying party at the OpenID identity provider. This identifier is typically obtained when the relying party is registered with the OpenID identity provider. You can specify a regular expression so that AppSync can validate against multiple client identifiers at a time.</p>"
+        },
+        "iatTTL": {
+          "type": "integer",
+          "format": "int64",
+          "description": "<p>The number of milliseconds that a token is valid after it's issued to a user.</p>"
+        },
+        "issuer": {
+          "type": "string",
+          "description": "<p>The issuer for the OIDC configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.</p>"
+        }
+      }
+    },
+    "OperationLevelMetricsConfig": {
+      "type": "string",
+      "description": "OperationLevelMetricsConfig enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "OperationLevelMetricsConfig",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "OperationLevelMetricsConfig enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "OperationLevelMetricsConfig enum ENABLED"
+          }
+        ]
+      }
+    },
+    "OperationLevelMetricsConfigEnumValue": {
+      "type": "object",
+      "description": "Definition of OperationLevelMetricsConfigEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/OperationLevelMetricsConfig",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ResolverLevelMetricsBehavior": {
+      "type": "string",
+      "description": "ResolverLevelMetricsBehavior enum",
+      "enum": [
+        "FULL_REQUEST_RESOLVER_METRICS",
+        "PER_RESOLVER_METRICS"
+      ],
+      "x-ms-enum": {
+        "name": "ResolverLevelMetricsBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FULL_REQUEST_RESOLVER_METRICS",
+            "value": "FULL_REQUEST_RESOLVER_METRICS",
+            "description": "ResolverLevelMetricsBehavior enum FULL_REQUEST_RESOLVER_METRICS"
+          },
+          {
+            "name": "PER_RESOLVER_METRICS",
+            "value": "PER_RESOLVER_METRICS",
+            "description": "ResolverLevelMetricsBehavior enum PER_RESOLVER_METRICS"
+          }
+        ]
+      }
+    },
+    "ResolverLevelMetricsBehaviorEnumValue": {
+      "type": "object",
+      "description": "Definition of ResolverLevelMetricsBehaviorEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ResolverLevelMetricsBehavior",
+          "description": "Property value"
+        }
+      }
+    },
+    "UserPoolConfig": {
+      "type": "object",
+      "description": "Definition of UserPoolConfig",
+      "properties": {
+        "appIdClientRegex": {
+          "type": "string",
+          "description": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn't set, no filtering is applied.</p>"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "<p>The Amazon Web Services Region in which the user pool was created.</p>"
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/DefaultActionEnumValue",
+          "description": "<p>The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.</p>"
+        },
+        "userPoolId": {
+          "type": "string",
+          "description": "<p>The user pool ID.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
