@@ -24,9 +24,9 @@ directive:
 ```
 
 ### Release 2024-11-15-preview
-These settings apply only when `--tag=release_2024_11_01` is specified on the command line.
+These settings apply only when `--tag=release_2024-11-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2024-05-15-preview'
+``` yaml $(tag) == 'release_2024-11-15-preview'
 input-file:
   - preview/2024-11-15-preview/analyzeconversations.json
 title:
