@@ -17,9 +17,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/$count")
   @get
-  count is SearchOperation<
+  count is SearchIndexOperation<
     {
-      ...indexNamePath;      
     },
     void
   >;
@@ -30,10 +29,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs")
   @get
-  searchGet is SearchOperation<
+  searchGet is SearchIndexOperation<
     {
-      ...indexNamePath;
-
       /**
        * A full-text search query expression; Use "*" or omit this parameter to match
        * all documents.
@@ -273,9 +270,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.search")
   @post
-  searchPost is SearchOperation<
+  searchPost is SearchIndexOperation<
     {
-      ...indexNamePath;
       /**
        * The definition of the Search request.
        */
@@ -291,9 +287,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs('{key}')")
   @get
-  get is SearchOperation<
+  get is SearchIndexOperation<
     {
-      ...indexNamePath;
       /**
        * The key of the document to retrieve.
        */
@@ -319,9 +314,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.suggest")
   @get
-  suggestGet is SearchOperation<
+  suggestGet is SearchIndexOperation<
     {
-      ...indexNamePath;
       /**
        * The search text to use to suggest documents. Must be at least 1 character, and
        * no more than 100 characters.
@@ -426,9 +420,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.suggest")
   @post
-  suggestPost is SearchOperation<
+  suggestPost is SearchIndexOperation<
     {
-      ...indexNamePath;
       /**
        * The Suggest request.
        */
@@ -444,9 +437,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.index")
   @post
-  index is SearchOperation<
+  index is SearchIndexOperation<
     {
-      ...indexNamePath;
       /**
        * The batch of index actions.
        */
@@ -463,9 +455,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.autocomplete")
   @get
-  autocompleteGet is SearchOperation<
+  autocompleteGet is SearchIndexOperation<
     {
-      ...indexNamePath;
       /**
        * The incomplete term which should be auto-completed.
        */
@@ -554,9 +545,8 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/search.post.autocomplete")
   @post
-  autocompletePost is SearchOperation<
+  autocompletePost is SearchIndexOperation<
     {
-      ...indexNamePath;
       /**
        * The definition of the Autocomplete request.
        */

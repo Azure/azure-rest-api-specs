@@ -8,6 +8,15 @@ using Azure.Core;
 
 namespace SearchClient;
 
+alias matchingHeader = {
+  @doc("Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.")
+  @header("If-Match")
+  ifMatch?: string;
+
+  @doc("Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.")
+  @header("If-None-Match")
+  ifNoneMatch?: string;
+};
 
 alias preferHeader = {
   @doc("For HTTP PUT requests, instructs the service to return the created/updated resource on success.")
@@ -67,13 +76,61 @@ alias SearchOperation<
   TError
 >;
 
-alias SearchConditionalOperation<
+alias SearchIndexOperation<
   TParams extends Reflection.Model,
   TResponse,
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & ConditionalRequestHeaders,
+  TParams & ClientRequestIdHeader & indexNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchIndexerOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & indexerNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchDataSourceOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & dataSourceNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchSkillsetOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & skillsetNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchSynonymMapOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & synonymMapNamePath,
   TResponse,
   Traits,
   TError
