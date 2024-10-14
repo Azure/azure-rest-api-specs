@@ -19,6 +19,7 @@ These settings apply only when `--tag=2023-08-22-preview` is specified on the co
 ```yaml $(tag) == '2023-08-22-preview'
 input-file:
   - Microsoft.AzureCis/preview/2023-08-22-preview/aad.json
+  - Microsoft.AzureCis/preview/2023-08-22-preview/certificate.json
   - Microsoft.AzureCis/preview/2023-08-22-preview/dscm.json
   - Microsoft.AzureCis/preview/2023-08-22-preview/environment.json
   - Microsoft.AzureCis/preview/2023-08-22-preview/genevaActions.json
@@ -35,28 +36,42 @@ input-file:
   - Microsoft.AzureCis/stable/2023-08-22/plannedQuota.json
 ```
 
-### Tag: 2024-06-11-preview
-
-These settings apply only when `--tag=2024-06-11-preview` is specified on the command line.
-
-```yaml $(tag) == '2024-06-11-preview'
-input-file:
-  - Microsoft.AzureCis/preview/2024-06-11-preview/cloudSprout.json
-```
-
 ### Tag: 2024-06-24-preview
 
 These settings apply only when `--tag=2024-06-24-preview` is specified on the command line.
 
 ```yaml $(tag) == '2024-06-24-preview'
 input-file:
+  - Microsoft.AzureCis/preview/2024-06-24-preview/certificate.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/dscm.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/environment.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/dns.json
-  - Microsoft.AzureCis/preview/2024-06-11-preview/cloudSprout.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/aad.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/dscm.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/pav2.json
+```
+
+### Tag: 2024-08-31-preview
+
+These settings apply only when `--tag=2024-08-31-preview` is specified on the command line.
+
+```yaml $(tag) == '2024-08-31-preview'
+input-file:
+  - Microsoft.AzureCis/preview/2024-08-31-preview/cloudSprout.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: BodyTopLevelProperties
+    from: certificate.json
+    reason: 'value and nextLink are top-level properties'
+  - suppress: PreviewVersionOverOneYear
+    from: certificate.json
+    reason: 'this version is still in use'
+  - suppress: AllProxyResourcesShouldHaveDelete
+    from: certificate.json
+    reason: 'the delete method is not ready'
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    from: certificate.json
+    reason: 'this version is sutable'	
 ```

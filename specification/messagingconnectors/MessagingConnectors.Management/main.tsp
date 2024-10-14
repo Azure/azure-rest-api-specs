@@ -7,3 +7,5 @@ import "./connectors.tsp";
 import "./dataPreview.tsp";
 import "./models.tsp";
 import "./common.tsp";
+import "./fetchCdcSchema.tsp";
+import "./fetchCdcSchemaModel.tsp";

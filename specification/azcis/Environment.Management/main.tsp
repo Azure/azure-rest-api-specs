@@ -1,10 +1,10 @@
 import "./versions.tsp";
-import "./autopilotEnvironment.tsp";
+import "./autopilotenvironment.tsp";
+import "./autopilotmachinefunction.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
 @service({
   title: "Azure CIS FRP",
@@ -14,3 +14,12 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureCis;
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@doc("Provisioning status of the resource.")
+union EnvironmentProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  @doc("The resource create request has been accepted")
+  Accepted: "Accepted",
+}

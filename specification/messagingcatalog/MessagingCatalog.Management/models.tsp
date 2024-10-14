@@ -84,12 +84,9 @@ model ResourceLabel {
 
 @doc("The type used for update operations of the Messaging Catalog.")
 model MessagingCatalogUpdate {
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  #suppress "deprecated" "Legacy flattening"
   @doc("The updatable properties of the Messaging Catalog.")
-  @Azure.ClientGenerator.Core.flattenProperty
   properties?: MessagingCatalogUpdateProperties;
 }
 
@@ -122,4 +119,34 @@ model ProblemDetails {
 
   @doc("Details about the error result.")
   instance?: string;
+}
+
+@doc("An association between external entities and catalog resources.")
+model Association {
+  @doc("Id of the association.")
+  id?: string;
+
+  @doc("Type of association.")
+  associationType: string;
+
+  @doc("Details about the Association.")
+  definition: AssociationDefinition;
+}
+
+@doc("Details about the catalog association.")
+model AssociationDefinition {
+  @doc("The tenant id to associate.")
+  tenantId?: string;
+
+  @doc("The workspace id to associate.")
+  workspaceId?: string;
+
+  @doc("The artifact id to associate.")
+  artifactId?: string;
+
+  @doc("The message group id to associate.")
+  messageGroupId?: string;
+
+  @doc("The schema group id to associate.")
+  schemaGroupId?: string;
 }
