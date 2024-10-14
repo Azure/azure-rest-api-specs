@@ -560,7 +560,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/exportTransfers/default": {
       "put": {
         "description": "Transfer subscriptions to destination email id.",
-        "operationId": "Transfers_ExportTransfer",
+        "operationId": "Transfers_SendExport",
         "x-ms-examples": {
           "CreateTransfer": {
             "$ref": "./examples/createTransfer.json"
@@ -1293,9 +1293,7 @@
         },
         "tenantId": {
           "description": "tenantId id.",
-          "type": "string",
-          "format": "uuid",
-          "example": "00000000-0000-0000-0000-000000000000"
+          "type": "string"
         },
         "upn": {
           "description": "User principal name (upn).",
@@ -1351,13 +1349,6 @@
           "description": "Transfer Service Ownership.",
           "type": "boolean"
         },
-        "subscriptionIds": {
-          "description": "Subscription ids.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "locale": {
           "description": "Locale information.",
           "type": "string"
@@ -1370,9 +1361,7 @@
       "properties": {
         "transferId": {
           "description": "Transfer id.",
-          "type": "string",
-          "format": "uuid",
-          "example": "00000000-0000-0000-0000-000000000000"
+          "type": "string"
         },
         "source": {
           "$ref": "#/definitions/TransferSourceOrDestination"
