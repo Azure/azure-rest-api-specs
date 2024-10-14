@@ -49,7 +49,7 @@ model HealthValidationProperties {
   status: validationStatus;
 
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["errorCode"])
+  @OpenAPI.extension("x-ms-identifiers", [])
   @doc("The list of issues found by health validation.")
   issues: ValidationIssue[];
 
@@ -107,9 +107,9 @@ model ValidationIssue {
 
   @visibility("read")
   @doc("The resource ID of the Azure resource related to the issue.")
-  validationResourceId?: Azure.Core.armResourceIdentifier<[]>;
+  relatedResourceId?: Azure.Core.armResourceIdentifier<[]>;
 
   @visibility("read")
   @doc("The type of the Azure resource related to the issue.")
-  validationResourceType?: string;
+  relatedResourceType?: string;
 }
