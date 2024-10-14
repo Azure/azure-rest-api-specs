@@ -4118,25 +4118,6 @@
         "value"
       ]
     },
-    "HelmSolution": {
-      "type": "object",
-      "description": "Helm Solution Properties",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HelmSolutionProperties",
-          "description": "properties of helm solution"
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SolutionVersion"
-        }
-      ],
-      "x-ms-discriminator-value": "Helm"
-    },
     "HelmSolutionProperties": {
       "type": "object",
       "description": "Solution Version Properties",
@@ -4950,15 +4931,20 @@
       "description": "Solution Version Resource",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/HelmSolutionProperties",
           "description": "The resource-specific properties for this resource."
         },
         "kind": {
-          "$ref": "#/definitions/SolutionVersionType",
-          "description": "Kind of solution version"
+          "type": "string",
+          "description": "Kind of solution version",
+          "enum": [
+            "Helm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
-      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -4988,24 +4974,6 @@
       "required": [
         "value"
       ]
-    },
-    "SolutionVersionType": {
-      "type": "string",
-      "description": "Available solution version types",
-      "enum": [
-        "Helm"
-      ],
-      "x-ms-enum": {
-        "name": "SolutionVersionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Helm",
-            "value": "Helm",
-            "description": "Helm solution version"
-          }
-        ]
-      }
     },
     "State": {
       "type": "string",
