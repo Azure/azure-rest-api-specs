@@ -12,23 +12,13 @@ jobs:
       with:
         fetch-depth: 2
 
-    # TODO: Refactor common steps into a reusable action
-    - name: Use Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-
-    - run: npm ci
-      shell: pwsh
-
-    - run: npm ls -a
-      shell: pwsh
-      continue-on-error: true
+    - name: Setup CI environment
+      uses: ./.github/actions/setup-node-ci.yml
 
     - name: Validate Impacted Specs
       run: |
         ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
         
-        # Effectively the same as ignoreLASTEXITCODE in Azure DevOps
+        # Effectively the same as ignoreLASTEXITCODE: true in Azure DevOps
         exit 0
       shell: pwsh
