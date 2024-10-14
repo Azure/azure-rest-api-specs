@@ -67,9 +67,9 @@
             "$ref": "./examples/LabelHistory_List.json"
           }
         },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/labelHistory"
       }
     },
@@ -183,6 +183,11 @@
           "items": {
             "$ref": "#/definitions/LabelHistory"
           }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
