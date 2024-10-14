@@ -51,10 +51,10 @@ interface DocumentsOperations {
        * expression contains a field name, optionally followed by a comma-separated list
        * of name:value pairs.
        */
-      #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing"
-      @query({
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
+      @query(#{
         name: "facet",
-        format: "multi",
+        explode: true,
       })
       facets?: string[];
 
@@ -68,9 +68,8 @@ interface DocumentsOperations {
        * The list of field names to use for hit highlights. Only searchable fields can
        * be used for hit highlighting.
        */
-      @query({
+      @query(#{
         name: "highlight",
-        format: "csv",
       })
       highlightFields?: string[];
 
@@ -106,9 +105,8 @@ interface DocumentsOperations {
        * specified, the default sort order is descending by document match score. There
        * can be at most 32 $orderby clauses.
        */
-      @query({
+      @query(#{
         name: "$orderby",
-        format: "csv",
       })
       orderBy?: string[];
 
@@ -125,10 +123,10 @@ interface DocumentsOperations {
        * scoring profile defines a function with a parameter called 'mylocation' the
        * parameter string would be "mylocation--122.2,44.8" (without the quotes).
        */
-      #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing"
-      @query({
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
+      @query(#{
         name: "scoringParameter",
-        format: "multi",
+        explode: true,
       })
       scoringParameters?: string[];
 
@@ -145,9 +143,8 @@ interface DocumentsOperations {
        * names of each fielded search expression take precedence over any field names
        * listed in this parameter.
        */
-      @query({
+      @query(#{
         name: "searchFields",
-        format: "csv",
       })
       searchFields?: string[];
 
@@ -181,9 +178,8 @@ interface DocumentsOperations {
        * The list of fields to retrieve. If unspecified, all fields marked as
        * retrievable in the schema are included.
        */
-      @query({
+      @query(#{
         name: "$select",
-        format: "csv",
       })
       $select?: string[];
 
@@ -299,9 +295,8 @@ interface DocumentsOperations {
        * List of field names to retrieve for the document; Any field not retrieved will
        * be missing from the returned document.
        */
-      @query({
+      @query(#{
         name: "$select",
-        format: "csv",
       })
       selectedFields?: string[];
     },
@@ -378,9 +373,8 @@ interface DocumentsOperations {
        * specified, the default sort order is descending by document match score. There
        * can be at most 32 $orderby clauses.
        */
-      @query({
+      @query(#{
         name: "$orderby",
-        format: "csv",
       })
       orderBy?: string[];
 
@@ -388,9 +382,8 @@ interface DocumentsOperations {
        * The list of field names to search for the specified search text. Target fields
        * must be included in the specified suggester.
        */
-      @query({
+      @query(#{
         name: "searchFields",
-        format: "csv",
       })
       searchFields?: string[];
 
@@ -398,9 +391,8 @@ interface DocumentsOperations {
        * The list of fields to retrieve. If unspecified, only the key field will be
        * included in the results.
        */
-      @query({
+      @query(#{
         name: "$select",
-        format: "csv",
       })
       $select?: string[];
 
@@ -522,9 +514,8 @@ interface DocumentsOperations {
        * The list of field names to consider when querying for auto-completed terms.
        * Target fields must be included in the specified suggester.
        */
-      @query({
+      @query(#{
         name: "searchFields",
-        format: "csv",
       })
       searchFields?: string[];
 
