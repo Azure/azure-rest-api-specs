@@ -15,6 +15,7 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.Contoso management service",
+  descriptin: "A test description but with an error",
 })
 @versioned(Microsoft.Contoso.Versions)
 namespace Microsoft.Contoso;
