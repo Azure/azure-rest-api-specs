@@ -2242,6 +2242,16 @@
         ]
       }
     },
+    "HybridComputePolicyResourceDetails": {
+      "type": "object",
+      "description": "Details of the OnboardingService Hybrid Compute Machines Policy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
+    },
     "DiscoveryService": {
       "type": "object",
       "description": "A discovery resource.",
@@ -2784,6 +2794,16 @@
         }
       ],
       "x-ms-discriminator-value": "Microsoft.DeviceRegistry/devices"
+    },
+    "PatchHybridComputePolicyResourceDetails": {
+      "type": "object",
+      "description": "Details of the OnboardingService Hybrid Compute Machines Policy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyPatchResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
     },
     "PatchEvenlyDistributedAllocationRule": {
       "type": "object",

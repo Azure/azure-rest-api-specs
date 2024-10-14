@@ -137,11 +137,10 @@ model DeviceRegistryPolicyResourceDetails extends PolicyResourceDetails {
   resourceMetadata?: ResourceMetadata; // for customer to label the devices
 }
 
-@doc("Details of the OnboardingService Discovery Policy.")
-@added(Versions.v2024_11_01_preview)
-@removed(Versions.v2024_12_01_preview)
-model DiscoveryPolicyResourceDetails extends PolicyResourceDetails {
-  @doc("The policy resource type for device registry devices.")
+@doc("Details of the OnboardingService Hybrid Compute Machines Policy.")
+@renamedFrom(Versions.v2024_12_01_preview, "DiscoveryPolicyResourceDetails")
+model HybridComputePolicyResourceDetails extends PolicyResourceDetails {
+  @doc("The policy resource type for hybrid compute machines.")
   type: OnboardingResourceType.HybridComputeMachine;
 }
 
