@@ -2409,6 +2409,21 @@
       },
       "x-ms-client-name": "AssignedResourceDeploymentsMetadata"
     },
+    "TextAnalysisAuthoringAzureOpenAiDetails": {
+      "description": "Databag that identifies the Azure OpenAI service used for data generation to improve data quality for increased model performance.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Azure OpenAI Resource Identifier the customer would like to use for data generation. Looks like: /subscriptions/b72743ec-8bb3-453f-83ad-a53e8a50712e/resourceGroups/customer-rg/providers/Microsoft.CognitiveServices/accounts/aoai-resource-name.",
+          "type": "string"
+        },
+        "deploymentName": {
+          "description": "Azure OpenAI model deployment name the customer would like to use for data generation.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "AzureOpenAiDetails"
+    },
     "TextAnalysisAuthoringCompositionSetting": {
       "enum": [
         "separateComponents",
@@ -2799,6 +2814,31 @@
       },
       "x-ms-discriminator-value": "CustomTextSentiment",
       "x-ms-client-name": "CustomTextSentimentEvaluationSummary"
+    },
+    "TextAnalysisAuthoringDataGenerationSettings": {
+      "description": "Data generation settings for the project. Used for adding more data to training dataset to improve model quality.",
+      "type": "object",
+      "properties": {
+        "AzureOpenAiDetails": {
+          "description": "Databag that identifies the Azure OpenAI service used for data generation to improve data quality for increased model performance.",
+          "$ref": "#/definitions/TextAnalysisAuthoringAzureOpenAiDetails"
+        }
+      },
+      "x-ms-client-name": "DataGenerationSettings"
+    },
+    "TextAnalysisAuthoringDataGenerationDetails": {
+      "description": "Databag including details on DataGeneration during model training.",
+      "required": [
+        "enabled"
+      ],
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "If the model was trained using data generation.",
+          "type": "boolean"
+        }
+      },
+      "x-ms-client-name": "DataGenerationDetails"
     },
     "TextAnalysisAuthoringDeleteDeploymentOptions": {
       "description": "Represents the options for deleting a project deployment.",
@@ -3306,6 +3346,7 @@
           "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
         },
         "evaluationOptions": {
+          "description": "Evaluation split options.",
           "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
         }
       },
@@ -3318,6 +3359,10 @@
       "properties": {
         "category": {
           "description": "The class category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The class description.",
           "type": "string"
         }
       },
@@ -3344,6 +3389,10 @@
         },
         "category": {
           "description": "The entity category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The entity description.",
           "type": "string"
         }
       },
@@ -3443,6 +3492,10 @@
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomEntityRecognitionDocument"
           }
+        },
+        "dataGeneration": {
+          "description": "The prompt2model settings belonging to the project.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationSettings"
         }
       },
       "x-ms-discriminator-value": "CustomEntityRecognition",
@@ -3599,6 +3652,10 @@
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument"
           }
+        },
+        "dataGeneration": {
+          "description": "The prompt2model settings belonging to the project.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationSettings"
         }
       },
       "x-ms-discriminator-value": "CustomSingleLabelClassification",
@@ -3731,6 +3788,10 @@
       "properties": {
         "category": {
           "description": "The entity category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The entity description.",
           "type": "string"
         }
       },
@@ -4436,6 +4497,10 @@
           "format": "int32",
           "description": "The predictive lookahead for GPT predictions that is specified by the user.",
           "type": "integer"
+        },
+        "dataGenerationSettings": {
+          "description": "Data generation settings for the project. Used for adding more data to training dataset to improve model quality.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationSettings"
         }
       },
       "x-ms-client-name": "ProjectSettings"
@@ -4472,7 +4537,8 @@
         "lastTrainingDurationInSeconds",
         "modelExpirationDate",
         "modelTrainingConfigVersion",
-        "hasSnapshot"
+        "hasSnapshot",
+        "dataGenerationEnabled"
       ],
       "type": "object",
       "properties": {
@@ -4505,6 +4571,10 @@
         },
         "hasSnapshot": {
           "description": "The flag to indicate if the trained model has a snapshot ready.",
+          "type": "boolean"
+        },
+        "dataGenerationEnabled": {
+          "description": "If data generation was enabled during training of model. Helpful to debug low model performance.",
           "type": "boolean"
         }
       },
@@ -5008,6 +5078,10 @@
         "evaluationOptions": {
           "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.",
           "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
+        },
+        "enableDataGeneration": {
+          "description": "If the customer would like to use DataGeneration during this specific training job.",
+          "type": "boolean"
         }
       },
       "x-ms-client-name": "TrainingJobOptions"
@@ -5036,6 +5110,10 @@
         "evaluationStatus": {
           "description": "Represents model evaluation status.",
           "$ref": "#/definitions/TextAnalysisAuthoringSubTrainingJobState"
+        },
+        "dataGenerationDetails": {
+          "description": "Databag with details on data generation during model training.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationDetails"
         },
         "estimatedEndDateTime": {
           "format": "date-time",
