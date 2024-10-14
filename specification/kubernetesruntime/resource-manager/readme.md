@@ -33,6 +33,10 @@ suppressions:
   - code: ConsistentPatchProperties
     from: kubernetesruntime.json
     reason: The tooling doens't check properties in derived models of discriminated unions.
+  - code: GuidUsage
+    from: kubernetesruntime.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: The definition is used for AAD object ids, which are UUIDs.
 
 ```
 ### Tag: package-preview-2023-10-01
