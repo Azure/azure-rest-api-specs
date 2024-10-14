@@ -22,6 +22,10 @@ model SessionCodeExecutionRequest {
 
 @doc("The response containing the result of the code execution.")
 model SessionCodeExecutionResponse {
+  @visibility("read")
+  @doc("Session code execution id.")
+  id?: string;
+
   @doc("The status of the code execution operation, indicates whether succeeded or not.")
   status: Foundations.OperationState;
 
@@ -36,7 +40,10 @@ model SessionCodeExecutionResponse {
   result?: unknown;
 
   @doc("The execution time of the code in milliseconds.")
-  executionTimeInMilliseconds?: int64;
+  executionTimeInMilliseconds: int64;
+
+  @doc("The error of this code execution if failed.")
+  error?: Foundations.ErrorResponse;
 }
 
 @doc("Code input type.")

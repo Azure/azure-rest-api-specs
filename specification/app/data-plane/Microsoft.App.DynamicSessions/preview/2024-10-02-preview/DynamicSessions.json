@@ -110,6 +110,10 @@
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           },
@@ -160,6 +164,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SessionCodeExecutionResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           },
           "default": {
@@ -630,6 +640,11 @@
       "type": "object",
       "description": "The response containing the result of the code execution.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Session code execution id.",
+          "readOnly": true
+        },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The status of the code execution operation, indicates whether succeeded or not."
@@ -649,10 +664,15 @@
           "type": "integer",
           "format": "int64",
           "description": "The execution time of the code in milliseconds."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "The error of this code execution if failed."
         }
       },
       "required": [
-        "status"
+        "status",
+        "executionTimeInMilliseconds"
       ]
     },
     "SessionResourceFile": {
