@@ -26,7 +26,9 @@ jobs:
       continue-on-error: true
 
     - name: Validate Impacted Specs
-      run: ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+      run: |
+        ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+        Write-Host "LASTEXITCODE: $LASTEXITCODE"
       shell: pwsh
       # TODO: Verify this is correct
       continue-on-error: true
