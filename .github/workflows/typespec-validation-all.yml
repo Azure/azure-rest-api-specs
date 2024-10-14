@@ -1,0 +1,50 @@
+name: TypeSpec Validation All
+
+on:
+  push:
+    branches:
+      - main
+      - RPSaaSMaster
+      - typespec-next
+
+  pull_request:
+    branches:
+      - main
+      - RPSaaSMaster
+      - typespec-next
+    paths:
+      - .gitattributes
+      - .prettierrc.json
+      - package-lock.json
+      - package.json
+      - tsconfig.json
+      - eng/**
+      - specification/suppressions.yaml
+      - specification/common-types/**
+
+  schedule:
+    # Run 4x/day
+    - cron: '0 0,6,12,18 * * * '
+
+jobs:
+  typespec-validation-all:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup CI environment
+        uses: ./.github/actions/setup-node-ci
+        
+      - name: Validate All Specs
+        run: |
+          ./eng/scripts/TypeSpec-Validation.ps1 -CheckAll -GitClean -Verbose
+          
+          # Effectively the same as ignoreLASTEXITCODE: true in Azure DevOps
+          exit 0
+        shell: pwsh
