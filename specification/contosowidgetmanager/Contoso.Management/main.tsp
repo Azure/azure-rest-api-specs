@@ -10,12 +10,11 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-
+using invalid-thing;
 /** Microsoft.Contoso Resource Provider management API. */
 @armProviderNamespace
 @service({
   title: "Microsoft.Contoso management service",
-  descriptin: "A test description but with an error",
 })
 @versioned(Microsoft.Contoso.Versions)
 namespace Microsoft.Contoso;
