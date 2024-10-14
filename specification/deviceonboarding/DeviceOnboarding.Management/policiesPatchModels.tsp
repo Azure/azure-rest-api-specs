@@ -182,8 +182,12 @@ model PatchDeviceRegistryPolicyResourceDetails
 }
 
 @doc("Details of the OnboardingService Hybrid Compute Machines Policy.")
-@renamedFrom(Versions.v2024_12_01_preview, "PatchDiscoveryPolicyResourceDetails")
-model PatchHybridComputePolicyResourceDetails extends PolicyPatchResourceDetails {
+@renamedFrom(
+  Versions.v2024_12_01_preview,
+  "PatchDiscoveryPolicyResourceDetails"
+)
+model PatchHybridComputePolicyResourceDetails
+  extends PolicyPatchResourceDetails {
   @doc("The policy resource type for hybrid compute machines.")
   type: OnboardingResourceType.HybridComputeMachine;
 }
