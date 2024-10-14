@@ -39,6 +39,8 @@ function LogError {
     Write-Host ("##vso[task.LogIssue type=error;]$args" -replace "`n", "%0D%0A")
   }
   elseif (Test-SupportsGitHubLogging) {
+    # Set an annotation in GitHub Actions UI
+    Write-Host ("::set-output name=error_message::$args" -replace "`n", "%0D%0A")
     Write-Error ("::error::$args" -replace "`n", "%0D%0A")
   }
   else {
