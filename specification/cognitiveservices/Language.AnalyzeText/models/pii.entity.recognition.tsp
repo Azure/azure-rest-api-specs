@@ -33,13 +33,10 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** Enumeration of PII categories to be excluded in the response. */
   @added(Versions.v2024_11_15_preview)
-  @removed(Versions.v2024_11_01)
-  @added(Versions.v2023_11_15_preview)
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
   /** Character to be used for redaction. Default in '*'. */
   @removed(Versions.v2024_11_01)
-  @added(Versions.v2023_11_15_preview)
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 
   /** RedactionPolicy to be used on the input. */

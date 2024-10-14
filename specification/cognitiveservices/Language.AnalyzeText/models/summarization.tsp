@@ -19,7 +19,7 @@ model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** (Optional) If provided, the query will be used to extract most relevant sentences from the document. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_15_preview)
   query?: string;
 }
 
@@ -40,7 +40,7 @@ model ExtractiveSummarizationResult is PreBuiltResult {
   /** Response by document */
   @added(Versions.v2023_04_01)
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
+    Versions.v2024_11_15_preview,
     Array<ExtractedSummaryDocumentResult>
   )
   documents: Array<ExtractedSummaryDocumentResultWithDetectedLanguage>;
@@ -66,7 +66,7 @@ model ExtractedSummaryDocumentResult is DocumentResult {
 }
 
 /** A ranked list of sentences representing the extracted summary. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model ExtractedSummaryDocumentResultWithDetectedLanguage
   is ExtractedSummaryDocumentResult {
   ...DocumentDetectedLanguage;
@@ -116,8 +116,8 @@ model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
 
   /** (Optional) If provided, the query will be used to generate the summary. */
-  @added(Versions.v2023_11_15_preview)
-  query?: string;
+  @added(Versions.v2024_11_15_preview)
+  prompt?: string;
 }
 
 /** An object representing the results for an Abstractive Summarization task. */
@@ -137,7 +137,7 @@ model AbstractiveSummarizationResultBase {
   /** Response by document */
   @added(Versions.v2023_04_01)
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
+    Versions.v2024_11_15_preview,
     Array<AbstractiveSummaryDocumentResult>
   )
   documents: Array<AbstractiveSummaryDocumentResultWithDetectedLanguage>;
@@ -157,7 +157,7 @@ model AbstractiveSummaryDocumentResult is DocumentResult {
 }
 
 /** An object representing the Abstractive Summarization result of a single document with detected language. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model AbstractiveSummaryDocumentResultWithDetectedLanguage
   is AbstractiveSummaryDocumentResult {
   ...DocumentDetectedLanguage;
@@ -175,7 +175,7 @@ model AbstractiveSummary {
 
 /** An object representing the task definition for an Custom Abstractive Summarization task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_11_15_preview)
+@removed(Versions.v2024_11_01)
 model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   /** The Custom Abstractive Summarization kind of the long running task. */
   kind: AnalyzeTextLROTaskKind.CustomAbstractiveSummarization;
@@ -185,7 +185,7 @@ model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 }
 
 /** Supported parameters for the Custom Abstractive Summarization task. */
-@added(Versions.v2023_11_15_preview)
+@removed(Versions.v2024_11_01)
 model CustomAbstractiveSummarizationTaskParameters
   is AbstractiveSummarizationTaskParametersBase {
   ...CustomTaskParameters;
@@ -193,7 +193,7 @@ model CustomAbstractiveSummarizationTaskParameters
 
 /** An object representing the results for an Custom Abstractive Summarization task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_11_15_preview)
+@removed(Versions.v2024_11_01)
 model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.CustomAbstractiveSummarizationLROResults;
@@ -203,7 +203,7 @@ model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
 }
 
 /** An object representing the custom summarization results of each document. */
-@added(Versions.v2023_11_15_preview)
+@removed(Versions.v2024_11_01)
 model CustomAbstractiveSummarizationResult
   is AbstractiveSummarizationResultBase {
   ...CustomResult;
