@@ -9,6 +9,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
 
     # TODO: Refactor common steps into a reusable action
     - name: Use Node
@@ -24,7 +26,7 @@ jobs:
       continue-on-error: true
 
     - name: Validate Impacted Specs
-      run: pwsh $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+      run: ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
       shell: pwsh
       # TODO: Verify this is correct
       continue-on-error: true
