@@ -46,7 +46,7 @@ interface TextAnalysisAuthoring {
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot createProjectOptions: TextAnalysisAuthoringCreateProjectOptions;
+      @bodyRoot body: TextAnalysisAuthoringCreateProjectOptions;
     },
     Foundations.ResourceCreatedOrOkResponse<TextAnalysisAuthoringProjectMetadata>,
     {},
@@ -84,8 +84,7 @@ interface TextAnalysisAuthoring {
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
     TextAnalysisAuthoringProjectMetadata,
-    
-{@bodyRoot copyAuthorizationOptions : TextAnalysisAuthoringCopyAuthorizationOptions },
+    TextAnalysisAuthoringCopyAuthorizationOptions,
     TextAnalysisAuthoringCopyProjectOptions
   >;
 
@@ -110,7 +109,7 @@ interface TextAnalysisAuthoring {
        * The copy project info.
        */
       @body
-      copyProjectOptions: TextAnalysisAuthoringCopyProjectOptions;
+      body: TextAnalysisAuthoringCopyProjectOptions;
     },
     AcceptedResponse,
     {},
@@ -187,7 +186,7 @@ interface TextAnalysisAuthoring {
        * The project data to import.
        */
       @body
-      exportedProject: TextAnalysisAuthoringExportedProject;
+      body: TextAnalysisAuthoringExportedProject;
     },
     AcceptedResponse,
     {},
@@ -214,7 +213,7 @@ interface TextAnalysisAuthoring {
        * The training input parameters.
        */
       @body
-      trainingJobOptions: TextAnalysisAuthoringTrainingJobOptions;
+      body: TextAnalysisAuthoringTrainingJobOptions;
     },
     AcceptedResponse,
     {},
@@ -367,7 +366,7 @@ interface TextAnalysisAuthoring {
        * The job object to swap two deployments.
        */
       @body
-      swapDeploymentsOptions: TextAnalysisAuthoringSwapDeploymentsOptions;
+      body: TextAnalysisAuthoringSwapDeploymentsOptions;
     },
     AcceptedResponse,
     {},
@@ -427,7 +426,7 @@ interface TextAnalysisAuthoring {
        * The exported model info.
        */
       @body
-      exportedModelOptions: TextAnalysisAuthoringExportedModelOptions;
+      body: TextAnalysisAuthoringExportedModelOptions;
     },
     AcceptedResponse,
     {},
@@ -545,7 +544,7 @@ interface TextAnalysisAuthoring {
        * The training input parameters.
        */
       @body
-      evaluationOptions: TextAnalysisAuthoringEvaluationOptions;
+      body: TextAnalysisAuthoringEvaluationOptions;
     },
     AcceptedResponse,
     {},
@@ -658,7 +657,7 @@ interface TextAnalysisAuthoring {
        * The new project resources info.
        */
       @body
-      assignDeploymentResourcesOptions: TextAnalysisAuthoringAssignDeploymentResourcesOptions;
+      body: TextAnalysisAuthoringAssignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -687,7 +686,7 @@ interface TextAnalysisAuthoring {
        * The info for the deployment resources to be deleted.
        */
       @body
-      unassignDeploymentResourcesOptions: TextAnalysisAuthoringUnassignDeploymentResourcesOptions;
+      body: TextAnalysisAuthoringUnassignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},

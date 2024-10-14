@@ -421,7 +421,7 @@ model TextAnalysisAuthoringCreateProjectOptions {
  * Represents the options for authorizing a project copy to the current Azure
  * resource.
  */
-@clientName("CopyAuthorizationOptions", "csharp")
+@clientName("CopyAuthorizationOptions")
 model TextAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
@@ -444,7 +444,7 @@ model TextAnalysisAuthoringCopyAuthorizationOptions {
  * Represents the options for copying an existing project to another Azure
  * resource.
  */
-@clientName("CopyProjectOptions", "csharp")
+@clientName("CopyProjectOptions")
 model TextAnalysisAuthoringCopyProjectOptions {
   /**
    * Represents the project kind.
@@ -480,7 +480,7 @@ model TextAnalysisAuthoringCopyProjectOptions {
 /**
  * Represents an exported project.
  */
-@clientName("ExportedProject", "csharp")
+@clientName("ExportedProject")
 model TextAnalysisAuthoringExportedProject {
   /**
    * The version of the exported file.
@@ -516,7 +516,7 @@ model TextAnalysisAuthoringExportedProjectAssets {
 /**
  * Represents the options for starting a new training job.
  */
-@clientName("TrainingJobOptions", "csharp")
+@clientName("TrainingJobOptions")
 model TextAnalysisAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
@@ -539,7 +539,7 @@ model TextAnalysisAuthoringTrainingJobOptions {
 /**
  * Represents the options used running the evaluation.
  */
-@clientName("EvaluationOptions", "csharp")
+@clientName("EvaluationOptions")
 model TextAnalysisAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to
@@ -776,7 +776,7 @@ model TextAnalysisAuthoringSwapDeploymentsJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
-@clientName("SwapDeploymentsOptions", "csharp")
+@clientName("SwapDeploymentsOptions")
 model TextAnalysisAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
@@ -865,7 +865,7 @@ model TextAnalysisAuthoringExportedTrainedModel {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-@clientName("ExportedModelOptions", "csharp")
+@clientName("ExportedModelOptions")
 model TextAnalysisAuthoringExportedModelOptions {
   /**
    * The trained model label.
@@ -1180,7 +1180,7 @@ model TextAnalysisAuthoringAssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
-@clientName("AssignDeploymentResourcesOptions", "csharp")
+@clientName("AssignDeploymentResourcesOptions")
 model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
@@ -1191,7 +1191,7 @@ model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
 /**
  * Represents metadata for the Azure resource..
  */
-@clientName("ResourceMetadata", "csharp")
+@clientName("ResourceMetadata")
 model TextAnalysisAuthoringResourceMetadata {
   /**
    * Represents the Azure resource ID.
@@ -1213,7 +1213,7 @@ model TextAnalysisAuthoringResourceMetadata {
  * Represents the options to unassign Azure resources from a project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("UnassignDeploymentResourcesOptions", "csharp")
+@clientName("UnassignDeploymentResourcesOptions")
 model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.

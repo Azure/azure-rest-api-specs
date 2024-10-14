@@ -157,7 +157,7 @@
             "type": "string"
           },
           {
-            "name": "createProjectOptions",
+            "name": "body",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -250,11 +250,11 @@
             "type": "string"
           },
           {
-            "name": "copyAuthorizationOptions",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringCopyAuthorizationOptions"
+              "$ref": "#/definitions/CopyAuthorizationOptions"
             }
           }
         ],
@@ -262,7 +262,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringCopyProjectOptions"
+              "$ref": "#/definitions/CopyProjectOptions"
             }
           },
           "default": {
@@ -296,12 +296,12 @@
             "maxLength": 100
           },
           {
-            "name": "copyProjectOptions",
+            "name": "body",
             "in": "body",
             "description": "The copy project info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringCopyProjectOptions"
+              "$ref": "#/definitions/CopyProjectOptions"
             }
           }
         ],
@@ -433,12 +433,12 @@
             "type": "string"
           },
           {
-            "name": "exportedProject",
+            "name": "body",
             "in": "body",
             "description": "The project data to import.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringExportedProject"
+              "$ref": "#/definitions/ExportedProject"
             }
           }
         ],
@@ -485,12 +485,12 @@
             "maxLength": 100
           },
           {
-            "name": "trainingJobOptions",
+            "name": "body",
             "in": "body",
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobOptions"
+              "$ref": "#/definitions/TrainingJobOptions"
             }
           }
         ],
@@ -940,12 +940,12 @@
             "maxLength": 100
           },
           {
-            "name": "swapDeploymentsOptions",
+            "name": "body",
             "in": "body",
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringSwapDeploymentsOptions"
+              "$ref": "#/definitions/SwapDeploymentsOptions"
             }
           }
         ],
@@ -1178,12 +1178,12 @@
             "type": "string"
           },
           {
-            "name": "exportedModelOptions",
+            "name": "body",
             "in": "body",
             "description": "The exported model info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringExportedModelOptions"
+              "$ref": "#/definitions/ExportedModelOptions"
             }
           }
         ],
@@ -1557,12 +1557,12 @@
             "type": "string"
           },
           {
-            "name": "evaluationOptions",
+            "name": "body",
             "in": "body",
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
+              "$ref": "#/definitions/EvaluationOptions"
             }
           }
         ],
@@ -1914,12 +1914,12 @@
             "maxLength": 100
           },
           {
-            "name": "assignDeploymentResourcesOptions",
+            "name": "body",
             "in": "body",
             "description": "The new project resources info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringAssignDeploymentResourcesOptions"
+              "$ref": "#/definitions/AssignDeploymentResourcesOptions"
             }
           }
         ],
@@ -1966,12 +1966,12 @@
             "maxLength": 100
           },
           {
-            "name": "unassignDeploymentResourcesOptions",
+            "name": "body",
             "in": "body",
             "description": "The info for the deployment resources to be deleted.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringUnassignDeploymentResourcesOptions"
+              "$ref": "#/definitions/UnassignDeploymentResourcesOptions"
             }
           }
         ],
@@ -2436,6 +2436,23 @@
     }
   },
   "definitions": {
+    "AssignDeploymentResourcesOptions": {
+      "type": "object",
+      "description": "Represents the options for assigning Azure resources to a project.",
+      "properties": {
+        "resourcesMetadata": {
+          "type": "array",
+          "description": "Represents the metadata for the resources to be assigned.",
+          "items": {
+            "$ref": "#/definitions/ResourceMetadata"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resourcesMetadata"
+      ]
+    },
     "CompositionSetting": {
       "type": "string",
       "enum": [
@@ -2458,6 +2475,66 @@
           }
         ]
       }
+    },
+    "CopyAuthorizationOptions": {
+      "type": "object",
+      "description": "Represents the options for authorizing a project copy to the current Azure\nresource.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The name of the storage container."
+        },
+        "allowOverwrite": {
+          "type": "boolean",
+          "description": "Whether to allow an existing project to be overwritten using the resulting copy\nauthorization."
+        }
+      },
+      "required": [
+        "projectKind"
+      ]
+    },
+    "CopyProjectOptions": {
+      "type": "object",
+      "description": "Represents the options for copying an existing project to another Azure\nresource.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "targetProjectName": {
+          "type": "string",
+          "description": "The project name to be copied-into."
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "The access token."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration of the access token."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Represents the target Azure resource ID."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "Represents the target Azure resource region."
+        }
+      },
+      "required": [
+        "projectKind",
+        "targetProjectName",
+        "accessToken",
+        "expiresAt",
+        "targetResourceId",
+        "targetResourceRegion"
+      ]
     },
     "CreateProjectOptions": {
       "type": "object",
@@ -2670,6 +2747,66 @@
           }
         ]
       }
+    },
+    "EvaluationOptions": {
+      "type": "object",
+      "description": "Represents the options used running the evaluation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
+        },
+        "trainingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        },
+        "testingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        }
+      }
+    },
+    "ExportedModelOptions": {
+      "type": "object",
+      "description": "Represents the options for creating or replacing an exported model.",
+      "properties": {
+        "trainedModelLabel": {
+          "type": "string",
+          "description": "The trained model label."
+        }
+      },
+      "required": [
+        "trainedModelLabel"
+      ]
+    },
+    "ExportedProject": {
+      "type": "object",
+      "description": "Represents an exported project.",
+      "properties": {
+        "projectFileVersion": {
+          "type": "string",
+          "description": "The version of the exported file."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
+        },
+        "metadata": {
+          "$ref": "#/definitions/CreateProjectOptions",
+          "description": "Represents the project metadata."
+        },
+        "assets": {
+          "$ref": "#/definitions/ExportedProjectAssets",
+          "description": "Represents the project assets."
+        }
+      },
+      "required": [
+        "projectFileVersion",
+        "stringIndexType",
+        "metadata"
+      ]
     },
     "ExportedProjectAssets": {
       "type": "object",
@@ -3162,6 +3299,29 @@
         }
       }
     },
+    "ResourceMetadata": {
+      "type": "object",
+      "description": "Represents metadata for the Azure resource..",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "Represents the Azure resource ID."
+        },
+        "customDomain": {
+          "type": "string",
+          "description": "Represents the Azure resource custom domain."
+        },
+        "region": {
+          "type": "string",
+          "description": "Represents the Azure resource region."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "customDomain",
+        "region"
+      ]
+    },
     "Sentiment": {
       "type": "string",
       "enum": [
@@ -3204,6 +3364,24 @@
           }
         ]
       }
+    },
+    "SwapDeploymentsOptions": {
+      "type": "object",
+      "description": "Represents the options for swapping two deployments together.",
+      "properties": {
+        "firstDeploymentName": {
+          "type": "string",
+          "description": "Represents the first deployment name."
+        },
+        "secondDeploymentName": {
+          "type": "string",
+          "description": "Represents the second deployment name."
+        }
+      },
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ]
     },
     "TextAnalysisAuthoringAssignDeploymentResourcesJobState": {
       "type": "object",
@@ -3254,23 +3432,6 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "status"
-      ]
-    },
-    "TextAnalysisAuthoringAssignDeploymentResourcesOptions": {
-      "type": "object",
-      "description": "Represents the options for assigning Azure resources to a project.",
-      "properties": {
-        "resourcesMetadata": {
-          "type": "array",
-          "description": "Represents the metadata for the resources to be assigned.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringResourceMetadata"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "resourcesMetadata"
       ]
     },
     "TextAnalysisAuthoringAssignedDeploymentResource": {
@@ -3370,27 +3531,6 @@
         "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixCell"
       }
     },
-    "TextAnalysisAuthoringCopyAuthorizationOptions": {
-      "type": "object",
-      "description": "Represents the options for authorizing a project copy to the current Azure\nresource.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The name of the storage container."
-        },
-        "allowOverwrite": {
-          "type": "boolean",
-          "description": "Whether to allow an existing project to be overwritten using the resulting copy\nauthorization."
-        }
-      },
-      "required": [
-        "projectKind"
-      ]
-    },
     "TextAnalysisAuthoringCopyProjectJobState": {
       "type": "object",
       "description": "Represents the state of a copy job.",
@@ -3440,45 +3580,6 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "status"
-      ]
-    },
-    "TextAnalysisAuthoringCopyProjectOptions": {
-      "type": "object",
-      "description": "Represents the options for copying an existing project to another Azure\nresource.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
-        },
-        "targetProjectName": {
-          "type": "string",
-          "description": "The project name to be copied-into."
-        },
-        "accessToken": {
-          "type": "string",
-          "description": "The access token."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration of the access token."
-        },
-        "targetResourceId": {
-          "type": "string",
-          "description": "Represents the target Azure resource ID."
-        },
-        "targetResourceRegion": {
-          "type": "string",
-          "description": "Represents the target Azure resource region."
-        }
-      },
-      "required": [
-        "projectKind",
-        "targetProjectName",
-        "accessToken",
-        "expiresAt",
-        "targetResourceId",
-        "targetResourceRegion"
       ]
     },
     "TextAnalysisAuthoringCreateDeploymentOptions": {
@@ -4149,7 +4250,7 @@
       "type": "object",
       "properties": {
         "evaluationOptions": {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
+          "$ref": "#/definitions/EvaluationOptions",
           "description": "Represents the options used running the evaluation."
         },
         "modelLabel": {
@@ -4229,26 +4330,6 @@
         "result"
       ]
     },
-    "TextAnalysisAuthoringEvaluationOptions": {
-      "type": "object",
-      "description": "Represents the options used running the evaluation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EvaluationKind",
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
-        },
-        "trainingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        },
-        "testingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        }
-      }
-    },
     "TextAnalysisAuthoringEvaluationSummary": {
       "type": "object",
       "description": "Represents the summary for an evaluation operation.",
@@ -4258,7 +4339,7 @@
           "description": "Represents the project type that the evaluation ran on."
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
+          "$ref": "#/definitions/EvaluationOptions",
           "description": "Represents the options used running the evaluation."
         }
       },
@@ -4861,19 +4942,6 @@
         "modelFiles"
       ]
     },
-    "TextAnalysisAuthoringExportedModelOptions": {
-      "type": "object",
-      "description": "Represents the options for creating or replacing an exported model.",
-      "properties": {
-        "trainedModelLabel": {
-          "type": "string",
-          "description": "The trained model label."
-        }
-      },
-      "required": [
-        "trainedModelLabel"
-      ]
-    },
     "TextAnalysisAuthoringExportedPrebuiltEntity": {
       "type": "object",
       "description": "Represents an exported prebuilt entity component",
@@ -4885,33 +4953,6 @@
       },
       "required": [
         "category"
-      ]
-    },
-    "TextAnalysisAuthoringExportedProject": {
-      "type": "object",
-      "description": "Represents an exported project.",
-      "properties": {
-        "projectFileVersion": {
-          "type": "string",
-          "description": "The version of the exported file."
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
-        },
-        "metadata": {
-          "$ref": "#/definitions/CreateProjectOptions",
-          "description": "Represents the project metadata."
-        },
-        "assets": {
-          "$ref": "#/definitions/ExportedProjectAssets",
-          "description": "Represents the project assets."
-        }
-      },
-      "required": [
-        "projectFileVersion",
-        "stringIndexType",
-        "metadata"
       ]
     },
     "TextAnalysisAuthoringExportedTrainedModel": {
@@ -5410,29 +5451,6 @@
         "hasSnapshot"
       ]
     },
-    "TextAnalysisAuthoringResourceMetadata": {
-      "type": "object",
-      "description": "Represents metadata for the Azure resource..",
-      "properties": {
-        "azureResourceId": {
-          "type": "string",
-          "description": "Represents the Azure resource ID."
-        },
-        "customDomain": {
-          "type": "string",
-          "description": "Represents the Azure resource custom domain."
-        },
-        "region": {
-          "type": "string",
-          "description": "Represents the Azure resource region."
-        }
-      },
-      "required": [
-        "azureResourceId",
-        "customDomain",
-        "region"
-      ]
-    },
     "TextAnalysisAuthoringSentimentEvaluationSummary": {
       "type": "object",
       "description": "Represents the evaluation summary for a sentiment in a custom sentiment project.",
@@ -5745,24 +5763,6 @@
         "status"
       ]
     },
-    "TextAnalysisAuthoringSwapDeploymentsOptions": {
-      "type": "object",
-      "description": "Represents the options for swapping two deployments together.",
-      "properties": {
-        "firstDeploymentName": {
-          "type": "string",
-          "description": "Represents the first deployment name."
-        },
-        "secondDeploymentName": {
-          "type": "string",
-          "description": "Represents the second deployment name."
-        }
-      },
-      "required": [
-        "firstDeploymentName",
-        "secondDeploymentName"
-      ]
-    },
     "TextAnalysisAuthoringTextSentimentEvaluationSummary": {
       "type": "object",
       "description": "Represents the evaluation summary for a custom text sentiment project.",
@@ -5829,28 +5829,6 @@
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
-      ]
-    },
-    "TextAnalysisAuthoringTrainingJobOptions": {
-      "type": "object",
-      "description": "Represents the options for starting a new training job.",
-      "properties": {
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents the output model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version."
-        },
-        "evaluationOptions": {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
-          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
-        }
-      },
-      "required": [
-        "modelLabel",
-        "trainingConfigVersion"
       ]
     },
     "TextAnalysisAuthoringTrainingJobResult": {
@@ -5992,22 +5970,6 @@
         "status"
       ]
     },
-    "TextAnalysisAuthoringUnassignDeploymentResourcesOptions": {
-      "type": "object",
-      "description": "Represents the options to unassign Azure resources from a project.",
-      "properties": {
-        "assignedResourceIds": {
-          "type": "array",
-          "description": "Represents the assigned resource IDs to be unassigned.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "assignedResourceIds"
-      ]
-    },
     "TextAnalysisAuthoringWarning": {
       "type": "object",
       "description": "Represents a warning that was encountered while executing the request.",
@@ -6024,6 +5986,44 @@
       "required": [
         "code",
         "message"
+      ]
+    },
+    "TrainingJobOptions": {
+      "type": "object",
+      "description": "Represents the options for starting a new training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents the output model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/EvaluationOptions",
+          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingConfigVersion"
+      ]
+    },
+    "UnassignDeploymentResourcesOptions": {
+      "type": "object",
+      "description": "Represents the options to unassign Azure resources from a project.",
+      "properties": {
+        "assignedResourceIds": {
+          "type": "array",
+          "description": "Represents the assigned resource IDs to be unassigned.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "assignedResourceIds"
       ]
     }
   },
