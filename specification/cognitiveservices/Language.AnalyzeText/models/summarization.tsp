@@ -172,39 +172,3 @@ model AbstractiveSummary {
   /** The context list of the summary. */
   contexts?: Array<SummaryContext>;
 }
-
-/** An object representing the task definition for an Custom Abstractive Summarization task. */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@removed(Versions.v2024_11_01)
-model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
-  /** The Custom Abstractive Summarization kind of the long running task. */
-  kind: AnalyzeTextLROTaskKind.CustomAbstractiveSummarization;
-
-  /** Parameters for the Custom Abstractive Summarization task. */
-  parameters: CustomAbstractiveSummarizationTaskParameters;
-}
-
-/** Supported parameters for the Custom Abstractive Summarization task. */
-@removed(Versions.v2024_11_01)
-model CustomAbstractiveSummarizationTaskParameters
-  is AbstractiveSummarizationTaskParametersBase {
-  ...CustomTaskParameters;
-}
-
-/** An object representing the results for an Custom Abstractive Summarization task. */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@removed(Versions.v2024_11_01)
-model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
-  /** Kind of the task. */
-  kind: AnalyzeTextLROResultsKind.CustomAbstractiveSummarizationLROResults;
-
-  /** Results of the task. */
-  results: CustomAbstractiveSummarizationResult;
-}
-
-/** An object representing the custom summarization results of each document. */
-@removed(Versions.v2024_11_01)
-model CustomAbstractiveSummarizationResult
-  is AbstractiveSummarizationResultBase {
-  ...CustomResult;
-}

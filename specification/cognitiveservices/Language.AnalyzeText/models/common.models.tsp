@@ -44,10 +44,6 @@ union AnalyzeTextTaskKind {
 
   /** Entity linking task */
   EntityLinking: "EntityLinking",
-
-  /** Dynamic classification task */
-  @removed(Versions.v2024_11_01)
-  DynamicClassification: "DynamicClassification",
 }
 
 /** The kind of the long running analyze text tasks supported. */
@@ -88,18 +84,6 @@ union AnalyzeTextLROTaskKind {
   /** Abstractive summarization task */
   @added(Versions.v2023_04_01)
   AbstractiveSummarization: "AbstractiveSummarization",
-
-  /** Custom healthcare task */
-  @removed(Versions.v2024_11_01)
-  CustomHealthcare: "CustomHealthcare",
-
-  /** Custom sentiment analysis task */
-  @removed(Versions.v2024_11_01)
-  CustomSentimentAnalysis: "CustomSentimentAnalysis",
-
-  /** Custom abstractive summarization task */
-  @removed(Versions.v2024_11_01)
-  CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
 }
 
 /** The kind of the response object returned by the analyze-text task. */
@@ -123,10 +107,6 @@ union AnalyzeTextTaskResultsKind {
 
   /** Entity linking results */
   EntityLinkingResults: "EntityLinkingResults",
-
-  /** Dynamic classification results */
-  @removed(Versions.v2024_11_01)
-  DynamicClassificationResults: "DynamicClassificationResults",
 }
 
 /** The kind of the response object returned by the analyze-text long running task. */
@@ -167,18 +147,6 @@ union AnalyzeTextLROResultsKind {
   /** Abstractive summarization LRO results */
   @added(Versions.v2023_04_01)
   AbstractiveSummarizationLROResults: "AbstractiveSummarizationLROResults",
-
-  /** Custom healthcare LRO results */
-  @removed(Versions.v2024_11_01)
-  CustomHealthcareLROResults: "CustomHealthcareLROResults",
-
-  /** Custom sentiment analysis LRO results */
-  @removed(Versions.v2024_11_01)
-  CustomSentimentAnalysisLROResults: "CustomSentimentAnalysisLROResults",
-
-  /** Custom abstractive summarization LRO results */
-  @removed(Versions.v2024_11_01)
-  CustomAbstractiveSummarizationLROResults: "CustomAbstractiveSummarizationLROResults",
 }
 
 /** Collection of input documents to be analyzed by the service. */

@@ -139,26 +139,6 @@ model CustomMultiLabelClassificationLROResult extends AnalyzeTextLROResult {
   results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
 }
 
-/** Contains the analyze text dynamic classifications input. */
-@removed(Versions.v2024_11_01)
-model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
-  /** Kind of the task. */
-  kind: AnalyzeTextTaskKind.DynamicClassification;
-
-  /** Input to be analyzed. */
-  analysisInput?: MultiLanguageAnalysisInput;
-
-  /** Task parameters. */
-  parameters?: DynamicClassificationTaskParameters;
-}
-
-/** Contains the Dynamic Classification document result. */
-@removed(Versions.v2024_11_01)
-model DynamicClassificationDocumentResult is DocumentResult {
-  /** Array of classification results. */
-  classifications: Array<ClassificationResult>;
-}
-
 /** This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully */
 @added(Versions.v2024_11_15_preview)
 @discriminator("entityComponentKind")
@@ -212,16 +192,6 @@ model ListComponent extends EntityComponentInformation {
   value?: string;
 }
 
-/** Supported parameters for a Dynamic Classification task. */
-@removed(Versions.v2024_11_01)
-model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
-  /** Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document. */
-  classificationType?: ClassificationType = ClassificationType.Multi;
-
-  /** a list of categories to which input is classified to. */
-  categories: Array<string>;
-}
-
 /** Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document. */
 @added(Versions.v2024_11_15_preview)
 union ClassificationType {
@@ -232,21 +202,4 @@ union ClassificationType {
 
   /** Single selection */
   Single: "Single",
-}
-
-/** Contains the Dynamic Classification result. */
-@removed(Versions.v2024_11_01)
-model DynamicClassificationResult is PreBuiltResult {
-  /** Response by document */
-  documents: Array<DynamicClassificationDocumentResult>;
-}
-
-/** Result for Dynamic Classification task. */
-@removed(Versions.v2024_11_01)
-model DynamicClassificationTaskResult extends AnalyzeTextTaskResult {
-  /** Kind of task result */
-  kind: AnalyzeTextTaskResultsKind.DynamicClassificationResults;
-
-  /** Results for Dynamic Classification task */
-  results: DynamicClassificationResult;
 }

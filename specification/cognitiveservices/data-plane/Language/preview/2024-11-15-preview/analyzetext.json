@@ -383,7 +383,7 @@
           "$ref": "#/definitions/SummaryLengthBucket",
           "description": "(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries."
         },
-        "query": {
+        "prompt": {
           "type": "string",
           "description": "(Optional) If provided, the query will be used to generate the summary."
         }
@@ -1409,143 +1409,6 @@
         }
       ],
       "x-ms-discriminator-value": "CurrencyMetadata"
-    },
-    "CustomAbstractiveSummarizationLROResult": {
-      "type": "object",
-      "description": "An object representing the results for an Custom Abstractive Summarization task.",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/CustomAbstractiveSummarizationResult",
-          "description": "Results of the task."
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ]
-    },
-    "CustomAbstractiveSummarizationLROTask": {
-      "type": "object",
-      "description": "An object representing the task definition for an Custom Abstractive Summarization task.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/CustomAbstractiveSummarizationTaskParameters",
-          "description": "Parameters for the Custom Abstractive Summarization task."
-        }
-      },
-      "required": [
-        "parameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROTask"
-        }
-      ]
-    },
-    "CustomAbstractiveSummarizationResult": {
-      "type": "object",
-      "description": "An object representing the custom summarization results of each document.",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
-        "documents",
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomAbstractiveSummarizationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for the Custom Abstractive Summarization task.",
-      "properties": {
-        "sentenceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Controls the approximate number of sentences in the output summaries."
-        },
-        "stringIndexType": {
-          "type": "string",
-          "description": "String index type",
-          "default": "TextElements_v8",
-          "enum": [
-            "TextElements_v8",
-            "UnicodeCodePoint",
-            "Utf16CodeUnit"
-          ],
-          "x-ms-enum": {
-            "name": "StringIndexType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "TextElements_v8",
-                "value": "TextElements_v8",
-                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-              },
-              {
-                "name": "UnicodeCodePoint",
-                "value": "UnicodeCodePoint",
-                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-              },
-              {
-                "name": "Utf16CodeUnit",
-                "value": "Utf16CodeUnit",
-                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-              }
-            ]
-          }
-        },
-        "summaryLength": {
-          "$ref": "#/definitions/SummaryLengthBucket",
-          "description": "(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries."
-        },
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
-        "projectName",
-        "deploymentName"
-      ]
     },
     "CustomEntitiesLROTask": {
       "type": "object",
@@ -6830,6 +6693,103 @@
           "description": "Enumeration of PII categories to be excluded in the response.",
           "items": {
             "$ref": "#/definitions/PiiCategoriesExclude"
+          }
+        },
+        "redactionCharacter": {
+          "type": "string",
+          "description": "Character to be used for redaction. Default in '*'.",
+          "default": "*",
+          "enum": [
+            "!",
+            "#",
+            "$",
+            "%",
+            "&",
+            "*",
+            "+",
+            "-",
+            "=",
+            "?",
+            "@",
+            "^",
+            "_",
+            "~"
+          ],
+          "x-ms-enum": {
+            "name": "redactionCharacter",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "exclamationPoint",
+                "value": "!",
+                "description": "Exclamation point character"
+              },
+              {
+                "name": "numberSign",
+                "value": "#",
+                "description": "Number sign character"
+              },
+              {
+                "name": "dollar",
+                "value": "$",
+                "description": "Dollar sign character"
+              },
+              {
+                "name": "perCent",
+                "value": "%",
+                "description": "Percent sign character"
+              },
+              {
+                "name": "ampersand",
+                "value": "&",
+                "description": "Ampersand character"
+              },
+              {
+                "name": "asterisk",
+                "value": "*",
+                "description": "Asterisk character"
+              },
+              {
+                "name": "plus",
+                "value": "+",
+                "description": "Plus sign character"
+              },
+              {
+                "name": "minus",
+                "value": "-",
+                "description": "Minus sign character"
+              },
+              {
+                "name": "equals",
+                "value": "=",
+                "description": "Equals sign character"
+              },
+              {
+                "name": "questionMark",
+                "value": "?",
+                "description": "Question mark character"
+              },
+              {
+                "name": "atSign",
+                "value": "@",
+                "description": "At sign character"
+              },
+              {
+                "name": "caret",
+                "value": "^",
+                "description": "Caret character"
+              },
+              {
+                "name": "underscore",
+                "value": "_",
+                "description": "Underscore character"
+              },
+              {
+                "name": "tilde",
+                "value": "~",
+                "description": "Tilde character"
+              }
+            ]
           }
         },
         "redactionPolicy": {
