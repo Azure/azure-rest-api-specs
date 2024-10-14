@@ -415,9 +415,9 @@ model VMAttributes {
   memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
 
   @doc("""
-  Specifies whether the VMSize supporting local storage should be used to build Fleet or not.
-  Included - Default if not specified as most Azure VMs support local storage.
-  """)
+    Specifies whether the VMSize supporting local storage should be used to build Fleet or not.
+    Included - Default if not specified as most Azure VMs support local storage.
+    """)
   localStorageSupport?: VMAttributeSupport;
 
   @doc("""
