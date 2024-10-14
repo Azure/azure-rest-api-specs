@@ -2242,16 +2242,6 @@
         ]
       }
     },
-    "HybridComputePolicyResourceDetails": {
-      "type": "object",
-      "description": "Details of the OnboardingService Hybrid Compute Machines Policy.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PolicyResourceDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
-    },
     "DiscoveryService": {
       "type": "object",
       "description": "A discovery resource.",
@@ -2392,6 +2382,16 @@
         }
       ],
       "x-ms-discriminator-value": "Fdo101"
+    },
+    "HybridComputePolicyResourceDetails": {
+      "type": "object",
+      "description": "Details of the OnboardingService Hybrid Compute Machines Policy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
     },
     "IdentityInfo": {
       "type": "object",
@@ -2795,16 +2795,6 @@
       ],
       "x-ms-discriminator-value": "Microsoft.DeviceRegistry/devices"
     },
-    "PatchHybridComputePolicyResourceDetails": {
-      "type": "object",
-      "description": "Details of the OnboardingService Hybrid Compute Machines Policy.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PolicyPatchResourceDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
-    },
     "PatchEvenlyDistributedAllocationRule": {
       "type": "object",
       "description": "The allocation rule for evenly distributed allocation type.",
@@ -2854,6 +2844,16 @@
         }
       ],
       "x-ms-discriminator-value": "Fdo101"
+    },
+    "PatchHybridComputePolicyResourceDetails": {
+      "type": "object",
+      "description": "Details of the OnboardingService Hybrid Compute Machines Policy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyPatchResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
     },
     "PatchOwnershipVoucherStorage": {
       "type": "object",
