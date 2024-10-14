@@ -21,7 +21,7 @@ model SessionIdentifier {
   sessionId: string;
 }
 
-@doc("Session code execution identifier query parameter.")
+@doc("Session code execution identifier path parameter.")
 model CodeExecutionIdentifier {
   @doc("The identifier of code execution.")
   @path
