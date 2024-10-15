@@ -24,8 +24,6 @@ model NetworkSettingsResource
   @segment("networkSettings")
   @visibility("read")
   name: string;
-
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations

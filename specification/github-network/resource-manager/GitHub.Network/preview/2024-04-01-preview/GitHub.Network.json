@@ -372,29 +372,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
-            "x-nullable": true
-          }
-        }
-      }
-    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -420,10 +397,6 @@
         "properties": {
           "$ref": "#/definitions/NetworkSettingsResourceProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -487,10 +460,6 @@
         "properties": {
           "$ref": "#/definitions/NetworkSettingsResourceProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
