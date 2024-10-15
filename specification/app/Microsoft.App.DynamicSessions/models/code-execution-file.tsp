@@ -23,10 +23,10 @@ model SessionResourceFile {
   type: string;
 
   @doc("The type of the content of this file.")
-  contentType: string;
+  contentType?: string;
 
   @doc("The size of the file.")
-  sizeInBytes: int64;
+  sizeInBytes?: int64;
 
   @doc("The date time in RFC3339 format when the file was last modified.")
   lastModifiedAt: utcDateTime;
