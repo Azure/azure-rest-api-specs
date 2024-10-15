@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using invalid-name;
 
 /** Microsoft.Contoso Resource Provider management API. */
 @armProviderNamespace
