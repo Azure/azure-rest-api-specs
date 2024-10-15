@@ -6,7 +6,7 @@
   },
   "parameters": {
     "api-version": "2024-10-02-preview",
-    "identifier": "testsessionidentidier",
+    "identifier": "testsessionidentifier",
     "codeExecutionRequest": {
       "codeInputType": "Inline",
       "executionType": "Asynchronous",
@@ -22,7 +22,12 @@
       },
       "body": {
         "id": "testexecutionid",
-        "status": "Running"
+        "status": "Running",
+        "result": {
+          "identifier": "testsessionidentifier",
+          "executionId": "testexecutionid",
+          "executionType": "Asynchronous"
+        }
       }
     }
   }

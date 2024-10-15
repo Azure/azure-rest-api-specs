@@ -672,6 +672,19 @@
       "type": "object",
       "description": "The result of the code execution.",
       "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "The identifier of the session."
+        },
+        "executionId": {
+          "type": "string",
+          "description": "Session code execution id.",
+          "readOnly": true
+        },
+        "executionType": {
+          "$ref": "#/definitions/ExecutionType",
+          "description": "The execution type of the code execution request."
+        },
         "stdout": {
           "type": "string",
           "description": "The standard output of the code execution."
@@ -688,7 +701,11 @@
           "format": "int64",
           "description": "The execution time of the code in milliseconds."
         }
-      }
+      },
+      "required": [
+        "identifier",
+        "executionType"
+      ]
     },
     "SessionResourceFile": {
       "type": "object",

@@ -3,7 +3,7 @@
   "operationId": "CodeExecution_ExecuteCode",
   "parameters": {
     "api-version": "2024-10-02-preview",
-    "identifier": "testidentidier",
+    "identifier": "testsessionidentifier",
     "codeExecutionRequest": {
       "codeInputType": "Inline",
       "executionType": "Synchronous",
@@ -14,12 +14,16 @@
   "responses": {
     "202": {
       "headers": {
+        "operation-id": "testexecutionid",
         "Operation-Location": "operation-location-uri"
       },
       "body": {
         "id": "testexecutionid",
         "status": "Succeeded",
         "result": {
+          "identifier": "testsessionidentifier",
+          "executionId": "testexecutionid",
+          "executionType": "Synchronous",
           "stdout": "63/n",
           "stderr": "",
           "executionResult": "",
