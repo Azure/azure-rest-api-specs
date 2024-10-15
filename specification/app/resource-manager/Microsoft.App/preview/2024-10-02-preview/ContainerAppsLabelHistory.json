@@ -132,6 +132,24 @@
   "definitions": {
     "LabelHistory": {
       "description": "Container App Label History.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of label history record items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabelHistoryRecordItem"
+          }
+        }
+      }
+    },
+    "LabelHistoryRecordItem": {
+      "description": "Container App Label History.",
       "type": "object",
       "allOf": [
         {
