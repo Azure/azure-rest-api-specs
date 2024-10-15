@@ -6461,6 +6461,9 @@
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
+            "$ref": "#/parameters/TargetFile"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -8506,9 +8509,9 @@
     "TargetFile": {
       "name": "x-ms-file-target-file",
       "x-ms-client-name": "targetFile",
-      "in": "headers",
+      "in": "header",
       "required": true,
-      "decription": "NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account.",
+      "description": "NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account.",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
