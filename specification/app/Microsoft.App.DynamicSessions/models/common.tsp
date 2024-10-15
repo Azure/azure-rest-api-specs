@@ -8,10 +8,10 @@ namespace Microsoft.App.DynamicSessions;
 using OpenAPI;
 
 @doc("The optional execution id header.")
-model ExecutionIdHeader {
+model ExecutionOperationIdHeader {
   @header
-  @doc("The operation id.")
-  executionId?: string;
+  @doc("The id of this execution operation.")
+  opeartionId?: string;
 }
 
 @doc("Session identifier query parameter.")
