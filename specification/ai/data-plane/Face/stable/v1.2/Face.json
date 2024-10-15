@@ -2853,47 +2853,6 @@
         }
       }
     },
-    "/operations/{operationId}": {
-      "get": {
-        "operationId": "GetOperationResult",
-        "description": "Get status of a long running operation.",
-        "parameters": [
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation ID of the operation.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call returns the long running operation status.",
-            "schema": {
-              "$ref": "#/definitions/OperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/FaceErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Face Operation Status": {
-            "$ref": "./examples/GetOperationResult.json"
-          }
-        }
-      }
-    },
     "/persongroups": {
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroups",
@@ -7148,45 +7107,6 @@
         "foreheadOccluded",
         "eyeOccluded",
         "mouthOccluded"
-      ]
-    },
-    "OperationResult": {
-      "type": "object",
-      "description": "Long running operation resource for person directory.",
-      "properties": {
-        "operationId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Operation ID of the operation.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus",
-          "description": "Current status of the operation."
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the operation was created."
-        },
-        "lastActionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the operation was last updated."
-        },
-        "finishedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the operation was finished."
-        },
-        "message": {
-          "type": "string",
-          "description": "Message for the operation."
-        }
-      },
-      "required": [
-        "operationId",
-        "status",
-        "createdTime"
       ]
     },
     "OperationStatus": {

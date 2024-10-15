@@ -85,6 +85,7 @@ op DynamicPersonGroupOperation<TParams extends TypeSpec.Reflection.Model> is Fou
   FaceErrorResponse
 >;
 
+@removed(Versions.v1_2)
 @doc("Get status of a long running operation.")
 @returnsDoc("A successful call returns the long running operation status.")
 op getOperationResult is FaceResourceReadOperation<OperationResult>;
