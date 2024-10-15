@@ -106,6 +106,54 @@
           },
           {
             "$ref": "#/parameters/TuningOptionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IndexRecommendationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations/{recommendationType}": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_GetRecommendation",
+        "x-ms-examples": {
+          "TuningOptions_GetRecommendation": {
+            "$ref": "./examples/Tuning_GetRecommendedIndex.json"
+          }
+        },
+        "description": "Retrieve the tuning index recommendation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
           },
           {
             "$ref": "#/parameters/RecommendationTypeParameter"
@@ -115,7 +163,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IndexRecommendationListResult"
+              "$ref": "#/definitions/IndexRecommendationResource"
             }
           },
           "default": {
@@ -267,6 +315,14 @@
         },
         "recommendationType": {
           "type": "string",
+          "enum": [
+            "CreateIndex",
+            "DropIndex"
+          ],
+          "x-ms-enum": {
+            "name": "RecommendationTypeEnum",
+            "modelAsString": true
+          },
           "description": "Type for this recommendation."
         },
         "implementationDetails": {
@@ -325,32 +381,17 @@
     "IndexRecommendationResource": {
       "type": "object",
       "properties": {
-        "type": {
-          "description": "The type of resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "Kind of index recommendation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The id of index recommendation.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of index recommendation.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/IndexRecommendationResourceProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of IndexRecommendationResource."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
       "description": "Index recommendation properties."
     },
     "IndexRecommendationListResult": {
@@ -376,30 +417,12 @@
     },
     "TuningOptionsResource": {
       "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id."
-        },
-        "type": {
-          "type": "string",
-          "description": "Tuning options type."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the tuning option."
-        },
-        "properties": {
-          "$ref": "#/definitions/TuningOptionsResourceProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of Tuning Options resource."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      },
+      ],
       "description": "Stores property that features impact on some metric if this recommended action is applied."
-    },
-    "TuningOptionsResourceProperties": {
-      "type": "object",
-      "description": "Properties for the PostgreSQL flexible server tuning option resource."
     },
     "TuningOptionsListResult": {
       "description": "A list of available tuning options.",
