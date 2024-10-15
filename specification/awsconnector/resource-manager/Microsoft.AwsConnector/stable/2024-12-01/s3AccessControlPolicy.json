@@ -40,17 +40,17 @@
   },
   "tags": [
     {
-      "name": "EmrClusterSummaries"
+      "name": "S3AccessControlPolicies"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/emrClusterSummaries": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/s3AccessControlPolicies": {
       "get": {
-        "operationId": "EmrClusterSummaries_ListBySubscription",
+        "operationId": "S3AccessControlPolicies_ListBySubscription",
         "tags": [
-          "EmrClusterSummaries"
+          "S3AccessControlPolicies"
         ],
-        "description": "List EmrClusterSummary resources by subscription ID",
+        "description": "List S3AccessControlPolicy resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EmrClusterSummaryListResult"
+              "$ref": "#/definitions/S3AccessControlPolicyListResult"
             }
           },
           "default": {
@@ -74,8 +74,8 @@
           }
         },
         "x-ms-examples": {
-          "EmrClusterSummaries_ListBySubscription": {
-            "$ref": "./examples/EmrClusterSummaries_ListBySubscription.json"
+          "S3AccessControlPolicies_ListBySubscription": {
+            "$ref": "./examples/S3AccessControlPolicies_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/emrClusterSummaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/s3AccessControlPolicies": {
       "get": {
-        "operationId": "EmrClusterSummaries_ListByResourceGroup",
+        "operationId": "S3AccessControlPolicies_ListByResourceGroup",
         "tags": [
-          "EmrClusterSummaries"
+          "S3AccessControlPolicies"
         ],
-        "description": "List EmrClusterSummary resources by resource group",
+        "description": "List S3AccessControlPolicy resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +105,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EmrClusterSummaryListResult"
+              "$ref": "#/definitions/S3AccessControlPolicyListResult"
             }
           },
           "default": {
@@ -116,8 +116,8 @@
           }
         },
         "x-ms-examples": {
-          "EmrClusterSummaries_ListByResourceGroup": {
-            "$ref": "./examples/EmrClusterSummaries_ListByResourceGroup.json"
+          "S3AccessControlPolicies_ListByResourceGroup": {
+            "$ref": "./examples/S3AccessControlPolicies_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -125,13 +125,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/emrClusterSummaries/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/s3AccessControlPolicies/{name}": {
       "get": {
-        "operationId": "EmrClusterSummaries_Get",
+        "operationId": "S3AccessControlPolicies_Get",
         "tags": [
-          "EmrClusterSummaries"
+          "S3AccessControlPolicies"
         ],
-        "description": "Get a EmrClusterSummary",
+        "description": "Get a S3AccessControlPolicy",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -145,7 +145,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of EmrClusterSummary",
+            "description": "Name of S3AccessControlPolicy",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
@@ -155,7 +155,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EmrClusterSummary"
+              "$ref": "#/definitions/S3AccessControlPolicy"
             }
           },
           "default": {
@@ -166,17 +166,17 @@
           }
         },
         "x-ms-examples": {
-          "EmrClusterSummaries_Get": {
-            "$ref": "./examples/EmrClusterSummaries_Get.json"
+          "S3AccessControlPolicies_Get": {
+            "$ref": "./examples/S3AccessControlPolicies_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "EmrClusterSummaries_CreateOrReplace",
+        "operationId": "S3AccessControlPolicies_CreateOrReplace",
         "tags": [
-          "EmrClusterSummaries"
+          "S3AccessControlPolicies"
         ],
-        "description": "Create a EmrClusterSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "description": "Create a S3AccessControlPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -190,7 +190,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of EmrClusterSummary",
+            "description": "Name of S3AccessControlPolicy",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
@@ -201,21 +201,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EmrClusterSummary"
+              "$ref": "#/definitions/S3AccessControlPolicy"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'EmrClusterSummary' update operation succeeded",
+            "description": "Resource 'S3AccessControlPolicy' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/EmrClusterSummary"
+              "$ref": "#/definitions/S3AccessControlPolicy"
             }
           },
           "201": {
-            "description": "Resource 'EmrClusterSummary' create operation succeeded",
+            "description": "Resource 'S3AccessControlPolicy' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/EmrClusterSummary"
+              "$ref": "#/definitions/S3AccessControlPolicy"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -237,8 +237,8 @@
           }
         },
         "x-ms-examples": {
-          "EmrClusterSummaries_CreateOrReplace": {
-            "$ref": "./examples/EmrClusterSummaries_CreateOrReplace.json"
+          "S3AccessControlPolicies_CreateOrReplace": {
+            "$ref": "./examples/S3AccessControlPolicies_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -247,11 +247,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "EmrClusterSummaries_Update",
+        "operationId": "S3AccessControlPolicies_Update",
         "tags": [
-          "EmrClusterSummaries"
+          "S3AccessControlPolicies"
         ],
-        "description": "Update a EmrClusterSummary",
+        "description": "Update a S3AccessControlPolicy",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -265,7 +265,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of EmrClusterSummary",
+            "description": "Name of S3AccessControlPolicy",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
@@ -276,7 +276,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EmrClusterSummaryTagsUpdate"
+              "$ref": "#/definitions/S3AccessControlPolicyTagsUpdate"
             }
           }
         ],
@@ -284,7 +284,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EmrClusterSummary"
+              "$ref": "#/definitions/S3AccessControlPolicy"
             }
           },
           "202": {
@@ -309,8 +309,8 @@
           }
         },
         "x-ms-examples": {
-          "EmrClusterSummaries_Update": {
-            "$ref": "./examples/EmrClusterSummaries_Update.json"
+          "S3AccessControlPolicies_Update": {
+            "$ref": "./examples/S3AccessControlPolicies_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -319,11 +319,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "EmrClusterSummaries_Delete",
+        "operationId": "S3AccessControlPolicies_Delete",
         "tags": [
-          "EmrClusterSummaries"
+          "S3AccessControlPolicies"
         ],
-        "description": "Delete a EmrClusterSummary",
+        "description": "Delete a S3AccessControlPolicy",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -337,7 +337,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of EmrClusterSummary",
+            "description": "Name of S3AccessControlPolicy",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
@@ -369,8 +369,8 @@
           }
         },
         "x-ms-examples": {
-          "EmrClusterSummaries_Delete": {
-            "$ref": "./examples/EmrClusterSummaries_Delete.json"
+          "S3AccessControlPolicies_Delete": {
+            "$ref": "./examples/S3AccessControlPolicies_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -381,346 +381,127 @@
     }
   },
   "definitions": {
-    "AwsEmrClusterSummaryProperties": {
+    "AwsS3AccessControlPolicyProperties": {
       "type": "object",
-      "description": "Definition of awsEmrClusterSummary",
+      "description": "Definition of awsS3AccessControlPolicy",
       "properties": {
-        "clusterArn": {
+        "grants": {
+          "type": "array",
+          "description": "<p>A list of grants.</p>",
+          "items": {
+            "$ref": "#/definitions/Grant"
+          },
+          "x-ms-identifiers": []
+        },
+        "owner": {
+          "$ref": "#/definitions/Owner",
+          "description": "<p>Container for the bucket owner's display name and ID.</p>"
+        }
+      }
+    },
+    "Grant": {
+      "type": "object",
+      "description": "Definition of Grant",
+      "properties": {
+        "grantee": {
+          "$ref": "#/definitions/Grantee",
+          "description": "<p>The person being granted permissions.</p>"
+        },
+        "permission": {
+          "$ref": "#/definitions/PermissionEnumValue",
+          "description": "<p>Specifies the permission given to the grantee.</p>"
+        }
+      }
+    },
+    "Grantee": {
+      "type": "object",
+      "description": "Definition of Grantee",
+      "properties": {
+        "displayName": {
           "type": "string",
-          "description": "<p>The Amazon Resource Name of the cluster.</p>"
+          "description": "<p>Screen name of the grantee.</p>"
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "<p>Email address of the grantee.</p> <note> <p>Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: </p> <ul> <li> <p>US East (N. Virginia)</p> </li> <li> <p>US West (N. California)</p> </li> <li> <p> US West (Oregon)</p> </li> <li> <p> Asia Pacific (Singapore)</p> </li> <li> <p>Asia Pacific (Sydney)</p> </li> <li> <p>Asia Pacific (Tokyo)</p> </li> <li> <p>Europe (Ireland)</p> </li> <li> <p>South America (São Paulo)</p> </li> </ul> <p>For a list of all the Amazon S3 supported Regions and endpoints, see <a href='https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region'>Regions and Endpoints</a> in the Amazon Web Services General Reference.</p> </note>"
         },
         "id": {
           "type": "string",
-          "description": "<p>The unique identifier for the cluster.</p>"
+          "description": "<p>The canonical user ID of the grantee.</p>"
         },
-        "name": {
+        "type": {
+          "$ref": "#/definitions/TypeEnumValue",
+          "description": "<p>Type of grantee</p>"
+        },
+        "uri": {
           "type": "string",
-          "description": "<p>The name of the cluster.</p>"
-        },
-        "normalizedInstanceHours": {
-          "type": "integer",
-          "format": "int32",
-          "description": "<p>An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
-        },
-        "outpostArn": {
-          "type": "string",
-          "description": "<p> The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. </p>"
-        },
-        "status": {
-          "$ref": "#/definitions/ClusterStatus",
-          "description": "<p>The details about the current status of the cluster.</p>"
+          "description": "<p>URI of the grantee group.</p>"
         }
       }
     },
-    "ClusterState": {
+    "Owner": {
+      "type": "object",
+      "description": "Definition of Owner",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "<p>Container for the display name of the owner. This value is only supported in the following Amazon Web Services Regions:</p> <ul> <li> <p>US East (N. Virginia)</p> </li> <li> <p>US West (N. California)</p> </li> <li> <p>US West (Oregon)</p> </li> <li> <p>Asia Pacific (Singapore)</p> </li> <li> <p>Asia Pacific (Sydney)</p> </li> <li> <p>Asia Pacific (Tokyo)</p> </li> <li> <p>Europe (Ireland)</p> </li> <li> <p>South America (São Paulo)</p> </li> </ul> <note> <p>This functionality is not supported for directory buckets.</p> </note>"
+        },
+        "id": {
+          "type": "string",
+          "description": "<p>Container for the ID of the owner.</p>"
+        }
+      }
+    },
+    "Permission": {
       "type": "string",
-      "description": "ClusterState enum",
+      "description": "Permission enum",
       "enum": [
-        "BOOTSTRAPPING",
-        "RUNNING",
-        "STARTING",
-        "TERMINATED",
-        "TERMINATED_WITH_ERRORS",
-        "TERMINATING",
-        "WAITING"
+        "FULL_CONTROL",
+        "READ",
+        "READ_ACP",
+        "WRITE",
+        "WRITE_ACP"
       ],
       "x-ms-enum": {
-        "name": "ClusterState",
+        "name": "Permission",
         "modelAsString": true,
         "values": [
           {
-            "name": "BOOTSTRAPPING",
-            "value": "BOOTSTRAPPING",
-            "description": "ClusterState enum BOOTSTRAPPING"
+            "name": "FULL_CONTROL",
+            "value": "FULL_CONTROL",
+            "description": "Permission enum FULL_CONTROL"
           },
           {
-            "name": "RUNNING",
-            "value": "RUNNING",
-            "description": "ClusterState enum RUNNING"
+            "name": "READ",
+            "value": "READ",
+            "description": "Permission enum READ"
           },
           {
-            "name": "STARTING",
-            "value": "STARTING",
-            "description": "ClusterState enum STARTING"
+            "name": "READ_ACP",
+            "value": "READ_ACP",
+            "description": "Permission enum READ_ACP"
           },
           {
-            "name": "TERMINATED",
-            "value": "TERMINATED",
-            "description": "ClusterState enum TERMINATED"
+            "name": "WRITE",
+            "value": "WRITE",
+            "description": "Permission enum WRITE"
           },
           {
-            "name": "TERMINATED_WITH_ERRORS",
-            "value": "TERMINATED_WITH_ERRORS",
-            "description": "ClusterState enum TERMINATED_WITH_ERRORS"
-          },
-          {
-            "name": "TERMINATING",
-            "value": "TERMINATING",
-            "description": "ClusterState enum TERMINATING"
-          },
-          {
-            "name": "WAITING",
-            "value": "WAITING",
-            "description": "ClusterState enum WAITING"
+            "name": "WRITE_ACP",
+            "value": "WRITE_ACP",
+            "description": "Permission enum WRITE_ACP"
           }
         ]
       }
     },
-    "ClusterStateChangeReason": {
+    "PermissionEnumValue": {
       "type": "object",
-      "description": "Definition of ClusterStateChangeReason",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/ClusterStateChangeReasonCodeEnumValue",
-          "description": "<p>The programmatic code for the state change reason.</p>"
-        },
-        "message": {
-          "type": "string",
-          "description": "<p>The descriptive message for the state change reason.</p>"
-        }
-      }
-    },
-    "ClusterStateChangeReasonCode": {
-      "type": "string",
-      "description": "ClusterStateChangeReasonCode enum",
-      "enum": [
-        "ALL_STEPS_COMPLETED",
-        "BOOTSTRAP_FAILURE",
-        "INSTANCE_FAILURE",
-        "INSTANCE_FLEET_TIMEOUT",
-        "INTERNAL_ERROR",
-        "STEP_FAILURE",
-        "USER_REQUEST",
-        "VALIDATION_ERROR"
-      ],
-      "x-ms-enum": {
-        "name": "ClusterStateChangeReasonCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ALL_STEPS_COMPLETED",
-            "value": "ALL_STEPS_COMPLETED",
-            "description": "ClusterStateChangeReasonCode enum ALL_STEPS_COMPLETED"
-          },
-          {
-            "name": "BOOTSTRAP_FAILURE",
-            "value": "BOOTSTRAP_FAILURE",
-            "description": "ClusterStateChangeReasonCode enum BOOTSTRAP_FAILURE"
-          },
-          {
-            "name": "INSTANCE_FAILURE",
-            "value": "INSTANCE_FAILURE",
-            "description": "ClusterStateChangeReasonCode enum INSTANCE_FAILURE"
-          },
-          {
-            "name": "INSTANCE_FLEET_TIMEOUT",
-            "value": "INSTANCE_FLEET_TIMEOUT",
-            "description": "ClusterStateChangeReasonCode enum INSTANCE_FLEET_TIMEOUT"
-          },
-          {
-            "name": "INTERNAL_ERROR",
-            "value": "INTERNAL_ERROR",
-            "description": "ClusterStateChangeReasonCode enum INTERNAL_ERROR"
-          },
-          {
-            "name": "STEP_FAILURE",
-            "value": "STEP_FAILURE",
-            "description": "ClusterStateChangeReasonCode enum STEP_FAILURE"
-          },
-          {
-            "name": "USER_REQUEST",
-            "value": "USER_REQUEST",
-            "description": "ClusterStateChangeReasonCode enum USER_REQUEST"
-          },
-          {
-            "name": "VALIDATION_ERROR",
-            "value": "VALIDATION_ERROR",
-            "description": "ClusterStateChangeReasonCode enum VALIDATION_ERROR"
-          }
-        ]
-      }
-    },
-    "ClusterStateChangeReasonCodeEnumValue": {
-      "type": "object",
-      "description": "Definition of ClusterStateChangeReasonCodeEnumValue",
+      "description": "Definition of PermissionEnumValue",
       "properties": {
         "value": {
-          "$ref": "#/definitions/ClusterStateChangeReasonCode",
+          "$ref": "#/definitions/Permission",
           "description": "Property value"
-        }
-      }
-    },
-    "ClusterStateEnumValue": {
-      "type": "object",
-      "description": "Definition of ClusterStateEnumValue",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/ClusterState",
-          "description": "Property value"
-        }
-      }
-    },
-    "ClusterStatus": {
-      "type": "object",
-      "description": "Definition of ClusterStatus",
-      "properties": {
-        "errorDetails": {
-          "type": "array",
-          "description": "<p>A list of tuples that provides information about the errors that caused a cluster to terminate. This structure can contain up to 10 different <code>ErrorDetail</code> tuples.</p>",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "x-ms-identifiers": []
-        },
-        "state": {
-          "$ref": "#/definitions/ClusterStateEnumValue",
-          "description": "<p>The current state of the cluster.</p>"
-        },
-        "stateChangeReason": {
-          "$ref": "#/definitions/ClusterStateChangeReason",
-          "description": "<p>The reason for the cluster status change.</p>"
-        },
-        "timeline": {
-          "$ref": "#/definitions/ClusterTimeline",
-          "description": "<p>A timeline that represents the status of a cluster over the lifetime of the cluster.</p>"
-        }
-      }
-    },
-    "ClusterTimeline": {
-      "type": "object",
-      "description": "Definition of ClusterTimeline",
-      "properties": {
-        "creationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "<p>The creation date and time of the cluster.</p>"
-        },
-        "endDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "<p>The date and time when the cluster was terminated.</p>"
-        },
-        "readyDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "<p>The date and time when the cluster was ready to run steps.</p>"
-        }
-      }
-    },
-    "EmrClusterSummary": {
-      "type": "object",
-      "description": "A Microsoft.AwsConnector resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EmrClusterSummaryProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "EmrClusterSummaryListResult": {
-      "type": "object",
-      "description": "The response of a EmrClusterSummary list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EmrClusterSummary items on this page",
-          "items": {
-            "$ref": "#/definitions/EmrClusterSummary"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "EmrClusterSummaryProperties": {
-      "type": "object",
-      "description": "Definition of EmrClusterSummary",
-      "properties": {
-        "awsProperties": {
-          "$ref": "#/definitions/AwsEmrClusterSummaryProperties",
-          "description": "AWS Properties"
-        },
-        "publicCloudConnectorsResourceId": {
-          "type": "string",
-          "description": "Public Cloud Connectors Resource ID"
-        },
-        "awsAccountId": {
-          "type": "string",
-          "description": "AWS Account ID"
-        },
-        "arn": {
-          "type": "string",
-          "description": "Amazon Resource Name (ARN)"
-        },
-        "publicCloudResourceName": {
-          "type": "string",
-          "description": "Public Cloud Resource Name"
-        },
-        "awsSourceSchema": {
-          "type": "string",
-          "description": "AWS Source Schema"
-        },
-        "awsRegion": {
-          "type": "string",
-          "description": "AWS Region"
-        },
-        "awsTags": {
-          "type": "object",
-          "description": "AWS Tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "EmrClusterSummaryTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in EmrClusterSummary resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "Definition of ErrorDetail",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "<p>The name or code associated with the error.</p>"
-        },
-        "errorData": {
-          "type": "array",
-          "description": "<p>A list of key value pairs that provides contextual information about why an error occured.</p>",
-          "items": {
-            "$ref": "#/definitions/StringMap"
-          },
-          "x-ms-identifiers": []
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "<p>A message that describes the error.</p>"
         }
       }
     },
@@ -779,9 +560,140 @@
       },
       "readOnly": true
     },
-    "StringMap": {
+    "S3AccessControlPolicy": {
       "type": "object",
-      "description": "Definition of StringMap"
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/S3AccessControlPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "S3AccessControlPolicyListResult": {
+      "type": "object",
+      "description": "The response of a S3AccessControlPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The S3AccessControlPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/S3AccessControlPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "S3AccessControlPolicyProperties": {
+      "type": "object",
+      "description": "Definition of S3AccessControlPolicy",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsS3AccessControlPolicyProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "S3AccessControlPolicyTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in S3AccessControlPolicy resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Type": {
+      "type": "string",
+      "description": "Type enum",
+      "enum": [
+        "AmazonCustomerByEmail",
+        "CanonicalUser",
+        "Group"
+      ],
+      "x-ms-enum": {
+        "name": "Type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AmazonCustomerByEmail",
+            "value": "AmazonCustomerByEmail",
+            "description": "Type enum AmazonCustomerByEmail"
+          },
+          {
+            "name": "CanonicalUser",
+            "value": "CanonicalUser",
+            "description": "Type enum CanonicalUser"
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Type enum Group"
+          }
+        ]
+      }
+    },
+    "TypeEnumValue": {
+      "type": "object",
+      "description": "Definition of TypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/Type",
+          "description": "Property value"
+        }
+      }
     }
   },
   "parameters": {}
