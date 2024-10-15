@@ -768,10 +768,11 @@
         },
         "enforcementMode": {
           "type": "string",
-          "description": "The policy assignment enforcement mode. Possible values are Default and DoNotEnforce.",
+          "description": "The policy assignment enforcement mode. Possible values are Default, DoNotEnforce, and Enroll.",
           "enum": [
             "Default",
-            "DoNotEnforce"
+            "DoNotEnforce",
+            "Enroll"
           ],
           "x-ms-enum": {
             "name": "enforcementMode",
@@ -784,6 +785,10 @@
               {
                 "value": "DoNotEnforce",
                 "description": "The policy effect is not enforced during resource creation or update."
+              },
+              {
+                "value": "Enroll",
+                "description": "The policy effect is not enforced during resource creation or update until the resource or scope of the resource is enrolled to the assignment instance. Enrollment occurs upon deployment of the policy enrollment resource."
               }
             ]
           },
