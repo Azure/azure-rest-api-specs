@@ -6,6 +6,9 @@
     "api-version": "2024-10-02-preview",
     "sessionPoolEnvelope": {
       "location": "East US",
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "properties": {
         "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
         "poolManagementType": "Dynamic",
@@ -108,6 +111,11 @@
             "status": "EgressEnabled"
           },
           "poolManagementEndpoint": "https://testsessionpool.agreeableriver-3d30edf1.eastus.azurecontainerapps.io"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "bce8c037-3d10-44a4-a970-25f799611fc6",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
         }
       }
     },
@@ -167,6 +175,11 @@
               "lifecycle": "Main"
             }
           ]
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "bce8c037-3d10-44a4-a970-25f799611fc6",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
         }
       }
     }
