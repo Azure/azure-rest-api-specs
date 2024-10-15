@@ -95,13 +95,6 @@ model ExportResourceGroup extends BaseExportModel {
 @doc("The status of the LRO operation.")
 model OperationStatus is ArmOperationStatus<ExportResult>;
 
-model AcceptedLroResponse<Description extends valueof string>
-  is ArmAcceptedLroResponse<
-    Description,
-    ArmCombinedLroHeaders<ArmOperationStatus, OperationStatus> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
 @doc("The Terraform export result")
 model ExportResult {
   @doc("The Terraform configuration content")

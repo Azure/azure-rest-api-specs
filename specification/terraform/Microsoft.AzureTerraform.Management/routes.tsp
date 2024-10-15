@@ -21,21 +21,22 @@ model CommonExportTerraformParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Cannot use @armResourceOperations, the implied @autoRoute produces the wrong route for GET /operationStatuses/{operationId}"
-@route("/subscription/{subscriptionId}/providers/{provider}")
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform")
 interface ExportTerraform {
+  // Cannot use Azure.ResourceManager.ArmProviderActionAsync due to error during .NET SDK code generation:
+  // Unknown identifier SubscriptionActionScope
   @armResourceAction(ExportResult)
   @doc("Exports the Terraform configuration of the specified resource(s).")
   @route("/exportTerraform")
   @post
   @tag("ExportTerraform")
-  // Cannot use Azure.ResourceManager.ArmProviderActionAsync due to a bug
   exportTerraform(
-    ...DefaultBaseParameters<SubscriptionActionScope>,
-    ...ProviderNamespace<SubscriptionActionScope>,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-    @doc("The resource(s) to be exported to Terraform")
-    @bodyRoot
-    body: BaseExportModel,
+    @doc("The export parameter")
+    @body
+    exportParameter: BaseExportModel,
   ): ArmAcceptedLroResponse<
     "Resource operation accepted.",
     ArmLroLocationHeader<
@@ -54,7 +55,6 @@ interface ExportTerraform {
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
-      ...ProviderNamespace<SubscriptionActionScope>;
       ...OperationIdParameter;
     },
     OperationStatus | ArmAcceptedLroResponse,

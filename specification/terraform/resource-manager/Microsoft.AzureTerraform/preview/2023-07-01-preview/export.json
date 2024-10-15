@@ -86,7 +86,7 @@
         }
       }
     },
-    "/subscription/{subscriptionId}/providers/{provider}/exportTerraform": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
       "post": {
         "operationId": "ExportTerraform_ExportTerraform",
         "tags": [
@@ -101,22 +101,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "provider",
-            "in": "path",
-            "description": "The provider namespace for the resource.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Microsoft.AzureTerraform"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
-          },
-          {
-            "name": "body",
+            "name": "exportParameter",
             "in": "body",
-            "description": "The resource(s) to be exported to Terraform",
+            "description": "The export parameter",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BaseExportModel"
@@ -156,7 +143,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscription/{subscriptionId}/providers/{provider}/operationStatuses/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/operationStatuses/{operationId}": {
       "get": {
         "operationId": "ExportTerraform_OperationStatuses",
         "tags": [
@@ -169,19 +156,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "provider",
-            "in": "path",
-            "description": "The provider namespace for the resource.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Microsoft.AzureTerraform"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
