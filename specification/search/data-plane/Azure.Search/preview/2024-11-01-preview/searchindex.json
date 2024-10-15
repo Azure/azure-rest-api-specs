@@ -3221,6 +3221,11 @@
     "QueryRewritesValuesDebugInfo": {
       "type": "object",
       "properties": {
+        "inputQuery": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The input query terms to the generative rewriting model. If the original query is too long, the input query may be truncated."
+        },
         "rewrites": {
           "type": "array",
           "items": {
