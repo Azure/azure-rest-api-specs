@@ -1569,6 +1569,12 @@ model VirtualMachineSize {
 }
 
 /**
+ * The List Virtual Machine operation response.
+ */
+model VirtualMachineScaleSetListResult
+  is Azure.Core.Page<VirtualMachineScaleSet>;
+
+/**
  * Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.
  */
 model Sku {
@@ -3418,6 +3424,12 @@ model Resource {
 }
 
 /**
+ * The List Virtual Machine operation response.
+ */
+model VirtualMachineScaleSetListWithLinkResult
+  is Azure.Core.Page<VirtualMachineScaleSet>;
+
+/**
  * Describes a Virtual Machine Scale Set.
  */
 model VirtualMachineScaleSetUpdate extends UpdateResource {
@@ -3941,6 +3953,12 @@ model VirtualMachineScaleSetVMInstanceRequiredIDs {
 }
 
 /**
+ * The List VM scale set extension operation response.
+ */
+model VirtualMachineScaleSetExtensionListResult
+  is Azure.Core.Page<VirtualMachineScaleSetExtension>;
+
+/**
  * Describes a Virtual Machine Scale Set Extension.
  */
 model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
@@ -4440,6 +4458,12 @@ model VirtualMachineScaleSetSkuCapacity {
   @visibility("read")
   scaleType?: VirtualMachineScaleSetSkuScaleType;
 }
+
+/**
+ * The List Virtual Machine Scale Set VMs operation response.
+ */
+model VirtualMachineScaleSetVMListResult
+  is Azure.Core.Page<VirtualMachineScaleSetVM>;
 
 /**
  * Describes the properties of a virtual machine scale set virtual machine.
@@ -5544,6 +5568,16 @@ model VirtualMachineIdentity {
 }
 
 /**
+ * The List VMSS VM Extension operation response
+ */
+model VirtualMachineScaleSetVMExtensionsListResult {
+  /**
+   * The list of VMSS VM extensions
+   */
+  value?: VirtualMachineScaleSetVMExtension[];
+}
+
+/**
  * Describes a VMSS VM Extension.
  */
 model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
@@ -5704,6 +5738,11 @@ model RetrieveBootDiagnosticsDataResult {
   @visibility("read")
   serialConsoleLogBlobUri?: string;
 }
+
+/**
+ * The List Virtual Machine operation response.
+ */
+model VirtualMachineListResult is Azure.Core.Page<VirtualMachine>;
 
 /**
  * Describes the properties of a Virtual Machine.
@@ -6296,6 +6335,16 @@ model VirtualMachineCaptureResult extends SubResource {
 }
 
 /**
+ * The List Extension operation response
+ */
+model VirtualMachineExtensionsListResult {
+  /**
+   * The list of extensions
+   */
+  value?: VirtualMachineExtension[];
+}
+
+/**
  * Describes a Virtual Machine Extension.
  */
 model VirtualMachineExtensionUpdate extends UpdateResource {
@@ -6751,6 +6800,11 @@ model VirtualMachineExtensionImageProperties {
 }
 
 /**
+ * The List Availability Set operation response.
+ */
+model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
+
+/**
  * The instance view of a resource.
  */
 model AvailabilitySetProperties {
@@ -6802,6 +6856,12 @@ model AvailabilitySetUpdate extends UpdateResource {
    */
   sku?: Sku;
 }
+
+/**
+ * The List Proximity Placement Group operation response.
+ */
+model ProximityPlacementGroupListResult
+  is Azure.Core.Page<ProximityPlacementGroup>;
 
 /**
  * Describes the properties of a Proximity Placement Group.
@@ -6862,6 +6922,11 @@ model ProximityPlacementGroupPropertiesIntent {
  * Specifies information about the proximity placement group.
  */
 model ProximityPlacementGroupUpdate extends UpdateResource {}
+
+/**
+ * The List Dedicated Host Group with resource group response.
+ */
+model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
 
 /**
  * Dedicated Host Group Properties.
@@ -6990,6 +7055,11 @@ model DedicatedHostGroupUpdate extends UpdateResource {
 }
 
 /**
+ * The list dedicated host operation response.
+ */
+model DedicatedHostListResult is Azure.Core.Page<DedicatedHost>;
+
+/**
  * Properties of the dedicated host.
  */
 model DedicatedHostProperties {
@@ -7077,6 +7147,11 @@ model DedicatedHostSizeListResult {
 }
 
 /**
+ * The list SSH public keys operation response.
+ */
+model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
+
+/**
  * Properties of the SSH public key.
  */
 model SshPublicKeyResourceProperties {
@@ -7126,6 +7201,11 @@ model SshPublicKeyGenerateKeyPairResult {
    */
   id: string;
 }
+
+/**
+ * The List Image operation response.
+ */
+model ImageListResult is Azure.Core.Page<Image>;
 
 /**
  * Describes the properties of an Image.
@@ -7249,6 +7329,12 @@ model ImageUpdate extends UpdateResource {
   @extension("x-ms-client-flatten", true)
   properties?: ImageProperties;
 }
+
+/**
+ * The List restore point collection operation response.
+ */
+model RestorePointCollectionListResult
+  is Azure.Core.Page<RestorePointCollection>;
 
 /**
  * The restore point collection properties.
@@ -7631,6 +7717,12 @@ model RestorePointCollectionUpdate extends UpdateResource {
 }
 
 /**
+ * The List capacity reservation group with resource group response.
+ */
+model CapacityReservationGroupListResult
+  is Azure.Core.Page<CapacityReservationGroup>;
+
+/**
  * capacity reservation group Properties.
  */
 model CapacityReservationGroupProperties {
@@ -7736,6 +7828,11 @@ model CapacityReservationGroupUpdate extends UpdateResource {
   @extension("x-ms-client-flatten", true)
   properties?: CapacityReservationGroupProperties;
 }
+
+/**
+ * The list capacity reservation operation response.
+ */
+model CapacityReservationListResult is Azure.Core.Page<CapacityReservation>;
 
 /**
  * Properties of the Capacity reservation.
@@ -7962,6 +8059,12 @@ model RunCommandParameterDefinition {
    */
   required?: boolean;
 }
+
+/**
+ * The List run command operation response
+ */
+model VirtualMachineRunCommandsListResult
+  is Azure.Core.Page<VirtualMachineRunCommand>;
 
 /**
  * Describes the properties of a Virtual Machine run command.

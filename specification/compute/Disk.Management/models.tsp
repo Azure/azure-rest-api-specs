@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -453,6 +453,11 @@ enum OperatingSystemTypes {
   Windows,
   Linux,
 }
+
+/**
+ * The List Disks operation response.
+ */
+model DiskList is Azure.Core.Page<Disk>;
 
 /**
  * The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.
@@ -1137,6 +1142,11 @@ model AccessUri {
   securityDataAccessSAS?: string;
 }
 
+/**
+ * The List disk access operation response.
+ */
+model DiskAccessList is Azure.Core.Page<DiskAccess>;
+
 model DiskAccessProperties {
   /**
    * A readonly collection of private endpoint connections created on the disk. Currently only one endpoint connection is supported.
@@ -1302,6 +1312,12 @@ model DiskAccessUpdate {
 /**
  * A list of private link resources
  */
+model PrivateEndpointConnectionListResult
+  is Azure.Core.Page<PrivateEndpointConnection>;
+
+/**
+ * A list of private link resources
+ */
 model PrivateLinkResourceListResult {
   /**
    * Array of private link resources
@@ -1359,6 +1375,11 @@ model PrivateLinkResourceProperties {
    */
   requiredZoneNames?: string[];
 }
+
+/**
+ * The List disk encryption set operation response.
+ */
+model DiskEncryptionSetList is Azure.Core.Page<DiskEncryptionSet>;
 
 /**
  * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
@@ -1534,6 +1555,11 @@ model CustomPage<Resource extends string> {
 model ResourceUriList is CustomPage<string>;
 
 /**
+ * The List Disk Restore Points operation response.
+ */
+model DiskRestorePointList is Azure.Core.Page<DiskRestorePoint>;
+
+/**
  * Properties of an incremental disk restore point
  */
 model DiskRestorePointProperties {
@@ -1660,6 +1686,11 @@ model ProxyOnlyResource {
   @visibility("read")
   type?: string;
 }
+
+/**
+ * The List Snapshots operation response.
+ */
+model SnapshotList is Azure.Core.Page<Snapshot>;
 
 /**
  * The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot

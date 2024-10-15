@@ -44,7 +44,14 @@ interface GalleryApplicationVersions {
   /**
    * Create or update a gallery Application Version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryApplicationVersion>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    GalleryApplicationVersion,
+    Response = ArmResourceCreatedResponse<GalleryApplicationVersion> | ArmResourceUpdatedResponse<GalleryApplicationVersion> | (ArmAcceptedLroResponse & {
+      @body _: GalleryApplicationVersion;
+    })
+  >;
 
   /**
    * Update a gallery Application Version.

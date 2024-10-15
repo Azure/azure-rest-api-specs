@@ -35,7 +35,14 @@ interface GalleryImages {
   /**
    * Create or update a gallery image definition.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    GalleryImage,
+    Response = ArmResourceCreatedResponse<GalleryImage> | ArmResourceUpdatedResponse<GalleryImage> | (ArmAcceptedLroResponse & {
+      @body _: GalleryImage;
+    })
+  >;
 
   /**
    * Update a gallery image definition.

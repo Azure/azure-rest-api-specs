@@ -47,7 +47,14 @@ interface Galleries {
   /**
    * Create or update a Shared Image Gallery.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Gallery>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Gallery,
+    Response = ArmResourceCreatedResponse<Gallery> | ArmResourceUpdatedResponse<Gallery> | (ArmAcceptedLroResponse & {
+      @body _: Gallery;
+    })
+  >;
 
   /**
    * Update a Shared Image Gallery.

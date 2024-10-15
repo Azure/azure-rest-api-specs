@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -10,59 +11,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Compute;
-
-/**
- * The List Galleries operation response.
- */
-model GalleryList is Azure.Core.Page<Gallery>;
-
-/**
- * The List Community Gallery Images operation response.
- */
-model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
-
-/**
- * The List Community Gallery Image versions operation response.
- */
-model CommunityGalleryImageVersionList
-  is Azure.Core.Page<CommunityGalleryImageVersion>;
-
-/**
- * The List Shared Galleries operation response.
- */
-model SharedGalleryList is Azure.Core.Page<SharedGallery>;
-
-/**
- * The List Shared Gallery Images operation response.
- */
-model SharedGalleryImageList is Azure.Core.Page<SharedGalleryImage>;
-
-/**
- * The List Shared Gallery Image versions operation response.
- */
-model SharedGalleryImageVersionList
-  is Azure.Core.Page<SharedGalleryImageVersion>;
-
-/**
- * The List Gallery Images operation response.
- */
-model GalleryImageList is Azure.Core.Page<GalleryImage>;
-
-/**
- * The List Gallery Image version operation response.
- */
-model GalleryImageVersionList is Azure.Core.Page<GalleryImageVersion>;
-
-/**
- * The List Gallery Applications operation response.
- */
-model GalleryApplicationList is Azure.Core.Page<GalleryApplication>;
-
-/**
- * The List Gallery Application version operation response.
- */
-model GalleryApplicationVersionList
-  is Azure.Core.Page<GalleryApplicationVersion>;
 
 /**
  * The provisioning state, which only appears in the response.
@@ -383,6 +331,11 @@ enum HostCaching {
   ReadOnly,
   ReadWrite,
 }
+
+/**
+ * The List Galleries operation response.
+ */
+model GalleryList is Azure.Core.Page<Gallery>;
 
 /**
  * Describes the properties of a Shared Image Gallery.
@@ -706,6 +659,11 @@ model UpdateResourceDefinition {
 }
 
 /**
+ * The List Gallery Applications operation response.
+ */
+model GalleryApplicationList is Azure.Core.Page<GalleryApplication>;
+
+/**
  * Describes the properties of a gallery Application Definition.
  */
 model GalleryApplicationProperties {
@@ -813,6 +771,12 @@ model GalleryApplicationUpdate extends UpdateResourceDefinition {
   @extension("x-ms-client-flatten", true)
   properties?: GalleryApplicationProperties;
 }
+
+/**
+ * The List Gallery Application version operation response.
+ */
+model GalleryApplicationVersionList
+  is Azure.Core.Page<GalleryApplicationVersion>;
 
 /**
  * Describes the properties of a gallery image version.
@@ -1178,6 +1142,11 @@ model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
 }
 
 /**
+ * The List Gallery Images operation response.
+ */
+model GalleryImageList is Azure.Core.Page<GalleryImage>;
+
+/**
  * Describes the properties of a gallery image definition.
  */
 model GalleryImageProperties {
@@ -1365,6 +1334,11 @@ model GalleryImageUpdate extends UpdateResourceDefinition {
   @extension("x-ms-client-flatten", true)
   properties?: GalleryImageProperties;
 }
+
+/**
+ * The List Gallery Image version operation response.
+ */
+model GalleryImageVersionList is Azure.Core.Page<GalleryImageVersion>;
 
 /**
  * Describes the properties of a gallery image version.
@@ -1638,6 +1612,11 @@ model SharingUpdate {
 }
 
 /**
+ * The List Shared Galleries operation response.
+ */
+model SharedGalleryList is Azure.Core.Page<SharedGallery>;
+
+/**
  * Specifies the properties of a shared gallery
  */
 model SharedGalleryProperties {
@@ -1686,6 +1665,11 @@ model PirResource {
   @visibility("read")
   location?: string;
 }
+
+/**
+ * The List Shared Gallery Images operation response.
+ */
+model SharedGalleryImageList is Azure.Core.Page<SharedGalleryImage>;
 
 /**
  * Describes the properties of a gallery image definition.
@@ -1759,6 +1743,12 @@ model SharedGalleryImageProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
 }
+
+/**
+ * The List Shared Gallery Image versions operation response.
+ */
+model SharedGalleryImageVersionList
+  is Azure.Core.Page<SharedGalleryImageVersion>;
 
 /**
  * Describes the properties of a gallery image version.
@@ -1931,6 +1921,11 @@ model CommunityGalleryIdentifier {
 }
 
 /**
+ * The List Community Gallery Images operation response.
+ */
+model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
+
+/**
  * Describes the properties of a gallery image definition.
  */
 model CommunityGalleryImageProperties {
@@ -2027,6 +2022,12 @@ model CommunityGalleryImageIdentifier {
    */
   sku?: string;
 }
+
+/**
+ * The List Community Gallery Image versions operation response.
+ */
+model CommunityGalleryImageVersionList
+  is Azure.Core.Page<CommunityGalleryImageVersion>;
 
 /**
  * Describes the properties of a gallery image version.

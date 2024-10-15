@@ -153,7 +153,8 @@ interface VirtualMachines {
        */
       @query("$expand")
       $expand?: ExpandTypeForListVMs;
-    }
+    },
+    Response = VirtualMachineListResult
   >;
 
   /**
@@ -179,7 +180,8 @@ interface VirtualMachines {
        */
       @query("$expand")
       $expand?: ExpandTypesForListVMs;
-    }
+    },
+    Response = VirtualMachineListResult
   >;
 
   /**

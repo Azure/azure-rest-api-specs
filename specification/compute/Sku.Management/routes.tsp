@@ -4,37 +4,39 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
-interface ResourceSkus {
+@armResourceOperations
+interface ResourceSkusOperations {
   /**
    * Gets the list of Microsoft.Compute SKUs available for your Subscription.
    */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/skus")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ResourceSkus_List")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
+  @action("skus")
+  list is ArmProviderActionAsync<
+    Response = ResourceSkusResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      /**
+       * The filter to apply on the operation. Only **location** filter is supported currently.
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The filter to apply on the operation. Only **location** filter is supported currently.
-     */
-    @query("$filter")
-    $filter?: string,
-
-    ...IncludeExtendedLocationsParameter,
-  ): ArmResponse<ResourceSkusResult> | ErrorResponse;
-}
-
-model IncludeExtendedLocationsParameter {
-  /**
-   * To Include Extended Locations information or not in the response.
-   */
-  @query("includeExtendedLocations")
-  includeExtendedLocations?: string;
+      /**
+       * To Include Extended Locations information or not in the response.
+       */
+      @query("includeExtendedLocations")
+      includeExtendedLocations?: string;
+    }
+  >;
 }
