@@ -1338,10 +1338,10 @@
         "policyKind": {
           "type": "string",
           "description": "The entity RedactionPolicy object kind.",
-          "default": "maskWithRedactionCharacter",
+          "default": "maskWithCharacter",
           "enum": [
             "doNotRedact",
-            "maskWithRedactionCharacter",
+            "maskWithCharacter",
             "maskWithEntityType"
           ],
           "x-ms-enum": {
@@ -1354,8 +1354,8 @@
                 "description": "Do not redact detected entities."
               },
               {
-                "name": "maskWithRedactionCharacter",
-                "value": "maskWithRedactionCharacter",
+                "name": "maskWithCharacter",
+                "value": "maskWithCharacter",
                 "description": "React detected entities with redaction character."
               },
               {
@@ -1885,13 +1885,13 @@
           "format": "double",
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
         },
-        "script": {
+        "scriptName": {
           "$ref": "#/definitions/ScriptKind",
-          "description": "Identifies the script of the input document."
+          "description": "Identifies the script name of the input document according to the ISO 15924 standard."
         },
-        "scriptCode": {
+        "scriptIso15924Code": {
           "$ref": "#/definitions/ScriptCode",
-          "description": "Identifies the script of the input document."
+          "description": "Identifies the script code of the input document according to the ISO 15924 standard."
         }
       },
       "required": [
@@ -4390,7 +4390,7 @@
           "$ref": "#/definitions/BaseRedactionPolicy"
         }
       ],
-      "x-ms-discriminator-value": "maskWithRedactionCharacter"
+      "x-ms-discriminator-value": "maskWithCharacter"
     },
     "Match": {
       "type": "object",

@@ -59,13 +59,13 @@ model DetectedLanguage {
   /** A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. */
   confidenceScore: float64;
 
-  /** Identifies the script of the input document. */
+  /** Identifies the script name of the input document according to the ISO 15924 standard. */
   @added(Versions.v2024_11_01)
-  script?: ScriptKind;
+  scriptName?: ScriptKind;
 
-  /** Identifies the script of the input document. */
+  /** Identifies the script code of the input document according to the ISO 15924 standard. */
   @added(Versions.v2024_11_01)
-  scriptCode?: ScriptCode;
+  scriptIso15924Code?: ScriptCode;
 }
 
 /** Identifies the script of the input document. Maps to the ISO 15924 standard formal name. */

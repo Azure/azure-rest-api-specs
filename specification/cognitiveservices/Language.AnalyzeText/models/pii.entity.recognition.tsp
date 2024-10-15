@@ -49,14 +49,14 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
-  policyKind: RedactionPolicyKind = RedactionPolicyKind.maskWithRedactionCharacter;
+  policyKind: RedactionPolicyKind = RedactionPolicyKind.maskWithCharacter;
 }
 
 /** Represents the policy of redacting with a redaction character */
 @added(Versions.v2024_11_15_preview)
 model MaskWithRedactionCharacterPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
-  policyKind: RedactionPolicyKind.maskWithRedactionCharacter;
+  policyKind: RedactionPolicyKind.maskWithCharacter;
 
   /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
@@ -85,7 +85,7 @@ union RedactionPolicyKind {
   doNotRedact: "doNotRedact",
 
   /** React detected entities with redaction character. */
-  maskWithRedactionCharacter: "maskWithRedactionCharacter",
+  maskWithCharacter: "maskWithCharacter",
 
   /** Redact detected entities with entity type. */
   maskWithEntityType: "maskWithEntityType",
