@@ -6415,6 +6415,31 @@
           }
         }
       },
+      "get": {
+        "tags": [
+          "file"
+        ],
+        "operationId": "File_GetSymbolicLink",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
       "parameters": [
         {
           "$ref": "#/parameters/ShareName"
