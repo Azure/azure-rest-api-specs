@@ -30,22 +30,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "Name of the Managed Environment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "./CommonDefinitions.json#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "httpRouteName",
-            "in": "path",
-            "description": "Name of the Http Route Config Resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63
+            "$ref": "#/parameters/HttpRouteConfigNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -85,18 +73,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "Name of the Managed Environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "./CommonDefinitions.json#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "httpRouteName",
-            "in": "path",
-            "description": "Name of the Http Route Config Resource.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/HttpRouteConfigNameParameter"
           },
           {
             "name": "httpRouteConfigEnvelope",
@@ -113,12 +93,6 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HttpRouteConfig"
-            }
-          },
-          "201": {
-            "description": "Created",
             "schema": {
               "$ref": "#/definitions/HttpRouteConfig"
             }
@@ -177,7 +151,7 @@
             "required": true,
             "description": "Properties of http route config that need to be updated",
             "schema": {
-              "$ref": "#/definitions/HttpRouteConfigPatch"
+              "$ref": "#/definitions/HttpRouteConfig"
             }
           },
           {
@@ -218,18 +192,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "Name of the Managed Environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "./CommonDefinitions.json#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "httpRouteName",
-            "in": "path",
-            "description": "Name of the Http Route Config Resource.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/HttpRouteConfigNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -271,12 +237,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "Name of the Managed Environment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "./CommonDefinitions.json#/parameters/EnvironmentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -286,7 +247,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedHttpRouteConfigCollection"
+              "$ref": "#/definitions/HttpRouteConfigCollection"
             }
           },
           "default": {
@@ -308,19 +269,6 @@
     }
   },
   "definitions": {
-    "ManagedHttpRoutePatch": {
-      "description": "A Http Route Config to update",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        }
-      }
-    },
     "HttpRouteConfig": {
       "description": "Advanced Ingress routing for path/header based routing for a Container App Environment",
       "type": "object",
@@ -330,68 +278,6 @@
         }
       ],
       "properties": {
-        "properties": {
-          "description": "Http Route Config properties",
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "description": "The provisioning state of the Http Route Config in cluster",
-              "$ref": "#/definitions/HttpRouteProvisioningState"
-            },
-            "provisioningErrors": {
-              "description": "List of errors when trying to reconcile http routes",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/HttpRouteProvisioningErrors"
-              },
-              "readOnly": true
-            },
-            "fqdn": {
-              "description": "FQDN of the route resource.",
-              "type": "string",
-              "readOnly": true
-            },
-            "customDomains": {
-              "description": "Custom domain bindings for http Routes' hostnames.",
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/CustomDomain"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            },
-            "rules": {
-              "description": "Routing Rules for http route resource.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/HttpRouteRule"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            }
-          }
-        }
-      },
-      "x-ms-client-flatten": true
-    },
-    "HttpRouteConfigPatch": {
-      "description": "Advanced Ingress routing for path/header based routing for a Container App Environment",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
         "properties": {
           "description": "Http Route Config properties",
           "type": "object",
@@ -577,7 +463,7 @@
         "modelAsString": true
       }
     },
-    "ManagedHttpRouteConfigCollection": {
+    "HttpRouteConfigCollection": {
       "description": "Collection of Advanced Ingress Routing Config resources.",
       "required": [
         "value"
@@ -597,6 +483,19 @@
           "readOnly": true
         }
       }
+    }
+  },
+  "parameters": {
+    "HttpRouteConfigNameParameter": {
+      "name": "httpRouteName",
+      "in": "path",
+      "description": "Name of the Http Route Config Resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
