@@ -839,6 +839,70 @@
         }
       }
     },
+    "DaprComponentProperties": {
+      "description": "Dapr Component resource specific properties",
+      "type": "object",
+      "properties": {
+        "componentType": {
+          "description": "Component type",
+          "type": "string"
+        },
+        "version": {
+          "description": "Component version",
+          "type": "string"
+        },
+        "ignoreErrors": {
+          "description": "Boolean describing if the component errors are ignores",
+          "type": "boolean",
+          "default": false
+        },
+        "initTimeout": {
+          "description": "Initialization timeout",
+          "type": "string"
+        },
+        "secrets": {
+          "description": "Collection of secrets used by a Dapr component",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/Secret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "secretStoreComponent": {
+          "description": "Name of a Dapr component to retrieve component secrets from",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Component metadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprMetadata"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "scopes": {
+          "description": "Names of container apps that can use this Dapr component",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceComponentBind": {
+          "description": "List of container app services that are bound to the Dapr component",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprComponentServiceBinding"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "DaprComponent": {
       "description": "Dapr Component.",
       "type": "object",
@@ -849,68 +913,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Dapr Component resource specific properties",
-          "type": "object",
-          "properties": {
-            "componentType": {
-              "description": "Component type",
-              "type": "string"
-            },
-            "version": {
-              "description": "Component version",
-              "type": "string"
-            },
-            "ignoreErrors": {
-              "description": "Boolean describing if the component errors are ignores",
-              "type": "boolean",
-              "default": false
-            },
-            "initTimeout": {
-              "description": "Initialization timeout",
-              "type": "string"
-            },
-            "secrets": {
-              "description": "Collection of secrets used by a Dapr component",
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/Secret"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            },
-            "secretStoreComponent": {
-              "description": "Name of a Dapr component to retrieve component secrets from",
-              "type": "string"
-            },
-            "metadata": {
-              "description": "Component metadata",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DaprMetadata"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            },
-            "scopes": {
-              "description": "Names of container apps that can use this Dapr component",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "serviceComponentBind": {
-              "description": "List of container app services that are bound to the Dapr component",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DaprComponentServiceBinding"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            }
-          },
+          "$ref": "#/definitions/DaprComponent",
           "x-ms-client-flatten": true
         }
       }
@@ -1425,6 +1428,11 @@
                 "name": "CertificateProvisioningState",
                 "modelAsString": true
               }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
             },
             "certificateKeyVaultProperties": {
               "description": "Properties for a certificate stored in a Key Vault.",
