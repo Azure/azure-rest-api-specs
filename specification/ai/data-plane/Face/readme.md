@@ -68,4 +68,8 @@ These settings apply only when `--tag=v1.2` is specified on the command line.
 ``` yaml $(tag) == 'v1.2'
 input-file:
   - stable/v1.2/Face.json
+suppressions:
+  - code: AvoidAnonymousParameter
+    from: Face.json
+    reason: Use anonymous parameter to provide interface with flatten parameters
 ```
