@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-04
+tag: package-preview-2024-09
 
 directive:
   - from: edgeDevices.json
@@ -107,6 +107,7 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - edgeDeviceJobs.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -183,6 +184,7 @@ suppressions:
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
+      - edgeDeviceJobs.json
 
   - code: XmsPageableForListCalls
     reason: already used in GA api version, fixing it will cause breaking change
@@ -228,8 +230,35 @@ suppressions:
 
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
+
+  - code: PatchBodyParametersSchema
+    from: 
+      - clusters.json
+    reason: Making the body optional now would cause a breaking change in backward compatibility
 ```
 
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - preview/2024-09-01-preview/arcSettings.json
+  - preview/2024-09-01-preview/clusters.json
+  - preview/2024-09-01-preview/deploymentSettings.json
+  - preview/2024-09-01-preview/edgeDevices.json
+  - preview/2024-09-01-preview/edgeDeviceJobs.json
+  - preview/2024-09-01-preview/extensions.json
+  - preview/2024-09-01-preview/hciCommon.json
+  - preview/2024-09-01-preview/offers.json
+  - ../operations/preview/2024-09-01-preview/operations.json
+  - preview/2024-09-01-preview/publishers.json
+  - preview/2024-09-01-preview/securitySettings.json
+  - preview/2024-09-01-preview/skus.json
+  - preview/2024-09-01-preview/updateRuns.json
+  - preview/2024-09-01-preview/updateSummaries.json
+  - preview/2024-09-01-preview/updates.json
+```
 
 ### Tag: package-2024-04
 
