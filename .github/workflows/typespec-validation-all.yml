@@ -39,6 +39,10 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+        shell: pwsh
+
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
