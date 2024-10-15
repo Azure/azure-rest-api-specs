@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Azure OpenAI Service API
   description: Azure OpenAI APIs for completions and search
-  version: 2024-09-01-preview
+  version: 2024-10-01-preview
 servers:
   - url: https://{endpoint}/openai
     variables:
@@ -30,7 +30,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -94,7 +94,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -106,8 +106,7 @@ paths:
               properties:
                 input:
                   description: |-
-                    Input text to get embeddings for, encoded as a string. To get embeddings for multiple inputs in a single request, pass an array of strings. Each input must not exceed 2048 tokens in length.
-                    Unless you are embedding code, we suggest replacing newlines (\n) in your input with a single space, as we have observed inferior results when newlines are present.
+                    Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. The input must not exceed the max input tokens for the model (8192 tokens for `text-embedding-ada-002`), cannot be an empty string, and any array must be 2048 dimensions or less.
                   oneOf:
                     - type: string
                       default: ""
@@ -204,7 +203,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -271,7 +270,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -314,7 +313,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -357,7 +356,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -399,7 +398,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -467,7 +466,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -490,7 +489,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       requestBody:
         required: true
@@ -527,7 +526,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -556,7 +555,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -591,7 +590,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -615,7 +614,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -651,7 +650,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -680,7 +679,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -715,7 +714,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -788,7 +787,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -817,7 +816,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -859,7 +858,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -894,7 +893,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -924,7 +923,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -994,7 +993,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -1023,7 +1022,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -1065,7 +1064,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       responses:
         "200":
@@ -1100,7 +1099,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -1143,7 +1142,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
             description: api version
       requestBody:
         required: true
@@ -1185,7 +1184,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1255,7 +1254,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1297,7 +1296,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1351,7 +1350,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1380,7 +1379,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1411,7 +1410,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1440,7 +1439,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       requestBody:
         required: true
@@ -1476,7 +1475,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1551,7 +1550,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1582,7 +1581,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       requestBody:
         required: true
@@ -1627,7 +1626,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1662,7 +1661,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1695,7 +1694,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       requestBody:
         required: true
@@ -1740,7 +1739,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1777,7 +1776,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1858,7 +1857,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-09-01-preview
+            example: 2024-10-01-preview
           description: api version
       responses:
         "200":
@@ -1942,6 +1941,19 @@ components:
         revised_prompt:
           type: string
           description: The prompt that was used to generate the image, if there was any revision to the prompt.
+    contentFilterCompletionTextSpan:
+      description: Describes a span within generated completion text.  Offset 0 is the first UTF32 code point of the completion text.
+      type: object
+      properties:
+        completion_start_offset:
+          description: Offset of the UTF32 code point which begins the span.
+          type: integer
+        completion_end_offset:
+          description: Offset of the first UTF32 code point which is excluded from the span. This field is always equal to completion_start_offset for empty spans. This field is always larger than completion_start_offset for non-empty spans.
+          type: integer
+      required:
+        - completion_start_offset
+        - completion_end_offset
     contentFilterResultBase:
       type: object
       properties:
@@ -2001,6 +2013,19 @@ components:
       required:
         - detected
         - filtered
+    contentFilterDetectedWithCompletionTextSpansResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/contentFilterDetectedResult"
+        - properties:
+            details:
+              type: array
+              items:
+                $ref: "#/components/schemas/contentFilterCompletionTextSpan"
+      required:
+        - detected
+        - filtered
+        - details
     contentFilterIdResult:
       type: object
       allOf:
@@ -2050,6 +2075,9 @@ components:
         - properties:
             protected_material_code:
               $ref: "#/components/schemas/contentFilterDetectedWithCitationResult"
+        - properties:
+            ungrounded_material:
+              $ref: "#/components/schemas/contentFilterDetectedWithCompletionTextSpansResult"
     contentFilterDetailedResults:
       type: object
       description: Content filtering results with a detail of content filter ids for the filtered segments.
@@ -2062,6 +2090,7 @@ components:
               type: array
       required:
         - filtered
+        - details
     promptFilterResult:
       type: object
       description: Content filtering results for a single prompt in the request.
@@ -2144,12 +2173,12 @@ components:
           description: |
             The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).
 
-            This value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+            This is not compatible with o1 series models.
           type: integer
           default: 4096
         max_completion_tokens:
           description: |
-            An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens.
+            An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens. This is only supported in o1 series models. Will expand the support to other models in future API release.
 
           type: integer
           nullable: true
@@ -4269,6 +4298,13 @@ components:
         total_tokens:
           type: integer
           description: Total number of tokens used in the request (prompt + completion).
+        prompt_tokens_details:
+          type: object
+          description: Details of the prompt tokens.
+          properties:
+            cached_tokens:
+              type: integer
+              description: The number of cached prompt tokens.
         completion_tokens_details:
           type: object
           description: Breakdown of tokens used in a completion.
