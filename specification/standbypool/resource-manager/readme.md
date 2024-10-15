@@ -31,6 +31,7 @@ tag: package-2024-03
 ```
 
 ### Suppression
+
 ``` yaml
 suppressions:
   - code: OperationIdNounVerb
@@ -42,6 +43,7 @@ suppressions:
 modelerfour:
   flatten-models: false
 ```
+
 ### Tag: package-2024-03
 
 These settings apply only when `--tag=package-2024-03` is specified on the command line.
