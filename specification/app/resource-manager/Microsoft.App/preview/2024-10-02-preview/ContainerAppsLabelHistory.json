@@ -154,42 +154,30 @@
       "x-ms-client-flatten": true
     },
     "LabelHistoryRecordItem": {
-      "description": "Container App Label History.",
+      "description": "Container App Label History Item resource specific properties",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "Label History resource specific properties",
-          "type": "object",
-          "properties": {
-            "label": {
-              "description": "Label name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "revision": {
-              "description": "Container App revision name that label was applied to.",
-              "type": "string",
-              "readOnly": true
-            },
-            "start": {
-              "format": "date-time",
-              "description": "Timestamp describing when the label was applied to the revision.",
-              "type": "string",
-              "readOnly": true
-            },
-            "stop": {
-              "format": "date-time",
-              "description": "Timestamp describing when the label was removed from the revision. Only meaningful when the label is currently applied to the revision.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
+        "label": {
+          "description": "Label name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "revision": {
+          "description": "Container App revision name that label was applied to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "start": {
+          "format": "date-time",
+          "description": "Timestamp describing when the label was applied to the revision.",
+          "type": "string",
+          "readOnly": true
+        },
+        "stop": {
+          "format": "date-time",
+          "description": "Timestamp describing when the label was removed from the revision. Only meaningful when the label is currently applied to the revision.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
