@@ -2516,6 +2516,8 @@ components:
               example: 1
               nullable: true
               description: How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep `n` as `1` to minimize costs.
+            parallel_tool_calls:
+              $ref: "#/components/schemas/ParallelToolCalls"
             presence_penalty:
               type: number
               default: 0
@@ -5758,6 +5760,8 @@ components:
         tool_choice:
           $ref: "#/components/schemas/assistantsApiToolChoiceOption"
           nullable: true
+        parallel_tool_calls:
+          $ref: "#/components/schemas/ParallelToolCalls"
         response_format:
           $ref: "#/components/schemas/assistantsApiResponseFormatOption"
           nullable: true
@@ -5957,6 +5961,8 @@ components:
         tool_choice:
           $ref: "#/components/schemas/assistantsApiToolChoiceOption"
           nullable: true
+        parallel_tool_calls":
+          $ref: "#/components/schemas/ParallelToolCalls"
         response_format:
           $ref: "#/components/schemas/assistantsApiResponseFormatOption"
           nullable: true
