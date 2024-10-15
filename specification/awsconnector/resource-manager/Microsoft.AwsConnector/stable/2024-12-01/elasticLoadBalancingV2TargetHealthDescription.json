@@ -1,0 +1,835 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ElasticLoadBalancingv2TargetHealthDescriptions"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2TargetHealthDescriptions": {
+      "get": {
+        "operationId": "ElasticLoadBalancingv2TargetHealthDescriptions_ListBySubscription",
+        "tags": [
+          "ElasticLoadBalancingv2TargetHealthDescriptions"
+        ],
+        "description": "List ElasticLoadBalancingv2TargetHealthDescription resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingv2TargetHealthDescriptions_ListBySubscription": {
+            "$ref": "./examples/ElasticLoadBalancingv2TargetHealthDescriptions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2TargetHealthDescriptions": {
+      "get": {
+        "operationId": "ElasticLoadBalancingv2TargetHealthDescriptions_ListByResourceGroup",
+        "tags": [
+          "ElasticLoadBalancingv2TargetHealthDescriptions"
+        ],
+        "description": "List ElasticLoadBalancingv2TargetHealthDescription resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingv2TargetHealthDescriptions_ListByResourceGroup": {
+            "$ref": "./examples/ElasticLoadBalancingv2TargetHealthDescriptions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2TargetHealthDescriptions/{name}": {
+      "get": {
+        "operationId": "ElasticLoadBalancingv2TargetHealthDescriptions_Get",
+        "tags": [
+          "ElasticLoadBalancingv2TargetHealthDescriptions"
+        ],
+        "description": "Get a ElasticLoadBalancingv2TargetHealthDescription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingv2TargetHealthDescription",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingv2TargetHealthDescriptions_Get": {
+            "$ref": "./examples/ElasticLoadBalancingv2TargetHealthDescriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ElasticLoadBalancingv2TargetHealthDescriptions_CreateOrReplace",
+        "tags": [
+          "ElasticLoadBalancingv2TargetHealthDescriptions"
+        ],
+        "description": "Create a ElasticLoadBalancingv2TargetHealthDescription. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingv2TargetHealthDescription",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ElasticLoadBalancingv2TargetHealthDescription' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescription"
+            }
+          },
+          "201": {
+            "description": "Resource 'ElasticLoadBalancingv2TargetHealthDescription' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescription"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingv2TargetHealthDescriptions_CreateOrReplace": {
+            "$ref": "./examples/ElasticLoadBalancingv2TargetHealthDescriptions_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ElasticLoadBalancingv2TargetHealthDescriptions_Update",
+        "tags": [
+          "ElasticLoadBalancingv2TargetHealthDescriptions"
+        ],
+        "description": "Update a ElasticLoadBalancingv2TargetHealthDescription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingv2TargetHealthDescription",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescriptionTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescription"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingv2TargetHealthDescriptions_Update": {
+            "$ref": "./examples/ElasticLoadBalancingv2TargetHealthDescriptions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ElasticLoadBalancingv2TargetHealthDescriptions_Delete",
+        "tags": [
+          "ElasticLoadBalancingv2TargetHealthDescriptions"
+        ],
+        "description": "Delete a ElasticLoadBalancingv2TargetHealthDescription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingv2TargetHealthDescription",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingv2TargetHealthDescriptions_Delete": {
+            "$ref": "./examples/ElasticLoadBalancingv2TargetHealthDescriptions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AnomalyDetection": {
+      "type": "object",
+      "description": "Definition of AnomalyDetection",
+      "properties": {
+        "mitigationInEffect": {
+          "$ref": "#/definitions/MitigationInEffectEnumEnumValue",
+          "description": "<p>Indicates whether anomaly mitigation is in progress.</p>"
+        },
+        "result": {
+          "$ref": "#/definitions/AnomalyResultEnumEnumValue",
+          "description": "<p>The latest anomaly detection result.</p>"
+        }
+      }
+    },
+    "AnomalyResultEnum": {
+      "type": "string",
+      "description": "AnomalyResultEnum enum",
+      "enum": [
+        "anomalous",
+        "normal"
+      ],
+      "x-ms-enum": {
+        "name": "AnomalyResultEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Anomalous",
+            "value": "anomalous",
+            "description": "AnomalyResultEnum enum anomalous"
+          },
+          {
+            "name": "Normal",
+            "value": "normal",
+            "description": "AnomalyResultEnum enum normal"
+          }
+        ]
+      }
+    },
+    "AnomalyResultEnumEnumValue": {
+      "type": "object",
+      "description": "Definition of AnomalyResultEnumEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AnomalyResultEnum",
+          "description": "Property value"
+        }
+      }
+    },
+    "AwsElasticLoadBalancingv2TargetHealthDescriptionProperties": {
+      "type": "object",
+      "description": "Definition of awsElasticLoadBalancingv2TargetHealthDescription",
+      "properties": {
+        "anomalyDetection": {
+          "$ref": "#/definitions/AnomalyDetection",
+          "description": "<p>The anomaly detection result for the target.</p> <p>If no anomalies were detected, the result is <code>normal</code>.</p> <p>If anomalies were detected, the result is <code>anomalous</code>.</p>"
+        },
+        "healthCheckPort": {
+          "type": "string",
+          "description": "<p>The port to use to connect with the target.</p>"
+        },
+        "target": {
+          "$ref": "#/definitions/TargetDescription",
+          "description": "<p>The description of the target.</p>"
+        },
+        "targetHealth": {
+          "$ref": "#/definitions/TargetHealth",
+          "description": "<p>The health information for the target.</p>"
+        }
+      }
+    },
+    "ElasticLoadBalancingv2TargetHealthDescription": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescriptionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticLoadBalancingv2TargetHealthDescriptionListResult": {
+      "type": "object",
+      "description": "The response of a ElasticLoadBalancingv2TargetHealthDescription list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ElasticLoadBalancingv2TargetHealthDescription items on this page",
+          "items": {
+            "$ref": "#/definitions/ElasticLoadBalancingv2TargetHealthDescription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ElasticLoadBalancingv2TargetHealthDescriptionProperties": {
+      "type": "object",
+      "description": "Definition of ElasticLoadBalancingv2TargetHealthDescription",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsElasticLoadBalancingv2TargetHealthDescriptionProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticLoadBalancingv2TargetHealthDescriptionTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ElasticLoadBalancingv2TargetHealthDescription resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MitigationInEffectEnum": {
+      "type": "string",
+      "description": "MitigationInEffectEnum enum",
+      "enum": [
+        "no",
+        "yes"
+      ],
+      "x-ms-enum": {
+        "name": "MitigationInEffectEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "No",
+            "value": "no",
+            "description": "MitigationInEffectEnum enum no"
+          },
+          {
+            "name": "Yes",
+            "value": "yes",
+            "description": "MitigationInEffectEnum enum yes"
+          }
+        ]
+      }
+    },
+    "MitigationInEffectEnumEnumValue": {
+      "type": "object",
+      "description": "Definition of MitigationInEffectEnumEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/MitigationInEffectEnum",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "TargetDescription": {
+      "type": "object",
+      "description": "Definition of TargetDescription",
+      "properties": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "<p>An Availability Zone or <code>all</code>. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.</p> <p>For Application Load Balancer target groups, the specified Availability Zone value is only applicable when cross-zone load balancing is off. Otherwise the parameter is ignored and treated as <code>all</code>.</p> <p>This parameter is not supported if the target type of the target group is <code>instance</code> or <code>alb</code>.</p> <p>If the target type is <code>ip</code> and the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required.</p> <p>For Application Load Balancer target groups with cross-zone load balancing off, if the target type is <code>ip</code> and the IP address is outside of the VPC for the target group, this should be an Availability Zone inside the VPC for the target group.</p> <p>If the target type is <code>lambda</code>, this parameter is optional and the only supported value is <code>all</code>.</p>"
+        },
+        "id": {
+          "type": "string",
+          "description": "<p>The ID of the target. If the target type of the target group is <code>instance</code>, specify an instance ID. If the target type is <code>ip</code>, specify an IP address. If the target type is <code>lambda</code>, specify the ARN of the Lambda function. If the target type is <code>alb</code>, specify the ARN of the Application Load Balancer target. </p>"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is <code>alb</code>, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. This parameter is not used if the target is a Lambda function.</p>"
+        }
+      }
+    },
+    "TargetHealth": {
+      "type": "object",
+      "description": "Definition of TargetHealth",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "<p>A description of the target health that provides additional details. If the state is <code>healthy</code>, a description is not provided.</p>"
+        },
+        "reason": {
+          "$ref": "#/definitions/TargetHealthReasonEnumEnumValue",
+          "description": "<p>The reason code.</p> <p>If the target state is <code>healthy</code>, a reason code is not provided.</p> <p>If the target state is <code>initial</code>, the reason code can be one of the following values:</p> <ul> <li> <p> <code>Elb.RegistrationInProgress</code> - The target is in the process of being registered with the load balancer.</p> </li> <li> <p> <code>Elb.InitialHealthChecking</code> - The load balancer is still sending the target the minimum number of health checks required to determine its health status.</p> </li> </ul> <p>If the target state is <code>unhealthy</code>, the reason code can be one of the following values:</p> <ul> <li> <p> <code>Target.ResponseCodeMismatch</code> - The health checks did not return an expected HTTP code. Applies only to Application Load Balancers and Gateway Load Balancers.</p> </li> <li> <p> <code>Target.Timeout</code> - The health check requests timed out. Applies only to Application Load Balancers and Gateway Load Balancers.</p> </li> <li> <p> <code>Target.FailedHealthChecks</code> - The load balancer received an error while establishing a connection to the target or the target response was malformed.</p> </li> <li> <p> <code>Elb.InternalError</code> - The health checks failed due to an internal error. Applies only to Application Load Balancers.</p> </li> </ul> <p>If the target state is <code>unused</code>, the reason code can be one of the following values:</p> <ul> <li> <p> <code>Target.NotRegistered</code> - The target is not registered with the target group.</p> </li> <li> <p> <code>Target.NotInUse</code> - The target group is not used by any load balancer or the target is in an Availability Zone that is not enabled for its load balancer.</p> </li> <li> <p> <code>Target.InvalidState</code> - The target is in the stopped or terminated state.</p> </li> <li> <p> <code>Target.IpUnusable</code> - The target IP address is reserved for use by a load balancer.</p> </li> </ul> <p>If the target state is <code>draining</code>, the reason code can be the following value:</p> <ul> <li> <p> <code>Target.DeregistrationInProgress</code> - The target is in the process of being deregistered and the deregistration delay period has not expired.</p> </li> </ul> <p>If the target state is <code>unavailable</code>, the reason code can be the following value:</p> <ul> <li> <p> <code>Target.HealthCheckDisabled</code> - Health checks are disabled for the target group. Applies only to Application Load Balancers.</p> </li> <li> <p> <code>Elb.InternalError</code> - Target health is unavailable due to an internal error. Applies only to Network Load Balancers.</p> </li> </ul>"
+        },
+        "state": {
+          "$ref": "#/definitions/TargetHealthStateEnumEnumValue",
+          "description": "<p>The state of the target.</p>"
+        }
+      }
+    },
+    "TargetHealthReasonEnum": {
+      "type": "string",
+      "description": "TargetHealthReasonEnum enum",
+      "enum": [
+        "Elb.InitialHealthChecking",
+        "Elb.InternalError",
+        "Elb.RegistrationInProgress",
+        "Target.DeregistrationInProgress",
+        "Target.FailedHealthChecks",
+        "Target.HealthCheckDisabled",
+        "Target.InvalidState",
+        "Target.IpUnusable",
+        "Target.NotInUse",
+        "Target.NotRegistered",
+        "Target.ResponseCodeMismatch",
+        "Target.Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "TargetHealthReasonEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ElbInitialHealthChecking",
+            "value": "Elb.InitialHealthChecking",
+            "description": "TargetHealthReasonEnum enum Elb.InitialHealthChecking"
+          },
+          {
+            "name": "ElbInternalError",
+            "value": "Elb.InternalError",
+            "description": "TargetHealthReasonEnum enum Elb.InternalError"
+          },
+          {
+            "name": "ElbRegistrationInProgress",
+            "value": "Elb.RegistrationInProgress",
+            "description": "TargetHealthReasonEnum enum Elb.RegistrationInProgress"
+          },
+          {
+            "name": "TargetDeregistrationInProgress",
+            "value": "Target.DeregistrationInProgress",
+            "description": "TargetHealthReasonEnum enum Target.DeregistrationInProgress"
+          },
+          {
+            "name": "TargetFailedHealthChecks",
+            "value": "Target.FailedHealthChecks",
+            "description": "TargetHealthReasonEnum enum Target.FailedHealthChecks"
+          },
+          {
+            "name": "TargetHealthCheckDisabled",
+            "value": "Target.HealthCheckDisabled",
+            "description": "TargetHealthReasonEnum enum Target.HealthCheckDisabled"
+          },
+          {
+            "name": "TargetInvalidState",
+            "value": "Target.InvalidState",
+            "description": "TargetHealthReasonEnum enum Target.InvalidState"
+          },
+          {
+            "name": "TargetIpUnusable",
+            "value": "Target.IpUnusable",
+            "description": "TargetHealthReasonEnum enum Target.IpUnusable"
+          },
+          {
+            "name": "TargetNotInUse",
+            "value": "Target.NotInUse",
+            "description": "TargetHealthReasonEnum enum Target.NotInUse"
+          },
+          {
+            "name": "TargetNotRegistered",
+            "value": "Target.NotRegistered",
+            "description": "TargetHealthReasonEnum enum Target.NotRegistered"
+          },
+          {
+            "name": "TargetResponseCodeMismatch",
+            "value": "Target.ResponseCodeMismatch",
+            "description": "TargetHealthReasonEnum enum Target.ResponseCodeMismatch"
+          },
+          {
+            "name": "TargetTimeout",
+            "value": "Target.Timeout",
+            "description": "TargetHealthReasonEnum enum Target.Timeout"
+          }
+        ]
+      }
+    },
+    "TargetHealthReasonEnumEnumValue": {
+      "type": "object",
+      "description": "Definition of TargetHealthReasonEnumEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/TargetHealthReasonEnum",
+          "description": "Property value"
+        }
+      }
+    },
+    "TargetHealthStateEnum": {
+      "type": "string",
+      "description": "TargetHealthStateEnum enum",
+      "enum": [
+        "draining",
+        "healthy",
+        "initial",
+        "unavailable",
+        "unhealthy",
+        "unhealthy.draining",
+        "unused"
+      ],
+      "x-ms-enum": {
+        "name": "TargetHealthStateEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Draining",
+            "value": "draining",
+            "description": "TargetHealthStateEnum enum draining"
+          },
+          {
+            "name": "Healthy",
+            "value": "healthy",
+            "description": "TargetHealthStateEnum enum healthy"
+          },
+          {
+            "name": "Initial",
+            "value": "initial",
+            "description": "TargetHealthStateEnum enum initial"
+          },
+          {
+            "name": "Unavailable",
+            "value": "unavailable",
+            "description": "TargetHealthStateEnum enum unavailable"
+          },
+          {
+            "name": "Unhealthy",
+            "value": "unhealthy",
+            "description": "TargetHealthStateEnum enum unhealthy"
+          },
+          {
+            "name": "UnhealthyDraining",
+            "value": "unhealthy.draining",
+            "description": "TargetHealthStateEnum enum unhealthy.draining"
+          },
+          {
+            "name": "Unused",
+            "value": "unused",
+            "description": "TargetHealthStateEnum enum unused"
+          }
+        ]
+      }
+    },
+    "TargetHealthStateEnumEnumValue": {
+      "type": "object",
+      "description": "Definition of TargetHealthStateEnumEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/TargetHealthStateEnum",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
