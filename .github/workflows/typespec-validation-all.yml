@@ -41,6 +41,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       - name: Setup CI environment
         uses: ./.github/actions/setup-node-ci
