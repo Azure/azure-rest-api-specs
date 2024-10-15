@@ -87,6 +87,9 @@ model ComplianceFlags {
 
   @doc("Locked down tables not required and non-customer content table does not have to be redacted")
   CustomerOptedInToEyesOnProductImprovement: boolean;
+
+  @doc("When this is true, the data may be used for model improvement. This flag does not affect redaction.")
+  CustomerOptedInToModelImprovement: boolean;
 }
 
 @doc("Skill Variable")
