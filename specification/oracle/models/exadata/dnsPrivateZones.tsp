@@ -22,40 +22,31 @@ model DnsPrivateZone is ProxyResource<DnsPrivateZoneProperties> {
 @doc("Zones resource model")
 model DnsPrivateZoneProperties {
   @doc("The OCID of the Zone")
-  @visibility("read")
-  ocid?: Ocid;
+  ocid: Ocid;
 
   @doc("A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.")
-  @visibility("read")
-  isProtected?: boolean;
+  isProtected: boolean;
 
   @doc("Zones lifecycleState")
-  @visibility("read")
-  lifecycleState?: DnsPrivateZonesLifecycleState;
+  lifecycleState: DnsPrivateZonesLifecycleState;
 
   @doc("The canonical absolute URL of the resource.")
-  @visibility("read")
-  self?: string;
+  self: string;
 
   @doc("The current serial of the zone. As seen in the zone's SOA record.")
-  @visibility("read")
-  serial?: int32;
+  serial: int32;
 
   @doc("Version is the never-repeating, totally-orderable, version of the zone, from which the serial field of the zone's SOA record is derived.")
-  @visibility("read")
-  version?: string;
+  version: string;
 
   @doc("The OCID of the private view containing the zone. This value will be null for zones in the global DNS, which are publicly resolvable and not part of a private view.")
-  @visibility("read")
   viewId?: Ocid;
 
   @doc("The type of the zone. Must be either PRIMARY or SECONDARY. SECONDARY is only supported for GLOBAL zones.")
-  @visibility("read")
-  zoneType?: ZoneType;
+  zoneType: ZoneType;
 
   @doc("Zones timeCreated")
-  @visibility("read")
-  timeCreated?: utcDateTime;
+  timeCreated: utcDateTime;
 
   @doc("Azure resource provisioning state.")
   @visibility("read")
