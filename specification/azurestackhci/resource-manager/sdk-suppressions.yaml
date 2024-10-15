@@ -3,10 +3,100 @@ suppressions:
     - package: 'sdk/resourcemanager/azurestackhci/armazurestackhci'
       breaking-changes:
         - Function `*ExtensionsClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, string, string, string, Extension, *ExtensionsClientBeginUpdateOptions)` to `(context.Context, string, string, string, string, ExtensionPatch, *ExtensionsClientBeginUpdateOptions)`
+        - Enum `AccessLevel` has been removed
+        - Enum `ArcExtensionState` has been removed
+        - Enum `DeviceKind` has been removed
+        - Enum `DeviceState` has been removed
+        - Enum `EceSecrets` has been removed
+        - Enum `LogCollectionJobType` has been removed
+        - Enum `LogCollectionStatus` has been removed
+        - Enum `OperationType` has been removed
+        - Enum `RemoteSupportType` has been removed
+        - Field `CurrentOemVersion`, `CurrentSbeVersion` of struct `UpdateSummariesProperties` has been removed
+        - Field `EdgeDeviceClassification` of struct `EdgeDevicesClientCreateOrUpdateResponse` has been removed
+        - Field `EdgeDeviceClassification` of struct `EdgeDevicesClientGetResponse` has been removed
+        - Field `ExpectedExecutionTime` of struct `Step` has been removed
+        - Field `HealthCheckTags`, `TargetResourceType` of struct `PrecheckResult` has been removed
+        - Field `LogCollectionProperties`, `RemoteSupportProperties` of struct `ClusterProperties` has been removed
+        - Field `MinSbeVersionRequired` of struct `UpdateProperties` has been removed
+        - Field `OperationType` of struct `DeploymentSettingsProperties` has been removed
+        - Field `SbePartnerInfo` of struct `ScaleUnits` has been removed
+        - Field `SdnIntegration`, `Secrets` of struct `DeploymentData` has been removed
+        - Field `SmbEncryptionForIntraClusterTrafficComplianceAssignment`, `WdacComplianceAssignment` of struct `SecurityProperties` has been removed
+        - Function `*ClustersClient.BeginConfigureRemoteSupport` has been removed
+        - Function `*ClustersClient.BeginTriggerLogCollection` has been removed
+        - Function `*EdgeDevice.GetEdgeDevice` has been removed
+        - Function `*EdgeDevicesClient.BeginCreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, EdgeDeviceClassification, *EdgeDevicesClientBeginCreateOrUpdateOptions)` to `(context.Context, string, string, EdgeDevice, *EdgeDevicesClientBeginCreateOrUpdateOptions)`
+        - Function `*HciEdgeDevice.GetEdgeDevice` has been removed
+        - Struct `DeploymentSettingAdapterPropertyOverrides` has been removed
+        - Struct `DeploymentSettingHostNetwork` has been removed
+        - Struct `DeploymentSettingIntents` has been removed
+        - Struct `DeploymentSettingStorageAdapterIPInfo` has been removed
+        - Struct `DeploymentSettingStorageNetworks` has been removed
+        - Struct `DeploymentSettingVirtualSwitchConfigurationOverrides` has been removed
+        - Struct `EceActionStatus` has been removed
+        - Struct `EceDeploymentSecrets` has been removed
+        - Struct `EceReportedProperties` has been removed
+        - Struct `ExtensionProfile` has been removed
+        - Struct `HciEdgeDeviceAdapterPropertyOverrides` has been removed
+        - Struct `HciEdgeDeviceArcExtension` has been removed
+        - Struct `HciEdgeDeviceHostNetwork` has been removed
+        - Struct `HciEdgeDeviceIntents` has been removed
+        - Struct `HciEdgeDeviceProperties` has been removed
+        - Struct `HciEdgeDeviceStorageAdapterIPInfo` has been removed
+        - Struct `HciEdgeDeviceStorageNetworks` has been removed
+        - Struct `HciEdgeDeviceVirtualSwitchConfigurationOverrides` has been removed
+        - Struct `HciEdgeDevice` has been removed
+        - Struct `HciNetworkProfile` has been removed
+        - Struct `HciNicDetail` has been removed
+        - Struct `HciOsProfile` has been removed
+        - Struct `HciReportedProperties` has been removed
+        - Struct `HciValidationFailureDetail` has been removed
+        - Struct `LogCollectionError` has been removed
+        - Struct `LogCollectionProperties` has been removed
+        - Struct `LogCollectionRequestProperties` has been removed
+        - Struct `LogCollectionRequest` has been removed
+        - Struct `LogCollectionSession` has been removed
+        - Struct `NetworkController` has been removed
+        - Struct `PerNodeRemoteSupportSession` has been removed
+        - Struct `RemoteSupportNodeSettings` has been removed
+        - Struct `RemoteSupportProperties` has been removed
+        - Struct `RemoteSupportRequestProperties` has been removed
+        - Struct `RemoteSupportRequest` has been removed
+        - Struct `SbeCredentials` has been removed
+        - Struct `SbeDeploymentInfo` has been removed
+        - Struct `SbeDeploymentPackageInfo` has been removed
+        - Struct `SbePartnerInfo` has been removed
+        - Struct `SbePartnerProperties` has been removed
+        - Struct `SdnIntegration` has been removed
+        - Struct `SwitchDetail` has been removed
+        - Struct `SwitchExtension` has been removed
+        - Type of `DeploymentData.HostNetwork` has been changed from `*DeploymentSettingHostNetwork` to `*HostNetwork`
+        - Type of `DeploymentSettingsProperties.ReportedProperties` has been changed from `*EceReportedProperties` to `*ReportedProperties`
+        - Type of `EdgeDeviceListResult.Value` has been changed from `[]EdgeDeviceClassification` to `[]*EdgeDevice`
 
   azure-sdk-for-python:
     - package: 'azure-mgmt-azurestackhci'
       breaking-changes:
+        - Deleted or renamed function `patch_sdk`
+        - Model `ArcSetting` deleted or renamed its instance variable `created_at`
+        - Model `ArcSetting` deleted or renamed its instance variable `created_by_type`
+        - Model `ArcSetting` deleted or renamed its instance variable `created_by`
+        - Model `ArcSetting` deleted or renamed its instance variable `last_modified_at`
+        - Model `ArcSetting` deleted or renamed its instance variable `last_modified_by_type`
+        - Model `ArcSetting` deleted or renamed its instance variable `last_modified_by`
+        - Model `Cluster` deleted or renamed its instance variable `created_at`
+        - Model `Cluster` deleted or renamed its instance variable `created_by_type`
+        - Model `Cluster` deleted or renamed its instance variable `created_by`
+        - Model `Cluster` deleted or renamed its instance variable `last_modified_at`
+        - Model `Cluster` deleted or renamed its instance variable `last_modified_by_type`
+        - Model `Cluster` deleted or renamed its instance variable `last_modified_by`
+        - Model `Extension` deleted or renamed its instance variable `created_at`
+        - Model `Extension` deleted or renamed its instance variable `created_by_type`
+        - Model `Extension` deleted or renamed its instance variable `created_by`
+        - Model `Extension` deleted or renamed its instance variable `last_modified_at`
+        - Model `Extension` deleted or renamed its instance variable `last_modified_by_type`
+        - Model `Extension` deleted or renamed its instance variable `last_modified_by`
         - Model ArcSetting no longer has parameter created_at
         - Model ArcSetting no longer has parameter created_by
         - Model ArcSetting no longer has parameter created_by_type
@@ -105,7 +195,25 @@ suppressions:
         - The model or publicly exposed class 'Extension' had its instance variable 'last_modified_by_type' deleted or renamed in the current version
         - The publicly exposed function 'patch_sdk' was deleted or renamed in the current version
         - The publicly exposed function 'patch_sdk' was deleted or renamed in the current version
-
+        - Deleted or renamed function `patch_sdk`
+        - Model `ArcSetting` deleted or renamed its instance variable `created_at`
+        - Model `ArcSetting` deleted or renamed its instance variable `created_by_type`
+        - Model `ArcSetting` deleted or renamed its instance variable `created_by`
+        - Model `ArcSetting` deleted or renamed its instance variable `last_modified_at`
+        - Model `ArcSetting` deleted or renamed its instance variable `last_modified_by_type`
+        - Model `ArcSetting` deleted or renamed its instance variable `last_modified_by`
+        - Model `Cluster` deleted or renamed its instance variable `created_at`
+        - Model `Cluster` deleted or renamed its instance variable `created_by_type`
+        - Model `Cluster` deleted or renamed its instance variable `created_by`
+        - Model `Cluster` deleted or renamed its instance variable `last_modified_at`
+        - Model `Cluster` deleted or renamed its instance variable `last_modified_by_type`
+        - Model `Cluster` deleted or renamed its instance variable `last_modified_by`
+        - Model `Extension` deleted or renamed its instance variable `created_at`
+        - Model `Extension` deleted or renamed its instance variable `created_by_type`
+        - Model `Extension` deleted or renamed its instance variable `created_by`
+        - Model `Extension` deleted or renamed its instance variable `last_modified_at`
+        - Model `Extension` deleted or renamed its instance variable `last_modified_by_type`
+        - Model `Extension` deleted or renamed its instance variable `last_modified_by`
   azure-sdk-for-js:
     - package: '@azure/arm-azurestackhci'
       breaking-changes:
