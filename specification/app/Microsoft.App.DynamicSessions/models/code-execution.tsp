@@ -22,16 +22,6 @@ model SessionCodeExecutionRequest {
 
 @doc("The result of the code execution.")
 model SessionCodeExecutionResult {
-  @doc("The identifier of the session.")
-  identifier: string;
-
-  @visibility("read")
-  @doc("Session code execution id.")
-  executionId?: string;
-
-  @doc("The execution type of the code execution request.")
-  executionType: ExecutionType;
-
   @doc("The standard output of the code execution.")
   stdout?: string;
 
@@ -51,6 +41,12 @@ model SessionCodeExecutionResponse {
   @visibility("read")
   @doc("Session code execution id.")
   id?: string;
+
+  @doc("The identifier of the session.")
+  identifier: string;
+
+  @doc("The execution type of the code execution request.")
+  executionType: ExecutionType;
 
   @doc("The status of the code execution operation, indicates whether succeeded or not.")
   status: Foundations.OperationState;

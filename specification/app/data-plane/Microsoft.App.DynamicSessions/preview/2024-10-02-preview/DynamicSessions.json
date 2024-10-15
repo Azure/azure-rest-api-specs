@@ -80,30 +80,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/SessionCodeExecutionResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
+              "$ref": "#/definitions/SessionCodeExecutionResponse"
             },
             "headers": {
               "Operation-Location": {
@@ -114,6 +91,10 @@
               "operation-id": {
                 "type": "string",
                 "description": "The id of this execution operation."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           },
@@ -651,6 +632,14 @@
           "description": "Session code execution id.",
           "readOnly": true
         },
+        "identifier": {
+          "type": "string",
+          "description": "The identifier of the session."
+        },
+        "executionType": {
+          "$ref": "#/definitions/ExecutionType",
+          "description": "The execution type of the code execution request."
+        },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The status of the code execution operation, indicates whether succeeded or not."
@@ -665,6 +654,8 @@
         }
       },
       "required": [
+        "identifier",
+        "executionType",
         "status"
       ]
     },
@@ -672,19 +663,6 @@
       "type": "object",
       "description": "The result of the code execution.",
       "properties": {
-        "identifier": {
-          "type": "string",
-          "description": "The identifier of the session."
-        },
-        "executionId": {
-          "type": "string",
-          "description": "Session code execution id.",
-          "readOnly": true
-        },
-        "executionType": {
-          "$ref": "#/definitions/ExecutionType",
-          "description": "The execution type of the code execution request."
-        },
         "stdout": {
           "type": "string",
           "description": "The standard output of the code execution."
@@ -701,11 +679,7 @@
           "format": "int64",
           "description": "The execution time of the code in milliseconds."
         }
-      },
-      "required": [
-        "identifier",
-        "executionType"
-      ]
+      }
     },
     "SessionResourceFile": {
       "type": "object",

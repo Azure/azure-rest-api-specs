@@ -15,10 +15,11 @@ using Azure.Core.Traits;
 namespace Microsoft.App.DynamicSessions;
 
 interface CodeExecution {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Execute code in a session.")
   @route("/executions")
   @pollingOperation(CodeExecution.getResult)
-  executeCode is LongRunningRpcOperation<
+  executeCode is Foundations.Operation<
     {
       ...SessionIdentifier;
       ...ExecutionOperationIdHeader;
@@ -27,11 +28,10 @@ interface CodeExecution {
       @body
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
-    SessionCodeExecutionResult,
-    {
-      ...ExecutionOperationIdHeader;
-      ...SessionCodeExecutionResult;
-    }
+    AcceptedResponse &
+      SessionCodeExecutionResponse &
+      ExecutionOperationIdHeader &
+      Foundations.LongRunningStatusLocation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -42,7 +42,9 @@ interface CodeExecution {
       ...SessionIdentifier;
       ...CodeExecutionIdentifier;
     },
-    SessionCodeExecutionResponse
+    {
+      ...SessionCodeExecutionResponse;
+    }
   >;
 }
 
