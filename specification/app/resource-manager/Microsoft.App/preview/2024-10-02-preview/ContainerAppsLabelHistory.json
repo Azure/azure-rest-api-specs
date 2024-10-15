@@ -132,23 +132,29 @@
   "definitions": {
     "LabelHistory": {
       "description": "Container App Label History.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
-      "type": "object",
       "properties": {
-        "records": {
-          "description": "List of label history records.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/LabelHistoryRecordItem"
-          },
-          "x-ms-identifiers": [
-            "label"
-          ]
+        "properties": {
+          "description": "Container App Label History resource specific properties",
+          "type": "object",
+          "properties": {
+            "records": {
+              "description": "List of label history records.",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/LabelHistoryRecordItem"
+              },
+              "x-ms-identifiers": [
+                "label"
+              ]
+            }
+          }
         }
       },
       "x-ms-client-flatten": true
