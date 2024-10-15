@@ -8435,6 +8435,15 @@
       "description": "NFS only. Required. The path to the original file, the symbolic link is pointing to. The path is of type string which is not resolved and is stored as is. The path can be absolute path or the relative path depending on the content stored in the symbolic link file.",
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "TargetFile": {
+      "name": "x-ms-file-target-file",
+      "x-ms-client-name": "targetFile",
+      "in": "headers",
+      "required": true,
+      "decription": "NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
