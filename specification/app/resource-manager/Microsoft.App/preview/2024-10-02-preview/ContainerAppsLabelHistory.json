@@ -139,14 +139,19 @@
       ],
       "type": "object",
       "properties": {
-        "value": {
-          "description": "Collection of label history record items.",
+        "records": {
+          "description": "List of label history records.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/LabelHistoryRecordItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "label"
+          ]
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "LabelHistoryRecordItem": {
       "description": "Container App Label History.",
