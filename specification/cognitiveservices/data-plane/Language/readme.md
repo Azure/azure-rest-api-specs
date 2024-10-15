@@ -6,7 +6,7 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Language is 2024-05-15-preview.
+The current preview release of Language is 2024-11-15-preview.
 
 The current stable release of Language is 2024-11-01.
 
@@ -25,7 +25,7 @@ directive:
 
 ### Release 2024-11-15-preview
 
-These settings apply only when `--tag=release_2024_11_11_preview` is specified on the command line.
+These settings apply only when `--tag=release_2024_11_15_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024-11-15-preview'
 input-file:
