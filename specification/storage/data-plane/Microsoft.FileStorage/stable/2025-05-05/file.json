@@ -6433,6 +6433,55 @@
           ]
         }
       ]
+    },
+    "/{shareName}/{directory}/{fileName}?comp=hardlink": {
+      "put": {
+        "tags": [
+          "file"
+        ],
+        "operationId": "File_CreateHardLink",
+        "description": "Creates a hard link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/ShareName"
+        },
+        {
+          "$ref": "#/parameters/DirectoryPath"
+        },
+        {
+          "$ref": "#/parameters/FilePath"
+        },
+        {
+          "name": "comp",
+          "description": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "hardlink"
+          ]
+        }
+      ]
     }
   },
   "definitions": {
