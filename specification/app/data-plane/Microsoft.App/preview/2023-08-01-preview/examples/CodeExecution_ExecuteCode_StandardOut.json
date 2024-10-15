@@ -1,0 +1,32 @@
+{
+  "title": "CodeExecution_ExecuteCode_StandardOut",
+  "operationId": "CodeExecution_ExecuteCode",
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "EF738D04-769D-4834-82FF-E4AB80A86777",
+    "resourceGroupName": "testrg",
+    "sessionPoolName": "testsessionpool",
+    "identifier": "testidentidier",
+    "codeExecutionRequest": {
+      "properties": {
+        "codeInputType": "inline",
+        "executionType": "synchronous",
+        "code": "7*9",
+        "timeoutInSeconds": 60
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "status": "Success",
+          "stdout": "",
+          "stderr": "",
+          "result": 63,
+          "executionTimeInMilliseconds": 4
+        }
+      }
+    }
+  }
+}
