@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -12,15 +13,10 @@ using TypeSpec.OpenAPI;
 
 namespace GitHub.Network;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.")
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  NetworkSettingsResourceProperties
-)
 model NetworkSettingsResource
-  extends TrackedResource<NetworkSettingsResourceProperties> {
+  is Azure.ResourceManager.TrackedResource<NetworkSettingsResourceProperties> {
   @doc("Name of the GitHub.Network resource")
   @pattern("^[a-zA-Z0-9]")
   @path
@@ -29,7 +25,7 @@ model NetworkSettingsResource
   @visibility("read")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -46,7 +42,6 @@ interface NetworkSettingsResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the properties of an existing GitHub.Network networkSettings resource with the specified update parameters.")
-  @parameterVisibility("read")
   @operationId("networkSettings_Update")
   update is ArmResourcePatchSync<
     NetworkSettingsResource,
@@ -72,14 +67,17 @@ interface NetworkSettingsResources {
 @@doc(NetworkSettingsResources.create::parameters.resource,
   "GitHub.Network networkSettings resource create parameters."
 );
-@@projectedName(NetworkSettingsResources.create::parameters.resource,
-  "json",
+@@Azure.ClientGenerator.Core.clientName(NetworkSettingsResources.create::parameters.resource,
   "networkSettings"
 );
+
 @@doc(NetworkSettingsResources.update::parameters.properties,
   "Parameters for updating the properties of the GitHub.Network resource."
 );
-@@projectedName(NetworkSettingsResources.update::parameters.properties,
-  "json",
+@@Azure.ClientGenerator.Core.clientName(NetworkSettingsResources.update::parameters.properties,
+  "networkSettings"
+);
+
+@@Azure.ClientGenerator.Core.clientName(NetworkSettingsResources,
   "networkSettings"
 );

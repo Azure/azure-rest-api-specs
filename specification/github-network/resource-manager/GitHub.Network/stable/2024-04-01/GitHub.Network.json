@@ -241,8 +241,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkSettingsResource"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -302,8 +301,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkSettingsResourceUpdate"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -374,10 +372,55 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "NetworkSettingsResource": {
       "type": "object",
       "description": "GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSettingsResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
@@ -385,24 +428,7 @@
       },
       "allOf": [
         {
-          "type": "object",
-          "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/NetworkSettingsResourceProperties",
-              "description": "The resource-specific properties for this resource.",
-              "x-ms-client-flatten": true,
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-            }
-          ]
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -456,20 +482,22 @@
     },
     "NetworkSettingsResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the NetworkSettingsResource.",
+      "description": "GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+        "properties": {
+          "$ref": "#/definitions/NetworkSettingsResourceProperties",
+          "description": "The resource-specific properties for this resource."
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
@@ -507,36 +535,6 @@
         ]
       },
       "readOnly": true
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-04-01-preview",
-        "2024-04-01",
-        "2024-04-02"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-04-01-preview",
-            "value": "2024-04-01-preview",
-            "description": "The 2024-04-01-preview API version for staging environment."
-          },
-          {
-            "name": "2024-04-01",
-            "value": "2024-04-01",
-            "description": "The 2024-04-01 API version for staff US environment."
-          },
-          {
-            "name": "2024-04-02",
-            "value": "2024-04-02",
-            "description": "The 2024-04-02 API version for production US/EU environments."
-          }
-        ]
-      }
     }
   },
   "parameters": {}
