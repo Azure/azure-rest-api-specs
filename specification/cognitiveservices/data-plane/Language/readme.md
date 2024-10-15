@@ -25,11 +25,11 @@ directive:
 
 ### Release 2024-11-15-preview
 
-These settings apply only when `--tag=release_2024_11_01` is specified on the command line.
+These settings apply only when `--tag=release_2024_11_11_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2024-05-15-preview'
+``` yaml $(tag) == 'release_2024-11-15-preview'
 input-file:
-  - stable/2024-11-15-preview/analyzetext.json
+  - preview/2024-11-15-preview/analyzetext.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
@@ -40,7 +40,7 @@ modelerfour:
 
 These settings apply only when `--tag=release_2024_11_01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2024-05-15-preview'
+``` yaml $(tag) == 'release_2024-11-01'
 input-file:
   - stable/2024-11-01/analyzetext.json
 title:
