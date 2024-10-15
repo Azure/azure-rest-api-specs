@@ -31,7 +31,10 @@ interface Evaluations {
   @route("runs:run")
   @post
   @doc("Run the evaluation.")
-  createEvaluation(
+  create(
+    @query
+    @doc("The API version to use for this operation.")
+    apiVersion: string,
     @body
     @doc("Evaluation to run.")
     evaluation: Evaluation,
@@ -44,17 +47,16 @@ interface Evaluations {
 
   update is EvaluationsOperations.ResourceUpdate<Evaluation>;
 
-  getEvaluationSchedule is EvaluationsOperations.ResourceRead<EvaluationSchedule>;
+  getSchedule is EvaluationsOperations.ResourceRead<EvaluationSchedule>;
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createOrReplaceEvaluationSchedule is EvaluationsOperations.ResourceCreateOrReplace<EvaluationSchedule>;
+  createOrReplaceSchedule is EvaluationsOperations.ResourceCreateOrReplace<EvaluationSchedule>;
 
-  listEvaluationSchedule is EvaluationsOperations.ResourceList<
+  listSchedule is EvaluationsOperations.ResourceList<
   EvaluationSchedule,
   ListQueryParametersTrait<StandardListQueryParameters>
->;
+  >;
 
-  deleteEvaluationSchedule is EvaluationsOperations.ResourceDelete<EvaluationSchedule>;
-}
+  deleteSchedule is EvaluationsOperations.ResourceDelete<EvaluationSchedule>;
 
-// model EvaluationCollection is Page<Evaluation>;
+};
