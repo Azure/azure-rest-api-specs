@@ -1,0 +1,33 @@
+{
+  "operationId": "Insights_Get",
+  "title": "Get Insight sample for Diagnostics category",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2023-12-01-preview",
+    "workloadImpactName": "impactid",
+    "insightName": "insight1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Impact/workloadimpacts/impactid/insights/insight1",
+        "name": "insight1",
+        "type": "Microsoft.impact/workloadimpacts/insights",
+        "properties": {
+          "category": "Diagnostics",
+          "impact": {
+            "impactId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Impact/workloadimpacts/impactid",
+            "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/virtualamchine/vm",
+            "startTime": "2018-11-08T00:00:00Z",
+            "endTime": "2018-11-08T00:00:00Z"
+          },
+          "insightUniqueId": "00000000-0000-0000-0000-000000000000",
+          "content": {
+            "title": "We ran diagnostics on your resource and found an issue",
+            "description": "<!--issueDescription-->\n<p>The physical host node where your VM is running had a networking stack update. This might result in a brief connectivity loss.</p>\n<br/><table><tr><th align=\"left\">Resource</th><th align=\"left\">Impact Start Time</th><th align=\"left\">Impact End Time</th><th align=\"left\">Impact Duration(Timespan)</th></tr><tr><td align=\"left\">west-eur-VM</td><td align=\"left\">2024-02-18 01:09:31 UTC</td><td align=\"left\">2024-02-18 01:09:35 UTC</td><td align=\"left\">00:00:04.2690000</td></tr></table>\n<!--/issueDescription-->\n<p>Azure performs updates to improve reliability, performance, and security of the VMs. Azure chooses the least impactful method, which might result in a brief connectivity loss. We are continuously working to improve and reduce impact of our updates, and we apologize for any inconvenience this may have caused you.</p>\n<!--recommendedActions-->\n<h2><strong>Recommended Documents</strong></h2>\n<ul>\n<li>To prepare for VM maintenance events and reduce its impact, try using <a href=\"https://docs.microsoft.com/azure/virtual-machines/windows/scheduled-events\">Scheduled Events for Windows</a> or <a href=\"https://docs.microsoft.com/azure/virtual-machines/linux/scheduled-events\">Linux</a></li>\n<li>Learn more about Azure maintenance and configuring for high availability:\n<ul>\n<li><a href=\"https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates\">Maintenance and updates for virtual machines in Azure</a></li>\n<li><a href=\"https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-availability-sets\">Configure availability of virtual machines</a></li>\n</ul>\n</li>\n<li>To troubleshoot this scenario in the future, see <a href=\"https://docs.microsoft.com/azure/resource-health/resource-health-overview\">Resource Health Center</a></li>\n</ul>\n"
+          }
+        }
+      }
+    }
+  }
+}

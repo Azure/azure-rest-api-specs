@@ -1,0 +1,130 @@
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "./subscriptionResource.cadl";
+
+namespace Microsoft.Impact;
+
+using Cadl.Http;
+using Cadl.Rest;
+using OpenAPI;
+using Azure.ResourceManager;
+
+@doc("Insight resource")
+@parentResource(WorkloadImpact)
+model Insight is ProxyResource<InsightProperties> {
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
+  @key("insightName")
+  @segment("insights")
+  @doc("Name of the insight")
+  @visibility("Read")
+  @path
+  name: string;  
+}
+
+@doc("Insight resource")
+model InsightUnderSubscription is ProxyResource<InsightProperties> {
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
+  @key("insightName")
+  @segment("insights")
+  @doc("Name of the insight")
+  @visibility("Read")
+  @path
+  name: string;  
+}
+
+
+
+
+@doc("Impact category properties.")
+model InsightProperties is ResourceProperties{
+
+  @doc("summary of the insight.")
+  "summary"? : string;
+
+  @doc("type of the insight.")
+  "type"? : string;
+
+  @doc("status of the impact. example resolved, repaired, other.")
+  "status"? : string;
+
+  @doc("time at which insight has been generated.")
+  "createdTime": zonedDateTime;
+  
+  @doc("time at which insight has been updated.")
+  "updatedTime": zonedDateTime;
+
+  @doc("list of actions performed to or for the azure resource.")
+  @extension("x-ms-identifiers", [])
+  "actions":Action[];
+
+  @doc("details of of the impact for which insight has been generated.")
+  "impactDetails": ImpactDetails;
+}
+
+@doc("details of the action performed to or for the azure resource.")
+model Action {
+  @doc("summary of the action performed to or for the resource.")
+	summary?: string;
+
+	@doc("time at which action was performed.")
+	time?: zonedDateTime;
+}
+
+@doc("details of of the impact for which insight has been generated.")
+model ImpactDetails {
+  @doc("List of impacted Azure resources.")
+  "impactedResources": ImpactedResource[];
+
+  @doc("Time at which impact was started according to reported impact.")
+  "impactStartTime": zonedDateTime;
+
+  @doc("azure Id of the impact.")
+  "impactId": string;
+
+  @doc("unique (guid) id of the impact generated during impact creation.")
+  "impactUniqueId": string;
+}
+
+@doc("impacted azure resource id.")
+model ImpactedResource {
+  @doc("impacted azure resource id")
+  "impactedResourceId": string;
+}
+
+@doc("context of post call for insight")
+model InsightCustomResourceCommonParameters<TResource> {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ProviderNamespace<TResource>;
+}
+
+@doc("Body of the get all insights")
+model insightDetails {
+ @doc("The ID of the azure resource.")
+  azureResourceId?: string;
+}
+
+
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
+@armResourceOperations
+interface Insights  {
+  @doc("Get Insight resources by workloadImpactName and insightName", TResource)
+  get  is SubscriptionResourceRead<Insight>;
+
+  @doc("List Insight resources by workloadImpactName", TResource)
+  listBySubscription is ArmListBySubscription<Insight>;
+
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
+  @post
+  @doc("get all insights under subscription")
+  @segment("getAllInsights")
+  op getAll(
+  ...InsightCustomResourceCommonParameters<InsightUnderSubscription>,
+  @body impactInfo: insightDetails, 
+): ArmResponse<ResourceListResult<Insight>> | ErrorResponse;
+}
