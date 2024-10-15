@@ -5,6 +5,7 @@ import "./models.persondirectory.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -105,6 +106,7 @@ alias CreateDynamicPersonGroupDescription = """
 alias UpdateDynamicPersonGroupSummary = "Update the name or userData of an existing Dynamic Person Group, and manage its members by adding or removing persons.";
 alias UpdateDynamicPersonGroupDescription = "The properties keep unchanged if they are not in request body.";
 
+@removed(Versions.v1_2)
 interface PersonDirectoryOperations {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   @doc("Creates a new person in a Person Directory. To add face to this person, please call Person Directory \"Add Person Face\".")
