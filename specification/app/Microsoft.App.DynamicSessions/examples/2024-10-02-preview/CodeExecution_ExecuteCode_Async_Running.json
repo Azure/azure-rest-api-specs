@@ -1,12 +1,12 @@
 {
-  "title": "CodeExecution_ExecuteCode_Async",
+  "title": "CodeExecution_ExecuteCode_Async_Running",
   "operationId": "CodeExecution_ExecuteCode",
   "headers": {
     "operation-id": "testexecutionid"
   },
   "parameters": {
     "api-version": "2024-10-02-preview",
-    "identifier": "testidentidier",
+    "identifier": "testsessionidentidier",
     "codeExecutionRequest": {
       "codeInputType": "Inline",
       "executionType": "Asynchronous",
@@ -17,6 +17,7 @@
   "responses": {
     "202": {
       "headers": {
+        "operation-id": "testexecutionid",
         "Operation-Location": "operation-location-uri"
       },
       "body": {
