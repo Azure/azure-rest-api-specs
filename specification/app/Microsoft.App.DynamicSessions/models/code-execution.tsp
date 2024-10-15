@@ -20,6 +20,22 @@ model SessionCodeExecutionRequest {
   timeoutInSeconds: int64;
 }
 
+@doc("The result of the code execution.")
+model SessionCodeExecutionResult {
+  @doc("The standard output of the code execution.")
+  stdout?: string;
+
+  @doc("The standard error of the code execution.")
+  stderr?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  @doc("The result of the code execution. The type of this field is same as the type of actual result of the code execution after being Json serialized.")
+  executionResult?: unknown;
+
+  @doc("The execution time of the code in milliseconds.")
+  executionTimeInMilliseconds?: int64;
+}
+
 @doc("The response containing the result of the code execution.")
 model SessionCodeExecutionResponse {
   @visibility("read")
@@ -29,21 +45,11 @@ model SessionCodeExecutionResponse {
   @doc("The status of the code execution operation, indicates whether succeeded or not.")
   status: Foundations.OperationState;
 
-  @doc("The standard output of the code execution.")
-  stdout?: string;
-
-  @doc("The standard error of the code execution.")
-  stderr?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
-  @doc("The result of the code execution. The type of this field is same as the type of actual result of the code execution after being Json serialized.")
-  result?: unknown;
-
-  @doc("The execution time of the code in milliseconds.")
-  executionTimeInMilliseconds?: int64;
-
   @doc("The error of this code execution if failed.")
   error?: Foundations.ErrorResponse;
+
+  @doc("The result of this code execution operation.")
+  result?: SessionCodeExecutionResult;
 }
 
 @doc("Code input type.")

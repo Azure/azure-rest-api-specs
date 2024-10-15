@@ -18,7 +18,7 @@ model ExecutionOperationIdHeader {
 model SessionIdentifier {
   @doc("The identifier of the session.")
   @query
-  sessionId: string;
+  identifier: string;
 }
 
 @doc("Session code execution identifier path parameter.")

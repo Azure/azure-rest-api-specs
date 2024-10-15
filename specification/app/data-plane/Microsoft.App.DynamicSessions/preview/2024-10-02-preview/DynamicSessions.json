@@ -96,7 +96,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/SessionCodeExecutionResponse",
+                  "$ref": "#/definitions/SessionCodeExecutionResult",
                   "description": "The result of the operation."
                 }
               },
@@ -111,9 +111,9 @@
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
               },
-              "x-ms-error-code": {
+              "operation-id": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The id of this execution operation."
               }
             }
           },
@@ -649,6 +649,23 @@
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The status of the code execution operation, indicates whether succeeded or not."
         },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "The error of this code execution if failed."
+        },
+        "result": {
+          "$ref": "#/definitions/SessionCodeExecutionResult",
+          "description": "The result of this code execution operation."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "SessionCodeExecutionResult": {
+      "type": "object",
+      "description": "The result of the code execution.",
+      "properties": {
         "stdout": {
           "type": "string",
           "description": "The standard output of the code execution."
@@ -657,22 +674,15 @@
           "type": "string",
           "description": "The standard error of the code execution."
         },
-        "result": {
+        "executionResult": {
           "description": "The result of the code execution. The type of this field is same as the type of actual result of the code execution after being Json serialized."
         },
         "executionTimeInMilliseconds": {
           "type": "integer",
           "format": "int64",
           "description": "The execution time of the code in milliseconds."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
-          "description": "The error of this code execution if failed."
         }
-      },
-      "required": [
-        "status"
-      ]
+      }
     },
     "SessionResourceFile": {
       "type": "object",
@@ -761,7 +771,7 @@
       "x-ms-client-name": "operationId"
     },
     "SessionIdentifier": {
-      "name": "sessionId",
+      "name": "identifier",
       "in": "query",
       "description": "The identifier of the session.",
       "required": true,

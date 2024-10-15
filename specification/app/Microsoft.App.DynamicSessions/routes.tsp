@@ -27,8 +27,11 @@ interface CodeExecution {
       @body
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
-    SessionCodeExecutionResponse,
-    SessionCodeExecutionResponse
+    SessionCodeExecutionResult,
+    {
+      ...ExecutionOperationIdHeader;
+      ...SessionCodeExecutionResult;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
