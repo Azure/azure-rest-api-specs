@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-06-01-preview",
+    "version": "2024-12-15-preview",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -11781,7 +11781,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to the CaCertificate resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -12117,7 +12117,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Channel resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -12266,7 +12266,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to the ClientGroup resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -12388,7 +12388,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to the Client resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -12881,7 +12881,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to the Event Grid Domain resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -13067,7 +13067,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Domain Topic resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -13238,6 +13238,13 @@
           "format": "date-time",
           "description": "Expiration time of the event subscription.",
           "type": "string"
+        },
+        "tags": {
+          "description": "Tags relating to Event Subscription resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -13308,7 +13315,7 @@
         },
         "eventTimeToLive": {
           "format": "duration",
-          "description": "Time span duration in ISO 8601 format that determines how long messages are available to the subscription from the time the message was published.\r\nThis duration value is expressed using the following format: \\'P(n)Y(n)M(n)DT(n)H(n)M(n)S\\', where:\r\n    - (n) is replaced by the value of each time element that follows the (n).\r\n    - P is the duration (or Period) designator and is always placed at the beginning of the duration.\r\n    - Y is the year designator, and it follows the value for the number of years.\r\n    - M is the month designator, and it follows the value for the number of months.\r\n    - W is the week designator, and it follows the value for the number of weeks.\r\n    - D is the day designator, and it follows the value for the number of days.\r\n    - T is the time designator, and it precedes the time components.\r\n    - H is the hour designator, and it follows the value for the number of hours.\r\n    - M is the minute designator, and it follows the value for the number of minutes.\r\n    - S is the second designator, and it follows the value for the number of seconds.\r\nThis duration value cannot be set greater than the topicâ€™s EventRetentionInDays. It is is an optional field where its minimum value is 1 minute, and its maximum is determined\r\nby topicâ€™s EventRetentionInDays value. The followings are examples of valid values:\r\n    - \\'P0DT23H12M\\' or \\'PT23H12M\\': for duration of 23 hours and 12 minutes.\r\n    - \\'P1D\\' or \\'P1DT0H0M0S\\': for duration of 1 day.",
+          "description": "Time span duration in ISO 8601 format that determines how long messages are available to the subscription from the time the message was published.\r\nThis duration value is expressed using the following format: \\'P(n)Y(n)M(n)DT(n)H(n)M(n)S\\', where:\r\n  - (n) is replaced by the value of each time element that follows the (n).\r\n  - P is the duration (or Period) designator and is always placed at the beginning of the duration.\r\n  - Y is the year designator, and it follows the value for the number of years.\r\n  - M is the month designator, and it follows the value for the number of months.\r\n  - W is the week designator, and it follows the value for the number of weeks.\r\n  - D is the day designator, and it follows the value for the number of days.\r\n  - T is the time designator, and it precedes the time components.\r\n  - H is the hour designator, and it follows the value for the number of hours.\r\n  - M is the minute designator, and it follows the value for the number of minutes.\r\n  - S is the second designator, and it follows the value for the number of seconds.\r\nThis duration value cannot be set greater than the topic’s EventRetentionInDays. It is is an optional field where its minimum value is 1 minute, and its maximum is determined\r\nby topic’s EventRetentionInDays value. The followings are examples of valid values:\r\n  - \\'P0DT23H12M\\' or \\'PT23H12M\\': for duration of 23 hours and 12 minutes.\r\n  - \\'P1D\\' or \\'P1DT0H0M0S\\': for duration of 1 day.",
           "type": "string"
         }
       }
@@ -13346,6 +13353,10 @@
         "userAssignedIdentity": {
           "description": "The user identity associated with the resource.",
           "type": "string"
+        },
+        "federatedIdentityCredentialInfo": {
+          "$ref": "#/definitions/FederatedIdentityCredentialInfo",
+          "description": "The details of the Federated Identity Credential (FIC) used with the resource delivery."
         }
       }
     },
@@ -13754,7 +13765,7 @@
       "x-ms-discriminator-value": "IsNotNull"
     },
     "Filter": {
-      "description": "This is the base type that represents a filter. To configure a filter, do not directly instantiate an object of this class. Instead, instantiate\r\nan object of a derived class such as BoolEqualsFilter, NumberInFilter, StringEqualsFilter etc depending on the type of the key based on\r\nwhich you want to filter.",
+      "description": "This is the base type that represents a filter. To configure a filter, do not directly instantiate an object of this class. Instead, instantiate\r\nan object of a derived class such as BoolEqualsFilter, NumberInFilter etc depending on the type of the key based on\r\nwhich you want to filter.",
       "type": "object",
       "properties": {
         "operatorType": {
@@ -13812,7 +13823,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Event Subscription resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -13855,6 +13866,13 @@
           "format": "date-time",
           "description": "Expiration time of the event subscription.",
           "type": "string"
+        },
+        "tags": {
+          "description": "Tags relating to Event Subscription resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -14090,7 +14108,7 @@
           "type": "integer"
         },
         "eventTimeToLive": {
-          "description": "Time span duration in ISO 8601 format that determines how long messages are available to the subscription from the time the message was published.\r\nThis duration value is expressed using the following format: \\'P(n)Y(n)M(n)DT(n)H(n)M(n)S\\', where:\r\n    - (n) is replaced by the value of each time element that follows the (n).\r\n    - P is the duration (or Period) designator and is always placed at the beginning of the duration.\r\n    - Y is the year designator, and it follows the value for the number of years.\r\n    - M is the month designator, and it follows the value for the number of months.\r\n    - W is the week designator, and it follows the value for the number of weeks.\r\n    - D is the day designator, and it follows the value for the number of days.\r\n    - T is the time designator, and it precedes the time components.\r\n    - H is the hour designator, and it follows the value for the number of hours.\r\n    - M is the minute designator, and it follows the value for the number of minutes.\r\n    - S is the second designator, and it follows the value for the number of seconds.\r\nThis duration value cannot be set greater than the topicâ€™s EventRetentionInDays. It is is an optional field where its minimum value is 1 minute, and its maximum is determined\r\nby topicâ€™s EventRetentionInDays value. The followings are examples of valid values:\r\n    - \\'P0DT23H12M\\' or \\'PT23H12M\\': for duration of 23 hours and 12 minutes.\r\n    - \\'P1D\\' or \\'P1DT0H0M0S\\': for duration of 1 day.",
+          "description": "Time span duration in ISO 8601 format that determines how long messages are available to the subscription from the time the message was published.\r\nThis duration value is expressed using the following format: \\'P(n)Y(n)M(n)DT(n)H(n)M(n)S\\', where:\r\n  - (n) is replaced by the value of each time element that follows the (n).\r\n  - P is the duration (or Period) designator and is always placed at the beginning of the duration.\r\n  - Y is the year designator, and it follows the value for the number of years.\r\n  - M is the month designator, and it follows the value for the number of months.\r\n  - W is the week designator, and it follows the value for the number of weeks.\r\n  - D is the day designator, and it follows the value for the number of days.\r\n  - T is the time designator, and it precedes the time components.\r\n  - H is the hour designator, and it follows the value for the number of hours.\r\n  - M is the minute designator, and it follows the value for the number of minutes.\r\n  - S is the second designator, and it follows the value for the number of seconds.\r\nThis duration value cannot be set greater than the topic’s EventRetentionInDays. It is is an optional field where its minimum value is 1 minute, and its maximum is determined\r\nby topic’s EventRetentionInDays value. The followings are examples of valid values:\r\n  - \\'P0DT23H12M\\' or \\'PT23H12M\\': for duration of 23 hours and 12 minutes.\r\n  - \\'P1D\\' or \\'P1DT0H0M0S\\': for duration of 1 day.",
           "type": "string"
         },
         "deadLetterDestinationWithResourceIdentity": {
@@ -14926,7 +14944,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Event Subscription resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -15055,7 +15073,7 @@
           "description": "Topic spaces configuration information for the namespace resource"
         },
         "isZoneRedundant": {
-          "description": "This is an optional property and it allows the user to specify if the namespace resource supports zone-redundancy capability or not. If this\r\nproperty is not specified explicitly by the user, its default value depends on the following conditions:\r\n    a. For Availability Zones enabled regions - The default property value would be true.\r\n    b. For non-Availability Zones enabled regions - The default property value would be false.\r\nOnce specified, this property cannot be updated.",
+          "description": "This is an optional property and it allows the user to specify if the namespace resource supports zone-redundancy capability or not. If this\r\nproperty is not specified explicitly by the user, its default value depends on the following conditions:\r\n  a. For Availability Zones enabled regions - The default property value would be true.\r\n  b. For non-Availability Zones enabled regions - The default property value would be false.\r\nOnce specified, this property cannot be updated.",
           "type": "boolean"
         },
         "publicNetworkAccess": {
@@ -15408,7 +15426,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to the namespace resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -15644,7 +15662,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to namespace topic resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -15832,7 +15850,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to partner configuration resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         },
@@ -15969,7 +15987,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Partner Destination resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -16114,7 +16132,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Partner Namespace resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -16271,7 +16289,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Partner Registration resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -16386,7 +16404,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Partner Topic resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         },
@@ -16803,7 +16821,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to the PermissionBinding resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -16958,7 +16976,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to System Topic resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         },
@@ -17172,7 +17190,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Topic resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -17335,7 +17353,7 @@
           "type": "string"
         },
         "schemaUrl": {
-          "description": "Url of the schema for this event type.",
+          "description": "URL of the schema for this event type.",
           "type": "string"
         },
         "isInDefaultSet": {
@@ -17390,7 +17408,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Extension Topic resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -17405,7 +17423,7 @@
           "type": "string"
         },
         "topicTemplates": {
-          "description": "The topic filters in the topic space.\r\nExample: \"topicTemplates\": [ \r\n              \"devices/foo/bar\",\r\n              \"devices/topic1/+\",\r\n              \"devices/${principal.name}/${principal.attributes.keyName}\" ].",
+          "description": "The topic filters in the topic space.\r\nExample: \"topicTemplates\": [ \r\n        \"devices/foo/bar\",\r\n        \"devices/topic1/+\",\r\n        \"devices/${principal.name}/${principal.attributes.keyName}\" ].",
           "type": "array",
           "items": {
             "type": "string"
@@ -17447,7 +17465,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to the TopicSpace resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -17673,7 +17691,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata relating to Verified Partner resource.",
+          "description": "The system metadata relating to the Event Grid resource.",
           "type": "object",
           "readOnly": true
         }
@@ -17752,12 +17770,51 @@
           "type": "string"
         },
         "issuerCertificates": {
-          "description": "Information about the certificate that is used for token validation. We currently support maximum 2 certificates.",
+          "description": "Information about the certificates that are used for token validation. We currently support maximum 2 certificates.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IssuerCertificateInfo"
           },
-          "x-ms-identifiers": []
+      "x-ms-identifiers": []
+        },
+        "encodedIssuerCertificates": {
+          "description": "Information about the encoded public certificates that are used for custom authentication.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncodedIssuerCertificateInfo"
+          }
+        }
+      }
+    },
+    "EncodedIssuerCertificateInfo": {
+      "description": "Information about the public certificate that is used for custom authentication.",
+      "required": [
+        "encodedCertificate",
+        "kid"
+      ],
+      "type": "object",
+      "properties": {
+        "kid": {
+          "description": "Identifier for the certificate.",
+          "type": "string"
+        },
+        "encodedCertificate": {
+          "description": "Certificate in pem format.",
+          "type": "string"
+        }
+      }
+    },
+    "FederatedIdentityCredentialInfo": {
+      "description": "The details of the Federated Identity Credential (FIC) used with the resource.",
+      "required": [
+        "federatedClientId"
+      ],
+      "type": "object",
+      "properties": {
+        "federatedClientId": {
+          "format": "uuid",
+          "description": "The Multi-Tenant AAD Application where the Federated Identity Credential (FIC) is associated with.",
+          "type": "string"
         }
       }
     },
