@@ -104,6 +104,47 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulEntityLinkingRequest": {
+            "$ref": "./examples/SuccessfulEntityLinkingRequest.json"
+          },
+          "SuccessfulEntityRecognitionExclusionRequest": {
+            "$ref": "./examples/SuccessfulEntityRecognitionExclusionRequest.json"
+          },
+          "SuccessfulEntityRecognitionInclusionRequest": {
+            "$ref": "./examples/SuccessfulEntityRecognitionInclusionRequest.json"
+          },
+          "SuccessfulEntityRecognitionInferenceOptionsRequest": {
+            "$ref": "./examples/SuccessfulEntityRecognitionInferenceOptionsRequest.json"
+          },
+          "SuccessfulEntityRecognitionOverlapPolicy": {
+            "$ref": "./examples/SuccessfulEntityRecognitionOverlapPolicy.json"
+          },
+          "SuccessfulEntityRecognitionRequest": {
+            "$ref": "./examples/SuccessfulEntityRecognitionRequest.json"
+          },
+          "SuccessfulKeyPhraseExtractionRequest": {
+            "$ref": "./examples/SuccessfulKeyPhraseExtractionRequest.json"
+          },
+          "SuccessfulLanguageDetectionRequest": {
+            "$ref": "./examples/SuccessfulLanguageDetectionRequest.json"
+          },
+          "SuccessfulPiiEntityRecognitionExclusionRequest": {
+            "$ref": "./examples/SuccessfulPiiEntityRecognitionExclusionRequest.json"
+          },
+          "SuccessfulPiiEntityRecognitionMaskedEntitiesRequest": {
+            "$ref": "./examples/SuccessfulPiiEntityRecognitionMaskedEntities.json"
+          },
+          "SuccessfulPiiEntityRecognitionRedactionPolicyRequest": {
+            "$ref": "./examples/SuccessfulPiiEntityRecognitionRedactionPolicyRequest.json"
+          },
+          "SuccessfulPiiEntityRecognitionRequest": {
+            "$ref": "./examples/SuccessfulPiiEntityRecognitionRequest.json"
+          },
+          "SuccessfulSentimentAnalysisRequest": {
+            "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
+          }
         }
       }
     },
@@ -146,6 +187,20 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulAbstractiveSummarizationTaskSubmit": {
+            "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskSubmit.json"
+          },
+          "SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest": {
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+          },
+          "SuccessfulHealthcareDocumentTypePostRequest": {
+            "$ref": "./examples/SuccessfulHealthcareDocumentTypePostRequest.json"
+          },
+          "SuccessfulHealthcarePostRequest": {
+            "$ref": "./examples/SuccessfulHealthcarePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -211,6 +266,20 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulAbstractiveSummarizationTaskResult": {
+            "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskResult.json"
+          },
+          "SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest": {
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+          },
+          "SuccessfulHealthcareDocumentTypeTaskStatusRequest": {
+            "$ref": "./examples/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
+          },
+          "SuccessfulHealthcareTaskStatusRequest": {
+            "$ref": "./examples/SuccessfulHealthcareTaskStatusRequest.json"
+          }
         }
       }
     },
@@ -254,6 +323,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulAnalyzeTextJobsCancelRequest": {
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1257,6 +1331,47 @@
         "metadataKind"
       ]
     },
+    "BaseRedactionPolicy": {
+      "type": "object",
+      "description": "The abstract base class for RedactionPolicy.",
+      "properties": {
+        "policyKind": {
+          "type": "string",
+          "description": "The entity RedactionPolicy object kind.",
+          "default": "maskWithRedactionCharacter",
+          "enum": [
+            "doNotRedact",
+            "maskWithRedactionCharacter",
+            "maskWithEntityType"
+          ],
+          "x-ms-enum": {
+            "name": "RedactionPolicyKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "doNotRedact",
+                "value": "doNotRedact",
+                "description": "Do not redact detected entities."
+              },
+              {
+                "name": "maskWithRedactionCharacter",
+                "value": "maskWithRedactionCharacter",
+                "description": "React detected entities with redaction character."
+              },
+              {
+                "name": "maskWithEntityType",
+                "value": "maskWithEntityType",
+                "description": "Redact detected entities with entity type."
+              }
+            ]
+          }
+        }
+      },
+      "discriminator": "policyKind",
+      "required": [
+        "policyKind"
+      ]
+    },
     "Certainty": {
       "type": "string",
       "description": "Describes the entities certainty and polarity.",
@@ -1784,6 +1899,16 @@
         "iso6391Name",
         "confidenceScore"
       ]
+    },
+    "DoNotRedactPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of not redacting found PII.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "doNotRedact"
     },
     "DocumentError": {
       "type": "object",
@@ -4147,6 +4272,125 @@
         "url",
         "dataSource"
       ]
+    },
+    "MaskWithEntityTypePolicyType": {
+      "type": "object",
+      "description": "Represents the policy of redacting PII with the entity type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "maskWithEntityType"
+    },
+    "MaskWithRedactionCharacterPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of redacting with a redaction character",
+      "properties": {
+        "redactionCharacter": {
+          "type": "string",
+          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+          "default": "*",
+          "enum": [
+            "!",
+            "#",
+            "$",
+            "%",
+            "&",
+            "*",
+            "+",
+            "-",
+            "=",
+            "?",
+            "@",
+            "^",
+            "_",
+            "~"
+          ],
+          "x-ms-enum": {
+            "name": "redactionCharacter",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "exclamationPoint",
+                "value": "!",
+                "description": "Exclamation point character"
+              },
+              {
+                "name": "numberSign",
+                "value": "#",
+                "description": "Number sign character"
+              },
+              {
+                "name": "dollar",
+                "value": "$",
+                "description": "Dollar sign character"
+              },
+              {
+                "name": "perCent",
+                "value": "%",
+                "description": "Percent sign character"
+              },
+              {
+                "name": "ampersand",
+                "value": "&",
+                "description": "Ampersand character"
+              },
+              {
+                "name": "asterisk",
+                "value": "*",
+                "description": "Asterisk character"
+              },
+              {
+                "name": "plus",
+                "value": "+",
+                "description": "Plus sign character"
+              },
+              {
+                "name": "minus",
+                "value": "-",
+                "description": "Minus sign character"
+              },
+              {
+                "name": "equals",
+                "value": "=",
+                "description": "Equals sign character"
+              },
+              {
+                "name": "questionMark",
+                "value": "?",
+                "description": "Question mark character"
+              },
+              {
+                "name": "atSign",
+                "value": "@",
+                "description": "At sign character"
+              },
+              {
+                "name": "caret",
+                "value": "^",
+                "description": "Caret character"
+              },
+              {
+                "name": "underscore",
+                "value": "_",
+                "description": "Underscore character"
+              },
+              {
+                "name": "tilde",
+                "value": "~",
+                "description": "Tilde character"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "maskWithRedactionCharacter"
     },
     "Match": {
       "type": "object",
@@ -6793,7 +7037,7 @@
           }
         },
         "redactionPolicy": {
-          "$ref": "#/definitions/RedactionPolicy",
+          "$ref": "#/definitions/BaseRedactionPolicy",
           "description": "RedactionPolicy to be used on the input."
         }
       }
@@ -6923,119 +7167,6 @@
             "description": "Currency range"
           }
         ]
-      }
-    },
-    "RedactionPolicy": {
-      "type": "object",
-      "description": "Represents the redaction policy to be used. Default policy kind is to maskWithRedactionCharacter and redactionCharacter.asterisk.",
-      "properties": {
-        "policyKind": {
-          "type": "string",
-          "description": "Redaction Policy kind that can be used. Default is maskWithRedactionCharacter. Can also use doNotRedact and maskWithEntityType.",
-          "enum": [
-            "maskWithRedactionCharacter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "redactionCharacter": {
-          "type": "string",
-          "description": "Redaction Character to be used for masking if maskWithRedactionCharacter is policyKind. Redaction characters allowed: !,#,$,%,&,*,+,-,=,?,`@`,^,_,~",
-          "default": "*",
-          "enum": [
-            "!",
-            "#",
-            "$",
-            "%",
-            "&",
-            "*",
-            "+",
-            "-",
-            "=",
-            "?",
-            "@",
-            "^",
-            "_",
-            "~"
-          ],
-          "x-ms-enum": {
-            "name": "redactionCharacter",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "exclamationPoint",
-                "value": "!",
-                "description": "Exclamation point character"
-              },
-              {
-                "name": "numberSign",
-                "value": "#",
-                "description": "Number sign character"
-              },
-              {
-                "name": "dollar",
-                "value": "$",
-                "description": "Dollar sign character"
-              },
-              {
-                "name": "perCent",
-                "value": "%",
-                "description": "Percent sign character"
-              },
-              {
-                "name": "ampersand",
-                "value": "&",
-                "description": "Ampersand character"
-              },
-              {
-                "name": "asterisk",
-                "value": "*",
-                "description": "Asterisk character"
-              },
-              {
-                "name": "plus",
-                "value": "+",
-                "description": "Plus sign character"
-              },
-              {
-                "name": "minus",
-                "value": "-",
-                "description": "Minus sign character"
-              },
-              {
-                "name": "equals",
-                "value": "=",
-                "description": "Equals sign character"
-              },
-              {
-                "name": "questionMark",
-                "value": "?",
-                "description": "Question mark character"
-              },
-              {
-                "name": "atSign",
-                "value": "@",
-                "description": "At sign character"
-              },
-              {
-                "name": "caret",
-                "value": "^",
-                "description": "Caret character"
-              },
-              {
-                "name": "underscore",
-                "value": "_",
-                "description": "Underscore character"
-              },
-              {
-                "name": "tilde",
-                "value": "~",
-                "description": "Tilde character"
-              }
-            ]
-          }
-        }
       }
     },
     "RelativeTo": {

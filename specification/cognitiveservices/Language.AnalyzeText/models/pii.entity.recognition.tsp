@@ -41,31 +41,53 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** RedactionPolicy to be used on the input. */
   @added(Versions.v2024_11_15_preview)
-  redactionPolicy?: RedactionPolicy;
+  redactionPolicy?: BaseRedactionPolicy;
 }
 
-/** Represents the redaction policy to be used. Default policy kind is to maskWithRedactionCharacter and redactionCharacter.asterisk. */
+/** The abstract base class for RedactionPolicy. */
 @added(Versions.v2024_11_15_preview)
-model RedactionPolicy {
-  /** Redaction Policy kind that can be used. Default is maskWithRedactionCharacter. Can also use doNotRedact and maskWithEntityType. */
-  policyKind?: redactionPolicyKind.maskWithRedactionCharacter;
+@discriminator("policyKind")
+model BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind = RedactionPolicyKind.maskWithRedactionCharacter;
+}
 
-  /** Redaction Character to be used for masking if maskWithRedactionCharacter is policyKind. Redaction characters allowed: !,#,$,%,&,*,+,-,=,?,`@`,^,_,~ */
+/** Represents the policy of redacting with a redaction character */
+@added(Versions.v2024_11_15_preview)
+model MaskWithRedactionCharacterPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.maskWithRedactionCharacter;
+
+  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
+}
+
+/** Represents the policy of not redacting found PII. */
+@added(Versions.v2024_11_15_preview)
+model DoNotRedactPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.doNotRedact;
+}
+
+/** Represents the policy of redacting PII with the entity type. */
+@added(Versions.v2024_11_15_preview)
+model MaskWithEntityTypePolicyType extends BaseRedactionPolicy {
+  /** The entity OverlapPolicy object kind. */
+  policyKind: RedactionPolicyKind.maskWithEntityType;
 }
 
 /** Kinds of redaction policies supported. */
 @added(Versions.v2024_11_15_preview)
-union redactionPolicyKind {
+union RedactionPolicyKind {
   string,
 
-  /** Represents DoNotRedact */
+  /** Do not redact detected entities. */
   doNotRedact: "doNotRedact",
 
-  /** Represents MaskWithRedactionCharacter */
+  /** React detected entities with redaction character. */
   maskWithRedactionCharacter: "maskWithRedactionCharacter",
 
-  /** Represents MaskWithEntityType */
+  /** Redact detected entities with entity type. */
   maskWithEntityType: "maskWithEntityType",
 }
 
