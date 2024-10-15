@@ -11,17 +11,17 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Client;
+namespace Azure.AI.Client.Evaluations;
 
 alias ServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
   NoConditionalRequests; // NoRetryRequests supresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("evaluations")
 interface Evaluations {
-  get is Operations.ResourceRead<Evaluation>;
+  get is EvaluationsOperations.ResourceRead<Evaluation>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   // create is Operations.ResourceCreateWithServiceProvidedName<Evaluation>;
@@ -36,25 +36,25 @@ interface Evaluations {
     evaluation: Evaluation,
   ): CreatedEvaluationResponse;
 
-  list is Operations.ResourceList<
+  list is EvaluationsOperations.ResourceList<
     Evaluation,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-  update is Operations.ResourceUpdate<Evaluation>;
+  update is EvaluationsOperations.ResourceUpdate<Evaluation>;
 }
 
 @route("evaluations")
 interface EvaluationSchedules {
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createOrReplace is Operations.ResourceCreateOrReplace<EvaluationSchedule>;
+  createOrReplace is EvaluationsOperations.ResourceCreateOrReplace<EvaluationSchedule>;
 
-  list is Operations.ResourceList<
+  list is EvaluationsOperations.ResourceList<
     EvaluationSchedule,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-  delete is Operations.ResourceDelete<EvaluationSchedule>;
+  delete is EvaluationsOperations.ResourceDelete<EvaluationSchedule>;
 }
 
 // model EvaluationCollection is Page<Evaluation>;
