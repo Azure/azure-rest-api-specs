@@ -128,6 +128,9 @@
           },
           "Get Bastion Host With Zones": {
             "$ref": "./examples/BastionHostGetWithZones.json"
+          },
+          "Get Bastion Host With Private Only": {
+            "$ref": "./examples/BastionHostGetWithPrivateOnly.json"
           }
         }
       },
@@ -186,6 +189,9 @@
           },
           "Create Bastion Host With Zones": {
             "$ref": "./examples/BastionHostPutWithZones.json"
+          },
+          "Create Bastion Host With Private Only": {
+            "$ref": "./examples/BastionHostPutWithPrivateOnly.json"
           },
           "Create Developer Bastion Host": {
             "$ref": "./examples/BastionHostDeveloperPut.json"
@@ -681,7 +687,7 @@
         },
         "publicIPAddress": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Reference of the PublicIP resource."
+          "description": "Reference of the PublicIP resource. Null for private only bastion"
         },
         "provisioningState": {
           "readOnly": true,
@@ -694,8 +700,7 @@
         }
       },
       "required": [
-        "subnet",
-        "publicIPAddress"
+        "subnet"
       ],
       "description": "Properties of IP configuration of an Bastion Host."
     },
@@ -803,6 +808,11 @@
           "type": "boolean",
           "default": false,
           "description": "Enable/Disable Session Recording feature of the Bastion Host resource."
+        },
+        "enablePrivateOnlyBastion": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable Private Only feature of the Bastion Host resource."
         }
       },
       "description": "Properties of the Bastion Host."
@@ -1112,4 +1122,3 @@
     }
   }
 }
-
