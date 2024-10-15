@@ -42,19 +42,18 @@ interface Evaluations {
   >;
 
   update is EvaluationsOperations.ResourceUpdate<Evaluation>;
-}
 
-@route("evaluations")
-interface EvaluationSchedules {
+  getEvaluationSchedule is EvaluationsOperations.ResourceRead<EvaluationSchedule>;
+
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createOrReplace is EvaluationsOperations.ResourceCreateOrReplace<EvaluationSchedule>;
+  createOrReplaceEvaluationSchedule is EvaluationsOperations.ResourceCreateOrReplace<EvaluationSchedule>;
 
-  list is EvaluationsOperations.ResourceList<
-    EvaluationSchedule,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+  listEvaluationSchedule is EvaluationsOperations.ResourceList<
+  EvaluationSchedule,
+  ListQueryParametersTrait<StandardListQueryParameters>
+>;
 
-  delete is EvaluationsOperations.ResourceDelete<EvaluationSchedule>;
+  deleteEvaluationSchedule is EvaluationsOperations.ResourceDelete<EvaluationSchedule>;
 }
 
 // model EvaluationCollection is Page<Evaluation>;
