@@ -2038,7 +2038,7 @@ union AssetChainSource {
 }
 
 @doc("A list of policy actions")
-@Versioning.added(Versions.v2024_03_01_preview)
+@Versioning.added(Versions.v2024_10_01_preview)
 union PolicyAction {
   string,
 
