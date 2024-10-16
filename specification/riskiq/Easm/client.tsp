@@ -66,4 +66,10 @@ interface EasmClient {
 
   getCisaCves is Easm.CisaCves.getCisaCves;
   getCisaCve is Easm.CisaCves.getCisaCve;
+
+  listPolicy is Easm.Policies.listPolicy;
+  getPolicy is Easm.Policies.getPolicy;
+  deletePolicy is Easm.Policies.deletePolicy;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  createOrReplacePolicy is Easm.Policies.createOrReplacePolicy;
 }

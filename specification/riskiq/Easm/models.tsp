@@ -94,6 +94,17 @@ alias DiscoGroupsListTrait = {
     ...MaxPageSizeQueryParameter;
   }>;
 };
+alias PoliciesListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
+  }>;
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
+};
 alias DiscoTemplatesListTrait = {
   ...PageResultBodyFields<{
     @doc("The total number of items available in the full result set.")
@@ -322,6 +333,10 @@ model AssetUpdateData {
 
   @doc("A list of asset types to cascade the updates to.")
   transfers?: AssetUpdateTransfers;
+
+  @doc(""A list of observation remediations to apply to the asset."")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  remediations?: ObservationRemediationItem[];
 }
 
 @doc("A request body used to export an asset.")
@@ -602,6 +617,78 @@ model DiscoGroupData {
 
   @doc("The unique identifier for the disco template used for the disco group creation.")
   templateId?: string;
+}
+
+
+@doc("A request body used to create a policy.")
+@clientName("PolicyPayload", "csharp")
+model PolicyData {
+  @doc("A human readable description of what the policy should do.")
+  description?: string;
+
+  @doc("Name of the saved filter query to be used to select assets that are to be updated by a given policy.")
+  filterName?: string;
+
+  @doc("Action specifying what the policy should do.")
+  action?: PolicyAction;
+
+  @doc("Priority of the policy.")
+  priority?: int32;
+
+  @doc("Additional parameters needed to perform the policy action.")
+  actionParameters?: ActionParameters;
+}
+
+@doc("This is an object that exists to provide a common schema definition for the action parameters.")
+model ActionParameters {
+  @doc("The value parameter that is used by the policy action..")
+  value?: string;
+
+  @doc("The optional name parameter that can be used by the policy action.")
+  name?: string;
+}
+
+@doc("This is an object that exists to provide a common schema definition for the priority response.")
+@resource("policies")
+@clientName("Policy", "csharp")
+model Policy {
+ @doc("The system generated unique id for the resource.")
+  id?: string;
+
+  @doc("The caller provided unique name for the resource.")
+  @key("policyName")
+  @visibility("read")
+  name: string;
+
+  @doc("The name that can be used for display purposes.")
+  displayName?: string;
+
+  @doc("A human readable description of what the policy should do.")
+  description?: string;
+
+  @doc("Name of the saved filter query to be used to select assets that are to be updated by a given policy.")
+  filterName?: string;
+
+  @doc("Action specifying what the policy should do.")
+  action?: PolicyAction;
+
+  @doc("Number of assets in inventory that have been updated by this policy.")
+  updatedAssetsCount?: int64;
+
+  @doc("The unique name of the user that created the policy user@gmail.com")
+  user?: string;
+
+  @doc("The date this policy was created.")
+  createdDate?: utcDateTime;
+
+  @doc("The date this policy was last updated.")
+  updatedDate?: utcDateTime;
+
+  @doc("Additional parameters needed to perform the policy action.")
+  actionParameters?: ActionParameters;
+
+  @doc("Priority of the policy.")
+  priority?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1572,6 +1659,43 @@ union AssetUpdateTransfers {
   "sslCert",
 }
 
+@doc("This is an object that contains the observation remediation information that is used as part of the asset update.")
+@Versioning.added(Versions.v2024_10_01_preview)
+model ObservationRemediationItem {
+  @doc("The kind of the observation to remediate.")
+  kind?: ObservationType;
+
+  @doc("The name of the observation to remediate.")
+  name?: string;
+
+  @doc("The state to which to update the observation.")
+  state?:ObservationRemediationState
+}
+
+@doc("A list of observation states")
+@Versioning.added(Versions.v2024_10_01_preview)
+union ObservationRemediationState {
+  string,
+
+  @doc("active")
+  "active",
+
+  @doc("nonApplicable")
+  "nonApplicable",
+}
+
+@doc("A list of observation remediation sources")
+@Versioning.added(Versions.v2024_10_01_preview)
+union ObservationRemediationSource {
+  string,
+
+  @doc("user")
+  "user",
+
+  @doc("system")
+  "system",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of billable asset.")
 union ReportBillableAssetBreakdownKind {
@@ -1878,6 +2002,14 @@ model ObservationResult {
 
   @doc("The CVSS v3 score.")
   cvssScoreV3: float64;
+
+  @doc("The remediation state of the observation.")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  remediationState: ObservationRemediationState;
+
+  @doc("The source of the remediation state of the observation.")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  remediationSource: ObservationRemediationSource;
 }
 
 @doc("The page result response for the observation")
@@ -1903,6 +2035,27 @@ union AssetChainSource {
 
   @doc("asset")
   "ASSET",
+}
+
+@doc("A list of policy actions")
+@Versioning.added(Versions.v2024_03_01_preview)
+union PolicyAction {
+  string,
+
+  @doc("add resource")
+  "addResource",
+
+  @doc("remove resource")
+  "removeResource",
+
+  @doc("set state")
+  "setState",
+
+  @doc("set external id")
+  "setExternalID",
+
+  @doc("remove from inventory")
+  "removeFromInventory"
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
