@@ -1,14 +1,31 @@
 {
   "operationId": "MongoClusters_Update",
-  "title": "Disables public network access on a Mongo Cluster resource with a private endpoint connection with Data API.",
+  "title": "Updates a Mongo Cluster resource",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestResourceGroup",
     "mongoClusterName": "myMongoCluster",
     "api-version": "2024-10-01-preview",
     "properties": {
-      "dataApi":{
-        "mode": "Enabled"
+      "properties": {
+        "administrator": {
+          "userName": "mongoAdmin"
+        },
+        "serverVersion": "5.0",
+        "storage": {
+          "sizeGb": 256
+        },
+        "compute": {
+          "tier": "M50"
+        },
+        "sharding": {
+          "shardCount": 4
+        },
+        "highAvailability": {
+          "targetMode": "SameZone"
+        },
+        "previewFeatures": [],
+        "publicNetworkAccess": "Enabled"
       }
     }
   },
@@ -27,6 +44,7 @@
           "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         },
         "properties": {
+          "provisioningState": "Succeeded",
           "administrator": {
             "userName": "mongoAdmin"
           },
@@ -35,7 +53,7 @@
             "sizeGb": 256
           },
           "compute": {
-            "tier": "M30"
+            "tier": "M50"
           },
           "sharding": {
             "shardCount": 4
@@ -46,42 +64,16 @@
           "backup": {
             "earliestRestoreTime": "2023-01-13T20:07:35Z"
           },
-          "privateEndpointConnections": [
-            {
-              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster/privateEndpointConnections/mymongocluster-pe.ffffffff-ffff-ffff-ffff-ffffffffffff",
-              "systemData": {
-                "createdAt": "2024-02-06T04:00:25.0509765Z",
-                "createdBy": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-                "createdByType": "Application",
-                "lastModifiedAt": "2024-02-06T04:00:25.0509765Z",
-                "lastModifiedBy": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-                "lastModifiedByType": "Application"
-              },
-              "properties": {
-                "privateEndpoint": {
-                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.Network/privateEndpoints/mymongocluster-pe"
-                },
-                "groupIds": [
-                  "MongoCluster"
-                ],
-                "privateLinkServiceConnectionState": {
-                  "status": "Approved",
-                  "description": "Auto-approved",
-                  "actionsRequired": "None"
-                }
-              }
-            }
-          ],
           "previewFeatures": [],
           "infrastructureVersion": "2.0",
-          "publicNetworkAccess": "Disabled",
+          "publicNetworkAccess": "Enabled",
           "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
           "replica": {
             "replicationState": "Active",
             "role": "Primary"
           },
           "dataApi":{
-            "mode": "Enabled"
+            "mode": "Disabled"
           }
         },
         "location": "westus2"

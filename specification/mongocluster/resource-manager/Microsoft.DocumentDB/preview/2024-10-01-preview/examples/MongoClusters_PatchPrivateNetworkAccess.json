@@ -1,14 +1,14 @@
 {
   "operationId": "MongoClusters_Update",
-  "title": "Disables public network access on a Mongo Cluster resource with a private endpoint connection with Data API.",
+  "title": "Disables public network access on a Mongo Cluster resource with a private endpoint connection.",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestResourceGroup",
     "mongoClusterName": "myMongoCluster",
     "api-version": "2024-10-01-preview",
     "properties": {
-      "dataApi":{
-        "mode": "Enabled"
+      "properties": {
+        "publicNetworkAccess": "Disabled"
       }
     }
   },
@@ -81,7 +81,7 @@
             "role": "Primary"
           },
           "dataApi":{
-            "mode": "Enabled"
+            "mode": "Disabled"
           }
         },
         "location": "westus2"

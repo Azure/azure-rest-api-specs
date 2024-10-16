@@ -153,8 +153,8 @@ model MongoClusterProperties {
   backup?: BackupProperties;
 
   /** The Data API properties of the mongo cluster. */
-  @added(Versions.v2024_10_01)
-  backup?: DataApiProperties;
+  @added(Versions.v2024_10_01_preview)
+  dataApi?: DataApiProperties;
 
   /** List of private endpoint connections. */
   @visibility("read")
