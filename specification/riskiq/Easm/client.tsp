@@ -4,7 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(Easm.Versions.v2024_03_01_preview)
+@TypeSpec.Versioning.useDependency(Easm.Versions.v2024_10_01_preview)
 namespace Customizations;
 
 @client({
@@ -66,4 +66,10 @@ interface EasmClient {
 
   getCisaCves is Easm.CisaCves.getCisaCves;
   getCisaCve is Easm.CisaCves.getCisaCve;
+
+  listPolicy is Easm.Policies.listPolicy;
+  getPolicy is Easm.Policies.getPolicy;
+  deletePolicy is Easm.Policies.deletePolicy;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  createOrReplacePolicy is Easm.Policies.createOrReplacePolicy;
 }
