@@ -97,6 +97,12 @@
               "$ref": "#/definitions/HttpRouteConfig"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/HttpRouteConfig"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -407,14 +413,14 @@
       "description": "Targets - Container App Names, Revision Names, Labels.",
       "type": "object",
       "required": [
-        "containerAppName"
+        "containerApp"
       ],
       "properties": {
-        "containerAppName": {
+        "containerApp": {
           "description": "Container App Name to route requests to",
           "type": "string"
         },
-        "revisionName": {
+        "revision": {
           "description": "Revision to route requests to",
           "type": "string"
         },
