@@ -53,10 +53,10 @@ model SkillContextResponse {
   source: string;
 
   @doc("Indicates whether the evaluation is user driven or automated")
-  InvocationType: EvaluationInvocationType;
+  invocationType: EvaluationInvocationType;
 
   @doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
-  InvocationCategory: EvaluationInvocationCategory;
+  invocationCategory: EvaluationInvocationCategory;
 
   @doc("Username of the user that invoked the skill")
   userName: string;
@@ -83,13 +83,13 @@ enum EvaluationInvocationCategory {
 @doc("ComplianceFlags")
 model ComplianceFlags {
   @doc("Whether to record logs in Geneva and Kusto for this user")
-  RecordLog: boolean;
+  recordLog: boolean;
 
   @doc("Locked down tables not required and non-customer content table does not have to be redacted")
-  CustomerOptedInToEyesOnProductImprovement: boolean;
+  customerOptedInToEyesOnProductImprovement: boolean;
 
   @doc("When this is true, the data may be used for model improvement. This flag does not affect redaction.")
-  CustomerOptedInToModelImprovement: boolean;
+  customerOptedInToModelImprovement: boolean;
 }
 
 @doc("Skill Variable")
