@@ -1,21 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "Microsoft.Falcon management service",
     "version": "2024-10-14-preview",
-    "title": "Falcon ResourceProvider",
-    "description": "Falcon resource provider",
-    "x-ms-code-generation-settings": {
-      "name": "falconClient"
-    }
+    "description": "Microsoft.Falcon Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -28,409 +30,346 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Namespaces"
+    }
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Falcon/resources/{resourceName}": {
+    "/providers/Microsoft.Falcon/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
-          "FalconResources"
+          "Operations"
         ],
-        "description": "Returns Falcon resource for a given name.",
-        "operationId": "Resources_Get",
+        "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FalconResourceParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Falcon resource details.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FalconResource"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-examples": {
-          "FalconResourceGet": {
-            "$ref": "./examples/FalconResourceGet.json"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Falcon/namespaces": {
+      "get": {
+        "operationId": "Namespaces_ListBySubscription",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "List Namespace resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Falcon/namespaces": {
+      "get": {
+        "operationId": "Namespaces_ListByResourceGroup",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "List Namespace resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Falcon/namespaces/{namespaceName}": {
+      "get": {
+        "operationId": "Namespaces_Get",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Get a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the Namespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
       "put": {
+        "operationId": "Namespaces_CreateOrUpdate",
         "tags": [
-          "FalconResources"
+          "Namespaces"
         ],
-        "description": "Create or update Falcon resource.",
-        "operationId": "FalconResources_CreateAndUpdate",
+        "description": "Create a Namespace",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FalconResourceParameter"
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the Namespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
+            "name": "resource",
             "in": "body",
-            "name": "resourceParameters",
-            "description": "Resource details.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FalconResource"
+              "$ref": "#/definitions/Namespace"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful.",
+            "description": "Resource 'Namespace' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/FalconResource"
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "201": {
+            "description": "Resource 'Namespace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-examples": {
-          "FalconResourcePut": {
-            "$ref": "./examples/FalconResourcePut.json"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Namespaces_Update",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Update a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the Namespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
       "delete": {
+        "operationId": "Namespaces_Delete",
         "tags": [
-          "FalconResources"
+          "Namespaces"
         ],
-        "description": "Deletes an existing Azure Falcon resource",
-        "operationId": "FalconResources_Delete",
+        "description": "Delete a Namespace",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FalconResourceParameter"
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the Namespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful"
-          },
           "202": {
-            "description": "Falcon Resource delete operation will complete asynchronously"
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
-            "description": "The specified Falcon resource does not exist in the subscription."
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
-        "x-ms-examples": {
-          "FalconResourceDelete": {
-            "$ref": "./examples/FalconResourceDelete.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "FalconResources"
-        ],
-        "description": "Updates the specified resource tags.",
-        "operationId": "FalconResources_UpdateTags",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FalconResourceParameter"
-          },
-          {
-            "in": "body",
-            "name": "parameters",
-            "description": "Parameters supplied to update resource tags.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TagsObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Update successful.",
-            "schema": {
-              "$ref": "#/definitions/FalconResource"
-            }
-          },
-          "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update resource tags": {
-            "$ref": "./examples/FalconResourceUpdateTags.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Falcon/resources": {
-      "get": {
-        "tags": [
-          "FalconResources"
-        ],
-        "description": "Lists all the Falcon resources under the given resource group.",
-        "operationId": "FalconResources_ListByResourceGroup",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FalconResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation has failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List resources in a resource group": {
-            "$ref": "./examples/ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Falcon/resources": {
-      "get": {
-        "tags": [
-          "FalconResources"
-        ],
-        "description": "Lists all of the Falcon resources under the given subscription.",
-        "operationId": "FalconResources_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Client Api Version.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FalconResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation has failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List resources in a subscription": {
-            "$ref": "./examples/ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Falcon/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available API operations for Falcon resources.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Client Api Version.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Falcon operations": {
-            "$ref": "./examples/ListFalconOperations.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "An Azure resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure resource Id.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name. Preferably as a <namespace>-<service>",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Azure resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "FalconResource": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
-      "description": "Falcon resource details",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "properties": {
-          "type": "object",
-          "required": [
-            "namespaceName"
-          ],
-          "properties": {
-            "namespaceName": {
-              "type": "string",
-              "description": "Namespace in Falcon"
-            },
-            "serviceName": {
-              "type": "string",
-              "description": "Service in Falcon"
-            }
-          }
-        }
-      }
-    },
-    "FalconResourceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of Falcon resources",
-          "items": {
-            "$ref": "#/definitions/FalconResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to fetch the next page of Falcon resources"
-        }
-      },
-      "description": "The paginated list of Falcon resources"
-    },
-    "TagsObject": {
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
           "type": "object",
@@ -440,114 +379,188 @@
           }
         }
       },
-      "description": "Tags object for patch operations."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
     },
-    "Operation": {
+    "Namespace": {
       "type": "object",
+      "description": "Namespace resource",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Operation name: {Microsoft.Falcon}/{resource}/{operation}",
-          "readOnly": true
-        },
-        "display": {
-          "$ref": "#/definitions/Operation_display"
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties",
+          "description": "The resource-specific properties for this resource."
         }
       },
-      "description": "The Falcon API operation"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
-    "OperationListResult": {
+    "NamespaceListResult": {
+      "type": "object",
+      "description": "The response of a Namespace list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of Falcon API operations.",
-          "readOnly": true,
+          "description": "The Namespace items on this page",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/Namespace"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to fetch the next page of Falcon API operations."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The paginated list of Falcon API operations."
+      "required": [
+        "value"
+      ]
     },
-    "ErrorResponse": {
+    "NamespaceProperties": {
       "type": "object",
+      "description": "Namespace properties",
       "properties": {
-        "error": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "The error code.",
-              "readOnly": true
-            },
-            "message": {
-              "type": "string",
-              "description": "The error message.",
-              "readOnly": true
-            }
-          }
-        }
-      },
-      "description": "The error response that indicates why an operation has failed."
-    },
-    "Operation_display": {
-      "type": "object",
-      "properties": {
-        "provider": {
+        "namespaceName": {
           "type": "string",
-          "description": "Service provider: Microsoft.Falcon"
-        },
-        "resource": {
-          "type": "string",
-          "description": "Falcon Resource on which the operation is performed"
-        },
-        "operation": {
-          "type": "string",
-          "description": "Operation type: Read, write, delete, etc."
+          "description": "Name of the falcon fleet namespace. IMMUTABLE",
+          "minLength": 1,
+          "maxLength": 12
         },
         "description": {
           "type": "string",
-          "description": "Description of the operation."
+          "description": "Description of the purpose of the name space"
+        },
+        "owner": {
+          "type": "string",
+          "description": "An email enable SG"
+        },
+        "icmPublicId": {
+          "type": "string",
+          "description": "Teams IcM id so incidents can be properly routed."
+        },
+        "managementGroup": {
+          "type": "string",
+          "description": "The PME group used to provide access and JIT to resources.\nIn the format of TM-<teamname>",
+          "pattern": "TM-[a-zA-Z0-9-]+"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       },
-      "description": "The object that represents the operation."
+      "required": [
+        "namespaceName",
+        "description",
+        "owner",
+        "icmPublicId",
+        "managementGroup"
+      ]
+    },
+    "NamespacePropertiesUpdate": {
+      "type": "object",
+      "description": "Namespace properties",
+      "properties": {
+        "namespaceName": {
+          "type": "string",
+          "description": "Name of the falcon fleet namespace. IMMUTABLE",
+          "minLength": 1,
+          "maxLength": 12
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the purpose of the name space"
+        },
+        "owner": {
+          "type": "string",
+          "description": "An email enable SG"
+        },
+        "icmPublicId": {
+          "type": "string",
+          "description": "Teams IcM id so incidents can be properly routed."
+        },
+        "managementGroup": {
+          "type": "string",
+          "description": "The PME group used to provide access and JIT to resources.\nIn the format of TM-<teamname>",
+          "pattern": "TM-[a-zA-Z0-9-]+"
+        }
+      }
+    },
+    "NamespaceUpdate": {
+      "type": "object",
+      "description": "Namespace resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespacePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The resource provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The Azure subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client Api Version.",
-      "required": true,
-      "type": "string"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "FalconResourceParameter": {
-      "name": "resourceName",
-      "in": "path",
-      "description": "The Falcon resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
-

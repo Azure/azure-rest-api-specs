@@ -3,7 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./employee.tsp";
+import "./namespace.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.Falcon Resource Provider management API. */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Falcon")
 @service({
   title: "Microsoft.Falcon management service",
 })
