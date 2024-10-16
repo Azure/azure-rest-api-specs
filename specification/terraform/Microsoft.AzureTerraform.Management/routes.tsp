@@ -41,11 +41,7 @@ interface ExportTerraform {
     exportParameter: BaseExportModel,
   ): ArmAcceptedLroResponse<
     "Resource operation accepted.",
-    ArmLroLocationHeader<
-      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-      OperationStatus,
-      string
-    > &
+    ArmCombinedLroHeaders<TerraformOperationStatus, TerraformOperationStatus> &
       Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
@@ -62,7 +58,8 @@ interface ExportTerraform {
       ...SubscriptionIdParameter;
       ...OperationIdParameter;
     },
-    OperationStatus | (OperationStatus & ArmAcceptedLroResponse),
+    TerraformOperationStatus | (TerraformOperationStatus &
+      ArmAcceptedLroResponse),
     ErrorResponse
   >;
 }

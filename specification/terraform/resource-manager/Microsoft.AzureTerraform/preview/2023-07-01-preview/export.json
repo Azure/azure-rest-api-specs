@@ -114,6 +114,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -165,13 +170,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "#/definitions/TerraformOperationStatus"
             }
           },
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "#/definitions/TerraformOperationStatus"
             },
             "headers": {
               "Location": {
@@ -395,7 +400,7 @@
         }
       }
     },
-    "OperationStatus": {
+    "TerraformOperationStatus": {
       "type": "object",
       "description": "The status of the LRO operation.",
       "properties": {
