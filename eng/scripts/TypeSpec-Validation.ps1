@@ -6,7 +6,7 @@ param (
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
   [int]$FolderCount = 0,
-  [int] $Parallelism = 2
+  [int] $Parallelism = 1
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
