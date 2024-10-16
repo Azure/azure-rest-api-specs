@@ -1,6 +1,6 @@
 {
   "operationId": "AnalyzeConversationsSubmitJob",
-  "title": "SuccessfulConversationPIIDoNotRedact",
+  "title": "SuccessfulConversationPIIMaskWithRedactionCharacter",
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
     "api-version": "2024-11-15-preview",
@@ -60,7 +60,8 @@
               "All"
             ],
             "redactionPolicy": {
-              "policyKind": "DoNotRedact"
+              "policyKind": "characterMask",
+              "redactionCharacter": "-"
             },
             "redactionSource": "lexical",
             "redactAudioTiming": true

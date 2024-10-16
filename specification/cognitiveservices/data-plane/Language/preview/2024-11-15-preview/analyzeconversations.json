@@ -155,16 +155,16 @@
         },
         "x-ms-examples": {
           "SuccessfulConversationPIIDoNotRedact": {
-            "$ref": "./examples/SuccessfulConversationPIIDoNotRedact.json"
+            "$ref": "./examples/SuccessfulConversationPIINoMask.json"
           },
           "SuccessfulConversationPIIExclusionSubmit": {
             "$ref": "./examples/SuccessfulConversationPIIExclusionSubmit.json"
           },
           "SuccessfulConversationPIIMaskWithEntityType": {
-            "$ref": "./examples/SuccessfulConversationPIIMaskWithEntityType.json"
+            "$ref": "./examples/SuccessfulConversationPIIEntityMask.json"
           },
           "SuccessfulConversationPIIMaskWithRedactionCharacter": {
-            "$ref": "./examples/SuccessfulConversationPIIMaskWithRedactionCharacter.json"
+            "$ref": "./examples/SuccessfulConversationPIICharacterMask.json"
           },
           "SuccessfulConversationPIIRedactionCharSubmit": {
             "$ref": "./examples/SuccessfulConversationPIIRedactionCharSubmit.json"
@@ -232,16 +232,16 @@
         },
         "x-ms-examples": {
           "SuccessfulConversationPIIDoNotRedactTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIIDoNotRedactTaskStatusRequest.json"
+            "$ref": "./examples/SuccessfulConversationPIINoMaskTaskStatusRequest.json"
           },
           "SuccessfulConversationPIIExclusionTaskStatusRequest": {
             "$ref": "./examples/SuccessfulConversationPIIExclusionTaskStatusRequest.json"
           },
           "SuccessfulConversationPIIMaskWithEntityTypeTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIIMaskWithEntityTypeTaskStatusRequest.json"
+            "$ref": "./examples/SuccessfulConversationPIIEntityMaskTaskStatusRequest.json"
           },
           "SuccessfulConversationPIIMaskWithRedactionTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIIMaskWithRedactionTaskStatusRequest.json"
+            "$ref": "./examples/SuccessfulConversationPIICharacterMaskTaskStatusRequest.json"
           },
           "SuccessfulConversationPIIRedactionCharTaskStatusRequest": {
             "$ref": "./examples/SuccessfulConversationPIIRedactionCharTaskStatusRequest.json"
@@ -1057,30 +1057,30 @@
         "policyKind": {
           "type": "string",
           "description": "The entity RedactionPolicy object kind.",
-          "default": "MaskWithRedactionCharacter",
+          "default": "characterMask",
           "enum": [
-            "DoNotRedact",
-            "MaskWithRedactionCharacter",
-            "MaskWithEntityType"
+            "noMask",
+            "characterMask",
+            "entityMask"
           ],
           "x-ms-enum": {
             "name": "RedactionPolicyKind",
             "modelAsString": true,
             "values": [
               {
-                "name": "DoNotRedact",
-                "value": "DoNotRedact",
-                "description": "Do not redact detected entities"
+                "name": "noMask",
+                "value": "noMask",
+                "description": "Do not mask detected entities"
               },
               {
-                "name": "MaskWithRedactionCharacter",
-                "value": "MaskWithRedactionCharacter",
-                "description": "Redact detected entities with redaction character"
+                "name": "characterMask",
+                "value": "characterMask",
+                "description": "Mask detected entities with redaction character"
               },
               {
-                "name": "MaskWithEntityType",
-                "value": "MaskWithEntityType",
-                "description": "Redact detected entities with entity type"
+                "name": "entityMask",
+                "value": "entityMask",
+                "description": "Mask detected entities with entity type"
               }
             ]
           }
@@ -1123,6 +1123,115 @@
         }
       ],
       "x-ms-discriminator-value": "BooleanResolution"
+    },
+    "CharacterMaskPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of masking with a redaction character",
+      "properties": {
+        "redactionCharacter": {
+          "type": "string",
+          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+          "default": "*",
+          "enum": [
+            "!",
+            "#",
+            "$",
+            "%",
+            "&",
+            "*",
+            "+",
+            "-",
+            "=",
+            "?",
+            "@",
+            "^",
+            "_",
+            "~"
+          ],
+          "x-ms-enum": {
+            "name": "redactionCharacter",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "exclamationPoint",
+                "value": "!",
+                "description": "Exclamation point character"
+              },
+              {
+                "name": "numberSign",
+                "value": "#",
+                "description": "Number sign character"
+              },
+              {
+                "name": "dollar",
+                "value": "$",
+                "description": "Dollar sign character"
+              },
+              {
+                "name": "perCent",
+                "value": "%",
+                "description": "Percent sign character"
+              },
+              {
+                "name": "ampersand",
+                "value": "&",
+                "description": "Ampersand character"
+              },
+              {
+                "name": "asterisk",
+                "value": "*",
+                "description": "Asterisk character"
+              },
+              {
+                "name": "plus",
+                "value": "+",
+                "description": "Plus sign character"
+              },
+              {
+                "name": "minus",
+                "value": "-",
+                "description": "Minus sign character"
+              },
+              {
+                "name": "equals",
+                "value": "=",
+                "description": "Equals sign character"
+              },
+              {
+                "name": "questionMark",
+                "value": "?",
+                "description": "Question mark character"
+              },
+              {
+                "name": "atSign",
+                "value": "@",
+                "description": "At sign character"
+              },
+              {
+                "name": "caret",
+                "value": "^",
+                "description": "Caret character"
+              },
+              {
+                "name": "underscore",
+                "value": "_",
+                "description": "Underscore character"
+              },
+              {
+                "name": "tilde",
+                "value": "~",
+                "description": "Tilde character"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "characterMask"
     },
     "Conversation": {
       "type": "object",
@@ -2236,16 +2345,6 @@
         ]
       }
     },
-    "DoNotRedactPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of not redacting found PII.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "DoNotRedact"
-    },
     "DocumentError": {
       "type": "object",
       "description": "Contains details of errors encountered during a job execution.",
@@ -2317,6 +2416,16 @@
         "length",
         "confidenceScore"
       ]
+    },
+    "EntityMaskTypePolicyType": {
+      "type": "object",
+      "description": "Represents the policy of masking PII with the entity type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "entityMask"
     },
     "EntitySubtype": {
       "type": "object",
@@ -3206,125 +3315,6 @@
       ],
       "x-ms-discriminator-value": "Luis"
     },
-    "MaskWithEntityTypePolicyType": {
-      "type": "object",
-      "description": "Represents the policy of redacting PII with the entity type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "MaskWithEntityType"
-    },
-    "MaskWithRedactionCharacterPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of redacting with a redaction character",
-      "properties": {
-        "redactionCharacter": {
-          "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
-          "default": "*",
-          "enum": [
-            "!",
-            "#",
-            "$",
-            "%",
-            "&",
-            "*",
-            "+",
-            "-",
-            "=",
-            "?",
-            "@",
-            "^",
-            "_",
-            "~"
-          ],
-          "x-ms-enum": {
-            "name": "redactionCharacter",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "exclamationPoint",
-                "value": "!",
-                "description": "Exclamation point character"
-              },
-              {
-                "name": "numberSign",
-                "value": "#",
-                "description": "Number sign character"
-              },
-              {
-                "name": "dollar",
-                "value": "$",
-                "description": "Dollar sign character"
-              },
-              {
-                "name": "perCent",
-                "value": "%",
-                "description": "Percent sign character"
-              },
-              {
-                "name": "ampersand",
-                "value": "&",
-                "description": "Ampersand character"
-              },
-              {
-                "name": "asterisk",
-                "value": "*",
-                "description": "Asterisk character"
-              },
-              {
-                "name": "plus",
-                "value": "+",
-                "description": "Plus sign character"
-              },
-              {
-                "name": "minus",
-                "value": "-",
-                "description": "Minus sign character"
-              },
-              {
-                "name": "equals",
-                "value": "=",
-                "description": "Equals sign character"
-              },
-              {
-                "name": "questionMark",
-                "value": "?",
-                "description": "Question mark character"
-              },
-              {
-                "name": "atSign",
-                "value": "@",
-                "description": "At sign character"
-              },
-              {
-                "name": "caret",
-                "value": "^",
-                "description": "Caret character"
-              },
-              {
-                "name": "underscore",
-                "value": "_",
-                "description": "Underscore character"
-              },
-              {
-                "name": "tilde",
-                "value": "~",
-                "description": "Tilde character"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "MaskWithRedactionCharacter"
-    },
     "MetadataFilter": {
       "type": "object",
       "description": "Find QnAs that are associated with the given list of metadata.",
@@ -3397,6 +3387,16 @@
       "required": [
         "conversations"
       ]
+    },
+    "NoMaskPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of not masking found PII.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "noMask"
     },
     "NoneLinkedTargetIntentResult": {
       "type": "object",
