@@ -1,0 +1,791 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AttestationsClient",
+    "version": "2024-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/attestations": {
+      "get": {
+        "operationId": "Attestations_ListForSubscription",
+        "description": "Gets all attestations for the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved attestations.",
+            "schema": {
+              "$ref": "#/definitions/AttestationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List attestations at subscription scope": {
+            "$ref": "./examples/Attestations_ListSubscriptionScope.json"
+          },
+          "List attestations at subscription scope with query parameters": {
+            "$ref": "./examples/Attestations_ListSubscriptionScope_WithQuery.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/attestations/{attestationName}": {
+      "put": {
+        "operationId": "Attestations_CreateOrUpdateAtSubscription",
+        "description": "Creates or updates an attestation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            },
+            "description": "The attestation parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "201": {
+            "description": "The created attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create attestation at subscription scope": {
+            "$ref": "./examples/Attestations_CreateSubscriptionScope.json"
+          },
+          "Create attestation at subscription scope with all properties": {
+            "$ref": "./examples/Attestations_CreateSubscriptionScope_AllProperties.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Attestations_GetAtSubscription",
+        "description": "Gets an existing attestation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get attestation at subscription scope": {
+            "$ref": "./examples/Attestations_GetSubscriptionScope.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Attestations_DeleteAtSubscription",
+        "description": "Deletes an existing attestation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The attestation was successfully deleted."
+          },
+          "204": {
+            "description": "The attestation did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete attestation at subscription scope": {
+            "$ref": "./examples/Attestations_DeleteSubscriptionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/attestations": {
+      "get": {
+        "operationId": "Attestations_ListForResourceGroup",
+        "description": "Gets all attestations for the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved attestations.",
+            "schema": {
+              "$ref": "#/definitions/AttestationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List attestations at resource group scope": {
+            "$ref": "./examples/Attestations_ListResourceGroupScope.json"
+          },
+          "List attestations at resource group scope with query parameters": {
+            "$ref": "./examples/Attestations_ListResourceGroupScope_WithQuery.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/attestations/{attestationName}": {
+      "put": {
+        "operationId": "Attestations_CreateOrUpdateAtResourceGroup",
+        "description": "Creates or updates an attestation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            },
+            "description": "The attestation parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "201": {
+            "description": "The created attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create attestation at resource group scope": {
+            "$ref": "./examples/Attestations_CreateResourceGroupScope.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Attestations_GetAtResourceGroup",
+        "description": "Gets an existing attestation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get attestation at resource group scope": {
+            "$ref": "./examples/Attestations_GetResourceGroupScope.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Attestations_DeleteAtResourceGroup",
+        "description": "Deletes an existing attestation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The attestation was successfully deleted."
+          },
+          "204": {
+            "description": "The attestation did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete attestation at resource group scope": {
+            "$ref": "./examples/Attestations_DeleteResourceGroupScope.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/attestations": {
+      "get": {
+        "operationId": "Attestations_ListForResource",
+        "description": "Gets all attestations for a resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved attestations.",
+            "schema": {
+              "$ref": "#/definitions/AttestationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List attestations at individual resource scope": {
+            "$ref": "./examples/Attestations_ListResourceScope.json"
+          },
+          "List attestations at individual resource scope with query parameters": {
+            "$ref": "./examples/Attestations_ListResourceScope_WithQuery.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/attestations/{attestationName}": {
+      "put": {
+        "operationId": "Attestations_CreateOrUpdateAtResource",
+        "description": "Creates or updates an attestation at resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            },
+            "description": "The attestation parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "201": {
+            "description": "The created attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create attestation at individual resource scope": {
+            "$ref": "./examples/Attestations_CreateResourceScope.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Attestations_GetAtResource",
+        "description": "Gets an existing attestation at resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved attestation.",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get attestation at individual resource scope": {
+            "$ref": "./examples/Attestations_GetResourceScope.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Attestations_DeleteAtResource",
+        "description": "Deletes an existing attestation at individual resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/attestationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The attestation was successfully deleted."
+          },
+          "204": {
+            "description": "The attestation did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete attestation at individual resource scope": {
+            "$ref": "./examples/Attestations_DeleteResourceScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttestationListResult": {
+      "description": "List of attestations.",
+      "properties": {
+        "value": {
+          "description": "Array of attestation definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attestation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "Attestation": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AttestationProperties",
+          "description": "Properties for the attestation."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "An attestation resource."
+    },
+    "AttestationProperties": {
+      "properties": {
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "The resource ID of the policy assignment that the attestation is setting the state for."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The policy definition reference ID from a policy set definition that the attestation is setting the state for. If the policy assignment assigns a policy set definition the attestation can choose a definition within the set definition with this property or omit this and set the state for the entire set definition."
+        },
+        "complianceState": {
+          "type": "string",
+          "enum": [
+            "Compliant",
+            "NonCompliant",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ComplianceState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Compliant",
+                "description": "The resource is in compliance with the policy."
+              },
+              {
+                "value": "NonCompliant",
+                "description": "The resource is not in compliance with the policy."
+              },
+              {
+                "value": "Unknown",
+                "description": "The compliance state of the resource is not known."
+              }
+            ]
+          },
+          "description": "The compliance state that should be set on the resource."
+        },
+        "expiresOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the compliance state should expire."
+        },
+        "owner": {
+          "type": "string",
+          "description": "The person responsible for setting the state of the resource. This value is typically an Azure Active Directory object ID."
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments describing why this attestation was created."
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttestationEvidence"
+          },
+          "x-ms-identifiers": [],
+          "description": "The evidence supporting the compliance state set in this attestation."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The status of the attestation.",
+          "readOnly": true
+        },
+        "lastComplianceStateChangeAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the compliance state was last changed in this attestation.",
+          "readOnly": true
+        },
+        "assessmentDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the evidence was assessed"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata for this attestation"
+        }
+      },
+      "required": [
+        "policyAssignmentId"
+      ],
+      "description": "The properties of an attestation resource."
+    },
+    "AttestationEvidence": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description for this piece of evidence."
+        },
+        "sourceUri": {
+          "type": "string",
+          "description": "The URI location of the evidence."
+        }
+      },
+      "description": "A piece of evidence supporting the compliance state set in the attestation."
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Additional scenario specific error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypedErrorInfo"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "TypedErrorInfo": {
+      "description": "Scenario specific error details.",
+      "properties": {
+        "type": {
+          "description": "The type of included error details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The scenario specific error details.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "attestationNameParameter": {
+      "name": "attestationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the attestation.",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceIdParameter": {
+      "name": "resourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource ID.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "topParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "Maximum number of records to return.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Top"
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData filter expression.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Filter"
+    }
+  }
+}

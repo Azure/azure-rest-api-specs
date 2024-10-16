@@ -1,0 +1,659 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "OrganizationsAccounts"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/organizationsAccounts": {
+      "get": {
+        "operationId": "OrganizationsAccounts_ListBySubscription",
+        "tags": [
+          "OrganizationsAccounts"
+        ],
+        "description": "List OrganizationsAccount resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrganizationsAccounts_ListBySubscription": {
+            "$ref": "./examples/OrganizationsAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/organizationsAccounts": {
+      "get": {
+        "operationId": "OrganizationsAccounts_ListByResourceGroup",
+        "tags": [
+          "OrganizationsAccounts"
+        ],
+        "description": "List OrganizationsAccount resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrganizationsAccounts_ListByResourceGroup": {
+            "$ref": "./examples/OrganizationsAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/organizationsAccounts/{name}": {
+      "get": {
+        "operationId": "OrganizationsAccounts_Get",
+        "tags": [
+          "OrganizationsAccounts"
+        ],
+        "description": "Get a OrganizationsAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OrganizationsAccount",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrganizationsAccounts_Get": {
+            "$ref": "./examples/OrganizationsAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OrganizationsAccounts_CreateOrReplace",
+        "tags": [
+          "OrganizationsAccounts"
+        ],
+        "description": "Create a OrganizationsAccount. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OrganizationsAccount",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrganizationsAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OrganizationsAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'OrganizationsAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrganizationsAccounts_CreateOrReplace": {
+            "$ref": "./examples/OrganizationsAccounts_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OrganizationsAccounts_Update",
+        "tags": [
+          "OrganizationsAccounts"
+        ],
+        "description": "Update a OrganizationsAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OrganizationsAccount",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrganizationsAccountTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsAccount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrganizationsAccounts_Update": {
+            "$ref": "./examples/OrganizationsAccounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OrganizationsAccounts_Delete",
+        "tags": [
+          "OrganizationsAccounts"
+        ],
+        "description": "Delete a OrganizationsAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OrganizationsAccount",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrganizationsAccounts_Delete": {
+            "$ref": "./examples/OrganizationsAccounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsOrganizationsAccountProperties": {
+      "type": "object",
+      "description": "Definition of awsOrganizationsAccount",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "If the account was created successfully, the unique identifier (ID) of the new account."
+        },
+        "accountName": {
+          "type": "string",
+          "description": "The friendly name of the member account."
+        },
+        "arn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the account."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the owner to assign to the new member account."
+        },
+        "joinedMethod": {
+          "$ref": "#/definitions/JoinedMethod",
+          "description": "The method by which the account joined the organization."
+        },
+        "joinedTimestamp": {
+          "type": "string",
+          "description": "The date the account became a part of the organization."
+        },
+        "parentIds": {
+          "type": "array",
+          "description": "List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "roleName": {
+          "type": "string",
+          "description": "The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.",
+          "default": "OrganizationAccountAccessRole"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the account in the organization."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "JoinedMethod": {
+      "type": "string",
+      "description": "JoinedMethod enum",
+      "enum": [
+        "CREATED",
+        "INVITED"
+      ],
+      "x-ms-enum": {
+        "name": "JoinedMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CREATED",
+            "value": "CREATED",
+            "description": "JoinedMethod enum CREATED"
+          },
+          {
+            "name": "INVITED",
+            "value": "INVITED",
+            "description": "JoinedMethod enum INVITED"
+          }
+        ]
+      }
+    },
+    "OrganizationsAccount": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OrganizationsAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OrganizationsAccountListResult": {
+      "type": "object",
+      "description": "The response of a OrganizationsAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OrganizationsAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/OrganizationsAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OrganizationsAccountProperties": {
+      "type": "object",
+      "description": "Definition of OrganizationsAccount",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsOrganizationsAccountProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OrganizationsAccountTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in OrganizationsAccount resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status enum",
+      "enum": [
+        "ACTIVE",
+        "PENDING_CLOSURE",
+        "SUSPENDED"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACTIVE",
+            "value": "ACTIVE",
+            "description": "Status enum ACTIVE"
+          },
+          {
+            "name": "PENDING_CLOSURE",
+            "value": "PENDING_CLOSURE",
+            "description": "Status enum PENDING_CLOSURE"
+          },
+          {
+            "name": "SUSPENDED",
+            "value": "SUSPENDED",
+            "description": "Status enum SUSPENDED"
+          }
+        ]
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key identifier, or name, of the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

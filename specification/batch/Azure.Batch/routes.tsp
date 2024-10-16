@@ -93,7 +93,7 @@ interface Pools {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -119,15 +119,15 @@ interface Pools {
     {}
   >;
 
-  @summary("Lists all of the Pools in the specified Account.")
-  @doc("Lists all of the Pools in the specified Account.")
+  @summary("Lists all of the Pools which be mounted.")
+  @doc("Lists all of the Pools which be mounted.")
   @route("/pools")
   @clientName("listPoolsInternal", "java")
   listPools is ListOperation<
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -350,7 +350,7 @@ interface Pools {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -370,7 +370,7 @@ interface Pools {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -402,6 +402,10 @@ interface Jobs {
       @doc("The ID of the Job to delete.")
       @path
       jobId: string;
+
+      @doc("If true, the server will delete the Job even if the corresponding nodes have not fully processed the deletion. The default value is false.")
+      @query
+      force?: boolean;
     },
     DeleteResponseHeaders
   >;
@@ -539,6 +543,10 @@ interface Jobs {
         @doc("The options to use for terminating the Job.")
         @bodyRoot
         parameters?: BatchJobTerminateContent;
+
+        @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
+        @query
+        force?: boolean;
       },
     AcceptedProcessingResponseHeaders
   >;
@@ -574,7 +582,7 @@ interface Jobs {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -605,7 +613,7 @@ interface Jobs {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -646,7 +654,7 @@ interface Jobs {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -715,6 +723,10 @@ interface JobSchedules {
       @doc("The ID of the Job Schedule to delete.")
       @path
       jobScheduleId: string;
+
+      @doc("If true, the server will delete the JobSchedule even if the corresponding nodes have not fully processed the deletion. The default value is false.")
+      @query
+      force?: boolean;
     },
     DeleteResponseHeaders
   >;
@@ -822,6 +834,10 @@ interface JobSchedules {
       @doc("The ID of the Job Schedule to terminates.")
       @path
       jobScheduleId: string;
+
+      @doc("If true, the server will terminate the JobSchedule even if the corresponding nodes have not fully processed the termination. The default value is false.")
+      @query
+      force?: boolean;
     },
     AcceptedProcessingResponseHeaders
   >;
@@ -847,7 +863,7 @@ interface JobSchedules {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -909,7 +925,7 @@ interface Tasks {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-tasks.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -1162,7 +1178,6 @@ interface Tasks {
   @doc("Gets the properties of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @clientName("getTaskFilePropertiesInternal", "java")
-  @clientName("getTaskFilePropertiesInternal", "csharp")
   getTaskFileProperties is HeadFileOperation<
     BatchTaskFileClientPathContent & BatchModifiedSinceHeaders,
     {}
@@ -1184,7 +1199,7 @@ interface Tasks {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-task-files.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -1333,6 +1348,69 @@ interface Nodes {
     AcceptedProcessingResponseHeaders
   >;
 
+  @summary("Starts the specified Compute Node.")
+  @doc("You can start a Compute Node only if it has been deallocated.")
+  @route("/pools/{poolId}/nodes/{nodeId}/start")
+  @clientName("startNodeInternal", "java")
+  startNode is PostOperation<
+    {
+      @doc("The ID of the Pool that contains the Compute Node.")
+      @path
+      poolId: string;
+
+      @doc("The ID of the Compute Node that you want to restart.")
+      @path
+      nodeId: string;
+    },
+    AcceptedProcessingResponseHeaders
+  >;
+
+  @summary("Deallocates the specified Compute Node.")
+  @doc("You can deallocate a Compute Node only if it is in an idle or running state.")
+  @route("/pools/{poolId}/nodes/{nodeId}/deallocate")
+  @clientName("deallocateNodeInternal", "java")
+  deallocateNode is PostOperation<
+    MinimalMetadata & {
+      @doc("The ID of the Pool that contains the Compute Node.")
+      @path
+      poolId: string;
+
+      @doc("The ID of the Compute Node that you want to restart.")
+      @path
+      nodeId: string;
+
+      @doc("The options to use for deallocating the Compute Node.")
+      @bodyRoot
+      parameters?: BatchNodeDeallocateContent;
+    },
+    AcceptedProcessingResponseHeaders
+  >;
+
+  @summary("Reinstalls the operating system on the specified Compute Node.")
+  @doc("""
+    You can reinstall the operating system on a Compute Node only if it is in an
+    idle or running state. This API can be invoked only on Pools created with the
+    cloud service configuration property.
+    """)
+  @route("/pools/{poolId}/nodes/{nodeId}/reimage")
+  @clientName("reimageNodeInternal", "java")
+  reimageNode is PostOperation<
+    MinimalMetadata & {
+      @doc("The ID of the Pool that contains the Compute Node.")
+      @path
+      poolId: string;
+
+      @doc("The ID of the Compute Node that you want to restart.")
+      @path
+      nodeId: string;
+
+      @doc("The options to use for reimaging the Compute Node.")
+      @body
+      parameters?: BatchNodeReimageContent;
+    },
+    AcceptedProcessingResponseHeaders
+  >;
+
   @summary("Disables Task scheduling on the specified Compute Node.")
   @doc("""
     You can disable Task scheduling on a Compute Node only if its current
@@ -1379,9 +1457,8 @@ interface Nodes {
 
   @summary("Gets the settings required for remote login to a Compute Node.")
   @doc("""
-    Before you can remotely login to a Compute Node using the remote login
-    settings, you must create a user Account on the Compute Node. This API can be
-    invoked only on Pools created with the virtual machine configuration property.
+    Before you can remotely login to a Compute Node using the remote login settings, 
+    you must create a user Account on the Compute Node.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @clientName("getNodeRemoteLoginSettingsInternal", "java")
@@ -1442,7 +1519,7 @@ interface Nodes {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -1555,7 +1632,6 @@ interface Nodes {
   @doc("Gets the properties of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @clientName("getNodeFilePropertiesInternal", "java")
-  @clientName("getNodeFilePropertiesInternal", "csharp")
   getNodeFileProperties is HeadFileOperation<
     BatchNodeFileClientPathContent & BatchModifiedSinceHeaders,
     {}
@@ -1577,7 +1653,7 @@ interface Nodes {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
+        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
         """)
       @query
       @clientName("filter", "!autorest")

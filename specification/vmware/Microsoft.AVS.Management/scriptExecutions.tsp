@@ -145,6 +145,7 @@ model ScriptExecutionProperties {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "It is unknown."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "It is unknown."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   @doc("User-defined dictionary.")
   namedOutputs?: Record<{}>;
 

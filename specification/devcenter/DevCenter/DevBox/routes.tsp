@@ -432,7 +432,7 @@ interface DevBoxes {
   @added(APIVersions.v2024_09_01_preview)
   @pollingOperation(OperationStatuses.get)
   @action("restoreSnapshot")
-  restoreSnapshotDevBox is DevCenterOps.LongRunningResourceAction<
+  restoreSnapshot is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {
       ...SnapshotIdQueryParameter;
@@ -445,7 +445,7 @@ interface DevBoxes {
   @added(APIVersions.v2024_10_01_preview)
   @pollingOperation(OperationStatuses.get)
   @action("captureSnapshot")
-  captureSnapshotDevBox is DevCenterOps.LongRunningResourceAction<
+  captureSnapshot is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {},
     OperationStatus

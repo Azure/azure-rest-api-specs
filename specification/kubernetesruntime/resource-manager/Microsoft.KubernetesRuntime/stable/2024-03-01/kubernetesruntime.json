@@ -992,6 +992,11 @@
         ]
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BgpPeer": {
       "type": "object",
       "description": "A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
@@ -1455,7 +1460,7 @@
       "description": "Properties for the service resource",
       "properties": {
         "rpObjectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The object id of the service principal of the RP provisioned in the tenant",
           "readOnly": true
         },

@@ -88,7 +88,7 @@ interface Environments {
 
       @doc("Represents an environment.")
       @body
-      body: Environment;
+      body: EnvironmentPatchProperties;
     },
     Environment
   >;

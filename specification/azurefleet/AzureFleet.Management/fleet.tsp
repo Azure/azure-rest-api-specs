@@ -370,8 +370,8 @@ union ArchitectureType {
   @doc("ARM64 Architecture")
   ARM64: "ARM64",
 
-  @doc("X86 Architecture")
-  X86: "X86",
+  @doc("X64 Architecture")
+  X64: "X64",
 }
 
 @added(Versions.v2024_11_01)
@@ -411,10 +411,16 @@ model VMAttributes {
   @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
   memoryInGiB: VMAttributeMinMaxDouble;
 
+  @doc("The range of memory in GiB per vCPU specified from min to max. Optional parameter. Either Min or Max is required if specified.")
+  memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
+
   @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
   localStorageSupport?: VMAttributeSupport;
 
-  @doc("The range of local storage in GB specified from Min to Max.")
+  @doc("""
+    LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If localStorageSupport is "Excluded", this VMAttribute can not be used.
+    """)
   localStorageInGiB?: VMAttributeMinMaxDouble;
 
   @extension("x-ms-identifiers", [])
@@ -436,21 +442,40 @@ model VMAttributes {
   @doc("Specifies whether the VMSize supporting RDMA (Remote Direct Memory Access) should be used to build Fleet or not.")
   rdmaSupport?: VMAttributeSupport;
 
-  @doc("The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
+  @doc("""
+    The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.
+    rdmaSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If rdmaSupport is "Excluded", this VMAttribute can not be used.
+    """)
   rdmaNetworkInterfaceCount?: VMAttributeMinMaxInteger;
 
-  @doc("Specifies whether the VMSize supporting accelerator should be used to build Fleet or not.")
+  @doc("""
+    Specifies whether the VMSize supporting accelerator should be used to build Fleet or not.
+    acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If acceleratorSupport is "Excluded", this VMAttribute can not be used.
+    """)
   acceleratorSupport?: VMAttributeSupport;
 
   @extension("x-ms-identifiers", [])
-  @doc("The accelerator manufacturers specified as a list. acceleratorSupport should be set to Included or Required to use this VMAttribute.")
+  @doc("""
+    The accelerator manufacturers specified as a list. 
+    acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If acceleratorSupport is "Excluded", this VMAttribute can not be used.
+    """)
   acceleratorManufacturers?: Array<AcceleratorManufacturer>;
 
   @extension("x-ms-identifiers", [])
-  @doc("The accelerator types specified as a list. acceleratorSupport should be set to Included or Required to use this VMAttribute.")
+  @doc("""
+    The accelerator types specified as a list. acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If acceleratorSupport is "Excluded", this VMAttribute can not be used.
+    """)
   acceleratorTypes?: Array<AcceleratorType>;
 
-  @doc("The range of accelerator count specified from min to max.. Optional parameter. Either Min or Max is required if specified.")
+  @doc("""
+    The range of accelerator count specified from min to max. Optional parameter. Either Min or Max is required if specified.
+    acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
+    If acceleratorSupport is "Excluded", this VMAttribute can not be used.
+    """)
   acceleratorCount?: VMAttributeMinMaxInteger;
 
   @extension("x-ms-identifiers", [])
@@ -477,9 +502,9 @@ model VMAttributes {
 @doc("Represents the profile for a single additional location in the Fleet. The location and the virtualMachineProfileOverride (optional).")
 model LocationProfile {
   @doc("""
-    The ARM location name of the additional region.
+    The ARM location name of the additional region. If LocationProfile is specified, then location is required.
     """)
-  location?: string;
+  location: string;
 
   @doc("""
     An override for computeProfile.baseVirtualMachineProfile specific to this region. 

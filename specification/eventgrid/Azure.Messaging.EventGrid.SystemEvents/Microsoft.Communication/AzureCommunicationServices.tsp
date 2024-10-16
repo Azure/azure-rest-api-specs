@@ -23,6 +23,9 @@ model AcsIncomingCallEventData {
   /** Signed incoming call context. */
   incomingCallContext?: string;
 
+  /** The communication identifier of the user on behalf of whom the call is made. */
+  onBehalfOfCallee?: CommunicationIdentifierModel;
+
   /** CorrelationId (CallId). */
   correlationId?: string;
 }

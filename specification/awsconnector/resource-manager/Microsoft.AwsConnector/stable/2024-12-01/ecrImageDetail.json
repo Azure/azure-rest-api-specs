@@ -1,0 +1,701 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EcrImageDetails"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/ecrImageDetails": {
+      "get": {
+        "operationId": "EcrImageDetails_ListBySubscription",
+        "tags": [
+          "EcrImageDetails"
+        ],
+        "description": "List EcrImageDetail resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EcrImageDetailListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcrImageDetails_ListBySubscription": {
+            "$ref": "./examples/EcrImageDetails_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ecrImageDetails": {
+      "get": {
+        "operationId": "EcrImageDetails_ListByResourceGroup",
+        "tags": [
+          "EcrImageDetails"
+        ],
+        "description": "List EcrImageDetail resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EcrImageDetailListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcrImageDetails_ListByResourceGroup": {
+            "$ref": "./examples/EcrImageDetails_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ecrImageDetails/{name}": {
+      "get": {
+        "operationId": "EcrImageDetails_Get",
+        "tags": [
+          "EcrImageDetails"
+        ],
+        "description": "Get a EcrImageDetail",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EcrImageDetail",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EcrImageDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcrImageDetails_Get": {
+            "$ref": "./examples/EcrImageDetails_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EcrImageDetails_CreateOrReplace",
+        "tags": [
+          "EcrImageDetails"
+        ],
+        "description": "Create a EcrImageDetail. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EcrImageDetail",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EcrImageDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EcrImageDetail' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EcrImageDetail"
+            }
+          },
+          "201": {
+            "description": "Resource 'EcrImageDetail' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EcrImageDetail"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcrImageDetails_CreateOrReplace": {
+            "$ref": "./examples/EcrImageDetails_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EcrImageDetails_Update",
+        "tags": [
+          "EcrImageDetails"
+        ],
+        "description": "Update a EcrImageDetail",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EcrImageDetail",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EcrImageDetailTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EcrImageDetail"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcrImageDetails_Update": {
+            "$ref": "./examples/EcrImageDetails_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EcrImageDetails_Delete",
+        "tags": [
+          "EcrImageDetails"
+        ],
+        "description": "Delete a EcrImageDetail",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EcrImageDetail",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcrImageDetails_Delete": {
+            "$ref": "./examples/EcrImageDetails_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsEcrImageDetailProperties": {
+      "type": "object",
+      "description": "Definition of awsEcrImageDetail",
+      "properties": {
+        "artifactMediaType": {
+          "type": "string",
+          "description": "<p>The artifact media type of the image.</p>"
+        },
+        "imageDigest": {
+          "type": "string",
+          "description": "<p>The <code>sha256</code> digest of the image manifest.</p>"
+        },
+        "imageManifestMediaType": {
+          "type": "string",
+          "description": "<p>The media type of the image manifest.</p>"
+        },
+        "imagePushedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. </p>"
+        },
+        "imageScanFindingsSummary": {
+          "$ref": "#/definitions/ImageScanFindingsSummary",
+          "description": "<p>A summary of the last completed image scan.</p>"
+        },
+        "imageScanStatus": {
+          "$ref": "#/definitions/ImageScanStatus",
+          "description": "<p>The current state of the scan.</p>"
+        },
+        "imageSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "<p>The size, in bytes, of the image in the repository.</p> <p>If the image is a manifest list, this will be the max size of all manifests in the list.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>"
+        },
+        "imageTags": {
+          "type": "array",
+          "description": "<p>The list of tags associated with this image.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "lastRecordedPullTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time, expressed in standard JavaScript date format, when Amazon ECR recorded the last image pull.</p> <note> <p>Amazon ECR refreshes the last image pull timestamp at least once every 24 hours. For example, if you pull an image once a day then the <code>lastRecordedPullTime</code> timestamp will indicate the exact time that the image was last pulled. However, if you pull an image once an hour, because Amazon ECR refreshes the <code>lastRecordedPullTime</code> timestamp at least once every 24 hours, the result may not be the exact time that the image was last pulled.</p> </note>"
+        },
+        "registryId": {
+          "type": "string",
+          "description": "<p>The Amazon Web Services account ID associated with the registry to which this image belongs.</p>"
+        },
+        "repositoryName": {
+          "type": "string",
+          "description": "<p>The name of the repository to which this image belongs.</p>"
+        }
+      }
+    },
+    "EcrImageDetail": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EcrImageDetailProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EcrImageDetailListResult": {
+      "type": "object",
+      "description": "The response of a EcrImageDetail list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EcrImageDetail items on this page",
+          "items": {
+            "$ref": "#/definitions/EcrImageDetail"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EcrImageDetailProperties": {
+      "type": "object",
+      "description": "Definition of EcrImageDetail",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEcrImageDetailProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "EcrImageDetailTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in EcrImageDetail resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ImageScanFindingsSummary": {
+      "type": "object",
+      "description": "Definition of ImageScanFindingsSummary",
+      "properties": {
+        "findingSeverityCounts": {
+          "type": "object",
+          "description": "<p>The image vulnerability counts, sorted by severity.</p>",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "imageScanCompletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time of the last completed image scan.</p>"
+        },
+        "vulnerabilitySourceUpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time when the vulnerability data was last scanned.</p>"
+        }
+      }
+    },
+    "ImageScanStatus": {
+      "type": "object",
+      "description": "Definition of ImageScanStatus",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "<p>The description of the image scan status.</p>"
+        },
+        "status": {
+          "$ref": "#/definitions/ScanStatusEnumValue",
+          "description": "<p>The current state of an image scan.</p>"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ScanStatus": {
+      "type": "string",
+      "description": "ScanStatus enum",
+      "enum": [
+        "ACTIVE",
+        "COMPLETE",
+        "FAILED",
+        "FINDINGS_UNAVAILABLE",
+        "IN_PROGRESS",
+        "PENDING",
+        "SCAN_ELIGIBILITY_EXPIRED",
+        "UNSUPPORTED_IMAGE"
+      ],
+      "x-ms-enum": {
+        "name": "ScanStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACTIVE",
+            "value": "ACTIVE",
+            "description": "ScanStatus enum ACTIVE"
+          },
+          {
+            "name": "COMPLETE",
+            "value": "COMPLETE",
+            "description": "ScanStatus enum COMPLETE"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "ScanStatus enum FAILED"
+          },
+          {
+            "name": "FINDINGS_UNAVAILABLE",
+            "value": "FINDINGS_UNAVAILABLE",
+            "description": "ScanStatus enum FINDINGS_UNAVAILABLE"
+          },
+          {
+            "name": "IN_PROGRESS",
+            "value": "IN_PROGRESS",
+            "description": "ScanStatus enum IN_PROGRESS"
+          },
+          {
+            "name": "PENDING",
+            "value": "PENDING",
+            "description": "ScanStatus enum PENDING"
+          },
+          {
+            "name": "SCAN_ELIGIBILITY_EXPIRED",
+            "value": "SCAN_ELIGIBILITY_EXPIRED",
+            "description": "ScanStatus enum SCAN_ELIGIBILITY_EXPIRED"
+          },
+          {
+            "name": "UNSUPPORTED_IMAGE",
+            "value": "UNSUPPORTED_IMAGE",
+            "description": "ScanStatus enum UNSUPPORTED_IMAGE"
+          }
+        ]
+      }
+    },
+    "ScanStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of ScanStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ScanStatus",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
