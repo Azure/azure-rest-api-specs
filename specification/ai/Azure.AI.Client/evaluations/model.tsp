@@ -49,6 +49,9 @@ model AppInsightsConfiguration extends InputData {
 
   @doc("Service name.")
   serviceName: string;
+
+  @doc("Connection String to connect to AppInsights.")
+  connectionString?: string;
 }
 
 @doc("Dataset as source for evaluation.")
@@ -168,7 +171,7 @@ model Recurrence {
   interval: int32;
 
   @doc("The recurrence schedule.")
-  schedule: RecurrenceSchedule;
+  schedule?: RecurrenceSchedule;
 }
 
 @doc("RecurrenceSchedule Definition")
@@ -180,10 +183,10 @@ model RecurrenceSchedule {
   minutes: int32[];
 
   @doc("List of days for the schedule.")
-  weekDays: WeekDays[];
+  weekDays?: WeekDays[];
 
   @doc("List of month days for the schedule")
-  monthDays: int32[];
+  monthDays?: int32[];
 }
 
 @doc("SamplingStrategy Definition")
