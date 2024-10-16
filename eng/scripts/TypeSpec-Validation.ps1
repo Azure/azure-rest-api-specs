@@ -99,7 +99,6 @@ if ($typespecFolders) {
 
     if($_.Errors.Count) {
       Write-Host "Errors in $($_.Service):"
-      # TODO: Ensure errors are properly surfaced in DevOps
       foreach ($item in $_.Errors.GetEnumerator()) {
         $typespecFoldersWithFailures += $item.Key
         LogError $item.Value
