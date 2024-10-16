@@ -5,7 +5,7 @@ param (
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
-  [int]$FolderCount = 15,
+  [int]$FolderCount = 0,
   [int] $Parallelism = 6
 )
 
@@ -29,9 +29,10 @@ if ($typespecFolders) {
   # Group typespec folders by "service" (the first folder in the path). This
   # parallel validation at the level of the service.
   # Example: 'specification/ai/DocumentIntelligence' -> 'specification/ai'.
-
-$serviceFolders = $typespecFolders | Group-Object -Property { Split-Path $_ -Parent }
+  $serviceFolders = $typespecFolders | Group-Object -Property { Split-Path $_ -Parent }
+  
   Write-Host "Starting per-service parallel validation..."
+
   $serviceFolders `
   | ForEach-Object -ThrottleLimit $Parallelism -Parallel {
     $service = $_.Name
@@ -89,11 +90,13 @@ $serviceFolders = $typespecFolders | Group-Object -Property { Split-Path $_ -Par
         Write-Host " > $item"
       }
     }
+
     foreach ($item in $_.Logs.GetEnumerator()) {
       LogGroupStart "Validation for $($item.Key)"
       $item.Value | Write-Host
       LogGroupEnd
     }
+
     if($_.Errors.Count) {
       Write-Host "Errors in $($_.Service):"
       # TODO: Ensure errors are properly surfaced in DevOps
