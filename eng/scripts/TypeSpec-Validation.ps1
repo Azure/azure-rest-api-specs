@@ -73,8 +73,8 @@ if ($typespecFolders) {
         # TODO: Ensure this is proper and correct. Can something in service A
         # affect files in Service B? Can they impact files in the root? Worth 
         # examining.
-        git restore $typespecFolder | Out-Null
-        git clean -df $typespecFolder | Out-Null
+        git restore $typespecFolder/.. | Out-Null
+        git clean -df $typespecFolder/.. | Out-Null
       }
     }
   
