@@ -62,7 +62,7 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
 /** Contains the entity recognition task result. */
 model EntitiesResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2024_11_15_preview, Array<EntitiesDocumentResult>)
+  @typeChangedFrom(Versions.v2024_11_15_preview, Array<EntitiesDocumentResultWithMetadata>)
   documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;
 }
 
