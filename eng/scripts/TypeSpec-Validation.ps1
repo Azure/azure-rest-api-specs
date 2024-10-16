@@ -6,7 +6,7 @@ param (
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
   [int]$FolderCount = 20,
-  [int] $Parallelism = 10
+  [int] $Parallelism = 6
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
@@ -22,7 +22,7 @@ if ($FolderCount) {
 }
 
 # Group typespec folders by "service" (the first folder in the path)
-# Example: 'specification/ai/DocumentIntelligence' -> 'ai'
+# Example: 'specification/ai/DocumentIntelligence' -> 'specification/ai'
 
 $serviceFolders = $typespecFolders | Group-Object -Property { Split-Path $_ -Parent }
 
@@ -98,6 +98,7 @@ if ($typespecFolders) {
       # TODO: Ensure errors are properly surfaced in DevOps
       foreach ($item in $_.Errors.GetEnumerator()) {
         $typespecFoldersWithFailures += $item.Key
+        LogError "Failure validating spec: $($item.Key)"
         $item.Value | Write-Host
       }
     }
