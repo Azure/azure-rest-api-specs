@@ -82,19 +82,21 @@ if ($typespecFolders) {
     return $result
   } | ForEach-Object { 
     # TODO: MORE LOGGING
-    LogGroupStart "Validation for $($_.Service)"
+    Write-Host "Validation for $($_.Service)"
     if ($_.Suppressed.Count) { 
-      Write-Host "Suppressed: "
+      Write-Host "Suppressions in $($_.Service): "
       foreach ($item in $_.Suppressed) {
         Write-Host " > $item"
       }
     }
+    Write-Host "Services:"
     foreach ($item in $_.Logs.GetEnumerator()) {
-      Write-Host "Logs for $($item.Key):"
+      LogGroupStart "Validation for $($item.Key)"
       $item.Value | Write-Host
+      LogGroupEnd
     }
     if($_.Errors.Count) {
-      LogError "Errors:"
+      Write-Host "Errors in $($_.Service)"
       # TODO: Ensure errors are properly surfaced in DevOps
       foreach ($item in $_.Errors.GetEnumerator()) {
         $typespecFoldersWithFailures += $item.Key
@@ -102,7 +104,6 @@ if ($typespecFolders) {
         $item.Value | Write-Host
       }
     }
-    LogGroupEnd
   }
 } else {
   if ($CheckAll) {
