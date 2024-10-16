@@ -37,11 +37,11 @@ directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
 ```
-### Tag: package-2024-04
+### Tag: package-preview-2024-10
 
-These settings apply only when `--tag=package-2024-10` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-10'
+```yaml $(tag) == 'package-preview-2024-10'
 input-file:
   - Microsoft.Insights/stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
   - Microsoft.Insights/stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
