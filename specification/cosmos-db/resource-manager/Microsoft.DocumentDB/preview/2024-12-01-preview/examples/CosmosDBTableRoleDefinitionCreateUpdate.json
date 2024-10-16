@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "roleDefinitionId": "myRoleDefinitionId",
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2024-12-01-preview",
+    "createUpdateTableRoleDefinitionParameters": {
+      "properties": {
+        "roleName": "myRoleName",
+        "type": "CustomRole",
+        "assignableScopes": [
+          "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+          "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+        ],
+        "permissions": [
+          {
+            "dataActions": [
+              "Microsoft.DocumentDB/databaseAccounts/tables/entities/create",
+              "Microsoft.DocumentDB/databaseAccounts/tables/entities/read"
+            ],
+            "notDataActions": []
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/tableRoleDefinitions/myRoleDefinitionId",
+        "name": "myRoleDefinitionId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/tableRoleDefinitions",
+        "properties": {
+          "roleName": "myRoleName",
+          "type": "CustomRole",
+          "assignableScopes": [
+            "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+            "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+          ],
+          "permissions": [
+            {
+              "dataActions": [
+                "Microsoft.DocumentDB/databaseAccounts/tables/entities/create",
+                "Microsoft.DocumentDB/databaseAccounts/tables/entities/read"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "202": {}
+  }
+}
