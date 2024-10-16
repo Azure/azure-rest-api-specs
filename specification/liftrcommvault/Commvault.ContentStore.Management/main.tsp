@@ -197,16 +197,16 @@ model StoragePlan {
   @doc("Indicates if this is the primary storage plan")
   isPrimary: boolean;
 
-  @doc("Indicates the retention period valid only if the type of retention choosen in CUSTOM")
+  @doc("Indicates the retention period valid only if the type of retention chosen in CUSTOM")
   retentionPeriod?: int32;
 
-  @doc("Indicates the retention timeframe valid only if the type of retention choosen in CUSTOM")
+  @doc("Indicates the retention timeframe valid only if the type of retention chosen in CUSTOM")
   retentionTime?: RetentionTime;
 
-  @doc("Indicates the montlhyFull retention time valid only if the type of retention choosen in CUSTOM")
-  monthlyRetnetion?: int32;
+  @doc("Indicates the monthlyFull retention time valid only if the type of retention chosen in CUSTOM")
+  monthlyRetention?: int32;
 
-  @doc("Indicates the yearly Full retention time valid only if the type of retention choosen in CUSTOM")
+  @doc("Indicates the yearly Full retention time valid only if the type of retention chosen in CUSTOM")
   yearlyRetention?: int32;
 }
 
@@ -221,7 +221,7 @@ union RetentionTime {
   string,
 }
 
-@doc("A Commvault Plan Schedul Model")
+@doc("A Commvault Plan Schedule Model")
 model Schedule {
   @doc("Type of Backup")
   backupType: BackUpType;
@@ -334,7 +334,7 @@ model ProtectionGroupProperties {
   @visibility("read", "create", "update")
   resources: ProtectionGroupResources;
 
-  @doc("The protection group schedu")
+  @doc("The protection group schedule")
   @visibility("read")
   protectionStatus: ProtectionStatus; //Check what values can it have
 
