@@ -366,3 +366,11 @@ using Microsoft.AzureFleet;
   "IsBypassPlatformSafetyChecksOnUserScheduleEnabled",
   "csharp"
 );
+@@clientName(AdditionalCapabilities.hibernationEnabled,
+  "isHibernationEnabled",
+  "csharp"
+);
+@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+  "isUltraSSDEnabled",
+  "csharp"
+);
