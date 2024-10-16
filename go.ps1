@@ -3,7 +3,7 @@ Measure-Command -Expression {
         -CheckAll `
         -GitClean `
         -Verbose `
-        -FolderCount 50 `
+        -FolderCount 20 `
         -Parallelism 10
 }
 
@@ -18,7 +18,13 @@ Measure-Command -Expression {
 # TotalSeconds      : 255.3325259
 
 # No edits (50 folders): 
-# 
+# TotalSeconds      : 416.8016576
 
-# Parallelism 10 (50 folders):
-# 
+# Parallelism 10 (50 folders) (INCLUDES AWS):
+# TotalSeconds      : 237.0811563
+
+# No parallelism (20 folders):
+#
+
+# Parallelism 10 (20 folders): 
+# TotalSeconds      : 237.0811563

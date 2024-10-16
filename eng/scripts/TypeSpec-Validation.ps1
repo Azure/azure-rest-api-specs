@@ -5,7 +5,7 @@ param (
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
-  [int]$FolderCount = 50,
+  [int]$FolderCount = 20,
   [int] $Parallelism = 10
 )
 
@@ -90,9 +90,8 @@ if ($typespecFolders) {
       }
     }
     foreach ($item in $_.Logs.GetEnumerator()) {
-      LogGroupStart $item.Key
+      Write-Host "Logs for $($item.Key):"
       $item.Value | Write-Host
-      LogGroupEnd
     }
     if($_.Errors.Count) {
       LogError "Errors:"
