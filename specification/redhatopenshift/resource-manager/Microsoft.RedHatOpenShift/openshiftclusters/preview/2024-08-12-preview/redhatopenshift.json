@@ -615,7 +615,6 @@
             "name": "parameters",
             "in": "body",
             "description": "The OpenShift cluster resource.",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/OpenShiftClusterUpdate"
             }
@@ -2646,22 +2645,6 @@
     "UpgradeableTo": {
       "description": "UpgradeableTo stores a single OpenShift version a workload identity cluster can be upgraded to",
       "type": "string"
-    },
-    "UserAssignedIdentity": {
-      "description": "UserAssignedIdentity stores information about a user-assigned managed identity in a predefined format required by Microsoft's Managed Identity team.",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The ClientID of the UserAssignedIdentity resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "principalId": {
-          "description": "The PrincipalID of the UserAssignedIdentity resource",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "VMSize": {
       "description": "VM size availability varies by region.\nIf a node contains insufficient compute resources (memory, cpu, etc.), pods might fail to run correctly.\nFor more details on restricted VM sizes, see: https://docs.microsoft.com/en-us/azure/openshift/support-policies-v4#supported-virtual-machine-sizes",
