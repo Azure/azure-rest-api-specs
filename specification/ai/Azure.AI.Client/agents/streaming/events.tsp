@@ -83,7 +83,7 @@ union RunStepStreamEvent {
   /** Event sent when a run step moves to `in_progress` status. The data of this event is of type RunStep */
   ThreadRunStepInProgress: "thread.run.step.in_progress",
 
-  /** Event sent when a run stepis being streamed. The data of this event is of type RunStepDeltaChunk */
+  /** Event sent when a run step is being streamed. The data of this event is of type RunStepDeltaChunk */
   ThreadRunStepDelta: "thread.run.step.delta",
 
   /** Event sent when a run step is completed. The data of this event is of type RunStep */
