@@ -5,15 +5,12 @@ param (
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
-  [int]$FolderCount = 0
+  [int]$FolderCount = 0,
+  [int] $Parallelism = 10
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
-
-function ValidateService($service, $typeSpecFolders) {
-
-}
 
 $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
@@ -34,7 +31,7 @@ if ($typespecFolders) {
   # TODO: Does this do anything? 
   # $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
 
-  $serviceFolders | ForEach-Object -Parallel {
+  $serviceFolders | ForEach-Object -ThrottleLimit $Parallelism -Parallel {
     $service = $_.Name
     $typespecFolders = $_.Group
 
@@ -45,9 +42,7 @@ if ($typespecFolders) {
       Errors = @{};
     }
   
-    foreach ($typespecFolder in $typespecFolders) {
-      # LogGroupStart "Validating $typespecFolder"
-  
+    foreach ($typespecFolder in $typespecFolders) {  
       if ($checkedAll) {
         $suppression = Get-Suppression "TypeSpecValidationAll" $typespecFolder
         if ($suppression) {
@@ -96,15 +91,16 @@ if ($typespecFolders) {
     foreach ($item in $_.Logs.GetEnumerator()) {
       LogGroupStart $item.Key
       $item.Value | Write-Host
+      LogGroupEnd
     }
-    if($_.Errors.Count) { 
+    if($_.Errors.Count) {
       LogError "Errors:"
+      # TODO: Ensure errors are properly surfaced in DevOps
       foreach ($item in $_.Errors.GetEnumerator()) {
         $typespecFoldersWithFailures += $item.Key
         $item.Value | Write-Host
       }
     }
-
     LogGroupEnd
   }
 } else {
