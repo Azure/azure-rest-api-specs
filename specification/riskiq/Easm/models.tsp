@@ -619,7 +619,6 @@ model DiscoGroupData {
   templateId?: string;
 }
 
-
 @doc("A request body used to create a policy.")
 @Versioning.added(Versions.v2024_10_01_preview)
 @clientName("PolicyPayload", "csharp")
@@ -655,7 +654,7 @@ model ActionParameters {
 @resource("policies")
 @clientName("Policy", "csharp")
 model Policy {
- @doc("The system generated unique id for the resource.")
+  @doc("The system generated unique id for the resource.")
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
@@ -1672,7 +1671,7 @@ model ObservationRemediationItem {
   name?: string;
 
   @doc("The state to which to update the observation.")
-  state?:ObservationRemediationState
+  state?: ObservationRemediationState;
 }
 
 @doc("A list of observation states")
@@ -2058,7 +2057,7 @@ union PolicyAction {
   "setExternalID",
 
   @doc("remove from inventory")
-  "removeFromInventory"
+  "removeFromInventory",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
