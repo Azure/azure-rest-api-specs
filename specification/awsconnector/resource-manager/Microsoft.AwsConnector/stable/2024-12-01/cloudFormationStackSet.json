@@ -1,0 +1,876 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CloudFormationStackSets"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/cloudFormationStackSets": {
+      "get": {
+        "operationId": "CloudFormationStackSets_ListBySubscription",
+        "tags": [
+          "CloudFormationStackSets"
+        ],
+        "description": "List CloudFormationStackSet resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStackSets_ListBySubscription": {
+            "$ref": "./examples/CloudFormationStackSets_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/cloudFormationStackSets": {
+      "get": {
+        "operationId": "CloudFormationStackSets_ListByResourceGroup",
+        "tags": [
+          "CloudFormationStackSets"
+        ],
+        "description": "List CloudFormationStackSet resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStackSets_ListByResourceGroup": {
+            "$ref": "./examples/CloudFormationStackSets_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/cloudFormationStackSets/{name}": {
+      "get": {
+        "operationId": "CloudFormationStackSets_Get",
+        "tags": [
+          "CloudFormationStackSets"
+        ],
+        "description": "Get a CloudFormationStackSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFormationStackSet",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStackSets_Get": {
+            "$ref": "./examples/CloudFormationStackSets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudFormationStackSets_CreateOrReplace",
+        "tags": [
+          "CloudFormationStackSets"
+        ],
+        "description": "Create a CloudFormationStackSet. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFormationStackSet",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudFormationStackSet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackSet"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudFormationStackSet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackSet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStackSets_CreateOrReplace": {
+            "$ref": "./examples/CloudFormationStackSets_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudFormationStackSets_Update",
+        "tags": [
+          "CloudFormationStackSets"
+        ],
+        "description": "Update a CloudFormationStackSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFormationStackSet",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackSetTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackSet"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStackSets_Update": {
+            "$ref": "./examples/CloudFormationStackSets_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudFormationStackSets_Delete",
+        "tags": [
+          "CloudFormationStackSets"
+        ],
+        "description": "Delete a CloudFormationStackSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFormationStackSet",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStackSets_Delete": {
+            "$ref": "./examples/CloudFormationStackSets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ActiveModel": {
+      "type": "object",
+      "description": "Definition of Active",
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "description": "When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order."
+        }
+      }
+    },
+    "AutoDeployment": {
+      "type": "object",
+      "description": "Definition of AutoDeployment",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions."
+        },
+        "retainStacksOnAccountRemoval": {
+          "type": "boolean",
+          "description": "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True."
+        }
+      }
+    },
+    "AwsCloudFormationStackSetProperties": {
+      "type": "object",
+      "description": "Definition of awsCloudFormationStackSet",
+      "properties": {
+        "administrationRoleARN": {
+          "type": "string",
+          "description": "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account."
+        },
+        "autoDeployment": {
+          "$ref": "#/definitions/AutoDeployment",
+          "description": "Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED."
+        },
+        "callAs": {
+          "$ref": "#/definitions/CallAs",
+          "description": "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN."
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the stack set. You can use the description to identify the stack set's purpose or other important information."
+        },
+        "executionRoleName": {
+          "type": "string",
+          "description": "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation."
+        },
+        "managedExecution": {
+          "$ref": "#/definitions/ActiveModel",
+          "description": "Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations."
+        },
+        "operationPreferences": {
+          "$ref": "#/definitions/OperationPreferences",
+          "description": "The user-specified preferences for how AWS CloudFormation performs a stack set operation."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The input parameters for the stack set template.",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "x-ms-identifiers": []
+        },
+        "permissionModel": {
+          "$ref": "#/definitions/PermissionModel",
+          "description": "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified."
+        },
+        "stackInstancesGroup": {
+          "type": "array",
+          "description": "A group of stack instances with parameters in some specific accounts and regions.",
+          "items": {
+            "$ref": "#/definitions/StackInstances"
+          },
+          "x-ms-identifiers": []
+        },
+        "stackSetId": {
+          "type": "string",
+          "description": "The ID of the stack set that you're creating."
+        },
+        "stackSetName": {
+          "type": "string",
+          "description": "The name to associate with the stack set. The name must be unique in the Region where you create your stack set."
+        },
+        "tags": {
+          "type": "array",
+          "description": "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "templateBody": {
+          "type": "string",
+          "description": "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes."
+        },
+        "templateURL": {
+          "type": "string",
+          "description": "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket."
+        }
+      }
+    },
+    "CallAs": {
+      "type": "string",
+      "description": "CallAs enum",
+      "enum": [
+        "DELEGATED_ADMIN",
+        "SELF"
+      ],
+      "x-ms-enum": {
+        "name": "CallAs",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DELEGATED_ADMIN",
+            "value": "DELEGATED_ADMIN",
+            "description": "CallAs enum DELEGATED_ADMIN"
+          },
+          {
+            "name": "SELF",
+            "value": "SELF",
+            "description": "CallAs enum SELF"
+          }
+        ]
+      }
+    },
+    "CloudFormationStackSet": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudFormationStackSetProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudFormationStackSetListResult": {
+      "type": "object",
+      "description": "The response of a CloudFormationStackSet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudFormationStackSet items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudFormationStackSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudFormationStackSetProperties": {
+      "type": "object",
+      "description": "Definition of CloudFormationStackSet",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsCloudFormationStackSetProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudFormationStackSetTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in CloudFormationStackSet resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeploymentTargets": {
+      "type": "object",
+      "description": "Definition of DeploymentTargets",
+      "properties": {
+        "accountFilterType": {
+          "$ref": "#/definitions/DeploymentTargetsAccountFilterType",
+          "description": "The filter type you want to apply on organizational units and accounts."
+        },
+        "accounts": {
+          "type": "array",
+          "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "accountsUrl": {
+          "type": "string",
+          "description": "Returns the value of the AccountsUrl property."
+        },
+        "organizationalUnitIds": {
+          "type": "array",
+          "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DeploymentTargetsAccountFilterType": {
+      "type": "string",
+      "description": "DeploymentTargetsAccountFilterType enum",
+      "enum": [
+        "DIFFERENCE",
+        "INTERSECTION",
+        "NONE",
+        "UNION"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentTargetsAccountFilterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DIFFERENCE",
+            "value": "DIFFERENCE",
+            "description": "DeploymentTargetsAccountFilterType enum DIFFERENCE"
+          },
+          {
+            "name": "INTERSECTION",
+            "value": "INTERSECTION",
+            "description": "DeploymentTargetsAccountFilterType enum INTERSECTION"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "DeploymentTargetsAccountFilterType enum NONE"
+          },
+          {
+            "name": "UNION",
+            "value": "UNION",
+            "description": "DeploymentTargetsAccountFilterType enum UNION"
+          }
+        ]
+      }
+    },
+    "OperationPreferences": {
+      "type": "object",
+      "description": "Definition of OperationPreferences",
+      "properties": {
+        "failureToleranceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property failureToleranceCount"
+        },
+        "failureTolerancePercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property failureTolerancePercentage"
+        },
+        "maxConcurrentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property maxConcurrentCount"
+        },
+        "maxConcurrentPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property maxConcurrentPercentage"
+        },
+        "regionConcurrencyType": {
+          "$ref": "#/definitions/OperationPreferencesRegionConcurrencyType",
+          "description": "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time"
+        },
+        "regionOrder": {
+          "type": "array",
+          "description": "Property regionOrder",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OperationPreferencesRegionConcurrencyType": {
+      "type": "string",
+      "description": "OperationPreferencesRegionConcurrencyType enum",
+      "enum": [
+        "PARALLEL",
+        "SEQUENTIAL"
+      ],
+      "x-ms-enum": {
+        "name": "OperationPreferencesRegionConcurrencyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PARALLEL",
+            "value": "PARALLEL",
+            "description": "OperationPreferencesRegionConcurrencyType enum PARALLEL"
+          },
+          {
+            "name": "SEQUENTIAL",
+            "value": "SEQUENTIAL",
+            "description": "OperationPreferencesRegionConcurrencyType enum SEQUENTIAL"
+          }
+        ]
+      }
+    },
+    "Parameter": {
+      "type": "object",
+      "description": "Definition of Parameter",
+      "properties": {
+        "parameterKey": {
+          "type": "string",
+          "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template."
+        },
+        "parameterValue": {
+          "type": "string",
+          "description": "The input value associated with the parameter."
+        }
+      }
+    },
+    "PermissionModel": {
+      "type": "string",
+      "description": "PermissionModel enum",
+      "enum": [
+        "SELF_MANAGED",
+        "SERVICE_MANAGED"
+      ],
+      "x-ms-enum": {
+        "name": "PermissionModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SELF_MANAGED",
+            "value": "SELF_MANAGED",
+            "description": "PermissionModel enum SELF_MANAGED"
+          },
+          {
+            "name": "SERVICE_MANAGED",
+            "value": "SERVICE_MANAGED",
+            "description": "PermissionModel enum SERVICE_MANAGED"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StackInstances": {
+      "type": "object",
+      "description": "Definition of StackInstances",
+      "properties": {
+        "deploymentTargets": {
+          "$ref": "#/definitions/DeploymentTargets",
+          "description": "The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions."
+        },
+        "parameterOverrides": {
+          "type": "array",
+          "description": "A list of stack set parameters whose values you want to override in the selected stack instances.",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "x-ms-identifiers": []
+        },
+        "regions": {
+          "type": "array",
+          "description": "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key."
+        },
+        "value": {
+          "type": "string",
+          "description": "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

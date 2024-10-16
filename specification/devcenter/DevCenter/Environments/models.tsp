@@ -223,14 +223,16 @@ alias EnvironmentUpdateProperties = {
   parameters?: Record<unknown>;
 };
 
-alias EnvironmentPatchProperties = {
+@doc("Properties of an environment. These properties can be updated via PATCH after the resource has been created.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentPatchProperties {
   @doc("""
     The time the expiration date will be triggered (UTC), after which the
     environment and associated resources will be deleted.
     """)
   @added(APIVersions.v2024_02_01)
   expirationDate?: utcDateTime;
-};
+}
 
 @doc("Outputs from environment deployment.")
 @added(APIVersions.v2024_02_01)

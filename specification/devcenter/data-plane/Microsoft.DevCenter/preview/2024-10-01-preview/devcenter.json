@@ -1762,7 +1762,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restoreSnapshot": {
       "post": {
-        "operationId": "DevBoxes_RestoreSnapshotDevBox",
+        "operationId": "DevBoxes_RestoreSnapshot",
         "description": "Restores a Dev Box to a specified snapshot.",
         "parameters": [
           {
@@ -1831,7 +1831,7 @@
         },
         "x-ms-examples": {
           "Attempts to restore the Dev Box to a selected snapshot.": {
-            "$ref": "./examples/DevBoxes_RestoreSnapshotDevBox.json"
+            "$ref": "./examples/DevBoxes_RestoreSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1839,7 +1839,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:captureSnapshot": {
       "post": {
-        "operationId": "DevBoxes_CaptureSnapshotDevBox",
+        "operationId": "DevBoxes_CaptureSnapshot",
         "description": "Captures a manual snapshot of the Dev Box.",
         "parameters": [
           {
@@ -1905,7 +1905,7 @@
         },
         "x-ms-examples": {
           "Attempts to capture the manual snapshot for the Dev Box.": {
-            "$ref": "./examples/DevBoxes_CaptureSnapshotDevBox.json"
+            "$ref": "./examples/DevBoxes_CaptureSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3103,7 +3103,7 @@
             "description": "Represents an environment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentUpdate"
+              "$ref": "#/definitions/EnvironmentPatchProperties"
             }
           }
         ],
@@ -5459,6 +5459,17 @@
         }
       }
     },
+    "EnvironmentPatchProperties": {
+      "type": "object",
+      "description": "Properties of an environment. These properties can be updated via PATCH after the resource has been created.",
+      "properties": {
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
+        }
+      }
+    },
     "EnvironmentProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the environment.",
@@ -5728,22 +5739,6 @@
             "description": "The environment type is not enabled for use in the project."
           }
         ]
-      }
-    },
-    "EnvironmentUpdate": {
-      "type": "object",
-      "description": "Properties of an environment.",
-      "properties": {
-        "expirationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Parameters object for the environment.",
-          "additionalProperties": {}
-        }
       }
     },
     "HardwareProfile": {

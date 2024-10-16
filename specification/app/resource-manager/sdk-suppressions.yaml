@@ -3,3 +3,13 @@ suppressions:
     - package: 'sdk/resourcemanager/appcontainers/armappcontainers'
       breaking-changes:
         - Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed
+  azure-sdk-for-python:
+    - package: azure-mgmt-appcontainers
+      breaking-changes:
+        - Model BillingMeter no longer has parameter system_data
+        - Operation ContainerAppsSourceControlsOperations.begin_create_or_update has a new required parameter x_ms_github_auxiliary
+        - Operation ContainerAppsSourceControlsOperations.begin_delete has a new required parameter x_ms_github_auxiliary
+        - Operation JobsOperations.proxy_get no longer has parameter api_name
+        - The 'JobsOperations' method 'proxy_get' had its parameter 'api_name' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'JobsOperations' method 'proxy_get' had its parameter 'api_name' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - Method `JobsOperations.proxy_get` deleted or renamed its parameter `api_name` of kind `positional_or_keyword`
