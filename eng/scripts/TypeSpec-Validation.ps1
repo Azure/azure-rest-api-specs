@@ -5,7 +5,7 @@ param (
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
-  [int]$FolderCount = 0,
+  [int]$FolderCount = 15,
   [int] $Parallelism = 6
 )
 
