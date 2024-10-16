@@ -413,5 +413,5 @@ suppressions:
   - code: GetCollectionResponseSchema
     from: HybridCompute.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions"]
-    reason: False positive
+    reason: False positive. This check was comparing metadata API path with subscription ID and metadata V2 API path without subscription ID.
 ```
