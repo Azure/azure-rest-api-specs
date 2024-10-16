@@ -5,7 +5,7 @@ param (
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
-  [int]$FolderCount = 0,
+  [int]$FolderCount = 50,
   [int] $Parallelism = 10
 )
 
@@ -31,6 +31,7 @@ if ($typespecFolders) {
   # TODO: Does this do anything? 
   # $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
 
+  Write-Host "Starting per-service parallel validation..."
   $serviceFolders | ForEach-Object -ThrottleLimit $Parallelism -Parallel {
     $service = $_.Name
     $typespecFolders = $_.Group
