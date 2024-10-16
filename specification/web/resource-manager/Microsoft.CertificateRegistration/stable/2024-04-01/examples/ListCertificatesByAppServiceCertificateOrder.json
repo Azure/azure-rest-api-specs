@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "certificateOrderName": "SampleCertificateOrderName",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName/certificates/SampleCertName1",
+            "name": "SampleCertName1",
+            "type": "Microsoft.CertificateRegistration/certificateOrders/certificates",
+            "location": "Global",
+            "properties": {
+              "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+              "keyVaultSecretName": "SampleSecretName1",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName/certificates/SampleCertName2",
+            "name": "SampleCertName2",
+            "type": "Microsoft.CertificateRegistration/certificateOrders/certificates",
+            "location": "Global",
+            "properties": {
+              "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+              "keyVaultSecretName": "SampleCertName2",
+              "provisioningState": "KeyVaultSecretDoesNotExist"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
