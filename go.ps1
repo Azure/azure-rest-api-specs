@@ -36,7 +36,13 @@ Measure-Command -Expression {
 # TotalSeconds      : 693.5767221
 
 # Parallelism 10 (all folders): 
-# 
+# TotalSeconds      : 529.1102603
 
 # No parallism (all folders):
-# 
+# TotalSeconds      : 691.3619761
+
+# In pipelines: 
+# | Parallelism | Linux Time | Windows Time |
+# |-------------|------------|--------------|
+# | None        | 29m 5s     | 41m 10s      | 
+# | 6           | 16m 57s    | 24m 30s      |
