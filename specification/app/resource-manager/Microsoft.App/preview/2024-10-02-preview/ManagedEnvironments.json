@@ -1582,13 +1582,6 @@
           "type": "string",
           "description": "Kind of the Environment."
         },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of availability zones to use for dedicated workloadProfiles"
-        },
         "identity": {
           "description": "Managed identities for the Managed Environment to interact with other Azure services without maintaining any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
@@ -1666,6 +1659,13 @@
                 "create",
                 "read"
               ]
+            },
+            "availabilityZones": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of availability zones to use for managed environment"
             },
             "customDomainConfiguration": {
               "$ref": "./CommonDefinitions.json#/definitions/CustomDomainConfiguration",
