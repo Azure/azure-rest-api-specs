@@ -14,6 +14,7 @@ import "./resources/Workspace.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
+using invalid-using;
 
 @useAuth(AadOauth2Auth<["https://azure-apicenter.net/user_impersonation"]>)
 @service({
