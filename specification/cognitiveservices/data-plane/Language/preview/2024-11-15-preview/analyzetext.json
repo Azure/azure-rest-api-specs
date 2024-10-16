@@ -2045,6 +2045,41 @@
         "entities"
       ]
     },
+    "EntitiesDocumentResultWithMetadata": {
+      "type": "object",
+      "description": "Entity documents result with metadata.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/EntityWithMetadata"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities"
+      ]
+    },
     "EntitiesDocumentResultWithMetadataDetectedLanguage": {
       "type": "object",
       "description": "Contains the entity recognition task result for the document with metadata and detected language.",
@@ -2123,7 +2158,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/EntitiesDocumentResultWithMetadataDetectedLanguage"
+            "$ref": "#/definitions/EntitiesDocumentResultWithMetadata"
           }
         }
       },
@@ -2207,7 +2242,7 @@
       "description": "Contains the entity task",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntitiesResult",
+          "$ref": "#/definitions/EntitiestWithMetadataAutoResult",
           "description": "Results for entity recognition."
         }
       },
@@ -2220,6 +2255,39 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionResults"
+    },
+    "EntitiestWithMetadataAutoResult": {
+      "type": "object",
+      "description": "Contains the entity recognition task result.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/EntitiesDocumentResultWithMetadataDetectedLanguage"
+          }
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion",
+        "documents"
+      ]
     },
     "Entity": {
       "type": "object",

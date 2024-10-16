@@ -509,6 +509,73 @@
         "summaries"
       ]
     },
+    "AgeMetadata": {
+      "type": "object",
+      "description": "Represents the Age entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "$ref": "#/definitions/AgeUnit",
+          "description": "Unit of measure for age."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "AgeMetadata"
+    },
+    "AgeUnit": {
+      "type": "string",
+      "description": "The Age Unit of measurement",
+      "enum": [
+        "Unspecified",
+        "Year",
+        "Month",
+        "Week",
+        "Day"
+      ],
+      "x-ms-enum": {
+        "name": "AgeUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified time period"
+          },
+          {
+            "name": "Year",
+            "value": "Year",
+            "description": "Time period of a year"
+          },
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Time period of a month"
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Time period of a week"
+          },
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Time period of a day"
+          }
+        ]
+      }
+    },
     "AllowOverlapEntityPolicyType": {
       "type": "object",
       "description": "Represents the allow overlap policy. Will apply no post processing logic for the entities. Whatever the model predicts is what will be returned to the user. This allows the user to get a full view of every single model's possible values and apply their own custom logic on entity selection",
@@ -1053,6 +1120,121 @@
         ]
       }
     },
+    "AreaMetadata": {
+      "type": "object",
+      "description": "Represents the Area entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "$ref": "#/definitions/AreaUnit",
+          "description": "Unit of measure for area."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "AreaMetadata"
+    },
+    "AreaUnit": {
+      "type": "string",
+      "description": "The area unit of measurement.",
+      "enum": [
+        "Unspecified",
+        "SquareKilometer",
+        "SquareHectometer",
+        "SquareDecameter",
+        "SquareDecimeter",
+        "SquareMeter",
+        "SquareCentimeter",
+        "SquareMillimeter",
+        "SquareInch",
+        "SquareFoot",
+        "SquareMile",
+        "SquareYard",
+        "Acre"
+      ],
+      "x-ms-enum": {
+        "name": "AreaUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified area unit"
+          },
+          {
+            "name": "SquareKilometer",
+            "value": "SquareKilometer",
+            "description": "Area unit in square kilometers"
+          },
+          {
+            "name": "SquareHectometer",
+            "value": "SquareHectometer",
+            "description": "Area unit in square hectometers"
+          },
+          {
+            "name": "SquareDecameter",
+            "value": "SquareDecameter",
+            "description": "Area unit in square decameters"
+          },
+          {
+            "name": "SquareDecimeter",
+            "value": "SquareDecimeter",
+            "description": "Area unit in square decimeters"
+          },
+          {
+            "name": "SquareMeter",
+            "value": "SquareMeter",
+            "description": "Area unit in square meters"
+          },
+          {
+            "name": "SquareCentimeter",
+            "value": "SquareCentimeter",
+            "description": "Area unit in square centimeters"
+          },
+          {
+            "name": "SquareMillimeter",
+            "value": "SquareMillimeter",
+            "description": "Area unit in square millimeters"
+          },
+          {
+            "name": "SquareInch",
+            "value": "SquareInch",
+            "description": "Area unit in square inches"
+          },
+          {
+            "name": "SquareFoot",
+            "value": "SquareFoot",
+            "description": "Area unit in square feet"
+          },
+          {
+            "name": "SquareMile",
+            "value": "SquareMile",
+            "description": "Area unit in square miles"
+          },
+          {
+            "name": "SquareYard",
+            "value": "SquareYard",
+            "description": "Area unit in square yards"
+          },
+          {
+            "name": "Acre",
+            "value": "Acre",
+            "description": "Area unit in acres"
+          }
+        ]
+      }
+    },
     "Association": {
       "type": "string",
       "description": "Describes if the entity is the subject of the text or if it describes someone else.",
@@ -1115,6 +1297,20 @@
       "discriminator": "policyKind",
       "required": [
         "policyKind"
+      ]
+    },
+    "BaseMetadata": {
+      "type": "object",
+      "description": "The abstract base class for entity Metadata.",
+      "properties": {
+        "metadataKind": {
+          "$ref": "#/definitions/MetadataKind",
+          "description": "The entity Metadata object kind."
+        }
+      },
+      "discriminator": "metadataKind",
+      "required": [
+        "metadataKind"
       ]
     },
     "Certainty": {
@@ -1236,6 +1432,35 @@
           }
         ]
       }
+    },
+    "CurrencyMetadata": {
+      "type": "object",
+      "description": "Represents the Currency ) entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Currency unit."
+        },
+        "iso4217": {
+          "type": "string",
+          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "CurrencyMetadata"
     },
     "CustomEntitiesLROTask": {
       "type": "object",
@@ -1518,6 +1743,68 @@
         "deploymentName"
       ]
     },
+    "DateMetadata": {
+      "type": "object",
+      "description": "A Metadata for date entity instances.",
+      "properties": {
+        "dateValues": {
+          "type": "array",
+          "description": "List of date values.",
+          "items": {
+            "$ref": "#/definitions/DateValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "DateMetadata"
+    },
+    "DateTimeMetadata": {
+      "type": "object",
+      "description": "A Metadata for datetime entity instances.",
+      "properties": {
+        "dateValues": {
+          "type": "array",
+          "description": "List of date values.",
+          "items": {
+            "$ref": "#/definitions/DateValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "DateTimeMetadata"
+    },
+    "DateValue": {
+      "type": "object",
+      "description": "Represents the date value.",
+      "properties": {
+        "timex": {
+          "type": "string",
+          "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual time that the extracted text denote."
+        },
+        "modifier": {
+          "$ref": "#/definitions/TemporalModifier",
+          "description": "Modifier for datetime to indicate point of reference like before, after etc."
+        }
+      },
+      "required": [
+        "timex",
+        "value"
+      ]
+    },
     "DetectedLanguage": {
       "type": "object",
       "description": "Contains the details of the detected language for the text.",
@@ -1681,6 +1968,41 @@
         "entities"
       ]
     },
+    "EntitiesDocumentResultWithMetadata": {
+      "type": "object",
+      "description": "Entity documents result with metadata.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/EntityWithMetadata"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities"
+      ]
+    },
     "EntitiesLROTask": {
       "type": "object",
       "description": "An object representing the task definition for an Entities Recognition task.",
@@ -1720,7 +2042,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/EntitiesDocumentResult"
+            "$ref": "#/definitions/EntitiesDocumentResultWithMetadata"
           }
         }
       },
@@ -2345,6 +2667,82 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionLROResults"
+    },
+    "EntityTag": {
+      "type": "object",
+      "description": "Entity tag object which contains the name of the tags abd any associated confidence score. Entity Tags are used to express some similarities/affinity between entities.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the tag. Entity Tag names will be unique globally."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Detection score between 0 and 1 of the extracted entity."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "EntityWithMetadata": {
+      "type": "object",
+      "description": "Entity object with tags and metadata.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "type": "string",
+          "description": "Entity type."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "type": {
+          "type": "string",
+          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of entity tags. Tags are to express some similarities/affinity between entities.",
+          "items": {
+            "$ref": "#/definitions/EntityTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "metadata": {
+          "$ref": "#/definitions/BaseMetadata",
+          "description": "The entity metadata object."
+        }
+      },
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore",
+        "type",
+        "tags"
+      ]
     },
     "Error": {
       "type": "object",
@@ -3041,6 +3439,121 @@
         }
       }
     },
+    "InformationMetadata": {
+      "type": "object",
+      "description": "Represents the Information (data) entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "$ref": "#/definitions/InformationUnit",
+          "description": "Unit of measure for information."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "InformationMetadata"
+    },
+    "InformationUnit": {
+      "type": "string",
+      "description": "The information (data) Unit of measurement.",
+      "enum": [
+        "Unspecified",
+        "Bit",
+        "Kilobit",
+        "Megabit",
+        "Gigabit",
+        "Terabit",
+        "Petabit",
+        "Byte",
+        "Kilobyte",
+        "Megabyte",
+        "Gigabyte",
+        "Terabyte",
+        "Petabyte"
+      ],
+      "x-ms-enum": {
+        "name": "InformationUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified data size unit"
+          },
+          {
+            "name": "Bit",
+            "value": "Bit",
+            "description": "Data size unit in bits"
+          },
+          {
+            "name": "Kilobit",
+            "value": "Kilobit",
+            "description": "Data size unit in kilobits"
+          },
+          {
+            "name": "Megabit",
+            "value": "Megabit",
+            "description": "Data size unit in megabits"
+          },
+          {
+            "name": "Gigabit",
+            "value": "Gigabit",
+            "description": "Data size unit in gigabits"
+          },
+          {
+            "name": "Terabit",
+            "value": "Terabit",
+            "description": "Data size unit in terabits"
+          },
+          {
+            "name": "Petabit",
+            "value": "Petabit",
+            "description": "Data size unit in petabits"
+          },
+          {
+            "name": "Byte",
+            "value": "Byte",
+            "description": "Data size unit in bytes"
+          },
+          {
+            "name": "Kilobyte",
+            "value": "Kilobyte",
+            "description": "Data size unit in kilobytes"
+          },
+          {
+            "name": "Megabyte",
+            "value": "Megabyte",
+            "description": "Data size unit in megabytes"
+          },
+          {
+            "name": "Gigabyte",
+            "value": "Gigabyte",
+            "description": "Data size unit in gigabytes"
+          },
+          {
+            "name": "Terabyte",
+            "value": "Terabyte",
+            "description": "Data size unit in terabytes"
+          },
+          {
+            "name": "Petabyte",
+            "value": "Petabyte",
+            "description": "Data size unit in petabytes"
+          }
+        ]
+      }
+    },
     "InnerErrorCode": {
       "type": "string",
       "description": "Human-readable error code.",
@@ -3441,6 +3954,145 @@
         "text"
       ]
     },
+    "LengthMetadata": {
+      "type": "object",
+      "description": "Represents the Length entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "$ref": "#/definitions/LengthUnit",
+          "description": "Unit of measure for length."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "LengthMetadata"
+    },
+    "LengthUnit": {
+      "type": "string",
+      "description": "The length unit of measurement.",
+      "enum": [
+        "Unspecified",
+        "Kilometer",
+        "Hectometer",
+        "Decameter",
+        "Meter",
+        "Decimeter",
+        "Centimeter",
+        "Millimeter",
+        "Micrometer",
+        "Nanometer",
+        "Picometer",
+        "Mile",
+        "Yard",
+        "Inch",
+        "Foot",
+        "LightYear",
+        "Point"
+      ],
+      "x-ms-enum": {
+        "name": "LengthUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified length unit."
+          },
+          {
+            "name": "Kilometer",
+            "value": "Kilometer",
+            "description": "Length unit in kilometers."
+          },
+          {
+            "name": "Hectometer",
+            "value": "Hectometer",
+            "description": "Length unit in hectometers."
+          },
+          {
+            "name": "Decameter",
+            "value": "Decameter",
+            "description": "Length unit in decameters."
+          },
+          {
+            "name": "Meter",
+            "value": "Meter",
+            "description": "Length unit in meters."
+          },
+          {
+            "name": "Decimeter",
+            "value": "Decimeter",
+            "description": "Length unit in decimeters."
+          },
+          {
+            "name": "Centimeter",
+            "value": "Centimeter",
+            "description": "Length unit in centimeters."
+          },
+          {
+            "name": "Millimeter",
+            "value": "Millimeter",
+            "description": "Length unit in millimeters."
+          },
+          {
+            "name": "Micrometer",
+            "value": "Micrometer",
+            "description": "Length unit in micrometers."
+          },
+          {
+            "name": "Nanometer",
+            "value": "Nanometer",
+            "description": "Length unit in nanometers."
+          },
+          {
+            "name": "Picometer",
+            "value": "Picometer",
+            "description": "Length unit in picometers."
+          },
+          {
+            "name": "Mile",
+            "value": "Mile",
+            "description": "Length unit in miles."
+          },
+          {
+            "name": "Yard",
+            "value": "Yard",
+            "description": "Length unit in yards."
+          },
+          {
+            "name": "Inch",
+            "value": "Inch",
+            "description": "Length unit in inches."
+          },
+          {
+            "name": "Foot",
+            "value": "Foot",
+            "description": "Length unit in feet."
+          },
+          {
+            "name": "LightYear",
+            "value": "LightYear",
+            "description": "Length unit in light years."
+          },
+          {
+            "name": "Point",
+            "value": "Point",
+            "description": "Length unit in points."
+          }
+        ]
+      }
+    },
     "LinkedEntitiesDocumentResult": {
       "type": "object",
       "description": "Entity linking document result.",
@@ -3561,6 +4213,120 @@
       ],
       "x-ms-discriminator-value": "matchLongest"
     },
+    "MetadataKind": {
+      "type": "string",
+      "description": "The entity Metadata object kind.",
+      "enum": [
+        "DateMetadata",
+        "DateTimeMetadata",
+        "TimeMetadata",
+        "TemporalSetMetadata",
+        "NumberMetadata",
+        "OrdinalMetadata",
+        "SpeedMetadata",
+        "WeightMetadata",
+        "LengthMetadata",
+        "VolumeMetadata",
+        "AreaMetadata",
+        "AgeMetadata",
+        "InformationMetadata",
+        "TemperatureMetadata",
+        "CurrencyMetadata",
+        "NumericRangeMetadata",
+        "TemporalSpanMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "MetadataKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DateMetadata",
+            "value": "DateMetadata",
+            "description": "Metadata for date-related values."
+          },
+          {
+            "name": "DateTimeMetadata",
+            "value": "DateTimeMetadata",
+            "description": "Metadata for date and time-related values."
+          },
+          {
+            "name": "TimeMetadata",
+            "value": "TimeMetadata",
+            "description": "Metadata for time-related values."
+          },
+          {
+            "name": "TemporalSetMetadata",
+            "value": "TemporalSetMetadata",
+            "description": "Metadata for set of time-related values."
+          },
+          {
+            "name": "NumberMetadata",
+            "value": "NumberMetadata",
+            "description": "Metadata for numeric values."
+          },
+          {
+            "name": "OrdinalMetadata",
+            "value": "OrdinalMetadata",
+            "description": "Metadata for ordinal numbers."
+          },
+          {
+            "name": "SpeedMetadata",
+            "value": "SpeedMetadata",
+            "description": "Metadata for speed-related values."
+          },
+          {
+            "name": "WeightMetadata",
+            "value": "WeightMetadata",
+            "description": "Metadata for weight-related values."
+          },
+          {
+            "name": "LengthMetadata",
+            "value": "LengthMetadata",
+            "description": "Metadata for length-related values."
+          },
+          {
+            "name": "VolumeMetadata",
+            "value": "VolumeMetadata",
+            "description": "Metadata for volume-related values."
+          },
+          {
+            "name": "AreaMetadata",
+            "value": "AreaMetadata",
+            "description": "Metadata for area-related values."
+          },
+          {
+            "name": "AgeMetadata",
+            "value": "AgeMetadata",
+            "description": "Metadata for age-related values."
+          },
+          {
+            "name": "InformationMetadata",
+            "value": "InformationMetadata",
+            "description": "Metadata for information-related values."
+          },
+          {
+            "name": "TemperatureMetadata",
+            "value": "TemperatureMetadata",
+            "description": "Metadata for temperature-related values."
+          },
+          {
+            "name": "CurrencyMetadata",
+            "value": "CurrencyMetadata",
+            "description": "Metadata for currency-related values."
+          },
+          {
+            "name": "NumericRangeMetadata",
+            "value": "NumericRangeMetadata",
+            "description": "Metadata for numeric range values."
+          },
+          {
+            "name": "TemporalSpanMetadata",
+            "value": "TemporalSpanMetadata",
+            "description": "Metadata for temporal span values."
+          }
+        ]
+      }
+    },
     "MultiLanguageAnalysisInput": {
       "type": "object",
       "description": "Collection of input documents to be analyzed by the service.",
@@ -3595,6 +4361,143 @@
         "id",
         "text"
       ]
+    },
+    "NumberKind": {
+      "type": "string",
+      "description": "The type of the extracted number entity.",
+      "enum": [
+        "Integer",
+        "Decimal",
+        "Power",
+        "Fraction",
+        "Percent",
+        "Unspecified"
+      ],
+      "x-ms-enum": {
+        "name": "NumberKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Integer",
+            "value": "Integer",
+            "description": "Integer number"
+          },
+          {
+            "name": "Decimal",
+            "value": "Decimal",
+            "description": "Decimal number"
+          },
+          {
+            "name": "Power",
+            "value": "Power",
+            "description": "Power number"
+          },
+          {
+            "name": "Fraction",
+            "value": "Fraction",
+            "description": "Fraction number"
+          },
+          {
+            "name": "Percent",
+            "value": "Percent",
+            "description": "Percent number"
+          },
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified number kind"
+          }
+        ]
+      }
+    },
+    "NumberMetadata": {
+      "type": "object",
+      "description": "A metadata for numeric entity instances.",
+      "properties": {
+        "numberKind": {
+          "$ref": "#/definitions/NumberKind",
+          "description": "Kind of the number type."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "A numeric representation of what the extracted text denotes."
+        }
+      },
+      "required": [
+        "numberKind",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "NumberMetadata"
+    },
+    "NumericRangeMetadata": {
+      "type": "object",
+      "description": "represents the Metadata of numeric intervals.",
+      "properties": {
+        "rangeKind": {
+          "$ref": "#/definitions/RangeKind",
+          "description": "Kind of numeric ranges supported - like Number, Speed, etc."
+        },
+        "minimum": {
+          "type": "number",
+          "format": "double",
+          "description": "The beginning value of  the interval."
+        },
+        "maximum": {
+          "type": "number",
+          "format": "double",
+          "description": "The ending value of the interval."
+        },
+        "rangeInclusivity": {
+          "$ref": "#/definitions/RangeInclusivity",
+          "description": "The inclusiveness of this range."
+        }
+      },
+      "required": [
+        "rangeKind",
+        "minimum",
+        "maximum"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "NumericRangeMetadata"
+    },
+    "OrdinalMetadata": {
+      "type": "object",
+      "description": "A metadata for numeric entity instances.",
+      "properties": {
+        "offset": {
+          "type": "string",
+          "description": "The offset with respect to the reference (e.g., offset = -1 indicates the second to last)"
+        },
+        "relativeTo": {
+          "$ref": "#/definitions/RelativeTo",
+          "description": "The reference point that the ordinal number denotes."
+        },
+        "value": {
+          "type": "string",
+          "description": "A simple arithmetic expression that the ordinal denotes."
+        }
+      },
+      "required": [
+        "offset",
+        "relativeTo",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "OrdinalMetadata"
     },
     "PiiCategory": {
       "type": "string",
@@ -4852,6 +5755,144 @@
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionResults"
     },
+    "RangeInclusivity": {
+      "type": "string",
+      "description": "The range inclusiveness of this property property.",
+      "enum": [
+        "NoneInclusive",
+        "LeftInclusive",
+        "RightInclusive",
+        "LeftRightInclusive"
+      ],
+      "x-ms-enum": {
+        "name": "RangeInclusivity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoneInclusive",
+            "value": "NoneInclusive",
+            "description": "No inclusivity"
+          },
+          {
+            "name": "LeftInclusive",
+            "value": "LeftInclusive",
+            "description": "Left side inclusive"
+          },
+          {
+            "name": "RightInclusive",
+            "value": "RightInclusive",
+            "description": "Right side inclusive"
+          },
+          {
+            "name": "LeftRightInclusive",
+            "value": "LeftRightInclusive",
+            "description": "Both sides inclusive"
+          }
+        ]
+      }
+    },
+    "RangeKind": {
+      "type": "string",
+      "description": "The kind of the number range entity.",
+      "enum": [
+        "Number",
+        "Speed",
+        "Weight",
+        "Length",
+        "Volume",
+        "Area",
+        "Age",
+        "Information",
+        "Temperature",
+        "Currency"
+      ],
+      "x-ms-enum": {
+        "name": "RangeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Number",
+            "value": "Number",
+            "description": "Number range"
+          },
+          {
+            "name": "Speed",
+            "value": "Speed",
+            "description": "Speed range"
+          },
+          {
+            "name": "Weight",
+            "value": "Weight",
+            "description": "Weight range"
+          },
+          {
+            "name": "Length",
+            "value": "Length",
+            "description": "Length range"
+          },
+          {
+            "name": "Volume",
+            "value": "Volume",
+            "description": "Volume range"
+          },
+          {
+            "name": "Area",
+            "value": "Area",
+            "description": "Area range"
+          },
+          {
+            "name": "Age",
+            "value": "Age",
+            "description": "Age range"
+          },
+          {
+            "name": "Information",
+            "value": "Information",
+            "description": "Information range"
+          },
+          {
+            "name": "Temperature",
+            "value": "Temperature",
+            "description": "Temperature range"
+          },
+          {
+            "name": "Currency",
+            "value": "Currency",
+            "description": "Currency range"
+          }
+        ]
+      }
+    },
+    "RelativeTo": {
+      "type": "string",
+      "description": "The reference point that the ordinal number denotes.",
+      "enum": [
+        "Current",
+        "End",
+        "Start"
+      ],
+      "x-ms-enum": {
+        "name": "RelativeTo",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Current",
+            "value": "Current",
+            "description": "Current state or position"
+          },
+          {
+            "name": "End",
+            "value": "End",
+            "description": "End state or position"
+          },
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Start state or position"
+          }
+        ]
+      }
+    },
     "RequestStatistics": {
       "type": "object",
       "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
@@ -5631,6 +6672,127 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysisResults"
     },
+    "SpeedMetadata": {
+      "type": "object",
+      "description": "Represents the Speed entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "$ref": "#/definitions/SpeedUnit",
+          "description": "Unit of measure for speed."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "SpeedMetadata"
+    },
+    "SpeedUnit": {
+      "type": "string",
+      "description": "The speed Unit of measurement",
+      "enum": [
+        "Unspecified",
+        "MetersPerSecond",
+        "KilometersPerHour",
+        "KilometersPerMinute",
+        "KilometersPerSecond",
+        "MilesPerHour",
+        "Knots",
+        "FeetPerSecond",
+        "FeetPerMinute",
+        "YardsPerMinute",
+        "YardsPerSecond",
+        "MetersPerMillisecond",
+        "CentimetersPerMillisecond",
+        "KilometersPerMillisecond"
+      ],
+      "x-ms-enum": {
+        "name": "SpeedUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified speed unit."
+          },
+          {
+            "name": "MetersPerSecond",
+            "value": "MetersPerSecond",
+            "description": "Speed unit in meters per second."
+          },
+          {
+            "name": "KilometersPerHour",
+            "value": "KilometersPerHour",
+            "description": "Speed unit in kilometers per hour."
+          },
+          {
+            "name": "KilometersPerMinute",
+            "value": "KilometersPerMinute",
+            "description": "Speed unit in kilometers per minute."
+          },
+          {
+            "name": "KilometersPerSecond",
+            "value": "KilometersPerSecond",
+            "description": "Speed unit in kilometers per second."
+          },
+          {
+            "name": "MilesPerHour",
+            "value": "MilesPerHour",
+            "description": "Speed unit in miles per hour."
+          },
+          {
+            "name": "Knots",
+            "value": "Knots",
+            "description": "Speed unit in knots."
+          },
+          {
+            "name": "FeetPerSecond",
+            "value": "FeetPerSecond",
+            "description": "Speed unit in feet per second."
+          },
+          {
+            "name": "FeetPerMinute",
+            "value": "FeetPerMinute",
+            "description": "Speed unit in feet per minute."
+          },
+          {
+            "name": "YardsPerMinute",
+            "value": "YardsPerMinute",
+            "description": "Speed unit in yards per minute."
+          },
+          {
+            "name": "YardsPerSecond",
+            "value": "YardsPerSecond",
+            "description": "Speed unit in yards per second."
+          },
+          {
+            "name": "MetersPerMillisecond",
+            "value": "MetersPerMillisecond",
+            "description": "Speed unit in meters per millisecond."
+          },
+          {
+            "name": "CentimetersPerMillisecond",
+            "value": "CentimetersPerMillisecond",
+            "description": "Speed unit in centimeters per millisecond."
+          },
+          {
+            "name": "KilometersPerMillisecond",
+            "value": "KilometersPerMillisecond",
+            "description": "Speed unit in Kilometers per millisecond."
+          }
+        ]
+      }
+    },
     "State": {
       "type": "string",
       "description": "The status of the task at the mentioned last update time.",
@@ -5837,6 +6999,259 @@
         "total"
       ]
     },
+    "TemperatureMetadata": {
+      "type": "object",
+      "description": "Represents the Information entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "$ref": "#/definitions/TemperatureUnit",
+          "description": "Unit of measure for temperature."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "TemperatureMetadata"
+    },
+    "TemperatureUnit": {
+      "type": "string",
+      "description": "The temperature Unit of measurement.",
+      "enum": [
+        "Unspecified",
+        "Fahrenheit",
+        "Kelvin",
+        "Rankine",
+        "Celsius"
+      ],
+      "x-ms-enum": {
+        "name": "TemperatureUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified temperature unit"
+          },
+          {
+            "name": "Fahrenheit",
+            "value": "Fahrenheit",
+            "description": "Temperature unit in Fahrenheit"
+          },
+          {
+            "name": "Kelvin",
+            "value": "Kelvin",
+            "description": "Temperature unit in Kelvin"
+          },
+          {
+            "name": "Rankine",
+            "value": "Rankine",
+            "description": "Temperature unit in Rankine"
+          },
+          {
+            "name": "Celsius",
+            "value": "Celsius",
+            "description": "Temperature unit in Celsius"
+          }
+        ]
+      }
+    },
+    "TemporalModifier": {
+      "type": "string",
+      "description": "An optional modifier of a date/time instance.",
+      "enum": [
+        "AfterApprox",
+        "Before",
+        "BeforeStart",
+        "Approx",
+        "ReferenceUndefined",
+        "SinceEnd",
+        "AfterMid",
+        "Start",
+        "After",
+        "BeforeEnd",
+        "Until",
+        "End",
+        "Less",
+        "Since",
+        "AfterStart",
+        "BeforeApprox",
+        "Mid",
+        "More"
+      ],
+      "x-ms-enum": {
+        "name": "TemporalModifier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AfterApprox",
+            "value": "AfterApprox",
+            "description": "After an approximate time"
+          },
+          {
+            "name": "Before",
+            "value": "Before",
+            "description": "Before a specific time"
+          },
+          {
+            "name": "BeforeStart",
+            "value": "BeforeStart",
+            "description": "Before the start of a time period"
+          },
+          {
+            "name": "Approx",
+            "value": "Approx",
+            "description": "Approximately at a specific time"
+          },
+          {
+            "name": "ReferenceUndefined",
+            "value": "ReferenceUndefined",
+            "description": "Reference to an undefined time"
+          },
+          {
+            "name": "SinceEnd",
+            "value": "SinceEnd",
+            "description": "Since the end of a time period"
+          },
+          {
+            "name": "AfterMid",
+            "value": "AfterMid",
+            "description": "After the middle of a time period"
+          },
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "At the start of a time period"
+          },
+          {
+            "name": "After",
+            "value": "After",
+            "description": "After a specific time"
+          },
+          {
+            "name": "BeforeEnd",
+            "value": "BeforeEnd",
+            "description": "Before the end of a time period"
+          },
+          {
+            "name": "Until",
+            "value": "Until",
+            "description": "Until a specific time"
+          },
+          {
+            "name": "End",
+            "value": "End",
+            "description": "At the end of a time period"
+          },
+          {
+            "name": "Less",
+            "value": "Less",
+            "description": "Less than a specific time"
+          },
+          {
+            "name": "Since",
+            "value": "Since",
+            "description": "Since a specific time"
+          },
+          {
+            "name": "AfterStart",
+            "value": "AfterStart",
+            "description": "After the start of a time period"
+          },
+          {
+            "name": "BeforeApprox",
+            "value": "BeforeApprox",
+            "description": "Before an approximate time"
+          },
+          {
+            "name": "Mid",
+            "value": "Mid",
+            "description": "In the middle of a time period"
+          },
+          {
+            "name": "More",
+            "value": "More",
+            "description": "More than a specific time"
+          }
+        ]
+      }
+    },
+    "TemporalSetMetadata": {
+      "type": "object",
+      "description": "A Metadata for temporal set entity instances.",
+      "properties": {
+        "dateValues": {
+          "type": "array",
+          "description": "List of date values.",
+          "items": {
+            "$ref": "#/definitions/DateValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "TemporalSetMetadata"
+    },
+    "TemporalSpanMetadata": {
+      "type": "object",
+      "description": "represents the Metadata of a date and/or time span.",
+      "properties": {
+        "spanValues": {
+          "type": "array",
+          "description": "List of temporal spans detected.",
+          "items": {
+            "$ref": "#/definitions/TemporalSpanValues"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "TemporalSpanMetadata"
+    },
+    "TemporalSpanValues": {
+      "type": "object",
+      "description": "Temporal span object.",
+      "properties": {
+        "begin": {
+          "type": "string",
+          "description": "Start value for the span."
+        },
+        "end": {
+          "type": "string",
+          "description": "End value for the span."
+        },
+        "duration": {
+          "type": "string",
+          "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+        },
+        "modifier": {
+          "$ref": "#/definitions/TemporalModifier",
+          "description": "Modifier for datetime to indicate point of reference like before, after etc."
+        },
+        "timex": {
+          "type": "string",
+          "description": "An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings."
+        }
+      }
+    },
     "Temporality": {
       "type": "string",
       "description": "Describes temporal information regarding the entity.",
@@ -5866,6 +7281,26 @@
           }
         ]
       }
+    },
+    "TimeMetadata": {
+      "type": "object",
+      "description": "A Metadata for time entity instances.",
+      "properties": {
+        "dateValues": {
+          "type": "array",
+          "description": "List of date values.",
+          "items": {
+            "$ref": "#/definitions/DateValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "TimeMetadata"
     },
     "TokenSentimentValue": {
       "type": "string",
@@ -5897,6 +7332,211 @@
         ]
       }
     },
+    "VolumeMetadata": {
+      "type": "object",
+      "description": "Represents the Volume entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "$ref": "#/definitions/VolumeUnit",
+          "description": "Unit of measure for volume."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "VolumeMetadata"
+    },
+    "VolumeUnit": {
+      "type": "string",
+      "description": "The Volume Unit of measurement",
+      "enum": [
+        "Unspecified",
+        "CubicMeter",
+        "CubicCentimeter",
+        "CubicMillimeter",
+        "Hectoliter",
+        "Decaliter",
+        "Liter",
+        "Centiliter",
+        "Milliliter",
+        "CubicYard",
+        "CubicInch",
+        "CubicFoot",
+        "CubicMile",
+        "FluidOunce",
+        "Teaspoon",
+        "Tablespoon",
+        "Pint",
+        "Quart",
+        "Cup",
+        "Gill",
+        "Pinch",
+        "FluidDram",
+        "Barrel",
+        "Minim",
+        "Cord",
+        "Peck",
+        "Bushel",
+        "Hogshead"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified volume unit."
+          },
+          {
+            "name": "CubicMeter",
+            "value": "CubicMeter",
+            "description": "Volume unit in cubic meters."
+          },
+          {
+            "name": "CubicCentimeter",
+            "value": "CubicCentimeter",
+            "description": "Volume unit in cubic centimeters."
+          },
+          {
+            "name": "CubicMillimeter",
+            "value": "CubicMillimeter",
+            "description": "Volume unit in cubic millimeters."
+          },
+          {
+            "name": "Hectoliter",
+            "value": "Hectoliter",
+            "description": "Volume unit in hectoliters."
+          },
+          {
+            "name": "Decaliter",
+            "value": "Decaliter",
+            "description": "Volume unit in decaliters."
+          },
+          {
+            "name": "Liter",
+            "value": "Liter",
+            "description": "Volume unit in liters."
+          },
+          {
+            "name": "Centiliter",
+            "value": "Centiliter",
+            "description": "Volume unit in centiliters."
+          },
+          {
+            "name": "Milliliter",
+            "value": "Milliliter",
+            "description": "Volume unit in milliliters."
+          },
+          {
+            "name": "CubicYard",
+            "value": "CubicYard",
+            "description": "Volume unit in cubic yards."
+          },
+          {
+            "name": "CubicInch",
+            "value": "CubicInch",
+            "description": "Volume unit in cubic inches."
+          },
+          {
+            "name": "CubicFoot",
+            "value": "CubicFoot",
+            "description": "Volume unit in cubic feet."
+          },
+          {
+            "name": "CubicMile",
+            "value": "CubicMile",
+            "description": "Volume unit in cubic miles."
+          },
+          {
+            "name": "FluidOunce",
+            "value": "FluidOunce",
+            "description": "Volume unit in fluid ounces."
+          },
+          {
+            "name": "Teaspoon",
+            "value": "Teaspoon",
+            "description": "Volume unit in teaspoons."
+          },
+          {
+            "name": "Tablespoon",
+            "value": "Tablespoon",
+            "description": "Volume unit in tablespoons."
+          },
+          {
+            "name": "Pint",
+            "value": "Pint",
+            "description": "Volume unit in pints."
+          },
+          {
+            "name": "Quart",
+            "value": "Quart",
+            "description": "Volume unit in quarts."
+          },
+          {
+            "name": "Cup",
+            "value": "Cup",
+            "description": "Volume unit in cups."
+          },
+          {
+            "name": "Gill",
+            "value": "Gill",
+            "description": "Volume unit in gills."
+          },
+          {
+            "name": "Pinch",
+            "value": "Pinch",
+            "description": "Volume unit in pinches."
+          },
+          {
+            "name": "FluidDram",
+            "value": "FluidDram",
+            "description": "Volume unit in fluid drams."
+          },
+          {
+            "name": "Barrel",
+            "value": "Barrel",
+            "description": "Volume unit in barrels."
+          },
+          {
+            "name": "Minim",
+            "value": "Minim",
+            "description": "Volume unit in minims."
+          },
+          {
+            "name": "Cord",
+            "value": "Cord",
+            "description": "Volume unit in cords."
+          },
+          {
+            "name": "Peck",
+            "value": "Peck",
+            "description": "Volume unit in pecks."
+          },
+          {
+            "name": "Bushel",
+            "value": "Bushel",
+            "description": "Volume unit in bushels."
+          },
+          {
+            "name": "Hogshead",
+            "value": "Hogshead",
+            "description": "Volume unit in hogsheads."
+          }
+        ]
+      }
+    },
     "WarningCodeValue": {
       "type": "string",
       "description": "Defines the list of the warning codes.",
@@ -5917,6 +7557,139 @@
             "name": "DocumentTruncated",
             "value": "DocumentTruncated",
             "description": "Document truncated warning"
+          }
+        ]
+      }
+    },
+    "WeightMetadata": {
+      "type": "object",
+      "description": "Represents the Weight ) entity Metadata model.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        },
+        "unit": {
+          "$ref": "#/definitions/WeightUnit",
+          "description": "Unit of measure for weight."
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "WeightMetadata"
+    },
+    "WeightUnit": {
+      "type": "string",
+      "description": "The weight Unit of measurement.",
+      "enum": [
+        "Unspecified",
+        "Kilogram",
+        "Gram",
+        "Milligram",
+        "Gallon",
+        "MetricTon",
+        "Ton",
+        "Pound",
+        "Ounce",
+        "Grain",
+        "PennyWeight",
+        "LongTonBritish",
+        "ShortTonUS",
+        "ShortHundredWeightUS",
+        "Stone",
+        "Dram"
+      ],
+      "x-ms-enum": {
+        "name": "WeightUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified weight unit"
+          },
+          {
+            "name": "Kilogram",
+            "value": "Kilogram",
+            "description": "Weight unit in kilograms"
+          },
+          {
+            "name": "Gram",
+            "value": "Gram",
+            "description": "Weight unit in grams"
+          },
+          {
+            "name": "Milligram",
+            "value": "Milligram",
+            "description": "Weight unit in milligrams"
+          },
+          {
+            "name": "Gallon",
+            "value": "Gallon",
+            "description": "Volume unit in gallons"
+          },
+          {
+            "name": "MetricTon",
+            "value": "MetricTon",
+            "description": "Weight unit in metric tons"
+          },
+          {
+            "name": "Ton",
+            "value": "Ton",
+            "description": "Weight unit in tons"
+          },
+          {
+            "name": "Pound",
+            "value": "Pound",
+            "description": "Weight unit in pounds"
+          },
+          {
+            "name": "Ounce",
+            "value": "Ounce",
+            "description": "Weight unit in ounces"
+          },
+          {
+            "name": "Grain",
+            "value": "Grain",
+            "description": "Weight unit in grains"
+          },
+          {
+            "name": "PennyWeight",
+            "value": "PennyWeight",
+            "description": "Weight unit in pennyweights"
+          },
+          {
+            "name": "LongTonBritish",
+            "value": "LongTonBritish",
+            "description": "Weight unit in long tons (British)"
+          },
+          {
+            "name": "ShortTonUS",
+            "value": "ShortTonUS",
+            "description": "Weight unit in short tons (US)"
+          },
+          {
+            "name": "ShortHundredWeightUS",
+            "value": "ShortHundredWeightUS",
+            "description": "Weight unit in short hundredweights (US)"
+          },
+          {
+            "name": "Stone",
+            "value": "Stone",
+            "description": "Weight unit in stones"
+          },
+          {
+            "name": "Dram",
+            "value": "Dram",
+            "description": "Weight unit in drams"
           }
         ]
       }

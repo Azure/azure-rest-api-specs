@@ -56,13 +56,21 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
 
   /** Results for entity recognition. */
-  results: EntitiesResult;
+  @typeChangedFrom(Versions.v2024_11_15_preview, EntitiesResult)
+  results: EntitiestWithMetadataAutoResult;
 }
 
 /** Contains the entity recognition task result. */
 model EntitiesResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2024_11_15_preview, Array<EntitiesDocumentResultWithMetadata>)
+  @typeChangedFrom(Versions.v2024_11_01, Array<EntitiesDocumentResult>)
+  documents: Array<EntitiesDocumentResultWithMetadata>;
+}
+
+/** Contains the entity recognition task result. */
+@added(Versions.v2024_11_15_preview)
+model EntitiestWithMetadataAutoResult is PreBuiltResult {
+  /** Response by document */
   documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;
 }
 
