@@ -20,7 +20,7 @@ interface DocumentsOperations {
   count is SearchIndexOperation<
     {
     },
-    void
+    int32
   >;
 
   /**
@@ -300,7 +300,7 @@ interface DocumentsOperations {
       })
       selectedFields?: string[];
     },
-    void
+    Record<unknown>
   >;
 
   /**
@@ -430,7 +430,7 @@ interface DocumentsOperations {
   @route("/docs/search.index")
   @post
   index is SearchIndexOperation<
-    {
+    {      
       /**
        * The batch of index actions.
        */
