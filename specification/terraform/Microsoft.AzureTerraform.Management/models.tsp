@@ -92,8 +92,9 @@ model ExportResourceGroup extends BaseExportModel {
   type: "ExportResourceGroup";
 }
 
-// Not using Azure.ResourceManager.ArmOperationStatus due to bug in the API response where id is a long URL instead of uuid
-// Will be fixed at next API version
+// Copy of Azure.ResourceManager.ArmOperationStatus but with id property typed as string instead of uuid
+// Cannot use Azure.ResourceManager.ArmOperationStatus: the id property returned by RPaaS is a URL, not uuid. See example: specification/terraform/Microsoft.AzureTerraform.Management/examples/2023-07-01-preview/GetOperationStatus.json.
+// Cannot use Azure.Core.OperationStatus: the result property is 'result' instead of 'properties'.
 @doc("The status of the LRO operation.")
 model TerraformArmOperationStatus<
   Properties extends {} = never,
