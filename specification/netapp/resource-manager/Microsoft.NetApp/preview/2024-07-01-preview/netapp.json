@@ -1139,6 +1139,9 @@
         "x-ms-examples": {
           "Pools_Get": {
             "$ref": "examples/Pools_Get.json"
+          },
+          "Pools_Get_CustomThroughput": {
+            "$ref": "examples/Pools_Get_CustomThroughput.json"
           }
         }
       },
@@ -1202,6 +1205,9 @@
         "x-ms-examples": {
           "Pools_CreateOrUpdate": {
             "$ref": "examples/Pools_CreateOrUpdate.json"
+          },
+          "Pools_CreateOrUpdate_CustomThroughput": {
+            "$ref": "examples/Pools_CreateOrUpdate_CustomThroughput.json"
           }
         }
       },
@@ -1262,6 +1268,9 @@
         "x-ms-examples": {
           "Pools_Update": {
             "$ref": "examples/Pools_Update.json"
+          },
+          "Pools_Update_CustomThroughput": {
+            "$ref": "examples/Pools_Update_CustomThroughput.json"
           }
         }
       },
@@ -6319,7 +6328,7 @@
         "kdcIP": {
           "type": "string",
           "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$",
-          "description": "kdc server IP addresses for the active directory machine. This optional parameter is used only while creating kerberos volume.",
+          "description": "kdc server IP address for the active directory machine. This optional parameter is used only while creating kerberos volume.",
           "example": "101.102.103.104"
         },
         "adName": {
@@ -6629,6 +6638,12 @@
           "example": 164.221,
           "readOnly": true
         },
+        "customThroughputMibps": {
+          "title": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level",
+          "type": "number",
+          "x-nullable": true,
+          "example": 128
+        },
         "qosType": {
           "title": "qosType",
           "type": "string",
@@ -6767,6 +6782,12 @@
           "type": "boolean",
           "example": false,
           "description": "If enabled (true) the pool can contain cool Access enabled volumes."
+        },
+        "customThroughputMibps": {
+          "title": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level",
+          "type": "number",
+          "x-nullable": true,
+          "example": 128
         }
       }
     },
@@ -6889,7 +6910,7 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 1PiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
           "minimum": 53687091200,
           "maximum": 2638827906662400,
           "default": 107374182400,
@@ -6931,6 +6952,14 @@
         "snapshotId": {
           "title": "Snapshot ID",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots"
+              }
+            ]
+          },
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
@@ -6946,6 +6975,14 @@
         "backupId": {
           "title": "Backup ID",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/backupVaults/backups"
+              }
+            ]
+          },
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
@@ -6966,7 +7003,15 @@
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
         },
         "networkFeatures": {
-          "$ref": "#/definitions/networkFeatures"
+          "$ref": "#/definitions/networkFeatures",
+          "description": "The original value of the network features type available to the volume at the time it was created.",
+          "example": "Basic"
+        },
+        "effectiveNetworkFeatures": {
+          "$ref": "#/definitions/networkFeatures",
+          "description": "The effective value of the network features type available to the volume, or current effective state of update.",
+          "readOnly": true,
+          "example": "Standard"
         },
         "networkSiblingSetId": {
           "title": "Network Sibling Set ID",
@@ -7815,7 +7860,7 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 1PiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
           "minimum": 53687091200,
           "maximum": 2638827906662400,
           "default": 107374182400,
@@ -8365,7 +8410,15 @@
       "properties": {
         "snapshotId": {
           "type": "string",
-          "description": "Resource id of the snapshot"
+          "description": "Resource id of the snapshot",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots"
+              }
+            ]
+          }
         }
       }
     },
@@ -8776,7 +8829,8 @@
         "Standard",
         "Premium",
         "Ultra",
-        "StandardZRS"
+        "StandardZRS",
+        "Flexible"
       ],
       "default": "Premium",
       "x-ms-enum": {
@@ -8798,6 +8852,10 @@
           {
             "value": "StandardZRS",
             "description": "Zone redundant storage service level"
+          },
+          {
+            "value": "Flexible",
+            "description": "Flexible service level"
           }
         ]
       }
@@ -9988,6 +10046,51 @@
         "modelAsString": true
       }
     },
+    "clusterPeerCommandResponse": {
+      "description": "Information about cluster peering process",
+      "type": "object",
+      "properties": {
+        "peerAcceptCommand": {
+          "description": "A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>",
+          "type": "string"
+        }
+      }
+    },
+    "svmPeerCommandResponse": {
+      "description": "Information about svm peering process",
+      "type": "object",
+      "properties": {
+        "svmPeeringCommand": {
+          "description": "A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>",
+          "type": "string"
+        }
+      }
+    },
+    "peerClusterForVolumeMigrationRequest": {
+      "description": "Source Cluster properties for a cluster peer request",
+      "type": "object",
+      "required": [
+        "peerIpAddresses"
+      ],
+      "properties": {
+        "peerIpAddresses": {
+          "type": "array",
+          "minItems": 1,
+          "description": "A list of IC-LIF IPs that can be used to connect to the On-prem cluster",
+          "example": [
+            "0.0.0.1",
+            "0.0.0.2",
+            "0.0.0.3",
+            "0.0.0.4",
+            "0.0.0.5",
+            "0.0.0.6"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "smbAccessBasedEnumeration": {
       "title": "smbAccessBasedEnumeration",
       "type": "string",
@@ -10079,6 +10182,14 @@
       "properties": {
         "backupPolicyId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/backupPolicies"
+              }
+            ]
+          },
           "description": "Backup Policy Resource ID"
         },
         "policyEnforced": {
@@ -10087,6 +10198,14 @@
         },
         "backupVaultId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/backupVaults"
+              }
+            ]
+          },
           "description": "Backup Vault Resource ID"
         }
       }
@@ -10415,6 +10534,14 @@
       "properties": {
         "backupVaultId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/backupVaults"
+              }
+            ]
+          },
           "description": "The ResourceId of the Backup Vault",
           "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1"
         }
@@ -10484,51 +10611,6 @@
           "type": "string",
           "description": "Identifier of the private endpoint to reach the Azure Key Vault",
           "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
-        }
-      }
-    },
-    "clusterPeerCommandResponse": {
-      "description": "Information about cluster peering process",
-      "type": "object",
-      "properties": {
-        "peerAcceptCommand": {
-          "description": "A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>",
-          "type": "string"
-        }
-      }
-    },
-    "svmPeerCommandResponse": {
-      "description": "Information about svm peering process",
-      "type": "object",
-      "properties": {
-        "svmPeeringCommand": {
-          "description": "A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>",
-          "type": "string"
-        }
-      }
-    },
-    "peerClusterForVolumeMigrationRequest": {
-      "description": "Source Cluster properties for a cluster peer request",
-      "type": "object",
-      "required": [
-        "peerIpAddresses"
-      ],
-      "properties": {
-        "peerIpAddresses": {
-          "type": "array",
-          "minItems": 1,
-          "description": "A list of IC-LIF IPs that can be used to connect to the On-prem cluster",
-          "example": [
-            "0.0.0.1",
-            "0.0.0.2",
-            "0.0.0.3",
-            "0.0.0.4",
-            "0.0.0.5",
-            "0.0.0.6"
-          ],
-          "items": {
-            "type": "string"
-          }
         }
       }
     }
@@ -10655,4 +10737,3 @@
     }
   }
 }
-
