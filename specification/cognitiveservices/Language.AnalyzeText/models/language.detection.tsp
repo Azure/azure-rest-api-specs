@@ -121,6 +121,10 @@ union ScriptKind {
   @added(Versions.v2024_11_01)
   Hangul: "Hangul",
 
+  /** Script name for the HanLiteral script. */
+  @added(Versions.v2024_11_01)
+  HanLiteral: "HanLiteral",
+
   /** Script name for the HanSimplified script. */
   @added(Versions.v2024_11_01)
   HanSimplified: "HanSimplified",
@@ -157,6 +161,14 @@ union ScriptKind {
   @added(Versions.v2024_11_01)
   Malayalam: "Malayalam",
 
+  /** Script name for the Meitei script. */
+  @added(Versions.v2024_11_01)
+  Meitei: "Meitei",
+
+  /** Script name for the Mongolian script. */
+  @added(Versions.v2024_11_01)
+  Mongolian: "Mongolian",
+
   /** Script name for the Myanmar script. */
   @added(Versions.v2024_11_01)
   Myanmar: "Myanmar",
@@ -164,6 +176,14 @@ union ScriptKind {
   /** Script name for the Odia script. */
   @added(Versions.v2024_11_01)
   Odia: "Odia",
+
+  /** Script name for the Santali script. */
+  @added(Versions.v2024_11_01)
+  Santali: "Santali",
+
+  /** Script name for the Sharada script. */
+  @added(Versions.v2024_11_01)
+  Sharada: "Sharada",
 
   /** Script name for the Sinhala script. */
   @added(Versions.v2024_11_01)
@@ -243,6 +263,10 @@ union ScriptCode {
   @added(Versions.v2024_11_01)
   Hang: "Hang",
 
+  /** Script code for the HanLiteral script. */
+  @added(Versions.v2024_11_01)
+  Hani: "Hani",
+
   /** Script code for the HanSimplified script. */
   @added(Versions.v2024_11_01)
   Hans: "Hans",
@@ -279,9 +303,21 @@ union ScriptCode {
   @added(Versions.v2024_11_01)
   Mlym: "Mlym",
 
+  /** Script code for the Mongolian script. */
+  @added(Versions.v2024_11_01)
+  Mong: "Mong",
+
+  /** Script code for the Meitei script. */
+  @added(Versions.v2024_11_01)
+  Mtei: "Mtei",
+
   /** Script code for the Myanmar script. */
   @added(Versions.v2024_11_01)
   Mymr: "Mymr",
+
+  /** Script code for the Santali script. */
+  @added(Versions.v2024_11_01)
+  Olck: "Olck",
 
   /** Script code for the Odia script. */
   @added(Versions.v2024_11_01)
@@ -290,6 +326,10 @@ union ScriptCode {
   /** Script code for the Sinhala script. */
   @added(Versions.v2024_11_01)
   Sinh: "Sinh",
+
+  /** Script code for the Sharada script. */
+  @added(Versions.v2024_11_01)
+  Shrd: "Shrd",
 
   /** Script code for the Tamil script. */
   @added(Versions.v2024_11_01)
