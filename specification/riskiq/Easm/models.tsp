@@ -334,7 +334,7 @@ model AssetUpdateData {
   @doc("A list of asset types to cascade the updates to.")
   transfers?: AssetUpdateTransfers;
 
-  @doc(""A list of observation remediations to apply to the asset."")
+  @doc("A list of observation remediations to apply to the asset.")
   @Versioning.added(Versions.v2024_10_01_preview)
   remediations?: ObservationRemediationItem[];
 }
