@@ -88,7 +88,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
       "post": {
-        "operationId": "ExportTerraform_ExportTerraform",
+        "operationId": "ExportTerraform_Export",
         "tags": [
           "ExportTerraform"
         ],
@@ -145,7 +145,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/operationStatuses/{operationId}": {
       "get": {
-        "operationId": "ExportTerraform_OperationStatuses",
+        "operationId": "ExportTerraform_GetOperationStatuses",
         "tags": [
           "OperationStatuses"
         ],
@@ -169,7 +169,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -198,11 +201,6 @@
     }
   },
   "definitions": {
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -411,8 +409,9 @@
           "description": "The operation status"
         },
         "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier for the operationStatus resource"
+          "type": "string",
+          "description": "The unique identifier for the operationStatus resource",
+          "readOnly": true
         },
         "name": {
           "type": "string",

@@ -25,11 +25,13 @@ model CommonExportTerraformParameters {
 interface ExportTerraform {
   // Cannot use Azure.ResourceManager.ArmProviderActionAsync due to error during .NET SDK code generation:
   // Unknown identifier SubscriptionActionScope
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to override @operationId to fix LintDiff"
   @armResourceAction(ExportResult)
   @doc("Exports the Terraform configuration of the specified resource(s).")
   @route("/exportTerraform")
   @post
   @tag("ExportTerraform")
+  @operationId("ExportTerraform_Export")
   exportTerraform(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -47,17 +49,20 @@ interface ExportTerraform {
       Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "202 response of this API has body"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to override @operationId to fix LintDiff"
   @doc("Get the status of a long running azure asynchronous operation.")
   @route("/operationStatuses/{operationId}")
   @get
   @tag("OperationStatuses")
+  @operationId("ExportTerraform_GetOperationStatuses")
   operationStatuses is ArmReadOperation<
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
       ...OperationIdParameter;
     },
-    OperationStatus | ArmAcceptedLroResponse,
+    OperationStatus | (OperationStatus & ArmAcceptedLroResponse),
     ErrorResponse
   >;
 }
