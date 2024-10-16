@@ -30,15 +30,31 @@ enum Versions {
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
-/** 
-@tenantResource
-model Company is ProxyResource<CompanyProperties> {
-  @doc("The Commvault Company name")
-  @segment("companies")
-  @key("companyName")
-  @visibility("read")
-  @path
-  name: "CommvaultCompany"; // this needs more thinking
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+@route("/providers/Commvault.ContentStore/")
+interface CommvaultTenant {
+  /** Configure provider */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
+  @route("configure")
+  @post
+  @action
+  configure(
+    ...ApiVersionParameter,
+
+    /** The request body for the action */
+    @body body: CompanyProperties,
+  ): ArmAcceptedLroResponse | ErrorResponse;
+
+  /** Describe provider details */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
+  @route("describe")
+  @post
+  @action
+  describe(
+    ...ApiVersionParameter,
+
+    /** The request body for the action */
+  ): CompanyProperties | ErrorResponse;
 }
 
 @doc("The properties of Commvault Company")
@@ -54,14 +70,6 @@ model CompanyProperties {
   singleSignOnProperties?: SingleSignOnProperties;
 }
 
-@armResourceOperations
-interface Companies {
-  //get is ArmResourceRead<Company>;
-  //create is ArmResourceCreateOrReplaceAsync<Company>;
-
-  addSso is ArmResourceActionNoContentAsync<Company, CompanyProperties>;
-}
-  */
 @doc("A Commvault Entity Resource")
 model Entity is TrackedResource<EntityProperties> {
   @key("entityName")
