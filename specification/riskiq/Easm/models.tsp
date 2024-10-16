@@ -621,6 +621,7 @@ model DiscoGroupData {
 
 
 @doc("A request body used to create a policy.")
+@Versioning.added(Versions.v2024_10_01_preview)
 @clientName("PolicyPayload", "csharp")
 model PolicyData {
   @doc("A human readable description of what the policy should do.")
@@ -640,6 +641,7 @@ model PolicyData {
 }
 
 @doc("This is an object that exists to provide a common schema definition for the action parameters.")
+@Versioning.added(Versions.v2024_10_01_preview)
 model ActionParameters {
   @doc("The value parameter that is used by the policy action..")
   value?: string;
@@ -649,6 +651,7 @@ model ActionParameters {
 }
 
 @doc("This is an object that exists to provide a common schema definition for the priority response.")
+@Versioning.added(Versions.v2024_10_01_preview)
 @resource("policies")
 @clientName("Policy", "csharp")
 model Policy {
