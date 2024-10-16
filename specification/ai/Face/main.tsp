@@ -12,6 +12,7 @@ import "./routes.session.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using invalid-using;
 
 @useAuth(KeyAuth | AADToken)
 @service({
