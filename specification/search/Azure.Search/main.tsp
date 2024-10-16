@@ -16,6 +16,13 @@ using TypeSpec.Versioning;
  * Client that can be used to manage and query indexes and documents, as well as
  * manage other resources, on a search service.
  */
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      scopes: ["https://search.azure.com/.default"],
+    }
+  ]>)
 @service({
   title: "SearchClient",
 })
