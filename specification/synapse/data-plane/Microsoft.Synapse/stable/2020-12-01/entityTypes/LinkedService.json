@@ -4413,6 +4413,10 @@
       "description": "Azure PostgreSQL linked service properties.",
       "type": "object",
       "properties": {
+        "connectionString": {
+          "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
         "server": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -4476,13 +4480,7 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      },
-      "required": [
-        "server",
-        "username",
-        "database",
-        "sslMode"
-      ]
+      }
     },
     "ConcurLinkedService": {
       "x-ms-discriminator-value": "Concur",
