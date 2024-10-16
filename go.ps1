@@ -44,5 +44,5 @@ Measure-Command -Expression {
 # In pipelines: 
 # | Parallelism | Linux Time | Windows Time |
 # |-------------|------------|--------------|
-# | None        | 29m 5s     | 41m 10s      | 
+# | None        | 29m 5s     | 41m 10s      |
 # | 6           | 16m 57s    | 24m 30s      |
