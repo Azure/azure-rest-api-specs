@@ -31,10 +31,8 @@ interface ExportTerraform {
   @route("/exportTerraform")
   @post
   @tag("ExportTerraform")
-  @operationId("ExportTerraform_Export")
-  exportTerraform(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
+  export(
+    ...CommonExportTerraformParameters,
 
     @doc("The export parameter")
     @body
@@ -51,11 +49,9 @@ interface ExportTerraform {
   @route("/operationStatuses/{operationId}")
   @get
   @tag("OperationStatuses")
-  @operationId("ExportTerraform_GetOperationStatuses")
-  operationStatuses is ArmReadOperation<
+  getOperationStatus is ArmReadOperation<
     {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
+      ...CommonExportTerraformParameters;
       ...OperationIdParameter;
     },
     TerraformOperationStatus | (TerraformOperationStatus &
