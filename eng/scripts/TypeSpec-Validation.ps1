@@ -6,7 +6,7 @@ param (
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
   [int]$FolderCount = 0,
-  [int] $Parallelism = 3
+  [int] $Parallelism = 2
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
@@ -75,7 +75,9 @@ if ($typespecFolders) {
         # TODO: Ensure this is proper and correct. Can something in service A
         # affect files in Service B? Can they impact files in the root? Worth 
         # examining.
+        Write-Host "git restore $service"
         git restore $service | Out-Null
+        Write-Host "git clean -df $service"
         git clean -df $service | Out-Null
       }
     }
