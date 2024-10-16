@@ -27,6 +27,9 @@ These are the global settings for the Azure Red Hat OpenShift API.
 ``` yaml
 openapi-type: arm
 tag: package-2024-08-12-preview
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Our use of additionalProperties is valid according to review from ARM team
 ```
 
 ### Tag: package-2020-04-30
