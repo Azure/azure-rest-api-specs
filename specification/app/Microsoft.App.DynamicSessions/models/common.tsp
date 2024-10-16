@@ -16,8 +16,11 @@ model ExecutionOperationIdHeader {
 
 @doc("Session identifier query parameter.")
 model SessionIdentifier {
-  @doc("The identifier of the session.")
+  @doc("The user-assigned identifier of the session.")
   @query
+  @minLength(1)
+  @maxLength(256)
+  @pattern("^[A-Za-z0-9-_]{1,256}$")
   identifier: string;
 }
 

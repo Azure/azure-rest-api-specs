@@ -40,7 +40,7 @@ model SessionCodeExecutionResult {
 model SessionCodeExecutionResponse {
   @visibility("read")
   @doc("Session code execution id.")
-  id?: string;
+  id: string;
 
   @doc("The identifier of the session.")
   identifier: string;

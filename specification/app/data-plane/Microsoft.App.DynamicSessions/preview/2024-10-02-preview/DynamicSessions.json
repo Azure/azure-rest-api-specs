@@ -654,6 +654,7 @@
         }
       },
       "required": [
+        "id",
         "identifier",
         "executionType",
         "status"
@@ -768,9 +769,12 @@
     "SessionIdentifier": {
       "name": "identifier",
       "in": "query",
-      "description": "The identifier of the session.",
+      "description": "The user-assigned identifier of the session.",
       "required": true,
       "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9-_]{1,256}$",
       "x-ms-parameter-location": "method"
     },
     "SessionResourceFileNamePathParameter": {
