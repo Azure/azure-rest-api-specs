@@ -4,13 +4,18 @@ param (
   [switch]$GitClean = $false,
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
-  [string]$TargetCommitish = "HEAD"
+  [string]$TargetCommitish = "HEAD",
+  [int]$FolderCount = 20
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
 
 $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -BaseCommitish:$BaseCommitish -TargetCommitish:$TargetCommitish -CheckAll:$CheckAll
+
+if ($FolderCount) { 
+  $typespecFolders = $typespecFolders[0..($FolderCount - 1)]
+}
 
 $typespecFoldersWithFailures = @()
 if ($typespecFolders) {
