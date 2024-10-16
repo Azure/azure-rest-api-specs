@@ -31,7 +31,7 @@ interface ExportTerraform {
   @route("/exportTerraform")
   @post
   @tag("ExportTerraform")
-  export(
+  exportTerraform(
     ...CommonExportTerraformParameters,
 
     @doc("The export parameter")

@@ -4,7 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.AzureTerraform;
 
-@@clientName(ExportTerraform.export, "ExportTerraform", "csharp");
+@@clientName(ExportTerraform.exportTerraform, "ExportTerraform", "csharp");
 @@clientName(ExportTerraform.getOperationStatus,
   "GetOperationStatus",
   "csharp"
