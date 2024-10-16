@@ -27,4 +27,4 @@ Measure-Command -Expression {
 #
 
 # Parallelism 10 (20 folders): 
-# TotalSeconds      : 237.0811563
+# TotalSeconds      : 62.0577551
