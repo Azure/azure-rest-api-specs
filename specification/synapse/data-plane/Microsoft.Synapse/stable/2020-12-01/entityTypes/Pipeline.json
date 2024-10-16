@@ -8075,6 +8075,10 @@
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size for each http request, too large pageSize will caused timeout, default 300,000. Type: integer (or Expression with resultType integer)."
         }
       }
     },
@@ -8180,6 +8184,10 @@
           "type": "object",
           "description": "Expression to filter data from source.",
           "$ref": "#/definitions/ExpressionV2"
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
         }
       }
     },
