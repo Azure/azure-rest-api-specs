@@ -153,8 +153,8 @@ model AssociationDefinition {
 
 @doc("An request to remove an association.")
 model AssociationRemoveRequest {
-  @doc("Id of the association.")
-  id: string;
+  @doc("Id of the association, which by default is a guid.")
+  associationId: string;
 }
 
 @doc("An request to paginate a list of result.")
