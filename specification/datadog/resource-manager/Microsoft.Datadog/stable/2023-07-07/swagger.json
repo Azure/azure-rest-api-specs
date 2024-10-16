@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Datadog",
-    "version": "2023-01-01"
+    "version": "2023-07-07"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -19,7 +19,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Microsoft Entra ID OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -142,7 +142,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CreateResourceSupportedResponseList"
+              "$ref": "#/definitions/CreateResourceSupportedResponse"
             }
           },
           "default": {
@@ -152,12 +152,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "x-ms-examples": {
-          "CreationSupported_List": {
-            "$ref": "./examples/CreationSupported_List.json"
+          "CreationSupported_Get": {
+            "$ref": "./examples/CreationSupported_Get.json"
           }
         }
       }
@@ -498,7 +495,7 @@
         "tags": [
           "MonitorsResource"
         ],
-        "summary": "List all operations provided by Microsoft.Datadog for the 2023-01-01 api version.",
+        "summary": "List all operations provided by Microsoft.Datadog for the 2021-03-01 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -1237,7 +1234,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MonitoredSubscriptionPropertiesList"
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
           },
           "default": {
@@ -1246,9 +1243,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         },
         "x-ms-examples": {
           "Monitors_GetMonitoredSubscriptions": {
@@ -1573,8 +1567,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogAgreementResource"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1605,18 +1598,6 @@
         "properties": {
           "$ref": "#/definitions/CreateResourceSupportedProperties",
           "description": "Represents the properties of the resource."
-        }
-      }
-    },
-    "CreateResourceSupportedResponseList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CreateResourceSupportedResponse"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -1653,8 +1634,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogApiKey"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1738,8 +1718,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogHost"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1879,8 +1858,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitoredSubscription"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1905,17 +1883,6 @@
         },
         "properties": {
           "$ref": "#/definitions/SubscriptionList"
-        }
-      }
-    },
-    "MonitoredSubscriptionPropertiesList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MonitoredSubscriptionProperties"
-          }
         }
       }
     },
@@ -1967,8 +1934,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1983,7 +1949,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'linking'.",
+          "description": "Name of the SKU.",
           "type": "string"
         }
       }
@@ -2004,8 +1970,7 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProvisioningState"
-      },
-      "readOnly": true
+      }
     },
     "MonitoringStatus": {
       "description": "Flag specifying if the resource monitoring is enabled or disabled.",
@@ -2036,7 +2001,7 @@
       "readOnly": true
     },
     "DatadogOrganizationProperties": {
-      "description": "Specify the Datadog organization name. In the case of linking to existing organizations, Id, ApiKey, and Applicationkey is required as well.",
+      "description": "Datadog organization properties",
       "type": "object",
       "properties": {
         "name": {
@@ -2102,13 +2067,13 @@
           ]
         },
         "cspm": {
-          "description": "The configuration which describes the state of cloud security posture management. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
+          "description": "The configuration which describes the state of cloud security posture management",
           "type": "boolean"
         }
       }
     },
     "UserInfo": {
-      "description": "Includes name, email and optionally, phone number. User Information can't be null.",
+      "description": "User info",
       "type": "object",
       "properties": {
         "name": {
@@ -2177,7 +2142,7 @@
         "UserAssigned"
       ],
       "type": "string",
-      "description": "Specifies the identity type of the Datadog Monitor. At this time the only allowed value is 'SystemAssigned'.",
+      "description": "Identity type",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ManagedIdentityTypes"
@@ -2272,7 +2237,7 @@
           "$ref": "#/definitions/MonitoringStatus"
         },
         "cspm": {
-          "description": "The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
+          "description": "The new cspm value of the monitor resource.",
           "type": "boolean"
         }
       }
@@ -2354,8 +2319,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2368,8 +2332,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2388,6 +2351,10 @@
         },
         "automuting": {
           "description": "Configuration to enable/disable auto-muting flag",
+          "type": "boolean"
+        },
+        "customMetrics": {
+          "description": "Configuration to enable/disable custom metrics. If enabled, custom metrics from app insights will be sent.",
           "type": "boolean"
         }
       }
