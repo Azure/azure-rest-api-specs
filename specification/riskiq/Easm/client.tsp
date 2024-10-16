@@ -4,7 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(Easm.Versions.v2024_03_01_preview)
+@TypeSpec.Versioning.useDependency(Easm.Versions.v2024_10_01_preview)
 namespace Customizations;
 
 @client({
