@@ -940,17 +940,17 @@
       "description": "Universal asynchronous batch request body.",
       "properties": {
         "inputContainerUri": {
-          "description": "The URI for the Azure Blob Storage container with the input blobs to be processed.",
+          "description": "The URI for the Azure Data Storage container with the input blobs to be processed.\n\nIf new files are added after job processing start, these will not be accounted for.\n\nService does not recursively check blobs inside sub-containers.",
           "type": "string",
           "format": "uri"
         },
         "outputContainerUri": {
-          "description": "The URI for the Azure Blob Storage container where the output blobs will be stored.",
+          "description": "The URI for the Azure Data Storage container where the output blobs will be stored.\n\nIf outputContainerUri doesn't exist, the container will be created by the service during transformation.\n\nIf one or multiple files with same name already exist in output path, behavior is different depends on the allowBlobOverwrite flag.\n\nFor any given input blob, the resolved result is named with the format \"<originalBasename>.rsp.json.\"",
           "type": "string",
           "format": "uri"
         },
         "allowBlobOverwrite": {
-          "description": "If a blob with the same name as the batch result output already exists in the output container, the transformation will terminate to avoid overwriting the existing blob. If allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
+          "description": "If a blob with the same name as the batch result output already exists in the output container, the transformation will terminate to avoid overwriting the existing blob and fail that specific blob. If allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
           "type": "boolean",
           "default": false
         },
