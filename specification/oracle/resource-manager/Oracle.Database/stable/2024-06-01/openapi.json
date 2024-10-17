@@ -4129,9 +4129,7 @@
         "retentionPeriodInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "Retention period, in days, for long-term backups.",
-          "minimum": 60,
-          "maximum": 3650,
+          "description": "Retention period, in days",
           "x-ms-mutability": [
             "read",
             "update",
@@ -4220,9 +4218,7 @@
         "retentionPeriodInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "Retention period, in days, for long-term backups.",
-          "minimum": 60,
-          "maximum": 3650,
+          "description": "Retention period, in days",
           "x-ms-mutability": [
             "read",
             "update",
@@ -4389,7 +4385,7 @@
         },
         "peerDbIds": {
           "type": "array",
-          "description": "The list of [OCIDs](https://docs.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of standby databases located in Autonomous Data Guard remote regions that are associated with the source database. Note that for Autonomous Database Serverless instances, standby databases located in the same region as the source primary database do not have OCIDs.",
+          "description": "The list of Azure IDs of standby databases located in Autonomous Data Guard remote regions that are associated with the source database. Note that for Autonomous Database Serverless instances, standby databases located in the same region as the source primary database do not have Azure IDs.",
           "items": {
             "type": "string"
           },
@@ -8856,7 +8852,7 @@
       "properties": {
         "peerDbId": {
           "type": "string",
-          "description": "The database OCID of the Disaster Recovery peer database, which is located in a different region from the current peer database.",
+          "description": "The Azure ID of the Disaster Recovery peer database, which is located in a different region from the current peer database.",
           "minLength": 1,
           "maxLength": 255
         }
