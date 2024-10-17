@@ -317,11 +317,11 @@ model StorageAccountOwnershipVoucherStorage extends OwnershipVoucherStorage {
   @doc("The storage resource id")
   resourceId: StorageAccountResourceId;
 
-  @doc("Endpoint URL for the storage account") // TODO: determine correct example here
+  @doc("Endpoint URL for the storage container. e.g: https://contoso.blob.core.windows.net/mycontainer")
   containerUri: url;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.Storage/storageAccounts/(.+)$") // TODO: test removing to see if RPaaS behavior has changed
+@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.Storage/storageAccounts/(.+)$")
 @added(Versions.v2024_12_01_preview)
 scalar StorageAccountResourceId
   extends armResourceIdentifier<[
