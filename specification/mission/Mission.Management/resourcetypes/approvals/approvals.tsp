@@ -25,31 +25,30 @@ union ApprovalStatus {
   @doc("ApprovalStatus Type Pending")
   Pending: "Pending",
 
-  string
+  string,
 }
 
 @doc("Request Metadata for approvals request.")
-model RequestMetadata{
+model RequestMetadata {
   @doc("Resource Action of the item being approved or declined.")
-    resourceAction: string;
+  resourceAction: string;
 
-    @doc("Approval status.")
-    approvalStatus?: ApprovalStatus;
+  @doc("Approval status.")
+  approvalStatus?: ApprovalStatus;
 }
 
 @doc("Approvals Resource Properties")
 model ApprovalProperties {
+  @doc("Provisioning State.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 
-    @doc("Provisioning State.")
-    @visibility("read")
-    provisioningState?: ProvisioningState;
+  @doc("Parameter for optimizing query results")
+  parent1?: string;
 
-    @doc("Parameter for optimizing query results")
-    parent1?: string;
+  @doc("Parameter for optimizing query results")
+  parent2?: string;
 
-    @doc("Parameter for optimizing query results")
-    parent2?: string;
-
-    @doc("Request metadata for the approval request.")
-    requestMetadata: RequestMetadata;
+  @doc("Request metadata for the approval request.")
+  requestMetadata: RequestMetadata;
 }
