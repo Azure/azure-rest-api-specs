@@ -189,7 +189,7 @@
     "/timezone/byCoordinates/{format}": {
       "get": {
         "summary": "Use to get the current, historical, and future time zone information for the specified latitude-longitude pair.",
-        "description": "\n\nThe `Get Timezone By Coordinates` API is an HTTP `GET` request that returns current, historical, and future time zone information for a specified latitude-longitude pair. In addition, the API provides sunset and sunrise times for a given location.",
+        "description": "\n\nThe `Get Timezone By Coordinates` API is an HTTP `GET` request that returns current, historical, and future time zone information for a specified latitude-longitude pair. In addition, the API provides sunset and sunrise times for a given location, with the exception of regions that observe solar days.",
         "operationId": "Timezone_GetTimezoneByCoordinates",
         "x-ms-examples": {
           "Successfully retrieve timezone by coordinates": {
@@ -670,13 +670,13 @@
           "readOnly": true
         },
         "Sunrise": {
-          "description": "Sunrise at the given time zone as shown in the `Tag` property. The sunrise is described in the ISO8601 format. (Only be populated if the call is byCoordinates)",
+          "description": "Sunrise at the given time zone as shown in the `Tag` property, populated only when the call is `byCoordinates`. The sunrise is described in the [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Note that the Timezone API does not return sunrise and sunset times when solar day is observed in the requested region.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "Sunset": {
-          "description": "Sunset at the given time zone as shown in the `Tag` property. The sunset is described in the ISO8601 format.(Only be populated if the call is byCoordinates)",
+          "description": "Sunset at the given time zone as shown in the `Tag` property, populated only when the call is `byCoordinates`. The sunset is described in the [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Note that the Timezone API does not return sunrise and sunset times when solar day is observed in the requested region.",
           "type": "string",
           "format": "date-time",
           "readOnly": true

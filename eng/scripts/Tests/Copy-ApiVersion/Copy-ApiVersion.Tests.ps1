@@ -1,6 +1,8 @@
 Import-Module Pester
 
-. "$PSScriptRoot\..\..\Copy-ApiVersion-Functions.ps1"
+BeforeAll {
+    . "$PSScriptRoot\..\..\Copy-ApiVersion-Functions.ps1"
+}
 
 Describe "Copy-ApiVersion regex tests" {
     Context "Generate new version tag section" {
@@ -16,6 +18,18 @@ Describe "Copy-ApiVersion regex tests" {
                 provider      = "Microsoft.Compute\ComputeRP"
                 versionStatus = "stable"
                 specsDir      = '..\..\..\..\..\specification\compute\resource-manager\Microsoft.Compute\ComputeRP\stable\2023-09-01'
+            },
+            @{
+                version       = "7.6-preview.1"
+                provider      = "Microsoft.KeyVault"
+                versionStatus = "preview"
+                specsDir      = '..\..\..\..\..\specification\keyvault\data-plane\Microsoft.KeyVault\preview\7.6-preview.1'
+            },
+            @{
+                version       = "7.5"
+                provider      = "Microsoft.Compute\ComputeRP"
+                versionStatus = "stable"
+                specsDir      = '..\..\..\..\..\specification\keyvault\data-plane\Microsoft.KeyVault\stable\7.5'
             }
         ) {
             param($version, $provider, $versionStatus, $specsDir)
@@ -23,36 +37,37 @@ Describe "Copy-ApiVersion regex tests" {
             $jsonFiles = Get-ChildItem $PSScriptRoot+$specsDir -Filter '*.json' | Select-Object -ExpandProperty Name
             $newTagSection = Get-NewTagSection $version $provider $versionStatus $jsonFiles
             
-            $version -match '\d{4}-\d{2}'
-            $tag = $Matches[0]
+            $tag = $version
             if ($versionStatus -eq "preview") {
                 $tag = "preview-" + $tag
             }
 
-            $newTagSection | Should match "package-$tag"
+            $newTagSection | Should -Match "(?m)^### Tag: package-$tag$"
         }
 
+        # TODO: This is fragile. The tests stop working when a service team updates their readme.md. We should instead take fixed copies or something.
         It "Default version gets updated" -TestCases @(
-            @{
-                inputReadme   = '..\..\..\..\..\specification\agrifood\resource-manager\readme.md'
-                apiVersion    = "2024-01-01-preview"
-                versionStatus = "preview"
-            },
             @{
                 inputReadme   = '..\..\..\..\..\specification\compute\resource-manager\readme.md'
                 apiVersion    = "2024-01-01"
                 versionStatus = "stable"
+            },
+            @{
+                inputReadme   = '..\..\..\..\..\specification\keyvault\data-plane\readme.md'
+                apiVersion    = "7.6-preview.1"
+                versionStatus = "preview"
             }
         ) {
             param($inputReadme, $apiVersion, $versionStatus)
             $contents = Get-Content $PSScriptRoot+$inputReadme -Raw
             $output = Get-ReadmeWithLatestTag $contents $apiVersion $versionStatus
-            $tag = $apiVersion -match '\d{4}-\d{2}'
-            $tag = $Matches[0]
+
+            $tag = $apiVersion
             if ($versionStatus -eq "preview") {
                 $tag = "preview-" + $tag
             }
-            $output | Should match "(?m)^tag:\s*package-$tag"
+
+            $output | Should -Match "(?m)^tag:\s*package-$tag$"
         }
     }
 }
