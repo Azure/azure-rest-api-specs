@@ -374,3 +374,14 @@ using Microsoft.AzureFleet;
   "isUltraSSDEnabled",
   "csharp"
 );
+@@clientName(VMAttributes, "ComputeFleetVMAttributes", "csharp");
+@@clientName(VMAttributeSupport, "ComputeFleetVMAttributeSupport", "csharp");
+@@clientName(VMAttributeMinMaxDouble,
+  "ComputeFleetVmAttributeMinMaxDouble",
+  "csharp"
+);
+@@clientName(VMAttributeMinMaxInteger,
+  "ComputeFleetVmAttributeMinMaxInteger",
+  "csharp"
+);
+@@clientName(VMCategory, "ComputeFleetVmCategory", "csharp");

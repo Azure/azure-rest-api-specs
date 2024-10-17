@@ -586,6 +586,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BasePriorityProfile": {
       "type": "object",
       "description": "Contains common properties that are applicable to both Spot and Regular.",
@@ -1105,7 +1110,7 @@
           "readOnly": true
         },
         "uniqueId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Specifies the ID which uniquely identifies a Compute Fleet.",
           "readOnly": true
         }
@@ -2310,6 +2315,7 @@
         },
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The compute RP resource id of the virtualMachineScaleSet \n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}\"",
           "readOnly": true
         },
