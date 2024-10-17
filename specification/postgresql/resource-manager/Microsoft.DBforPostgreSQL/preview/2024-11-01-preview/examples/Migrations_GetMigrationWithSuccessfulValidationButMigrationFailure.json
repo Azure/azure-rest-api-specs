@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testrg",
+    "targetDbServerName": "testtarget",
+    "migrationMode": "Offline",
+    "migrationName": "testmigrationwithsuccessfulvalidationbutmigrationfailure"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "da52db29-cfeb-4670-a1ad-683edb14c621",
+          "currentStatus": {
+            "state": "Failed",
+            "error": "testdb6: Collation/Encoding not Supported Error:  User defined Collations are present in the source database. Please drop them before retrying the migration. ",
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {
+                "testdb6": {
+                  "databaseName": "testdb6",
+                  "migrationState": "Failed",
+                  "startedOn": "2023-08-21T13:09:52.9226008Z",
+                  "endedOn": "2023-08-21T13:09:53.2526436Z",
+                  "fullLoadErroredTables": 0,
+                  "fullLoadQueuedTables": 0,
+                  "fullLoadLoadingTables": 0,
+                  "fullLoadCompletedTables": 0,
+                  "cdcUpdateCounter": 0,
+                  "cdcDeleteCounter": 0,
+                  "cdcInsertCounter": 0,
+                  "appliedChanges": 0,
+                  "incomingChanges": 0,
+                  "latency": 0,
+                  "message": "Collation/Encoding not Supported Error:  User defined Collations are present in the source database. Please drop them before retrying the migration."
+                }
+              },
+              "validationDetails": {
+                "status": "Succeeded",
+                "validationStartTimeInUtc": "2023-08-21T13:04:21.6230786Z",
+                "validationEndTimeInUtc": "2023-08-21T13:04:24.5659891Z",
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "address_standardizer",
+                    "startedOn": "2023-08-21T13:04:24.5659891+00:00",
+                    "endedOn": "2023-08-21T13:04:24.5659891+00:00",
+                    "summary": [
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "migrationMode": "Offline",
+          "migrationWindowEndTimeInUtc": "2023-08-21T13:04:24.5659891Z",
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/source-rg/providers/Microsoft.DBforPostgreSQL/servers/testsource",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testtarget",
+          "dbsToMigrate": [
+            "testdb6"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2023-08-21T13:04:24.5659891Z",
+          "sourceDbServerMetadata": {
+            "location": "eastus2",
+            "storageMb": 102400,
+            "sku": {}
+          },
+          "targetDbServerMetadata": {
+            "location": "East US 2",
+            "storageMb": 131072,
+            "sku": {
+              "name": "Standard_D2ds_v4",
+              "tier": "Standard_D2ds_v4"
+            }
+          },
+          "migrateRoles": "False",
+          "migrationOption": "ValidateAndMigrate"
+        },
+        "location": "eastus2",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigrationwithsuccessfulvalidationbutmigrationfailure",
+        "name": "testmigrationwithsuccessfulvalidationbutmigrationfailure",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}
