@@ -59,7 +59,7 @@ These are the global settings for the IoTOperations.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-011-01
+tag: package-2024-11-01
 ```
 
 ### Tag: package-2024-07-01-preview
