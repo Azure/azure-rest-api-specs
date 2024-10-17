@@ -12,7 +12,7 @@ import "./agents/streaming/events.tsp";
 import "./agents/vector_stores/routes.tsp";
 import "./agents/vector_stores/files/routes.tsp";
 import "./agents/vector_stores/file_batches/routes.tsp";
-import "./endpoints/routes.tsp";
+import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
 
 using TypeSpec.Http;

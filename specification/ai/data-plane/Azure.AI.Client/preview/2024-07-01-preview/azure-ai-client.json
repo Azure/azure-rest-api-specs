@@ -388,7 +388,7 @@
     },
     "/connections": {
       "get": {
-        "operationId": "Endpoints_List",
+        "operationId": "Connections_List",
         "description": "List the details of all the connections (not including their credentials)",
         "parameters": [
           {
@@ -416,15 +416,15 @@
           }
         },
         "x-ms-examples": {
-          "Endpoints_List_MaximumSet": {
-            "$ref": "./examples/Endpoints_List_MaximumSet_Gen.json"
+          "Connections_List_MaximumSet_Gen": {
+            "$ref": "./examples/Connections_List_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/connections/{connectionNameInUrl}/listsecrets": {
       "post": {
-        "operationId": "Endpoints_ListSecrets",
+        "operationId": "Connections_ListSecrets",
         "description": "Get the details of a single connection, including credential (if available).",
         "parameters": [
           {
@@ -496,8 +496,8 @@
           }
         },
         "x-ms-examples": {
-          "Endpoints_ListSecrets_MaximumSet": {
-            "$ref": "./examples/Endpoints_ListSecrets_MaximumSet_Gen.json"
+          "Connections_ListSecrets_MaximumSet_Gen": {
+            "$ref": "./examples/Connections_ListSecrets_MaximumSet_Gen.json"
           }
         }
       }
@@ -550,13 +550,13 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Evaluations_List_MaximumSet": {
             "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -765,13 +765,13 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Evaluations_ListSchedule_MaximumSet": {
             "$ref": "./examples/Evaluations_ListSchedule_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -8476,7 +8476,7 @@
       "description": "Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)",
       "properties": {
         "category": {
-          "$ref": "#/definitions/EndpointType",
+          "$ref": "#/definitions/ConnectionType",
           "description": "Category of the connection"
         },
         "target": {
@@ -8500,7 +8500,7 @@
       "description": "Connection properties for connections with API key authentication",
       "properties": {
         "category": {
-          "$ref": "#/definitions/EndpointType",
+          "$ref": "#/definitions/ConnectionType",
           "description": "Category of the connection"
         },
         "credentials": {
@@ -8529,7 +8529,7 @@
       "description": "Connection properties for connections with SAS authentication",
       "properties": {
         "category": {
-          "$ref": "#/definitions/EndpointType",
+          "$ref": "#/definitions/ConnectionType",
           "description": "Category of the connection"
         },
         "credentials": {
@@ -8552,6 +8552,30 @@
         }
       ],
       "x-ms-discriminator-value": "SAS"
+    },
+    "ConnectionType": {
+      "type": "string",
+      "description": "The Type (or category) of the connection",
+      "enum": [
+        "AzureOpenAI",
+        "Serverless"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "AzureOpenAI",
+            "value": "AzureOpenAI",
+            "description": "Azure OpenAI service"
+          },
+          {
+            "name": "Serverless",
+            "value": "Serverless",
+            "description": "Serverless API service"
+          }
+        ]
+      }
     },
     "ConnectionsListResponse": {
       "type": "object",
@@ -8665,30 +8689,6 @@
         }
       ],
       "x-ms-discriminator-value": "dataset"
-    },
-    "EndpointType": {
-      "type": "string",
-      "description": "The Type (or category) of the connection",
-      "enum": [
-        "AzureOpenAI",
-        "Serverless"
-      ],
-      "x-ms-enum": {
-        "name": "EndpointType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "AzureOpenAI",
-            "value": "AzureOpenAI",
-            "description": "Azure OpenAI service"
-          },
-          {
-            "name": "Serverless",
-            "value": "Serverless",
-            "description": "Serverless API service"
-          }
-        ]
-      }
     },
     "Evaluation": {
       "type": "object",
