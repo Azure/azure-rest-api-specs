@@ -601,107 +601,6 @@
           "description": "When set to true during a job, the service will surrogate all documents individually.",
           "default": false
         },
-        "overwrite": {
-          "type": "boolean",
-          "description": "When set to true during a job, the service will overwrite the output location if it already exists.",
-          "default": false
-        },
-        "locale": {
-          "type": "string",
-          "description": "Language and Locale that the service should use.",
-          "default": "en-US"
-        }
-      }
-    },
-    "DeidentificationContent": {
-      "type": "object",
-      "description": "Request body for de-identification operation.",
-      "properties": {
-        "inputText": {
-          "type": "string",
-          "description": "Input text to de-identify.",
-          "maxLength": 100000
-        },
-        "operation": {
-          "type": "string",
-          "description": "Operation to perform on the input.",
-          "default": "Surrogate",
-          "enum": [
-            "Redact",
-            "Surrogate",
-            "Tag"
-          ],
-          "x-ms-enum": {
-            "name": "OperationType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Redact",
-                "value": "Redact",
-                "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
-              },
-              {
-                "name": "Surrogate",
-                "value": "Surrogate",
-                "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
-              },
-              {
-                "name": "Tag",
-                "value": "Tag",
-                "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
-              }
-            ]
-          }
-        },
-        "dataType": {
-          "type": "string",
-          "description": "Data type of the input.",
-          "default": "Plaintext",
-          "enum": [
-            "Plaintext"
-          ],
-          "x-ms-enum": {
-            "name": "DocumentDataType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Plaintext",
-                "value": "Plaintext",
-                "description": "Plain text data type."
-              }
-            ]
-          }
-        },
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when OperationType is \"Redact\".",
-          "maxLength": 16
-        }
-      },
-      "required": [
-        "inputText"
-      ]
-    },
-    "DeidentificationJob": {
-      "type": "object",
-      "description": "A job containing a batch of documents to de-identify.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of a job.",
-          "minLength": 3,
-          "maxLength": 36,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$",
-          "readOnly": true
-        },
-        "sourceLocation": {
-          "$ref": "#/definitions/SourceStorageLocation",
-          "description": "Storage location to perform the operation on."
-        },
-        "targetLocation": {
-          "$ref": "#/definitions/TargetStorageLocation",
-          "description": "Target location to store output of operation."
-        },
         "operation": {
           "type": "string",
           "description": "Operation to perform on the input documents.",
@@ -732,10 +631,21 @@
               }
             ]
           }
+        }
+      }
+    },
+    "DeidentificationContent": {
+      "type": "object",
+      "description": "Request body for de-identification operation.",
+      "properties": {
+        "inputText": {
+          "type": "string",
+          "description": "Input text to de-identify.",
+          "maxLength": 48000
         },
         "dataType": {
           "type": "string",
-          "description": "Data type of the input documents.",
+          "description": "Data type of the input.",
           "default": "Plaintext",
           "enum": [
             "Plaintext"
@@ -751,6 +661,35 @@
               }
             ]
           }
+        },
+        "customizations": {
+          "$ref": "#/definitions/CustomizationOptions",
+          "description": "Customization parameters to override default service behaviors."
+        }
+      },
+      "required": [
+        "inputText"
+      ]
+    },
+    "DeidentificationJob": {
+      "type": "object",
+      "description": "A job containing a batch of documents to de-identify.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of a job.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$",
+          "readOnly": true
+        },
+        "sourceLocation": {
+          "$ref": "#/definitions/SourceStorageLocation",
+          "description": "Storage location to perform the operation on."
+        },
+        "targetLocation": {
+          "$ref": "#/definitions/TargetStorageLocation",
+          "description": "Target location to store output of operation."
         },
         "customizations": {
           "$ref": "#/definitions/CustomizationOptions",
@@ -1263,6 +1202,30 @@
           "items": {
             "type": "string"
           }
+        },
+        "locale": {
+          "type": "string",
+          "description": "Language and Locale that the service should use.",
+          "default": "en-US"
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the input documents.",
+          "default": "Plaintext",
+          "enum": [
+            "Plaintext"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentDataType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Plaintext",
+                "value": "Plaintext",
+                "description": "Plain text data type."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1310,6 +1273,11 @@
           "description": "Prefix to filter path by.",
           "minLength": 1,
           "maxLength": 1024
+        },
+        "overwrite": {
+          "type": "boolean",
+          "description": "When set to true during a job, the service will overwrite the output location if it already exists.",
+          "default": false
         }
       },
       "required": [
