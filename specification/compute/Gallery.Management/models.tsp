@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -625,7 +623,8 @@ model GalleryUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a Shared Image Gallery.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryProperties;
 }
 
@@ -768,7 +767,8 @@ model GalleryApplicationUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery Application Definition.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryApplicationProperties;
 }
 
@@ -815,6 +815,7 @@ model GalleryApplicationVersionPublishingProfile
    */
   source: UserArtifactSource;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   manageActions?: UserArtifactManage;
 
   /**
@@ -855,6 +856,7 @@ model UserArtifactSource {
   defaultConfigurationLink?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserArtifactManage {
   /**
    * Required. The path and arguments to install the gallery application. This is limited to 4096 characters.
@@ -1028,6 +1030,7 @@ model DataDiskImageEncryption extends DiskImageEncryption {
   lun: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model GalleryTargetExtendedLocation {
   /**
    * The name of the region.
@@ -1059,6 +1062,7 @@ model GalleryTargetExtendedLocation {
  * The name of the extended location.
  */
 model GalleryExtendedLocation {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
 
   /**
@@ -1137,7 +1141,8 @@ model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryApplicationVersionProperties;
 }
 
@@ -1331,7 +1336,8 @@ model GalleryImageUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image definition.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryImageProperties;
 }
 
@@ -1591,7 +1597,8 @@ model GalleryImageVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryImageVersionProperties;
 }
 
@@ -1635,7 +1642,8 @@ model PirSharedGalleryResource extends PirResource {
   /**
    * The identifier information of shared gallery.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   identifier?: SharedGalleryIdentifier;
 }
 
@@ -1906,7 +1914,8 @@ model PirCommunityGalleryResource {
   /**
    * The identifier information of community gallery.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   identifier?: CommunityGalleryIdentifier;
 }
 
@@ -2067,6 +2076,7 @@ model CommunityGalleryImageVersionProperties {
   artifactTags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubResource {
   /**
    * Resource Id
@@ -2074,6 +2084,7 @@ model SubResource {
   id?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubResourceReadOnly {
   /**
    * Resource Id
@@ -2131,6 +2142,7 @@ model ExtendedLocation {
   type?: ExtendedLocationTypes;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.
