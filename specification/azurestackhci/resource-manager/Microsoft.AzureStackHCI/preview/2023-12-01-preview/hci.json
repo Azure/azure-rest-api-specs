@@ -776,7 +776,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "Name of Cluster",
+            "description": "The name of the Cluster",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -826,7 +826,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "Name of Cluster",
+            "description": "The name of the Cluster",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -879,7 +879,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "Name of Cluster",
+            "description": "The name of the Cluster",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -945,9 +945,6 @@
           },
           "ClusterJobs_CreateOrUpdate_ResumeServerJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ResumeServerJob.json"
-          },
-          "ClusterJobs_CreateOrUpdate_Windows_AddNetworkIntentJob": {
-            "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddNetworkIntentJob.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -974,7 +971,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "Name of Cluster",
+            "description": "The name of the Cluster",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1026,6 +1023,24 @@
     }
   },
   "definitions": {
+    "AddNetworkIntentJobDetails": {
+      "type": "object",
+      "description": "Host and Network details for which the intent has to be added.",
+      "properties": {
+        "hostNetwork": {
+          "$ref": "#/definitions/DeploymentHostNetwork",
+          "description": "HostNetwork properties to set network intent."
+        },
+        "arcNodeResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
+        }
+      },
+      "required": [
+        "hostNetwork"
+      ]
+    },
     "AddNetworkIntentJobProperties": {
       "type": "object",
       "description": "Properties for adding network intent to a cluster.",
@@ -1097,24 +1112,17 @@
             "secretName"
           ]
         },
-        "hostNetwork": {
-          "$ref": "#/definitions/DeploymentHostNetwork",
-          "description": "HostNetwork properties to set network intent."
-        },
-        "arcNodeResourceIds": {
+        "addNetworkIntentJobDetails": {
           "type": "array",
-          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "Host and Network details for which the intent has to be added.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/AddNetworkIntentJobDetails"
           },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "hostNetwork"
+        "addNetworkIntentJobDetails"
       ]
     },
     "AddServerJobProperties": {
@@ -1233,8 +1241,7 @@
       },
       "required": [
         "serverName",
-        "hostIpv4Address",
-        "arcNodeResourceId"
+        "hostIpv4Address"
       ]
     },
     "AzureLinuxAddServerJobProperties": {
@@ -1875,10 +1882,10 @@
     },
     "Cluster": {
       "type": "object",
-      "description": "A Cluster",
+      "description": "Cluster details.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ClusterProperties",
+          "type": "object",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -2027,17 +2034,6 @@
             "description": "RackAware Cluster."
           }
         ]
-      }
-    },
-    "ClusterProperties": {
-      "type": "object",
-      "description": "A ClusterProperties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the cluster.",
-          "readOnly": true
-        }
       }
     },
     "CollectLogJobProperties": {
@@ -2939,24 +2935,17 @@
             "secretName"
           ]
         },
-        "hostNetwork": {
-          "$ref": "#/definitions/DeploymentHostNetwork",
-          "description": "HostNetwork properties to set network intent."
-        },
-        "arcNodeResourceIds": {
+        "addNetworkIntentJobDetails": {
           "type": "array",
-          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "Host and Network details for which the intent has to be added.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/AddNetworkIntentJobDetails"
           },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "hostNetwork"
+        "addNetworkIntentJobDetails"
       ],
       "allOf": [
         {
@@ -3735,6 +3724,30 @@
       ],
       "x-ms-discriminator-value": "HybridComputeMachine"
     },
+    "IdentityProvider": {
+      "type": "string",
+      "description": "Identity Provider for the cluster",
+      "enum": [
+        "ActiveDirectory",
+        "LocalIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveDirectory",
+            "value": "ActiveDirectory",
+            "description": "Active Directory as the Identity Provider. This is the default option."
+          },
+          {
+            "name": "LocalIdentity",
+            "value": "LocalIdentity",
+            "description": "Use local identity with Azure Keyvault"
+          }
+        ]
+      }
+    },
     "IpAddressRange": {
       "type": "object",
       "description": "IP address range configuration.",
@@ -3779,7 +3792,7 @@
     },
     "JobReportedProperties": {
       "type": "object",
-      "description": "Reported Properties for cluster job triggered from cloud.",
+      "description": "Reported Properties for job triggered from cloud.",
       "properties": {
         "percentComplete": {
           "type": "integer",
@@ -3789,7 +3802,7 @@
         },
         "validationStatus": {
           "$ref": "#/definitions/EceActionStatus",
-          "description": "Validation status of ob.",
+          "description": "Validation status of job.",
           "readOnly": true
         },
         "deploymentStatus": {
@@ -4273,8 +4286,7 @@
         }
       },
       "required": [
-        "serverName",
-        "arcNodeResourceId"
+        "serverName"
       ]
     },
     "ProvisionOsReportedProperties": {
@@ -4706,8 +4718,7 @@
         }
       },
       "required": [
-        "serverName",
-        "arcNodeResourceId"
+        "serverName"
       ]
     },
     "ResumeServerJobProperties": {
@@ -4799,8 +4810,7 @@
         }
       },
       "required": [
-        "serverName",
-        "arcNodeResourceId"
+        "serverName"
       ]
     },
     "Step": {

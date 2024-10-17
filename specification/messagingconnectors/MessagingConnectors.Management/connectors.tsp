@@ -42,9 +42,11 @@ interface ConnectorOperations {
   @doc("Delete an Connector instance for the specified subscription, resource group, and instance name.")
   delete is ArmResourceDeleteSync<MessagingConnector>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
   @doc("Pause one Connector to paused status")
   pause is ArmResourceActionNoContentSync<MessagingConnector, {}>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
   @doc("Resume one Connector to running status")
   resume is ArmResourceActionNoContentSync<MessagingConnector, {}>;
 
