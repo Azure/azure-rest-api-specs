@@ -21,7 +21,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** Enumeration of PII categories to be excluded in the response. */
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
+  /** Character to be used for redaction. Default in '*'." */
   @removed(Versions.v2024_11_15_preview)
   redactionCharacter: redactionCharacter = redactionCharacter.asterisk;
 
@@ -70,7 +70,7 @@ model CharacterMaskPolicy extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
 
-  /** Character to be used for redaction. Default in '*'." */
+  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
