@@ -24,7 +24,7 @@ model ChangeArtifact {
 
 /* ChangeArtifact for InlineArmTemplate or InlineBicep. */
 @doc("Describes the change payload for InlineArmTemplate or InlineBicep")
-model InlineTemaplateChangeArtifact extends ChangeArtifact {
+model InlineTemplateChangeArtifact extends ChangeArtifact {
   @visibility("read", "create")
   @doc("The type of the artifact.")
   artifactType: ArtifactType.InlineArmTemplate | ArtifactType.InlineBicep;

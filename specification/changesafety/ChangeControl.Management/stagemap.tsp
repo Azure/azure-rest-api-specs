@@ -24,7 +24,7 @@ model StageMap is ProxyResource<StageMapProperties> {
   name: string;
 }
 
-@doc("Detailed properties of the StageMap resoruce.")
+@doc("Detailed properties of the StageMap resource.")
 model StageMapProperties {
   @visibility("read")
   @doc("The status of the last operation.")
@@ -63,9 +63,9 @@ model Stage {
 
   @doc("Stage Map Id.")
   @visibility("read", "create")
-  childStageMapReference?: string;
+  nestedStageMapResourceId?: string;
 
-  @doc("Referenced stagemap snapshot.")
+  @doc("Referenced StageMap snapshot.")
   @visibility("hidden")
   stageMapSnapshot?: StageMap;
 }

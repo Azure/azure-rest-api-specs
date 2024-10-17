@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.ChangeSafety;
 
-@doc("Defines the progression of a change using these child resources, with changestage parent resource.")
+@doc("Defines the progression of a change using these child resources, with ChangeState parent resource.")
 @parentResource(ChangeState)
 model StageProgression is ProxyResource<StageProgressionProperties> {
   @doc("name of the stageProgression")
@@ -28,7 +28,7 @@ model StageProgressionProperties {
   provisioningState?: ProvisioningState;
 
   @visibility("read", "create")
-  @doc("Stage name relevant to hirarchical stagemap.")
+  @doc("Stage name relevant to hierarchical StageMap.")
   @minLength(3)
   @maxLength(200)
   stageReference: string;
@@ -50,11 +50,11 @@ model StageProgressionProperties {
 
   @visibility("read", "create", "update")
   @doc("Comments about the status update of the resource.")
-  @maxLength(200)
+  @maxLength(2000)
   updateComments?: string;
 }
 
-@doc("Indicates the current status of the progression of the change within the statge.")
+@doc("Indicates the current status of the progression of the change within the stage.")
 union StageProgressionState {
   string,
 

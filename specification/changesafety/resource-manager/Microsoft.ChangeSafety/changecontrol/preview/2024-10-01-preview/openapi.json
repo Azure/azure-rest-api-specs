@@ -992,10 +992,6 @@
           "type": "string",
           "description": "Resource Id."
         },
-        "name": {
-          "type": "string",
-          "description": "Resource name"
-        },
         "type": {
           "type": "string",
           "description": "Resource type."
@@ -1003,11 +999,14 @@
         "tenantId": {
           "type": "string",
           "description": "TenantId of the resource."
+        },
+        "identity": {
+          "type": "string",
+          "description": "User information."
         }
       },
       "required": [
         "id",
-        "name",
         "type"
       ]
     },
@@ -1055,7 +1054,7 @@
     },
     "ChangeStateProperties": {
       "type": "object",
-      "description": "Detailed properties of the ChangeState resoruce.",
+      "description": "Detailed properties of the ChangeState resource.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1073,7 +1072,7 @@
         "description": {
           "type": "string",
           "description": "Brief description about the change.",
-          "maxLength": 200,
+          "maxLength": 2000,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1082,7 +1081,7 @@
         },
         "stageMapResourceId": {
           "type": "string",
-          "description": "ARM resource Id of the Referenced stagemap.",
+          "description": "ARM resource Id of the Referenced StageMap.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1137,6 +1136,7 @@
         "updateComments": {
           "type": "string",
           "description": "Comments about the status update.",
+          "maxLength": 2000,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1166,12 +1166,12 @@
     },
     "ChangeStatePropertiesUpdate": {
       "type": "object",
-      "description": "Detailed properties of the ChangeState resoruce.",
+      "description": "Detailed properties of the ChangeState resource.",
       "properties": {
         "description": {
           "type": "string",
           "description": "Brief description about the change.",
-          "maxLength": 200,
+          "maxLength": 2000,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1210,6 +1210,7 @@
         "updateComments": {
           "type": "string",
           "description": "Comments about the status update.",
+          "maxLength": 2000,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1410,9 +1411,9 @@
           "description": "Guid for the StageProgression user should be using when do the PUT operation.",
           "readOnly": true
         },
-        "stageName": {
+        "stageReference": {
           "type": "string",
-          "description": "Stage name relevant to the hierarchical stagemap. Identifies the stage uniquely within a changestate resource.",
+          "description": "Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changestate resource.",
           "readOnly": true
         },
         "parameterValues": {
@@ -1424,11 +1425,24 @@
       },
       "required": [
         "id",
-        "stageName",
+        "stageReference",
         "parameterValues"
       ]
     },
-    "InlineTemaplateChangeArtifact": {
+    "InlineTemplateArtifactContent": {
+      "type": "object",
+      "description": "Artifact content model for Inline template or bicep content.",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "Inline ArmTemplate string or Bicep content."
+        }
+      },
+      "required": [
+        "script"
+      ]
+    },
+    "InlineTemplateChangeArtifact": {
       "type": "object",
       "description": "Describes the change payload for InlineArmTemplate or InlineBicep",
       "properties": {
@@ -1448,19 +1462,6 @@
         {
           "$ref": "#/definitions/ChangeArtifact"
         }
-      ]
-    },
-    "InlineTemplateArtifactContent": {
-      "type": "object",
-      "description": "Artifact content model for Inline template or bicep content.",
-      "properties": {
-        "script": {
-          "type": "string",
-          "description": "Inline ArmTemplate string or Bicep content."
-        }
-      },
-      "required": [
-        "script"
       ]
     },
     "NumberParameter": {
@@ -1642,7 +1643,7 @@
             "create"
           ]
         },
-        "childStageMapReference": {
+        "nestedStageMapResourceId": {
           "type": "string",
           "description": "Stage Map Id.",
           "x-ms-mutability": [
@@ -1673,7 +1674,7 @@
     },
     "StageMapProperties": {
       "type": "object",
-      "description": "Detailed properties of the StageMap resoruce.",
+      "description": "Detailed properties of the StageMap resource.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1713,7 +1714,7 @@
     },
     "StageMapPropertiesUpdate": {
       "type": "object",
-      "description": "Detailed properties of the StageMap resoruce."
+      "description": "Detailed properties of the StageMap resource."
     },
     "StageMapUpdate": {
       "type": "object",
@@ -1732,7 +1733,7 @@
     },
     "StageProgression": {
       "type": "object",
-      "description": "Defines the progression of a change using these child resources, with changestage parent resource.",
+      "description": "Defines the progression of a change using these child resources, with ChangeState parent resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StageProgressionProperties",
@@ -1777,7 +1778,7 @@
         },
         "stageReference": {
           "type": "string",
-          "description": "Stage name relevant to hirarchical stagemap.",
+          "description": "Stage name relevant to hierarchical StageMap.",
           "minLength": 3,
           "maxLength": 200,
           "x-ms-mutability": [
@@ -1813,7 +1814,7 @@
         "updateComments": {
           "type": "string",
           "description": "Comments about the status update of the resource.",
-          "maxLength": 200,
+          "maxLength": 2000,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1843,7 +1844,7 @@
         "updateComments": {
           "type": "string",
           "description": "Comments about the status update of the resource.",
-          "maxLength": 200,
+          "maxLength": 2000,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1854,7 +1855,7 @@
     },
     "StageProgressionState": {
       "type": "string",
-      "description": "Indicates the current status of the progression of the change within the statge.",
+      "description": "Indicates the current status of the progression of the change within the stage.",
       "enum": [
         "Initialized",
         "InProgress",
@@ -1908,7 +1909,7 @@
     },
     "StageProgressionUpdate": {
       "type": "object",
-      "description": "Defines the progression of a change using these child resources, with changestage parent resource.",
+      "description": "Defines the progression of a change using these child resources, with ChangeState parent resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StageProgressionPropertiesUpdate",

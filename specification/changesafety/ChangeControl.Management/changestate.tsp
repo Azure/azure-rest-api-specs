@@ -27,7 +27,7 @@ model ChangeState is ProxyResource<ChangeStateProperties> {
   name: string;
 }
 
-@doc("Detailed properties of the ChangeState resoruce.")
+@doc("Detailed properties of the ChangeState resource.")
 model ChangeStateProperties {
   @visibility("read")
   @doc("The status of the last operation.")
@@ -39,11 +39,11 @@ model ChangeStateProperties {
 
   @visibility("read", "create", "update")
   @doc("Brief description about the change.")
-  @maxLength(200)
+  @maxLength(2000)
   description?: string;
 
   @visibility("read", "create")
-  @doc("ARM resource Id of the Referenced stagemap.")
+  @doc("ARM resource Id of the Referenced StageMap.")
   stageMapResourceId: string;
 
   @visibility("read", "create")
@@ -68,6 +68,7 @@ model ChangeStateProperties {
 
   @visibility("read", "create", "update")
   @doc("Comments about the status update.")
+  @maxLength(2000)
   updateComments?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
@@ -94,9 +95,9 @@ model GetNextStagesResponseItem {
   @visibility("read")
   id: string;
 
-  @doc("Stage name relevant to the hierarchical stagemap. Identifies the stage uniquely within a changestate resource.")
+  @doc("Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changestate resource.")
   @visibility("read")
-  stageName: string;
+  stageReference: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
@@ -123,14 +124,14 @@ model AuditTrailItem {
   @doc("Resource Id.")
   id: string;
 
-  @doc("Resource name")
-  name: string;
-
-  @doc("Resource type.")
+   @doc("Resource type.")
   type: string;
 
   @doc("TenantId of the resource.")
   tenantId?: string;
+
+  @doc("User information.")
+  identity?: string;
 }
 
 @doc("Internal status of the ChangeState resource.")
