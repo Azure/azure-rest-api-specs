@@ -49,14 +49,14 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
-  policyKind: RedactionPolicyKind = RedactionPolicyKind.maskWithCharacter;
+  policyKind: RedactionPolicyKind = RedactionPolicyKind.characterMask;
 }
 
 /** Represents the policy of redacting with a redaction character */
 @added(Versions.v2024_11_15_preview)
 model MaskWithRedactionCharacterPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
-  policyKind: RedactionPolicyKind.maskWithCharacter;
+  policyKind: RedactionPolicyKind.characterMask;
 
   /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
@@ -66,14 +66,14 @@ model MaskWithRedactionCharacterPolicyType extends BaseRedactionPolicy {
 @added(Versions.v2024_11_15_preview)
 model DoNotRedactPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
-  policyKind: RedactionPolicyKind.doNotRedact;
+  policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
 @added(Versions.v2024_11_15_preview)
 model MaskWithEntityTypePolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
-  policyKind: RedactionPolicyKind.maskWithEntityType;
+  policyKind: RedactionPolicyKind.entityMask;
 }
 
 /** Kinds of redaction policies supported. */
@@ -82,13 +82,13 @@ union RedactionPolicyKind {
   string,
 
   /** Do not redact detected entities. */
-  doNotRedact: "doNotRedact",
+  noMask: "noMask",
 
   /** React detected entities with redaction character. */
-  maskWithCharacter: "maskWithCharacter",
+  characterMask: "characterMask",
 
   /** Redact detected entities with entity type. */
-  maskWithEntityType: "maskWithEntityType",
+  entityMask: "entityMask",
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */

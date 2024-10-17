@@ -190,6 +190,9 @@
           }
         },
         "x-ms-examples": {
+          "SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskSubmit": {
+            "$ref": "./examples/SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskSubmit.json"
+          },
           "SuccessfulAbstractiveSummarizationTaskSubmit": {
             "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskSubmit.json"
           },
@@ -268,6 +271,9 @@
           }
         },
         "x-ms-examples": {
+          "SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskResult": {
+            "$ref": "./examples/SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskResult.json"
+          },
           "SuccessfulAbstractiveSummarizationTaskResult": {
             "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskResult.json"
           },
@@ -1338,29 +1344,29 @@
         "policyKind": {
           "type": "string",
           "description": "The entity RedactionPolicy object kind.",
-          "default": "maskWithCharacter",
+          "default": "characterMask",
           "enum": [
-            "doNotRedact",
-            "maskWithCharacter",
-            "maskWithEntityType"
+            "noMask",
+            "characterMask",
+            "entityMask"
           ],
           "x-ms-enum": {
             "name": "RedactionPolicyKind",
             "modelAsString": true,
             "values": [
               {
-                "name": "doNotRedact",
-                "value": "doNotRedact",
+                "name": "noMask",
+                "value": "noMask",
                 "description": "Do not redact detected entities."
               },
               {
-                "name": "maskWithCharacter",
-                "value": "maskWithCharacter",
+                "name": "characterMask",
+                "value": "characterMask",
                 "description": "React detected entities with redaction character."
               },
               {
-                "name": "maskWithEntityType",
-                "value": "maskWithEntityType",
+                "name": "entityMask",
+                "value": "entityMask",
                 "description": "Redact detected entities with entity type."
               }
             ]
@@ -1908,7 +1914,7 @@
           "$ref": "#/definitions/BaseRedactionPolicy"
         }
       ],
-      "x-ms-discriminator-value": "doNotRedact"
+      "x-ms-discriminator-value": "noMask"
     },
     "DocumentError": {
       "type": "object",
@@ -4349,7 +4355,7 @@
           "$ref": "#/definitions/BaseRedactionPolicy"
         }
       ],
-      "x-ms-discriminator-value": "maskWithEntityType"
+      "x-ms-discriminator-value": "entityMask"
     },
     "MaskWithRedactionCharacterPolicyType": {
       "type": "object",
@@ -4458,7 +4464,7 @@
           "$ref": "#/definitions/BaseRedactionPolicy"
         }
       ],
-      "x-ms-discriminator-value": "maskWithCharacter"
+      "x-ms-discriminator-value": "characterMask"
     },
     "Match": {
       "type": "object",
