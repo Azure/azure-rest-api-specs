@@ -3,86 +3,84 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-
 @doc("Provisioning state of resource.")
 @Azure.Core.lroStatus
 union ProvisioningState {
-    string,
-    
-    @doc("The resource is being provisioned.")
-    Provisioning: "Provisioning",
+  string,
 
-    @doc("The resource is being updated")
-    Updating: "Updating",
+  @doc("The resource is being provisioned.")
+  Provisioning: "Provisioning",
 
-    @doc("The resource is being deleted.")
-    Deleting: "Deleting",
+  @doc("The resource is being updated")
+  Updating: "Updating",
 
-    @doc(" The resource create request has been accepted.")
-    Accepted: "Accepted",
+  @doc("The resource is being deleted.")
+  Deleting: "Deleting",
 
-    @doc("Resource has been created.")
-    Succeeded: "Succeeded",
+  @doc(" The resource create request has been accepted.")
+  Accepted: "Accepted",
 
-    @doc("Resource creation failed.")
-    Failed: "Failed",
+  @doc("Resource has been created.")
+  Succeeded: "Succeeded",
 
-    @doc("Resource creation was canceled.")
-    Canceled: "Canceled",
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
 }
 
 @doc("Data type of the parameter.")
 union ParameterType {
-    string,
-    
-    @doc("string data type")
-    String: "string",
+  string,
 
-    @doc("integer data type")
-    Number: "number",
+  @doc("string data type")
+  String: "string",
+
+  @doc("integer data type")
+  Number: "number",
 }
 
 @doc("Base class for the Parameters.")
 @discriminator("type")
 model Parameter {
- 
-   @doc("Data type of the parameter.")
-   @visibility("read", "create")
-   type: ParameterType;
+  @doc("Data type of the parameter.")
+  @visibility("read", "create")
+  type: ParameterType;
 
-   @doc("user-specified parameter metadata")
-   @visibility("read", "create", "update")
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
-    #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: Metadata does not have a fixed schema as there may be any number of properties. Hence implemented as a Record."
-   metadata?: Record<string>
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: Metadata does not have a fixed schema as there may be any number of properties. Hence implemented as a Record."
+  @doc("user-specified parameter metadata")
+  @visibility("read", "create", "update")
+  metadata?: Record<string>;
 }
 
 @doc("String Type Parameter model.")
 model StringParameter extends Parameter {
-    @doc("Data type of the parameter.")
-   @visibility("read", "create")
-   type: ParameterType.String;
+  @doc("Data type of the parameter.")
+  @visibility("read", "create")
+  type: ParameterType.String;
 
-   @doc("Default value for the parameter.")
-   @visibility("read", "create")
-   defaultValue? : ParameterType.String;
+  @doc("Default value for the parameter.")
+  @visibility("read", "create")
+  defaultValue?: ParameterType.String;
 
-   @doc("Allowed list of the values for the parameter.")
-   @visibility("read", "create")
-   allowedValues: Array<ParameterType.String>;
+  @doc("Allowed list of the values for the parameter.")
+  @visibility("read", "create")
+  allowedValues: Array<ParameterType.String>;
 }
 
 @doc("Integer type parameter model")
 model NumberParameter extends Parameter {
-   @doc("Data type of the parameter.")
-   @visibility("read", "create")
-   type: ParameterType.Number;
+  @doc("Data type of the parameter.")
+  @visibility("read", "create")
+  type: ParameterType.Number;
 
-   @doc("Default value for the parameter.")
-   @visibility("read", "create")
-   defaultValue? : int32;
+  @doc("Default value for the parameter.")
+  @visibility("read", "create")
+  defaultValue?: int32;
 
-   @doc("Allowed list of the values for the parameter.")
-   @visibility("read", "create")
-   allowedValues: Array<int32>;
+  @doc("Allowed list of the values for the parameter.")
+  @visibility("read", "create")
+  allowedValues: Array<int32>;
 }

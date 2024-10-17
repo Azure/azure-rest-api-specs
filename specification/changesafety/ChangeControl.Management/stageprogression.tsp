@@ -23,61 +23,61 @@ model StageProgression is ProxyResource<StageProgressionProperties> {
 
 @doc("Detailed properties of the StageProgression resource.")
 model StageProgressionProperties {
-    @visibility("read")
-    @doc("The status of the last operation.")
-    provisioningState?: ProvisioningState;
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
 
-    @visibility("read", "create")
-    @doc("Stage name relevant to hirarchical stagemap.")
-    @minLength(3)
-    @maxLength(200)
-    stageReference: string;
+  @visibility("read", "create")
+  @doc("Stage name relevant to hirarchical stagemap.")
+  @minLength(3)
+  @maxLength(200)
+  stageReference: string;
 
-    @visibility("read", "create", "update")
-    @doc("StageProgression resource state.")
-    state: StageProgressionState;
+  @visibility("read", "create", "update")
+  @doc("StageProgression resource state.")
+  state: StageProgressionState;
 
-    @visibility("read")
-    @doc("The sequence of the stage within the ChangeStage parent resource.")
-    @minValue(1)
-    sequence?: int32;
+  @visibility("read")
+  @doc("The sequence of the stage within the ChangeStage parent resource.")
+  @minValue(1)
+  sequence?: int32;
 
-    @doc("Parameters to apply on the change of that stage. Key value pairs of parameter and values.")
-    @visibility("read", "create")
-    #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
-    parameterValues: Record<string | int32>;
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
+  @doc("Parameters to apply on the change of that stage. Key value pairs of parameter and values.")
+  @visibility("read", "create")
+  parameterValues: Record<string | int32>;
 
-    @visibility("read", "create", "update")
-    @doc("Comments about the status update of the resource.")
-    @maxLength(200)
-    updateComments?: string;
+  @visibility("read", "create", "update")
+  @doc("Comments about the status update of the resource.")
+  @maxLength(200)
+  updateComments?: string;
 }
 
 @doc("Indicates the current status of the progression of the change within the statge.")
 union StageProgressionState {
-    string;
+  string,
 
-    @doc("Change is initialized to be applied within the stage.")
-    Initialized : "Initialized";
+  @doc("Change is initialized to be applied within the stage.")
+  Initialized: "Initialized",
 
-    @doc("Change is being applied within the stage.")
-    InProgress: "InProgress";
+  @doc("Change is being applied within the stage.")
+  InProgress: "InProgress",
 
-    @doc("Change is applied to the stage already.")
-    Completed: "Completed";
+  @doc("Change is applied to the stage already.")
+  Completed: "Completed",
 
-    @doc("Change apply operation was abandoned.")
-    Abandoned: "Abandoned";
+  @doc("Change apply operation was abandoned.")
+  Abandoned: "Abandoned",
 
-    @doc("Change apply operation was paused.")
-    Paused: "Paused";
+  @doc("Change apply operation was paused.")
+  Paused: "Paused",
 
-    @doc("Change apply operation was failed.")
-    Failed: "Failed";
+  @doc("Change apply operation was failed.")
+  Failed: "Failed",
 
-    @doc("Change is not applied to the stage.")
-    Skipped: "Skipped";
+  @doc("Change is not applied to the stage.")
+  Skipped: "Skipped",
 }
 
 @armResourceOperations
@@ -89,4 +89,3 @@ interface StageProgressions {
 
   listByParent is ArmResourceListByParent<StageProgression>;
 }
-
