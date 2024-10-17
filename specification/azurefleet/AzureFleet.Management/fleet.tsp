@@ -102,7 +102,7 @@ model FleetProperties {
 
   @doc("Specifies the ID which uniquely identifies a Compute Fleet.")
   @visibility("read")
-  uniqueId?: uuid;
+  uniqueId?: string;
 }
 
 @doc("Compute Profile to use for running user's workloads.")
