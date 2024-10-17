@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Document Analysis",
-    "version": "2023-11-15-preview",
+    "version": "2024-11-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.\nThe API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering.\nFurther documentation can be found in <a href=\\\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "x-typespec-generated": [
       {
@@ -669,6 +669,129 @@
       ],
       "x-ms-discriminator-value": "AzureBlob"
     },
+    "BaseRedactionPolicy": {
+      "type": "object",
+      "description": "The abstract base class for RedactionPolicy.",
+      "properties": {
+        "policyKind": {
+          "$ref": "#/definitions/RedactionPolicyKind",
+          "description": "The entity RedactionPolicy object kind."
+        }
+      },
+      "discriminator": "policyKind",
+      "required": [
+        "policyKind"
+      ]
+    },
+    "CharacterMaskPolicy": {
+      "type": "object",
+      "description": "Represents the policy of redacting with a redaction character",
+      "properties": {
+        "redactionCharacter": {
+          "type": "string",
+          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+          "default": "*",
+          "enum": [
+            "!",
+            "#",
+            "$",
+            "%",
+            "&",
+            "*",
+            "+",
+            "-",
+            "=",
+            "?",
+            "@",
+            "^",
+            "_",
+            "~"
+          ],
+          "x-ms-enum": {
+            "name": "redactionCharacter",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "exclamationPoint",
+                "value": "!",
+                "description": "Exclamation point character"
+              },
+              {
+                "name": "numberSign",
+                "value": "#",
+                "description": "Number sign character"
+              },
+              {
+                "name": "dollar",
+                "value": "$",
+                "description": "Dollar sign character"
+              },
+              {
+                "name": "perCent",
+                "value": "%",
+                "description": "Percent sign character"
+              },
+              {
+                "name": "ampersand",
+                "value": "&",
+                "description": "Ampersand character"
+              },
+              {
+                "name": "asterisk",
+                "value": "*",
+                "description": "Asterisk character"
+              },
+              {
+                "name": "plus",
+                "value": "+",
+                "description": "Plus sign character"
+              },
+              {
+                "name": "minus",
+                "value": "-",
+                "description": "Minus sign character"
+              },
+              {
+                "name": "equals",
+                "value": "=",
+                "description": "Equals sign character"
+              },
+              {
+                "name": "questionMark",
+                "value": "?",
+                "description": "Question mark character"
+              },
+              {
+                "name": "atSign",
+                "value": "@",
+                "description": "At sign character"
+              },
+              {
+                "name": "caret",
+                "value": "^",
+                "description": "Caret character"
+              },
+              {
+                "name": "underscore",
+                "value": "_",
+                "description": "Underscore character"
+              },
+              {
+                "name": "tilde",
+                "value": "~",
+                "description": "Tilde character"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "characterMask"
+    },
     "DetectedLanguage": {
       "type": "object",
       "description": "Contains the details of the detected language for the text.",
@@ -832,6 +955,16 @@
         "code",
         "message"
       ]
+    },
+    "EntityMaskPolicy": {
+      "type": "object",
+      "description": "Represents the policy of redacting PII with the entity type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "entityMask"
     },
     "Error": {
       "type": "object",
@@ -1285,6 +1418,16 @@
         "source",
         "target"
       ]
+    },
+    "NoMaskPolicy": {
+      "type": "object",
+      "description": "Represents the policy of not redacting found PII.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "noMask"
     },
     "PiiCategoriesExclude": {
       "type": "string",
@@ -3493,107 +3636,41 @@
             "$ref": "#/definitions/PiiCategoriesExclude"
           }
         },
-        "redactionCharacter": {
-          "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
-          "default": "*",
-          "enum": [
-            "!",
-            "#",
-            "$",
-            "%",
-            "&",
-            "*",
-            "+",
-            "-",
-            "=",
-            "?",
-            "@",
-            "^",
-            "_",
-            "~"
-          ],
-          "x-ms-enum": {
-            "name": "redactionCharacter",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "exclamationPoint",
-                "value": "!",
-                "description": "Exclamation point character"
-              },
-              {
-                "name": "numberSign",
-                "value": "#",
-                "description": "Number sign character"
-              },
-              {
-                "name": "dollar",
-                "value": "$",
-                "description": "Dollar sign character"
-              },
-              {
-                "name": "perCent",
-                "value": "%",
-                "description": "Percent sign character"
-              },
-              {
-                "name": "ampersand",
-                "value": "&",
-                "description": "Ampersand character"
-              },
-              {
-                "name": "asterisk",
-                "value": "*",
-                "description": "Asterisk character"
-              },
-              {
-                "name": "plus",
-                "value": "+",
-                "description": "Plus sign character"
-              },
-              {
-                "name": "minus",
-                "value": "-",
-                "description": "Minus sign character"
-              },
-              {
-                "name": "equals",
-                "value": "=",
-                "description": "Equals sign character"
-              },
-              {
-                "name": "questionMark",
-                "value": "?",
-                "description": "Question mark character"
-              },
-              {
-                "name": "atSign",
-                "value": "@",
-                "description": "At sign character"
-              },
-              {
-                "name": "caret",
-                "value": "^",
-                "description": "Caret character"
-              },
-              {
-                "name": "underscore",
-                "value": "_",
-                "description": "Underscore character"
-              },
-              {
-                "name": "tilde",
-                "value": "~",
-                "description": "Tilde character"
-              }
-            ]
-          }
+        "redactionPolicy": {
+          "$ref": "#/definitions/BaseRedactionPolicy",
+          "description": "Redaction policy to be used when redacting from documents"
         }
-      },
-      "required": [
-        "redactionCharacter"
-      ]
+      }
+    },
+    "RedactionPolicyKind": {
+      "type": "string",
+      "description": "Kinds of redaction policies supported.",
+      "enum": [
+        "noMask",
+        "characterMask",
+        "entityMask"
+      ],
+      "x-ms-enum": {
+        "name": "RedactionPolicyKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "noMask",
+            "value": "noMask",
+            "description": "Do not redact detected entities."
+          },
+          {
+            "name": "characterMask",
+            "value": "characterMask",
+            "description": "React detected entities with redaction character."
+          },
+          {
+            "name": "entityMask",
+            "value": "entityMask",
+            "description": "Redact detected entities with entity type."
+          }
+        ]
+      }
     },
     "RequestStatistics": {
       "type": "object",

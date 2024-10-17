@@ -21,6 +21,10 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** Enumeration of PII categories to be excluded in the response. */
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
+  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
+  @removed(Versions.v2024_11_15_preview)
+  redactionCharacter: redactionCharacter = redactionCharacter.asterisk;
+
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
@@ -66,7 +70,7 @@ model CharacterMaskPolicy extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
 
-  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
+  /** Character to be used for redaction. Default in '*'." */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
@@ -117,8 +121,12 @@ model Entity {
   /** Entity text as appears in the request. */
   text: string;
 
-  /** Entity type. */
+  /** Entity category is the broad grouping of the entity detected. It is a legacy field and replaces the the Type and Tags field in the future. */
   category: string;
+
+  /** Entity subcategory */
+  @removed(Versions.v2024_11_15_preview)
+  subCategory?: string;
 
   /** Most granular type of the entity detected */
   @added(Versions.v2024_11_15_preview)
