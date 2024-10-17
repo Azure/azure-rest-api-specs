@@ -1,0 +1,450 @@
+import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "./main.tsp";
+import "../common/models.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+using Azure.Core.Foundations;
+
+namespace Microsoft.MachineLearningServices;
+
+@doc("Get an Online Endpoint.")
+@route("/onlineEndpoints/{name}")
+@get
+op GetOnlineEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of the endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    name: string;
+  },
+  OnlineEndpoint
+>;
+
+@doc("Delete an Online Endpoint.")
+@route("/onlineEndpoints/{name}")
+@delete
+op DeleteOnlineEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of the endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    name: string;
+  },
+  void
+>;
+
+@doc("Update an Online Endpoint.")
+@route("/onlineEndpoints/{name}")
+@patch
+op UpdateOnlineEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of the endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    name: string;
+
+    @doc("Online Endpoint entity to apply during operation.")
+    @body
+    body: PartialMinimalTrackedResourceWithIdentity;
+  },
+  OnlineEndpoint
+>;
+
+@doc("Create or Update an Online Endpoint.")
+@route("/onlineEndpoints/{name}")
+@put
+op CreateOrUpdateOnlineEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of the endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    name: string;
+
+    @doc("Online Endpoint")
+    @body
+    body: OnlineEndpoint;
+  },
+  OnlineEndpoint
+>;
+
+@route("/onlineEndpoints")
+@doc("List Online Endpoints.")
+@get
+op listOnlineEndpoints(
+  @query
+  @doc("Name of the endpoint.")
+  name?: string,
+
+  @query
+  @doc("Number of endpoints to be retrieved in a page of results.")
+  count?: int32,
+
+  @query
+  @doc("EndpointComputeType to be filtered by.")
+  computeType?: EndpointComputeType,
+
+  @query
+  @doc("A set of tags with which to filter the returned models. It is a comma separated string of tags key or tags key=value. Example: tagKey1,tagKey2,tagKey3=value3 .")
+  tags?: string,
+
+  @query
+  @doc("A set of properties with which to filter the returned models. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .")
+  properties?: string,
+
+  @query
+  @doc("The option to order the response.")
+  orderBy?: OrderString,
+): PagedOnlineEndpoint;
+
+@doc("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
+@route("/onlineEndpoints/{name}/listKeys")
+@post
+op ListKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of the endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    name: string;
+
+    @doc("Online Endpoint")
+    @body
+    body: RegenerateEndpointKeysRequest;
+  },
+  EndpointAuthKeys
+>;
+
+@doc("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
+@route("/onlineEndpoints/{name}/regenerateKeys")
+@post
+op RegenerateKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of the endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    name: string;
+  },
+  EndpointAuthKeys
+>;
+
+@doc("Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.")
+@route("/onlineEndpoints/{name}/token")
+@put
+op GetTokenOnlineEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of the endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    name: string;
+  },
+  EndpointAuthToken
+>;
+
+@route("/onlineEndpoints/{endpointName}/deployments")
+@doc("List Online Deployments.")
+@get
+op listOnlineDeployments(
+  @doc("Inference endpoint name.")
+  @path
+  endpointName: string,
+
+  @doc("Ordering of list.")
+  @query("$orderBy")
+  $orderBy?: string,
+
+  @doc("Top of list.")
+  @query("$top")
+  $top?: int32,
+): PagedOnlineDeployment;
+
+@doc("Delete an Online Deployment.")
+@route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
+@delete
+op DeleteOnlineDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Inference endpoint name.")
+    @path
+    endpointName: string;
+
+    @doc("Inference Endpoint Deployment name.")
+    @path
+    deploymentName: string;
+  },
+  void
+>;
+
+@doc("Gets an online inference deployment by id.")
+@route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
+@get
+op GetOnlineDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Inference endpoint name.")
+    @path
+    endpointName: string;
+
+    @doc("Inference Endpoint Deployment name.")
+    @path
+    deploymentName: string;
+  },
+  OnlineDeployment
+>;
+
+@doc("Update a Online Deployment.")
+@route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
+@patch
+op UpdateOnlineDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Inference endpoint name.")
+    @path
+    endpointName: string;
+
+    @doc("Inference Endpoint Deployment name.")
+    @path
+    deploymentName: string;
+
+    @doc("Online Endpoint entity to apply during operation.")
+    @body
+    body: PartialMinimalTrackedResourceWithSku;
+  },
+  OnlineDeployment
+>;
+
+@doc("Create or Update an Online Deployment.")
+@route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
+@put
+op CreateOrUpdateOnlineDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Inference endpoint name.")
+    @path
+    endpointName: string;
+
+    @doc("Inference Endpoint Deployment name.")
+    @path
+    deploymentName: string;
+
+    @doc("Inference Endpoint entity to apply during operation.")
+    @body
+    body: OnlineDeployment;
+  },
+  OnlineDeployment
+>;
+
+@doc("Polls an Endpoint operation.")
+@route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs")
+@post
+op PollLogsOnlineDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Inference endpoint name.")
+    @path
+    endpointName: string;
+
+    @doc("Inference Endpoint Deployment name.")
+    @path
+    deploymentName: string;
+
+    @doc("The request containing parameters for retrieving logs.")
+    @body
+    body: DeploymentLogsRequest;
+  },
+  DeploymentLogs
+>;
+
+@doc("List Inference Endpoint Deployment Skus.")
+@route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus")
+@get
+op GetSkusOnlineDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Inference endpoint name.")
+    @path
+    endpointName: string;
+
+    @doc("Inference Endpoint Deployment name.")
+    @path
+    deploymentName: string;
+
+    @doc("Number of Skus to be retrieved in a page of results.")
+    @query
+    count: int32;
+  },
+  SkuResourceArmPaginatedResult
+>;
+
+///// Batch Endpoints ///////
+@doc("Get a Batch Endpoint.")
+@route("/batchEndpoints/{endpointName}")
+@get
+op GetBatchEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name for the Batch Endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+    @maxLength(254)
+    @path
+    endpointName: string;
+  },
+  BatchEndpoint
+>;
+
+@doc("Delete an Batch Endpoint.")
+@route("/batchEndpoints/{endpointName}")
+@delete
+op DeleteBatchEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Inference Endpoint name.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @maxLength(254)
+    @path
+    endpointName: string;
+  },
+  void
+>;
+
+@doc("Update a Batch Endpoint.")
+@route("/batchEndpoints/{endpointName}")
+@patch
+op UpdateBatchEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name for the Batch inference endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @maxLength(254)
+    @path
+    endpointName: string;
+
+    @doc("Mutable batch inference endpoint definition object.")
+    @body
+    body: PartialMinimalTrackedResourceWithIdentity;
+  },
+  BatchEndpoint
+>;
+
+@doc("Create or Update a Batch Endpoint.")
+@route("/batchEndpoints/{endpointName}")
+@put
+op CreateOrUpdateBatchEndpoint is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name for the Batch inference endpoint.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @maxLength(254)
+    @path
+    endpointName: string;
+
+    @doc("Batch inference endpoint definition object.")
+    @body
+    body: BatchEndpoint;
+  },
+  BatchEndpoint
+>;
+
+@route("/batchEndpoints")
+@doc("List Batch Endpoints.")
+@get
+op listBatchEndpoints(
+  @query
+  @doc("Number of endpoints to be retrieved in a page of results.")
+  count?: int32,
+): PagedBatchEndpoint;
+
+@route("/batchEndpoints/{endpointName}/deployments")
+@doc("List Batch Deployments.")
+@get
+op listBatchDeployments(
+  @doc("Endpoint name.")
+  @path
+  endpointName: string,
+
+  @doc("Ordering of list.")
+  @query("$orderBy")
+  $orderBy?: string,
+
+  @doc("Top of list.")
+  @query("$top")
+  $top?: int32,
+
+  @doc("Continuation token for pagination.")
+  @query("$skip")
+  $skip?: string,
+): PagedBatchDeployment;
+
+@doc("Delete an Batch Deployment.")
+@route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
+@delete
+op DeleteBatchDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Endpoint name")
+    @path
+    endpointName: string;
+
+    @doc("Inference deployment identifier.")
+    @path
+    deploymentName: string;
+  },
+  void
+>;
+
+@doc("Gets a batch inference deployment by id.")
+@route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
+@get
+op GetBatchDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Endpoint name")
+    @path
+    endpointName: string;
+
+    @doc("Inference deployment identifier.")
+    @path
+    deploymentName: string;
+  },
+  BatchDeployment
+>;
+
+@doc("Update a Batch Deployment.")
+@route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
+@patch
+op UpdateBatchDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Endpoint name")
+    @path
+    endpointName: string;
+
+    @doc("Inference deployment identifier.")
+    @path
+    deploymentName: string;
+
+    @doc("Mutable batch inference endpoint definition object.")
+    @body
+    body: PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties;
+  },
+  BatchDeployment
+>;
+
+@doc("Create or Update a Batch Deployment.")
+@route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
+@put
+op CreateOrUpdateBatchDeployment is Azure.Core.Foundations.Operation<
+  {
+    @doc("Endpoint name")
+    @path
+    endpointName: string;
+
+    @doc("The identifier for the Batch inference deployment.")
+    @path
+    deploymentName: string;
+
+    @doc("Batch inference deployment definition object.")
+    @body
+    body: BatchDeployment;
+  },
+  BatchEndpoint
+>;
