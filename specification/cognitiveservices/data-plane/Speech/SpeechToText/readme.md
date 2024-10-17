@@ -193,7 +193,7 @@ These settings apply only when `--tag=release_2024_11_15` is specified on the co
 
 ```yaml $(tag) == 'release_2024_11_15'
 input-file:
-  - preview/2024-11-15/speechtotext.json
+  - stable/2024-11-15/speechtotext.json
 ```
 
 AutoRest-Linter Suppressions
