@@ -534,6 +534,7 @@ op getSnapshot is standardOps.ResourceRead<
 @doc("Creates a key-value snapshot.")
 @route("/snapshots/{name}")
 @pollingOperation(getOperationDetails)
+@createsOrReplacesResource(Snapshot)
 @put
 op createSnapshot is Foundations.LongRunningOperation<
   {

@@ -1,0 +1,836 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs to manage Azure API Management gateway deployments.",
+    "version": "2024-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateways/{gatewayName}": {
+      "put": {
+        "tags": [
+          "ApiGateway"
+        ],
+        "operationId": "ApiGateway_CreateOrUpdate",
+        "description": "Creates or updates an API Management gateway. This is long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementCreateStandardGateway": {
+            "$ref": "./examples/ApiManagementCreateStandardGateway.json"
+          },
+          "ApiManagementCreateWorkspacePremiumGateway": {
+            "$ref": "./examples/ApiManagementCreateWorkspacePremiumGateway.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayResource"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate API Management gateway operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The gateway was successfully set up.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ApiGateway"
+        ],
+        "operationId": "ApiGateway_Update",
+        "description": "Updates an existing API Management gateway.",
+        "x-ms-examples": {
+          "ApiManagementUpdateStandardGateway": {
+            "$ref": "./examples/ApiManagementUpdateStandardGateway.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayUpdateParameters"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate API Management gateway operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The gateway was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayResource"
+            }
+          },
+          "202": {
+            "description": "The gateway update request was Accepted.",
+            "headers": {
+              "location": {
+                "description": "Location header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ApiGateway"
+        ],
+        "operationId": "ApiGateway_Get",
+        "description": "Gets an API Management gateway resource description.",
+        "x-ms-examples": {
+          "ApiManagementGatewayGetGateway": {
+            "$ref": "./examples/ApiManagementGatewayGetGateway.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the API Management gateway Resource.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiGateway"
+        ],
+        "operationId": "ApiGateway_Delete",
+        "description": "Deletes an existing API Management gateway.",
+        "x-ms-examples": {
+          "ApiManagementGatewayDeleteGateway": {
+            "$ref": "./examples/ApiManagementGatewayDeleteGateway.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The gateway delete request was accepted.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayResource"
+            },
+            "headers": {
+              "location": {
+                "description": "Location header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The gateway does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateways": {
+      "get": {
+        "tags": [
+          "ApiGateway"
+        ],
+        "operationId": "ApiGateway_ListByResourceGroup",
+        "description": "List all API Management gateways within a resource group.",
+        "x-ms-examples": {
+          "ApiManagementListGatewaysBySubscriptionAndResourceGroup": {
+            "$ref": "./examples/ApiManagementListGatewaysBySubscriptionAndResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The API Management gateways list.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/gateways": {
+      "get": {
+        "tags": [
+          "ApiGateway"
+        ],
+        "operationId": "ApiGateway_List",
+        "description": "List all API Management gateways within a subscription.",
+        "x-ms-examples": {
+          "ApiManagementListGatewaysBySubscription": {
+            "$ref": "./examples/ApiManagementListGatewaysBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The API Management gateways list.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateways/{gatewayName}/skus": {
+      "get": {
+        "tags": [
+          "ApiManagementGatewaySkus"
+        ],
+        "summary": "Gets available SKUs for API Management gateway",
+        "description": "Gets all available SKU for a given API Management gateway",
+        "operationId": "ApiManagementGatewaySkus_ListAvailableSkus",
+        "x-ms-examples": {
+          "ApiManagementListSKUs-Gateways": {
+            "$ref": "./examples/ApiManagementListSKUs-Gateways.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of SKUs.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResourceSkuResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GatewaySku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
+          },
+          "enum": [
+            "Standard",
+            "WorkspaceGatewayStandard",
+            "WorkspaceGatewayPremium"
+          ],
+          "x-ms-enum": {
+            "name": "ApiGatewaySkuType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard SKU of the API gateway."
+              },
+              {
+                "value": "WorkspaceGatewayStandard",
+                "description": "Standard SKU of the API gateway to be used in Workspaces."
+              },
+              {
+                "value": "WorkspaceGatewayPremium",
+                "description": "Premium SKU of the API gateway to be used in Workspaces."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Describes an available API Management SKU for gateways."
+    },
+    "GatewayConfigurationApi": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Hostname to which the agent connects to propagate configuration to the cloud."
+        }
+      },
+      "description": "Information regarding the Configuration API of the API Management gateway. This is only applicable for API gateway with Standard SKU."
+    },
+    "FrontendConfiguration": {
+      "type": "object",
+      "properties": {
+        "defaultHostname": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The default hostname of the data-plane gateway to which requests can be sent. This is only applicable for API gateway with Standard SKU."
+        }
+      },
+      "description": "Information regarding how the gateway should be exposed."
+    },
+    "BackendConfiguration": {
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/BackendSubnetConfiguration",
+          "description": "The default hostname of the data-plane gateway to which requests can be sent."
+        }
+      },
+      "description": "Information regarding how the gateway should integrate with backend systems."
+    },
+    "BackendSubnetConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM ID of the subnet in which the backend systems are hosted."
+        }
+      },
+      "description": "Information regarding how the subnet to which the gateway should be injected."
+    },
+    "ApiManagementGatewayProperties": {
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiManagementGatewayBaseProperties"
+        }
+      ],
+      "description": "Properties of an API Management gateway resource description."
+    },
+    "ApiManagementGatewayUpdateProperties": {
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiManagementGatewayBaseProperties"
+        }
+      ],
+      "description": "Properties of an API Management gateway resource description."
+    },
+    "ApiManagementGatewayBaseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The current provisioning state of the API Management gateway which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted.",
+          "readOnly": true
+        },
+        "targetProvisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the API Management gateway, which is targeted by the long running operation started on the gateway.",
+          "readOnly": true
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation UTC date of the API Management gateway.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.",
+          "readOnly": true
+        },
+        "frontend": {
+          "$ref": "#/definitions/FrontendConfiguration",
+          "description": "Information regarding how the gateway should be exposed."
+        },
+        "backend": {
+          "$ref": "#/definitions/BackendConfiguration",
+          "description": "Information regarding how the gateway should integrate with backend systems."
+        },
+        "configurationApi": {
+          "$ref": "#/definitions/GatewayConfigurationApi",
+          "description": "Information regarding the Configuration API of the API Management gateway. This is only applicable for API gateway with Standard SKU."
+        },
+        "virtualNetworkType": {
+          "type": "string",
+          "description": "The type of VPN in which API Management gateway needs to be configured in. ",
+          "enum": [
+            "None",
+            "External",
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "The API Management gateway is not part of any Virtual Network."
+              },
+              {
+                "value": "External",
+                "description": "The API Management gateway is part of Virtual Network and it is accessible from Internet."
+              },
+              {
+                "value": "Internal",
+                "description": "The API Management gateway is part of Virtual Network and it is only accessible from within the virtual network."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Base Properties of an API Management gateway resource description."
+    },
+    "ApiManagementGatewayListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiManagementGatewayResource"
+          },
+          "description": "Result of the List API Management gateway operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response of the List API Management gateway operation."
+    },
+    "ApiManagementGatewaySkuProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
+          },
+          "enum": [
+            "Standard",
+            "WorkspaceGatewayStandard",
+            "WorkspaceGatewayPremium"
+          ],
+          "x-ms-enum": {
+            "name": "ApiGatewaySkuType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard SKU of the API gateway."
+              },
+              {
+                "value": "WorkspaceGatewayStandard",
+                "description": "Standard SKU of the API gateway to be used in Workspaces."
+              },
+              {
+                "value": "WorkspaceGatewayPremium",
+                "description": "Premium SKU of the API gateway to be used in Workspaces."
+              }
+            ]
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity of the SKU (number of deployed units of the SKU)"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "API Management gateway resource SKU properties."
+    },
+    "ApiManagementGatewaySkuPropertiesForPatch": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
+          },
+          "enum": [
+            "Standard",
+            "WorkspaceGatewayStandard",
+            "WorkspaceGatewayPremium"
+          ],
+          "x-ms-enum": {
+            "name": "ApiGatewaySkuType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard SKU of the API gateway."
+              },
+              {
+                "value": "WorkspaceGatewayStandard",
+                "description": "Standard SKU of the API gateway to be used in Workspaces."
+              },
+              {
+                "value": "WorkspaceGatewayPremium",
+                "description": "Premium SKU of the API gateway to be used in Workspaces."
+              }
+            ]
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity of the SKU (number of deployed units of the SKU)"
+        }
+      },
+      "description": "API Management gateway resource SKU properties for PATCH operations given nothing should be required."
+    },
+    "ApiManagementGatewayResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiManagementGatewayProperties",
+          "description": "Properties of the API Management gateway."
+        },
+        "sku": {
+          "$ref": "#/definitions/ApiManagementGatewaySkuProperties",
+          "description": "SKU properties of the API Management gateway."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApimResource"
+        }
+      ],
+      "required": [
+        "location",
+        "sku",
+        "properties"
+      ],
+      "description": "A single API Management gateway resource in List or Get response."
+    },
+    "ApimResource": {
+      "type": "object",
+      "description": "The Resource definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type for API Management resource is set to Microsoft.ApiManagement."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ApiManagementGatewayUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiManagementGatewayUpdateProperties",
+          "description": "Properties of the API Management gateway."
+        },
+        "sku": {
+          "$ref": "#/definitions/ApiManagementGatewaySkuPropertiesForPatch",
+          "description": "SKU properties of the API Management gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApimResource"
+        }
+      ],
+      "description": "Parameter supplied to Update API Management gateway."
+    },
+    "GatewayResourceSkuResults": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayResourceSkuResult"
+          },
+          "x-ms-identifiers": [
+            "resourceType",
+            "sku/name"
+          ],
+          "description": "The list of skus available for the gateway."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of API Management gateway Skus."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The API Management gateway SKUs operation response."
+    },
+    "GatewayResourceSkuResult": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "sku": {
+          "$ref": "#/definitions/GatewaySku",
+          "readOnly": true,
+          "description": "Specifies API Management gateway SKU."
+        },
+        "capacity": {
+          "$ref": "#/definitions/GatewaySkuCapacity",
+          "readOnly": true,
+          "description": "Specifies the number of API Management gateway units."
+        }
+      },
+      "description": "Describes an available API Management gateway SKU."
+    },
+    "GatewaySkuCapacity": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The maximum capacity that can be set."
+        },
+        "default": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The default capacity."
+        },
+        "scaleType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The scale type applicable to the sku.",
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "GatewaySkuCapacityScaleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Automatic",
+                "description": "Supported scale type automatic."
+              },
+              {
+                "value": "Manual",
+                "description": "Supported scale type manual."
+              },
+              {
+                "value": "None",
+                "description": "Scaling not supported."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Describes scaling information of a SKU."
+    }
+  },
+  "parameters": {}
+}
