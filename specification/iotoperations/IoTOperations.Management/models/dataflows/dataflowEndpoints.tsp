@@ -359,7 +359,7 @@ model DataflowEndpointMqtt {
 
   @doc("Session expiry in seconds.")
   @minValue(0)
-  sessionExpirySeconds?: int32 = 3600;
+  sessionExpirySeconds?: int32;
 
   @doc("TLS configuration.")
   tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
