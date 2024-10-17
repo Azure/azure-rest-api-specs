@@ -29,7 +29,13 @@ if ($typespecFolders) {
   # Group typespec folders by "service" (the first folder in the path). This
   # parallel validation at the level of the service.
   # Example: 'specification/ai/DocumentIntelligence' -> 'specification/ai'.
-  $serviceFolders = $typespecFolders | Group-Object -Property { Split-Path $_ -Parent }
+  $serviceFolders = $typespecFolders | Group-Object -Property { 
+    # "specification\ai\DocumentIntelligence" -> @("specification", "ai", "DocumentIntelligence")
+    $splitPath = $_ -replace '\\', '/' -split '/'
+
+    # @("specification", "ai", "DocumentIntelligence") -> "specification/ai"
+    return $splitPath[0..1] -join '/'
+  }
   
   Write-Host "Starting per-service parallel validation..."
 
@@ -72,19 +78,18 @@ if ($typespecFolders) {
       }
   
       if ($GitClean) {
-        # TODO: Ensure this is proper and correct. Can something in service A
-        # affect files in Service B? Can they impact files in the root? Worth 
-        # examining.
-        Write-Host "git restore $service"
+        # Clean at the level of the service because it's possible for items in 
+        # the service folder to change files at the level of the service folder.
         git restore $service | Out-Null
-        Write-Host "git clean -df $service"
         git clean -df $service | Out-Null
       }
     }
   
     # Return results
     return $result
+
   } | ForEach-Object {
+    # Handle outputs (single-threaded)
     Write-Host "Validation for Service: $($_.Service):"
     if ($_.Suppressed.Count) { 
       Write-Host "Suppressions in $($_.Service): "
