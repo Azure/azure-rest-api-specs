@@ -733,6 +733,9 @@
           },
           {
             "$ref": "#/parameters/EncryptionContext"
+          },
+          {
+            "$ref": "#/parameters/ClientTransactionId"
           }
         ],
         "responses": {
@@ -1648,6 +1651,11 @@
                 "x-ms-client-name": "LeaseStatus",
                 "description": "The lease status of the resource.",
                 "type": "string"
+              },
+              "x-ms-client-transaction-id": {
+                "x-ms-client-name": "clientTransactionId",
+                "type": "string",
+                "description": "Transaction ID client sent when creating or renaming the path."
               }
             }
           },
@@ -3309,6 +3317,15 @@
       "x-ms-parameter-location": "method",
       "required": false,
       "type": "boolean"
+    },
+    "ClientTransactionId": {
+      "name": "x-ms-client-transaction-id",
+      "x-ms-client-name": "clientTransactionId",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Optional, UUID that identifies a request.  Max length is 32.  All retries of the same request should have the same transaction ID."
     }
   },
   "definitions": {
