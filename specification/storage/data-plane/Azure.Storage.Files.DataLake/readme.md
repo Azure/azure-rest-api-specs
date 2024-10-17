@@ -102,7 +102,7 @@ input-file:
 - stable/2025-01-05/DataLakeStorage.json
 ```
 
-### Tag: package-2025-01
+### Tag: package-2025-05
 
 These settings apply only when `--tag=package-2025-05` is specified on the command line.
 
