@@ -63,8 +63,10 @@ interface TestRunOperations {
   stop is LoadTestRun.stop;
 }
 
+// NOTE: `LoadTestAdministrationClient` will contain all administration operations and `LoadTestRunClient` will contain all run based operations
+// A separate interface is made to just segregate the operations by resource type
 @client({
-  name: "TestProfileAdministrationClient",
+  name: "LoadTestAdministrationClient",
   service: Microsoft.LoadTestService,
 })
 interface TestProfileAdministrationOperations {
@@ -75,7 +77,7 @@ interface TestProfileAdministrationOperations {
 }
 
 @client({
-  name: "TestProfileRunClient",
+  name: "LoadTestRunClient",
   service: Microsoft.LoadTestService,
 })
 interface TestProfileRunOperations {
