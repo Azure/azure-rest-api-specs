@@ -255,6 +255,7 @@ model ResourceSkuCosts {
   /**
    * Used for querying price from commerce.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "backwards compatibility"
   @visibility("read")
   meterID?: string;
 
@@ -427,20 +428,26 @@ model Resource {
   tags?: Record<string>;
 }
 
-model SubResource {
-  /**
-   * Resource Id
-   */
-  id?: string;
-}
+// /**
+//  * The SubResource model definition.
+//  */
+// model SubResource {
+//   /**
+//    * Resource Id
+//    */
+//   id?: string;
+// }
 
-model SubResourceReadOnly {
-  /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-}
+// /**
+//  * The SubResourceReadOnly model definition.
+//  */
+// model SubResourceReadOnly {
+//   /**
+//    * Resource Id
+//    */
+//   @visibility("read")
+//   id?: string;
+// }
 
 /**
  * The Resource model definition with location property as optional.
@@ -491,16 +498,16 @@ model ExtendedLocation {
   type?: ExtendedLocationTypes;
 }
 
-model UserAssignedIdentitiesValue {
-  /**
-   * The principal id of user assigned identity.
-   */
-  @visibility("read")
-  principalId?: string;
+// model UserAssignedIdentitiesValue {
+//   /**
+//    * The principal id of user assigned identity.
+//    */
+//   @visibility("read")
+//   principalId?: string;
 
-  /**
-   * The client id of user assigned identity.
-   */
-  @visibility("read")
-  clientId?: string;
-}
+//   /**
+//    * The client id of user assigned identity.
+//    */
+//   @visibility("read")
+//   clientId?: string;
+// }

@@ -14,12 +14,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Compute;
 
 @armResourceOperations
-interface ResourceSkusOperations {
+interface ResourceSkus {
   /**
    * Gets the list of Microsoft.Compute SKUs available for your Subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceSkus_List")
   @get
   @action("skus")
   list is ArmProviderActionAsync<
