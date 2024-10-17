@@ -2359,7 +2359,7 @@
       "description": "The FDO-based authentication rule for bootstrapping.",
       "properties": {
         "publicKeys": {
-          "$ref": "#/definitions/PublicKeys",
+          "$ref": "#/definitions/FdoPublicKeys",
           "description": "Per policy public key(s) to extend ownership voucher to the customer.",
           "readOnly": true
         },
@@ -2382,6 +2382,34 @@
         }
       ],
       "x-ms-discriminator-value": "FDO"
+    },
+    "FdoPublicKey": {
+      "type": "object",
+      "description": "Owner public key model",
+      "properties": {
+        "default": {
+          "type": "array",
+          "description": "x5Chain representation of the public key.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "FdoPublicKeys": {
+      "type": "object",
+      "description": "Owner public keys to extend ownership voucher to the customer.",
+      "properties": {
+        "secp256R1": {
+          "$ref": "#/definitions/FdoPublicKey",
+          "description": "Public key as x5C with encryption type SECP256R1."
+        }
+      },
+      "required": [
+        "secp256R1"
+      ]
     },
     "HybridComputePolicyResourceDetails": {
       "type": "object",
@@ -2719,14 +2747,14 @@
       "type": "object",
       "description": "Generic Ownership Voucher Storage type.",
       "properties": {
-        "type": {
+        "ownershipVoucherStorageType": {
           "$ref": "#/definitions/OwnershipVoucherStorageType",
           "description": "The Ownership Voucher Storage type."
         }
       },
-      "discriminator": "type",
+      "discriminator": "ownershipVoucherStorageType",
       "required": [
-        "type"
+        "ownershipVoucherStorageType"
       ]
     },
     "OwnershipVoucherStorageType": {
@@ -2824,7 +2852,7 @@
       "description": "The FDO-based authentication rule for bootstrapping.",
       "properties": {
         "publicKeys": {
-          "$ref": "#/definitions/PublicKeys",
+          "$ref": "#/definitions/FdoPublicKeys",
           "description": "Per policy public keys to represent this policy",
           "readOnly": true
         },
@@ -2858,14 +2886,14 @@
       "type": "object",
       "description": "Generic Ownership Voucher Storage type.",
       "properties": {
-        "type": {
+        "ownershipVoucherStorageType": {
           "$ref": "#/definitions/OwnershipVoucherStorageType",
           "description": "The Ownership Voucher Storage type."
         }
       },
-      "discriminator": "type",
+      "discriminator": "ownershipVoucherStorageType",
       "required": [
-        "type"
+        "ownershipVoucherStorageType"
       ]
     },
     "PatchSelectedIdentity": {
@@ -2892,7 +2920,8 @@
         },
         "containerUri": {
           "type": "string",
-          "description": "Endpoint for the storage account"
+          "format": "uri",
+          "description": "Endpoint URI for the storage account"
         }
       },
       "allOf": [
@@ -3171,26 +3200,26 @@
       "type": "object",
       "description": "Details of public key type",
       "properties": {
-        "type": {
+        "publicKeyType": {
           "$ref": "#/definitions/PublicKeyType"
         }
       },
-      "discriminator": "type",
+      "discriminator": "publicKeyType",
       "required": [
-        "type"
+        "publicKeyType"
       ]
     },
     "PublicKeyDetailsUpdate": {
       "type": "object",
       "description": "Details of public key type",
       "properties": {
-        "type": {
+        "publicKeyType": {
           "$ref": "#/definitions/PublicKeyType"
         }
       },
-      "discriminator": "type",
+      "discriminator": "publicKeyType",
       "required": [
-        "type"
+        "publicKeyType"
       ]
     },
     "PublicKeyType": {
@@ -3210,23 +3239,6 @@
           }
         ]
       }
-    },
-    "PublicKeys": {
-      "type": "object",
-      "description": "Owner public keys to extend ownership voucher to the customer.",
-      "properties": {
-        "secp256R1": {
-          "type": "array",
-          "description": "Public key as x5C with encryption type SECP256R1.",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      },
-      "required": [
-        "secp256R1"
-      ]
     },
     "PublicNetworkAccessOptions": {
       "type": "string",
@@ -3367,7 +3379,8 @@
         },
         "containerUri": {
           "type": "string",
-          "description": "Endpoint for the storage account"
+          "format": "uri",
+          "description": "Endpoint URL for the storage account"
         }
       },
       "required": [

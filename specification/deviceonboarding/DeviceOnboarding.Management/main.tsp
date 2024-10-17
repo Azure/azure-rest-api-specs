@@ -273,7 +273,7 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 
   @visibility("read")
   @doc("Per policy public key(s) to extend ownership voucher to the customer.")
-  publicKeys: PublicKeys;
+  publicKeys: FdoPublicKeys;
 
   @doc("Ownership Voucher storage link")
   ownershipVoucherStorage?: OwnershipVoucherStorage;
@@ -284,32 +284,41 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 
 @doc("Owner public keys to extend ownership voucher to the customer.")
 @added(Versions.v2024_12_01_preview)
-model PublicKeys {
+model FdoPublicKeys {
   @doc("Public key as x5C with encryption type SECP256R1.")
-  secp256R1: bytes[];
+  secp256R1: FdoPublicKey
 
   // SECP384R1 // TODO: SECP384R1 is not supported by some hardwares, we may need to add support for SECP256R1
 }
 
+@doc("Owner public key model")
+@added(Versions.v2024_12_01_preview)
+model FdoPublicKey {
+  @doc("x5Chain representation of the public key.")
+  @visibility("read")
+  default?: bytes[];
+  // status: boolean; // To be added later.
+}
+
 @doc("Generic Ownership Voucher Storage type.")
 @added(Versions.v2024_12_01_preview)
-@discriminator("type")
+@discriminator("ownershipVoucherStorageType")
 model OwnershipVoucherStorage {
   @doc("The Ownership Voucher Storage type.")
-  type: OwnershipVoucherStorageType;
+  ownershipVoucherStorageType: OwnershipVoucherStorageType;
 }
 
 @doc("Storage Account Ownership Voucher Storage. Policy MI is used to access this storage")
 @added(Versions.v2024_12_01_preview)
 model StorageAccountOwnershipVoucherStorage extends OwnershipVoucherStorage {
   @doc("The Ownership Voucher Storage type.")
-  type: OwnershipVoucherStorageType.AzureBlobStorage;
+  ownershipVoucherStorageType: OwnershipVoucherStorageType.AzureBlobStorage;
 
   @doc("The storage resource id")
   resourceId: StorageAccountResourceId;
 
-  @doc("Endpoint for the storage account") // TODO: determine correct example here
-  containerUri: string;
+  @doc("Endpoint URL for the storage account") // TODO: determine correct example here
+  containerUri: url;
 }
 
 @pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.Storage/storageAccounts/(.+)$") // TODO: test removing to see if RPaaS behavior has changed
@@ -753,7 +762,7 @@ model PatchFdoBootstrapAuthenticationRule
 
   @visibility("read")
   @doc("Per policy public keys to represent this policy")
-  publicKeys?: PublicKeys;
+  publicKeys?: FdoPublicKeys;
 
   @doc("Ownership Voucher storage link")
   ownershipVoucherStorage?: OwnershipVoucherStorage;
@@ -764,10 +773,10 @@ model PatchFdoBootstrapAuthenticationRule
 
 @doc("Generic Ownership Voucher Storage type.")
 @added(Versions.v2024_12_01_preview)
-@discriminator("type")
+@discriminator("ownershipVoucherStorageType")
 model PatchOwnershipVoucherStorage {
   @doc("The Ownership Voucher Storage type.")
-  type: OwnershipVoucherStorageType;
+  ownershipVoucherStorageType: OwnershipVoucherStorageType;
 }
 
 @doc("Storage Account Ownership Voucher Storage. Policy MI is used to access this storage")
@@ -775,13 +784,13 @@ model PatchOwnershipVoucherStorage {
 model PatchStorageAccountOwnershipVoucherStorage
   extends PatchOwnershipVoucherStorage {
   @doc("The Ownership Voucher Storage type.")
-  type: OwnershipVoucherStorageType.AzureBlobStorage;
+  ownershipVoucherStorageType: OwnershipVoucherStorageType.AzureBlobStorage;
 
   @doc("The storage resource id")
   resourceId?: StorageAccountResourceId;
 
-  @doc("Endpoint for the storage account") // TODO: determine correct example here
-  containerUri?: string;
+  @doc("Endpoint URI for the storage account") // TODO: determine correct example here
+  containerUri?: url;
 }
 
 @doc("The rule for Just-in-time connection.")

@@ -45,9 +45,9 @@ model OwnershipVoucherPublicKeyProperties {
 
 @doc("Details of public key type")
 @added(Versions.v2024_12_01_preview)
-@discriminator("type")
+@discriminator("publicKeyType")
 model PublicKeyDetails {
-  type: PublicKeyType;
+  publicKeyType: PublicKeyType;
 }
 
 @doc("Options of public key types to validate ownership vouchers.")
@@ -63,7 +63,7 @@ union PublicKeyType {
 @added(Versions.v2024_12_01_preview)
 model X5ChainPublicKeyDetails extends PublicKeyDetails {
   @doc("X5Chain type public key details")
-  type: PublicKeyType.X5Chain;
+  publicKeyType: PublicKeyType.X5Chain;
 
   @doc("X509CertificateChain used as public keys to validate Ownership Voucher.")
   x5Chain: bytes[];
