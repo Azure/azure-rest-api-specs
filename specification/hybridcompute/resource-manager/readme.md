@@ -410,8 +410,4 @@ suppressions:
     from: HybridCompute.json
     where: $.definitions.AgentVersion
     reason: Previously approved and released, would require potentially breaking changes
-  - code: GetCollectionResponseSchema
-    from: HybridCompute.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions"]
-    reason: Response model of GET collection operation "ExtensionMetadataV2_List" should not match with the response model of individual GET operation "ExtensionMetadataV2_Get". The individual GET operation returns additional properties that we do not want to include in the response model of the collection operation.
 ```
