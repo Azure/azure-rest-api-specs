@@ -9736,6 +9736,13 @@
           "type": "string",
           "description": "The maximum throughput value or the maximum maxThroughput value (for autoscale) that can be specified",
           "readOnly": true
+        },
+        "throughputBuckets": {
+          "type": "array",
+          "description": "Array of Throughput Bucket limits to be applied to the Cosmos DB container",
+          "items": {
+            "$ref": "#/definitions/ThroughputBucketResource"
+          }
         }
       }
     },
@@ -9784,6 +9791,24 @@
           "description": "Represents the percentage by which throughput can increase every time throughput policy kicks in."
         }
       }
+    },
+    "ThroughputBucketResource": {
+      "type": "object",
+      "description": "Cosmos DB throughput bucket object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Represents the throughput bucket id"
+        },
+        "maxThroughputPercentage": {
+          "type": "integer",
+          "description": "Represents maximum percentage throughput that can be used by the bucket"
+        }
+      },
+      "required": [
+        "id",
+        "maxThroughputPercentage"
+      ]
     },
     "OptionsResource": {
       "type": "object",
