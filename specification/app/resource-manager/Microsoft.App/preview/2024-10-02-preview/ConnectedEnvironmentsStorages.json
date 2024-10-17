@@ -122,6 +122,10 @@
         "summary": "Create or update storage for a connectedEnvironment.",
         "description": "Create or update storage for a connectedEnvironment.",
         "operationId": "ConnectedEnvironmentsStorages_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -163,10 +167,16 @@
               "$ref": "#/definitions/ConnectedEnvironmentStorage"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentStorage"
+            }
+          },
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -183,6 +193,10 @@
         "summary": "Delete storage for a connectedEnvironment.",
         "description": "Delete storage for a connectedEnvironment.",
         "operationId": "ConnectedEnvironmentsStorages_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -209,8 +223,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Delete operation is accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Storage does not exist"
@@ -218,7 +237,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -260,6 +279,26 @@
           "description": "Storage properties",
           "type": "object",
           "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the storage.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ConnectedEnvironmentStorageProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
+            },
             "azureFile": {
               "$ref": "./CommonDefinitions.json#/definitions/AzureFileProperties",
               "description": "Azure file properties"
@@ -292,4 +331,3 @@
     }
   ]
 }
-
