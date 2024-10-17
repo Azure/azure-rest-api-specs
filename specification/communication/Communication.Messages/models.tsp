@@ -24,8 +24,11 @@ union CommunicationMessageKind {
   @doc("Image message type.")
   image: "image",
 
-  @doc("Template message type.")
-  template: "template",
+  @doc("Sticker message type.")
+  sticker: "sticker",
+
+  @doc("Reaction message type.")
+  reaction: "reaction",
 }
 
 @doc("The WhatsApp button sub type.")
@@ -117,6 +120,14 @@ model TextNotificationContent extends NotificationContent {
   content: string;
 }
 
+@added(Versions.c2024_08_30)
+@doc("A request to send a media notification. Could be an image, document or video.")
+model MediaNotificationContentBase {
+  @clientName("mediaUrl", "java")
+  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
+  mediaUri: url;
+}
+
 @doc("A request to send a media notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
@@ -128,6 +139,28 @@ model MediaNotificationContent extends NotificationContent {
   @clientName("mediaUrl", "java")
   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
+}
+
+@added(Versions.c2024-11-25)
+@doc("A request to send a Reaction notification.")
+model ReactionNotificationContent extends NotificationContent {
+  @doc("Message notification type is reaction.")
+  kind: CommunicationMessageKind.reaction;
+
+  @doc("emoji content like \uD83D\uDE00.")
+  emoji?: string;
+
+  @doc("ID of the previous message you want to reply to.")
+  messageId?: string;
+}
+
+@added(Versions.c2024-11-25)
+@doc("A request to send a Sticker notification.")
+model StickerNotificationContent extends NotificationContent {
+  @doc("Message notification type is sticker.")
+  kind: CommunicationMessageKind.sticker;
+
+  ...MediaNotificationContentBase;
 }
 
 @doc("A request to send a template notification.")
@@ -373,6 +406,14 @@ enum Versions {
   @doc("Azure Communication Messages 2024-02-01 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
+
+  @doc("Azure Communication Messages 2024-08-30 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_08_30: "2024-08-30",
+
+  @doc("Azure Communication Messages 2024-08-30 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024-11-25: "2024-11-25",
 }
 
 @doc("Notification messages send request body.")
