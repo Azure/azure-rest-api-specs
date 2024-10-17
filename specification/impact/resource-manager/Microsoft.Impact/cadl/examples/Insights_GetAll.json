@@ -1,0 +1,45 @@
+{
+  "operationId": "Insights_GetAll",
+  "title": "Get Insights list by subscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2023-12-01-preview",
+    "impactInfo": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/workloadImpacts/impactid22/insights/insightId12",
+            "name": "insightId12",
+            "type": "Microsoft.Impact/insights",
+            "properties": {
+              "createdTime": "2023-06-15T04:00:00.009223Z",
+              "updatedTime": "2023-06-15T05:00:00.009223Z",
+              "summary": "resource has been taken down",
+              "category": "repair",
+              "status": "resolved",
+              "actions": [
+                {
+                  "summary": "Acknowledged impact",
+                  "time": "2023-06-15T03:00:00.009223Z"
+                }
+              ],
+              "impactDetails": {
+                "impactedResources": [
+                  {
+                    "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.Sql/sqlserver/dbservername"
+                  }
+                ],
+                "impactStartTime": "2023-06-15T01:00:00.009223Z",
+                "impactId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/workloadImpacts/impactid22",
+                "impactUniqueId": "00000000-0000-0000-0000-000000000000"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
