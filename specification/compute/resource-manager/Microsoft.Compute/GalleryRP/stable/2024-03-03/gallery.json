@@ -2542,6 +2542,13 @@
             "modelAsString": true
           }
         },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionImages"
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "Contains the flag setting to hide an image when users specify version='latest'"
+        },
         "additionalReplicaSets": {
           "type": "array",
           "items": {
@@ -2549,13 +2556,6 @@
           },
           "x-ms-identifiers": [],
           "description": "List of storage sku with replica count to create direct drive replicas."
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionImages"
-        },
-        "excludeFromLatest": {
-          "type": "boolean",
-          "description": "Contains the flag setting to hide an image when users specify version='latest'"
         }
       },
       "required": [
