@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2022-06-01",
+    "version": "2025-01-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -61,10 +61,11 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$",
             "description": "The name of the policy assignment to delete."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -108,6 +109,9 @@
           "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
             "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
           },
+          "Create or update a policy assignment to enforce policy effect only on enrolled resources during resource creation or update.": {
+            "$ref": "./examples/createPolicyAssignmentWithEnrollEnforcement.json"
+          },
           "Create or update a policy assignment with resource selectors": {
             "$ref": "./examples/createPolicyAssignmentWithResourceSelectors.json"
           },
@@ -129,6 +133,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$",
             "description": "The name of the policy assignment."
           },
           {
@@ -141,7 +146,7 @@
             "description": "Parameters for the policy assignment."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -197,10 +202,11 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$",
             "description": "The name of the policy assignment to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -253,6 +259,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$",
             "description": "The name of the policy assignment."
           },
           {
@@ -265,7 +272,7 @@
             "description": "Parameters for policy assignment patch request."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -299,6 +306,9 @@
         },
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -315,10 +325,7 @@
             "$ref": "#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -355,6 +362,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "name": "resourceGroupName",
             "in": "path",
@@ -393,6 +403,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^.+$",
             "description": "The name of the resource."
           },
           {
@@ -402,10 +413,7 @@
             "$ref": "#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -452,7 +460,7 @@
             "$ref": "#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -495,10 +503,10 @@
             "$ref": "#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -544,7 +552,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -599,7 +607,7 @@
             "description": "Parameters for policy assignment."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -642,7 +650,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -691,7 +699,7 @@
             "description": "Parameters for policy assignment patch request."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -732,6 +740,10 @@
         "policyDefinitionId": {
           "type": "string",
           "description": "The ID of the policy definition or policy set definition being assigned."
+        },
+        "definitionVersion": {
+          "type": "string",
+          "description": "The version of the policy definition to use."
         },
         "scope": {
           "type": "string",
@@ -799,7 +811,7 @@
         "resourceSelectors": {
           "type": "array",
           "items": {
-            "$ref": "../../common/v1/types.json#/definitions/ResourceSelector"
+            "$ref": "../../common/v2/types.json#/definitions/ResourceSelector"
           },
           "x-ms-identifiers": [],
           "description": "The resource selector list to filter policies by resource properties."
@@ -807,10 +819,29 @@
         "overrides": {
           "type": "array",
           "items": {
-            "$ref": "../../common/v1/types.json#/definitions/Override"
+            "$ref": "../../common/v2/types.json#/definitions/Override"
           },
           "x-ms-identifiers": [],
           "description": "The policy property value override."
+        },
+        "assignmentType": {
+          "type": "string",
+          "description": "The type of policy assignment. Possible values are NotSpecified, System, SystemHidden, and Custom. Immutable.",
+          "enum": [
+            "NotSpecified",
+            "System",
+            "SystemHidden",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "assignmentType",
+            "modelAsString": true
+          }
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "The instance ID of the policy assignment. This ID only and always changes when the assignment is deleted and recreated.",
+          "readOnly": true
         }
       },
       "description": "The policy assignment properties."
@@ -881,7 +912,7 @@
           "description": "The managed identity associated with the policy assignment."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true,
           "description": "The system metadata relating to this resource."
         }
@@ -976,7 +1007,7 @@
         "resourceSelectors": {
           "type": "array",
           "items": {
-            "$ref": "../../common/v1/types.json#/definitions/ResourceSelector"
+            "$ref": "../../common/v2/types.json#/definitions/ResourceSelector"
           },
           "x-ms-identifiers": [],
           "description": "The resource selector list to filter policies by resource properties."
@@ -984,7 +1015,7 @@
         "overrides": {
           "type": "array",
           "items": {
-            "$ref": "../../common/v1/types.json#/definitions/Override"
+            "$ref": "../../common/v2/types.json#/definitions/Override"
           },
           "x-ms-identifiers": [],
           "description": "The policy property value override."
@@ -1013,20 +1044,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the operation."
-    },
     "ManagementGroupIdParameter": {
       "name": "managementGroupId",
       "in": "path",

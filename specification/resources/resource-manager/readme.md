@@ -42,7 +42,7 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2024-05-stable
+tag: package-policy-2025-01-stable
 ```
 
 ``` yaml $(package-databoundaries)
@@ -93,12 +93,28 @@ tag: package-snapshots-2022-11
 tag: package-bicep-2023-11
 ```
 
+### Tag: package-policy-2025-01-stable
 
-### Tag: package-policy-2024-05-stable
+These settings apply only when `--tag=package-policy-2025-01-stable` is specified on the command line.
 
-These settings apply only when `--tag=package-policy-2024-05-stable` is specified on the command line.
+```yaml $(tag) == 'package-policy-2025-01-stable'
+input-file:
+- Microsoft.Authorization/stable/2025-01-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2025-01-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2025-01-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2025-01-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2025-01-01/policyAssignments.json
 
-```yaml $(tag) == 'package-policy-2024-05-stable'
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2024-05
+
+These settings apply only when `--tag=package-policy-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2024-05'
 input-file:
 - Microsoft.Authorization/stable/2024-05-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2024-05-01/policyDefinitionVersions.json
@@ -1554,6 +1570,9 @@ directive:
   - suppress: GetCollectionResponseSchema
     from: dataBoundaries.json
     reason: "Do not have any list calls."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: policyAssignments.json
+    reason: "Policy assignments are not tracked."
 ```
 
 ---
