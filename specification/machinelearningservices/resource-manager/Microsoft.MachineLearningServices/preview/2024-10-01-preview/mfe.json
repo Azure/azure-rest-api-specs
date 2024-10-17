@@ -15010,8 +15010,21 @@
         }
       ],
       "properties": {
+        "aiServicesConnections": {
+          "description": "List of AI services connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "capabilityHostKind": {
+          "description": "Kind of this capability host.",
+          "default": "Agents",
+          "$ref": "#/definitions/CapabilityHostKind"
+        },
         "customerSubnet": {
-          "description": "Represents a request to provision a resource.",
+          "description": "Customer subnet info to help set up this capability host.",
           "type": "string",
           "x-nullable": true
         },
@@ -15022,9 +15035,41 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "storageConnections": {
+          "description": "List of Storage connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "vectorStoreConnections": {
+          "description": "List of VectorStore connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
         }
       },
       "x-ms-client-name": "CapabilityHostProperties",
+      "additionalProperties": false
+    },
+    "CapabilityHostKind": {
+      "enum": [
+        "Agents"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CapabilityHostKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Agents"
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "CapabilityHostProvisioningState": {
