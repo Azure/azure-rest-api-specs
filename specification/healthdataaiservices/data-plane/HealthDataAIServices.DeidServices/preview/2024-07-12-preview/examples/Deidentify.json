@@ -5,9 +5,12 @@
     "api-version": "2024-07-12-preview",
     "body": {
       "inputText": "Hello my name is John Smith.",
-      "operation": "Redact",
       "dataType": "Plaintext",
-      "redactionFormat": "[{type}]"
+      "customizations": {
+        "redactionFormat": "[{type}]",
+        "disableConsistency": false,
+        "operation": "Redact"
+      }
     }
   },
   "responses": {
