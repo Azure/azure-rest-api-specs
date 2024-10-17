@@ -6,12 +6,8 @@ param (
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
   [int]$FolderCount = 0,
-  [int] $Parallelism = $env:TYPESPEC_PARALLELISM
+  [int] $Parallelism = 1
 )
-
-if (!$Parallelism) { 
-  $Parallelism = 1
-}
 
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
