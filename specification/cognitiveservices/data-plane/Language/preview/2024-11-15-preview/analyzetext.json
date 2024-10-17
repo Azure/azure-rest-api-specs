@@ -1420,6 +1420,115 @@
         ]
       }
     },
+    "CharacterMaskPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of redacting with a redaction character",
+      "properties": {
+        "redactionCharacter": {
+          "type": "string",
+          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+          "default": "*",
+          "enum": [
+            "!",
+            "#",
+            "$",
+            "%",
+            "&",
+            "*",
+            "+",
+            "-",
+            "=",
+            "?",
+            "@",
+            "^",
+            "_",
+            "~"
+          ],
+          "x-ms-enum": {
+            "name": "redactionCharacter",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "exclamationPoint",
+                "value": "!",
+                "description": "Exclamation point character"
+              },
+              {
+                "name": "numberSign",
+                "value": "#",
+                "description": "Number sign character"
+              },
+              {
+                "name": "dollar",
+                "value": "$",
+                "description": "Dollar sign character"
+              },
+              {
+                "name": "perCent",
+                "value": "%",
+                "description": "Percent sign character"
+              },
+              {
+                "name": "ampersand",
+                "value": "&",
+                "description": "Ampersand character"
+              },
+              {
+                "name": "asterisk",
+                "value": "*",
+                "description": "Asterisk character"
+              },
+              {
+                "name": "plus",
+                "value": "+",
+                "description": "Plus sign character"
+              },
+              {
+                "name": "minus",
+                "value": "-",
+                "description": "Minus sign character"
+              },
+              {
+                "name": "equals",
+                "value": "=",
+                "description": "Equals sign character"
+              },
+              {
+                "name": "questionMark",
+                "value": "?",
+                "description": "Question mark character"
+              },
+              {
+                "name": "atSign",
+                "value": "@",
+                "description": "At sign character"
+              },
+              {
+                "name": "caret",
+                "value": "^",
+                "description": "Caret character"
+              },
+              {
+                "name": "underscore",
+                "value": "_",
+                "description": "Underscore character"
+              },
+              {
+                "name": "tilde",
+                "value": "~",
+                "description": "Tilde character"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "characterMask"
+    },
     "ClassificationDocumentResultWithDetectedLanguage": {
       "type": "object",
       "description": "Contains the classification doc result for the task with detected language.",
@@ -1905,16 +2014,6 @@
         "iso6391Name",
         "confidenceScore"
       ]
-    },
-    "DoNotRedactPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of not redacting found PII.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "noMask"
     },
     "DocumentError": {
       "type": "object",
@@ -2841,6 +2940,16 @@
         }
       ],
       "x-ms-discriminator-value": "EntityLinkingResults"
+    },
+    "EntityMaskPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of redacting PII with the entity type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "entityMask"
     },
     "EntityRecognitionLROResult": {
       "type": "object",
@@ -4347,125 +4456,6 @@
         "dataSource"
       ]
     },
-    "MaskWithEntityTypePolicyType": {
-      "type": "object",
-      "description": "Represents the policy of redacting PII with the entity type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "entityMask"
-    },
-    "MaskWithRedactionCharacterPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of redacting with a redaction character",
-      "properties": {
-        "redactionCharacter": {
-          "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
-          "default": "*",
-          "enum": [
-            "!",
-            "#",
-            "$",
-            "%",
-            "&",
-            "*",
-            "+",
-            "-",
-            "=",
-            "?",
-            "@",
-            "^",
-            "_",
-            "~"
-          ],
-          "x-ms-enum": {
-            "name": "redactionCharacter",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "exclamationPoint",
-                "value": "!",
-                "description": "Exclamation point character"
-              },
-              {
-                "name": "numberSign",
-                "value": "#",
-                "description": "Number sign character"
-              },
-              {
-                "name": "dollar",
-                "value": "$",
-                "description": "Dollar sign character"
-              },
-              {
-                "name": "perCent",
-                "value": "%",
-                "description": "Percent sign character"
-              },
-              {
-                "name": "ampersand",
-                "value": "&",
-                "description": "Ampersand character"
-              },
-              {
-                "name": "asterisk",
-                "value": "*",
-                "description": "Asterisk character"
-              },
-              {
-                "name": "plus",
-                "value": "+",
-                "description": "Plus sign character"
-              },
-              {
-                "name": "minus",
-                "value": "-",
-                "description": "Minus sign character"
-              },
-              {
-                "name": "equals",
-                "value": "=",
-                "description": "Equals sign character"
-              },
-              {
-                "name": "questionMark",
-                "value": "?",
-                "description": "Question mark character"
-              },
-              {
-                "name": "atSign",
-                "value": "@",
-                "description": "At sign character"
-              },
-              {
-                "name": "caret",
-                "value": "^",
-                "description": "Caret character"
-              },
-              {
-                "name": "underscore",
-                "value": "_",
-                "description": "Underscore character"
-              },
-              {
-                "name": "tilde",
-                "value": "~",
-                "description": "Tilde character"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "characterMask"
-    },
     "Match": {
       "type": "object",
       "description": "The Match object containing the detected entity text with the offset and the length.",
@@ -4656,6 +4646,16 @@
         "text"
       ]
     },
+    "NoMaskPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of not redacting found PII.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "noMask"
+    },
     "NumberKind": {
       "type": "string",
       "description": "The type of the extracted number entity.",
@@ -4819,6 +4819,7 @@
         "AzureStorageAccountKey",
         "AzureStorageAccountGeneric",
         "BENationalNumber",
+        "BENationalNumberV2",
         "BEValueAddedTaxNumber",
         "BRCPFNumber",
         "BRLegalEntityNumber",
@@ -4836,10 +4837,13 @@
         "HRIdentityCardNumber",
         "HRNationalIDNumber",
         "HRPersonalIdentificationNumber",
+        "HRPersonalIdentificationOIBNumberV2",
         "CYIdentityCard",
         "CYTaxIdentificationNumber",
         "CZPersonalIdentityNumber",
+        "CZPersonalIdentityV2",
         "DKPersonalIdentificationNumber",
+        "DKPersonalIdentificationV2",
         "DrugEnforcementAgencyNumber",
         "EEPersonalIdentificationCode",
         "EUDebitCardNumber",
@@ -4851,6 +4855,7 @@
         "EUTaxIdentificationNumber",
         "FIEuropeanHealthNumber",
         "FINationalID",
+        "FINationalIDV2",
         "FIPassportNumber",
         "FRDriversLicenseNumber",
         "FRHealthInsuranceNumber",
@@ -4865,6 +4870,7 @@
         "DETaxIdentificationNumber",
         "DEValueAddedNumber",
         "GRNationalIDCard",
+        "GRNationalIDV2",
         "GRTaxIdentificationNumber",
         "HKIdentityCardNumber",
         "HUValueAddedNumber",
@@ -4875,6 +4881,7 @@
         "IDIdentityCardNumber",
         "InternationalBankingAccountNumber",
         "IEPersonalPublicServiceNumber",
+        "IEPersonalPublicServiceNumberV2",
         "ILBankAccountNumber",
         "ILNationalID",
         "ITDriversLicenseNumber",
@@ -4896,6 +4903,7 @@
         "MTIdentityCardNumber",
         "MTTaxIDNumber",
         "NLCitizensServiceNumber",
+        "NLCitizensServiceNumberV2",
         "NLTaxIdentificationNumber",
         "NLValueAddedTaxNumber",
         "NZBankAccountNumber",
@@ -4907,10 +4915,12 @@
         "PHUnifiedMultiPurposeIDNumber",
         "PLIdentityCard",
         "PLNationalID",
+        "PLNationalIDV2",
         "PLPassportNumber",
         "PLTaxIdentificationNumber",
         "PLREGONNumber",
         "PTCitizenCardNumber",
+        "PTCitizenCardNumberV2",
         "PTTaxIdentificationNumber",
         "ROPersonalNumericalCode",
         "RUPassportNumberDomestic",
@@ -4927,6 +4937,7 @@
         "ESTaxIdentificationNumber",
         "SQLServerConnectionString",
         "SENationalID",
+        "SENationalIDV2",
         "SEPassportNumber",
         "SETaxIdentificationNumber",
         "SWIFTCode",
@@ -5073,6 +5084,11 @@
             "description": "BE National Number"
           },
           {
+            "name": "BENationalNumberV2",
+            "value": "BENationalNumberV2",
+            "description": "BE National Number V2"
+          },
+          {
             "name": "BEValueAddedTaxNumber",
             "value": "BEValueAddedTaxNumber",
             "description": "BE Value Added Tax Number"
@@ -5158,6 +5174,11 @@
             "description": "HR Personal Identification Number"
           },
           {
+            "name": "HRPersonalIdentificationOIBNumberV2",
+            "value": "HRPersonalIdentificationOIBNumberV2",
+            "description": "HR Personal Identification OIB Number V2"
+          },
+          {
             "name": "CYIdentityCard",
             "value": "CYIdentityCard",
             "description": "CY Identity Card"
@@ -5173,9 +5194,19 @@
             "description": "CZ Personal Identity Number"
           },
           {
+            "name": "CZPersonalIdentityV2",
+            "value": "CZPersonalIdentityV2",
+            "description": "CZ Personal Identity V2"
+          },
+          {
             "name": "DKPersonalIdentificationNumber",
             "value": "DKPersonalIdentificationNumber",
             "description": "DK Personal Identification Number"
+          },
+          {
+            "name": "DKPersonalIdentificationV2",
+            "value": "DKPersonalIdentificationV2",
+            "description": "DK Personal Identification V2"
           },
           {
             "name": "DrugEnforcementAgencyNumber",
@@ -5231,6 +5262,11 @@
             "name": "FINationalID",
             "value": "FINationalID",
             "description": "FI National ID"
+          },
+          {
+            "name": "FINationalIDV2",
+            "value": "FINationalIDV2",
+            "description": "FI National ID V2"
           },
           {
             "name": "FIPassportNumber",
@@ -5303,6 +5339,11 @@
             "description": "GR National ID Card"
           },
           {
+            "name": "GRNationalIDV2",
+            "value": "GRNationalIDV2",
+            "description": "GR National ID V2"
+          },
+          {
             "name": "GRTaxIdentificationNumber",
             "value": "GRTaxIdentificationNumber",
             "description": "GR Tax Identification Number"
@@ -5351,6 +5392,11 @@
             "name": "IEPersonalPublicServiceNumber",
             "value": "IEPersonalPublicServiceNumber",
             "description": "IE Personal Public Service Number"
+          },
+          {
+            "name": "IEPersonalPublicServiceNumberV2",
+            "value": "IEPersonalPublicServiceNumberV2",
+            "description": "IE Personal Public Service Number V2"
           },
           {
             "name": "ILBankAccountNumber",
@@ -5458,6 +5504,11 @@
             "description": "NL Citizens Service Number"
           },
           {
+            "name": "NLCitizensServiceNumberV2",
+            "value": "NLCitizensServiceNumberV2",
+            "description": "NL Citizens Service Number V2"
+          },
+          {
             "name": "NLTaxIdentificationNumber",
             "value": "NLTaxIdentificationNumber",
             "description": "NL Tax Identification Number"
@@ -5513,6 +5564,11 @@
             "description": "PL National ID"
           },
           {
+            "name": "PLNationalIDV2",
+            "value": "PLNationalIDV2",
+            "description": "PL National ID V2"
+          },
+          {
             "name": "PLPassportNumber",
             "value": "PLPassportNumber",
             "description": "PL Passport Number"
@@ -5531,6 +5587,11 @@
             "name": "PTCitizenCardNumber",
             "value": "PTCitizenCardNumber",
             "description": "PT Citizen Card Number"
+          },
+          {
+            "name": "PTCitizenCardNumberV2",
+            "value": "PTCitizenCardNumberV2",
+            "description": "PT Citizen Card Number V2"
           },
           {
             "name": "PTTaxIdentificationNumber",
@@ -5611,6 +5672,11 @@
             "name": "SENationalID",
             "value": "SENationalID",
             "description": "SE National ID"
+          },
+          {
+            "name": "SENationalIDV2",
+            "value": "SENationalIDV2",
+            "description": "SE National ID V2"
           },
           {
             "name": "SEPassportNumber",
@@ -5791,6 +5857,7 @@
         "AzureStorageAccountKey",
         "AzureStorageAccountGeneric",
         "BENationalNumber",
+        "BENationalNumberV2",
         "BEValueAddedTaxNumber",
         "BRCPFNumber",
         "BRLegalEntityNumber",
@@ -5808,10 +5875,13 @@
         "HRIdentityCardNumber",
         "HRNationalIDNumber",
         "HRPersonalIdentificationNumber",
+        "HRPersonalIdentificationOIBNumberV2",
         "CYIdentityCard",
         "CYTaxIdentificationNumber",
         "CZPersonalIdentityNumber",
+        "CZPersonalIdentityV2",
         "DKPersonalIdentificationNumber",
+        "DKPersonalIdentificationV2",
         "DrugEnforcementAgencyNumber",
         "EEPersonalIdentificationCode",
         "EUDebitCardNumber",
@@ -5823,6 +5893,7 @@
         "EUTaxIdentificationNumber",
         "FIEuropeanHealthNumber",
         "FINationalID",
+        "FINationalIDV2",
         "FIPassportNumber",
         "FRDriversLicenseNumber",
         "FRHealthInsuranceNumber",
@@ -5837,6 +5908,7 @@
         "DETaxIdentificationNumber",
         "DEValueAddedNumber",
         "GRNationalIDCard",
+        "GRNationalIDV2",
         "GRTaxIdentificationNumber",
         "HKIdentityCardNumber",
         "HUValueAddedNumber",
@@ -5847,6 +5919,7 @@
         "IDIdentityCardNumber",
         "InternationalBankingAccountNumber",
         "IEPersonalPublicServiceNumber",
+        "IEPersonalPublicServiceNumberV2",
         "ILBankAccountNumber",
         "ILNationalID",
         "ITDriversLicenseNumber",
@@ -5868,6 +5941,7 @@
         "MTIdentityCardNumber",
         "MTTaxIDNumber",
         "NLCitizensServiceNumber",
+        "NLCitizensServiceNumberV2",
         "NLTaxIdentificationNumber",
         "NLValueAddedTaxNumber",
         "NZBankAccountNumber",
@@ -5879,10 +5953,12 @@
         "PHUnifiedMultiPurposeIDNumber",
         "PLIdentityCard",
         "PLNationalID",
+        "PLNationalIDV2",
         "PLPassportNumber",
         "PLTaxIdentificationNumber",
         "PLREGONNumber",
         "PTCitizenCardNumber",
+        "PTCitizenCardNumberV2",
         "PTTaxIdentificationNumber",
         "ROPersonalNumericalCode",
         "RUPassportNumberDomestic",
@@ -5899,6 +5975,7 @@
         "ESTaxIdentificationNumber",
         "SQLServerConnectionString",
         "SENationalID",
+        "SENationalIDV2",
         "SEPassportNumber",
         "SETaxIdentificationNumber",
         "SWIFTCode",
@@ -6047,6 +6124,11 @@
             "description": "BE National Number"
           },
           {
+            "name": "BENationalNumberV2",
+            "value": "BENationalNumberV2",
+            "description": "BE National Number V2"
+          },
+          {
             "name": "BEValueAddedTaxNumber",
             "value": "BEValueAddedTaxNumber",
             "description": "BE Value Added Tax Number"
@@ -6132,6 +6214,11 @@
             "description": "HR Personal Identification Number"
           },
           {
+            "name": "HRPersonalIdentificationOIBNumberV2",
+            "value": "HRPersonalIdentificationOIBNumberV2",
+            "description": "HR Personal Identification OIB Number V2"
+          },
+          {
             "name": "CYIdentityCard",
             "value": "CYIdentityCard",
             "description": "CY Identity Card"
@@ -6147,9 +6234,19 @@
             "description": "CZ Personal Identity Number"
           },
           {
+            "name": "CZPersonalIdentityV2",
+            "value": "CZPersonalIdentityV2",
+            "description": "CZ Personal Identity V2"
+          },
+          {
             "name": "DKPersonalIdentificationNumber",
             "value": "DKPersonalIdentificationNumber",
             "description": "DK Personal Identification Number"
+          },
+          {
+            "name": "DKPersonalIdentificationV2",
+            "value": "DKPersonalIdentificationV2",
+            "description": "DK Personal Identification V2"
           },
           {
             "name": "DrugEnforcementAgencyNumber",
@@ -6205,6 +6302,11 @@
             "name": "FINationalID",
             "value": "FINationalID",
             "description": "FI National ID"
+          },
+          {
+            "name": "FINationalIDV2",
+            "value": "FINationalIDV2",
+            "description": "FI National ID V2"
           },
           {
             "name": "FIPassportNumber",
@@ -6277,6 +6379,11 @@
             "description": "GR National ID Card"
           },
           {
+            "name": "GRNationalIDV2",
+            "value": "GRNationalIDV2",
+            "description": "GR National ID V2"
+          },
+          {
             "name": "GRTaxIdentificationNumber",
             "value": "GRTaxIdentificationNumber",
             "description": "GR Tax Identification Number"
@@ -6325,6 +6432,11 @@
             "name": "IEPersonalPublicServiceNumber",
             "value": "IEPersonalPublicServiceNumber",
             "description": "IE Personal Public Service Number"
+          },
+          {
+            "name": "IEPersonalPublicServiceNumberV2",
+            "value": "IEPersonalPublicServiceNumberV2",
+            "description": "IE Personal Public Service Number V2"
           },
           {
             "name": "ILBankAccountNumber",
@@ -6432,6 +6544,11 @@
             "description": "NL Citizens Service Number"
           },
           {
+            "name": "NLCitizensServiceNumberV2",
+            "value": "NLCitizensServiceNumberV2",
+            "description": "NL Citizens Service Number V2"
+          },
+          {
             "name": "NLTaxIdentificationNumber",
             "value": "NLTaxIdentificationNumber",
             "description": "NL Tax Identification Number"
@@ -6487,6 +6604,11 @@
             "description": "PL National ID"
           },
           {
+            "name": "PLNationalIDV2",
+            "value": "PLNationalIDV2",
+            "description": "PL National ID V2"
+          },
+          {
             "name": "PLPassportNumber",
             "value": "PLPassportNumber",
             "description": "PL Passport Number"
@@ -6505,6 +6627,11 @@
             "name": "PTCitizenCardNumber",
             "value": "PTCitizenCardNumber",
             "description": "PT Citizen Card Number"
+          },
+          {
+            "name": "PTCitizenCardNumberV2",
+            "value": "PTCitizenCardNumberV2",
+            "description": "PT Citizen Card Number V2"
           },
           {
             "name": "PTTaxIdentificationNumber",
@@ -6585,6 +6712,11 @@
             "name": "SENationalID",
             "value": "SENationalID",
             "description": "SE National ID"
+          },
+          {
+            "name": "SENationalIDV2",
+            "value": "SENationalIDV2",
+            "description": "SE National ID V2"
           },
           {
             "name": "SEPassportNumber",
@@ -6831,9 +6963,7 @@
         "category",
         "offset",
         "length",
-        "confidenceScore",
-        "type",
-        "tags"
+        "confidenceScore"
       ]
     },
     "PiiLROTask": {

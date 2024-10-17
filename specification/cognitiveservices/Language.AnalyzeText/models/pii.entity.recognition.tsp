@@ -50,7 +50,7 @@ model BaseRedactionPolicy {
 
 /** Represents the policy of redacting with a redaction character */
 @added(Versions.v2024_11_15_preview)
-model MaskWithRedactionCharacterPolicyType extends BaseRedactionPolicy {
+model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
 
@@ -60,14 +60,14 @@ model MaskWithRedactionCharacterPolicyType extends BaseRedactionPolicy {
 
 /** Represents the policy of not redacting found PII. */
 @added(Versions.v2024_11_15_preview)
-model DoNotRedactPolicyType extends BaseRedactionPolicy {
+model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
 @added(Versions.v2024_11_15_preview)
-model MaskWithEntityTypePolicyType extends BaseRedactionPolicy {
+model EntityMaskPolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
 }
@@ -133,10 +133,10 @@ union PiiDomain {
 @added(Versions.v2024_11_15_preview)
 model PiiEntityWithTags is Entity {
   /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
-  type: string;
+  type?: string;
 
   /** List of entity tags. Tags are to express some similarities/affinity between entities. */
-  tags: Array<EntityTag>;
+  tags?: Array<EntityTag>;
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
   mask?: string;
@@ -259,7 +259,6 @@ union PiiCategoriesExclude {
   BENationalNumber: "BENationalNumber",
 
   /** BE National Number V2 */
-  @removed(Versions.v2024_11_15_preview)
   BENationalNumberV2: "BENationalNumberV2",
 
   /** BE Value Added Tax Number */
@@ -314,7 +313,6 @@ union PiiCategoriesExclude {
   HRPersonalIdentificationNumber: "HRPersonalIdentificationNumber",
 
   /** HR Personal Identification OIB Number V2 */
-  @removed(Versions.v2024_11_15_preview)
   HRPersonalIdentificationOIBNumberV2: "HRPersonalIdentificationOIBNumberV2",
 
   /** CY Identity Card */
@@ -327,14 +325,12 @@ union PiiCategoriesExclude {
   CZPersonalIdentityNumber: "CZPersonalIdentityNumber",
 
   /** CZ Personal Identity V2 */
-  @removed(Versions.v2024_11_15_preview)
   CZPersonalIdentityV2: "CZPersonalIdentityV2",
 
   /** DK Personal Identification Number */
   DKPersonalIdentificationNumber: "DKPersonalIdentificationNumber",
 
   /** DK Personal Identification V2 */
-  @removed(Versions.v2024_11_15_preview)
   DKPersonalIdentificationV2: "DKPersonalIdentificationV2",
 
   /** Drug Enforcement Agency Number */
@@ -371,7 +367,6 @@ union PiiCategoriesExclude {
   FINationalID: "FINationalID",
 
   /** FI National ID V2 */
-  @removed(Versions.v2024_11_15_preview)
   FINationalIDV2: "FINationalIDV2",
 
   /** FI Passport Number */
@@ -417,7 +412,6 @@ union PiiCategoriesExclude {
   GRNationalIDCard: "GRNationalIDCard",
 
   /** GR National ID V2 */
-  @removed(Versions.v2024_11_15_preview)
   GRNationalIDV2: "GRNationalIDV2",
 
   /** GR Tax Identification Number */
@@ -451,7 +445,6 @@ union PiiCategoriesExclude {
   IEPersonalPublicServiceNumber: "IEPersonalPublicServiceNumber",
 
   /** IE Personal Public Service Number V2 */
-  @removed(Versions.v2024_11_15_preview)
   IEPersonalPublicServiceNumberV2: "IEPersonalPublicServiceNumberV2",
 
   /** IL Bank Account Number */
@@ -518,7 +511,6 @@ union PiiCategoriesExclude {
   NLCitizensServiceNumber: "NLCitizensServiceNumber",
 
   /** NL Citizens Service Number V2 */
-  @removed(Versions.v2024_11_15_preview)
   NLCitizensServiceNumberV2: "NLCitizensServiceNumberV2",
 
   /** NL Tax Identification Number */
@@ -555,7 +547,6 @@ union PiiCategoriesExclude {
   PLNationalID: "PLNationalID",
 
   /** PL National ID V2 */
-  @removed(Versions.v2024_11_15_preview)
   PLNationalIDV2: "PLNationalIDV2",
 
   /** PL Passport Number */
@@ -571,7 +562,6 @@ union PiiCategoriesExclude {
   PTCitizenCardNumber: "PTCitizenCardNumber",
 
   /** PT Citizen Card Number V2 */
-  @removed(Versions.v2024_11_15_preview)
   PTCitizenCardNumberV2: "PTCitizenCardNumberV2",
 
   /** PT Tax Identification Number */
@@ -623,7 +613,6 @@ union PiiCategoriesExclude {
   SENationalID: "SENationalID",
 
   /** SE National ID V2 */
-  @removed(Versions.v2024_11_15_preview)
   SENationalIDV2: "SENationalIDV2",
 
   /** SE Passport Number */
