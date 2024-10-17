@@ -31,7 +31,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
   @added(Versions.v2024_11_15_preview)
-  excludeEntities?: boolean;
+  excludeExtractionData?: boolean;
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
