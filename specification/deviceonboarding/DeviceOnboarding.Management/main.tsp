@@ -286,7 +286,7 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 @added(Versions.v2024_12_01_preview)
 model FdoPublicKeys {
   @doc("Public key as x5C with encryption type SECP256R1.")
-  secp256R1: FdoPublicKey
+  secp256R1: FdoPublicKey;
 
   // SECP384R1 // TODO: SECP384R1 is not supported by some hardwares, we may need to add support for SECP256R1
 }
