@@ -65,8 +65,8 @@ model X5ChainPublicKeyDetails extends PublicKeyDetails {
   @doc("X5Chain type public key details")
   type: PublicKeyType.X5Chain;
 
-  @doc("X509CertificateChain used as a public key to validate Ownership Voucher.")
-  x5Chain: bytes;
+  @doc("X509CertificateChain used as public keys to validate Ownership Voucher.")
+  x5Chain: bytes[];
 }
 
 @armResourceOperations

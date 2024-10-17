@@ -261,15 +261,15 @@ union BootstrapAuthenticationType {
   Discovery: "Discovery",
 
   @added(Versions.v2024_12_01_preview)
-  @doc("The Fdo101 authentication type.")
-  Fdo101: "Fdo101", // TODO: come up with a versioned name, follow up with Adarsh/Jesus
+  @doc("The FDO authentication type.")
+  FDO: "FDO",
 }
 
-@doc("The Fdo101-based authentication rule for bootstrapping.")
+@doc("The FDO-based authentication rule for bootstrapping.")
 @added(Versions.v2024_12_01_preview)
-model Fdo101BootstrapAuthenticationRule extends BootstrapAuthenticationRule {
+model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
   @doc("The type of authentication rule.")
-  type: BootstrapAuthenticationType.Fdo101;
+  type: BootstrapAuthenticationType.FDO;
 
   @visibility("read")
   @doc("Per policy public key(s) to extend ownership voucher to the customer.")
@@ -286,7 +286,7 @@ model Fdo101BootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 @added(Versions.v2024_12_01_preview)
 model PublicKeys {
   @doc("Public key as x5C with encryption type SECP256R1.")
-  secp256R1: bytes;
+  secp256R1: bytes[];
 
   // SECP384R1 // TODO: SECP384R1 is not supported by some hardwares, we may need to add support for SECP256R1
 }
@@ -744,16 +744,16 @@ model PatchDiscoveryBootstrapAuthenticationRule
   type: BootstrapAuthenticationType.Discovery;
 }
 
-@doc("The Fdo101-based authentication rule for bootstrapping.")
+@doc("The FDO-based authentication rule for bootstrapping.")
 @added(Versions.v2024_12_01_preview)
-model PatchFdo101BootstrapAuthenticationRule
+model PatchFdoBootstrapAuthenticationRule
   extends PatchBootstrapAuthenticationRule {
   @doc("The type of authentication rule.")
-  type: BootstrapAuthenticationType.Fdo101;
+  type: BootstrapAuthenticationType.FDO;
 
   @visibility("read")
-  @doc("Per policy public key to represent this policy")
-  publicKey?: bytes;
+  @doc("Per policy public keys to represent this policy")
+  publicKeys?: PublicKeys;
 
   @doc("Ownership Voucher storage link")
   ownershipVoucherStorage?: OwnershipVoucherStorage;
@@ -934,7 +934,7 @@ model DeviceStateProperties {
 
   @added(Versions.v2024_12_01_preview)
   @visibility("read")
-  @doc("TTL until the device can be onboarded, in utcDateTime format")
+  @doc("Indicates the maximum date and time by which a device can be onboarded, in utcDateTime format")
   onboardUntilDate?: utcDateTime;
 }
 
@@ -966,7 +966,7 @@ union OnboardingStatus {
 @doc("The properties passed in the readyToOnboard POST request.")
 @added(Versions.v2024_12_01_preview)
 model ReadyToOnboardProperties {
-  @doc("Desired TTL until the device can be onboarded")
+  @doc("Desired maximum duration by which a device can be onboarded")
   ttl: duration; // TODO, determine min/max enforcement, correct format here
 }
 
