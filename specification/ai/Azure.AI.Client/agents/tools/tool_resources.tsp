@@ -87,7 +87,7 @@ model ConnectionListResource {
  */
 model ConnectionResource {
   /**
-   * A connection in a ConnectionListResource attached to this agent. 
+   * A connection in a ConnectionListResource attached to this agent.
    */
   @encodedName("application/json", "connection_id")
   connectionId: string;
@@ -111,13 +111,13 @@ model AzureAISearchResource {
  */
 model IndexResource {
   /**
-   * An index connection id in an IndexResource attached to this agent. 
+   * An index connection id in an IndexResource attached to this agent.
    */
   @encodedName("application/json", "index_connection_id")
   indexConnectionId: string;
 
   /**
-   * The name of an index in an IndexResource attached to this agent. 
+   * The name of an index in an IndexResource attached to this agent.
    */
   @encodedName("application/json", "index_name")
   indexName: string;

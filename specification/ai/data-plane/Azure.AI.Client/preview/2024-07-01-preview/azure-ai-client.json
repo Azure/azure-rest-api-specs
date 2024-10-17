@@ -13,7 +13,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/{subscriptionId}/{resourceGroupName}/{projectName}",
+    "hostTemplate": "{endpoint}/agents/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{projectName}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -192,6 +192,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_ListAgents_MaximumSet": {
+            "$ref": "./examples/Agents_ListAgents_MaximumSet_Gen.json"
+          },
+          "Agents_ListAgents_MinimumSet": {
+            "$ref": "./examples/Agents_ListAgents_MinimumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -228,6 +236,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CreateAgent_MaximumSet": {
+            "$ref": "./examples/Agents_CreateAgent_MaximumSet_Gen.json"
+          },
+          "Agents_CreateAgent_MinimumSet": {
+            "$ref": "./examples/Agents_CreateAgent_MinimumSet_Gen.json"
           }
         }
       }
@@ -266,6 +282,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_GetAgent_MaximumSet": {
+            "$ref": "./examples/Agents_GetAgent_MaximumSet_Gen.json"
+          },
+          "Agents_GetAgent_MinimumSet": {
+            "$ref": "./examples/Agents_GetAgent_MinimumSet_Gen.json"
           }
         }
       },
@@ -307,6 +331,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_UpdateAgent_MaximumSet": {
+            "$ref": "./examples/Agents_UpdateAgent_MaximumSet_Gen.json"
+          },
+          "Agents_UpdateAgent_MinimumSet": {
+            "$ref": "./examples/Agents_UpdateAgent_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -343,6 +375,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_DeleteAgent_MaximumSet": {
+            "$ref": "./examples/Agents_DeleteAgent_MaximumSet_Gen.json"
+          },
+          "Agents_DeleteAgent_MinimumSet": {
+            "$ref": "./examples/Agents_DeleteAgent_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -373,6 +413,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_List_MaximumSet": {
+            "$ref": "./examples/Endpoints_List_MaximumSet_Gen.json"
           }
         }
       }
@@ -449,13 +494,18 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Endpoints_ListSecrets_MaximumSet": {
+            "$ref": "./examples/Endpoints_ListSecrets_MaximumSet_Gen.json"
+          }
         }
       }
     },
-    "/evaluations": {
+    "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
-        "description": "List evaluations",
+        "description": "Resource list operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -468,13 +518,23 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Evaluations.PagedEvaluation"
+              "$ref": "#/definitions/PagedEvaluation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -490,15 +550,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Evaluations_List_MaximumSet": {
+            "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/evaluations/{id}": {
+    "/evaluations/runs/{id}": {
       "get": {
         "operationId": "Evaluations_Get",
-        "description": "Get an evaluation.",
+        "description": "Resource read operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -511,13 +576,23 @@
             "type": "string",
             "maxLength": 254,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Evaluations.Evaluation"
+              "$ref": "#/definitions/Evaluation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -531,12 +606,20 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_Get_MaximumSet": {
+            "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
           }
         }
       },
       "patch": {
         "operationId": "Evaluations_Update",
-        "description": "Update an evaluation.",
+        "description": "Resource update operation template.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -551,12 +634,15 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
-            "name": "updateRequest",
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "Update evaluation request.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Evaluations.UpdateEvaluationRequest"
+              "$ref": "#/definitions/EvaluationUpdate"
             }
           }
         ],
@@ -564,7 +650,14 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Evaluations.Evaluation"
+              "$ref": "#/definitions/Evaluation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -579,53 +672,55 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Evaluations_Update_MaximumSet": {
+            "$ref": "./examples/Evaluations_Update_MaximumSet_Gen.json"
+          }
         }
       }
     },
-    "/evaluations/create": {
+    "/evaluations/runs:run": {
       "post": {
         "operationId": "Evaluations_Create",
-        "description": "Creates an evaluation.",
+        "description": "Run the evaluation.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "apiVersion",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "evaluation",
             "in": "body",
-            "description": "Properties of Evaluation.",
+            "description": "Evaluation to run.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Evaluations.Evaluation"
+              "$ref": "#/definitions/Evaluation"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Response model for create evaluation",
             "schema": {
-              "$ref": "#/definitions/Evaluations.Evaluation"
+              "$ref": "#/definitions/Evaluation"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_Create_MaximumSet": {
+            "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/evaluations/schedules": {
       "get": {
-        "operationId": "Evaluations_ListSchedules",
-        "description": "List evaluation schedules",
+        "operationId": "Evaluations_ListSchedule",
+        "description": "Resource list operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -638,13 +733,23 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Evaluations.PagedEvaluationSchedule"
+              "$ref": "#/definitions/PagedEvaluationSchedule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -658,6 +763,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_ListSchedule_MaximumSet": {
+            "$ref": "./examples/Evaluations_ListSchedule_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -668,7 +778,7 @@
     "/evaluations/schedules/{id}": {
       "get": {
         "operationId": "Evaluations_GetSchedule",
-        "description": "Get an evaluation schedule along with runs.",
+        "description": "Resource read operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -676,102 +786,28 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Identifier of the evaluation schedule.",
+            "description": "Identifier of the evaluation.",
             "required": true,
             "type": "string",
             "maxLength": 254,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Evaluations.EvaluationSchedule"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/EvaluationSchedule"
             },
             "headers": {
-              "x-ms-error-code": {
+              "x-ms-client-request-id": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Evaluations_DeleteSchedule",
-        "description": "Delete an evaluation schedule.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the evaluation schedule.",
-            "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/evaluations/schedules/{id}/runs": {
-      "get": {
-        "operationId": "Evaluations_ListScheduleEvaluations",
-        "description": "List evaluations under a schedule",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the evaluation schedule.",
-            "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Evaluations.PagedEvaluation"
             }
           },
           "default": {
@@ -787,34 +823,66 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-examples": {
+          "Evaluations_GetSchedule_MaximumSet": {
+            "$ref": "./examples/Evaluations_GetSchedule_MaximumSet_Gen.json"
+          }
         }
-      }
-    },
-    "/evaluations/schedules/create": {
-      "post": {
-        "operationId": "Evaluations_CreateSchedule",
-        "description": "Creates an evaluation schedule.",
+      },
+      "put": {
+        "operationId": "Evaluations_CreateOrReplaceSchedule",
+        "description": "Create or replace operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "Properties of Evaluation Schedule.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Evaluations.EvaluationSchedule"
+              "$ref": "#/definitions/EvaluationSchedule"
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSchedule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Evaluations.EvaluationSchedule"
+              "$ref": "#/definitions/EvaluationSchedule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -828,6 +896,61 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_CreateOrReplaceSchedule_MaximumSet": {
+            "$ref": "./examples/Evaluations_CreateOrReplaceSchedule_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Evaluations_DeleteSchedule",
+        "description": "Resource delete operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_DeleteSchedule_MaximumSet": {
+            "$ref": "./examples/Evaluations_DeleteSchedule_MaximumSet_Gen.json"
           }
         }
       }
@@ -916,6 +1039,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_ListFiles_MaximumSet": {
+            "$ref": "./examples/Agents_ListFiles_MaximumSet_Gen.json"
+          },
+          "Agents_ListFiles_MinimumSet": {
+            "$ref": "./examples/Agents_ListFiles_MinimumSet_Gen.json"
           }
         }
       },
@@ -1020,6 +1151,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_UploadFile_MaximumSet": {
+            "$ref": "./examples/Agents_UploadFile_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1058,6 +1194,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_GetFile_MaximumSet": {
+            "$ref": "./examples/Agents_GetFile_MaximumSet_Gen.json"
+          },
+          "Agents_GetFile_MinimumSet": {
+            "$ref": "./examples/Agents_GetFile_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -1093,6 +1237,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_DeleteFile_MaximumSet": {
+            "$ref": "./examples/Agents_DeleteFile_MaximumSet_Gen.json"
+          },
+          "Agents_DeleteFile_MinimumSet": {
+            "$ref": "./examples/Agents_DeleteFile_MinimumSet_Gen.json"
           }
         }
       }
@@ -1131,6 +1283,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_GetFileContent_MaximumSet": {
+            "$ref": "./examples/Agents_GetFileContent_MaximumSet_Gen.json"
+          },
+          "Agents_GetFileContent_MinimumSet": {
+            "$ref": "./examples/Agents_GetFileContent_MinimumSet_Gen.json"
           }
         }
       }
@@ -1171,6 +1331,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_CreateThread_MaximumSet": {
+            "$ref": "./examples/Agents_CreateThread_MaximumSet_Gen.json"
+          },
+          "Agents_CreateThread_MinimumSet": {
+            "$ref": "./examples/Agents_CreateThread_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1208,6 +1376,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_GetThread_MaximumSet": {
+            "$ref": "./examples/Agents_GetThread_MaximumSet_Gen.json"
+          },
+          "Agents_GetThread_MinimumSet": {
+            "$ref": "./examples/Agents_GetThread_MinimumSet_Gen.json"
           }
         }
       },
@@ -1249,6 +1425,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_UpdateThread_MaximumSet": {
+            "$ref": "./examples/Agents_UpdateThread_MaximumSet_Gen.json"
+          },
+          "Agents_UpdateThread_MinimumSet": {
+            "$ref": "./examples/Agents_UpdateThread_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -1284,6 +1468,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_DeleteThread_MaximumSet": {
+            "$ref": "./examples/Agents_DeleteThread_MaximumSet_Gen.json"
+          },
+          "Agents_DeleteThread_MinimumSet": {
+            "$ref": "./examples/Agents_DeleteThread_MinimumSet_Gen.json"
           }
         }
       }
@@ -1423,6 +1615,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_ListMessages_MaximumSet": {
+            "$ref": "./examples/Agents_ListMessages_MaximumSet_Gen.json"
+          },
+          "Agents_ListMessages_MinimumSet": {
+            "$ref": "./examples/Agents_ListMessages_MinimumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -1466,6 +1666,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CreateMessage_MaximumSet": {
+            "$ref": "./examples/Agents_CreateMessage_MaximumSet_Gen.json"
+          },
+          "Agents_CreateMessage_MinimumSet": {
+            "$ref": "./examples/Agents_CreateMessage_MinimumSet_Gen.json"
           }
         }
       }
@@ -1511,6 +1719,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_GetMessage_MaximumSet": {
+            "$ref": "./examples/Agents_GetMessage_MaximumSet_Gen.json"
+          },
+          "Agents_GetMessage_MinimumSet": {
+            "$ref": "./examples/Agents_GetMessage_MinimumSet_Gen.json"
           }
         }
       },
@@ -1572,6 +1788,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_UpdateMessage_MaximumSet": {
+            "$ref": "./examples/Agents_UpdateMessage_MaximumSet_Gen.json"
+          },
+          "Agents_UpdateMessage_MinimumSet": {
+            "$ref": "./examples/Agents_UpdateMessage_MinimumSet_Gen.json"
           }
         }
       }
@@ -1704,6 +1928,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_ListRuns_MaximumSet": {
+            "$ref": "./examples/Agents_ListRuns_MaximumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -1747,6 +1976,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CreateRun_MaximumSet": {
+            "$ref": "./examples/Agents_CreateRun_MaximumSet_Gen.json"
           }
         }
       }
@@ -1792,6 +2026,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_GetRun_MaximumSet": {
+            "$ref": "./examples/Agents_GetRun_MaximumSet_Gen.json"
           }
         }
       },
@@ -1854,6 +2093,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_UpdateRun_MaximumSet": {
+            "$ref": "./examples/Agents_UpdateRun_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1898,6 +2142,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CancelRun_MaximumSet": {
+            "$ref": "./examples/Agents_CancelRun_MaximumSet_Gen.json"
           }
         }
       }
@@ -2037,6 +2286,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_ListRunSteps_MaximumSet": {
+            "$ref": "./examples/Agents_ListRunSteps_MaximumSet_Gen.json"
+          },
+          "Agents_ListRunSteps_MinimumSet": {
+            "$ref": "./examples/Agents_ListRunSteps_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2088,6 +2345,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_GetRunStep_MaximumSet": {
+            "$ref": "./examples/Agents_GetRunStep_MaximumSet_Gen.json"
+          },
+          "Agents_GetRunStep_MinimumSet": {
+            "$ref": "./examples/Agents_GetRunStep_MinimumSet_Gen.json"
           }
         }
       }
@@ -2161,6 +2426,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_SubmitToolOutputsToRun_MaximumSet": {
+            "$ref": "./examples/Agents_SubmitToolOutputsToRun_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -2199,6 +2469,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CreateThreadAndRun_MaximumSet": {
+            "$ref": "./examples/Agents_CreateThreadAndRun_MaximumSet_Gen.json"
           }
         }
       }
@@ -2324,6 +2599,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_ListVectorStores_MaximumSet": {
+            "$ref": "./examples/Agents_ListVectorStores_MaximumSet_Gen.json"
+          },
+          "Agents_ListVectorStores_MinimumSet": {
+            "$ref": "./examples/Agents_ListVectorStores_MinimumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -2360,6 +2643,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CreateVectorStore_MaximumSet": {
+            "$ref": "./examples/Agents_CreateVectorStore_MaximumSet_Gen.json"
+          },
+          "Agents_CreateVectorStore_MinimumSet": {
+            "$ref": "./examples/Agents_CreateVectorStore_MinimumSet_Gen.json"
           }
         }
       }
@@ -2398,6 +2689,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_GetVectorStore_MaximumSet": {
+            "$ref": "./examples/Agents_GetVectorStore_MaximumSet_Gen.json"
+          },
+          "Agents_GetVectorStore_MinimumSet": {
+            "$ref": "./examples/Agents_GetVectorStore_MinimumSet_Gen.json"
           }
         }
       },
@@ -2443,6 +2742,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_ModifyVectorStore_MaximumSet": {
+            "$ref": "./examples/Agents_ModifyVectorStore_MaximumSet_Gen.json"
+          },
+          "Agents_ModifyVectorStore_MinimumSet": {
+            "$ref": "./examples/Agents_ModifyVectorStore_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -2478,6 +2785,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_DeleteVectorStore_MaximumSet": {
+            "$ref": "./examples/Agents_DeleteVectorStore_MaximumSet_Gen.json"
+          },
+          "Agents_DeleteVectorStore_MinimumSet": {
+            "$ref": "./examples/Agents_DeleteVectorStore_MinimumSet_Gen.json"
           }
         }
       }
@@ -2545,6 +2860,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_CreateVectorStoreFileBatch_MaximumSet": {
+            "$ref": "./examples/Agents_CreateVectorStoreFileBatch_MaximumSet_Gen.json"
+          },
+          "Agents_CreateVectorStoreFileBatch_MinimumSet": {
+            "$ref": "./examples/Agents_CreateVectorStoreFileBatch_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2590,6 +2913,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_GetVectorStoreFileBatch_MaximumSet": {
+            "$ref": "./examples/Agents_GetVectorStoreFileBatch_MaximumSet_Gen.json"
+          },
+          "Agents_GetVectorStoreFileBatch_MinimumSet": {
+            "$ref": "./examples/Agents_GetVectorStoreFileBatch_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2634,6 +2965,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CancelVectorStoreFileBatch_MaximumSet": {
+            "$ref": "./examples/Agents_CancelVectorStoreFileBatch_MaximumSet_Gen.json"
+          },
+          "Agents_CancelVectorStoreFileBatch_MinimumSet": {
+            "$ref": "./examples/Agents_CancelVectorStoreFileBatch_MinimumSet_Gen.json"
           }
         }
       }
@@ -2812,6 +3151,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_ListVectorStoreFileBatchFiles_MaximumSet": {
+            "$ref": "./examples/Agents_ListVectorStoreFileBatchFiles_MaximumSet_Gen.json"
+          },
+          "Agents_ListVectorStoreFileBatchFiles_MinimumSet": {
+            "$ref": "./examples/Agents_ListVectorStoreFileBatchFiles_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2982,6 +3329,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_ListVectorStoreFiles_MaximumSet": {
+            "$ref": "./examples/Agents_ListVectorStoreFiles_MaximumSet_Gen.json"
+          },
+          "Agents_ListVectorStoreFiles_MinimumSet": {
+            "$ref": "./examples/Agents_ListVectorStoreFiles_MinimumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -3041,6 +3396,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_CreateVectorStoreFile_MaximumSet": {
+            "$ref": "./examples/Agents_CreateVectorStoreFile_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -3086,6 +3446,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Agents_GetVectorStoreFile_MaximumSet": {
+            "$ref": "./examples/Agents_GetVectorStoreFile_MaximumSet_Gen.json"
+          },
+          "Agents_GetVectorStoreFile_MinimumSet": {
+            "$ref": "./examples/Agents_GetVectorStoreFile_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -3128,6 +3496,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_DeleteVectorStoreFile_MaximumSet": {
+            "$ref": "./examples/Agents_DeleteVectorStoreFile_MaximumSet_Gen.json"
+          },
+          "Agents_DeleteVectorStoreFile_MinimumSet": {
+            "$ref": "./examples/Agents_DeleteVectorStoreFile_MinimumSet_Gen.json"
           }
         }
       }
@@ -3367,7 +3743,7 @@
           {
             "name": "ThreadRunStepDelta",
             "value": "thread.run.step.delta",
-            "description": "Event sent when a run stepis being streamed. The data of this event is of type RunStepDeltaChunk"
+            "description": "Event sent when a run step is being streamed. The data of this event is of type RunStepDeltaChunk"
           },
           {
             "name": "ThreadRunStepCompleted",
@@ -3616,7 +3992,11 @@
       "enum": [
         "function",
         "code_interpreter",
-        "file_search"
+        "file_search",
+        "bing_grounding",
+        "microsoft_fabric",
+        "sharepoint",
+        "azure_ai_search"
       ],
       "x-ms-enum": {
         "name": "AgentsNamedToolChoiceType",
@@ -3636,6 +4016,26 @@
             "name": "fileSearch",
             "value": "file_search",
             "description": "Tool type `file_search`"
+          },
+          {
+            "name": "bingGrounding",
+            "value": "bing_grounding",
+            "description": "Tool type `bing_grounding`"
+          },
+          {
+            "name": "microsoftFabric",
+            "value": "microsoft_fabric",
+            "description": "Tool type `microsoft_fabric`"
+          },
+          {
+            "name": "sharepoint",
+            "value": "sharepoint",
+            "description": "Tool type `sharepoint`"
+          },
+          {
+            "name": "azureAISearch",
+            "value": "azure_ai_search",
+            "description": "Tool type `azure_ai_search`"
           }
         ]
       }
@@ -3664,6 +4064,42 @@
         ]
       }
     },
+    "Agents.AzureAISearchResource": {
+      "type": "object",
+      "description": "A set of index resources used by the `azure_ai_search` tool.",
+      "properties": {
+        "indexes": {
+          "type": "array",
+          "description": "The indices attached to this agent. There can be a maximum of 1 index\nresource attached to the agent.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Agents.IndexResource"
+          },
+          "x-ms-client-name": "indexList",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Agents.AzureAISearchToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for an Azure AI search tool as used to configure an agent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search"
+    },
+    "Agents.BingSearchToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a bing search tool as used to configure an agent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_search"
+    },
     "Agents.CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an agent.",
@@ -3689,6 +4125,36 @@
           "x-ms-client-name": "fileIds"
         }
       }
+    },
+    "Agents.ConnectionListResource": {
+      "type": "object",
+      "description": "A set of connection resources currently used by either the `bing_search`, `microsoft_fabric`, or `sharepoint` tools.",
+      "properties": {
+        "connections": {
+          "type": "array",
+          "description": "The connections attached to this agent. There can be a maximum of 1 connection\nresource attached to the agent.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Agents.ConnectionResource"
+          },
+          "x-ms-client-name": "connectionList",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Agents.ConnectionResource": {
+      "type": "object",
+      "description": "A connection resource.",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "A connection in a ConnectionListResource attached to this agent.",
+          "x-ms-client-name": "connectionId"
+        }
+      },
+      "required": [
+        "connection_id"
+      ]
     },
     "Agents.CreateAgentOptions": {
       "type": "object",
@@ -4053,6 +4519,26 @@
           "$ref": "#/definitions/Agents.CreateFileSearchToolResourceOptions",
           "description": "A list of vector stores or their IDs made available to the `file_search` tool.",
           "x-ms-client-name": "fileSearch"
+        },
+        "bing_search": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "A list of connections to be used by the `bing_search` tool consisting of connection IDs.",
+          "x-ms-client-name": "bingSearch"
+        },
+        "microsoft_fabric": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "A list of connections to be used by the `microsoft_fabric` tool consisting of connection IDs.",
+          "x-ms-client-name": "microsoftFabric"
+        },
+        "sharepoint": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "A list of connections to be used by the `sharepoint` tool consisting of connection IDs.",
+          "x-ms-client-name": "sharePoint"
+        },
+        "azure_ai_search": {
+          "$ref": "#/definitions/Agents.AzureAISearchResource",
+          "description": "Resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
+          "x-ms-client-name": "azureAISearch"
         }
       }
     },
@@ -4392,6 +4878,26 @@
           }
         ]
       }
+    },
+    "Agents.IndexResource": {
+      "type": "object",
+      "description": "A Index resource.",
+      "properties": {
+        "index_connection_id": {
+          "type": "string",
+          "description": "An index connection id in an IndexResource attached to this agent.",
+          "x-ms-client-name": "indexConnectionId"
+        },
+        "index_name": {
+          "type": "string",
+          "description": "The name of an index in an IndexResource attached to this agent.",
+          "x-ms-client-name": "indexName"
+        }
+      },
+      "required": [
+        "index_connection_id",
+        "index_name"
+      ]
     },
     "Agents.ListSortOrder": {
       "type": "string",
@@ -5057,6 +5563,16 @@
         "file_id"
       ]
     },
+    "Agents.MicrosoftFabricToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "microsoft_fabric"
+    },
     "Agents.OpenAIFile": {
       "type": "object",
       "description": "Represents an agent that can call the model and use tools.",
@@ -5417,6 +5933,52 @@
         "failed_at",
         "metadata"
       ]
+    },
+    "Agents.RunStepAzureAISearchToolCall": {
+      "type": "object",
+      "description": "A record of a call to an Azure AI Search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Azure AI search.",
+      "properties": {
+        "azure_ai_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "azureAISearch"
+        }
+      },
+      "required": [
+        "azure_ai_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search"
+    },
+    "Agents.RunStepBingSearchToolCall": {
+      "type": "object",
+      "description": "A record of a call to a bing search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted bing search.",
+      "properties": {
+        "bing_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingSearch"
+        }
+      },
+      "required": [
+        "bing_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_search"
     },
     "Agents.RunStepCodeInterpreterImageOutput": {
       "type": "object",
@@ -5991,6 +6553,52 @@
         "message_id"
       ]
     },
+    "Agents.RunStepMicrosoftFabricToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Microsoft Fabric tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Microsoft Fabric operations.",
+      "properties": {
+        "microsoft_fabric": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "microsoftFabric"
+        }
+      },
+      "required": [
+        "microsoft_fabric"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "microsoft_fabric"
+    },
+    "Agents.RunStepSharepointToolCall": {
+      "type": "object",
+      "description": "A record of a call to a SharePoint tool, issued by the model in evaluation of a defined tool, that represents\nexecuted SharePoint actions.",
+      "properties": {
+        "sharepoint": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "sharePoint"
+        }
+      },
+      "required": [
+        "sharepoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "sharepoint"
+    },
     "Agents.RunStepStatus": {
       "type": "string",
       "description": "Possible values for the status of a run step.",
@@ -6062,7 +6670,7 @@
           {
             "name": "ThreadRunStepDelta",
             "value": "thread.run.step.delta",
-            "description": "Event sent when a run stepis being streamed. The data of this event is of type RunStepDeltaChunk"
+            "description": "Event sent when a run step is being streamed. The data of this event is of type RunStepDeltaChunk"
           },
           {
             "name": "ThreadRunStepCompleted",
@@ -6218,6 +6826,16 @@
           }
         ]
       }
+    },
+    "Agents.SharepointToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a sharepoint tool as used to configure an agent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "sharepoint"
     },
     "Agents.SubmitToolOutputsAction": {
       "type": "object",
@@ -6725,6 +7343,26 @@
           "$ref": "#/definitions/Agents.FileSearchToolResource",
           "description": "Resources to be used by the `file_search` tool consisting of vector store IDs.",
           "x-ms-client-name": "fileSearch"
+        },
+        "bing_search": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "Resources to be used by the `bing_search` tool consisting of connection IDs.",
+          "x-ms-client-name": "bingSearch"
+        },
+        "microsoft_fabric": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "Resources to be used by the `microsoft_fabric` tool consisting of connection IDs.",
+          "x-ms-client-name": "microsoftFabric"
+        },
+        "sharepoint": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "Resources to be used by the `sharepoint` tool consisting of connection IDs.",
+          "x-ms-client-name": "sharePoint"
+        },
+        "azure_ai_search": {
+          "$ref": "#/definitions/Agents.AzureAISearchResource",
+          "description": "Resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
+          "x-ms-client-name": "azureAISearch"
         }
       }
     },
@@ -6929,6 +7567,26 @@
           "$ref": "#/definitions/Agents.UpdateFileSearchToolResourceOptions",
           "description": "Overrides the vector store attached to this agent. There can be a maximum of 1 vector store attached to the agent.",
           "x-ms-client-name": "fileSearch"
+        },
+        "bing_search": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "Overrides the list of connections to be used by the `bing_search` tool consisting of connection IDs.",
+          "x-ms-client-name": "bingSearch"
+        },
+        "microsoft_fabric": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "Overrides the list of connections to be used by the `microsoft_fabric` tool consisting of connection IDs.",
+          "x-ms-client-name": "microsoftFabric"
+        },
+        "sharepoint": {
+          "$ref": "#/definitions/Agents.ConnectionListResource",
+          "description": "Overrides the list of connections to be used by the `sharepoint` tool consisting of connection IDs.",
+          "x-ms-client-name": "sharePoint"
+        },
+        "azure_ai_search": {
+          "$ref": "#/definitions/Agents.AzureAISearchResource",
+          "description": "Overrides the resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
+          "x-ms-client-name": "azureAISearch"
         }
       }
     },
@@ -7679,6 +8337,35 @@
         }
       }
     },
+    "AppInsightsConfiguration": {
+      "type": "object",
+      "description": "Data Source for Application Insight.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "LogAnalytic Workspace resourceID associated with AppInsights"
+        },
+        "query": {
+          "type": "string",
+          "description": "Query to fetch the data."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "Service name."
+        }
+      },
+      "required": [
+        "resourceId",
+        "query",
+        "serviceName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "app_insights"
+    },
     "AuthenticationType": {
       "type": "string",
       "description": "Authentication type used by Azure AI service to connect to another service",
@@ -7772,7 +8459,7 @@
     },
     "ConnectionProperties": {
       "type": "object",
-      "description": "Connetion properties",
+      "description": "Connection properties",
       "properties": {
         "authType": {
           "$ref": "#/definitions/AuthenticationType",
@@ -7901,6 +8588,19 @@
         "properties"
       ]
     },
+    "CreatedEvaluationResponse": {
+      "type": "object",
+      "description": "Response model for create evaluation",
+      "properties": {
+        "evaluation": {
+          "$ref": "#/definitions/Evaluation",
+          "description": "Evaluation created"
+        }
+      },
+      "required": [
+        "evaluation"
+      ]
+    },
     "CredentialsApiKeyAuth": {
       "type": "object",
       "description": "The credentials needed for API key authentication",
@@ -7916,7 +8616,7 @@
     },
     "CredentialsSASAuth": {
       "type": "object",
-      "description": "The credentials neede for Shared Access Signatures (SAS) authentication",
+      "description": "The credentials needed for Shared Access Signatures (SAS) authentication",
       "properties": {
         "SAS": {
           "type": "string",
@@ -7926,6 +8626,45 @@
       "required": [
         "SAS"
       ]
+    },
+    "CronTrigger": {
+      "type": "object",
+      "description": "Cron Trigger Definition",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Cron expression for the trigger."
+        }
+      },
+      "required": [
+        "expression"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "Cron"
+    },
+    "Dataset": {
+      "type": "object",
+      "description": "Dataset as source for evaluation.",
+      "properties": {
+        "Uri": {
+          "type": "string",
+          "description": "Evaluation input data",
+          "x-ms-client-name": "id"
+        }
+      },
+      "required": [
+        "Uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "dataset"
     },
     "EndpointType": {
       "type": "string",
@@ -7951,66 +8690,24 @@
         ]
       }
     },
-    "Evaluations.AppInsightsConfiguration": {
-      "type": "object",
-      "description": "Data Source for Application Insight.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "LogAnalytic Workspace resourceID associated with AppInsights"
-        },
-        "query": {
-          "type": "string",
-          "description": "Query to fetch the data."
-        },
-        "serviceName": {
-          "type": "string",
-          "description": "Service name."
-        }
-      },
-      "required": [
-        "resourceId",
-        "query",
-        "serviceName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Evaluations.InputData"
-        }
-      ],
-      "x-ms-discriminator-value": "app_insights"
-    },
-    "Evaluations.Dataset": {
-      "type": "object",
-      "description": "Dataset as source for evaluation.",
-      "properties": {
-        "Uri": {
-          "type": "string",
-          "description": "Evaluation input data",
-          "x-ms-client-name": "id"
-        }
-      },
-      "required": [
-        "Uri"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Evaluations.InputData"
-        }
-      ],
-      "x-ms-discriminator-value": "dataset"
-    },
-    "Evaluations.Evaluation": {
+    "Evaluation": {
       "type": "object",
       "description": "Evaluation Definition",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier of the evaluation."
+          "description": "Identifier of the evaluation.",
+          "maxLength": 254,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
+          "readOnly": true
         },
         "data": {
-          "$ref": "#/definitions/Evaluations.InputData",
-          "description": "Data for evaluation."
+          "$ref": "#/definitions/InputData",
+          "description": "Data for evaluation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "displayName": {
           "type": "string",
@@ -8042,32 +8739,48 @@
           "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "evaluators": {
           "type": "object",
           "description": "Evaluators to be used for the evaluation.",
           "additionalProperties": {
-            "$ref": "#/definitions/Evaluations.EvaluatorConfiguration"
-          }
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
+        "id",
         "data",
         "evaluators"
       ]
     },
-    "Evaluations.EvaluationSchedule": {
+    "EvaluationSchedule": {
       "type": "object",
       "description": "Evaluation Schedule Definition",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier of the evaluation."
+          "description": "Identifier of the evaluation.",
+          "maxLength": 254,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
+          "readOnly": true
         },
         "data": {
-          "$ref": "#/definitions/Evaluations.InputData",
-          "description": "Data for evaluation."
+          "$ref": "#/definitions/InputData",
+          "description": "Data for evaluation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "displayName": {
           "type": "string",
@@ -8082,7 +8795,7 @@
           "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
-        "status": {
+        "provisioningStatus": {
           "type": "string",
           "description": "Status of the evaluation. It is set by service and is read-only.",
           "readOnly": true
@@ -8099,35 +8812,62 @@
           "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "evaluators": {
           "type": "object",
           "description": "Evaluators to be used for the evaluation.",
           "additionalProperties": {
-            "$ref": "#/definitions/Evaluations.EvaluatorConfiguration"
-          }
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
-        "recurrence": {
-          "$ref": "#/definitions/Evaluations.Recurrence",
-          "description": "Recurrence pattern for the evaluation."
-        },
-        "cronExpression": {
-          "type": "string",
-          "description": "Cron expression for the evaluation."
+        "trigger": {
+          "$ref": "#/definitions/Trigger",
+          "description": "Trigger for the evaluation."
         },
         "samplingStrategy": {
-          "$ref": "#/definitions/Evaluations.SamplingStrategy",
+          "$ref": "#/definitions/SamplingStrategy",
           "description": "Sampling strategy for the evaluation."
         }
       },
       "required": [
+        "id",
         "data",
         "evaluators",
+        "trigger",
         "samplingStrategy"
       ]
     },
-    "Evaluations.EvaluatorConfiguration": {
+    "EvaluationUpdate": {
+      "type": "object",
+      "description": "Evaluation Definition",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EvaluatorConfiguration": {
       "type": "object",
       "description": "Evaluator Configuration",
       "properties": {
@@ -8152,7 +8892,7 @@
         "id"
       ]
     },
-    "Evaluations.Frequency": {
+    "Frequency": {
       "type": "string",
       "description": "Frequency of the schedule - day, week, month, hour, minute",
       "enum": [
@@ -8189,7 +8929,7 @@
         ]
       }
     },
-    "Evaluations.InputData": {
+    "InputData": {
       "type": "object",
       "description": "Abstract data class for input data configuration.",
       "properties": {
@@ -8203,17 +8943,16 @@
         "type"
       ]
     },
-    "Evaluations.PagedEvaluation": {
+    "PagedEvaluation": {
       "type": "object",
-      "description": "Paged evaluation items",
+      "description": "Paged collection of Evaluation items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of Evaluations.",
+          "description": "The Evaluation items on this page",
           "items": {
-            "$ref": "#/definitions/Evaluations.Evaluation"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Evaluation"
+          }
         },
         "nextLink": {
           "type": "string",
@@ -8225,17 +8964,16 @@
         "value"
       ]
     },
-    "Evaluations.PagedEvaluationSchedule": {
+    "PagedEvaluationSchedule": {
       "type": "object",
-      "description": "Paged evaluation schedule items",
+      "description": "Paged collection of EvaluationSchedule items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of Evaluation Schedules.",
+          "description": "The EvaluationSchedule items on this page",
           "items": {
-            "$ref": "#/definitions/Evaluations.EvaluationSchedule"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/EvaluationSchedule"
+          }
         },
         "nextLink": {
           "type": "string",
@@ -8247,12 +8985,12 @@
         "value"
       ]
     },
-    "Evaluations.Recurrence": {
+    "Recurrence": {
       "type": "object",
       "description": "Recurrence Definition",
       "properties": {
         "frequency": {
-          "$ref": "#/definitions/Evaluations.Frequency",
+          "$ref": "#/definitions/Frequency",
           "description": "The frequency to trigger schedule."
         },
         "interval": {
@@ -8261,7 +8999,7 @@
           "description": "Specifies schedule interval in conjunction with frequency"
         },
         "schedule": {
-          "$ref": "#/definitions/Evaluations.RecurrenceSchedule",
+          "$ref": "#/definitions/RecurrenceSchedule",
           "description": "The recurrence schedule."
         }
       },
@@ -8271,7 +9009,7 @@
         "schedule"
       ]
     },
-    "Evaluations.RecurrenceSchedule": {
+    "RecurrenceSchedule": {
       "type": "object",
       "description": "RecurrenceSchedule Definition",
       "properties": {
@@ -8295,7 +9033,7 @@
           "type": "array",
           "description": "List of days for the schedule.",
           "items": {
-            "$ref": "#/definitions/Evaluations.WeekDays"
+            "$ref": "#/definitions/WeekDays"
           }
         },
         "monthDays": {
@@ -8314,7 +9052,37 @@
         "monthDays"
       ]
     },
-    "Evaluations.SamplingStrategy": {
+    "RecurrenceTrigger": {
+      "type": "object",
+      "description": "Recurrence Trigger Definition",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/Frequency",
+          "description": "The frequency to trigger schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies schedule interval in conjunction with frequency"
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrenceSchedule",
+          "description": "The recurrence schedule."
+        }
+      },
+      "required": [
+        "frequency",
+        "interval",
+        "schedule"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "Recurrence"
+    },
+    "SamplingStrategy": {
       "type": "object",
       "description": "SamplingStrategy Definition",
       "properties": {
@@ -8328,28 +9096,49 @@
         "rate"
       ]
     },
-    "Evaluations.UpdateEvaluationRequest": {
+    "SystemData": {
       "type": "object",
-      "description": "Update Evaluation Request",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Tags to be updated.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "displayName": {
+        "createdAt": {
           "type": "string",
-          "description": "Display Name"
+          "format": "date-time",
+          "description": "The timestamp the resource was created at.",
+          "readOnly": true
         },
-        "description": {
+        "createdBy": {
           "type": "string",
-          "description": "Description"
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The identity type that created the resource.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
         }
       }
     },
-    "Evaluations.WeekDays": {
+    "Trigger": {
+      "type": "object",
+      "description": "Abstract data class for input data configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the trigger."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "WeekDays": {
       "type": "string",
       "description": "WeekDay of the schedule - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",
       "enum": [
@@ -8395,34 +9184,6 @@
           }
         ]
       }
-    },
-    "SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp the resource was created at.",
-          "readOnly": true
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource.",
-          "readOnly": true
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The identity type that created the resource.",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
@@ -8441,6 +9202,16 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
     },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",

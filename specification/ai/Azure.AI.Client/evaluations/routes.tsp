@@ -35,6 +35,7 @@ interface Evaluations {
     @query
     @doc("The API version to use for this operation.")
     apiVersion: string,
+
     @body
     @doc("Evaluation to run.")
     evaluation: Evaluation,
@@ -53,10 +54,9 @@ interface Evaluations {
   createOrReplaceSchedule is EvaluationsOperations.ResourceCreateOrReplace<EvaluationSchedule>;
 
   listSchedule is EvaluationsOperations.ResourceList<
-  EvaluationSchedule,
-  ListQueryParametersTrait<StandardListQueryParameters>
+    EvaluationSchedule,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   deleteSchedule is EvaluationsOperations.ResourceDelete<EvaluationSchedule>;
-
-};
+}

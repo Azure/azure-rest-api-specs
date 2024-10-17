@@ -30,7 +30,7 @@ model ConnectionsListResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
-@doc("Connetion properties")
+@doc("Connection properties")
 @discriminator("authType")
 model ConnectionProperties {
   @doc("Authentication type of the connection target")
@@ -104,7 +104,7 @@ model CredentialsApiKeyAuth {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("The credentials neede for Shared Access Signatures (SAS) authentication")
+@doc("The credentials needed for Shared Access Signatures (SAS) authentication")
 model CredentialsSASAuth {
   @doc("The Shared Access Signatures (SAS) token")
   SAS: string;
