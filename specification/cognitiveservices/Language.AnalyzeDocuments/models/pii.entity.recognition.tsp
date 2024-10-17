@@ -21,9 +21,9 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** Enumeration of PII categories to be excluded in the response. */
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  /** Character to be used for redaction. Default in '*'." */
+  /** Character to be used for redaction. Default in '*'. */
   @removed(Versions.v2024_11_15_preview)
-  redactionCharacter: redactionCharacter = redactionCharacter.asterisk;
+  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
@@ -124,19 +124,23 @@ model Entity {
   /** Entity category is the broad grouping of the entity detected. It is a legacy field and replaces the the Type and Tags field in the future. */
   category: string;
 
+  /** Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned. */
+  @removed(Versions.v2024_11_15_preview)
+  offset: int32;
+
   /** Entity subcategory */
   @removed(Versions.v2024_11_15_preview)
   subCategory?: string;
-
-  /** Most granular type of the entity detected */
-  @added(Versions.v2024_11_15_preview)
-  type: string;
 
   /** Length for the entity text. Use of different 'stringIndexType' values can affect the length returned. */
   length: int32;
 
   /** Confidence score between 0 and 1 of the extracted entity. */
   confidenceScore: float64;
+
+  /** Most granular type of the entity detected */
+  @added(Versions.v2024_11_15_preview)
+  type: string;
 
   /** Identifier for the reference. */
   @added(Versions.v2024_11_15_preview)
