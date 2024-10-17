@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "deploymentName": "my-deployment",
+    "api-version": "2024-07-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "templateLink": {
+          "uri": "https://example.com/exampleTemplate.json"
+        },
+        "parameters": {},
+        "mode": "Incremental"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "properties": {
+          "templateLink": {
+            "uri": "https://example.com/exampleTemplate.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "templateHash": "0000000000000000000",
+          "parameters": {},
+          "mode": "Incremental",
+          "provisioningState": "Succeeded",
+          "timestamp": "2020-06-05T01:20:01.723776Z",
+          "duration": "PT22.8356799S",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "providers": [
+            {
+              "namespace": "Microsoft.Resources",
+              "resourceTypes": [
+                {
+                  "resourceType": "resourceGroups",
+                  "locations": [
+                    "eastus"
+                  ]
+                }
+              ]
+            }
+          ],
+          "dependencies": [],
+          "validatedResources": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group2"
+            }
+          ],
+          "diagnostics": [
+            {
+              "level": "Warning",
+              "code": "NestedDeploymentShortCircuited",
+              "message": "A nested deployment got short-circuited and all its resources got skipped from validation. This is due to a nested template having a parameter that was not fully evaluated (e.g. contains a reference() function)."
+            },
+            {
+              "level": "Warning",
+              "code": "NestedDeploymentSkippedFromInternalExpansion",
+              "message": "When nested deployments are expanded, all its inner resources are retrieved for further validation. This process is performed in batch of: '10' at a time. Nested deployments exceeding this batch count are skipped from expansion."
+            },
+            {
+              "level": "Warning",
+              "code": "NestedDeploymentExpansionLimitReached",
+              "message": "Nested deployments are expanded up to: '50' in total. Nested deployments exceeding this count are skipped from expansion."
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/00000000-0000-0000-0000-000000000001/operationResults/XXXXXXXXXXXXXXX?api-version=2024-07-01"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidTemplateDeployment",
+          "message": "Validation failed"
+        }
+      }
+    }
+  }
+}
