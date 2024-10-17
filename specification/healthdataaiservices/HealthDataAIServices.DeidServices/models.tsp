@@ -25,12 +25,6 @@ model DeidentificationJob {
   @doc("Target location to store output of operation.")
   targetLocation: TargetStorageLocation;
 
-  @doc("Operation to perform on the input documents.")
-  operation?: OperationType = OperationType.Surrogate;
-
-  @doc("Data type of the input documents.")
-  dataType?: DocumentDataType = DocumentDataType.Plaintext;
-
   @doc("Customization parameters to override default service behaviors.")
   customizations?: CustomizationOptions;
 
@@ -45,6 +39,7 @@ model DeidentificationJob {
   @visibility("read")
   error?: Azure.Core.Foundations.Error;
 
+  // TODO: Potentially group timestamps together?
   @doc("""
     Date and time when the job was completed.
     
@@ -68,22 +63,65 @@ model DeidentificationJob {
   summary?: JobSummary;
 }
 
-@doc("Summary metrics of a job.")
-model JobSummary {
-  @doc("Number of documents that have completed.")
-  successful: int32;
+@doc("Storage location.")
+model SourceStorageLocation {
+  @doc("URL to storage location.")
+  location: url;
 
-  @doc("Number of documents that have failed.")
-  failed: int32;
+  @doc("Prefix to filter path by.")
+  @minLength(1)
+  @maxLength(1024)
+  prefix: string;
 
-  @doc("Number of documents that have been canceled.")
-  canceled: int32;
+  @doc("List of extensions to filter path by.")
+  @minItems(1)
+  extensions?: Array<string> = #["*"];
 
-  @doc("Number of documents total.")
-  total: int32;
+  @doc("Language and Locale that the service should use.")
+  locale?: string = "en-US";
 
-  @doc("Number of bytes processed.")
-  bytesProcessed: int64;
+  @doc("Data type of the input documents.")
+  dataType?: DocumentDataType = DocumentDataType.Plaintext;
+}
+
+@doc("Storage location.")
+model TargetStorageLocation {
+  @doc("URL to storage location.")
+  location: url;
+
+  // TODO: Specify an example of the output path of a file.
+  @doc("Prefix to filter path by.")
+  @minLength(1)
+  @maxLength(1024)
+  prefix: string;
+
+  @doc("When set to true during a job, the service will overwrite the output location if it already exists.")
+  overwrite?: boolean = false;
+}
+
+/*
+TODO: Name pending
+ServiceModifiers
+BehaviorOverrides
+DeidentificationOptions
+DeidentificationParameters
+*/
+@doc("Customizations options to override default service behaviors.")
+model CustomizationOptions {
+  @maxLength(16)
+  @minLength(1)
+  @doc("Format of the redacted output. Only valid when Operation is Redact.")
+  redactionFormat?: string;
+
+  // TODO: SHould I avoid negative? processIndividually?
+  @doc("When set to true during a job, the service will surrogate all documents individually.")
+  disableConsistency?: boolean = false;
+
+  @doc("Operation to perform on the input documents.")
+  operation?: OperationType = OperationType.Surrogate;
+
+  // TODO: Optionally return surrogated offsets? Do they want before or after surrogation?
+  // How will this work with a job?
 }
 
 @doc("List of statuses a job can have.")
@@ -115,30 +153,22 @@ union JobStatus {
   string,
 }
 
-@doc("Storage location.")
-model SourceStorageLocation {
-  @doc("URL to storage location.")
-  location: url;
+@doc("Summary metrics of a job.")
+model JobSummary {
+  @doc("Number of documents that have completed.")
+  successful: int32;
 
-  @doc("Prefix to filter path by.")
-  @minLength(1)
-  @maxLength(1024)
-  prefix: string;
+  @doc("Number of documents that have failed.")
+  failed: int32;
 
-  @doc("List of extensions to filter path by.")
-  @minItems(1)
-  extensions?: Array<string> = #["*"];
-}
+  @doc("Number of documents that have been canceled.")
+  canceled: int32;
 
-@doc("Storage location.")
-model TargetStorageLocation {
-  @doc("URL to storage location.")
-  location: url;
+  @doc("Number of documents total.")
+  total: int32;
 
-  @doc("Prefix to filter path by.")
-  @minLength(1)
-  @maxLength(1024)
-  prefix: string;
+  @doc("Number of bytes processed.")
+  bytesProcessed: int64;
 }
 
 @doc("Details of a single document in a job.")
@@ -194,45 +224,17 @@ union OperationType {
   string,
 }
 
-/*
-TODO: Name pending
-ServiceModifiers
-BehaviorOverrides
-DeidentificationOptions
-DeidentificationParameters
-*/
-@doc("Customizations options to override default service behaviors.")
-model CustomizationOptions {
-  @maxLength(16)
-  @minLength(1)
-  @doc("Format of the redacted output. Only valid when Operation is Redact.")
-  redactionFormat?: string;
-
-  @doc("When set to true during a job, the service will surrogate all documents individually.")
-  disableConsistency?: boolean = false;
-
-  @doc("When set to true during a job, the service will overwrite the output location if it already exists.")
-  overwrite?: boolean = false;
-
-  @doc("Language and Locale that the service should use.")
-  locale?: string = "en-US";
-}
-
 @doc("Request body for de-identification operation.")
 model DeidentificationContent {
   @doc("Input text to de-identify.")
-  @maxLength(100000) // 100KB
+  @maxLength(48000) // 50k total request size. 2k for other fields.
   inputText: string;
-
-  @doc("Operation to perform on the input.")
-  operation?: OperationType = OperationType.Surrogate;
 
   @doc("Data type of the input.")
   dataType?: DocumentDataType = DocumentDataType.Plaintext;
 
-  @maxLength(16)
-  @doc("Format of the redacted output. Only valid when OperationType is \"Redact\".")
-  redactionFormat?: string;
+  @doc("Customization parameters to override default service behaviors.")
+  customizations?: CustomizationOptions;
 }
 
 @doc("Response body for de-identification operation.")
@@ -249,10 +251,12 @@ model PhiTaggerResult {
   @doc("List of entities detected in the input.")
   entities: Array<PhiEntity>;
 
+  // TODO: REMOVE? We don't use it within the code. And any data is already in the Details
   @doc("Path to the document in storage.")
   @maxLength(1024) // Max length for path Name
   path?: string;
 
+  // TODO: Same as above
   // Source: ...EtagProperty;
   // Needs to be optional
   @doc("The entity tag for this resource.")
