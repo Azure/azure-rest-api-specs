@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+    "resourceGroupName": "myResourceGroup",
+    "configStoreName": "contoso",
+    "api-version": "2024-06-01-preview",
+    "sasTokenGenerationParameters": {
+      "sasTokenScope": {
+        "resourceType": "Kv",
+        "key": "test*",
+        "label": "prod",
+        "tags": [
+          "group=test-group",
+          "region=eastus"
+        ]
+      },
+      "expires": "2024-09-01T00:00:00",
+      "cacheControlMaxAge": 3600,
+      "kind": "Primary"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sasTokenScope": {
+          "resourceType": "Kv",
+          "key": "test*",
+          "label": "prod",
+          "tags": [
+            "group=test-group",
+            "region=eastus"
+          ]
+        },
+        "expires": "2024-09-01T00:00:00",
+        "cacheControlMaxAge": 3600,
+        "kind": "Primary",
+        "value": "sas=res=kv;sp=key,label,tags;exp=2024-09-01T00:00:00Z;ccma=3600;kind=primary;oid=<ObjectId>;tid=<TenantId>;p=read;sig=<hmac256signature>"
+      }
+    }
+  }
+}
