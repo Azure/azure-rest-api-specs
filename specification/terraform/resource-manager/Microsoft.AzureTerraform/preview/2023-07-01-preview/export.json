@@ -44,9 +44,6 @@
     },
     {
       "name": "ExportTerraform"
-    },
-    {
-      "name": "OperationStatuses"
     }
   ],
   "paths": {
@@ -101,9 +98,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "exportParameter",
+            "name": "body",
             "in": "body",
-            "description": "The export parameter",
+            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BaseExportModel"
@@ -111,6 +108,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExportResult"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -143,69 +146,18 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/operationStatuses/{operationId}": {
-      "get": {
-        "operationId": "ExportTerraform_GetOperationStatus",
-        "tags": [
-          "OperationStatuses"
-        ],
-        "description": "Get the status of a long running azure asynchronous operation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TerraformOperationStatus"
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/TerraformOperationStatus"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get specific operation status": {
-            "$ref": "./examples/GetOperationStatus.json"
-          }
-        }
       }
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -414,9 +366,8 @@
           "description": "The operation status"
         },
         "id": {
-          "type": "string",
-          "description": "The unique identifier for the operationStatus resource",
-          "readOnly": true
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier for the operationStatus resource"
         },
         "name": {
           "type": "string",

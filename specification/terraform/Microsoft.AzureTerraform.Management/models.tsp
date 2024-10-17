@@ -92,46 +92,8 @@ model ExportResourceGroup extends BaseExportModel {
   type: "ExportResourceGroup";
 }
 
-// Copy of Azure.ResourceManager.ArmOperationStatus but with id property typed as string instead of uuid
-// Cannot use Azure.ResourceManager.ArmOperationStatus: the id property returned by RPaaS is a URL, not uuid. See example: specification/terraform/Microsoft.AzureTerraform.Management/examples/2023-07-01-preview/GetOperationStatus.json.
-// Cannot use Azure.Core.OperationStatus: the result property is 'result' instead of 'properties'.
 @doc("The status of the LRO operation.")
-model TerraformOperationStatus {
-  /** RP-specific properties for the operationStatus resource, only appears when operation ended with Succeeded status */
-  @visibility("read")
-  properties?: ExportResult;
-
-  /** The operation status */
-  @Azure.Core.lroStatus
-  status: ResourceProvisioningState;
-
-  /** The unique identifier for the operationStatus resource */
-  @key
-  @path
-  @segment("operationStatuses")
-  @visibility("read")
-  id: string;
-
-  /** The name of the  operationStatus resource */
-  @visibility("read")
-  name?: string;
-
-  /** Operation start time */
-  @visibility("read")
-  startTime?: utcDateTime;
-
-  /** Operation complete time */
-  @visibility("read")
-  endTime?: utcDateTime;
-
-  /** The progress made toward completing the operation */
-  @visibility("read")
-  percentComplete?: float64;
-
-  /** Errors that occurred if the operation ended with Canceled or Failed status */
-  @visibility("read")
-  error?: ErrorDetail;
-}
+model TerraformOperationStatus is ArmOperationStatus<ExportResult>;
 
 @doc("The Terraform export result")
 model ExportResult {
