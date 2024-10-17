@@ -928,15 +928,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AbstractiveSummaryActionResult",
   "csharp"
 );
-@@clientName(CustomLabelClassificationResultWithDocumentDetectedLanguage,
-  "CustomLabelClassificationActionResult",
-  "csharp"
-);
 @@clientName(HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
   "HealthcareActionResult",
-  "csharp"
-);
-@@clientName(CustomEntitiesResultWithDocumentDetectedLanguage,
-  "CustomEntitiesActionResult",
   "csharp"
 );
