@@ -1,0 +1,214 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "containerAppName": "testcontainerApp0",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+        "name": "testcontainerApp0",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "24adfa4f-dedf-8dc0-ca29-b6d1a69ab319",
+          "tenantId": "23adfa4f-eedf-1dc0-ba29-a6d1a69ab3d0",
+          "userAssignedIdentities": {
+            "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312",
+              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "workloadProfileName": "My-GP-01",
+          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "transport": "auto",
+              "customDomains": [
+                {
+                  "name": "www.my-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                },
+                {
+                  "name": "www.my--other-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                }
+              ],
+              "traffic": [
+                {
+                  "weight": 80,
+                  "revisionName": "testcontainerApp0-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerApp0-ab4321",
+                  "label": "staging"
+                }
+              ],
+              "ipSecurityRestrictions": [
+                {
+                  "name": "Allow work IP A subnet",
+                  "description": "Allowing all IP's within the subnet below to access containerapp",
+                  "ipAddressRange": "192.168.1.1/32",
+                  "action": "Allow"
+                },
+                {
+                  "name": "Allow work IP B subnet",
+                  "description": "Allowing all IP's within the subnet below to access containerapp",
+                  "ipAddressRange": "192.168.1.1/8",
+                  "action": "Allow"
+                }
+              ],
+              "stickySessions": {
+                "affinity": "sticky"
+              },
+              "targetPortHttpScheme": "http"
+            },
+            "dapr": {
+              "enabled": true,
+              "appPort": 3000,
+              "appProtocol": "http",
+              "httpReadBufferSize": 30,
+              "httpMaxRequestSize": 10,
+              "logLevel": "debug",
+              "enableApiLogging": true
+            },
+            "runtime": {
+              "java": {
+                "enableMetrics": true,
+                "javaAgent": {
+                  "enabled": true,
+                  "logging": {
+                    "loggerSettings": [
+                      {
+                        "logger": "org.springframework.boot",
+                        "level": "debug"
+                      }
+                    ]
+                  }
+                }
+              },
+              "dotnet": {
+                "autoConfigureDataProtection": true
+              }
+            },
+            "maxInactiveRevisions": 10,
+            "service": {
+              "type": "redis"
+            },
+            "identitySettings": [
+              {
+                "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
+                "lifecycle": "All"
+              },
+              {
+                "identity": "system",
+                "lifecycle": "Init"
+              }
+            ]
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerApp0:v4",
+                "name": "testcontainerApp0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
+                  }
+                ]
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerApp0:v4",
+                "name": "testinitcontainerApp0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "cooldownPeriod": 350,
+              "pollingInterval": 35,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                },
+                {
+                  "name": "servicebus",
+                  "custom": {
+                    "type": "azure-servicebus",
+                    "metadata": {
+                      "queueName": "myqueue",
+                      "namespace": "mynamespace",
+                      "messageCount": "5"
+                    },
+                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                  }
+                }
+              ]
+            },
+            "serviceBinds": [
+              {
+                "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/service",
+                "name": "service",
+                "clientType": "dotnet",
+                "customizedKeys": {
+                  "DesiredKey": "defaultKey"
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
+              }
+            ]
+          },
+          "eventStreamEndpoint": "testEndpoint"
+        }
+      }
+    },
+    "404": {}
+  }
+}

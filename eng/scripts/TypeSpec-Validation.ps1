@@ -10,7 +10,7 @@ param (
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
 
-$typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -BaseCommitish:$BaseCommitish -TargetCommitish:$TargetCommitish -CheckAll:$CheckAll
+$typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -BaseCommitish:$BaseCommitish -TargetCommitish:$TargetCommitish -CheckAll:$CheckAll
 
 $typespecFoldersWithFailures = @()
 if ($typespecFolders) {
@@ -18,7 +18,7 @@ if ($typespecFolders) {
   foreach ($typespecFolder in $typespecFolders) {
     LogGroupStart "Validating $typespecFolder"
 
-    if ($CheckAll) {
+    if ($checkedAll) {
       $suppression = Get-Suppression "TypeSpecValidationAll" $typespecFolder
       if ($suppression) {
         $reason = $suppression["reason"] ?? "<no reason specified>"

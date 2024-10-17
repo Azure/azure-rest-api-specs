@@ -26,7 +26,51 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-02
+tag: package-preview-2024-08
+```
+
+### Tag: package-preview-2024-08
+
+These settings apply only when `--tag=package-preview-2024-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-08'
+input-file:
+  - Microsoft.App/preview/2024-08-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2024-08-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2024-08-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2024-08-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2024-08-02-preview/Builders.json
+  - Microsoft.App/preview/2024-08-02-preview/Builds.json
+  - Microsoft.App/preview/2024-08-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2024-08-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2024-08-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2024-08-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-08-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-08-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2024-08-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2024-08-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2024-08-02-preview/Global.json
+  - Microsoft.App/preview/2024-08-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2024-08-02-preview/Jobs.json
+  - Microsoft.App/preview/2024-08-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-08-02-preview/SessionPools.json
+  - Microsoft.App/preview/2024-08-02-preview/SourceControls.json
+  - Microsoft.App/preview/2024-08-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2024-08-02-preview/Usages.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: JavaComponents.json
+    reason: |
+      Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
 ```
 
 ### Tag: package-preview-2024-02

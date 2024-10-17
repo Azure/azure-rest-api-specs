@@ -33,7 +33,8 @@ op exportTerraform(
   exportParameter: BaseExportModel,
 ): ArmAcceptedLroResponse<
   "Export request accepted.",
-  ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  ArmCombinedLroHeaders<ArmOperationStatus, OperationStatus> &
+    Azure.Core.Foundations.RetryAfterHeader
 > | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Cannot use @armResourceOperations decorator here, the auto-generated routes do not match feature requirements"
