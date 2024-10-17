@@ -28,6 +28,10 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
+
+  /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
+  @added(Versions.v2024_11_15_preview)
+  excludeEntities?: boolean;
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
