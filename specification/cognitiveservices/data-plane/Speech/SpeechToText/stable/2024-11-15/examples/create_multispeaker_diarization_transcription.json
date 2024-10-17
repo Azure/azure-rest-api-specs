@@ -8,7 +8,6 @@
         "https://contoso.com/mystoragelocation"
       ],
       "properties": {
-        "diarizationEnabled": true,
         "wordLevelTimestampsEnabled": false,
         "displayFormWordLevelTimestampsEnabled": false,
         "channels": [
@@ -17,16 +16,14 @@
         ],
         "punctuationMode": "DictatedAndAutomatic",
         "profanityFilterMode": "Masked",
-        "timeToLive": "P2D",
+        "timeToLiveHours": 48,
         "diarization": {
-          "speakers": {
-            "minCount": 3,
-            "maxCount": 5
-          }
+          "enabled": true,
+          "maxSpeakers": 5
         }
       },
       "locale": "en-US",
-      "displayName": "Transcription using diarization for audio that is known to contain speech from 3-5 speakers"
+      "displayName": "Transcription using diarization for audio that is known to contain speech from up to 5 speakers"
     },
     "Content-Type": "application/json"
   },
@@ -42,7 +39,6 @@
           "files": "https://westus.api.cognitive.microsoft.com/speechtotext/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683/files?api-version=2024-11-15"
         },
         "properties": {
-          "diarizationEnabled": true,
           "wordLevelTimestampsEnabled": false,
           "displayFormWordLevelTimestampsEnabled": false,
           "channels": [
@@ -51,20 +47,18 @@
           ],
           "punctuationMode": "DictatedAndAutomatic",
           "profanityFilterMode": "Masked",
-          "duration": "PT42S",
-          "timeToLive": "P2D",
+          "durationMilliseconds": 42000,
+          "timeToLiveHours": 48,
           "diarization": {
-            "speakers": {
-              "minCount": 3,
-              "maxCount": 5
-            }
+            "enabled": true,
+            "maxSpeakers": 5
           }
         },
         "lastActionDateTime": "2019-01-07T11:36:07Z",
         "status": "Succeeded",
         "createdDateTime": "2019-01-07T11:34:12Z",
         "locale": "en-US",
-        "displayName": "Transcription using diarization for audio that is known to contain speech from 3-5 speakers",
+        "displayName": "Transcription using diarization for audio that is known to contain speech from up to 5 speakers",
         "customProperties": {
           "key": "value"
         }

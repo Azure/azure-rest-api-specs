@@ -9,12 +9,11 @@
         "https://contoso.com/myotherstoragelocation"
       ],
       "properties": {
-        "diarizationEnabled": false,
         "wordLevelTimestampsEnabled": false,
         "displayFormWordLevelTimestampsEnabled": false,
         "punctuationMode": "DictatedAndAutomatic",
         "profanityFilterMode": "Masked",
-        "timeToLive": "P2D"
+        "timeToLiveHours": 48
       },
       "locale": "en-US",
       "displayName": "Transcription using default model for en-US"
@@ -33,7 +32,6 @@
           "files": "https://westus.api.cognitive.microsoft.com/speechtotext/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683/files?api-version=2024-11-15"
         },
         "properties": {
-          "diarizationEnabled": false,
           "wordLevelTimestampsEnabled": false,
           "displayFormWordLevelTimestampsEnabled": false,
           "channels": [
@@ -42,8 +40,8 @@
           ],
           "punctuationMode": "DictatedAndAutomatic",
           "profanityFilterMode": "Masked",
-          "duration": "PT42S",
-          "timeToLive": "P2D"
+          "durationMilliseconds": 42000,
+          "timeToLiveHours": 48
         },
         "lastActionDateTime": "2019-01-07T11:36:07Z",
         "status": "Succeeded",

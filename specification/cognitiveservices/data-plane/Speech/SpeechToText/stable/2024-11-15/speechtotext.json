@@ -501,7 +501,7 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "$ref": "#/parameters/sasLifetimeQueryParameter"
           },
           {
             "$ref": "#/parameters/skipQueryParameter"
@@ -582,7 +582,7 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "$ref": "#/parameters/sasLifetimeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -1089,7 +1089,7 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "$ref": "#/parameters/sasLifetimeQueryParameter"
           },
           {
             "$ref": "#/parameters/skipQueryParameter"
@@ -1167,7 +1167,7 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "$ref": "#/parameters/sasLifetimeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -1890,7 +1890,12 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "in": "query",
+            "name": "sasLifetimeMinutes",
+            "description": "The duration in minutes that an SAS url should be valid.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -1937,7 +1942,12 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "in": "query",
+            "name": "sasLifetimeMinutes",
+            "description": "The duration in minutes that an SAS url should be valid.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -1984,7 +1994,7 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "$ref": "#/parameters/sasLifetimeQueryParameter"
           },
           {
             "$ref": "#/parameters/skipQueryParameter"
@@ -2062,7 +2072,7 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "$ref": "#/parameters/sasLifetimeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -2445,9 +2455,6 @@
           "Create a transcription for URIs": {
             "$ref": "./examples/create_uri_transcription.json"
           },
-          "Create a transcription with basic two-speaker diarization": {
-            "$ref": "./examples/create_simple_diarization_transcription.json"
-          },
           "Create a transcription with multispeaker diarization": {
             "$ref": "./examples/create_multispeaker_diarization_transcription.json"
           },
@@ -2480,7 +2487,11 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "in": "query",
+            "name": "sasLifetimeMinutes",
+            "description": "This parameter defines the duration in minutes for which an SAS url should be valid.\r\n            The parameter can only be used for operations on speech resources that don't have BYOS enabled and transcriptions without a destinationContainerUrl. For speech resources\r\n            that don't have BYOS enabled, the default SAS validity duration is 12 hours.\r\n            For speech resources with BYOS and transcriptions with a destinationContainerUrl, returned urls do not contain an SAS token.",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/skipQueryParameter"
@@ -2561,7 +2572,11 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/sasValidityQueryParameter"
+            "in": "query",
+            "name": "sasLifetimeMinutes",
+            "description": "This parameter defines the duration in minutes for which an SAS url should be valid.\r\n            The parameter can only be used for operations on speech resources that don't have BYOS enabled and transcriptions without a destinationContainerUrl. For speech resources\r\n            that don't have BYOS enabled, the default SAS validity duration is 12 hours.\r\n            For speech resources with BYOS and transcriptions with a destinationContainerUrl, returned urls do not contain an SAS token.",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -2979,7 +2994,6 @@
             "in": "formData",
             "name": "definition",
             "description": "Metadata for a fast transcription request. This field contains a JSON-serialized object of type `TranscribeDefinition`.",
-            "required": true,
             "type": "string"
           },
           {
@@ -3445,9 +3459,11 @@
           "type": "integer",
           "readOnly": true
         },
-        "duration": {
-          "description": "The total duration of the datasets if it contains audio files. The duration is encoded as ISO 8601 duration\r\n(\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
-          "type": "string",
+        "durationMilliseconds": {
+          "format": "int64",
+          "description": "The total duration in milliseconds of the datasets if it contains audio files.\r\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.",
+          "default": 0,
+          "type": "integer",
           "readOnly": true
         },
         "textNormalizationKind": {
@@ -3553,7 +3569,8 @@
         "InvalidWebHookEventKind",
         "InvalidTimeToLive",
         "InvalidSourceAzureResourceId",
-        "ModelCopyAuthorizationExpired"
+        "ModelCopyAuthorizationExpired",
+        "EndpointLoggingNotSupported"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3843,36 +3860,27 @@
           {
             "value": "ModelCopyAuthorizationExpired",
             "description": "Expired ModelCopyAuthorization."
+          },
+          {
+            "value": "EndpointLoggingNotSupported",
+            "description": "Endpoint logging not supported."
           }
         ]
       }
     },
     "DiarizationProperties": {
       "title": "DiarizationProperties",
-      "required": [
-        "speakers"
-      ],
       "type": "object",
       "properties": {
-        "speakers": {
-          "$ref": "#/definitions/DiarizationSpeakersProperties"
-        }
-      }
-    },
-    "DiarizationSpeakersProperties": {
-      "title": "DiarizationSpeakersProperties",
-      "type": "object",
-      "properties": {
-        "minCount": {
-          "format": "int32",
-          "description": "A hint for the minimum number of speakers for diarization. Must be smaller than or equal to the maxSpeakers property.",
-          "minimum": 1,
-          "type": "integer"
+        "enabled": {
+          "description": "A value indicating whether speaker diarization is enabled.",
+          "type": "boolean"
         },
-        "maxCount": {
+        "maxSpeakers": {
           "format": "int32",
-          "description": "The maximum number of speakers for diarization. Must be less than 36 and larger than or equal to the minSpeakers property.",
-          "minimum": 1,
+          "description": "A hint for the maximum number of speakers for diarization. Must be greater than 1 and less than 36.",
+          "maximum": 35,
+          "minimum": 2,
           "type": "integer"
         }
       }
@@ -3963,7 +3971,7 @@
       "properties": {
         "webSocket": {
           "format": "uri",
-          "description": "The Speech SDK universal endpoint, that supports Interactive - Intended for short requests up to 15 seconds with a single final result,\r\nas well as Conversation/Dictation scenarios - Intended for long requests with multiple final results and optionally dictation of punctuation marks.",
+          "description": "The Speech SDK endpoint for long requests with multiple final results.",
           "type": "string",
           "readOnly": true
         }
@@ -4579,9 +4587,11 @@
           "type": "integer",
           "readOnly": true
         },
-        "duration": {
-          "description": "The duration in case this file is an audio file. The duration is encoded as ISO 8601\r\nduration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
-          "type": "string",
+        "durationMilliseconds": {
+          "format": "int32",
+          "description": "The total duration in milliseconds of the file in case this file is an audio file.",
+          "default": 0,
+          "type": "integer",
           "readOnly": true
         }
       }
@@ -5375,7 +5385,7 @@
     "TranscriptionProperties": {
       "title": "TranscriptionProperties",
       "required": [
-        "timeToLive"
+        "timeToLiveHours"
       ],
       "type": "object",
       "properties": {
@@ -5387,9 +5397,11 @@
           "description": "A value indicating whether word level timestamps for the display form are requested. The default value is `false`.",
           "type": "boolean"
         },
-        "duration": {
-          "description": "The duration of the transcription. The duration is encoded as ISO 8601 duration\r\n(\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
-          "type": "string",
+        "durationMilliseconds": {
+          "format": "int64",
+          "description": "The duration in milliseconds of the transcription.\r\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.",
+          "default": 0,
+          "type": "integer",
           "readOnly": true
         },
         "channels": {
@@ -5411,16 +5423,13 @@
         "profanityFilterMode": {
           "$ref": "#/definitions/ProfanityFilterMode"
         },
-        "timeToLive": {
-          "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted.\r\n            \r\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account\r\nwill also be deleted. Use either destinationContainerUrl to specify a separate container for result files\r\nwhich will not be deleted when the timeToLive expires, or retrieve the result files through the API and\r\nstore them as needed.\r\n            \r\nThe shortest supported duration is 6h, the longest supported duration is 31 days. 2 days (\"P2D\") is the recommended default value\r\nwhen data is consumed directly.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
-          "type": "string"
+        "timeToLiveHours": {
+          "format": "int32",
+          "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted.\r\n            \r\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account\r\nwill also be deleted. Use either destinationContainerUrl to specify a separate container for result files\r\nwhich will not be deleted when the timeToLive expires, or retrieve the result files through the API and\r\nstore them as needed.\r\n            \r\nThe shortest supported duration is 6 hours, the longest supported duration is 31 days. 2 days (48 hours) is the recommended default value\r\nwhen data is consumed directly.",
+          "type": "integer"
         },
         "error": {
           "$ref": "#/definitions/EntityError"
-        },
-        "diarizationEnabled": {
-          "description": "A value indicating whether diarization (speaker identification) is requested. The default value\r\nis `false`.\r\nIf this field is set to true and the improved diarization system is configured by specifying\r\n`DiarizationProperties`, the improved diarization system will provide diarization for a configurable\r\nrange of speakers.\r\nIf this field is set to true and the improved diarization system is not enabled (not specifying\r\n`DiarizationProperties`), the basic diarization system will distinguish between up to two speakers.\r\nNo extra charges are applied for the basic diarization.\r\n            \r\nThe basic diarization system is deprecated and will be removed in the next major version of the API.\r\nThis `diarizationEnabled` setting will also be removed.",
-          "type": "boolean"
         },
         "diarization": {
           "$ref": "#/definitions/DiarizationProperties"
@@ -5706,8 +5715,8 @@
       "description": "A transcribed phrase.",
       "required": [
         "confidence",
-        "duration",
-        "offset",
+        "durationMilliseconds",
+        "offsetMilliseconds",
         "text"
       ],
       "type": "object",
@@ -5722,13 +5731,13 @@
           "description": "The speaker number. Only present if speaker diarization is enabled.",
           "type": "integer"
         },
-        "offset": {
-          "format": "int64",
+        "offsetMilliseconds": {
+          "format": "int32",
           "description": "The start offset of the phrase in milliseconds.",
           "type": "integer"
         },
-        "duration": {
-          "format": "int64",
+        "durationMilliseconds": {
+          "format": "int32",
           "description": "The duration of the phrase in milliseconds.",
           "type": "integer"
         },
@@ -5759,7 +5768,7 @@
       "type": "object",
       "properties": {
         "locales": {
-          "description": "The input locales. Currently, only one locale is supported.",
+          "description": "A list of possible locales for the transcription. If not specified, the locale of the speech in the audio is detected automatically from all supported locales.",
           "type": "array",
           "items": {
             "type": "string"
@@ -5776,6 +5785,9 @@
         "profanityFilterMode": {
           "$ref": "#/definitions/ProfanityFilterMode"
         },
+        "diarization": {
+          "$ref": "#/definitions/TranscribeDiarizationProperties"
+        },
         "channels": {
           "description": "The 0-based indices of the channels to be transcribed separately. If not specified, multiple channels are merged and transcribed jointly. Only up to two channels are supported.",
           "type": "array",
@@ -5786,17 +5798,34 @@
         }
       }
     },
+    "TranscribeDiarizationProperties": {
+      "description": "The diarization settings. Diarization settings must be specified to enable diarization.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Gets or sets a value indicating whether speaker diarization is enabled.",
+          "type": "boolean"
+        },
+        "maxSpeakers": {
+          "format": "int32",
+          "description": "Gets or sets a hint for the maximum number of speakers for diarization. Must be greater than 1 and less than 36.",
+          "maximum": 35,
+          "minimum": 2,
+          "type": "integer"
+        }
+      }
+    },
     "TranscribeResult": {
       "description": "The result of the transcribe operation.",
       "required": [
         "combinedPhrases",
-        "duration",
+        "durationMilliseconds",
         "phrases"
       ],
       "type": "object",
       "properties": {
-        "duration": {
-          "format": "int64",
+        "durationMilliseconds": {
+          "format": "int32",
           "description": "The duration of the audio in milliseconds.",
           "type": "integer"
         },
@@ -5819,8 +5848,8 @@
     "Word": {
       "description": "Time-stamped word in the display form.",
       "required": [
-        "duration",
-        "offset",
+        "durationMilliseconds",
+        "offsetMilliseconds",
         "text"
       ],
       "type": "object",
@@ -5829,13 +5858,13 @@
           "description": "The recognized word, including punctuation.",
           "type": "string"
         },
-        "offset": {
-          "format": "int64",
+        "offsetMilliseconds": {
+          "format": "int32",
           "description": "The start offset of the word in milliseconds.",
           "type": "integer"
         },
-        "duration": {
-          "format": "int64",
+        "durationMilliseconds": {
+          "format": "int32",
           "description": "The duration of the word in milliseconds.",
           "type": "integer"
         }
@@ -5876,10 +5905,10 @@
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "sasValidityQueryParameter": {
+    "sasLifetimeQueryParameter": {
       "in": "query",
-      "name": "sasValidityInSeconds",
-      "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours, a value of 0 means that a plain blob URI without SAS token will be generated.\r\n            When using BYOS (https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging):\r\n            no SAS url will be generated, unless a value greater than 0 is given.",
+      "name": "sasLifetimeMinutes",
+      "description": "This parameter defines the duration in minutes for which an SAS url should be valid.\r\n            The parameter can only be used for operations on speech resources that don't have BYOS enabled. For speech resources\r\n            that don't have BYOS enabled, the default SAS validity duration is 12 hours.\r\n            For speech resources with BYOS, returned urls do not contain an SAS token.",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
