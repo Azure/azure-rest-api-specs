@@ -1911,7 +1911,7 @@
       "description": "The authentication type for bootstrap.",
       "enum": [
         "X509",
-        "Fdo101"
+        "FDO"
       ],
       "x-ms-enum": {
         "name": "BootstrapAuthenticationType",
@@ -1923,9 +1923,9 @@
             "description": "The X509 authentication type."
           },
           {
-            "name": "Fdo101",
-            "value": "Fdo101",
-            "description": "The Fdo101 authentication type."
+            "name": "FDO",
+            "value": "FDO",
+            "description": "The FDO authentication type."
           }
         ]
       }
@@ -2159,7 +2159,7 @@
         "onboardUntilDate": {
           "type": "string",
           "format": "date-time",
-          "description": "TTL until the device can be onboarded, in utcDateTime format",
+          "description": "Indicates the maximum date and time by which a device can be onboarded, in utcDateTime format",
           "readOnly": true
         }
       },
@@ -2354,9 +2354,9 @@
       ],
       "x-ms-discriminator-value": "EvenlyDistributed"
     },
-    "Fdo101BootstrapAuthenticationRule": {
+    "FdoBootstrapAuthenticationRule": {
       "type": "object",
-      "description": "The Fdo101-based authentication rule for bootstrapping.",
+      "description": "The FDO-based authentication rule for bootstrapping.",
       "properties": {
         "publicKeys": {
           "$ref": "#/definitions/PublicKeys",
@@ -2381,7 +2381,7 @@
           "$ref": "#/definitions/BootstrapAuthenticationRule"
         }
       ],
-      "x-ms-discriminator-value": "Fdo101"
+      "x-ms-discriminator-value": "FDO"
     },
     "HybridComputePolicyResourceDetails": {
       "type": "object",
@@ -2819,14 +2819,13 @@
       ],
       "x-ms-discriminator-value": "EvenlyDistributed"
     },
-    "PatchFdo101BootstrapAuthenticationRule": {
+    "PatchFdoBootstrapAuthenticationRule": {
       "type": "object",
-      "description": "The Fdo101-based authentication rule for bootstrapping.",
+      "description": "The FDO-based authentication rule for bootstrapping.",
       "properties": {
-        "publicKey": {
-          "type": "string",
-          "format": "byte",
-          "description": "Per policy public key to represent this policy",
+        "publicKeys": {
+          "$ref": "#/definitions/PublicKeys",
+          "description": "Per policy public keys to represent this policy",
           "readOnly": true
         },
         "ownershipVoucherStorage": {
@@ -2843,7 +2842,7 @@
           "$ref": "#/definitions/PatchBootstrapAuthenticationRule"
         }
       ],
-      "x-ms-discriminator-value": "Fdo101"
+      "x-ms-discriminator-value": "FDO"
     },
     "PatchHybridComputePolicyResourceDetails": {
       "type": "object",
@@ -3217,9 +3216,12 @@
       "description": "Owner public keys to extend ownership voucher to the customer.",
       "properties": {
         "secp256R1": {
-          "type": "string",
-          "format": "byte",
-          "description": "Public key as x5C with encryption type SECP256R1."
+          "type": "array",
+          "description": "Public key as x5C with encryption type SECP256R1.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       },
       "required": [
@@ -3257,7 +3259,7 @@
         "ttl": {
           "type": "string",
           "format": "duration",
-          "description": "Desired TTL until the device can be onboarded"
+          "description": "Desired maximum duration by which a device can be onboarded"
         }
       },
       "required": [
@@ -3481,9 +3483,12 @@
       "description": "X5Chain Public Key Details.",
       "properties": {
         "x5Chain": {
-          "type": "string",
-          "format": "byte",
-          "description": "X509CertificateChain used as a public key to validate Ownership Voucher."
+          "type": "array",
+          "description": "X509CertificateChain used as public keys to validate Ownership Voucher.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       },
       "required": [
@@ -3501,9 +3506,12 @@
       "description": "X5Chain Public Key Details.",
       "properties": {
         "x5Chain": {
-          "type": "string",
-          "format": "byte",
-          "description": "X509CertificateChain used as a public key to validate Ownership Voucher."
+          "type": "array",
+          "description": "X509CertificateChain used as public keys to validate Ownership Voucher.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       },
       "allOf": [
