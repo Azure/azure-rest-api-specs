@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -903,6 +901,7 @@ model Encryption {
   type?: EncryptionType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ShareInfoElement {
   /**
    * A relative URI containing the ID of the VM that has the disk attached.
@@ -977,7 +976,8 @@ model DiskUpdate {
   /**
    * Disk resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiskUpdateProperties;
 
   /**
@@ -1147,6 +1147,7 @@ model AccessUri {
  */
 model DiskAccessList is Azure.Core.Page<DiskAccess>;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DiskAccessProperties {
   /**
    * A readonly collection of private endpoint connections created on the disk. Currently only one endpoint connection is supported.
@@ -1332,7 +1333,8 @@ model PrivateLinkResource {
   /**
    * Resource properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 
   /**
@@ -1409,6 +1411,7 @@ model EncryptionSetIdentity {
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.
@@ -1423,6 +1426,7 @@ model UserAssignedIdentitiesValue {
   clientId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EncryptionSetProperties {
   /**
    * The type of key used to encrypt the data of the disk.
@@ -1493,7 +1497,8 @@ model DiskEncryptionSetUpdate {
   /**
    * disk encryption set resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiskEncryptionSetUpdateProperties;
 
   /**
@@ -1857,7 +1862,8 @@ model SnapshotUpdate {
   /**
    * Snapshot resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SnapshotUpdateProperties;
 
   /**
@@ -1927,6 +1933,7 @@ model SnapshotUpdateProperties {
   supportedCapabilities?: SupportedCapabilities;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubResource {
   /**
    * Resource Id
@@ -1934,6 +1941,7 @@ model SubResource {
   id?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubResourceReadOnly {
   /**
    * Resource Id

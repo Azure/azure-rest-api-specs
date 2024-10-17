@@ -87,7 +87,9 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("publishers")
   listPublishers is ArmProviderActionAsync<
-    Response = VirtualMachineImageResource,
+    Response = {
+      @body _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -108,7 +110,9 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ArmProviderActionAsync<
-    Response = VirtualMachineImageResource,
+    Response = {
+      @body _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -136,7 +140,9 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("skus")
   listSkus is ArmProviderActionAsync<
-    Response = VirtualMachineImageResource,
+    Response = {
+      @body _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -171,7 +177,9 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("versions")
   list is ArmProviderActionAsync<
-    Response = VirtualMachineImageResource,
+    Response = {
+      @body _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -299,7 +307,9 @@ interface VirtualMachineImagesOperations {
   @get
   @action("publishers")
   listPublishers is ArmProviderActionAsync<
-    Response = VirtualMachineImageResource,
+    Response = {
+      @body _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -311,7 +321,9 @@ interface VirtualMachineImagesOperations {
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ArmProviderActionAsync<
-    Response = VirtualMachineImageResource,
+    Response = {
+      @body _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -332,7 +344,9 @@ interface VirtualMachineImagesOperations {
   @get
   @action("skus")
   listSkus is ArmProviderActionAsync<
-    Response = VirtualMachineImageResource,
+    Response = {
+      @body _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -360,7 +374,9 @@ interface VirtualMachineImagesOperations {
   @get
   @action("versions")
   list is ArmProviderActionAsync<
-    Response = VirtualMachineImageResource,
+    Response = {
+      @body _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -392,9 +408,11 @@ interface VirtualMachineImagesOperations {
       @query("$expand")
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("$top")
       $top?: int32;
 
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("$orderby")
       $orderby?: string;
     }
