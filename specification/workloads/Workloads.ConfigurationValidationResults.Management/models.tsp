@@ -34,24 +34,46 @@ union QualityCheckType {
 @doc("The level of impact associated with a quality check.")
 union QualityCheckImpactLevel {
   /**
-   * High-impact checks indicate critical issues that require immediate attention.
+   * Critical-impact quality checks highlight the most severe issues that require urgent and
+   * immediate resolution to prevent major disruptions or downtime.
    */
-  @doc("High-impact level for quality checks.")
+  @doc("Critical-impact quality checks represent the highest level of severity and demand immediate attention.")
+  Critical: "Critical",
+
+  /**
+   * High-impact quality checks indicate significant issues that, if not resolved promptly, can lead to
+   * major performance degradation.
+   */
+  @doc("High-impact quality checks represent serious issues requiring quick action.")
   High: "High",
 
   /**
-   * Medium-impact checks indicate important issues that may not be urgent but still
-   * require prompt attention.
+   * Medium-impact quality checks highlight issues that, while important, may not be urgent but
+   * still require resolution to maintain optimal performance.
    */
-  @doc("Medium-impact level for quality checks.")
+  @doc("Medium-impact quality checks signal important but not immediately critical issues.")
   Medium: "Medium",
 
   /**
-   * Low-impact checks highlight minor issues that may not significantly affect the workload's
-   * performance or functionality.
+   * Low-impact quality checks refer to issues that have minimal impact on the workload's
+   * performance or functionality but may still require attention over time.
    */
-  @doc("Low-impact level for quality checks.")
+  @doc("Low-impact quality checks highlight issues with limited effect on performance.")
   Low: "Low",
+
+  /**
+   * Minor-impact quality checks identify very small issues that have negligible effects and do not
+   * usually require urgent action.
+   */
+  @doc("Minor-impact quality checks represent trivial issues with little to no impact.")
+  Minor: "Minor",
+
+  /**
+   * Informational-impact quality checks provide useful insights or best practices but do not
+   * indicate any problems or issues with the workload.
+   */
+  @doc("Informational checks offer insights or suggestions without highlighting any problems.")
+  Informational: "Informational",
 
   string,
 }

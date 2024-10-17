@@ -423,28 +423,46 @@
       "type": "string",
       "description": "The level of impact associated with a quality check.",
       "enum": [
+        "Critical",
         "High",
         "Medium",
-        "Low"
+        "Low",
+        "Minor",
+        "Informational"
       ],
       "x-ms-enum": {
         "name": "QualityCheckImpactLevel",
         "modelAsString": true,
         "values": [
           {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical-impact quality checks represent the highest level of severity and demand immediate attention."
+          },
+          {
             "name": "High",
             "value": "High",
-            "description": "High-impact level for quality checks."
+            "description": "High-impact quality checks represent serious issues requiring quick action."
           },
           {
             "name": "Medium",
             "value": "Medium",
-            "description": "Medium-impact level for quality checks."
+            "description": "Medium-impact quality checks signal important but not immediately critical issues."
           },
           {
             "name": "Low",
             "value": "Low",
-            "description": "Low-impact level for quality checks."
+            "description": "Low-impact quality checks highlight issues with limited effect on performance."
+          },
+          {
+            "name": "Minor",
+            "value": "Minor",
+            "description": "Minor-impact quality checks represent trivial issues with little to no impact."
+          },
+          {
+            "name": "Informational",
+            "value": "Informational",
+            "description": "Informational checks offer insights or suggestions without highlighting any problems."
           }
         ]
       }
@@ -463,7 +481,7 @@
           {
             "name": "Default",
             "value": "Default",
-            "description": "The default quality check type."
+            "description": "The default Platform defined(First Party) quality check type."
           },
           {
             "name": "Custom",
