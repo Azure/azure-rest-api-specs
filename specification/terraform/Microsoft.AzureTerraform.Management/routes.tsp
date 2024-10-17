@@ -19,7 +19,7 @@ interface ExportTerraform {
   @doc("Exports the Terraform configuration of the specified resource(s).")
   @tag("ExportTerraform")
   @useFinalStateVia("azure-async-operation")
-  exportTerraform is ArmProviderActionAsync<
+  export is ArmProviderActionAsync<
     BaseExportModel,
     ExportResult,
     SubscriptionActionScope,
