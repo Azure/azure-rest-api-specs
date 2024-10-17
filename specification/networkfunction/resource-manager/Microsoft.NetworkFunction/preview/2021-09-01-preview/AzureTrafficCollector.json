@@ -547,6 +547,51 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}/listCktConfigState": {
+      "get": {
+        "tags": [
+          "CktConfigState"
+        ],
+        "operationId": "CktConfigState_Get",
+        "description": "Gets the circuit configuration state for circuits configured with a specified collector policy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/azureTrafficCollectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectorPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the circuit configuration state resource.",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Collection Policy": {
+            "$ref": "./examples/CollectorPolicyGet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
