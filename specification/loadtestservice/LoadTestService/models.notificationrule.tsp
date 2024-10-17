@@ -1,0 +1,168 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
+
+namespace Microsoft.LoadTestService;
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("Scope type of a notification rule.")
+union NotificationScopeType {
+  string,
+
+  @doc("Notification rule is for Tests.")
+  Tests: "Tests",
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("Notification event type.")
+union NotificationEventType {
+  string,
+
+  @doc("Test run ended event.")
+  TestRunEnded: "TestRunEnded",
+
+  @doc("Test run started event.")
+  TestRunStarted: "TestRunStarted",
+
+  @doc("Trigger ended event.")
+  TriggerEnded: "TriggerEnded",
+
+  @doc("Trigger disabled event.")
+  TriggerDisabled: "TriggerDisabled",
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@discriminator("name")
+@doc("The notification event.")
+model NotificationEvent {
+  @doc("The event type")
+  name: NotificationEventType;
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("The notification event when the event type is TestRunEnded.")
+@summary("This event would occur when a test run reaches terminal state.")
+model TestRunEndedNotificationEvent extends NotificationEvent {
+  @doc("Event type for test run ended event")
+  name: NotificationEventType.TestRunEnded;
+
+  @doc("Event filtering condition")
+  condition?: TestRunEndedEventCondition;
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("The notification event when the event type is TestRunStarted.")
+@summary("This event would occur when a new test run is triggered.")
+model TestRunStartedNotificationEvent extends NotificationEvent {
+  @doc("Event type for test run started event")
+  name: NotificationEventType.TestRunStarted;
+
+  @doc("Event filtering condition")
+  condition?: TestRunStartedEventCondition;
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("The notification event when the event type is TriggerEnded.")
+@summary("This event would occur when a trigger ends.")
+model TriggerEndedNotificationEvent extends NotificationEvent {
+  @doc("Event type for trigger ended event")
+  name: NotificationEventType.TriggerEnded;
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("The notification event when the event type is TriggerDisabled.")
+@summary("This event would occur when a trigger is disabled.")
+model TriggerDisabledNotificationEvent extends NotificationEvent {
+  @doc("Event type for trigger disabled event")
+  name: NotificationEventType.TriggerDisabled;
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("TestRunEnded Event condition.")
+model TestRunEndedEventCondition {
+  @doc("The test run statuses to send notification for")
+  testRunStatuses?: Status[];
+
+  @doc("The test run results to send notification for")
+  testRunResults?: PFTestResult[];
+
+  @doc("The types of entities that created the test run to send notification for")
+  createdByTypes?: CreateByTypes[];
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("TestRunStarted Event condition.")
+model TestRunStartedEventCondition {
+  @doc("The creator types to send notification for")
+  createdByTypes?: string[];
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@resource("notification-rules")
+@discriminator("scope")
+@doc("Notification rule model.")
+model NotificationRule {
+  @key
+  @maxLength(50)
+  @minLength(2)
+  @pattern("^[a-z0-9_-]*$")
+  @doc("The unique identifier of the notification rule.")
+  @visibility("read")
+  notificationRuleId: string;
+
+  @maxLength(50)
+  @minLength(2)
+  @doc("The name of the notification rule.")
+  displayName: string;
+
+  @doc("The action groups to notify.")
+  actionGroupIds: string[];
+
+  @doc("The scope of the notification rule")
+  scope: NotificationScopeType;
+
+  @doc("The event of the notification rule")
+  events: NotificationEvent[];
+
+  ...SystemMetaData;
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("Tests Notification rule model.")
+model TestsNotificationRule extends NotificationRule {
+  @doc("Scope of type Tests")
+  scope: NotificationScopeType.Tests;
+
+  @doc("The test ids to include")
+  testIds?: string[];
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("Parameters for list notification rule operation")
+model ListNotificationRuleQueryParams {
+  @doc("Search based on notification rules associated with the provided test ids.")
+  @query
+  testIds?: string;
+
+  @doc("""
+    Start DateTime(RFC 3339 literal format) of the last updated time range to filter notification rules.
+    """)
+  @query
+  lastModifiedStartTime?: utcDateTime;
+
+  @doc("""
+    End DateTime(RFC 3339 literal format) of the last updated time range to filter notification rules.
+    """)
+  @query
+  lastModifiedEndTime?: utcDateTime;
+
+  @doc("Number of results in response. Default page size is 50.")
+  @query
+  maxpagesize?: int32 = 50;
+}

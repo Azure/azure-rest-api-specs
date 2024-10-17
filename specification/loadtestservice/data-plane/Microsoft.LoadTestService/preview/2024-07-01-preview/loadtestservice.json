@@ -64,9 +64,225 @@
     },
     {
       "name": "Trigger"
+    },
+    {
+      "name": "NotificationRule"
     }
   ],
   "paths": {
+    "/notification-rules": {
+      "get": {
+        "operationId": "NotificationRuleAdministration_ListNotificationRule",
+        "tags": [
+          "NotificationRule"
+        ],
+        "description": "Resource list operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListNotificationRuleQueryParams.testIds"
+          },
+          {
+            "$ref": "#/parameters/ListNotificationRuleQueryParams.lastModifiedStartTime"
+          },
+          {
+            "$ref": "#/parameters/ListNotificationRuleQueryParams.lastModifiedEndTime"
+          },
+          {
+            "$ref": "#/parameters/ListNotificationRuleQueryParams.maxpagesize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedNotificationRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all notification rules for the specified filters.": {
+            "$ref": "./examples/ListNotificationRules.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/notification-rules/{notificationRuleId}": {
+      "get": {
+        "operationId": "NotificationRuleAdministration_GetNotificationRule",
+        "tags": [
+          "NotificationRule"
+        ],
+        "description": "Resource read operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "notificationRuleId",
+            "in": "path",
+            "description": "The unique identifier of the notification rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NotificationRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a notification rule.": {
+            "$ref": "./examples/GetNotificationRule.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NotificationRuleAdministration_CreateOrUpdateNotificationRule",
+        "tags": [
+          "NotificationRule"
+        ],
+        "description": "Create or update operation template.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "notificationRuleId",
+            "in": "path",
+            "description": "The unique identifier of the notification rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationRuleCreateOrUpdate"
+            },
+            "x-ms-client-name": "resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NotificationRule"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/NotificationRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a notification rule.": {
+            "$ref": "./examples/CreateOrUpdateNotificationRule.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NotificationRuleAdministration_DeleteNotificationRule",
+        "tags": [
+          "NotificationRule"
+        ],
+        "description": "Resource delete operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "notificationRuleId",
+            "in": "path",
+            "description": "The unique identifier of the notification rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a notification rule": {
+            "$ref": "./examples/DeleteNotificationRule.json"
+          }
+        }
+      }
+    },
     "/test-profile-runs": {
       "get": {
         "operationId": "TestProfileRunAdministration_ListTestProfileRuns",
@@ -3398,6 +3614,178 @@
         }
       }
     },
+    "NotificationEvent": {
+      "type": "object",
+      "description": "The notification event.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/NotificationEventType",
+          "description": "The event type"
+        }
+      },
+      "discriminator": "name",
+      "required": [
+        "name"
+      ]
+    },
+    "NotificationEventType": {
+      "type": "string",
+      "description": "Notification event type.",
+      "enum": [
+        "TestRunEnded",
+        "TestRunStarted",
+        "TriggerEnded",
+        "TriggerDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TestRunEnded",
+            "value": "TestRunEnded",
+            "description": "Test run ended event."
+          },
+          {
+            "name": "TestRunStarted",
+            "value": "TestRunStarted",
+            "description": "Test run started event."
+          },
+          {
+            "name": "TriggerEnded",
+            "value": "TriggerEnded",
+            "description": "Trigger ended event."
+          },
+          {
+            "name": "TriggerDisabled",
+            "value": "TriggerDisabled",
+            "description": "Trigger disabled event."
+          }
+        ]
+      }
+    },
+    "NotificationRule": {
+      "type": "object",
+      "description": "Notification rule model.",
+      "properties": {
+        "notificationRuleId": {
+          "type": "string",
+          "description": "The unique identifier of the notification rule.",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9_-]*$",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the notification rule.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "actionGroupIds": {
+          "type": "array",
+          "description": "The action groups to notify.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "$ref": "#/definitions/NotificationScopeType",
+          "description": "The scope of the notification rule"
+        },
+        "events": {
+          "type": "array",
+          "description": "The event of the notification rule",
+          "items": {
+            "$ref": "#/definitions/NotificationEvent"
+          },
+          "x-ms-identifiers": []
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation datetime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user that created.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The user that last modified.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "scope",
+      "required": [
+        "notificationRuleId",
+        "displayName",
+        "actionGroupIds",
+        "scope",
+        "events"
+      ]
+    },
+    "NotificationRuleCreateOrUpdate": {
+      "type": "object",
+      "description": "Notification rule model.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the notification rule.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "actionGroupIds": {
+          "type": "array",
+          "description": "The action groups to notify.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "$ref": "#/definitions/NotificationScopeType",
+          "description": "The scope of the notification rule"
+        },
+        "events": {
+          "type": "array",
+          "description": "The event of the notification rule",
+          "items": {
+            "$ref": "#/definitions/NotificationEvent"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "discriminator": "scope",
+      "required": [
+        "scope"
+      ]
+    },
+    "NotificationScopeType": {
+      "type": "string",
+      "description": "Scope type of a notification rule.",
+      "enum": [
+        "Tests"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tests",
+            "value": "Tests",
+            "description": "Notification rule is for Tests."
+          }
+        ]
+      }
+    },
     "OptionalLoadTestConfig": {
       "type": "object",
       "description": "Configuration for quick load test",
@@ -3636,6 +4024,28 @@
           }
         ]
       }
+    },
+    "PagedNotificationRule": {
+      "type": "object",
+      "description": "Paged collection of NotificationRule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NotificationRule items on this page",
+          "items": {
+            "$ref": "#/definitions/NotificationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PagedTest": {
       "type": "object",
@@ -5535,6 +5945,50 @@
         "properties"
       ]
     },
+    "TestRunEndedEventCondition": {
+      "type": "object",
+      "description": "TestRunEnded Event condition.",
+      "properties": {
+        "testRunStatuses": {
+          "type": "array",
+          "description": "The test run statuses to send notification for",
+          "items": {
+            "$ref": "#/definitions/Status"
+          }
+        },
+        "testRunResults": {
+          "type": "array",
+          "description": "The test run results to send notification for",
+          "items": {
+            "$ref": "#/definitions/PFTestResult"
+          }
+        },
+        "createdByTypes": {
+          "type": "array",
+          "description": "The types of entities that created the test run to send notification for",
+          "items": {
+            "$ref": "#/definitions/CreateByTypes"
+          }
+        }
+      }
+    },
+    "TestRunEndedNotificationEvent": {
+      "type": "object",
+      "title": "This event would occur when a test run reaches terminal state.",
+      "description": "The notification event when the event type is TestRunEnded.",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/TestRunEndedEventCondition",
+          "description": "Event filtering condition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "TestRunEnded"
+    },
     "TestRunFileInfo": {
       "type": "object",
       "description": "Test run file info.",
@@ -5671,6 +6125,36 @@
           "readOnly": true
         }
       }
+    },
+    "TestRunStartedEventCondition": {
+      "type": "object",
+      "description": "TestRunStarted Event condition.",
+      "properties": {
+        "createdByTypes": {
+          "type": "array",
+          "description": "The creator types to send notification for",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TestRunStartedNotificationEvent": {
+      "type": "object",
+      "title": "This event would occur when a new test run is triggered.",
+      "description": "The notification event when the event type is TestRunStarted.",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/TestRunStartedEventCondition",
+          "description": "Event filtering condition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "TestRunStarted"
     },
     "TestRunStatistics": {
       "type": "object",
@@ -5853,6 +6337,44 @@
         }
       }
     },
+    "TestsNotificationRule": {
+      "type": "object",
+      "description": "Tests Notification rule model.",
+      "properties": {
+        "testIds": {
+          "type": "array",
+          "description": "The test ids to include",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Tests"
+    },
+    "TestsNotificationRuleCreateOrUpdate": {
+      "type": "object",
+      "description": "Tests Notification rule model.",
+      "properties": {
+        "testIds": {
+          "type": "array",
+          "description": "The test ids to include",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationRuleCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Tests"
+    },
     "TimeGrain": {
       "type": "string",
       "description": "Time Grain",
@@ -6011,6 +6533,28 @@
       "required": [
         "kind"
       ]
+    },
+    "TriggerDisabledNotificationEvent": {
+      "type": "object",
+      "title": "This event would occur when a trigger is disabled.",
+      "description": "The notification event when the event type is TriggerDisabled.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "TriggerDisabled"
+    },
+    "TriggerEndedNotificationEvent": {
+      "type": "object",
+      "title": "This event would occur when a trigger ends.",
+      "description": "The notification event when the event type is TriggerEnded.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "TriggerEnded"
     },
     "TriggerState": {
       "type": "string",
@@ -6179,6 +6723,42 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "ListNotificationRuleQueryParams.lastModifiedEndTime": {
+      "name": "lastModifiedEndTime",
+      "in": "query",
+      "description": "End DateTime(RFC 3339 literal format) of the last updated time range to filter notification rules.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListNotificationRuleQueryParams.lastModifiedStartTime": {
+      "name": "lastModifiedStartTime",
+      "in": "query",
+      "description": "Start DateTime(RFC 3339 literal format) of the last updated time range to filter notification rules.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListNotificationRuleQueryParams.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "Number of results in response. Default page size is 50.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 50,
+      "x-ms-parameter-location": "method"
+    },
+    "ListNotificationRuleQueryParams.testIds": {
+      "name": "testIds",
+      "in": "query",
+      "description": "Search based on notification rules associated with the provided test ids.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ListTestProfileQueryParams.lastModifiedEndTime": {
       "name": "lastModifiedEndTime",
