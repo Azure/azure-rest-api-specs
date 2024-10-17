@@ -146,17 +146,9 @@ model Entity {
   @added(Versions.v2024_11_15_preview)
   type: string;
 
-  /** Identifier for the reference. */
+  /** An identifier for mappping the extracted entity with the redacted data in the original document. */
   @added(Versions.v2024_11_15_preview)
   referenceId: string;
-
-  /** The unique masked string used to mask the entity in the original text */
-  @added(Versions.v2024_11_15_preview)
-  mask: string;
-
-  /** The length of the mask string. */
-  @added(Versions.v2024_11_15_preview)
-  maskLength: int32;
 
   /** List of entity tags. Tags are to express some similarities/affinity between entities. */
   @added(Versions.v2024_11_15_preview)
