@@ -1656,9 +1656,9 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
     },
-    "CustomEntitiesResultWithDocumentDetectedLanguage": {
+    "CustomEntitiesResult": {
       "type": "object",
-      "description": "Contains the list of detected custom entities result for the documents along with detected language.",
+      "description": "Contains the list of detected custom entities result for the documents.",
       "properties": {
         "errors": {
           "type": "array",
@@ -1681,7 +1681,7 @@
         },
         "documents": {
           "type": "array",
-          "description": "Enumeration of the document results with detected language.",
+          "description": "Enumeration of the document results.",
           "items": {
             "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
           }
@@ -1753,7 +1753,7 @@
       "description": "Contains the custom entity recognition job result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomEntitiesResultWithDocumentDetectedLanguage",
+          "$ref": "#/definitions/CustomEntitiesResult",
           "description": "List of results."
         }
       },
@@ -1767,9 +1767,9 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
-    "CustomLabelClassificationResultWithDocumentDetectedLanguage": {
+    "CustomLabelClassificationResult": {
       "type": "object",
-      "description": "Contains the custom label classification with detected language results.",
+      "description": "Contains the custom label classification results.",
       "properties": {
         "errors": {
           "type": "array",
@@ -1810,7 +1810,7 @@
       "description": "Contains the custom multi label classification job result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomLabelClassificationResultWithDocumentDetectedLanguage",
+          "$ref": "#/definitions/CustomLabelClassificationResult",
           "description": "List of results."
         }
       },
@@ -1868,7 +1868,7 @@
       "description": "Contains the custom single label classification job result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomLabelClassificationResultWithDocumentDetectedLanguage",
+          "$ref": "#/definitions/CustomLabelClassificationResult",
           "description": "List of results."
         }
       },

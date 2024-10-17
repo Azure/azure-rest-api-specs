@@ -29,13 +29,7 @@ model CustomEntitiesLROTask extends AnalyzeTextLROTask {
 /** Contains the list of detected custom entities result for the documents. */
 model CustomEntitiesResult is CustomResult {
   /** Enumeration of the document results. */
-  documents: Array<EntitiesDocumentResult>;
-}
-
-/** Contains the list of detected custom entities result for the documents along with detected language. */
-@added(Versions.v2024_11_15_preview)
-model CustomEntitiesResultWithDocumentDetectedLanguage is CustomResult {
-  /** Enumeration of the document results with detected language. */
+  @typeChangedFrom(Versions.v2024_11_15_preview, Array<EntitiesDocumentResult>)
   documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
 }
 
@@ -55,14 +49,10 @@ model CustomSingleLabelClassificationLROTask extends AnalyzeTextLROTask {
 /** Contains the custom label classification results. */
 model CustomLabelClassificationResult is CustomResult {
   /** Response by document */
-  documents: Array<ClassificationDocumentResult>;
-}
-
-/** Contains the custom label classification with detected language results. */
-@added(Versions.v2024_11_15_preview)
-model CustomLabelClassificationResultWithDocumentDetectedLanguage
-  is CustomResult {
-  /** Response by document */
+  @typeChangedFrom(
+    Versions.v2024_11_15_preview,
+    Array<ClassificationDocumentResult>
+  )
   documents: Array<ClassificationDocumentResultWithDetectedLanguage>;
 }
 
@@ -107,8 +97,7 @@ model CustomEntityRecognitionLROResult extends AnalyzeTextLROResult {
   kind: AnalyzeTextLROResultsKind.CustomEntityRecognitionLROResults;
 
   /** List of results. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, CustomEntitiesResult)
-  results: CustomEntitiesResultWithDocumentDetectedLanguage;
+  results: CustomEntitiesResult;
 }
 
 /** Contains the custom single label classification job result. */
@@ -118,11 +107,7 @@ model CustomSingleLabelClassificationLROResult extends AnalyzeTextLROResult {
   kind: AnalyzeTextLROResultsKind.CustomSingleLabelClassificationLROResults;
 
   /** List of results. */
-  @typeChangedFrom(
-    Versions.v2024_11_15_preview,
-    CustomLabelClassificationResult
-  )
-  results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
+  results: CustomLabelClassificationResult;
 }
 
 /** Contains the custom multi label classification job result. */
@@ -132,11 +117,7 @@ model CustomMultiLabelClassificationLROResult extends AnalyzeTextLROResult {
   kind: AnalyzeTextLROResultsKind.CustomMultiLabelClassificationLROResults;
 
   /** List of results. */
-  @typeChangedFrom(
-    Versions.v2024_11_15_preview,
-    CustomLabelClassificationResult
-  )
-  results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
+  results: CustomLabelClassificationResult;
 }
 
 /** This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully */
