@@ -349,10 +349,10 @@ model EntityTag {
 @added(Versions.v2024_11_01)
 model EntityWithTags is Entity {
   /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
-  type: string;
+  type?: string;
 
   /** List of entity tags. Tags are to express some similarities/affinity between entities. */
-  tags: Array<EntityTag>;
+  tags?: Array<EntityTag>;
 }
 
 /** Entity object with tags and metadata. */
