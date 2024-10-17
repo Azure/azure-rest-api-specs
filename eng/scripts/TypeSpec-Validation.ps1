@@ -6,8 +6,12 @@ param (
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
   [int]$FolderCount = 0,
-  [int] $Parallelism = 2
+  [int] $Parallelism = $env:TYPESPEC_PARALLELISM
 )
+
+if (!$Parallelism) { 
+  $Parallelism = 1
+}
 
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
@@ -37,7 +41,7 @@ if ($typespecFolders) {
     return $splitPath[0..1] -join '/'
   }
   
-  Write-Host "Starting per-service parallel validation..."
+  Write-Host "Starting per-service parallel validation with parallelism: $Parallelism"
 
   $serviceFolders `
   | ForEach-Object -ThrottleLimit $Parallelism -Parallel {
