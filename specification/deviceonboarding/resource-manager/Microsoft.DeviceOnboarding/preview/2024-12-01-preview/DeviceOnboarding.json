@@ -2369,6 +2369,7 @@
         },
         "rendezvousEndpoint": {
           "type": "string",
+          "format": "uri",
           "description": "Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com"
         }
       },
@@ -2404,7 +2405,8 @@
       "properties": {
         "secp256R1": {
           "$ref": "#/definitions/FdoPublicKey",
-          "description": "Public key as x5C with encryption type SECP256R1."
+          "description": "Public key as x5C with encryption type SECP256R1.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2862,6 +2864,7 @@
         },
         "rendezvousEndpoint": {
           "type": "string",
+          "format": "uri",
           "description": "Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com"
         }
       },
