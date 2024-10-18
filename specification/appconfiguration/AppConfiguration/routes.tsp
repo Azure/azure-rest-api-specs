@@ -318,7 +318,7 @@ op getKeyValue is Foundations.ResourceOperation<
     ...ClientRequestIdHeader;
     ...AppConfigResponseHeaders;
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
-    ...cacheControlHeader;
+    ...cacheControlHeader
   },
   Traits = {},
   ErrorResponse = Error
@@ -451,15 +451,12 @@ op checkKeyValue is appConfigOperation<
     @query("$Select")
     select?: KeyValueFields[];
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders & cacheControlHeader
