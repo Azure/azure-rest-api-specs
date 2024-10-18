@@ -13,26 +13,26 @@
         "properties": {
           "provisioningState": "Succeeded",
           "parameters": {
-              "location": {
-                  "type": "string",
-                  "defaultValue": "eastus",
-                  "allowedValues": [
-                      "eastuseuap",
-                      "westus",
-                      "eastus",
-                      "centraluseuap"
-                  ],
-                  "metadata": {
-                      "description": "Location for all resources."
-                  }
+            "location": {
+              "type": "string",
+              "defaultValue": "eastus",
+              "allowedValues": [
+                "eastuseuap",
+                "westus",
+                "eastus",
+                "centraluseuap"
+              ],
+              "metadata": {
+                "description": "Location for all resources."
               }
+            }
           },
           "stages": [
             {
               "name": "ev2canary",
               "sequence": 1,
               "parameterValues": {
-                "location":"eastuseuap",
+                "location": "eastuseuap",
                 "stageParameter1": "stageParameterValue1"
               },
               "nestedStageMapResourceId": null
