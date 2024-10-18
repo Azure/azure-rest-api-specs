@@ -13,11 +13,11 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
+    "hostTemplate": "{url}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "endpoint",
+        "name": "url",
         "in": "path",
         "description": "The host name of the blob storage account, e.g. accountName.blob.core.windows.net",
         "required": true,
@@ -64,15 +64,11 @@
       "get": {
         "operationId": "Service_GetProperties",
         "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
           {
             "name": "x-ms-version",
             "in": "header",
@@ -80,6 +76,14 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -119,15 +123,10 @@
       "put": {
         "operationId": "Service_SetProperties",
         "description": "Get the properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
           {
             "name": "x-ms-version",
             "in": "header",
@@ -137,12 +136,19 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "The storage service properties that specifies the analytics and CORS rules to set on the Blob service.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageServiceProperties"
@@ -180,15 +186,14 @@
       "post": {
         "operationId": "Service_GetUserDelegationKey",
         "description": "The Get User Delegation Key operation gets the user delegation key for the Blob service. This is only a valid operation when using User Delegation SAS. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas\\\">Create a user delegation SAS</a>.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
           {
             "name": "x-ms-version",
             "in": "header",
@@ -198,12 +203,19 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "The user delegation key info.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyInfo"
@@ -248,6 +260,14 @@
         "description": "returns all user-defined metadata and system properties for the specified container. The data returned does not include the container's list of blobs",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -269,14 +289,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -463,6 +475,14 @@
         "description": "Creates a new container under the specified account. If the container with the same name already exists, the operation fails.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -522,14 +542,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -578,7 +590,22 @@
       "post": {
         "operationId": "Container_SubmitBatch",
         "description": "The Batch operation allows multiple API calls to be embedded into a single HTTP request.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -604,14 +631,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -621,7 +640,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "byte"
+              "format": "binary"
             }
           }
         ],
@@ -629,8 +648,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -661,6 +679,14 @@
         "operationId": "Container_Delete",
         "description": "operation marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -701,14 +727,6 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -752,7 +770,19 @@
       "get": {
         "operationId": "Blob_Download",
         "description": "The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -779,9 +809,9 @@
           },
           {
             "name": "versionid",
-            "in": "header",
+            "in": "query",
             "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "versionId"
           },
@@ -850,22 +880,6 @@
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
             "name": "x-ms-if-tags",
             "in": "header",
             "description": "Specify a SQL where clause on blob tags to operate only on blobs with a matching value.",
@@ -874,30 +888,16 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -907,8 +907,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             },
             "headers": {
               "Accept-Ranges": {
@@ -1241,8 +1240,7 @@
           "206": {
             "description": "Successful",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             },
             "headers": {
               "Accept-Ranges": {
@@ -1585,6 +1583,14 @@
         "description": "The Set HTTP Headers operation sets system properties on the blob.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -1666,38 +1672,16 @@
             "x-ms-client-name": "blobContentDisposition"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -1706,14 +1690,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1771,6 +1747,14 @@
         "description": "\"Undelete a blob that was previously soft deleted\"",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -1786,14 +1770,6 @@
             "minLength": 1,
             "maxLength": 1024,
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1837,6 +1813,14 @@
         "description": "If the storage account's soft delete feature is disabled then, when a blob is deleted, it is permanently removed from the storage account. If the storage account's soft delete feature is enabled, then, when a blob is deleted, it is marked for deletion and becomes inaccessible immediately. However, the blob service retains the blob or snapshot for the number of days specified by the DeleteRetentionPolicy section of [Storage service properties] (Set-Blob-Service-Properties.md). After the specified number of days has passed, the blob's data is permanently removed from the storage account. Note that you continue to be charged for the soft-deleted blob's storage until it is permanently removed. Use the List Blobs API and specify the \\\"include=deleted\\\" query parameter to discover which blobs and snapshots have been soft deleted. You can then use the Undelete Blob API to restore a soft-deleted blob. All other operations on a soft-deleted blob or snapshot causes the service to return an HTTP status code of 404 (ResourceNotFound).",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -1862,9 +1846,9 @@
           },
           {
             "name": "versionid",
-            "in": "header",
+            "in": "query",
             "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "versionId"
           },
@@ -1913,38 +1897,16 @@
             "x-ms-client-name": "deleteSnapshots"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -1981,14 +1943,6 @@
               ]
             },
             "x-ms-client-name": "blobDeleteType"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2032,6 +1986,14 @@
         "description": "The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -2057,9 +2019,9 @@
           },
           {
             "name": "versionid",
-            "in": "header",
+            "in": "query",
             "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "versionId"
           },
@@ -2096,38 +2058,16 @@
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -2136,14 +2076,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2672,7 +2604,19 @@
       "get": {
         "operationId": "Blob_GetTags",
         "description": "The Get Blob Tags operation enables users to get tags on a blob.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -2707,9 +2651,9 @@
           },
           {
             "name": "versionid",
-            "in": "header",
+            "in": "query",
             "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "versionId"
           },
@@ -2728,14 +2672,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2780,7 +2716,18 @@
       "put": {
         "operationId": "Blob_SetTags",
         "description": "The Set Tags operation enables users to set tags on a blob.",
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -2808,9 +2755,9 @@
           },
           {
             "name": "versionid",
-            "in": "header",
+            "in": "query",
             "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "versionId"
           },
@@ -2845,14 +2792,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2903,7 +2842,22 @@
       "post": {
         "operationId": "Blob_Query",
         "description": "The Query operation enables users to select/project on blob data by providing simple query expressions.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -2969,38 +2923,16 @@
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -3009,14 +2941,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3035,8 +2959,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             },
             "headers": {
               "Accept-Ranges": {
@@ -3304,8 +3227,7 @@
           "206": {
             "description": "Successful",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             },
             "headers": {
               "Accept-Ranges": {
@@ -3587,6 +3509,14 @@
         "description": "operation sets one or more user-defined name-value pairs for the specified container.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -3617,14 +3547,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3677,7 +3599,19 @@
       "get": {
         "operationId": "Container_GetAccessPolicy",
         "description": "gets the permissions for the specified container. The permissions indicate whether container data may be accessed publicly.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -3700,14 +3634,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3790,7 +3716,18 @@
       "put": {
         "operationId": "Container_SetAccessPolicy",
         "description": "sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly.",
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -3831,14 +3768,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3905,6 +3834,14 @@
         "description": "Restores a previously-deleted container.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -3934,14 +3871,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3987,6 +3916,14 @@
         "description": "Renames an existing container.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -4016,14 +3953,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4067,7 +3996,19 @@
       "get": {
         "operationId": "Container_FilterBlobs",
         "description": "The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -4137,14 +4078,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -4190,6 +4123,14 @@
         "operationId": "Container_AcquireLease",
         "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -4239,14 +4180,6 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4305,6 +4238,14 @@
         "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -4344,14 +4285,6 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4406,6 +4339,14 @@
         "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -4445,14 +4386,6 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4511,6 +4444,14 @@
         "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -4551,14 +4492,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "breakPeriod"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4622,6 +4555,14 @@
         "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -4669,14 +4610,6 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4738,7 +4671,19 @@
       "get": {
         "operationId": "Container_ListBlobFlatSegment",
         "description": "[Update] The List Blobs operation returns a list of the blobs under the specified container",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -4856,14 +4801,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -4908,7 +4845,19 @@
       "get": {
         "operationId": "Container_ListBlobHierarchySegment",
         "description": "[Update] The List Blobs operation returns a list of the blobs under the specified container",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -5033,14 +4982,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -5087,19 +5028,19 @@
         "description": "Returns the sku name and account kind",
         "parameters": [
           {
-            "name": "containerName",
-            "in": "path",
-            "description": "The name of the container.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "The name of the container.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -5229,6 +5170,14 @@
         "description": "The Create operation creates a new page blob.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -5354,38 +5303,16 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -5437,14 +5364,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -5517,7 +5436,18 @@
       "put": {
         "operationId": "PageBlob_UploadPages",
         "description": "The Upload Pages operation writes a range of pages to a page blob",
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -5644,38 +5574,16 @@
             "x-ms-client-name": "ifSequenceNumberEqualTo"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -5684,14 +5592,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -5703,7 +5603,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "byte"
+              "format": "binary"
             }
           }
         ],
@@ -5780,6 +5680,14 @@
         "operationId": "PageBlob_ClearPages",
         "description": "The Clear Pages operation clears a range of pages from a page blob",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -5858,38 +5766,16 @@
             "x-ms-client-name": "ifSequenceNumberEqualTo"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -5898,14 +5784,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -5964,6 +5842,14 @@
         "operationId": "PageBlob_UploadPagesFromUrl",
         "description": "The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -6106,38 +5992,16 @@
             "x-ms-client-name": "ifSequenceNumberEqualTo"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -6188,14 +6052,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "copySourceAuthorization"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -6273,7 +6129,19 @@
       "get": {
         "operationId": "PageBlob_GetPageRanges",
         "description": "The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -6315,38 +6183,16 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -6370,14 +6216,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -6438,7 +6276,19 @@
       "get": {
         "operationId": "PageBlob_GetPageRangesDiff",
         "description": "The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -6503,38 +6353,16 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -6558,14 +6386,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -6627,6 +6447,14 @@
         "operationId": "PageBlob_Resize",
         "description": "The Resize operation increases the size of the page blob to the specified size.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -6693,38 +6521,16 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -6742,14 +6548,6 @@
             "type": "integer",
             "format": "int64",
             "x-ms-client-name": "blobContentLength"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -6809,6 +6607,14 @@
         "description": "The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -6842,38 +6648,16 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -6925,14 +6709,6 @@
             "type": "integer",
             "format": "int64",
             "x-ms-client-name": "blobSequenceNumber"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -6992,6 +6768,14 @@
         "description": "The Copy Incremental operation copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. The copied snapshots are complete copies of the original snapshot and can be read or copied from as usual. This API is supported since REST version 2016-05-31.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -7017,38 +6801,16 @@
             "format": "int32"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -7073,14 +6835,6 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "copySource"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -7175,6 +6929,14 @@
         "description": "The Create operation creates a new append blob.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -7297,38 +7059,16 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -7396,14 +7136,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -7476,7 +7208,18 @@
       "put": {
         "operationId": "BlockBlob_Upload",
         "description": "The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation.",
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -7699,38 +7442,16 @@
             "x-ms-client-name": "tier"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -7808,14 +7529,6 @@
             "x-ms-client-name": "transactionalContentCrc64"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -7825,7 +7538,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "byte"
+              "format": "binary"
             }
           }
         ],
@@ -7897,6 +7610,14 @@
         "operationId": "BlockBlob_PutBlobFromUrl",
         "description": "The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -8128,38 +7849,16 @@
             "x-ms-client-name": "tier"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -8251,14 +7950,6 @@
             "x-ms-client-name": "copySourceTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -8320,7 +8011,18 @@
       "put": {
         "operationId": "BlockBlob_StageBlock",
         "description": "The Stage Block operation creates a new block to be committed as part of a blob",
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -8420,14 +8122,6 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -8437,7 +8131,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "byte"
+              "format": "binary"
             }
           }
         ],
@@ -8499,7 +8193,18 @@
       "put": {
         "operationId": "AppendBlob_AppendBlock",
         "description": "The Append Block operation commits a new block of data to the end of an append blob.",
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -8609,38 +8314,16 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -8649,14 +8332,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -8668,7 +8343,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "byte"
+              "format": "binary"
             }
           }
         ],
@@ -8755,6 +8430,14 @@
         "operationId": "AppendBlob_AppendBlockFromUrl",
         "description": "The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -8880,38 +8563,16 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -8928,14 +8589,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "copySourceAuthorization"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -9020,6 +8673,14 @@
         "description": "The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -9062,38 +8723,16 @@
             "x-ms-client-name": "appendPosition"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -9102,14 +8741,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -9167,6 +8798,14 @@
         "operationId": "Blob_StartCopyFromUrl",
         "description": "The Start Copy From URL operation copies a blob or an internet resource to a new blob.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -9363,38 +9002,16 @@
             "x-ms-client-name": "sourceIfTags"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -9486,14 +9103,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -9592,6 +9201,14 @@
         "description": "The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -9631,14 +9248,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -9683,6 +9292,14 @@
         "operationId": "Blob_CopyFromUrl",
         "description": "The Copy From URL operation copies a blob or an internet resource to a new blob. It will not return a response until the copy is complete.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -9843,38 +9460,16 @@
             "x-ms-client-name": "sourceIfNoneMatch"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -9992,14 +9587,6 @@
             "x-ms-client-name": "copySourceTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -10104,6 +9691,14 @@
         "description": "\"Set the expiration time of a blob\"",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -10169,14 +9764,6 @@
             "x-ms-client-name": "ExpiresOn"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -10228,6 +9815,14 @@
         "operationId": "Blob_SetImmutabilityPolicy",
         "description": "\"Set the immutability policy of a blob\"",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -10304,14 +9899,6 @@
               ]
             },
             "x-ms-client-name": "immutabilityPolicyMode"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -10401,6 +9988,14 @@
         "description": "The Delete Immutability Policy operation deletes the immutability policy on the blob.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -10424,14 +10019,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -10477,6 +10064,14 @@
         "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -10519,38 +10114,16 @@
             "x-ms-client-name": "proposedLeaseId"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -10559,14 +10132,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -10625,6 +10190,14 @@
         "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -10659,38 +10232,16 @@
             "x-ms-client-name": "breakPeriod"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -10699,14 +10250,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -10766,6 +10309,14 @@
         "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -10807,38 +10358,16 @@
             "x-ms-client-name": "proposedLeaseId"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -10847,14 +10376,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -10913,6 +10434,14 @@
         "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -10946,38 +10475,16 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -10986,14 +10493,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -11048,6 +10547,14 @@
         "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -11081,38 +10588,16 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -11121,14 +10606,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -11187,6 +10664,14 @@
         "description": "The Set Legal Hold operation sets a legal hold on the blob.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -11218,14 +10703,6 @@
             "required": true,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -11274,6 +10751,14 @@
         "operationId": "Blob_SetMetadata",
         "description": "The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -11340,38 +10825,16 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -11380,14 +10843,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -11454,6 +10909,14 @@
         "description": "The Create Snapshot operation creates a read-only snapshot of a blob",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -11519,38 +10982,16 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -11559,14 +11000,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -11628,6 +11061,14 @@
         "operationId": "Blob_SetTier",
         "description": "The Set Tier operation sets the tier on a block blob. The operation is allowed on a page blob or block blob, but not on an append blob. A block blob's tier determines Hot/Cool/Archive storage type. This operation does not update the blob's ETag.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -11798,14 +11239,6 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -11863,6 +11296,14 @@
         "description": "Returns the sku name and account kind",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -11878,14 +11319,6 @@
             "minLength": 1,
             "maxLength": 1024,
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -12015,6 +11448,14 @@
         "description": "The Batch operation allows multiple API calls to be embedded into a single HTTP request.",
         "parameters": [
           {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
             "name": "Content-Length",
             "in": "header",
             "description": "The length of the request.",
@@ -12030,14 +11471,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -12076,7 +11509,19 @@
       "get": {
         "operationId": "Service_FilterBlobs",
         "description": "The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "where",
             "in": "query",
@@ -12139,14 +11584,6 @@
             "format": "int32"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -12192,6 +11629,14 @@
         "operationId": "BlockBlob_StageBlockFromUrl",
         "description": "The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL.",
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -12349,14 +11794,6 @@
             "x-ms-client-name": "copySourceAuthorization"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -12418,7 +11855,18 @@
       "put": {
         "operationId": "BlockBlob_CommitBlockList",
         "description": "The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to.",
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -12641,38 +12089,16 @@
             "x-ms-client-name": "tier"
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifModifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
           },
           {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-client-name": "ifUnmodifiedSince"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           },
           {
             "name": "x-ms-if-tags",
@@ -12740,14 +12166,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -12829,7 +12247,19 @@
       "get": {
         "operationId": "BlockBlob_GetBlockList",
         "description": "The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -12905,14 +12335,6 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -12971,7 +12393,19 @@
       "get": {
         "operationId": "Service_ListContainersSegment",
         "description": "The List Containers Segment operation returns a list of the containers under the specified account",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "prefix",
             "in": "query",
@@ -13001,14 +12435,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -13189,15 +12615,11 @@
       "get": {
         "operationId": "Service_GetStatistics",
         "description": "Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
           {
             "name": "x-ms-version",
             "in": "header",
@@ -13205,6 +12627,14 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -15417,6 +14847,44 @@
       "format": "uuid",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
+      "name": "If-Modified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifModifiedSince"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
+      "name": "If-Unmodified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was not modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifUnmodifiedSince"
     },
     "PremiumPageBlobAccessTierOptional": {
       "name": "x-ms-access-tier",

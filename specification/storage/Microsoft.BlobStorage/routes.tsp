@@ -23,12 +23,11 @@ op StorageOperation<
   @header("Content-Type")
   contentType: "application/xml",
 
-  ...TParams,
-
   /** Specifies the version of the operation to use for this request. */
   @header("x-ms-version")
   version: string,
 
+  ...TParams,
   ...ClientRequestIdHeader,
 ): (TResponse & {
   /** Content-Type header */
@@ -52,12 +51,7 @@ interface Service {
   @put
   @route("/?restype=service&comp=properties")
   setProperties is StorageOperation<
-    {
-      /** The storage service properties that specifies the analytics and CORS rules to set on the Blob service. */
-      @body body: StorageServiceProperties;
-
-      ...TimeoutParameter;
-    },
+    TimeoutParameter & StorageServiceProperties,
     {
       @statusCode statusCode: 202;
     }
@@ -67,15 +61,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("/?restype=service&comp=properties")
-  getProperties is StorageOperation<
-    {
-      ...TimeoutParameter;
-    },
-    {
-      @statusCode statusCode: 200;
-      @body body: StorageServiceProperties;
-    }
-  >;
+  getProperties is StorageOperation<TimeoutParameter, StorageServiceProperties>;
 
   /** Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -83,11 +69,7 @@ interface Service {
   @route("/?restype=service&comp=stats")
   getStatistics is StorageOperation<
     TimeoutParameter,
-    {
-      @statusCode statusCode: 200;
-      @body body: StorageServiceStats;
-      ...DateResponseHeader;
-    }
+    DateResponseHeader & StorageServiceStats
   >;
 
   /** The List Containers Segment operation returns a list of the containers under the specified account */
@@ -102,10 +84,7 @@ interface Service {
       ...MarkerParameter;
       ...MaxResultsParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: ListContainersSegmentResponse;
-    }
+    ListContainersSegmentResponse
   >;
 
   /** The Get User Delegation Key operation gets the user delegation key for the Blob service. This is only a valid operation when using User Delegation SAS. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas\">Create a user delegation SAS</a>. */
@@ -113,18 +92,8 @@ interface Service {
   @post
   @route("/?restype=service&comp=userdelegationkey")
   getUserDelegationKey is StorageOperation<
-    {
-      /** The user delegation key info. */
-      @body body: KeyInfo;
-
-      ...TimeoutParameter;
-    },
-    {
-      @statusCode statusCode: 200;
-
-      /** The user delegation key. */
-      @body body: UserDelegationKey;
-    }
+    KeyInfo & TimeoutParameter,
+    UserDelegationKey
   >;
 
   /** Returns the sku name and account kind. */
@@ -135,7 +104,6 @@ interface Service {
   getAccountInfo is StorageOperation<
     {},
     {
-      @statusCode statusCode: 200;
       ...DateResponseHeader;
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
@@ -153,9 +121,7 @@ interface Service {
       ...ContentLengthParameter;
       ...TimeoutParameter;
     },
-    {
-      @statusCode statusCode: 200;
-    }
+    {}
   >;
 
   /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
@@ -171,11 +137,7 @@ interface Service {
       ...MarkerParameter;
       ...MaxResultsParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: FilterBlobSegment;
-      ...DateResponseHeader;
-    }
+    DateResponseHeader & FilterBlobSegment
   >;
 }
 
@@ -217,8 +179,6 @@ interface Container {
       ...LeaseIdOptionalParameter;
     },
     {
-      @statusCode statusCode: 200;
-
       // TODO: x-ms-meta headers
       ...EtagResponseHeader;
 
@@ -272,7 +232,6 @@ interface Container {
       ...LeaseIdOptionalParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -290,7 +249,6 @@ interface Container {
       ...LeaseIdOptionalParameter;
     },
     {
-      @statusCode statusCode: 200;
       @body body: SignedIdentifiers;
       ...PublicAccessResponseHeader;
       ...EtagResponseHeader;
@@ -320,7 +278,6 @@ interface Container {
       ...LeaseIdOptionalParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -359,10 +316,7 @@ interface Container {
       ...SourceLeaseIdParameter;
       ...TimeoutParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      ...DateResponseHeader;
-    }
+    DateResponseHeader
   >;
 
   /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
@@ -381,8 +335,7 @@ interface Container {
     },
     {
       @statusCode statusCode: 202;
-      @body body: bytes;
-    }
+    } & BodyParameter
   >;
 
   /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
@@ -399,11 +352,7 @@ interface Container {
       ...FilterBlobsIncludeParameter;
       ...TimeoutParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: FilterBlobSegment;
-      ...DateResponseHeader;
-    }
+    DateResponseHeader & FilterBlobSegment
   >;
 
   /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
@@ -445,7 +394,6 @@ interface Container {
       ...IfUnmodifiedSinceParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -467,7 +415,6 @@ interface Container {
       ...IfUnmodifiedSinceParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...LeaseIdResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
@@ -514,7 +461,6 @@ interface Container {
       ...IfUnmodifiedSinceParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...LeaseIdResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
@@ -537,11 +483,7 @@ interface Container {
       ...ListBlobsIncludeParameter;
       ...TimeoutParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: ListBlobsFlatSegmentResponse;
-      ...DateResponseHeader;
-    }
+    ListBlobsFlatSegmentResponse & DateResponseHeader
   >;
 
   /** [Update] The List Blobs operation returns a list of the blobs under the specified container */
@@ -559,11 +501,7 @@ interface Container {
       ...ListBlobsIncludeParameter;
       ...TimeoutParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: ListBlobsHierarchySegmentResponse;
-      ...DateResponseHeader;
-    }
+    ListBlobsHierarchySegmentResponse & DateResponseHeader
   >;
 
   /** Returns the sku name and account kind */
@@ -576,7 +514,6 @@ interface Container {
       ...ContainerNameParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...DateResponseHeader;
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
@@ -606,16 +543,12 @@ interface Blob {
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
       ...IfTagsParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
+      ...ConditionalRequestHeaders;
     },
-    {
+    BodyParameter & {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
       @statusCode statusCode: 200 | 206;
-      ...BodyParameter;
 
       // TODO: x-ms-meta headers
       // TODO: x-ms-or headers
@@ -672,15 +605,10 @@ interface Blob {
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
-      @statusCode statusCode: 200;
-
       // TODO: x-ms-meta headers
       // TODO: x-ms-or headers
 
@@ -744,10 +672,7 @@ interface Blob {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...DeleteSnapshotsParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...BlobDeleteTypeParameter;
     },
@@ -767,10 +692,7 @@ interface Blob {
       ...ContainerNameParameter;
       ...BlobNameParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      ...DateResponseHeader;
-    }
+    DateResponseHeader
   >;
 
   /** "Set the expiration time of a blob" */
@@ -786,7 +708,6 @@ interface Blob {
       ...BlobExpiryTimeParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -811,14 +732,10 @@ interface Blob {
       ...BlobContentLanguageParameter;
       ...LeaseIdOptionalParameter;
       ...BlobContentDispositionParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...BlobSequenceNumberResponseHeader;
@@ -842,7 +759,6 @@ interface Blob {
       ...ImmutabilityPolicyModeParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -862,10 +778,7 @@ interface Blob {
       ...BlobNameParameter;
       ...TimeoutParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      ...DateResponseHeader;
-    }
+    DateResponseHeader
   >;
 
   /** The Set Legal Hold operation sets a legal hold on the blob. */
@@ -882,7 +795,6 @@ interface Blob {
       ...LegalHoldRequiredParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...DateResponseHeader;
       ...LegalHoldResponseHeader;
     }
@@ -907,14 +819,10 @@ interface Blob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -937,10 +845,7 @@ interface Blob {
       ...TimeoutParameter;
       ...LeaseDurationParameter;
       ...ProposedLeaseIdOptionalParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
@@ -964,14 +869,10 @@ interface Blob {
       ...BlobNameParameter;
       ...TimeoutParameter;
       ...LeaseIdRequiredParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -990,14 +891,10 @@ interface Blob {
       ...BlobNameParameter;
       ...TimeoutParameter;
       ...LeaseIdRequiredParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -1018,14 +915,10 @@ interface Blob {
       ...TimeoutParameter;
       ...LeaseIdRequiredParameter;
       ...ProposedLeaseIdOptionalParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -1044,10 +937,7 @@ interface Blob {
       ...BlobNameParameter;
       ...TimeoutParameter;
       ...LeaseBreakPeriodParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
@@ -1077,10 +967,7 @@ interface Blob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
@@ -1113,15 +1000,16 @@ interface Blob {
       ...SourceIfMatchParameter;
       ...SourceIfNoneMatchParameter;
       ...SourceIfTagsParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...CopySourceParameter;
       ...LeaseIdOptionalParameter;
       ...BlobTagsHeaderParameter;
-      ...SealBlobParameter;
+
+      /** Overrides the sealed state of the destination blob.  Service version 2019-12-12 and newer. */
+      @header("x-ms-seal-blob")
+      sealBlob?: boolean;
+
       ...ImmutabilityPolicyExpiryParameter;
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
@@ -1155,10 +1043,7 @@ interface Blob {
       ...SourceIfUnmodifiedSinceParameter;
       ...SourceIfMatchParameter;
       ...SourceIfNoneMatchParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...CopySourceParameter;
       ...LeaseIdOptionalParameter;
@@ -1235,7 +1120,6 @@ interface Blob {
       ...BlobNameParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...DateResponseHeader;
       ...AccountKindResponseHeader;
       ...SkuNameResponseHeader;
@@ -1260,16 +1144,12 @@ interface Blob {
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
-    {
+    BodyParameter & {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
       @statusCode statusCode: 200 | 206;
-      ...BodyParameter;
 
       // TODO: MetadataResponseHeader;
 
@@ -1317,11 +1197,7 @@ interface Blob {
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: BlobTags;
-      ...DateResponseHeader;
-    }
+    BlobTags & DateResponseHeader
   >;
 
   /** The Set Tags operation enables users to set tags on a blob. */
@@ -1377,10 +1253,7 @@ interface PageBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...BlobContentLengthRequiredParameter;
       ...BlobSequenceNumberParameter;
@@ -1427,10 +1300,7 @@ interface PageBlob {
       ...IfSequenceNumberLessThanOrEqualToParameter;
       ...IfSequenceNumberLessThanParameter;
       ...IfSequenceNumberEqualToParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
@@ -1464,10 +1334,7 @@ interface PageBlob {
       ...IfSequenceNumberLessThanOrEqualToParameter;
       ...IfSequenceNumberLessThanParameter;
       ...IfSequenceNumberEqualToParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
@@ -1503,10 +1370,7 @@ interface PageBlob {
       ...IfSequenceNumberLessThanOrEqualToParameter;
       ...IfSequenceNumberLessThanParameter;
       ...IfSequenceNumberEqualToParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...SourceIfModifiedSinceParameter;
       ...SourceIfUnmodifiedSinceParameter;
@@ -1539,17 +1403,12 @@ interface PageBlob {
       ...SnapshotParameter;
       ...RangeParameter;
       ...LeaseIdOptionalParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: PageList;
+    PageList & {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
       ...BlobContentLengthResponseHeader;
@@ -1571,17 +1430,12 @@ interface PageBlob {
       ...PrevSnapshotUrlParameter;
       ...RangeParameter;
       ...LeaseIdOptionalParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: PageList;
+    PageList & {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
       ...BlobContentLengthResponseHeader;
@@ -1605,15 +1459,11 @@ interface PageBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...BlobContentLengthRequiredParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...BlobSequenceNumberResponseHeader;
@@ -1633,16 +1483,12 @@ interface PageBlob {
       ...BlobNameParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...SequenceNumberActionParameter;
       ...SequenceNumberParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...BlobSequenceNumberResponseHeader;
@@ -1660,10 +1506,7 @@ interface PageBlob {
       ...ContainerNameParameter;
       ...BlobNameParameter;
       ...TimeoutParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...LeaseIdOptionalParameter;
       ...CopySourceParameter;
@@ -1705,10 +1548,7 @@ interface AppendBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...BlobTagsHeaderParameter;
       ...ImmutabilityPolicyExpiryParameter;
@@ -1752,10 +1592,7 @@ interface AppendBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
@@ -1797,10 +1634,7 @@ interface AppendBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...CopySourceAuthorizationParameter;
     },
@@ -1832,14 +1666,10 @@ interface AppendBlob {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...BlobConditionAppendPosParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
     },
     {
-      @statusCode statusCode: 200;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -1878,10 +1708,7 @@ interface BlockBlob {
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
       ...AccessTierOptionalParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...BlobTagsHeaderParameter;
       ...ImmutabilityPolicyExpiryParameter;
@@ -1930,10 +1757,7 @@ interface BlockBlob {
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
       ...AccessTierOptionalParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...SourceIfModifiedSinceParameter;
       ...SourceIfMatchParameter;
@@ -2059,10 +1883,7 @@ interface BlockBlob {
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
       ...AccessTierOptionalParameter;
-      ...IfModifiedSinceParameter;
-      ...IfUnmodifiedSinceParameter;
-      ...IfMatchParameter;
-      ...IfNoneMatchParameter;
+      ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...BlobTagsHeaderParameter;
       ...ImmutabilityPolicyExpiryParameter;
@@ -2095,9 +1916,7 @@ interface BlockBlob {
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
     },
-    {
-      @statusCode statusCode: 200;
-      @body body: BlockLookupList;
+    BlockLookupList & {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
       ...BlobContentLengthResponseHeader;
