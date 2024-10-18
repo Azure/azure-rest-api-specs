@@ -366,3 +366,22 @@ using Microsoft.AzureFleet;
   "IsBypassPlatformSafetyChecksOnUserScheduleEnabled",
   "csharp"
 );
+@@clientName(AdditionalCapabilities.hibernationEnabled,
+  "isHibernationEnabled",
+  "csharp"
+);
+@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+  "isUltraSSDEnabled",
+  "csharp"
+);
+@@clientName(VMAttributes, "ComputeFleetVMAttributes", "csharp");
+@@clientName(VMAttributeSupport, "ComputeFleetVMAttributeSupport", "csharp");
+@@clientName(VMAttributeMinMaxDouble,
+  "ComputeFleetVmAttributeMinMaxDouble",
+  "csharp"
+);
+@@clientName(VMAttributeMinMaxInteger,
+  "ComputeFleetVmAttributeMinMaxInteger",
+  "csharp"
+);
+@@clientName(VMCategory, "ComputeFleetVmCategory", "csharp");

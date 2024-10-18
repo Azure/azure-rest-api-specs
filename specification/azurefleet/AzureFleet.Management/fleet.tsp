@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.AzureFleet;
 
@@ -504,7 +505,7 @@ model LocationProfile {
   @doc("""
     The ARM location name of the additional region. If LocationProfile is specified, then location is required.
     """)
-  location: string;
+  location: azureLocation;
 
   @doc("""
     An override for computeProfile.baseVirtualMachineProfile specific to this region. 
