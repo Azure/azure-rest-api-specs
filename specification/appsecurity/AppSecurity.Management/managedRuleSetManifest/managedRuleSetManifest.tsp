@@ -14,7 +14,7 @@ namespace Microsoft.AppSecurity;
 // 2. ManagedRuleSetDefinitionList: https://github.com/Azure/azure-rest-api-specs/blob/700bd7b4e10d2bd83672ee56fd6aedcf7e195a06/specification/frontdoor/resource-manager/Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json#L796C6-L796C34
 @doc("Manifest containing the available managed rule sets.")
 model AppProtectManagedRuleSetManifestProperties {
-  @doc("The status of the last operation")
+  @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
@@ -22,7 +22,7 @@ model AppProtectManagedRuleSetManifestProperties {
   @visibility("read")
   version: string;
 
-  @doc("Default managed rule set ID.")
+  @doc("Defines the default managed rule sets for all supported pillar types.")
   @visibility("read")
   @extension("x-ms-identifiers", ["pillarType"])
   defaultRuleSets: PillarTypeDefaultRuleSet[];
@@ -33,12 +33,12 @@ model AppProtectManagedRuleSetManifestProperties {
   availableRuleSets: ManagedRuleSetDefinition[];
 }
 
-@doc("Defines the default managed rule set of a pillar type")
+@doc("Defines the default managed rule set of a pillar type.")
 model PillarTypeDefaultRuleSet {
   @doc("The pillar type.")
   pillarType: PillarType;
 
-  @doc("The default rule set ID of the specified pillar type.")
+  @doc("The default rule set of the specified pillar type.")
   defaultRuleSet: ManagedRuleSetId;
 }
 
