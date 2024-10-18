@@ -475,10 +475,48 @@
         }
       }
     },
+    "/connections/{connectionNameInUrl}": {
+      "get": {
+        "operationId": "Connections_Get",
+        "description": "Get the details of a single connection, without credentials.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "connectionNameInUrl",
+            "in": "path",
+            "description": "Connection Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionsListSecretsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/connections/{connectionNameInUrl}/listsecrets": {
       "post": {
         "operationId": "Connections_ListSecrets",
-        "description": "Get the details of a single connection, including credential (if available).",
+        "description": "Get the details of a single connection, including credentials (if available).",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -583,13 +621,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Evaluations_List_MaximumSet": {
             "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -798,13 +836,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Evaluations_ListSchedule_MaximumSet": {
             "$ref": "./examples/Evaluations_ListSchedule_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
