@@ -141,7 +141,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -409,7 +410,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -702,17 +704,6 @@
             "x-ms-client-name": "select"
           },
           {
-            "name": "tags",
-            "in": "query",
-            "description": "A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
             "name": "Sync-Token",
             "in": "header",
             "description": "Used to guarantee real-time consistency between requests.",
@@ -743,6 +734,17 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1269,7 +1271,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -1749,7 +1752,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -2106,7 +2110,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
