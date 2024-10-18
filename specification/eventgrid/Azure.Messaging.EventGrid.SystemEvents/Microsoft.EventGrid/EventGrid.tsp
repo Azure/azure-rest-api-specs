@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -89,10 +91,12 @@ model SubscriptionDeletedEventData {
 model EventGridMQTTClientCreatedOrUpdatedEventData
   extends EventGridMQTTClientEventData {
   /** Configured state of the client. The value could be Enabled or Disabled */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   state: EventGridMQTTClientState;
 
   /** Time the client resource is created based on the provider's UTC time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   createdOn: utcDateTime;
 
   /** 
@@ -100,6 +104,7 @@ Time the client resource is last updated based on the provider's UTC time. If
 the client resource was never updated, this value is identical to the value of
 the 'createdOn' property.
 */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   updatedOn: utcDateTime;
 
   /** The key-value attributes that are assigned to the client resource. */
@@ -170,5 +175,6 @@ than the previous event.
 Reason for the disconnection of the MQTT client's session. The value could be
 one of the values in the disconnection reasons table.
 */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   disconnectionReason: EventGridMQTTClientDisconnectionReason;
 }

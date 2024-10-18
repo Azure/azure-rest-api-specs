@@ -85,7 +85,7 @@ union RecommendationCategory {
 @added(APIVersions.v2024_05_01_preview)
 model FunctionFlexConsumptionResourceConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Abbreviating MB to Mb changes the meaning of the value."
-  @doc("Memory size of the instance. Supported values are 512, 2048, 2096.")
+  @doc("Memory size of the instance. Supported values are 2048, 4096.")
   instanceMemoryMB: int64;
 
   @doc("HTTP Concurrency for the function app.")

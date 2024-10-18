@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 @doc("Contains the analyze text KeyPhraseExtraction task input.")
 model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {

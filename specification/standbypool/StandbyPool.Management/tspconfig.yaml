@@ -10,8 +10,10 @@ options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
+    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
+    arm-resource-flattening: true
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/standbypool.json"
 
     # omit the enum type Versions from being added to versioned swagger
@@ -21,4 +23,37 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.standbypool"
     service-name: "Standby Pool"
-    examples-directory: "examples"
+    examples-directory: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.StandbyPool"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-standbypool"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-standbypool"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-standbypool"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/standbypool"
+    package-dir: "armstandbypool"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
