@@ -27,6 +27,15 @@ interface DynamicSchemaVersions {
   @doc("Get a Dynamic Schema Version Resource")
   get is ArmResourceRead<DynamicSchemaVersion>;
 
+  @doc("Create or update a Dynamic Schema Version Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<DynamicSchemaVersion>;
+
+  @doc("update a Dynamic Schema Version Resource")
+  update is ArmResourcePatchSync<DynamicSchemaVersion, SchemaVersionProperties>;
+
+  @doc("Delete a Dynamic Schema Version Resource")
+  delete is ArmResourceDeleteSync<DynamicSchemaVersion>;
+
   @doc("List by Dynamic Schema")
   listByDynamicSchema is ArmResourceListByParent<DynamicSchemaVersion>;
 }

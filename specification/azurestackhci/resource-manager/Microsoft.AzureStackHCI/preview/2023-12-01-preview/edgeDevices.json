@@ -854,9 +854,30 @@
           "description": "The status of NIC, up, disconnected.",
           "readOnly": true
         },
-        "rdmaCapable": {
-          "type": "boolean",
-          "description": "True if the adapter is RDMA capable.",
+        "rdmaCapability": {
+          "type": "string",
+          "description": "Describes the RDMA capability of the network adapter.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "x-ms-enum": {
+            "name": "RdmaCapability",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              }
+            ]
+          },
           "readOnly": true
         }
       }
@@ -1125,6 +1146,12 @@
         "extensionProfile": {
           "$ref": "#/definitions/ExtensionProfile",
           "description": "Extensions details for edge device.",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent edge device sync timestamp.",
           "readOnly": true
         },
         "confidentialVmProfile": {
