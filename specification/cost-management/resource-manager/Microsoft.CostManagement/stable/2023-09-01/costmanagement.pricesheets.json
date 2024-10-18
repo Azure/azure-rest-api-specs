@@ -171,7 +171,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Generates the pricesheet for the provided billing period asynchronously based on the Enrollment ID. This is for Enterprise Agreement customers. \n You can use the new 2023-09-01 API version at '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.CostManagement/pricesheets/default/download' for billing periods January 2023 onwards. With a new schema detailed below, the new price sheet provides more information and includes prices for Azure Reserved Instances (RI) for the current billing period.\n \n We recommend downloading an Azure Price Sheet for when entering a new billing period if you would maintain a record of past Azure Reserved Instance (RI) pricing. Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single .csv file to a zip file containing multiple csv files, each with max size of 75MB.",
+        "description": "Generates the pricesheet for the provided billing period asynchronously based on the Enrollment ID. This is for Enterprise Agreement customers.\n \n **Migrate to version 2023-09-01** \n\n You can use the 2023-09-01 API version with the new URI: \n\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.CostManagement/pricesheets/default/download' \n\n With a new schema detailed below, the new version of the price sheet provides additional information and includes prices for Azure Reserved Instances (RI) for the current billing period. We recommend downloading an Azure Price Sheet for when entering a new billing period if you would maintain an ongoing record of past Azure Reserved Instance (RI) pricing.\n\n The EA Azure price sheet is available for billing periods in the past 13 months. To request a price sheet for a billing period older than 13 months, please contact support.\n\n The Azure price sheet download experience has been updated from a single .csv file to a zip file containing multiple .csv files, each with max size of 75MB. The 2023-09-01 version has been upgraded to use http POST method; details can be found below.\n\n All versions of the Microsoft.Consumption Azure Price Sheet - Download by Billing Account (including 2022-06-01, 2021-10-01, 2020-01-01-preview, 2019-10-01, 2019-05-01) are scheduled to be retired on 01 June 2026 and will no longer be supported after this date.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -248,7 +248,7 @@
           "readOnly": true
         },
         "validTill": {
-          "description": "Download link validity.",
+          "description": "Download link validity. The URI is available for use for 1 hour.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -410,7 +410,7 @@
       }
     },
     "EAPriceSheetProperties": {
-      "description": "The properties of the EA price sheet.",
+      "description": "The properties of the EA price sheet. Properties supported with version 2023-09-01 as below",
       "type": "object",
       "properties": {
         "enrollmentNumber": {
@@ -439,7 +439,7 @@
           "readOnly": true
         },
         "unitOfMeasure": {
-          "description": "How usage is measured for the service",
+          "description": "How usage is measured for the service. Note: The field “Unit” has been removed with version 2023-09-01 as a duplicate of “UnitofMeasure”, please use the field “UnitOfMeasure”. ",
           "type": "string",
           "readOnly": true
         },
@@ -455,6 +455,11 @@
         },
         "meterType": {
           "description": "Name of the meter type",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerId": {
+          "description": "Determines the Azure offer associated with this meter. [Learn more about Azure offers] (https://azure.microsoft.com/en-us/support/legal/offer-details/)",
           "type": "string",
           "readOnly": true
         },
@@ -491,7 +496,7 @@
           "readOnly": true
         },
         "basePrice": {
-          "description": "The unit price at the time the customer signs on or the unit price at the time of service meter GA launch if it is after sign-on.\n\n This is applicable for Enterprise Agreement users",
+          "description": "The unit price at the time the customer signs on or the unit price at the time of service meter GA launch if it is after sign-on. May appear as null or 0 where not applicable. Base price is unavailable for ReservedInstance meters. ",
           "type": "string",
           "readOnly": true
         },
