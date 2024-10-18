@@ -25,16 +25,8 @@ model DeidentificationJob {
   @doc("Target location to store output of operation.")
   targetLocation: TargetStorageLocation;
 
-  @doc("Operation to perform on the input documents.")
-  operation?: OperationType = OperationType.Surrogate;
-
-  @doc("Data type of the input documents.")
-  dataType?: DocumentDataType = DocumentDataType.Plaintext;
-
-  @maxLength(16)
-  @minLength(1)
-  @doc("Format of the redacted output. Only valid when Operation is Redact.")
-  redactionFormat?: string;
+  @doc("Customization parameters to override default service behaviors.")
+  customizations?: BatchCustomizationOptions;
 
   // Readonly Properties
 
@@ -70,22 +62,77 @@ model DeidentificationJob {
   summary?: JobSummary;
 }
 
-@doc("Summary metrics of a job.")
-model JobSummary {
-  @doc("Number of documents that have completed.")
-  successful: int32;
+@doc("Storage location.")
+model SourceStorageLocation {
+  @doc("URL to storage location.")
+  location: url;
 
-  @doc("Number of documents that have failed.")
-  failed: int32;
+  @doc("Prefix to filter path by.")
+  @minLength(1)
+  @maxLength(1024)
+  prefix: string;
 
-  @doc("Number of documents that have been canceled.")
-  canceled: int32;
+  @doc("List of extensions to filter path by.")
+  @minItems(1)
+  extensions?: Array<string> = #["*"];
 
-  @doc("Number of documents total.")
-  total: int32;
+  @doc("Data type of the input documents.")
+  dataType?: DocumentDataType = DocumentDataType.Plaintext;
+}
 
-  @doc("Number of bytes processed.")
-  bytesProcessed: int64;
+@doc("Storage location.")
+model TargetStorageLocation {
+  @doc("URL to storage location.")
+  location: url;
+
+  @doc("""
+  Replaces the input prefix of a file path with the output prefix, preserving the rest of the path structure.
+  
+  Example:
+  File full path: documents/user/note.txt
+  Input Prefix: "documents/user/"
+  Output Prefix: "output_docs/"
+
+  Output file: "output_docs/note.txt"
+  """)
+  @minLength(1)
+  @maxLength(1024)
+  prefix: string;
+
+  @doc("When set to true during a job, the service will overwrite the output location if it already exists.")
+  overwrite?: boolean = false;
+}
+
+/*
+TODO: Name pending
+ServiceModifiers
+BehaviorOverrides
+DeidentificationOptions
+DeidentificationParameters
+*/
+
+@doc("Customizations options to override default service behaviors for realtime behavior.")
+model RealtimeCustomizationOptions {
+  ...SharedCustomizationOptions;
+}
+
+@doc("Customizations options to override default service behaviors for job behavior.")
+model BatchCustomizationOptions {
+  ...SharedCustomizationOptions;
+}
+
+@doc("Customizations options to override default service behaviors.")
+model SharedCustomizationOptions {
+  @maxLength(16)
+  @minLength(1)
+  @doc("Format of the redacted output. Only valid when Operation is Redact.")
+  redactionFormat?: string;
+
+  @doc("Operation to perform on the input documents.")
+  operation?: OperationType = OperationType.Surrogate;
+
+  @doc("Locale in which the output surrogates are written.")
+  surrogateLocale?: string = "en-US";
 }
 
 @doc("List of statuses a job can have.")
@@ -117,30 +164,22 @@ union JobStatus {
   string,
 }
 
-@doc("Storage location.")
-model SourceStorageLocation {
-  @doc("URL to storage location.")
-  location: url;
+@doc("Summary metrics of a job.")
+model JobSummary {
+  @doc("Number of documents that have completed.")
+  successful: int32;
 
-  @doc("Prefix to filter path by.")
-  @minLength(1)
-  @maxLength(1024)
-  prefix: string;
+  @doc("Number of documents that have failed.")
+  failed: int32;
 
-  @doc("List of extensions to filter path by.")
-  @minItems(1)
-  extensions?: Array<string> = #["*"];
-}
+  @doc("Number of documents that have been canceled.")
+  canceled: int32;
 
-@doc("Storage location.")
-model TargetStorageLocation {
-  @doc("URL to storage location.")
-  location: url;
+  @doc("Number of documents total.")
+  total: int32;
 
-  @doc("Prefix to filter path by.")
-  @minLength(1)
-  @maxLength(1024)
-  prefix: string;
+  @doc("Number of bytes processed.")
+  bytesProcessed: int64;
 }
 
 @doc("Details of a single document in a job.")
@@ -199,18 +238,14 @@ union OperationType {
 @doc("Request body for de-identification operation.")
 model DeidentificationContent {
   @doc("Input text to de-identify.")
-  @maxLength(100000) // 100KB
+  @maxLength(48000) // 50k total request size. 2k for other fields.
   inputText: string;
-
-  @doc("Operation to perform on the input.")
-  operation?: OperationType = OperationType.Surrogate;
 
   @doc("Data type of the input.")
   dataType?: DocumentDataType = DocumentDataType.Plaintext;
 
-  @maxLength(16)
-  @doc("Format of the redacted output. Only valid when OperationType is \"Redact\".")
-  redactionFormat?: string;
+  @doc("Customization parameters to override default service behaviors.")
+  customizations?: RealtimeCustomizationOptions;
 }
 
 @doc("Response body for de-identification operation.")
@@ -226,15 +261,6 @@ model DeidentificationResult {
 model PhiTaggerResult {
   @doc("List of entities detected in the input.")
   entities: Array<PhiEntity>;
-
-  @doc("Path to the document in storage.")
-  @maxLength(1024) // Max length for path Name
-  path?: string;
-
-  // Source: ...EtagProperty;
-  // Needs to be optional
-  @doc("The entity tag for this resource.")
-  etag?: eTag;
 }
 
 @doc("List of PHI Entities.")

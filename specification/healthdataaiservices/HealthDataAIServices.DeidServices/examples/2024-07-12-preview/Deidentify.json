@@ -5,9 +5,12 @@
     "api-version": "2024-07-12-preview",
     "body": {
       "inputText": "Hello my name is John Smith.",
-      "operation": "Redact",
       "dataType": "Plaintext",
-      "redactionFormat": "[{type}]"
+      "customizations": {
+        "redactionFormat": "[{type}]",
+        "operation": "Redact",
+        "surrogateLocale": "en-US"
+      }
     }
   },
   "responses": {
@@ -31,8 +34,7 @@
               "text": "John Smith",
               "confidenceScore": 0.83
             }
-          ],
-          "etag": "0x000000000000000"
+          ]
         }
       }
     }
