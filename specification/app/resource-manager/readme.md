@@ -63,11 +63,17 @@ input-file:
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2024-10-02-preview/SessionPools.json
   - Microsoft.App/preview/2024-10-02-preview/SourceControls.json
   - Microsoft.App/preview/2024-10-02-preview/Subscriptions.json
   - Microsoft.App/preview/2024-10-02-preview/Usages.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: SessionPools.json
+    reason: |
+      Session Pool is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
 ```
 
 ### Tag: package-preview-2024-08
