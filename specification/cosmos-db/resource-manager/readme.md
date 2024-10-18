@@ -49,6 +49,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-12-01-preview/restorable.json
   - Microsoft.DocumentDB/preview/2024-12-01-preview/services.json
   - Microsoft.DocumentDB/preview/2024-12-01-preview/throughputpool.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/tablerbac.json
 ```
 
 ### Tag: package-preview-2024-09
