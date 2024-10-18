@@ -393,6 +393,59 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Category of the workspace connection.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "AzureOpenAI",
+              "Serverless",
+              "AzureBlob",
+              "AIServices"
+            ],
+            "x-ms-enum": {
+              "name": "ConnectionType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AzureOpenAI",
+                  "value": "AzureOpenAI",
+                  "description": "Azure OpenAI service"
+                },
+                {
+                  "name": "Serverless",
+                  "value": "Serverless",
+                  "description": "Serverless API service"
+                },
+                {
+                  "name": "AzureBlobStorage",
+                  "value": "AzureBlob",
+                  "description": "Azure Blob Storage"
+                },
+                {
+                  "name": "AIServices",
+                  "value": "AIServices",
+                  "description": "Azure AI Services"
+                }
+              ]
+            }
+          },
+          {
+            "name": "includeAll",
+            "in": "query",
+            "description": "Indicates whether to list datastores. Service default: do not lines datastores.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "Target of the workspace connection.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -444,33 +497,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "connectionName": {
+                "ignored": {
                   "type": "string",
-                  "description": "Connection Name (should be the same as the connection name in the URL path)"
-                },
-                "subscriptionId": {
-                  "type": "string",
-                  "description": "The ID of the target subscription."
-                },
-                "resourceGroupName": {
-                  "type": "string",
-                  "description": "The name of the Resource Group."
-                },
-                "workspaceName": {
-                  "type": "string",
-                  "description": "The name of the workspace (Azure AI Studio hub)."
-                },
-                "apiVersionInBody": {
-                  "type": "string",
-                  "description": "The api version."
+                  "description": "The body is ignored."
                 }
               },
               "required": [
-                "connectionName",
-                "subscriptionId",
-                "resourceGroupName",
-                "workspaceName",
-                "apiVersionInBody"
+                "ignored"
               ]
             }
           }
@@ -550,13 +583,13 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Evaluations_List_MaximumSet": {
             "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -765,13 +798,13 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Evaluations_ListSchedule_MaximumSet": {
             "$ref": "./examples/Evaluations_ListSchedule_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -8558,7 +8591,9 @@
       "description": "The Type (or category) of the connection",
       "enum": [
         "AzureOpenAI",
-        "Serverless"
+        "Serverless",
+        "AzureBlob",
+        "AIServices"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
@@ -8573,6 +8608,16 @@
             "name": "Serverless",
             "value": "Serverless",
             "description": "Serverless API service"
+          },
+          {
+            "name": "AzureBlobStorage",
+            "value": "AzureBlob",
+            "description": "Azure Blob Storage"
+          },
+          {
+            "name": "AIServices",
+            "value": "AIServices",
+            "description": "Azure AI Services"
           }
         ]
       }

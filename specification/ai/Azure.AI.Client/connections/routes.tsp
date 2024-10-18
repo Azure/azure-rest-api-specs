@@ -34,7 +34,7 @@ op list is Azure.Core.Foundations.Operation<
     @query
     @doc("Target of the workspace connection.")
     target: string;
-  }, 
+  },
   ConnectionsListResponse
 >;
 
