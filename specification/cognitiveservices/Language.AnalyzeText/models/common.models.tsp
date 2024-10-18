@@ -44,10 +44,6 @@ union AnalyzeTextTaskKind {
 
   /** Entity linking task */
   EntityLinking: "EntityLinking",
-
-  /** Dynamic classification task */
-  @added(Versions.v2023_11_15_preview)
-  DynamicClassification: "DynamicClassification",
 }
 
 /** The kind of the long running analyze text tasks supported. */
@@ -88,18 +84,6 @@ union AnalyzeTextLROTaskKind {
   /** Abstractive summarization task */
   @added(Versions.v2023_04_01)
   AbstractiveSummarization: "AbstractiveSummarization",
-
-  /** Custom healthcare task */
-  @added(Versions.v2023_11_15_preview)
-  CustomHealthcare: "CustomHealthcare",
-
-  /** Custom sentiment analysis task */
-  @added(Versions.v2023_11_15_preview)
-  CustomSentimentAnalysis: "CustomSentimentAnalysis",
-
-  /** Custom abstractive summarization task */
-  @added(Versions.v2023_11_15_preview)
-  CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
 }
 
 /** The kind of the response object returned by the analyze-text task. */
@@ -123,10 +107,6 @@ union AnalyzeTextTaskResultsKind {
 
   /** Entity linking results */
   EntityLinkingResults: "EntityLinkingResults",
-
-  /** Dynamic classification results */
-  @added(Versions.v2023_11_15_preview)
-  DynamicClassificationResults: "DynamicClassificationResults",
 }
 
 /** The kind of the response object returned by the analyze-text long running task. */
@@ -167,18 +147,6 @@ union AnalyzeTextLROResultsKind {
   /** Abstractive summarization LRO results */
   @added(Versions.v2023_04_01)
   AbstractiveSummarizationLROResults: "AbstractiveSummarizationLROResults",
-
-  /** Custom healthcare LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomHealthcareLROResults: "CustomHealthcareLROResults",
-
-  /** Custom sentiment analysis LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomSentimentAnalysisLROResults: "CustomSentimentAnalysisLROResults",
-
-  /** Custom abstractive summarization LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomAbstractiveSummarizationLROResults: "CustomAbstractiveSummarizationLROResults",
 }
 
 /** Collection of input documents to be analyzed by the service. */
@@ -220,7 +188,7 @@ model AnalyzeTextJobsInput {
   tasks: Array<AnalyzeTextLROTask>;
 
   /** Default language to use for records requesting automatic language detection. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_15_preview)
   defaultLanguage?: string;
 }
 
@@ -386,7 +354,7 @@ model MultiLanguageInput {
 }
 
 /** Defines the detected language for the document. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model DocumentDetectedLanguage {
   /** If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document. */
   detectedLanguage?: DetectedLanguage;
@@ -738,7 +706,7 @@ model SentimentConfidenceScores {
 }
 
 /** Enum that defines the length of the output summaries. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_01)
 union SummaryLengthBucket {
   string,
 
@@ -762,7 +730,7 @@ model AbstractiveSummarizationTaskParametersBase {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** (NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_01)
   summaryLength?: SummaryLengthBucket;
 }
 
