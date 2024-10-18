@@ -279,7 +279,7 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
   ownershipVoucherStorage?: OwnershipVoucherStorage;
 
   @doc("Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com")
-  rendezvousEndpoint: string;
+  rendezvousEndpoint: url;
 }
 
 @doc("Owner public keys to extend ownership voucher to the customer.")
