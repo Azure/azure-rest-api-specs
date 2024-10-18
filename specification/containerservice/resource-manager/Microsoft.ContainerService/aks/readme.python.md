@@ -16,9 +16,10 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
-default-api-version: "2024-07-01"
+default-api-version: "2024-08-01"
 multiapi: true
 batch:
+  - tag: package-2024-08
   - tag: package-2024-07
   - tag: package-preview-2024-07
   - tag: package-preview-2024-06
@@ -109,6 +110,16 @@ batch:
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/
 perform-load: false
 clear-output-folder: false
+```
+
+### Tag: package-2024-08 and python
+
+These settings apply only when `--tag=package-2024-08 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-08' && $(python)
+namespace: azure.mgmt.containerservice.v2024_08_01
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2024_08_01
 ```
 
 ### Tag: package-2024-07 and python
