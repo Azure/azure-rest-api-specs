@@ -1,0 +1,87 @@
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+using Cadl.Http;
+using Cadl.Rest;
+using OpenAPI;
+using Autorest;
+using Azure.ResourceManager.Foundations;
+
+namespace Azure.ResourceManager;
+
+
+@doc("ResourceType parameter for filtering")
+model ResourceTypeParameter {
+  @query
+  @minLength(1)
+  @doc("Filter by resource type")
+  resourceType?: string;
+}
+
+@doc("CategoryName parameter type")
+model CategoryNameParameter {
+  @query
+  @minLength(1)
+  @doc("Filter by category name ")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
+  categoryName?: string;
+}
+
+@resourceBaseParametersOf(TResource)
+model SubscriptionBaseParameters<TResource extends ArmResource> {
+  ...ApiVersionParameter;
+  // unless tenant or extension
+  ...SubscriptionIdParameter;
+
+}
+
+
+@autoRoute
+@doc("Get a {name}", TResource)
+@get
+@armResourceRead(TResource)
+op SubscriptionResourceRead<TResource extends ArmResource, TBaseParameters = SubscriptionBaseParameters<TResource>>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>
+): ArmResponse<TResource> | ErrorResponse;
+
+@autoRoute
+@doc("Create a {name}", TResource)
+@armResourceCreateOrUpdate(TResource)
+@put
+op SubscriptionResourceCreateOrUpdateSync<
+  TResource extends ArmResource,
+  TBaseParameters = SubscriptionBaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("Resource create parameters.")
+  @body
+  resource: TResource
+): ArmResponse<TResource> |ArmCreatedResponse<TResource> | ErrorResponse;
+
+@autoRoute
+@doc("Delete a {name}", TResource)
+@armResourceDelete(TResource)
+@delete
+op SubscriptionResourceDeleteSync<
+  TResource extends ArmResource,
+  TBaseParameters = SubscriptionBaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>
+): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
+
+@autoRoute
+@doc("List {name} resources by subscription ID", TResource)
+@list(TResource)
+@segmentOf(TResource)
+@armResourceList(TResource)
+@get
+op ArmListBySubscriptionWithCustomQueryParams<TResource extends ArmResource>(
+    ...SubscriptionScope<TResource>;
+    ...CategoryNameParameter;
+    ...ResourceTypeParameter;
+): ArmResponse<ResourceListResult<TResource>> | ErrorResponse;

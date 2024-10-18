@@ -1,0 +1,95 @@
+{
+  "operationId": "WorkloadImpacts_CreateOrUpdate",
+  "title": "connectivity related impact",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2022-11-01-preview",
+    "workloadImpactName": "impact-001",
+    "resource": {
+      "properties": {
+        "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.sql/sqlservers/db1",
+        "startDateTime": "2022-06-15T05:59:46.6517821Z",
+        "endDateTime": null,
+        "impactDescription": "conection failure",
+        "impactCategory": "Resource.Connectivity",
+        "connectivity": {
+          "protocol": "TCP",
+          "port": 1443,
+          "source": {
+            "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm1"
+          },
+          "destination": {
+            "uri": "https://www.microsoft.com"
+          }
+        },
+        "workload": {
+          "context": "webapp/scenario1",
+          "toolset": "Other"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/workloadImpacts/impact-001",
+        "name": "impact-001",
+        "type": "Microsoft.Impact/workloadImpacts",
+        "properties": {
+          "impactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2022-06-15T06:01:46.6517821Z",
+          "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.sql/sqlservers/db1",
+          "startDateTime": "2022-06-15T05:59:46.6517821Z",
+          "endDateTime": null,
+          "impactDescription": "conection failure",
+          "impactCategory": "Resource.Connectivity",
+          "connectivity": {
+            "protocol": "TCP",
+            "port": 1443,
+            "source": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm1"
+            },
+            "destination": {
+              "uri": "https://www.microsoft.com"
+            }
+          },
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/workloadImpacts/impact-001",
+        "name": "impact-001",
+        "type": "Microsoft.Impact/workloadImpacts",
+        "properties": {
+          "impactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2022-06-15T06:01:46.6517821Z",
+          "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.sql/sqlservers/db1",
+          "startDateTime": "2022-06-15T05:59:46.6517821Z",
+          "endDateTime": null,
+          "impactDescription": "conection failure",
+          "impactCategory": "Resource.Connectivity",
+          "connectivity": {
+            "protocol": "TCP",
+            "port": 1443,
+            "source": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm1"
+            },
+            "destination": {
+              "uri": "https://www.microsoft.com"
+            }
+          },
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          }
+        }
+      }
+    }
+  }
+}
