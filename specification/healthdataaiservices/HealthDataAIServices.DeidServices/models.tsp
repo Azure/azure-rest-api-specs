@@ -26,7 +26,7 @@ model DeidentificationJob {
   targetLocation: TargetStorageLocation;
 
   @doc("Customization parameters to override default service behaviors.")
-  customizations?: CustomizationOptions;
+  customizations?: BatchCustomizationOptions;
 
   // Readonly Properties
 
@@ -39,7 +39,6 @@ model DeidentificationJob {
   @visibility("read")
   error?: Azure.Core.Foundations.Error;
 
-  // TODO: Potentially group timestamps together?
   @doc("""
     Date and time when the job was completed.
     
@@ -77,9 +76,6 @@ model SourceStorageLocation {
   @minItems(1)
   extensions?: Array<string> = #["*"];
 
-  @doc("Language and Locale that the service should use.")
-  locale?: string = "en-US";
-
   @doc("Data type of the input documents.")
   dataType?: DocumentDataType = DocumentDataType.Plaintext;
 }
@@ -89,8 +85,16 @@ model TargetStorageLocation {
   @doc("URL to storage location.")
   location: url;
 
-  // TODO: Specify an example of the output path of a file.
-  @doc("Prefix to filter path by.")
+  @doc("""
+  Replaces the input prefix of a file path with the output prefix, preserving the rest of the path structure.
+  
+  Example:
+  File full path: documents/user/note.txt
+  Input Prefix: "documents/user/"
+  Output Prefix: "output_docs/"
+
+  Output file: "output_docs/note.txt"
+  """)
   @minLength(1)
   @maxLength(1024)
   prefix: string;
@@ -106,22 +110,29 @@ BehaviorOverrides
 DeidentificationOptions
 DeidentificationParameters
 */
+
+@doc("Customizations options to override default service behaviors for realtime behavior.")
+model RealtimeCustomizationOptions {
+  ...SharedCustomizationOptions;
+}
+
+@doc("Customizations options to override default service behaviors for job behavior.")
+model BatchCustomizationOptions {
+  ...SharedCustomizationOptions;
+}
+
 @doc("Customizations options to override default service behaviors.")
-model CustomizationOptions {
+model SharedCustomizationOptions {
   @maxLength(16)
   @minLength(1)
   @doc("Format of the redacted output. Only valid when Operation is Redact.")
   redactionFormat?: string;
 
-  // TODO: SHould I avoid negative? processIndividually?
-  @doc("When set to true during a job, the service will surrogate all documents individually.")
-  disableConsistency?: boolean = false;
-
   @doc("Operation to perform on the input documents.")
   operation?: OperationType = OperationType.Surrogate;
 
-  // TODO: Optionally return surrogated offsets? Do they want before or after surrogation?
-  // How will this work with a job?
+  @doc("Locale in which the output surrogates are written.")
+  surrogateLocale?: string = "en-US";
 }
 
 @doc("List of statuses a job can have.")
@@ -234,7 +245,7 @@ model DeidentificationContent {
   dataType?: DocumentDataType = DocumentDataType.Plaintext;
 
   @doc("Customization parameters to override default service behaviors.")
-  customizations?: CustomizationOptions;
+  customizations?: RealtimeCustomizationOptions;
 }
 
 @doc("Response body for de-identification operation.")
@@ -250,17 +261,6 @@ model DeidentificationResult {
 model PhiTaggerResult {
   @doc("List of entities detected in the input.")
   entities: Array<PhiEntity>;
-
-  // TODO: REMOVE? We don't use it within the code. And any data is already in the Details
-  @doc("Path to the document in storage.")
-  @maxLength(1024) // Max length for path Name
-  path?: string;
-
-  // TODO: Same as above
-  // Source: ...EtagProperty;
-  // Needs to be optional
-  @doc("The entity tag for this resource.")
-  etag?: eTag;
 }
 
 @doc("List of PHI Entities.")

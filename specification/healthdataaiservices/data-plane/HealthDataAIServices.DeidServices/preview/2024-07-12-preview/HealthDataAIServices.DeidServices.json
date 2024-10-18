@@ -586,20 +586,15 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
-    "CustomizationOptions": {
+    "BatchCustomizationOptions": {
       "type": "object",
-      "description": "Customizations options to override default service behaviors.",
+      "description": "Customizations options to override default service behaviors for job behavior.",
       "properties": {
         "redactionFormat": {
           "type": "string",
           "description": "Format of the redacted output. Only valid when Operation is Redact.",
           "minLength": 1,
           "maxLength": 16
-        },
-        "disableConsistency": {
-          "type": "boolean",
-          "description": "When set to true during a job, the service will surrogate all documents individually.",
-          "default": false
         },
         "operation": {
           "type": "string",
@@ -631,6 +626,11 @@
               }
             ]
           }
+        },
+        "surrogateLocale": {
+          "type": "string",
+          "description": "Locale in which the output surrogates are written.",
+          "default": "en-US"
         }
       }
     },
@@ -663,7 +663,7 @@
           }
         },
         "customizations": {
-          "$ref": "#/definitions/CustomizationOptions",
+          "$ref": "#/definitions/RealtimeCustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
         }
       },
@@ -692,7 +692,7 @@
           "description": "Target location to store output of operation."
         },
         "customizations": {
-          "$ref": "#/definitions/CustomizationOptions",
+          "$ref": "#/definitions/BatchCustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
         },
         "status": {
@@ -1162,20 +1162,59 @@
             "$ref": "#/definitions/PhiEntity"
           },
           "x-ms-identifiers": []
-        },
-        "path": {
-          "type": "string",
-          "description": "Path to the document in storage.",
-          "maxLength": 1024
-        },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "The entity tag for this resource."
         }
       },
       "required": [
         "entities"
       ]
+    },
+    "RealtimeCustomizationOptions": {
+      "type": "object",
+      "description": "Customizations options to override default service behaviors for realtime behavior.",
+      "properties": {
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation to perform on the input documents.",
+          "default": "Surrogate",
+          "enum": [
+            "Redact",
+            "Surrogate",
+            "Tag"
+          ],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Redact",
+                "value": "Redact",
+                "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
+              },
+              {
+                "name": "Surrogate",
+                "value": "Surrogate",
+                "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
+              },
+              {
+                "name": "Tag",
+                "value": "Tag",
+                "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
+              }
+            ]
+          }
+        },
+        "surrogateLocale": {
+          "type": "string",
+          "description": "Locale in which the output surrogates are written.",
+          "default": "en-US"
+        }
+      }
     },
     "SourceStorageLocation": {
       "type": "object",
@@ -1202,11 +1241,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "locale": {
-          "type": "string",
-          "description": "Language and Locale that the service should use.",
-          "default": "en-US"
         },
         "dataType": {
           "type": "string",
@@ -1270,7 +1304,7 @@
         },
         "prefix": {
           "type": "string",
-          "description": "Prefix to filter path by.",
+          "description": "Replaces the input prefix of a file path with the output prefix, preserving the rest of the path structure.\n\nExample:\nFile full path: documents/user/note.txt\nInput Prefix: \"documents/user/\"\nOutput Prefix: \"output_docs/\"\n\nOutput file: \"output_docs/note.txt\"",
           "minLength": 1,
           "maxLength": 1024
         },
