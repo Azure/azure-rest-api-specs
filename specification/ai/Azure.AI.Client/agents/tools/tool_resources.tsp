@@ -26,9 +26,9 @@ model ToolResources {
   @encodedName("application/json", "file_search")
   fileSearch?: FileSearchToolResource;
 
-  /** Resources to be used by the `bing_search` tool consisting of connection IDs. */
-  @encodedName("application/json", "bing_search")
-  bingSearch?: ConnectionListResource;
+  /** Resources to be used by the `bing_grounding` tool consisting of connection IDs. */
+  @encodedName("application/json", "bing_grounding")
+  bingGrounding?: ConnectionListResource;
 
   /** Resources to be used by the `microsoft_fabric` tool consisting of connection IDs. */
   @encodedName("application/json", "microsoft_fabric")
@@ -70,7 +70,7 @@ model FileSearchToolResource {
 }
 
 /**
- * A set of connection resources currently used by either the `bing_search`, `microsoft_fabric`, or `sharepoint` tools.
+ * A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint` tools.
  */
 model ConnectionListResource {
   /**
@@ -144,9 +144,9 @@ model CreateToolResourcesOptions {
   @encodedName("application/json", "file_search")
   fileSearch?: CreateFileSearchToolResourceOptions;
 
-  /** A list of connections to be used by the `bing_search` tool consisting of connection IDs. */
-  @encodedName("application/json", "bing_search")
-  bingSearch?: ConnectionListResourceOptions;
+  /** A list of connections to be used by the `bing_grounding` tool consisting of connection IDs. */
+  @encodedName("application/json", "bing_grounding")
+  bingGrounding?: ConnectionListResourceOptions;
 
   /** A list of connections to be used by the `microsoft_fabric` tool consisting of connection IDs. */
   @encodedName("application/json", "microsoft_fabric")
@@ -232,9 +232,9 @@ model UpdateToolResourcesOptions {
   @encodedName("application/json", "file_search")
   fileSearch?: UpdateFileSearchToolResourceOptions;
 
-  /** Overrides the list of connections to be used by the `bing_search` tool consisting of connection IDs. */
-  @encodedName("application/json", "bing_search")
-  bingSearch?: ConnectionListResourceOptions;
+  /** Overrides the list of connections to be used by the `bing_grounding` tool consisting of connection IDs. */
+  @encodedName("application/json", "bing_grounding")
+  bingGrounding?: ConnectionListResourceOptions;
 
   /** Overrides the list of connections to be used by the `microsoft_fabric` tool consisting of connection IDs. */
   @encodedName("application/json", "microsoft_fabric")
