@@ -1387,30 +1387,25 @@
       "type": "object",
       "description": "GetNextStage POST Action response.",
       "properties": {
-        "stageProgressions": {
+        "nextStages": {
           "type": "array",
           "description": "StageProgression resources that are ready to put in 'InProgress' state.",
           "items": {
             "$ref": "#/definitions/GetNextStagesResponseItem"
           },
           "x-ms-identifiers": [
-            "stageId"
+            "stageReference"
           ]
         }
       },
       "required": [
-        "stageProgressions"
+        "nextStages"
       ]
     },
     "GetNextStagesResponseItem": {
       "type": "object",
       "description": "StageProgression data comes from GetNextStages API.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Guid for the StageProgression user should be using when do the PUT operation.",
-          "readOnly": true
-        },
         "stageReference": {
           "type": "string",
           "description": "Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changestate resource.",
@@ -1424,7 +1419,6 @@
         }
       },
       "required": [
-        "id",
         "stageReference",
         "parameterValues"
       ]
@@ -1708,8 +1702,7 @@
         }
       },
       "required": [
-        "stages",
-        "parameters"
+        "stages"
       ]
     },
     "StageMapPropertiesUpdate": {

@@ -38,7 +38,7 @@ model StageMapProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning of operation parameters should not be of type Record as per ARM."
   @doc("StageMap parameters schema for each stage.")
   @visibility("read", "create")
-  parameters: Record<Parameter>;
+  parameters?: Record<Parameter>;
 }
 
 @doc("Defines details about each stage in the stage map resource.")

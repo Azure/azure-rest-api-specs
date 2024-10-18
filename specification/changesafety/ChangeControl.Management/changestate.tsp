@@ -85,16 +85,12 @@ model ChangeStateProperties {
 @doc("GetNextStage POST Action response.")
 model GetNextStagesResponse {
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
-  @OpenAPI.extension("x-ms-identifiers", ["stageId"])
-  stageProgressions: GetNextStagesResponseItem[];
+  @OpenAPI.extension("x-ms-identifiers", ["stageReference"])
+  nextStages: GetNextStagesResponseItem[];
 }
 
 @doc("StageProgression data comes from GetNextStages API.")
 model GetNextStagesResponseItem {
-  @doc("Guid for the StageProgression user should be using when do the PUT operation.")
-  @visibility("read")
-  id: string;
-
   @doc("Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changestate resource.")
   @visibility("read")
   stageReference: string;
