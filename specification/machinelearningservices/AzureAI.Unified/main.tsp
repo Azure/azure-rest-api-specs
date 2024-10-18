@@ -40,7 +40,21 @@ namespace Microsoft.MachineLearningServices;
 
 @doc("Azure AI api versions.")
 enum Versions {
-  @doc("Azure AI api version 2025-03-01-preview.")
+  // AML Versions
+  @doc("AML api version 2024-01-01-preview.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2025-03-01-preview`,
+  `2024-04-01-preview`,
+
+  @doc("AML api version 2024-01-01-preview.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2024-05-01-preview`,
+
+  // OpenAI API Versions
+  @doc("OpenAI api version 2024-01-01-preview.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_02_15_preview,
+
+  @doc("OpenAI api version 2024-01-01-preview.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_05_01_preview,
 }

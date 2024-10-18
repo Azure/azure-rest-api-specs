@@ -2,14 +2,15 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Microsoft.MachineLearningServices;
 
 @doc("The possible values for roles attributed to messages in a thread.")
-@added(ServiceApiVersions.v2024_02_15_preview)
+@added(Versions.v2024_02_15_preview)
 union MessageRole {
   string,
 
@@ -106,7 +107,7 @@ alias OptionalNullableMetadata = {
  * if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
-@added(ServiceApiVersions.v2024_05_01_preview)
+@added(Versions.v2024_05_01_preview)
 union AssistantsApiResponseFormatOption {
   string,
 
@@ -118,7 +119,7 @@ union AssistantsApiResponseFormatOption {
 }
 
 /** Represents the mode in which the model will handle the return format of a tool call. */
-@added(ServiceApiVersions.v2024_05_01_preview)
+@added(Versions.v2024_05_01_preview)
 union AssistantsApiResponseFormatMode {
   string,
 
@@ -133,14 +134,14 @@ union AssistantsApiResponseFormatMode {
  * An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
  * If `text` the model can return text or any value needed.
  */
-@added(ServiceApiVersions.v2024_05_01_preview)
+@added(Versions.v2024_05_01_preview)
 model AssistantsApiResponseFormat {
   /** Must be one of `text` or `json_object`. */
   type?: ApiResponseFormat = ApiResponseFormat.text;
 }
 
 /** Possible API response formats. */
-@added(ServiceApiVersions.v2024_05_01_preview)
+@added(Versions.v2024_05_01_preview)
 union ApiResponseFormat {
   string,
 
@@ -150,7 +151,6 @@ union ApiResponseFormat {
   /** Using `json_object` format will limit the usage of ToolCall to only functions. */
   jsonObject: "json_object",
 }
-
 
 /** Needed for indexes */
 @doc("Metadata pertaining to creation and last modification of the resource.")
