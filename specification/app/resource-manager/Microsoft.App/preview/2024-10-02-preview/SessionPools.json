@@ -404,7 +404,7 @@
       "description": "Session pool private registry credentials.",
       "type": "object",
       "properties": {
-        "registryServer": {
+        "server": {
           "description": "Container registry server.",
           "type": "string"
         },
@@ -414,6 +414,10 @@
         },
         "passwordSecretRef": {
           "description": "The name of the secret that contains the registry login password",
+          "type": "string"
+        },
+        "identity": {
+          "description": "A Managed Identity to use to authenticate with Azure Container Registry. For user-assigned identities, use the full user-assigned identity Resource ID. For system-assigned identities, use 'system'",
           "type": "string"
         }
       }
@@ -537,6 +541,10 @@
         }
       ],
       "properties": {
+        "identity": {
+          "description": "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "description": "Container App session pool resource specific properties",
           "type": "object",
@@ -634,9 +642,45 @@
                 "name": "SessionPoolProvisioningState",
                 "modelAsString": true
               }
+            },
+            "managedIdentitySettings": {
+              "description": "Optional settings for a Managed Identity that is assigned to the Session pool.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ManagedIdentitySetting"
+              },
+              "x-ms-identifiers": [
+                "identity"
+              ]
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedIdentitySetting": {
+      "description": "Optional settings for a Managed Identity that is assigned to the Session pool.",
+      "type": "object",
+      "required": [
+        "identity"
+      ],
+      "properties": {
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Session Pool, or 'system' for system-assigned identity.",
+          "type": "string"
+        },
+        "lifecycle": {
+          "description": "Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.",
+          "enum": [
+            "None",
+            "Main"
+          ],
+          "type": "string",
+          "default": "None",
+          "x-ms-enum": {
+            "name": "IdentitySettingsLifeCycle",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -644,6 +688,10 @@
       "description": "Container App session pool updatable properties.",
       "type": "object",
       "properties": {
+        "identity": {
+          "description": "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "description": "Session pool resource specific updatable properties.",
           "type": "object",
@@ -702,4 +750,3 @@
     }
   }
 }
-
