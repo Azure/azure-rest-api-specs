@@ -55,7 +55,6 @@ input-file:
   - Microsoft.App/preview/2024-10-02-preview/DotNetComponents.json
   - Microsoft.App/preview/2024-10-02-preview/FunctionsExtension.json
   - Microsoft.App/preview/2024-10-02-preview/Global.json
-  - Microsoft.App/preview/2024-10-02-preview/HttpRouteConfig.json
   - Microsoft.App/preview/2024-10-02-preview/JavaComponents.json
   - Microsoft.App/preview/2024-10-02-preview/Jobs.json
   - Microsoft.App/preview/2024-10-02-preview/LogicAppsExtension.json
@@ -63,6 +62,7 @@ input-file:
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsHttpRouteConfig.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2024-10-02-preview/SessionPools.json
