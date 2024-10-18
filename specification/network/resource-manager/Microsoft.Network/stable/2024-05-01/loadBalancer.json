@@ -1461,6 +1461,73 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health": {
+      "post": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerLoadBalancingRules_Health",
+        "description": "Get health details of a load balancing rule.",
+        "parameters": [
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "loadBalancingRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancing rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for query load balancer health per rule.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerHealthPerRule"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerHealthPerRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query load balancing rule health": {
+            "$ref": "./examples/LoadBalancerHealth.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}": {
       "get": {
         "tags": [
@@ -2735,6 +2802,51 @@
         }
       },
       "description": "Individual port mappings for inbound NAT rule created for backend pool."
+    },
+    "LoadBalancerHealthPerRule": {
+      "type": "object",
+      "properties": {
+        "up": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of backend instances associated to the LB rule that are considered healthy."
+        },
+        "down": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of backend instances associated to the LB rule that are considered unhealthy."
+        },
+        "loadBalancerBackendAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerHealthPerRulePerBackendAddress"
+          },
+          "description": "Information about the health per rule of the backend addresses."
+        }
+      },
+      "description": "The response for a Health API."
+    },
+    "LoadBalancerHealthPerRulePerBackendAddress": {
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address belonging to the backend address."
+        },
+        "networkInterfaceIPConfigurationId": {
+          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+          "description": "The id of the network interface ip configuration belonging to the backend address"
+        },
+        "state": {
+          "type": "string",
+          "description": "The current health of the backend instances that is associated to the LB rule."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The explanation of the State"
+        }
+      },
+      "description": "The information about health per rule per backendaddress."
     },
     "MigrateLoadBalancerToIpBasedRequest": {
       "type": "object",

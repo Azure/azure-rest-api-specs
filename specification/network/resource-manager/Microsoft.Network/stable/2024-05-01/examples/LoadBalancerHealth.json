@@ -1,0 +1,42 @@
+{
+    "parameters": {
+      "api-version": "2024-05-01",
+      "subscriptionId": "subid",
+      "groupName": "rg1",
+      "loadBalancerName": "lb1",
+      "loadBalancingRuleName": "rulelb"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "up": 1,
+          "down": 0,
+          "loadBalancerBackendAddresses": [
+            {
+              "ipAddress": "10.1.0.4",
+              "networkInterfaceIPConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/NIC1/IpConfigurations/ipConfig",
+              "state": "Up",
+              "reason": "Up_Probe_Success"
+            }
+          ]
+        }
+      },
+      "202": {
+        "headers": {
+          "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/loadBalancingRules/rulelb/health?api-version=2024-05-01"
+        },
+        "body": {
+          "up": 1,
+          "down": 0,
+          "loadBalancerBackendAddresses": [
+            {
+              "ipAddress": "10.1.0.4",
+              "networkInterfaceIPConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/NIC1/IpConfigurations/ipConfig",
+              "state": "Up",
+              "reason": "Up_Probe_Success"
+            }
+          ]
+        }
+      }
+    }
+  }
