@@ -153,6 +153,11 @@
           "description": "Ephemeral Storage, e.g. \"1Gi\"",
           "type": "string",
           "readOnly": true
+        },
+        "gpu": {
+          "format": "double",
+          "description": "Required GPU in cores for GPU based app, e.g. 1.0",
+          "type": "number"
         }
       }
     },
@@ -908,7 +913,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DaprComponent",
+          "$ref": "#/definitions/DaprComponentProperties",
           "x-ms-client-flatten": true
         }
       }
@@ -2168,6 +2173,17 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "ContainerAppsNameParameter": {
+      "name": "containerAppName",
+      "in": "path",
+      "description": "Name of the Container App",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
