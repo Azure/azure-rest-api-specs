@@ -21,11 +21,11 @@ using Azure.Core;
   title: "Azure Storage Blob service",
 })
 @server(
-  "{endpoint}",
+  "{url}",
   "The host name of the blob storage account, e.g. accountName.blob.core.windows.net",
   {
     @doc("The host name of the blob storage account, e.g. accountName.blob.core.windows.net")
-    endpoint: url,
+    url: url,
   }
 )
 @versioned(Versions)
