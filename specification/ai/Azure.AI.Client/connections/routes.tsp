@@ -14,17 +14,32 @@ using Azure.Core.Foundations;
 namespace Azure.AI.Client.Connections;
 
 /*
- See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list
+ See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list?view=rest-azureml-2024-07-01-preview
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @doc("List the details of all the connections (not including their credentials)")
 @route("connections")
 @get
-op list is Azure.Core.Foundations.Operation<{}, ConnectionsListResponse>;
+op list is Azure.Core.Foundations.Operation<
+  {
+    @query
+    @doc("Category of the workspace connection.")
+    category: ConnectionType;
+
+    @query
+    @doc("Indicates whether to list datastores. Service default: do not lines datastores.")
+    includeAll: boolean;
+
+    @query
+    @doc("Target of the workspace connection.")
+    target: string;
+  }, 
+  ConnectionsListResponse
+>;
 
 /*
- See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets
+ See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-07-01-preview
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the details of a single connection, including credential (if available).")
@@ -35,20 +50,8 @@ op listSecrets is Azure.Core.Foundations.Operation<
     @doc("Connection Name")
     connectionNameInUrl: string;
 
-    @doc("Connection Name (should be the same as the connection name in the URL path)")
-    connectionName: string;
-
-    @doc("The ID of the target subscription.")
-    subscriptionId: string;
-
-    @doc("The name of the Resource Group.")
-    resourceGroupName: string;
-
-    @doc("The name of the workspace (Azure AI Studio hub).")
-    workspaceName: string;
-
-    @doc("The api version.")
-    apiVersionInBody: string;
+    @doc("The body is ignored.")
+    ignored: string;
   },
   ConnectionsListSecretsResponse
 >;
