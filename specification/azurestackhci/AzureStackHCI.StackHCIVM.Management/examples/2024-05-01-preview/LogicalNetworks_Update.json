@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "logicalNetworkName": "test-lnet",
+    "properties": {
+      "tags": {
+        "additionalProperties": "sample"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-lnet",
+        "type": "Microsoft.AzureStackHCI/logicalNetworks",
+        "extendedLocation": {
+          "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/logicalNetworks/test-lnet",
+        "location": "West US2",
+        "properties": {
+          "provisioningState": "Accepted"
+        },
+        "tags": {
+          "additionalProperties": "sample"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "LogicalNetworks_Update",
+  "title": "UpdateLogicalNetwork"
+}

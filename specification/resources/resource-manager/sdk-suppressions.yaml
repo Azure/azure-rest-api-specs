@@ -7,6 +7,12 @@ suppressions:
         - Operation `*TagsClient.UpdateAtScope` has been changed to LRO, use `*TagsClient.BeginUpdateAtScope` instead.
         - Type of `DeploymentProperties.Parameters` has been changed from `any` to `map[string]*DeploymentParameter`
         - Type of `DeploymentWhatIfProperties.Parameters` has been changed from `any` to `map[string]*DeploymentParameter`
+        - Field `DeploymentValidateResult` of struct `DeploymentsClientValidateAtManagementGroupScopeResponse` has been removed
+        - Field `DeploymentValidateResult` of struct `DeploymentsClientValidateAtScopeResponse` has been removed
+        - Field `DeploymentValidateResult` of struct `DeploymentsClientValidateAtSubscriptionScopeResponse` has been removed
+        - Field `DeploymentValidateResult` of struct `DeploymentsClientValidateAtTenantScopeResponse` has been removed
+        - Field `DeploymentValidateResult` of struct `DeploymentsClientValidateResponse` has been removed
+        - Struct `DeploymentValidateResult` has been removed
     - package: sdk/resourcemanager/resources/armdeploymentstacks
       breaking-changes:
         - Struct `DeploymentStackPropertiesActionOnUnmanage` has been removed
@@ -83,3 +89,11 @@ suppressions:
         - Struct `VariableValueColumnValue` has been removed
         - Struct `VariableValueListResult` has been removed
         - Struct `VariableValueProperties` has been removed
+  azure-sdk-for-js:
+    - package: "@azure/arm-resources"
+      breaking-changes:
+        - Class ResourceManagementClient has a new signature
+        - Removed operation TagsOperations.createOrUpdateAtScope
+        - Removed operation TagsOperations.deleteAtScope
+        - Removed operation TagsOperations.updateAtScope
+        - "Type of parameter parameters of interface DeploymentProperties is changed from Record<string, unknown> to {\n        [propertyName: string]: DeploymentParameter;\n    }"

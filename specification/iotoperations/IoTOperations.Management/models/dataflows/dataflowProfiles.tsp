@@ -15,7 +15,7 @@ namespace Microsoft.IoTOperations;
  */
 @doc("Instance dataflowProfile resource")
 @parentResource(InstanceResource)
-model DataFlowProfileResource is ProxyResource<DataFlowProfileProperties> {
+model DataflowProfileResource is ProxyResource<DataflowProfileProperties> {
   @doc("Name of Instance dataflowProfile resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("dataflowProfileName")
@@ -32,22 +32,22 @@ model DataFlowProfileResource is ProxyResource<DataFlowProfileProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-@doc("DataFlowProfile Resource properties")
-model DataFlowProfileProperties {
+@doc("DataflowProfile Resource properties")
+model DataflowProfileProperties {
   @doc("Spec defines the desired identities of NBC diagnostics settings.")
   diagnostics?: ProfileDiagnostics;
 
   @doc("To manually scale the dataflow profile, specify the maximum number of instances you want to run.")
   @minValue(1)
   @maxValue(20)
-  instanceCount?: int32;
+  instanceCount?: int32 = 1;
 
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
 
-@doc("DataFlowProfile Diagnostics properties")
+@doc("DataflowProfile Diagnostics properties")
 model ProfileDiagnostics {
   ...MetricProperties;
 }

@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
+    "databaseName": "databaseName",
+    "collectionName": "collectionName",
+    "location": {
+      "location": "North Europe"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "continuousBackupInformation": {
+          "latestRestorableTimestamp": "2021-02-05T02:40:50Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-09-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-09-01-preview"
+      }
+    }
+  }
+}
