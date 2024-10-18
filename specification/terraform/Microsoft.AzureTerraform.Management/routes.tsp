@@ -18,12 +18,12 @@ alias LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
   ArmCombinedLroHeaders<FinalResult = TerraformOperationStatus>;
 
 @armResourceOperations
-interface ExportTerraform {
+interface Terraform {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to override operationId to fix LintDiff error"
   @doc("Exports the Terraform configuration of the specified resource(s).")
   @tag("ExportTerraform")
   @useFinalStateVia("azure-async-operation")
-  @operationId("ExportTerraform_Export")
+  @operationId("Terraform_Export")
   exportTerraform is ArmProviderActionAsync<
     BaseExportModel,
     ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>,
