@@ -1,3 +1,4 @@
+
 # ChangeControl
 
 > see https://aka.ms/autorest
@@ -27,7 +28,6 @@ These are the global settings for the ChangeControl.
 ```yaml
 openapi-type: arm
 tag: package-2024-10-01-preview
-openapi-subtype: providerHub
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - Microsoft.ChangeSafety/changecontrol/preview/2024-10-01-preview/openapi.json
+  - Microsoft.ChangeSafety/preview/2024-10-01-preview/ChangeControl.json
 ```
 
 ---
