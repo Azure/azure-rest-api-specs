@@ -32,6 +32,12 @@ alias syncTokenHeader = {
   syncToken?: string;
 };
 
+alias cacheControlHeader = {
+  @doc("This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated.")
+  @header("Cache-Control")
+  cacheControl?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
 alias contentTypeHeader<T extends string> = {
   @doc("Content-Type header")
@@ -190,7 +196,8 @@ op getKeyValues is Foundations.ResourceList<
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">  &
+    cacheControlHeader,
   {},
   Error
 >;
@@ -268,7 +275,7 @@ op checkKeyValues is appConfigOperation<
     })
     tags?: string[];
   },
-  OkResponse & AppConfigResponseHeaders
+  OkResponse & AppConfigResponseHeaders & cacheControlHeader
 >;
 
 @summary("Gets a single key-value.")
@@ -323,7 +330,8 @@ op getKeyValue is standardOps.ResourceRead<
       ifNoneMatch?: string;
     }> &
     ResponseHeadersTrait<AppConfigResponseHeaders &
-      contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">>
+      contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json"> &
+      cacheControlHeader>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -467,7 +475,7 @@ op checkKeyValue is appConfigOperation<
     })
     tags?: string[];
   },
-  OkResponse & AppConfigResponseHeaders
+  OkResponse & AppConfigResponseHeaders & cacheControlHeader
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -505,6 +513,9 @@ op getSnapshots is Foundations.ResourceList<
   },
   SnapshotListResult & {
     ...syncTokenHeader;
+
+    ...cacheControlHeader;
+
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
   },
   {},
@@ -529,6 +540,8 @@ op checkSnapshots is appConfigOperation<
   },
   OkResponse & {
     ...syncTokenHeader;
+
+    ...cacheControlHeader;
   }
 >;
 
@@ -565,6 +578,8 @@ op getSnapshot is standardOps.ResourceRead<
       @doc("Includes links to related resources.")
       @header("Link")
       link?: string;
+
+      ...cacheControlHeader;
 
       ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     }>
@@ -684,6 +699,8 @@ op checkSnapshot is appConfigOperation<
   },
   OkResponse & {
     ...AppConfigResponseHeaders;
+
+    ...cacheControlHeader;
 
     @doc("Includes links to related resources.")
     @header("Link")

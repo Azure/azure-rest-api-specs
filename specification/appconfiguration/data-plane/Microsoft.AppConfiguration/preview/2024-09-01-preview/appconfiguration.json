@@ -373,6 +373,10 @@
               "$ref": "#/definitions/KeyValueListResult"
             },
             "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated."
+              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -391,6 +395,9 @@
           }
         },
         "x-ms-examples": {
+          "Gets a list of key-values using SAS token authentication.": {
+            "$ref": "./examples/GetKeyValues_Sas.json"
+          },
           "Gets a list of key-values using the If-Match header.": {
             "$ref": "./examples/GetKeyValues_IfMatch.json"
           },
@@ -561,6 +568,10 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated."
+              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -579,6 +590,9 @@
           }
         },
         "x-ms-examples": {
+          "Requests the headers and status of the given resource using SAS token authentication.": {
+            "$ref": "./examples/CheckKeyValues_Sas.json"
+          },
           "Requests the headers and status of the given resource using the If-Match header.": {
             "$ref": "./examples/CheckKeyValues_IfMatch.json"
           },
@@ -741,6 +755,10 @@
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated."
+              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -764,6 +782,9 @@
           }
         },
         "x-ms-examples": {
+          "Gets a single key-value using SAS token authentication.": {
+            "$ref": "./examples/GetKeyValue_Sas.json"
+          },
           "Gets a single key-value using the If-Match header.": {
             "$ref": "./examples/GetKeyValue_IfMatch.json"
           },
@@ -1092,6 +1113,17 @@
             "x-ms-client-name": "select"
           },
           {
+            "name": "tags",
+            "in": "query",
+            "description": "A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -1099,6 +1131,10 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated."
+              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -1117,6 +1153,9 @@
           }
         },
         "x-ms-examples": {
+          "Requests the headers and status of the given resource using SAS token authentication.": {
+            "$ref": "./examples/CheckKeyValue_Sas.json"
+          },
           "Requests the headers and status of the given resource using the If-Match header.": {
             "$ref": "./examples/CheckKeyValue_IfMatch.json"
           },
@@ -2044,6 +2083,10 @@
               "$ref": "#/definitions/SnapshotListResult"
             },
             "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated."
+              },
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
@@ -2098,6 +2141,10 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated."
+              },
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
@@ -2260,6 +2307,10 @@
               "$ref": "#/definitions/Snapshot"
             },
             "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated."
+              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -2295,6 +2346,9 @@
           },
           "Gets a single key-value snapshot using If-None-Match header.": {
             "$ref": "./examples/GetSnapshot_IfNoneMatch.json"
+          },
+          "Gets a single key-value snapshot using SAS token authentication.": {
+            "$ref": "./examples/GetSnapshot_Sas.json"
           },
           "Gets a single key-value snapshot.": {
             "$ref": "./examples/GetSnapshot.json"
@@ -2529,6 +2583,10 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated."
+              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -2556,6 +2614,9 @@
           },
           "Requests the headers and status of the given resource using If-None-Match header": {
             "$ref": "./examples/CheckSnapshot_IfNoneMatch.json"
+          },
+          "Requests the headers and status of the given resource using SAS token authentication.": {
+            "$ref": "./examples/CheckSnapshot_Sas.json"
           },
           "Requests the headers and status of the given resource.": {
             "$ref": "./examples/CheckSnapshot.json"

@@ -1,0 +1,31 @@
+{
+  "operationId": "GetKeyValue",
+  "title": "Gets a single key-value using SAS token authentication.",
+  "parameters": {
+    "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
+    "api-version": "2024-09-01-preview",
+    "key": "Message",
+    "Authorization": "SAS sas=res=kv;rp=key;rp=label;rp=tags;exp=2024-09-01T00:00:00.0000000Z;ccma=3600;kind=primary;oid=<ObjectId>;tid=<TenantId>;p=read;sig=<signature>"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/vnd.microsoft.appconfig.kv+json",
+        "ETag": "W/\"L10qpBghN693OaxydgTkLmrBbV5\"",
+        "Last-Modified": "Tue, 27 Aug 2019 16:52:32 GMT",
+        "Sync-Token": "zAJw6V16=NjotMSM3ODk3NjM=;sn=789763",
+        "Cache-Control": "max-age=3600"
+      },
+      "body": {
+        "etag": "L10qpBghN693OaxydgTkLmrBbV5",
+        "key": "Message",
+        "label": null,
+        "content_type": null,
+        "value": "Hello World!",
+        "tags": {},
+        "locked": false,
+        "last_modified": "2019-08-27T16:52:32+00:00"
+      }
+    }
+  }
+}
