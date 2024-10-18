@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 @versioned(Azure.Communication.MessagesService.Versions)
 namespace Azure.Communication.MessagesService;
 
-@doc("The type of message. Supports text, image, template.")
+@doc("The type of message.")
 union CommunicationMessageKind {
   string,
 
@@ -23,6 +23,22 @@ union CommunicationMessageKind {
 
   @doc("Image message type.")
   image: "image",
+
+  @added(Versions.c2024_08_30)
+  @doc("Image message type. Legacy image type for `MediaNotificationContent` which is being deprecated")
+  image_v0: "image_v0",
+
+  @added(Versions.c2024_08_30)
+  @doc("Document message type.")
+  document: "document",
+
+  @added(Versions.c2024_08_30)
+  @doc("Video message type.")
+  video: "video",
+
+  @added(Versions.c2024_08_30)
+  @doc("Audio message type.")
+  audio: "audio",
 
   @doc("Template message type.")
   template: "template",
@@ -117,17 +133,76 @@ model TextNotificationContent extends NotificationContent {
   content: string;
 }
 
-@doc("A request to send a media notification.")
+@added(Versions.c2024_08_30)
+@doc("A request to send a media notification. Could be an image, document or video.")
+model MediaNotificationContentBase {
+  @clientName("mediaUrl", "java")
+  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
+  mediaUri: url;
+}
+
+#deprecated "`MediaNotificationContent` is being deprecated, we encourage you to use the new `ImageNotificationContent` for sending images instead."
+@access(Access.internal, "python")
+@added(Versions.c2024_08_30)
+@doc("@deprecated A request to send an image notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
-  kind: CommunicationMessageKind.image;
+  kind: CommunicationMessageKind.image_v0;
 
   @doc("Optional text content.")
   content?: string;
 
-  @clientName("mediaUrl", "java")
-  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
-  mediaUri: url;
+  ...MediaNotificationContentBase;
+}
+
+@renamedFrom(Versions.c2024_08_30, "MediaNotificationContent")
+@doc("A request to send an image notification.")
+model ImageNotificationContent extends NotificationContent {
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.image;
+
+  @renamedFrom(Versions.c2024_08_30, "content")
+  @clientName("content", "python")
+  @doc("Optional text content.")
+  caption?: string;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_08_30)
+@doc("A request to send a document notification.")
+model DocumentNotificationContent extends NotificationContent {
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.document;
+
+  @doc("Optional text content.")
+  caption?: string;
+
+  @doc("Optional name for the file.")
+  fileName?: string;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_08_30)
+@doc("A request to send a video notification.")
+model VideoNotificationContent extends NotificationContent {
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.video;
+
+  @doc("Optional text content.")
+  caption?: string;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_08_30)
+@doc("A request to send an audio notification.")
+model AudioNotificationContent extends NotificationContent {
+  @doc("Message notification type is audio.")
+  kind: CommunicationMessageKind.audio;
+
+  ...MediaNotificationContentBase;
 }
 
 @doc("A request to send a template notification.")
@@ -368,16 +443,20 @@ alias ListTemplatesQueryParams = ListQueryParametersTrait<{
   maxpagesize?: int32;
 }>;
 
-@doc("Azure Communication Messages Versions")
-enum Versions {
-  @doc("Azure Communication Messages 2024-02-01 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  c2024_02_01: "2024-02-01",
-}
-
 @doc("Notification messages send request body.")
 model NotificationMessagesSendRequestBody {
   @doc("Details of the message to send.")
   @bodyRoot
   body: NotificationContent;
+}
+
+@doc("Azure Communication Messages Versions")
+enum Versions {
+  @doc("Azure Communication Messages 2024-02-01 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_02_01: "2024-02-01",
+
+  @doc("Azure Communication Messages 2024-08-30 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_08_30: "2024-08-30",
 }

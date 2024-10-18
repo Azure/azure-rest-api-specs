@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CommunicationMessagesClient",
-    "version": "2024-02-01",
+    "version": "2024-08-30",
     "description": "Azure Communication Messages Service",
     "x-typespec-generated": [
       {
@@ -220,11 +220,20 @@
           "Sends a notification message - Template": {
             "$ref": "./examples/NotificationMessages_SendTemplate.json"
           },
+          "Sends a notification message - audio": {
+            "$ref": "./examples/NotificationMessages_SendAudio.json"
+          },
+          "Sends a notification message - document": {
+            "$ref": "./examples/NotificationMessages_SendDocument.json"
+          },
           "Sends a notification message - image": {
             "$ref": "./examples/NotificationMessages_SendImage.json"
           },
           "Sends a notification message - text": {
             "$ref": "./examples/NotificationMessages_SendText.json"
+          },
+          "Sends a notification message - video": {
+            "$ref": "./examples/NotificationMessages_SendVideo.json"
           }
         }
       }
@@ -291,6 +300,26 @@
     }
   },
   "definitions": {
+    "AudioNotificationContent": {
+      "type": "object",
+      "description": "A request to send an audio notification.",
+      "properties": {
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "audio"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -363,6 +392,10 @@
       "enum": [
         "text",
         "image",
+        "image_v0",
+        "document",
+        "video",
+        "audio",
         "template"
       ],
       "x-ms-enum": {
@@ -378,6 +411,26 @@
             "name": "image",
             "value": "image",
             "description": "Image message type."
+          },
+          {
+            "name": "image_v0",
+            "value": "image_v0",
+            "description": "Image message type. Legacy image type for `MediaNotificationContent` which is being deprecated"
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "Document message type."
+          },
+          {
+            "name": "video",
+            "value": "video",
+            "description": "Video message type."
+          },
+          {
+            "name": "audio",
+            "value": "audio",
+            "description": "Audio message type."
           },
           {
             "name": "template",
@@ -405,9 +458,61 @@
         ]
       }
     },
-    "MediaNotificationContent": {
+    "DocumentNotificationContent": {
+      "type": "object",
+      "description": "A request to send a document notification.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Optional name for the file."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "document"
+    },
+    "ImageNotificationContent": {
       "type": "object",
       "description": "A request to send an image notification.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
+    },
+    "MediaNotificationContent": {
+      "type": "object",
+      "description": "@deprecated A request to send an image notification.",
       "properties": {
         "content": {
           "type": "string",
@@ -427,7 +532,7 @@
           "$ref": "#/definitions/NotificationContent"
         }
       ],
-      "x-ms-discriminator-value": "image"
+      "x-ms-discriminator-value": "image_v0"
     },
     "MessageReceipt": {
       "type": "object",
@@ -902,6 +1007,30 @@
         }
       ],
       "x-ms-discriminator-value": "text"
+    },
+    "VideoNotificationContent": {
+      "type": "object",
+      "description": "A request to send a video notification.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "video"
     },
     "WhatsAppMessageButtonSubType": {
       "type": "string",
