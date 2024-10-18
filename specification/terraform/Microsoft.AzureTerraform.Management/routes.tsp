@@ -16,10 +16,12 @@ namespace Microsoft.AzureTerraform;
 
 @armResourceOperations
 interface ExportTerraform {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to override operationId to fix LintDiff error"
   @doc("Exports the Terraform configuration of the specified resource(s).")
   @tag("ExportTerraform")
   @useFinalStateVia("azure-async-operation")
-  export is ArmProviderActionAsync<
+  @operationId("ExportTerraform_Export")
+  exportTerraform is ArmProviderActionAsync<
     BaseExportModel,
     ExportResult,
     SubscriptionActionScope,
