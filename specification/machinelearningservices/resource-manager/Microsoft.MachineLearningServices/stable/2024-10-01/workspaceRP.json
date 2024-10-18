@@ -1185,6 +1185,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "includeAll",
+            "description": "query parameter that indicates if get connection call should return both connections and datastores",
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -3003,6 +3010,7 @@
         "Redis",
         "ApiKey",
         "AzureOpenAI",
+        "AIServices",
         "CognitiveSearch",
         "CognitiveService",
         "CustomKeys",
@@ -3043,6 +3051,7 @@
         "Sybase",
         "Teradata",
         "Vertica",
+        "Pinecone",
         "Cassandra",
         "Couchbase",
         "MongoDbV2",
@@ -3087,11 +3096,12 @@
         "Xero",
         "Zoho",
         "GenericContainerRegistry",
+        "Elasticsearch",
         "OpenAI",
         "Serp",
         "BingLLMSearch",
         "Serverless",
-        "AIServices"
+        "ManagedOnlineEndpoint"
       ],
       "type": "string",
       "x-ms-enum": {
