@@ -39,10 +39,25 @@ op list is Azure.Core.Foundations.Operation<
 >;
 
 /*
+ See https://learn.microsoft.com/en-us/rest/api/azureml/workspace-connections/get?view=rest-azureml-2024-07-01-preview
+*/
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@doc("Get the details of a single connection, without credentials.")
+@route("connections/{connectionNameInUrl}")
+@get
+op get is Azure.Core.Foundations.Operation<
+  {
+    @doc("Connection Name")
+    connectionNameInUrl: string;
+  },
+  ConnectionsListSecretsResponse
+>;
+
+/*
  See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-07-01-preview
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Get the details of a single connection, including credential (if available).")
+@doc("Get the details of a single connection, including credentials (if available).")
 @route("connections/{connectionNameInUrl}/listsecrets")
 @post
 op listSecrets is Azure.Core.Foundations.Operation<
