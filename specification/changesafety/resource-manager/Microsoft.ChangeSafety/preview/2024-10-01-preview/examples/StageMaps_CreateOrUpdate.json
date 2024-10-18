@@ -5,25 +5,45 @@
     "api-version": "2024-10-01-preview",
     "subscriptionId": "B5B497A8-27C8-491F-A790-CB1B6DAA5F8C",
     "resourceGroupName": "rgopenapi",
-    "stageMapName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9-]{3,100}$",
+    "stageMapName": "regionalMap",
     "resource": {
       "properties": {
-        "stages": [
-          {
-            "name": "Replace this value with a string matching RegExp ^[a-zA-Z0-9-]{3,100}$",
-            "sequence": 26,
-            "parameterValues": {},
-            "nestedStageMapResourceId": "esupgkafwgyeprmikntt"
-          }
-        ],
         "parameters": {
-          "key551": {
-            "type": "Parameter",
+          "location": {
+            "type": "string",
+            "defaultValue": "eastus",
+            "allowedValues": [
+              "eastuseuap",
+              "westus",
+              "eastus",
+              "centraluseuap"
+            ],
             "metadata": {
-              "key9681": "ijm"
+              "description": "Location for all resources."
             }
           }
-        }
+        },
+        "stages": [
+          {
+            "name": "ev2canary",
+            "sequence": 1,
+            "parameterValues": {
+              "location": "eastuseuap",
+              "stageParameter1": "stageParameterValue1"
+            },
+            "nestedStageMapResourceId": null
+          },
+          {
+            "name": "ev2prod",
+            "sequence": 2,
+            "parameterValues": {
+              "location": "eastus",
+              "stageParameter2": "stageParameterValue2",
+              "stageParameter3": "stageParameterValue3"
+            },
+            "nestedStageMapResourceId": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/anotherStageMap"
+          }
+        ]
       }
     }
   },
@@ -31,27 +51,47 @@
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stages": [
-            {
-              "name": "Replace this value with a string matching RegExp ^[a-zA-Z0-9-]{3,100}$",
-              "sequence": 26,
-              "parameterValues": {},
-              "nestedStageMapResourceId": "esupgkafwgyeprmikntt"
-            }
-          ],
+          "provisioningState": "Succeeded",
           "parameters": {
-            "key551": {
-              "type": "Parameter",
+            "location": {
+              "type": "string",
+              "defaultValue": "eastus",
+              "allowedValues": [
+                "eastuseuap",
+                "westus",
+                "eastus",
+                "centraluseuap"
+              ],
               "metadata": {
-                "key9681": "ijm"
+                "description": "Location for all resources."
               }
             }
-          }
+          },
+          "stages": [
+            {
+              "name": "ev2canary",
+              "sequence": 1,
+              "parameterValues": {
+                "location": "eastuseuap",
+                "stageParameter1": "stageParameterValue1"
+              },
+              "nestedStageMapResourceId": null
+            },
+            {
+              "name": "ev2prod",
+              "sequence": 2,
+              "parameterValues": {
+                "location": "eastus",
+                "stageParameter2": "stageParameterValue2",
+                "stageParameter3": "stageParameterValue3"
+              },
+              "nestedStageMapResourceId": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/anotherStageMap"
+            }
+          ]
         },
-        "id": "xdcmgqjwekyekrvdc",
-        "name": "lwnwmkjidpanatvwssqnvr",
-        "type": "cakqehmiljvygjzbsczilbqvwm",
+        "id": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/regionalMap",
+        "name": "regionalMap",
+        "type": "microsoft.changesafety/stagemaps",
         "systemData": {
           "createdBy": "odkqcsvpyyjlcmiv",
           "createdByType": "User",
@@ -65,27 +105,47 @@
     "201": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stages": [
-            {
-              "name": "Replace this value with a string matching RegExp ^[a-zA-Z0-9-]{3,100}$",
-              "sequence": 26,
-              "parameterValues": {},
-              "nestedStageMapResourceId": "esupgkafwgyeprmikntt"
-            }
-          ],
+          "provisioningState": "Succeeded",
           "parameters": {
-            "key551": {
-              "type": "Parameter",
+            "location": {
+              "type": "string",
+              "defaultValue": "eastus",
+              "allowedValues": [
+                "eastuseuap",
+                "westus",
+                "eastus",
+                "centraluseuap"
+              ],
               "metadata": {
-                "key9681": "ijm"
+                "description": "Location for all resources."
               }
             }
-          }
+          },
+          "stages": [
+            {
+              "name": "ev2canary",
+              "sequence": 1,
+              "parameterValues": {
+                "location": "eastuseuap",
+                "stageParameter1": "stageParameterValue1"
+              },
+              "nestedStageMapResourceId": null
+            },
+            {
+              "name": "ev2prod",
+              "sequence": 2,
+              "parameterValues": {
+                "location": "eastus",
+                "stageParameter2": "stageParameterValue2",
+                "stageParameter3": "stageParameterValue3"
+              },
+              "nestedStageMapResourceId": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/anotherStageMap"
+            }
+          ]
         },
-        "id": "xdcmgqjwekyekrvdc",
-        "name": "lwnwmkjidpanatvwssqnvr",
-        "type": "cakqehmiljvygjzbsczilbqvwm",
+        "id": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/regionalMap",
+        "name": "regionalMap",
+        "type": "microsoft.changesafety/stagemaps",
         "systemData": {
           "createdBy": "odkqcsvpyyjlcmiv",
           "createdByType": "User",

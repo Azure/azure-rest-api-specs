@@ -28,6 +28,7 @@ These are the global settings for the ChangeControl.
 ```yaml
 openapi-type: arm
 tag: package-2024-10-01-preview
+openapi-subtype: providerHub
 ```
 
 ### Tag: package-2024-10-01-preview

@@ -5,14 +5,19 @@
     "api-version": "2024-10-01-preview",
     "subscriptionId": "B5B497A8-27C8-491F-A790-CB1B6DAA5F8C",
     "resourceGroupName": "rgopenapi",
-    "changeStateName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9-]{3,100}$",
-    "stageProgressionName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9-|]{3,100}$",
+    "changeStateName": "safeassignmentdemoChangeState",
+    "stageProgressionName": "progression1",
     "resource": {
       "properties": {
-        "stageReference": "aztrwydzenxlhalhhhbhsiaubnpdltkeejgihrulnuzejguqcibqqvxyjckabaitxkvfi",
-        "state": "Initialized",
-        "parameterValues": {},
-        "updateComments": "tmsokbnsixtvbrejpngkkxiqhfxpxjcvxccxfgnwvjjivhkqpglxgpsmkkzucjgbvtoyctlqpbyduafmvnvrevfgijctiudkmufgxndnbjzbwlxdgdcxmgpukenlfrmgxcbogjmfijwniyxqfamvztwjkuxcwrexoztlwiwauilzwudvmsnnnmnkidlhhitmznfbardlieoqjnflffshsboammbkfurqjkclxpqhuhcnfwbjxcbayxhrygabgmhgojhqllqcdprrivazetdwmyfdfmlajuethchrvdekzvlqhhxxnbbvojaajkvltutzbwnpqbolyqljmfprneyqjozbipeyiufppmgdfcnqohsadlvlqvihamugsaebqoewmilynxrqjhbiicwhqyqfeovuxdjlrapkmdpyuevplnhfdhtweinxncxxluwawzllxndeiozsaerjenxfdhoghydueyoccrrunkazwyscuwxvwrkgqtlpvsvnpzooltjhokzppylgofvazazxizjirplqbowxgfnybyzhjskumvzphkdfehzpinipkifukwxekmwfdxmwryzxokoipigoasicgopbubgwdxdsejgxkrdinxxrsmvrtibauvavdfobsokchrotoguqpsfnvuiqqpnjphjaltyloizisrslkpvzrlyvveglbvwuikqbvnbhzzywydrxzshfwaxxetwepbjuqjbolkmqdrgssynadfijvkmukkafwgguqhbmwjqonnhjoahunbikykcganjhtqnrapipgyvjuwmodktxvtqauoziusmnerqzoeimxblkooqremvaimjjrevbikrxmprnvbzsjrxkvobdyoqvmnoxzlzyyfmhjjlxiqnpugkpevgedpasqhacwroxgiznyybwmjtajzdxodkwtazwcradqyjtatwqdbbcesubwesgzaelbhucjcksslmlpomkaavttxlwfbyjvlevcdkjyqkbebbxqioxgvbkarjrzvmjfbfslkepdqiubvdwjsppcizfbpfffxbgghlnzphjwjgkbfggdfnrmybxujdaucvqrzilxfcunspxakvolpuhimwuovlrknwihqgazhixzikqqegwligadyabfqzdpnukpufvnnqdfuwgbyqetuynorwlsisnfczvynk"
+        "stageReference": "Audit/canary",
+        "state": "initialized",
+        "parameterValues": {
+          "location": "eastuseuap",
+          "stageParameter1": "stageParameterValue1",
+          "storageAccountType": "Standard_GRS",
+          "CustomParam1": "CustomValue1"
+        },
+        "updateComments": "Initializing stage."
       }
     }
   },
@@ -20,16 +25,21 @@
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stageReference": "aztrwydzenxlhalhhhbhsiaubnpdltkeejgihrulnuzejguqcibqqvxyjckabaitxkvfi",
+          "provisioningState": "Succeeded",
+          "stageReference": "Audit/canary",
           "state": "Initialized",
-          "sequence": 15,
-          "parameterValues": {},
-          "updateComments": "tmsokbnsixtvbrejpngkkxiqhfxpxjcvxccxfgnwvjjivhkqpglxgpsmkkzucjgbvtoyctlqpbyduafmvnvrevfgijctiudkmufgxndnbjzbwlxdgdcxmgpukenlfrmgxcbogjmfijwniyxqfamvztwjkuxcwrexoztlwiwauilzwudvmsnnnmnkidlhhitmznfbardlieoqjnflffshsboammbkfurqjkclxpqhuhcnfwbjxcbayxhrygabgmhgojhqllqcdprrivazetdwmyfdfmlajuethchrvdekzvlqhhxxnbbvojaajkvltutzbwnpqbolyqljmfprneyqjozbipeyiufppmgdfcnqohsadlvlqvihamugsaebqoewmilynxrqjhbiicwhqyqfeovuxdjlrapkmdpyuevplnhfdhtweinxncxxluwawzllxndeiozsaerjenxfdhoghydueyoccrrunkazwyscuwxvwrkgqtlpvsvnpzooltjhokzppylgofvazazxizjirplqbowxgfnybyzhjskumvzphkdfehzpinipkifukwxekmwfdxmwryzxokoipigoasicgopbubgwdxdsejgxkrdinxxrsmvrtibauvavdfobsokchrotoguqpsfnvuiqqpnjphjaltyloizisrslkpvzrlyvveglbvwuikqbvnbhzzywydrxzshfwaxxetwepbjuqjbolkmqdrgssynadfijvkmukkafwgguqhbmwjqonnhjoahunbikykcganjhtqnrapipgyvjuwmodktxvtqauoziusmnerqzoeimxblkooqremvaimjjrevbikrxmprnvbzsjrxkvobdyoqvmnoxzlzyyfmhjjlxiqnpugkpevgedpasqhacwroxgiznyybwmjtajzdxodkwtazwcradqyjtatwqdbbcesubwesgzaelbhucjcksslmlpomkaavttxlwfbyjvlevcdkjyqkbebbxqioxgvbkarjrzvmjfbfslkepdqiubvdwjsppcizfbpfffxbgghlnzphjwjgkbfggdfnrmybxujdaucvqrzilxfcunspxakvolpuhimwuovlrknwihqgazhixzikqqegwligadyabfqzdpnukpufvnnqdfuwgbyqetuynorwlsisnfczvynk"
+          "sequence": 1,
+          "parameterValues": {
+            "location": "eastuseuap",
+            "stageParameter1": "stageParameterValue1",
+            "storageAccountType": "Standard_GRS",
+            "CustomParam1": "CustomValue1"
+          },
+          "updateComments": "Initializing stage."
         },
-        "id": "ip",
-        "name": "sunq",
-        "type": "zmsiijpvdxtwwkjvw",
+        "id": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/AzureChangeControlPrivateRP/providers/Microsoft.ChangeSafety/changeStates/safeassignmentdemoChangeState/stageProgressions/progression1",
+        "name": "progression1",
+        "type": "microsoft.changeSafety/changestates/stageprogressions",
         "systemData": {
           "createdBy": "odkqcsvpyyjlcmiv",
           "createdByType": "User",
@@ -43,16 +53,21 @@
     "201": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stageReference": "aztrwydzenxlhalhhhbhsiaubnpdltkeejgihrulnuzejguqcibqqvxyjckabaitxkvfi",
+          "provisioningState": "Succeeded",
+          "stageReference": "Audit/canary",
           "state": "Initialized",
-          "sequence": 15,
-          "parameterValues": {},
-          "updateComments": "tmsokbnsixtvbrejpngkkxiqhfxpxjcvxccxfgnwvjjivhkqpglxgpsmkkzucjgbvtoyctlqpbyduafmvnvrevfgijctiudkmufgxndnbjzbwlxdgdcxmgpukenlfrmgxcbogjmfijwniyxqfamvztwjkuxcwrexoztlwiwauilzwudvmsnnnmnkidlhhitmznfbardlieoqjnflffshsboammbkfurqjkclxpqhuhcnfwbjxcbayxhrygabgmhgojhqllqcdprrivazetdwmyfdfmlajuethchrvdekzvlqhhxxnbbvojaajkvltutzbwnpqbolyqljmfprneyqjozbipeyiufppmgdfcnqohsadlvlqvihamugsaebqoewmilynxrqjhbiicwhqyqfeovuxdjlrapkmdpyuevplnhfdhtweinxncxxluwawzllxndeiozsaerjenxfdhoghydueyoccrrunkazwyscuwxvwrkgqtlpvsvnpzooltjhokzppylgofvazazxizjirplqbowxgfnybyzhjskumvzphkdfehzpinipkifukwxekmwfdxmwryzxokoipigoasicgopbubgwdxdsejgxkrdinxxrsmvrtibauvavdfobsokchrotoguqpsfnvuiqqpnjphjaltyloizisrslkpvzrlyvveglbvwuikqbvnbhzzywydrxzshfwaxxetwepbjuqjbolkmqdrgssynadfijvkmukkafwgguqhbmwjqonnhjoahunbikykcganjhtqnrapipgyvjuwmodktxvtqauoziusmnerqzoeimxblkooqremvaimjjrevbikrxmprnvbzsjrxkvobdyoqvmnoxzlzyyfmhjjlxiqnpugkpevgedpasqhacwroxgiznyybwmjtajzdxodkwtazwcradqyjtatwqdbbcesubwesgzaelbhucjcksslmlpomkaavttxlwfbyjvlevcdkjyqkbebbxqioxgvbkarjrzvmjfbfslkepdqiubvdwjsppcizfbpfffxbgghlnzphjwjgkbfggdfnrmybxujdaucvqrzilxfcunspxakvolpuhimwuovlrknwihqgazhixzikqqegwligadyabfqzdpnukpufvnnqdfuwgbyqetuynorwlsisnfczvynk"
+          "sequence": 1,
+          "parameterValues": {
+            "location": "eastuseuap",
+            "stageParameter1": "stageParameterValue1",
+            "storageAccountType": "Standard_GRS",
+            "CustomParam1": "CustomValue1"
+          },
+          "updateComments": "Initializing stage."
         },
-        "id": "ip",
-        "name": "sunq",
-        "type": "zmsiijpvdxtwwkjvw",
+        "id": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/AzureChangeControlPrivateRP/providers/Microsoft.ChangeSafety/changeStates/safeassignmentdemoChangeState/stageProgressions/progression1",
+        "name": "progression1",
+        "type": "microsoft.changeSafety/changestates/stageprogressions",
         "systemData": {
           "createdBy": "odkqcsvpyyjlcmiv",
           "createdByType": "User",

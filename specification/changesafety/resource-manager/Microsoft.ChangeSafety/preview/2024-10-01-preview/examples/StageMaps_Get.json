@@ -11,27 +11,47 @@
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
+          "provisioningState": "Succeeded",
+          "parameters": {
+              "location": {
+                  "type": "string",
+                  "defaultValue": "eastus",
+                  "allowedValues": [
+                      "eastuseuap",
+                      "westus",
+                      "eastus",
+                      "centraluseuap"
+                  ],
+                  "metadata": {
+                      "description": "Location for all resources."
+                  }
+              }
+          },
           "stages": [
             {
-              "name": "Replace this value with a string matching RegExp ^[a-zA-Z0-9-]{3,100}$",
-              "sequence": 26,
-              "parameterValues": {},
-              "nestedStageMapResourceId": "esupgkafwgyeprmikntt"
+              "name": "ev2canary",
+              "sequence": 1,
+              "parameterValues": {
+                "location":"eastuseuap",
+                "stageParameter1": "stageParameterValue1"
+              },
+              "nestedStageMapResourceId": null
+            },
+            {
+              "name": "ev2prod",
+              "sequence": 2,
+              "parameterValues": {
+                "location": "eastus",
+                "stageParameter2": "stageParameterValue2",
+                "stageParameter3": "stageParameterValue3"
+              },
+              "nestedStageMapResourceId": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/anotherStageMap"
             }
-          ],
-          "parameters": {
-            "key551": {
-              "type": "Parameter",
-              "metadata": {
-                "key9681": "ijm"
-              }
-            }
-          }
+          ]
         },
-        "id": "xdcmgqjwekyekrvdc",
-        "name": "lwnwmkjidpanatvwssqnvr",
-        "type": "cakqehmiljvygjzbsczilbqvwm",
+        "id": "/subscriptions/53012dcb-5039-4e96-8e6c-5d913da1cdb5/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/regionalMap",
+        "name": "regionalMap",
+        "type": "microsoft.changesafety/stagemaps",
         "systemData": {
           "createdBy": "odkqcsvpyyjlcmiv",
           "createdByType": "User",
