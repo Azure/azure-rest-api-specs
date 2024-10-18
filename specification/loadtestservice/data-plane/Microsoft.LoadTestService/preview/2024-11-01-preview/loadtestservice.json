@@ -3614,20 +3614,6 @@
         }
       }
     },
-    "NotificationEvent": {
-      "type": "object",
-      "description": "The notification event.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/NotificationEventType",
-          "description": "The event type"
-        }
-      },
-      "discriminator": "name",
-      "required": [
-        "name"
-      ]
-    },
     "NotificationEventType": {
       "type": "string",
       "description": "Notification event type.",
@@ -3644,22 +3630,22 @@
           {
             "name": "TestRunEnded",
             "value": "TestRunEnded",
-            "description": "Test run ended event."
+            "description": "Test run ended event. This event would occur when a test run reaches terminal state."
           },
           {
             "name": "TestRunStarted",
             "value": "TestRunStarted",
-            "description": "Test run started event."
+            "description": "Test run started event. This event would occur when a new test run is triggered."
           },
           {
             "name": "TriggerEnded",
             "value": "TriggerEnded",
-            "description": "Trigger ended event."
+            "description": "Trigger ended event. This event would occur when a trigger ends."
           },
           {
             "name": "TriggerDisabled",
             "value": "TriggerDisabled",
-            "description": "Trigger disabled event."
+            "description": "Trigger disabled event. This event would occur when a trigger is disabled."
           }
         ]
       }
@@ -3691,15 +3677,7 @@
         },
         "scope": {
           "$ref": "#/definitions/NotificationScopeType",
-          "description": "The scope of the notification rule"
-        },
-        "events": {
-          "type": "array",
-          "description": "The event of the notification rule",
-          "items": {
-            "$ref": "#/definitions/NotificationEvent"
-          },
-          "x-ms-identifiers": []
+          "description": "The scope of the notification rule."
         },
         "createdDateTime": {
           "type": "string",
@@ -3729,8 +3707,7 @@
         "notificationRuleId",
         "displayName",
         "actionGroupIds",
-        "scope",
-        "events"
+        "scope"
       ]
     },
     "NotificationRuleCreateOrUpdate": {
@@ -3752,15 +3729,7 @@
         },
         "scope": {
           "$ref": "#/definitions/NotificationScopeType",
-          "description": "The scope of the notification rule"
-        },
-        "events": {
-          "type": "array",
-          "description": "The event of the notification rule",
-          "items": {
-            "$ref": "#/definitions/NotificationEvent"
-          },
-          "x-ms-identifiers": []
+          "description": "The scope of the notification rule."
         }
       },
       "discriminator": "scope",
@@ -5951,21 +5920,21 @@
       "properties": {
         "testRunStatuses": {
           "type": "array",
-          "description": "The test run statuses to send notification for",
+          "description": "The test run statuses to send notification for.",
           "items": {
             "$ref": "#/definitions/Status"
           }
         },
         "testRunResults": {
           "type": "array",
-          "description": "The test run results to send notification for",
+          "description": "The test run results to send notification for.",
           "items": {
             "$ref": "#/definitions/PFTestResult"
           }
         },
         "createdByTypes": {
           "type": "array",
-          "description": "The types of entities that created the test run to send notification for",
+          "description": "The types of entities that created the test run to send notification for.",
           "items": {
             "$ref": "#/definitions/CreateByTypes"
           }
@@ -5974,17 +5943,32 @@
     },
     "TestRunEndedNotificationEvent": {
       "type": "object",
-      "title": "This event would occur when a test run reaches terminal state.",
       "description": "The notification event when the event type is TestRunEnded.",
       "properties": {
         "condition": {
           "$ref": "#/definitions/TestRunEndedEventCondition",
-          "description": "Event filtering condition"
+          "description": "Event filtering condition."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NotificationEvent"
+          "$ref": "#/definitions/TestsNotificationEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "TestRunEnded"
+    },
+    "TestRunEndedNotificationEventCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event when the event type is TestRunEnded.",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/TestRunEndedEventCondition",
+          "description": "Event filtering condition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TestRunEnded"
@@ -6132,7 +6116,7 @@
       "properties": {
         "createdByTypes": {
           "type": "array",
-          "description": "The creator types to send notification for",
+          "description": "The creator types to send notification for.",
           "items": {
             "type": "string"
           }
@@ -6141,17 +6125,32 @@
     },
     "TestRunStartedNotificationEvent": {
       "type": "object",
-      "title": "This event would occur when a new test run is triggered.",
       "description": "The notification event when the event type is TestRunStarted.",
       "properties": {
         "condition": {
           "$ref": "#/definitions/TestRunStartedEventCondition",
-          "description": "Event filtering condition"
+          "description": "Event filtering condition."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NotificationEvent"
+          "$ref": "#/definitions/TestsNotificationEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "TestRunStarted"
+    },
+    "TestRunStartedNotificationEventCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event when the event type is TestRunStarted.",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/TestRunStartedEventCondition",
+          "description": "Event filtering condition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TestRunStarted"
@@ -6337,18 +6336,56 @@
         }
       }
     },
+    "TestsNotificationEvent": {
+      "type": "object",
+      "description": "The notification event for tests.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/NotificationEventType",
+          "description": "The event type"
+        }
+      },
+      "discriminator": "name",
+      "required": [
+        "name"
+      ]
+    },
+    "TestsNotificationEventCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event for tests.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/NotificationEventType",
+          "description": "The event type"
+        }
+      },
+      "discriminator": "name",
+      "required": [
+        "name"
+      ]
+    },
     "TestsNotificationRule": {
       "type": "object",
       "description": "Tests Notification rule model.",
       "properties": {
         "testIds": {
           "type": "array",
-          "description": "The test ids to include. If not provided, the notification will be sent for all testIds",
+          "description": "The test ids to include. If not provided, the notification will be sent for all testIds.",
           "items": {
             "type": "string"
           }
+        },
+        "events": {
+          "type": "object",
+          "description": "The events to send notifications for.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestsNotificationEvent"
+          }
         }
       },
+      "required": [
+        "events"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/NotificationRule"
@@ -6362,9 +6399,16 @@
       "properties": {
         "testIds": {
           "type": "array",
-          "description": "The test ids to include. If not provided, the notification will be sent for all testIds",
+          "description": "The test ids to include. If not provided, the notification will be sent for all testIds.",
           "items": {
             "type": "string"
+          }
+        },
+        "events": {
+          "type": "object",
+          "description": "The events to send notifications for.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
           }
         }
       },
@@ -6536,22 +6580,40 @@
     },
     "TriggerDisabledNotificationEvent": {
       "type": "object",
-      "title": "This event would occur when a trigger is disabled.",
       "description": "The notification event when the event type is TriggerDisabled.",
       "allOf": [
         {
-          "$ref": "#/definitions/NotificationEvent"
+          "$ref": "#/definitions/TestsNotificationEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "TriggerDisabled"
+    },
+    "TriggerDisabledNotificationEventCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event when the event type is TriggerDisabled.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TriggerDisabled"
     },
     "TriggerEndedNotificationEvent": {
       "type": "object",
-      "title": "This event would occur when a trigger ends.",
       "description": "The notification event when the event type is TriggerEnded.",
       "allOf": [
         {
-          "$ref": "#/definitions/NotificationEvent"
+          "$ref": "#/definitions/TestsNotificationEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "TriggerEnded"
+    },
+    "TriggerEndedNotificationEventCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event when the event type is TriggerEnded.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TriggerEnded"

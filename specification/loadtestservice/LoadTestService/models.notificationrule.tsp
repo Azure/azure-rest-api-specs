@@ -24,82 +24,78 @@ union NotificationScopeType {
 union NotificationEventType {
   string,
 
-  @doc("Test run ended event.")
+  @doc("Test run ended event. This event would occur when a test run reaches terminal state.")
   TestRunEnded: "TestRunEnded",
 
-  @doc("Test run started event.")
+  @doc("Test run started event. This event would occur when a new test run is triggered.")
   TestRunStarted: "TestRunStarted",
 
-  @doc("Trigger ended event.")
+  @doc("Trigger ended event. This event would occur when a trigger ends.")
   TriggerEnded: "TriggerEnded",
 
-  @doc("Trigger disabled event.")
+  @doc("Trigger disabled event. This event would occur when a trigger is disabled.")
   TriggerDisabled: "TriggerDisabled",
 }
 
 @added(APIVersions.v2024_11_01_preview)
 @discriminator("name")
-@doc("The notification event.")
-model NotificationEvent {
+@doc("The notification event for tests.")
+model TestsNotificationEvent {
   @doc("The event type")
   name: NotificationEventType;
 }
 
 @added(APIVersions.v2024_11_01_preview)
 @doc("The notification event when the event type is TestRunEnded.")
-@summary("This event would occur when a test run reaches terminal state.")
-model TestRunEndedNotificationEvent extends NotificationEvent {
-  @doc("Event type for test run ended event")
+model TestRunEndedNotificationEvent extends TestsNotificationEvent {
+  @doc("Event type for test run ended event.")
   name: NotificationEventType.TestRunEnded;
 
-  @doc("Event filtering condition")
+  @doc("Event filtering condition.")
   condition?: TestRunEndedEventCondition;
 }
 
 @added(APIVersions.v2024_11_01_preview)
 @doc("The notification event when the event type is TestRunStarted.")
-@summary("This event would occur when a new test run is triggered.")
-model TestRunStartedNotificationEvent extends NotificationEvent {
-  @doc("Event type for test run started event")
+model TestRunStartedNotificationEvent extends TestsNotificationEvent {
+  @doc("Event type for test run started event.")
   name: NotificationEventType.TestRunStarted;
 
-  @doc("Event filtering condition")
+  @doc("Event filtering condition.")
   condition?: TestRunStartedEventCondition;
 }
 
 @added(APIVersions.v2024_11_01_preview)
 @doc("The notification event when the event type is TriggerEnded.")
-@summary("This event would occur when a trigger ends.")
-model TriggerEndedNotificationEvent extends NotificationEvent {
-  @doc("Event type for trigger ended event")
+model TriggerEndedNotificationEvent extends TestsNotificationEvent {
+  @doc("Event type for trigger ended event.")
   name: NotificationEventType.TriggerEnded;
 }
 
 @added(APIVersions.v2024_11_01_preview)
 @doc("The notification event when the event type is TriggerDisabled.")
-@summary("This event would occur when a trigger is disabled.")
-model TriggerDisabledNotificationEvent extends NotificationEvent {
-  @doc("Event type for trigger disabled event")
+model TriggerDisabledNotificationEvent extends TestsNotificationEvent {
+  @doc("Event type for trigger disabled event.")
   name: NotificationEventType.TriggerDisabled;
 }
 
 @added(APIVersions.v2024_11_01_preview)
 @doc("TestRunEnded Event condition.")
 model TestRunEndedEventCondition {
-  @doc("The test run statuses to send notification for")
+  @doc("The test run statuses to send notification for.")
   testRunStatuses?: Status[];
 
-  @doc("The test run results to send notification for")
+  @doc("The test run results to send notification for.")
   testRunResults?: PFTestResult[];
 
-  @doc("The types of entities that created the test run to send notification for")
+  @doc("The types of entities that created the test run to send notification for.")
   createdByTypes?: CreateByTypes[];
 }
 
 @added(APIVersions.v2024_11_01_preview)
 @doc("TestRunStarted Event condition.")
 model TestRunStartedEventCondition {
-  @doc("The creator types to send notification for")
+  @doc("The creator types to send notification for.")
   createdByTypes?: string[];
 }
 
@@ -124,11 +120,8 @@ model NotificationRule {
   @doc("The action groups to notify.")
   actionGroupIds: string[];
 
-  @doc("The scope of the notification rule")
+  @doc("The scope of the notification rule.")
   scope: NotificationScopeType;
-
-  @doc("The event of the notification rule")
-  events: NotificationEvent[];
 
   ...SystemMetaData;
 }
@@ -136,15 +129,18 @@ model NotificationRule {
 @added(APIVersions.v2024_11_01_preview)
 @doc("Tests Notification rule model.")
 model TestsNotificationRule extends NotificationRule {
-  @doc("Scope of type Tests")
+  @doc("Scope of type Tests.")
   scope: NotificationScopeType.Tests;
 
-  @doc("The test ids to include. If not provided, the notification will be sent for all testIds")
+  @doc("The test ids to include. If not provided, the notification will be sent for all testIds.")
   testIds?: string[];
+
+  @doc("The events to send notifications for.")
+  events: Record<TestsNotificationEvent>;
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@doc("Parameters for list notification rule operation")
+@doc("Parameters for list notification rule operation.")
 model ListNotificationRuleQueryParams {
   @doc("Search based on notification rules associated with the provided test ids.")
   @query
