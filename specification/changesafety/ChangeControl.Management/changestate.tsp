@@ -120,7 +120,7 @@ model AuditTrailItem {
   @doc("Resource Id.")
   id: string;
 
-   @doc("Resource type.")
+  @doc("Resource type.")
   type: string;
 
   @doc("TenantId of the resource.")
