@@ -2239,6 +2239,15 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/Owner"
+          },
+          {
+            "$ref": "#/parameters/Group"
+          },
+          {
+            "$ref": "#/parameters/FileMode"
           }
         ],
         "responses": {
@@ -2311,6 +2320,35 @@
                 "x-ms-client-name": "FileParentId",
                 "type": "string",
                 "description": "The parent fileId of the directory."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-file-file-type": {
+                "x-ms-client-name": "nfsFileType",
+                "description": "NFS only. Type of the file or directory.",
+                "type": "string",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "Symlink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true
+                }
               }
             }
           },
@@ -2424,6 +2462,35 @@
                 "x-ms-client-name": "FileParentId",
                 "type": "string",
                 "description": "The parent fileId of the directory."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-file-file-type": {
+                "x-ms-client-name": "nfsFileType",
+                "description": "NFS only. Type of the file or directory.",
+                "type": "string",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "Symlink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true
+                }
               }
             }
           },
@@ -2555,6 +2622,15 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/Owner"
+          },
+          {
+            "$ref": "#/parameters/Group"
+          },
+          {
+            "$ref": "#/parameters/FileMode"
           }
         ],
         "responses": {
@@ -2627,6 +2703,21 @@
                 "x-ms-client-name": "FileParentId",
                 "type": "string",
                 "description": "The parent fileId of the directory."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
               }
             }
           },
@@ -3331,6 +3422,18 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/Owner"
+          },
+          {
+            "$ref": "#/parameters/Group"
+          },
+          {
+            "$ref": "#/parameters/FileMode"
+          },
+          {
+            "$ref": "#/parameters/NfsFileType"
           }
         ],
         "responses": {
@@ -3403,6 +3506,35 @@
                 "x-ms-client-name": "FileParentId",
                 "type": "string",
                 "description": "The parent fileId of the file."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-file-file-type": {
+                "x-ms-client-name": "nfsFileType",
+                "description": "NFS only. Type of the file or directory.",
+                "type": "string",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "Symlink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true
+                }
               }
             }
           },
@@ -3663,6 +3795,27 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-link-count": {
+                "x-ms-client-name": "linkCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "NFS only. The link count of the file or directory."
               }
             },
             "schema": {
@@ -3883,6 +4036,27 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-link-count": {
+                "x-ms-client-name": "linkCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "NFS only. The link count of the file or directory."
               }
             },
             "schema": {
@@ -4124,6 +4298,41 @@
                   "name": "LeaseStatusType",
                   "modelAsString": false
                 }
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-link-count": {
+                "x-ms-client-name": "linkCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "NFS only. The link count of the file or directory."
+              },
+              "x-ms-file-file-type": {
+                "x-ms-client-name": "nfsFileType",
+                "description": "NFS only. Type of the file or directory.",
+                "type": "string",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "Symlink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true
+                }
               }
             }
           },
@@ -4179,6 +4388,12 @@
                 "type": "string",
                 "format": "date-time-rfc1123",
                 "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
+              },
+              "x-ms-link-count": {
+                "x-ms-client-name": "linkCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "NFS only. The link count of the file or directory."
               }
             }
           },
@@ -4281,6 +4496,15 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/Owner"
+          },
+          {
+            "$ref": "#/parameters/Group"
+          },
+          {
+            "$ref": "#/parameters/FileMode"
           }
         ],
         "responses": {
@@ -4353,6 +4577,27 @@
                 "x-ms-client-name": "FileParentId",
                 "type": "string",
                 "description": "The parent fileId of the directory."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-link-count": {
+                "x-ms-client-name": "linkCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "NFS only. The link count of the file or directory."
               }
             }
           },
@@ -5435,6 +5680,21 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/Owner"
+          },
+          {
+            "$ref": "#/parameters/Group"
+          },
+          {
+            "$ref": "#/parameters/FileMode"
+          },
+          {
+            "$ref": "#/parameters/FileCopyModeCopyMode"
+          },
+          {
+            "$ref": "#/parameters/FileCopyOwnerCopyMode"
           }
         ],
         "responses": {
@@ -5967,6 +6227,416 @@
           "type": "string",
           "enum": [
             "rename"
+          ]
+        }
+      ]
+    },
+    "/{shareName}/{directory}/{fileName}?restype=symboliclink": {
+      "put": {
+        "tags": [
+          "file"
+        ],
+        "operationId": "File_CreateSymbolicLink",
+        "description": "Creates a symbolic link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Metadata"
+          },
+          {
+            "$ref": "#/parameters/FileCreationTime"
+          },
+          {
+            "$ref": "#/parameters/FileLastWriteTime"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/Owner"
+          },
+          {
+            "$ref": "#/parameters/Group"
+          },
+          {
+            "$ref": "#/parameters/LinkText"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success, symbolic link created.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value which represents the version of the file, in quotes."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the share was last modified. Any operation that modifies the directory or its properties updates the last modified time. Operations on files do not affect the last modified time of the directory."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the File service used to execute the request."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
+              },
+              "x-ms-file-creation-time": {
+                "x-ms-client-name": "FileCreationTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Creation time for the file."
+              },
+              "x-ms-file-last-write-time": {
+                "x-ms-client-name": "FileLastWriteTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Last write time for the file."
+              },
+              "x-ms-file-change-time": {
+                "x-ms-client-name": "FileChangeTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Change time for the file."
+              },
+              "x-ms-file-id": {
+                "x-ms-client-name": "FileId",
+                "type": "string",
+                "description": "The fileId of the file."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the directory."
+              },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-file-file-type": {
+                "x-ms-client-name": "nfsFileType",
+                "description": "NFS only. Type of the file or directory.",
+                "type": "string",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "Symlink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "file"
+        ],
+        "operationId": "File_GetSymbolicLink",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ShareSnapshot"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded, read symlink.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value which represents the version of the file, in quotes."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the share was last modified. Any operation that modifies the directory or its properties updates the last modified time. Operations on files do not affect the last modified time of the directory."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the File service used to execute the request."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
+              },
+              "x-ms-link-text": {
+                "x-ms-client-name": "linkText",
+                "type": "string",
+                "description": "The path to the original file, the symbolic link is pointing to. The path is of type string which is not resolved and is stored as is. The path can be absolute path or the relative path depending on the content stored in the symbolic link file."
+              },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/ShareName"
+        },
+        {
+          "$ref": "#/parameters/DirectoryPath"
+        },
+        {
+          "$ref": "#/parameters/FilePath"
+        },
+        {
+          "name": "restype",
+          "description": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "symboliclink"
+          ]
+        }
+      ]
+    },
+    "/{shareName}/{directory}/{fileName}?restype=hardlink": {
+      "put": {
+        "tags": [
+          "file"
+        ],
+        "operationId": "File_CreateHardLink",
+        "description": "Creates a hard link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileType"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/TargetFile"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success, hard link created",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value which represents the version of the file, in quotes."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the share was last modified. Any operation that modifies the directory or its properties updates the last modified time. Operations on files do not affect the last modified time of the directory."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the File service used to execute the request."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
+              },
+              "x-ms-file-creation-time": {
+                "x-ms-client-name": "FileCreationTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Creation time for the file."
+              },
+              "x-ms-file-last-write-time": {
+                "x-ms-client-name": "FileLastWriteTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Last write time for the file."
+              },
+              "x-ms-file-change-time": {
+                "x-ms-client-name": "FileChangeTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Change time for the file."
+              },
+              "x-ms-file-id": {
+                "x-ms-client-name": "FileId",
+                "type": "string",
+                "description": "The fileId of the file."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the directory."
+              },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-link-count": {
+                "x-ms-client-name": "linkCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "NFS only. The link count of the file or directory."
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-file-file-type": {
+                "x-ms-client-name": "nfsFileType",
+                "description": "NFS only. Type of the file or directory.",
+                "type": "string",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "Symlink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/ShareName"
+        },
+        {
+          "$ref": "#/parameters/DirectoryPath"
+        },
+        {
+          "$ref": "#/parameters/FilePath"
+        },
+        {
+          "name": "restype",
+          "description": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "hardlink"
           ]
         }
       ]
@@ -7097,6 +7767,40 @@
       },
       "description": "Specifies the option to set archive attribute on a target file. True means archive attribute will be set on a target file despite attribute overrides or a source file state."
     },
+    "FileCopyModeCopyMode": {
+      "name": "x-ms-file-mode-copy-mode",
+      "x-ms-client-name": "fileModeCopyMode",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "source",
+        "override"
+      ],
+      "x-ms-enum": {
+        "name": "ModeCopyMode",
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method",
+      "description": "NFS only. Applicable only when the copy source is a File. Determines the copy behavior of the mode bits of the file. source: The mode on the destination file is copied from the source file. override: The mode on the destination file is determined via the x-ms-mode header."
+    },
+    "FileCopyOwnerCopyMode": {
+      "name": "x-ms-file-owner-copy-mode",
+      "x-ms-client-name": "fileOwnerCopyMode",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "source",
+        "override"
+      ],
+      "x-ms-enum": {
+        "name": "OwnerCopyMode",
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method",
+      "description": "NFS only. Determines the copy behavior of the owner user identifier (UID) and group identifier (GID) of the file. source: The owner user identifier (UID) and group identifier (GID) on the destination file is copied from the source file. override: The owner user identifier (UID) and group identifier (GID) on the destination file is determined via the x-ms-owner and x-ms-group  headers."
+    },
     "DeletedShareName": {
       "name": "x-ms-deleted-share-name",
       "x-ms-client-name": "DeletedShareName",
@@ -7183,7 +7887,7 @@
       "x-ms-client-name": "FileAttributes",
       "in": "header",
       "description": "If specified, the provided file attributes shall be set. Default value: ‘Archive’ for file and ‘Directory’ for directory. ‘None’ can also be specified as default.",
-      "required": true,
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -7880,6 +8584,69 @@
       "in": "header",
       "required": false,
       "type": "boolean"
+    },
+    "Owner": {
+      "name": "x-ms-owner",
+      "x-ms-client-name": "owner",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Optional, NFS only. The owner of the file or directory.",
+      "x-ms-parameter-location": "method"
+    },
+    "Group": {
+      "name": "x-ms-group",
+      "x-ms-client-name": "group",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Optional, NFS only. The owning group of the file or directory.",
+      "x-ms-parameter-location": "method"
+    },
+    "FileMode": {
+      "name": "x-ms-mode",
+      "x-ms-client-name": "fileMode",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Optional, NFS only. The file mode of the file or directory",
+      "x-ms-parameter-location": "method"
+    },
+    "NfsFileType": {
+      "name": "x-ms-file-file-type",
+      "x-ms-client-name": "nfsFileType",
+      "in": "header",
+      "required": false,
+      "description": "Optional, NFS only. Type of the file or directory.",
+      "type": "string",
+      "enum": [
+        "Regular",
+        "Directory",
+        "Symlink"
+      ],
+      "x-ms-enum": {
+        "name": "NfsFileType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "LinkText": {
+      "name": "x-ms-link-text",
+      "x-ms-client-name": "linkText",
+      "in": "header",
+      "required": true,
+      "description": "NFS only. Required. The path to the original file, the symbolic link is pointing to. The path is of type string which is not resolved and is stored as is. The path can be absolute path or the relative path depending on the content stored in the symbolic link file.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetFile": {
+      "name": "x-ms-file-target-file",
+      "x-ms-client-name": "targetFile",
+      "in": "header",
+      "required": true,
+      "description": "NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
