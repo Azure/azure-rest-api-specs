@@ -16,7 +16,8 @@ using TypeSpec.Versioning;
   SasTokenAuth | ApiKeyAuth<
     ApiKeyLocation.header,
     "Connection String"
-  > | OAuth2Auth<[
+  > |
+  OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
