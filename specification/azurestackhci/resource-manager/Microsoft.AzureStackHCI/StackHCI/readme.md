@@ -29,7 +29,43 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-04
+tag: package-preview-2024-09
+
+directive:
+  - from: edgeDevices.json
+    where: $.definitions
+    transform: >
+      $.ErrorDetail['x-ms-client-name'] = 'HciValidationFailureDetail';
+      $.Extension['x-ms-client-name'] = 'HciEdgeDeviceArcExtension';
+      $.Intents['x-ms-client-name'] = 'HciEdgeDeviceIntents';
+      $.HostNetwork['x-ms-client-name'] = 'HciEdgeDeviceHostNetwork';
+      $.StorageNetworks['x-ms-client-name'] = 'HciEdgeDeviceStorageNetworks';
+      $.StorageAdapterIPInfo['x-ms-client-name'] = 'HciEdgeDeviceStorageAdapterIPInfo';
+      $.AdapterPropertyOverrides['x-ms-client-name'] = 'HciEdgeDeviceAdapterPropertyOverrides';
+      $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'HciEdgeDeviceVirtualSwitchConfigurationOverrides';
+  - from: deploymentSettings.json
+    where: $.definitions
+    transform: >
+      $.Intents['x-ms-client-name'] = 'DeploymentSettingIntents';
+      $.HostNetwork['x-ms-client-name'] = 'DeploymentSettingHostNetwork';
+      $.StorageNetworks['x-ms-client-name'] = 'DeploymentSettingStorageNetworks';
+      $.StorageAdapterIPInfo['x-ms-client-name'] = 'DeploymentSettingStorageAdapterIPInfo';
+      $.AdapterPropertyOverrides['x-ms-client-name'] = 'DeploymentSettingAdapterPropertyOverrides';
+      $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'DeploymentSettingVirtualSwitchConfigurationOverrides';
+  - from: swagger-document
+    where: 
+      - $.definitions.Extension.allOf[0]
+      - $.definitions.Offer.allOf[0]
+      - $.definitions.Publisher.allOf[0]
+      - $.definitions.Sku.allOf[0]
+      - $.definitions.UpdateRun.allOf[0]
+      - $.definitions.Update.allOf[0]
+      - $.definitions.UpdateSummaries.allOf[0]
+    transform: >
+      $['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+  - from: swagger-document
+    where: $.paths[*]..responses.default
+    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
 ```
 
 ## Suppression
@@ -71,6 +107,7 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - edgeDeviceJobs.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -147,6 +184,7 @@ suppressions:
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
+      - edgeDeviceJobs.json
 
   - code: XmsPageableForListCalls
     reason: already used in GA api version, fixing it will cause breaking change
@@ -192,8 +230,35 @@ suppressions:
 
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
+
+  - code: PatchBodyParametersSchema
+    from: 
+      - clusters.json
+    reason: Making the body optional now would cause a breaking change in backward compatibility
 ```
 
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - preview/2024-09-01-preview/arcSettings.json
+  - preview/2024-09-01-preview/clusters.json
+  - preview/2024-09-01-preview/deploymentSettings.json
+  - preview/2024-09-01-preview/edgeDevices.json
+  - preview/2024-09-01-preview/edgeDeviceJobs.json
+  - preview/2024-09-01-preview/extensions.json
+  - preview/2024-09-01-preview/hciCommon.json
+  - preview/2024-09-01-preview/offers.json
+  - ../operations/preview/2024-09-01-preview/operations.json
+  - preview/2024-09-01-preview/publishers.json
+  - preview/2024-09-01-preview/securitySettings.json
+  - preview/2024-09-01-preview/skus.json
+  - preview/2024-09-01-preview/updateRuns.json
+  - preview/2024-09-01-preview/updateSummaries.json
+  - preview/2024-09-01-preview/updates.json
+```
 
 ### Tag: package-2024-04
 
@@ -228,7 +293,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -239,4 +304,28 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js azurestackhci/resource-manager
   - repo: azure-powershell
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

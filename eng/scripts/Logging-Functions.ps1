@@ -2,6 +2,10 @@ function Test-SupportsDevOpsLogging() {
   return ($null -ne $env:SYSTEM_TEAMPROJECTID)
 }
 
+function Test-SupportsGitHubLogging() {
+  return ($null -ne $env:GITHUB_ACTIONS)
+}
+
 function LogInfo {
   Write-Host "$args"
 }
@@ -9,6 +13,9 @@ function LogInfo {
 function LogWarning {
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.LogIssue type=warning;]$args" -replace "`n", "%0D%0A")
+  }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Warning ("::warning::$args" -replace "`n", "%0D%0A")
   }
   else {
     Write-Warning "$args"
@@ -20,6 +27,9 @@ function LogErrorForFile($file, $errorString)
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.logissue type=error;sourcepath=$file;linenumber=1;columnnumber=1;]$errorString" -replace "`n", "%0D%0A")
   }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Error ("::error file=$file,line=1,col=1::$errorString" -replace "`n", "%0D%0A")
+  }
   else {
     Write-Error "[Error in file $file]$errorString"
   }
@@ -27,6 +37,9 @@ function LogErrorForFile($file, $errorString)
 function LogError {
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.LogIssue type=error;]$args" -replace "`n", "%0D%0A")
+  }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Error ("::error::$args" -replace "`n", "%0D%0A")
   }
   else {
     Write-Error "$args"
@@ -37,6 +50,9 @@ function LogDebug {
   if (Test-SupportsDevOpsLogging) {
     Write-Host "[debug]$args"
   }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Debug "::debug::$args"
+  }
   else {
     Write-Debug "$args"
   }
@@ -46,11 +62,17 @@ function LogGroupStart() {
   if (Test-SupportsDevOpsLogging) {
     Write-Host "##[group]$args"
   }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Host "::group::$args"
+  }
 }
 
 function LogGroupEnd() {
   if (Test-SupportsDevOpsLogging) {
     Write-Host "##[endgroup]"
+  }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Host "::endgroup::"
   }
 }
 
@@ -58,4 +80,5 @@ function LogJobFailure() {
   if (Test-SupportsDevOpsLogging) {
     Write-Host "##vso[task.complete result=Failed;]"
   }
+  # No equivalent for GitHub Actions.  Failure is only determined by nonzero exit code.
 }

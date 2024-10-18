@@ -10,41 +10,6 @@ using TypeSpec.Versioning;
 namespace DocumentTranslation;
 @doc("Document Translate Request Content")
 model DocumentTranslateContent {
-  @doc("""
-    Specifies source language of the input document.
-    If this parameter isn't specified, automatic language detection is applied to determine the source language.
-    For example if the source document is written in English, then use sourceLanguage=en
-    """)
-  @query("sourceLanguage")
-  sourceLanguage?: string;
-
-  @doc("""
-    Specifies the language of the output document.
-    The target language must be one of the supported languages included in the translation scope.
-    For example if you want to translate the document in German language, then use targetLanguage=de 
-    """)
-  @query("targetLanguage")
-  targetLanguage: string;
-
-  @doc("""
-    A string specifying the category (domain) of the translation. This parameter is used to get translations 
-    from a customized system built with Custom Translator. Add the Category ID from your Custom Translator 
-    project details to this parameter to use your deployed customized system. Default value is: general.
-    """)
-  @query("category")
-  category?: string = "general";
-
-  @doc("""
-    Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
-    Possible values are: true (default) or false.
-    """)
-  @query("allowFallback")
-  allowFallback?: boolean;
-
-  @doc("Content Type as multipart/form-data")
-  @header
-  contentType: "multipart/form-data";
-
   @doc("Document to be translated in the form")
   document: bytes;
 
@@ -469,4 +434,53 @@ model FileFormat {
 
   @doc("Supported Type for this format")
   type?: string;
+}
+
+@doc("Document Translate Request Body")
+model DocumentTranslateBody {
+  @doc("""
+    Specifies source language of the input document.
+    If this parameter isn't specified, automatic language detection is applied to determine the source language.
+    For example if the source document is written in English, then use sourceLanguage=en
+    """)
+  @query("sourceLanguage")
+  sourceLanguage?: string;
+
+  @doc("""
+    Specifies the language of the output document.
+    The target language must be one of the supported languages included in the translation scope.
+    For example if you want to translate the document in German language, then use targetLanguage=de 
+    """)
+  @query("targetLanguage")
+  targetLanguage: string;
+
+  @doc("""
+    A string specifying the category (domain) of the translation. This parameter is used to get translations 
+    from a customized system built with Custom Translator. Add the Category ID from your Custom Translator 
+    project details to this parameter to use your deployed customized system. Default value is: general.
+    """)
+  @query("category")
+  category?: string = "general";
+
+  @doc("""
+    Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
+    Possible values are: true (default) or false.
+    """)
+  @query("allowFallback")
+  allowFallback?: boolean;
+
+  @doc("Content Type as multipart/form-data")
+  @header
+  contentType: "multipart/form-data";
+
+  @doc("Document Translate Request Content")
+  @body
+  body: DocumentTranslateContent;
+}
+
+@doc("Start Translation Request Body")
+model StartTranslationBody {
+  @doc("Translation job submission batch request")
+  @body
+  body: StartTranslationDetails;
 }

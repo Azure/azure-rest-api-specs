@@ -144,9 +144,12 @@ interface CommunityTrainings {
     CommunityTraining,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     CommunityTraining,
-    CommunityTrainingProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CommunityTraining,
+      CommunityTrainingProperties
+    >
   >;
   delete is ArmResourceDeleteAsync<CommunityTraining>;
   listByResourceGroup is ArmResourceListByParent<CommunityTraining>;

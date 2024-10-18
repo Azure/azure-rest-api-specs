@@ -1,0 +1,751 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted for the billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByBillingProfile": {
+            "$ref": "./examples/billingRequestsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted for the customer.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByCustomer": {
+            "$ref": "./examples/billingRequestsListByCustomer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted for the invoice section.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByInvoiceSection": {
+            "$ref": "./examples/billingRequestsListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted for the billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByBillingAccount": {
+            "$ref": "./examples/billingRequestsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingRequests/{billingRequestName}": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "Gets a billing request by its ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingRequestName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsGet": {
+            "$ref": "./examples/billingRequestsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "Create or update a billing request.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingRequestName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequest"
+            }
+          },
+          "201": {
+            "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequest"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BillingRequestsCreateOrUpdate": {
+            "$ref": "./examples/billingRequestsCreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted by a user.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByUser": {
+            "$ref": "./examples/billingRequestsListByUser.json"
+          },
+          "BillingRequestsListByUserWithFilter": {
+            "$ref": "./examples/billingRequestsListByUserWithFilter.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingRequest": {
+      "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingRequestProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BillingRequestListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingRequest"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "BillingRequestProperties": {
+      "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "additionalInformation": {
+          "description": "Additional information for the billing request.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "reviewedBy": {
+          "description": "The principal of the request reviewer. Will only be set if request is approved.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Principal"
+            }
+          ]
+        },
+        "reviewalDate": {
+          "format": "date-time",
+          "description": "The date and time when the request was reviewed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountId": {
+          "description": "The fully qualified ID that uniquely identifies a billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountName": {
+          "description": "The ID that uniquely identifies a billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountDisplayName": {
+          "description": "The name of the billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountPrimaryBillingTenantId": {
+          "description": "The primary tenant ID of the billing account for which the billing request was submitted.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "The fully qualified ID that uniquely identifies a billing profile.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "The ID that uniquely identifies a billing profile.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The principal of the entity who created the request.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Principal"
+            }
+          ]
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The date and time when the request was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "The date and time when the request expires.",
+          "type": "string",
+          "readOnly": true
+        },
+        "decisionReason": {
+          "description": "The reason to approve or decline the request.",
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "description": "The fully qualified ID that uniquely identifies an invoice section.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "The ID that uniquely identifies an invoice section.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerId": {
+          "description": "The fully qualified ID that uniquely identifies a customer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerName": {
+          "description": "The ID that uniquely identifies a customer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerDisplayName": {
+          "description": "The name of the customer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The fully qualified ID that uniquely identifies a billing subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionName": {
+          "description": "The ID that uniquely identifies a billing subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionDisplayName": {
+          "description": "The name of the billing subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "justification": {
+          "description": "Justification for submitting request.",
+          "type": "string"
+        },
+        "recipients": {
+          "description": "The recipients of the billing request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Principal"
+          },
+          "x-ms-identifiers": []
+        },
+        "requestScope": {
+          "description": "The billing scope for which the request was submitted (ex. '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}').",
+          "type": "string"
+        },
+        "billingScope": {
+          "description": "The billing scope for which the request will be applied. This is a read only property derived by the service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of billing request.",
+          "enum": [
+            "Other",
+            "Pending",
+            "Approved",
+            "Declined",
+            "Cancelled",
+            "Completed",
+            "Expired"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BillingRequestStatus",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "description": "Type of billing request.",
+          "enum": [
+            "Other",
+            "InvoiceAccess",
+            "ProvisioningAccess",
+            "RoleAssignment",
+            "UpdateBillingPolicy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BillingRequestType",
+            "modelAsString": true
+          }
+        },
+        "lastUpdatedBy": {
+          "description": "The principal of the entity who last updated the request.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Principal"
+            }
+          ]
+        },
+        "lastUpdatedDate": {
+          "format": "date-time",
+          "description": "Date and time of last update.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Principal": {
+      "description": "A principal who has interacted with a billing entity.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id of the principal who has interacted with a billing entity.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the principal who has interacted with a billing entity.",
+          "type": "string"
+        },
+        "upn": {
+          "description": "The user principal name of the principal who has interacted with a billing entity.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

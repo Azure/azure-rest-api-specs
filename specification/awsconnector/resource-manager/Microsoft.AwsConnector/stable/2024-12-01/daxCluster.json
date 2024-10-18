@@ -1,0 +1,818 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DaxClusters"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/daxClusters": {
+      "get": {
+        "operationId": "DaxClusters_ListBySubscription",
+        "tags": [
+          "DaxClusters"
+        ],
+        "description": "List DaxCluster resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DaxClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DaxClusters_ListBySubscription": {
+            "$ref": "./examples/DaxClusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/daxClusters": {
+      "get": {
+        "operationId": "DaxClusters_ListByResourceGroup",
+        "tags": [
+          "DaxClusters"
+        ],
+        "description": "List DaxCluster resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DaxClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DaxClusters_ListByResourceGroup": {
+            "$ref": "./examples/DaxClusters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/daxClusters/{name}": {
+      "get": {
+        "operationId": "DaxClusters_Get",
+        "tags": [
+          "DaxClusters"
+        ],
+        "description": "Get a DaxCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DaxCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DaxCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DaxClusters_Get": {
+            "$ref": "./examples/DaxClusters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DaxClusters_CreateOrReplace",
+        "tags": [
+          "DaxClusters"
+        ],
+        "description": "Create a DaxCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DaxCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DaxCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DaxCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DaxCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'DaxCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DaxCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DaxClusters_CreateOrReplace": {
+            "$ref": "./examples/DaxClusters_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DaxClusters_Update",
+        "tags": [
+          "DaxClusters"
+        ],
+        "description": "Update a DaxCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DaxCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DaxClusterTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DaxCluster"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DaxClusters_Update": {
+            "$ref": "./examples/DaxClusters_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DaxClusters_Delete",
+        "tags": [
+          "DaxClusters"
+        ],
+        "description": "Delete a DaxCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DaxCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DaxClusters_Delete": {
+            "$ref": "./examples/DaxClusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsDaxClusterProperties": {
+      "type": "object",
+      "description": "Definition of awsDaxCluster",
+      "properties": {
+        "activeNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The number of nodes in the cluster that are active (i.e., capable of serving requests).</p>"
+        },
+        "clusterArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster. </p>"
+        },
+        "clusterDiscoveryEndpoint": {
+          "$ref": "#/definitions/Endpoint",
+          "description": "<p>The endpoint for this DAX cluster, consisting of a DNS name, a port number, and a URL. Applications should use the URL to configure the DAX client to find their cluster.</p>"
+        },
+        "clusterEndpointEncryptionType": {
+          "$ref": "#/definitions/ClusterEndpointEncryptionTypeEnumValue",
+          "description": "<p>The type of encryption supported by the cluster's endpoint. Values are:</p> <ul> <li> <p> <code>NONE</code> for no encryption</p> <p> <code>TLS</code> for Transport Layer Security</p> </li> </ul>"
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "<p>The name of the DAX cluster.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "<p>The description of the cluster.</p>"
+        },
+        "iamRoleArn": {
+          "type": "string",
+          "description": "<p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role's permissions to access DynamoDB on your behalf.</p>"
+        },
+        "nodeIdsToRemove": {
+          "type": "array",
+          "description": "<p>A list of nodes to be removed from the cluster.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "nodeType": {
+          "type": "string",
+          "description": "<p>The node type for the nodes in the cluster. (All nodes in a DAX cluster are of the same type.)</p>"
+        },
+        "nodes": {
+          "type": "array",
+          "description": "<p>A list of nodes that are currently in the cluster.</p>",
+          "items": {
+            "$ref": "#/definitions/Node"
+          },
+          "x-ms-identifiers": []
+        },
+        "notificationConfiguration": {
+          "$ref": "#/definitions/NotificationConfiguration",
+          "description": "<p>Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).</p>"
+        },
+        "parameterGroup": {
+          "$ref": "#/definitions/ParameterGroupStatus",
+          "description": "<p>The parameter group being used by nodes in the cluster.</p>"
+        },
+        "preferredMaintenanceWindow": {
+          "type": "string",
+          "description": "<p>A range of time when maintenance of DAX cluster software will be performed. For example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than 30 minutes, and is performed automatically within the maintenance window.</p>"
+        },
+        "sseDescription": {
+          "$ref": "#/definitions/SSEDescription",
+          "description": "<p>The description of the server-side encryption status on the specified DAX cluster.</p>"
+        },
+        "securityGroups": {
+          "type": "array",
+          "description": "<p>A list of security groups, and the status of each, for the nodes in the cluster.</p>",
+          "items": {
+            "$ref": "#/definitions/SecurityGroupMembership"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "type": "string",
+          "description": "<p>The current status of the cluster.</p>"
+        },
+        "subnetGroup": {
+          "type": "string",
+          "description": "<p>The subnet group where the DAX cluster is running.</p>"
+        },
+        "totalNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of nodes in the cluster.</p>"
+        }
+      }
+    },
+    "ClusterEndpointEncryptionType": {
+      "type": "string",
+      "description": "ClusterEndpointEncryptionType enum",
+      "enum": [
+        "NONE",
+        "TLS"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterEndpointEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ClusterEndpointEncryptionType enum NONE"
+          },
+          {
+            "name": "TLS",
+            "value": "TLS",
+            "description": "ClusterEndpointEncryptionType enum TLS"
+          }
+        ]
+      }
+    },
+    "ClusterEndpointEncryptionTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of ClusterEndpointEncryptionTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ClusterEndpointEncryptionType",
+          "description": "Property value"
+        }
+      }
+    },
+    "DaxCluster": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DaxClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DaxClusterListResult": {
+      "type": "object",
+      "description": "The response of a DaxCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DaxCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/DaxCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DaxClusterProperties": {
+      "type": "object",
+      "description": "Definition of DaxCluster",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsDaxClusterProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "DaxClusterTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in DaxCluster resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "Definition of Endpoint",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "<p>The DNS hostname of the endpoint.</p>"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The port number that applications should use to connect to the endpoint.</p>"
+        },
+        "url": {
+          "type": "string",
+          "description": "<p>The URL that applications should use to connect to the endpoint. The default ports are 8111 for the 'dax' protocol and 9111 for the 'daxs' protocol.</p>"
+        }
+      }
+    },
+    "Node": {
+      "type": "object",
+      "description": "Definition of Node",
+      "properties": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "<p>The Availability Zone (AZ) in which the node has been deployed.</p>"
+        },
+        "endpoint": {
+          "$ref": "#/definitions/Endpoint",
+          "description": "<p>The endpoint for the node, consisting of a DNS name and a port number. Client applications can connect directly to a node endpoint, if desired (as an alternative to allowing DAX client software to intelligently route requests and responses to nodes in the DAX cluster.</p>"
+        },
+        "nodeCreateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time (in UNIX epoch format) when the node was launched.</p>"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "<p>A system-generated identifier for the node.</p>"
+        },
+        "nodeStatus": {
+          "type": "string",
+          "description": "<p>The current status of the node. For example: <code>available</code>.</p>"
+        },
+        "parameterGroupStatus": {
+          "type": "string",
+          "description": "<p>The status of the parameter group associated with this node. For example, <code>in-sync</code>.</p>"
+        }
+      }
+    },
+    "NotificationConfiguration": {
+      "type": "object",
+      "description": "Definition of NotificationConfiguration",
+      "properties": {
+        "topicArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) that identifies the topic. </p>"
+        },
+        "topicStatus": {
+          "type": "string",
+          "description": "<p>The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.</p>"
+        }
+      }
+    },
+    "ParameterGroupStatus": {
+      "type": "object",
+      "description": "Definition of ParameterGroupStatus",
+      "properties": {
+        "nodeIdsToReboot": {
+          "type": "array",
+          "description": "<p>The node IDs of one or more nodes to be rebooted.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "parameterApplyStatus": {
+          "type": "string",
+          "description": "<p>The status of parameter updates. </p>"
+        },
+        "parameterGroupName": {
+          "type": "string",
+          "description": "<p>The name of the parameter group.</p>"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SSEDescription": {
+      "type": "object",
+      "description": "Definition of SSEDescription",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/SSEStatusEnumValue",
+          "description": "<p>The current state of server-side encryption:</p> <ul> <li> <p> <code>ENABLING</code> - Server-side encryption is being enabled.</p> </li> <li> <p> <code>ENABLED</code> - Server-side encryption is enabled.</p> </li> <li> <p> <code>DISABLING</code> - Server-side encryption is being disabled.</p> </li> <li> <p> <code>DISABLED</code> - Server-side encryption is disabled.</p> </li> </ul>"
+        }
+      }
+    },
+    "SSEStatus": {
+      "type": "string",
+      "description": "SSEStatus enum",
+      "enum": [
+        "DISABLED",
+        "DISABLING",
+        "ENABLED",
+        "ENABLING"
+      ],
+      "x-ms-enum": {
+        "name": "SSEStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "SSEStatus enum DISABLED"
+          },
+          {
+            "name": "DISABLING",
+            "value": "DISABLING",
+            "description": "SSEStatus enum DISABLING"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "SSEStatus enum ENABLED"
+          },
+          {
+            "name": "ENABLING",
+            "value": "ENABLING",
+            "description": "SSEStatus enum ENABLING"
+          }
+        ]
+      }
+    },
+    "SSEStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of SSEStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SSEStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "SecurityGroupMembership": {
+      "type": "object",
+      "description": "Definition of SecurityGroupMembership",
+      "properties": {
+        "securityGroupIdentifier": {
+          "type": "string",
+          "description": "<p>The unique ID for this security group.</p>"
+        },
+        "status": {
+          "type": "string",
+          "description": "<p>The status of this security group.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

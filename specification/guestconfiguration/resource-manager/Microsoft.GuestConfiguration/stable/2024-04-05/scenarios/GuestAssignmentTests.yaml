@@ -1,0 +1,188 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  guestConfigurationAssignmentName:
+    type: string
+    prefix: guestcon
+  vmName:
+    type: string
+    prefix: vmname
+  vmssName:
+    type: string
+    prefix: vmssname
+  name:
+    type: string
+    prefix: name
+  adminPassword:
+    type: secureString
+    prefix: Admin@1
+
+prepareSteps:
+  - step: createVirtualNetwork
+    operationId: VirtualNetworks_CreateOrUpdate
+    readmeTag: ../../../../../../network/resource-manager/readme.md#package-2021-05
+    parameters:
+      virtualNetworkName: $(vmName)-VNET
+      parameters:
+        location: $(location)
+        properties:
+          addressSpace:
+            addressPrefixes:
+              - 10.0.0.0/16
+          subnets:
+            - name: $(vmName)-Subnet
+              properties:
+                addressPrefix: 10.0.0.0/24
+    outputVariables:
+      subnetId:
+        type: string
+        fromResponse: /properties/subnets/0/id
+  - step: createNSG
+    operationId: NetworkSecurityGroups_CreateOrUpdate
+    readmeTag: ../../../../../../network/resource-manager/readme.md#package-2021-05
+    parameters:
+      networkSecurityGroupName: $(vmName)-NSG
+      parameters:
+        location: $(location)
+        properties:
+          securityRules:
+            - name: rdp
+              properties:
+                protocol: Tcp
+                sourcePortRange: "*"
+                destinationPortRange: "3389"
+                sourceAddressPrefix: "*"
+                destinationAddressPrefix: "*"
+                access: Allow
+                priority: 1000
+                direction: Inbound
+    outputVariables:
+      networkSecurityGroupId:
+        type: string
+        fromResponse: /id
+  - step: createPublicIP
+    operationId: PublicIPAddresses_CreateOrUpdate
+    readmeTag: ../../../../../../network/resource-manager/readme.md#package-2021-05
+    parameters:
+      publicIpAddressName: $(vmName)-PublicIP
+      parameters:
+        location: $(location)
+        sku:
+          name: Standard
+        properties:
+          publicIPAllocationMethod: Static
+    outputVariables:
+      publicIPAddressId:
+        type: string
+        fromResponse: /id
+  - step: createNIC
+    operationId: NetworkInterfaces_CreateOrUpdate
+    readmeTag: ../../../../../../network/resource-manager/readme.md#package-2021-05
+    parameters:
+      networkInterfaceName: $(vmName)-VMNic
+      parameters:
+        location: $(location)
+        properties:
+          ipConfigurations:
+            - name: ipconfig-$(vmName)
+              properties:
+                privateIPAllocationMethod: Dynamic
+                subnet:
+                  id: $(subnetId)
+                publicIpAddress:
+                  id: $(publicIPAddressId)
+          networkSecurityGroup:
+            id: $(networkSecurityGroupId)
+    outputVariables:
+      vmNicId:
+        type: string
+        fromResponse: /id
+  - step: createVirtualMachine
+    operationId: VirtualMachines_CreateOrUpdate
+    readmeTag: ../../../../../../compute/resource-manager/readme.md#package-2022-11-01
+    parameters:
+      vmName: $(vmName)
+      parameters:
+        location: $(location)
+        properties:
+          hardwareProfile:
+            vmSize: Standard_A2_v2
+          networkProfile:
+            networkInterfaces:
+              - id: $(vmNicId)
+          storageProfile:
+            osDisk:
+              createOption: fromImage
+              caching: ReadWrite
+            imageReference:
+              publisher: MicrosoftWindowsServer
+              offer: WindowsServer
+              sku: 2019-Datacenter
+              version: latest
+          osProfile:
+            computerName: $(vmName)
+            adminUsername: azureuser
+            adminPassword: $(adminPassword)
+          additionalCapabilities: {}
+  - step: createVirtualMachineScaleSets
+    operationId: VirtualMachineScaleSets_CreateOrUpdate
+    readmeTag: ../../../../../../compute/resource-manager/readme.md#package-2022-11-01
+    parameters:
+      vmScaleSetName: $(vmssName)
+      parameters:
+        location: $(location)
+        properties:
+          overprovision: false
+          upgradePolicy:
+            mode: Automatic
+            automaticOSUpgradePolicy:
+              enableAutomaticOSUpgrade: false
+          virtualMachineProfile:
+            storageProfile:
+              osDisk:
+                createOption: fromImage
+              imageReference:
+                publisher: MicrosoftWindowsServer
+                offer: WindowsServer
+                sku: 2019-Datacenter
+                version: latest
+            osProfile:
+              computerNamePrefix: vmss
+              adminUsername: $(vmssName)
+              adminPassword: $(adminPassword)
+            networkProfile:
+              networkInterfaceConfigurations:
+              - name:  $(vmssName)
+                properties:
+                  primary: true
+                  ipConfigurations:
+                  - name:  ipconfig-$(vmssName)
+                    properties:
+                      subnet:
+                        id:  $(subnetId)
+        sku:
+          name: Standard_A1_v2
+          capacity: 1
+          tier: Standard
+scenarios:
+  - scenario: GeneratedScenario
+    steps:
+    - operationId: GuestConfigurationAssignments_CreateOrUpdate
+      exampleFile: ../../2024-04-05/examples/createOrUpdateGuestConfigurationAssignment.json
+    - operationId: GuestConfigurationAssignments_SubscriptionList
+      exampleFile: ../../2024-04-05/examples/listSubGuestConfigurationAssignments.json
+    - operationId: GuestConfigurationAssignments_RGList
+      exampleFile: ../../2024-04-05/examples/listRGGuestConfigurationAssignments.json
+    - operationId: Operations_List
+      exampleFile: ../../2024-04-05/examples/listOperations.json
+    - operationId: GuestConfigurationAssignments_Get
+      exampleFile: ../../2024-04-05/examples/getGuestConfigurationAssignment.json
+    - operationId: GuestConfigurationAssignments_List
+      exampleFile: ../../2024-04-05/examples/listGuestConfigurationAssignments.json
+    - operationId: GuestConfigurationAssignments_Delete
+      exampleFile: ../../2024-04-05/examples/deleteGuestConfigurationAssignment.json
+    - operationId: GuestConfigurationAssignmentsVMSS_CreateOrUpdate
+      exampleFile: ../../2024-04-05/examples/createOrUpdateGuestConfigurationVMSSAssignment.json
+    - operationId: GuestConfigurationAssignmentsVMSS_Get
+      exampleFile: ../../2024-04-05/examples/getVMSSGuestConfigurationAssignment.json
+      

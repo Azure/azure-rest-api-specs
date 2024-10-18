@@ -163,3 +163,26 @@ directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
 ```
+
+## Tag: release_2024_05_15_preview
+
+These settings apply only when `--tag=release_2024_05_15_preview` is specified on the command line.
+
+```yaml $(tag) == 'release_2024_05_15_preview'
+input-file:
+  - preview/2024-05-15-preview/speechtotext.json
+```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    reason: Does not apply in those two places. The method is a DELETE which lazily deletes blobs, so it's Accepted, not NoContent. 
+  - suppress: OperationIdNounVerb
+    where: $..paths[($..operationId["Models_*"])]
+    reason: There is a sub-route called /models/base/ that refers to the base models. Therefore, the correct operation ID seems to be "Models_GetBaseModel", for example.
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```

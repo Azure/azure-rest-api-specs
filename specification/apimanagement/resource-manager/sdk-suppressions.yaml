@@ -7,3 +7,43 @@ suppressions:
         - Model ErrorResponse no longer has parameter message
         - Renamed operation ApiOperations.delete to ApiOperations.begin_delete
         - Renamed operation UserOperations.delete to UserOperations.begin_delete
+        - The 'ApiOperations' method 'delete' was deleted or renamed in the current version
+        - The 'ApiOperations' method 'delete' was deleted or renamed in the current version
+        - The 'SkuType' enum had its value 'BASIC' deleted or renamed in the current version
+        - The 'SkuType' enum had its value 'CONSUMPTION' deleted or renamed in the current version
+        - The 'SkuType' enum had its value 'DEVELOPER' deleted or renamed in the current version
+        - The 'SkuType' enum had its value 'ISOLATED' deleted or renamed in the current version
+        - The 'SkuType' enum had its value 'PREMIUM' deleted or renamed in the current version
+        - The 'UserOperations' method 'delete' was deleted or renamed in the current version
+        - The 'UserOperations' method 'delete' was deleted or renamed in the current version
+        - The class 'ApiManagementServiceBaseProperties' method '__init__' had its parameter 'virtual_network_type' default value changed from 'str' to 'none'
+        - The class 'ApiManagementServiceProperties' method '__init__' had its parameter 'virtual_network_type' default value changed from 'str' to 'none'
+        - The class 'ApiManagementServiceResource' method '__init__' had its parameter 'virtual_network_type' default value changed from 'str' to 'none'
+        - The class 'ApiManagementServiceUpdateParameters' method '__init__' had its parameter 'virtual_network_type' default value changed from 'str' to 'none'
+        - The class 'ApiManagementServiceUpdateProperties' method '__init__' had its parameter 'virtual_network_type' default value changed from 'str' to 'none'
+        - The class 'PolicyFragmentOperations' method 'list_by_service' changed from 'asynchronous' to 'synchronous' in the current version.
+        - The class 'PolicyOperations' method 'list_by_service' changed from 'asynchronous' to 'synchronous' in the current version.
+        - The class 'PortalConfigOperations' method 'list_by_service' changed from 'asynchronous' to 'synchronous' in the current version.
+        - The class 'ProductPolicyOperations' method 'list_by_product' changed from 'asynchronous' to 'synchronous' in the current version.
+        - The model or publicly exposed class 'ErrorResponse' had its instance variable 'code' deleted or renamed in the current version
+        - The model or publicly exposed class 'ErrorResponse' had its instance variable 'details' deleted or renamed in the current version
+        - The model or publicly exposed class 'ErrorResponse' had its instance variable 'message' deleted or renamed in the current version
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/apimanagement/armapimanagement'
+      breaking-changes:
+        - Type of `AssociationContractProperties.ProvisioningState` has been changed from `*string` to `*ProvisioningState`
+        - Type of `ErrorResponse.Error` has been changed from `*ErrorResponseBody` to `*ErrorDetail`
+        - Operation `*APIClient.Delete` has been changed to LRO, use `*APIClient.BeginDelete` instead.
+        - Operation `*UserClient.Delete` has been changed to LRO, use `*UserClient.BeginDelete` instead.
+        - Operation `*PolicyClient.ListByService` has supported pagination, use `*PolicyClient.NewListByServicePager` instead.
+        - Operation `*PolicyFragmentClient.ListByService` has supported pagination, use `*PolicyFragmentClient.NewListByServicePager` instead.
+        - Operation `*PortalConfigClient.ListByService` has supported pagination, use `*PortalConfigClient.NewListByServicePager` instead.
+        - Operation `*ProductPolicyClient.ListByProduct` has supported pagination, use `*ProductPolicyClient.NewListByProductPager` instead.
+  azure-sdk-for-js:
+    - package: '@azure/arm-apimanagement'
+      breaking-changes:
+        - Interface ErrorResponse no longer has parameter code
+        - Interface ErrorResponse no longer has parameter details
+        - Interface ErrorResponse no longer has parameter message
+        - Removed operation Api.delete
+        - Removed operation User.delete

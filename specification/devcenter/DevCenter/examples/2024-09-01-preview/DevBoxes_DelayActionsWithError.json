@@ -1,0 +1,43 @@
+{
+  "title": "Delays all actions with an error.",
+  "operationId": "DevBoxes_DelayActionsWithError",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com",
+    "projectName": "myProject",
+    "userId": "me",
+    "devBoxName": "myDevBox",
+    "until": "2022-09-30T17:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/b08e39b4-2ac6-4465-a35e-48322efb0f98/devboxes/MyDevBox/actions/schedule-default",
+            "name": "schedule-default",
+            "result": "Failed",
+            "error": {
+              "code": "DelayOverMaxTime",
+              "message": "The schedule cannot be delayed more than 8 hours from the original invocation time."
+            }
+          },
+          {
+            "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/b08e39b4-2ac6-4465-a35e-48322efb0f98/devboxes/MyDevBox/actions/idle-hibernateondisconnect",
+            "name": "idle-hibernateondisconnect",
+            "result": "Succeeded",
+            "action": {
+              "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/b08e39b4-2ac6-4465-a35e-48322efb0f98/devboxes/MyDevBox/actions/idle-hibernateondisconnect",
+              "name": "idle-hibernateondisconnect",
+              "actionType": "Stop",
+              "sourceId": "/projects/myProject/pools/myPool",
+              "sourceUri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/pools/myPool",
+              "sourceType": "Pool",
+              "suspendedUntil": "2022-09-30T17:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

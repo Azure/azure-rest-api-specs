@@ -290,6 +290,7 @@ model ArmCommonProperties {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 
   /**
@@ -316,6 +317,7 @@ model PatchablePortalExtension {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 }
 
@@ -347,6 +349,7 @@ model PortalExtensionAlterAlterationsItem {
   /**
    * The content of the file.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   content?: Record<unknown>;
 
   /**
@@ -367,17 +370,21 @@ model PortalExtensionCompileFile {
   /**
    * The contents of the file.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   contents?: Record<unknown>;
 
   /**
    * The contents of the string source.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   stringSource?: Record<unknown>;
 }
 
 /**
  * The result of contents of the file to compile.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model PortalExtensionCompileFileResult is Record<unknown>;
 
 /**
@@ -417,11 +424,13 @@ model PortalExtensionListSourcesFolder {
   /**
    * The list of child folders
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   folders?: Record<PortalExtensionListSourcesFolder>;
 
   /**
    * The list of child files
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   files?: Record<PortalExtensionListSourcesFile>;
 }
 
@@ -501,6 +510,7 @@ model PatchableExtensionVersion {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 }
 
@@ -568,6 +578,7 @@ model PatchableExtensionDeployment {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 }
 
@@ -620,6 +631,7 @@ model PatchableExtensionSlot {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 }
 
@@ -653,6 +665,8 @@ model PortalTenantCompileFileProperties {
 /**
  * The contents of the file to compile.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model PortalTenantCompileFileResult is Record<unknown>;
 
 /**

@@ -86,15 +86,14 @@ Please reach out to him with any questions.
 
 If you have an issue or with any of checks listed in the first column of the table below:
 
-| Check name                        | Owner          |
-|-----------------------------------|----------------|
-| `SDK azure-sdk-for-go`            | Ray Chen       |
-| `SDK azure-sdk-for-java`          | Weidong Xu     |
-| `SDK azure-sdk-for-js`            | Qiaoqiao Zhang |
-| `SDK azure-sdk-for-net`           | Wei Hu         |
-| `SDK azure-sdk-for-net-track2`    | Wei Hu         |
-| `SDK azure-sdk-for-python`        | Yuchao Yan     |
-| `SDK azure-sdk-for-python-track2` | Yuchao Yan     |
+| Check name                        | Owner          | GitHub login                                                  |
+|-----------------------------------|----------------| ------------------------------------------------------------- |
+| `SDK azure-sdk-for-go`            | Chenjie Shi    | [tadelesh](https://github.com/tadelesh)                       |
+| `SDK azure-sdk-for-java`          | Weidong Xu     | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
+| `SDK azure-sdk-for-js`            | Qiaoqiao Zhang | [qiaozha](https://github.com/qiaozha)                         |
+| `SDK azure-sdk-for-net`           | Wei Hu         | [live1206](https://github.com/live1206)                       |
+| `SDK azure-sdk-for-net-track2`    | Wei Hu         | [live1206](https://github.com/live1206)                       |
+| `SDK azure-sdk-for-python`        | Yuchao Yan     | [msyyc](https://github.com/msyyc)                             |
 
 Do the following:
 
@@ -190,70 +189,7 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
-Check `Swagger LintDiff` may fail for the OpenAPI generated from TypeSpec, even if there are no warnings or errors reported from the TypeSpec compiler.  Causes include bugs in the TypeSpec OpenAPI emitter, bugs in LintDiff rules, incompatibilities between TypeSpec and LintDiff, or checks duplicated in TypeSpec and LintDiff.
-
-We are working to address the root causes (where possible).  Until then, we recommend you [suppress](#suppression-process) these LintDiff errors, using a "permanent suppression" with a descriptive "reason", so we can revert your suppression when the root cause is fixed.
-
-### `Record<unknown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`
-
-The use of `Record<unknown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the OpenAPI spec generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations.
-
-### `RequestBodyMustExistForPutPatch`
-
-We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/641
-
-### `PatchPropertiesCorrespondToPutProperties`
-
-We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/642
-
-### `@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`
-
-If `EvenSegmentedPathForPutOperation` and/or `XmsPageableForListCalls` are failing for OpenAPI generated from TypeSpec using `@singleton` (OpenAPI path ends with `/default`), we believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/646
-
-### `AvoidAnonymousParameter`, `AvoidAnonymousTypes`, `IntegerTypeMustHaveFormat`
-
-Data-plane specs can suppress violations of the following rules, since they only exist for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec.  Resource-manager specs should **not** suppress violations of these rules, since resource-manager SDKs are generated from OpenAPI, and rely on these errors being fixed.
-
-- `AvoidAnonymousParameter`
-- `AvoidAnonymousTypes`
-- `IntegerTypeMustHaveFormat`
-
-### `AvoidAnonymousTypes` inside a 202 response
-
-As an exception to the previous note, resource-manager specs **may** be able to suppress `AvoidAnonymousTypes`, but only if the error is inside a 202 response from a long-running operation (LRO).  It is known that SDKs do not need to generate type names for such responses.
-
-### `OAuth2Auth` causes `XmsEnumValidation`
-
-TypeSpec using `OAuth2Auth` may generate the following OpenAPI:
-
-``` yaml
-"type": {
-  "type": "string",
-  "description": "OAuth2 authentication",
-  "enum": [
-    "oauth2"
-  ]
-},
-```
-
-Which causes error `XmsEnumValidation`.  The recommended workaround is to add `omit-unreachable-types: true` to your `tspconfig.yaml`.
-
-### `ProvisioningStateMustBeReadOnly`
-
-The root cause is bugs in `azure-openapi-validator` and `oav`:
-
-https://github.com/Azure/azure-openapi-validator/issues/637
-https://github.com/Azure/oav/issues/848
-
-The recommended workaround is to add `use-read-only-status-schema: true` to your `tspconfig.yaml`.
-
-### `PatchBodyParameterSchema`
-
-The root cause is a bug in typespec-azure:
-
-https://github.com/Azure/typespec-azure/issues/383.
-
-Please see the issue above for the suggested workaround and apply it directly to the spec TypeSpec sources.  The LintDiff error should **not** be ignored or suppressed.
+https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff-for-TypeSpec
 
 ## `Swagger ModelValidation`
 
@@ -343,26 +279,7 @@ If you need more information on see [cspell configuration](https://cspell.org/co
 
 ## `TypeSpec Validation`
 
-This validator will help ensure your TypeSpec project follows [standard conventions](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md) as well ensures that the [generated OpenAPI spec](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) files are in-sync with your project.
-
-### Run `tsv` locally
-
-``` powershell
-cd <repo>
-git checkout <your-branch>
-git merge <target-branch>
-npm ci
-npx tsv <path-to-your-spec>
-git commit; git push (if any changes)
-
-# example
-npx tsv specification/contosowidgetmanager/Contoso.WidgetManager
-```
-
-Then check any errors that might be outputted and address any issues as needed. If there are changed files after the runit generally means
-that the generated OpenAPI spec files were not in-sync with the TypeSpec project and you should include those changes in your pull request as well.
-
-If none of the above helped, please reach out on [TypeSpec Discussions Teams channel].
+https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 
 ## `license/cla`
 

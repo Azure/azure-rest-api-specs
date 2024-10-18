@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2024-07-31-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "my-resource-group",
+    "scopeName": "my-privatelinkscope",
+    "perimeterName": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.myAssociation"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "{callbackUrl}"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    }
+  }
+}

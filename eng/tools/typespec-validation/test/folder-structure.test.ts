@@ -205,4 +205,94 @@ describe("folder-structure", function () {
     assert(result.errorOutput);
     assert(result.errorOutput.includes("must contain"));
   });
+
+  it("should succeed with resource-manager/Management", async function() {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/Foo.Management/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+    host.readTspConfig = async (_folder: string) => `
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+`;
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/Foo.Management",
+    );
+
+    assert(result.success);
+  });
+
+  it("should succeed with data-plane/NoManagement", async function() {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/Foo/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+    host.readTspConfig = async (_folder: string) => `
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+`;
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/Foo",
+    );
+
+    assert(result.success);
+  });
+
+  it("should fail with resource-manager/NoManagement", async function() {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/Foo/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+    host.readTspConfig = async (_folder: string) => `
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+`;
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/Foo",
+    );
+
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes(".Management"));
+  });
+
+  it("should fail with data-plane/Management", async function() {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/Foo.Management/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+    host.readTspConfig = async (_folder: string) => `
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+`;
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/Foo.Management",
+    );
+
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes(".Management"));
+  });
 });

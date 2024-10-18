@@ -1,0 +1,16 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/liftrqumulo/armqumulo
+      breaking-changes:
+        - Enum `StorageSKU` has been removed
+        - Field `ClusterLoginURL`, `PrivateIPs` of struct `FileSystemResourceUpdateProperties` has been removed
+        - Field `InitialCapacity` of struct `FileSystemResourceProperties` has been removed
+        - Type of `FileSystemResourceProperties.StorageSKU` has been changed from `*StorageSKU` to `*string`
+        - "`ProvisioningStateNotSpecified` from enum `ProvisioningState` has been removed"
+  azure-sdk-for-js:
+    - package: '@azure/arm-qumulo'
+      breaking-changes:
+        - Interface FileSystemResource no longer has parameter initialCapacity
+        - Interface FileSystemResourceUpdateProperties no longer has parameter clusterLoginUrl
+        - Interface FileSystemResourceUpdateProperties no longer has parameter privateIPs
+        - Type of parameter storageSku of interface FileSystemResource is changed from StorageSku to string

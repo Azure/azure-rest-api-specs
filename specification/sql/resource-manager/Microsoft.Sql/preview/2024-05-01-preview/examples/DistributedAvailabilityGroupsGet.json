@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "testcl",
+    "distributedAvailabilityGroupName": "dag",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "distributedAvailabilityGroupName": "dag",
+          "distributedAvailabilityGroupId": "c856cff5-a6fe-418e-8894-17799cc20f5d",
+          "replicationMode": "Async",
+          "partnerLinkRole": "Secondary",
+          "partnerAvailabilityGroupName": "BoxLocalAg1",
+          "partnerEndpoint": "TCP://SERVER:7022",
+          "instanceLinkRole": "Primary",
+          "instanceAvailabilityGroupName": "testcl",
+          "failoverMode": "None",
+          "seedingMode": "Automatic",
+          "databases": [
+            {
+              "databaseName": "testdb",
+              "instanceReplicaId": "4713ed91-1e8c-497d-9bd4-d8a3935ae49a",
+              "partnerReplicaId": "8ffa9723-a1ec-4323-b929-c4aedee3894b",
+              "replicaState": "Seeding",
+              "seedingProgress": "80%",
+              "synchronizationHealth": "HEALTHY",
+              "connectedState": "CONNECTED",
+              "lastReceivedLsn": "71000009407900001",
+              "lastReceivedTime": "2023-08-01T00:00:00Z",
+              "lastCommitLsn": "71000009407900004",
+              "lastCommitTime": "2023-08-01T00:00:00Z",
+              "lastHardenedLsn": "71000009408100001",
+              "lastHardenedTime": "2023-08-01T00:00:00Z",
+              "lastBackupLsn": "71000009405700001",
+              "lastBackupTime": "2023-08-01T00:00:00Z",
+              "instanceSendReplicationLagSeconds": 1,
+              "instanceRedoReplicationLagSeconds": 1
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+        "name": "dag",
+        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups"
+      }
+    }
+  }
+}

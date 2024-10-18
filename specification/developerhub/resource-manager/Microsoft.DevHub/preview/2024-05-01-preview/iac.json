@@ -633,9 +633,9 @@
         "None",
         "HCI",
         "HCIAKS",
-        "HCIARCVM"
+        "HCIARCVM",
+        "ALL"
       ],
-      "readOnly": true,
       "x-ms-enum": {
         "name": "QuickStartTemplateType",
         "modelAsString": true,
@@ -655,6 +655,10 @@
           {
             "value": "HCIARCVM",
             "description": "The template use quick start template of HCI and ArcVM"
+          },
+          {
+            "value": "ALL",
+            "description": "The template use quick start template of All supported products"
           }
         ]
       },
@@ -711,7 +715,7 @@
           "title": "The name of the template.",
           "description": "Template Name"
         },
-        "scaleRequirement": {
+        "scaleProperties": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScaleProperty"
@@ -730,7 +734,7 @@
           "type": "string",
           "description": "The stage of the store"
         },
-        "numberOfStore": {
+        "numberOfStores": {
           "type": "integer",
           "format": "int32",
           "description": "Number of the store"

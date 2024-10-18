@@ -23,6 +23,13 @@ To see additional help and options, run:
 ``` yaml
 directive:
   - suppress: R2059
+  - suppress: PutResponseCodes
+    from: subscriptions.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default"].put
+    reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
+  - suppress: PutRequestResponseSchemeArm
+    from: subscriptions.json
+    reason: The models designed in new version of this existing api in which put request, need not be same in response, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29042001", to take this item in future ref for next set of changes.
   - suppress: LroExtension
     from: subscriptions.json
     where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get
@@ -31,6 +38,12 @@ directive:
     from: subscriptions.json
     where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get.responses["202"]
     reason: This api will return 200 and 202 response.
+  - suppress: DeleteResponseCodes
+    from: subscriptions.json
+    reason: The delete subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
+  - suppress: DeleteOperationResponses
+    from: subscriptions.json
+    reason: The delete operation response for subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
 ```
 
 
@@ -40,6 +53,17 @@ These are the global settings for the Subscription API.
 ``` yaml
 openapi-type: arm
 tag: package-2021-10
+```
+
+### Tag: package-2024-08-preview
+
+These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08-preview'
+input-file:
+- Microsoft.Subscription/preview/2024-08-01-preview/subscriptions.json
+title: Initiate, Get and Accept Subscription Changed Directory
+description: Initiate, Get and Accept Subscription Changed Directory
 ```
 
 ### Tag: package-2021-10

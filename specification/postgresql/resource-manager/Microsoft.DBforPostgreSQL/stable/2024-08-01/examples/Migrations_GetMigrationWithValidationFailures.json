@@ -1,0 +1,198 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testrg",
+    "targetDbServerName": "testtarget",
+    "migrationName": "testmigrationwithvalidationfailure"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "a3e2d3cc-b139-4201-9431-e4f3003140fd",
+          "currentStatus": {
+            "state": "ValidationFailed",
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {},
+              "validationDetails": {
+                "status": "Failed",
+                "validationStartTimeInUtc": "2023-10-17T19:19:59.91782Z",
+                "validationEndTimeInUtc": "2023-10-17T19:20:33.1368946Z",
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "SourceVersionValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "ServerParametersValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "c.utf-8",
+                    "startedOn": "2023-10-17T19:20:01.830801Z",
+                    "endedOn": "2023-10-17T19:20:02.810871Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Failed",
+                        "messages": [
+                          {
+                            "state": "Failed",
+                            "message": "Unsupported Extension. Single to Flex migration tool does not support migration of databases having postgres_fdw extension. Consider performing the migration through other migration tools such as pg_dump/pg_restore (https://aka.ms/migrate-using-pgdump-restore)"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "postgres",
+                    "startedOn": "2023-10-17T19:20:01.8309442Z",
+                    "endedOn": "2023-10-17T19:20:02.8109414Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "readme_to_recover",
+                    "startedOn": "2023-10-17T19:20:01.8309447Z",
+                    "endedOn": "2023-10-17T19:20:02.8109415Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "testdb1",
+                    "startedOn": "2023-10-17T19:20:01.8309448Z",
+                    "endedOn": "2023-10-17T19:20:02.8109416Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "testdb2",
+                    "startedOn": "2023-10-17T19:20:01.830945Z",
+                    "endedOn": "2023-10-17T19:20:02.8109418Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "testSchema",
+                    "startedOn": "2023-10-17T19:20:01.8309464Z",
+                    "endedOn": "2023-10-17T19:20:02.8109419Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "UnknownCollationTest",
+                    "startedOn": "2023-10-17T19:20:01.8309465Z",
+                    "endedOn": "2023-10-17T19:20:02.810942Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Failed",
+                        "messages": [
+                          {
+                            "state": "Failed",
+                            "message": "Unsupported Extension. Single to Flex migration tool does not support migration of databases having postgres_fdw extension. Consider performing the migration through other migration tools such as pg_dump/pg_restore (https://aka.ms/migrate-using-pgdump-restore)"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "migrationMode": "Offline",
+          "migrationWindowEndTimeInUtc": "2023-10-17T19:21:00.0434143Z",
+          "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testtarget",
+          "dbsToMigrate": [
+            "c.utf-8",
+            "postgres",
+            "readme_to_recover",
+            "testdb1",
+            "testdb2",
+            "testSchema",
+            "UnknownCollationTest"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2023-10-17T19:19:47.4488908Z",
+          "triggerCutover": "True",
+          "migrateRoles": "False",
+          "migrationOption": "Validate"
+        },
+        "location": "East US",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testtarget/migrations/testmigrationwithvalidationfailure",
+        "name": "testmigrationwithvalidationfailure",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+      }
+    }
+  }
+}

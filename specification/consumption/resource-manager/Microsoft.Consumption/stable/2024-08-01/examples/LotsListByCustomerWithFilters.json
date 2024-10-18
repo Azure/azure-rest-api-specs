@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingAccountId": "1234:5678",
+    "customerId": "1234:5678",
+    "$filter": "status eq 'active' AND source eq 'consumptioncommitment'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234/customers/456/providers/Microsoft.Consumption/lots/lot1",
+            "name": "lot1",
+            "type": "Microsoft.Consumption/lots",
+            "properties": {
+              "originalAmount": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 60.90
+              },
+              "source": "PurchasedCredit",
+              "startDate": "2021-05-01T00:00:00Z",
+              "expirationDate": "2021-05-01T00:00:00Z",
+              "poNumber": "3524",
+              "isEstimatedBalance": false
+            }
+          }
+        ]
+      }
+    }
+  }
+}

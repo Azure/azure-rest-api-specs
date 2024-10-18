@@ -16,3 +16,31 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicessiterecovery/azure/mgmt/recoveryservicessiterecovery
 ```
+
+``` yaml $(python)
+directive: 
+- from: swagger-document
+  where: $.parameters.ResourceGroupName
+  transform: >
+    $["x-ms-parameter-location"] = "client"; 
+
+- from: swagger-document
+  where: $.parameters.ResourceName
+  transform: >
+    $["x-ms-parameter-location"] = "client";
+
+- from: swagger-document
+  where: $.parameters.FabricName
+  transform: >
+    $["x-ms-parameter-location"] = "method";
+
+- from: swagger-document
+  where: $.parameters.ProtectionContainerName
+  transform: >
+    $["x-ms-parameter-location"] = "method";
+
+- from: swagger-document
+  where: $.parameters.ReplicationProtectionClusterName
+  transform: >
+    $["x-ms-parameter-location"] = "method";
+```

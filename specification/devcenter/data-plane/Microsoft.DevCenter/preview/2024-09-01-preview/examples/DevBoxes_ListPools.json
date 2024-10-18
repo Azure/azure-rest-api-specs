@@ -1,0 +1,71 @@
+{
+  "title": "Lists available pools.",
+  "operationId": "DevBoxes_ListPools",
+  "parameters": {
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com",
+    "projectName": "myProject",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/pools/LargeDevWorkStationPool",
+            "name": "LargeDevWorkStationPool",
+            "location": "centralus",
+            "osType": "Windows",
+            "hardwareProfile": {
+              "vCPUs": 8,
+              "memoryGB": 32
+            },
+            "storageProfile": {
+              "osDisk": {
+                "diskSizeGB": 1024
+              }
+            },
+            "hibernateSupport": "Enabled",
+            "imageReference": {
+              "name": "DevImage",
+              "version": "1.0.0",
+              "publishedDate": "2022-03-01T00:13:23.323Z"
+            },
+            "stopOnDisconnect": {
+              "status": "Enabled",
+              "gracePeriodMinutes": 60
+            },
+            "healthStatus": "Healthy",
+            "displayName": "LargePool"
+          },
+          {
+            "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/pools/SQLDevelopmentMachinePool",
+            "name": "SQLDevelopmentMachinePool",
+            "location": "southcentralus",
+            "osType": "Windows",
+            "hardwareProfile": {
+              "vCPUs": 16,
+              "memoryGB": 128
+            },
+            "storageProfile": {
+              "osDisk": {
+                "diskSizeGB": 1024
+              }
+            },
+            "hibernateSupport": "Enabled",
+            "imageReference": {
+              "name": "SqlDevImage",
+              "version": "1.0.0",
+              "publishedDate": "2022-03-01T00:13:23.323Z"
+            },
+            "stopOnDisconnect": {
+              "status": "Enabled",
+              "gracePeriodMinutes": 60
+            },
+            "healthStatus": "Healthy",
+            "displayName": "SQLPool"
+          }
+        ]
+      }
+    }
+  }
+}

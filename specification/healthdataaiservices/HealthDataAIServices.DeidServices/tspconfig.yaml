@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/healthdataaiservices"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{project-root}/../data-plane/{service-name}/{version-status}/{version}/{service-name}.json"
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-health-deidentification"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Health.Deidentification"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "azure-health-deidentification"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/health-deidentification"
+      description: "Health Deidentification Service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-health-deidentification"
+    namespace: "com.azure.health.deidentification"
+    flavor: azure
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Disabling as #suppress not working for namespace"

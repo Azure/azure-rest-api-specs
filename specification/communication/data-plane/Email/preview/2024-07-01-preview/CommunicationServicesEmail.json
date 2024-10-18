@@ -1,0 +1,390 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EmailClient",
+    "description": "Azure Communication Email Service",
+    "version": "2024-07-01-preview"
+  },
+  "paths": {
+    "/emails/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "EmailGetSendResult"
+        ],
+        "summary": "Gets the status of the email send operation.",
+        "operationId": "Email_GetSendResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "ID of the long running operation (GUID) returned from a previous call to send email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code - this will be the same as the code in the error property in the response body.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Message status was successfully retrieved.",
+            "headers": {
+              "retry-after": {
+                "description": "This header will only be present when the status is a non-terminal status. It indicates the minimum amount of time in seconds to wait before polling for operation status again.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/EmailSendResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Message Status FailedTerminalStatus": {
+            "$ref": "./examples/GetOperationStatusReturnsFailedTerminalStatus.json"
+          },
+          "Get Message Status NonTerminalStatus": {
+            "$ref": "./examples/GetOperationStatusReturnsNonTerminalStatus.json"
+          },
+          "Get Message Status SuccessTerminalStatus": {
+            "$ref": "./examples/GetOperationStatusReturnsSuccessTerminalStatus.json"
+          }
+        }
+      }
+    },
+    "/emails:send": {
+      "post": {
+        "tags": [
+          "EmailSend"
+        ],
+        "summary": "Queues an email message to be sent to one or more recipients",
+        "operationId": "Email_Send",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "description": "This is the ID provided by the customer to identify the long running operation. If an ID is not provided by the customer, the service will generate one.",
+            "type": "string",
+            "required": false,
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-request-id",
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "type": "string",
+            "required": false,
+            "format": "uuid",
+            "x-ms-client-name": "ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "emailMessage",
+            "description": "Message payload for sending an email",
+            "required": true,
+            "x-ms-client-name": "message",
+            "schema": {
+              "$ref": "#/definitions/EmailMessage"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code - this will be the same as the code in the error property in the response body.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the request and will start processing the message later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation/message status using the URL specified in 'Operation-Location' header. Once the send operation has succeeded, you can get additional status about email delivery through either Azure Monitor or Event Grid events (for events reference, please refer to: https://learn.microsoft.com/en-us/azure/event-grid/communication-services-email-events)",
+            "headers": {
+              "Operation-Location": {
+                "description": "Location url of where to poll the status of this operation from.",
+                "type": "string"
+              },
+              "retry-after": {
+                "description": "This header will only be present when the operation status is a non-terminal status. It indicates the minimum amount of time in seconds to wait before polling for operation status again.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/EmailSendResult"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Send Email": {
+            "$ref": "./examples/SendEmail.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EmailSendResult": {
+      "description": "Status of the long running operation",
+      "required": [
+        "id",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id of the operation. Use a UUID.",
+          "type": "string",
+          "example": "8540c0de-899f-5cce-acb5-3ec493af3800"
+        },
+        "status": {
+          "description": "Status of operation.",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EmailSendStatus",
+            "modelAsString": true
+          }
+        },
+        "error": {
+          "description": "Error details when status is a non-success terminal state.",
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "EmailMessage": {
+      "description": "Message payload for sending an email",
+      "required": [
+        "senderAddress",
+        "content",
+        "recipients"
+      ],
+      "type": "object",
+      "properties": {
+        "headers": {
+          "description": "Custom email headers to be passed.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "senderAddress": {
+          "description": "Sender email address from a verified domain.",
+          "type": "string",
+          "example": "info@contoso.com"
+        },
+        "content": {
+          "description": "Email content to be sent.",
+          "$ref": "#/definitions/EmailContent"
+        },
+        "recipients": {
+          "description": "Recipients for the email.",
+          "$ref": "#/definitions/EmailRecipients"
+        },
+        "attachments": {
+          "description": "List of attachments. Please note that we limit the total size of an email request (which includes both regular and inline attachments) to 10MB.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailAttachment"
+          }
+        },
+        "replyTo": {
+          "description": "Email addresses where recipients' replies will be sent to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailAddress"
+          }
+        },
+        "userEngagementTrackingDisabled": {
+          "description": "Indicates whether user engagement tracking should be disabled for this request if the resource-level user engagement tracking setting was already enabled in the control plane.",
+          "type": "boolean"
+        }
+      }
+    },
+    "EmailAddress": {
+      "description": "An object representing the email address and its display name",
+      "type": "object",
+      "required": [
+        "address"
+      ],
+      "properties": {
+        "address": {
+          "description": "Email address.",
+          "type": "string",
+          "example": "abc@contoso.com"
+        },
+        "displayName": {
+          "description": "Email display name.",
+          "type": "string",
+          "example": "abc"
+        }
+      }
+    },
+    "EmailContent": {
+      "description": "Content of the email.",
+      "type": "object",
+      "required": [
+        "subject"
+      ],
+      "properties": {
+        "subject": {
+          "description": "Subject of the email message",
+          "type": "string",
+          "example": "An exciting offer especially for you!"
+        },
+        "plainText": {
+          "description": "Plain text version of the email message.",
+          "type": "string",
+          "example": "This exciting offer was created especially for you, our most loyal customer."
+        },
+        "html": {
+          "description": "Html version of the email message.",
+          "type": "string",
+          "example": "<html><head><title>Exciting offer!</title></head><body><h1>This exciting offer was created especially for you, our most loyal customer.</h1></body></html>"
+        }
+      }
+    },
+    "EmailAttachment": {
+      "description": "Attachment to the email.",
+      "type": "object",
+      "required": [
+        "name",
+        "contentType",
+        "contentInBase64"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the attachment",
+          "type": "string",
+          "example": "attachment.pdf"
+        },
+        "contentType": {
+          "description": "MIME type of the content being attached.",
+          "type": "string",
+          "example": "text/plain"
+        },
+        "contentInBase64": {
+          "description": "Base64 encoded contents of the attachment",
+          "type": "string",
+          "format": "byte",
+          "example": "TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQ="
+        },
+        "contentId": {
+          "description": "Unique identifier (CID) to reference an inline attachment.",
+          "type": "string",
+          "example": "inline_image_id"
+        }
+      }
+    },
+    "EmailRecipients": {
+      "description": "Recipients of the email",
+      "type": "object",
+      "required": [
+        "to"
+      ],
+      "properties": {
+        "to": {
+          "description": "Email To recipients",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailAddress"
+          }
+        },
+        "cc": {
+          "description": "Email CC recipients",
+          "type": "array",
+          "x-ms-client-name": "CC",
+          "items": {
+            "$ref": "#/definitions/EmailAddress"
+          }
+        },
+        "bcc": {
+          "description": "Email BCC recipients",
+          "type": "array",
+          "x-ms-client-name": "BCC",
+          "items": {
+            "$ref": "#/definitions/EmailAddress"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "An authentication string containing a signature generated using HMAC-SHA256 scheme."
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "url",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  }
+}

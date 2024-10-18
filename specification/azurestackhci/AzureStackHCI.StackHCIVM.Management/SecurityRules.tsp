@@ -42,5 +42,5 @@ interface SecurityRules {
   delete is ArmResourceDeleteWithoutOkAsync<SecurityRule>;
 
   @doc("Gets all security rules in a Network Security Group.")
-  list is ArmResourceListByParent<SecurityRule>;
+  listByNetworkSecurityGroup is ArmResourceListByParent<SecurityRule>;
 }

@@ -31,7 +31,6 @@ interface DevCenterResourceOperations<
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Custom template"
   #suppress "@azure-tools/typespec-providerhub/no-inline-model" "This operation signature is not used in Azure Resource Manager operations (yet)"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "This operation must return a status monitor in its response."
-  @Foundations.Private.ensureVerb("LongRunningResourceAction", "POST")
   @action
   @actionSeparator(":")
   LongRunningResourceAction<

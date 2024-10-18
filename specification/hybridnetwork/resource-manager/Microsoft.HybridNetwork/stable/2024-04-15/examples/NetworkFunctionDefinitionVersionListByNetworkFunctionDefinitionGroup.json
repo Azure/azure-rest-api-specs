@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher",
+    "networkFunctionDefinitionGroupName": "TestNetworkFunctionDefinitionGroupNameName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "networkFunctionDefinitionVersionName",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/publisherskuGroups/networkFunctionDefinitionGroupName/networkFunctionDefinitionVersions/TestVersion",
+            "type": "Microsoft.HybridNetwork/publishers/publisherskugroups/publisherskuversions",
+            "location": "eastus",
+            "properties": {
+              "versionState": "Active",
+              "deployParameters": "{\"releaseName\":{\"type\":\"string\"},\"namespace\":{\"type\":\"string\"}}",
+              "networkFunctionType": "ContainerizedNetworkFunction",
+              "networkFunctionTemplate": {
+                "nfviType": "AzureArcKubernetes",
+                "networkFunctionApplications": [
+                  {
+                    "name": "fedrbac",
+                    "artifactType": "HelmPackage",
+                    "dependsOnProfile": {
+                      "installDependsOn": [],
+                      "uninstallDependsOn": [],
+                      "updateDependsOn": []
+                    },
+                    "artifactProfile": {
+                      "artifactStore": {
+                        "id": "/subscriptions/subid/resourcegroups/rg/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/testArtifactStore"
+                      },
+                      "helmArtifactProfile": {
+                        "helmPackageName": "fed-rbac",
+                        "helmPackageVersionRange": "~2.1.3",
+                        "registryValuesPaths": [
+                          "global.registry.docker.repoPath"
+                        ],
+                        "imagePullSecretsValuesPaths": [
+                          "global.imagePullSecrets"
+                        ]
+                      }
+                    },
+                    "deployParametersMappingRuleProfile": {
+                      "applicationEnablement": "Enabled",
+                      "helmMappingRuleProfile": {
+                        "releaseNamespace": "{deployParameters.namesapce}",
+                        "releaseName": "{deployParameters.releaseName}",
+                        "helmPackageVersion": "2.1.3",
+                        "values": "",
+                        "options": {
+                          "installOptions": {
+                            "atomic": "true",
+                            "wait": "waitValue",
+                            "timeout": "30"
+                          },
+                          "upgradeOptions": {
+                            "atomic": "true",
+                            "wait": "waitValue",
+                            "timeout": "30"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

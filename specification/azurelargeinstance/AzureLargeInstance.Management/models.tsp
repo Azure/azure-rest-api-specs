@@ -292,20 +292,44 @@ model AzureLargeInstanceProperties {
   @doc("Specifies the network settings for the Azure Large Instance.")
   networkProfile?: NetworkProfile;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "azureLargeInstanceId")
   @doc("Specifies the Azure Large Instance unique ID.")
   @visibility("read")
+  azureLargeInstanceIdOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the Azure Large Instance unique ID.")
   azureLargeInstanceId?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "powerState")
   @doc("Resource power state")
   @visibility("read")
+  powerStateOld?: AzureLargeInstancePowerStateEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Resource power state")
   powerState?: AzureLargeInstancePowerStateEnum;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "proximityPlacementGroup")
   @doc("Resource proximity placement group")
   @visibility("read")
+  proximityPlacementGroupOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Resource proximity placement group")
   proximityPlacementGroup?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "hwRevision")
   @doc("Hardware revision of an Azure Large Instance")
   @visibility("read")
+  hwRevisionOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Hardware revision of an Azure Large Instance")
   hwRevision?: string;
 
   @doc("""
@@ -322,19 +346,37 @@ model AzureLargeInstanceProperties {
 
 @doc("Specifies the hardware settings for the Azure Large Instance.")
 model HardwareProfile {
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "hardwareType")
   @doc("Name of the hardware type (vendor and/or their product name)")
   @visibility("read")
+  hardwareTypeOld?: AzureLargeInstanceHardwareTypeNamesEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Name of the hardware type (vendor and/or their product name)")
   hardwareType?: AzureLargeInstanceHardwareTypeNamesEnum;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "azureLargeInstanceSize")
   @doc("Specifies the Azure Large Instance SKU.")
   @visibility("read")
+  azureLargeInstanceSizeOld?: AzureLargeInstanceSizeNamesEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the Azure Large Instance SKU.")
   azureLargeInstanceSize?: AzureLargeInstanceSizeNamesEnum;
 }
 
 @doc("Specifies the storage settings for the Azure Large Instance disks.")
 model StorageProfile {
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "nfsIpAddress")
   @doc("IP Address to connect to storage.")
   @visibility("read")
+  nfsIpAddressOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("IP Address to connect to storage.")
   nfsIpAddress?: string;
 
   @doc("""
@@ -368,12 +410,24 @@ model OsProfile {
   @doc("Specifies the host OS name of the Azure Large Instance.")
   computerName?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "osType")
   @doc("This property allows you to specify the type of the OS.")
   @visibility("read")
+  osTypeOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("This property allows you to specify the type of the OS.")
   osType?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "version")
   @doc("Specifies version of operating system.")
   @visibility("read")
+  versionOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies version of operating system.")
   version?: string;
 
   @doc("Specifies the SSH public key used to access the operating system.")
@@ -386,8 +440,14 @@ model NetworkProfile {
   @extension("x-ms-identifiers", [])
   networkInterfaces?: IpAddress[];
 
+  @removed(Versions.v2024_08_01_preview)
   @doc("Specifies the circuit id for connecting to express route.")
+  @renamedFrom(Versions.v2024_08_01_preview, "circuitId")
   @visibility("read")
+  circuitIdOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the circuit id for connecting to express route.")
   circuitId?: string;
 }
 
@@ -461,3 +521,17 @@ model StorageBillingProperties {
   @doc("the SKU type that is provisioned")
   sku?: string;
 }
+
+@doc("The type used for updating tags in AzureLargeStorageInstance resources.")
+model AzureLargeStorageInstanceTagsUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
+  @clientName("tagsValue", "csharp")
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  ...ManagedServiceIdentityProperty;
+}
+@@added(AzureLargeStorageInstanceTagsUpdate.identity,
+  Versions.v2024_08_01_preview
+);

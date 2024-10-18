@@ -229,3 +229,15 @@ model ClinicalCodedElement {
   @doc("A value associated with the code within the given clinical coding system.")
   value?: string;
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};

@@ -56,5 +56,5 @@ interface SAPInstances {
    * Lists the SAP Instance resources for the given SAP Migration discovery site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
-  list is ArmResourceListByParent<SAPInstance>;
+  ListBySapDiscoverySite is ArmResourceListByParent<SAPInstance>;
 }

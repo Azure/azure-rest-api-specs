@@ -1,0 +1,658 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks": {
+      "get": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Gets a list of replication links on database.",
+        "operationId": "ReplicationLinks_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of replication links.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLinkListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 ReplicationLinksReplicationLinkTypeIsInvalid - The LinkType is invalid. Valid values are STANDBY and GEO.\n\n * 400 ReplicationLinksCreateIsNotSupported - Creation of Replication Link is not supported.\n\n * 400 LedgerNoDropLink - Geo-replication cannot be stopped because the database has Ledger Digest Uploads enabled. Disable Ledger Digest Uploads and retry the operation.\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List replication links on server on database.": {
+            "$ref": "./examples/ReplicationLinkListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}": {
+      "get": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Gets a replication link.",
+        "operationId": "ReplicationLinks_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "description": "The name of the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified replication link.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 ReplicationLinksReplicationLinkTypeIsInvalid - The LinkType is invalid. Valid values are STANDBY and GEO.\n\n * 400 ReplicationLinksCreateIsNotSupported - Creation of Replication Link is not supported.\n\n * 400 LedgerNoDropLink - Geo-replication cannot be stopped because the database has Ledger Digest Uploads enabled. Disable Ledger Digest Uploads and retry the operation.\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the replication link.": {
+            "$ref": "./examples/ReplicationLinkGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Updates the replication link type.",
+        "operationId": "ReplicationLinks_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the replication link.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 ReplicationLinksReplicationLinkTypeIsInvalid - The LinkType is invalid. Valid values are STANDBY and GEO.\n\n * 400 ReplicationLinksCreateIsNotSupported - Creation of Replication Link is not supported.\n\n * 400 LedgerNoDropLink - Geo-replication cannot be stopped because the database has Ledger Digest Uploads enabled. Disable Ledger Digest Uploads and retry the operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 VBSEnclaveNotSupportedForGeoReplicationWithDefaultEnclave - Configuring geo-replication is not supported for databases using different values of the preferredEnclaveType property. The primary '{0}' database on the '{1}' server uses the '{2}' preferredEnclaveType, whereas the specified preferredEnclaveType for the secondary '{3}' database on the '{4}' server is '{5}'.\n\n * 400 VBSEnclaveNotSupportedForPlannedFailoverBetweenDatabasesWithDifferentPreferredEnclaveTypes - Planned failover between primary and secondary database with different preferredEnclaveType is not supported for Virtualization-based security (VBS) enclaves.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 PlannedFailoverTimedOut - User invoked planned failover, and it timed out while trying to contact the partner management service.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication operation was performed on a database that is not in a replication relationship.\n\n * 409 GeoReplicationCannotBecomePrimaryDuringUndo - User attempted to failover or force-terminate a geo-link while the secondary is in a state where it may not be physically consistent and so cannot enter the primary role.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 FailoverGroupAlreadySetup - The operation cannot be performed because the geo-replication link is part of a Failover Group. You must remove the database from the group in order to individually terminate or failover.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Update operation is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates Replication Link": {
+            "$ref": "./examples/ReplicationLinkCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Deletes the replication link.",
+        "operationId": "ReplicationLinks_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 ReplicationLinksReplicationLinkTypeIsInvalid - The LinkType is invalid. Valid values are STANDBY and GEO.\n\n * 400 ReplicationLinksCreateIsNotSupported - Creation of Replication Link is not supported.\n\n * 400 LedgerNoDropLink - Geo-replication cannot be stopped because the database has Ledger Digest Uploads enabled. Disable Ledger Digest Uploads and retry the operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 VBSEnclaveNotSupportedForGeoReplicationWithDefaultEnclave - Configuring geo-replication is not supported for databases using different values of the preferredEnclaveType property. The primary '{0}' database on the '{1}' server uses the '{2}' preferredEnclaveType, whereas the specified preferredEnclaveType for the secondary '{3}' database on the '{4}' server is '{5}'.\n\n * 400 VBSEnclaveNotSupportedForPlannedFailoverBetweenDatabasesWithDifferentPreferredEnclaveTypes - Planned failover between primary and secondary database with different preferredEnclaveType is not supported for Virtualization-based security (VBS) enclaves.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 PlannedFailoverTimedOut - User invoked planned failover, and it timed out while trying to contact the partner management service.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication operation was performed on a database that is not in a replication relationship.\n\n * 409 GeoReplicationCannotBecomePrimaryDuringUndo - User attempted to failover or force-terminate a geo-link while the secondary is in a state where it may not be physically consistent and so cannot enter the primary role.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 FailoverGroupAlreadySetup - The operation cannot be performed because the geo-replication link is part of a Failover Group. You must remove the database from the group in order to individually terminate or failover.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Deletion operation is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete replication link on server": {
+            "$ref": "./examples/ReplicationLinkDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Updates the replication link type.",
+        "operationId": "ReplicationLinks_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplicationLinkUpdate"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the replication link.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 ReplicationLinksReplicationLinkTypeIsInvalid - The LinkType is invalid. Valid values are STANDBY and GEO.\n\n * 400 ReplicationLinksCreateIsNotSupported - Creation of Replication Link is not supported.\n\n * 400 LedgerNoDropLink - Geo-replication cannot be stopped because the database has Ledger Digest Uploads enabled. Disable Ledger Digest Uploads and retry the operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 VBSEnclaveNotSupportedForGeoReplicationWithDefaultEnclave - Configuring geo-replication is not supported for databases using different values of the preferredEnclaveType property. The primary '{0}' database on the '{1}' server uses the '{2}' preferredEnclaveType, whereas the specified preferredEnclaveType for the secondary '{3}' database on the '{4}' server is '{5}'.\n\n * 400 VBSEnclaveNotSupportedForPlannedFailoverBetweenDatabasesWithDifferentPreferredEnclaveTypes - Planned failover between primary and secondary database with different preferredEnclaveType is not supported for Virtualization-based security (VBS) enclaves.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 PlannedFailoverTimedOut - User invoked planned failover, and it timed out while trying to contact the partner management service.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication operation was performed on a database that is not in a replication relationship.\n\n * 409 GeoReplicationCannotBecomePrimaryDuringUndo - User attempted to failover or force-terminate a geo-link while the secondary is in a state where it may not be physically consistent and so cannot enter the primary role.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 FailoverGroupAlreadySetup - The operation cannot be performed because the geo-replication link is part of a Failover Group. You must remove the database from the group in order to individually terminate or failover.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Update operation is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update Replication Link": {
+            "$ref": "./examples/ReplicationLinkUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/failover": {
+      "post": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Fails over from the current primary server to this server.",
+        "operationId": "ReplicationLinks_Failover",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "description": "The name of the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully failed over.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 ReplicationLinksReplicationLinkTypeIsInvalid - The LinkType is invalid. Valid values are STANDBY and GEO.\n\n * 400 ReplicationLinksCreateIsNotSupported - Creation of Replication Link is not supported.\n\n * 400 LedgerNoDropLink - Geo-replication cannot be stopped because the database has Ledger Digest Uploads enabled. Disable Ledger Digest Uploads and retry the operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 VBSEnclaveNotSupportedForGeoReplicationWithDefaultEnclave - Configuring geo-replication is not supported for databases using different values of the preferredEnclaveType property. The primary '{0}' database on the '{1}' server uses the '{2}' preferredEnclaveType, whereas the specified preferredEnclaveType for the secondary '{3}' database on the '{4}' server is '{5}'.\n\n * 400 VBSEnclaveNotSupportedForPlannedFailoverBetweenDatabasesWithDifferentPreferredEnclaveTypes - Planned failover between primary and secondary database with different preferredEnclaveType is not supported for Virtualization-based security (VBS) enclaves.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 PlannedFailoverTimedOut - User invoked planned failover, and it timed out while trying to contact the partner management service.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication operation was performed on a database that is not in a replication relationship.\n\n * 409 GeoReplicationCannotBecomePrimaryDuringUndo - User attempted to failover or force-terminate a geo-link while the secondary is in a state where it may not be physically consistent and so cannot enter the primary role.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 FailoverGroupAlreadySetup - The operation cannot be performed because the geo-replication link is part of a Failover Group. You must remove the database from the group in order to individually terminate or failover.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Failover operation is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Planned failover of a replication link": {
+            "$ref": "./examples/ReplicationLinkFailover.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/forceFailoverAllowDataLoss": {
+      "post": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Fails over from the current primary server to this server allowing data loss.",
+        "operationId": "ReplicationLinks_FailoverAllowDataLoss",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "description": "The name of the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully failed over.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 ReplicationLinksReplicationLinkTypeIsInvalid - The LinkType is invalid. Valid values are STANDBY and GEO.\n\n * 400 ReplicationLinksCreateIsNotSupported - Creation of Replication Link is not supported.\n\n * 400 LedgerNoDropLink - Geo-replication cannot be stopped because the database has Ledger Digest Uploads enabled. Disable Ledger Digest Uploads and retry the operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 VBSEnclaveNotSupportedForGeoReplicationWithDefaultEnclave - Configuring geo-replication is not supported for databases using different values of the preferredEnclaveType property. The primary '{0}' database on the '{1}' server uses the '{2}' preferredEnclaveType, whereas the specified preferredEnclaveType for the secondary '{3}' database on the '{4}' server is '{5}'.\n\n * 400 VBSEnclaveNotSupportedForPlannedFailoverBetweenDatabasesWithDifferentPreferredEnclaveTypes - Planned failover between primary and secondary database with different preferredEnclaveType is not supported for Virtualization-based security (VBS) enclaves.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 PlannedFailoverTimedOut - User invoked planned failover, and it timed out while trying to contact the partner management service.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication operation was performed on a database that is not in a replication relationship.\n\n * 409 GeoReplicationCannotBecomePrimaryDuringUndo - User attempted to failover or force-terminate a geo-link while the secondary is in a state where it may not be physically consistent and so cannot enter the primary role.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 FailoverGroupAlreadySetup - The operation cannot be performed because the geo-replication link is part of a Failover Group. You must remove the database from the group in order to individually terminate or failover.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Failover operation is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Forced failover of a replication link": {
+            "$ref": "./examples/ReplicationLinkFailoverAllowDataLoss.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/replicationLinks": {
+      "get": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Gets a list of replication links.",
+        "operationId": "ReplicationLinks_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of replication links.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLinkListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List replication links on server": {
+            "$ref": "./examples/ReplicationLinkListByServer.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ReplicationLink": {
+      "description": "A replication link.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReplicationLinkProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ReplicationLinkListResult": {
+      "description": "A list of replication links.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationLink"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationLinkProperties": {
+      "description": "Properties of a replication link.",
+      "type": "object",
+      "properties": {
+        "partnerServer": {
+          "description": "Resource partner server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerDatabase": {
+          "description": "Resource partner database.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerDatabaseId": {
+          "description": "Resource partner database Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerLocation": {
+          "description": "Resource partner location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "role": {
+          "description": "Local replication role.",
+          "enum": [
+            "Primary",
+            "Secondary",
+            "NonReadableSecondary",
+            "Source",
+            "Copy"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReplicationRole",
+            "modelAsString": false
+          }
+        },
+        "partnerRole": {
+          "description": "Partner replication role.",
+          "enum": [
+            "Primary",
+            "Secondary",
+            "NonReadableSecondary",
+            "Source",
+            "Copy"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReplicationRole",
+            "modelAsString": false
+          }
+        },
+        "replicationMode": {
+          "description": "Replication mode.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Time at which the link was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Seeding completion percentage for the link.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "replicationState": {
+          "description": "Replication state (PENDING, SEEDING, CATCHUP, SUSPENDED).",
+          "enum": [
+            "PENDING",
+            "SEEDING",
+            "CATCH_UP",
+            "SUSPENDED"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReplicationState",
+            "modelAsString": true
+          }
+        },
+        "isTerminationAllowed": {
+          "description": "Whether the user is currently allowed to terminate the link.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "linkType": {
+          "description": "Link type (GEO, NAMED, STANDBY). Update operation does not support NAMED.",
+          "enum": [
+            "GEO",
+            "NAMED",
+            "STANDBY"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReplicationLinkType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ReplicationLinkUpdate": {
+      "description": "A replication link update request.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReplicationLinkUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ReplicationLinkUpdateProperties": {
+      "description": "Properties of a replication link update.",
+      "type": "object",
+      "properties": {
+        "linkType": {
+          "description": "Link type (GEO, NAMED, STANDBY). Update operation does not support NAMED.",
+          "enum": [
+            "GEO",
+            "NAMED",
+            "STANDBY"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReplicationLinkType",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

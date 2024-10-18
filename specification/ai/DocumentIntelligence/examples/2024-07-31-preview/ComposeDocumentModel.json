@@ -1,0 +1,28 @@
+{
+  "operationId": "DocumentModels_ComposeModel",
+  "title": "Compose Document Model",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-07-31-preview",
+    "composeRequest": {
+      "modelId": "composedModel",
+      "description": "Composed model description",
+      "classifierId": "customClassifier",
+      "docTypes": {
+        "formA": {
+          "modelId": "model1"
+        },
+        "formB": {
+          "modelId": "model2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/documentintelligence/operations/b704bb00-d130-4f3f-a1d8-ca96de3eabb4?api-version=2024-07-31-preview"
+      }
+    }
+  }
+}

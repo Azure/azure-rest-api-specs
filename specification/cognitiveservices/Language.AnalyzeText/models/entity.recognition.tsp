@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 /** The entity recognition analyze text input task request. */
 model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {

@@ -42,7 +42,8 @@ function Get-ChangedCoreFiles($changedFiles = (Get-ChangedFiles)) {
     ".prettierrc.json",
     "package-lock.json",
     "package.json",
-    "tsconfig.json"
+    "tsconfig.json",
+    "specification/suppressions.yaml"
   )
 
   $coreFiles = $changedFiles.Where({ 

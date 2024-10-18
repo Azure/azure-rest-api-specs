@@ -1,0 +1,153 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "managedInstanceName": "managedInstance",
+    "databaseName": "testdb",
+    "restoreDetailsName": "Default",
+    "api-version": "2024-05-01-preview",
+    "parameters": {
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "type": "LRSRestore",
+          "status": "Restoring",
+          "lastUploadedFileName": "RestoreDetailsFullBlownExampleLog11.bak",
+          "lastUploadedFileTime": "2022-03-01T07:54:21Z",
+          "lastRestoredFileName": "RestoreDetailsFullBlownExampleLog9_1.bak",
+          "lastRestoredFileTime": "2022-05-09T12:27:20.4936305Z",
+          "percentCompleted": 53,
+          "currentRestoredSizeMB": 25,
+          "currentRestorePlanSizeMB": 47,
+          "currentBackupType": "Log",
+          "currentRestoringFileName": "RestoreDetailsFullBlownExampleLog10.bak",
+          "numberOfFilesDetected": 25,
+          "numberOfFilesQueued": 1,
+          "numberOfFilesSkipped": 8,
+          "numberOfFilesRestoring": 1,
+          "numberOfFilesRestored": 14,
+          "numberOfFilesUnrestorable": 1,
+          "fullBackupSets": [
+            {
+              "status": "Skipped",
+              "firstStripeName": "RestoreDetailsFullBlownExampleFull2.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 2
+            },
+            {
+              "status": "Restored",
+              "firstStripeName": "RestoreDetailsFullBlownExampleFull3_1.bak",
+              "numberOfStripes": 3,
+              "backupSizeMB": 3,
+              "restoreStartedTimestampUtc": "2022-05-09T12:15:40.3143263Z",
+              "restoreFinishedTimestampUtc": "2022-05-09T12:18:41.3785089Z"
+            }
+          ],
+          "diffBackupSets": [
+            {
+              "status": "Skipped",
+              "firstStripeName": "RestoreDetailsFullBlownExampleDiff2.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 0
+            },
+            {
+              "status": "Restored",
+              "firstStripeName": "RestoreDetailsFullBlownExampleDiff3_1.bak",
+              "numberOfStripes": 3,
+              "backupSizeMB": 1,
+              "restoreStartedTimestampUtc": "2022-05-09T12:19:40.5455092Z",
+              "restoreFinishedTimestampUtc": "2022-05-09T12:20:21.3667454Z"
+            }
+          ],
+          "logBackupSets": [
+            {
+              "status": "Skipped",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog2.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 0
+            },
+            {
+              "status": "Skipped",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog3.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 8
+            },
+            {
+              "status": "Skipped",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog4.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 11
+            },
+            {
+              "status": "Restored",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog5.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 7,
+              "restoreStartedTimestampUtc": "2022-05-09T12:21:01.7717453Z",
+              "restoreFinishedTimestampUtc": "2022-05-09T12:21:54.7557851Z"
+            },
+            {
+              "status": "Restored",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog6.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 3,
+              "restoreStartedTimestampUtc": "2022-05-09T12:22:41.8784062Z",
+              "restoreFinishedTimestampUtc": "2022-05-09T12:23:03.709407Z"
+            },
+            {
+              "status": "Restored",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog7.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 4,
+              "restoreStartedTimestampUtc": "2022-05-09T12:23:36.6264066Z",
+              "restoreFinishedTimestampUtc": "2022-05-09T12:23:52.9274047Z"
+            },
+            {
+              "status": "Restored",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog8.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 3,
+              "restoreStartedTimestampUtc": "2022-05-09T12:24:25.899407Z",
+              "restoreFinishedTimestampUtc": "2022-05-09T12:24:37.9954063Z"
+            },
+            {
+              "status": "Restored",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog9_1.bak",
+              "numberOfStripes": 4,
+              "backupSizeMB": 4,
+              "restoreStartedTimestampUtc": "2022-05-09T12:25:10.8804065Z",
+              "restoreFinishedTimestampUtc": "2022-05-09T12:25:27.808409Z"
+            },
+            {
+              "status": "Restoring",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog10.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 15,
+              "restoreStartedTimestampUtc": "2022-05-09T12:26:00.7813103Z"
+            },
+            {
+              "status": "Queued",
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog11.bak",
+              "numberOfStripes": 1,
+              "backupSizeMB": 7
+            }
+          ],
+          "unrestorableFiles": [
+            {
+              "name": "ImageFile.JPG"
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/databases/testdb/restoreDetails/current",
+        "name": "current",
+        "type": "Microsoft.Sql/managedInstances/databases/restoreDetails"
+      }
+    }
+  }
+}

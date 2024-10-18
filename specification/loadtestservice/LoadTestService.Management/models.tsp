@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -24,6 +25,67 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   name: string;
 
   ...ManagedServiceIdentityProperty;
+}
+
+@extensionResource
+@doc("LoadTest mapping resource details")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestMappingResource is ProxyResource<LoadTestMappingProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  @doc("Load Test Mapping name")
+  @key("loadTestMappingName")
+  @path
+  @segment("loadTestMappings")
+  @pattern("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
+@doc("Azure LoadTest mapping resource properties.")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestMappingProperties {
+  @doc("Mapped source resource Id.")
+  @maxLength(1024)
+  sourceResourceId?: string;
+
+  @doc("Mapped Azure Load Test resource Id.")
+  @maxLength(1024)
+  azureLoadTestingResourceId?: string;
+
+  @doc("Mapped Azure Load Test resource test-id.")
+  @maxLength(256)
+  testId?: string;
+}
+
+@extensionResource
+@doc("LoadTest profile mapping resource details")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestProfileMappingResource
+  is ProxyResource<LoadTestProfileMappingProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  @doc("Load Test Profile Mapping name")
+  @key("loadTestProfileMappingName")
+  @path
+  @segment("loadTestProfileMappings")
+  @pattern("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
+@doc("Azure LoadTest profile mapping resource properties.")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestProfileMappingProperties {
+  @doc("Mapped source resource Id.")
+  @maxLength(1024)
+  sourceResourceId?: string;
+
+  @doc("Mapped Azure Load Test resource Id.")
+  @maxLength(1024)
+  azureLoadTestingResourceId?: string;
+
+  @doc("Mapped Azure Load Test resource test-profile-id.")
+  @maxLength(60)
+  testProfileId?: string;
 }
 
 @doc("Resources provisioning states.")
@@ -126,7 +188,6 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @key("quotaBucketName")
   @path
   @segment("quotas")
-  @extension("x-ms-parameter-location", "method")
   name: string;
 }
 
@@ -168,8 +229,9 @@ model CheckQuotaAvailabilityResponse {
   @visibility("read")
   name?: string;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("Check quota availability response properties.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
 
@@ -184,7 +246,8 @@ model CheckQuotaAvailabilityResponseProperties {
 
 @doc("Request object of new quota for a quota bucket.")
 model QuotaBucketRequest {
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
 }
@@ -219,5 +282,5 @@ model QuotaBucketRequestPropertiesDimensions {
 }
 
 @doc("Values returned by the List operation.")
-model OutboundEnvironmentEndpointCollection
+model PagedOutboundEnvironmentEndpoint
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;

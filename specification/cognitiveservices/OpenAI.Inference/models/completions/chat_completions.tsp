@@ -48,6 +48,21 @@ model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
   type: "json_object";
 }
 
+// Deferred to a near-term future release after publish; see:
+// https://github.com/Azure/azure-rest-api-specs/pull/30087
+//
+// /**
+//  * Options for streaming response. Only set this when you set `stream: true`.
+//  */
+// @added(ServiceApiVersions.v2024_07_01_Preview)
+// model ChatCompletionStreamOptions {
+//   /**
+//    * If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.
+//    */
+//   #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+//   include_usage?: boolean;
+// }
+
 @doc("""
   The configuration information for a chat completions request.
   Completions support a wide variety of tasks and generate text that continues from or "completes"
@@ -158,6 +173,17 @@ model ChatCompletionsOptions {
   @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
+  // Deferred to a near-term future release after publish; see:
+  // https://github.com/Azure/azure-rest-api-specs/pull/30087
+  //
+  // /**
+  //  * Options for streaming response. Only set this when you set `stream: true`.
+  //  */
+  // #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+  // #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  // @added(ServiceApiVersions.v2024_07_01_Preview)
+  // stream_options?: ChatCompletionStreamOptions | null;
+
   @doc("""
     The model name to provide as part of this completions request.
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
@@ -216,6 +242,7 @@ model ChatCompletionsOptions {
   @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
   tools?: ChatCompletionsToolDefinition[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
   @encodedName("application/json", "tool_choice")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
@@ -248,13 +275,15 @@ model ChatChoice {
   @encodedName("application/json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
-  // Note: this property is currently speculative via observation and not yet documented anywhere.
+  // Note: this property was briefly present for gpt-4-vision-preview; it's retained here for posterity for the
+  // lifetime of the service API versions impacted.
 
   @doc("""
     The reason the model stopped generating tokens, together with any applicable details.
     This structured representation replaces 'finish_reason' for some models.
     """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
+  @removed(ServiceApiVersions.v2024_07_01_Preview)
   @encodedName("application/json", "finish_details")
   finishDetails?: ChatFinishDetails;
 
@@ -400,4 +429,18 @@ model ChatTokenLogProbabilityInfo {
     A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be null if there is no bytes representation for the token.
     """)
   bytes: int32[] | null;
+}
+
+/**
+ * Get chat completions request body.
+ */
+@added(ServiceApiVersions.v2023_05_15)
+model GetChatCompletionsBody {
+  /**
+   * The configuration information for a chat completions request.
+   * Completions support a wide variety of tasks and generate text that continues from or "completes"
+   * provided prompt data.
+   */
+  @bodyRoot
+  body: ChatCompletionsOptions;
 }

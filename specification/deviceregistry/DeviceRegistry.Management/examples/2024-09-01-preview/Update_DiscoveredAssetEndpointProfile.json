@@ -1,0 +1,66 @@
+{
+  "title": "Update_DiscoveredAssetEndpointProfile",
+  "operationId": "DiscoveredAssetEndpointProfiles_Update",
+  "description": "Patch a Discovered Asset Endpoint Profile",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "discoveredAssetEndpointProfileName": "my-discoveredassetendpointprofile",
+    "properties": {
+      "properties": {
+        "targetAddress": "https://www.example.com/myTargetAddress",
+        "additionalConfiguration": "{\"foo\": \"bar\"}",
+        "discoveryId": "11111111-1111-1111-1111-111111111111",
+        "version": 73766,
+        "endpointProfileType": "myEndpointProfileType",
+        "supportedAuthenticationMethods": [
+          "Anonymous",
+          "Certificate"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/discoveredAssetEndpointProfiles/my-discoveredassetendpointprofile",
+        "name": "my-discoveredassetendpointprofile",
+        "type": "Microsoft.DeviceRegistry/discoveredAssetEndpointProfiles",
+        "location": "West Europe",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+        },
+        "tags": {
+          "site": "building-1"
+        },
+        "systemData": {
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+        },
+        "properties": {
+          "targetAddress": "https://www.example.com/myTargetAddress",
+          "additionalConfiguration": "{\"foo\": \"bar\"}",
+          "discoveryId": "11111111-1111-1111-1111-111111111111",
+          "version": 73766,
+          "endpointProfileType": "myEndpointProfileType",
+          "supportedAuthenticationMethods": [
+            "Anonymous",
+            "Certificate"
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

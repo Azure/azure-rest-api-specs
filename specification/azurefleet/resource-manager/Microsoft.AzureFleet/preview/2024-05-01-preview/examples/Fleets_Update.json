@@ -64,7 +64,7 @@
                   "listeners": [
                     {
                       "protocol": "Http",
-                      "certificateUrl": "phwesineizrl"
+                      "certificateUrl": "https://myVaultName.vault.azure.net/secrets/myCertName"
                     }
                   ]
                 },
@@ -94,11 +94,11 @@
               "secrets": [
                 {
                   "sourceVault": {
-                    "id": "groxwd"
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
                   },
                   "vaultCertificates": [
                     {
-                      "certificateUrl": "tyldwkzafmnkvpo",
+                      "certificateUrl": "https://myVaultName.vault.azure.net/secrets/myCertName",
                       "certificateStore": "nlxrwavpzhueffxsshlun"
                     }
                   ]
@@ -115,7 +115,7 @@
                 "version": "wvpcqefgtmqdgltiuz",
                 "sharedGalleryImageId": "kmkgihoxwlawuuhcinfirktdwkmx",
                 "communityGalleryImageId": "vlqe",
-                "id": "aiunknwgksu"
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}/versions/{versionName}"
               },
               "osDisk": {
                 "name": "wfttw",
@@ -129,7 +129,7 @@
                 "diskSizeGB": 14,
                 "osType": "Windows",
                 "image": {
-                  "uri": "thqceubivdrjs"
+                  "uri": "https://myStorageAccountName.blob.core.windows.net/myContainerName/myVhdName.vhd"
                 },
                 "vhdContainers": [
                   "tkzcwddtinkfpnfklatw"
@@ -137,12 +137,12 @@
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS",
                   "diskEncryptionSet": {
-                    "id": "vmatqblzjalbatdepyzqmnd"
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}"
                   },
                   "securityProfile": {
                     "securityEncryptionType": "VMGuestStateOnly",
                     "diskEncryptionSet": {
-                      "id": "vmatqblzjalbatdepyzqmnd"
+                      "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}"
                     }
                   }
                 },
@@ -159,12 +159,12 @@
                   "managedDisk": {
                     "storageAccountType": "Standard_LRS",
                     "diskEncryptionSet": {
-                      "id": "vmatqblzjalbatdepyzqmnd"
+                      "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}"
                     },
                     "securityProfile": {
                       "securityEncryptionType": "VMGuestStateOnly",
                       "diskEncryptionSet": {
-                        "id": "vmatqblzjalbatdepyzqmnd"
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}"
                       }
                     }
                   },
@@ -177,7 +177,7 @@
             },
             "networkProfile": {
               "healthProbe": {
-                "id": "cmkfcjhmrwxwqtac"
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}"
               },
               "networkInterfaceConfigurations": [
                 {
@@ -188,7 +188,7 @@
                     "disableTcpStateTracking": true,
                     "enableFpga": true,
                     "networkSecurityGroup": {
-                      "id": "groxwd"
+                      "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}"
                     },
                     "dnsSettings": {
                       "dnsServers": [
@@ -200,7 +200,7 @@
                         "name": "oezqhkidfhyywlfzwuotilrpbqnjg",
                         "properties": {
                           "subnet": {
-                            "id": "cmkfcjhmrwxwqtac"
+                            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
                           },
                           "primary": true,
                           "publicIPAddressConfiguration": {
@@ -218,7 +218,7 @@
                                 }
                               ],
                               "publicIPPrefix": {
-                                "id": "groxwd"
+                                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}"
                               },
                               "publicIPAddressVersion": "IPv4",
                               "deleteOption": "Delete"
@@ -231,22 +231,22 @@
                           "privateIPAddressVersion": "IPv4",
                           "applicationGatewayBackendAddressPools": [
                             {
-                              "id": "groxwd"
+                              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendAddressPools/{backendAddressPoolName}"
                             }
                           ],
                           "applicationSecurityGroups": [
                             {
-                              "id": "groxwd"
+                              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}"
                             }
                           ],
                           "loadBalancerBackendAddressPools": [
                             {
-                              "id": "groxwd"
+                              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}"
                             }
                           ],
                           "loadBalancerInboundNatPools": [
                             {
-                              "id": "groxwd"
+                              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatPools/{inboundNatPoolName}"
                             }
                           ]
                         }
@@ -269,7 +269,7 @@
               "encryptionAtHost": true,
               "securityType": "TrustedLaunch",
               "encryptionIdentity": {
-                "userAssignedIdentityResourceId": "qoersmt"
+                "userAssignedIdentityResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{userAssignedIdentityName}"
               },
               "proxyAgentSettings": {
                 "enabled": true,
@@ -280,7 +280,7 @@
             "diagnosticsProfile": {
               "bootDiagnostics": {
                 "enabled": true,
-                "storageUri": "rzamfwghybpx"
+                "storageUri": "http://myStorageAccountName.blob.core.windows.net"
               }
             },
             "extensionProfile": {
@@ -301,9 +301,9 @@
                     ],
                     "suppressFailures": true,
                     "protectedSettingsFromKeyVault": {
-                      "secretUrl": "vyhzfkqsqanacgzjthpjoe",
+                      "secretUrl": "https://myVaultName.vault.azure.net/secrets/secret/mySecretName",
                       "sourceVault": {
-                        "id": "groxwd"
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
                       }
                     }
                   }
@@ -325,7 +325,7 @@
             "userData": "s",
             "capacityReservation": {
               "capacityReservationGroup": {
-                "id": "groxwd"
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}"
               }
             },
             "applicationProfile": {
@@ -333,7 +333,7 @@
                 {
                   "tags": "eyrqjbib",
                   "order": 5,
-                  "packageReferenceId": "lfxqiadouhmbovcd",
+                  "packageReferenceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{applicationName}/versions/{versionName}",
                   "configurationReference": "ulztmiavpojpbpbddgnuuiimxcpau",
                   "treatFailureAsDeploymentFailure": true,
                   "enableAutomaticUpgrade": true
@@ -347,59 +347,14 @@
               }
             },
             "serviceArtifactReference": {
-              "id": "qlkeeyskyr"
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactsName}/vmArtifactsProfiles/{vmArtifactsProfileName}"
             },
             "securityPostureReference": {
-              "id": "mubredelfbshboaxrsxiajihahaa",
+              "id": "/CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest",
               "excludeExtensions": [
-                {
-                  "properties": {
-                    "forceUpdateTag": "oriasdwawveilgusfrn",
-                    "publisher": "rxoajzb",
-                    "type": "vhrtgbaqdkbrrqxsdiiaqxksmqukl",
-                    "typeHandlerVersion": "bvzbiibps",
-                    "autoUpgradeMinorVersion": true,
-                    "enableAutomaticUpgrade": true,
-                    "settings": {},
-                    "protectedSettings": {},
-                    "instanceView": {
-                      "name": "ip",
-                      "type": "woadxvobquacooaujyg",
-                      "typeHandlerVersion": "ftkkqxdqiofgsusvxekdcpua",
-                      "substatuses": [
-                        {
-                          "code": "kuehuahsdozupmjrtp",
-                          "level": "Info",
-                          "displayStatus": "pomenhgqjoelbxvsqwxxexqxv",
-                          "message": "jxjjmlwbjylzvrislyyflhnmizhiu",
-                          "time": "2024-04-29T21:51:44.042Z"
-                        }
-                      ],
-                      "statuses": [
-                        {
-                          "code": "kuehuahsdozupmjrtp",
-                          "level": "Info",
-                          "displayStatus": "pomenhgqjoelbxvsqwxxexqxv",
-                          "message": "jxjjmlwbjylzvrislyyflhnmizhiu",
-                          "time": "2024-04-29T21:51:44.042Z"
-                        }
-                      ]
-                    },
-                    "suppressFailures": true,
-                    "protectedSettingsFromKeyVault": {
-                      "secretUrl": "vyhzfkqsqanacgzjthpjoe",
-                      "sourceVault": {
-                        "id": "groxwd"
-                      }
-                    },
-                    "provisionAfterExtensions": [
-                      "lwsfavklrgzuwmyxscskt"
-                    ]
-                  },
-                  "location": "wrqxhbqaebwkzmcdmngyqmhogc",
-                  "tags": {}
-                }
-              ]
+                "{securityPostureVMExtensionName}"
+              ],
+              "isOverridable": true
             }
           },
           "computeApiVersion": "2023-07-01",
@@ -467,7 +422,7 @@
                     "listeners": [
                       {
                         "protocol": "Http",
-                        "certificateUrl": "phwesineizrl"
+                        "certificateUrl": "https://myVaultName.vault.azure.net/secrets/myCertName"
                       }
                     ]
                   },
@@ -497,11 +452,11 @@
                 "secrets": [
                   {
                     "sourceVault": {
-                      "id": "groxwd"
+                      "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
                     },
                     "vaultCertificates": [
                       {
-                        "certificateUrl": "tyldwkzafmnkvpo",
+                        "certificateUrl": "https://myVaultName.vault.azure.net/secrets/myCertName",
                         "certificateStore": "nlxrwavpzhueffxsshlun"
                       }
                     ]
@@ -518,7 +473,7 @@
                   "version": "wvpcqefgtmqdgltiuz",
                   "sharedGalleryImageId": "kmkgihoxwlawuuhcinfirktdwkmx",
                   "communityGalleryImageId": "vlqe",
-                  "id": "aiunknwgksu",
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}/versions/{versionName}",
                   "exactVersion": "zjbntmiskjexlr"
                 },
                 "osDisk": {
@@ -533,7 +488,7 @@
                   "diskSizeGB": 14,
                   "osType": "Windows",
                   "image": {
-                    "uri": "thqceubivdrjs"
+                    "uri": "https://myStorageAccountName.blob.core.windows.net/myContainerName/myVhdName.vhd"
                   },
                   "vhdContainers": [
                     "tkzcwddtinkfpnfklatw"
@@ -541,12 +496,12 @@
                   "managedDisk": {
                     "storageAccountType": "Standard_LRS",
                     "diskEncryptionSet": {
-                      "id": "vmatqblzjalbatdepyzqmnd"
+                      "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}"
                     },
                     "securityProfile": {
                       "securityEncryptionType": "VMGuestStateOnly",
                       "diskEncryptionSet": {
-                        "id": "vmatqblzjalbatdepyzqmnd"
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}"
                       }
                     }
                   },
@@ -563,12 +518,12 @@
                     "managedDisk": {
                       "storageAccountType": "Standard_LRS",
                       "diskEncryptionSet": {
-                        "id": "vmatqblzjalbatdepyzqmnd"
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}"
                       },
                       "securityProfile": {
                         "securityEncryptionType": "VMGuestStateOnly",
                         "diskEncryptionSet": {
-                          "id": "vmatqblzjalbatdepyzqmnd"
+                          "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}"
                         }
                       }
                     },
@@ -581,7 +536,7 @@
               },
               "networkProfile": {
                 "healthProbe": {
-                  "id": "cmkfcjhmrwxwqtac"
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}"
                 },
                 "networkInterfaceConfigurations": [
                   {
@@ -592,7 +547,7 @@
                       "disableTcpStateTracking": true,
                       "enableFpga": true,
                       "networkSecurityGroup": {
-                        "id": "groxwd"
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}"
                       },
                       "dnsSettings": {
                         "dnsServers": [
@@ -604,7 +559,7 @@
                           "name": "oezqhkidfhyywlfzwuotilrpbqnjg",
                           "properties": {
                             "subnet": {
-                              "id": "cmkfcjhmrwxwqtac"
+                              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
                             },
                             "primary": true,
                             "publicIPAddressConfiguration": {
@@ -622,7 +577,7 @@
                                   }
                                 ],
                                 "publicIPPrefix": {
-                                  "id": "groxwd"
+                                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}"
                                 },
                                 "publicIPAddressVersion": "IPv4",
                                 "deleteOption": "Delete"
@@ -635,22 +590,22 @@
                             "privateIPAddressVersion": "IPv4",
                             "applicationGatewayBackendAddressPools": [
                               {
-                                "id": "groxwd"
+                                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendAddressPools/{backendAddressPoolName}"
                               }
                             ],
                             "applicationSecurityGroups": [
                               {
-                                "id": "groxwd"
+                                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}"
                               }
                             ],
                             "loadBalancerBackendAddressPools": [
                               {
-                                "id": "groxwd"
+                                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}"
                               }
                             ],
                             "loadBalancerInboundNatPools": [
                               {
-                                "id": "groxwd"
+                                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatPools/{inboundNatPoolName}"
                               }
                             ]
                           }
@@ -673,7 +628,7 @@
                 "encryptionAtHost": true,
                 "securityType": "TrustedLaunch",
                 "encryptionIdentity": {
-                  "userAssignedIdentityResourceId": "qoersmt"
+                  "userAssignedIdentityResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{userAssignedIdentityName}"
                 },
                 "proxyAgentSettings": {
                   "enabled": true,
@@ -684,7 +639,7 @@
               "diagnosticsProfile": {
                 "bootDiagnostics": {
                   "enabled": true,
-                  "storageUri": "rzamfwghybpx"
+                  "storageUri": "http://myStorageAccountName.blob.core.windows.net"
                 }
               },
               "extensionProfile": {
@@ -698,22 +653,21 @@
                       "typeHandlerVersion": "zevivcoilxmbwlrihhhibq",
                       "autoUpgradeMinorVersion": true,
                       "enableAutomaticUpgrade": true,
-                      "settings": {},
-                      "protectedSettings": {},
                       "provisionAfterExtensions": [
                         "nftzosroolbcwmpupujzqwqe"
                       ],
                       "suppressFailures": true,
                       "protectedSettingsFromKeyVault": {
-                        "secretUrl": "vyhzfkqsqanacgzjthpjoe",
+                        "secretUrl": "https://myVaultName.vault.azure.net/secrets/secret/mySecretName",
                         "sourceVault": {
-                          "id": "groxwd"
+                          "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
                         }
                       },
-                      "provisioningState": "jquzzuhvarugybjwdooovfrgqtpe"
+                      "settings": {},
+                      "provisioningState": "Succeeded"
                     },
                     "type": "cmeam",
-                    "id": "fmheufuaqonfvirwrpd"
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{extensionName}"
                   }
                 ],
                 "extensionsTimeBudget": "mbhjahtdygwgyszdwjtvlvtgchdwil"
@@ -732,7 +686,7 @@
               "userData": "s",
               "capacityReservation": {
                 "capacityReservationGroup": {
-                  "id": "groxwd"
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}"
                 }
               },
               "applicationProfile": {
@@ -740,8 +694,7 @@
                   {
                     "tags": "eyrqjbib",
                     "order": 5,
-                    "packageReferenceId": "lfxqiadouhmbovcd",
-                    "configurationReference": "ulztmiavpojpbpbddgnuuiimxcpau",
+                    "packageReferenceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{applicationName}/versions/{versionName}",
                     "treatFailureAsDeploymentFailure": true,
                     "enableAutomaticUpgrade": true
                   }
@@ -754,70 +707,23 @@
                 }
               },
               "serviceArtifactReference": {
-                "id": "qlkeeyskyr"
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactsName}/vmArtifactsProfiles/{vmArtifactsProfileName}"
               },
               "securityPostureReference": {
-                "id": "mubredelfbshboaxrsxiajihahaa",
+                "id": "/CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest",
                 "excludeExtensions": [
-                  {
-                    "properties": {
-                      "forceUpdateTag": "oriasdwawveilgusfrn",
-                      "publisher": "rxoajzb",
-                      "type": "vhrtgbaqdkbrrqxsdiiaqxksmqukl",
-                      "typeHandlerVersion": "bvzbiibps",
-                      "autoUpgradeMinorVersion": true,
-                      "enableAutomaticUpgrade": true,
-                      "settings": {},
-                      "protectedSettings": {},
-                      "instanceView": {
-                        "name": "ip",
-                        "type": "woadxvobquacooaujyg",
-                        "typeHandlerVersion": "ftkkqxdqiofgsusvxekdcpua",
-                        "substatuses": [
-                          {
-                            "code": "kuehuahsdozupmjrtp",
-                            "level": "Info",
-                            "displayStatus": "pomenhgqjoelbxvsqwxxexqxv",
-                            "message": "jxjjmlwbjylzvrislyyflhnmizhiu",
-                            "time": "2024-04-29T21:51:44.042Z"
-                          }
-                        ],
-                        "statuses": [
-                          {
-                            "code": "kuehuahsdozupmjrtp",
-                            "level": "Info",
-                            "displayStatus": "pomenhgqjoelbxvsqwxxexqxv",
-                            "message": "jxjjmlwbjylzvrislyyflhnmizhiu",
-                            "time": "2024-04-29T21:51:44.042Z"
-                          }
-                        ]
-                      },
-                      "suppressFailures": true,
-                      "protectedSettingsFromKeyVault": {
-                        "secretUrl": "vyhzfkqsqanacgzjthpjoe",
-                        "sourceVault": {
-                          "id": "groxwd"
-                        }
-                      },
-                      "provisionAfterExtensions": [
-                        "lwsfavklrgzuwmyxscskt"
-                      ],
-                      "provisioningState": "tzbaituagn"
-                    },
-                    "location": "wrqxhbqaebwkzmcdmngyqmhogc",
-                    "tags": {},
-                    "id": "ovmtxndtfwvcxnw",
-                    "name": "zudiuxzkgqhxaam",
-                    "type": "lpnynhnniohtotmkznxku"
-                  }
-                ]
+                  "{securityPostureVMExtensionName}"
+                ],
+                "isOverridable": true
               },
               "timeCreated": "2024-04-29T21:51:44.043Z"
             },
             "computeApiVersion": "2023-07-01",
             "platformFaultDomainCount": 1
           },
-          "provisioningState": "Creating"
+          "provisioningState": "Creating",
+          "timeCreated": "2024-07-10T00:16:34.8590555+00:00",
+          "uniqueId": "a2f7fabd-bbc2-4a20-afe1-49fdb3885a28"
         },
         "zones": [
           "zone1",
@@ -853,7 +759,8 @@
     },
     "202": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "location": "https://contoso.com/operationstatus",
+        "Retry-After": 30
       }
     }
   }

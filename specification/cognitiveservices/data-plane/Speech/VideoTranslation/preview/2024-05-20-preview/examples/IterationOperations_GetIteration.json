@@ -1,0 +1,37 @@
+{
+  "title": "Get Iteration",
+  "operationId": "IterationOperations_GetIteration",
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "api-version": "2024-05-20-preview",
+    "translationId": "TranslateMyZhCNVideo",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "iterationId": "TranslateMyZhCNVideo-Iteration-1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "TranslateMyZhCNVideo-Iteration-1",
+        "description": "Translate video from en-US to zh-CN, fix segment issue.",
+        "status": "Succeeded",
+        "createdDateTime": "2023-04-10T05:30:00.000Z",
+        "lastActionDateTime": "2023-04-10T05:15:30.000Z",
+        "input": {
+          "speakerCount": 3,
+          "subtitleMaxCharCountPerSegment": 80,
+          "webvttFile": {
+            "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+            "kind": "MetadataJson"
+          }
+        },
+        "result": {
+          "translatedVideoFileUrl": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+          "sourceLocaleSubtitleWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/sourceLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+          "targetLocaleSubtitleWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/targetLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+          "metadataJsonWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/metadataJsonLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        }
+      }
+    }
+  }
+}

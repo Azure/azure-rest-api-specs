@@ -23,7 +23,6 @@ namespace Quantum.Workspace.BaseOperations {
   alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
 
   /** Generic POST operation. */
-  @Foundations.Private.ensureVerb("PostOperation", "POST")
   @post
   op PostOperation<
     TRequest extends TypeSpec.Reflection.Model,
@@ -47,7 +46,6 @@ namespace Quantum.Workspace.BaseOperations {
     """
   @updatesResource(Resource)
   @patch
-  @Azure.Core.Foundations.Private.ensureVerb("PatchOperation", "PATCH")
   op PatchOperation<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
     Resource,
     {

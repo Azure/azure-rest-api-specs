@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "planName": "ContosoPlan",
+    "memberName": "d702f662-b3f2-4796-9e8c-13c22378ced3",
+    "body": {
+      "tags": {
+        "CostCode": "12345"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "d702f662-b3f2-4796-9e8c-13c22378ced3",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/plans/ContosoPlan/members/d702f662-b3f2-4796-9e8c-13c22378ced3",
+        "type": "Microsoft.DevCenter/plans/members",
+        "tags": {
+          "CostCode": "12345"
+        },
+        "properties": {
+          "memberId": "d702f662-b3f2-4796-9e8c-13c22378ced3",
+          "memberType": "User",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4?api-version=2024-07-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4?api-version=2024-07-01-preview"
+      }
+    }
+  }
+}

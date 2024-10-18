@@ -1,0 +1,26 @@
+{
+  "title": "Add Face to PersonDirectory Person from Url",
+  "operationId": "PersonDirectoryOperations_AddPersonFaceFromUrl",
+  "parameters": {
+    "apiVersion": "v1.2-preview.1",
+    "personId": "85c0c630-c9c9-40f8-8a4e-f9ae4f926ea5",
+    "recognitionModel": "recognition_01",
+    "targetFace": "10,10,100,100",
+    "detectionModel": "detection_01",
+    "userData": "your_user_data",
+    "body": {
+      "url": "https://microsoft.com/example.jpg"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus",
+        "operation-Location": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "persistedFaceId": "43897a75-8d6f-42cf-885e-74832febb055"
+      }
+    }
+  }
+}

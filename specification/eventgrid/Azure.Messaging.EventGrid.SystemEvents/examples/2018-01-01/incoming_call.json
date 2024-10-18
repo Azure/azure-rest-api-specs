@@ -1,0 +1,40 @@
+{
+  "id": "e80026e7-e298-46ba-bc42-dab0eda92581",
+  "source": "/subscriptions/{subscription-id}/resourceGroups/{group-name}/providers/Microsoft.Communication/communicationServices/{communication-services-resource-name}",
+  "subject": "/caller/{caller-id}/recipient/{recipient-id}",
+  "data": {
+    "to": {
+      "kind": "communicationUser",
+      "rawId": "{recipient-id}",
+      "communicationUser": {
+        "id": "{recipient-id}"
+      }
+    },
+    "from": {
+      "kind": "communicationUser",
+      "rawId": "{caller-id}",
+      "communicationUser": {
+        "id": "{caller-id}"
+      }
+    },
+    "serverCallId": "{server-call-id}",
+    "callerDisplayName": "VOIP Caller",
+    "customContext": {
+      "sipHeaders": {
+        "userToUser": "616d617a6f6e5f6368696;encoding=hex",
+        "X-MS-Custom-myheader1": "35567842",
+        "X-MS-Custom-myheader2": "customsipheadervalue"
+      },
+      "voipHeaders": {
+        "customHeader": "customValue"
+      }
+    },
+    "incomingCallContext": "{incoming-call-contextValue}",
+    "correlationId": "correlationId"
+  },
+  "type": "Microsoft.Communication.IncomingCall",
+  "specversion": "1.0",
+  "time": "2023-04-04T17:18:42.5542219Z",
+  "operationId": "IncomingCallEventName",
+  "title": "IncomingCall"
+}

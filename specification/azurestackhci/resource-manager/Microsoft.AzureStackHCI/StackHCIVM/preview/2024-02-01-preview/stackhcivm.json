@@ -40,9 +40,6 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "GalleryImages"
     },
     {
@@ -867,42 +864,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/providers/Microsoft.AzureStackHCI/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List the operations for the provider.": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryImages": {
@@ -3889,8 +3850,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "GalleryImageIdentifier": {
       "type": "object",
@@ -4018,8 +3978,7 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "GalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -4391,8 +4350,7 @@
           "$ref": "#/definitions/IPConfigurationProperties",
           "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "IPConfigurationProperties": {
       "type": "object",
@@ -4618,8 +4576,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "LogicalNetworkArmReference": {
       "type": "object",
@@ -4633,6 +4590,18 @@
             "allowedResources": [
               {
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/l2Networks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/l3Networks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/trunkedNetworks"
               }
             ]
           }
@@ -4721,8 +4690,7 @@
           "$ref": "#/definitions/LogicalNetworkStatusProvisioningStatus",
           "description": "Logical network provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "LogicalNetworkStatusProvisioningStatus": {
       "type": "object",
@@ -4770,8 +4738,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "MarketplaceGalleryImageListResult": {
       "type": "object",
@@ -4870,8 +4837,7 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "MarketplaceGalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -4943,8 +4909,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "NetworkInterfaceArmReference": {
       "type": "object",
@@ -5037,8 +5002,7 @@
           "$ref": "#/definitions/NetworkInterfaceStatusProvisioningStatus",
           "description": "Network interface provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "NetworkInterfaceStatusProvisioningStatus": {
       "type": "object",
@@ -5840,8 +5804,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "StorageContainerArmReference": {
       "type": "object",
@@ -5931,8 +5894,7 @@
           "$ref": "#/definitions/StorageContainerStatusProvisioningStatus",
           "description": "Storage container's provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "StorageContainerStatusProvisioningStatus": {
       "type": "object",
@@ -6103,8 +6065,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "VirtualHardDiskArmReference": {
       "type": "object",
@@ -6221,8 +6182,7 @@
           "$ref": "#/definitions/VirtualHardDiskStatusProvisioningStatus",
           "description": "Provisioning status of the vhd"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "VirtualHardDiskStatusProvisioningStatus": {
       "type": "object",
@@ -6323,8 +6283,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "VirtualMachineInstanceListResult": {
       "type": "object",
@@ -6803,8 +6762,7 @@
           "$ref": "#/definitions/VirtualMachineInstanceStatusProvisioningStatus",
           "description": "Provisioning status of the virtual machine instance"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "VirtualMachineInstanceStatusProvisioningStatus": {
       "type": "object",

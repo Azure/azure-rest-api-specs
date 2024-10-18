@@ -36,7 +36,7 @@ alias syncTokenHeader = {
 alias contentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
-  contentTypeHeader?: T | "application/problem+json";
+  contentType?: T | "application/problem+json";
 };
 
 alias AppConfigResponseHeaders = {
@@ -150,10 +150,7 @@ op getKeyValues is Foundations.ResourceList<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
     @doc("""
@@ -177,15 +174,12 @@ op getKeyValues is Foundations.ResourceList<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   KeyValueListResult &
@@ -233,10 +227,7 @@ op checkKeyValues is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
     @doc("A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.")
@@ -257,62 +248,64 @@ op checkKeyValues is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a single key-value.")
 @doc("Gets a single key-value.")
-op getKeyValue is standardOps.ResourceRead<
-  KeyValue,
-  QueryParametersTrait<{
+@get
+op getKeyValue is Foundations.ResourceOperation<
+  Resource = KeyValue,
+  Parameters = {
     @doc("The label of the key-value to retrieve.")
     @query("label")
     label?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
-  }> &
-    RequestHeadersTrait<{
-      ...syncTokenHeader;
+  } & {
+    ...syncTokenHeader;
 
-      @doc("""
-        Requests the server to respond with the state of the resource at the specified
-        time.
-        """)
-      @header("Accept-Datetime")
-      acceptDatetime?: string;
+    @doc("""
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
+    @header("Accept-Datetime")
+    acceptDatetime?: string;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag matches the
-        value provided.
-        """)
-      @header("If-Match")
-      ifMatch?: string;
+    @doc("""
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
+    @header("If-Match")
+    ifMatch?: string;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag does not
-        match the value provided.
-        """)
-      @header("If-None-Match")
-      ifNoneMatch?: string;
-    }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders &
-      contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">>
+    @doc("""
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
+    @header("If-None-Match")
+    ifNoneMatch?: string;
+
+    ...ClientRequestIdHeader;
+  },
+  Response = Body<KeyValue> & {
+    ...ClientRequestIdHeader;
+    ...AppConfigResponseHeaders;
+    ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
+  },
+  Traits = {},
+  ErrorResponse = Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -325,7 +318,7 @@ op putKeyValue is appConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentTypeHeader:
+    contentType:
       | "application/vnd.microsoft.appconfig.kv+json"
       | "application/vnd.microsoft.appconfig.kvset+json"
       | "application/json"
@@ -361,7 +354,7 @@ op putKeyValue is appConfigOperation<
     @body
     entity?: KeyValue;
   },
-  KeyValue &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -390,7 +383,7 @@ op deleteKeyValue is appConfigOperation<
     @header("If-Match")
     ifMatch?: string;
   },
-  (KeyValue &
+  (Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     @statusCode
@@ -439,10 +432,7 @@ op checkKeyValue is appConfigOperation<
     ifNoneMatch?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
   },
   OkResponse & AppConfigResponseHeaders
@@ -466,17 +456,11 @@ op getSnapshots is Foundations.ResourceList<
     after?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: SnapshotFields[];
 
     @doc("Used to filter returned snapshots by their status property.")
-    @query({
-      name: "status",
-      format: "csv",
-    })
+    @query("status")
     status?: SnapshotStatus[];
 
     ...syncTokenHeader;
@@ -516,10 +500,7 @@ op getSnapshot is standardOps.ResourceRead<
   Snapshot,
   QueryParametersTrait<{
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: SnapshotFields[];
   }> &
     RequestHeadersTrait<{
@@ -553,13 +534,14 @@ op getSnapshot is standardOps.ResourceRead<
 @doc("Creates a key-value snapshot.")
 @route("/snapshots/{name}")
 @pollingOperation(getOperationDetails)
+@createsOrReplacesResource(Snapshot)
 @put
 op createSnapshot is Foundations.LongRunningOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentTypeHeader: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
+    contentType: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
 
     @doc("The name of the key-value snapshot to create.")
     @maxLength(256)
@@ -596,7 +578,7 @@ op updateSnapshot is appConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentTypeHeader: "application/merge-patch+json" | "application/json";
+    contentType: "application/merge-patch+json" | "application/json";
 
     @doc("The name of the key-value snapshot to update.")
     @path
@@ -696,10 +678,7 @@ op getLabels is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: LabelFields[];
   },
   LabelListResult & {
@@ -736,10 +715,7 @@ op checkLabels is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: LabelFields[];
   },
   OkResponse & {
@@ -778,7 +754,7 @@ op putLock is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  KeyValue &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -814,7 +790,7 @@ op deleteLock is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  KeyValue &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -857,21 +833,15 @@ op getRevisions is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/restapirevisions
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   KeyValueListResult &
@@ -917,21 +887,15 @@ op checkRevisions is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/restapirevisions
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders

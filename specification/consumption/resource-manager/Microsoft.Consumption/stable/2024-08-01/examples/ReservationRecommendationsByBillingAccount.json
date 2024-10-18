@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "resourceScope": "providers/Microsoft.Billing/billingAccounts/123456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "billingAccount/123456/providers/Microsoft.Consumption/reservationRecommendations/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "location": "westus",
+            "sku": "Standard_DS1_v2",
+            "kind": "legacy",
+            "properties": {
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "term": "P1Y",
+              "costWithNoReservedInstances": 12.0785105,
+              "recommendedQuantity": 1,
+              "totalCostWithReservedInstances": 11.4899644807748,
+              "netSavings": 0.588546019225182,
+              "firstUsageDate": "2019-07-07T00:00:00-07:00",
+              "scope": "Shared",
+              "lookBackPeriod": "Last7Days",
+              "instanceFlexibilityRatio": 1,
+              "instanceFlexibilityGroup": "DSv2 Series",
+              "normalizedSize": "Standard_DS1_v2",
+              "recommendedQuantityNormalized": 1,
+              "skuProperties": [
+                {
+                  "name": "Cores",
+                  "value": "1"
+                },
+                {
+                  "name": "Ram",
+                  "value": "1"
+                }
+              ],
+              "totalHours": 701,
+              "lastUsageDate": "2019-08-07T00:00:00-07:00"
+            }
+          },
+          {
+            "id": "billingAccount/123456/providers/Microsoft.Consumption/reservationRecommendations/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "location": "westus",
+            "sku": "Standard_DS1_v2",
+            "kind": "legacy",
+            "properties": {
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "term": "P1Y",
+              "costWithNoReservedInstances": 10.0785105,
+              "recommendedQuantity": 1,
+              "totalCostWithReservedInstances": 13.48,
+              "netSavings": 0.68,
+              "firstUsageDate": "2019-07-07T00:00:00-07:00",
+              "scope": "Shared",
+              "lookBackPeriod": "Last7Days",
+              "instanceFlexibilityRatio": 1,
+              "instanceFlexibilityGroup": "DSv2 Series",
+              "normalizedSize": "Standard_DS1",
+              "recommendedQuantityNormalized": 1.2,
+              "skuProperties": [
+                {
+                  "name": "SkuDisplayName",
+                  "value": "B"
+                },
+                {
+                  "name": "CPU",
+                  "value": "1"
+                }
+              ],
+              "totalHours": 805,
+              "lastUsageDate": "2019-08-09T00:00:00-07:00"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations?api-version=2024-08-01&$skiptoken=AQAAAA%3D%3D&"
+      }
+    },
+    "204": {}
+  }
+}

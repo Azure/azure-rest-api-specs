@@ -1,0 +1,942 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used by publishers to on-board offerings and manage network functions.",
+    "version": "2024-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkServiceDesignGroups": {
+      "get": {
+        "tags": [
+          "NetworkServiceDesignGroups"
+        ],
+        "operationId": "NetworkServiceDesignGroups_ListByPublisher",
+        "description": "Gets information of the network service design groups under a publisher.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting network service design group resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get networkServiceDesign groups under publisher resource": {
+            "$ref": "./examples/NetworkServiceDesignGroupsListByPublisherName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkServiceDesignGroups/{networkServiceDesignGroupName}": {
+      "delete": {
+        "tags": [
+          "NetworkServiceDesignGroups"
+        ],
+        "operationId": "NetworkServiceDesignGroups_Delete",
+        "description": "Deletes a specified network service design group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a network function group resource": {
+            "$ref": "./examples/NetworkServiceDesignGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkServiceDesignGroups"
+        ],
+        "operationId": "NetworkServiceDesignGroups_CreateOrUpdate",
+        "description": "Creates or updates a network service design group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignGroup"
+            },
+            "description": "Parameters supplied to the create or update publisher network service design group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting NetworkServiceDesignGroup sub resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignGroup"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting NetworkServiceDesignGroup sub resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the network service design group": {
+            "$ref": "./examples/NetworkServiceDesignGroupCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkServiceDesignGroups"
+        ],
+        "operationId": "NetworkServiceDesignGroups_Get",
+        "description": "Gets information about the specified networkServiceDesign group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting publisher network service design group resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a networkServiceDesign group resource": {
+            "$ref": "./examples/NetworkServiceDesignGroupGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkServiceDesignGroups"
+        ],
+        "operationId": "NetworkServiceDesignGroups_Update",
+        "description": "Updates a network service design groups resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the create or update publisher network service design group operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation or update is successful. The operation returns the resulting network service design group resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the network service design group resource": {
+            "$ref": "./examples/NetworkServiceDesignGroupUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkServiceDesignGroups/{networkServiceDesignGroupName}/networkServiceDesignVersions/{networkServiceDesignVersionName}": {
+      "delete": {
+        "tags": [
+          "NetworkServiceDesignVersions"
+        ],
+        "operationId": "NetworkServiceDesignVersions_Delete",
+        "description": "Deletes the specified network service design version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a network service design version": {
+            "$ref": "./examples/NetworkServiceDesignVersionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkServiceDesignVersions"
+        ],
+        "operationId": "NetworkServiceDesignVersions_CreateOrUpdate",
+        "description": "Creates or updates a network service design version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/networkServiceDesignVersion"
+            },
+            "description": "Parameters supplied to the create or update network service design version operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting network service design sub resource.",
+            "schema": {
+              "$ref": "#/definitions/networkServiceDesignVersion"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting network service design sub resource.",
+            "schema": {
+              "$ref": "#/definitions/networkServiceDesignVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a network service design version resource": {
+            "$ref": "./examples/NetworkServiceDesignVersionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkServiceDesignVersions"
+        ],
+        "operationId": "NetworkServiceDesignVersions_Get",
+        "description": "Gets information about a network service design version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting networkServiceDesignVersion resource.",
+            "schema": {
+              "$ref": "#/definitions/networkServiceDesignVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a network service design version resource": {
+            "$ref": "./examples/NetworkServiceDesignVersionGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkServiceDesignVersions"
+        ],
+        "operationId": "NetworkServiceDesignVersions_Update",
+        "description": "Updates a network service design version resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the create or update network service design version operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation or update is successful. The operation returns the resulting network service design sub resource.",
+            "schema": {
+              "$ref": "#/definitions/networkServiceDesignVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the network service design version tags": {
+            "$ref": "./examples/NetworkServiceDesignVersionUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkServiceDesignGroups/{networkServiceDesignGroupName}/networkServiceDesignVersions": {
+      "get": {
+        "tags": [
+          "NetworkServiceDesignVersions"
+        ],
+        "operationId": "NetworkServiceDesignVersions_ListByNetworkServiceDesignGroup",
+        "description": "Gets information about a list of network service design versions under a network service design group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting networkServiceDesignVersion resource.",
+            "schema": {
+              "$ref": "#/definitions/networkServiceDesignVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Publisher resource": {
+            "$ref": "./examples/NetworkServiceDesignVersionListByNetworkServiceDesignGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkServiceDesignGroups/{networkServiceDesignGroupName}/networkServiceDesignVersions/{networkServiceDesignVersionName}/updateState": {
+      "post": {
+        "tags": [
+          "NetworkServiceDesignVersions"
+        ],
+        "operationId": "NetworkServiceDesignVersions_updateState",
+        "description": "Update network service design version state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignVersionUpdateState"
+            },
+            "description": "Parameters supplied to update the state of network service design version."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated network service design version state.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignVersionUpdateState"
+            }
+          },
+          "202": {
+            "description": "The request of updating network service design version state is accepted.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update network service design version state": {
+            "$ref": "./examples/NetworkServiceDesignVersionUpdateState.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkServiceDesignGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/NetworkServiceDesignGroupPropertiesFormat",
+          "description": "network service design group properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "network service design group resource."
+    },
+    "NetworkServiceDesignGroupPropertiesFormat": {
+      "description": "network service design group properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the network service design groups resource."
+        },
+        "description": {
+          "type": "string",
+          "description": "The network service design group description."
+        }
+      }
+    },
+    "NetworkServiceDesignGroupListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkServiceDesignGroup"
+          },
+          "description": "A list of network service design group."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of network service design group resources."
+    },
+    "networkServiceDesignVersionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/networkServiceDesignVersion"
+          },
+          "description": "A list of network service design versions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to get the next set of results."
+        }
+      },
+      "description": "A list of network service design versions."
+    },
+    "networkServiceDesignVersion": {
+      "description": "network service design version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/networkServiceDesignVersionPropertiesFormat",
+          "description": "network service design version properties."
+        }
+      }
+    },
+    "networkServiceDesignVersionPropertiesFormat": {
+      "description": "network service design version properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the network service design version resource."
+        },
+        "versionState": {
+          "readOnly": true,
+          "description": "The network service design version state.",
+          "$ref": "#/definitions/NSDVersionState"
+        },
+        "description": {
+          "type": "string",
+          "description": "The network service design version description."
+        },
+        "configurationGroupSchemaReferences": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "description": "The configuration schemas to used to define the values."
+        },
+        "nfvisFromSite": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NfviDetails"
+          },
+          "description": "The nfvis from the site."
+        },
+        "resourceElementTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceElementTemplate"
+          },
+          "description": "List of resource element template",
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "NfviDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The nfvi name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The nfvi type.",
+          "type": "string"
+        }
+      },
+      "description": "The nfvi details."
+    },
+    "ResourceElementTemplate": {
+      "required": [
+        "type"
+      ],
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource element template."
+        },
+        "type": {
+          "$ref": "#/definitions/Type",
+          "description": "The resource element template type.",
+          "x-ms-client-name": "ResourceElementType"
+        },
+        "dependsOnProfile": {
+          "$ref": "./common.json#/definitions/DependsOnProfile",
+          "description": "The depends on profile."
+        }
+      },
+      "description": "The resource element template object."
+    },
+    "Type": {
+      "type": "string",
+      "description": "The resource element template type.",
+      "enum": [
+        "Unknown",
+        "ArmResourceDefinition",
+        "NetworkFunctionDefinition"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true
+      }
+    },
+    "ArmResourceDefinitionResourceElementTemplateDetails": {
+      "description": "The arm resource definition resource element template details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceElementTemplate"
+        }
+      ],
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/ArmResourceDefinitionResourceElementTemplate",
+          "description": "The resource element template type."
+        }
+      },
+      "x-ms-discriminator-value": "ArmResourceDefinition"
+    },
+    "ArmResourceDefinitionResourceElementTemplate": {
+      "type": "object",
+      "properties": {
+        "templateType": {
+          "description": "The template type.",
+          "$ref": "#/definitions/TemplateType"
+        },
+        "parameterValues": {
+          "type": "string",
+          "description": "Name and value pairs that define the parameter values. It can be  a well formed escaped JSON string."
+        },
+        "artifactProfile": {
+          "$ref": "#/definitions/NSDArtifactProfile",
+          "description": "Artifact profile properties."
+        }
+      },
+      "description": "The arm template RE."
+    },
+    "NetworkFunctionDefinitionResourceElementTemplateDetails": {
+      "description": "The network function definition resource element template details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceElementTemplate"
+        }
+      ],
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/ArmResourceDefinitionResourceElementTemplate",
+          "description": "The resource element template type."
+        }
+      },
+      "x-ms-discriminator-value": "NetworkFunctionDefinition"
+    },
+    "NSDArtifactProfile": {
+      "description": "Artifact profile properties.",
+      "type": "object",
+      "properties": {
+        "artifactStoreReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The artifact store resource id"
+        },
+        "artifactName": {
+          "type": "string",
+          "description": "Artifact name."
+        },
+        "artifactVersion": {
+          "type": "string",
+          "description": "Artifact version."
+        }
+      }
+    },
+    "TemplateType": {
+      "type": "string",
+      "description": "The template type.",
+      "enum": [
+        "Unknown",
+        "ArmTemplate"
+      ],
+      "x-ms-enum": {
+        "name": "templateType",
+        "modelAsString": true
+      }
+    },
+    "ConfigurationGenerationType": {
+      "type": "string",
+      "description": "The configuration generation type.",
+      "enum": [
+        "Unknown",
+        "HandlebarTemplate"
+      ],
+      "x-ms-enum": {
+        "name": "configurationGenerationType",
+        "modelAsString": true
+      }
+    },
+    "NSDVersionState": {
+      "type": "string",
+      "description": "The network service design version state.",
+      "enum": [
+        "Unknown",
+        "Preview",
+        "Active",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "versionState",
+        "modelAsString": true
+      }
+    },
+    "NetworkServiceDesignVersionUpdateState": {
+      "type": "object",
+      "description": "Publisher network service design version update request definition.",
+      "properties": {
+        "versionState": {
+          "description": "The network service design version state.",
+          "$ref": "#/definitions/NSDVersionState",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    }
+  }
+}

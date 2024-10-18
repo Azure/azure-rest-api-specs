@@ -1,0 +1,226 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "$expand": "instanceView",
+    "api-version": "2024-07-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine",
+        "name": "myMachine",
+        "location": "eastus2euap",
+        "tags": null,
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "string",
+          "tenantId": "string"
+        },
+        "type": "Microsoft.HybridCompute/machines",
+        "kind": null,
+        "properties": {
+          "provisioningState": "Succeeded",
+          "agentVersion": null,
+          "status": null,
+          "lastStatusChange": null,
+          "errorDetails": null,
+          "displayName": null,
+          "machineFqdn": null,
+          "vmUuid": null,
+          "osSku": null,
+          "osEdition": "Standard",
+          "domainName": null,
+          "adFqdn": null,
+          "dnsFqdn": null,
+          "osVersion": null,
+          "osType": null,
+          "osProfile": {
+            "computerName": null,
+            "windowsConfiguration": {
+              "patchSettings": {
+                "assessmentMode": null,
+                "patchMode": null,
+                "enableHotpatching": true,
+                "status": {
+                  "hotpatchEnablementStatus": "Enabled",
+                  "error": null
+                }
+              }
+            },
+            "linuxConfiguration": {
+              "patchSettings": {
+                "assessmentMode": null,
+                "patchMode": null
+              }
+            }
+          },
+          "licenseProfile": {
+            "licenseStatus": "Licensed",
+            "licenseChannel": "PSG",
+            "softwareAssurance": {
+              "softwareAssuranceCustomer": true
+            },
+            "esuProfile": {
+              "assignedLicense": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Licenses/{licenseName}",
+                "name": "{licenseName}",
+                "type": "Microsoft.HybridCompute/licenses",
+                "location": "eastus2euap",
+                "tags": null,
+                "properties": {
+                  "tenantId": "{tenandId}",
+                  "licenseType": "ESU",
+                  "licenseDetails": {
+                    "state": "Activated",
+                    "target": "Windows Server 2012",
+                    "edition": "Datacenter",
+                    "type": "pCore",
+                    "processors": 6,
+                    "assignedLicenses": 8,
+                    "immutableId": "<generated Guid>"
+                  }
+                }
+              },
+              "licenseAssignmentState": "Assigned",
+              "esuEligibility": "Ineligible",
+              "serverType": "Standard",
+              "esuKeyState": "Inactive",
+              "esuKeys": [
+                {
+                  "sku": "skuNumber1",
+                  "licenseStatus": 1
+                },
+                {
+                  "sku": "skuNumber2",
+                  "licenseStatus": 1
+                }
+              ]
+            },
+            "productProfile": {
+              "subscriptionStatus": "Enabled",
+              "productType": "WindowsServer",
+              "enrollmentDate": "2023-10-05T20:36:49.745Z",
+              "billingStartDate": "2023-10-05T20:36:49.745Z",
+              "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+              "billingEndDate": "2023-11-05T20:36:49.745Z",
+              "productFeatures": [
+                {
+                  "name": "Hotpatch",
+                  "subscriptionStatus": "Enabled",
+                  "enrollmentDate": "2023-10-05T20:36:49.745Z",
+                  "billingStartDate": "2023-10-05T20:36:49.745Z",
+                  "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+                  "billingEndDate": "2023-11-05T20:36:49.745Z"
+                }
+              ]
+            }
+          },
+          "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
+          "locationData": {
+            "name": "Redmond",
+            "city": "redmond",
+            "district": null,
+            "countryOrRegion": "usa"
+          },
+          "clientPublicKey": "string",
+          "parentClusterResourceId": "{AzureStackHCIResourceId}",
+          "mssqlDiscovered": "false",
+          "detectedProperties": {
+            "cloudprovider": "N/A",
+            "manufacturer": "Microsoft Corporation",
+            "model": "Virtual Machine"
+          },
+          "agentConfiguration": {
+            "proxyUrl": "https://test.test",
+            "incomingConnectionsPorts": [
+              "22",
+              "23"
+            ],
+            "extensionsAllowList": null,
+            "extensionsBlockList": null,
+            "proxyBypass": [
+              "proxy1",
+              "proxy2"
+            ],
+            "extensionsEnabled": "true",
+            "guestConfigurationEnabled": "true",
+            "configMode": "full"
+          },
+          "serviceStatuses": {
+            "extensionService": {
+              "status": "Running",
+              "startupType": "Automatic"
+            },
+            "guestConfigurationService": {
+              "status": "Running",
+              "startupType": "Automatic"
+            }
+          },
+          "firmwareProfile": {
+            "serialNumber": "007f0232-1c2e-4978-8604-ea44e7a5f5a0",
+            "type": "BIOS"
+          },
+          "hardwareProfile": {
+            "totalPhysicalMemoryInBytes": 34359738368,
+            "numberOfCpuSockets": 2,
+            "processors": [
+              {
+                "name": "Intel(R) Core(TM) i7-10610U CPU @ 1.80GHz",
+                "numberOfCores": 4
+              }
+            ]
+          },
+          "storageProfile": {
+            "disks": [
+              {
+                "path": "C:/",
+                "diskType": "Fixed",
+                "generatedId": "94318602-6e46-4eaa-997e-0e528afe3d17",
+                "id": "2",
+                "name": "Windows",
+                "maxSizeInBytes": 1022870155264,
+                "usedSpaceInBytes": 435501297664
+              }
+            ]
+          },
+          "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName",
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "name": "Wi-Fi",
+                "macAddress": "3c:49:6e:13:0e:73",
+                "id": "8",
+                "ipAddresses": [
+                  {
+                    "address": "192.168.12.345",
+                    "ipAddressVersion": "IPv4",
+                    "subnet": {
+                      "addressPrefix": "192.168.12.0/24"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "Ethernet",
+                "macAddress": "10:15:5c:52:f9:b8",
+                "id": "23",
+                "ipAddresses": [
+                  {
+                    "address": "1001:0:34aa:5000:1234:aaaa:bbbb:cccc",
+                    "ipAddressVersion": "IPv6",
+                    "subnet": {
+                      "addressPrefix": "1001:0:34aa:5000::/64"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "resources": []
+      }
+    }
+  }
+}

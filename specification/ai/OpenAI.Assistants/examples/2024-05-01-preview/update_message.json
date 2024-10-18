@@ -1,0 +1,47 @@
+{
+  "title": "Modify a message.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-05-01-preview",
+    "threadId": "thread_abc123",
+    "messageId": "msg_abc123 ",
+    "body": {
+      "metadata": {
+        "modified": "true",
+        "user": "abc123"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "msg_abc123",
+        "object": "thread.message",
+        "created_at": 1699017614,
+        "assistant_id": null,
+        "thread_id": "thread_abc123",
+        "status": "complete",
+        "incomplete_details": null,
+        "completed_at": 1699017614,
+        "incomplete_at": null,
+        "run_id": null,
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": {
+              "value": "How does AI work? Explain it in simple terms.",
+              "annotations": []
+            }
+          }
+        ],
+        "attachments": [],
+        "metadata": {
+          "modified": "true",
+          "user": "abc123"
+        }
+      }
+    }
+  },
+  "operationId": "UpdateMessage"
+}

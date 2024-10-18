@@ -19,6 +19,13 @@ batch:
   - package-subscriptions: true
   - package-changes: true
   - package-deploymentstacks: true
+  - package-databoundaries: true
+```
+
+```yaml $(typescript) && $(package-databoundaries) && !$(profile-content)
+typescript:
+  package-name: "@azure/arm-databoundaries"
+  output-folder: "$(typescript-sdks-folder)/sdk/databoundaries/arm-databoundaries"
 ```
 
 ```yaml $(typescript) && $(package-features) && !$(profile-content)
@@ -28,6 +35,8 @@ typescript:
 ```
 
 ```yaml $(typescript) && $(package-deploymentstacks) && !$(profile-content)
+modelerfour:
+  flatten-models: false
 typescript:
   package-name: "@azure/arm-resourcesdeploymentstacks"
   output-folder: "$(typescript-sdks-folder)/sdk/resourcesdeploymentstacks/arm-resourcesdeploymentstacks"

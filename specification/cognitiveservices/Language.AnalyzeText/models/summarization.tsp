@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 /** Supported parameters for an Extractive Summarization task. */
 @added(Versions.v2023_04_01)
@@ -107,7 +107,7 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   kind: AnalyzeTextLROTaskKind.AbstractiveSummarization;
 
   /** Parameters for the Abstractive Summarization task. */
-  parameters: AbstractiveSummarizationTaskParameters;
+  parameters?: AbstractiveSummarizationTaskParameters;
 }
 
 /** Supported parameters for the pre-built Abstractive Summarization task. */

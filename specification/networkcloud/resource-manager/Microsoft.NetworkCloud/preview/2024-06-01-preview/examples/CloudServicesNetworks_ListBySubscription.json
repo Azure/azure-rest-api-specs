@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+            "name": "cloudServicesNetworkName",
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "type": "Microsoft.NetworkCloud/cloudServicesNetworks",
+            "location": "location",
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            },
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+            },
+            "properties": {
+              "additionalEgressEndpoints": [
+                {
+                  "category": "azure-resource-management",
+                  "endpoints": [
+                    {
+                      "domainName": "storageaccountex.blob.core.windows.net",
+                      "port": 443
+                    }
+                  ]
+                }
+              ],
+              "enableDefaultEgressEndpoints": "False",
+              "provisioningState": "Succeeded",
+              "interfaceName": "eth0",
+              "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+              "associatedResourceIds": [
+                "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+              ],
+              "enabledEgressEndpoints": [
+                {
+                  "category": "azure-resource-management",
+                  "endpoints": [
+                    {
+                      "domainName": "storageaccountex.blob.core.windows.net",
+                      "port": 443
+                    }
+                  ]
+                }
+              ],
+              "detailedStatus": "Available",
+              "detailedStatusMessage": "Cloud services network is up"
+            }
+          }
+        ],
+        "nextLink": "https://fully.qualified.hyperlink"
+      }
+    }
+  }
+}

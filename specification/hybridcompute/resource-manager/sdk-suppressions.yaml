@@ -1,0 +1,20 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-hybridcompute
+      breaking-changes:
+        - Model Machine no longer has parameter properties
+        - Model MachineExtensionUpdate no longer has parameter properties
+        - Model MachineUpdate no longer has parameter properties
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/hybridcompute/armhybridcompute'
+      breaking-changes:
+        - Struct `ErrorResponse` has been removed
+        - Struct `PrivateLinkScopesResource` has been removed
+        - Struct `ProxyResource` has been removed
+        - Struct `ResourceUpdate` has been removed
+        - Struct `Resource` has been removed
+        - Struct `TrackedResource` has been removed
+        - Type of `MachineExtensionProperties.ProtectedSettings` has been changed from `any` to `map[string]any`
+        - Type of `MachineExtensionProperties.Settings` has been changed from `any` to `map[string]any`
+        - Type of `MachineExtensionUpdateProperties.ProtectedSettings` has been changed from `any` to `map[string]any`
+        - Type of `MachineExtensionUpdateProperties.Settings` has been changed from `any` to `map[string]any`

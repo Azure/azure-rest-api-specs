@@ -1,0 +1,453 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the hybrid network site.",
+    "version": "2024-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/sites/{siteName}": {
+      "delete": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_Delete",
+        "description": "Deletes the specified network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SiteNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete network site": {
+            "$ref": "./examples/SiteDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_Get",
+        "description": "Gets information about the specified network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SiteNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting network site resource.",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network site": {
+            "$ref": "./examples/SiteGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_CreateOrUpdate",
+        "description": "Creates or updates a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SiteNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Site"
+            },
+            "description": "Parameters supplied to the create or update network site operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting network site resource.",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting network site resource.",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create network site": {
+            "$ref": "./examples/SiteCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_UpdateTags",
+        "description": "Updates a site update tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SiteNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network site tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting network site resource.",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update network site tags": {
+            "$ref": "./examples/SiteUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/sites": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_ListBySubscription",
+        "description": "Lists all sites in the network service in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of hybrid network site resources.",
+            "schema": {
+              "$ref": "#/definitions/SiteListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all hybrid network sites in a subscription.": {
+            "$ref": "./examples/SiteListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/sites": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_ListByResourceGroup",
+        "description": "Lists all sites in the network service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of network site resources.",
+            "schema": {
+              "$ref": "#/definitions/SiteListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all network sites": {
+            "$ref": "./examples/SiteListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Site": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/SitePropertiesFormat",
+          "description": "Site properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Site resource."
+    },
+    "SitePropertiesFormat": {
+      "type": "object",
+      "description": "Site properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the site resource. **TODO**: Confirm if this is needed."
+        },
+        "nfvis": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NFVIs"
+          },
+          "description": "List of NFVIs",
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "siteNetworkServiceReferences": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "description": "The list of site network services on the site.",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "SiteListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Site"
+          },
+          "description": "A list of sites in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for sites API service call."
+    },
+    "NFVIs": {
+      "required": [
+        "nfviType"
+      ],
+      "discriminator": "nfviType",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the nfvi."
+        },
+        "nfviType": {
+          "$ref": "./common.json#/definitions/NFVIType",
+          "description": "The NFVI type."
+        }
+      },
+      "description": "The NFVI object."
+    },
+    "AzureCoreNFVIDetails": {
+      "description": "The Azure Core NFVI detail.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NFVIs"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the Azure core."
+        }
+      },
+      "x-ms-discriminator-value": "AzureCore"
+    },
+    "AzureArcK8sClusterNFVIDetails": {
+      "description": "The AzureArcK8sCluster NFVI detail.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NFVIs"
+        }
+      ],
+      "properties": {
+        "customLocationReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The reference to the custom location."
+        }
+      },
+      "x-ms-discriminator-value": "AzureArcKubernetes"
+    },
+    "AzureOperatorNexusClusterNFVIDetails": {
+      "description": "The AzureOperatorNexusCluster NFVI detail.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NFVIs"
+        }
+      ],
+      "properties": {
+        "customLocationReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The reference to the custom location."
+        }
+      },
+      "x-ms-discriminator-value": "AzureOperatorNexus"
+    }
+  }
+}

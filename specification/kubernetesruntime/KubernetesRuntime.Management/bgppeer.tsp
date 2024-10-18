@@ -50,5 +50,5 @@ interface BgpPeers {
   @renamedFrom(Versions.v2024_03_01, "delete")
   @removed(Versions.v2024_03_01)
   oldDelete is ArmResourceDeleteWithoutOkAsync<BgpPeer>;
-  listByParent is ArmResourceListByParent<BgpPeer>;
+  list is ArmResourceListByParent<BgpPeer>;
 }

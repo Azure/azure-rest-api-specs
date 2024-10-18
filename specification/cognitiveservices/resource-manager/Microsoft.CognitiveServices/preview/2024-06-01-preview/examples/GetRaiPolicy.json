@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "deploymentName",
+    "raiPolicyName": "raiPolicyName",
+    "effective": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "raiPolicyName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiPolicies/raiPolicyName",
+        "properties": {
+          "basePolicyName": "Microsoft.Default",
+          "mode": "Asynchronous_filter",
+          "contentFilters": [
+            {
+              "name": "hate",
+              "blocking": false,
+              "enabled": false,
+              "severityThreshold": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "hate",
+              "blocking": true,
+              "enabled": true,
+              "severityThreshold": "Medium",
+              "source": "Completion"
+            },
+            {
+              "name": "sexual",
+              "blocking": true,
+              "enabled": true,
+              "severityThreshold": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "sexual",
+              "blocking": true,
+              "enabled": true,
+              "severityThreshold": "Medium",
+              "source": "Completion"
+            },
+            {
+              "name": "selfharm",
+              "blocking": true,
+              "enabled": true,
+              "severityThreshold": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "selfharm",
+              "blocking": true,
+              "enabled": true,
+              "severityThreshold": "Medium",
+              "source": "Completion"
+            },
+            {
+              "name": "violence",
+              "blocking": true,
+              "enabled": true,
+              "severityThreshold": "Medium",
+              "source": "Prompt"
+            },
+            {
+              "name": "violence",
+              "blocking": true,
+              "enabled": true,
+              "severityThreshold": "Medium",
+              "source": "Completion"
+            },
+            {
+              "name": "jailbreak",
+              "blocking": true,
+              "source": "Prompt",
+              "enabled": true
+            },
+            {
+              "name": "protected_material_text",
+              "blocking": true,
+              "source": "Completion",
+              "enabled": true
+            },
+            {
+              "name": "protected_material_code",
+              "blocking": true,
+              "source": "Completion",
+              "enabled": true
+            },
+            {
+              "name": "profanity",
+              "blocking": true,
+              "source": "Prompt",
+              "enabled": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

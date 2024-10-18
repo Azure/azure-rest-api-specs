@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+    "resourceGroupName": "myResourceGroup",
+    "configStoreName": "contoso",
+    "replicaName": "myReplicaEus",
+    "replicaCreationParameters": {
+      "location": "eastus"
+    },
+    "api-version": "2024-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/replicas/myReplicaEus",
+        "name": "myReplicaEus",
+        "type": "Microsoft.AppConfiguration/configurationStores/replicas",
+        "location": "eastus",
+        "properties": {
+          "endpoint": "https://contoso-myreplicaeus.azconfig.io",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/replicas/myReplicaEus",
+        "name": "myReplicaEus",
+        "type": "Microsoft.AppConfiguration/configurationStores/replicas",
+        "location": "eastus",
+        "properties": {
+          "endpoint": "https://contoso-myreplicaeus.azconfig.io",
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 parameters:
+  "service-dir":
+    default: "sdk/containerorchestratorruntime"
   swagger-repo-dir:
     default: "{project-root}/swagger"
 
@@ -8,9 +10,22 @@ options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: resource-manager
-    examples-directory: "{project-root}/examples"
+    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
+    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/kubernetesruntime.json"
     use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.ContainerOrchestratorRuntime"
+    flavor: azure
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-containerorchestratorruntime"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
 
 linter:
   extends:

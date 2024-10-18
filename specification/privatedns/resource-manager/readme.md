@@ -26,7 +26,7 @@ These are the global settings for the Private DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-2024-06
 ```
 
 ### Tag: package-2018-09
@@ -54,6 +54,15 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 ``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.Network/stable/2020-06-01/privatedns.json
+```
+
+### Tag: package-2024-06
+
+These settings apply only when `--tag=package-2024-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06'
+input-file:
+  - Microsoft.Network/stable/2024-06-01/privatedns.json
 ```
 
 # Code Generation
@@ -129,6 +138,11 @@ batch:
   - tag: package-2020-06
 ```
 
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2024-06
+```
+
 ### Tag: package-2018-09 and java
 
 These settings apply only when `--tag=package-2018-09 --java` is specified on the command line.
@@ -171,6 +185,20 @@ generate-interface: true
 fconfig: '{"moduleName": "privatedns"}'
 ```
 
+### Tag: package-2024-06 and java
+
+These settings apply only when `--tag=package-2024-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2024-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.privatedns.v2024_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2024_06_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "privatedns"}'
+```
+
 ## Suppression
 
 ``` yaml
@@ -196,6 +224,3 @@ directive:
     suppress: DescriptionAndTitleMissing
     reason: Common types warning.
 ```
-
-
-

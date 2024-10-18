@@ -1,0 +1,5356 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ScVmm",
+    "version": "2024-06-01",
+    "description": "The Microsoft.ScVmm Rest API spec.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "VmmServers"
+    },
+    {
+      "name": "Clouds"
+    },
+    {
+      "name": "VirtualNetworks"
+    },
+    {
+      "name": "VirtualMachineTemplates"
+    },
+    {
+      "name": "AvailabilitySets"
+    },
+    {
+      "name": "InventoryItems"
+    },
+    {
+      "name": "VirtualMachineInstances"
+    },
+    {
+      "name": "VmInstanceHybridIdentityMetadatas"
+    },
+    {
+      "name": "GuestAgents"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances": {
+      "get": {
+        "operationId": "VirtualMachineInstances_List",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Implements List virtual machine instances.",
+        "description": "Lists all of the virtual machine instances within the specified parent resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_List_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_List_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_List_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default": {
+      "get": {
+        "operationId": "VirtualMachineInstances_Get",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Gets a virtual machine.",
+        "description": "Retrieves information about a virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_Get_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Get_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_Get_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineInstances_CreateOrUpdate",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Implements virtual machine PUT method.",
+        "description": "The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualMachineInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualMachineInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualMachineInstances_Update",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Updates a virtual machine.",
+        "description": "The operation to update a virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstanceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_Update_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Update_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_Update_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualMachineInstances_Delete",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Deletes an virtual machine.",
+        "description": "The operation to delete a virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryForceDelete"
+          },
+          {
+            "name": "deleteFromHost",
+            "in": "query",
+            "description": "Whether to disable the VM from azure and also delete it from Vmm.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "DeleteFromHost",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "true",
+                  "value": "true",
+                  "description": "Enable delete from host."
+                },
+                {
+                  "name": "false",
+                  "value": "false",
+                  "description": "Disable delete from host."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_Delete_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Delete_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_Delete_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/createCheckpoint": {
+      "post": {
+        "operationId": "VirtualMachineInstances_CreateCheckpoint",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Implements the operation to creates a checkpoint in a virtual machine instance.",
+        "description": "Creates a checkpoint in virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineCreateCheckpoint"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_CreateCheckpoint_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_CreateCheckpoint_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_CreateCheckpoint_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_CreateCheckpoint_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/deleteCheckpoint": {
+      "post": {
+        "operationId": "VirtualMachineInstances_DeleteCheckpoint",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Implements the operation to delete a checkpoint in a virtual machine instance.",
+        "description": "Deletes a checkpoint in virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineDeleteCheckpoint"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_DeleteCheckpoint_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_DeleteCheckpoint_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_DeleteCheckpoint_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_DeleteCheckpoint_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/guestAgents": {
+      "get": {
+        "operationId": "GuestAgents_ListByVirtualMachineInstance",
+        "tags": [
+          "GuestAgents"
+        ],
+        "summary": "Implements GET GuestAgent in a vm.",
+        "description": "Returns the list of GuestAgent of the given vm.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestAgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestAgents_ListByVirtualMachineInstance_MaximumSet": {
+            "$ref": "./examples/GuestAgents_ListByVirtualMachineInstance_MaximumSet_Gen.json"
+          },
+          "GuestAgents_ListByVirtualMachineInstance_MinimumSet": {
+            "$ref": "./examples/GuestAgents_ListByVirtualMachineInstance_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/guestAgents/default": {
+      "get": {
+        "operationId": "GuestAgents_Get",
+        "tags": [
+          "GuestAgents"
+        ],
+        "summary": "Gets GuestAgent.",
+        "description": "Implements GuestAgent GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestAgents_Get_MaximumSet": {
+            "$ref": "./examples/GuestAgents_Get_MaximumSet_Gen.json"
+          },
+          "GuestAgents_Get_MinimumSet": {
+            "$ref": "./examples/GuestAgents_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GuestAgents_Create",
+        "tags": [
+          "GuestAgents"
+        ],
+        "summary": "Implements GuestAgent PUT method.",
+        "description": "Create Or Update GuestAgent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GuestAgent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "201": {
+            "description": "Resource 'GuestAgent' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestAgents_Create_MaximumSet": {
+            "$ref": "./examples/GuestAgents_Create_MaximumSet_Gen.json"
+          },
+          "GuestAgents_Create_MinimumSet": {
+            "$ref": "./examples/GuestAgents_Create_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GuestAgents_Delete",
+        "tags": [
+          "GuestAgents"
+        ],
+        "summary": "Deletes a GuestAgent resource.",
+        "description": "Implements GuestAgent DELETE method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestAgents_Delete_MaximumSet": {
+            "$ref": "./examples/GuestAgents_Delete_MaximumSet_Gen.json"
+          },
+          "GuestAgents_Delete_MinimumSet": {
+            "$ref": "./examples/GuestAgents_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/hybridIdentityMetadata": {
+      "get": {
+        "operationId": "VmInstanceHybridIdentityMetadatas_ListByVirtualMachineInstance",
+        "tags": [
+          "VmInstanceHybridIdentityMetadatas"
+        ],
+        "summary": "Implements GET HybridIdentityMetadata in a vm.",
+        "description": "Returns the list of HybridIdentityMetadata of the given VM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmInstanceHybridIdentityMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmInstanceHybridIdentityMetadatas_ListByVirtualMachineInstance_MaximumSet": {
+            "$ref": "./examples/VmInstanceHybridIdentityMetadatas_ListByVirtualMachineInstance_MaximumSet_Gen.json"
+          },
+          "VmInstanceHybridIdentityMetadatas_ListByVirtualMachineInstance_MinimumSet": {
+            "$ref": "./examples/VmInstanceHybridIdentityMetadatas_ListByVirtualMachineInstance_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/hybridIdentityMetadata/default": {
+      "get": {
+        "operationId": "VmInstanceHybridIdentityMetadatas_Get",
+        "tags": [
+          "VmInstanceHybridIdentityMetadatas"
+        ],
+        "summary": "Gets HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmInstanceHybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmInstanceHybridIdentityMetadatas_Get_MaximumSet": {
+            "$ref": "./examples/VmInstanceHybridIdentityMetadatas_Get_MaximumSet_Gen.json"
+          },
+          "VmInstanceHybridIdentityMetadatas_Get_MinimumSet": {
+            "$ref": "./examples/VmInstanceHybridIdentityMetadatas_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/restart": {
+      "post": {
+        "operationId": "VirtualMachineInstances_Restart",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Implements the operation to restart a virtual machine.",
+        "description": "The operation to restart a virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_Restart_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Restart_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_Restart_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Restart_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/restoreCheckpoint": {
+      "post": {
+        "operationId": "VirtualMachineInstances_RestoreCheckpoint",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Implements the operation to restores to a checkpoint in a virtual machine instance.",
+        "description": "Restores to a checkpoint in virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRestoreCheckpoint"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_RestoreCheckpoint_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_RestoreCheckpoint_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_RestoreCheckpoint_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_RestoreCheckpoint_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/start": {
+      "post": {
+        "operationId": "VirtualMachineInstances_Start",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Implements the operation to start a virtual machine.",
+        "description": "The operation to start a virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_Start_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Start_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_Start_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Start_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/stop": {
+      "post": {
+        "operationId": "VirtualMachineInstances_Stop",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "summary": "Implements the operation to stop a virtual machine.",
+        "description": "The operation to power off (stop) a virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StopVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineInstances_Stop_MaximumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Stop_MaximumSet_Gen.json"
+          },
+          "VirtualMachineInstances_Stop_MinimumSet": {
+            "$ref": "./examples/VirtualMachineInstances_Stop_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.ScVmm/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/availabilitySets": {
+      "get": {
+        "operationId": "AvailabilitySets_ListBySubscription",
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "summary": "Implements GET AvailabilitySets in a subscription.",
+        "description": "List of AvailabilitySets in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/AvailabilitySets_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_ListBySubscription_MinimumSet": {
+            "$ref": "./examples/AvailabilitySets_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/clouds": {
+      "get": {
+        "operationId": "Clouds_ListBySubscription",
+        "tags": [
+          "Clouds"
+        ],
+        "summary": "Implements GET Clouds in a subscription.",
+        "description": "List of Clouds in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/Clouds_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Clouds_ListBySubscription_MinimumSet": {
+            "$ref": "./examples/Clouds_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/virtualMachineTemplates": {
+      "get": {
+        "operationId": "VirtualMachineTemplates_ListBySubscription",
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "summary": "Implements GET VirtualMachineTemplates in a subscription.",
+        "description": "List of VirtualMachineTemplates in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineTemplates_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "VirtualMachineTemplates_ListBySubscription_MinimumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/virtualNetworks": {
+      "get": {
+        "operationId": "VirtualNetworks_ListBySubscription",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "summary": "Implements GET VirtualNetworks in a subscription.",
+        "description": "List of VirtualNetworks in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/VirtualNetworks_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_ListBySubscription_MinimumSet": {
+            "$ref": "./examples/VirtualNetworks_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/vmmServers": {
+      "get": {
+        "operationId": "VmmServers_ListBySubscription",
+        "tags": [
+          "VmmServers"
+        ],
+        "summary": "Implements GET VmmServers in a subscription.",
+        "description": "List of VmmServers in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmmServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmmServers_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/VmmServers_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "VmmServers_ListBySubscription_MinimumSet": {
+            "$ref": "./examples/VmmServers_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/availabilitySets": {
+      "get": {
+        "operationId": "AvailabilitySets_ListByResourceGroup",
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "summary": "Implements GET AvailabilitySets in a resource group.",
+        "description": "List of AvailabilitySets in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/AvailabilitySets_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_ListByResourceGroup_MinimumSet": {
+            "$ref": "./examples/AvailabilitySets_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/availabilitySets/{availabilitySetResourceName}": {
+      "get": {
+        "operationId": "AvailabilitySets_Get",
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "summary": "Gets an AvailabilitySet.",
+        "description": "Implements AvailabilitySet GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "availabilitySetResourceName",
+            "in": "path",
+            "description": "Name of the AvailabilitySet.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_Get_MaximumSet": {
+            "$ref": "./examples/AvailabilitySets_Get_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_Get_MinimumSet": {
+            "$ref": "./examples/AvailabilitySets_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AvailabilitySets_CreateOrUpdate",
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "summary": "Implements AvailabilitySets PUT method.",
+        "description": "Onboards the ScVmm availability set as an Azure resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "availabilitySetResourceName",
+            "in": "path",
+            "description": "Name of the AvailabilitySet.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AvailabilitySet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "201": {
+            "description": "Resource 'AvailabilitySet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/AvailabilitySets_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/AvailabilitySets_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AvailabilitySets_Update",
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "summary": "Implements the AvailabilitySets PATCH method.",
+        "description": "Updates the AvailabilitySets resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "availabilitySetResourceName",
+            "in": "path",
+            "description": "Name of the AvailabilitySet.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_Update_MaximumSet": {
+            "$ref": "./examples/AvailabilitySets_Update_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_Update_MinimumSet": {
+            "$ref": "./examples/AvailabilitySets_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AvailabilitySets_Delete",
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "summary": "Implements AvailabilitySet DELETE method.",
+        "description": "Deregisters the ScVmm availability set from Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryForceDelete"
+          },
+          {
+            "name": "availabilitySetResourceName",
+            "in": "path",
+            "description": "Name of the AvailabilitySet.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_Delete_MaximumSet": {
+            "$ref": "./examples/AvailabilitySets_Delete_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_Delete_MinimumSet": {
+            "$ref": "./examples/AvailabilitySets_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/clouds": {
+      "get": {
+        "operationId": "Clouds_ListByResourceGroup",
+        "tags": [
+          "Clouds"
+        ],
+        "summary": "Implements GET Clouds in a resource group.",
+        "description": "List of Clouds in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/Clouds_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Clouds_ListByResourceGroup_MinimumSet": {
+            "$ref": "./examples/Clouds_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/clouds/{cloudResourceName}": {
+      "get": {
+        "operationId": "Clouds_Get",
+        "tags": [
+          "Clouds"
+        ],
+        "summary": "Gets a Cloud.",
+        "description": "Implements Cloud GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudResourceName",
+            "in": "path",
+            "description": "Name of the Cloud.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_Get_MaximumSet": {
+            "$ref": "./examples/Clouds_Get_MaximumSet_Gen.json"
+          },
+          "Clouds_Get_MinimumSet": {
+            "$ref": "./examples/Clouds_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Clouds_CreateOrUpdate",
+        "tags": [
+          "Clouds"
+        ],
+        "summary": "Implements Clouds PUT method.",
+        "description": "Onboards the ScVmm fabric cloud as an Azure cloud resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudResourceName",
+            "in": "path",
+            "description": "Name of the Cloud.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Cloud' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          },
+          "201": {
+            "description": "Resource 'Cloud' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Clouds_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Clouds_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/Clouds_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Clouds_Update",
+        "tags": [
+          "Clouds"
+        ],
+        "summary": "Implements the Clouds PATCH method.",
+        "description": "Updates the Clouds resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudResourceName",
+            "in": "path",
+            "description": "Name of the Cloud.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_Update_MaximumSet": {
+            "$ref": "./examples/Clouds_Update_MaximumSet_Gen.json"
+          },
+          "Clouds_Update_MinimumSet": {
+            "$ref": "./examples/Clouds_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Clouds_Delete",
+        "tags": [
+          "Clouds"
+        ],
+        "summary": "Implements Cloud resource DELETE method.",
+        "description": "Deregisters the ScVmm fabric cloud from Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryForceDelete"
+          },
+          {
+            "name": "cloudResourceName",
+            "in": "path",
+            "description": "Name of the Cloud.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_Delete_MaximumSet": {
+            "$ref": "./examples/Clouds_Delete_MaximumSet_Gen.json"
+          },
+          "Clouds_Delete_MinimumSet": {
+            "$ref": "./examples/Clouds_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/virtualMachineTemplates": {
+      "get": {
+        "operationId": "VirtualMachineTemplates_ListByResourceGroup",
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "summary": "Implements GET VirtualMachineTemplates in a resource group.",
+        "description": "List of VirtualMachineTemplates in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineTemplates_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "VirtualMachineTemplates_ListByResourceGroup_MinimumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/virtualMachineTemplates/{virtualMachineTemplateName}": {
+      "get": {
+        "operationId": "VirtualMachineTemplates_Get",
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "summary": "Gets a VirtualMachineTemplate.",
+        "description": "Implements VirtualMachineTemplate GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualMachineTemplateName",
+            "in": "path",
+            "description": "Name of the VirtualMachineTemplate.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineTemplates_Get_MaximumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_Get_MaximumSet_Gen.json"
+          },
+          "VirtualMachineTemplates_Get_MinimumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineTemplates_CreateOrUpdate",
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "summary": "Implements VirtualMachineTemplates PUT method.",
+        "description": "Onboards the ScVmm VM Template as an Azure VM Template resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualMachineTemplateName",
+            "in": "path",
+            "description": "Name of the VirtualMachineTemplate.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualMachineTemplate' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualMachineTemplate' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineTemplates_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VirtualMachineTemplates_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualMachineTemplates_Update",
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "summary": "Implements the VirtualMachineTemplate PATCH method.",
+        "description": "Updates the VirtualMachineTemplate resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualMachineTemplateName",
+            "in": "path",
+            "description": "Name of the VirtualMachineTemplate.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplateTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineTemplates_Update_MaximumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_Update_MaximumSet_Gen.json"
+          },
+          "VirtualMachineTemplates_Update_MinimumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualMachineTemplates_Delete",
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "summary": "Implements VirtualMachineTemplate DELETE method.",
+        "description": "Deregisters the ScVmm VM Template from Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryForceDelete"
+          },
+          {
+            "name": "virtualMachineTemplateName",
+            "in": "path",
+            "description": "Name of the VirtualMachineTemplate.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineTemplates_Delete_MaximumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_Delete_MaximumSet_Gen.json"
+          },
+          "VirtualMachineTemplates_Delete_MinimumSet": {
+            "$ref": "./examples/VirtualMachineTemplates_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/virtualNetworks": {
+      "get": {
+        "operationId": "VirtualNetworks_ListByResourceGroup",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "summary": "Implements GET VirtualNetworks in a resource group.",
+        "description": "List of VirtualNetworks in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/VirtualNetworks_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_ListByResourceGroup_MinimumSet": {
+            "$ref": "./examples/VirtualNetworks_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/virtualNetworks/{virtualNetworkName}": {
+      "get": {
+        "operationId": "VirtualNetworks_Get",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "summary": "Gets a VirtualNetwork.",
+        "description": "Implements VirtualNetwork GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the VirtualNetwork.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Get_MaximumSet": {
+            "$ref": "./examples/VirtualNetworks_Get_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_Get_MinimumSet": {
+            "$ref": "./examples/VirtualNetworks_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworks_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "summary": "Implements VirtualNetworks PUT method.",
+        "description": "Onboards the ScVmm virtual network as an Azure virtual network resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the VirtualNetwork.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualNetwork' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualNetwork' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/VirtualNetworks_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/VirtualNetworks_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualNetworks_Update",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "summary": "Implements the VirtualNetworks PATCH method.",
+        "description": "Updates the VirtualNetworks resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the VirtualNetwork.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Update_MaximumSet": {
+            "$ref": "./examples/VirtualNetworks_Update_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_Update_MinimumSet": {
+            "$ref": "./examples/VirtualNetworks_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualNetworks_Delete",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "summary": "Implements VirtualNetwork DELETE method.",
+        "description": "Deregisters the ScVmm virtual network from Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryForceDelete"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the VirtualNetwork.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Delete_MaximumSet": {
+            "$ref": "./examples/VirtualNetworks_Delete_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_Delete_MinimumSet": {
+            "$ref": "./examples/VirtualNetworks_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/vmmServers": {
+      "get": {
+        "operationId": "VmmServers_ListByResourceGroup",
+        "tags": [
+          "VmmServers"
+        ],
+        "summary": "Implements GET VmmServers in a resource group.",
+        "description": "List of VmmServers in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmmServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmmServers_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/VmmServers_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "VmmServers_ListByResourceGroup_MinimumSet": {
+            "$ref": "./examples/VmmServers_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/vmmServers/{vmmServerName}": {
+      "get": {
+        "operationId": "VmmServers_Get",
+        "tags": [
+          "VmmServers"
+        ],
+        "summary": "Gets a VMMServer.",
+        "description": "Implements VmmServer GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmmServerName",
+            "in": "path",
+            "description": "Name of the VmmServer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmmServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmmServers_Get_MaximumSet": {
+            "$ref": "./examples/VmmServers_Get_MaximumSet_Gen.json"
+          },
+          "VmmServers_Get_MinimumSet": {
+            "$ref": "./examples/VmmServers_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VmmServers_CreateOrUpdate",
+        "tags": [
+          "VmmServers"
+        ],
+        "summary": "Implements VmmServers PUT method.",
+        "description": "Onboards the SCVmm fabric as an Azure VmmServer resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmmServerName",
+            "in": "path",
+            "description": "Name of the VmmServer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VmmServer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VmmServer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VmmServer"
+            }
+          },
+          "201": {
+            "description": "Resource 'VmmServer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VmmServer"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmmServers_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/VmmServers_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VmmServers_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/VmmServers_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VmmServers_Update",
+        "tags": [
+          "VmmServers"
+        ],
+        "summary": "Implements VmmServers PATCH method.",
+        "description": "Updates the VmmServers resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmmServerName",
+            "in": "path",
+            "description": "Name of the VmmServer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VmmServerTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmmServer"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmmServers_Update_MaximumSet": {
+            "$ref": "./examples/VmmServers_Update_MaximumSet_Gen.json"
+          },
+          "VmmServers_Update_MinimumSet": {
+            "$ref": "./examples/VmmServers_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VmmServers_Delete",
+        "tags": [
+          "VmmServers"
+        ],
+        "summary": "Implements VmmServers DELETE method.",
+        "description": "Removes the SCVmm fabric from Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryForceDelete"
+          },
+          {
+            "name": "vmmServerName",
+            "in": "path",
+            "description": "Name of the VmmServer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmmServers_Delete_MaximumSet": {
+            "$ref": "./examples/VmmServers_Delete_MaximumSet_Gen.json"
+          },
+          "VmmServers_Delete_MinimumSet": {
+            "$ref": "./examples/VmmServers_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/vmmServers/{vmmServerName}/inventoryItems": {
+      "get": {
+        "operationId": "InventoryItems_ListByVmmServer",
+        "tags": [
+          "InventoryItems"
+        ],
+        "summary": "Implements GET for the list of Inventory Items in the VMMServer.",
+        "description": "Returns the list of inventoryItems in the given VmmServer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmmServerName",
+            "in": "path",
+            "description": "Name of the VmmServer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryItemListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryItems_ListByVmmServer_MaximumSet": {
+            "$ref": "./examples/InventoryItems_ListByVmmServer_MaximumSet_Gen.json"
+          },
+          "InventoryItems_ListByVmmServer_MinimumSet": {
+            "$ref": "./examples/InventoryItems_ListByVmmServer_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/vmmServers/{vmmServerName}/inventoryItems/{inventoryItemResourceName}": {
+      "get": {
+        "operationId": "InventoryItems_Get",
+        "tags": [
+          "InventoryItems"
+        ],
+        "summary": "Implements GET InventoryItem method.",
+        "description": "Shows an inventory item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmmServerName",
+            "in": "path",
+            "description": "Name of the VmmServer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "inventoryItemResourceName",
+            "in": "path",
+            "description": "Name of the inventoryItem.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryItems_Get_MaximumSet": {
+            "$ref": "./examples/InventoryItems_Get_MaximumSet_Gen.json"
+          },
+          "InventoryItems_Get_MinimumSet": {
+            "$ref": "./examples/InventoryItems_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InventoryItems_Create",
+        "tags": [
+          "InventoryItems"
+        ],
+        "summary": "Implements InventoryItem PUT method.",
+        "description": "Create Or Update InventoryItem.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmmServerName",
+            "in": "path",
+            "description": "Name of the VmmServer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "inventoryItemResourceName",
+            "in": "path",
+            "description": "Name of the inventoryItem.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InventoryItem' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          },
+          "201": {
+            "description": "Resource 'InventoryItem' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryItems_Create_MaximumSet": {
+            "$ref": "./examples/InventoryItems_Create_MaximumSet_Gen.json"
+          },
+          "InventoryItems_Create_MinimumSet": {
+            "$ref": "./examples/InventoryItems_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "InventoryItems_Delete",
+        "tags": [
+          "InventoryItems"
+        ],
+        "summary": "Implements inventoryItem DELETE method.",
+        "description": "Deletes an inventoryItem.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmmServerName",
+            "in": "path",
+            "description": "Name of the VmmServer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "[a-zA-Z0-9-_\\.]"
+          },
+          {
+            "name": "inventoryItemResourceName",
+            "in": "path",
+            "description": "Name of the inventoryItem.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryItems_Delete_MaximumSet": {
+            "$ref": "./examples/InventoryItems_Delete_MaximumSet_Gen.json"
+          },
+          "InventoryItems_Delete_MinimumSet": {
+            "$ref": "./examples/InventoryItems_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AllocationMethod": {
+      "type": "string",
+      "description": "Network address allocation method.",
+      "enum": [
+        "Dynamic",
+        "Static"
+      ],
+      "x-ms-enum": {
+        "name": "AllocationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dynamic",
+            "value": "Dynamic",
+            "description": "Dynamically allocated address."
+          },
+          {
+            "name": "Static",
+            "value": "Static",
+            "description": "Statically allocated address."
+          }
+        ]
+      }
+    },
+    "AvailabilitySet": {
+      "type": "object",
+      "description": "The AvailabilitySets resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailabilitySetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AvailabilitySetListItem": {
+      "type": "object",
+      "description": "Availability Set model",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Gets the ARM Id of the microsoft.scvmm/availabilitySets resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/availabilitySets"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the availability set."
+        }
+      }
+    },
+    "AvailabilitySetListResult": {
+      "type": "object",
+      "description": "The response of a AvailabilitySet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvailabilitySet items on this page",
+          "items": {
+            "$ref": "#/definitions/AvailabilitySet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AvailabilitySetProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "availabilitySetName": {
+          "type": "string",
+          "description": "Name of the availability set.",
+          "minLength": 1
+        },
+        "vmmServerId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AvailabilitySetTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AvailabilitySet resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Checkpoint": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "parentCheckpointID": {
+          "type": "string",
+          "description": "Gets ID of parent of the checkpoint.",
+          "x-ms-client-name": "parentCheckpointId"
+        },
+        "checkpointID": {
+          "type": "string",
+          "description": "Gets ID of the checkpoint.",
+          "x-ms-client-name": "checkpointId"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the checkpoint."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets description of the checkpoint."
+        }
+      }
+    },
+    "Cloud": {
+      "type": "object",
+      "description": "The Clouds resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudCapacity": {
+      "type": "object",
+      "description": "Cloud Capacity model",
+      "properties": {
+        "cpuCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "CPUCount specifies the maximum number of CPUs that can be allocated in the cloud.",
+          "readOnly": true
+        },
+        "memoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "MemoryMB specifies a memory usage limit in megabytes.",
+          "readOnly": true
+        },
+        "vmCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "VMCount gives the max number of VMs that can be deployed in the cloud.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudInventoryItem": {
+      "type": "object",
+      "description": "The Cloud inventory item.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Cloud"
+    },
+    "CloudListResult": {
+      "type": "object",
+      "description": "The response of a Cloud list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Cloud items on this page",
+          "items": {
+            "$ref": "#/definitions/Cloud"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "inventoryItemId": {
+          "type": "string",
+          "description": "Gets or sets the inventory Item ID for the resource."
+        },
+        "uuid": {
+          "type": "string",
+          "description": "Unique ID of the cloud.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "vmmServerId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
+        },
+        "cloudName": {
+          "type": "string",
+          "description": "Name of the cloud in VmmServer.",
+          "readOnly": true
+        },
+        "cloudCapacity": {
+          "$ref": "#/definitions/CloudCapacity",
+          "description": "Capacity of the cloud.",
+          "readOnly": true
+        },
+        "storageQoSPolicies": {
+          "type": "array",
+          "description": "List of QoS policies available for the cloud.",
+          "items": {
+            "$ref": "#/definitions/StorageQosPolicy"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "storageQosPolicies"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Cloud resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreateDiffDisk": {
+      "type": "string",
+      "description": "Create diff disk.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "CreateDiffDisk",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable create diff disk."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable create diff disk."
+          }
+        ]
+      }
+    },
+    "DynamicMemoryEnabled": {
+      "type": "string",
+      "description": "Dynamic memory enabled.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicMemoryEnabled",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable dynamic memory."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable dynamic memory."
+          }
+        ]
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The extended location name.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ExtendedLocation/customLocations"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "GuestAgent": {
+      "type": "object",
+      "description": "Defines the GuestAgent.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GuestAgentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GuestAgentListResult": {
+      "type": "object",
+      "description": "The response of a GuestAgent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GuestAgent items on this page",
+          "items": {
+            "$ref": "#/definitions/GuestAgent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GuestAgentProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Gets a unique identifier for this resource.",
+          "readOnly": true
+        },
+        "credentials": {
+          "$ref": "#/definitions/GuestCredential",
+          "description": "Username / Password Credentials to provision guest agent."
+        },
+        "httpProxyConfig": {
+          "$ref": "#/definitions/HttpProxyConfiguration",
+          "description": "HTTP Proxy configuration for the VM."
+        },
+        "provisioningAction": {
+          "$ref": "#/definitions/ProvisioningAction",
+          "description": "Gets or sets the guest agent provisioning action."
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets the guest agent status.",
+          "readOnly": true
+        },
+        "customResourceName": {
+          "type": "string",
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the private link scope this machine is assigned to, if any.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/privateLinkScopes"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "GuestCredential": {
+      "type": "object",
+      "description": "Username / Password Credentials to connect to guest.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Gets or sets username to connect with the guest."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Gets or sets the password to connect with the guest.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "HardwareProfile": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "memoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MemoryMB is the size of a virtual machine's memory, in MB."
+        },
+        "cpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of vCPUs for the vm."
+        },
+        "limitCpuForMigration": {
+          "$ref": "#/definitions/LimitCpuForMigration",
+          "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs."
+        },
+        "dynamicMemoryEnabled": {
+          "$ref": "#/definitions/DynamicMemoryEnabled",
+          "description": "Gets or sets a value indicating whether to enable dynamic memory or not."
+        },
+        "dynamicMemoryMaxMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the max dynamic memory for the vm."
+        },
+        "dynamicMemoryMinMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the min dynamic memory for the vm."
+        },
+        "isHighlyAvailable": {
+          "$ref": "#/definitions/IsHighlyAvailable",
+          "description": "Gets highly available property.",
+          "readOnly": true
+        }
+      }
+    },
+    "HardwareProfileUpdate": {
+      "type": "object",
+      "description": "Defines the resource update properties.",
+      "properties": {
+        "memoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MemoryMB is the size of a virtual machine's memory, in MB."
+        },
+        "cpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of vCPUs for the vm."
+        },
+        "limitCpuForMigration": {
+          "$ref": "#/definitions/LimitCpuForMigration",
+          "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs."
+        },
+        "dynamicMemoryEnabled": {
+          "$ref": "#/definitions/DynamicMemoryEnabled",
+          "description": "Gets or sets a value indicating whether to enable dynamic memory or not."
+        },
+        "dynamicMemoryMaxMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the max dynamic memory for the vm."
+        },
+        "dynamicMemoryMinMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the min dynamic memory for the vm."
+        }
+      }
+    },
+    "HttpProxyConfiguration": {
+      "type": "object",
+      "description": "HTTP Proxy configuration for the VM.",
+      "properties": {
+        "httpsProxy": {
+          "type": "string",
+          "description": "Gets or sets httpsProxy url."
+        }
+      }
+    },
+    "InfrastructureProfile": {
+      "type": "object",
+      "description": "Specifies the vmmServer infrastructure specific settings for the virtual machine instance.",
+      "properties": {
+        "inventoryItemId": {
+          "type": "string",
+          "description": "Gets or sets the inventory Item ID for the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vmmServerId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
+        },
+        "cloudId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Id of the cloud resource to use for deploying the vm.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/clouds"
+              }
+            ]
+          }
+        },
+        "templateId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Id of the template resource to use for deploying the vm.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualMachineTemplates"
+              }
+            ]
+          }
+        },
+        "vmName": {
+          "type": "string",
+          "description": "VMName is the name of VM on the SCVmm server.",
+          "minLength": 1,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "Unique ID of the virtual machine.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lastRestoredVMCheckpoint": {
+          "$ref": "#/definitions/Checkpoint",
+          "description": "Last restored checkpoint in the vm.",
+          "readOnly": true,
+          "x-ms-client-name": "lastRestoredVmCheckpoint"
+        },
+        "checkpoints": {
+          "type": "array",
+          "description": "Checkpoints in the vm.",
+          "items": {
+            "$ref": "#/definitions/Checkpoint"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "checkpointID"
+          ]
+        },
+        "checkpointType": {
+          "type": "string",
+          "description": "Type of checkpoint supported for the vm.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "generation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the generation for the vm.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "biosGuid": {
+          "type": "string",
+          "description": "Gets or sets the bios guid for the vm.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "InfrastructureProfileUpdate": {
+      "type": "object",
+      "description": "Specifies the vmmServer infrastructure specific update settings for the virtual machine instance.",
+      "properties": {
+        "checkpointType": {
+          "type": "string",
+          "description": "Type of checkpoint supported for the vm.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "InventoryItem": {
+      "type": "object",
+      "description": "Defines the inventory item.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InventoryItemProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InventoryItemDetails": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "inventoryItemId": {
+          "type": "string",
+          "description": "Gets or sets the inventory Item ID for the resource."
+        },
+        "inventoryItemName": {
+          "type": "string",
+          "description": "Gets or sets the Managed Object name in Vmm for the resource."
+        }
+      }
+    },
+    "InventoryItemListResult": {
+      "type": "object",
+      "description": "The response of a InventoryItem list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InventoryItem items on this page",
+          "items": {
+            "$ref": "#/definitions/InventoryItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InventoryItemProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "inventoryType": {
+          "$ref": "#/definitions/InventoryType",
+          "description": "They inventory type."
+        },
+        "managedResourceId": {
+          "type": "string",
+          "description": "Gets the tracked resource id corresponding to the inventory resource.",
+          "readOnly": true
+        },
+        "uuid": {
+          "type": "string",
+          "description": "Gets the UUID (which is assigned by Vmm) for the inventory item.",
+          "readOnly": true
+        },
+        "inventoryItemName": {
+          "type": "string",
+          "description": "Gets the Managed Object name in Vmm for the inventory item.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "inventoryType",
+      "required": [
+        "inventoryType"
+      ]
+    },
+    "InventoryType": {
+      "type": "string",
+      "description": "The inventory type",
+      "enum": [
+        "Cloud",
+        "VirtualNetwork",
+        "VirtualMachine",
+        "VirtualMachineTemplate"
+      ],
+      "x-ms-enum": {
+        "name": "InventoryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cloud",
+            "value": "Cloud",
+            "description": "Cloud inventory type"
+          },
+          {
+            "name": "VirtualNetwork",
+            "value": "VirtualNetwork",
+            "description": "VirtualNetwork inventory type"
+          },
+          {
+            "name": "VirtualMachine",
+            "value": "VirtualMachine",
+            "description": "VirtualMachine inventory type"
+          },
+          {
+            "name": "VirtualMachineTemplate",
+            "value": "VirtualMachineTemplate",
+            "description": "VirtualMachineTemplate inventory type"
+          }
+        ]
+      }
+    },
+    "IsCustomizable": {
+      "type": "string",
+      "description": "Customizable.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "IsCustomizable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable customizable."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable customizable."
+          }
+        ]
+      }
+    },
+    "IsHighlyAvailable": {
+      "type": "string",
+      "description": "Highly available.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "IsHighlyAvailable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable highly available."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable highly available."
+          }
+        ]
+      }
+    },
+    "LimitCpuForMigration": {
+      "type": "string",
+      "description": "Limit CPU for migration.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "LimitCpuForMigration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable limit CPU for migration."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable limit CPU for migration."
+          }
+        ]
+      }
+    },
+    "NetworkInterface": {
+      "type": "object",
+      "description": "Network Interface model",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the network interface."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the display name of the network interface as shown in the vmmServer. This is the fallback label for a NIC when the name is not set.",
+          "readOnly": true
+        },
+        "ipv4Addresses": {
+          "type": "array",
+          "description": "Gets the nic ipv4 addresses.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "Gets the nic ipv6 addresses.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "Gets or sets the nic MAC address."
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualNetwork"
+              }
+            ]
+          }
+        },
+        "networkName": {
+          "type": "string",
+          "description": "Gets the name of the virtual network in vmmServer that the nic is connected to.",
+          "readOnly": true
+        },
+        "ipv4AddressType": {
+          "$ref": "#/definitions/AllocationMethod",
+          "description": "Gets or sets the ipv4 address type."
+        },
+        "ipv6AddressType": {
+          "$ref": "#/definitions/AllocationMethod",
+          "description": "Gets or sets the ipv6 address type."
+        },
+        "macAddressType": {
+          "$ref": "#/definitions/AllocationMethod",
+          "description": "Gets or sets the mac address type."
+        },
+        "nicId": {
+          "type": "string",
+          "description": "Gets or sets the nic id."
+        }
+      }
+    },
+    "NetworkInterfaceUpdate": {
+      "type": "object",
+      "description": "Network Interface Update model",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the network interface."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "Gets or sets the nic MAC address."
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualNetwork"
+              }
+            ]
+          }
+        },
+        "ipv4AddressType": {
+          "$ref": "#/definitions/AllocationMethod",
+          "description": "Gets or sets the ipv4 address type."
+        },
+        "ipv6AddressType": {
+          "$ref": "#/definitions/AllocationMethod",
+          "description": "Gets or sets the ipv6 address type."
+        },
+        "macAddressType": {
+          "$ref": "#/definitions/AllocationMethod",
+          "description": "Gets or sets the mac address type."
+        },
+        "nicId": {
+          "type": "string",
+          "description": "Gets or sets the nic id."
+        }
+      }
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "nicId"
+          ]
+        }
+      }
+    },
+    "NetworkProfileUpdate": {
+      "type": "object",
+      "description": "Defines the resource update properties.",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceUpdate"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "nicId"
+          ]
+        }
+      }
+    },
+    "OsProfileForVmInstance": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "adminPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Admin password of the virtual machine.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "computerName": {
+          "type": "string",
+          "description": "Gets or sets computer name."
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "Gets the type of the os.",
+          "readOnly": true
+        },
+        "osSku": {
+          "type": "string",
+          "description": "Gets os sku.",
+          "readOnly": true
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "Gets os version.",
+          "readOnly": true
+        },
+        "domainName": {
+          "type": "string",
+          "description": "Gets or sets the domain name."
+        },
+        "domainUsername": {
+          "type": "string",
+          "description": "Gets or sets the domain username."
+        },
+        "domainPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Password of the domain the VM has to join.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "workgroup": {
+          "type": "string",
+          "description": "Gets or sets the workgroup."
+        },
+        "productKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "timezone": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the index value of the timezone."
+        },
+        "runOnceCommands": {
+          "type": "string",
+          "description": "Get or sets the commands to be run once at the time of creation separated by semicolons."
+        }
+      }
+    },
+    "OsType": {
+      "type": "string",
+      "description": "Virtual machine operating system type.",
+      "enum": [
+        "Windows",
+        "Linux",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "OsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Windows operating system."
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Linux operating system."
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other operating system."
+          }
+        ]
+      }
+    },
+    "ProvisioningAction": {
+      "type": "string",
+      "description": "Guest agent provisioning action.",
+      "enum": [
+        "install",
+        "uninstall",
+        "repair"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "install",
+            "value": "install",
+            "description": "Install guest agent."
+          },
+          {
+            "name": "uninstall",
+            "value": "uninstall",
+            "description": "Uninstall guest agent."
+          },
+          {
+            "name": "repair",
+            "value": "repair",
+            "description": "Repair guest agent."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Created"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is provisioning."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource has been accepted."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The resource was created."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StopVirtualMachineOptions": {
+      "type": "object",
+      "description": "Defines the stop action properties.",
+      "properties": {
+        "skipShutdown": {
+          "type": "string",
+          "description": "Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false.",
+          "default": "false",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "SkipShutdown",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "true",
+                "value": "true",
+                "description": "Enable skip shutdown."
+              },
+              {
+                "name": "false",
+                "value": "false",
+                "description": "Disable skip shutdown."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "StorageProfile": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
+          "items": {
+            "$ref": "#/definitions/VirtualDisk"
+          },
+          "x-ms-identifiers": [
+            "diskId",
+            "name"
+          ]
+        }
+      }
+    },
+    "StorageProfileUpdate": {
+      "type": "object",
+      "description": "Defines the resource update properties.",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
+          "items": {
+            "$ref": "#/definitions/VirtualDiskUpdate"
+          },
+          "x-ms-identifiers": [
+            "diskId",
+            "name"
+          ]
+        }
+      }
+    },
+    "StorageQosPolicy": {
+      "type": "object",
+      "description": "The StorageQoSPolicy definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the policy."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the QoS policy."
+        },
+        "iopsMaximum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum IO operations per second."
+        },
+        "iopsMinimum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum IO operations per second."
+        },
+        "bandwidthLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Bandwidth Limit for internet traffic."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "The underlying policy."
+        }
+      }
+    },
+    "StorageQosPolicyDetails": {
+      "type": "object",
+      "description": "The StorageQoSPolicyDetails definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the policy."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the QoS policy."
+        }
+      }
+    },
+    "VirtualDisk": {
+      "type": "object",
+      "description": "Virtual disk model",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the disk."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the display name of the virtual disk as shown in the vmmServer. This is the fallback label for a disk when the name is not set.",
+          "readOnly": true
+        },
+        "diskId": {
+          "type": "string",
+          "description": "Gets or sets the disk id."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the disk total size."
+        },
+        "maxDiskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the max disk size.",
+          "readOnly": true
+        },
+        "bus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the disk bus."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the disk lun."
+        },
+        "busType": {
+          "type": "string",
+          "description": "Gets or sets the disk bus type."
+        },
+        "vhdType": {
+          "type": "string",
+          "description": "Gets or sets the disk vhd type."
+        },
+        "volumeType": {
+          "type": "string",
+          "description": "Gets the disk volume type.",
+          "readOnly": true
+        },
+        "vhdFormatType": {
+          "type": "string",
+          "description": "Gets the disk vhd format type.",
+          "readOnly": true
+        },
+        "templateDiskId": {
+          "type": "string",
+          "description": "Gets or sets the disk id in the template.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageQoSPolicy": {
+          "$ref": "#/definitions/StorageQosPolicyDetails",
+          "description": "The QoS policy for the disk.",
+          "x-ms-client-name": "storageQosPolicy"
+        },
+        "createDiffDisk": {
+          "$ref": "#/definitions/CreateDiffDisk",
+          "description": "Gets or sets a value indicating diff disk.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "VirtualDiskUpdate": {
+      "type": "object",
+      "description": "Virtual Disk Update model",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the disk."
+        },
+        "diskId": {
+          "type": "string",
+          "description": "Gets or sets the disk id."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the disk total size."
+        },
+        "bus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the disk bus."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the disk lun."
+        },
+        "busType": {
+          "type": "string",
+          "description": "Gets or sets the disk bus type."
+        },
+        "vhdType": {
+          "type": "string",
+          "description": "Gets or sets the disk vhd type."
+        },
+        "storageQoSPolicy": {
+          "$ref": "#/definitions/StorageQosPolicyDetails",
+          "description": "The QoS policy for the disk.",
+          "x-ms-client-name": "storageQosPolicy"
+        }
+      }
+    },
+    "VirtualMachineCreateCheckpoint": {
+      "type": "object",
+      "description": "Defines the create checkpoint action properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the checkpoint."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the checkpoint."
+        }
+      }
+    },
+    "VirtualMachineDeleteCheckpoint": {
+      "type": "object",
+      "description": "Defines the delete checkpoint action properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the checkpoint to be deleted."
+        }
+      }
+    },
+    "VirtualMachineInstance": {
+      "type": "object",
+      "description": "Define the virtualMachineInstance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VirtualMachineInstanceListResult": {
+      "type": "object",
+      "description": "The response of a VirtualMachineInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachineInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualMachineInstanceProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "availabilitySets": {
+          "type": "array",
+          "description": "Availability Sets in vm.",
+          "items": {
+            "$ref": "#/definitions/AvailabilitySetListItem"
+          }
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OsProfileForVmInstance",
+          "description": "OS properties.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Hardware properties."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Network properties."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage properties."
+        },
+        "infrastructureProfile": {
+          "$ref": "#/definitions/InfrastructureProfile",
+          "description": "Gets the infrastructure profile."
+        },
+        "powerState": {
+          "type": "string",
+          "description": "Gets the power state of the virtual machine.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineInstanceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the VirtualMachineInstance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineInstanceUpdateProperties",
+          "description": "The update properties of the VirtualMachineInstance.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualMachineInstanceUpdateProperties": {
+      "type": "object",
+      "description": "Virtual Machine Instance Properties Update model",
+      "properties": {
+        "availabilitySets": {
+          "type": "array",
+          "description": "Availability Sets in vm.",
+          "items": {
+            "$ref": "#/definitions/AvailabilitySetListItem"
+          }
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfileUpdate",
+          "description": "Hardware properties."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfileUpdate",
+          "description": "Network properties."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfileUpdate",
+          "description": "Storage properties."
+        },
+        "infrastructureProfile": {
+          "$ref": "#/definitions/InfrastructureProfileUpdate",
+          "description": "Gets the infrastructure profile."
+        }
+      }
+    },
+    "VirtualMachineInventoryItem": {
+      "type": "object",
+      "description": "The Virtual machine inventory item.",
+      "properties": {
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "Gets the type of the os.",
+          "readOnly": true
+        },
+        "osName": {
+          "type": "string",
+          "description": "Gets os name.",
+          "readOnly": true
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "Gets os version.",
+          "readOnly": true
+        },
+        "powerState": {
+          "type": "string",
+          "description": "Gets the power state of the virtual machine.",
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "Gets or sets the nic ip addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cloud": {
+          "$ref": "#/definitions/InventoryItemDetails",
+          "description": "Cloud inventory resource details where the VM is present."
+        },
+        "biosGuid": {
+          "type": "string",
+          "description": "Gets the bios guid.",
+          "readOnly": true
+        },
+        "managedMachineResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Gets the tracked resource id corresponding to the inventory resource.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "VirtualMachine"
+    },
+    "VirtualMachineRestoreCheckpoint": {
+      "type": "object",
+      "description": "Defines the restore checkpoint action properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the checkpoint to be restored to."
+        }
+      }
+    },
+    "VirtualMachineTemplate": {
+      "type": "object",
+      "description": "The VirtualMachineTemplates resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineTemplateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VirtualMachineTemplateInventoryItem": {
+      "type": "object",
+      "description": "The Virtual machine template inventory item.",
+      "properties": {
+        "cpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the desired number of vCPUs for the vm.",
+          "readOnly": true
+        },
+        "memoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MemoryMB is the desired size of a virtual machine's memory, in MB.",
+          "readOnly": true
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "Gets the type of the os.",
+          "readOnly": true
+        },
+        "osName": {
+          "type": "string",
+          "description": "Gets os name.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "VirtualMachineTemplate"
+    },
+    "VirtualMachineTemplateListResult": {
+      "type": "object",
+      "description": "The response of a VirtualMachineTemplate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachineTemplate items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineTemplate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualMachineTemplateProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "inventoryItemId": {
+          "type": "string",
+          "description": "Gets or sets the inventory Item ID for the resource."
+        },
+        "uuid": {
+          "type": "string",
+          "description": "Unique ID of the virtual machine template.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "vmmServerId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "Gets the type of the os.",
+          "readOnly": true
+        },
+        "osName": {
+          "type": "string",
+          "description": "Gets os name.",
+          "readOnly": true
+        },
+        "computerName": {
+          "type": "string",
+          "description": "Gets computer name.",
+          "readOnly": true
+        },
+        "memoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MemoryMB is the desired size of a virtual machine's memory, in MB.",
+          "readOnly": true
+        },
+        "cpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the desired number of vCPUs for the vm.",
+          "readOnly": true
+        },
+        "limitCpuForMigration": {
+          "$ref": "#/definitions/LimitCpuForMigration",
+          "description": "Gets a value indicating whether to enable processor compatibility mode for live migration of VMs.",
+          "readOnly": true
+        },
+        "dynamicMemoryEnabled": {
+          "$ref": "#/definitions/DynamicMemoryEnabled",
+          "description": "Gets a value indicating whether to enable dynamic memory or not.",
+          "readOnly": true
+        },
+        "isCustomizable": {
+          "$ref": "#/definitions/IsCustomizable",
+          "description": "Gets a value indicating whether the vm template is customizable or not.",
+          "readOnly": true
+        },
+        "dynamicMemoryMaxMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the max dynamic memory for the vm.",
+          "readOnly": true
+        },
+        "dynamicMemoryMinMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the min dynamic memory for the vm.",
+          "readOnly": true
+        },
+        "isHighlyAvailable": {
+          "$ref": "#/definitions/IsHighlyAvailable",
+          "description": "Gets highly available property.",
+          "readOnly": true
+        },
+        "generation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the generation for the vm.",
+          "readOnly": true
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "description": "Gets the network interfaces of the template.",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name",
+            "nicId"
+          ]
+        },
+        "disks": {
+          "type": "array",
+          "description": "Gets the disks of the template.",
+          "items": {
+            "$ref": "#/definitions/VirtualDisk"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "diskId",
+            "name"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineTemplateTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in VirtualMachineTemplate resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VirtualNetwork": {
+      "type": "object",
+      "description": "The VirtualNetworks resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VirtualNetworkInventoryItem": {
+      "type": "object",
+      "description": "The Virtual network inventory item.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "VirtualNetwork"
+    },
+    "VirtualNetworkListResult": {
+      "type": "object",
+      "description": "The response of a VirtualNetwork list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualNetwork items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualNetworkProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "inventoryItemId": {
+          "type": "string",
+          "description": "Gets or sets the inventory Item ID for the resource."
+        },
+        "uuid": {
+          "type": "string",
+          "description": "Unique ID of the virtual network.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "vmmServerId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
+        },
+        "networkName": {
+          "type": "string",
+          "description": "Name of the virtual network in vmmServer.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in VirtualNetwork resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VmInstanceHybridIdentityMetadata": {
+      "type": "object",
+      "description": "Defines the HybridIdentityMetadata.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VmInstanceHybridIdentityMetadataProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VmInstanceHybridIdentityMetadataListResult": {
+      "type": "object",
+      "description": "The response of a VmInstanceHybridIdentityMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VmInstanceHybridIdentityMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/VmInstanceHybridIdentityMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VmInstanceHybridIdentityMetadataProperties": {
+      "type": "object",
+      "description": "Describes the properties of Hybrid Identity Metadata for a Virtual Machine.",
+      "properties": {
+        "resourceUid": {
+          "type": "string",
+          "description": "The unique identifier for the resource."
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "Gets or sets the Public Key."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "VmmCredential": {
+      "type": "object",
+      "description": "Credentials to connect to VmmServer.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username to use to connect to VmmServer."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password to use to connect to VmmServer.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "VmmServer": {
+      "type": "object",
+      "description": "The VmmServers resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VmmServerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VmmServerListResult": {
+      "type": "object",
+      "description": "The response of a VmmServer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VmmServer items on this page",
+          "items": {
+            "$ref": "#/definitions/VmmServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VmmServerProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/VmmCredential",
+          "description": "Credentials to connect to VmmServer."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Fqdn is the hostname/ip of the vmmServer.",
+          "minLength": 1
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port is the port on which the vmmServer is listening.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "Gets the connection status to the vmmServer.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Gets any error message if connection to vmmServer is having any issue.",
+          "readOnly": true
+        },
+        "uuid": {
+          "type": "string",
+          "description": "Unique ID of vmmServer.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version is the version of the vmmSever.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fqdn"
+      ]
+    },
+    "VmmServerTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in VmmServer resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "QueryForceDelete": {
+      "name": "force",
+      "in": "query",
+      "description": "Forces the resource to be deleted.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "ForceDelete",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable force delete."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable force delete."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -766,260 +766,260 @@
       }
     },
     "/ingestion/jobs": {
-        "get": {
-            "tags": [
-                "Ingestion:"
-            ],
-            "summary": "Lists the ingestion jobs.",
-            "operationId": "IngestionJobs_List",
-            "produces": [
-                "application/json"
-            ],
-            "parameters": [
-                {
-                    "$ref": "#/parameters/apiVersionQueryParameter"
-                },
-                {
-                    "in": "header",
-                    "name": "mgmt-user-token",
-                    "type": "string",
-                    "description": "The token used to access the workspace (needed only for user compute jobs)."
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Success",
-                    "schema": {
-                        "$ref": "#/definitions/IngestionJobList"
-                    }
-                },
-                "default": {
-                    "description": "An error occurred.",
-                    "schema": {
-                        "$ref": "#/definitions/ErrorResponse"
-                    }
-                }
-            },
-            "x-ms-examples": {
-                "List all ingestion jobs": {
-                    "$ref": "./examples/list_ingestion_jobs.json"
-                }
+      "get": {
+        "tags": [
+          "Ingestion:"
+        ],
+        "summary": "Lists the ingestion jobs.",
+        "operationId": "IngestionJobs_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "header",
+            "name": "mgmt-user-token",
+            "type": "string",
+            "description": "The token used to access the workspace (needed only for user compute jobs)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionJobList"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all ingestion jobs": {
+            "$ref": "./examples/list_ingestion_jobs.json"
+          }
         }
+      }
     },
     "/ingestion/jobs/{job-id}": {
-        "put": {
-            "tags": [
-                "Ingestion:"
-            ],
-            "summary": "Creates an ingestion job with the specified job id.",
-            "operationId": "IngestionJobs_Create",
-            "consumes": [
-                "application/json"
-            ],
-            "produces": [
-                "application/json"
-            ],
-            "parameters": [
-                {
-                    "$ref": "#/parameters/apiVersionQueryParameter"
-                },
-                {
-                    "in": "path",
-                    "name": "job-id",
-                    "required": true,
-                    "type": "string",
-                    "description": "The id of the job that will be created."
-                },
-                {
-                    "in": "header",
-                    "name": "mgmt-user-token",
-                    "type": "string",
-                    "description": "The token used to access the workspace (needed only for user compute jobs)."
-                },
-                {
-                    "in": "header",
-                    "name": "aml-user-token",
-                    "type": "string",
-                    "description": "The token used to access the resources within the job in the workspace (needed only for user compute jobs)."
-                },
-                {
-                    "in": "body",
-                    "name": "ingestionJob",
-                    "schema": {
-                        "$ref": "#/definitions/IngestionJob"
-                    }
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Success",
-                    "schema": {
-                        "$ref": "#/definitions/IngestionJob"
-                    }
-                },
-                "default": {
-                    "description": "An error occurred.",
-                    "schema": {
-                        "$ref": "#/definitions/ErrorResponse"
-                    }
-                }
-            },
-            "x-ms-examples": {
-                "Create a system-compute ingestion job": {
-                    "$ref": "./examples/put_ingestion_job_sc.json"
-                },
-                "Create a user-compute ingestion job": {
-                    "$ref": "./examples/put_ingestion_job_uc.json"
-                }
+      "put": {
+        "tags": [
+          "Ingestion:"
+        ],
+        "summary": "Creates an ingestion job with the specified job id.",
+        "operationId": "IngestionJobs_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "path",
+            "name": "job-id",
+            "required": true,
+            "type": "string",
+            "description": "The id of the job that will be created."
+          },
+          {
+            "in": "header",
+            "name": "mgmt-user-token",
+            "type": "string",
+            "description": "The token used to access the workspace (needed only for user compute jobs)."
+          },
+          {
+            "in": "header",
+            "name": "aml-user-token",
+            "type": "string",
+            "description": "The token used to access the resources within the job in the workspace (needed only for user compute jobs)."
+          },
+          {
+            "in": "body",
+            "name": "ingestionJob",
+            "schema": {
+              "$ref": "#/definitions/IngestionJob"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionJob"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         },
-        "get": {
-            "tags": [
-                "Ingestion:"
-            ],
-            "summary": "Gets the details of the specified job id.",
-            "operationId": "IngestionJobs_Get",
-            "produces": [
-                "application/json"
-            ],
-            "parameters": [
-                {
-                    "$ref": "#/parameters/apiVersionQueryParameter"
-                },
-                {
-                    "in": "path",
-                    "name": "job-id",
-                    "required": true,
-                    "description": "The id of the job.",
-                    "type": "string"
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Success",
-                    "schema": {
-                        "$ref": "#/definitions/IngestionJob"
-                    }
-                },
-                "default": {
-                    "description": "An error occurred.",
-                    "schema": {
-                        "$ref": "#/definitions/ErrorResponse"
-                    }
-                }
-            },
-            "x-ms-examples": {
-                "Get ingestion job": {
-                    "$ref": "./examples/get_ingestion_job.json"
-                }
-            }
+        "x-ms-examples": {
+          "Create a system-compute ingestion job": {
+            "$ref": "./examples/put_ingestion_job_sc.json"
+          },
+          "Create a user-compute ingestion job": {
+            "$ref": "./examples/put_ingestion_job_uc.json"
+          }
         }
+      },
+      "get": {
+        "tags": [
+          "Ingestion:"
+        ],
+        "summary": "Gets the details of the specified job id.",
+        "operationId": "IngestionJobs_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "path",
+            "name": "job-id",
+            "required": true,
+            "description": "The id of the job.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionJob"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ingestion job": {
+            "$ref": "./examples/get_ingestion_job.json"
+          }
+        }
+      }
     },
     "/ingestion/jobs/{job-id}/runs": {
-        "get": {
-            "tags": [
-                "Ingestion:"
-            ],
-            "summary": "Lists the runs of the specified job id.",
-            "operationId": "IngestionJobRuns_List",
-            "produces": [
-                "application/json"
-            ],
-            "parameters": [
-                {
-                    "$ref": "#/parameters/apiVersionQueryParameter"
-                },
-                {
-                    "in": "path",
-                    "name": "job-id",
-                    "required": true,
-                    "description": "The id of the job.",
-                    "type": "string"
-                },
-                {
-                    "in": "header",
-                    "name": "mgmt-user-token",
-                    "type": "string",
-                    "description": "The token used to access the workspace (needed only for user compute jobs)."
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Success",
-                    "schema": {
-                        "$ref": "#/definitions/IngestionJobRunList"
-                    }
-                },
-                "default": {
-                    "description": "An error occurred.",
-                    "schema": {
-                        "$ref": "#/definitions/ErrorResponse"
-                    }
-                }
-            },
-            "x-ms-examples": {
-                "List ingestion job runs": {
-                    "$ref": "./examples/list_ingestion_job_runs.json"
-                }
+      "get": {
+        "tags": [
+          "Ingestion:"
+        ],
+        "summary": "Lists the runs of the specified job id.",
+        "operationId": "IngestionJobRuns_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "path",
+            "name": "job-id",
+            "required": true,
+            "description": "The id of the job.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "mgmt-user-token",
+            "type": "string",
+            "description": "The token used to access the workspace (needed only for user compute jobs)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionJobRunList"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ingestion job runs": {
+            "$ref": "./examples/list_ingestion_job_runs.json"
+          }
         }
+      }
     },
     "/ingestion/jobs/{job-id}/runs/{run-id}": {
-        "get": {
-            "tags": [
-                "Ingestion:"
-            ],
-            "summary": "Gets the details of the specified run id as part of the specified job id.",
-            "operationId": "IngestionJobRuns_Get",
-            "produces": [
-                "application/json"
-            ],
-            "parameters": [
-                {
-                    "$ref": "#/parameters/apiVersionQueryParameter"
-                },
-                {
-                    "in": "path",
-                    "name": "job-id",
-                    "required": true,
-                    "description": "The id of the job.",
-                    "type": "string"
-                },
-                {
-                    "in": "path",
-                    "name": "run-id",
-                    "required": true,
-                    "description": "The id of the run.",
-                    "type": "string"
-                },
-                {
-                    "in": "header",
-                    "name": "mgmt-user-token",
-                    "type": "string",
-                    "description": "The token used to access the workspace (needed only for user compute jobs)."
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Success",
-                    "schema": {
-                        "$ref": "#/definitions/IngestionJobRun"
-                    }
-                },
-                "default": {
-                    "description": "An error occurred.",
-                    "schema": {
-                        "$ref": "#/definitions/ErrorResponse"
-                    }
-                }
-            },
-            "x-ms-examples": {
-                "Get ingestion job runs": {
-                    "$ref": "./examples/get_ingestion_job_run.json"
-                }
+      "get": {
+        "tags": [
+          "Ingestion:"
+        ],
+        "summary": "Gets the details of the specified run id as part of the specified job id.",
+        "operationId": "IngestionJobRuns_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "path",
+            "name": "job-id",
+            "required": true,
+            "description": "The id of the job.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "run-id",
+            "required": true,
+            "description": "The id of the run.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "mgmt-user-token",
+            "type": "string",
+            "description": "The token used to access the workspace (needed only for user compute jobs)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionJobRun"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ingestion job runs": {
+            "$ref": "./examples/get_ingestion_job_run.json"
+          }
         }
+      }
     }
   },
   "definitions": {
@@ -1981,8 +1981,8 @@
       "type": "string",
       "description": "The job type.",
       "enum": [
-        "system",
-        "user"
+        "SystemCompute",
+        "UserCompute"
       ],
       "x-ms-enum": {
         "name": "IngestionJobType",
@@ -1990,845 +1990,870 @@
         "values": [
           {
             "name": "SystemCompute",
-            "value": "system",
+            "value": "SystemCompute",
             "description": "Jobs that run on service owned resources."
           },
           {
             "name": "UserCompute",
-            "value": "user",
+            "value": "UserCompute",
             "description": "Jobs that run on user owned workspace."
           }
-      ]
-    }
-  },
-  "IngestionJobSystemCompute": {
-    "type": "object",
-    "allOf": [
-      {
-        "$ref": "#/definitions/IngestionJob"
-      },
-      {
-        "properties": {
-          "searchServiceConnection": {
-            "$ref": "#/definitions/BaseConnection"
-          },
-          "datasource": {
-            "$ref": "#/definitions/SystemComputeDatasource"
-          },
-          "completionAction": {
-            "$ref": "#/definitions/CompletionAction"
-          },
-          "dataRefreshIntervalInHours": {
-            "type": "integer"
-          }
-        }
+        ]
       }
-    ],
-    "x-ms-discriminator-value": "system"
-  },
-  "IngestionJobUserCompute": {
-    "type": "object",
-    "required": [
-      "workspaceId"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/IngestionJob"
-      },
-      {
-        "properties": {
-          "workspaceId": {
-            "type": "string"
-          },
-          "compute": {
-            "$ref": "#/definitions/JobCompute"
-          },
-          "target": {
-            "$ref": "#/definitions/TargetIndex"
-          },
-          "datasource": {
-            "$ref": "#/definitions/UserComputeDatasource"
-          },
-          "dataRefreshIntervalInHours": {
-            "type": "integer"
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "user"
-  },
-  "JobCompute": {
-    "title": "JobCompute",
-    "description": "The compute settings of the job.",
-    "type": "object",
-    "discriminator": "kind",
-    "required": [ "kind" ],
-    "properties": {
-      "kind": {
-        "$ref": "#/definitions/ComputeType"
-      }
-    }
-  },
-  "ComputeType": {
-    "type": "string",
-    "description": "The compute type.",
-    "enum": [
-      "serverless",
-      "custom"
-    ],
-    "x-ms-enum": {
-      "name": "ComputeType",
-      "modelAsString": true,
-      "values": [
+    },
+    "IngestionJobSystemCompute": {
+      "type": "object",
+      "allOf": [
         {
-          "name": "ServerlessCompute",
-          "value": "serverless",
-          "description": "Serverless user compute."
+          "$ref": "#/definitions/IngestionJob"
         },
         {
-          "name": "CustomCompute",
-          "value": "custom",
-          "description": "Custom user compute."
-        }
-      ]
-    }
-  },
-  "ServerlessCompute": {
-    "description": "Serverless compute.",
-    "allOf": [
-      {
-        "$ref": "#/definitions/JobCompute"
-      },
-      {
-        "properties": {
-          "sku": {
-            "type": "string",
-            "description": "SKU Level"
-          },
-          "instanceCount": {
-            "type": "integer",
-            "description": "The count of instances to run the job on."
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "serverless"
-  },
-  "CustomCompute": {
-    "description": "Custom compute.",
-    "required": [
-      "computeId"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/JobCompute"
-      },
-      {
-        "properties": {
-          "computeId": {
-            "type": "string",
-            "description": "Id of the custom compute"
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "custom"
-  },
-  "TargetIndex": {
-    "title": "TargetIndex",
-    "description": "Information about the index to be created.",
-    "type": "object",
-    "discriminator": "kind",
-    "required": [
-      "kind"
-    ],
-    "properties": {
-      "kind": {
-        "$ref": "#/definitions/TargetType"
-      }
-	  }
-  },
-  "TargetType": {
-    "type": "string",
-    "description": "The target type.",
-    "enum": [
-      "acs",
-      "cosmosdb",
-      "pinecone"
-    ],
-    "x-ms-enum": {
-      "name": "TargetType",
-      "modelAsString": "true",
-      "values": [
-        {
-          "name": "AzureSearch",
-          "value": "acs",
-          "description": "Azure AI Search Index."
-        },
-        {
-          "name": "CosmosDB",
-          "value": "cosmosdb",
-          "description": "CosmosDB Index."
-        },
-        {
-          "name": "Pinecone",
-          "value": "pinecone",
-          "description": "Pinecone Index."
-        }
-      ]
-    }
-  },
-  "ACSIndex": {
-    "description": "ACS Index.",
-    "required": [
-      "connectionId"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/TargetIndex"
-      },
-      {
-        "properties": {
-          "connectionId": {
-            "type": "string",
-            "description": "The id of the connection pointing to the ACS Index."
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "acs"
-  },
-  "CosmosDBIndex": {
-    "description": "CosmosDB Index.",
-    "required": [
-      "connectionId"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/TargetIndex"
-      },
-      {
-        "properties": {
-          "connectionId": {
-            "type": "string",
-            "description": "The id of the connection pointing to the cosmos DB."
-          },
-          "collectionName": {
-            "type": "string",
-            "description": "The name of the cosmos DB collection."
-          },
-          "databaseName": {
-            "type": "string",
-            "description": "The name of the cosmos DB database."
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "cosmosdb"
-  },
-  "PineconeIndex": {
-    "description": "Pinecone Index.",
-    "required": [
-      "connectionId"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/TargetIndex"
-      },
-      {
-        "properties": {
-          "connectionId": {
-            "type": "string",
-            "description": "The id of the connection pointing to the pinecone."
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "pinecone"
-  },
-  "UserComputeDatasource": {
-    "title": "UserComputeDatasource",
-    "type": "object",
-    "discriminator": "kind",
-    "required": [
-      "kind"
-    ],
-    "properties": {
-      "kind": {
-        "$ref": "#/definitions/UserComputeDatasourceType"
-      }
-    }
-  },
-  "UserComputeDatasourceType": {
-    "type": "string",
-    "description": "The datasource type.",
-    "enum": [
-      "dataset",
-      "urls"
-    ],
-    "x-ms-enum": {
-      "name": "DatasourceType",
-      "modelAsString": true,
-      "values": [
-        {
-          "name": "Dataset",
-          "value": "dataset",
-          "description": "Workspace Dataset."
-        },
-        {
-          "name": "Urls",
-          "value": "urls",
-          "description": "URLs."
-        }
-      ]
-    }
-  },
-  "UserComputeDataset": {
-    "type": "object",
-    "title": "UserComputeStorage",
-    "description": "Storage account",
-    "required": [
-      "datasetId",
-      "datasetType"
-    ],
-    "x-ms-discriminator-value": "dataset",
-    "allOf": [
-      {
-        "$ref": "#/definitions/UserComputeDatasource"
-      },
-      {
-        "properties": {
-          "datasetId": {
-            "type": "string"
-          },
-          "datasetType": {
-            "type": "string"
-          },
-          "chunking": {
-            "$ref": "#/definitions/ChunkingSettings"
-          },
-          "embeddings": {
-            "type": "array",
-            "items":
-            {
-              "$ref": "#/definitions/WorkspaceConnectionEmbeddingSettings"
+          "type": "object",
+          "properties": {
+            "searchServiceConnection": {
+              "$ref": "#/definitions/BaseConnection"
+            },
+            "datasource": {
+              "$ref": "#/definitions/SystemComputeDatasource"
+            },
+            "completionAction": {
+              "$ref": "#/definitions/CompletionAction"
+            },
+            "dataRefreshIntervalInHours": {
+              "type": "integer"
             }
           }
         }
+      ],
+      "x-ms-discriminator-value": "SystemCompute"
+    },
+    "IngestionJobUserCompute": {
+      "type": "object",
+      "required": [
+        "workspaceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IngestionJob"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "workspaceId": {
+              "type": "string"
+            },
+            "compute": {
+              "$ref": "#/definitions/JobCompute"
+            },
+            "target": {
+              "$ref": "#/definitions/TargetIndex"
+            },
+            "datasource": {
+              "$ref": "#/definitions/UserComputeDatasource"
+            },
+            "dataRefreshIntervalInHours": {
+              "type": "integer"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "UserCompute"
+    },
+    "JobCompute": {
+      "title": "JobCompute",
+      "description": "The compute settings of the job.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ComputeType"
+        }
       }
-    ]
-  },
-  "UserComputeUrl": {
-    "type": "object",
-    "title": "UserComputeUrl",
-    "description": "Urls",
-    "required": [
-      "urls",
-      "embeddings"
-    ],
-    "x-ms-discriminator-value": "urls",
-    "allOf": [
-      {
-        "$ref": "#/definitions/UserComputeDatasource"
-      },
-      {
-        "properties": {
-          "urls": {
-            "type": "array",
-            "items":
-              {
-                "type": "string"
-              }
+    },
+    "ComputeType": {
+      "type": "string",
+      "description": "The compute type.",
+      "enum": [
+        "ServerlessCompute",
+        "CustomCompute"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServerlessCompute",
+            "value": "ServerlessCompute",
+            "description": "Serverless user compute."
           },
-          "crawling": {
-            "$ref": "#/definitions/CrawlingSettings"
+          {
+            "name": "CustomCompute",
+            "value": "CustomCompute",
+            "description": "Custom user compute."
+          }
+        ]
+      }
+    },
+    "ServerlessCompute": {
+      "description": "Serverless compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobCompute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sku": {
+              "type": "string",
+              "description": "SKU Level"
+            },
+            "instanceCount": {
+              "type": "integer",
+              "description": "The count of instances to run the job on."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ServerlessCompute"
+    },
+    "CustomCompute": {
+      "description": "Custom compute.",
+      "required": [
+        "computeId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobCompute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "computeId": {
+              "type": "string",
+              "description": "Id of the custom compute"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "CustomCompute"
+    },
+    "TargetIndex": {
+      "title": "TargetIndex",
+      "description": "Information about the index to be created.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/TargetType"
+        }
+      }
+    },
+    "TargetType": {
+      "type": "string",
+      "description": "The target type.",
+      "enum": [
+        "AzureAISearch",
+        "CosmosDB",
+        "Pinecone"
+      ],
+      "x-ms-enum": {
+        "name": "TargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureAISearch",
+            "value": "AzureAISearch",
+            "description": "Azure AI Search Index."
           },
-          "chunking": {
-            "$ref": "#/definitions/ChunkingSettings"
+          {
+            "name": "CosmosDB",
+            "value": "CosmosDB",
+            "description": "CosmosDB Index."
           },
-          "embeddings": {
-            "type": "array",
-            "items":
-              {
+          {
+            "name": "Pinecone",
+            "value": "Pinecone",
+            "description": "Pinecone Index."
+          }
+        ]
+      }
+    },
+    "AzureAISearchIndex": {
+      "description": "Azure AI Search Index.",
+      "required": [
+        "connectionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIndex"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "The id of the connection pointing to the Azure AI Search Index."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "AzureAISearch"
+    },
+    "CosmosDBIndex": {
+      "description": "CosmosDB Index.",
+      "required": [
+        "connectionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIndex"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "The id of the connection pointing to the cosmos DB."
+            },
+            "collectionName": {
+              "type": "string",
+              "description": "The name of the cosmos DB collection."
+            },
+            "databaseName": {
+              "type": "string",
+              "description": "The name of the cosmos DB database."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "CosmosDB"
+    },
+    "PineconeIndex": {
+      "description": "Pinecone Index.",
+      "required": [
+        "connectionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIndex"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "The id of the connection pointing to the pinecone."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Pinecone"
+    },
+    "UserComputeDatasource": {
+      "title": "UserComputeDatasource",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/UserComputeDatasourceType"
+        }
+      }
+    },
+    "UserComputeDatasourceType": {
+      "type": "string",
+      "description": "The datasource type.",
+      "enum": [
+        "Dataset",
+        "Urls"
+      ],
+      "x-ms-enum": {
+        "name": "UserComputeDatasourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dataset",
+            "value": "Dataset",
+            "description": "Workspace Dataset."
+          },
+          {
+            "name": "Urls",
+            "value": "Urls",
+            "description": "URLs."
+          }
+        ]
+      }
+    },
+    "UserComputeDataset": {
+      "type": "object",
+      "title": "UserComputeStorage",
+      "description": "Storage account",
+      "required": [
+        "datasetId",
+        "datasetType"
+      ],
+      "x-ms-discriminator-value": "Dataset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserComputeDatasource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "datasetId": {
+              "type": "string"
+            },
+            "datasetType": {
+              "type": "string"
+            },
+            "chunking": {
+              "$ref": "#/definitions/ChunkingSettings"
+            },
+            "embeddings": {
+              "type": "array",
+              "items": {
                 "$ref": "#/definitions/WorkspaceConnectionEmbeddingSettings"
               }
-          }
-        }
-      }
-    ]
-  },
-  "SystemComputeDatasource": {
-    "title": "SystemComputeDatasource",
-    "type": "object",
-    "required": [
-      "kind"
-    ],
-    "properties": {
-      "kind": {
-        "$ref": "#/definitions/SystemComputeDatasourceType"
-      }
-    }
-  },
-  "SystemComputeDatasourceType": {
-    "type": "string",
-    "description": "The datasource type.",
-    "enum": [
-      "storage",
-      "urls"
-    ],
-    "x-ms-enum": {
-      "name": "DatasourceType",
-      "modelAsString": true,
-      "values": [
-        {
-          "name": "Storage",
-          "value": "storage",
-          "description": "Azure Storage Account."
-        },
-        {
-          "name": "Urls",
-          "value": "urls",
-          "description": "URLs."
-        }
-      ]
-    }
-  },
-  "SystemComputeStorage": {
-    "title": "SystemComputeStorage",
-    "description": "Storage account",
-    "required": [
-      "connection",
-      "containerName",
-      "embeddings"
-    ],
-    "x-ms-discriminator-value": "storage",
-    "allOf": [
-      {
-        "$ref": "#/definitions/SystemComputeDatasource"
-      },
-      {
-        "properties": {
-          "connection": {
-            "$ref": "#/definitions/BaseConnection"
-          },
-          "containerName": {
-            "type": "string",
-            "description": "container name"
-          },
-          "chunking": {
-            "$ref": "#/definitions/ChunkingSettings"
-          },
-          "embeddings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/GenericEmbeddingSettings"
             }
           }
         }
-      }
-    ]
-  },
-  "SystemComputeUrl": {
-    "title": "SystemComputeUrl",
-    "description": "Urls",
-    "required": [
-      "urls",
-      "connection",
-      "containerName",
-      "embeddings"
-    ],
-    "x-ms-discriminator-value": "urls",
-    "allOf": [
-      {
-        "$ref": "#/definitions/SystemComputeDatasource"
-      },
-      {
-        "properties": {
-          "urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "connection": {
-            "$ref": "#/definitions/BaseConnection"
-          },
-          "containerName": {
-            "type": "string",
-            "description": "container name"
-          },
-          "crawling": {
-            "$ref": "#/definitions/CrawlingSettings"
-          },
-          "chunking": {
-            "$ref": "#/definitions/ChunkingSettings"
-          },
-          "embeddings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/GenericEmbeddingSettings"
+      ]
+    },
+    "UserComputeUrl": {
+      "type": "object",
+      "title": "UserComputeUrl",
+      "description": "Urls",
+      "required": [
+        "urls",
+        "embeddings"
+      ],
+      "x-ms-discriminator-value": "Urls",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserComputeDatasource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "crawling": {
+              "$ref": "#/definitions/CrawlingSettings"
+            },
+            "chunking": {
+              "$ref": "#/definitions/ChunkingSettings"
+            },
+            "embeddings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkspaceConnectionEmbeddingSettings"
+              }
             }
           }
         }
-      }
-    ]
-  },
-  "ChunkingSettings": {
-    "title": "ChunkingSettings",
-    "description": "Chunking settings",
-    "properties": {
-      "maxChunkSizeInTokens": {
-        "type": "integer"
-      }
-    }
-  },
-  "CrawlingSettings": {
-    "title": "CrawlingSettings",
-    "description": "Crawling settings",
-    "properties": {
-      "maxCrawlDepth": {
-        "type": "integer"
-      },
-      "maxCrawlTimeInMins": {
-        "type": "integer"
-      },
-      "maxDownloadTimeInMins": {
-        "type": "integer"
-      },
-      "maxFileSize": {
-        "type": "integer"
-      },
-      "maxRedirects": {
-        "type": "integer"
-      },
-      "maxFiles": {
-        "type": "integer"
-      }
-    }
-  },
-  "GenericEmbeddingSettings": {
-    "title": "ConnectionEmbeddingSettings",
-    "description": "Connection Embedding Settings",
-    "type": "object",
-    "x-ms-discriminator-value": "connection",
-    "properties": {
-      "connection": {
-        "$ref": "#/definitions/BaseConnection"
-      },
-      "deploymentName": {
-        "type": "string"
-      },
-      "modelName": {
-        "type": "string"
-      }
-    }
-  },
-  "WorkspaceConnectionEmbeddingSettings": {
-    "title": "WorkspaceConnectionEmbeddingSettings",
-    "description": "Connection id to the embedding model",
-    "type": "object",
-    "properties": {
-      "connectionId": {
-        "type": "string"
-      },
-      "deploymentName": {
-        "type": "string"
-      },
-      "modelName": {
-        "type": "string"
-      }
-    }
-  },
-  "BaseConnection": {
-    "title": "BaseConnection",
-    "description": "A connection to a resource.",
-    "type": "object",
-    "required": [
-      "kind"
-    ],
-    "properties": {
-      "kind": {
-        "$ref": "#/definitions/ConnectionType"
-      }
-    }
-  },
-  "ConnectionType": {
-    "type": "string",
-    "description": "The connection type.",
-    "enum": [
-      "endpointKey",
-      "connectionString",
-      "endpointMI",
-      "workspace"
-    ],
-    "x-ms-enum": {
-      "name": "ConnectionType",
-      "modelAsString": true,
-      "values": [
-        {
-          "name": "EndpointKey",
-          "value": "endpointKey",
-          "description": "Endpoint and key connection."
-        },
-        {
-          "name": "ConnectionString",
-          "value": "connectionString",
-          "description": "Connection string."
-        },
-        {
-          "name": "EndpointManagedIdentity",
-          "value": "endpointMI",
-          "description": "Endpoint and managed identity."
-        },
-        {
-          "name": "AMLWorkspace",
-          "value": "workspace",
-          "description": "AML Workspace connection."
-        },
-        {
-          "name": "RelativeDeployment",
-          "value": "relativeDeployment",
-          "description": "Relative deployment"
-        }
       ]
-    }
-  },
-  "EndpointKeyConnection": {
-    "description": "Endpoint key connection.",
-    "required": [
-      "endpoint",
-      "key"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/BaseConnection"
+    },
+    "SystemComputeDatasource": {
+      "title": "SystemComputeDatasource",
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SystemComputeDatasourceType"
+        }
       },
-      {
-        "properties": {
-          "endpoint": {
-            "type": "string",
-            "description": "Endpoint"
+      "discriminator": "kind"
+    },
+    "SystemComputeDatasourceType": {
+      "type": "string",
+      "description": "The datasource type.",
+      "enum": [
+        "Storage",
+        "Urls"
+      ],
+      "x-ms-enum": {
+        "name": "SystemComputeDatasourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "Azure Storage Account."
           },
-          "key": {
-            "type": "string",
-            "description": "Key"
+          {
+            "name": "Urls",
+            "value": "Urls",
+            "description": "URLs."
           }
-        }
+        ]
       }
-    ],
-    "x-ms-discriminator-value": "endpointKey"
-  },
-  "ConnectionStringConnection": {
-    "description": "Connection string connection.",
-    "required": [
-      "connectionString"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/BaseConnection"
-      },
-      {
-        "properties": {
-          "connectionString": {
-            "type": "string",
-            "description": "Connection string"
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "connectionString"
-  },
-  "EndpointMIConnection": {
-    "description": "Endpoint Managed Identity connection.",
-    "required": [
-      "endpoint" ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/BaseConnection"
-      },
-      {
-        "properties": {
-          "endpoint": {
-            "type": "string",
-            "description": "Endpoint"
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "endpointMI"
-  },
-  "WorkspaceConnection": {
-    "description": "AML Workspace connection.",
-    "required": [
-      "connectionId" ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/BaseConnection"
-      },
-      {
-        "properties": {
-          "connectionId": {
-            "type": "string",
-            "description": "ConnectionId"
-          }
-        }
-      }
-    ],
-    "x-ms-discriminator-value": "workspace"
-  },
-  "DeploymentConnection": {
-    "description": "Relative deployment connection.",
-    "allOf": [
-      {
-        "$ref": "#/definitions/BaseConnection"
-      }
-    ],
-    "x-ms-discriminator-value": "relativeDeployment"
-  },
-  "CompletionAction": {
-    "type": "string",
-    "description": "The completion action.",
-    "enum": [
-      "cleanUpAssets",
-      "keepAllAssets"
-    ],
-    "x-ms-enum": {
-      "name": "IngestionJobCompletionAction",
-      "modelAsString": true,
-      "values": [
+    },
+    "SystemComputeStorage": {
+      "title": "SystemComputeStorage",
+      "description": "Storage account",
+      "required": [
+        "connection",
+        "containerName",
+        "embeddings"
+      ],
+      "x-ms-discriminator-value": "Storage",
+      "allOf": [
         {
-          "name": "keepAllAssets",
-          "value": "keepAllAssets",
-          "description": "Will not clean up any of the intermediate assets created during the ingestion process."
+          "$ref": "#/definitions/SystemComputeDatasource"
         },
         {
-          "name": "cleanUpAssets",
-          "value": "cleanUpAssets",
-          "description": "Will clean up intermediate assets created during the ingestion process."
+          "type": "object",
+          "properties": {
+            "connection": {
+              "$ref": "#/definitions/BaseConnection"
+            },
+            "containerName": {
+              "type": "string",
+              "description": "container name"
+            },
+            "chunking": {
+              "$ref": "#/definitions/ChunkingSettings"
+            },
+            "embeddings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GenericEmbeddingSettings"
+              }
+            }
+          }
         }
       ]
-    }
-  },
-  "IngestionJobList": {
-    "title": "IngestionJobList",
-    "description": "Represents a list of ingestion jobs.",
-    "type": "object",
-    "properties": {
-      "nextLink": {
-        "description": "The link to the next page.",
-        "type": "string"
-      },
-      "value": {
-        "description": "The list of items.",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/IngestionJob"
+    },
+    "SystemComputeUrl": {
+      "title": "SystemComputeUrl",
+      "description": "Urls",
+      "required": [
+        "urls",
+        "connection",
+        "containerName",
+        "embeddings"
+      ],
+      "x-ms-discriminator-value": "Urls",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemComputeDatasource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "connection": {
+              "$ref": "#/definitions/BaseConnection"
+            },
+            "containerName": {
+              "type": "string",
+              "description": "container name"
+            },
+            "crawling": {
+              "$ref": "#/definitions/CrawlingSettings"
+            },
+            "chunking": {
+              "$ref": "#/definitions/ChunkingSettings"
+            },
+            "embeddings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GenericEmbeddingSettings"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ChunkingSettings": {
+      "type": "object",
+      "title": "ChunkingSettings",
+      "description": "Chunking settings",
+      "properties": {
+        "maxChunkSizeInTokens": {
+          "type": "integer"
         }
       }
-    }
-  },
-  "IngestionJobRunList": {
-    "title": "IngestionJobRunList",
-    "description": "Represents a list of ingestion job runs.",
-    "type": "object",
-    "properties": {
-      "nextLink": {
-        "description": "The link to the next page.",
-        "type": "string"
-      },
-      "value": {
-        "description": "The list of items.",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/IngestionJobRun"
+    },
+    "CrawlingSettings": {
+      "type": "object",
+      "title": "CrawlingSettings",
+      "description": "Crawling settings",
+      "properties": {
+        "maxCrawlDepth": {
+          "type": "integer"
+        },
+        "maxCrawlTimeInMins": {
+          "type": "integer"
+        },
+        "maxDownloadTimeInMins": {
+          "type": "integer"
+        },
+        "maxFileSize": {
+          "type": "integer"
+        },
+        "maxRedirects": {
+          "type": "integer"
+        },
+        "maxFiles": {
+          "type": "integer"
         }
       }
-    }
-  },
-  "IngestionJobRun": {
-    "title": "IngestionJobRun",
-    "description": "The details of a job run",
-    "type": "object",
-    "properties": {
-      "jobId": {
-        "type": "string"
-      },
-      "runId": {
-        "type": "string"
-      },
-      "status": {
-        "$ref": "#/definitions/OperationState"
-      },
-      "error": {
-        "$ref": "#/definitions/IngestionError"
-      },
-      "warnings": {
-        "type": "array",
-        "items": {
+    },
+    "GenericEmbeddingSettings": {
+      "title": "ConnectionEmbeddingSettings",
+      "description": "Connection Embedding Settings",
+      "type": "object",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        "deploymentName": {
           "type": "string"
-        }
-      },
-      "progress": {
-        "$ref": "#/definitions/IngestionJobProgress"
-      }
-    }
-  },
-  "IngestionError": {
-    "title": "IngestionError",
-    "description": "The details of the ingestion error",
-    "type": "object",
-    "properties": {
-      "message": {
-        "type": "string"
-      },
-      "innerErrors": {
-        "type": "array",
-        "items": {
+        },
+        "modelName": {
           "type": "string"
         }
       }
-    }
-  },
-  "IngestionJobProgress": {
-    "title": "IngestionJobProgress",
-    "type": "object",
-    "required": [
-      "stageProgress" ],
-    "properties": {
-      "stageProgress": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/IngestionJobStageProgress"
+    },
+    "WorkspaceConnectionEmbeddingSettings": {
+      "title": "WorkspaceConnectionEmbeddingSettings",
+      "description": "Connection id to the embedding model",
+      "type": "object",
+      "properties": {
+        "connectionId": {
+          "type": "string"
+        },
+        "deploymentName": {
+          "type": "string"
+        },
+        "modelName": {
+          "type": "string"
+        }
+      }
+    },
+    "BaseConnection": {
+      "title": "BaseConnection",
+      "description": "A connection to a resource.",
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ConnectionType"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ConnectionType": {
+      "type": "string",
+      "description": "The connection type.",
+      "enum": [
+        "EndpointWithKey",
+        "ConnectionString",
+        "EndpointWithManagedIdentity",
+        "WorkspaceConnection",
+        "RelativeConnection"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EndpointWithKey",
+            "value": "EndpointWithKey",
+            "description": "Endpoint and key connection."
+          },
+          {
+            "name": "ConnectionString",
+            "value": "ConnectionString",
+            "description": "Connection string."
+          },
+          {
+            "name": "EndpointWithManagedIdentity",
+            "value": "EndpointWithManagedIdentity",
+            "description": "Endpoint and managed identity."
+          },
+          {
+            "name": "WorkspaceConnection",
+            "value": "WorkspaceConnection",
+            "description": "AML Workspace connection."
+          },
+          {
+            "name": "RelativeConnection",
+            "value": "RelativeConnection",
+            "description": "Relative deployment"
+          }
+        ]
+      }
+    },
+    "EndpointKeyConnection": {
+      "description": "Endpoint key connection.",
+      "required": [
+        "endpoint",
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "Endpoint"
+            },
+            "key": {
+              "type": "string",
+              "description": "Key"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "EndpointWithKey"
+    },
+    "ConnectionStringConnection": {
+      "description": "Connection string connection.",
+      "required": [
+        "connectionString"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionString": {
+              "type": "string",
+              "description": "Connection string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ConnectionString"
+    },
+    "EndpointMIConnection": {
+      "description": "Endpoint Managed Identity connection.",
+      "required": [
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "Endpoint"
+            },
+            "resourceId": {
+              "type": "string",
+              "description": "Resource Id"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "EndpointWithManagedIdentity"
+    },
+    "WorkspaceConnection": {
+      "description": "AML Workspace connection.",
+      "required": [
+        "connectionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "ConnectionId"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "WorkspaceConnection"
+    },
+    "DeploymentConnection": {
+      "description": "Relative deployment connection.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        }
+      ],
+      "x-ms-discriminator-value": "RelativeConnection"
+    },
+    "CompletionAction": {
+      "type": "string",
+      "description": "The completion action.",
+      "enum": [
+        "cleanUpTempAssets",
+        "keepAllAssets"
+      ],
+      "x-ms-enum": {
+        "name": "IngestionJobCompletionAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "keepAllAssets",
+            "value": "keepAllAssets",
+            "description": "Will not clean up any of the intermediate assets created during the ingestion process."
+          },
+          {
+            "name": "cleanUpTempAssets",
+            "value": "cleanUpTempAssets",
+            "description": "Will clean up intermediate assets created during the ingestion process."
+          }
+        ]
+      }
+    },
+    "IngestionJobList": {
+      "title": "IngestionJobList",
+      "description": "Represents a list of ingestion jobs.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJob"
+          }
+        }
+      }
+    },
+    "IngestionJobRunList": {
+      "title": "IngestionJobRunList",
+      "description": "Represents a list of ingestion job runs.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJobRun"
+          }
+        }
+      }
+    },
+    "IngestionJobRun": {
+      "title": "IngestionJobRun",
+      "description": "The details of a job run",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationState"
+        },
+        "error": {
+          "$ref": "#/definitions/IngestionError"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "progress": {
+          "$ref": "#/definitions/IngestionJobProgress"
+        }
+      }
+    },
+    "IngestionError": {
+      "title": "IngestionError",
+      "description": "The details of the ingestion error",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "innerErrors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IngestionJobProgress": {
+      "title": "IngestionJobProgress",
+      "type": "object",
+      "required": [
+        "stageProgress"
+      ],
+      "properties": {
+        "stageProgress": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJobStageProgress"
+          }
+        }
+      }
+    },
+    "IngestionJobStageProgress": {
+      "title": "IngestionJobStageProgress",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "totalItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "processedItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "state": {
+          "$ref": "#/definitions/OperationState"
+        },
+        "subStageProgress": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJobStageProgress"
+          }
         }
       }
     }
-  },
-  "IngestionJobStageProgress": {
-    "title": "IngestionJobStageProgress",
-    "type": "object",
-    "properties": {
-      "name": {
-        "type": "string"
-      },
-      "totalItems": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "processedItems": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "state": {
-        "$ref": "#/definitions/OperationState"
-      },
-      "subStageProgress": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/IngestionJobStageProgress"
-        }
-      }
-    }
-  }
   },
   "parameters": {
     "endpoint": {
@@ -2851,19 +2876,33 @@
       "x-ms-parameter-location": "client"
     }
   },
-  "securityDefinitions": {
-    "api-key": {
-      "type": "apiKey",
-      "name": "api-key",
-      "in": "header",
-      "description": "Provide your Cognitive Services Azure OpenAI account key here."
-    }
-  },
   "security": [
     {
-      "api-key": [ ]
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "description": "API key authentication",
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "description": "OAuth2 authentication",
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
   "schemes": [
     "https"
   ],

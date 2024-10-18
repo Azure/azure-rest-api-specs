@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2024-03-01
+tag: package-2024-07-01
 
 directive:
   - where:
@@ -269,6 +269,114 @@ suppressions:
   - code: XmsPageableForListCalls
     reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: diagnostic.json
+```
+
+### Tag: package-2024-07-01
+
+These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-07-01'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+```
+
+### Tag: package-2024-07-01-only
+
+These settings apply only when `--tag=package-2024-07-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07-01-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
+```
+
+### Tag: package-2024-03-02
+
+These settings apply only when `--tag=package-2024-03-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-02'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/runCommand.json 
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+```
+
+### Tag: package-2024-03-02-only
+
+These settings apply only when `--tag=package-2024-03-02-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-02-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
 ```
 
 ### Tag: package-2024-06-01-preview

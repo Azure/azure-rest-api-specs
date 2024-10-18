@@ -1,0 +1,46 @@
+{
+  "title": "Cancels a run that is `in_progress`.\n",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-08-01-preview",
+    "thread_id": "thread_abc123",
+    "run_id": "run_abc123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "run_abc123",
+        "object": "thread.run",
+        "created_at": 1699076126,
+        "assistant_id": "asst_abc123",
+        "thread_id": "thread_abc123",
+        "status": "cancelling",
+        "started_at": 1699076126,
+        "expires_at": 1699076726,
+        "cancelled_at": null,
+        "failed_at": null,
+        "completed_at": null,
+        "last_error": null,
+        "model": "gpt-4-turbo",
+        "instructions": "You summarize books.",
+        "tools": [
+          {
+            "type": "file_search"
+          }
+        ],
+        "tool_resources": {
+          "file_search": {
+            "vector_store_ids": [
+              "vs_123"
+            ]
+          }
+        },
+        "metadata": {},
+        "usage": null,
+        "temperature": 1.0,
+        "top_p": 1.0,
+        "response_format": "auto"
+      }
+    }
+  }
+}

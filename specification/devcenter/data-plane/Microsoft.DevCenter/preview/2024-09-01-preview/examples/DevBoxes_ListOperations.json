@@ -1,0 +1,42 @@
+{
+  "title": "Lists operations on the Dev Box which have occurred within the past 90 days.",
+  "operationId": "DevBoxes_ListOperations",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com",
+    "projectName": "myProject",
+    "userId": "me",
+    "devBoxName": "myDevBox"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/cf849cb0-3a05-4059-84b4-40c16abb1e93/devBoxes/myDevBox/operations/f5dbdfab-fa0e-4831-8d13-25359aa5e680",
+            "operationId": "f5dbdfab-fa0e-4831-8d13-25359aa5e680",
+            "status": "Succeeded",
+            "kind": "Start",
+            "createdByObjectId": "cf849cb0-3a05-4059-84b4-40c16abb1e93",
+            "startTime": "2022-09-06T16:58:51.7229492+00:00",
+            "endTime": "2022-09-06T16:59:51.7229492+00:00"
+          },
+          {
+            "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/cf849cb0-3a05-4059-84b4-40c16abb1e93/devBoxes/myDevBox/operations/a6eb12ee-daa1-2215-9c44-63618dc2a781",
+            "operationId": "a6eb12ee-daa1-2215-9c44-63618dc2a781",
+            "status": "Succeeded",
+            "kind": "Repair",
+            "createdByObjectId": "cf849cb0-3a05-4059-84b4-40c16abb1e93",
+            "startTime": "2022-09-10T19:31:20.7229492+00:00",
+            "endTime": "2022-09-10T19:57:41.7229492+00:00",
+            "result": {
+              "code": "ConnectivityFixApplied",
+              "message": "We resolved some connectivity issues with your Dev Box.",
+              "repairOutcome": "FixApplied"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

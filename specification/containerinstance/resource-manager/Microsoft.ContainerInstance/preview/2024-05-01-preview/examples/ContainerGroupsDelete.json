@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-05-01-preview",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "location": "WestUs",
+        "zones": [
+          "1"
+        ],
+        "name": "demo1",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/mnt/volume1",
+                    "name": "volume1",
+                    "readOnly": false
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [
+            {
+              "server": "azcloudconsoleregistry.azurecr.io",
+              "username": "azcloudconsoleregistry"
+            }
+          ],
+          "ipAddress": {
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "type": "Public"
+          },
+          "osType": "Linux",
+          "isCreatedFromStandbyPool": false,
+          "provisioningState": "Succeeded",
+          "volumes": [
+            {
+              "azureFile": {
+                "readOnly": false,
+                "shareName": "share1",
+                "storageAccountName": "storage1"
+              },
+              "name": "volume1"
+            }
+          ]
+        },
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/locations/location/operations/operationId?api-version=apiVersion"
+      }
+    },
+    "204": {}
+  }
+}

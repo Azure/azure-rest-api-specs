@@ -1,0 +1,41 @@
+{
+  "title": "Cancel a de-identification job.",
+  "operationId": "CancelJob",
+  "parameters": {
+    "api-version": "2024-07-12-preview",
+    "name": "documents_smith_1",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "documents_smith_1",
+        "sourceLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
+          "prefix": "/documents",
+          "extensions": [
+            "*"
+          ]
+        },
+        "targetLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
+          "prefix": "/documents"
+        },
+        "operation": "Redact",
+        "dataType": "Plaintext",
+        "redactionFormat": "[{type}]",
+        "status": "Canceled",
+        "lastUpdatedAt": "2024-01-26T01:15:00.009Z",
+        "createdAt": "2024-01-25T23:27:43.009Z",
+        "startedAt": "2024-01-25T23:27:43.009Z",
+        "summary": {
+          "successful": 10,
+          "failed": 0,
+          "canceled": 2,
+          "total": 12,
+          "bytesProcessed": 4096
+        }
+      }
+    }
+  }
+}

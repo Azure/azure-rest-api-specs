@@ -9,7 +9,7 @@ using DocumentIntelligence;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(
-  DocumentIntelligence.Versions.v2024_02_29_preview
+  DocumentIntelligence.Versions.v2024_07_31_preview
 )
 namespace ClientCustomizations;
 
@@ -20,6 +20,13 @@ namespace ClientCustomizations;
 interface DocumentIntelligenceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   analyzeDocument is DocumentModels.analyzeDocument;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  analyzeBatchDocuments is DocumentModels.analyzeBatchDocuments;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getAnalyzeResultPdf is DocumentModels.getAnalyzeResultPdf;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getAnalyzeResultFigure is DocumentModels.getAnalyzeResultFigure;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   classifyDocument is DocumentClassifiers.classifyDocument;
 }
@@ -48,12 +55,24 @@ interface DocumentIntelligenceAdministrationClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   buildClassifier is DocumentClassifiers.buildClassifier;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  authorizeClassifierCopy is DocumentClassifiers.authorizeClassifierCopy;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  copyClassifierTo is DocumentClassifiers.copyClassifierTo;
   getClassifier is DocumentClassifiers.getClassifier;
   listClassifiers is DocumentClassifiers.listClassifiers;
   deleteClassifier is DocumentClassifiers.deleteClassifier;
 }
 
+@@clientName(AnalyzeBatchDocumentsRequest,
+  "AnalyzeBatchDocumentsContent",
+  "csharp"
+);
 @@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentContent", "csharp");
+@@clientName(AuthorizeClassifierCopyRequest,
+  "AuthorizeClassifierCopyContent",
+  "csharp"
+);
 @@clientName(AuthorizeCopyRequest, "AuthorizeCopyContent", "csharp");
 @@clientName(BuildDocumentClassifierRequest,
   "BuildDocumentClassifierContent",
@@ -92,7 +111,6 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(FontWeight, "DocumentFontWeight", "csharp");
 @@clientName(OperationDetails.createdDateTime, "CreatedOn", "csharp");
 @@clientName(OperationDetails.lastUpdatedDateTime, "LastUpdatedOn", "csharp");
-@@clientName(QuotaDetails.quotaResetDateTime, "QuotaResetsOn", "csharp");
 
 @@usage(DocumentAnalysisFeature, Usage.output, "csharp");
 @@usage(LengthUnit, Usage.output, "csharp");
@@ -118,8 +136,6 @@ interface DocumentIntelligenceAdministrationClient {
 @@usage(DocumentTable, Usage.output, "csharp");
 @@usage(DocumentTableCell, Usage.output, "csharp");
 @@usage(DocumentFigure, Usage.output, "csharp");
-@@usage(DocumentList, Usage.output, "csharp");
-@@usage(DocumentListItem, Usage.output, "csharp");
 @@usage(DocumentSection, Usage.output, "csharp");
 @@usage(DocumentCaption, Usage.output, "csharp");
 @@usage(DocumentFootnote, Usage.output, "csharp");
@@ -133,7 +149,6 @@ interface DocumentIntelligenceAdministrationClient {
 @@usage(AddressValue, Usage.output, "csharp");
 @@usage(BuildDocumentModelRequest, Usage.input, "csharp");
 @@usage(ComposeDocumentModelRequest, Usage.input, "csharp");
-@@usage(ComponentDocumentModelDetails, Usage.input, "csharp");
 @@usage(CopyAuthorization, Usage.input | Usage.output, "csharp");
 
 @@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "python");

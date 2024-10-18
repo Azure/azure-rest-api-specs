@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /**
 Describes the schema of the Health Resources events published to Azure Event
 Grid. This corresponds to the Data property of an EventGridEvent.
@@ -54,6 +56,7 @@ model ResourceNotificationsResourceUpdatedDetails {
 model ResourceNotificationsOperationalDetails {
   /** Date and Time when resource was updated */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   resourceEventTime: utcDateTime;
 }
 

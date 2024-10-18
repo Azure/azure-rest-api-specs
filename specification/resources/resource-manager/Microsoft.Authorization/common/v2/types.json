@@ -1,0 +1,120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyClient",
+    "version": "v2"
+  },
+  "paths": {},
+  "definitions": {
+    "Selector": {
+      "description": "The selector expression.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The selector kind.",
+          "enum": [
+            "resourceLocation",
+            "resourceType",
+            "resourceWithoutLocation",
+            "policyDefinitionReferenceId"
+          ],
+          "x-ms-enum": {
+            "name": "SelectorKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "resourceLocation",
+                "description": "The selector kind to filter policies by the resource location."
+              },
+              {
+                "value": "resourceType",
+                "description": "The selector kind to filter policies by the resource type."
+              },
+              {
+                "value": "resourceWithoutLocation",
+                "description": "The selector kind to filter policies by the resource without location."
+              },
+              {
+                "value": "policyDefinitionReferenceId",
+                "description": "The selector kind to filter policies by the policy definition reference ID."
+              }
+            ]
+          }
+        },
+        "in": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of values to filter in."
+        },
+        "notIn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of values to filter out."
+        }
+      }
+    },
+    "ResourceSelector": {
+      "description": "The resource selector to filter policies by resource properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource selector."
+        },
+        "selectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Selector"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of the selector expressions."
+        }
+      }
+    },
+    "Override": {
+      "description": "The policy property value override.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The override kind.",
+          "enum": [
+            "policyEffect",
+            "definitionVersion"
+          ],
+          "x-ms-enum": {
+            "name": "OverrideKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "policyEffect",
+                "description": "It will override the policy effect type."
+              },
+              {
+                "value": "definitionVersion",
+                "description": "It will override the definition version property value of the policy assignment."
+              }
+            ]
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "The value to override the policy property."
+        },
+        "selectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Selector"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of the selector expressions."
+        }
+      }
+    }
+  }
+}

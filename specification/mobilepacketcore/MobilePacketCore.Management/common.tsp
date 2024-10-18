@@ -11,6 +11,7 @@ namespace Microsoft.MobilePacketCore;
  * @template TBaseParameters Optional. Allows overriding the operation parameters
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a valid template"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
 @autoRoute
 @doc("Create a {name}", TResource)
 @OpenAPI.extension("x-ms-long-running-operation", true)

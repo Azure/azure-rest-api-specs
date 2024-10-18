@@ -30,7 +30,7 @@ interface Assets {
   @updatesResource(AssetResource)
   @post
   updateAssets is Foundations.Operation<
-    AssetsUpdateParameter & AssetUpdateData,
+    AssetsUpdateParameter & BodyParameter<AssetUpdateData>,
     Task
   >;
   @doc("Retrieve an asset by assetId.")
@@ -41,7 +41,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getAssetsExport is Operations.ResourceCollectionAction<
     AssetResource,
-    AssetsExportRequest,
+    BodyParameter<AssetsExportRequest>,
     Task,
     AssetsExportTrait
   >;
@@ -61,7 +61,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getDeltaDetails is Operations.ResourceCollectionAction<
     AssetResource,
-    DeltaDetailsRequest,
+    BodyParameter<DeltaDetailsRequest>,
     DeltaPageResult,
     DeltaDetailsTrait
   >;
@@ -71,7 +71,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getDeltaSummary is Operations.ResourceCollectionAction<
     AssetResource,
-    DeltaSummaryRequest,
+    BodyParameter<DeltaSummaryRequest>,
     DeltaSummaryResult,
     {}
   >;
@@ -90,7 +90,7 @@ interface DataConnections {
   @action("validate")
   validateDataConnection is Operations.ResourceCollectionAction<
     DataConnection,
-    DataConnectionData,
+    BodyParameter<DataConnectionData>,
     ValidateResult
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
@@ -102,7 +102,7 @@ interface DataConnections {
   @put
   createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
-    DataConnectionData,
+    BodyParameter<DataConnectionData>,
     DataConnection
   >;
 
@@ -122,7 +122,7 @@ interface DiscoveryGroups {
   @clientName("ValidateDiscoveryGroup", "csharp")
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
-    DiscoGroupData,
+    BodyParameter<DiscoGroupData>,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
@@ -136,7 +136,7 @@ interface DiscoveryGroups {
   @clientName("CreateOrReplaceDiscoveryGroup", "csharp")
   createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
-    DiscoGroupData,
+    BodyParameter<DiscoGroupData>,
     DiscoGroup
   >;
   @doc("Run a discovery group with a given groupName.")
@@ -162,7 +162,7 @@ interface DiscoveryGroups {
   @Versioning.added(Versions.v2024_03_01_preview)
   getAssetChainSummary is Operations.ResourceCollectionAction<
     DiscoGroup,
-    AssetChainRequest,
+    BodyParameter<AssetChainRequest>,
     AssetChainSummaryResult
   >;
 
@@ -171,7 +171,7 @@ interface DiscoveryGroups {
   @Versioning.added(Versions.v2024_03_01_preview)
   dismissAssetChain is Operations.ResourceCollectionAction<
     DiscoGroup,
-    AssetChainRequest,
+    BodyParameter<AssetChainRequest>,
     Task
   >;
 }
@@ -203,7 +203,7 @@ interface Reports {
   @route("/reports/assets:getSnapshot")
   @post
   getSnapshot is Foundations.Operation<
-    ReportAssetSnapshotRequest,
+    BodyParameter<ReportAssetSnapshotRequest>,
     ReportAssetSnapshotResult
   >;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -211,7 +211,7 @@ interface Reports {
   @route("/reports/assets:getSummary")
   @post
   getSummary is Foundations.Operation<
-    ReportAssetSummaryRequest,
+    BodyParameter<ReportAssetSummaryRequest>,
     ReportAssetSummaryResult
   >;
 
@@ -221,7 +221,7 @@ interface Reports {
   @route("/reports/assets:getSnapshotExport")
   @post
   getSnapshotExport is Foundations.Operation<
-    ReportAssetSnapshotExportRequest,
+    BodyParameter<ReportAssetSnapshotExportRequest>,
     Task
   >;
 }
@@ -242,7 +242,7 @@ interface SavedFilters {
   @put
   createOrReplaceSavedFilter is Foundations.ResourceOperation<
     SavedFilter,
-    SavedFilterData,
+    BodyParameter<SavedFilterData>,
     SavedFilter
   >;
   @doc("Delete a saved filter with a given filterName.")

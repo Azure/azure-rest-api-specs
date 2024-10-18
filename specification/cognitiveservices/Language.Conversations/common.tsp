@@ -2,7 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -130,6 +132,7 @@ model PreBuiltTaskParameters is TaskParameters {
 alias ShowStatsQueryParameter = QueryParametersTrait<{
   /** (Optional) if set to true, response will contain request and document level statistics. */
   @query
+  @clientName("showStatistics", "csharp")
   showStats?: boolean;
 }>;
 

@@ -1,0 +1,53 @@
+{
+  "title": "Validates a list of customization tasks.",
+  "operationId": "DevBoxes_ValidateCustomizationTasksActionWithFailure",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/",
+    "projectName": "myProject",
+    "body": {
+      "tasks": [
+        {
+          "name": "catalogName/choco",
+          "parameters": {
+            "packageName": "vscode",
+            "packageVersion": "1.0.0"
+          }
+        },
+        {
+          "name": "catalogName/write-to-file"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/operationstatuses/786a823c-8037-48ab-89b8-8599901e67d0",
+        "Operation-Location": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/operationstatuses/786a823c-8037-48ab-89b8-8599901e67d0"
+      },
+      "body": {
+        "id": "/projects/myProject/operationstatuses/786a823c-8037-48ab-89b8-8599901e67d0",
+        "name": "786a823c-8037-48ab-89b8-8599901e67d0",
+        "status": "Succeeded",
+        "startTime": "2023-02-01T12:43:54.122Z",
+        "result": {
+          "validationResult": "Failed",
+          "errors": [
+            {
+              "target": {
+                "name": "catalogName/write-to-file"
+              },
+              "details": [
+                {
+                  "code": "TaskNotFound",
+                  "message": "Could not find the referenced task catalogName/write-to-file."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -55,4 +55,8 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("v1.1-preview.1")
   v1_1_preview_1: "v1.1-preview.1",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("v1.2-preview.1")
+  v1_2_preview_1: "v1.2-preview.1",
 }

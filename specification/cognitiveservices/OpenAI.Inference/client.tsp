@@ -7,7 +7,7 @@ using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @TypeSpec.Versioning.useDependency(
-  Azure.OpenAI.ServiceApiVersions.v2024_02_15_Preview
+  Azure.OpenAI.ServiceApiVersions.v2024_07_01_Preview
 )
 namespace Client;
 
@@ -41,4 +41,58 @@ interface OpenAIClient {
   generateSpeechFromText is Azure.OpenAI.generateSpeechFromText;
 
   getEmbeddings is Azure.OpenAI.getEmbeddings;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  listFiles is Azure.OpenAI.listFiles;
+
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  uploadFile is Azure.OpenAI.uploadFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  deleteFile is Azure.OpenAI.deleteFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  getFile is Azure.OpenAI.getFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  getFileContent is Azure.OpenAI.getFileContent;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  listBatches is Azure.OpenAI.listBatches;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  createBatch is Azure.OpenAI.createBatch;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  getBatch is Azure.OpenAI.getBatch;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  cancelBatch is Azure.OpenAI.cancelBatch;
 }
+
+@@clientName(Azure.OpenAI.GenerateSpeechFromTextBody.body,
+  "speechGenerationOptions",
+  "java"
+);
+@@clientName(Azure.OpenAI.GetAudioTranscriptionBody.body,
+  "audioTranscriptionOptions",
+  "java"
+);
+@@clientName(Azure.OpenAI.GetAudioTranslationBody.body,
+  "audioTranslationOptions",
+  "java"
+);
+@@clientName(Azure.OpenAI.GetChatCompletionsBody.body,
+  "chatCompletionsOptions",
+  "java"
+);
+@@clientName(Azure.OpenAI.GetCompletionsBody.body,
+  "completionsOptions",
+  "java"
+);
+@@clientName(Azure.OpenAI.GetEmbeddingsBody.body, "embeddingsOptions", "java");
+@@clientName(Azure.OpenAI.GetImageGenerationsBody.body,
+  "imageGenerationOptions",
+  "java"
+);

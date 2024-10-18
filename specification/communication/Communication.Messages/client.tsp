@@ -36,3 +36,8 @@ interface MessageTemplateClient
   "templateValues",
   "python"
 );
+
+@@clientName(Azure.Communication.MessagesService.NotificationMessagesSendRequestBody.body,
+  "notificationContent",
+  "csharp,java"
+);

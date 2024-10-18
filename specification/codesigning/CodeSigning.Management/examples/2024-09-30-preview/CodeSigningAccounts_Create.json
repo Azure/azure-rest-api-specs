@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "accountName": "MyAccount",
+    "api-version": "2024-09-30-preview",
+    "resource": {
+      "location": "westus",
+      "properties": {
+        "sku": {
+          "name": "Basic"
+        }
+      }
+    },
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyAccount",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "Basic"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "MyAccount",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Accepted",
+          "sku": {
+            "name": "Basic"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "CodeSigningAccounts_Create",
+  "title": "Create a trusted Signing Account."
+}

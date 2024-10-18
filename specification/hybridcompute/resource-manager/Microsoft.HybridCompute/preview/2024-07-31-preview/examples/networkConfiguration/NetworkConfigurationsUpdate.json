@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2024-07-31-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "hybridRG",
+    "machineName": "testMachine",
+    "name": "current",
+    "parameters": {
+      "properties": {
+        "networkConfigurationScopeResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/hybridRG/providers/Microsoft.HybridCompute/privateLinkScopes/newScope"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/hybridRG/providers/Microsoft.HybridCompute/machines/testMachine/providers/Microsoft.HybridCompute/networkConfigurations/current",
+        "name": "current",
+        "type": "Microsoft.HybridCompute/networkConfigurations",
+        "properties": {
+          "location": "westus",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "networkConfigurationScopeId": "00000000-1111-2222-3333-444444444444",
+          "networkConfigurationScopeResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/hybridRG/providers/Microsoft.HybridCompute/privateLinkScopes/newScope",
+          "keyProperties": {
+            "clientPublicKey": {
+              "publicKey": "publickey",
+              "notAfter": "2021-01-01T00:00:00Z",
+              "renewAfter": "2021-02-01T00:00:00Z"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/hybridRG/providers/Microsoft.HybridCompute/machines/testMachine/providers/Microsoft.HybridCompute/networkConfigurations/current",
+        "name": "current",
+        "type": "Microsoft.HybridCompute/networkConfigurations",
+        "properties": {
+          "location": "westus",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "networkConfigurationScopeId": "00000000-1111-2222-3333-444444444444",
+          "networkConfigurationScopeResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/hybridRG/providers/Microsoft.HybridCompute/privateLinkScopes/newScope",
+          "keyProperties": {
+            "clientPublicKey": {
+              "publicKey": "publickey",
+              "notAfter": "2021-01-01T00:00:00Z",
+              "renewAfter": "2021-02-01T00:00:00Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}

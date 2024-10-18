@@ -454,7 +454,7 @@
           "type": "boolean",
           "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of the kind LogAlert."
         },
-        "ruleResolveConfiguration": {
+        "resolveConfiguration": {
           "type": "object",
           "$ref": "#/definitions/RuleResolveConfiguration",
           "description": "Defines the configuration for resolving fired alerts. Relevant only for rules of the kind LogAlert."
@@ -776,6 +776,7 @@
       "name": "ruleName",
       "in": "path",
       "required": true,
+      "pattern": "^[^#<>%&:\\?/{}*]{1,260}$",
       "type": "string",
       "description": "The name of the rule.",
       "x-ms-parameter-location": "method"

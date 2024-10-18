@@ -22,7 +22,17 @@ These are the global settings for the Serial Console API.
 ``` yaml
 openapi-type: arm
 azure-arm: true
-tag: package-2023-01
+tag: package-2024-07
+```
+
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-07'
+input-file:
+- Microsoft.SerialConsole/stable/2024-07-01/serialconsole.json
+- Microsoft.SerialConsole/stable/2024-07-01/serialport.json
 ```
 
 ### Tag: package-2023-01
