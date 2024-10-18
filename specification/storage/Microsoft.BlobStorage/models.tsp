@@ -1499,13 +1499,6 @@ alias CopyIdResponseHeader = {
   copyId: string;
 };
 
-/** The seal blob parameter. */
-alias SealBlobParameter = {
-  /** Overrides the sealed state of the destination blob.  Service version 2019-12-12 and newer. */
-  @header("x-ms-seal-blob")
-  sealBlob?: boolean;
-};
-
 /** The source if unmodified since parameter. */
 alias SourceIfUnmodifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
@@ -2084,9 +2077,9 @@ alias RangeParameter = {
 /** The version ID parameter. */
 alias VersionIdParameter = {
   /** The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer. */
-  @header
+  @query
   @clientName("versionId")
-  versionid: string;
+  versionid?: string;
 };
 
 /** The snapshot parameter. */
