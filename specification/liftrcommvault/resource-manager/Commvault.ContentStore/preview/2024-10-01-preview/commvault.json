@@ -291,6 +291,80 @@
           }
         }
       },
+      "patch": {
+        "operationId": "Entities_Patch",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Update a Entity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the Entity resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Entities_Patch_MaximumSet_Gen": {
+            "$ref": "./examples/Entities_Patch_MaximumSet_Gen.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "Entities_Delete",
         "tags": [
@@ -455,6 +529,36 @@
         "user"
       ]
     },
+    "EntityPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties specific to Commvault Entity resource",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/LiftrBase.UserDetailsUpdate",
+          "description": "Details of the user."
+        }
+      }
+    },
+    "EntityUpdate": {
+      "type": "object",
+      "description": "A Commvault Entity Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EntityPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
       "description": "Marketplace details for an organization",
@@ -579,6 +683,32 @@
         "lastName",
         "emailAddress"
       ]
+    },
+    "LiftrBase.UserDetailsUpdate": {
+      "type": "object",
+      "description": "User details for an organization",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user"
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/LiftrBase.email",
+          "description": "Email address of the user"
+        },
+        "upn": {
+          "type": "string",
+          "description": "User's principal name"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number"
+        }
+      }
     },
     "LiftrBase.email": {
       "type": "string",
