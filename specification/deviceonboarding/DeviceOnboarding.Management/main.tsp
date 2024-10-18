@@ -273,13 +273,13 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 
   @visibility("read")
   @doc("Per policy public key(s) to extend ownership voucher to the customer.")
-  publicKeys: FdoPublicKeys;
+  publicKeys?: FdoPublicKeys;
 
   @doc("Ownership Voucher storage")
   ownershipVoucherStorage?: OwnershipVoucherStorage;
 
   @doc("Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com")
-  rendezvousEndpoint: url;
+  rendezvousEndpoint?: url;
 }
 
 @doc("Owner public keys to extend ownership voucher to the customer.")
@@ -287,7 +287,7 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 model FdoPublicKeys {
   @doc("Public key as x5C with encryption type SECP256R1.")
   @visibility("read")
-  secp256R1: FdoPublicKey;
+  secp256R1?: FdoPublicKey;
 
   // SECP384R1 // TODO: SECP384R1 is not supported by some hardwares, we may need to add support for SECP256R1
 }
