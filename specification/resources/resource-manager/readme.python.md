@@ -208,6 +208,8 @@ default-api-version: "2024-08-01"
 title: DataBoundaryMgmtClient
 namespace: azure.mgmt.resource.databoundaries.v2024_08_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/databoundaries/v2024_08_01
+directive:
+  - remove-operation: "Operations_List"
 ```
 
 ### Tag: package-changes-2022-05 and python
