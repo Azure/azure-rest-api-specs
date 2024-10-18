@@ -14,6 +14,9 @@ using OpenAPI;
 
 namespace Microsoft.AzureTerraform;
 
+alias LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+  ArmCombinedLroHeaders<FinalResult = TerraformOperationStatus>;
+
 @armResourceOperations
 interface ExportTerraform {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to override operationId to fix LintDiff error"
@@ -23,9 +26,8 @@ interface ExportTerraform {
   @operationId("ExportTerraform_Export")
   exportTerraform is ArmProviderActionAsync<
     BaseExportModel,
-    ExportResult,
-    SubscriptionActionScope,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmCombinedLroHeaders<FinalResult = TerraformOperationStatus>
+    ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>,
+    Scope = SubscriptionActionScope,
+    LroHeaders = LroHeaders
   >;
 }
