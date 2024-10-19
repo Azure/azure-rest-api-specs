@@ -25,15 +25,15 @@ op list is Azure.Core.Foundations.Operation<
   {
     @query
     @doc("Category of the workspace connection.")
-    category: ConnectionType;
+    category?: ConnectionType;
 
     @query
     @doc("Indicates whether to list datastores. Service default: do not list datastores.")
-    includeAll: boolean;
+    includeAll?: boolean;
 
     @query
     @doc("Target of the workspace connection.")
-    target: string;
+    target?: string;
   },
   ConnectionsListResponse
 >;
