@@ -158,6 +158,7 @@ union SkuName {
 }
 
 /** The list container segement response */
+@pagedResult
 @Xml.name("EnumerationResults")
 model ListContainersSegmentResponse {
   /** The service endpoint. */
@@ -178,7 +179,9 @@ model ListContainersSegmentResponse {
   @Xml.name("ContainerItems") containerItems: ContainerItem[];
 
   /** The next marker of the containers. */
-  @Xml.name("NextMarker") nextMarker?: string;
+  @nextLink
+  @Xml.name("NextMarker")
+  nextMarker?: string;
 }
 
 /** An Azure Storage container. */
