@@ -47,10 +47,10 @@ model FunctionToolDefinition extends ToolDefinition {
 
 // Azure Custom Tools
 
-@doc("The input definition information for a bing search tool as used to configure an agent.")
-model BingSearchToolDefinition extends ToolDefinition {
-  @doc("The object type, which is always 'bing_search'.")
-  type: "bing_search";
+@doc("The input definition information for a bing grounding search tool as used to configure an agent.")
+model BingGroundingToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'bing_grounding'.")
+  type: "bing_grounding";
 }
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
@@ -180,16 +180,16 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
 }
 
 @doc("""
-  A record of a call to a bing search tool, issued by the model in evaluation of a defined tool, that represents
-  executed bing search.
+  A record of a call to a bing grounding tool, issued by the model in evaluation of a defined tool, that represents
+  executed search with bing grounding.
   """)
-model RunStepBingSearchToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'bing_search'.")
-  type: "bing_search";
+model RunStepBingGroundingToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'bing_grounding'.")
+  type: "bing_grounding";
 
   @doc("Reserved for future use.")
-  @encodedName("application/json", "bing_search")
-  bingSearch: Record<string>;
+  @encodedName("application/json", "bing_grounding")
+  bingGrounding: Record<string>;
 }
 
 @doc("""
