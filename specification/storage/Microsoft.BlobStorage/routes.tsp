@@ -153,11 +153,11 @@ interface Service {
   @route("/?comp=blobs")
   filterBlobs is StorageOperation<
     {
-      ...FilterBlobsWhereParameter;
-      ...FilterBlobsIncludeParameter;
       ...TimeoutParameter;
+      ...FilterBlobsWhereParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
+      ...FilterBlobsIncludeParameter;
     },
     DateResponseHeader & FilterBlobSegment
   >;
@@ -173,13 +173,15 @@ interface Container {
   create is StorageOperation<
     {
       ...ContainerNameParameter;
+      ...TimeoutParameter;
 
-      // TODO: x-ms-meta headers
+      // TODO should we define metadata headers like:
+      // ...MetadataHeaders;
+
       ...BlobPublicAccessParameter;
 
       ...DefaultEncryptionScopeParameter;
       ...DenyEncryptionScopeOverrideParameter;
-      ...TimeoutParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -202,6 +204,8 @@ interface Container {
     },
     {
       // TODO: x-ms-meta headers
+      // ...MetadataHeaders;
+
       ...EtagResponseHeader;
 
       ...LastModifiedResponseHeader;
@@ -246,12 +250,12 @@ interface Container {
   setMetadata is StorageOperation<
     {
       ...ContainerNameParameter;
-
-      // TODO: ...MetadataParameter;
       ...TimeoutParameter;
+      ...LeaseIdOptionalParameter;
+
+      // TODO: ...MetadataParameter; or MetadataHeaders?
 
       ...IfModifiedSinceParameter;
-      ...LeaseIdOptionalParameter;
     },
     {
       ...EtagResponseHeader;
@@ -292,12 +296,13 @@ interface Container {
       /** The access control list for the container. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
       @body
-      acl: SignedIdentifiers;
+      containerAcl: SignedIdentifiers;
 
       ...TimeoutParameter;
+      ...LeaseIdOptionalParameter;
+      ...BlobPublicAccessParameter;
       ...IfModifiedSinceParameter;
       ...IfUnmodifiedSinceParameter;
-      ...LeaseIdOptionalParameter;
     },
     {
       ...EtagResponseHeader;
@@ -312,7 +317,7 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("/{containerName}?restype=container&comp=undelete")
-  undelete is StorageOperation<
+  restore is StorageOperation<
     {
       ...ContainerNameParameter;
       ...DeletedContainerNameParameter;
@@ -346,19 +351,37 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("/{containerName}?restype=container&comp=batch")
-  submitBatch is StorageOperation<
-    {
-      /** The batch request content */
-      ...BodyParameter;
+  submitBatch(
+    ...ContainerNameParameter,
 
-      ...ContainerNameParameter;
-      ...ContentLengthParameter;
-      ...TimeoutParameter;
-    },
-    {
-      @statusCode statusCode: 202;
-    } & BodyParameter
-  >;
+    /** The batch request content */
+    ...BodyParameter,
+
+    /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+    @header("Content-Type")
+    multipartContentType: string,
+
+    ...ContentLengthParameter,
+    ...TimeoutParameter,
+
+    /** Specifies the version of the operation to use for this request. */
+    @header("x-ms-version")
+    version: string,
+
+    ...ClientRequestIdHeader,
+  ): ({
+    @statusCode statusCode: 202;
+
+    /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+    @header("Content-Type")
+    multipartContentType: string;
+
+    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
+    @header("x-ms-version")
+    version: string;
+
+    ...RequestIdResponseHeader;
+  } & BodyParameter) | StorageError;
 
   /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -368,11 +391,11 @@ interface Container {
   filterBlobs is StorageOperation<
     {
       ...ContainerNameParameter;
+      ...TimeoutParameter;
+      ...FilterBlobsWhereParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
-      ...FilterBlobsWhereParameter;
       ...FilterBlobsIncludeParameter;
-      ...TimeoutParameter;
     },
     DateResponseHeader & FilterBlobSegment
   >;
@@ -486,7 +509,6 @@ interface Container {
       ...LeaseIdResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...LeaseTimeResponseHeader;
       ...DateResponseHeader;
     }
   >;
@@ -532,9 +554,7 @@ interface Container {
   @get
   @route("/{containerName}?restype=account&comp=properties")
   getAccountInfo is StorageOperation<
-    {
-      ...ContainerNameParameter;
-    },
+    ContainerNameParameter,
     {
       ...DateResponseHeader;
       ...SkuNameResponseHeader;

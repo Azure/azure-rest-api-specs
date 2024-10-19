@@ -857,6 +857,7 @@ model RetentionPolicy {
 // List Blobs
 
 /** An enumeration of blobs. */
+@pagedResult
 @Xml.name("EnumerationResults")
 model ListBlobsFlatSegmentResponse {
   /** The service endpoint. */
@@ -883,7 +884,9 @@ model ListBlobsFlatSegmentResponse {
   @Xml.name("Segment") segment: BlobFlatListSegment;
 
   /** The next marker of the blobs. */
-  @Xml.name("NextMarker") nextMarker?: string;
+  @nextLink
+  @Xml.name("NextMarker")
+  nextMarker?: string;
 }
 
 /** The blob flat list segment. */
@@ -2134,6 +2137,7 @@ model BlobHierarchyListSegment {
 }
 
 /** An enumeration of blobs */
+@pagedResult
 @Xml.name("EnumerationResults")
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */
@@ -2163,7 +2167,9 @@ model ListBlobsHierarchySegmentResponse {
   @Xml.name("Segment") segment: BlobHierarchyListSegment;
 
   /** The next marker of the blobs. */
-  @Xml.name("NextMarker") nextMarker?: string;
+  @nextLink
+  @Xml.name("NextMarker")
+  nextMarker?: string;
 }
 
 /** The delimiter parameter. */
@@ -2251,11 +2257,16 @@ alias DeletedContainerVersionParameter = {
   deletedContainerVersion?: string;
 };
 
-/** The container name header */
+/** The container name path parameter */
 alias ContainerNameParameter = {
   /** The name of the container. */
   @path
   containerName: string;
+};
+
+alias MetadataHeaders = {
+  /** The metadata headers. */
+  @header("x-ms-meta") metadata?: Record<string>;
 };
 
 /** The If-Unmodified-Since header. */
