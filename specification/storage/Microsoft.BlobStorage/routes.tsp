@@ -45,7 +45,7 @@ op StorageOperation<
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {
-  /** Get the properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
+  /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -80,9 +80,12 @@ interface Service {
   listContainersSegment is StorageOperation<
     {
       ...PrefixParameter;
-      ...TimeoutParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
+      ...TimeoutParameter;
+
+      /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
+      @query include?: Array<ListContainersIncludeType>;
     },
     ListContainersSegmentResponse
   >;

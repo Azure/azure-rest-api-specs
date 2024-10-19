@@ -89,6 +89,20 @@ model FilterBlobItem {
   @Xml.name("IsCurrentVersion") isCurrentVersion?: boolean;
 }
 
+/** Include this parameter to specify that the container's metadata be returned as part of the response body. */
+union ListContainersIncludeType {
+  /** Include metadata */
+  metadata: "metadata",
+
+  /** Include deleted */
+  deleted: "deleted",
+
+  /** Include system */
+  system: "system",
+
+  string,
+}
+
 /** The filter blobs includes. */
 union FilterBlobsIncludes {
   /** The filter includes no versions. */
