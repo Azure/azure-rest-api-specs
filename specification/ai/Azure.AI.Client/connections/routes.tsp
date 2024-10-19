@@ -28,7 +28,7 @@ op list is Azure.Core.Foundations.Operation<
     category: ConnectionType;
 
     @query
-    @doc("Indicates whether to list datastores. Service default: do not lines datastores.")
+    @doc("Indicates whether to list datastores. Service default: do not list datastores.")
     includeAll: boolean;
 
     @query
@@ -43,12 +43,12 @@ op list is Azure.Core.Foundations.Operation<
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the details of a single connection, without credentials.")
-@route("connections/{connectionNameInUrl}")
+@route("connections/{connectionName}")
 @get
 op get is Azure.Core.Foundations.Operation<
   {
     @doc("Connection Name")
-    connectionNameInUrl: string;
+    connectionName: string;
   },
   ConnectionsListSecretsResponse
 >;
@@ -58,12 +58,12 @@ op get is Azure.Core.Foundations.Operation<
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the details of a single connection, including credentials (if available).")
-@route("connections/{connectionNameInUrl}/listsecrets")
+@route("connections/{connectionName}/listsecrets")
 @post
 op listSecrets is Azure.Core.Foundations.Operation<
   {
     @doc("Connection Name")
-    connectionNameInUrl: string;
+    connectionName: string;
 
     @doc("The body is ignored.")
     ignored: string;
