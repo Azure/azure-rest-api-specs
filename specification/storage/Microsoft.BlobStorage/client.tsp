@@ -5,13 +5,18 @@ using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 using Storage.Blob;
 
+namespace Customizations;
+
 /** client init */
-model StorageClientOptions {
-  /** Specifies the version of the operation to use for this request. */
+model BlobStorageClientOptions {
+  /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
+  @header("x-ms-version")
   version: string;
+
+  ...ContainerNameParameter;
 }
 
-@@clientInitialization(Storage.Blob, StorageClientOptions);
+@@clientInitialization(Storage.Blob, BlobStorageClientOptions);
 
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
   "PreventEncryptionScopeOverride"
