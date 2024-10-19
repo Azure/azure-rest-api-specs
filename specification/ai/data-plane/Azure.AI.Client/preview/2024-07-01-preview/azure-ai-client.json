@@ -436,7 +436,7 @@
           {
             "name": "includeAll",
             "in": "query",
-            "description": "Indicates whether to list datastores. Service default: do not lines datastores.",
+            "description": "Indicates whether to list datastores. Service default: do not list datastores.",
             "required": true,
             "type": "boolean"
           },
@@ -475,7 +475,7 @@
         }
       }
     },
-    "/connections/{connectionNameInUrl}": {
+    "/connections/{connectionName}": {
       "get": {
         "operationId": "Connections_Get",
         "description": "Get the details of a single connection, without credentials.",
@@ -484,7 +484,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "connectionNameInUrl",
+            "name": "connectionName",
             "in": "path",
             "description": "Connection Name",
             "required": true,
@@ -513,7 +513,7 @@
         }
       }
     },
-    "/connections/{connectionNameInUrl}/listsecrets": {
+    "/connections/{connectionName}/listsecrets": {
       "post": {
         "operationId": "Connections_ListSecrets",
         "description": "Get the details of a single connection, including credentials (if available).",
@@ -522,7 +522,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "connectionNameInUrl",
+            "name": "connectionName",
             "in": "path",
             "description": "Connection Name",
             "required": true,
