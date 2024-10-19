@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+@@access(Azure.AI.Client.Connections.get, Access.internal);
 @@access(Azure.AI.Client.Connections.list, Access.internal);
 @@access(Azure.AI.Client.Connections.listSecrets, Access.internal);
 @@access(Azure.AI.Client.ConnectionsListSecretsResponse, Access.internal);
