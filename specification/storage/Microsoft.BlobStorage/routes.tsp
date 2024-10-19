@@ -90,13 +90,13 @@ interface Service {
     ListContainersSegmentResponse
   >;
 
-  /** The Get User Delegation Key operation gets the user delegation key for the Blob service. This is only a valid operation when using User Delegation SAS. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas\">Create a user delegation SAS</a>. */
+  /** Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @post
   @route("/?restype=service&comp=userdelegationkey")
   getUserDelegationKey is StorageOperation<
     KeyInfo & TimeoutParameter,
-    UserDelegationKey
+    UserDelegationKey & DateResponseHeader
   >;
 
   /** Returns the sku name and account kind. */
