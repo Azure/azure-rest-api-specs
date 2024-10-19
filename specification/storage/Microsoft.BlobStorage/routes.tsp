@@ -99,6 +99,7 @@ interface Service {
     UserDelegationKey & DateResponseHeader
   >;
 
+  // TODO: The swagger didnt specify all of the headers we have in the template, like the request id headers
   /** Returns the sku name and account kind. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
@@ -119,13 +120,31 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("/?comp=batch")
-  submitBatch is StorageOperation<
-    {
-      ...ContentLengthParameter;
-      ...TimeoutParameter;
-    },
-    {}
-  >;
+  submitBatch(
+    /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+    @header("Content-Type")
+    multipartContentType: string,
+
+    /** Specifies the version of the operation to use for this request. */
+    @header("x-ms-version")
+    version: string,
+
+    ...TimeoutParameter,
+    ...ClientRequestIdHeader,
+    ...ContentLengthParameter,
+    ...BodyParameter,
+  ): (BodyParameter & {
+    /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
+    #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
+    @header("Content-Type")
+    contentType: string;
+
+    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
+    @header("x-ms-version")
+    version: string;
+
+    ...RequestIdResponseHeader;
+  }) | StorageError;
 
   /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"

@@ -5117,7 +5117,7 @@
                 "description": "Identifies the sku name of the account",
                 "enum": [
                   "Standard_LRS",
-                  "tandard_GRS",
+                  "Standard_GRS",
                   "Standard_RAGRS",
                   "Standard_ZRS",
                   "Premium_LRS"
@@ -5133,7 +5133,7 @@
                     },
                     {
                       "name": "StandardGRS",
-                      "value": "tandard_GRS",
+                      "value": "Standard_GRS",
                       "description": "The standard GRS SKU."
                     },
                     {
@@ -11395,7 +11395,7 @@
                 "description": "Identifies the sku name of the account",
                 "enum": [
                   "Standard_LRS",
-                  "tandard_GRS",
+                  "Standard_GRS",
                   "Standard_RAGRS",
                   "Standard_ZRS",
                   "Premium_LRS"
@@ -11411,7 +11411,7 @@
                     },
                     {
                       "name": "StandardGRS",
-                      "value": "tandard_GRS",
+                      "value": "Standard_GRS",
                       "description": "The standard GRS SKU."
                     },
                     {
@@ -11451,6 +11451,13 @@
       "post": {
         "operationId": "Service_SubmitBatch",
         "description": "The Batch operation allows multiple API calls to be embedded into a single HTTP request.",
+        "produces": [
+          "*/*",
+          "application/json"
+        ],
+        "consumes": [
+          "*/*"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -11459,15 +11466,6 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
-          },
-          {
-            "name": "Content-Length",
-            "in": "header",
-            "description": "The length of the request.",
-            "required": true,
-            "type": "integer",
-            "format": "int64",
-            "x-ms-client-name": "contentLength"
           },
           {
             "name": "timeout",
@@ -11479,17 +11477,34 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "Content-Length",
+            "in": "header",
+            "description": "The length of the request.",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "x-ms-client-name": "contentLength"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The body of the request.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            },
             "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -12604,7 +12619,7 @@
                 "description": "Identifies the sku name of the account",
                 "enum": [
                   "Standard_LRS",
-                  "tandard_GRS",
+                  "Standard_GRS",
                   "Standard_RAGRS",
                   "Standard_ZRS",
                   "Premium_LRS"
@@ -12620,7 +12635,7 @@
                     },
                     {
                       "name": "StandardGRS",
-                      "value": "tandard_GRS",
+                      "value": "Standard_GRS",
                       "description": "The standard GRS SKU."
                     },
                     {
@@ -14753,7 +14768,7 @@
       "description": "The SKU types",
       "enum": [
         "Standard_LRS",
-        "tandard_GRS",
+        "Standard_GRS",
         "Standard_RAGRS",
         "Standard_ZRS",
         "Premium_LRS"
@@ -14769,7 +14784,7 @@
           },
           {
             "name": "StandardGRS",
-            "value": "tandard_GRS",
+            "value": "Standard_GRS",
             "description": "The standard GRS SKU."
           },
           {

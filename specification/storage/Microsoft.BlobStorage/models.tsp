@@ -142,7 +142,7 @@ union SkuName {
   StandardLRS: "Standard_LRS",
 
   /** The standard GRS SKU. */
-  StandardGRS: "tandard_GRS",
+  StandardGRS: "Standard_GRS",
 
   /** The standard RAGRS SKU. */
   StandardRAGRS: "Standard_RAGRS",
