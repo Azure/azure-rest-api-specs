@@ -50,7 +50,7 @@ interface Entities {
   get is ArmResourceRead<Entity>;
   create is ArmResourceCreateOrReplaceAsync<Entity>;
   delete is ArmResourceDeleteWithoutOkAsync<Entity>;
-  patch is ArmResourcePatchAsync<Entity, EntityProperties>;
+  update is ArmResourcePatchAsync<Entity, EntityProperties>;
   listByResourceGroup is ArmResourceListByParent<Entity>;
   listBySubscription is ArmListBySubscription<Entity>;
 }
