@@ -75,7 +75,6 @@ model Dataset extends InputData {
   type: "dataset";
 
   @doc("Evaluation input data")
-  @encodedName("application/json", "Uri")
   id: string;
 }
 
