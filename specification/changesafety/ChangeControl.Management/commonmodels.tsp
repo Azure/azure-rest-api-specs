@@ -63,11 +63,11 @@ model StringParameter extends Parameter {
 
   @doc("Default value for the parameter.")
   @visibility("read", "create")
-  defaultValue?: ParameterType.String;
+  defaultValue?: string;
 
   @doc("Allowed list of the values for the parameter.")
   @visibility("read", "create")
-  allowedValues: Array<ParameterType.String>;
+  allowedValues: Array<string>;
 }
 
 @doc("Integer type parameter model")
