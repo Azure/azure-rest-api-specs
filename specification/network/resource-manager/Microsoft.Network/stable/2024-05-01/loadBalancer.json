@@ -1474,21 +1474,24 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the resource group.",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "loadBalancerName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the load balancer."
+            "description": "The name of the load balancer.",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "loadBalancingRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the load balancing rule."
+            "description": "The name of the load balancing rule.",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -1506,8 +1509,11 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/LoadBalancerHealthPerRule"
+             "headers": {
+              "Location": {
+                "description": "URI to query the status of the long-running operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
