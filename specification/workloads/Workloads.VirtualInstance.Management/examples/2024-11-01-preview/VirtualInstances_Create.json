@@ -1,0 +1,315 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "resource": {
+      "location": "eastus2euap",
+      "tags": {
+        "TestSystem": "true"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsi": {}
+        }
+      },
+      "kind": "sap",
+      "properties": {
+        "architectureId": "Rise-PacemakerHA",
+        "environmentType": "NonProduction",
+        "environmentLabel": "Test",
+        "systemLifecycleStage": "Active",
+        "systemPriority": 3,
+        "components": [
+          {
+            "name": "application",
+            "role": "default",
+            "resources": [
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1pas"
+              },
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ap01"
+              },
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1applb0"
+              }
+            ]
+          },
+          {
+            "name": "webdispatcher",
+            "role": "default",
+            "resources": [
+              {
+                "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-wdrg/providers/Microsoft.Compute/virtualMachines/rs1wd1"
+              },
+              {
+                "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-wdrg/providers/Microsoft.Compute/virtualMachines/rs1wd2"
+              },
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1wdlb0"
+              }
+            ]
+          },
+          {
+            "name": "central",
+            "role": "default",
+            "resources": [
+              {
+                "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ascs"
+              },
+              {
+                "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ers"
+              },
+              {
+                "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1cslb0"
+              }
+            ]
+          },
+          {
+            "name": "database",
+            "role": "default",
+            "resources": [
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+              },
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+              }
+            ],
+            "metadata": {
+              "DBType": "HANA",
+              "DBVersion": "2.0"
+            }
+          }
+        ],
+        "metadata": {
+          "SID": "RS1",
+          "LandscapeIdentifier": "abcdefgh-1234-5678-ijkl-mn1234567890"
+        },
+        "dependsOn": [
+          "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/supportvi1",
+          "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/support-rg/providers/Microsoft.Workloads/virtualInstances/supportvi2"
+        ]
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "virtualInstanceName": "testvi",
+    "subscriptionId": "49d64d54-e966-4c46-a868-1999802b762c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvi",
+        "type": "Microsoft.Workloads/virtualInstances",
+        "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi",
+        "location": "eastus2euap",
+        "tags": {
+          "TestSystem": "true"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsi": {}
+          }
+        },
+        "kind": "sap",
+        "properties": {
+          "architectureId": "Rise-PacemakerHA",
+          "environmentType": "NonProduction",
+          "environmentLabel": "Test",
+          "systemLifecycleStage": "Active",
+          "systemPriority": 3,
+          "components": [
+            {
+              "name": "application",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1pas"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ap01"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1applb0"
+                }
+              ]
+            },
+            {
+              "name": "webdispatcher",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-wdrg/providers/Microsoft.Compute/virtualMachines/rs1wd1"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-wdrg/providers/Microsoft.Compute/virtualMachines/rs1wd2"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1wdlb0"
+                }
+              ]
+            },
+            {
+              "name": "central",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ascs"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ers"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1cslb0"
+                }
+              ]
+            },
+            {
+              "name": "database",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+                }
+              ],
+              "metadata": {
+                "DBType": "HANA",
+                "DBVersion": "2.0"
+              }
+            }
+          ],
+          "metadata": {
+            "SID": "RS1",
+            "LandscapeIdentifier": "abcdefgh-1234-5678-ijkl-mn1234567890"
+          },
+          "dependsOn": [
+            "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/supportvi1",
+            "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/support-rg/providers/Microsoft.Workloads/virtualInstances/supportvi2"
+          ],
+          "provisioningState": "Succeeded",
+          "state": "RegistrationComplete"
+        },
+        "systemData": {
+          "createdAt": "2024-11-01T00:00:00.001Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-11-01T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testvi",
+        "type": "Microsoft.Workloads/virtualInstances",
+        "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi",
+        "location": "eastus2euap",
+        "tags": {
+          "TestSystem": "true"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsi": {}
+          }
+        },
+        "kind": "sap",
+        "properties": {
+          "architectureId": "Rise-PacemakerHA",
+          "environmentType": "NonProduction",
+          "environmentLabel": "Test",
+          "systemLifecycleStage": "Active",
+          "systemPriority": 3,
+          "components": [
+            {
+              "name": "application",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1pas"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ap01"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1applb0"
+                }
+              ]
+            },
+            {
+              "name": "webdispatcher",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-wdrg/providers/Microsoft.Compute/virtualMachines/rs1wd1"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-wdrg/providers/Microsoft.Compute/virtualMachines/rs1wd2"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1wdlb0"
+                }
+              ]
+            },
+            {
+              "name": "central",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ascs"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ers"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1cslb0"
+                }
+              ]
+            },
+            {
+              "name": "database",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+                }
+              ],
+              "metadata": {
+                "DBType": "HANA",
+                "DBVersion": "2.0"
+              }
+            }
+          ],
+          "metadata": {
+            "SID": "RS1",
+            "LandscapeIdentifier": "abcdefgh-1234-5678-ijkl-mn1234567890"
+          },
+          "dependsOn": [
+            "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/supportvi1",
+            "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/support-rg/providers/Microsoft.Workloads/virtualInstances/supportvi2"
+          ],
+          "provisioningState": "Creating",
+          "state": "DiscoveryInProgress"
+        },
+        "systemData": {
+          "createdAt": "2024-11-01T00:00:00.001Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-11-01T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualInstances_Create",
+  "title": "Register a virtual instance - sample 1"
+}

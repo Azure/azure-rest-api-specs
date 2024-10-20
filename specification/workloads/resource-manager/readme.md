@@ -30,6 +30,20 @@ openapi-subtype: rpaas
 tag: package-2023-04
 ```
 
+### Tag: package-2024-11-01-preview
+
+These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-01-preview'
+input-file:
+  - Microsoft.Workloads/VirtualInstance/preview/2024-11-01-preview/VirtualInstance.json
+  - Microsoft.Workloads/operations/preview/2024-11-01-preview/operations.json
+suppressions:
+    - code: AvoidAdditionalProperties
+      from: Microsoft.Workloads/VirtualInstance/preview/2024-11-01-preview/VirtualInstance.json
+      reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+```
+
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.

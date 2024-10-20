@@ -1,0 +1,158 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "properties": {
+      "tags": {
+        "TestSystem": "false",
+        "RetainUntil": "2024-12-01"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsinew": {}
+        }
+      },
+      "properties": {
+        "components": [
+          {
+            "name": "application",
+            "role": "default",
+            "resources": [
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1pas"
+              },
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ap01"
+              }
+            ]
+          },
+          {
+            "name": "central",
+            "role": "default",
+            "resources": [
+              {
+                "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ascs"
+              },
+              {
+                "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ers"
+              }
+            ]
+          },
+          {
+            "name": "database",
+            "role": "default",
+            "resources": [
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+              },
+              {
+                "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+              }
+            ],
+            "metadata": {
+              "DBType": "HANA",
+              "DBVersion": "2.1"
+            }
+          }
+        ],
+        "metadata": {
+          "SID": "RS2",
+          "LandscapeIdentifier": "abcdefgh-1234-5678-ijkl-mn1234567891"
+        }
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "virtualInstanceName": "testvi",
+    "subscriptionId": "49d64d54-e966-4c46-a868-1999802b762c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvi",
+        "type": "Microsoft.Workloads/virtualInstances",
+        "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi",
+        "location": "eastus2euap",
+        "tags": {
+          "TestSystem": "false",
+          "RetainUntil": "2024-12-01"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsinew": {}
+          }
+        },
+        "kind": "sap",
+        "properties": {
+          "architectureId": "Rise-PacemakerHA",
+          "environmentType": "NonProduction",
+          "systemLifecycleStage": "Active",
+          "systemPriority": 3,
+          "components": [
+            {
+              "name": "application",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1pas"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ap01"
+                }
+              ]
+            },
+            {
+              "name": "central",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ascs"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ers"
+                }
+              ]
+            },
+            {
+              "name": "database",
+              "role": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+                }
+              ],
+              "metadata": {
+                "DBType": "HANA",
+                "DBVersion": "2.1"
+              }
+            }
+          ],
+          "metadata": {
+            "SID": "RS2",
+            "LandscapeIdentifier": "abcdefgh-1234-5678-ijkl-mn1234567891"
+          },
+          "provisioningState": "Succeeded",
+          "state": "RegistrationComplete"
+        },
+        "systemData": {
+          "createdAt": "2024-11-01T00:00:00.001Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-11-01T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/EASTUS2EUAP/operationStatuses/b7d35156-cfc9-419f-838a-b1e7eff64474*465BB862DF6F3B58F4A29B409D4197F48D5A22B67E126174D4C11F42B19263E5?api-version=2024-11-01-preview"
+      }
+    }
+  },
+  "operationId": "VirtualInstances_Update",
+  "title": "Update a virtual instance - sample 1"
+}
