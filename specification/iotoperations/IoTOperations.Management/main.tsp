@@ -33,10 +33,10 @@ namespace Microsoft.IoTOperations;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-15-preview version */
+  /** 2024-09-15-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-15-preview`,
+  `2024-09-15-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -103,7 +103,7 @@ interface Dataflow {
   get is ArmResourceRead<DataflowResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataflowResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Dataflow_ListByProfileResource")
   listByResourceGroup is ArmResourceListByParent<DataflowResource>;
 }

@@ -62,7 +62,11 @@ interface SAPVirtualInstances {
    */
   start is ArmResourceActionAsync<
     SAPVirtualInstance,
-    StartRequest,
+    {
+      @doc("The Virtual Instance for SAP solutions resource start request body.")
+      @body
+      body?: StartRequest;
+    },
     Foundations.OperationStatusResult
   >;
 
@@ -71,13 +75,19 @@ interface SAPVirtualInstances {
    */
   stop is ArmResourceActionAsync<
     SAPVirtualInstance,
-    StopRequest,
+    {
+      @doc("The Virtual Instance for SAP solutions resource stop request body.")
+      @body
+      body?: StopRequest;
+    },
     Foundations.OperationStatusResult
   >;
 
   /**
    * Gets the sizing recommendations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeSizingRecommendations")
   getSizingRecommendations is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
     SAPSizingRecommendationRequest,
@@ -87,6 +97,8 @@ interface SAPVirtualInstances {
   /**
    * Get a list of SAP supported SKUs for ASCS, Application and Database tier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeSapSupportedSku")
   getSapSupportedSku is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
     SAPSupportedSkusRequest,
@@ -96,6 +108,8 @@ interface SAPVirtualInstances {
   /**
    * Get the SAP Disk Configuration Layout prod/non-prod SAP System.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeDiskConfigurations")
   getDiskConfigurations is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
     SAPDiskConfigurationsRequest,
@@ -105,6 +119,8 @@ interface SAPVirtualInstances {
   /**
    * Get the recommended SAP Availability Zone Pair Details for your region.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeAvailabilityZoneDetails")
   getAvailabilityZoneDetails is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
     SAPAvailabilityZoneDetailsRequest,

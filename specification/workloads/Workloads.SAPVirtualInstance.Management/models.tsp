@@ -709,6 +709,7 @@ model SAPDiskConfigurationsResult {
   /**
    * The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   volumeConfigurations?: Record<SAPDiskConfiguration>;
 }
 
@@ -1008,6 +1009,7 @@ model UpdateSAPVirtualInstanceRequest {
   /**
    * Gets or sets the Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 
   /**
@@ -1313,6 +1315,7 @@ model UpdateSAPCentralInstanceRequest {
   /**
    * Gets or sets the Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 }
 
@@ -1409,6 +1412,7 @@ model UpdateSAPDatabaseInstanceRequest {
   /**
    * Gets or sets the Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 }
 
@@ -1547,6 +1551,7 @@ model UpdateSAPApplicationInstanceRequest {
   /**
    * Gets or sets the Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 }
 
@@ -1771,6 +1776,7 @@ model DiskConfiguration {
   /**
    * The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   diskVolumeConfigurations?: Record<DiskVolumeConfiguration>;
 }
 
@@ -2121,6 +2127,7 @@ model VirtualMachineResourceNames {
   /**
    * The full resource names for virtual machine data disks. This is a dictionary containing list of names of data disks per volume. Currently supported volumes for database layer are ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os', 'backup']. For application and cs layers, only 'default' volume is supported
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   dataDiskNames?: Record<string[]>;
 }
 
