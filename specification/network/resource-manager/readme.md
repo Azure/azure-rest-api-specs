@@ -115,6 +115,12 @@ suppressions:
   - code: MissingSegmentsInNestedResourceListOperation
     from: ipAddressManager.json
     reason: False alarm.
+  - code: PatchIdentityProperty
+    from: networkWatcher.json
+    reason: False alarm.
+  - code: PatchIdentityProperty
+    from: virtualNetworkGateway.json
+    reason: False alarm.
 ```
 
 ### Tag: package-2024-03
