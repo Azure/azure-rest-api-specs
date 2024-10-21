@@ -101,7 +101,7 @@ input-file:
 directive:
   - suppress: PutRequestResponseSchemeArm
     from: swagger.json
-    reason: Temporary suppression needed to avoid delays for business needs and maintain production timelines
+    reason: Temporary suppression needed to avoid delays for business needs and maintain production timelines. It's also approved before in previous PR in private repo.
 ```    
 ---
 
