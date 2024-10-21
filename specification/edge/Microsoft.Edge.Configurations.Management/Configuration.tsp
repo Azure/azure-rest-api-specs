@@ -76,4 +76,5 @@ interface ConfigurationReferences {
     ConfigurationReferenceProperties
   >;
   delete is ArmResourceDeleteSync<ConfigurationReference>;
+  list is ArmResourceListByParent<ConfigurationReference>;
 }
