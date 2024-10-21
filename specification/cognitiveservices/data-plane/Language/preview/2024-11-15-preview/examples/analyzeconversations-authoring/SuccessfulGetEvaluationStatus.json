@@ -1,11 +1,12 @@
 {
-  "operationId": "TextAnalysisAuthoring_DataGeneration_GetTrainingStatus",
-  "title": "SuccessfulGetTrainStatus",
+  "operationId": "ConversationalAnalysisAuthoring_GetEvaluationStatus",
+  "title": "Successful Get Evaluation Status",
   "parameters": {
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "api-version": "2024-11-15-preview",
-    "projectName": "LoanAgreements",
+    "projectName": "EmailApp",
+    "trainedModelLabel": "model1",
     "jobId": "8ccf2ffe-e758-4d04-a44a-31512918c7e8_637858368000000000"
   },
   "responses": {
@@ -13,18 +14,14 @@
       "headers": {},
       "body": {
         "result": {
-          "modelLabel": "model1",
-          "trainingConfigVersion": "2024-11-15-datagen",
-          "estimatedEndDateTime": "2022-04-18T15:47:58.8190649Z",
-          "trainingStatus": {
-            "percentComplete": 3,
-            "startDateTime": "2022-04-18T15:45:06.8190649Z",
-            "status": "running"
+          "evaluationOptions": {
+            "kind": "percentage",
+            "trainingSplitPercentage": 60,
+            "testingSplitPercentage": 40
           },
-          "evaluationStatus": {
-            "percentComplete": 0,
-            "status": "notStarted"
-          }
+          "modelLabel": "model1",
+          "trainingConfigVersion": "2022-05-01",
+          "percentComplete": 30
         },
         "jobId": "8ccf2ffe-e758-4d04-a44a-31512918c7e8_637858368000000000",
         "createdDateTime": "2022-04-18T15:44:44Z",
