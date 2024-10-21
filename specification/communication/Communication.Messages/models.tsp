@@ -40,6 +40,14 @@ union CommunicationMessageKind {
   @doc("Audio message type.")
   audio: "audio",
 
+  @added(Versions.c2024_11_15)
+  @doc("Sticker message type.")
+  sticker: "sticker",
+
+  @added(Versions.c2024_11_15)
+  @doc("Reaction message type.")
+  reaction: "reaction",
+
   @doc("Template message type.")
   template: "template",
 }
@@ -201,6 +209,28 @@ model VideoNotificationContent extends NotificationContent {
 model AudioNotificationContent extends NotificationContent {
   @doc("Message notification type is audio.")
   kind: CommunicationMessageKind.audio;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_11_15)
+@doc("A request to send a Reaction notification.")
+model ReactionNotificationContent extends NotificationContent {
+  @doc("Message notification type is reaction.")
+  kind: CommunicationMessageKind.reaction;
+
+  @doc("emoji content like \\uD83D\\uDE00.")
+  emoji?: string;
+
+  @doc("ID of the previous message you want to reply to.")
+  messageId?: string;
+}
+
+@added(Versions.c2024_11_15)
+@doc("A request to send a Sticker notification.")
+model StickerNotificationContent extends NotificationContent {
+  @doc("Message notification type is sticker.")
+  kind: CommunicationMessageKind.sticker;
 
   ...MediaNotificationContentBase;
 }
@@ -459,4 +489,8 @@ enum Versions {
   @doc("Azure Communication Messages 2024-08-30 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_08_30: "2024-08-30",
+
+  @doc("Azure Communication Messages 2024-11-15 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_11_15: "2024-11-15",
 }
