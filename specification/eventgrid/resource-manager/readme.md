@@ -43,11 +43,6 @@ suppressions:
     from: EventGrid.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters
 
-  - code:  PatchBodyParametersSchema
-    reason: This is false positive as federatedClientId is a required parameter of FederatedIdentityCredentialInfo object but object FederatedIdentityCredentialInfo is itself an optional parameter for patch operation.
-    from: EventGrid.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters
-
   - code:  ParameterNotUsingCommonTypes
     reason: We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
     from: EventGrid.json
@@ -69,6 +64,10 @@ suppressions:
 
   - code:  PathForResourceAction
     reason: This route definition is defined by NSP for all partner services and the right integration with NSP relies on that. We cannot change this as we don't own the contract here and in order for the NSP integration to work, we need to adhere to NSP requirements in this route defintion.
+    from: EventGrid.json
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as federatedClientId is a required parameter of FederatedIdentityCredentialInfo object but object FederatedIdentityCredentialInfo is itself an optional parameter for patch operation.
     from: EventGrid.json
 
   - code:  GuidUsage
