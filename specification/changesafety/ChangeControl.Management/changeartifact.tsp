@@ -46,7 +46,6 @@ model InlineBicepTemplateChangeArtifact extends ChangeArtifact {
   artifactPayload: InlineTemplateArtifactContent;
 }
 
-
 /* ChangeArtifact for ArmOperation. */
 @doc("Describes the change payload for Kind=Inline & artifactType='ArmOperation'")
 model ArmOperationChangeArtifact extends ChangeArtifact {
