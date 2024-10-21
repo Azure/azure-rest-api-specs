@@ -51,6 +51,10 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_05_01: "2024-05-01",
 
+  /** Version 2024-11-01 */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_11_01: "2024-11-01",
+
   /** Version 2024-11-15-preview" */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_15_preview: "2024-11-15-preview",
@@ -1167,6 +1171,10 @@ model ConversationSummarizationTaskParametersBase
   is AbstractiveSummarizationTaskParametersBase {
   /** Array of Summary Aspects */
   summaryAspects: Array<SummaryAspect>;
+
+  /** a text field to allow customers to use natural language to describe their needs for summarization. */
+  @added(Versions.v2024_11_15_preview)
+  instruction: string;
 }
 
 /** Supported parameters for pre-build conversational summarization task. */

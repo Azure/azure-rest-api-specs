@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
-    "version": "2024-11-15-preview",
+    "version": "2024-11-01",
     "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\\n\\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
     "x-typespec-generated": [
       {
@@ -97,17 +97,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulAnalyzeConversations": {
-            "$ref": "./examples/SuccessfulAnalyzeConversations.json"
-          },
-          "SuccessfulAnalyzeConversationsArbitration": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationsArbitration.json"
-          },
-          "SuccessfulAnalyzeConversationsArbitrationDirectTarget": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
-          }
         }
       }
     },
@@ -151,35 +140,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulConversationPIIDoNotRedact": {
-            "$ref": "./examples/SuccessfulConversationPIINoMask.json"
-          },
-          "SuccessfulConversationPIIExclusionSubmit": {
-            "$ref": "./examples/SuccessfulConversationPIIExclusionSubmit.json"
-          },
-          "SuccessfulConversationPIIMaskWithEntityType": {
-            "$ref": "./examples/SuccessfulConversationPIIEntityMask.json"
-          },
-          "SuccessfulConversationPIIMaskWithRedactionCharacter": {
-            "$ref": "./examples/SuccessfulConversationPIICharacterMask.json"
-          },
-          "SuccessfulConversationPIIRedactionCharSubmit": {
-            "$ref": "./examples/SuccessfulConversationPIIRedactionCharSubmit.json"
-          },
-          "SuccessfulConversationPIISubmit": {
-            "$ref": "./examples/SuccessfulConversationPIISubmit.json"
-          },
-          "SuccessfulConversationSummarizationTaskSubmit": {
-            "$ref": "./examples/SuccessfulConversationSummarizationTaskSubmit.json"
-          },
-          "SuccessfulConversationSummarySubmit": {
-            "$ref": "./examples/SuccessfulConversationSummarySubmit.json"
-          },
-          "SuccessfulCustomConversationSummarizationTaskSubmit": {
-            "$ref": "./examples/SuccessfulCustomConversationSummarizationTaskSubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -229,35 +189,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulConversationPIIDoNotRedactTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIINoMaskTaskStatusRequest.json"
-          },
-          "SuccessfulConversationPIIExclusionTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIIExclusionTaskStatusRequest.json"
-          },
-          "SuccessfulConversationPIIMaskWithEntityTypeTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIIEntityMaskTaskStatusRequest.json"
-          },
-          "SuccessfulConversationPIIMaskWithRedactionTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIICharacterMaskTaskStatusRequest.json"
-          },
-          "SuccessfulConversationPIIRedactionCharTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIIRedactionCharTaskStatusRequest.json"
-          },
-          "SuccessfulConversationPIITaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationPIITaskStatusRequest.json"
-          },
-          "SuccessfulConversationSummarizationTaskResult": {
-            "$ref": "./examples/SuccessfulConversationSummarizationTaskResult.json"
-          },
-          "SuccessfulConversationSummarizationTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulConversationSummarizationTaskStatusRequest.json"
-          },
-          "SuccessfulCustomConversationSummarizationTaskResult": {
-            "$ref": "./examples/SuccessfulCustomConversationSummarizationTaskResult.json"
-          }
         }
       }
     },
@@ -301,11 +232,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulAnalyzeConversationsJobsCancelRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationsJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -560,8 +486,7 @@
       "description": "Enumeration of supported analysis tasks on a collection of conversations.",
       "enum": [
         "ConversationalSummarizationTask",
-        "ConversationalPIITask",
-        "CustomConversationalSummarizationTask"
+        "ConversationalPIITask"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -576,11 +501,6 @@
             "name": "ConversationalPIITask",
             "value": "ConversationalPIITask",
             "description": "Conversational PII Task"
-          },
-          {
-            "name": "CustomConversationalSummarizationTask",
-            "value": "CustomConversationalSummarizationTask",
-            "description": "Custom Conversational Summarization Task"
           }
         ]
       }
@@ -628,8 +548,7 @@
       "description": "Enumeration of results for supported conversation analysis Results.",
       "enum": [
         "conversationalSummarizationResults",
-        "conversationalPIIResults",
-        "customConversationalSummarizationResults"
+        "conversationalPIIResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationResultsKind",
@@ -644,11 +563,6 @@
             "name": "ConversationalPIIResults",
             "value": "conversationalPIIResults",
             "description": "Conversational PII Results"
-          },
-          {
-            "name": "CustomConversationalSummarizationResults",
-            "value": "customConversationalSummarizationResults",
-            "description": "Custom Conversational Summarization Results"
           }
         ]
       }
@@ -755,41 +669,6 @@
           }
         ]
       }
-    },
-    "AnalyzeCustomConversationSummarizationResult": {
-      "type": "object",
-      "description": "Result for the custom summarization task on the conversation.",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/CustomSummaryResult",
-          "description": "Custom Summary Result"
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationJobResult"
-        }
-      ],
-      "x-ms-discriminator-value": "customConversationalSummarizationResults"
-    },
-    "AnalyzeCustomConversationSummarizationTask": {
-      "type": "object",
-      "description": "Task definition for custom conversational summarization.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/CustomConversationSummarizationTaskParameters",
-          "description": "parameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomConversationalSummarizationTask"
     },
     "AnswerSpan": {
       "type": "object",
@@ -1050,47 +929,6 @@
         "projectKind"
       ]
     },
-    "BaseRedactionPolicy": {
-      "type": "object",
-      "description": "The abstract base class for RedactionPolicy.",
-      "properties": {
-        "policyKind": {
-          "type": "string",
-          "description": "The entity RedactionPolicy object kind.",
-          "default": "characterMask",
-          "enum": [
-            "noMask",
-            "characterMask",
-            "entityMask"
-          ],
-          "x-ms-enum": {
-            "name": "RedactionPolicyKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "noMask",
-                "value": "noMask",
-                "description": "Do not mask detected entities"
-              },
-              {
-                "name": "characterMask",
-                "value": "characterMask",
-                "description": "Mask detected entities with redaction character"
-              },
-              {
-                "name": "entityMask",
-                "value": "entityMask",
-                "description": "Mask detected entities with entity type"
-              }
-            ]
-          }
-        }
-      },
-      "discriminator": "policyKind",
-      "required": [
-        "policyKind"
-      ]
-    },
     "BaseResolution": {
       "type": "object",
       "description": "The abstract base class for entity resolutions.",
@@ -1123,115 +961,6 @@
         }
       ],
       "x-ms-discriminator-value": "BooleanResolution"
-    },
-    "CharacterMaskPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of masking with a redaction character",
-      "properties": {
-        "redactionCharacter": {
-          "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
-          "default": "*",
-          "enum": [
-            "!",
-            "#",
-            "$",
-            "%",
-            "&",
-            "*",
-            "+",
-            "-",
-            "=",
-            "?",
-            "@",
-            "^",
-            "_",
-            "~"
-          ],
-          "x-ms-enum": {
-            "name": "redactionCharacter",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "exclamationPoint",
-                "value": "!",
-                "description": "Exclamation point character"
-              },
-              {
-                "name": "numberSign",
-                "value": "#",
-                "description": "Number sign character"
-              },
-              {
-                "name": "dollar",
-                "value": "$",
-                "description": "Dollar sign character"
-              },
-              {
-                "name": "perCent",
-                "value": "%",
-                "description": "Percent sign character"
-              },
-              {
-                "name": "ampersand",
-                "value": "&",
-                "description": "Ampersand character"
-              },
-              {
-                "name": "asterisk",
-                "value": "*",
-                "description": "Asterisk character"
-              },
-              {
-                "name": "plus",
-                "value": "+",
-                "description": "Plus sign character"
-              },
-              {
-                "name": "minus",
-                "value": "-",
-                "description": "Minus sign character"
-              },
-              {
-                "name": "equals",
-                "value": "=",
-                "description": "Equals sign character"
-              },
-              {
-                "name": "questionMark",
-                "value": "?",
-                "description": "Question mark character"
-              },
-              {
-                "name": "atSign",
-                "value": "@",
-                "description": "At sign character"
-              },
-              {
-                "name": "caret",
-                "value": "^",
-                "description": "Caret character"
-              },
-              {
-                "name": "underscore",
-                "value": "_",
-                "description": "Underscore character"
-              },
-              {
-                "name": "tilde",
-                "value": "~",
-                "description": "Tilde character"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "characterMask"
     },
     "Conversation": {
       "type": "object",
@@ -1745,10 +1474,6 @@
           "items": {
             "$ref": "#/definitions/ConversationPiiCategoriesExclude"
           }
-        },
-        "redactionPolicy": {
-          "$ref": "#/definitions/BaseRedactionPolicy",
-          "description": "Optional parameter determine what type of redaction to use."
         }
       }
     },
@@ -1929,15 +1654,10 @@
           "items": {
             "$ref": "#/definitions/SummaryAspect"
           }
-        },
-        "instruction": {
-          "type": "string",
-          "description": "a text field to allow customers to use natural language to describe their needs for summarization."
         }
       },
       "required": [
-        "summaryAspects",
-        "instruction"
+        "summaryAspects"
       ]
     },
     "ConversationTargetIntentResult": {
@@ -2166,115 +1886,6 @@
       ],
       "x-ms-discriminator-value": "CurrencyResolution"
     },
-    "CustomConversationSummarizationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a custom conversation summarization task.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        },
-        "sentenceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "It controls the approximate number of sentences in the output summaries."
-        },
-        "stringIndexType": {
-          "type": "string",
-          "description": "String index type",
-          "default": "TextElements_v8",
-          "enum": [
-            "TextElements_v8",
-            "UnicodeCodePoint",
-            "Utf16CodeUnit"
-          ],
-          "x-ms-enum": {
-            "name": "StringIndexType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "TextElements_v8",
-                "value": "TextElements_v8",
-                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-              },
-              {
-                "name": "UnicodeCodePoint",
-                "value": "UnicodeCodePoint",
-                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-              },
-              {
-                "name": "Utf16CodeUnit",
-                "value": "Utf16CodeUnit",
-                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-              }
-            ]
-          }
-        },
-        "summaryLength": {
-          "$ref": "#/definitions/SummaryLengthBucket",
-          "description": "Controls the approximate length of the output summaries. Recommended to use summaryLength over sentenceCount"
-        },
-        "summaryAspects": {
-          "type": "array",
-          "description": "Array of Summary Aspects",
-          "items": {
-            "$ref": "#/definitions/SummaryAspect"
-          }
-        }
-      },
-      "required": [
-        "projectName",
-        "deploymentName",
-        "summaryAspects"
-      ]
-    },
-    "CustomSummaryResult": {
-      "type": "object",
-      "description": "Custom Summary Results",
-      "properties": {
-        "conversations": {
-          "type": "array",
-          "description": "array of conversations",
-          "items": {
-            "$ref": "#/definitions/ConversationsSummaryResult"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
-        "conversations",
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
     "DateTimeResolution": {
       "type": "object",
       "description": "A resolution for datetime entity instances.",
@@ -2398,20 +2009,6 @@
           "type": "number",
           "format": "double",
           "description": "Confidence score between 0 and 1 of the extracted entity."
-        },
-        "mask": {
-          "type": "string",
-          "description": "Exact mask text to mask the PII entity"
-        },
-        "maskOffset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Offset of the mask text"
-        },
-        "maskLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length of the mask text"
         }
       },
       "required": [
@@ -2422,16 +2019,6 @@
         "confidenceScore"
       ]
     },
-    "EntityMaskTypePolicyType": {
-      "type": "object",
-      "description": "Represents the policy of masking PII with the entity type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "entityMask"
-    },
     "EntitySubtype": {
       "type": "object",
       "description": "The concrete entity Subtype model of extra information.",
@@ -2439,14 +2026,6 @@
         "value": {
           "type": "string",
           "description": "The Subtype of an extracted entity type."
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of entity tags. Tags express similarities between entity categories for the extracted entity type.",
-          "items": {
-            "$ref": "#/definitions/EntityTag"
-          },
-          "x-ms-identifiers": []
         }
       },
       "allOf": [
@@ -2455,24 +2034,6 @@
         }
       ],
       "x-ms-discriminator-value": "EntitySubtype"
-    },
-    "EntityTag": {
-      "type": "object",
-      "description": "Tags express similarities between entity categories for the extracted entity type.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the tag."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "The confidence score of the tag for the extracted entity between 0.0 and 1.0."
-        }
-      },
-      "required": [
-        "name"
-      ]
     },
     "Error": {
       "type": "object",
@@ -3393,16 +2954,6 @@
         "conversations"
       ]
     },
-    "NoMaskPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of not masking found PII.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "noMask"
-    },
     "NoneLinkedTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of non-linked intent response.",
@@ -4170,8 +3721,7 @@
         "resolution",
         "chapterTitle",
         "narrative",
-        "recap",
-        "follow-up tasks"
+        "recap"
       ],
       "x-ms-enum": {
         "name": "SummaryAspect",
@@ -4201,11 +3751,6 @@
             "name": "recap",
             "value": "recap",
             "description": "A concise one-paragraph summary to provide a quick overview."
-          },
-          {
-            "name": "followUpTasks",
-            "value": "follow-up tasks",
-            "description": "Action items and tasks that arose during a meeting."
           }
         ]
       }
