@@ -90,11 +90,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "De-identify text.": {
-            "$ref": "./examples/Deidentify.json"
-          }
         }
       }
     },
@@ -142,11 +137,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List de-identification jobs.": {
-            "$ref": "./examples/ListJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -202,11 +192,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get a de-identification job.": {
-            "$ref": "./examples/GetJob.json"
           }
         }
       },
@@ -291,11 +276,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create a de-identification job.": {
-            "$ref": "./examples/CreateJob.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
@@ -345,11 +325,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a de-identification job.": {
-            "$ref": "./examples/DeleteJob.json"
           }
         }
       }
@@ -402,11 +377,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Cancel a de-identification job.": {
-            "$ref": "./examples/CancelJob.json"
           }
         }
       }
@@ -465,11 +435,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List processed documents within a job.": {
-            "$ref": "./examples/ListJobDocuments.json"
           }
         },
         "x-ms-pageable": {
@@ -586,9 +551,9 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
-    "BatchCustomizationOptions": {
+    "CustomizationOptions": {
       "type": "object",
-      "description": "Customizations options to override default service behaviors for job behavior.",
+      "description": "Customizations options to override default service behaviors for synchonous usage.",
       "properties": {
         "redactionFormat": {
           "type": "string",
@@ -663,7 +628,7 @@
           }
         },
         "customizations": {
-          "$ref": "#/definitions/RealtimeCustomizationOptions",
+          "$ref": "#/definitions/CustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
         }
       },
@@ -692,7 +657,7 @@
           "description": "Target location to store output of operation."
         },
         "customizations": {
-          "$ref": "#/definitions/BatchCustomizationOptions",
+          "$ref": "#/definitions/JobCustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
         },
         "status": {
@@ -803,6 +768,54 @@
         "path",
         "etag"
       ]
+    },
+    "JobCustomizationOptions": {
+      "type": "object",
+      "description": "Customizations options to override default service behaviors for job usage.",
+      "properties": {
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation to perform on the input documents.",
+          "default": "Surrogate",
+          "enum": [
+            "Redact",
+            "Surrogate",
+            "Tag"
+          ],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Redact",
+                "value": "Redact",
+                "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
+              },
+              {
+                "name": "Surrogate",
+                "value": "Surrogate",
+                "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
+              },
+              {
+                "name": "Tag",
+                "value": "Tag",
+                "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
+              }
+            ]
+          }
+        },
+        "surrogateLocale": {
+          "type": "string",
+          "description": "Locale in which the output surrogates are written.",
+          "default": "en-US"
+        }
+      }
     },
     "JobStatus": {
       "type": "string",
@@ -1167,54 +1180,6 @@
       "required": [
         "entities"
       ]
-    },
-    "RealtimeCustomizationOptions": {
-      "type": "object",
-      "description": "Customizations options to override default service behaviors for realtime behavior.",
-      "properties": {
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when Operation is Redact.",
-          "minLength": 1,
-          "maxLength": 16
-        },
-        "operation": {
-          "type": "string",
-          "description": "Operation to perform on the input documents.",
-          "default": "Surrogate",
-          "enum": [
-            "Redact",
-            "Surrogate",
-            "Tag"
-          ],
-          "x-ms-enum": {
-            "name": "OperationType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Redact",
-                "value": "Redact",
-                "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
-              },
-              {
-                "name": "Surrogate",
-                "value": "Surrogate",
-                "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
-              },
-              {
-                "name": "Tag",
-                "value": "Tag",
-                "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
-              }
-            ]
-          }
-        },
-        "surrogateLocale": {
-          "type": "string",
-          "description": "Locale in which the output surrogates are written.",
-          "default": "en-US"
-        }
-      }
     },
     "SourceStorageLocation": {
       "type": "object",

@@ -26,7 +26,7 @@ model DeidentificationJob {
   targetLocation: TargetStorageLocation;
 
   @doc("Customization parameters to override default service behaviors.")
-  customizations?: BatchCustomizationOptions;
+  customizations?: JobCustomizationOptions;
 
   // Readonly Properties
 
@@ -111,13 +111,13 @@ DeidentificationOptions
 DeidentificationParameters
 */
 
-@doc("Customizations options to override default service behaviors for realtime behavior.")
-model RealtimeCustomizationOptions {
+@doc("Customizations options to override default service behaviors for synchonous usage.")
+model CustomizationOptions {
   ...SharedCustomizationOptions;
 }
 
-@doc("Customizations options to override default service behaviors for job behavior.")
-model BatchCustomizationOptions {
+@doc("Customizations options to override default service behaviors for job usage.")
+model JobCustomizationOptions {
   ...SharedCustomizationOptions;
 }
 
@@ -245,7 +245,7 @@ model DeidentificationContent {
   dataType?: DocumentDataType = DocumentDataType.Plaintext;
 
   @doc("Customization parameters to override default service behaviors.")
-  customizations?: RealtimeCustomizationOptions;
+  customizations?: CustomizationOptions;
 }
 
 @doc("Response body for de-identification operation.")
