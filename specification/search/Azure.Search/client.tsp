@@ -9,22 +9,6 @@ using SearchClient;
 @TypeSpec.Versioning.useDependency(SearchClient.Versions.v2024_07_01)
 namespace Customizations;
 
-// @client({
-//     name: "SearchIndexClient",
-//     service: SearchClient,
-// })
-// interface Client1 {
-//     DataSourcesOperationsCreateOrUpdate is SearchClient.DataSourcesOperations.createOrUpdate;
-// }
-
-// @client({
-//     name: "SearchServiceClient",
-//     service: SearchClient,
-// })
-// interface Client2 {
-//     DataSourcesOperationsDelete is SearchClient.DataSourcesOperations.delete;
-// }
-
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
