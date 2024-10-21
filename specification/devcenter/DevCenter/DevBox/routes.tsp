@@ -432,11 +432,22 @@ interface DevBoxes {
   @added(APIVersions.v2024_09_01_preview)
   @pollingOperation(OperationStatuses.get)
   @action("restoreSnapshot")
-  restoreSnapshotDevBox is DevCenterOps.LongRunningResourceAction<
+  restoreSnapshot is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {
       ...SnapshotIdQueryParameter;
     },
+    OperationStatus
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
+  @doc("Captures a manual snapshot of the Dev Box.")
+  @added(APIVersions.v2024_10_01_preview)
+  @pollingOperation(OperationStatuses.get)
+  @action("captureSnapshot")
+  captureSnapshot is DevCenterOps.LongRunningResourceAction<
+    DevBox,
+    {},
     OperationStatus
   >;
 }
