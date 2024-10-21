@@ -65,7 +65,7 @@ op listSecrets is Azure.Core.Foundations.Operation<
     @doc("Connection Name")
     connectionName: string;
 
-    @doc("The body is ignored.")
+    @doc("The body is ignored. TODO: Can we remove this?")
     ignored: string;
   },
   ConnectionsListSecretsResponse
