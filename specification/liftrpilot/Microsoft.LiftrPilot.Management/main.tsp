@@ -12,13 +12,13 @@ using Azure.Core;
 using Azure.ResourceManager;
 using LiftrBase;
 
-/* Pilot.Samplerp Resource Provider management API. */
+/* Microsoft.LiftrPilot Resource Provider management API. */
 @armProviderNamespace
 @service({
-  title: "Pilot.Samplerp management service",
+  title: "Microsoft.LiftrPilot management service",
 })
-@versioned(Pilot.Samplerp.Versions)
-namespace Pilot.Samplerp;
+@versioned(Microsoft.LiftrPilot.Versions)
+namespace Microsoft.LiftrPilot;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
