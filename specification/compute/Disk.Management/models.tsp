@@ -507,6 +507,7 @@ model DiskProperties {
   /**
    * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   hyperVGeneration?: HyperVGeneration;
 
   /**
@@ -527,7 +528,7 @@ model DiskProperties {
   /**
    * If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size.
    */
-  diskSizeGB?: int32;
+  diskSizeGb?: int32;
 
   /**
    * The size of the disk in bytes. This field is read only.
@@ -561,7 +562,7 @@ model DiskProperties {
   /**
    * The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
    */
-  diskMBpsReadWrite?: int64;
+  diskMbpsReadWrite?: int64;
 
   /**
    * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
@@ -572,7 +573,7 @@ model DiskProperties {
   /**
    * The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
    */
-  diskMBpsReadOnly?: int64;
+  diskMbpsReadOnly?: int64;
 
   /**
    * The state of the disk.
@@ -1004,7 +1005,7 @@ model DiskUpdateProperties {
   /**
    * If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size.
    */
-  diskSizeGB?: int32;
+  diskSizeGb?: int32;
 
   /**
    * Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot.
@@ -1020,7 +1021,7 @@ model DiskUpdateProperties {
   /**
    * The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
    */
-  diskMBpsReadWrite?: int64;
+  diskMbpsReadWrite?: int64;
 
   /**
    * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
@@ -1031,7 +1032,7 @@ model DiskUpdateProperties {
   /**
    * The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
    */
-  diskMBpsReadOnly?: int64;
+  diskMbpsReadOnly?: int64;
 
   /**
    * The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
@@ -1117,7 +1118,8 @@ model GrantAccessData {
   /**
    * Set this flag to true to get additional SAS for VM guest state
    */
-  getSecureVMGuestStateSAS?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  getSecureVmGuestStateSAS?: boolean;
 
   /**
    * Used to specify the file format when making request for SAS on a VHDX file format snapshot
@@ -1132,12 +1134,14 @@ model AccessUri {
   /**
    * A SAS uri for accessing a disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility("read")
   accessSAS?: string;
 
   /**
    * A SAS uri for accessing a VM guest state.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility("read")
   securityDataAccessSAS?: string;
 }
@@ -1590,6 +1594,7 @@ model DiskRestorePointProperties {
   /**
    * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   hyperVGeneration?: HyperVGeneration;
 
   /**
@@ -1752,7 +1757,7 @@ model SnapshotProperties {
   /**
    * If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size.
    */
-  diskSizeGB?: int32;
+  diskSizeGb?: int32;
 
   /**
    * The size of the disk in bytes. This field is read only.
@@ -1890,7 +1895,7 @@ model SnapshotUpdateProperties {
   /**
    * If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size.
    */
-  diskSizeGB?: int32;
+  diskSizeGb?: int32;
 
   /**
    * Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot.

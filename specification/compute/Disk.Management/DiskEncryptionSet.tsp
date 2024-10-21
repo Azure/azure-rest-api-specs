@@ -50,8 +50,15 @@ interface DiskEncryptionSets {
   /**
    * Updates (patches) a disk encryption set.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;
+  update is ArmCustomPatchAsync<
+    DiskEncryptionSet,
+    DiskEncryptionSetUpdate,
+    Response = ArmResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
+      @body _: DiskEncryptionSet;
+    })
+  >;
 
   /**
    * Deletes a disk encryption set.
@@ -80,19 +87,22 @@ interface DiskEncryptionSets {
   /**
    * Lists all resources that are encrypted with this disk encryption set.
    */
-  // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}/associatedResources")
-  @get
   listAssociatedResources(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
+    ...ProviderNamespace<TenantActionScope>,
 
     /**
      * The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
      */
     @path
+    @segment("diskEncryptionSets")
     diskEncryptionSetName: string,
+
+    /** operation name */
+    @path
+    name: "associatedResources",
   ): ArmResponse<ResourceUriList> | ErrorResponse;
 }
 

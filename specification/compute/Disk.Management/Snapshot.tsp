@@ -60,8 +60,15 @@ interface Snapshots {
   /**
    * Updates (patches) a snapshot.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
+  update is ArmCustomPatchAsync<
+    Snapshot,
+    SnapshotUpdate,
+    Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
+      @body _: Snapshot;
+    })
+  >;
 
   /**
    * Deletes a snapshot.
@@ -92,7 +99,7 @@ interface Snapshots {
   /**
    * Revokes access to a snapshot.
    */
-  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
+  revokeAccess is ArmResourceActionAsync<Snapshot, void, OkResponse>;
 }
 
 @@doc(Snapshot.name,

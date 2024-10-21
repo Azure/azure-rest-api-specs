@@ -50,8 +50,15 @@ interface DiskAccesses {
   /**
    * Updates (patches) a disk access resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<DiskAccess, DiskAccessUpdate>;
+  update is ArmCustomPatchAsync<
+    DiskAccess,
+    DiskAccessUpdate,
+    Response = ArmResponse<DiskAccess> | (ArmAcceptedLroResponse & {
+      @body _: DiskAccess;
+    })
+  >;
 
   /**
    * Deletes a disk access resource.
@@ -77,19 +84,22 @@ interface DiskAccesses {
   /**
    * Gets the private link resources possible under disk access resource
    */
-  // FIXME: DiskAccesses_GetPrivateLinkResources could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources")
-  @get
   getPrivateLinkResources(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
+    ...ProviderNamespace<TenantActionScope>,
 
     /**
      * The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
      */
     @path
+    @segment("diskAccesses")
     diskAccessName: string,
+
+    /** operation name */
+    @path
+    name: "privateLinkResources",
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
