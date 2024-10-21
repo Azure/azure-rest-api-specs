@@ -31,6 +31,10 @@ union OnYourDataAuthenticationType {
 
   @doc("Authentication via user-assigned managed identity.")
   userAssignedManagedIdentity: "user_assigned_managed_identity",
+
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  @doc("Authentication via username and password.")
+  usernameAndPassword: "username_and_password",
 }
 
 @discriminator("type")
@@ -97,6 +101,22 @@ model OnYourDataEncodedApiKeyAuthenticationOptions
   @doc("The encoded API key to use for authentication.")
   @encodedName("application/json", "encoded_api_key")
   encodedApiKey: string;
+}
+
+@doc("""
+  The authentication options for Azure OpenAI On Your Data when using a username and password.
+  """)
+@added(ServiceApiVersions.v2024_08_01_Preview)
+model OnYourDataUsernameAndPasswordAuthenticationOptions
+  extends OnYourDataAuthenticationOptions {
+  @doc("The discriminator type for username and password.")
+  type: OnYourDataAuthenticationType.usernameAndPassword;
+
+  @doc("The username.")
+  username: string;
+
+  @doc("The password.")
+  password: string;
 }
 
 @doc("""
