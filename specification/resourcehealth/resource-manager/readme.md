@@ -26,7 +26,7 @@ These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-02
+tag: package-preview-2023-10
 azure-validator: true
 ```
 

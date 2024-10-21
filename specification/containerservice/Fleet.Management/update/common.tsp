@@ -4,14 +4,14 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ContainerService;
 
 @doc("""
-Defines the update sequence of the clusters via stages and groups.
-
-Stages within a run are executed sequentially one after another.
-Groups within a stage are executed in parallel.
-Member clusters within a group are updated sequentially one after another.
-
-A valid strategy contains no duplicate groups within or across stages.
-""")
+  Defines the update sequence of the clusters via stages and groups.
+  
+  Stages within a run are executed sequentially one after another.
+  Groups within a stage are executed in parallel.
+  Member clusters within a group are updated sequentially one after another.
+  
+  A valid strategy contains no duplicate groups within or across stages.
+  """)
 model UpdateRunStrategy {
   @extension("x-ms-identifiers", ["name"])
   @doc("The list of stages that compose this update run. Min size: 1.")

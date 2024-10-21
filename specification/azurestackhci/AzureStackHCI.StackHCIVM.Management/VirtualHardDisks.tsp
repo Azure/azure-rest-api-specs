@@ -8,13 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The virtual hard disk resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 model VirtualHardDisk is TrackedResource<VirtualHardDiskProperties> {
   @doc("Name of the virtual hard disk")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -33,8 +34,13 @@ interface VirtualHardDisks {
   @doc("Gets a virtual hard disk")
   get is ArmResourceRead<VirtualHardDisk>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a virtual hard disk. Please note some properties can be set only during virtual hard disk creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHardDisk>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualHardDisk,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("The operation to update a virtual hard disk.")
   update is ArmTagsPatchAsync<VirtualHardDisk>;
@@ -43,8 +49,16 @@ interface VirtualHardDisks {
   delete is ArmResourceDeleteWithoutOkAsync<VirtualHardDisk>;
 
   @doc("Lists all of the virtual hard disks in the specified resource group. Use the nextLink property in the response to get the next page of virtual hard disks.")
-  list is ArmResourceListByParent<VirtualHardDisk>;
+  listByResourceGroup is ArmResourceListByParent<VirtualHardDisk>;
 
   @doc("Lists all of the virtual hard disks in the specified subscription. Use the nextLink property in the response to get the next page of virtual hard disks.")
   listAll is ArmListBySubscription<VirtualHardDisk>;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The operation to upload a virtual hard disk.")
+  upload is ArmResourceActionAsync<
+    VirtualHardDisk,
+    VirtualHardDiskUploadRequest,
+    VirtualHardDiskUploadResponse
+  >;
 }

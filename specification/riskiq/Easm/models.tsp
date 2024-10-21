@@ -220,6 +220,7 @@ model AssetPageResult {
 @resource("assets")
 model AssetResource {
   /** Discriminator property for AssetResource. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: string;
 
   @doc("The system generated unique id for the resource.")
@@ -483,6 +484,7 @@ model DataConnectionProperties {}
 @clientName("DataConnectionPayload", "csharp")
 model DataConnectionData {
   /** Discriminator property for DataConnectionData. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: string;
 
   @doc("The name of data connection")
@@ -503,6 +505,7 @@ model DataConnectionData {
 @resource("dataConnections")
 model DataConnection {
   /** Discriminator property for DataConnection. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: string;
 
   @doc("The system generated unique id for the resource.")
@@ -2045,9 +2048,7 @@ model ResponseTypeParameter {
 @doc("The prameter of responseIncludes")
 @Versioning.added(Versions.v2024_03_01_preview)
 model ResponseIncludesParameter {
-  @query({
-    format: "csv",
-  })
+  @query
   @doc("The properties to include in the response.")
   responseIncludes?: string[];
 }
@@ -2152,3 +2153,15 @@ model DiscoGroupSummaryResult {
   @doc("The name that can be used for display purposes.")
   displayName: string;
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};

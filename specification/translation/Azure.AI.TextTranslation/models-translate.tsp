@@ -13,10 +13,8 @@ namespace TextTranslation;
 model TranslateParameters {
   ...CommonParameters;
 
-  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing Spec"
-  @query({
-    format: "multi",
-  })
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing Spec"
+  @query(#{ explode: true })
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
     in the translation scope. For example, use to=de to translate to German.
@@ -30,7 +28,7 @@ model TranslateParameters {
     Specifies the language of the input text. Find which languages are available to translate from by 
     looking up supported languages using the translation scope. If the from parameter isn't specified, 
     automatic language detection is applied to determine the source language.
-
+    
     You must use the from parameter rather than autodetection when using the dynamic dictionary feature. 
     Note: the dynamic dictionary feature is case-sensitive.
     """)
@@ -103,7 +101,7 @@ model TranslateParameters {
   @doc("""
     Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
     Possible values are: true (default) or false.
-
+    
     allowFallback=false specifies that the translation should only use systems trained for the category specified 
     by the request. If a translation for language X to language Y requires chaining through a pivot language E, 
     then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. 
@@ -125,7 +123,7 @@ model TranslationResult {
   @doc("""
     Specifies the system type that was used for translation for each 'to' language requested for translation. 
     The value is a comma-separated list of strings. Each string indicates a type:
-
+    
     * Custom - Request includes a custom system and at least one custom system was used during translation.
     * Team - All other requests
     """)

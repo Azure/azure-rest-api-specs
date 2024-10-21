@@ -33,7 +33,7 @@ model Fleet is TrackedResource<FleetProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Legacy.ManagedServiceIdentityV4;
 }
 
 @doc("Fleet properties.")
@@ -106,12 +106,16 @@ model APIServerAccessProfile {
   enablePrivateCluster?: boolean;
 
   @visibility("read", "create")
+  @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)
+  @added(Versions.v2024_05_02_preview)
   @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
   enableVnetIntegration?: boolean;
 
   @visibility("read", "create")
+  @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)
+  @added(Versions.v2024_05_02_preview)
   @doc("The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.")
   subnetId?: SubnetResourceId;
 }
@@ -154,7 +158,7 @@ model FleetPatch {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Legacy.ManagedServiceIdentityV4;
 }
 
 @doc("One credential result item.")
@@ -181,14 +185,17 @@ interface Fleets {
   @doc("Gets a Fleet.")
   get is ArmResourceRead<Fleet>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "changing the operation-id on an existing operation is an SDK breaking change"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next update"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "changing the operation-id on an existing operation is an SDK breaking change"
   @doc("Creates or updates a Fleet.")
   @operationId("Fleets_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,
     Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
-      IfNoneMatchParameters<Fleet>
+      IfNoneMatchParameters<Fleet>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
@@ -201,7 +208,7 @@ interface Fleets {
       IfMatchParameters<Fleet>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Use operationId to keep same name as deprecated sync operation"
   @added(Versions.v2023_06_15_preview)
   @operationId("Fleets_Update")
   @extension(

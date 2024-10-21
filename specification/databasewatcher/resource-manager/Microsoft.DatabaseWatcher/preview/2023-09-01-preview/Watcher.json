@@ -1219,11 +1219,7 @@
         "properties": {
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1272,7 +1268,7 @@
         },
         "dnsZone": {
           "type": "string",
-          "description": "The DNS zone to be included in the DNS name of the shared private link. Value is service-specific."
+          "description": "The DNS zone to be included in the DNS name of the shared private link. Value is required for Azure Data Explorer clusters and SQL managed instances. The value to use is the second segment of the host FQDN name of the resource that the shared private link resource is for."
         },
         "status": {
           "$ref": "#/definitions/SharedPrivateLinkResourceStatus",
@@ -1486,11 +1482,7 @@
         "properties": {
           "$ref": "#/definitions/TargetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1613,11 +1605,7 @@
         "properties": {
           "$ref": "#/definitions/WatcherProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -1730,6 +1718,7 @@
         },
         "properties": {
           "$ref": "#/definitions/WatcherUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }

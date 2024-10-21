@@ -1,15 +1,17 @@
 import "@typespec/versioning";
+import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Versioning;
+using Http;
 
 namespace Azure.OpenAI;
 
 @doc("""
-Representation of the token counts processed for a completions request.
-Counts consider all tokens across prompts, choices, choice alternates, best_of generations, and
-other consumers.
-""")
+  Representation of the token counts processed for a completions request.
+  Counts consider all tokens across prompts, choices, choice alternates, best_of generations, and
+  other consumers.
+  """)
 model CompletionsUsage {
   @doc("The number of tokens generated across all completions emissions.")
   @encodedName("application/json", "completion_tokens")
@@ -25,8 +27,8 @@ model CompletionsUsage {
 }
 
 @doc("""
-Representation of the manner in which a completions response concluded.
-""")
+  Representation of the manner in which a completions response concluded.
+  """)
 union CompletionsFinishReason {
   string,
 

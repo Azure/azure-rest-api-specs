@@ -46,6 +46,19 @@
             "type": "string"
           }
         },
+        "typespecProject": {
+          // List of related typespec project of this package.
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "language": {
+          "type": "string"
+        },        
+        "apiViewArtifact": {
+          "type": "string"
+        },
         "changelog": {
           "type": "object",
           "properties": {
@@ -56,6 +69,13 @@
             "hasBreakingChange": {
               // Does the new package has breaking change
               "type": "boolean"
+            },
+            "breakingChangeItems": {
+              // The breaking change details quote from the changelog
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "required": [

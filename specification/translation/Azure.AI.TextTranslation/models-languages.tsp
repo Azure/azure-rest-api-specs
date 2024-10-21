@@ -72,9 +72,9 @@ alias BaseLanguage = {
 };
 
 @doc("""
-The value of the translation property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag.
-A key identifies a language for which text can be translated to or translated from.
-""")
+  The value of the translation property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag.
+  A key identifies a language for which text can be translated to or translated from.
+  """)
 model TranslationLanguage {
   ...BaseLanguage;
 
@@ -83,10 +83,10 @@ model TranslationLanguage {
 }
 
 @doc("""
-The value of the transliteration property is a dictionary of (key, value) pairs. 
-Each key is a BCP 47 language tag. A key identifies a language for which text can be converted from one script 
-to another script.
-""")
+  The value of the transliteration property is a dictionary of (key, value) pairs. 
+  Each key is a BCP 47 language tag. A key identifies a language for which text can be converted from one script 
+  to another script.
+  """)
 model TransliterationLanguage {
   ...BaseLanguage;
 

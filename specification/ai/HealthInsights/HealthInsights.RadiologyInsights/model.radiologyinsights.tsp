@@ -93,19 +93,20 @@ model RadiologyInsightsPatientResult {
   inferences: RadiologyInsightsInference[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("""
-An inference made by the Radiology Insights model regarding a patient.
-  - AgeMismatch
-  - SexMismatch
-  - LateralityDiscrepancy
-  - CompleteOrderDiscrepancy
-  - LimitedOrderDiscrepancy
-  - Finding
-  - CriticalResult
-  - FollowupRecommendation
-  - RadiologyProcedure
-  - FollowupCommunication
-""")
+  An inference made by the Radiology Insights model regarding a patient.
+    - AgeMismatch
+    - SexMismatch
+    - LateralityDiscrepancy
+    - CompleteOrderDiscrepancy
+    - LimitedOrderDiscrepancy
+    - Finding
+    - CriticalResult
+    - FollowupRecommendation
+    - RadiologyProcedure
+    - FollowupCommunication
+  """)
 @discriminator("kind")
 model RadiologyInsightsInference {
   ...Fhir.R4.Extendible;
@@ -246,6 +247,7 @@ model FollowupRecommendationInference extends RadiologyInsightsInference {
   recommendedProcedure: ProcedureRecommendation;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("The procedure recommendation can be a generic procedure or an imaging procedure.")
 @discriminator("kind")
 model ProcedureRecommendation {

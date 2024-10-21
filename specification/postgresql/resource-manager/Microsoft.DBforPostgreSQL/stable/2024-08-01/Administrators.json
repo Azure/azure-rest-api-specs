@@ -1,0 +1,406 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLServerManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "version": "2024-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}": {
+      "put": {
+        "tags": [
+          "Administrators"
+        ],
+        "operationId": "Administrators_Create",
+        "x-ms-examples": {
+          "Adds an Active DIrectory Administrator for the server": {
+            "$ref": "./examples/AdministratorAdd.json"
+          }
+        },
+        "description": "Creates a new server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActiveDirectoryAdministratorAdd"
+            },
+            "description": "The required parameters for adding an active directory administrator for a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ActiveDirectoryAdministrator"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ActiveDirectoryAdministrator"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Administrators"
+        ],
+        "operationId": "Administrators_Delete",
+        "x-ms-examples": {
+          "AdministratorDelete": {
+            "$ref": "./examples/AdministratorDelete.json"
+          }
+        },
+        "description": "Deletes an Active Directory Administrator associated with the server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Administrators"
+        ],
+        "operationId": "Administrators_Get",
+        "x-ms-examples": {
+          "ServerGet": {
+            "$ref": "./examples/AdministratorGet.json"
+          }
+        },
+        "description": "Gets information about a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActiveDirectoryAdministrator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "Administrators"
+        ],
+        "operationId": "Administrators_ListByServer",
+        "x-ms-examples": {
+          "AdministratorsListByServer": {
+            "$ref": "./examples/AdministratorsListByServer.json"
+          }
+        },
+        "description": "List all the AAD administrators for a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdministratorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActiveDirectoryAdministratorAdd": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorPropertiesForAdd",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the active directory administrator."
+        }
+      },
+      "description": "Represents an Active Directory administrator."
+    },
+    "AdministratorPropertiesForAdd": {
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "type": "string",
+          "description": "The principal type used to represent the type of Active Directory Administrator.",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "principalName": {
+          "type": "string",
+          "description": "Active Directory administrator principal name.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId of the Active Directory administrator.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      },
+      "description": "The properties of an Active Directory administrator."
+    },
+    "AdministratorProperties": {
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "type": "string",
+          "description": "The principal type used to represent the type of Active Directory Administrator.",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "principalName": {
+          "type": "string",
+          "description": "Active Directory administrator principal name.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The objectId of the Active Directory administrator.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId of the Active Directory administrator.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        }
+      },
+      "description": "The properties of an Active Directory administrator."
+    },
+    "ActiveDirectoryAdministrator": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the active directory administrator."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Represents an Active Directory administrator."
+    },
+    "AdministratorListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActiveDirectoryAdministrator"
+          },
+          "description": "The list of active directory administrators"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of active directory.",
+          "type": "string"
+        }
+      },
+      "description": "A list of active directory administrators."
+    }
+  },
+  "parameters": {
+    "ObjectIdParameter": {
+      "name": "objectId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Guid of the objectId for the administrator.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -11,9 +11,9 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The virtual machine instance resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 @singleton("default")
 model VirtualMachineInstance
   is ExtensionResource<VirtualMachineInstanceProperties> {
@@ -36,8 +36,13 @@ interface VirtualMachineInstances {
   @doc("Gets a virtual machine instance")
   get is ArmResourceRead<VirtualMachineInstance>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineInstance>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualMachineInstance,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("The operation to update a virtual machine instance.")
   @parameterVisibility

@@ -1,7 +1,10 @@
+import "@azure-tools/typespec-client-generator-core";
+
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
@@ -30,7 +33,12 @@ interface DeviceGroups {
   /**
    * Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DeviceGroup>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DeviceGroup,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
@@ -80,11 +88,4 @@ interface DeviceGroups {
 @@doc(DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );
-@@encodedName(DeviceGroups.claimDevices::parameters.body,
-  "application/json",
-  "claimDevicesRequest"
-);
-@@extension(DeviceGroups.claimDevices::parameters.body,
-  "x-ms-client-name",
-  "claimDevicesRequest"
-);
+@@clientName(DeviceGroups.claimDevices::parameters.body, "claimDevicesRequest");

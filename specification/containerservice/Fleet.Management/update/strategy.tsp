@@ -55,15 +55,19 @@ model FleetUpdateStrategyProperties {
 interface FleetUpdateStrategies {
   get is ArmResourceRead<FleetUpdateStrategy>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE AT NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FleetUpdateStrategy,
     Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
       IfMatchParameters<FleetUpdateStrategy> &
-      IfNoneMatchParameters<FleetUpdateStrategy>
+      IfNoneMatchParameters<FleetUpdateStrategy>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
     {
@@ -76,5 +80,6 @@ interface FleetUpdateStrategies {
       IfMatchParameters<FleetUpdateStrategy>
   >;
 
-  listByParent is ArmResourceListByParent<FleetUpdateStrategy>;
+  /** List FleetUpdateStrategy resources by Fleet */
+  listByFleet is ArmResourceListByParent<FleetUpdateStrategy>;
 }

@@ -31,9 +31,15 @@ interface VirtualNetworks {
   @summary("Gets a VirtualNetwork.")
   get is ArmResourceRead<VirtualNetwork>;
   /** Onboards the ScVmm virtual network as an Azure virtual network resource. */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @summary("Implements VirtualNetworks PUT method.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualNetwork>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    VirtualNetwork,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   /** Updates the VirtualNetworks resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements the VirtualNetworks PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -43,6 +49,7 @@ interface VirtualNetworks {
   )
   update is ArmTagsPatchAsync<VirtualNetwork>;
   /** Deregisters the ScVmm virtual network from Azure. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements VirtualNetwork DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",

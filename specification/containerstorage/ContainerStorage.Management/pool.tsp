@@ -12,15 +12,24 @@ namespace Microsoft.ContainerStorage;
 @armResourceOperations
 interface Pools {
   get is ArmResourceRead<Pool>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DOT NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",
     }
   )
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Pool>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Pool,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
-  update is ArmResourcePatchAsync<Pool, PoolProperties>;
+  update is ArmCustomPatchAsync<
+    Pool,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>
+  >;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
 }
@@ -187,7 +196,7 @@ model Encryption {
   @doc("The URI of the key vault.")
   keyVaultUri: string;
 
-  ...ManagedServiceIdentityProperty;
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("Elastic San Pool Properties")

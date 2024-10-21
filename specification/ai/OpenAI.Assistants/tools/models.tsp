@@ -14,6 +14,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @discriminator("type")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model ToolDefinition {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -30,6 +31,13 @@ model CodeInterpreterToolDefinition extends ToolDefinition {
 model FileSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'file_search'.")
   type: "file_search";
+
+  /**
+   * Options overrides for the file search tool.
+   */
+  @encodedName("application/json", "file_search")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  fileSearch?: FileSearchToolDefinitionDetails;
 }
 
 @doc("The input definition information for a function tool as used to configure an assistant.")
@@ -40,6 +48,24 @@ model FunctionToolDefinition extends ToolDefinition {
 
   @doc("The definition of the concrete function that the function tool should call.")
   function: FunctionDefinition;
+}
+
+// Definition details: File Search
+
+/**
+ * Options overrides for the file search tool.
+ */
+@added(ServiceApiVersions.v2024_07_01_preview)
+model FileSearchToolDefinitionDetails {
+  /**
+   * The maximum number of results the file search tool should output. The default is 20 for gpt-4* models and 5 for gpt-3.5-turbo. This number should be between 1 and 50 inclusive.
+   *
+   * Note that the file search tool may output fewer than `max_num_results` results. See the file search tool documentation for more information.
+   */
+  @encodedName("application/json", "max_num_results")
+  @minValue(1)
+  @maxValue(50)
+  maxNumResults?: int32;
 }
 
 // Definition details: Functions
@@ -64,10 +90,11 @@ model FunctionDefinition {
 
 @discriminator("type")
 @doc("""
-An abstract representation a a tool invocation needed by the model to continue a run.
-""")
+  An abstract representation a a tool invocation needed by the model to continue a run.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RequiredToolCall {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type for the required tool call.")
   type: string;
 
@@ -103,6 +130,7 @@ model RequiredFunctionToolCallDetails {
 @doc("An abstract representation of a detailed tool call as recorded within a run step for an existing run.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepToolCall {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 
@@ -111,9 +139,9 @@ model RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
-represents inputs and outputs consumed and emitted by the code interpreter.
-""")
+  A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
+  represents inputs and outputs consumed and emitted by the code interpreter.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCodeInterpreterToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'code_interpreter'.")
@@ -125,9 +153,9 @@ model RunStepCodeInterpreterToolCall extends RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
-executed file search.
-""")
+  A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
+  executed file search.
+  """)
 @added(ServiceApiVersions.v2024_05_01_preview)
 model RunStepFileSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'file_search'.")
@@ -139,9 +167,9 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
-and output consumed and emitted by the specified function.
-""")
+  A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
+  and output consumed and emitted by the specified function.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepFunctionToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'function'.")
@@ -167,6 +195,7 @@ model RunStepCodeInterpreterToolCallDetails {
 @doc("An abstract representation of an emitted output from a code interpreter tool.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCodeInterpreterToolCallOutput {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -287,7 +316,7 @@ union AssistantsNamedToolChoiceType {
   fileSearch: "file_search",
 }
 
-/** The function name that will be used, if using the `funtion` tool */
+/** The function name that will be used, if using the `function` tool */
 @added(ServiceApiVersions.v2024_05_01_preview)
 model FunctionName {
   /** The name of the function to call */

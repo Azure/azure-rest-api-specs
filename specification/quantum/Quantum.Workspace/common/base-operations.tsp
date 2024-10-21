@@ -23,7 +23,6 @@ namespace Quantum.Workspace.BaseOperations {
   alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
 
   /** Generic POST operation. */
-  @Foundations.Private.ensureVerb("PostOperation", "POST")
   @post
   op PostOperation<
     TRequest extends TypeSpec.Reflection.Model,
@@ -41,13 +40,12 @@ namespace Quantum.Workspace.BaseOperations {
 
   /** Operation to patch a resource. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-  There is no support for JsonPatch in Azure.Core.
-  The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
-  See https://github.com/Azure/typespec-azure/issues/475
-  """
+    There is no support for JsonPatch in Azure.Core.
+    The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
+    See https://github.com/Azure/typespec-azure/issues/475
+    """
   @updatesResource(Resource)
   @patch
-  @Azure.Core.Foundations.Private.ensureVerb("PatchOperation", "PATCH")
   op PatchOperation<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
     Resource,
     {

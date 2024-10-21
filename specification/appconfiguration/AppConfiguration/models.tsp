@@ -229,11 +229,11 @@ model Snapshot {
   filters: KeyValueFilter[];
 
   @doc("""
-The composition type describes how the key-values within the snapshot are
-composed. The 'key' composition type ensures there are no two key-values
-containing the same key. The 'key_label' composition type ensures there are no
-two key-values containing the same key and label.
-""")
+    The composition type describes how the key-values within the snapshot are
+    composed. The 'key' composition type ensures there are no two key-values
+    containing the same key. The 'key_label' composition type ensures there are no
+    two key-values containing the same key and label.
+    """)
   @encodedName("application/json", "composition_type")
   compositionType?: CompositionType;
 
@@ -248,11 +248,11 @@ two key-values containing the same key and label.
   expires?: offsetDateTime;
 
   @doc("""
-The amount of time, in seconds, that a snapshot will remain in the archived
-state before expiring. This property is only writable during the creation of a
-snapshot. If not specified, the default lifetime of key-value revisions will be
-used.
-""")
+    The amount of time, in seconds, that a snapshot will remain in the archived
+    state before expiring. This property is only writable during the creation of a
+    snapshot. If not specified, the default lifetime of key-value revisions will be
+    used.
+    """)
   @maxValue(7776000)
   @minValue(3600)
   @encodedName("application/json", "retention_period")
@@ -276,9 +276,9 @@ used.
 }
 
 @doc("""
-Enables filtering of key-values. Syntax reference:
-https://aka.ms/azconfig/docs/restapisnapshots
-""")
+  Enables filtering of key-values. Syntax reference:
+  https://aka.ms/azconfig/docs/restapisnapshots
+  """)
 model KeyValueFilter {
   @doc("Filters key-values by their key field.")
   key: string;
@@ -323,8 +323,8 @@ model OperationDetails {
   status: Foundations.OperationState;
 
   @doc("""
-An error, available when the status is `Failed`, describing why the operation
-failed.
-""")
+    An error, available when the status is `Failed`, describing why the operation
+    failed.
+    """)
   error?: Foundations.Error;
 }

@@ -626,8 +626,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ProofOfPossessionNonceRequest"
-            },
-            "x-ms-client-name": "proofOfPossessionNonceRequest"
+            }
           }
         ],
         "responses": {
@@ -1068,8 +1067,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ListDeviceGroupsRequest"
-            },
-            "x-ms-client-name": "listDeviceGroupsRequest"
+            }
           }
         ],
         "responses": {
@@ -2045,8 +2043,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClaimDevicesRequest"
-            },
-            "x-ms-client-name": "claimDevicesRequest"
+            }
           }
         ],
         "responses": {
@@ -2772,6 +2769,10 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2940,8 +2941,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/GenerateCapabilityImageRequest"
-            },
-            "x-ms-client-name": "generateDeviceCapabilityRequest"
+            }
           }
         ],
         "responses": {
@@ -3073,8 +3073,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Image"
-            },
-            "x-ms-client-name": "uploadImageRequest"
+            }
           }
         ],
         "responses": {
@@ -3167,11 +3166,7 @@
         "properties": {
           "$ref": "#/definitions/CatalogProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3237,11 +3232,7 @@
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3416,11 +3407,7 @@
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3493,11 +3480,7 @@
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3513,11 +3496,7 @@
         "properties": {
           "$ref": "#/definitions/DeviceGroupProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3782,11 +3761,7 @@
         "properties": {
           "$ref": "#/definitions/ImageProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4095,11 +4070,7 @@
         "properties": {
           "$ref": "#/definitions/ProductProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
