@@ -96,6 +96,15 @@ input-file:
 - NGINX.NGINXPLUS/preview/2021-05-01-preview/swagger.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: PutRequestResponseSchemeArm
+    from: swagger.json
+    reason: Temporary suppression needed to avoid delays for business needs and maintain production timelines
+```    
+---
+
 # Code Generation
 
 ## Swagger to SDK
