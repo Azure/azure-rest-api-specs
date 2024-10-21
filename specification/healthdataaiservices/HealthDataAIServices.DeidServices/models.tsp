@@ -111,7 +111,7 @@ DeidentificationOptions
 DeidentificationParameters
 */
 
-@doc("Customizations options to override default service behaviors for synchonous usage.")
+@doc("Customizations options to override default service behaviors for synchronous usage.")
 model CustomizationOptions {
   ...SharedCustomizationOptions;
 }
