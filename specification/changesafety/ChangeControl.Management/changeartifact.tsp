@@ -22,17 +22,30 @@ model ChangeArtifact {
   artifactType: ArtifactType;
 }
 
-/* ChangeArtifact for InlineArmTemplate or InlineBicep. */
+/* ChangeArtifact for InlineArmTemplate. */
 @doc("Describes the change payload for InlineArmTemplate or InlineBicep")
-model InlineTemplateChangeArtifact extends ChangeArtifact {
+model InlineArmTemplateChangeArtifact extends ChangeArtifact {
   @visibility("read", "create")
   @doc("The type of the artifact.")
-  artifactType: ArtifactType.InlineArmTemplate | ArtifactType.InlineBicep;
+  artifactType: ArtifactType.InlineArmTemplate;
 
   @visibility("read", "create")
   @doc("The actual payload content.")
   artifactPayload: InlineTemplateArtifactContent;
 }
+
+/* ChangeArtifact for InlineBicep. */
+@doc("Describes the change payload for InlineArmTemplate or InlineBicep")
+model InlineBicepTemplateChangeArtifact extends ChangeArtifact {
+  @visibility("read", "create")
+  @doc("The type of the artifact.")
+  artifactType: ArtifactType.InlineBicep;
+
+  @visibility("read", "create")
+  @doc("The actual payload content.")
+  artifactPayload: InlineTemplateArtifactContent;
+}
+
 
 /* ChangeArtifact for ArmOperation. */
 @doc("Describes the change payload for Kind=Inline & artifactType='ArmOperation'")
@@ -46,12 +59,24 @@ model ArmOperationChangeArtifact extends ChangeArtifact {
   artifactPayload: ArmOperationArtifactContent;
 }
 
-/* ChangeArtifact for external ARM Template or bicep file.*/
-@doc("Describes the change payload for External ArmTemplate or Bicep file.")
+/* ChangeArtifact for external ARM Template.*/
+@doc("Describes the change payload for External ArmTemplate file.")
 model ExternalArmTemplateChangeArtifact extends ChangeArtifact {
   @visibility("read", "create")
   @doc("The type of the artifact.")
-  artifactType: ArtifactType.ExternalArmTemplate | ArtifactType.ExternalBicep;
+  artifactType: ArtifactType.ExternalArmTemplate;
+
+  @visibility("read", "create")
+  @doc("The actual payload content.")
+  artifactPayload: ExternalArmTemplateArtifactContent;
+}
+
+/* ChangeArtifact for external bicep file.*/
+@doc("Describes the change payload for External Bicep file.")
+model ExternalBicepTemplateChangeArtifact extends ChangeArtifact {
+  @visibility("read", "create")
+  @doc("The type of the artifact.")
+  artifactType: ArtifactType.ExternalBicep;
 
   @visibility("read", "create")
   @doc("The actual payload content.")

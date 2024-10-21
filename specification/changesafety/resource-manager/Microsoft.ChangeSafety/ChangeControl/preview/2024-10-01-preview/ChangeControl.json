@@ -1412,7 +1412,7 @@
     },
     "ExternalArmTemplateChangeArtifact": {
       "type": "object",
-      "description": "Describes the change payload for External ArmTemplate or Bicep file.",
+      "description": "Describes the change payload for External ArmTemplate file.",
       "properties": {
         "artifactPayload": {
           "$ref": "#/definitions/ExternalArmTemplateArtifactContent",
@@ -1430,7 +1430,31 @@
         {
           "$ref": "#/definitions/ChangeArtifact"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ExternalArmTemplate"
+    },
+    "ExternalBicepTemplateChangeArtifact": {
+      "type": "object",
+      "description": "Describes the change payload for External Bicep file.",
+      "properties": {
+        "artifactPayload": {
+          "$ref": "#/definitions/ExternalArmTemplateArtifactContent",
+          "description": "The actual payload content.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "artifactPayload"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeArtifact"
+        }
+      ],
+      "x-ms-discriminator-value": "ExternalBicep"
     },
     "GetAuditTrailResponse": {
       "type": "object",
@@ -1503,20 +1527,7 @@
         "parameterValues"
       ]
     },
-    "InlineTemplateArtifactContent": {
-      "type": "object",
-      "description": "Artifact content model for Inline template or bicep content.",
-      "properties": {
-        "script": {
-          "type": "string",
-          "description": "Inline ArmTemplate string or Bicep content."
-        }
-      },
-      "required": [
-        "script"
-      ]
-    },
-    "InlineTemplateChangeArtifact": {
+    "InlineArmTemplateChangeArtifact": {
       "type": "object",
       "description": "Describes the change payload for InlineArmTemplate or InlineBicep",
       "properties": {
@@ -1536,6 +1547,43 @@
         {
           "$ref": "#/definitions/ChangeArtifact"
         }
+      ],
+      "x-ms-discriminator-value": "InlineArmTemplate"
+    },
+    "InlineBicepTemplateChangeArtifact": {
+      "type": "object",
+      "description": "Describes the change payload for InlineArmTemplate or InlineBicep",
+      "properties": {
+        "artifactPayload": {
+          "$ref": "#/definitions/InlineTemplateArtifactContent",
+          "description": "The actual payload content.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "artifactPayload"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeArtifact"
+        }
+      ],
+      "x-ms-discriminator-value": "InlineBicep"
+    },
+    "InlineTemplateArtifactContent": {
+      "type": "object",
+      "description": "Artifact content model for Inline template or bicep content.",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "Inline ArmTemplate string or Bicep content."
+        }
+      },
+      "required": [
+        "script"
       ]
     },
     "NumberParameter": {
