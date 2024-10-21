@@ -16,6 +16,10 @@ namespace Azure.AI.Client;
 
 @doc("Response from the listSecrets operation")
 model ConnectionsListSecretsResponse {
+
+  @doc("A unique identifier for the connection")
+  id: string;
+
   @doc("The name of the resource")
   name: string;
 
