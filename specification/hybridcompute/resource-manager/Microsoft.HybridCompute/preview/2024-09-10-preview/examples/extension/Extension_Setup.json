@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "api-version": "2024-09-10-preview",
+    "extensionSetupBody": {
+      "extensionSetupList": [
+        {
+          "publisher": "Microsoft.Azure.Monitoring",
+          "type": "AzureMonitorAgentLinux"
+        },
+        {
+          "publisher": "<extension_publisher>",
+          "type": "<extension_type>"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    }
+  }
+}
