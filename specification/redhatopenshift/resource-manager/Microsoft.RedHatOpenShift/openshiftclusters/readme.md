@@ -30,6 +30,8 @@ tag: package-2024-08-12-preview
 suppressions:
   - code: AvoidAdditionalProperties
     reason: Our use of additionalProperties is valid according to review from ARM team
+  - code: PatchBodyParametersSchema
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
 ```
 
 ### Tag: package-2020-04-30
