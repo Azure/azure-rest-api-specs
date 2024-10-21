@@ -19,22 +19,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "name": "myDisk",
-        "location": "West US",
-        "properties": {
-          "provisioningState": "Updating",
-          "osType": "Windows",
-          "creationData": {
-            "createOption": "FromImage",
-            "imageReference": {
-              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}"
-            }
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "managedBy": "/subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec",
@@ -74,6 +58,24 @@
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk",
         "name": "myManagedDisk"
       }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "osType": "Windows",
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}"
+            }
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk from a platform image."
 }

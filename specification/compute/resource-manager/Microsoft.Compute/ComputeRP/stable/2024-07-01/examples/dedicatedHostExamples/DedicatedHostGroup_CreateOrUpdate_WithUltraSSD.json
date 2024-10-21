@@ -22,26 +22,6 @@
     }
   },
   "responses": {
-    "201": {
-      "body": {
-        "name": "myDedicatedHostGroup",
-        "location": "westus",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
-        "tags": {
-          "department": "finance"
-        },
-        "zones": [
-          "1"
-        ],
-        "properties": {
-          "platformFaultDomainCount": 3,
-          "supportAutomaticPlacement": true,
-          "additionalCapabilities": {
-            "ultraSSDEnabled": true
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "properties": {
@@ -62,6 +42,28 @@
           "1"
         ]
       }
+    },
+    "201": {
+      "body": {
+        "name": "myDedicatedHostGroup",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
+        "tags": {
+          "department": "finance"
+        },
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "supportAutomaticPlacement": true,
+          "additionalCapabilities": {
+            "ultraSSDEnabled": true
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "DedicatedHostGroups_CreateOrUpdate",
+  "title": "create or update a dedicated host group with Ultra SSD support."
 }

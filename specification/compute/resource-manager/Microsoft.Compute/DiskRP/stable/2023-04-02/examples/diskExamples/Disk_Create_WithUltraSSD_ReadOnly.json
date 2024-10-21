@@ -24,24 +24,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
-        "properties": {
-          "creationData": {
-            "createOption": "Empty"
-          },
-          "diskSizeGB": 200,
-          "provisioningState": "Updating"
-        },
-        "location": "West US",
-        "name": "myUltraReadOnlyDisk",
-        "sku": {
-          "name": "UltraSSD_LRS",
-          "tier": "Ultra"
-        }
-      }
-    },
     "200": {
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
@@ -62,6 +44,26 @@
           "tier": "Ultra"
         }
       }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myUltraReadOnlyDisk",
+        "sku": {
+          "name": "UltraSSD_LRS",
+          "tier": "Ultra"
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk with ultra account type with readOnly property set."
 }

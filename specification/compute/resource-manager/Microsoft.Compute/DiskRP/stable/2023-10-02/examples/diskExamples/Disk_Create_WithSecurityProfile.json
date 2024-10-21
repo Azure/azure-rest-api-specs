@@ -21,26 +21,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
-        "name": "myDisk",
-        "location": "North Central US",
-        "properties": {
-          "provisioningState": "Updating",
-          "osType": "Windows",
-          "securityProfile": {
-            "securityType": "TrustedLaunch"
-          },
-          "creationData": {
-            "createOption": "FromImage",
-            "imageReference": {
-              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}"
-            }
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
@@ -60,6 +40,28 @@
           }
         }
       }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "name": "myDisk",
+        "location": "North Central US",
+        "properties": {
+          "provisioningState": "Updating",
+          "osType": "Windows",
+          "securityProfile": {
+            "securityType": "TrustedLaunch"
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}"
+            }
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk with security profile"
 }

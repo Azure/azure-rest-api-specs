@@ -15,19 +15,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "name": "myDisk",
-        "location": "West US",
-        "properties": {
-          "provisioningState": "Updating",
-          "creationData": {
-            "createOption": "Copy",
-            "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "name": "myDisk",
@@ -40,6 +27,21 @@
           }
         }
       }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk by copying a snapshot."
 }

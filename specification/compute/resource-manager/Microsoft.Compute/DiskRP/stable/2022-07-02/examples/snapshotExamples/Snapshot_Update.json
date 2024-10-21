@@ -15,6 +15,24 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+          },
+          "diskSizeGB": 20,
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "department": "Development",
+          "project": "UpdateSnapshots"
+        },
+        "location": "West US",
+        "name": "mySnapshot"
+      }
+    },
     "202": {
       "headers": {
         "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot?api-version=2021-04-01"
@@ -35,24 +53,8 @@
         "location": "West US",
         "name": "mySnapshot"
       }
-    },
-    "200": {
-      "body": {
-        "properties": {
-          "creationData": {
-            "createOption": "Copy",
-            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
-          },
-          "diskSizeGB": 20,
-          "provisioningState": "Succeeded"
-        },
-        "tags": {
-          "department": "Development",
-          "project": "UpdateSnapshots"
-        },
-        "location": "West US",
-        "name": "mySnapshot"
-      }
     }
-  }
+  },
+  "operationId": "Snapshots_Update",
+  "title": "Update a snapshot."
 }

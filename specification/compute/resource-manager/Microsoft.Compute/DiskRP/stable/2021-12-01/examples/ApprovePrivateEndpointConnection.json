@@ -15,23 +15,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "name": "myPrivateEndpointConenction",
-        "type": "Microsoft.Compute/diskAccesses/privateEndpointConnections",
-        "properties": {
-          "provisioningState": "Updating",
-          "privateEndpoint": {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
-          },
-          "privateLinkServiceConnectionState": {
-            "actionsRequired": "None",
-            "description": "Approving myPrivateEndpointConnection",
-            "status": "Approved"
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "name": "myPrivateEndpointConnectionName",
@@ -49,6 +32,25 @@
           }
         }
       }
+    },
+    "202": {
+      "body": {
+        "name": "myPrivateEndpointConenction",
+        "type": "Microsoft.Compute/diskAccesses/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Updating",
+          "privateEndpoint": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "actionsRequired": "None",
+            "description": "Approving myPrivateEndpointConnection",
+            "status": "Approved"
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "DiskAccesses_UpdateAPrivateEndpointConnection",
+  "title": "Approve a Private Endpoint Connection under a disk access resource."
 }

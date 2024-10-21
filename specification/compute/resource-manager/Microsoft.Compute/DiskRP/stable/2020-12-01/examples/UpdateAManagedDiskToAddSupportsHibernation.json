@@ -11,27 +11,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "name": "myDisk",
-        "location": "westus",
-        "sku": {
-          "name": "Standard_LRS",
-          "tier": "Standard"
-        },
-        "properties": {
-          "osType": "Windows",
-          "hyperVGeneration": "V1",
-          "supportsHibernation": true,
-          "creationData": {
-            "createOption": "Import",
-            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
-          },
-          "diskSizeGB": 127,
-          "provisioningState": "Updating"
-        }
-      }
-    },
     "200": {
       "body": {
         "name": "myDisk",
@@ -52,6 +31,29 @@
           "provisioningState": "Succeeded"
         }
       }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportsHibernation": true,
+          "creationData": {
+            "createOption": "Import",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Updating"
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_Update",
+  "title": "Update a managed disk to add supportsHibernation."
 }

@@ -19,24 +19,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
-        "properties": {
-          "creationData": {
-            "createOption": "Empty"
-          },
-          "diskSizeGB": 200,
-          "provisioningState": "Updating"
-        },
-        "location": "West US",
-        "name": "myDisk",
-        "extendedLocation": {
-          "type": "EdgeZone",
-          "name": "{edge-zone-id}"
-        }
-      }
-    },
     "200": {
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
@@ -54,6 +36,26 @@
           "name": "{edge-zone-id}"
         }
       }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk",
+        "extendedLocation": {
+          "type": "EdgeZone",
+          "name": "{edge-zone-id}"
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create an empty managed disk in extended location."
 }
