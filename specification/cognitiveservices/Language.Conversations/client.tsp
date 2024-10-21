@@ -85,7 +85,12 @@ namespace Language.ConversationsClientCustomizations;
   "CustomConversationSummarizationActionContent",
   "csharp"
 );
-@@clientName(ConversationTaskParameters, "ConversationActionContent", "csharp");
+
+@@clientName(ConversationTaskParameters,
+  "ConversationLanguageUnderstandingActionContent",
+  "csharp"
+);
+
 @@clientName(ConversationSummarizationTaskParameters,
   "ConversationSummarizationActionContent",
   "csharp"
@@ -129,7 +134,11 @@ namespace Language.ConversationsClientCustomizations;
   "csharp"
 );
 
-@@clientName(ConversationalTask, "ConversationalInput", "csharp");
+@@clientName(ConversationalTask,
+  "ConversationLanguageUnderstandingInput",
+  "csharp"
+);
+
 @@clientName(ConversationalTask.analysisInput, "ConversationInput", "csharp");
 @@clientName(ConversationalTask.parameters, "ActionContent", "csharp");
 @@clientName(ConversationTaskParameters, "ConversationActionContent", "csharp");
@@ -249,5 +258,10 @@ namespace Language.ConversationsClientCustomizations;
 );
 @@clientName(analyzeConversationsCancelJob,
   "CancelAnalyzeConversations",
+  "csharp"
+);
+
+@@clientName(ConversationalPiiResultWithResultBase,
+  "ConversationalPiiResult",
   "csharp"
 );
