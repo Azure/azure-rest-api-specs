@@ -1,0 +1,64 @@
+{
+  "title": "maximum set chat completion",
+  "operationId": "GetChatCompletions",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "extra-parameters": "error",
+    "body": {
+      "messages": [
+        {
+          "role": "ChatRequestMessage"
+        }
+      ],
+      "frequency_penalty": -2,
+      "stream": true,
+      "presence_penalty": -1,
+      "temperature": 0,
+      "top_p": 0,
+      "max_tokens": 0,
+      "response_format": {
+        "type": "ChatCompletionsResponseFormat"
+      },
+      "stop": [
+        "ssbwclb"
+      ],
+      "tools": [
+        {
+          "type": "ChatCompletionsToolDefinition"
+        }
+      ],
+      "seed": 24,
+      "model": "ywenpzfibpkmkunmeadllhcadauv"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "jmrhtfblhsuikkokuyxhfarwite",
+        "created": 14,
+        "model": "pqixfxtbrvywpoe",
+        "usage": {
+          "completion_tokens": 26,
+          "prompt_tokens": 20,
+          "total_tokens": 2
+        },
+        "choices": [
+          {
+            "index": 8,
+            "finish_reason": "stop",
+            "message": {
+              "role": "system",
+              "content": "csgynyhcslcsbdjvomhiiqxy",
+              "tool_calls": [
+                {
+                  "type": "ChatCompletionsToolCall",
+                  "id": "ukzdopmdztxlkmrjhzgeilwb"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
