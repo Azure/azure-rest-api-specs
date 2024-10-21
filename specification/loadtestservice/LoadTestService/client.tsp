@@ -8,6 +8,11 @@ using Microsoft.LoadTestService;
 @useDependency(APIVersions.v2024_05_01_preview)
 namespace Customizations;
 
+// Client customizations should be kept in this file only and not in other files
+// Model related customizations here (Ref: https://azure.github.io/typespec-azure/docs/howtos/DataPlane%20Generation%20-%20DPG/04renaming):
+@@clientName(MetricDimensionsRequest.metricname, "metric_name", "python");
+@@clientName(MetricDimensionsRequest.timespan, "time_interval", "python");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @client({
   name: "LoadTestAdministrationClient",
@@ -58,8 +63,10 @@ interface TestRunOperations {
   stop is LoadTestRun.stop;
 }
 
+// NOTE: `LoadTestAdministrationClient` will contain all administration operations and `LoadTestRunClient` will contain all run based operations
+// A separate interface is made to just segregate the operations by resource type
 @client({
-  name: "TestProfileAdministrationClient",
+  name: "LoadTestAdministrationClient",
   service: Microsoft.LoadTestService,
 })
 interface TestProfileAdministrationOperations {
@@ -70,7 +77,7 @@ interface TestProfileAdministrationOperations {
 }
 
 @client({
-  name: "TestProfileRunClient",
+  name: "LoadTestRunClient",
   service: Microsoft.LoadTestService,
 })
 interface TestProfileRunOperations {
