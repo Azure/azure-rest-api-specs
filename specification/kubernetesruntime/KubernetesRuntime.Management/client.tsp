@@ -10,6 +10,11 @@ using Microsoft.KubernetesRuntime;
   "python"
 );
 
+@@clientName(Microsoft.KubernetesRuntime,
+  "ContainerOrchestratorRuntimeManagementClient",
+  "java"
+);
+
 @@clientName(AccessMode, "StorageClassAccessMode", "csharp");
 @@clientName(AdvertiseMode.ARP, "Arp", "csharp");
 @@clientName(AdvertiseMode.BGP, "Bgp", "csharp");
