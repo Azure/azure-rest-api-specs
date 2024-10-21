@@ -93,44 +93,7 @@ model ExportResourceGroup extends BaseExportModel {
 }
 
 @doc("The status of the LRO operation.")
-model OperationStatus {
-  @doc("The operation status resource id.")
-  id?: string;
-
-  @doc("The fully qualified resource id of the resource for which the operation was performed.")
-  @visibility("read")
-  resourceId?: string;
-
-  @doc("The operation name.")
-  name?: string;
-
-  @doc("The start time of the operation.")
-  @visibility("read")
-  startTime?: utcDateTime;
-
-  @doc("The end time of the operation.")
-  @visibility("read")
-  endTime?: utcDateTime;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The progress percentage of the operation, ranges from 0 to 100")
-  percentComplete?: float64;
-
-  @doc("The Terraform export result")
-  properties?: ExportResult;
-
-  ...ErrorResponse;
-}
-
-model InProgressOperationStatus
-  is ArmAcceptedResponse<
-    "InProgress operation status",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > {
-  ...OperationStatus;
-}
+model TerraformOperationStatus is ArmOperationStatus<ExportResult>;
 
 @doc("The Terraform export result")
 model ExportResult {
