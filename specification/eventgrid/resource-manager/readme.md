@@ -43,6 +43,11 @@ suppressions:
     from: EventGrid.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters
 
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as federatedClientId is a required parameter of FederatedIdentityCredentialInfo object but object FederatedIdentityCredentialInfo is itself an optional parameter for patch operation.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters
+
   - code:  ParameterNotUsingCommonTypes
     reason: We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
     from: EventGrid.json
