@@ -22,20 +22,12 @@
       }
     },
     "202": {
+      "description": "Accepted and the operation will complete asynchronously.",
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/loadBalancingRules/rulelb/health?api-version=2024-05-01"
-      },
-      "body": {
-        "up": 1,
-        "down": 0,
-        "loadBalancerBackendAddresses": [
-          {
-            "ipAddress": "10.1.0.4",
-            "networkInterfaceIPConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/NIC1/IpConfigurations/ipConfig",
-            "state": "Up",
-            "reason": "Up_Probe_Success"
-          }
-        ]
+        "Location": {
+          "description": "URI to query the status of the long-running operation.",
+          "type": "string"
+        }
       }
     }
   }
