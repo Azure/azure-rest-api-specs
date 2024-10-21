@@ -11,7 +11,7 @@ using Microsoft.KubernetesRuntime;
 );
 
 @@clientName(Microsoft.KubernetesRuntime,
-  "ContainerOrchestratorRuntimeManagementClient",
+  "ContainerOrchestratorRuntimeMgmtClient",
   "java"
 );
 
