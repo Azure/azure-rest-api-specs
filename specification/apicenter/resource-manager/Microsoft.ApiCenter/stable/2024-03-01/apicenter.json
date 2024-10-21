@@ -328,8 +328,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceUpdate"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -434,8 +433,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/MetadataSchemaExportRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -639,8 +637,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/MetadataSchema"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -955,8 +952,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Workspace"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -1301,8 +1297,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Api"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -1697,8 +1692,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Deployment"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -2113,8 +2107,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApiVersion"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -2559,8 +2552,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -2954,8 +2946,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApiSpecImportRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -3186,8 +3177,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Environment"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -4553,20 +4543,23 @@
     },
     "ServiceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Service.",
+      "description": "The service entity.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "SmallString": {
       "type": "string",
