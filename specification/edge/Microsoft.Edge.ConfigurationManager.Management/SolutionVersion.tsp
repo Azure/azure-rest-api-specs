@@ -33,6 +33,7 @@ model HelmSolutionProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 @doc("Solution Version Resource")
 @parentResource(Solution)
 @resource("versions")

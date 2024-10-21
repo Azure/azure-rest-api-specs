@@ -141,6 +141,9 @@ model AssociationDefinition {
   @doc("The workspace id to associate.")
   workspaceId?: string;
 
+  @doc("The artifact id to associate.")
+  artifactId?: string;
+
   @doc("The message group id to associate.")
   messageGroupId?: string;
 

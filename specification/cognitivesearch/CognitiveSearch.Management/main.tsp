@@ -70,6 +70,7 @@ model DataSource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 @discriminator("authenticationType")
 @doc("Parent connection")
 model Connection {}
@@ -85,6 +86,7 @@ model Credentials extends Connection {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 @discriminator("kind")
 @doc("Datasource properties types")
 model DataSourceProperties {}

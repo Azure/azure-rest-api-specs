@@ -1186,6 +1186,7 @@ model Step {
   /**
    * Parameters to be passed to handler during execution.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
   handlerProperties?: {};
 
   /**
