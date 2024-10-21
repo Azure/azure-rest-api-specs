@@ -38,6 +38,16 @@ input-file:
 - Microsoft.EventGrid/preview/2024-12-15-preview/EventGrid.json
 
 suppressions:
+
+  - code: PatchBodyParametersSchema
+    reason: This is false positive as federatedClientId is a required parameter of FederatedIdentityCredentialInfo object, but the object FederatedIdentityCredentialInfo is itself an optional parameter for patch operation.
+    from: EventGrid.json
+	where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters
+
+  - code: GuidUsage
+    reason: This is required because we need to pass Multi-Tenant AAD Application's Id where the Federated Identity Credential (FIC) is associated with.
+    from: EventGrid.json
+
   - code: PatchPropertiesCorrespondToPutProperties
     reason: This is false positive as the customDomain is part of the NamespaceUpdateParameters.NamespaceUpdateParameterProperties.UpdateTopicSpacesConfigurationInfo.
     from: EventGrid.json
