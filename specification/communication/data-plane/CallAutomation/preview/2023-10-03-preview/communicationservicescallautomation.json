@@ -1698,246 +1698,6 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/recordings": {
-      "post": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Start recording the call with a connectionId.",
-        "operationId": "CallRecording_StartRecording",
-        "parameters": [
-          {
-            "name": "startCallRecording",
-            "in": "body",
-            "description": "The request body of start call recording request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StartCallRecordingConnectionRequest"
-            }
-          },
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
-            "type": "string",
-            "format": "date-time-rfc1123"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "202": {
-            "description": "The service has accepted the start call recording request and will begin processing it. You will receive either a StartRecordingFailed event or RecordingStateChanged to active event at your specified callback URI to update you on the status of the request.",
-            "schema": {
-              "$ref": "#/definitions/RecordingStateResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CallRecording_StartRecording": {
-            "$ref": "./examples/CallRecording_StartRecording.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/recordings/{recordingId}": {
-      "get": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Get call recording properties.",
-        "operationId": "CallRecording_GetRecordingProperties",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recordingId",
-            "in": "path",
-            "description": "The recording id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Returns the recording properties.",
-            "schema": {
-              "$ref": "#/definitions/RecordingStateResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CallRecording_GetRecordingProperties": {
-            "$ref": "./examples/CallRecording_GetRecordingProperties.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Stop recording the call.",
-        "operationId": "CallRecording_StopRecording",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recordingId",
-            "in": "path",
-            "description": "The recording id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "202": {
-            "description": "The service has accepted the stop call recording request and will begin processing it. You will receive either a StopRecordingFailed event or RecordingStateChanged to inactive event at your specified callback URI to update you on the status of the request."
-          }
-        },
-        "x-ms-examples": {
-          "CallRecording_StopRecording": {
-            "$ref": "./examples/CallRecording_StopRecording.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/recordings/{recordingId}:pause": {
-      "post": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Pause recording the call.",
-        "operationId": "CallRecording_PauseRecording",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recordingId",
-            "in": "path",
-            "description": "The recording id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "202": {
-            "description": "The service has accepted the pause request and will begin processing it."
-          }
-        },
-        "x-ms-examples": {
-          "CallRecording_PauseRecording": {
-            "$ref": "./examples/CallRecording_PauseRecording.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/recordings/{recordingId}:resume": {
-      "post": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Resume recording the call.",
-        "operationId": "CallRecording_ResumeRecording",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recordingId",
-            "in": "path",
-            "description": "The recording id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "202": {
-            "description": "The service has accepted the resume request and will begin processing it."
-          }
-        },
-        "x-ms-examples": {
-          "CallRecording_ResumeRecording": {
-            "$ref": "./examples/CallRecording_ResumeRecording.json"
-          }
-        }
-      }
-    },
     "/calling/recordings": {
       "post": {
         "tags": [
@@ -3512,10 +3272,17 @@
         "modelAsString": true
       }
     },
-    "StartCallRecordingConnectionRequest": {
+    "StartCallRecordingRequest": {
       "description": "The request payload start for call recording operation with call locator.",
+      "required": [
+        "callLocator"
+      ],
       "type": "object",
       "properties": {
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
+        },
         "recordingStateCallbackUri": {
           "description": "The uri to send notifications to.",
           "type": "string"
@@ -3550,6 +3317,35 @@
         "pauseOnStart": {
           "description": "When set to true will start recording in Pause mode, which can be resumed.",
           "type": "boolean"
+        }
+      }
+    },
+    "CallLocatorKind": {
+      "description": "The call locator kind.",
+      "enum": [
+        "groupCallLocator",
+        "serverCallLocator"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallLocatorKind",
+        "modelAsString": true
+      }
+    },
+    "CallLocator": {
+      "description": "The locator used for joining or taking action on a call",
+      "type": "object",
+      "properties": {
+        "groupCallId": {
+          "description": "The group call id",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "The server call id.",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/CallLocatorKind"
         }
       }
     },
@@ -3635,83 +3431,6 @@
         },
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
-        }
-      }
-    },
-    "StartCallRecordingRequest": {
-      "description": "The request payload start for call recording operation with call locator.",
-      "required": [
-        "callLocator"
-      ],
-      "type": "object",
-      "properties": {
-        "callLocator": {
-          "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
-        },
-        "recordingStateCallbackUri": {
-          "description": "The uri to send notifications to.",
-          "type": "string"
-        },
-        "recordingContentType": {
-          "$ref": "#/definitions/RecordingContentType"
-        },
-        "recordingChannelType": {
-          "$ref": "#/definitions/RecordingChannelType"
-        },
-        "recordingFormatType": {
-          "$ref": "#/definitions/RecordingFormatType"
-        },
-        "audioChannelParticipantOrdering": {
-          "description": "The sequential order in which audio channels are assigned to participants in the unmixed recording.\r\nWhen 'recordingChannelType' is set to 'unmixed' and `audioChannelParticipantOrdering is not specified,\r\nthe audio channel to participant mapping will be automatically assigned based on the order in which participant\r\nfirst audio was detected.  Channel to participant mapping details can be found in the metadata of the recording.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
-        },
-        "channelAffinity": {
-          "description": "The channel affinity of call recording\r\nWhen 'recordingChannelType' is set to 'unmixed', if channelAffinity is not specified, 'channel' will be automatically assigned.\r\nChannel-Participant mapping details can be found in the metadata of the recording.\r\n///",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChannelAffinity"
-          }
-        },
-        "externalStorage": {
-          "$ref": "#/definitions/ExternalStorage",
-          "description": "Optional property to specify location where recording will be stored"
-        },
-        "pauseOnStart": {
-          "description": "When set to true will start recording in Pause mode, which can be resumed.",
-          "type": "boolean"
-        }
-      }
-    },
-    "CallLocatorKind": {
-      "description": "The call locator kind.",
-      "enum": [
-        "groupCallLocator",
-        "serverCallLocator"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CallLocatorKind",
-        "modelAsString": true
-      }
-    },
-    "CallLocator": {
-      "description": "The locator used for joining or taking action on a call",
-      "type": "object",
-      "properties": {
-        "groupCallId": {
-          "description": "The group call id",
-          "type": "string"
-        },
-        "serverCallId": {
-          "description": "The server call id.",
-          "type": "string"
-        },
-        "kind": {
-          "$ref": "#/definitions/CallLocatorKind"
         }
       }
     },
@@ -3815,6 +3534,11 @@
           "type": "string",
           "readOnly": true
         },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -3839,6 +3563,11 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
@@ -3947,6 +3676,11 @@
           "type": "integer",
           "readOnly": true
         },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -4052,6 +3786,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
@@ -4189,6 +3924,11 @@
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
         },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Result information defines the code, subcode and message",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -4275,6 +4015,11 @@
     "PlayCanceled": {
       "type": "object",
       "properties": {
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
@@ -4453,6 +4198,11 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Result information defines the code, subcode and message",
           "readOnly": true
         },
         "callConnectionId": {
@@ -4947,7 +4697,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
