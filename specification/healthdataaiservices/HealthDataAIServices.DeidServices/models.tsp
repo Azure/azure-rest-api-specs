@@ -86,15 +86,15 @@ model TargetStorageLocation {
   location: url;
 
   @doc("""
-  Replaces the input prefix of a file path with the output prefix, preserving the rest of the path structure.
-  
-  Example:
-  File full path: documents/user/note.txt
-  Input Prefix: "documents/user/"
-  Output Prefix: "output_docs/"
-
-  Output file: "output_docs/note.txt"
-  """)
+    Replaces the input prefix of a file path with the output prefix, preserving the rest of the path structure.
+    
+    Example:
+    File full path: documents/user/note.txt
+    Input Prefix: "documents/user/"
+    Output Prefix: "output_docs/"
+    
+    Output file: "output_docs/note.txt"
+    """)
   @minLength(1)
   @maxLength(1024)
   prefix: string;
