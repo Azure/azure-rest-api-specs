@@ -6323,6 +6323,26 @@
       ],
       "x-ms-discriminator-value": "AzureVmWorkloadSAPAseDatabase"
     },
+    "AzureVmWorkloadOracleDatabaseProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing Oracle Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadOracleDatabase"
+    },
+    "AzureVmWorkloadAnyDatabaseProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing Any Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadAnyDatabase"
+    },
     "AzureVmWorkloadSAPHanaDatabaseProtectedItem": {
       "description": "Azure VM workload-specific protected item representing SAP HANA Database.",
       "type": "object",
@@ -6649,6 +6669,66 @@
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
     },
+    "AzureWorkloadSAPAseRecoveryPoint": {
+      "description": "SAPAse specific recoverypoint, specifically encapsulates full/diff recoverypoints",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSAPAseRecoveryPoint"
+    },
+    "AzureWorkloadSAPAsePointInTimeRecoveryPoint": {
+      "description": "Recovery point specific to PointInTime in SAPAse",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSAPAsePointInTimeRecoveryPoint"
+    },
+    "AzureWorkloadOracleRecoveryPoint": {
+      "description": "Oracle specific recoverypoint, specifically encapsulates full/diff recoverypoints",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadOracleRecoveryPoint"
+    },
+    "AzureWorkloadOraclePointInTimeRecoveryPoint": {
+      "description": "Recovery point specific to PointInTime for Oracle",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadOraclePointInTimeRecoveryPoint"
+    },
+    "AzureWorkloadAnyDatabaseRecoveryPoint": {
+      "description": "Generic any database specific recoverypoint, specifically encapsulates full/diff recoverypoints",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadAnyDatabaseRecoveryPoint"
+    },
+    "AzureWorkloadAnyDatabasePointInTimeRecoveryPoint": {
+      "description": "Recovery point specific to PointInTime for generic any database",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadAnyDatabasePointInTimeRecoveryPoint"
+    },
     "AzureWorkloadSAPHanaPointInTimeRestoreRequest": {
       "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
       "type": "object",
@@ -6686,6 +6766,36 @@
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
     },
+    "AzureWorkloadSAPAseRestoreRequest": {
+      "description": "AzureWorkload SAP Ase-specific restore.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSAPAseRestoreRequest"
+    },
+    "AzureWorkloadOracleRestoreRequest": {
+      "description": "AzureWorkload Oracle-specific restore.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadOracleRestoreRequest"
+    },
+    "AzureWorkloadAnyDatabaseRestoreRequest": {
+      "description": "AzureWorkload AnyDatabase-specific restore.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadAnyDatabaseRestoreRequest"
+    },
     "AzureWorkloadSQLPointInTimeRecoveryPoint": {
       "description": "Recovery point specific to PointInTime",
       "type": "object",
@@ -6722,6 +6832,57 @@
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
+    },
+    "AzureWorkloadSAPAsePointInTimeRestoreRequest": {
+      "description": "AzureWorkload SAP Ase -specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPAseRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPAsePointInTimeRestoreRequest"
+    },
+    "AzureWorkloadOraclePointInTimeRestoreRequest": {
+      "description": "AzureWorkload Oracle -specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadOracleRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadOraclePointInTimeRestoreRequest"
+    },
+    "AzureWorkloadAnyDatabasePointInTimeRestoreRequest": {
+      "description": "AzureWorkload AnyDatabase -specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadAnyDatabaseRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadAnyDatabasePointInTimeRestoreRequest"
     },
     "AzureWorkloadSQLRecoveryPoint": {
       "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info",
@@ -8859,7 +9020,9 @@
             "AzureFileShare",
             "SAPHanaDatabase",
             "SAPAseDatabase",
-            "SAPHanaDBInstance"
+            "SAPHanaDBInstance",
+            "OracleDatabase",
+            "AnyDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -10639,6 +10802,26 @@
       ],
       "x-ms-discriminator-value": "SAPAseSystem"
     },
+    "AzureVmWorkloadOracleDatabaseWorkloadItem": {
+      "description": "Azure VM workload-specific workload item representing Oracle Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadItem"
+        }
+      ],
+      "x-ms-discriminator-value": "OracleDataBase"
+    },
+    "AzureVmWorkloadAnyDatabaseWorkloadItem": {
+      "description": "Azure VM workload-specific workload item representing Any Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AnyDataBase"
+    },
     "AzureVmWorkloadSAPHanaDatabaseProtectableItem": {
       "description": "Azure VM workload-specific protectable item representing SAP HANA Database.",
       "type": "object",
@@ -10688,6 +10871,26 @@
         }
       ],
       "x-ms-discriminator-value": "HanaHSRContainer"
+    },
+    "AzureVmWorkloadOracleDatabaseProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing Oracle DB.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "OracleDatabase"
+    },
+    "AzureVmWorkloadAnyDatabaseProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing AnyDatabase DB.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AnyDatabase"
     },
     "AzureVmWorkloadSAPHanaScaleoutProtectableItem": {
       "description": "Azure VM workload-specific protectable item representing HANA scale out.",
@@ -10934,7 +11137,11 @@
             "SAPHanaDatabase",
             "SAPAseSystem",
             "SAPAseDatabase",
-            "SAPHanaDBInstance"
+            "SAPHanaDBInstance",
+            "OracleSystem",
+            "OracleDatabase",
+            "AnyDBSystem",
+            "AnyDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -11767,7 +11974,9 @@
             "StorageContainer",
             "GenericContainer",
             "HanaHSRContainer",
-            "HanaScaleoutContainer"
+            "HanaScaleoutContainer",
+            "ASEHAContainer",
+            "OracleContainer"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -13099,6 +13308,54 @@
       },
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest"
     },
+    "AzureWorkloadSAPAsePointInTimeRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload SAP Ase-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPAsePointInTimeRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPAsePointInTimeRestoreWithRehydrateRequest"
+    },
+    "AzureWorkloadOraclePointInTimeRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload Oracle-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadOraclePointInTimeRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadOraclePointInTimeRestoreWithRehydrateRequest"
+    },
+    "AzureWorkloadAnyDatabasePointInTimeRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload AnyDatabase-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadAnyDatabasePointInTimeRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadAnyDatabasePointInTimeRestoreWithRehydrateRequest"
+    },
     "AzureWorkloadSAPHanaRestoreWithRehydrateRequest": {
       "description": "AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.",
       "type": "object",
@@ -13114,6 +13371,54 @@
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreWithRehydrateRequest"
+    },
+    "AzureWorkloadSAPAseRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload SAP Ase-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPAseRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPAseRestoreWithRehydrateRequest"
+    },
+    "AzureWorkloadOracleRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload Oracle-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadOracleRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadOracleRestoreWithRehydrateRequest"
+    },
+    "AzureWorkloadAnyDatabaseRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload AnyDatabase-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadAnyDatabaseRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadAnyDatabaseRestoreWithRehydrateRequest"
     },
     "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest": {
       "description": "AzureWorkload SQL-specific restore with integrated rehydration of recovery point.",
