@@ -67,6 +67,9 @@ model AppInsightsConfiguration extends InputData {
 
   @doc("Service name.")
   serviceName: string;
+
+  @doc("Connection String to connect to AppInsights.")
+  connectionString?: string;
 }
 
 @doc("Dataset as source for evaluation.")
@@ -185,7 +188,7 @@ model Recurrence {
   interval: int32;
 
   @doc("The recurrence schedule.")
-  schedule: RecurrenceSchedule;
+  schedule?: RecurrenceSchedule;
 }
 
 @doc("RecurrenceSchedule Definition")
@@ -197,10 +200,10 @@ model RecurrenceSchedule {
   minutes: int32[];
 
   @doc("List of days for the schedule.")
-  weekDays: WeekDays[];
+  weekDays?: WeekDays[];
 
   @doc("List of month days for the schedule")
-  monthDays: int32[];
+  monthDays?: int32[];
 }
 
 @doc("SamplingStrategy Definition")
@@ -215,17 +218,14 @@ model SamplingStrategy {
 model EvaluationSchedule {
   @key("id")
   @visibility("read")
-  @doc("Identifier of the evaluation.")
+  @doc("Unique identifier for the evaluation, which also serves as the name for the schedule.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
   @maxLength(254)
   id: string;
 
   @doc("Data for evaluation.")
   @visibility("read", "create")
-  data: InputData;
-
-  @doc("Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique.")
-  displayName?: string;
+  data: AppInsightsConfiguration;
 
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
   description?: string;
