@@ -26,7 +26,7 @@ model Alert is ProxyResource<AlertProperties> {
 @armResourceOperations
 interface Alerts {
     /**
-     * Gets proprties of an Alert for the specified subscription, resource group, SAP monitor name, and resource name.
+     * Gets properties of an Alert for the specified subscription, resource group, SAP monitor name, and resource name.
      */
     get is ArmResourceRead<Alert>;
 
