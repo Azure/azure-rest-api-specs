@@ -88,57 +88,12 @@
         "x-ms-examples": {
           "TuningOptions_ListRecommendations": {
             "$ref": "./examples/Tuning_GetRecommendedIndexes.json"
+          },
+          "TuningOptions_ListFilteredRecommendations": {
+            "$ref": "./examples/Tuning_GetFilteredRecommendedIndexes.json"
           }
         },
         "description": "Retrieve the list of available tuning index recommendations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TuningOptionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/IndexRecommendationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations/{recommendationType}": {
-      "get": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningOptions_GetRecommendation",
-        "x-ms-examples": {
-          "TuningOptions_GetRecommendation": {
-            "$ref": "./examples/Tuning_GetRecommendedIndex.json"
-          }
-        },
-        "description": "Retrieve the tuning index recommendation.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -163,7 +118,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IndexRecommendationResource"
+              "$ref": "#/definitions/IndexRecommendationListResult"
             }
           },
           "default": {
@@ -460,12 +415,13 @@
     "RecommendationTypeParameter": {
       "name": "recommendationType",
       "in": "query",
+      "required": false,
       "type": "string",
       "enum": [
         "CreateIndex",
         "DropIndex"
       ],
-      "description": "Optional client query parameter which defines the recommendations types to be returned.",
+      "description": "Recommendations list filter. Retrieves recommendations based on type.",
       "x-ms-enum": {
         "name": "RecommendationType",
         "modelAsString": true
