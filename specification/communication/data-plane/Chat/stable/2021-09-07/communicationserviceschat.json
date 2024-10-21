@@ -1556,6 +1556,9 @@
           "items": {
             "$ref": "#/definitions/ChatParticipant"
           }
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1593,6 +1596,9 @@
           "description": "The timestamp when the chat thread was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1643,6 +1649,9 @@
           "type": "string",
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1675,6 +1684,9 @@
           "description": "Chat thread topic.",
           "type": "string",
           "example": "Lunch Thread"
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1688,6 +1700,48 @@
           "example": "Bob Admin"
         }
       }
+    },
+    "RetentionPolicy": {
+      "description": "Data retention policy for auto deletion.",
+      "type": "object",
+      "discriminator": "retentionPolicyType",
+      "properties": {
+        "retentionPolicyType": {
+          "description": "Retention Policy Type",
+          "enum": [
+            "basedOnThreadCreationDate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RetentionPolicyType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "retentionPolicyType"
+      ]
+    },  
+    "BasedOnThreadCreationDateRetentionPolicy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RetentionPolicy"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "daysAfterCreation":{
+              "type": "integer",
+              "format": "int32",
+              "description": "Indicates how many days after the thread creation the thread will be deleted. Only 90 is accepted for now."
+            }
+          },
+          "required": [
+            "daysAfterCreation"
+          ],
+          "x-ms-discriminator-value": "basedOnThreadCreationDate"
+        }
+      ]
     }
   },
   "parameters": {
