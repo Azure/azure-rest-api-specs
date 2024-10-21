@@ -9004,31 +9004,11 @@
         },
         "workloadType": {
           "description": "Type of workload this item represents.",
-          "enum": [
-            "Invalid",
-            "VM",
-            "FileFolder",
-            "AzureSqlDb",
-            "SQLDB",
-            "Exchange",
-            "Sharepoint",
-            "VMwareVM",
-            "SystemState",
-            "Client",
-            "GenericDataSource",
-            "SQLDataBase",
-            "AzureFileShare",
-            "SAPHanaDatabase",
-            "SAPAseDatabase",
-            "SAPHanaDBInstance",
-            "OracleDatabase",
-            "AnyDatabase"
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataSourceType"
+            }
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          },
           "readOnly": true
         },
         "containerName": {
@@ -9153,29 +9133,11 @@
         },
         "itemType": {
           "description": "Type of workload this item represents.",
-          "enum": [
-            "Invalid",
-            "VM",
-            "FileFolder",
-            "AzureSqlDb",
-            "SQLDB",
-            "Exchange",
-            "Sharepoint",
-            "VMwareVM",
-            "SystemState",
-            "Client",
-            "GenericDataSource",
-            "SQLDataBase",
-            "AzureFileShare",
-            "SAPHanaDatabase",
-            "SAPAseDatabase",
-            "SAPHanaDBInstance"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          }
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataSourceType"
+            }
+          ]
         },
         "policyName": {
           "description": "Backup policy name associated with the backup item.",
@@ -11211,35 +11173,45 @@
         }
       }
     },
+    "DataSourceType": {
+      "description": "Base datasource type enum.",
+      "enum": [
+        "Invalid",
+        "VM",
+        "FileFolder",
+        "AzureSqlDb",
+        "SQLDB",
+        "Exchange",
+        "Sharepoint",
+        "VMwareVM",
+        "SystemState",
+        "Client",
+        "GenericDataSource",
+        "SQLDataBase",
+        "AzureFileShare",
+        "SAPHanaDatabase",
+        "SAPAseDatabase",
+        "SAPHanaDBInstance",
+        "OracleDatabase",
+        "AnyDatabase"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true
+      }
+    },
     "BackupStatusRequest": {
       "description": "BackupStatus request.",
       "type": "object",
       "properties": {
         "resourceType": {
           "description": "Container Type - VM, SQLPaaS, DPM, AzureFileShare...",
-          "enum": [
-            "Invalid",
-            "VM",
-            "FileFolder",
-            "AzureSqlDb",
-            "SQLDB",
-            "Exchange",
-            "Sharepoint",
-            "VMwareVM",
-            "SystemState",
-            "Client",
-            "GenericDataSource",
-            "SQLDataBase",
-            "AzureFileShare",
-            "SAPHanaDatabase",
-            "SAPAseDatabase",
-            "SAPHanaDBInstance"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          }
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataSourceType"
+            }
+          ]
         },
         "resourceId": {
           "description": "Entire ARM resource id of the resource",
@@ -11382,29 +11354,11 @@
       "properties": {
         "resourceType": {
           "description": "ProtectedItem Type- VM, SqlDataBase, AzureFileShare etc",
-          "enum": [
-            "Invalid",
-            "VM",
-            "FileFolder",
-            "AzureSqlDb",
-            "SQLDB",
-            "Exchange",
-            "Sharepoint",
-            "VMwareVM",
-            "SystemState",
-            "Client",
-            "GenericDataSource",
-            "SQLDataBase",
-            "AzureFileShare",
-            "SAPHanaDatabase",
-            "SAPAseDatabase",
-            "SAPHanaDBInstance"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          }
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataSourceType"
+            }
+          ]
         },
         "resourceId": {
           "description": "ARM Virtual Machine Id",
