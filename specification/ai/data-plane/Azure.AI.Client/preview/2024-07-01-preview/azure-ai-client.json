@@ -786,7 +786,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Unique identifier for the evaluation, which also serves as the name for the schedule.",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -839,7 +839,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Unique identifier for the evaluation, which also serves as the name for the schedule.",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -914,7 +914,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Unique identifier for the evaluation, which also serves as the name for the schedule.",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -8352,6 +8352,10 @@
         "serviceName": {
           "type": "string",
           "description": "Service name."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Connection String to connect to AppInsights."
         }
       },
       "required": [
@@ -8674,14 +8678,13 @@
       "type": "object",
       "description": "Dataset as source for evaluation.",
       "properties": {
-        "Uri": {
+        "id": {
           "type": "string",
-          "description": "Evaluation input data",
-          "x-ms-client-name": "id"
+          "description": "Evaluation input data"
         }
       },
       "required": [
-        "Uri"
+        "id"
       ],
       "allOf": [
         {
@@ -8769,22 +8772,18 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier of the evaluation.",
+          "description": "Unique identifier for the evaluation, which also serves as the name for the schedule.",
           "maxLength": 254,
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
           "readOnly": true
         },
         "data": {
-          "$ref": "#/definitions/InputData",
+          "$ref": "#/definitions/AppInsightsConfiguration",
           "description": "Data for evaluation.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique."
         },
         "description": {
           "type": "string",
@@ -9005,8 +9004,7 @@
       },
       "required": [
         "frequency",
-        "interval",
-        "schedule"
+        "interval"
       ]
     },
     "RecurrenceSchedule": {
@@ -9047,9 +9045,7 @@
       },
       "required": [
         "hours",
-        "minutes",
-        "weekDays",
-        "monthDays"
+        "minutes"
       ]
     },
     "RecurrenceTrigger": {
