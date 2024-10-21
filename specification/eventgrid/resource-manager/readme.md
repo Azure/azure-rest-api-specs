@@ -65,6 +65,10 @@ suppressions:
   - code:  PathForResourceAction
     reason: This route definition is defined by NSP for all partner services and the right integration with NSP relies on that. We cannot change this as we don't own the contract here and in order for the NSP integration to work, we need to adhere to NSP requirements in this route defintion.
     from: EventGrid.json
+
+  - code:  GuidUsage
+    reason: This is required because we need to pass Multi-Tenant AAD Application Id where the Federated Identity Credential is associated with.
+    from: EventGrid.json
 ```
 
 ### Tag: package-2024-06-preview
