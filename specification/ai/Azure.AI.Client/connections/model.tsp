@@ -119,6 +119,12 @@ enum ConnectionType {
 
   @doc("Serverless API service")
   Serverless: "Serverless",
+
+  @doc("Azure Blob Storage")
+  AzureBlobStorage: "AzureBlob",
+
+  @doc("Azure AI Services")
+  AIServices: "AIServices",
 }
 
 /*

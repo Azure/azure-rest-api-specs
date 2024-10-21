@@ -393,6 +393,59 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Category of the workspace connection.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AzureOpenAI",
+              "Serverless",
+              "AzureBlob",
+              "AIServices"
+            ],
+            "x-ms-enum": {
+              "name": "ConnectionType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AzureOpenAI",
+                  "value": "AzureOpenAI",
+                  "description": "Azure OpenAI service"
+                },
+                {
+                  "name": "Serverless",
+                  "value": "Serverless",
+                  "description": "Serverless API service"
+                },
+                {
+                  "name": "AzureBlobStorage",
+                  "value": "AzureBlob",
+                  "description": "Azure Blob Storage"
+                },
+                {
+                  "name": "AIServices",
+                  "value": "AIServices",
+                  "description": "Azure AI Services"
+                }
+              ]
+            }
+          },
+          {
+            "name": "includeAll",
+            "in": "query",
+            "description": "Indicates whether to list datastores. Service default: do not list datastores.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "Target of the workspace connection.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -422,16 +475,54 @@
         }
       }
     },
-    "/connections/{connectionNameInUrl}/listsecrets": {
-      "post": {
-        "operationId": "Connections_ListSecrets",
-        "description": "Get the details of a single connection, including credential (if available).",
+    "/connections/{connectionName}": {
+      "get": {
+        "operationId": "Connections_Get",
+        "description": "Get the details of a single connection, without credentials.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "connectionNameInUrl",
+            "name": "connectionName",
+            "in": "path",
+            "description": "Connection Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionsListSecretsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connections/{connectionName}/listsecrets": {
+      "post": {
+        "operationId": "Connections_ListSecrets",
+        "description": "Get the details of a single connection, including credentials (if available).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "description": "Connection Name",
             "required": true,
@@ -444,33 +535,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "connectionName": {
+                "ignored": {
                   "type": "string",
-                  "description": "Connection Name (should be the same as the connection name in the URL path)"
-                },
-                "subscriptionId": {
-                  "type": "string",
-                  "description": "The ID of the target subscription."
-                },
-                "resourceGroupName": {
-                  "type": "string",
-                  "description": "The name of the Resource Group."
-                },
-                "workspaceName": {
-                  "type": "string",
-                  "description": "The name of the workspace (Azure AI Studio hub)."
-                },
-                "apiVersionInBody": {
-                  "type": "string",
-                  "description": "The api version."
+                  "description": "The body is ignored."
                 }
               },
               "required": [
-                "connectionName",
-                "subscriptionId",
-                "resourceGroupName",
-                "workspaceName",
-                "apiVersionInBody"
+                "ignored"
               ]
             }
           }
@@ -8558,7 +8629,9 @@
       "description": "The Type (or category) of the connection",
       "enum": [
         "AzureOpenAI",
-        "Serverless"
+        "Serverless",
+        "AzureBlob",
+        "AIServices"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
@@ -8573,6 +8646,16 @@
             "name": "Serverless",
             "value": "Serverless",
             "description": "Serverless API service"
+          },
+          {
+            "name": "AzureBlobStorage",
+            "value": "AzureBlob",
+            "description": "Azure Blob Storage"
+          },
+          {
+            "name": "AIServices",
+            "value": "AIServices",
+            "description": "Azure AI Services"
           }
         ]
       }
