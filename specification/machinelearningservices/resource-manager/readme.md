@@ -226,7 +226,7 @@ suppressions:
   - code: LroLocationHeader
     reason: Caused by swagger file refactor, this is already in prod.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}].delete.responses.202
   - code: PatchBodyParametersSchema
     reason: Caused by swagger file refactor, this is already in prod.
     where:
