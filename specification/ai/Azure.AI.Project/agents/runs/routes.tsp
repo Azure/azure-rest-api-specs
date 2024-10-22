@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Client.Agents;
+namespace Azure.AI.Project.Agents;
 
 /**
  * Creates and starts a new run of the specified thread using the specified agent.

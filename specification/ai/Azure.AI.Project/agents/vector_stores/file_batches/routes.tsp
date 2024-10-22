@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Client.Agents;
+namespace Azure.AI.Project.Agents;
 
 /**
  * Create a vector store file batch.

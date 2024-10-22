@@ -4,7 +4,7 @@ import "@typespec/versioning";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Client.Agents;
+namespace Azure.AI.Project.Agents;
 
 @doc("The possible values for roles attributed to messages in a thread.")
 union MessageRole {

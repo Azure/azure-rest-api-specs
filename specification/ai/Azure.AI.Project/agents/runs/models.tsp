@@ -4,7 +4,7 @@ import "../common/models.tsp";
 import "../threads/models.tsp";
 import "../tools/models.tsp";
 
-namespace Azure.AI.Client.Agents;
+namespace Azure.AI.Project.Agents;
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;

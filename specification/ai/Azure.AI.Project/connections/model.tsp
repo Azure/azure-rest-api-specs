@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Client;
+namespace Azure.AI.Project;
 
 @doc("Response from the listSecrets operation")
 model ConnectionsListSecretsResponse {

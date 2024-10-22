@@ -56,7 +56,7 @@ namespace Azure.AI {
   }
 )
 @versioned(Versions)
-namespace Azure.AI.Client {
+namespace Azure.AI.Project {
   @doc("Azure AI API versions")
   enum Versions {
     @doc("Azure AI API version 2024-07-01-preview.")

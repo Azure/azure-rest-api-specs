@@ -7,7 +7,7 @@ import "../messages/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Client.Agents;
+namespace Azure.AI.Project.Agents;
 
 @doc("Information about a single thread associated with an agent.")
 model AgentThread {
