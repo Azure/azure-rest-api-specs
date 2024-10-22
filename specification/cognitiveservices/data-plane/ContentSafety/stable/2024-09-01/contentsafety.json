@@ -811,19 +811,8 @@
             "$ref": "#/definitions/TextBlocklistMatch"
           },
           "x-ms-identifiers": []
-        },
-        "categoriesAnalysis": {
-          "type": "array",
-          "description": "Analysis result for categories.",
-          "items": {
-            "$ref": "#/definitions/TextCategoriesAnalysis"
-          },
-          "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "categoriesAnalysis"
-      ]
+      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1178,35 +1167,11 @@
           "type": "string",
           "description": "The ID of the matched item.",
           "maxLength": 64
-        },
-        "blocklistItemText": {
-          "type": "string",
-          "description": "The content of the matched item.",
-          "maxLength": 128
         }
       },
       "required": [
         "blocklistName",
-        "blocklistItemId",
-        "blocklistItemText"
-      ]
-    },
-    "TextCategoriesAnalysis": {
-      "type": "object",
-      "description": "Text analysis result.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/TextCategory",
-          "description": "The text analysis category."
-        },
-        "severity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7."
-        }
-      },
-      "required": [
-        "category"
+        "blocklistItemId"
       ]
     },
     "TextCategory": {
