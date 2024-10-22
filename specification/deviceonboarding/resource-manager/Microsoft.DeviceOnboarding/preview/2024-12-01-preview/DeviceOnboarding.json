@@ -279,7 +279,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MarkReadyToOnboardProperties"
+              "$ref": "#/definitions/EnableOnboardingProperties"
             }
           }
         ],
@@ -2309,6 +2309,20 @@
         }
       ]
     },
+    "EnableOnboardingProperties": {
+      "type": "object",
+      "description": "The properties passed in the enableOnboarding POST request.",
+      "properties": {
+        "ttl": {
+          "type": "string",
+          "format": "duration",
+          "description": "Desired maximum duration by which a device can be onboarded"
+        }
+      },
+      "required": [
+        "ttl"
+      ]
+    },
     "EndpointType": {
       "type": "string",
       "description": "Type of the endpoint.",
@@ -2494,20 +2508,6 @@
           "pattern": "^[-\\w\\._\\(\\)]+$"
         }
       }
-    },
-    "MarkReadyToOnboardProperties": {
-      "type": "object",
-      "description": "The properties passed in the markReadyToOnboard POST request.",
-      "properties": {
-        "ttl": {
-          "type": "string",
-          "format": "duration",
-          "description": "Desired maximum duration by which a device can be onboarded"
-        }
-      },
-      "required": [
-        "ttl"
-      ]
     },
     "OnboardingResourceType": {
       "type": "string",
