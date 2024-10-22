@@ -1065,7 +1065,7 @@ union QueryType {
 alias BlobContentMd5ResponseHeader = {
   /** If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range */
   @header("x-ms-blob-content-md5")
-  blobContentMd5: string;
+  blobContentMd5: bytes;
 };
 
 /** The blob append offset response header. */
