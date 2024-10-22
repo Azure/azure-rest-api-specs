@@ -101,6 +101,9 @@
           },
           "Create Flux Configuration with OCIRepository Source Kind": {
             "$ref": "./examples/CreateFluxConfigurationWithOCIRepository.json"
+          },
+          "Create Flux Configuration with Git Repository Provider": {
+            "$ref": "./examples/CreateFluxConfigurationWithProvider.json"
           }
         },
         "parameters": [
@@ -483,7 +486,15 @@
         "provider": {
           "description": "Name of the provider used for authentication.",
           "type": "string",
-          "x-nullable": true
+          "x-nullable": true,
+          "enum": [
+            "azure",
+            "generic"
+          ],
+          "x-ms-enum": {
+            "name": "ProviderType",
+            "modelAsString": true
+          }
         }
       }
     },
