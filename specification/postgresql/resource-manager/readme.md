@@ -73,16 +73,16 @@ suppressions:
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
     from: ThreatProtection.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: PutResponseCodes
     from: ThreatProtection.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
     from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: ProvisioningStateSpecifiedForLROPatch
     from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: PutResponseCodes
     from: VirtualEndpoints.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
@@ -91,7 +91,7 @@ suppressions:
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
     from: Backups.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
 ```
 
 ### Tag: package-flexibleserver-2024-08-01
