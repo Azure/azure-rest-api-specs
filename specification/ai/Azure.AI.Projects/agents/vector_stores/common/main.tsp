@@ -110,7 +110,7 @@ model VectorStorageDataSourceIDAsset
 model VectorStorageDataSource {
   /** Asset URI. */
   @encodedName("application/json", "uri")
-  uri: string;
+  storageUri: string;
   
   /** The asset type **/
   @encodedName("application/json", "type")
@@ -132,11 +132,11 @@ model VectorStorageConfiguration {
 model VectorStoreFromAzure {
   /** Name */
   @encodedName("application/json", "name")
-  name: string;
+  storeName: string;
 
   /** Configurations */
   @encodedName("application/json", "configuration")
-  configuration: VectorStorageConfiguration;
+  storeConfiguration: VectorStorageConfiguration;
 }
 
 /** A statically configured chunking strategy. */
