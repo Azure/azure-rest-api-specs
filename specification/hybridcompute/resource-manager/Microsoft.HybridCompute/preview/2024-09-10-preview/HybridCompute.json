@@ -2911,6 +2911,83 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/setupExtensions": {
+      "post": {
+        "tags": [
+          "MachineExtensions Setup"
+        ],
+        "operationId": "SetupExtensions",
+        "description": "The operation to Setup Machine Extensions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$",
+            "minLength": 1,
+            "maxLength": 54,
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "extensionSetupBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionSetup"
+            },
+            "description": "Parameters supplied to the Setup Extensions operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionSetup"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Setup Machine Extensions": {
+            "$ref": "./examples/extension/Extension_Setup.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -5823,6 +5900,18 @@
               }
             ]
           }
+        }
+      }
+    },
+    "MachineExtensionSetup": {
+      "type": "object",
+      "properties": {
+        "extensionSetupList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtensionProperties"
+          },
+          "description": "The list of extensions"
         }
       }
     }
