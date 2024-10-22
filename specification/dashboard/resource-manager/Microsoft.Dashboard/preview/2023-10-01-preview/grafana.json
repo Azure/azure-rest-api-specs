@@ -1145,6 +1145,296 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/integrationFabrics": {
+      "get": {
+        "tags": [
+          "integrationFabric"
+        ],
+        "operationId": "IntegrationFabrics_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabricListResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_List": {
+            "$ref": "./examples/IntegrationFabrics_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/integrationFabrics/{integrationFabricName}": {
+      "get": {
+        "tags": [
+          "integrationFabric"
+        ],
+        "operationId": "IntegrationFabrics_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationFabricNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the properties of the integration fabric resource.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Get": {
+            "$ref": "./examples/IntegrationFabrics_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "integrationFabric"
+        ],
+        "operationId": "IntegrationFabrics_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationFabricNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "requestBodyParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully created an integration fabric for Grafana resource.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "201": {
+            "description": "Created. The operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation URI for long running operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Create": {
+            "$ref": "./examples/IntegrationFabrics_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IntegrationFabric"
+        ],
+        "operationId": "IntegrationFabrics_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationFabricNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "requestBodyParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabricUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Operation URI for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Update": {
+            "$ref": "./examples/IntegrationFabrics_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "integrationFabric"
+        ],
+        "operationId": "IntegrationFabrics_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationFabricNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The operation is accepted and will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "Operation URI for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Delete": {
+            "$ref": "./examples/IntegrationFabrics_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1462,6 +1752,12 @@
       "properties": {
         "smtp": {
           "$ref": "#/definitions/Smtp"
+        },
+        "snapshots": {
+          "$ref": "#/definitions/Snapshots"
+        },
+        "users": {
+          "$ref": "#/definitions/Users"
         }
       }
     },
@@ -1500,6 +1796,26 @@
         },
         "skipVerify": {
           "description": "Verify SSL for SMTP server. Default is false\r\nhttps://pkg.go.dev/crypto/tls#Config",
+          "type": "boolean"
+        }
+      }
+    },
+    "Snapshots": {
+      "description": "Grafana Snapshots settings",
+      "type": "object",
+      "properties": {
+        "externalEnabled": {
+          "description": "Set to false to disable external snapshot publish endpoint",
+          "type": "boolean"
+        }
+      }
+    },
+    "Users": {
+      "description": "Grafana users settings",
+      "type": "object",
+      "properties": {
+        "viewersCanEdit": {
+          "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.",
           "type": "boolean"
         }
       }
@@ -1969,6 +2285,88 @@
           }
         }
       }
+    },
+    "IntegrationFabric": {
+      "type": "object",
+      "description": "The integration fabric resource type.",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IntegrationFabricProperties"
+        }
+      }
+    },
+    "IntegrationFabricListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationFabric"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "IntegrationFabricProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "targetResourceId": {
+          "description": "The resource Id of the Azure resource being integrated with Azure Managed Grafana. E.g., an Azure Kubernetes Service cluster.",
+          "type": "string"
+        },
+        "dataSourceResourceId": {
+          "description": "The resource Id of the Azure resource which is used to configure Grafana data source. E.g., an Azure Monitor Workspace, an Azure Data Explorer cluster, etc.",
+          "type": "string"
+        },
+        "scenarios": {
+          "description": "A list of integration scenarios covered by this integration fabric",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IntegrationFabricUpdateParameters": {
+      "description": "The parameters for a PATCH request to a Integration Fabric resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The new tags of the Integration Fabric resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The new properties of this Integration Fabric resource",
+          "$ref": "#/definitions/IntegrationFabricPropertiesUpdateParameters"
+        }
+      }
+    },
+    "IntegrationFabricPropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "scenarios": {
+          "description": "The new integration scenarios covered by this integration fabric.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -1989,6 +2387,7 @@
       "description": "The workspace name of Azure Managed Grafana.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$",
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionNameParameter": {
@@ -2005,6 +2404,15 @@
       "description": "The managed private endpoint name of Azure Managed Grafana.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IntegrationFabricNameParameter": {
+      "in": "path",
+      "name": "integrationFabricName",
+      "description": "The integration fabric name of Azure Managed Grafana.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$",
       "x-ms-parameter-location": "method"
     }
   }
