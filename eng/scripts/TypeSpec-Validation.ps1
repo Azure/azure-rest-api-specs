@@ -6,7 +6,7 @@ param (
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
   [int]$FolderCount = 0,
-  [int] $Parallelism = $env:TSV_PARALLELISM
+  [int] $Parallelism = 5
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
