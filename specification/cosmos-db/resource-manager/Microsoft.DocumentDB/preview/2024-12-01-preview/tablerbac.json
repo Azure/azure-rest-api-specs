@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleDefinitions/{tableRoleDefinitionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleDefinitions/{roleDefinitionId}": {
       "get": {
         "operationId": "TableResources_GetTableRoleDefinition",
         "x-ms-examples": {
@@ -45,7 +45,7 @@
         "description": "Retrieves the properties of an existing Azure Cosmos DB Table Role Definition with the given Id.",
         "parameters": [
           {
-            "$ref": "#/parameters/tableRoleDefinitionIdParameter"
+            "$ref": "#/parameters/roleDefinitionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -86,7 +86,7 @@
         "description": "Creates or updates an Azure Cosmos DB Table Role Definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/tableRoleDefinitionIdParameter"
+            "$ref": "#/parameters/roleDefinitionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -139,7 +139,7 @@
         "description": "Deletes an existing Azure Cosmos DB Table Role Definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/tableRoleDefinitionIdParameter"
+            "$ref": "#/parameters/roleDefinitionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -496,7 +496,7 @@
     "TableRoleAssignmentResource": {
       "type": "object",
       "properties": {
-        "tableRoleDefinitionId": {
+        "roleDefinitionId": {
           "type": "string",
           "description": "The unique identifier for the associated Role Definition."
         },
@@ -553,8 +553,8 @@
     }
   },
   "parameters": {
-    "tableRoleDefinitionIdParameter": {
-      "name": "tableRoleDefinitionId",
+    "roleDefinitionIdParameter": {
+      "name": "roleDefinitionId",
       "in": "path",
       "required": true,
       "type": "string",
