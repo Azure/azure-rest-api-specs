@@ -32,6 +32,8 @@ options:
     package-name: "{package-dir}"
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     flavor: azure
+    generate-test: true
+    generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-health-insights-radiologyinsights"
     namespace: com.azure.health.insights.radiologyinsights
@@ -39,7 +41,7 @@ options:
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-health-insights-radiologyinsights"
     flavor: azure
-    stream-style-serialization: false
+    api-version: 2024-04-01
     polling:
       inferRadiologyInsights:
         final-type: com.azure.health.insights.radiologyinsights.models.RadiologyInsightsInferenceResult

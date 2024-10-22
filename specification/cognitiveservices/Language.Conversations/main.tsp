@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -12,10 +14,14 @@ using Azure.Core.Traits;
 
 /** The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection. */
 @useAuth(
-  TypeSpec.Http.ApiKeyAuth<
-    TypeSpec.Http.ApiKeyLocation.header,
-    "Ocp-Apim-Subscription-Key"
-  >
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
 )
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
@@ -94,15 +100,15 @@ model AnalyzeConversationTaskResult {
   kind: AnalyzeConversationTaskResultsKind;
 }
 
-/** The input for a custom conversation task. */
+/** The input for a conversation language understanding task. */
 model ConversationalTask extends AnalyzeConversationTask {
-  /** The input for a custom conversation task. */
+  /** Task kind. */
   kind: AnalyzeConversationTaskKind.Conversation;
 
   /** The input ConversationItem and its optional parameters */
   analysisInput: ConversationAnalysisOptions;
 
-  /** Input parameters necessary for a Conversation task. */
+  /** Input parameters necessary for a Conversation language understanding task. */
   parameters: ConversationTaskParameters;
 }
 
@@ -671,15 +677,15 @@ union AnalyzeConversationResultsKind {
 
   /** Conversational Summarization Results */
   @added(Versions.v2023_04_01)
-  ConversationalSummarizationResults: "ConversationalSummarizationResults",
+  ConversationalSummarizationResults: "conversationalSummarizationResults",
 
   /** Conversational PII Results */
   @added(Versions.v2024_05_01)
-  ConversationalPIIResults: "ConversationalPIIResults",
+  ConversationalPIIResults: "conversationalPIIResults",
 
   /** Custom Conversational Summarization Results */
   @added(Versions.v2024_05_15_preview)
-  CustomConversationalSummarizationResults: "CustomConversationalSummarizationResults",
+  CustomConversationalSummarizationResults: "customConversationalSummarizationResults",
 }
 
 /** Contains the status of the submitted job for analyzing a conversation, along with related statistics. */
@@ -1907,7 +1913,12 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 @post
 @route("/:analyze-conversations")
 op analyzeConversations is RpcOperation<
-  AnalyzeConversationTask,
+  {
+    /** The input for the analyze conversations operation. */
+    @bodyRoot
+    @clientName("AnalyzeConversationInput", "csharp")
+    body: AnalyzeConversationTask;
+  },
   AnalyzeConversationTaskResult,
   {},
   ErrorResponse
@@ -1927,7 +1938,12 @@ op analyzeConversationsJobStatus is languageOperations.ResourceRead<
 @route("/analyze-conversations/jobs")
 @pollingOperation(analyzeConversationsJobStatus)
 op analyzeConversationsSubmitJob is Foundations.LongRunningOperation<
-  AnalyzeConversationJobsInput,
+  {
+    /** The input for the analyze conversations operation. */
+    @bodyRoot
+    @clientName("AnalyzeConversationOperationInput", "csharp")
+    body: AnalyzeConversationJobsInput;
+  },
   AcceptedResponse,
   {},
   ErrorResponse

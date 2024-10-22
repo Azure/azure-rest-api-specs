@@ -18,6 +18,7 @@ namespace Microsoft.AppComplianceAutomation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
@@ -35,8 +36,8 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Report property.
    */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: ReportProperties;
 }
 
@@ -46,14 +47,14 @@ interface Report {
   /**
    * Get the AppComplianceAutomation report and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_Get")
   get is ArmResourceRead<ReportResource>;
 
   /**
    * Create a new AppComplianceAutomation report or update an exiting AppComplianceAutomation report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("Report_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -66,7 +67,7 @@ interface Report {
   /**
    * Update an exiting AppComplianceAutomation report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @parameterVisibility
   @operationId("Report_Update")
   update is ArmCustomPatchAsync<
@@ -78,7 +79,7 @@ interface Report {
   /**
    * Delete an AppComplianceAutomation report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReportResource,
@@ -88,7 +89,7 @@ interface Report {
   /**
    * Get the AppComplianceAutomation report list for the tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_List")
   list is ArmResourceListByParent<
     ReportResource,
@@ -101,7 +102,7 @@ interface Report {
   /**
    * Synchronize attestation record from app compliance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_SyncCertRecord")
   syncCertRecord is ArmResourceActionAsync<
     ReportResource,
@@ -113,7 +114,7 @@ interface Report {
   /**
    * Checks the report's nested resource name availability, e.g: Webhooks, Evidences, Snapshots.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_NestedResourceCheckNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     ReportResource,
@@ -124,7 +125,7 @@ interface Report {
   /**
    * Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_Fix")
   fix is ArmResourceActionAsync<
     ReportResource,
@@ -136,7 +137,7 @@ interface Report {
   /**
    * Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_GetScopingQuestions")
   getScopingQuestions is ArmResourceActionSync<
     ReportResource,
@@ -148,7 +149,7 @@ interface Report {
   /**
    * Verify the AppComplianceAutomation report health status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_Verify")
   verify is ArmResourceActionAsync<
     ReportResource,
@@ -161,17 +162,13 @@ interface Report {
 @@doc(Report.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Report.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
 );
 
-@@OpenAPI.extension(Report.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
-
-@@clientName(Report.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Report.createOrUpdate::parameters.resource, "properties");
 
 @@doc(Report.update::parameters.properties,
   "Parameters for the create or update operation"
@@ -182,7 +179,7 @@ interface Report {
 @@doc(Report.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
-
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Report.update::parameters.properties,
   "application/json",
   "parameters"

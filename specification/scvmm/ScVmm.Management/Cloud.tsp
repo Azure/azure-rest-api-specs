@@ -39,6 +39,7 @@ interface Clouds {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates the Clouds resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements the Clouds PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -48,6 +49,7 @@ interface Clouds {
   )
   update is ArmTagsPatchAsync<Cloud>;
   /** Deregisters the ScVmm fabric cloud from Azure. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements Cloud resource DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",

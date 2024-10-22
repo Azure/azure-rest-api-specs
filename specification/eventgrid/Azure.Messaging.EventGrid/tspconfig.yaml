@@ -11,7 +11,6 @@ linter:
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
-    examples-directory: examples
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/EventGrid.json"
     azure-resource-provider-folder: "data-plane"
@@ -23,6 +22,8 @@ options:
     package-name: "{package-dir}"
     emitter-output-dir: "{project-root}/{service-dir}/{package-name}"
     flavor: azure
+    generate-test: true
+    generate-sample: true
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   "@azure-tools/typespec-csharp":
     package-dir: Azure.Messaging.EventGridV2
@@ -35,10 +36,10 @@ options:
     namespace: "com.azure.messaging.eventgrid.namespaces"
     package-dir: azure-messaging-eventgrid-namespaces
     partial-update: true
-    namer: true
     generate-samples: false
     generate-tests: false
     enable-sync-stack: true
+    service-version-exclude-preview: true
     customization-class: customization/src/main/java/EventGridCustomization.java
     dev-options:
       loglevel: info

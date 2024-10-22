@@ -11,9 +11,9 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The storage container resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 model StorageContainer is TrackedResource<StorageContainerProperties> {
   @doc("Name of the storage container")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -47,7 +47,7 @@ interface StorageContainers {
   delete is ArmResourceDeleteWithoutOkAsync<StorageContainer>;
 
   @doc("Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.")
-  list is ArmResourceListByParent<StorageContainer>;
+  listByResourceGroup is ArmResourceListByParent<StorageContainer>;
 
   @doc("Lists all of the storage containers in the specified subscription. Use the nextLink property in the response to get the next page of storage containers.")
   listAll is ArmListBySubscription<StorageContainer>;

@@ -6,7 +6,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 /** Contains the analyze text SentimentAnalysis task input. */
 model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {

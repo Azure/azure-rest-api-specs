@@ -1,12 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace DocumentTranslation;
 
@@ -21,7 +23,7 @@ interface DocumentTranslationOperations {
   @route("document:translate")
   @post
   documentTranslate is RpcOperation<
-    DocumentTranslateContent,
+    DocumentTranslateBody,
     DocumentTranslateResult,
     ServiceTraits
   >;
@@ -50,11 +52,12 @@ interface DocumentTranslationOperations {
     destination, it will be overwritten. The targetUrl for each target language
     must be unique.
     """)
+  @finalOperation(DocumentTranslationOperations.getTranslationStatus)
   @pollingOperation(DocumentTranslationOperations.getTranslationStatus)
   @route("/document/batches")
   @post
   startTranslation is Azure.Core.Foundations.Operation<
-    StartTranslationDetails,
+    StartTranslationBody,
     {
       @doc("Request has been accepted successfully.")
       @statusCode
@@ -180,17 +183,11 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
-      @query({
-        name: "ids",
-        format: "csv",
-      })
+      @query("ids")
       ids?: uuid[];
 
       @doc("Statuses to use in filtering")
-      @query({
-        name: "statuses",
-        format: "csv",
-      })
+      @query("statuses")
       statuses?: string[];
 
       @doc("the start datetime to get items after")
@@ -202,10 +199,7 @@ interface DocumentTranslationOperations {
       createdDateTimeUtcEnd?: utcDateTime;
 
       @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
-      @query({
-        name: "orderby",
-        format: "csv",
-      })
+      @query("orderby")
       orderby?: string[];
     },
     TranslationsStatus
@@ -222,6 +216,7 @@ interface DocumentTranslationOperations {
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The batch id")
+      @clientName("translation_id", "python")
       @path
       id: uuid;
 
@@ -245,6 +240,7 @@ interface DocumentTranslationOperations {
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
+      @clientName("translation_id", "python")
       @path
       id: uuid;
     },
@@ -268,6 +264,7 @@ interface DocumentTranslationOperations {
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation-id")
+      @clientName("translation_id", "python")
       @path
       id: uuid;
     },
@@ -329,6 +326,7 @@ interface DocumentTranslationOperations {
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
+      @clientName("translation_id", "python")
       @path
       id: uuid;
 
@@ -385,17 +383,11 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
-      @query({
-        name: "ids",
-        format: "csv",
-      })
+      @query("ids")
       ids?: uuid[];
 
       @doc("Statuses to use in filtering")
-      @query({
-        name: "statuses",
-        format: "csv",
-      })
+      @query("statuses")
       statuses?: string[];
 
       @doc("the start datetime to get items after")
@@ -407,10 +399,7 @@ interface DocumentTranslationOperations {
       createdDateTimeUtcEnd?: utcDateTime;
 
       @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
-      @query({
-        name: "orderby",
-        format: "csv",
-      })
+      @query("orderby")
       orderby?: string[];
     },
     DocumentsStatus
