@@ -20,7 +20,7 @@ using TypeSpec.Versioning;
  */
 @armProviderNamespace
 @service({
-  title: "App Compliance Automation Tool for Microsoft 365",
+    title: "App Compliance Automation Tool for Microsoft 365 test",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
@@ -30,10 +30,10 @@ namespace Microsoft.AppComplianceAutomation;
  * The available API versions.
  */
 enum Versions {
-  /**
-   * The 2024-06-27 API version.
-   */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_06_27: "2024-06-27",
+    /**
+     * The 2024-06-27 API version.
+     */
+    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+    @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+    v2024_06_27: "2024-06-27",
 }
