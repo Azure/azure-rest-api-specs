@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-08-21-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-21-preview'
 input-file:
-  - preview/2024-08-21-preview/secretsynccontroller.json
+  - Microsoft.SecretSyncController/preview/2024-08-21-preview/secretsynccontroller.json
 ```
 
 ---
