@@ -6,7 +6,7 @@ param (
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
   [int]$FolderCount = 0,
-  [int] $Parallelism = 5
+  [int] $Parallelism = 2
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
@@ -33,14 +33,17 @@ if ($typespecFolders) {
   # Group typespec folders by "service" (the first folder in the path). This
   # parallel validation at the level of the service.
   # Example: 'specification/ai/DocumentIntelligence' -> 'specification/ai'.
-  $serviceFolders = $typespecFolders | Group-Object -Property { 
-    # "specification\ai\DocumentIntelligence" -> @("specification", "ai", "DocumentIntelligence")
-    $splitPath = $_ -replace '\\', '/' -split '/'
+  # $serviceFolders = $typespecFolders | Group-Object -Property {
+  #   # "specification\ai\DocumentIntelligence" -> @("specification", "ai", "DocumentIntelligence")
+  #   $splitPath = $_ -replace '\\', '/' -split '/'
 
-    # @("specification", "ai", "DocumentIntelligence") -> "specification/ai"
-    return $splitPath[0..1] -join '/'
-  }
-  
+  #   # @("specification", "ai", "DocumentIntelligence") -> "specification/ai"
+  #   return $splitPath[0..1] -join '/'
+  # }
+
+  # Test: no grouping. Run everything flat out.
+  $serviceFolders = $typespecFolders | Group-Object -Property { $_ }
+
   Write-Host "Starting per-service parallel validation with parallelism: $Parallelism"
 
   $serviceFolders `
