@@ -1675,7 +1675,7 @@
         "tags": [
           "SoftDelete"
         ],
-        "operationId": "SoftDelete_ListSoftDeletedResourcesByArtifactName",
+        "operationId": "SoftDeletedResource_ListByArtifactName",
         "description": "List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.",
         "parameters": [
           {
@@ -1689,6 +1689,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the soft-deleted resources resides."
           },
           {
@@ -1696,6 +1697,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The type of the artifact to be listed, such as gallery image version."
           },
           {
@@ -1703,6 +1705,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The artifact name to be listed. If artifact type is Images, then the artifact name should be the gallery image name."
           },
           {
@@ -3058,6 +3061,7 @@
           "description": "The timestamp for when the resource is soft-deleted."
         }
       },
+      "type": "object",
       "description": "Describes the properties of a soft-deleted resource."
     },
     "GallerySoftDeletedResource": {
@@ -3072,6 +3076,7 @@
           "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
         }
       ],
+      "type": "object",
       "description": "The details information of soft-deleted resource."
     },
     "GalleryList": {
@@ -3186,6 +3191,7 @@
       "required": [
         "value"
       ],
+      "type": "object",
       "description": "The List Soft-deleted Resources operation response."
     },
     "UpdateResourceDefinition": {
