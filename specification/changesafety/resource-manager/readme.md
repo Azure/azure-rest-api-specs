@@ -37,7 +37,14 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - ChangeControl/preview/2024-10-01-preview/ChangeControl.json
+  - Microsoft.ChangeSafety/ChangeControl/preview/2024-10-01-preview/ChangeControl.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: changeControl.json
+    reason: Need to use Record for key-value pair properties
+  - code: TopLevelResourcesListByResourceGroup
+    from: changeControl.json
+    reason: List for ChangeStates and StageMaps are not supported by design.
 ```
 
 ---
