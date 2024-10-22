@@ -1745,6 +1745,12 @@
             "schema": {
               "$ref": "#/definitions/RecordingStateResponse"
             }
+          },
+          "202": {
+            "description": "The service has accepted the StartCallRecording request and will begin processing it. You will receive either a StartRecordingFailed event or RecordingStateChanged to active at your specified callback URI to update you on the status of the request.",
+            "schema": {
+              "$ref": "#/definitions/RecordingStateResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -3274,14 +3280,15 @@
     },
     "StartCallRecordingRequest": {
       "description": "The request payload start for call recording operation with call locator.",
-      "required": [
-        "callLocator"
-      ],
       "type": "object",
       "properties": {
         "callLocator": {
           "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
+          "description": "The call locator. (only one of CallLocator or connectionId to be used)"
+        },
+        "callConnectionId": {
+          "description": "The call connectionId. (only one of CallLocator or connectionId to be used)",
+          "type": "string"
         },
         "recordingStateCallbackUri": {
           "description": "The uri to send notifications to.",
@@ -3534,6 +3541,11 @@
           "type": "string",
           "readOnly": true
         },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -3558,6 +3570,11 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
@@ -3666,6 +3683,11 @@
           "type": "integer",
           "readOnly": true
         },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -3771,6 +3793,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
@@ -3908,6 +3931,11 @@
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
         },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Result information defines the code, subcode and message",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -3994,6 +4022,11 @@
     "PlayCanceled": {
       "type": "object",
       "properties": {
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
@@ -4172,6 +4205,11 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Result information defines the code, subcode and message",
           "readOnly": true
         },
         "callConnectionId": {
@@ -4666,7 +4704,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
