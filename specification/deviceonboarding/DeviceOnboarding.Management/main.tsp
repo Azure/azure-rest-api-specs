@@ -124,7 +124,7 @@ interface OnboardingServices {
 // ------------------------------------------------------------------
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
-@doc("A onboarding policy resource.")
+@doc("An onboarding policy resource.")
 @parentResource(OnboardingService)
 model Policy is Azure.ResourceManager.TrackedResource<PolicyProperties> {
   @doc("The name of the Policy tracked resource.")
@@ -973,9 +973,9 @@ union OnboardingStatus {
   Failed: "Failed",
 }
 
-@doc("The properties passed in the readyToOnboard POST request.")
+@doc("The properties passed in the markReadyToOnboard POST request.")
 @added(Versions.v2024_12_01_preview)
-model ReadyToOnboardProperties {
+model MarkReadyToOnboardProperties {
   @doc("Desired maximum duration by which a device can be onboarded")
   ttl: duration; // TODO, determine min/max enforcement, correct format here
 }
@@ -990,6 +990,6 @@ interface DeviceStates {
   @added(Versions.v2024_12_01_preview)
   readyToOnboard is ArmResourceActionNoResponseContentAsync<
     DeviceState,
-    ReadyToOnboardProperties
+    MarkReadyToOnboardProperties
   >; // TODO: revisit error response body after private RP testing if needed
 }
