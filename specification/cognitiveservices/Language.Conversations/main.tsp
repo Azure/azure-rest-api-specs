@@ -1174,7 +1174,7 @@ model ConversationSummarizationTaskParametersBase
 
   /** a text field to allow customers to use natural language to describe their needs for summarization. */
   @added(Versions.v2024_11_15_preview)
-  instruction: string;
+  instruction?: string;
 }
 
 /** Supported parameters for pre-build conversational summarization task. */
