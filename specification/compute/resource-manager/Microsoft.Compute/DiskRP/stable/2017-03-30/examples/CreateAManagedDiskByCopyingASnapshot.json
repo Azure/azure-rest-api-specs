@@ -16,19 +16,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "name": "myDisk",
-        "location": "West US",
-        "properties": {
-          "provisioningState": "Updating",
-          "creationData": {
-            "createOption": "Copy",
-            "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "managedBy": "/subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec",
@@ -68,6 +55,21 @@
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk",
         "name": "myManagedDisk"
       }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk by copying a snapshot."
 }

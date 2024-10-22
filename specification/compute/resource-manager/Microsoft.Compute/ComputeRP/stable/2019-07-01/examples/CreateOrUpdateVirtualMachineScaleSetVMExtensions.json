@@ -20,24 +20,6 @@
     }
   },
   "responses": {
-    "201": {
-      "body": {
-        "name": "myVMExtension",
-        "location": "westus",
-        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension",
-        "properties": {
-          "autoUpgradeMinorVersion": true,
-          "provisioningState": "Creating",
-          "publisher": "extPublisher",
-          "type": "extType",
-          "typeHandlerVersion": "1.2",
-          "settings": {
-            "UserName": "xyz@microsoft.com"
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "name": "myVMExtension",
@@ -55,6 +37,26 @@
           }
         }
       }
+    },
+    "201": {
+      "body": {
+        "name": "myVMExtension",
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension",
+        "properties": {
+          "autoUpgradeMinorVersion": true,
+          "provisioningState": "Creating",
+          "publisher": "extPublisher",
+          "type": "extType",
+          "typeHandlerVersion": "1.2",
+          "settings": {
+            "UserName": "xyz@microsoft.com"
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
+  "title": "Create VirtualMachineScaleSet VM extension."
 }

@@ -16,19 +16,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "properties": {
-          "creationData": {
-            "createOption": "Empty"
-          },
-          "diskSizeGB": 200,
-          "provisioningState": "Updating"
-        },
-        "location": "West US",
-        "name": "myDisk"
-      }
-    },
     "200": {
       "body": {
         "managedBy": "/subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec",
@@ -68,6 +55,21 @@
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk",
         "name": "myManagedDisk"
       }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create an empty managed disk."
 }

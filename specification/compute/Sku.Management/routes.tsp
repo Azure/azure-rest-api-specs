@@ -30,11 +30,16 @@ interface ResourceSkus {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * To Include Extended Locations information or not in the response.
-       */
-      @query("includeExtendedLocations")
-      includeExtendedLocations?: string;
+      ...IncludeExtendedLocationsParameter;
     }
   >;
+}
+
+/** Query Parameter to indicating whether to include extended locations */
+model IncludeExtendedLocationsParameter {
+  /**
+   * To Include Extended Locations information or not in the response.
+   */
+  @query("includeExtendedLocations")
+  includeExtendedLocations?: string;
 }

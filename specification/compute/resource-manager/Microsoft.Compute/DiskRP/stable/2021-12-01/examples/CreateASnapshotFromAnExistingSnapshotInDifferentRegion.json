@@ -15,19 +15,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "name": "mySnapshot2",
-        "location": "West US",
-        "properties": {
-          "provisioningState": "Updating",
-          "creationData": {
-            "createOption": "CopyStart",
-            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "name": "mySnapshot2",
@@ -40,6 +27,21 @@
           }
         }
       }
+    },
+    "202": {
+      "body": {
+        "name": "mySnapshot2",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "CopyStart",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "Snapshots_CreateOrUpdate",
+  "title": "Create a snapshot from an existing snapshot in the same or a different subscription in a different region."
 }

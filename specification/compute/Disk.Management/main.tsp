@@ -33,6 +33,8 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 namespace Microsoft.Compute;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /**
  * The available API versions.
  */

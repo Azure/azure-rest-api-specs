@@ -15,20 +15,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot",
-        "name": "mySnapshot",
-        "location": "West US",
-        "properties": {
-          "provisioningState": "Updating",
-          "creationData": {
-            "createOption": "CopyFromSanSnapshot",
-            "elasticSanResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ElasticSan/elasticSans/myElasticSan/volumegroups/myElasticSanVolumeGroup/snapshots/myElasticSanVolumeSnapshot"
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot",
@@ -42,6 +28,22 @@
           }
         }
       }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot",
+        "name": "mySnapshot",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "CopyFromSanSnapshot",
+            "elasticSanResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ElasticSan/elasticSans/myElasticSan/volumegroups/myElasticSanVolumeGroup/snapshots/myElasticSanVolumeSnapshot"
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "Snapshots_CreateOrUpdate",
+  "title": "Create a snapshot from an elastic san volume snapshot."
 }

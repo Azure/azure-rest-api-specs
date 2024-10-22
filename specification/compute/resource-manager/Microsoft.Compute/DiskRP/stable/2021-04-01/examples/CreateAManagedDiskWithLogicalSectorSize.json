@@ -19,24 +19,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "properties": {
-          "creationData": {
-            "createOption": "Empty",
-            "logicalSectorSize": 512
-          },
-          "diskSizeGB": 200,
-          "provisioningState": "Updating"
-        },
-        "location": "West US",
-        "name": "myDisk",
-        "sku": {
-          "name": "UltraSSD_LRS",
-          "tier": "Ultra"
-        }
-      }
-    },
     "200": {
       "body": {
         "properties": {
@@ -54,6 +36,26 @@
           "tier": "Ultra"
         }
       }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty",
+            "logicalSectorSize": 512
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk",
+        "sku": {
+          "name": "UltraSSD_LRS",
+          "tier": "Ultra"
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create an ultra managed disk with logicalSectorSize 512E"
 }

@@ -18,23 +18,6 @@
     }
   },
   "responses": {
-    "201": {
-      "body": {
-        "name": "myDedicatedHostGroup",
-        "location": "westus",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
-        "tags": {
-          "department": "finance"
-        },
-        "zones": [
-          "1"
-        ],
-        "properties": {
-          "platformFaultDomainCount": 3,
-          "hosts": []
-        }
-      }
-    },
     "200": {
       "body": {
         "properties": {
@@ -52,6 +35,25 @@
           "1"
         ]
       }
+    },
+    "201": {
+      "body": {
+        "name": "myDedicatedHostGroup",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
+        "tags": {
+          "department": "finance"
+        },
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "hosts": []
+        }
+      }
     }
-  }
+  },
+  "operationId": "DedicatedHostGroups_CreateOrUpdate",
+  "title": "Create or update a dedicated host group."
 }

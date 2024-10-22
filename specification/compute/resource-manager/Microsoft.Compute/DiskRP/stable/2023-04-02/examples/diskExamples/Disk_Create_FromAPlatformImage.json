@@ -18,32 +18,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
-        "name": "myDisk",
-        "location": "West US",
-        "properties": {
-          "osType": "Windows",
-          "hyperVGeneration": "V1",
-          "purchasePlan": {
-            "name": "{sku}",
-            "publisher": "{publisher}",
-            "product": "{offer}"
-          },
-          "supportedCapabilities": {
-            "acceleratedNetwork": true
-          },
-          "creationData": {
-            "createOption": "FromImage",
-            "imageReference": {
-              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/westus/Publishers/{publisher}/ArtifactTypes/VMImage/Offers/{offer}/Skus/{sku}/Versions/1.0.0"
-            }
-          },
-          "provisioningState": "Updating"
-        }
-      }
-    },
     "200": {
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
@@ -69,6 +43,34 @@
           }
         }
       }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "purchasePlan": {
+            "name": "{sku}",
+            "publisher": "{publisher}",
+            "product": "{offer}"
+          },
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/westus/Publishers/{publisher}/ArtifactTypes/VMImage/Offers/{offer}/Skus/{sku}/Versions/1.0.0"
+            }
+          },
+          "provisioningState": "Updating"
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk from a platform image."
 }

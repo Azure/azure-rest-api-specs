@@ -16,19 +16,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "name": "myDisk",
-        "location": "West US",
-        "properties": {
-          "provisioningState": "Updating",
-          "creationData": {
-            "createOption": "Import",
-            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
-          }
-        }
-      }
-    },
     "200": {
       "body": {
         "name": "myDisk",
@@ -41,6 +28,21 @@
           }
         }
       }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "Import",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          }
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk by importing an unmanaged blob from the same subscription."
 }

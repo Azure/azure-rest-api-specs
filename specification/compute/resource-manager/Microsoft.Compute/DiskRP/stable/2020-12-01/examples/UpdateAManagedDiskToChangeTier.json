@@ -11,6 +11,19 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "provisioningState": "Succeeded",
+          "tier": "P30"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
     "202": {
       "body": {
         "properties": {
@@ -26,19 +39,8 @@
         "location": "West US",
         "name": "myDisk"
       }
-    },
-    "200": {
-      "body": {
-        "properties": {
-          "creationData": {
-            "createOption": "Empty"
-          },
-          "provisioningState": "Succeeded",
-          "tier": "P30"
-        },
-        "location": "West US",
-        "name": "myDisk"
-      }
     }
-  }
+  },
+  "operationId": "Disks_Update",
+  "title": "Update a managed disk to change tier."
 }

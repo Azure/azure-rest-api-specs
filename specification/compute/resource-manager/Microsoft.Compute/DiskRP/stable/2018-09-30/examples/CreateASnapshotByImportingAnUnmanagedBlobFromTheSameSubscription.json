@@ -16,19 +16,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "properties": {
-          "creationData": {
-            "createOption": "Import",
-            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
-          },
-          "provisioningState": "Updating"
-        },
-        "location": "West US",
-        "name": "mySnapshot1"
-      }
-    },
     "200": {
       "body": {
         "properties": {
@@ -41,6 +28,21 @@
         "location": "West US",
         "name": "mySnapshot1"
       }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Import",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "mySnapshot1"
+      }
     }
-  }
+  },
+  "operationId": "Snapshots_CreateOrUpdate",
+  "title": "Create a snapshot by importing an unmanaged blob from the same subscription."
 }
