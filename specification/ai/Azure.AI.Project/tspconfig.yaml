@@ -8,10 +8,10 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-client.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-project.json"
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-ai-client"
+    package-dir: "azure-ai-project"
     package-name: "{package-dir}"
     flavor: azure
     generate-test: false
@@ -28,11 +28,11 @@ options:
     generate-sample: false
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-ts":
-    package-dir: "azure-ai-client"
+    package-dir: "azure-ai-project"
     isModularLibrary: true
     generateTest: false
     packageDetails:
-      name: "@azure/ai-client"
+      name: "@azure/ai-project"
     flavor: azure
 linter:
   extends:
