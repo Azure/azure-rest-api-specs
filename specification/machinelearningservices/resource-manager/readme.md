@@ -135,6 +135,7 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2024-04-01/mfe.json
   - Microsoft.MachineLearningServices/stable/2024-04-01/registries.json
   - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceRP.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     reason: This provisioningState property is marked as readOnly. 
@@ -205,6 +206,64 @@ suppressions:
       this can't be change without breaking the customer.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}].put
+  - code: PutResponseCodes
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}].put
+  - code: DeleteResponseCodes
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}].delete
+  - code: LroLocationHeader
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}].delete.responses.202
+  - code: PatchBodyParametersSchema
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}].patch.parameters[4].schema.properties.identity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}].patch.parameters[4].schema.properties.sku
+  - code: PostResponseCodes
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/resyncKeys].post
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints].get.responses.200.schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources].get.responses.200.schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections].get.responses.200.schema.properties
+  - code: XmsPageableForListCalls
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources].get
+  - code: AvoidAdditionalProperties
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.definitions.DiagnoseRequestProperties.properties.udr
+      - $.definitions.DiagnoseRequestProperties.properties.nsg
+      - $.definitions.DiagnoseRequestProperties.properties.resourceLock
+      - $.definitions.DiagnoseRequestProperties.properties.dnsResolution
+      - $.definitions.DiagnoseRequestProperties.properties.storageAccount
+      - $.definitions.DiagnoseRequestProperties.properties.keyVault
+      - $.definitions.DiagnoseRequestProperties.properties.containerRegistry
+      - $.definitions.DiagnoseRequestProperties.properties.applicationInsights
+      - $.definitions.DiagnoseRequestProperties.properties.others
+      - $.definitions.ManagedNetworkSettings.properties.outboundRules
+  - code: TrackedResourcePatchOperation
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.definitions.PrivateEndpointConnection
 ```
 
 ### Tag: package-preview-2024-04
