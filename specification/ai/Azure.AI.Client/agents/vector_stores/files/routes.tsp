@@ -57,7 +57,7 @@ op createVectorStoreFile is Azure.Core.Foundations.Operation<
     /** The data sorces to be used. This option is mutually exclusive with fileId. */
     @doc("Azure asset ID.")
     @encodedName("application/json", "data_sources")
-    dataSources?: dataSources: VectorStorageDataSource[];
+    dataSources?: VectorStorageDataSource[];
 
     /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. */
     @encodedName("application/json", "chunking_strategy")
