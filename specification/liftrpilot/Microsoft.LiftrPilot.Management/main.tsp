@@ -32,17 +32,10 @@ enum Versions {
   v2024_10_03_preview: "2024-10-03-preview",
 }
 
-@doc("Partner's specific Properties")
-model PartnerProperties{
-}
-
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
  * BaseResourceProperties contains Marketplace, useDetail related properties*/
 @doc("Properties specific to Organization")
 model OrganizationProperties is BaseResourceProperties {
-
-  @doc("partner properties")
-  partnerProperties?: PartnerProperties;
 }
 
 model OrganizationResource is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
