@@ -59,7 +59,7 @@ interface Data {
   ): DataContainer;
 
   @doc("Create or update container.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
+  @route("/data/{name}")
   @put
   createOrUpdate(
     @doc("Container name.")
@@ -132,7 +132,7 @@ interface DataVersionsBase {
   ): DataVersionBase;
 
   @doc("Create or update version.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
+  @route("/data/{name}/versions/{version}")
   @put
   createOrUpdate(
     @doc("Container name.")
@@ -150,7 +150,7 @@ interface DataVersionsBase {
   ): DataVersionBase;
 
   @doc("Publish version asset into registry.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}/publish")
+  @route("/data/{name}/versions/{version}/publish")
   @post
   publish(
     @doc("Container name.")
