@@ -988,7 +988,7 @@ interface DeviceStates {
   update is ArmResourcePatchSync<DeviceState, DeviceStateProperties>;
   listByParent is ArmResourceListByParent<DeviceState>;
   @added(Versions.v2024_12_01_preview)
-  readyToOnboard is ArmResourceActionNoResponseContentAsync<
+  enableOnboarding is ArmResourceActionNoResponseContentAsync<
     DeviceState,
     EnableOnboardingProperties
   >; // TODO: revisit error response body after private RP testing if needed
