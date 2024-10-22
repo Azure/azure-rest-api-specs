@@ -1,10 +1,29 @@
 {
   "parameters": {
-    "roleDefinitionId": "myRoleDefinitionId",
+    "tableRoleDefinitionId": "myRoleDefinitionId",
     "subscriptionId": "mySubscriptionId",
     "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
-    "api-version": "2024-12-01-preview"
+    "api-version": "2024-12-01-preview",
+    "createUpdateTableRoleDefinitionParameters": {
+      "properties": {
+        "roleName": "myRoleName",
+        "type": "CustomRole",
+        "assignableScopes": [
+          "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+          "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+        ],
+        "permissions": [
+          {
+            "dataActions": [
+              "Microsoft.DocumentDB/databaseAccounts/tables/entities/create",
+              "Microsoft.DocumentDB/databaseAccounts/tables/entities/read"
+            ],
+            "notDataActions": []
+          }
+        ]
+      }
+    }
   },
   "responses": {
     "200": {
@@ -24,12 +43,12 @@
               "dataActions": [
                 "Microsoft.DocumentDB/databaseAccounts/tables/entities/create",
                 "Microsoft.DocumentDB/databaseAccounts/tables/entities/read"
-              ],
-              "notDataActions": []
+              ]
             }
           ]
         }
       }
-    }
+    },
+    "202": {}
   }
 }
