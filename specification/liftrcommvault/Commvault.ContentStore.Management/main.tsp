@@ -47,9 +47,9 @@ model Entity is TrackedResource<EntityProperties> {
 @armResourceOperations
 interface Entities {
   get is ArmResourceRead<Entity>;
-  create is ArmResourceCreateOrReplaceAsync<Entity>;
-  delete is ArmResourceDeleteWithoutOkAsync<Entity>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Entity>;
   update is ArmResourcePatchAsync<Entity, EntityProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<Entity>;
   listByResourceGroup is ArmResourceListByParent<Entity>;
   listBySubscription is ArmListBySubscription<Entity>;
 }
