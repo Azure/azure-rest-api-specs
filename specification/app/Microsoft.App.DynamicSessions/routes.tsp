@@ -14,6 +14,14 @@ using Azure.Core.Traits;
 
 namespace Microsoft.App.DynamicSessions;
 
+alias BaseOperationTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+alias CodeExecutionTraits = BaseOperationTraits &
+  QueryParametersTrait<SessionIdentifier>;
+alias CodeExecutionOperations = Azure.Core.ResourceOperations<CodeExecutionTraits>;
+
 interface CodeExecution {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Execute code in a session.")
@@ -29,33 +37,20 @@ interface CodeExecution {
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
     AcceptedResponse &
-      SessionCodeExecutionResponse &
+      SessionCodeExecutionResource &
       ExecutionOperationIdHeader &
       Foundations.LongRunningStatusLocation
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the code execution result.")
-  @route("/executions/{executionId}")
-  get is Foundations.Operation<
-    {
-      ...SessionIdentifier;
-      ...CodeExecutionIdentifier;
-    },
-    {
-      ...SessionCodeExecutionResponse;
-    }
-  >;
+  get is CodeExecutionOperations.ResourceRead<SessionCodeExecutionResource>;
 }
 
-alias SessionResourceFilesTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId &
+alias SessionResourceFilesTraits = BaseOperationTraits &
   QueryParametersTrait<{
     ...SessionIdentifier;
     ...SessionResourceFilePathQueryParameter;
   }>;
-
 alias SessionResourceFilesOperations = Azure.Core.ResourceOperations<SessionResourceFilesTraits>;
 
 interface SessionResourceFiles {

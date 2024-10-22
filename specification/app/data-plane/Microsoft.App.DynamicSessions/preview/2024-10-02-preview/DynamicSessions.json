@@ -80,7 +80,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResponse"
+              "$ref": "#/definitions/SessionCodeExecutionResource"
             },
             "headers": {
               "Operation-Location": {
@@ -137,17 +137,21 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SessionIdentifier"
+            "name": "executionId",
+            "in": "path",
+            "description": "Session code execution id.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/CodeExecutionIdentifier"
+            "$ref": "#/parameters/SessionIdentifier"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResponse"
+              "$ref": "#/definitions/SessionCodeExecutionResource"
             },
             "headers": {
               "x-ms-error-code": {
@@ -518,6 +522,19 @@
         ]
       }
     },
+    "CodeExecutionIdentifier": {
+      "type": "object",
+      "description": "Session code execution identifier path parameter.",
+      "properties": {
+        "executionId": {
+          "type": "string",
+          "description": "The identifier of code execution."
+        }
+      },
+      "required": [
+        "executionId"
+      ]
+    },
     "CodeInputType": {
       "type": "string",
       "description": "Code input type.",
@@ -623,9 +640,9 @@
         "timeoutInSeconds"
       ]
     },
-    "SessionCodeExecutionResponse": {
+    "SessionCodeExecutionResource": {
       "type": "object",
-      "description": "The response containing the result of the code execution.",
+      "description": "The session code execution resource.",
       "properties": {
         "id": {
           "type": "string",
@@ -748,14 +765,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "CodeExecutionIdentifier": {
-      "name": "executionId",
-      "in": "path",
-      "description": "The identifier of code execution.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     },
     "ExecutionOperationIdHeader": {
       "name": "operation-id",

@@ -36,10 +36,12 @@ model SessionCodeExecutionResult {
   executionTimeInMilliseconds?: int64;
 }
 
-@doc("The response containing the result of the code execution.")
-model SessionCodeExecutionResponse {
+@doc("The session code execution resource.")
+@resource("executions")
+model SessionCodeExecutionResource {
   @visibility("read")
   @doc("Session code execution id.")
+  @key("executionId")
   id: string;
 
   @doc("The identifier of the session.")
