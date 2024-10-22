@@ -26,4 +26,9 @@ directive:
 - from: cosmos-db.json
   where: $.definitions
   transform: delete $.ErrorResponse
+
+- from: dataTransferService.json
+  where: $.definitions.DataTransferJobProperties.properties.error
+  transform: >
+    $.$ref = "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
 ```
