@@ -102,7 +102,6 @@ model VectorStorageDataSourceURIAsset
 model VectorStorageDataSourceIDAsset
   extends VectorStorageDataSourceAsset {
     type: VectorStorageDataSourceAssetType.id_asset;
-  }
 }
 
 /**
