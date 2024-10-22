@@ -58,7 +58,7 @@ model CodeInterpreterToolResource {
   /** The data sources to be used. This option is mutually exclusive with fileIds. */
   @maxItems(20)
   @encodedName("application/json", "data_sources")
-  dataSources?: dataSources: VectorStorageDataSource[]
+  dataSources?: VectorStorageDataSource[];
 }
 
 /**
@@ -75,7 +75,7 @@ model FileSearchToolResource {
 
   @maxItems(1)
   @encodedName("application/json", "vector_stores")
-  vectorStores?: VectorStore[]; 
+  vectorStores?: VectorStoreFromAzure[]; 
 }
 
 /**

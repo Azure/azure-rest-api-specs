@@ -95,18 +95,17 @@ model VectorStorageDataSourceAsset {
 /** The URI asset type, used when we want to get vector store based of the Azure asset ID. */
 model VectorStorageDataSourceURIAsset
   extends VectorStorageDataSourceAsset {
-    type: VectorStorageDataSourceAssetType.uri_asset
+    type: VectorStorageDataSourceAssetType.uri_asset;
 }
 
 /** The data ID asset. */
 model VectorStorageDataSourceIDAsset
   extends VectorStorageDataSourceAsset {
-    type: VectorStorageDataSourceAssetType.id_asset
+    type: VectorStorageDataSourceAssetType.id_asset;
   }
 }
 
-/
-**
+/**
  * The structure to be supplied when the vector store is being created from the Azure asset ID.
  */
 model VectorStorageDataSource {
@@ -131,7 +130,7 @@ model VectorStorageConfiguration {
 /**
  * Vector store, keeping several vector store configurations.
  */
-model VectorStore {
+model VectorStoreFromAzure {
   /** Name */
   @encodedName("application/json", "name")
   name: string;
