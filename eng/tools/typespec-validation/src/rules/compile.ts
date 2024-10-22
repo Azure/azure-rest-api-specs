@@ -2,6 +2,7 @@ import path from "path";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { setupTempWorkspace, getServiceRoot } from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -12,10 +13,11 @@ export class CompileRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
+    const workspaceDirectory = await setupTempWorkspace(host, folder);
     if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
       let [err, stdout, stderr] = await host.runCmd(
         `npm exec --no -- tsp compile . --warn-as-error`,
-        folder,
+        workspaceDirectory,
       );
       if (
         stdout.toLowerCase().includes("no emitter was configured") ||
@@ -34,7 +36,7 @@ export class CompileRule implements Rule {
     if (await host.checkFileExists(path.join(folder, "client.tsp"))) {
       let [err, stdout, stderr] = await host.runCmd(
         `npm exec --no -- tsp compile client.tsp --no-emit --warn-as-error`,
-        folder,
+        workspaceDirectory,
       );
       if (err) {
         success = false;
@@ -45,7 +47,11 @@ export class CompileRule implements Rule {
     }
 
     if (success) {
-      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      const gitDiffResult = await host.gitDiffTopSpecFolder(
+        host,
+        getServiceRoot(folder),
+        getServiceRoot(workspaceDirectory),
+      );
       stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;

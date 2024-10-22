@@ -18,18 +18,8 @@ export class TsvTestHost implements TsvHost {
 
   gitOperation(_folder: string): IGitOperation {
     return {
-      status: () => {
-        return Promise.resolve({
-          modified: [],
-          not_added: [],
-          isClean: () => true,
-        });
-      },
       diff: () => {
-        return Promise.resolve("");
-      },
-      revparse: () => {
-        return Promise.resolve("");
+        return Promise.resolve('');
       },
     };
   }

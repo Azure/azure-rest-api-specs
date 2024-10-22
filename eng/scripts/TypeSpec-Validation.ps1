@@ -6,11 +6,15 @@ param (
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD",
   [int]$FolderCount = 0,
-  [int] $Parallelism = 6
+  [int] $Parallelism = $env:TSV_PARALLELISM
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
+
+if (!$Parallelism) { 
+  $Parallelism = 1
+}
 
 $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `

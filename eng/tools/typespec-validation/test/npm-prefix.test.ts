@@ -16,18 +16,8 @@ describe("npm-prefix", function () {
     };
     host.gitOperation = (_folder: string): IGitOperation => {
       return {
-        status: () => {
-          return Promise.resolve({
-            modified: [],
-            not_added: [],
-            isClean: () => true,
-          });
-        },
         diff: () => {
-          return Promise.resolve("");
-        },
-        revparse: () => {
-          return Promise.resolve("c:/Git/azure-rest-api-specs");
+          return Promise.resolve('');
         },
       };
     };
@@ -48,18 +38,8 @@ describe("npm-prefix", function () {
     };
     host.gitOperation = (_folder: string): IGitOperation => {
       return {
-        status: () => {
-          return Promise.resolve({
-            modified: [],
-            not_added: [],
-            isClean: () => true,
-          });
-        },
         diff: () => {
-          return Promise.resolve("");
-        },
-        revparse: () => {
-          return Promise.resolve("/Git/azure-rest-api-specs");
+          return Promise.resolve('');
         },
       };
     };

@@ -1,20 +1,20 @@
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { getRepoRoot } from "../utils.js";
 
 export class NpmPrefixRule implements Rule {
   readonly name = "NpmPrefix";
   readonly description = "Verify spec is using root level package.json";
 
   async execute(host: TsvHost, folder: string): Promise<RuleResult> {
-    const git = host.gitOperation(folder);
 
     let expected_npm_prefix: string | undefined;
     try {
       // If spec folder is inside a git repo, returns repo root
-      expected_npm_prefix = host.normalizePath(await git.revparse("--show-toplevel"));
+      expected_npm_prefix = host.normalizePath(await getRepoRoot());
     } catch (err) {
-      // If spec folder is outside git repo, or if problem running git, throws error
+      // Spec is outside a git repo
       return {
         success: false,
         errorOutput: err instanceof Error ? err.message : undefined,

@@ -37,8 +37,8 @@ export class TsvRunnerHost implements TsvHost {
     return normalizePath(folder);
   }
 
-  gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult> {
-    return gitDiffTopSpecFolder(host, folder);
+  gitDiffTopSpecFolder(host: TsvHost, baseFolder: string, changedFolder: string): Promise<RuleResult> {
+    return gitDiffTopSpecFolder(host, baseFolder, changedFolder);
   }
 
   globby(patterns: string[]): Promise<string[]> {

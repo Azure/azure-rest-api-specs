@@ -3,6 +3,7 @@ import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { getRepoRoot } from "../utils.js";
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
@@ -11,7 +12,7 @@ export class FolderStructureRule implements Rule {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
-    const gitRoot = host.normalizePath(await host.gitOperation(folder).revparse("--show-toplevel"));
+    const gitRoot = host.normalizePath(await getRepoRoot());
     const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
 
     stdOutput += `folder: ${folder}\n`;

@@ -32,7 +32,8 @@ describe("util", function () {
   });
   describe("gitDiff", function () {
     it("should succeed if git diff produces no output", async function () {
-      const result = await gitDiffTopSpecFolder(new TsvTestHost(), TsvTestHost.folder);
+      // TODO: contrive a good temp folder name
+      const result = await gitDiffTopSpecFolder(new TsvTestHost(), TsvTestHost.folder, '.');
       assert(result.success);
     });
   });

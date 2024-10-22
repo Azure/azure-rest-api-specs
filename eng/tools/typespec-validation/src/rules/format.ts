@@ -1,6 +1,7 @@
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { setupTempWorkspace, getServiceRoot } from "../utils.js";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
@@ -11,9 +12,10 @@ export class FormatRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
+    const workspaceDirectory = await setupTempWorkspace(host, folder);
     let [err, stdout, stderr] = await host.runCmd(
       'npm exec --no -- tsp format "../**/*.tsp"', // Format parent folder to include shared files
-      folder,
+      workspaceDirectory,
     );
     if (err) {
       success = false;
@@ -34,7 +36,11 @@ export class FormatRule implements Rule {
     errorOutput += stderr;
 
     if (success) {
-      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      const gitDiffResult = await host.gitDiffTopSpecFolder(
+        host,
+        getServiceRoot(folder),
+        getServiceRoot(workspaceDirectory),
+      );
       stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;
