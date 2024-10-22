@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2021-05-01-preview",
+    "projectName": "proj1",
+    "body": [
+      {
+        "op": "add",
+        "value": {
+          "id": 3,
+          "answer": "ans3",
+          "source": "source1",
+          "questions": [
+            "question 3.1",
+            "question 3.2"
+          ],
+          "metadata": {
+            "k1": "v1",
+            "k2": "v2"
+          },
+          "dialog": {
+            "isContextOnly": false,
+            "prompts": [
+              {
+                "displayOrder": 1,
+                "qnaId": 11,
+                "displayText": "prompt 3.1"
+              },
+              {
+                "displayOrder": 2,
+                "qnaId": 21,
+                "displayText": "prompt 3.2"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "op": "replace",
+        "value": {
+          "id": 1,
+          "answer": "ans4",
+          "source": "source1",
+          "questions": [
+            "question 4.1",
+            "question 4.2"
+          ]
+        }
+      },
+      {
+        "op": "delete",
+        "value": {
+          "id": 2,
+          "answer": "ans2",
+          "source": "source1",
+          "questions": [
+            "question 2.1",
+            "question 2.2"
+          ]
+        }
+      }
+    ]
+  },
+  "responses": {
+    "202": {
+      "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+      "headers": {
+        "Operation-Location": "job1"
+      }
+    }
+  }
+}
