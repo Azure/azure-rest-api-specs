@@ -1037,6 +1037,23 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+- Microsoft.Resources/stable/2018-05-01/resources.json
+
+override-info:
+  title: PolicyClient
+```
+
 ## Suppression
 
 ``` yaml
@@ -1627,21 +1644,4 @@ batch:
   - package-changes: true
   - package-snapshots: true
   - package-bicep: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Authorization/stable/2016-09-01/locks.json
-- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
-- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
-- Microsoft.Resources/stable/2016-06-01/subscriptions.json
-- Microsoft.Resources/stable/2018-05-01/resources.json
-
-override-info:
-  title: PolicyClient
 ```
