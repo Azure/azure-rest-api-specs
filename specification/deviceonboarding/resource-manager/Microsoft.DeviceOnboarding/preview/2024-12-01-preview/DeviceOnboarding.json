@@ -279,7 +279,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ReadyToOnboardProperties"
+              "$ref": "#/definitions/MarkReadyToOnboardProperties"
             }
           }
         ],
@@ -2495,6 +2495,20 @@
         }
       }
     },
+    "MarkReadyToOnboardProperties": {
+      "type": "object",
+      "description": "The properties passed in the markReadyToOnboard POST request.",
+      "properties": {
+        "ttl": {
+          "type": "string",
+          "format": "duration",
+          "description": "Desired maximum duration by which a device can be onboarded"
+        }
+      },
+      "required": [
+        "ttl"
+      ]
+    },
     "OnboardingResourceType": {
       "type": "string",
       "description": "Type of resource being provisioned.",
@@ -2971,7 +2985,7 @@
     },
     "Policy": {
       "type": "object",
-      "description": "A onboarding policy resource.",
+      "description": "An onboarding policy resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PolicyProperties",
@@ -3259,20 +3273,6 @@
           }
         ]
       }
-    },
-    "ReadyToOnboardProperties": {
-      "type": "object",
-      "description": "The properties passed in the readyToOnboard POST request.",
-      "properties": {
-        "ttl": {
-          "type": "string",
-          "format": "duration",
-          "description": "Desired maximum duration by which a device can be onboarded"
-        }
-      },
-      "required": [
-        "ttl"
-      ]
     },
     "RendezvousEndpoint": {
       "type": "object",
