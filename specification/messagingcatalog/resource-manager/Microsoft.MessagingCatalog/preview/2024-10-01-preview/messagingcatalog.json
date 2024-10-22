@@ -521,10 +521,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssociationListRequest"
+            }
           }
         ],
         "responses": {
@@ -608,7 +611,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssociationDeleteResponse"
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -695,9 +701,22 @@
         }
       }
     },
-    "AssociationListResponse": {
+    "AssociationDeleteResponse": {
       "type": "object",
-      "description": "An response of paginated associations.",
+      "description": "An response of a association deletion.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A string detailing the result of the operation."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "AssociationListRequest": {
+      "type": "object",
+      "description": "An request to paginate a list of result.",
       "properties": {
         "skip": {
           "type": "integer",
@@ -708,7 +727,13 @@
           "type": "integer",
           "format": "int32",
           "description": "Controls how many results to retrieve."
-        },
+        }
+      }
+    },
+    "AssociationListResponse": {
+      "type": "object",
+      "description": "An response of paginated associations.",
+      "properties": {
         "associations": {
           "type": "array",
           "description": "List of associations.",
@@ -733,10 +758,6 @@
       "required": [
         "associationId"
       ]
-    },
-    "Azure.ResourceManager.ArmDeletedResponse": {
-      "type": "object",
-      "description": "Resource deleted successfully."
     },
     "MessagingCatalog": {
       "type": "object",
@@ -969,25 +990,5 @@
       ]
     }
   },
-  "parameters": {
-    "Azure.Core.SkipQueryParameter": {
-      "name": "skip",
-      "in": "query",
-      "description": "The number of result items to skip.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.TopQueryParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The number of result items to return.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
