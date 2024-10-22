@@ -613,7 +613,6 @@
           "MidConnections"
         ],
         "summary": "Recognize media from call.",
-        "description": "Recognize media from call.",
         "operationId": "CallMedia_Recognize",
         "parameters": [
           {
@@ -752,7 +751,6 @@
           "MidConnections"
         ],
         "summary": "Send dtmf tones.",
-        "description": "Send dtmf tones.",
         "operationId": "CallMedia_SendDtmfTones",
         "parameters": [
           {
@@ -863,7 +861,6 @@
           "MidConnections"
         ],
         "summary": "Hold participant from the call using identifier.",
-        "description": "Hold participant from the call using identifier.",
         "operationId": "CallMedia_Hold",
         "parameters": [
           {
@@ -910,7 +907,6 @@
           "MidConnections"
         ],
         "summary": "Unhold participants from the call using identifier.",
-        "description": "Unhold participants from the call using identifier.",
         "operationId": "CallMedia_Unhold",
         "parameters": [
           {
@@ -957,7 +953,6 @@
           "MidConnections"
         ],
         "summary": "Hold participant from the call using identifier.",
-        "description": "Hold participant from the call using identifier.",
         "operationId": "CallMedia_StartHoldMusic",
         "parameters": [
           {
@@ -1004,7 +999,6 @@
           "MidConnections"
         ],
         "summary": "Unhold participants from the call using identifier.",
-        "description": "Unhold participants from the call using identifier.",
         "operationId": "CallMedia_StopHoldMusic",
         "parameters": [
           {
@@ -1198,28 +1192,23 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Stop a dialog.",
-        "description": "Stop a dialog.",
         "operationId": "CallDialog_StopDialog",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
-            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
             "name": "dialogId",
             "in": "path",
-            "description": "The dialog id",
             "required": true,
             "type": "string"
           },
           {
             "name": "operationCallbackUri",
             "in": "query",
-            "description": "Operation callback URI.",
             "required": false,
             "type": "string"
           },
@@ -1943,6 +1932,10 @@
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the source of the call"
         },
+        "opsSource": {
+          "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
+          "description": "The identifier of the source in an OPS call"
+        },
         "operationContext": {
           "description": "A customer set value used to track the answering of a call.",
           "type": "string"
@@ -1989,6 +1982,21 @@
     },
     "CommunicationUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationUserIdentifierModel"
+    },
+    "AzureOpenAIDialogUpdate": {
+      "description": "Azure Open AI Dialog for UpdateDialog API Call",
+      "required": [],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DialogUpdateBase"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "azureOpenAI"
+    },
+    "MicrosoftTeamsAppIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
     },
     "MediaStreamingTransportType": {
       "description": "The type of transport to be used for media streaming, eg. Websocket",
@@ -2118,23 +2126,8 @@
         }
       }
     },
-    "AzureOpenAIDialogUpdate": {
-      "description": "Azure Open AI Dialog for UpdateDialog API Call",
-      "required": [],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DialogUpdateBase"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "azureOpenAI"
-    },
     "MicrosoftTeamsUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
-    },
-    "MicrosoftTeamsAppIdentifierModel": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
