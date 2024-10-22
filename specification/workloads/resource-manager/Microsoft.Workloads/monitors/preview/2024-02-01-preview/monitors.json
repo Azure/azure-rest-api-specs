@@ -1338,7 +1338,7 @@
           "description": "Defines the SAP monitor Alert Template Name."
         },
         "providerType": {
-          "$ref": "#/definitions/ProviderType",
+          "type": "string",
           "description": "Defines the provider type."
         },
         "providerNames": {
@@ -1547,7 +1547,7 @@
           "description": "Display name of the template."
         },
         "providerType": {
-          "$ref": "#/definitions/ProviderType",
+          "type": "string",
           "description": "Type of the provider."
         },
         "description": {
@@ -2133,7 +2133,7 @@
       "description": "Gets or sets the provider specific properties.",
       "properties": {
         "providerType": {
-          "$ref": "#/definitions/ProviderType",
+          "type": "string",
           "description": "The provider type. For example, the value can be SapHana.",
           "x-ms-mutability": [
             "read",
@@ -2145,60 +2145,6 @@
       "required": [
         "providerType"
       ]
-    },
-    "ProviderType": {
-      "type": "string",
-      "description": "The Provider Types for Monitor.",
-      "enum": [
-        "SapHana",
-        "SapNetWeaver",
-        "PrometheusOS",
-        "MsSqlServer",
-        "PrometheusHaCluster",
-        "Db2",
-        "Oracle"
-      ],
-      "x-ms-enum": {
-        "name": "ProviderType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SapHana",
-            "value": "SapHana",
-            "description": "SapHana Provider."
-          },
-          {
-            "name": "SapNetWeaver",
-            "value": "SapNetWeaver",
-            "description": "SapNetWeaver Provider."
-          },
-          {
-            "name": "PrometheusOS",
-            "value": "PrometheusOS",
-            "description": "PrometheusOS Provider."
-          },
-          {
-            "name": "MsSqlServer",
-            "value": "MsSqlServer",
-            "description": "MsSqlServer Provider."
-          },
-          {
-            "name": "PrometheusHaCluster",
-            "value": "PrometheusHaCluster",
-            "description": "PrometheusHaCluster Provider."
-          },
-          {
-            "name": "Db2",
-            "value": "Db2",
-            "description": "Db2 Provider."
-          },
-          {
-            "name": "Oracle",
-            "value": "Oracle",
-            "description": "Oracle Provider."
-          }
-        ]
-      }
     },
     "RoutingPreference": {
       "type": "string",

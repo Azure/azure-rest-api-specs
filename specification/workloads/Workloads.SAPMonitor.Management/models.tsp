@@ -274,7 +274,7 @@ model ProviderSpecificProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @visibility("read", "create")
-  providerType: ProviderType;
+  providerType: string;
 }
 
 /**
@@ -423,7 +423,7 @@ model HanaDbProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * The provider type. For example, the value can be SapHana.
    */
-  providerType: ProviderType.SapHana;
+  providerType: "SapHana";
 }
 
 /**
@@ -490,7 +490,7 @@ model SapNetWeaverProviderInstanceProperties
   /**
    * The provider type. For example, the value can be SapHana.
    */
-  providerType: ProviderType.SapNetWeaver;
+  providerType: "SapNetWeaver";
 }
 
 /**
@@ -521,7 +521,7 @@ model PrometheusOsProviderInstanceProperties
   /**
    * The provider type. For example, the value can be SapHana.
    */
-  providerType: ProviderType.PrometheusOS;
+  providerType: "PrometheusOS";
 }
 
 /**
@@ -577,7 +577,7 @@ model Db2ProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * The provider type. For example, the value can be SapHana.
    */
-  providerType: ProviderType.Db2;
+  providerType: "Db2";
 }
 
 /**
@@ -618,7 +618,7 @@ model PrometheusHaClusterProviderInstanceProperties
   /**
    * The provider type. For example, the value can be SapHana.
    */
-  providerType: ProviderType.PrometheusHaCluster;
+  providerType: "PrometheusHaCluster";
 }
 
 /**
@@ -669,7 +669,7 @@ model MsSqlServerProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * The provider type. For example, the value can be SapHana.
    */
-  providerType: ProviderType.MsSqlServer;
+  providerType: "MsSqlServer";
 }
 
 /**
@@ -721,36 +721,7 @@ model OracleProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * The provider type. For example, the value can be SapHana.
    */
-  providerType: ProviderType.Oracle;
-}
-
-/**
- * The Provider Types for Monitor.
- */
-union ProviderType {
-  string,
-
-  /** SapHana Provider. */
-  SapHana: "SapHana",
-
-  /** SapNetWeaver Provider. */
-  SapNetWeaver: "SapNetWeaver",
-
-  /** PrometheusOS Provider. */
-  PrometheusOS: "PrometheusOS",
-
-  /** MsSqlServer Provider. */
-  MsSqlServer: "MsSqlServer",
-
-  /** PrometheusHaCluster Provider. */
-  PrometheusHaCluster: "PrometheusHaCluster",
-
-  /** Db2 Provider. */
-  Db2: "Db2",
-
-  /** Oracle Provider. */
-  @added(Versions.v2024_02_01_preview)
-  Oracle: "Oracle",
+  providerType: "Oracle";
 }
 
 /**
@@ -772,7 +743,7 @@ model AlertProperties {
   /**
    * Defines the provider type.
    */
-  providerType?: ProviderType;
+  providerType?: string;
 
   /**
    * Defines the provider names.
@@ -905,7 +876,7 @@ model AlertTemplateProperties {
   /**
    * Type of the provider.
    */
-  providerType?: ProviderType;
+  providerType?: string;
 
   /**
    * Description of the template.

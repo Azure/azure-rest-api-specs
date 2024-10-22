@@ -1391,7 +1391,7 @@
       "description": "Gets or sets the provider specific properties.",
       "properties": {
         "providerType": {
-          "$ref": "#/definitions/ProviderType",
+          "type": "string",
           "description": "The provider type. For example, the value can be SapHana.",
           "x-ms-mutability": [
             "read",
@@ -1403,54 +1403,6 @@
       "required": [
         "providerType"
       ]
-    },
-    "ProviderType": {
-      "type": "string",
-      "description": "The Provider Types for Monitor.",
-      "enum": [
-        "SapHana",
-        "SapNetWeaver",
-        "PrometheusOS",
-        "MsSqlServer",
-        "PrometheusHaCluster",
-        "Db2"
-      ],
-      "x-ms-enum": {
-        "name": "ProviderType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SapHana",
-            "value": "SapHana",
-            "description": "SapHana Provider."
-          },
-          {
-            "name": "SapNetWeaver",
-            "value": "SapNetWeaver",
-            "description": "SapNetWeaver Provider."
-          },
-          {
-            "name": "PrometheusOS",
-            "value": "PrometheusOS",
-            "description": "PrometheusOS Provider."
-          },
-          {
-            "name": "MsSqlServer",
-            "value": "MsSqlServer",
-            "description": "MsSqlServer Provider."
-          },
-          {
-            "name": "PrometheusHaCluster",
-            "value": "PrometheusHaCluster",
-            "description": "PrometheusHaCluster Provider."
-          },
-          {
-            "name": "Db2",
-            "value": "Db2",
-            "description": "Db2 Provider."
-          }
-        ]
-      }
     },
     "RoutingPreference": {
       "type": "string",
