@@ -735,7 +735,7 @@ model TextAnalysisAuthoringProjectDeployment {
    * Represents the metadata of the assigned Azure resources.
    */
   @added(Versions.v2023_04_15_preview)
-  assignedResources?: TextAnalysisAuthoringDeploymentResource[];
+  assignedResources: TextAnalysisAuthoringDeploymentResource[];
 }
 
 /**

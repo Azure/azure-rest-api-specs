@@ -697,7 +697,7 @@ model ConversationalAnalysisAuthoringProjectDeployment {
    * Represents the metadata of the assigned Azure resources.
    */
   @added(Versions.v2023_04_15_preview)
-  assignedResources?: ConversationalAnalysisAuthoringDeploymentResource[];
+  assignedResources: ConversationalAnalysisAuthoringDeploymentResource[];
 }
 
 /**
