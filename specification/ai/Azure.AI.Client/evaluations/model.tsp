@@ -54,12 +54,12 @@ model InputData {
   type: string;
 }
 
-@doc("Data Source for Application Insight.")
-model AppInsightsConfiguration extends InputData {
+@doc("Data Source for Application Insights.")
+model ApplicationInsightsConfiguration extends InputData {
   @visibility("read")
   type: "app_insights";
 
-  @doc("LogAnalytic Workspace resourceID associated with AppInsights")
+  @doc("LogAnalytic Workspace resourceID associated with ApplicationInsights")
   resourceId: string;
 
   @doc("Query to fetch the data.")
@@ -68,7 +68,7 @@ model AppInsightsConfiguration extends InputData {
   @doc("Service name.")
   serviceName: string;
 
-  @doc("Connection String to connect to AppInsights.")
+  @doc("Connection String to connect to ApplicationInsights.")
   connectionString?: string;
 }
 
@@ -216,16 +216,16 @@ model SamplingStrategy {
 // NoteNote: I modeled ScheduledEvaluation as a type of Evaluation. But can also be modeled as a separate Schedule entity. We can discuss
 @resource("schedules")
 model EvaluationSchedule {
-  @key("id")
+  @key("name")
   @visibility("read")
-  @doc("Unique identifier for the evaluation, which also serves as the name for the schedule.")
+  @doc("Name of the schedule, which also serves as the unique identifier for the evaluation")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
   @maxLength(254)
-  id: string;
+  name: string;
 
   @doc("Data for evaluation.")
   @visibility("read", "create")
-  data: AppInsightsConfiguration;
+  data: ApplicationInsightsConfiguration;
 
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
   description?: string;
