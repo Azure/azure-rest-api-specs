@@ -1645,6 +1645,7 @@ model VirtualMachineScaleSetProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -2351,6 +2352,7 @@ model VirtualMachineScaleSetStorageProfile {
 /**
  * Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageReference extends SubResource {
   /**
    * The image publisher.
@@ -2497,6 +2499,7 @@ model VirtualMachineScaleSetManagedDiskParameters {
 /**
  * Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. **Note:** The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DiskEncryptionSetParameters extends SubResource {}
 
 /**
@@ -3016,6 +3019,7 @@ model VirtualMachineScaleSetExtensionProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -3442,6 +3446,7 @@ model VirtualMachineScaleSetListWithLinkResult
 /**
  * Describes a Virtual Machine Scale Set.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineScaleSetUpdate extends UpdateResource {
   /**
    * The virtual machine scale set sku.
@@ -3977,6 +3982,7 @@ model VirtualMachineScaleSetExtensionListResult
 /**
  * Describes a Virtual Machine Scale Set Extension.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
   /**
    * The name of the extension.
@@ -4291,6 +4297,7 @@ model RollbackStatusInfo {
 /**
  * Describes a Virtual Machine Scale Set VM Reimage Parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineScaleSetReimageParameters
   extends VirtualMachineScaleSetVMReimageParameters {
   /**
@@ -4302,6 +4309,7 @@ model VirtualMachineScaleSetReimageParameters
 /**
  * Describes a Virtual Machine Scale Set VM Reimage Parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineScaleSetVMReimageParameters
   extends VirtualMachineReimageParameters {
   /**
@@ -4346,6 +4354,7 @@ model OSProfileProvisioningData {
 /**
  * The status of the latest virtual machine scale set rolling upgrade.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RollingUpgradeStatusInfoProperties {
   /**
    * The rolling upgrade policies applied for this upgrade.
@@ -4552,6 +4561,7 @@ model VirtualMachineScaleSetVMProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -4992,6 +5002,7 @@ model OSDisk {
 /**
  * The parameters of a managed disk.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ManagedDiskParameters extends SubResource {
   /**
    * Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.
@@ -5165,6 +5176,7 @@ model NetworkProfile {
 /**
  * Describes a network interface reference.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model NetworkInterfaceReference extends SubResource {
   /**
    * Describes a network interface reference properties.
@@ -5503,6 +5515,7 @@ model VirtualMachineExtensionProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -5602,6 +5615,7 @@ model VirtualMachineScaleSetVMExtensionsListResult {
 /**
  * Describes a VMSS VM Extension.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
   /**
    * The name of the extension.
@@ -5854,6 +5868,7 @@ model VirtualMachineProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -6161,6 +6176,7 @@ model LastPatchInstallationSummary {
 /**
  * Describes a Virtual Machine Update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineUpdate extends UpdateResource {
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
@@ -6330,6 +6346,7 @@ model VirtualMachineCaptureParameters {
 /**
  * Output of virtual machine capture operation.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineCaptureResult extends SubResource {
   /**
    * the schema of the captured virtual machine
@@ -6371,6 +6388,7 @@ model VirtualMachineExtensionsListResult {
 /**
  * Describes a Virtual Machine Extension.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineExtensionUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Extension.
@@ -6584,6 +6602,7 @@ model PatchInstallationDetail {
 /**
  * Virtual machine image resource information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineImageResource extends SubResource {
   /**
    * The name of the resource.
@@ -6610,6 +6629,7 @@ model VirtualMachineImageResource extends SubResource {
 /**
  * Describes a Virtual Machine Image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineImage extends VirtualMachineImageResource {
   /**
    * Describes the properties of a Virtual Machine Image.
@@ -6799,6 +6819,7 @@ model VmImagesInEdgeZoneListResult {
 /**
  * Describes the properties of a Virtual Machine Extension Image.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model VirtualMachineExtensionImageProperties {
   /**
    * The operating system this extension supports.
@@ -6834,6 +6855,7 @@ model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
 /**
  * The instance view of a resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model AvailabilitySetProperties {
   /**
    * Update Domain count.
@@ -6871,6 +6893,7 @@ model AvailabilitySetProperties {
 /**
  * Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AvailabilitySetUpdate extends UpdateResource {
   /**
    * The instance view of a resource.
@@ -6894,6 +6917,7 @@ model ProximityPlacementGroupListResult
 /**
  * Describes the properties of a Proximity Placement Group.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ProximityPlacementGroupProperties {
   /**
    * Specifies the type of the proximity placement group. Possible values are: **Standard** : Co-locate resources within an Azure region or Availability Zone. **Ultra** : For future use.
@@ -6930,6 +6954,7 @@ model ProximityPlacementGroupProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SubResourceWithColocationStatus extends SubResource {
   /**
    * Describes colocation status of a resource in the Proximity Placement Group.
@@ -6950,6 +6975,7 @@ model ProximityPlacementGroupPropertiesIntent {
 /**
  * Specifies information about the proximity placement group.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProximityPlacementGroupUpdate extends UpdateResource {}
 
 /**
@@ -6960,6 +6986,7 @@ model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
 /**
  * Dedicated Host Group Properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DedicatedHostGroupProperties {
   /**
    * Number of fault domains that the host group can span.
@@ -7002,6 +7029,7 @@ model DedicatedHostGroupInstanceView {
 /**
  * The instance view of a dedicated host that includes the name of the dedicated host. It is used for the response to the instance view of a dedicated host group.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DedicatedHostInstanceViewWithName extends DedicatedHostInstanceView {
   /**
    * The name of the dedicated host.
@@ -7071,6 +7099,7 @@ model DedicatedHostGroupPropertiesAdditionalCapabilities {
 /**
  * Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DedicatedHostGroupUpdate extends UpdateResource {
   /**
    * Dedicated Host Group Properties.
@@ -7131,6 +7160,7 @@ model DedicatedHostProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -7151,6 +7181,7 @@ model DedicatedHostProperties {
 /**
  * Specifies information about the dedicated host. Only tags, autoReplaceOnFailure and licenseType may be updated.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DedicatedHostUpdate extends UpdateResource {
   /**
    * Properties of the dedicated host.
@@ -7186,6 +7217,7 @@ model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
 /**
  * Properties of the SSH public key.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SshPublicKeyResourceProperties {
   /**
    * SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.
@@ -7196,6 +7228,7 @@ model SshPublicKeyResourceProperties {
 /**
  * Specifies information about the SSH public key.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SshPublicKeyUpdateResource extends UpdateResource {
   /**
    * Properties of the SSH public key.
@@ -7257,6 +7290,7 @@ model ImageProperties {
   /**
    * The provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -7290,6 +7324,7 @@ model ImageStorageProfile {
 /**
  * Describes an Operating System disk.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageOSDisk extends ImageDisk {
   /**
    * This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. Possible values are: **Windows,** **Linux.**
@@ -7345,6 +7380,7 @@ model ImageDisk {
 /**
  * Describes a data disk.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageDataDisk extends ImageDisk {
   /**
    * Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
@@ -7355,6 +7391,7 @@ model ImageDataDisk extends ImageDisk {
 /**
  * The source user image virtual hard disk. Only tags may be updated.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageUpdate extends UpdateResource {
   /**
    * Describes the properties of an Image.
@@ -7382,6 +7419,7 @@ model RestorePointCollectionProperties {
   /**
    * The provisioning state of the restore point collection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -7431,6 +7469,7 @@ model RestorePointProperties {
   /**
    * Gets the provisioning state of the restore point.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -7598,6 +7637,7 @@ model RestorePointSourceVmosDisk {
 /**
  * Disk Restore Point details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DiskRestorePointAttributes extends SubResourceReadOnly {
   /**
    * Encryption at rest settings for disk restore point. It is an optional property that can be specified in the input while creating a restore point.
@@ -7742,6 +7782,7 @@ model ProxyResource {
 /**
  * Update Restore Point collection parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RestorePointCollectionUpdate extends UpdateResource {
   /**
    * The restore point collection properties.
@@ -7760,6 +7801,7 @@ model CapacityReservationGroupListResult
 /**
  * capacity reservation group Properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model CapacityReservationGroupProperties {
   /**
    * A list of all capacity reservation resource ids that belong to capacity reservation group.
@@ -7805,6 +7847,7 @@ model CapacityReservationGroupInstanceView {
 /**
  * The instance view of a capacity reservation that includes the name of the capacity reservation. It is used for the response to the instance view of a capacity reservation group.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CapacityReservationInstanceViewWithName
   extends CapacityReservationInstanceView {
   /**
@@ -7858,6 +7901,7 @@ model ResourceSharingProfile {
 /**
  * Specifies information about the capacity reservation group. Only tags can be updated.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CapacityReservationGroupUpdate extends UpdateResource {
   /**
    * capacity reservation group Properties.
@@ -7904,6 +7948,7 @@ model CapacityReservationProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -7924,6 +7969,7 @@ model CapacityReservationProperties {
 /**
  * Specifies information about the capacity reservation. Only tags and sku.capacity can be updated.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CapacityReservationUpdate extends UpdateResource {
   /**
    * Properties of the Capacity reservation.
@@ -7941,6 +7987,7 @@ model CapacityReservationUpdate extends UpdateResource {
 /**
  * Api request input for LogAnalytics getRequestRateByInterval Api.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RequestRateByIntervalInput extends LogAnalyticsInputBase {
   /**
    * Interval value in minutes used to create LogAnalytics call rate logs.
@@ -8020,6 +8067,7 @@ model LogAnalyticsOutput {
 /**
  * Api request input for LogAnalytics getThrottledRequests Api.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ThrottledRequestsInput extends LogAnalyticsInputBase {}
 
 /**
@@ -8061,6 +8109,7 @@ model RunCommandDocumentBase {
 /**
  * Describes the properties of a Run Command.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RunCommandDocument extends RunCommandDocumentBase {
   /**
    * The script to be executed.
@@ -8169,6 +8218,7 @@ model VirtualMachineRunCommandProperties {
   /**
    * The provisioning state, which only appears in the response. If treatFailureAsDeploymentFailure set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If treatFailureAsDeploymentFailure set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -8290,6 +8340,7 @@ model VirtualMachineRunCommandInstanceView {
 /**
  * Describes a Virtual Machine run command.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualMachineRunCommandUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine run command.

@@ -619,6 +619,7 @@ model InnerError {
 /**
  * Specifies information about the Shared Image Gallery that you want to update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a Shared Image Gallery.
@@ -665,6 +666,7 @@ model GalleryApplicationList is Azure.Core.Page<GalleryApplication>;
 /**
  * Describes the properties of a gallery Application Definition.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model GalleryApplicationProperties {
   /**
    * The description of this gallery Application Definition resource. This property is updatable.
@@ -763,6 +765,7 @@ model GalleryApplicationCustomActionParameter {
 /**
  * Specifies information about the gallery Application Definition that you want to update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryApplicationUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery Application Definition.
@@ -808,6 +811,7 @@ model GalleryApplicationVersionProperties {
 /**
  * The publishing profile of a gallery image version.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryApplicationVersionPublishingProfile
   extends GalleryArtifactPublishingProfileBase {
   /**
@@ -988,6 +992,7 @@ model EncryptionImages {
 /**
  * Contains encryption settings for an OS disk image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model OSDiskImageEncryption extends DiskImageEncryption {
   /**
    * This property specifies the security profile of an OS disk image.
@@ -1023,6 +1028,7 @@ model DiskImageEncryption {
 /**
  * Contains encryption settings for a data disk image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DataDiskImageEncryption extends DiskImageEncryption {
   /**
    * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
@@ -1074,6 +1080,7 @@ model GalleryExtendedLocation {
 /**
  * The safety profile of the Gallery Application Version.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryApplicationVersionSafetyProfile
   extends GalleryArtifactSafetyProfileBase {}
 
@@ -1137,6 +1144,7 @@ model RegionalReplicationStatus {
 /**
  * Specifies information about the gallery Application Version that you want to update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
@@ -1332,6 +1340,7 @@ model GalleryImageFeature {
 /**
  * Specifies information about the gallery image definition that you want to update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryImageUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image definition.
@@ -1386,6 +1395,7 @@ model GalleryImageVersionProperties {
 /**
  * The publishing profile of a gallery image Version.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryImageVersionPublishingProfile
   extends GalleryArtifactPublishingProfileBase {}
 
@@ -1413,6 +1423,7 @@ model GalleryImageVersionStorageProfile {
 /**
  * The source of the gallery artifact version.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryArtifactVersionFullSource extends GalleryArtifactVersionSource {
   /**
    * The resource Id of the source Community Gallery Image.  Only required when using Community Gallery Image as a source.
@@ -1438,6 +1449,7 @@ model GalleryArtifactVersionSource {
 /**
  * This is the OS disk image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryOSDiskImage extends GalleryDiskImage {}
 
 /**
@@ -1464,6 +1476,7 @@ model GalleryDiskImage {
 /**
  * The source for the disk image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryDiskImageSource extends GalleryArtifactVersionSource {
   /**
    * The uri of the gallery artifact version source. Currently used to specify vhd/blob source.
@@ -1479,6 +1492,7 @@ model GalleryDiskImageSource extends GalleryArtifactVersionSource {
 /**
  * This is the data disk image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryDataDiskImage extends GalleryDiskImage {
   /**
    * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
@@ -1489,6 +1503,7 @@ model GalleryDataDiskImage extends GalleryDiskImage {
 /**
  * This is the safety profile of the Gallery Image Version.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryImageVersionSafetyProfile
   extends GalleryArtifactSafetyProfileBase {
   /**
@@ -1593,6 +1608,7 @@ model UefiKey {
 /**
  * Specifies information about the gallery image version that you want to update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryImageVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
@@ -1626,6 +1642,7 @@ model SharedGalleryList is Azure.Core.Page<SharedGallery>;
 /**
  * Specifies the properties of a shared gallery
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SharedGalleryProperties {
   /**
    * The artifact tags of a shared gallery resource.
@@ -1638,6 +1655,7 @@ model SharedGalleryProperties {
 /**
  * Base information about the shared gallery resource in pir.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PirSharedGalleryResource extends PirResource {
   /**
    * The identifier information of shared gallery.
@@ -1682,6 +1700,7 @@ model SharedGalleryImageList is Azure.Core.Page<SharedGalleryImage>;
 /**
  * Describes the properties of a gallery image definition.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SharedGalleryImageProperties {
   /**
    * This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. Possible values are: **Windows,** **Linux.**
@@ -1761,6 +1780,7 @@ model SharedGalleryImageVersionList
 /**
  * Describes the properties of a gallery image version.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SharedGalleryImageVersionProperties {
   /**
    * The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
@@ -1810,6 +1830,7 @@ model SharedGalleryImageVersionStorageProfile {
 /**
  * This is the OS disk image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SharedGalleryOSDiskImage extends SharedGalleryDiskImage {}
 
 /**
@@ -1831,6 +1852,7 @@ model SharedGalleryDiskImage {
 /**
  * This is the data disk image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SharedGalleryDataDiskImage extends SharedGalleryDiskImage {
   /**
    * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
@@ -1841,6 +1863,7 @@ model SharedGalleryDataDiskImage extends SharedGalleryDiskImage {
 /**
  * Describes the properties of a community gallery.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model CommunityGalleryProperties {
   /**
    * The disclaimer for a community gallery resource.
@@ -1937,6 +1960,7 @@ model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
 /**
  * Describes the properties of a gallery image definition.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model CommunityGalleryImageProperties {
   /**
    * This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. Possible values are: **Windows,** **Linux.**
@@ -2041,6 +2065,7 @@ model CommunityGalleryImageVersionList
 /**
  * Describes the properties of a gallery image version.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model CommunityGalleryImageVersionProperties {
   /**
    * The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.

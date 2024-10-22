@@ -45,7 +45,8 @@ interface ComputeDiagnosticBases {
   @operationId("Diagnostics_List")
   list is ArmResourceListByParent<
     ComputeDiagnosticBase,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ComputeDiagnosticsList
   >;
 
   /**

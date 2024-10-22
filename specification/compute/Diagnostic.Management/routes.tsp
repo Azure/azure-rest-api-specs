@@ -32,73 +32,63 @@ interface DiagnosticOperationsOperations {
     @minLength(1)
     @path
     operationId: string,
-  ): ArmResponse<ComputeDiagnosticsOperationResult | void> | ErrorResponse;
+  ): ArmResponse<ComputeDiagnosticsOperationResult> | ArmAcceptedResponse | ErrorResponse;
 }
 
+@armResourceOperations
 interface SpotPlacementRecommenderOperations {
   /**
    * [SOON TO BE DEPRECATED] Gets Spot Placement Recommender diagnostic metadata.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SpotPlacementRecommender_Get")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/spotPlacementRecommender")
   @get
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-  ): ArmResponse<ComputeDiagnosticBase> | ErrorResponse;
-
+  @action("diagnostics/spotPlacementRecommender")
+  get is ArmProviderActionAsync<
+    Response = ComputeDiagnosticBase,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
+  >;
   /**
    * [SOON TO BE DEPRECATED] Generates placement scores for Spot VM skus.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SpotPlacementRecommender_Post")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/spotPlacementRecommender/generate")
   @post
-  post(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * SpotPlacementRecommender object supplied in the body of the Post spot placement recommender operation.
-     */
-    @body
-    spotPlacementRecommenderInput: SpotPlacementRecommenderInput,
-  ): ArmResponse<SpotPlacementRecommenderResponse> | ErrorResponse;
+  @action("diagnostics/spotPlacementRecommender/generate")
+  post is ArmProviderActionAsync<
+    Response = SpotPlacementRecommenderResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter,
+    Request = SpotPlacementRecommenderInput
+  >;
 }
 
+@armResourceOperations
 interface SpotPlacementScoresOperations {
   /**
    * Gets Spot Placement Scores metadata.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SpotPlacementScores_Get")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot")
   @get
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-  ): ArmResponse<ComputeDiagnosticBase> | ErrorResponse;
-
+  @action("placementScores/spot")
+  get is ArmProviderActionAsync<
+    Response = ComputeDiagnosticBase,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
+  >;
   /**
    * Generates placement scores for Spot VM skus.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SpotPlacementScores_Post")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot/generate")
   @post
-  post(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * SpotPlacementScores object supplied in the body of the Post spot placement scores operation.
-     */
-    @body
-    spotPlacementScoresInput: SpotPlacementScoresInput,
-  ): ArmResponse<SpotPlacementScoresResponse> | ErrorResponse;
+  @action("placementScores/spot/generate")
+  post is ArmProviderActionAsync<
+    Response = SpotPlacementScoresResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter,
+    Request = SpotPlacementScoresInput
+  >;
 }

@@ -223,12 +223,34 @@ interface VirtualMachineScaleSets {
   >;
 
   /**
+   * Gets the status of a VM scale set instance.
+   */
+  @get
+  getInstanceView is ArmResourceActionSync<
+    VirtualMachineScaleSet,
+    void,
+    VirtualMachineScaleSetInstanceView
+  >;
+
+  /**
    * Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
    */
   updateInstances is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
     void
+  >;
+
+  /**
+   * Gets list of OS upgrades on a VM scale set instance.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
+  getOSUpgradeHistory is ArmResourceActionSync<
+    VirtualMachineScaleSet,
+    void,
+    VirtualMachineScaleSetListOSUpgradeHistory
   >;
 
   /**
@@ -307,6 +329,16 @@ interface VirtualMachineScaleSets {
   >;
 
   /**
+   * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
+   */
+  @get
+  listSkus is ArmResourceActionSync<
+    VirtualMachineScaleSet,
+    void,
+    VirtualMachineScaleSetListSkusResult
+  >;
+
+  /**
    * Starts one or more virtual machines in a VM scale set.
    */
   start is ArmResourceActionAsync<
@@ -339,65 +371,6 @@ interface VirtualMachineScaleSets {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
   cancel is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
-
-  /**
-   * Gets the status of a VM scale set instance.
-   */
-  // FIXME: VirtualMachineScaleSets_GetInstanceView could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView")
-  @get
-  getInstanceView(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    vmScaleSetName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineScaleSetInstanceView> | ErrorResponse;
-
-  /**
-   * Gets list of OS upgrades on a VM scale set instance.
-   */
-  // FIXME: VirtualMachineScaleSets_GetOSUpgradeHistory could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory")
-  @get
-  getOSUpgradeHistory(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    vmScaleSetName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineScaleSetListOSUpgradeHistory> | ErrorResponse;
-
-  /**
-   * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
-   */
-  // FIXME: VirtualMachineScaleSets_ListSkus could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus")
-  @get
-  listSkus(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    vmScaleSetName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineScaleSetListSkusResult> | ErrorResponse;
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");

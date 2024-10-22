@@ -247,6 +247,16 @@ interface VirtualMachines {
   >;
 
   /**
+   * Retrieves information about the run-time state of a virtual machine.
+   */
+  @get
+  instanceView is ArmResourceActionSync<
+    VirtualMachine,
+    void,
+    VirtualMachineInstanceView
+  >;
+
+  /**
    * The operation to perform maintenance on a virtual machine.
    */
   performMaintenance is ArmResourceActionAsync<VirtualMachine, void, void>;
@@ -318,6 +328,16 @@ interface VirtualMachines {
   start is ArmResourceActionAsync<VirtualMachine, void, void>;
 
   /**
+   * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
+   */
+  @get
+  listAvailableSizes is ArmResourceActionSync<
+    VirtualMachine,
+    void,
+    VirtualMachineSizeListResult
+  >;
+
+  /**
    * Run command on the VM.
    */
   runCommand is ArmResourceActionAsync<
@@ -325,44 +345,6 @@ interface VirtualMachines {
     RunCommandInput,
     RunCommandResult
   >;
-
-  /**
-   * Retrieves information about the run-time state of a virtual machine.
-   */
-  // FIXME: VirtualMachines_InstanceView could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView")
-  @get
-  instanceView(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the virtual machine.
-     */
-    @path
-    vmName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineInstanceView> | ErrorResponse;
-
-  /**
-   * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
-   */
-  // FIXME: VirtualMachines_ListAvailableSizes could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes")
-  @get
-  listAvailableSizes(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the virtual machine.
-     */
-    @path
-    vmName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
 @@doc(VirtualMachine.name, "The name of the virtual machine.");

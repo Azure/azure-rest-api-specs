@@ -549,6 +549,7 @@ model DiskProperties {
   /**
    * The disk provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -1158,6 +1159,7 @@ model DiskAccessProperties {
   /**
    * The disk access resource provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -1448,6 +1450,7 @@ model EncryptionSetProperties {
   /**
    * The disk encryption set provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -1567,6 +1570,7 @@ model DiskRestorePointList is Azure.Core.Page<DiskRestorePoint>;
 /**
  * Properties of an incremental disk restore point
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DiskRestorePointProperties {
   /**
    * The timestamp of restorePoint creation
@@ -1780,6 +1784,7 @@ model SnapshotProperties {
   /**
    * The disk provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility("read")
   provisioningState?: string;
 

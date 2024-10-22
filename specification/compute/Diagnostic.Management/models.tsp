@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -52,8 +53,14 @@ model ComputeDiagnosticsOperationResult {
 }
 
 /**
+ * Lists all available Compute diagnostics for a subscription in a location.
+ */
+model ComputeDiagnosticsList is Azure.Core.Page<ComputeDiagnosticBase>;
+
+/**
  * Contains additional properties of a diagnostic
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DiagnosticProperties {
   /**
    * Describes what are the supported resource types for a diagnostic.
