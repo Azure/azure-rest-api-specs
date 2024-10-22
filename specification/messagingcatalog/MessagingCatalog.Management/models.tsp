@@ -157,15 +157,6 @@ model AssociationRemoveRequest {
   associationId: string;
 }
 
-@doc("An request to paginate a list of result.")
-model AssociationListRequest {
-  @doc("Controls how many results to skip.")
-  skip?: int32;
-
-  @doc("Controls how many results to retrieve.")
-  top?: int32;
-}
-
 @doc("An response of paginated associations.")
 model AssociationListResponse {
   @doc("Controls how many results to skip.")
@@ -176,10 +167,4 @@ model AssociationListResponse {
 
   @doc("List of associations.")
   associations: Association[];
-}
-
-@doc("An response of a association deletion.")
-model AssociationDeleteResponse {
-  @doc("A string detailing the result of the operation.")
-  status: string;
 }

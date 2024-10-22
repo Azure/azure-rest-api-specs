@@ -73,13 +73,14 @@ interface MessagingCatalogs {
 
   listAssociations is ArmResourceActionAsync<
     MessagingCatalog,
-    AssociationListRequest,
-    AssociationListResponse
+    void,
+    AssociationListResponse,
+    Parameters =  Azure.Core.TopQueryParameter & Azure.Core.SkipQueryParameter
   >;
 
   removeAssociation is ArmResourceActionAsync<
     MessagingCatalog,
     AssociationRemoveRequest,
-    AssociationDeleteResponse
+    ArmDeletedResponse
   >;
 }
