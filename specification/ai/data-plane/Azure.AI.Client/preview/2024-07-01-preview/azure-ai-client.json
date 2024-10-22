@@ -846,7 +846,7 @@
         }
       }
     },
-    "/evaluations/schedules/{id}": {
+    "/evaluations/schedules/{name}": {
       "get": {
         "operationId": "Evaluations_GetSchedule",
         "description": "Resource read operation template.",
@@ -855,9 +855,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -908,9 +908,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -983,9 +983,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -8408,13 +8408,13 @@
         }
       }
     },
-    "AppInsightsConfiguration": {
+    "ApplicationInsightsConfiguration": {
       "type": "object",
-      "description": "Data Source for Application Insight.",
+      "description": "Data Source for Application Insights.",
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "LogAnalytic Workspace resourceID associated with AppInsights"
+          "description": "LogAnalytic Workspace resourceID associated with ApplicationInsights"
         },
         "query": {
           "type": "string",
@@ -8423,6 +8423,10 @@
         "serviceName": {
           "type": "string",
           "description": "Service name."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Connection String to connect to ApplicationInsights."
         }
       },
       "required": [
@@ -8757,14 +8761,13 @@
       "type": "object",
       "description": "Dataset as source for evaluation.",
       "properties": {
-        "Uri": {
+        "id": {
           "type": "string",
-          "description": "Evaluation input data",
-          "x-ms-client-name": "id"
+          "description": "Evaluation input data"
         }
       },
       "required": [
-        "Uri"
+        "id"
       ],
       "allOf": [
         {
@@ -8850,24 +8853,20 @@
       "type": "object",
       "description": "Evaluation Schedule Definition",
       "properties": {
-        "id": {
+        "name": {
           "type": "string",
-          "description": "Identifier of the evaluation.",
+          "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
           "maxLength": 254,
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
           "readOnly": true
         },
         "data": {
-          "$ref": "#/definitions/InputData",
+          "$ref": "#/definitions/ApplicationInsightsConfiguration",
           "description": "Data for evaluation.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique."
         },
         "description": {
           "type": "string",
@@ -8922,7 +8921,7 @@
         }
       },
       "required": [
-        "id",
+        "name",
         "data",
         "evaluators",
         "trigger",
@@ -9056,7 +9055,8 @@
           "description": "The EvaluationSchedule items on this page",
           "items": {
             "$ref": "#/definitions/EvaluationSchedule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -9088,8 +9088,7 @@
       },
       "required": [
         "frequency",
-        "interval",
-        "schedule"
+        "interval"
       ]
     },
     "RecurrenceSchedule": {
@@ -9130,9 +9129,7 @@
       },
       "required": [
         "hours",
-        "minutes",
-        "weekDays",
-        "monthDays"
+        "minutes"
       ]
     },
     "RecurrenceTrigger": {
