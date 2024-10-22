@@ -18,8 +18,8 @@ interface CodeExecution {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Execute code in a session.")
   @route("/executions")
-  @pollingOperation(CodeExecution.getResult)
-  executeCode is Foundations.Operation<
+  @pollingOperation(CodeExecution.get)
+  execute is Foundations.Operation<
     {
       ...SessionIdentifier;
       ...ExecutionOperationIdHeader;
@@ -37,7 +37,7 @@ interface CodeExecution {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the code execution result.")
   @route("/executions/{executionId}")
-  getResult is Foundations.Operation<
+  get is Foundations.Operation<
     {
       ...SessionIdentifier;
       ...CodeExecutionIdentifier;
@@ -60,18 +60,18 @@ alias SessionResourceFilesOperations = Azure.Core.ResourceOperations<SessionReso
 
 interface SessionResourceFiles {
   @doc("List the file resources.")
-  listFilesMetadata is SessionResourceFilesOperations.ResourceList<SessionResourceFile>;
+  list is SessionResourceFilesOperations.ResourceList<SessionResourceFile>;
 
   @doc("Get the file resource.")
-  getFileMetadata is SessionResourceFilesOperations.ResourceRead<SessionResourceFile>;
+  get is SessionResourceFilesOperations.ResourceRead<SessionResourceFile>;
 
   @doc("Delete the file.")
-  deleteFile is SessionResourceFilesOperations.ResourceDelete<SessionResourceFile>;
+  delete is SessionResourceFilesOperations.ResourceDelete<SessionResourceFile>;
 
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   @doc("Upload a file to a session.")
   @route("/files")
-  uploadFile is RpcOperation<
+  upload is RpcOperation<
     {
       @doc("The content type for the operation. Always multipart/form-data for this operation.")
       @header("content-type")
@@ -87,7 +87,7 @@ interface SessionResourceFiles {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the content of the file.")
   @route("/files/{name}/content")
-  getFileContent is Foundations.Operation<
+  getContent is Foundations.Operation<
     {
       ...SessionIdentifier;
       ...SessionResourceFileNamePathParameter;

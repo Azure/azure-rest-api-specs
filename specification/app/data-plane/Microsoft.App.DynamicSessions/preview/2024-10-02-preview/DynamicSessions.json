@@ -54,7 +54,7 @@
   "paths": {
     "/executions": {
       "post": {
-        "operationId": "CodeExecution_ExecuteCode",
+        "operationId": "CodeExecution_Execute",
         "description": "Execute code in a session.",
         "parameters": [
           {
@@ -112,14 +112,14 @@
           }
         },
         "x-ms-examples": {
-          "CodeExecution_ExecuteCode_Async_Completed": {
-            "$ref": "./examples/CodeExecution_ExecuteCode_Async_Completed.json"
+          "CodeExecution_Execute_Async_Completed": {
+            "$ref": "./examples/CodeExecution_Execute_Async_Completed.json"
           },
-          "CodeExecution_ExecuteCode_Async_Running": {
-            "$ref": "./examples/CodeExecution_ExecuteCode_Async_Running.json"
+          "CodeExecution_Execute_Async_Running": {
+            "$ref": "./examples/CodeExecution_Execute_Async_Running.json"
           },
-          "CodeExecution_ExecuteCode_Sync": {
-            "$ref": "./examples/CodeExecution_ExecuteCode_Sync.json"
+          "CodeExecution_Execute_Sync": {
+            "$ref": "./examples/CodeExecution_Execute_Sync.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -130,7 +130,7 @@
     },
     "/executions/{executionId}": {
       "get": {
-        "operationId": "CodeExecution_GetResult",
+        "operationId": "CodeExecution_Get",
         "description": "Get the code execution result.",
         "parameters": [
           {
@@ -170,18 +170,18 @@
           }
         },
         "x-ms-examples": {
-          "CodeExecution_GetResult_Completed": {
-            "$ref": "./examples/CodeExecution_GetResult_Completed.json"
+          "CodeExecution_Get_Completed": {
+            "$ref": "./examples/CodeExecution_Get_Completed.json"
           },
-          "CodeExecution_GetResult_Running": {
-            "$ref": "./examples/CodeExecution_GetResult_Running.json"
+          "CodeExecution_Get_Running": {
+            "$ref": "./examples/CodeExecution_Get_Running.json"
           }
         }
       }
     },
     "/files": {
       "get": {
-        "operationId": "SessionResourceFiles_ListFilesMetadata",
+        "operationId": "SessionResourceFiles_List",
         "description": "List the file resources.",
         "parameters": [
           {
@@ -215,8 +215,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionResourceFiles_ListFilesMetadata": {
-            "$ref": "./examples/SessionResourceFiles_ListFilesMetadata.json"
+          "SessionResourceFiles_List": {
+            "$ref": "./examples/SessionResourceFiles_List.json"
           }
         },
         "x-ms-pageable": {
@@ -224,7 +224,7 @@
         }
       },
       "post": {
-        "operationId": "SessionResourceFiles_UploadFile",
+        "operationId": "SessionResourceFiles_Upload",
         "description": "Upload a file to a session.",
         "consumes": [
           "multipart/form-data"
@@ -268,15 +268,15 @@
           }
         },
         "x-ms-examples": {
-          "SessionResourceFiles_UploadFile": {
-            "$ref": "./examples/SessionResourceFiles_UploadFile.json"
+          "SessionResourceFiles_Upload": {
+            "$ref": "./examples/SessionResourceFiles_Upload.json"
           }
         }
       }
     },
     "/files/{name}": {
       "get": {
-        "operationId": "SessionResourceFiles_GetFileMetadata",
+        "operationId": "SessionResourceFiles_Get",
         "description": "Get the file resource.",
         "parameters": [
           {
@@ -317,13 +317,13 @@
           }
         },
         "x-ms-examples": {
-          "SessionResourceFiles_GetFileMetadata": {
-            "$ref": "./examples/SessionResourceFiles_GetFileMetadata.json"
+          "SessionResourceFiles_Get": {
+            "$ref": "./examples/SessionResourceFiles_Get.json"
           }
         }
       },
       "delete": {
-        "operationId": "SessionResourceFiles_DeleteFile",
+        "operationId": "SessionResourceFiles_Delete",
         "description": "Delete the file.",
         "parameters": [
           {
@@ -361,15 +361,15 @@
           }
         },
         "x-ms-examples": {
-          "SessionResourceFiles_DeleteFile": {
-            "$ref": "./examples/SessionResourceFiles_DeleteFile.json"
+          "SessionResourceFiles_Delete": {
+            "$ref": "./examples/SessionResourceFiles_Delete.json"
           }
         }
       }
     },
     "/files/{name}/content": {
       "get": {
-        "operationId": "SessionResourceFiles_GetFileContent",
+        "operationId": "SessionResourceFiles_GetContent",
         "description": "Get the content of the file.",
         "parameters": [
           {
@@ -407,8 +407,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionResourceFiles_GetFileContent": {
-            "$ref": "./examples/SessionResourceFiles_GetFileContent.json"
+          "SessionResourceFiles_GetContent": {
+            "$ref": "./examples/SessionResourceFiles_GetContent.json"
           }
         }
       }

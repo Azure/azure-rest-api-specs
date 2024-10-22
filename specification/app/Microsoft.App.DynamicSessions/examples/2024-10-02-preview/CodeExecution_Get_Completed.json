@@ -1,25 +1,13 @@
 {
-  "title": "CodeExecution_ExecuteCode_Async_Completed",
-  "operationId": "CodeExecution_ExecuteCode",
-  "headers": {
-    "operation-id": "testExecutionId"
-  },
+  "title": "CodeExecution_Get_Completed",
+  "operationId": "CodeExecution_Get",
   "parameters": {
     "api-version": "2024-10-02-preview",
     "identifier": "testSessionIdentifier",
-    "codeExecutionRequest": {
-      "codeInputType": "Inline",
-      "executionType": "Asynchronous",
-      "code": "print(7*9)",
-      "timeoutInSeconds": 60
-    }
+    "executionId": "testExecutionId"
   },
   "responses": {
-    "202": {
-      "headers": {
-        "operation-id": "testExecutionId",
-        "Operation-Location": "operation-location-uri"
-      },
+    "200": {
       "body": {
         "id": "testExecutionId",
         "identifier": "testSessionIdentifier",
