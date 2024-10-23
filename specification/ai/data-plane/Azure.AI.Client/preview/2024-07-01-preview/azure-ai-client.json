@@ -192,14 +192,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_ListAgents_MaximumSet": {
-            "$ref": "./examples/Agents_ListAgents_MaximumSet_Gen.json"
-          },
-          "Agents_ListAgents_MinimumSet": {
-            "$ref": "./examples/Agents_ListAgents_MinimumSet_Gen.json"
-          }
         }
       },
       "post": {
@@ -236,14 +228,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_CreateAgent_MaximumSet": {
-            "$ref": "./examples/Agents_CreateAgent_MaximumSet_Gen.json"
-          },
-          "Agents_CreateAgent_MinimumSet": {
-            "$ref": "./examples/Agents_CreateAgent_MinimumSet_Gen.json"
           }
         }
       }
@@ -282,14 +266,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_GetAgent_MaximumSet": {
-            "$ref": "./examples/Agents_GetAgent_MaximumSet_Gen.json"
-          },
-          "Agents_GetAgent_MinimumSet": {
-            "$ref": "./examples/Agents_GetAgent_MinimumSet_Gen.json"
           }
         }
       },
@@ -331,14 +307,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_UpdateAgent_MaximumSet": {
-            "$ref": "./examples/Agents_UpdateAgent_MaximumSet_Gen.json"
-          },
-          "Agents_UpdateAgent_MinimumSet": {
-            "$ref": "./examples/Agents_UpdateAgent_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -374,14 +342,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_DeleteAgent_MaximumSet": {
-            "$ref": "./examples/Agents_DeleteAgent_MaximumSet_Gen.json"
-          },
-          "Agents_DeleteAgent_MinimumSet": {
-            "$ref": "./examples/Agents_DeleteAgent_MinimumSet_Gen.json"
           }
         }
       }
@@ -467,11 +427,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Connections_List_MaximumSet": {
-            "$ref": "./examples/Connections_List_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -537,7 +492,7 @@
               "properties": {
                 "ignored": {
                   "type": "string",
-                  "description": "The body is ignored."
+                  "description": "The body is ignored. TODO: Can we remove this?"
                 }
               },
               "required": [
@@ -564,11 +519,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Connections_ListSecrets_MaximumSet": {
-            "$ref": "./examples/Connections_ListSecrets_MaximumSet_Gen.json"
           }
         }
       }
@@ -619,11 +569,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_List_MaximumSet": {
-            "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -677,11 +622,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_Get_MaximumSet": {
-            "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -743,11 +683,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Evaluations_Update_MaximumSet": {
-            "$ref": "./examples/Evaluations_Update_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -779,11 +714,6 @@
             "schema": {
               "$ref": "#/definitions/Evaluation"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_Create_MaximumSet": {
-            "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
           }
         }
       }
@@ -836,17 +766,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Evaluations_ListSchedule_MaximumSet": {
-            "$ref": "./examples/Evaluations_ListSchedule_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/evaluations/schedules/{id}": {
+    "/evaluations/schedules/{name}": {
       "get": {
         "operationId": "Evaluations_GetSchedule",
         "description": "Resource read operation template.",
@@ -855,9 +780,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -893,11 +818,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Evaluations_GetSchedule_MaximumSet": {
-            "$ref": "./examples/Evaluations_GetSchedule_MaximumSet_Gen.json"
-          }
         }
       },
       "put": {
@@ -908,9 +828,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -968,11 +888,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Evaluations_CreateOrReplaceSchedule_MaximumSet": {
-            "$ref": "./examples/Evaluations_CreateOrReplaceSchedule_MaximumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -983,9 +898,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "Identifier of the evaluation.",
+            "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
             "required": true,
             "type": "string",
             "maxLength": 254,
@@ -1017,11 +932,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_DeleteSchedule_MaximumSet": {
-            "$ref": "./examples/Evaluations_DeleteSchedule_MaximumSet_Gen.json"
           }
         }
       }
@@ -1110,14 +1020,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_ListFiles_MaximumSet": {
-            "$ref": "./examples/Agents_ListFiles_MaximumSet_Gen.json"
-          },
-          "Agents_ListFiles_MinimumSet": {
-            "$ref": "./examples/Agents_ListFiles_MinimumSet_Gen.json"
           }
         }
       },
@@ -1222,11 +1124,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_UploadFile_MaximumSet": {
-            "$ref": "./examples/Agents_UploadFile_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1265,14 +1162,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_GetFile_MaximumSet": {
-            "$ref": "./examples/Agents_GetFile_MaximumSet_Gen.json"
-          },
-          "Agents_GetFile_MinimumSet": {
-            "$ref": "./examples/Agents_GetFile_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -1308,14 +1197,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_DeleteFile_MaximumSet": {
-            "$ref": "./examples/Agents_DeleteFile_MaximumSet_Gen.json"
-          },
-          "Agents_DeleteFile_MinimumSet": {
-            "$ref": "./examples/Agents_DeleteFile_MinimumSet_Gen.json"
           }
         }
       }
@@ -1354,14 +1235,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_GetFileContent_MaximumSet": {
-            "$ref": "./examples/Agents_GetFileContent_MaximumSet_Gen.json"
-          },
-          "Agents_GetFileContent_MinimumSet": {
-            "$ref": "./examples/Agents_GetFileContent_MinimumSet_Gen.json"
           }
         }
       }
@@ -1402,14 +1275,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_CreateThread_MaximumSet": {
-            "$ref": "./examples/Agents_CreateThread_MaximumSet_Gen.json"
-          },
-          "Agents_CreateThread_MinimumSet": {
-            "$ref": "./examples/Agents_CreateThread_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -1447,14 +1312,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_GetThread_MaximumSet": {
-            "$ref": "./examples/Agents_GetThread_MaximumSet_Gen.json"
-          },
-          "Agents_GetThread_MinimumSet": {
-            "$ref": "./examples/Agents_GetThread_MinimumSet_Gen.json"
           }
         }
       },
@@ -1496,14 +1353,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_UpdateThread_MaximumSet": {
-            "$ref": "./examples/Agents_UpdateThread_MaximumSet_Gen.json"
-          },
-          "Agents_UpdateThread_MinimumSet": {
-            "$ref": "./examples/Agents_UpdateThread_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -1539,14 +1388,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_DeleteThread_MaximumSet": {
-            "$ref": "./examples/Agents_DeleteThread_MaximumSet_Gen.json"
-          },
-          "Agents_DeleteThread_MinimumSet": {
-            "$ref": "./examples/Agents_DeleteThread_MinimumSet_Gen.json"
           }
         }
       }
@@ -1686,14 +1527,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_ListMessages_MaximumSet": {
-            "$ref": "./examples/Agents_ListMessages_MaximumSet_Gen.json"
-          },
-          "Agents_ListMessages_MinimumSet": {
-            "$ref": "./examples/Agents_ListMessages_MinimumSet_Gen.json"
-          }
         }
       },
       "post": {
@@ -1737,14 +1570,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_CreateMessage_MaximumSet": {
-            "$ref": "./examples/Agents_CreateMessage_MaximumSet_Gen.json"
-          },
-          "Agents_CreateMessage_MinimumSet": {
-            "$ref": "./examples/Agents_CreateMessage_MinimumSet_Gen.json"
           }
         }
       }
@@ -1790,14 +1615,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_GetMessage_MaximumSet": {
-            "$ref": "./examples/Agents_GetMessage_MaximumSet_Gen.json"
-          },
-          "Agents_GetMessage_MinimumSet": {
-            "$ref": "./examples/Agents_GetMessage_MinimumSet_Gen.json"
           }
         }
       },
@@ -1859,14 +1676,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_UpdateMessage_MaximumSet": {
-            "$ref": "./examples/Agents_UpdateMessage_MaximumSet_Gen.json"
-          },
-          "Agents_UpdateMessage_MinimumSet": {
-            "$ref": "./examples/Agents_UpdateMessage_MinimumSet_Gen.json"
           }
         }
       }
@@ -1999,11 +1808,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_ListRuns_MaximumSet": {
-            "$ref": "./examples/Agents_ListRuns_MaximumSet_Gen.json"
-          }
         }
       },
       "post": {
@@ -2047,11 +1851,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_CreateRun_MaximumSet": {
-            "$ref": "./examples/Agents_CreateRun_MaximumSet_Gen.json"
           }
         }
       }
@@ -2097,11 +1896,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_GetRun_MaximumSet": {
-            "$ref": "./examples/Agents_GetRun_MaximumSet_Gen.json"
           }
         }
       },
@@ -2164,11 +1958,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_UpdateRun_MaximumSet": {
-            "$ref": "./examples/Agents_UpdateRun_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -2213,11 +2002,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_CancelRun_MaximumSet": {
-            "$ref": "./examples/Agents_CancelRun_MaximumSet_Gen.json"
           }
         }
       }
@@ -2357,14 +2141,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_ListRunSteps_MaximumSet": {
-            "$ref": "./examples/Agents_ListRunSteps_MaximumSet_Gen.json"
-          },
-          "Agents_ListRunSteps_MinimumSet": {
-            "$ref": "./examples/Agents_ListRunSteps_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -2416,14 +2192,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_GetRunStep_MaximumSet": {
-            "$ref": "./examples/Agents_GetRunStep_MaximumSet_Gen.json"
-          },
-          "Agents_GetRunStep_MinimumSet": {
-            "$ref": "./examples/Agents_GetRunStep_MinimumSet_Gen.json"
           }
         }
       }
@@ -2497,11 +2265,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_SubmitToolOutputsToRun_MaximumSet": {
-            "$ref": "./examples/Agents_SubmitToolOutputsToRun_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -2540,11 +2303,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_CreateThreadAndRun_MaximumSet": {
-            "$ref": "./examples/Agents_CreateThreadAndRun_MaximumSet_Gen.json"
           }
         }
       }
@@ -2670,14 +2428,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_ListVectorStores_MaximumSet": {
-            "$ref": "./examples/Agents_ListVectorStores_MaximumSet_Gen.json"
-          },
-          "Agents_ListVectorStores_MinimumSet": {
-            "$ref": "./examples/Agents_ListVectorStores_MinimumSet_Gen.json"
-          }
         }
       },
       "post": {
@@ -2714,14 +2464,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_CreateVectorStore_MaximumSet": {
-            "$ref": "./examples/Agents_CreateVectorStore_MaximumSet_Gen.json"
-          },
-          "Agents_CreateVectorStore_MinimumSet": {
-            "$ref": "./examples/Agents_CreateVectorStore_MinimumSet_Gen.json"
           }
         }
       }
@@ -2760,14 +2502,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_GetVectorStore_MaximumSet": {
-            "$ref": "./examples/Agents_GetVectorStore_MaximumSet_Gen.json"
-          },
-          "Agents_GetVectorStore_MinimumSet": {
-            "$ref": "./examples/Agents_GetVectorStore_MinimumSet_Gen.json"
           }
         }
       },
@@ -2813,14 +2547,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_ModifyVectorStore_MaximumSet": {
-            "$ref": "./examples/Agents_ModifyVectorStore_MaximumSet_Gen.json"
-          },
-          "Agents_ModifyVectorStore_MinimumSet": {
-            "$ref": "./examples/Agents_ModifyVectorStore_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -2856,14 +2582,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_DeleteVectorStore_MaximumSet": {
-            "$ref": "./examples/Agents_DeleteVectorStore_MaximumSet_Gen.json"
-          },
-          "Agents_DeleteVectorStore_MinimumSet": {
-            "$ref": "./examples/Agents_DeleteVectorStore_MinimumSet_Gen.json"
           }
         }
       }
@@ -2931,14 +2649,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_CreateVectorStoreFileBatch_MaximumSet": {
-            "$ref": "./examples/Agents_CreateVectorStoreFileBatch_MaximumSet_Gen.json"
-          },
-          "Agents_CreateVectorStoreFileBatch_MinimumSet": {
-            "$ref": "./examples/Agents_CreateVectorStoreFileBatch_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -2984,14 +2694,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_GetVectorStoreFileBatch_MaximumSet": {
-            "$ref": "./examples/Agents_GetVectorStoreFileBatch_MaximumSet_Gen.json"
-          },
-          "Agents_GetVectorStoreFileBatch_MinimumSet": {
-            "$ref": "./examples/Agents_GetVectorStoreFileBatch_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -3036,14 +2738,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_CancelVectorStoreFileBatch_MaximumSet": {
-            "$ref": "./examples/Agents_CancelVectorStoreFileBatch_MaximumSet_Gen.json"
-          },
-          "Agents_CancelVectorStoreFileBatch_MinimumSet": {
-            "$ref": "./examples/Agents_CancelVectorStoreFileBatch_MinimumSet_Gen.json"
           }
         }
       }
@@ -3222,14 +2916,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_ListVectorStoreFileBatchFiles_MaximumSet": {
-            "$ref": "./examples/Agents_ListVectorStoreFileBatchFiles_MaximumSet_Gen.json"
-          },
-          "Agents_ListVectorStoreFileBatchFiles_MinimumSet": {
-            "$ref": "./examples/Agents_ListVectorStoreFileBatchFiles_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -3400,14 +3086,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_ListVectorStoreFiles_MaximumSet": {
-            "$ref": "./examples/Agents_ListVectorStoreFiles_MaximumSet_Gen.json"
-          },
-          "Agents_ListVectorStoreFiles_MinimumSet": {
-            "$ref": "./examples/Agents_ListVectorStoreFiles_MinimumSet_Gen.json"
-          }
         }
       },
       "post": {
@@ -3467,11 +3145,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_CreateVectorStoreFile_MaximumSet": {
-            "$ref": "./examples/Agents_CreateVectorStoreFile_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -3517,14 +3190,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_GetVectorStoreFile_MaximumSet": {
-            "$ref": "./examples/Agents_GetVectorStoreFile_MaximumSet_Gen.json"
-          },
-          "Agents_GetVectorStoreFile_MinimumSet": {
-            "$ref": "./examples/Agents_GetVectorStoreFile_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -3567,14 +3232,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_DeleteVectorStoreFile_MaximumSet": {
-            "$ref": "./examples/Agents_DeleteVectorStoreFile_MaximumSet_Gen.json"
-          },
-          "Agents_DeleteVectorStoreFile_MinimumSet": {
-            "$ref": "./examples/Agents_DeleteVectorStoreFile_MinimumSet_Gen.json"
           }
         }
       }
@@ -8408,13 +8065,13 @@
         }
       }
     },
-    "AppInsightsConfiguration": {
+    "ApplicationInsightsConfiguration": {
       "type": "object",
-      "description": "Data Source for Application Insight.",
+      "description": "Data Source for Application Insights.",
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "LogAnalytic Workspace resourceID associated with AppInsights"
+          "description": "LogAnalytic Workspace resourceID associated with ApplicationInsights"
         },
         "query": {
           "type": "string",
@@ -8423,6 +8080,10 @@
         "serviceName": {
           "type": "string",
           "description": "Service name."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Connection String to connect to ApplicationInsights."
         }
       },
       "required": [
@@ -8669,8 +8330,7 @@
           "description": "A list of connection list secrets",
           "items": {
             "$ref": "#/definitions/ConnectionsListSecretsResponse"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -8681,6 +8341,10 @@
       "type": "object",
       "description": "Response from the listSecrets operation",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the connection"
+        },
         "name": {
           "type": "string",
           "description": "The name of the resource"
@@ -8691,6 +8355,7 @@
         }
       },
       "required": [
+        "id",
         "name",
         "properties"
       ]
@@ -8757,14 +8422,13 @@
       "type": "object",
       "description": "Dataset as source for evaluation.",
       "properties": {
-        "Uri": {
+        "id": {
           "type": "string",
-          "description": "Evaluation input data",
-          "x-ms-client-name": "id"
+          "description": "Evaluation input data"
         }
       },
       "required": [
-        "Uri"
+        "id"
       ],
       "allOf": [
         {
@@ -8850,24 +8514,20 @@
       "type": "object",
       "description": "Evaluation Schedule Definition",
       "properties": {
-        "id": {
+        "name": {
           "type": "string",
-          "description": "Identifier of the evaluation.",
+          "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
           "maxLength": 254,
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
           "readOnly": true
         },
         "data": {
-          "$ref": "#/definitions/InputData",
+          "$ref": "#/definitions/ApplicationInsightsConfiguration",
           "description": "Data for evaluation.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique."
         },
         "description": {
           "type": "string",
@@ -8922,7 +8582,7 @@
         }
       },
       "required": [
-        "id",
+        "name",
         "data",
         "evaluators",
         "trigger",
@@ -9056,7 +8716,8 @@
           "description": "The EvaluationSchedule items on this page",
           "items": {
             "$ref": "#/definitions/EvaluationSchedule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -9066,30 +8727,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "Recurrence": {
-      "type": "object",
-      "description": "Recurrence Definition",
-      "properties": {
-        "frequency": {
-          "$ref": "#/definitions/Frequency",
-          "description": "The frequency to trigger schedule."
-        },
-        "interval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies schedule interval in conjunction with frequency"
-        },
-        "schedule": {
-          "$ref": "#/definitions/RecurrenceSchedule",
-          "description": "The recurrence schedule."
-        }
-      },
-      "required": [
-        "frequency",
-        "interval",
-        "schedule"
       ]
     },
     "RecurrenceSchedule": {
@@ -9130,9 +8767,7 @@
       },
       "required": [
         "hours",
-        "minutes",
-        "weekDays",
-        "monthDays"
+        "minutes"
       ]
     },
     "RecurrenceTrigger": {
@@ -9155,8 +8790,7 @@
       },
       "required": [
         "frequency",
-        "interval",
-        "schedule"
+        "interval"
       ],
       "allOf": [
         {

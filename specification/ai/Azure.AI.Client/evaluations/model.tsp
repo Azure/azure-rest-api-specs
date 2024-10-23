@@ -54,12 +54,12 @@ model InputData {
   type: string;
 }
 
-@doc("Data Source for Application Insight.")
-model AppInsightsConfiguration extends InputData {
+@doc("Data Source for Application Insights.")
+model ApplicationInsightsConfiguration extends InputData {
   @visibility("read")
   type: "app_insights";
 
-  @doc("LogAnalytic Workspace resourceID associated with AppInsights")
+  @doc("LogAnalytic Workspace resourceID associated with ApplicationInsights")
   resourceId: string;
 
   @doc("Query to fetch the data.")
@@ -67,6 +67,9 @@ model AppInsightsConfiguration extends InputData {
 
   @doc("Service name.")
   serviceName: string;
+
+  @doc("Connection String to connect to ApplicationInsights.")
+  connectionString?: string;
 }
 
 @doc("Dataset as source for evaluation.")
@@ -99,7 +102,7 @@ model RecurrenceTrigger extends Trigger {
   interval: int32;
 
   @doc("The recurrence schedule.")
-  schedule: RecurrenceSchedule;
+  schedule?: RecurrenceSchedule;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
@@ -176,18 +179,6 @@ union WeekDays {
   string,
 }
 
-@doc("Recurrence Definition")
-model Recurrence {
-  @doc("The frequency to trigger schedule.")
-  frequency: Frequency;
-
-  @doc("Specifies schedule interval in conjunction with frequency")
-  interval: int32;
-
-  @doc("The recurrence schedule.")
-  schedule: RecurrenceSchedule;
-}
-
 @doc("RecurrenceSchedule Definition")
 model RecurrenceSchedule {
   @doc("List of hours for the schedule.")
@@ -197,10 +188,10 @@ model RecurrenceSchedule {
   minutes: int32[];
 
   @doc("List of days for the schedule.")
-  weekDays: WeekDays[];
+  weekDays?: WeekDays[];
 
   @doc("List of month days for the schedule")
-  monthDays: int32[];
+  monthDays?: int32[];
 }
 
 @doc("SamplingStrategy Definition")
@@ -213,19 +204,16 @@ model SamplingStrategy {
 // NoteNote: I modeled ScheduledEvaluation as a type of Evaluation. But can also be modeled as a separate Schedule entity. We can discuss
 @resource("schedules")
 model EvaluationSchedule {
-  @key("id")
+  @key("name")
   @visibility("read")
-  @doc("Identifier of the evaluation.")
+  @doc("Name of the schedule, which also serves as the unique identifier for the evaluation")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
   @maxLength(254)
-  id: string;
+  name: string;
 
   @doc("Data for evaluation.")
   @visibility("read", "create")
-  data: InputData;
-
-  @doc("Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique.")
-  displayName?: string;
+  data: ApplicationInsightsConfiguration;
 
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
   description?: string;
