@@ -628,10 +628,10 @@ model PolicyData {
 @Versioning.added(Versions.v2024_10_01_preview)
 model ActionParameters {
   @doc("""
-  The value parameter that is used by the policy action. This is action specific,
-  for further information please refer to documentation here:
-  https://learn.microsoft.com/en-us/azure/external-attack-surface-management/policy-engine
-  """)
+    The value parameter that is used by the policy action. This is action specific,
+    for further information please refer to documentation here:
+    https://learn.microsoft.com/en-us/azure/external-attack-surface-management/policy-engine
+    """)
   value?: string;
 }
 

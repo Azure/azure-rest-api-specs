@@ -94,9 +94,18 @@ interface EasmClient {
 @@clientName(Easm.Location, "ObservedLocationDetails", "csharp");
 @@clientName(Easm.Port, "PortDetails", "csharp");
 @@clientName(Easm.Port.port, "portName", "csharp");
-@@clientName(Easm.ReportAssetSnapshotExportRequest, "ReportAssetSnapshotExportPayload", "csharp");
-@@clientName(Easm.ReportAssetSnapshotRequest, "ReportAssetSnapshotPayload", "csharp");
-@@clientName(Easm.ReportAssetSummaryRequest, "ReportAssetSummaryPayload", "csharp");
+@@clientName(Easm.ReportAssetSnapshotExportRequest,
+  "ReportAssetSnapshotExportPayload",
+  "csharp"
+);
+@@clientName(Easm.ReportAssetSnapshotRequest,
+  "ReportAssetSnapshotPayload",
+  "csharp"
+);
+@@clientName(Easm.ReportAssetSummaryRequest,
+  "ReportAssetSummaryPayload",
+  "csharp"
+);
 @@clientName(Easm.Reputation, "ReputationDetails", "csharp");
 @@clientName(Easm.ResourceUrl, "ResourceUri", "csharp");
 @@clientName(Easm.SavedFilterData, "SavedFilterPayload", "csharp");
@@ -107,6 +116,15 @@ interface EasmClient {
 @@clientName(Easm.TaskState, "TaskResourceState", "csharp");
 @@clientName(Easm.TaskPhase, "TaskResourcePhase", "csharp");
 @@clientName(Easm.DiscoSourceKind, "DiscoverySourceKind", "csharp");
-@@clientName(Easm.LogAnalyticsDataConnectionData, "LogAnalyticsDataConnectionPayload", "csharp");
-@@clientName(Easm.AzureDataExplorerDataConnectionData, "AzureDataExplorerDataConnectionPayload", "csharp");
-@@clientName(Easm.DiscoGroupNameParameter, "DiscoveryGroupNameParameter", "csharp");
+@@clientName(Easm.LogAnalyticsDataConnectionData,
+  "LogAnalyticsDataConnectionPayload",
+  "csharp"
+);
+@@clientName(Easm.AzureDataExplorerDataConnectionData,
+  "AzureDataExplorerDataConnectionPayload",
+  "csharp"
+);
+@@clientName(Easm.DiscoGroupNameParameter,
+  "DiscoveryGroupNameParameter",
+  "csharp"
+);
