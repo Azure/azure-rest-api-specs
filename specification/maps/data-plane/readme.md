@@ -27,7 +27,7 @@ These are the global settings for MapsClient.
 ``` yaml
 title: MapsClient
 openapi-type: data-plane
-tag: package-stable-2023-06-01
+tag: package-2024-10-01
 ```
 
 ### Suppression
@@ -46,6 +46,15 @@ directive:
   - suppress: RESPONSE_SCHEMA_NOT_IN_SPEC
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
 
+```
+
+### Tag: package-2024-10-01
+
+These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-01'
+input-file:
+  - Render/stable/2024-10-01/render.json
 ```
 
 ### Tag: package-stable-2023-06-01
