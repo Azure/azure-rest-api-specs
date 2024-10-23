@@ -3779,6 +3779,19 @@
           "items": {
             "type": "string"
           }
+        },
+        "targetEnvironmentId": {
+          "type": "string",
+          "description": "The target environment resource ID."
+        },
+        "targetLifecycleStage": {
+          "$ref": "#/definitions/LifecycleStage",
+          "description": "The target lifecycle stage."
+        },
+        "linkState": {
+          "$ref": "#/definitions/LinkState",
+          "description": "The state of the API source link",
+          "readOnly": true
         }
       },
       "required": [
@@ -4245,6 +4258,28 @@
           }
         ]
       }
+    },
+    "LinkState": {
+      "type": "object",
+      "description": "The link state.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the link."
+        },
+        "message": {
+          "type": "string",
+          "description": "The state message."
+        },
+        "lastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last update of the link state."
+        }
+      },
+      "required": [
+        "lastUpdatedOn"
+      ]
     },
     "ManagedServiceIdentityType": {
       "type": "string",

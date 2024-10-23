@@ -582,6 +582,7 @@ model ApiSourceProperties {
   @doc("Indicates if the specification should be imported along with metadata.")
   shouldImportSpec?: boolean = false;
 
+  @doc("API source configuration for Azure API Management.")
   apimSource?: ApimSource;
 }
 
@@ -592,9 +593,28 @@ model ApimSource {
 
   @doc("The resource ID of the managed identity that has access to the API Management instance.")
   msiResourceId?: string[];
+
+  @doc("The target environment resource ID.")
+  targetEnvironmentId?: string;
+
+  @doc("The target lifecycle stage.")
+  targetLifecycleStage?: LifecycleStage;
+
+  /**
+   * The state of the API source link
+   */
+  @visibility("read")
+  linkState?: LinkState;
 }
 
-// model LinkState {
-//   @doc("The state of the link.")
-//   state?: string;
-// }
+@doc("The link state.")
+model LinkState {
+  @doc("The state of the link.")
+  state?: string;
+
+  @doc("The state message.")
+  message?: string;
+
+  @doc("The timestamp of the last update of the link state.")
+  lastUpdatedOn: utcDateTime;
+}
