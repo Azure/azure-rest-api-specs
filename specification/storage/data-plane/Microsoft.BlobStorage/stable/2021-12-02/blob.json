@@ -1683,7 +1683,18 @@
           "application/octet-stream",
           "application/json"
         ],
+        "consumes": [
+          "application/octet-stream"
+        ],
         "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
           {
             "name": "containerName",
             "in": "path",
@@ -1767,6 +1778,9 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "queryRequest",
@@ -1877,6 +1891,11 @@
                   ]
                 }
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -2036,9 +2055,18 @@
                   ]
                 }
               },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
               }
             }
           },
@@ -2140,6 +2168,11 @@
                   ]
                 }
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -2299,9 +2332,18 @@
                   ]
                 }
               },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
               }
             }
           },
@@ -2493,13 +2535,10 @@
           {
             "name": "x-ms-version",
             "in": "header",
-            "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.",
+            "description": "Specifies the version of the operation to use for this request.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "containerName",
@@ -2592,6 +2631,9 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -11655,6 +11697,11 @@
               "type": "file"
             },
             "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",

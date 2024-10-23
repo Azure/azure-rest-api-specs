@@ -145,6 +145,7 @@ interface Service {
     version: string;
 
     ...RequestIdResponseHeader;
+    ...ClientRequestIdHeader;
   }) | StorageError;
 
   /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
@@ -707,90 +708,71 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @head
   @route("/{containerName}/{blob}")
-  getProperties(
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string,
+  getProperties is StorageOperation<
+    {
+      ...ContainerNameParameter;
+      ...BlobNameParameter;
+      ...SnapshotParameter;
+      ...VersionIdParameter;
+      ...TimeoutParameter;
+      ...LeaseIdOptionalParameter;
+      ...EncryptionKeyParameter;
+      ...EncryptionKeySha256Parameter;
+      ...EncryptionAlgorithmParameter;
+      ...ConditionalRequestHeaders;
+      ...IfTagsParameter;
+    },
+    {
+      // TODO: x-ms-meta headers
+      // TODO: x-ms-or headers
 
-    /** The media type of the body of the response. */
-    #suppress "@typespec/http/content-type-ignored" "Exisitng API"
-    @header("Content-Type")
-    contentType: "application/octet-stream",
+      ...LastModifiedResponseHeader;
 
-    ...RequestIdResponseHeader,
-    ...ClientRequestIdHeader,
-    ...ContainerNameParameter,
-    ...BlobNameParameter,
-    ...SnapshotParameter,
-    ...VersionIdParameter,
-    ...TimeoutParameter,
-    ...LeaseIdOptionalParameter,
-    ...EncryptionKeyParameter,
-    ...EncryptionKeySha256Parameter,
-    ...EncryptionAlgorithmParameter,
-    ...ConditionalRequestHeaders,
-    ...IfTagsParameter,
-  ): {
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
-
-    /** The media type of the body of the response. */
-    #suppress "@typespec/http/content-type-ignored" "Exisitng API"
-    @header("Content-Type")
-    contentType: "application/octet-stream";
-
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-
-    // TODO: x-ms-meta headers
-    // TODO: x-ms-or headers
-
-    ...LastModifiedResponseHeader;
-
-    ...CreationTimeResponseHeader;
-    ...ObjectReplicationPolicyIdResponseHeader;
-    ...BlobTypeResponseHeader;
-    ...CopyCompletionTimeResponseHeader;
-    ...CopyStatusDescriptionResponseHeader;
-    ...CopyIdResponseHeader;
-    ...CopyProgressResponseHeader;
-    ...CopyStatusResponseHeader;
-    ...CopySourceResponseHeader;
-    ...IsIncrementalCopyResponseHeader;
-    ...DestinationSnapshotResponseHeader;
-    ...LeaseDurationResponseHeader;
-    ...LeaseStateResponseHeader;
-    ...LeaseStatusResponseHeader;
-    ...ContentLengthResponseHeader;
-    ...EtagResponseHeader;
-    ...ContentMd5ResponseHeader;
-    ...ContentEncodingResponseParameter;
-    ...ContentDispositionResponseHeader;
-    ...ContentLanguageResponseHeader;
-    ...CacheControlResponseHeader;
-    ...BlobSequenceNumberResponseHeader;
-    ...DateResponseHeader;
-    ...AcceptRangesResponseHeader;
-    ...BlobCommittedBlockCountResponseHeader;
-    ...IsServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-    ...AccessTierResponseHeader;
-    ...AccessTierInferredResponseHeader;
-    ...ArchiveStatusResponseHeader;
-    ...AccessTierChangeTimeResponseHeader;
-    ...VersionIdResponseHeader;
-    ...IsCurrentVersionResponseHeader;
-    ...TagCountResponseHeader;
-    ...ExpiresOnResponseHeader;
-    ...IsSealedResponseHeader;
-    ...RehydratePriorityResponseHeader;
-    ...LastAccessedResponseHeader;
-    ...ImmutabilityPolicyExpiresOnResponseHeader;
-    ...ImmutabilityPolicyModeResponseHeader;
-    ...LegalHoldResponseHeader;
-  } | StorageError;
+      ...CreationTimeResponseHeader;
+      ...ObjectReplicationPolicyIdResponseHeader;
+      ...BlobTypeResponseHeader;
+      ...CopyCompletionTimeResponseHeader;
+      ...CopyStatusDescriptionResponseHeader;
+      ...CopyIdResponseHeader;
+      ...CopyProgressResponseHeader;
+      ...CopyStatusResponseHeader;
+      ...CopySourceResponseHeader;
+      ...IsIncrementalCopyResponseHeader;
+      ...DestinationSnapshotResponseHeader;
+      ...LeaseDurationResponseHeader;
+      ...LeaseStateResponseHeader;
+      ...LeaseStatusResponseHeader;
+      ...ContentLengthResponseHeader;
+      ...EtagResponseHeader;
+      ...ContentMd5ResponseHeader;
+      ...ContentEncodingResponseParameter;
+      ...ContentDispositionResponseHeader;
+      ...ContentLanguageResponseHeader;
+      ...CacheControlResponseHeader;
+      ...BlobSequenceNumberResponseHeader;
+      ...DateResponseHeader;
+      ...AcceptRangesResponseHeader;
+      ...BlobCommittedBlockCountResponseHeader;
+      ...IsServerEncryptedResponseHeader;
+      ...EncryptionKeySha256ResponseHeader;
+      ...EncryptionScopeResponseHeader;
+      ...AccessTierResponseHeader;
+      ...AccessTierInferredResponseHeader;
+      ...ArchiveStatusResponseHeader;
+      ...AccessTierChangeTimeResponseHeader;
+      ...VersionIdResponseHeader;
+      ...IsCurrentVersionResponseHeader;
+      ...TagCountResponseHeader;
+      ...ExpiresOnResponseHeader;
+      ...IsSealedResponseHeader;
+      ...RehydratePriorityResponseHeader;
+      ...LastAccessedResponseHeader;
+      ...ImmutabilityPolicyExpiresOnResponseHeader;
+      ...ImmutabilityPolicyModeResponseHeader;
+      ...LegalHoldResponseHeader;
+    },
+    "application/octet-stream"
+  >;
 
   /** If the storage account's soft delete feature is disabled then, when a blob is deleted, it is permanently removed from the storage account. If the storage account's soft delete feature is enabled, then, when a blob is deleted, it is marked for deletion and becomes inaccessible immediately. However, the blob service retains the blob or snapshot for the number of days specified by the DeleteRetentionPolicy section of [Storage service properties] (Set-Blob-Service-Properties.md). After the specified number of days has passed, the blob's data is permanently removed from the storage account. Note that you continue to be charged for the soft-deleted blob's storage until it is permanently removed. Use the List Blobs API and specify the \"include=deleted\" query parameter to discover which blobs and snapshots have been soft deleted. You can then use the Undelete Blob API to restore a soft-deleted blob. All other operations on a soft-deleted blob or snapshot causes the service to return an HTTP status code of 404 (ResourceNotFound). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -1268,65 +1250,65 @@ interface Blob {
 
   /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @post
   @route("/{containerName}/{blob}?comp=query")
-  query(
-    ...ContainerNameParameter,
-    ...BlobNameParameter,
+  query is StorageOperation<
+    {
+      ...ContainerNameParameter;
+      ...BlobNameParameter;
 
-    /** The query request */
-    @body
-    queryRequest: QueryRequest,
+      /** The query request */
+      @body
+      queryRequest: QueryRequest;
 
-    ...SnapshotParameter,
-    ...TimeoutParameter,
-    ...LeaseIdOptionalParameter,
-    ...EncryptionKeyParameter,
-    ...EncryptionKeySha256Parameter,
-    ...EncryptionAlgorithmParameter,
-    ...ConditionalRequestHeaders,
-    ...IfTagsParameter,
-  ): (BodyParameter & {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
-    @statusCode statusCode: 200 | 206;
+      ...SnapshotParameter;
+      ...TimeoutParameter;
+      ...LeaseIdOptionalParameter;
+      ...EncryptionKeyParameter;
+      ...EncryptionKeySha256Parameter;
+      ...EncryptionAlgorithmParameter;
+      ...ConditionalRequestHeaders;
+      ...IfTagsParameter;
+    },
+    BodyParameter & {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+      @statusCode statusCode: 200 | 206;
 
-    // TODO: MetadataResponseHeader;
+      // TODO: MetadataResponseHeader;
 
-    ...LastModifiedResponseHeader;
+      ...LastModifiedResponseHeader;
 
-    ...ContentLengthResponseHeader;
-
-    /** Supported media type. */
-    @header("Content-Type")
-    contentType: "application/octet-stream";
-
-    ...ContentRangeResponseHeader;
-    ...EtagResponseHeader;
-    ...ContentMd5ResponseHeader;
-    ...ContentEncodingResponseParameter;
-    ...CacheControlResponseHeader;
-    ...ContentDispositionResponseHeader;
-    ...ContentLanguageResponseHeader;
-    ...BlobSequenceNumberResponseHeader;
-    ...BlobTypeResponseHeader;
-    ...ContentCrc64ResponseHeader;
-    ...CopyCompletionTimeResponseHeader;
-    ...CopyStatusDescriptionResponseHeader;
-    ...CopyIdResponseHeader;
-    ...CopyProgressResponseHeader;
-    ...CopySourceResponseHeader;
-    ...CopyStatusResponseHeader;
-    ...LeaseDurationResponseHeader;
-    ...LeaseStateResponseHeader;
-    ...LeaseStatusResponseHeader;
-    ...AcceptRangesResponseHeader;
-    ...DateResponseHeader;
-    ...BlobCommittedBlockCountResponseHeader;
-    ...IsServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-    ...BlobContentMd5ResponseHeader;
-  }) | StorageError;
+      ...ContentLengthResponseHeader;
+      ...ContentRangeResponseHeader;
+      ...EtagResponseHeader;
+      ...ContentMd5ResponseHeader;
+      ...ContentEncodingResponseParameter;
+      ...CacheControlResponseHeader;
+      ...ContentDispositionResponseHeader;
+      ...ContentLanguageResponseHeader;
+      ...BlobSequenceNumberResponseHeader;
+      ...BlobTypeResponseHeader;
+      ...ContentCrc64ResponseHeader;
+      ...CopyCompletionTimeResponseHeader;
+      ...CopyStatusDescriptionResponseHeader;
+      ...CopyIdResponseHeader;
+      ...CopyProgressResponseHeader;
+      ...CopySourceResponseHeader;
+      ...CopyStatusResponseHeader;
+      ...LeaseDurationResponseHeader;
+      ...LeaseStateResponseHeader;
+      ...LeaseStatusResponseHeader;
+      ...AcceptRangesResponseHeader;
+      ...DateResponseHeader;
+      ...BlobCommittedBlockCountResponseHeader;
+      ...IsServerEncryptedResponseHeader;
+      ...EncryptionKeySha256ResponseHeader;
+      ...EncryptionScopeResponseHeader;
+      ...BlobContentMd5ResponseHeader;
+    },
+    "application/octet-stream"
+  >;
 
   /** The Get Blob Tags operation enables users to get tags on a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
