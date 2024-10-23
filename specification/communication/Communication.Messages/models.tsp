@@ -220,10 +220,10 @@ model ReactionNotificationContent extends NotificationContent {
   kind: CommunicationMessageKind.reaction;
 
   @doc("emoji content like \\uD83D\\uDE00.")
-  emoji?: string;
+  emoji: string;
 
   @doc("ID of the previous message you want to reply to.")
-  messageId?: string;
+  messageId: string;
 }
 
 @added(Versions.c2024_11_15)
