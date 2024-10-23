@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
   - Microsoft.ToolchainOrchestrator/preview/2024-08-01-preview/toolchainOrchestrator.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: toolchainOrchestrator.json
+    reason: Service design forces behavior
 ```
 
 ### Tag: package-2024-04-01-preview
@@ -46,4 +50,8 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
   - Microsoft.ToolchainOrchestrator/preview/2024-04-01-preview/toolchainOrchestrator.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: toolchainOrchestrator.json
+    reason: Service design forces behavior
 ```
