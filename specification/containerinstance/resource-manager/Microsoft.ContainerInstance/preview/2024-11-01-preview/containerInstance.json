@@ -1341,7 +1341,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{ContainerGroupProfileName}": {
       "put": {
         "operationId": "ContainerGroupProfile_CreateOrUpdate",
         "x-ms-examples": {},
@@ -3547,51 +3547,53 @@
           "type": "array",
           "description": "Contains information about the volumes that can be mounted by Containers in the Container Groups.",
           "items": {
-            "Volume": {
-              "description": "The properties of the volume.",
-              "type": "object",
-              "required": [
-                "name"
-              ],
-              "properties": {
-                "name": {
-                  "description": "The name of the volume.",
-                  "type": "string"
-                },
-                "azureFile": {
-                  "description": "The Azure File volume.",
-                  "$ref": "#/definitions/AzureFileVolume"
-                }
-              }
-            }
+            "$ref": "#/definitions/NGroupCGPropertyVolume"
           }
         },
         "containers": {
           "type": "array",
           "description": "Contains information about Container which can be set while creating or updating the nGroups.",
           "items": {
-            "Container": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "container name"
-                },
-                "properties": {
-                  "type": "object",
-                  "description": "container properties",
-                  "properties": {
-                    "volumeMounts": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/VolumeMount"
-                      }
-                    }
-                  }
-                }
+            "$ref": "#/definitions/NGroupCGPropertyContainer"
+          }
+        }
+      }
+    },
+    "NGroupCGPropertyContainer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "container name"
+        },
+        "properties": {
+          "type": "object",
+          "description": "container properties",
+          "properties": {
+            "volumeMounts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VolumeMount"
               }
             }
           }
+        }
+      }
+    },
+    "NGroupCGPropertyVolume": {
+      "description": "Contains information about the volumes that can be mounted by Containers in the Container Groups.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The name of the volume.",
+          "type": "string"
+        },
+        "azureFile": {
+          "description": "The Azure File volume.",
+          "$ref": "#/definitions/AzureFileVolume"
         }
       }
     },
