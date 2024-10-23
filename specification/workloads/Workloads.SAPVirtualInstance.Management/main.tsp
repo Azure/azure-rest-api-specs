@@ -15,7 +15,6 @@ import "./SAPDatabaseInstance.tsp";
 import "./SAPApplicationServerInstance.tsp";
 import "./SAPVirtualInstanceMetadata.tsp";
 import "./custom.tsp";
-import "../Workloads.Operations.Management/models.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
