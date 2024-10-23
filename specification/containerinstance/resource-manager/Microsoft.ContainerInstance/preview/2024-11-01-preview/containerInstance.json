@@ -3332,13 +3332,6 @@
           },
           "description": "The nGroups zones. NOTE: Availability zones can only be set when you create the scale set"
         },
-        "tags": {
-          "type": "object",
-          "description": "Tags is a dictionary where customer can provide flags to enable certain features. Eg: autoscale.enabled: true",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
           "x-ms-mutability": [
@@ -3385,10 +3378,10 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The list of user identities associated with the nGroups. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "description": "The list of user identities associated with the nGroup.",
           "additionalProperties": {
-            "type": "object",
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
+            "description": "The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+            "$ref": "#/definitions/UserAssignedIdentities"
           }
         }
       }
