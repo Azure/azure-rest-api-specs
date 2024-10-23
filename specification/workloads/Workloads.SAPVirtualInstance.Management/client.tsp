@@ -9,6 +9,22 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
+@@clientName(Microsoft.Workloads.SAPApplicationServerInstances,
+  "SapApplicationServerInstance",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPCentralServerInstances,
+  "SapCentralServerInstances",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDatabaseInstances,
+  "SapDatabaseInstances",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstances,
+  "SapVirtualInstances",
+  "java"
+);
 @@clientName(Microsoft.Workloads.SAPEnvironmentType,
   "SapEnvironmentType",
   "java"
@@ -35,10 +51,7 @@ using Azure.ClientGenerator.Core;
   "SapVirtualInstanceStatus",
   "java"
 );
-@@clientName(Microsoft.Workloads.SAPVirtualInstanceStatus,
-  "SapHealthState",
-  "java"
-);
+@@clientName(Microsoft.Workloads.SAPHealthState, "SapHealthState", "java");
 @@clientName(Microsoft.Workloads.SAPVirtualInstanceState,
   "SapVirtualInstanceState",
   "java"
@@ -63,6 +76,7 @@ using Azure.ClientGenerator.Core;
   "SapSupportedResourceSkusResult",
   "java"
 );
+@@clientName(Microsoft.Workloads.SAPSupportedSku, "SapSupportedSku", "java");
 @@clientName(Microsoft.Workloads.SAPDiskConfigurationsRequest,
   "SapDiskConfigurationsRequest",
   "java"
@@ -112,7 +126,7 @@ using Azure.ClientGenerator.Core;
   "SapVirtualInstanceProperties",
   "java"
 );
-@@clientName(Microsoft.Workloads.SAPConfiguration, "SAPConfiguration", "java");
+@@clientName(Microsoft.Workloads.SAPConfiguration, "SapConfiguration", "java");
 @@clientName(Microsoft.Workloads.SAPVirtualInstanceError,
   "SapVirtualInstanceError",
   "java"
