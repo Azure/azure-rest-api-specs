@@ -121,6 +121,7 @@ suppressions:
     reason: False alarm.
   - code: PatchIdentityProperty
     from: virtualNetworkGateway.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters
     reason: False alarm.
 ```
 
