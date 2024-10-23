@@ -72,16 +72,16 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
+          "Operations_List_MaximumSet": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           },
-          "Operations_List_MinimumSet_Gen": {
+          "Operations_List_MinimumSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -114,13 +114,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Organizations_ListBySubscription_MaximumSet_Gen": {
+          "Organizations_ListBySubscription": {
             "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -156,13 +156,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Organizations_ListByResourceGroup_MaximumSet_Gen": {
+          "Organizations_ListByResourceGroup": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -209,7 +209,7 @@
           }
         },
         "x-ms-examples": {
-          "Organizations_Get_MaximumSet_Gen": {
+          "Organizations_Get": {
             "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
           }
         }
@@ -281,15 +281,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Organizations_CreateOrUpdate": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Organizations_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Organizations_Update",
@@ -334,20 +334,6 @@
               "$ref": "#/definitions/OrganizationResource"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -356,14 +342,10 @@
           }
         },
         "x-ms-examples": {
-          "Organizations_Update_MaximumSet_Gen": {
+          "Organizations_Update": {
             "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "Organizations_Delete",
@@ -417,15 +399,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Organizations_Delete": {
+            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Organizations_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -494,7 +476,8 @@
         },
         "subscriptionStatus": {
           "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
-          "description": "Marketplace subscription status"
+          "description": "Marketplace subscription status",
+          "readOnly": true
         },
         "offerDetails": {
           "$ref": "#/definitions/LiftrBase.OfferDetails",
