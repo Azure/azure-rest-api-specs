@@ -834,7 +834,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/NGroups/{nGroupsName}/skus": {
       "get": {
         "operationId": "NGroupsSkus_Get",
         "x-ms-examples": {},
@@ -873,11 +873,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/NGroups/{nGroupsName}": {
       "get": {
         "operationId": "NGroups_Get",
         "x-ms-examples": {},
-        "summary": "Display information about a specified nGroup.",
+        "summary": "Display information about a specified NGroup.",
         "description": "Get the properties of the specified n group.",
         "parameters": [
           {
@@ -911,7 +911,7 @@
       "put": {
         "operationId": "NGroups_CreateOrUpdate",
         "x-ms-examples": {},
-        "description": "Create or update a nGroup.",
+        "description": "Create or update a NGroup.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -920,13 +920,13 @@
             "$ref": "#/parameters/NGroupsNameParameter"
           },
           {
-            "name": "nGroup",
+            "name": "NGroup",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NGroup"
             },
-            "description": "The nGroup object."
+            "description": "The NGroup object."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -973,8 +973,8 @@
       "patch": {
         "operationId": "NGroups_Update",
         "x-ms-examples": {},
-        "summary": "Update a specified nGroup.",
-        "description": "Update a specified nGroup.",
+        "summary": "Update a specified NGroup.",
+        "description": "Update a specified NGroup.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -983,13 +983,13 @@
             "$ref": "#/parameters/NGroupsNameParameter"
           },
           {
-            "name": "nGroup",
+            "name": "NGroup",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NGroup"
             },
-            "description": "The nGroup object."
+            "description": "The NGroup object."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1011,7 +1011,7 @@
             }
           },
           "202": {
-            "description": "nGroup update started",
+            "description": "NGroup update started",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string"
@@ -1036,8 +1036,8 @@
       "delete": {
         "operationId": "NGroups_Delete",
         "x-ms-examples": {},
-        "summary": "Delete a nGroup.",
-        "description": "Deletes a nGroup.",
+        "summary": "Delete a NGroup.",
+        "description": "Deletes a NGroup.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1080,12 +1080,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/NGroups/{nGroupsName}/start": {
       "post": {
         "operationId": "NGroups_Start",
         "x-ms-examples": {},
-        "summary": "Starts all container groups in a nGroup.",
-        "description": "Starts all container groups in a nGroup. Compute resources will be allocated and billing will start.",
+        "summary": "Starts all container groups in a NGroup.",
+        "description": "Starts all container groups in a NGroup. Compute resources will be allocated and billing will start.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1125,12 +1125,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/NGroups/{nGroupsName}/stop": {
       "post": {
         "operationId": "NGroups_Stop",
         "x-ms-examples": {},
-        "summary": "Stops all container groups in a nGroup.",
-        "description": "Stops all container groups in a nGroup. Compute resources will be deallocated and billing will stop.",
+        "summary": "Stops all container groups in a NGroup.",
+        "description": "Stops all container groups in a NGroup. Compute resources will be deallocated and billing will stop.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1158,12 +1158,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/NGroups/{nGroupsName}/restart": {
       "post": {
         "operationId": "NGroups_Restart",
         "x-ms-examples": {},
-        "summary": "Restarts all container groups in a nGroup.",
-        "description": "Restarts all container groups in a nGroup in place. If container image has updates, new image will be downloaded.",
+        "summary": "Restarts all container groups in a NGroup.",
+        "description": "Restarts all container groups in a NGroup in place. If container image has updates, new image will be downloaded.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1203,12 +1203,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/NGroups": {
       "get": {
         "operationId": "NGroups_ListByResourceGroup",
         "x-ms-examples": {},
-        "summary": "Gets a list of all nGroups under a resource group.",
-        "description": "Gets a list of all nGroups under a resource group.",
+        "summary": "Gets a list of all NGroups under a resource group.",
+        "description": "Gets a list of all NGroups under a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1239,12 +1239,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/ngroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/NGroups": {
       "get": {
         "operationId": "NGroups_List",
         "x-ms-examples": {},
-        "summary": "Gets a list of all nGroups under a subscription.",
-        "description": "Gets a list of all nGroups under a subscription.",
+        "summary": "Gets a list of all NGroups under a subscription.",
+        "description": "Gets a list of all NGroups under a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1341,7 +1341,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{ContainerGroupProfileName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}": {
       "put": {
         "operationId": "ContainerGroupProfile_CreateOrUpdate",
         "x-ms-examples": {},
@@ -1422,7 +1422,7 @@
             "required": true,
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/ContainerGroupProfile"
             }
           },
           {
@@ -3289,12 +3289,12 @@
         },
         "skuCapacity": {
           "type": "string",
-          "description": "The number of container groups of the nGroups."
+          "description": "The number of container groups of the NGroups."
         }
       }
     },
     "NGroupsListResult": {
-      "description": "The nGroups list response that contains the nGroups properties.",
+      "description": "The NGroups list response that contains the NGroups properties.",
       "type": "object",
       "properties": {
         "value": {
@@ -3313,24 +3313,20 @@
     "NGroup": {
       "type": "object",
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "readOnly": true
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NGroupProperties"
         },
         "identity": {
           "$ref": "#/definitions/NGroupIdentity",
-          "description": "The identity of the nGroup, if configured."
+          "description": "The identity of the NGroup, if configured."
         },
         "zones": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The nGroups zones. NOTE: Availability zones can only be set when you create the scale set"
+          "description": "The NGroups zones. NOTE: Availability zones can only be set when you create the scale set"
         },
         "location": {
           "type": "string",
@@ -3346,25 +3342,25 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Describes a nGroup."
+      "description": "Describes a NGroup."
     },
     "NGroupIdentity": {
       "type": "object",
-      "description": "Identity for the nGroup.",
+      "description": "Identity for the NGroup.",
       "properties": {
         "principalId": {
           "readOnly": true,
           "type": "string",
-          "description": "The principal id of the nGroup identity. This property will only be provided for a system assigned identity."
+          "description": "The principal id of the NGroup identity. This property will only be provided for a system assigned identity."
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenant id associated with the nGroup. This property will only be provided for a system assigned identity."
+          "description": "The tenant id associated with the NGroup. This property will only be provided for a system assigned identity."
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the nGroup. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the nGroup.",
+          "description": "The type of identity used for the NGroup. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the NGroup.",
           "enum": [
             "SystemAssigned",
             "UserAssigned",
@@ -3378,7 +3374,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The list of user identities associated with the nGroup.",
+          "description": "The list of user identities associated with the NGroup.",
           "additionalProperties": {
             "description": "The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
             "$ref": "#/definitions/UserAssignedIdentities"
@@ -3403,7 +3399,7 @@
             "$ref": "#/definitions/ContainerGroupProfileStub"
           },
           "x-ms-identifiers": [],
-          "description": "The Container Group Profiles that could be used in a nGroup."
+          "description": "The Container Group Profiles that could be used in a NGroup."
         },
         "provisioningState": {
           "readOnly": true,
@@ -3428,7 +3424,7 @@
           "description": "Used by the customer to specify the way to update the Container Groups in NGroup."
         }
       },
-      "description": "Describes the properties of a nGroup."
+      "description": "Describes the properties of a NGroup."
     },
     "UpdateProfile": {
       "type": "object",
@@ -3478,7 +3474,7 @@
         "faultDomainCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of fault domains to be used to spread CGs in a nGroup. This can only be specified during nGroup creation and is immutable after that."
+          "description": "The number of fault domains to be used to spread CGs in a NGroup. This can only be specified during NGroup creation and is immutable after that."
         }
       }
     },
@@ -3501,7 +3497,7 @@
               "type": "object",
               "properties": {
                 "prefix": {
-                  "description": "The prefix can be used when there are tooling limitations (e.g. on the Azure portal where CGs from multiple nGroups exist in the same RG). The prefix with the suffixed resource name must still follow Azure resource naming guidelines.",
+                  "description": "The prefix can be used when there are tooling limitations (e.g. on the Azure portal where CGs from multiple NGroups exist in the same RG). The prefix with the suffixed resource name must still follow Azure resource naming guidelines.",
                   "type": "string"
                 }
               }
@@ -3509,7 +3505,7 @@
           }
         }
       },
-      "description": "Describes the elastic profile of the nGroup"
+      "description": "Describes the elastic profile of the NGroup"
     },
     "ContainerGroupProfileStub": {
       "type": "object",
@@ -3521,7 +3517,7 @@
         "revision": {
           "type": "integer",
           "format": "int32",
-          "description": "The revision of the CG profile is an optional property. If customer does not to provide a revision then nGroups will pickup the latest revision of CGProfile."
+          "description": "The revision of the CG profile is an optional property. If customer does not to provide a revision then NGroups will pickup the latest revision of CGProfile."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
@@ -3533,14 +3529,14 @@
         },
         "containerGroupProperties": {
           "$ref": "#/definitions/NGroupContainerGroupProperties",
-          "description": " Container Group properties which can be set while creating or updating the nGroups."
+          "description": " Container Group properties which can be set while creating or updating the NGroups."
         }
       },
       "description": "The object that contains a reference to a Container Group Profile and it's other related properties."
     },
     "NGroupContainerGroupProperties": {
       "type": "object",
-      "description": "Container Group properties which can be set while creating or updating the nGroups.",
+      "description": "Container Group properties which can be set while creating or updating the NGroups.",
       "properties": {
         "subnetIds": {
           "type": "array",
@@ -3558,7 +3554,7 @@
         },
         "containers": {
           "type": "array",
-          "description": "Contains information about Container which can be set while creating or updating the nGroups.",
+          "description": "Contains information about Container which can be set while creating or updating the NGroups.",
           "items": {
             "$ref": "#/definitions/NGroupCGPropertyContainer"
           }
@@ -3752,12 +3748,22 @@
     },
     "ContainerGroupProfile": {
       "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/ContainerGroupProfileProperties"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/ContainerGroupProfileProperties"
         }
       ]
     },
@@ -3954,7 +3960,7 @@
       "x-ms-parameter-location": "method"
     },
     "NGroupsNameParameter": {
-      "name": "ngroupsName",
+      "name": "nGroupsName",
       "in": "path",
       "required": true,
       "type": "string",
@@ -3965,7 +3971,7 @@
       "x-ms-parameter-location": "method"
     },
     "ContainerGroupProfileNameParameter": {
-      "name": "ContainerGroupProfileName",
+      "name": "containerGroupProfileName",
       "in": "path",
       "required": true,
       "type": "string",
