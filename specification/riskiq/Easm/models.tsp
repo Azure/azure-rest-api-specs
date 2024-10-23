@@ -608,22 +608,6 @@ model DiscoGroupData {
   templateId?: string;
 }
 
-@doc("A request body used to create a policy.")
-@Versioning.added(Versions.v2024_10_01_preview)
-model PolicyData {
-  @doc("A human readable description of what the policy should do.")
-  description?: string;
-
-  @doc("Name of the saved filter query to be used to select assets that are to be updated by a given policy.")
-  filterName: string;
-
-  @doc("Action specifying what the policy should do.")
-  action: PolicyAction;
-
-  @doc("Additional parameters needed to perform the policy action.")
-  actionParameters: ActionParameters;
-}
-
 @doc("This is an object that exists to provide a common schema definition for the action parameters.")
 @Versioning.added(Versions.v2024_10_01_preview)
 model ActionParameters {
@@ -645,6 +629,7 @@ model Policy {
   name: string;
 
   @doc("The name that can be used for display purposes.")
+  @visibility("read")
   displayName?: string;
 
   @doc("A human readable description of what the policy should do.")
@@ -657,19 +642,23 @@ model Policy {
   action: PolicyAction;
 
   @doc("Number of assets in inventory that have been updated by this policy.")
+  @visibility("read")
   updatedAssetsCount: int64;
 
   @doc("The unique name of the user that created the policy user@gmail.com")
+  @visibility("read")
   user: string;
 
   @doc("The date this policy was created, in RFC3339 format.")
+  @visibility("read")
   createdDate: utcDateTime;
 
   @doc("The date this policy was last updated, in RFC3339 format.")
+  @visibility("read")
   updatedDate: utcDateTime;
 
   @doc("Additional parameters needed to perform the policy action.")
-  actionParameters?: ActionParameters;
+  actionParameters: ActionParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"

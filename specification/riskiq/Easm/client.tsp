@@ -74,7 +74,6 @@ interface EasmClient {
   createOrReplacePolicy is Easm.Policies.createOrReplacePolicy;
 }
 
-@@clientName(Easm.PolicyData, "PolicyPayload", "csharp");
 @@clientName(Easm.Policy, "Policy", "csharp");
 @@clientName(Easm.AlexaInfo, "AlexaDetails", "java");
 @@clientName(Easm.AssetUpdateData, "AssetUpdatePayload", "csharp");

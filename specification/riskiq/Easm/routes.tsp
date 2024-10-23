@@ -305,7 +305,7 @@ interface Policies {
   @clientName("CreateOrReplacePolicy", "csharp")
   createOrReplacePolicy is Foundations.ResourceOperation<
     Policy,
-    PolicyData,
+    BodyParameter<Policy>,
     Policy
   >;
 

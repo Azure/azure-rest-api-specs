@@ -1426,9 +1426,10 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PolicyData"
+              "$ref": "#/definitions/Policy"
             }
           }
         ],
@@ -6510,7 +6511,8 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The name that can be used for display purposes."
+          "description": "The name that can be used for display purposes.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -6527,21 +6529,25 @@
         "updatedAssetsCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of assets in inventory that have been updated by this policy."
+          "description": "Number of assets in inventory that have been updated by this policy.",
+          "readOnly": true
         },
         "user": {
           "type": "string",
-          "description": "The unique name of the user that created the policy user@gmail.com"
+          "description": "The unique name of the user that created the policy user@gmail.com",
+          "readOnly": true
         },
         "createdDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date this policy was created, in RFC3339 format."
+          "description": "The date this policy was created, in RFC3339 format.",
+          "readOnly": true
         },
         "updatedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date this policy was last updated, in RFC3339 format."
+          "description": "The date this policy was last updated, in RFC3339 format.",
+          "readOnly": true
         },
         "actionParameters": {
           "$ref": "#/definitions/ActionParameters",
@@ -6555,7 +6561,8 @@
         "updatedAssetsCount",
         "user",
         "createdDate",
-        "updatedDate"
+        "updatedDate",
+        "actionParameters"
       ]
     },
     "PolicyAction": {
@@ -6599,33 +6606,6 @@
           }
         ]
       }
-    },
-    "PolicyData": {
-      "type": "object",
-      "description": "A request body used to create a policy.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "A human readable description of what the policy should do."
-        },
-        "filterName": {
-          "type": "string",
-          "description": "Name of the saved filter query to be used to select assets that are to be updated by a given policy."
-        },
-        "action": {
-          "$ref": "#/definitions/PolicyAction",
-          "description": "Action specifying what the policy should do."
-        },
-        "actionParameters": {
-          "$ref": "#/definitions/ActionParameters",
-          "description": "Additional parameters needed to perform the policy action."
-        }
-      },
-      "required": [
-        "filterName",
-        "action",
-        "actionParameters"
-      ]
     },
     "Port": {
       "type": "object",
