@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-edgeresourceInsights
-namespace: azure.mgmt.edgeresourceInsights
+package-name: azure-mgmt-resourceInsights
+namespace: azure.mgmt.resourceInsights
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/edgeresourceInsights/azure-mgmt-edgeresourceInsights/azure/mgmt/edgeresourceInsights
+output-folder: $(python-sdks-folder)/resourceInsights/azure-mgmt-resourceInsights/azure/mgmt/resourceInsights
 ```

@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: edgeresourceInsights
-    namespace: azure.mgmt.edgeresourceInsights
-    package-name: azure-mgmt-edgeresourceInsights
-az-output-folder: $(azure-cli-extension-folder)/src/edgeresourceInsights
-python-sdk-output-folder: "$(az-output-folder)/azext_edgeresourceInsights/vendored_sdks/edgeresourceInsights"
+    extensions: resourceInsights
+    namespace: azure.mgmt.resourceInsights
+    package-name: azure-mgmt-resourceInsights
+az-output-folder: $(azure-cli-extension-folder)/src/resourceInsights
+python-sdk-output-folder: "$(az-output-folder)/azext_resourceInsights/vendored_sdks/resourceInsights"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_edgeresourceInsights/vendor
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: edgeresourceInsights
-  namespace: azure.mgmt.edgeresourceInsights
-  package-name: azure-mgmt-edgeresourceInsights
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/edgeresourceInsights
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/edgeresourceInsights"
+  extensions: resourceInsights
+  namespace: azure.mgmt.resourceInsights
+  package-name: azure-mgmt-resourceInsights
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/resourceInsights
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/resourceInsights"
 ``` 
