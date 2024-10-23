@@ -283,8 +283,19 @@ model ImportFromApimSuccessResult {
     @doc("The successful response status code.")
     @statusCode code: 200;
 
+    /**
+     * Async operation status.
+     */
     status: string;
+
+    /**
+     * Async operation start time.
+     */
     startTime: utcDateTime;
+
+    /**
+     * Async operation end time.
+     */
     endTime?: utcDateTime;
 }
 
