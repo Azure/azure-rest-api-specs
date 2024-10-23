@@ -29,7 +29,6 @@ model Service is TrackedResource<ServiceProperties> {
 
 @@added(Service.sku, Versions.v2024_06_01_preview);
 @@added(Service.location, Versions.v2024_06_01_preview);
-@@added(Service.tags, Versions.v2024_06_01_preview);
 
 
 @armResourceOperations

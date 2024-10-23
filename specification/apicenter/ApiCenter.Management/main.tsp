@@ -48,18 +48,18 @@ enum Versions {
   v2024_06_01_preview: "2024-06-01-preview",
 }
 
-@@clientName(Apis.createOrUpdate::parameters.resource, "payload");
-@@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
-@@clientName(ApiVersions.createOrUpdate::parameters.resource, "payload");
-@@clientName(Deployments.createOrUpdate::parameters.resource, "payload");
-@@clientName(Environments.createOrUpdate::parameters.resource, "payload");
-@@clientName(MetadataSchemas.createOrUpdate::parameters.resource, "payload");
-@@clientName(Services.update::parameters.properties, "payload");
-@@clientName(Workspaces.createOrUpdate::parameters.resource, "payload");
-@@clientName(ApiDefinitions.importSpecification::parameters.body, "payload");
-@@clientName(ApiDefinitions.exportSpecification::parameters.body, "payload");
-@@clientName(Services.exportMetadataSchema::parameters.body, "payload");
-@@clientName(Services.importFromApim::parameters.body, "payload");
+@@clientName(Apis.createOrUpdate::parameters.resource, "resource");
+@@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "resource");
+@@clientName(ApiVersions.createOrUpdate::parameters.resource, "resource");
+@@clientName(Deployments.createOrUpdate::parameters.resource, "resource");
+@@clientName(Environments.createOrUpdate::parameters.resource, "resource");
+@@clientName(MetadataSchemas.createOrUpdate::parameters.resource, "resource");
+@@clientName(Services.update::parameters.properties, "resource");
+@@clientName(Workspaces.createOrUpdate::parameters.resource, "resource");
+@@clientName(ApiDefinitions.importSpecification::parameters.body, "resource");
+@@clientName(ApiDefinitions.exportSpecification::parameters.body, "resource");
+@@clientName(Services.exportMetadataSchema::parameters.body, "resource");
+@@clientName(Services.importFromApim::parameters.body, "resource");
 
 @@visibility(Azure.Core.Page.nextLink, "read");
 @@visibility(Azure.Core.Page.value, "read");
