@@ -1959,6 +1959,46 @@
           }
         }
       }
+    },
+    "/calling/recordings/{recordingId}/result": {
+      "get": {
+        "tags": [
+          "Recording"
+        ],
+        "summary": "Get recording result. This includes the download URLs for the recording chunks.",
+        "operationId": "CallRecording_GetRecordingResult",
+        "parameters": [
+          {
+            "name": "recordingId",
+            "in": "path",
+            "description": "The recording id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the recording result.",
+            "schema": {
+              "$ref": "#/definitions/RecordingResultResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallRecording_GetRecordingResult": {
+            "$ref": "./examples/CallRecording_GetRecordingResult.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2040,17 +2080,28 @@
     "CommunicationUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationUserIdentifierModel"
     },
-    "AzureOpenAIDialogUpdate": {
-      "description": "Azure Open AI Dialog for UpdateDialog API Call",
-      "required": [],
+    "PowerVirtualAgentsDialog": {
+      "description": "Power Virtual Agents Dialog",
+      "required": [
+        "botAppId"
+      ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DialogUpdateBase"
+          "$ref": "#/definitions/BaseDialog"
         }
       ],
-      "properties": {},
-      "x-ms-discriminator-value": "azureOpenAI"
+      "properties": {
+        "botAppId": {
+          "description": "Bot identifier.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Language.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "powerVirtualAgents"
     },
     "MicrosoftTeamsAppIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
@@ -2192,28 +2243,8 @@
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     },
-    "PowerVirtualAgentsDialog": {
-      "description": "Power Virtual Agents Dialog",
-      "required": [
-        "botAppId"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseDialog"
-        }
-      ],
-      "properties": {
-        "botAppId": {
-          "description": "Bot identifier.",
-          "type": "string"
-        },
-        "language": {
-          "description": "Language.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "powerVirtualAgents"
+    "CommunicationError": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationError"
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -3645,6 +3676,138 @@
         },
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
+        }
+      }
+    },
+    "CallSessionEndReason": {
+      "description": "Reason call ended",
+      "enum": [
+        "sessionStillOngoing",
+        "callEnded",
+        "initiatorLeft",
+        "handedOverOrTransfered",
+        "maximumSessionTimeReached",
+        "callStartTimeout",
+        "mediaTimeout",
+        "audioStreamFailure",
+        "allInstancesBusy",
+        "teamsTokenConversionFailed",
+        "reportCallStateFailed",
+        "reportCallStateFailedAndSessionMustBeDiscarded",
+        "couldNotRejoinCall",
+        "invalidBotData",
+        "couldNotStart",
+        "appHostedMediaFailureOutcomeWithError",
+        "appHostedMediaFailureOutcomeGracefully",
+        "handedOverDueToMediaTimeout",
+        "handedOverDueToAudioStreamFailure",
+        "speechRecognitionSessionNonRetriableError",
+        "speechRecognitionSessionRetriableErrorMaxRetryCountReached",
+        "handedOverDueToChunkCreationFailure",
+        "chunkCreationFailed",
+        "handedOverDueToProcessingTimeout",
+        "processingTimeout",
+        "transcriptObjectCreationFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallSessionEndReason",
+        "modelAsString": true
+      }
+    },
+    "RecordingResultResponse": {
+      "description": "Recording result data",
+      "type": "object",
+      "properties": {
+        "recordingStorageInfo": {
+          "$ref": "#/definitions/RecordingStorageInfo",
+          "description": "Recording storage information"
+        },
+        "recordingStartTime": {
+          "format": "date-time",
+          "description": "Recording start time",
+          "type": "string"
+        },
+        "recordingDurationMs": {
+          "format": "int64",
+          "description": "Recording duration in milliseconds",
+          "type": "integer"
+        },
+        "sessionEndReason": {
+          "$ref": "#/definitions/CallSessionEndReason"
+        },
+        "storageType": {
+          "$ref": "#/definitions/RecordingStorageKind"
+        },
+        "recordingExpirationTime": {
+          "format": "date-time",
+          "description": "Recording expiration time. The recording will not be available after this time.",
+          "type": "string"
+        },
+        "errors": {
+          "description": "Errors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationError"
+          }
+        }
+      }
+    },
+    "RecordingStorageInfo": {
+      "description": "Container for chunks",
+      "type": "object",
+      "properties": {
+        "recordingChunks": {
+          "description": "Collection of {Microsoft.Skype.Platform.ExecutionAgent.Azure.Communication.Service.ServerCalling.Content.Contracts.ALPHA4_2024_09_01_preview.Models.RecordingChunkStorageInfo}",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecordingChunkStorageInfo"
+          }
+        }
+      }
+    },
+    "ChunkEndReason": {
+      "description": "Reason this chunk ended",
+      "enum": [
+        "chunkIsBeingRecorded",
+        "sessionEnded",
+        "chunkMaximumSizeExceeded",
+        "chunkMaximumTimeExceeded",
+        "chunkUploadFailure"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChunkEndReason",
+        "modelAsString": true
+      }
+    },
+    "RecordingChunkStorageInfo": {
+      "description": "Recording chunk data",
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "description": "Chunk document id",
+          "type": "string"
+        },
+        "index": {
+          "format": "int32",
+          "description": "Chunks order in a multi chunk recording",
+          "type": "integer"
+        },
+        "endReason": {
+          "$ref": "#/definitions/ChunkEndReason"
+        },
+        "contentLocation": {
+          "description": "Location of the chunk",
+          "type": "string"
+        },
+        "metadataLocation": {
+          "description": "Location of chunk metadata",
+          "type": "string"
+        },
+        "deleteLocation": {
+          "description": "Callback for deleting chunk",
+          "type": "string"
         }
       }
     },
@@ -5327,6 +5490,18 @@
           "readOnly": true
         }
       }
+    },
+    "AzureOpenAIDialogUpdate": {
+      "description": "Azure Open AI Dialog for UpdateDialog API Call",
+      "required": [],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DialogUpdateBase"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "azureOpenAI"
     }
   },
   "parameters": {
