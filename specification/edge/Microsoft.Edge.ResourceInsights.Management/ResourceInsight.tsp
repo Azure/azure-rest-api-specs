@@ -70,7 +70,7 @@ model ResourceInsightProperties {
   update?: Update;
 }
 
-@doc("Connectivity")
+@doc("ResourceInsights Connectivity")
 model Connectivity {
   @doc("The connectivity status")
   status?: ConnectivityStatusEnum;
@@ -79,7 +79,7 @@ model Connectivity {
   eventReceivedTime?: utcDateTime;
 }
 
-@doc("Update")
+@doc("ResourceInsights Update")
 model Update {
   @doc("The update status")
   status?: UpdateStatus;
