@@ -13,8 +13,8 @@ namespace Microsoft.Edge;
 @doc("ResourceInsight resource")
 model ResourceInsight
   is Azure.ResourceManager.ExtensionResource<ResourceInsightProperties> {
-    ...ResourceNameParameter<ResourceInsight, NamePattern = "^default$">;
-  }
+  ...ResourceNameParameter<ResourceInsight, NamePattern = "^default$">;
+}
 
 @doc("ResourceInsight operations")
 @armResourceOperations
@@ -29,6 +29,7 @@ interface ResourceInsights {
 @doc("Connectivity status enum")
 union ConnectivityStatusEnum {
   string,
+
   @doc("The device is in Connected state")
   Connected: "Connected",
 
@@ -42,6 +43,7 @@ union ConnectivityStatusEnum {
 @doc("Update status enum")
 union UpdateStatus {
   string,
+
   @doc("The device is in Unknown state")
   Unknown: "Unknown",
 
@@ -61,7 +63,6 @@ union UpdateStatus {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
 @doc("Resource Insight properties")
 model ResourceInsightProperties {
-  
   @doc("The connectivity status")
   connectivity?: Connectivity;
 
@@ -73,6 +74,7 @@ model ResourceInsightProperties {
 model Connectivity {
   @doc("The connectivity status")
   status?: ConnectivityStatusEnum;
+
   @doc("The event received time")
   eventReceivedTime?: utcDateTime;
 }
@@ -81,6 +83,7 @@ model Connectivity {
 model Update {
   @doc("The update status")
   status?: UpdateStatus;
+
   @doc("The event received time")
   eventReceivedTime?: utcDateTime;
 }
