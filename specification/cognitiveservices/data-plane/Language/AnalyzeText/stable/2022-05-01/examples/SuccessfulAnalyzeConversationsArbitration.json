@@ -1,0 +1,76 @@
+{
+  "operationId": "AnalyzeConversations",
+  "title": "SuccessfulAnalyzeConversationsArbitration",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2022-05-01",
+    "body": {
+      "kind": "Conversation",
+      "analysisInput": {
+        "conversationItem": {
+          "participantId": "1",
+          "id": "1",
+          "modality": "text",
+          "language": "en-GB",
+          "text": "How do I integrate QnA Maker and LUIS?"
+        }
+      },
+      "parameters": {
+        "projectName": "{project-name}",
+        "deploymentName": "{deployment-name}",
+        "verbose": true,
+        "isLoggingEnabled": false,
+        "stringIndexType": "TextElement_V8"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "ConversationResult",
+        "result": {
+          "query": "trains from London",
+          "prediction": {
+            "topIntent": "Rail",
+            "projectKind": "Orchestration",
+            "intents": {
+              "Rail": {
+                "confidenceScore": 1,
+                "targetProjectKind": "Conversation",
+                "result": {
+                  "query": "trains from London",
+                  "prediction": {
+                    "topIntent": "Timetable",
+                    "projectKind": "Conversation",
+                    "intents": [
+                      {
+                        "category": "Timetable",
+                        "confidenceScore": 0.99968535
+                      },
+                      {
+                        "category": "Locomotive",
+                        "confidenceScore": 0.000314623
+                      }
+                    ],
+                    "entities": []
+                  }
+                }
+              },
+              "Tree": {
+                "confidenceScore": 0.2641529,
+                "targetProjectKind": "QuestionAnswering"
+              },
+              "None": {
+                "confidenceScore": 0,
+                "targetProjectKind": "NonLinked"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
