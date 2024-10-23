@@ -52,6 +52,7 @@ interface DocumentTranslationOperations {
     destination, it will be overwritten. The targetUrl for each target language
     must be unique.
     """)
+  @finalOperation(DocumentTranslationOperations.getTranslationStatus)
   @pollingOperation(DocumentTranslationOperations.getTranslationStatus)
   @route("/document/batches")
   @post
