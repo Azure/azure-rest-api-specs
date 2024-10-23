@@ -1,0 +1,902 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LightsailInstances"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/lightsailInstances": {
+      "get": {
+        "operationId": "LightsailInstances_ListBySubscription",
+        "tags": [
+          "LightsailInstances"
+        ],
+        "description": "List LightsailInstance resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LightsailInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LightsailInstances_ListBySubscription": {
+            "$ref": "./examples/LightsailInstances_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/lightsailInstances": {
+      "get": {
+        "operationId": "LightsailInstances_ListByResourceGroup",
+        "tags": [
+          "LightsailInstances"
+        ],
+        "description": "List LightsailInstance resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LightsailInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LightsailInstances_ListByResourceGroup": {
+            "$ref": "./examples/LightsailInstances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/lightsailInstances/{name}": {
+      "get": {
+        "operationId": "LightsailInstances_Get",
+        "tags": [
+          "LightsailInstances"
+        ],
+        "description": "Get a LightsailInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LightsailInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LightsailInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LightsailInstances_Get": {
+            "$ref": "./examples/LightsailInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LightsailInstances_CreateOrReplace",
+        "tags": [
+          "LightsailInstances"
+        ],
+        "description": "Create a LightsailInstance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LightsailInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LightsailInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LightsailInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LightsailInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'LightsailInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LightsailInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LightsailInstances_CreateOrReplace": {
+            "$ref": "./examples/LightsailInstances_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LightsailInstances_Update",
+        "tags": [
+          "LightsailInstances"
+        ],
+        "description": "Update a LightsailInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LightsailInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LightsailInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LightsailInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LightsailInstances_Update": {
+            "$ref": "./examples/LightsailInstances_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LightsailInstances_Delete",
+        "tags": [
+          "LightsailInstances"
+        ],
+        "description": "Delete a LightsailInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LightsailInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LightsailInstances_Delete": {
+            "$ref": "./examples/LightsailInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AddOn": {
+      "type": "object",
+      "description": "Definition of AddOn",
+      "properties": {
+        "addOnType": {
+          "type": "string",
+          "description": "The add-on type"
+        },
+        "autoSnapshotAddOnRequest": {
+          "$ref": "#/definitions/AutoSnapshotAddOn",
+          "description": "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on"
+        },
+        "status": {
+          "$ref": "#/definitions/AddOnStatus",
+          "description": "Status of the Addon"
+        }
+      }
+    },
+    "AddOnStatus": {
+      "type": "string",
+      "description": "AddOnStatus enum",
+      "enum": [
+        "Disabled",
+        "Disabling",
+        "Enabled",
+        "Enabling",
+        "Failed",
+        "Terminated",
+        "Terminating"
+      ],
+      "x-ms-enum": {
+        "name": "AddOnStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "AddOnStatus enum Disabled"
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "AddOnStatus enum Disabling"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "AddOnStatus enum Enabled"
+          },
+          {
+            "name": "Enabling",
+            "value": "Enabling",
+            "description": "AddOnStatus enum Enabling"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "AddOnStatus enum Failed"
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "AddOnStatus enum Terminated"
+          },
+          {
+            "name": "Terminating",
+            "value": "Terminating",
+            "description": "AddOnStatus enum Terminating"
+          }
+        ]
+      }
+    },
+    "AutoSnapshotAddOn": {
+      "type": "object",
+      "description": "Definition of AutoSnapshotAddOn",
+      "properties": {
+        "snapshotTimeOfDay": {
+          "type": "string",
+          "description": "The daily time when an automatic snapshot will be created."
+        }
+      }
+    },
+    "AwsLightsailInstanceProperties": {
+      "type": "object",
+      "description": "Definition of awsLightsailInstance",
+      "properties": {
+        "addOns": {
+          "type": "array",
+          "description": "An array of objects representing the add-ons to enable for the new instance.",
+          "items": {
+            "$ref": "#/definitions/AddOn"
+          },
+          "x-ms-identifiers": []
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request."
+        },
+        "blueprintId": {
+          "type": "string",
+          "description": "The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0 ). Use the get blueprints operation to return a list of available images (or blueprints )."
+        },
+        "bundleId": {
+          "type": "string",
+          "description": "The bundle of specification information for your virtual private server (or instance ), including the pricing plan (e.g., micro_1_0 )."
+        },
+        "hardware": {
+          "$ref": "#/definitions/Hardware",
+          "description": "Hardware of the Instance."
+        },
+        "instanceArn": {
+          "type": "string",
+          "description": "Property instanceArn"
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "The names to use for your new Lightsail instance."
+        },
+        "isStaticIp": {
+          "type": "boolean",
+          "description": "Is the IP Address of the Instance is the static IP"
+        },
+        "keyPairName": {
+          "type": "string",
+          "description": "The name of your key pair."
+        },
+        "location": {
+          "$ref": "#/definitions/Location",
+          "description": "Location of a resource."
+        },
+        "networking": {
+          "$ref": "#/definitions/Networking",
+          "description": "Networking of the Instance."
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "description": "Private IP Address of the Instance"
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "description": "Public IP Address of the Instance"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type of Lightsail instance."
+        },
+        "sshKeyName": {
+          "type": "string",
+          "description": "SSH Key Name of the  Lightsail instance."
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "Current State of the Instance."
+        },
+        "supportCode": {
+          "type": "string",
+          "description": "Support code to help identify any issues"
+        },
+        "tags": {
+          "type": "array",
+          "description": "An array of key-value pairs to apply to this resource.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "userData": {
+          "type": "string",
+          "description": "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update."
+        },
+        "userName": {
+          "type": "string",
+          "description": "Username of the  Lightsail instance."
+        }
+      }
+    },
+    "Disk": {
+      "type": "object",
+      "description": "Definition of Disk",
+      "properties": {
+        "attachedTo": {
+          "type": "string",
+          "description": "Instance attached to the disk."
+        },
+        "attachmentState": {
+          "type": "string",
+          "description": "Attachment state of the disk."
+        },
+        "diskName": {
+          "type": "string",
+          "description": "The names to use for your new Lightsail disk."
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "IOPS of disk."
+        },
+        "isSystemDisk": {
+          "type": "boolean",
+          "description": "Is the Attached disk is the system disk of the Instance."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path of the disk attached to the instance."
+        },
+        "sizeInGb": {
+          "type": "string",
+          "description": "Size of the disk attached to the Instance."
+        }
+      }
+    },
+    "Hardware": {
+      "type": "object",
+      "description": "Definition of Hardware",
+      "properties": {
+        "cpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU count of the Instance."
+        },
+        "disks": {
+          "type": "array",
+          "description": "Disks attached to the Instance.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "x-ms-identifiers": []
+        },
+        "ramSizeInGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "RAM Size of the Instance."
+        }
+      }
+    },
+    "LightsailInstance": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LightsailInstanceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LightsailInstanceListResult": {
+      "type": "object",
+      "description": "The response of a LightsailInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LightsailInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/LightsailInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LightsailInstanceProperties": {
+      "type": "object",
+      "description": "Definition of LightsailInstance",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsLightsailInstanceProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "LightsailInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in LightsailInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "description": "Definition of Location",
+      "properties": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request."
+        },
+        "regionName": {
+          "type": "string",
+          "description": "The Region Name in which to create your instance."
+        }
+      }
+    },
+    "MonthlyTransfer": {
+      "type": "object",
+      "description": "Definition of MonthlyTransfer",
+      "properties": {
+        "gbPerMonthAllocated": {
+          "type": "string",
+          "description": "GbPerMonthAllocated of the Instance."
+        }
+      }
+    },
+    "Networking": {
+      "type": "object",
+      "description": "Definition of Networking",
+      "properties": {
+        "monthlyTransfer": {
+          "$ref": "#/definitions/MonthlyTransfer",
+          "description": "Monthly Transfer of the Instance."
+        },
+        "ports": {
+          "type": "array",
+          "description": "Ports to the Instance.",
+          "items": {
+            "$ref": "#/definitions/Port"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Port": {
+      "type": "object",
+      "description": "Definition of Port",
+      "properties": {
+        "accessDirection": {
+          "type": "string",
+          "description": "Access Direction for Protocol of the Instance(inbound/outbound)."
+        },
+        "accessFrom": {
+          "type": "string",
+          "description": "Access From Protocol of the Instance."
+        },
+        "accessType": {
+          "type": "string",
+          "description": "Access Type Protocol of the Instance."
+        },
+        "cidrListAliases": {
+          "type": "array",
+          "description": "cidr List Aliases",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "cidrs": {
+          "type": "array",
+          "description": "Property cidrs",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "commonName": {
+          "type": "string",
+          "description": "CommonName for Protocol of the Instance."
+        },
+        "fromPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "From Port of the Instance."
+        },
+        "ipv6Cidrs": {
+          "type": "array",
+          "description": "IPv6 Cidrs",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Port Protocol of the Instance."
+        },
+        "toPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "To Port of the Instance."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "State": {
+      "type": "object",
+      "description": "Definition of State",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Status code of the Instance."
+        },
+        "name": {
+          "type": "string",
+          "description": "Status code of the Instance."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
