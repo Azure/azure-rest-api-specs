@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.ChangeSafety
-  output-folder: $(csharp-sdks-folder)/changecontrol/management/Microsoft.ChangeSafety/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/changesafety/management/Microsoft.ChangeSafety/GeneratedProtocol
 ```

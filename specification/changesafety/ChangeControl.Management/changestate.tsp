@@ -15,6 +15,7 @@ using TypeSpec.Rest;
 namespace Microsoft.ChangeSafety;
 
 @doc("Resource allows the user to define the change that they intended to execute & indicate the progression it will use.")
+@extensionResource
 model ChangeState is ProxyResource<ChangeStateProperties> {
   @pattern("^[a-zA-Z0-9-]{3,100}$")
   @key("changeStateName")
@@ -43,11 +44,11 @@ model ChangeStateProperties {
   description?: string;
 
   @visibility("read", "create")
-  @doc("ARM resource Id of the Referenced StageMap.")
+  @doc("ARM resource Id of the referenced StageMap.")
   stageMapResourceId: string;
 
   @visibility("read", "create")
-  @doc("Object that described the change payload.")
+  @doc("Object that describes the change payload.")
   changeArtifact: ChangeArtifact;
 
   @visibility("read", "create")
@@ -67,13 +68,13 @@ model ChangeStateProperties {
   state: ChangeStatus;
 
   @visibility("read", "create", "update")
-  @doc("Comments about the status update.")
+  @doc("Comments about the last update to the changeState resource.")
   @maxLength(2000)
   updateComments?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
-  @doc("StageMap parameters schema for each stage.")
+  @doc("Schema of parameters that will be provided for each stageProgression.")
   @visibility("read", "create")
   stageParameters: Record<Parameter>;
 

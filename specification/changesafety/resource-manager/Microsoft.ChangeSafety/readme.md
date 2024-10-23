@@ -1,9 +1,9 @@
 
-# ChangeControl
+# ChangeSafety
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for ChangeControl.
+This is the AutoRest configuration file for ChangeSafety.
 
 ## Getting Started
 
@@ -23,7 +23,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the ChangeControl.
+These are the global settings for the ChangeSafety.
 
 ```yaml
 openapi-type: arm
@@ -37,14 +37,14 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - ChangeControl/preview/2024-10-01-preview/ChangeControl.json
+  - Microsoft.ChangeSafety/ChangeControl/preview/2024-10-01-preview/ChangeControl.json
 suppressions:
   - code: AvoidAdditionalProperties
     from: changeControl.json
     reason: Need to use Record for key-value pair properties
   - code: TopLevelResourcesListByResourceGroup
     from: changeControl.json
-    reason: False alarm.
+    reason: List for ChangeStates and StageMaps are not supported by design.
 ```
 
 ---

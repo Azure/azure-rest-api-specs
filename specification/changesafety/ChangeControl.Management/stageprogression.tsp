@@ -17,6 +17,8 @@ model StageProgression is ProxyResource<StageProgressionProperties> {
   @key("stageProgressionName")
   @segment("stageProgressions")
   @pattern("^[a-zA-Z0-9-|]{3,100}$")
+  @minLength(3)
+  @maxLength(100)
   @path
   name: string;
 }
@@ -64,7 +66,7 @@ union StageProgressionState {
   @doc("Change is being applied within the stage.")
   InProgress: "InProgress",
 
-  @doc("Change is applied to the stage already.")
+  @doc("Change has successfully been applied to the stage.")
   Completed: "Completed",
 
   @doc("Change apply operation was abandoned.")

@@ -53,43 +53,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.ChangeSafety/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}": {
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}": {
       "get": {
         "operationId": "ChangeStates_Get",
         "tags": [
@@ -101,10 +65,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -148,10 +109,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -210,10 +168,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -266,10 +221,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -318,7 +270,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/getAuditTrail": {
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/getAuditTrail": {
       "post": {
         "operationId": "ChangeStates_GetAuditTrail",
         "tags": [
@@ -330,10 +282,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -367,7 +316,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/getNextStages": {
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/getNextStages": {
       "post": {
         "operationId": "ChangeStates_GetNextStages",
         "tags": [
@@ -379,10 +328,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -416,7 +362,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/stageProgressions": {
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/stageProgressions": {
       "get": {
         "operationId": "StageProgressions_ListByParent",
         "tags": [
@@ -428,10 +374,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -468,7 +411,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/stageProgressions/{stageProgressionName}": {
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/stageProgressions/{stageProgressionName}": {
       "get": {
         "operationId": "StageProgressions_Get",
         "tags": [
@@ -480,10 +423,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -501,6 +441,8 @@
             "description": "name of the stageProgression",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
             "pattern": "^[a-zA-Z0-9-|]{3,100}$"
           }
         ],
@@ -535,10 +477,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -556,6 +495,8 @@
             "description": "name of the stageProgression",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
             "pattern": "^[a-zA-Z0-9-|]{3,100}$"
           },
           {
@@ -605,10 +546,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -626,6 +564,8 @@
             "description": "name of the stageProgression",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
             "pattern": "^[a-zA-Z0-9-|]{3,100}$"
           },
           {
@@ -669,10 +609,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "changeStateName",
@@ -690,6 +627,8 @@
             "description": "name of the stageProgression",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
             "pattern": "^[a-zA-Z0-9-|]{3,100}$"
           }
         ],
@@ -714,7 +653,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/stageMaps/{stageMapName}": {
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/stageMaps/{stageMapName}": {
       "get": {
         "operationId": "StageMaps_Get",
         "tags": [
@@ -726,10 +665,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "stageMapName",
@@ -773,10 +709,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "stageMapName",
@@ -835,10 +768,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "stageMapName",
@@ -891,10 +821,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "stageMapName",
@@ -925,6 +852,42 @@
           "StageMaps_Delete_MaximumSet": {
             "$ref": "./examples/StageMaps_Delete.json"
           }
+        }
+      }
+    },
+    "/providers/Microsoft.ChangeSafety/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -969,7 +932,7 @@
     },
     "ArmOperationChangeArtifact": {
       "type": "object",
-      "description": "Describes the change payload for Kind=Inline & artifactType='ArmOperation'",
+      "description": "Describes the change payload for artifactType='ArmOperation'",
       "properties": {
         "artifactPayload": {
           "$ref": "#/definitions/ArmOperationArtifactContent",
@@ -1161,7 +1124,7 @@
         },
         "stageMapResourceId": {
           "type": "string",
-          "description": "ARM resource Id of the Referenced StageMap.",
+          "description": "ARM resource Id of the referenced StageMap.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1169,7 +1132,7 @@
         },
         "changeArtifact": {
           "$ref": "#/definitions/ChangeArtifact",
-          "description": "Object that described the change payload.",
+          "description": "Object that describes the change payload.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1215,7 +1178,7 @@
         },
         "updateComments": {
           "type": "string",
-          "description": "Comments about the status update.",
+          "description": "Comments about the last update to the changeState resource.",
           "maxLength": 2000,
           "x-ms-mutability": [
             "read",
@@ -1225,7 +1188,7 @@
         },
         "stageParameters": {
           "type": "object",
-          "description": "StageMap parameters schema for each stage.",
+          "description": "Schema of parameters that will be provided for each stageProgression.",
           "additionalProperties": {
             "$ref": "#/definitions/Parameter"
           },
@@ -1289,7 +1252,7 @@
         },
         "updateComments": {
           "type": "string",
-          "description": "Comments about the status update.",
+          "description": "Comments about the last update to the changeState resource.",
           "maxLength": 2000,
           "x-ms-mutability": [
             "read",
@@ -1392,9 +1355,32 @@
         ]
       }
     },
-    "ExternalArmTemplateArtifactContent": {
+    "ExternalArmTemplateChangeArtifact": {
       "type": "object",
-      "description": "Artifact content model for External ArmTemplates.",
+      "description": "Describes the change payload for External ArmTemplate file.",
+      "properties": {
+        "artifactPayload": {
+          "$ref": "#/definitions/ExternalArtifactContent",
+          "description": "The actual payload content.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "artifactPayload"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeArtifact"
+        }
+      ],
+      "x-ms-discriminator-value": "ExternalArmTemplate"
+    },
+    "ExternalArtifactContent": {
+      "type": "object",
+      "description": "Artifact content model for External ArmTemplates or Bicep files.",
       "properties": {
         "uri": {
           "type": "string",
@@ -1410,12 +1396,12 @@
         "uri"
       ]
     },
-    "ExternalArmTemplateChangeArtifact": {
+    "ExternalBicepTemplateChangeArtifact": {
       "type": "object",
-      "description": "Describes the change payload for External ArmTemplate or Bicep file.",
+      "description": "Describes the change payload for External Bicep file.",
       "properties": {
         "artifactPayload": {
-          "$ref": "#/definitions/ExternalArmTemplateArtifactContent",
+          "$ref": "#/definitions/ExternalArtifactContent",
           "description": "The actual payload content.",
           "x-ms-mutability": [
             "read",
@@ -1430,7 +1416,8 @@
         {
           "$ref": "#/definitions/ChangeArtifact"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ExternalBicep"
     },
     "GetAuditTrailResponse": {
       "type": "object",
@@ -1503,25 +1490,12 @@
         "parameterValues"
       ]
     },
-    "InlineTemplateArtifactContent": {
-      "type": "object",
-      "description": "Artifact content model for Inline template or bicep content.",
-      "properties": {
-        "script": {
-          "type": "string",
-          "description": "Inline ArmTemplate string or Bicep content."
-        }
-      },
-      "required": [
-        "script"
-      ]
-    },
-    "InlineTemplateChangeArtifact": {
+    "InlineArmTemplateChangeArtifact": {
       "type": "object",
       "description": "Describes the change payload for InlineArmTemplate or InlineBicep",
       "properties": {
         "artifactPayload": {
-          "$ref": "#/definitions/InlineTemplateArtifactContent",
+          "$ref": "#/definitions/InlineArtifactContent",
           "description": "The actual payload content.",
           "x-ms-mutability": [
             "read",
@@ -1536,7 +1510,44 @@
         {
           "$ref": "#/definitions/ChangeArtifact"
         }
+      ],
+      "x-ms-discriminator-value": "InlineArmTemplate"
+    },
+    "InlineArtifactContent": {
+      "type": "object",
+      "description": "Artifact content model for Inline template or bicep content.",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "Inline ArmTemplate string or Bicep content."
+        }
+      },
+      "required": [
+        "script"
       ]
+    },
+    "InlineBicepTemplateChangeArtifact": {
+      "type": "object",
+      "description": "Describes the change payload for InlineBicep",
+      "properties": {
+        "artifactPayload": {
+          "$ref": "#/definitions/InlineArtifactContent",
+          "description": "The actual payload content.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "artifactPayload"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeArtifact"
+        }
+      ],
+      "x-ms-discriminator-value": "InlineBicep"
     },
     "NumberParameter": {
       "type": "object",
@@ -1955,7 +1966,7 @@
           {
             "name": "Completed",
             "value": "Completed",
-            "description": "Change is applied to the stage already."
+            "description": "Change has successfully been applied to the stage."
           },
           {
             "name": "Abandoned",
@@ -2002,12 +2013,6 @@
         "defaultValue": {
           "type": "string",
           "description": "Default value for the parameter.",
-          "enum": [
-            "string"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -2017,13 +2022,7 @@
           "type": "array",
           "description": "Allowed list of the values for the parameter.",
           "items": {
-            "type": "string",
-            "enum": [
-              "string"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "type": "string"
           },
           "x-ms-mutability": [
             "read",
@@ -2060,7 +2059,7 @@
     },
     "TemplateSpecChangeArtifact": {
       "type": "object",
-      "description": "Describes the change payload for Kind=External & artifactType='ArmTemplate' or Bicep.",
+      "description": "Describes the change payload for artifactType=External & artifactType='ArmTemplate' or Bicep.",
       "properties": {
         "artifactPayload": {
           "$ref": "#/definitions/TemplateSpecArtifactContent",
@@ -2082,5 +2081,15 @@
       "x-ms-discriminator-value": "TemplateSpec"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }
