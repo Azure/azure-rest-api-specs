@@ -27,7 +27,87 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-07
+tag: package-preview-2024-10
+```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/workspaceRP.json
+suppressions:
+  - code: NestedResourcesMustHaveListOperation
+    reason: This resource will have many kind and we currently only start with the first kind that will have a 1 to 1 
+        mapping with the parent resource, so right now we didn't implement List API, 
+        we will add whence needed in the future.
+    where:
+      - $.definitions["CapabilityHostResource"]
+  - code: DeleteResponseCodes
+    reason: Existing API behavior in 2024-04-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}"].delete
+  - code: PatchIdentityProperty
+    reason: Existing API behavior in 2024-04-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}"].patch.parameters[6]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}"].patch.parameters[6]
+  - code: PathForResourceAction
+    reason: Existing API behavior in 2024-04-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify"]
+  - code: AvoidAdditionalProperties
+    reason: Existing API behavior in 2024-04-01-preview.
+    where:
+      - $.definitions.CustomModelFineTuning.properties.hyperParameters
+      - $.definitions.DeltaModelStatusResponse.properties.deltaModels
+      - $.definitions.FineTuningJob.properties.outputs
+      - $.definitions.SparkJob.properties.conf
+      - $.definitions.SparkJob.properties.environmentVariables
+  - code: PatchBodyParametersSchema
+    reason: The required part is within a property, the whole property itself is not required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: This should be exist in 2024-07-01-preview and got suppressed already, not sure why it got triggered.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+  - code: PostResponseCodes
+    reason: This API is intend to align with Cognitive service API which has the same behavior https://github.com/Azure/azure-rest-api-specs/blob/efa7e41b82e82359fc76c0cda1856eb6e44448ec/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json#L2717.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post
+  - code: AvoidAdditionalProperties
+    reason: Existing API behavior in 2024-07-01-preview.
+    where:
+      - $.definitions.CustomKeys.properties.keys
+      - $.definitions.EndpointModelProperties.properties.capabilities
+      - $.definitions.EndpointModelProperties.properties.finetuneCapabilities
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
+      - $.definitions.ServerlessEndpointInferenceEndpoint.properties.headers
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before,
+       this can't be change without breaking the customer.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: CMK is a short term and not violate the camel case rule.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
 ```
 
 ### Tag: package-preview-2024-07
