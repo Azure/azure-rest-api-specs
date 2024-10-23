@@ -5803,7 +5803,15 @@
           "format": "date-time",
           "description": "The end time of the target dataset time series that resulted in drift detection."
         }
-      }
+      },
+      "required": [
+        "dataDriftId",
+        "dataDriftName",
+        "runId",
+        "baseDatasetId",
+        "targetDatasetId",
+        "driftCoefficient"
+      ]
     },
     "MachineLearningServicesModelDeployedEventData": {
       "type": "object",
@@ -5833,8 +5841,9 @@
         }
       },
       "required": [
-        "serviceTags",
-        "serviceProperties"
+        "serviceName",
+        "serviceComputeType",
+        "modelIds"
       ]
     },
     "MachineLearningServicesModelRegisteredEventData": {
@@ -5861,8 +5870,8 @@
         }
       },
       "required": [
-        "modelTags",
-        "modelProperties"
+        "modelName",
+        "modelVersion"
       ]
     },
     "MachineLearningServicesRunCompletedEventData": {
@@ -5897,6 +5906,10 @@
         }
       },
       "required": [
+        "experimentId",
+        "experimentName",
+        "runId",
+        "runType",
         "runTags",
         "runProperties"
       ]
@@ -5937,8 +5950,13 @@
         }
       },
       "required": [
+        "experimentId",
+        "experimentName",
+        "runId",
+        "runType",
         "runTags",
-        "runProperties"
+        "runProperties",
+        "runStatus"
       ]
     },
     "MapsGeofenceEnteredEventData": {
