@@ -11,7 +11,7 @@ using Azure.ClientGenerator.Core;
 
 // interfaces
 @@clientName(Microsoft.Workloads.SAPApplicationServerInstances,
-  "SapApplicationServerInstance",
+  "SapApplicationServerInstances",
   "java"
 );
 @@clientName(Microsoft.Workloads.SAPCentralServerInstances,
