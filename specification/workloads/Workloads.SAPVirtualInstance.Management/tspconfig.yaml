@@ -1,6 +1,7 @@
 parameters:
   "service-dir":
     default: "sdk/workloads"
+    java: "/sdk/workloadssapvirtualinstance"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -24,7 +25,7 @@ options:
     namespace: "com.azure.resourcemanager.workloadssapvirtualinstance"
     service-name: "Workloads Sap Virtual Instance"
     flavor: "azure"
-    emitter-output-dir: "{java-sdk-folder}/sdk/workloadssapvirtualinstance/azure-resourcemanager-workloadssapvirtualinstance"
+    service-dir: "{service-dir/java}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
