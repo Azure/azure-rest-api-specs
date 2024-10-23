@@ -27,8 +27,16 @@ These are the global settings for the Azure API Center.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2024-03-15-preview
+tag: package-2024-06-01-preview
 ```
+
+### Tag: package-2024-06-01-preview
+
+These settings apply only when `--tag=package-2024-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-15-preview'
+input-file:
+  - Microsoft.ApiCenter/preview/2024-03-15-preview/apicenter.json
 
 ### Tag: package-2024-03-15-preview
 

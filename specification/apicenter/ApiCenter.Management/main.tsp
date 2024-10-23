@@ -12,6 +12,7 @@ import "./Workspace.tsp";
 import "./Api.tsp";
 import "./ApiVersion.tsp";
 import "./ApiDefinition.tsp";
+import "./ApiSource.tsp";
 import "./Deployment.tsp";
 import "./Environment.tsp";
 

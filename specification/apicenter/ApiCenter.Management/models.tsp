@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/openapi3";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -573,3 +574,27 @@ model DeletedServiceProperties {
   @doc("UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
   softDeletionDate?: utcDateTime;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_06_01_preview)
+@doc("API source properties.")
+model ApiSourceProperties {
+  @doc("Indicates if the specification should be imported along with metadata.")
+  shouldImportSpec?: boolean = false;
+
+  apimSource?: ApimSource;
+}
+
+@doc("API source configuration for Azure API Management.")
+model ApimSource {
+  @doc("API Management service resource ID.")
+  resourceId: string;
+
+  @doc("The resource ID of the managed identity that has access to the API Management instance.")
+  msiResourceId?: string[];
+}
+
+// model LinkState {
+//   @doc("The state of the link.")
+//   state?: string;
+// }
