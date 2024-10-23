@@ -4289,14 +4289,58 @@
       "description": "API source properties.",
       "properties": {
         "shouldImportSpec": {
-          "type": "boolean",
+          "type": "string",
           "description": "Indicates if the specification should be imported along with metadata.",
-          "default": false
+          "default": "true",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "ApiSourceSpecImportOptions",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ShouldImport",
+                "value": "true",
+                "description": "Indicates that the specification should be imported along with metadata."
+              },
+              {
+                "name": "ShouldNotImport",
+                "value": "false",
+                "description": "Indicates that the specification should not be imported along with metadata."
+              }
+            ]
+          }
         },
         "apimSource": {
           "$ref": "#/definitions/ApimSource",
           "description": "API source configuration for Azure API Management."
         }
+      }
+    },
+    "ApiSourceSpecImportOptions": {
+      "type": "string",
+      "description": "The API source specification import options.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "ApiSourceSpecImportOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ShouldImport",
+            "value": "true",
+            "description": "Indicates that the specification should be imported along with metadata."
+          },
+          {
+            "name": "ShouldNotImport",
+            "value": "false",
+            "description": "Indicates that the specification should not be imported along with metadata."
+          }
+        ]
       }
     },
     "ApiSpecExportResult": {
@@ -4931,11 +4975,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "autoSync": {
-          "type": "boolean",
-          "description": "Indicates if syncing of the future changes should be enabled for the selected APIs.",
-          "default": false
         }
       }
     },

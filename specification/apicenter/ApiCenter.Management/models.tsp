@@ -272,15 +272,14 @@ model MetadataSchemaProperties {
 model ImportFromApimRequest {
   @doc("An entity the metadata schema is requested for.")
   sourceResourceIds?: string[];
-
-  @doc("Indicates if syncing of the future changes should be enabled for the selected APIs.")
-  autoSync?: boolean = false;
 }
 
 @added(Versions.v2024_06_01_preview)
 @doc("The import operation was successfully completed.")
 model ImportFromApimSuccessResult {
-    @doc("The successful response status code.")
+    /**
+     * The successful response status code.
+     */
     @statusCode code: 200;
 
     /**
@@ -595,10 +594,29 @@ model DeletedServiceProperties {
 @doc("API source properties.")
 model ApiSourceProperties {
   @doc("Indicates if the specification should be imported along with metadata.")
-  shouldImportSpec?: boolean = false;
+  shouldImportSpec?: ApiSourceSpecImportOptions = ApiSourceSpecImportOptions.ShouldImport;
 
   @doc("API source configuration for Azure API Management.")
   apimSource?: ApimSource;
+}
+
+
+/**
+ * The API source specification import options.
+ */
+@added(Versions.v2024_06_01_preview)
+union ApiSourceSpecImportOptions {
+  /**
+   * Indicates that the specification should be imported along with metadata.
+   */
+  ShouldImport: "true",
+
+  /**
+   * Indicates that the specification should not be imported along with metadata.
+   */
+  ShouldNotImport: "false",
+
+  string
 }
 
 /**
