@@ -8,3 +8,148 @@ using Azure.ClientGenerator.Core;
   "WorkloadsSapVirtualInstanceMgmtClient",
   "java"
 );
+
+@@clientName(Microsoft.Workloads.SAPEnvironmentType,
+  "SapEnvironmentType",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPProductType, "SapProductType", "java");
+@@clientName(Microsoft.Workloads.SAPDeploymentType,
+  "SapDeploymentType",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDatabaseType, "SapDatabaseType", "java");
+@@clientName(Microsoft.Workloads.SAPDatabaseScaleMethod,
+  "SapDatabaseScaleMethod",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPHighAvailabilityType,
+  "SapHighAvailabilityType",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPConfigurationType,
+  "SapConfigurationType",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceStatus,
+  "SapVirtualInstanceStatus",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceStatus,
+  "SapHealthState",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceState,
+  "SapVirtualInstanceState",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPSoftwareInstallationType,
+  "SapSoftwareInstallationType",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPSizingRecommendationRequest,
+  "SapSizingRecommendationRequest",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPSizingRecommendationResult,
+  "SapSizingRecommendationResult",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPSupportedSkusRequest,
+  "SapSupportedSkusRequest",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPSupportedResourceSkusResult,
+  "SapSupportedResourceSkusResult",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfigurationsRequest,
+  "SapDiskConfigurationsRequest",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfigurationsResult,
+  "SapDiskConfigurationsResult",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
+  "SapDiskConfiguration",
+  "java"
+);
+
+@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
+  "SapDiskConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
+  "SapDiskConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
+  "SapDiskConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
+  "SapDiskConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
+  "SapDiskConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPAvailabilityZoneDetailsRequest,
+  "SapAvailabilityZoneDetailsRequest",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPAvailabilityZoneDetailsResult,
+  "SapAvailabilityZoneDetailsResult",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPAvailabilityZonePair,
+  "SapAvailabilityZonePair",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceProperties,
+  "SapVirtualInstanceProperties",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPConfiguration, "SAPConfiguration", "java");
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceError,
+  "SapVirtualInstanceError",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPCentralServerProperties,
+  "SapCentralServerProperties",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDatabaseProperties,
+  "SapDatabaseProperties",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPApplicationServerProperties,
+  "SapApplicationServerProperties",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPInstallWithoutOSConfigSoftwareConfiguration,
+  "SapInstallWithoutOSConfigSoftwareConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPApplicationServerInstance,
+  "SapApplicationServerInstance",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPCentralServerInstance,
+  "SapCentralServerInstance",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPDatabaseInstance,
+  "SapDatabaseInstance",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstance,
+  "SapVirtualInstance",
+  "java"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceMetadata,
+  "SapVirtualInstanceMetadata",
+  "java"
+);
