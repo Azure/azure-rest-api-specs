@@ -21,9 +21,7 @@ namespace Microsoft.MachineLearningServices;
 @post
 @route("/assistants")
 op createAssistant(
-  /**
-   * The request details to use when creating a new assistant.
-   */
+  @doc("The request details to use when creating a new assistant.")
   @bodyRoot
   body: AssistantCreationOptions,
 ): Assistant;
@@ -67,9 +65,7 @@ op getAssistant(@path assistantId: string): Assistant;
 @post
 @route("/assistants/{assistantId}")
 op updateAssistant(
-  /**
-   * The request details to use when modifying an existing assistant.
-   */
+  @doc("The request details to use when modifying an existing assistant.")
   @bodyRoot
   body: UpdateAssistantOptions,
 ): Assistant;

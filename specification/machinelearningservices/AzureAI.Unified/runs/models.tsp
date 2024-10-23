@@ -99,59 +99,57 @@ model ThreadRun {
   @doc("Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).")
   usage: RunCompletionUsage | null;
 
-  /** The sampling temperature used for this run. If not set, defaults to 1. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The sampling temperature used for this run. If not set, defaults to 1.")
   temperature?: float32 | null;
 
-  /** The nucleus sampling value used for this run. If not set, defaults to 1. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The nucleus sampling value used for this run. If not set, defaults to 1.")
   @encodedName("application/json", "top_p")
   topP?: float32 | null;
 
-  /** The maximum number of prompt tokens specified to have been used over the course of the run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The maximum number of prompt tokens specified to have been used over the course of the run.")
   @encodedName("application/json", "max_prompt_tokens")
   @minValue(256)
   maxPromptTokens: int32 | null;
 
-  /** The maximum number of completion tokens specified to have been used over the course of the run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The maximum number of completion tokens specified to have been used over the course of the run.")
   @encodedName("application/json", "max_completion_tokens")
   @minValue(256)
   maxCompletionTokens: int32 | null;
 
-  /** The strategy to use for dropping messages as the context windows moves forward. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The strategy to use for dropping messages as the context windows moves forward.")
   @encodedName("application/json", "truncation_strategy")
   truncationStrategy: TruncationObject | null;
 
-  /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Controls whether or not and which tool is called by the model.")
   @encodedName("application/json", "tool_choice")
   toolChoice: AssistantsApiToolChoiceOption | null;
 
-  /** The response format of the tool calls used in this run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The response format of the tool calls used in this run.")
   @encodedName("application/json", "response_format")
   responseFormat: AssistantsApiResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
 }
 
-/** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
+@doc("The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.")
 union IncompleteRunDetails {
   string,
 
-  /** Maximum completion tokens exceeded */
+  @doc("Maximum completion tokens exceeded")
   maxCompletionTokens: "max_completion_tokens",
 
-  /** Maximum prompt tokens exceeded */
+  @doc("Maximum prompt tokens exceeded")
   maxPromptTokens: "max_prompt_tokens",
 }
 
-/**
- * Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
- */
+@doc("Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).")
 model RunCompletionUsage {
   @doc("Number of completion tokens used over the course of the run.")
   @encodedName("application/json", "completion_tokens")
@@ -188,8 +186,8 @@ model CreateRunOptions {
     """)
   additionalInstructions?: string | null;
 
-  /** Adds additional messages to the thread before creating the run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Adds additional messages to the thread before creating the run.")
   @encodedName("application/json", "additional_messages")
   additionalMessages?: ThreadMessage[] | null;
 
@@ -197,66 +195,66 @@ model CreateRunOptions {
   @doc("The overridden list of enabled tools that the assistant should use to run the thread.")
   tools?: ToolDefinition[] | null;
 
-  /**
-   * If `true`, returns a stream of events that happen during the Run as server-sent events,
-   * terminating when the Run enters a terminal state with a `data: [DONE]` message.
-   */
+  @doc("""
+    If `true`, returns a stream of events that happen during the Run as server-sent events,
+    terminating when the Run enters a terminal state with a `data: [DONE]` message.
+    """)
   stream?: boolean;
 
-  /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
-   * more random, while lower values like 0.2 will make it more focused and deterministic.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("""
+    What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+    more random, while lower values like 0.2 will make it more focused and deterministic.
+    """)
   @minValue(0)
   @maxValue(2)
   temperature?: float32 | null = 1;
 
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model
-   * considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
-   * comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("""
+    An alternative to sampling with temperature, called nucleus sampling, where the model
+    considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+    comprising the top 10% probability mass are considered.
+    
+    We generally recommend altering this or temperature but not both.
+    """)
   @minValue(0)
   @maxValue(1)
   @encodedName("application/json", "top_p")
   topP?: float32 | null = 1;
 
-  /**
-   * The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
-   * the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
-   * the run will end with status `incomplete`. See `incomplete_details` for more info.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("""
+    The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
+    the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
+    the run will end with status `incomplete`. See `incomplete_details` for more info.
+    """)
   @minValue(256)
   @encodedName("application/json", "max_prompt_tokens")
   maxPromptTokens?: int32 | null;
 
-  /**
-   * The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort
-   * to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of
-   * completion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("""
+    The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort
+    to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of
+    completion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
+    """)
   @minValue(256)
   @encodedName("application/json", "max_completion_tokens")
   maxCompletionTokens?: int32 | null;
 
-  /** The strategy to use for dropping messages as the context windows moves forward. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The strategy to use for dropping messages as the context windows moves forward.")
   @encodedName("application/json", "truncation_strategy")
   truncationStrategy?: TruncationObject | null;
 
-  /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Controls whether or not and which tool is called by the model.")
   @encodedName("application/json", "tool_choice")
   toolChoice?: AssistantsApiToolChoiceOption | null;
 
-  /** Specifies the format that the model must output. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Specifies the format that the model must output.")
   @encodedName("application/json", "response_format")
   responseFormat?: AssistantsApiResponseFormatOption | null;
 
@@ -350,107 +348,103 @@ model CreateAndRunThreadOptions {
   @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[] | null;
 
-  /** Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.")
   @encodedName("application/json", "tool_resources")
   toolResources?: UpdateToolResourcesOptions | null;
 
-  /**
-   * If `true`, returns a stream of events that happen during the Run as server-sent events,
-   * terminating when the Run enters a terminal state with a `data: [DONE]` message.
-   */
+  @doc("""
+    If `true`, returns a stream of events that happen during the Run as server-sent events,
+    terminating when the Run enters a terminal state with a `data: [DONE]` message.
+    """)
   stream?: boolean;
 
-  /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
-   * more random, while lower values like 0.2 will make it more focused and deterministic.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("""
+    What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+    more random, while lower values like 0.2 will make it more focused and deterministic.
+    """)
   @minValue(0)
   @maxValue(2)
   temperature?: float32 | null = 1;
 
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model
-   * considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
-   * comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("""
+    An alternative to sampling with temperature, called nucleus sampling, where the model
+    considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+    comprising the top 10% probability mass are considered.
+    
+    We generally recommend altering this or temperature but not both.
+    """)
   @minValue(0)
   @maxValue(1)
   @encodedName("application/json", "top_p")
   topP?: float32 | null = 1;
 
-  /**
-   * The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
-   * the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
-   * the run will end with status `incomplete`. See `incomplete_details` for more info.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("""
+    The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
+    the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
+    the run will end with status `incomplete`. See `incomplete_details` for more info.
+    """)
   @minValue(256)
   @encodedName("application/json", "max_prompt_tokens")
   maxPromptTokens?: int32 | null;
 
-  /**
-   * The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only
-   * the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens
-   * specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("""
+    The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only
+    the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens
+    specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
+    """)
   @minValue(256)
   @encodedName("application/json", "max_completion_tokens")
   maxCompletionTokens?: int32 | null;
 
-  /** The strategy to use for dropping messages as the context windows moves forward. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The strategy to use for dropping messages as the context windows moves forward.")
   @encodedName("application/json", "truncation_strategy")
   truncationStrategy?: TruncationObject | null;
 
-  /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Controls whether or not and which tool is called by the model.")
   @encodedName("application/json", "tool_choice")
   toolChoice?: AssistantsApiToolChoiceOption | null;
 
-  /** Specifies the format that the model must output. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Specifies the format that the model must output.")
   @encodedName("application/json", "response_format")
   responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }
 
-/**
- * Controls for how a thread will be truncated prior to the run. Use this to control the initial
- * context window of the run.
- */
+@doc("""
+  Controls for how a thread will be truncated prior to the run. Use this to control the initial
+  context window of the run.
+  """)
 model TruncationObject {
-  /**
-   * The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will
-   * be truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread
-   * will be dropped to fit the context length of the model, `max_prompt_tokens`.
-   */
+  @doc("""
+    The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will
+    be truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread
+    will be dropped to fit the context length of the model, `max_prompt_tokens`.
+    """)
   type: TruncationStrategy = TruncationStrategy.auto;
 
-  /**
-   * The number of most recent messages from the thread when constructing the context for the run.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The number of most recent messages from the thread when constructing the context for the run.")
   @minValue(1)
   @encodedName("application/json", "last_messages")
   lastMessages?: int32 | null;
 }
 
-/**
- * Possible truncation strategies for the thread.
- */
+@doc("Possible truncation strategies for the thread.")
 union TruncationStrategy {
   string,
 
-  /** Default value. Messages in the middle of the thread will be dropped to fit the context length of the model. */
+  @doc("Default value. Messages in the middle of the thread will be dropped to fit the context length of the model.")
   auto: "auto",
 
-  /** The thread will truncate to the `lastMessages` count of recent messages. */
+  @doc("The thread will truncate to the `lastMessages` count of recent messages.")
   lastMessages: "last_messages",
 }

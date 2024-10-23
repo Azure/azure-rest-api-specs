@@ -29,78 +29,63 @@ model OpenAIFile {
   @doc("The intended purpose of a file.")
   purpose: FilePurpose;
 
-  /** The state of the file. This field is available in Azure OpenAI only. */
+  @doc("The state of the file. This field is available in Azure OpenAI only.")
   status?: FileState;
 
-  /** The error message with details in case processing of this file failed. This field is available in Azure OpenAI only. */
   @encodedName("application/json", "status_details")
+  @doc("The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.")
   statusDetails?: string;
 }
 
-/** The state of the file. */
+@doc("The state of the file.")
 union FileState {
   string,
 
-  /**
-   * The file has been uploaded but it's not yet processed. This state is not returned by Azure OpenAI and exposed only for
-   * compatibility. It can be categorized as an inactive state.
-   */
+  @doc("The file has been uploaded but it's not yet processed. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an inactive state.")
   uploaded: "uploaded",
 
-  /**
-   * The operation was created and is not queued to be processed in the future. It can be categorized as an inactive state.
-   */
+  @doc("The operation was created and is not queued to be processed in the future. It can be categorized as an inactive state.")
   pending: "pending",
 
-  /** The operation has started to be processed. It can be categorized as an active state. */
+  @doc("The operation has started to be processed. It can be categorized as an active state.")
   running: "running",
 
-  /**
-   * The operation has successfully processed and is ready for consumption. It can be categorized as a terminal state.
-   */
+  @doc("The operation has successfully processed and is ready for consumption. It can be categorized as a terminal state.")
   processed: "processed",
 
-  /**
-   * The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state.
-   */
+  @doc("The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state.")
   error: "error",
 
-  /**
-   * The entity is in the process to be deleted. This state is not returned by Azure OpenAI and exposed only for compatibility.
-   * It can be categorized as an active state.
-   */
+  @doc("The entity is in the process to be deleted. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an active state.")
   deleting: "deleting",
 
-  /**
-   * The entity has been deleted but may still be referenced by other entities predating the deletion. It can be categorized as a
-   * terminal state.
-   */
+  @doc("The entity has been deleted but may still be referenced by other entities predating the deletion. It can be categorized as a terminal state.")
   deleted: "deleted",
 }
 
-/** The possible values denoting the intended usage of a file. */
+@doc("The possible values denoting the intended usage of a file.")
 union FilePurpose {
   string,
 
-  /** Indicates a file is used for fine tuning input. */
+  @doc("Indicates a file is used for fine tuning input.")
   fineTune: "fine-tune",
 
-  /** Indicates a file is used for fine tuning results. */
+  @doc("Indicates a file is used for fine tuning results.")
   fineTuneResults: "fine-tune-results",
 
-  /** Indicates a file is used as input to assistants. */
+  @doc("Indicates a file is used as input to assistants.")
   assistants: "assistants",
 
-  /** Indicates a file is used as output by assistants. */
+  @doc("Indicates a file is used as output by assistants.")
   assistantsOutput: "assistants_output",
 
-  /** Indicates a file is used as input to . */
+  @doc("Indicates a file is used as input to batch operations.")
   batch: "batch",
 
-  /** Indicates a file is used as output by a vector store batch operation. */
+  @doc("Indicates a file is used as output by a vector store batch operation.")
   batchOutput: "batch_output",
 
-  /** Indicates a file is used as input to a vision operation. */
+  @doc("Indicates a file is used as input to a vision operation.")
   vision: "vision",
 }
 

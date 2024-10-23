@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
+import "../main.tsp";
 import "@typespec/openapi";
 
 using TypeSpec.OpenAPI;
@@ -131,11 +132,3 @@ model UpdateEvaluationRequest {
   @doc("Description")
   description: string;
 }
-
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
-  T;
-
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
-  T;

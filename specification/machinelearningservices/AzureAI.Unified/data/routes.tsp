@@ -15,9 +15,6 @@ using Azure.Core.Foundations;
 namespace Microsoft.MachineLearningServices;
 
 interface Data {
-  /**
-   * List data containers.
-   */
   @doc("List data containers.")
   @route("/data")
   @get
@@ -35,16 +32,12 @@ interface Data {
   @route("/data/{name}")
   @delete
   delete(
-    /**
-     * Name of Azure Machine Learning workspace.
-     */
+    @doc("Name of Azure Machine Learning workspace.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
     @path
     workspaceName: string,
 
-    /**
-     * Container name.
-     */
+    @doc("Container name.")
     @path
     name: string,
   ): void;

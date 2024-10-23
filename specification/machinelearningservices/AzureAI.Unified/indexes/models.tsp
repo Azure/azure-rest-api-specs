@@ -3,7 +3,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
-import "@typespec/openapi";
+import "../main.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;

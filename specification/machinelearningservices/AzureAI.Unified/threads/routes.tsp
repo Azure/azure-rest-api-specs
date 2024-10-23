@@ -20,9 +20,7 @@ namespace Microsoft.MachineLearningServices;
 @post
 @route("/threads")
 op createThread(
-  /**
-   * The details used to create a new assistant thread.
-   */
+  @doc("The details used to create a new assistant thread.")
   @bodyRoot
   body: AssistantThreadCreationOptions,
 ): AssistantThread;
@@ -56,9 +54,7 @@ op getThread(@path threadId: string): AssistantThread;
 @post
 @route("/threads/{threadId}")
 op updateThread(
-  /**
-   * The details used to update an existing assistant thread.
-   */
+  @doc("The details used to update an existing assistant thread.")
   @bodyRoot
   body: UpdateAssistantThreadOptions,
 ): AssistantThread;

@@ -30,8 +30,9 @@ namespace Microsoft.MachineLearningServices;
 op createMessage(
   @path threadId: string,
 
-  /** A single message within an assistant thread, as provided during that thread's creation for its initial state. */
-  @bodyRoot body: ThreadMessageOptions,
+  @doc("A single message within an assistant thread, as provided during that thread's creation for its initial state.")
+  @bodyRoot
+  body: ThreadMessageOptions,
 ): ThreadMessage;
 
 /**
@@ -49,7 +50,7 @@ op createMessage(
 op listMessages(
   @path threadId: string,
 
-  /** Filter messages by the run ID that generated them. */
+  @doc("Filter messages by the run ID that generated them.")
   @query
   runId?: string,
 

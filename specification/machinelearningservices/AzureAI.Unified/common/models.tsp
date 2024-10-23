@@ -81,74 +81,57 @@ alias DeletionStatus = {
 };
 
 alias RequiredNullableMetadata = {
-  /**
-   * A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.")
   metadata: Record<string> | null;
 };
 
 alias OptionalNullableMetadata = {
-  /**
-   * A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.")
   metadata?: Record<string> | null;
 };
 
-/**
- * Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
- *
- * Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
- *
- * **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message.
- * Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit,
- * resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
- * if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
- */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+@doc("Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`. Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which guarantees the message the model generates is valid JSON. **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if `finish_reason=\"length\"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.")
 union AssistantsApiResponseFormatOption {
   string,
 
-  /** The model will handle the return format. */
+  @doc("The model will handle the return format.")
   AssistantsApiResponseFormatMode,
 
-  /** Sets the format of the output of the model when a ToolCall is returned. */
+  @doc("Sets the format of the output of the model when a ToolCall is returned.")
   AssistantsApiResponseFormat,
 }
 
-/** Represents the mode in which the model will handle the return format of a tool call. */
+@doc("Represents the mode in which the model will handle the return format of a tool call.")
 union AssistantsApiResponseFormatMode {
   string,
 
-  /** Default value. Let the model handle the return format. */
+  @doc("Default value. Let the model handle the return format.")
   "auto",
 
-  /** Setting the value to `none`, will result in a 400 Bad request. */
+  @doc("Setting the value to `none`, will result in a 400 Bad request.")
   "none",
 }
 
-/**
- * An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
- * If `text` the model can return text or any value needed.
- */
+@doc("An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run. If `text` the model can return text or any value needed.")
 model AssistantsApiResponseFormat {
-  /** Must be one of `text` or `json_object`. */
+  @doc("Must be one of `text` or `json_object`.")
   type?: ApiResponseFormat = ApiResponseFormat.text;
 }
 
-/** Possible API response formats. */
+@doc("Possible API response formats.")
 union ApiResponseFormat {
   string,
 
-  /** `text` format should be used for requests involving any sort of ToolCall. */
+  @doc("`text` format should be used for requests involving any sort of ToolCall.")
   text: "text",
 
-  /** Using `json_object` format will limit the usage of ToolCall to only functions. */
+  @doc("Using `json_object` format will limit the usage of ToolCall to only functions.")
   jsonObject: "json_object",
 }
 
-/** Needed for indexes */
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {
   @visibility("read")
@@ -171,370 +154,304 @@ model SystemData {
 @doc("List View Type Definition")
 union ListViewType {
   string,
+
+  @doc("List only active items.")
   ActiveOnly: "ActiveOnly",
+
+  @doc("List only archived items.")
   ArchivedOnly: "ArchivedOnly",
+
+  @doc("List all items.")
   All: "All",
 }
 
-/**
- * Enum to determine whether PublicNetworkAccess is Enabled or Disabled.
- */
+@doc("Enum to determine whether PublicNetworkAccess is Enabled or Disabled.")
 union PublicNetworkAccessType {
   string,
+
+  @doc("PublicNetworkAccess is enabled.")
   Enabled: "Enabled",
+
+  @doc("PublicNetworkAccess is disabled.")
   Disabled: "Disabled",
 }
 
-/**
- * Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.
- */
+@doc("Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.")
 union EgressPublicNetworkAccessType {
   string,
+
+  @doc("PublicNetworkAccess is enabled for egress.")
   Enabled: "Enabled",
+
+  @doc("PublicNetworkAccess is disabled for egress.")
   Disabled: "Disabled",
 }
 
-/**
- * Base definition for asset references.
- */
+@doc("Base definition for asset references.")
 @discriminator("referenceType")
 model AssetReferenceBase {}
 
-/**
- * Reference to an asset via its ARM resource ID.
- */
+@doc("Reference to an asset via its ARM resource ID.")
 model IdAssetReference extends AssetReferenceBase {
-  /**
-   * [Required] ARM resource ID of the asset.
-   */
+  @doc("[Required] ARM resource ID of the asset.")
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   assetId: string;
 
-  /**
-   * [Required] Specifies the type of asset reference.
-   */
+  @doc("[Required] Specifies the type of asset reference.")
   referenceType: "Id";
 }
 
-/**
- * Reference to an asset via its path in a datastore.
- */
+@doc("Reference to an asset via its path in a datastore.")
 model DataPathAssetReference extends AssetReferenceBase {
-  /**
-   * ARM resource ID of the datastore where the asset is located.
-   */
+  @doc("ARM resource ID of the datastore where the asset is located.")
   datastoreId?: string;
 
-  /**
-   * The path of the file/directory in the datastore.
-   */
+  @doc("The path of the file/directory in the datastore.")
   path?: string;
 
-  /**
-   * [Required] Specifies the type of asset reference.
-   */
+  @doc("[Required] Specifies the type of asset reference.")
   referenceType: "DataPath";
 }
 
-/**
- * Reference to an asset via its path in a job output.
- */
+@doc("Reference to an asset via its path in a job output.")
 model OutputPathAssetReference extends AssetReferenceBase {
-  /**
-   * ARM resource ID of the job.
-   */
+  @doc("ARM resource ID of the job.")
   jobId?: string;
 
-  /**
-   * The path of the file/directory in the job output.
-   */
+  @doc("The path of the file/directory in the job output.")
   path?: string;
 
-  /**
-   * [Required] Specifies the type of asset reference.
-   */
+  @doc("[Required] Specifies the type of asset reference.")
   referenceType: "OutputPath";
 }
 
-/**
- * Enum to determine endpoint compute type.
- */
+@doc("Enum to determine endpoint compute type.")
 union EndpointComputeType {
   string,
+
+  @doc("Managed")
   Managed: "Managed",
+
+  @doc("Kubernetes")
   Kubernetes: "Kubernetes",
+
+  @doc("AzureMLCompute")
   AzureMLCompute: "AzureMLCompute",
 }
 
+@doc("The type of ordering to use")
 union OrderString {
   string,
+
+  @doc("Sort creation date/time in descending order.")
   CreatedAtDesc: "CreatedAtDesc",
+
+  @doc("Sort creation date/time in ascending order.")
   CreatedAtAsc: "CreatedAtAsc",
+
+  @doc("Sort updated at date/time in descending order.")
   UpdatedAtDesc: "UpdatedAtDesc",
+
+  @doc("Sort updated at date/time in ascending order.")
   UpdatedAtAsc: "UpdatedAtAsc",
 }
 
-/**
- * Strictly used in update requests.
- */
-model PartialMinimalTrackedResourceWithIdentity
-  extends PartialMinimalTrackedResource {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
-  identity?: PartialManagedServiceIdentity;
-}
-
-/**
- * Strictly used in update requests.
- */
+@doc("Strictly used in update requests.")
 model PartialMinimalTrackedResource {
-  /**
-   * Resource tags.
-   */
+  @doc("Resource tags.")
   tags?: Record<string>;
 }
 
-/**
- * Strictly used in update requests.
- */
+@doc("Strictly used in update requests.")
+model PartialMinimalTrackedResourceWithIdentity
+  extends PartialMinimalTrackedResource {
+  @doc("Managed service identity (system assigned and/or user assigned identities)")
+  identity?: PartialManagedServiceIdentity;
+}
+
+@doc("Strictly used in update requests.")
 model PartialMinimalTrackedResourceWithSku
   extends PartialMinimalTrackedResource {
-  /**
-   * Sku details required for ARM contract for Autoscaling.
-   */
+  @doc("Sku details required for ARM contract for Autoscaling.")
   sku?: PartialSku;
 }
 
-/**
- * Common SKU definition.
- */
+@doc("Common SKU definition.")
 model PartialSku {
-  /**
-   * If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
-   */
+  @doc("If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.")
   capacity?: int32;
 
-  /**
-   * If the service has different generations of hardware, for the same SKU, then that can be captured here.
-   */
+  @doc("If the service has different generations of hardware, for the same SKU, then that can be captured here.")
   family?: string;
 
-  /**
-   * The name of the SKU. Ex - P3. It is typically a letter+number code.
-   */
+  @doc("The name of the SKU. Ex - P3. It is typically a letter+number code.")
   name?: string;
 
-  /**
-   * The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.
-   */
+  @doc("The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.")
   size?: string;
 
-  /**
-   * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
-   */
+  @doc("This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.")
   tier?: SkuTier;
 }
 
-/**
- * Managed service identity (system assigned and/or user assigned identities)
- */
+@doc("Managed service identity (system assigned and/or user assigned identities)")
 model PartialManagedServiceIdentity {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
+  @doc("Managed service identity (system assigned and/or user assigned identities)")
   type?: ManagedServiceIdentityType;
 
-  /**
-   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
-   */
+  @doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
   userAssignedIdentities?: Record<Record<unknown>>;
 }
 
-/**
- * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
- */
+@doc("Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).")
 union ManagedServiceIdentityType {
   string,
+
+  @doc("No managed service identity.")
   None: "None",
+
+  @doc("SystemAssigned identity")
   SystemAssigned: "SystemAssigned",
+
+  @doc("UserAssigned identity.")
   UserAssigned: "UserAssigned",
+
+  @doc("SystemAssigned and UserAssigned identity.")
   `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
+@doc("Type of key (Primary or Secondary).")
 union KeyType {
   string,
+
+  @doc("Primary key.")
   Primary: "Primary",
+
+  @doc("Secondary key.")
   Secondary: "Secondary",
 }
 
-/**
- * A paginated list of SkuResource entities.
- */
+@doc("A paginated list of SkuResource entities.")
 model SkuResourceArmPaginatedResult is Azure.Core.Page<SkuResource>;
 
-/**
- * Fulfills ARM Contract requirement to list all available SKUS for a resource.
- */
+@doc("Fulfills ARM Contract requirement to list all available SKUS for a resource.")
 model SkuResource {
-  /**
-   * Gets or sets the Sku Capacity.
-   */
+  @doc("Gets or sets the Sku Capacity.")
   capacity?: SkuCapacity;
 
-  /**
-   * The resource type name.
-   */
+  @doc("The resource type name.")
   @visibility("read")
   resourceType?: string;
 
-  /**
-   * Gets or sets the Sku.
-   */
+  @doc("Gets or sets the Sku.")
   sku?: SkuSetting;
 }
 
-/**
- * SKU capacity information
- */
+@doc("SKU capacity information")
 model SkuCapacity {
-  /**
-   * Gets or sets the default capacity.
-   */
+  @doc("Gets or sets the default capacity.")
   default?: int32;
 
-  /**
-   * Gets or sets the maximum.
-   */
+  @doc("Gets or sets the maximum.")
   maximum?: int32;
 
-  /**
-   * Gets or sets the minimum.
-   */
+  @doc("Gets or sets the minimum.")
   minimum?: int32;
 
-  /**
-   * Gets or sets the type of the scale.
-   */
+  @doc("Gets or sets the type of the scale.")
   scaleType?: SkuScaleType;
 }
 
-/**
- * SkuSetting fulfills the need for stripped down SKU info in ARM contract.
- */
+@doc("SkuSetting fulfills the need for stripped down SKU info in ARM contract.")
 model SkuSetting {
-  /**
-   * [Required] The name of the SKU. Ex - P3. It is typically a letter+number code.
-   */
+  @doc("[Required] The name of the SKU. Ex - P3. It is typically a letter+number code.")
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   name: string;
 
-  /**
-   * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
-   */
+  @doc("This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.")
   tier?: SkuTier;
 }
 
-/**
- * Node scaling setting for the compute sku.
- */
+@doc("Node scaling setting for the compute sku.")
 union SkuScaleType {
   string,
 
-  /**
-   * Automatically scales node count.
-   */
+  @doc("Automatically scales node count.")
   Automatic: "Automatic",
 
-  /**
-   * Node count scaled upon user request.
-   */
+  @doc("Node count scaled upon user request.")
   Manual: "Manual",
 
-  /**
-   * Fixed set of nodes.
-   */
+  @doc("Fixed set of nodes.")
   None: "None",
 }
 
 model AssetBase extends ResourceBase {
-  /**
-   * If the name version are system generated (anonymous registration).
-   */
+  @doc("If the name version are system generated (anonymous registration).")
   @visibility("read", "create")
   isAnonymous?: boolean;
 
-  /**
-   * Is the asset archived?
-   */
+  @doc("Is the asset archived?")
   @visibility("read", "create", "update")
   isArchived?: boolean;
 }
 
-/**
- * Enum to determine the type of data.
- */
+@doc("Enum to determine the type of data.")
 union DataType {
   string,
+
+  @doc("URI file.")
   uri_file: "uri_file",
+
+  @doc("URI folder.")
   uri_folder: "uri_folder",
 }
 
+@doc("AssetContainer definition")
 model AssetContainer extends ResourceBase {
-  /**
-   * Is the asset archived?
-   */
+  @doc("Is the asset archived?")
   @visibility("read", "create", "update")
   isArchived?: boolean;
 
-  /**
-   * The latest version inside this container.
-   */
+  @doc("The latest version inside this container.")
   @visibility("read")
   latestVersion?: string;
 
-  /**
-   * The next auto incremental version
-   */
+  @doc("The next auto incremental version")
   @visibility("read")
   nextVersion?: string;
 }
 
+@doc("ResourceBase definition")
 model ResourceBase {
-  /**
-   * The asset description text.
-   */
+  @doc("The asset description text.")
   description?: string;
 
-  /**
-   * The asset property dictionary.
-   */
+  @doc("The asset property dictionary.")
   properties?: Record<string>;
 
-  /**
-   * Tag dictionary. Tags can be added, removed, and updated.
-   */
+  @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags?: Record<string>;
 }
 
-/**
- * Publishing destination registry asset information
- */
+@doc("Publishing destination registry asset information")
 model DestinationAsset {
-  /**
-   * Destination asset name
-   */
+  @doc("Destination asset name")
   destinationName?: string;
 
-  /**
-   * Destination asset version
-   */
+  @doc("Destination asset version")
   destinationVersion?: string;
 
-  /**
-   * Destination registry name
-   */
+  @doc("Destination registry name")
   registryName?: string;
 }
+
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
+  T;
+
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
+  T;

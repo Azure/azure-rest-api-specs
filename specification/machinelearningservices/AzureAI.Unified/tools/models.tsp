@@ -29,9 +29,7 @@ model FileSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'file_search'.")
   type: "file_search";
 
-  /**
-   * Options overrides for the file search tool.
-   */
+  @doc("Options overrides for the file search tool.")
   @encodedName("application/json", "file_search")
   fileSearch?: FileSearchToolDefinitionDetails;
 }
@@ -46,22 +44,14 @@ model FunctionToolDefinition extends ToolDefinition {
 }
 
 // Definition details: File Search
-
-/**
- * Options overrides for the file search tool.
- */
+@doc("Options overrides for the file search tool.")
 model FileSearchToolDefinitionDetails {
-  /**
-   * The maximum number of results the file search tool should output. The default is 20 for gpt-4* models and 5 for gpt-3.5-turbo. This number should be between 1 and 50 inclusive.
-   *
-   * Note that the file search tool may output fewer than `max_num_results` results. See the file search tool documentation for more information.
-   */
+  @doc("The maximum number of results the file search tool should output. The default is 20 for gpt-4* models and 5 for gpt-3.5-turbo. This number should be between 1 and 50 inclusive. Note that the file search tool may output fewer than `max_num_results` results. See the file search tool documentation for more information.")
   @encodedName("application/json", "max_num_results")
   @minValue(1)
   @maxValue(50)
   maxNumResults?: int32;
 }
-
 // Definition details: Functions
 
 @doc("The input definition information for a function.")
@@ -81,10 +71,8 @@ model FunctionDefinition {
 // Required tool calls -- provided on a run and represent tools that need outputs submitted for the run to continue
 //
 
+@doc("An abstract representation a a tool invocation needed by the model to continue a run.")
 @discriminator("type")
-@doc("""
-  An abstract representation a a tool invocation needed by the model to continue a run.
-  """)
 model RequiredToolCall {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type for the required tool call.")
@@ -116,8 +104,8 @@ model RequiredFunctionToolCallDetails {
 // Tool calls -- present in run steps and provide information about tool execution
 //
 
-@discriminator("type")
 @doc("An abstract representation of a detailed tool call as recorded within a run step for an existing run.")
+@discriminator("type")
 model RunStepToolCall {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
@@ -127,23 +115,17 @@ model RunStepToolCall {
   id: string;
 }
 
-@doc("""
-  A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
-  represents inputs and outputs consumed and emitted by the code interpreter.
-  """)
+@doc("A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that represents inputs and outputs consumed and emitted by the code interpreter.")
 model RunStepCodeInterpreterToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'code_interpreter'.")
   type: "code_interpreter";
 
-  @encodedName("application/json", "code_interpreter")
   @doc("The details of the tool call to the code interpreter tool.")
+  @encodedName("application/json", "code_interpreter")
   codeInterpreter: RunStepCodeInterpreterToolCallDetails;
 }
 
-@doc("""
-  A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
-  executed file search.
-  """)
+@doc("A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents executed file search.")
 model RunStepFileSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'file_search'.")
   type: "file_search";
@@ -153,10 +135,7 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   fileSearch: Record<string>;
 }
 
-@doc("""
-  A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
-  and output consumed and emitted by the specified function.
-  """)
+@doc("A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs and output consumed and emitted by the specified function.")
 model RunStepFunctionToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'function'.")
   type: "function";
@@ -176,8 +155,8 @@ model RunStepCodeInterpreterToolCallDetails {
   outputs: RunStepCodeInterpreterToolCallOutput[];
 }
 
-@discriminator("type")
 @doc("An abstract representation of an emitted output from a code interpreter tool.")
+@discriminator("type")
 model RunStepCodeInterpreterToolCallOutput {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
@@ -206,8 +185,8 @@ model RunStepCodeInterpreterImageOutput
 
 @doc("An image reference emitted by a code interpreter tool in response to a tool call by the model.")
 model RunStepCodeInterpreterImageReference {
-  @encodedName("application/json", "file_id")
   @doc("The ID of the file associated with this image.")
+  @encodedName("application/json", "file_id")
   fileId: string;
 }
 
@@ -240,59 +219,54 @@ model ToolOutput {
   output?: string;
 }
 
-/**
- * Controls which (if any) tool is called by the model.
- * - `none` means the model will not call any tools and instead generates a message.
- * - `auto` is the default value and means the model can pick between generating a message or calling a tool.
- * Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}`
- * forces the model to call that tool.
- */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+@doc("Controls which (if any) tool is called by the model. - `none` means the model will not call any tools and instead generates a message. - `auto` is the default value and means the model can pick between generating a message or calling a tool. Specifying a particular tool like `{\"type\": \"file_search\"}` or `{\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}` forces the model to call that tool.")
 union AssistantsApiToolChoiceOption {
   string,
 
-  /** Specifies how the tool choice will be used */
+  @doc("Specifies how the tool choice will be used")
   AssistantsApiToolChoiceOptionMode,
 
-  /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
+  @doc("Specifies a tool the model should use. Use to force the model to call a specific tool.")
   AssistantsNamedToolChoice,
 }
 
-/** Specifies how the tool choice will be used */
+@doc("Specifies how the tool choice will be used")
 union AssistantsApiToolChoiceOptionMode {
   string,
 
-  /** The model will not call a function and instead generates a message. */
+  @doc("The model will not call a function and instead generates a message.")
   none: "none",
 
-  /** The model can pick between generating a message or calling a function. */
+  @doc("The model can pick between generating a message or calling a function.")
   auto: "auto",
 }
-/** Specifies a tool the model should use. Use to force the model to call a specific tool. */
+
+@doc("Specifies a tool the model should use. Use to force the model to call a specific tool.")
 model AssistantsNamedToolChoice {
-  /** the type of tool. If type is `function`, the function name must be set. */
+  @doc("the type of tool. If type is `function`, the function name must be set.")
   type: AssistantsNamedToolChoiceType;
 
-  /** The name of the function to call */
+  @doc("The name of the function to call")
   function?: FunctionName;
 }
 
-/** Available tool types for assistants named tools. */
+@doc("Available tool types for assistants named tools.")
 union AssistantsNamedToolChoiceType {
   string,
 
-  /** Tool type `function` */
+  @doc("Tool type `function`")
   function: "function",
 
-  /** Tool type `code_interpreter` */
+  @doc("Tool type `code_interpreter`")
   codeInterpreter: "code_interpreter",
 
-  /** Tool type `file_search` */
+  @doc("Tool type `file_search`")
   fileSearch: "file_search",
 }
 
-/** The function name that will be used, if using the `function` tool */
+@doc("The function name that will be used, if using the `function` tool")
 model FunctionName {
-  /** The name of the function to call */
+  @doc("The name of the function to call")
   name: string;
 }

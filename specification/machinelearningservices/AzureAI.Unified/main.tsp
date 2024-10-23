@@ -63,6 +63,6 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("AML api version 2024-11-01-preview.")
+  @doc("Azure AI api version 2024-11-01-preview.")
   `2024-11-01-preview`,
 }

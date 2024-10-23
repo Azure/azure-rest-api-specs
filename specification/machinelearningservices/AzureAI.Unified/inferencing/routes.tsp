@@ -17,7 +17,7 @@ namespace Microsoft.MachineLearningServices;
 @doc("Get an Online Endpoint.")
 @route("/onlineEndpoints/{name}")
 @get
-op GetOnlineEndpoint is Azure.Core.Foundations.Operation<
+op getOnlineEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name of the endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -31,7 +31,7 @@ op GetOnlineEndpoint is Azure.Core.Foundations.Operation<
 @doc("Delete an Online Endpoint.")
 @route("/onlineEndpoints/{name}")
 @delete
-op DeleteOnlineEndpoint is Azure.Core.Foundations.Operation<
+op deleteOnlineEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name of the endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -45,7 +45,7 @@ op DeleteOnlineEndpoint is Azure.Core.Foundations.Operation<
 @doc("Update an Online Endpoint.")
 @route("/onlineEndpoints/{name}")
 @patch
-op UpdateOnlineEndpoint is Azure.Core.Foundations.Operation<
+op updateOnlineEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name of the endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -63,7 +63,7 @@ op UpdateOnlineEndpoint is Azure.Core.Foundations.Operation<
 @doc("Create or Update an Online Endpoint.")
 @route("/onlineEndpoints/{name}")
 @put
-op CreateOrUpdateOnlineEndpoint is Azure.Core.Foundations.Operation<
+op createOrUpdateOnlineEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name of the endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -110,7 +110,7 @@ op listOnlineEndpoints(
 @doc("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
 @route("/onlineEndpoints/{name}/listKeys")
 @post
-op ListKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
+op listKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name of the endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -128,7 +128,7 @@ op ListKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
 @doc("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
 @route("/onlineEndpoints/{name}/regenerateKeys")
 @post
-op RegenerateKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
+op regenerateKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name of the endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -142,7 +142,7 @@ op RegenerateKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
 @doc("Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.")
 @route("/onlineEndpoints/{name}/token")
 @put
-op GetTokenOnlineEndpoint is Azure.Core.Foundations.Operation<
+op getTokenOnlineEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name of the endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -173,7 +173,7 @@ op listOnlineDeployments(
 @doc("Delete an Online Deployment.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
 @delete
-op DeleteOnlineDeployment is Azure.Core.Foundations.Operation<
+op deleteOnlineDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Inference endpoint name.")
     @path
@@ -189,7 +189,7 @@ op DeleteOnlineDeployment is Azure.Core.Foundations.Operation<
 @doc("Gets an online inference deployment by id.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
 @get
-op GetOnlineDeployment is Azure.Core.Foundations.Operation<
+op getOnlineDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Inference endpoint name.")
     @path
@@ -205,7 +205,7 @@ op GetOnlineDeployment is Azure.Core.Foundations.Operation<
 @doc("Update a Online Deployment.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
 @patch
-op UpdateOnlineDeployment is Azure.Core.Foundations.Operation<
+op updateOnlineDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Inference endpoint name.")
     @path
@@ -225,7 +225,7 @@ op UpdateOnlineDeployment is Azure.Core.Foundations.Operation<
 @doc("Create or Update an Online Deployment.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
 @put
-op CreateOrUpdateOnlineDeployment is Azure.Core.Foundations.Operation<
+op createOrUpdateOnlineDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Inference endpoint name.")
     @path
@@ -245,7 +245,7 @@ op CreateOrUpdateOnlineDeployment is Azure.Core.Foundations.Operation<
 @doc("Polls an Endpoint operation.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs")
 @post
-op PollLogsOnlineDeployment is Azure.Core.Foundations.Operation<
+op pollLogsOnlineDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Inference endpoint name.")
     @path
@@ -265,7 +265,7 @@ op PollLogsOnlineDeployment is Azure.Core.Foundations.Operation<
 @doc("List Inference Endpoint Deployment Skus.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus")
 @get
-op GetSkusOnlineDeployment is Azure.Core.Foundations.Operation<
+op getSkusOnlineDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Inference endpoint name.")
     @path
@@ -286,7 +286,7 @@ op GetSkusOnlineDeployment is Azure.Core.Foundations.Operation<
 @doc("Get a Batch Endpoint.")
 @route("/batchEndpoints/{endpointName}")
 @get
-op GetBatchEndpoint is Azure.Core.Foundations.Operation<
+op getBatchEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name for the Batch Endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -300,7 +300,7 @@ op GetBatchEndpoint is Azure.Core.Foundations.Operation<
 @doc("Delete an Batch Endpoint.")
 @route("/batchEndpoints/{endpointName}")
 @delete
-op DeleteBatchEndpoint is Azure.Core.Foundations.Operation<
+op deleteBatchEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Inference Endpoint name.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
@@ -314,7 +314,7 @@ op DeleteBatchEndpoint is Azure.Core.Foundations.Operation<
 @doc("Update a Batch Endpoint.")
 @route("/batchEndpoints/{endpointName}")
 @patch
-op UpdateBatchEndpoint is Azure.Core.Foundations.Operation<
+op updateBatchEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name for the Batch inference endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
@@ -332,7 +332,7 @@ op UpdateBatchEndpoint is Azure.Core.Foundations.Operation<
 @doc("Create or Update a Batch Endpoint.")
 @route("/batchEndpoints/{endpointName}")
 @put
-op CreateOrUpdateBatchEndpoint is Azure.Core.Foundations.Operation<
+op createOrUpdateBatchEndpoint is Azure.Core.Foundations.Operation<
   {
     @doc("Name for the Batch inference endpoint.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
@@ -380,7 +380,7 @@ op listBatchDeployments(
 @doc("Delete an Batch Deployment.")
 @route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
 @delete
-op DeleteBatchDeployment is Azure.Core.Foundations.Operation<
+op deleteBatchDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Endpoint name")
     @path
@@ -396,7 +396,7 @@ op DeleteBatchDeployment is Azure.Core.Foundations.Operation<
 @doc("Gets a batch inference deployment by id.")
 @route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
 @get
-op GetBatchDeployment is Azure.Core.Foundations.Operation<
+op getBatchDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Endpoint name")
     @path
@@ -412,7 +412,7 @@ op GetBatchDeployment is Azure.Core.Foundations.Operation<
 @doc("Update a Batch Deployment.")
 @route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
 @patch
-op UpdateBatchDeployment is Azure.Core.Foundations.Operation<
+op updateBatchDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Endpoint name")
     @path
@@ -432,7 +432,7 @@ op UpdateBatchDeployment is Azure.Core.Foundations.Operation<
 @doc("Create or Update a Batch Deployment.")
 @route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
 @put
-op CreateOrUpdateBatchDeployment is Azure.Core.Foundations.Operation<
+op createOrUpdateBatchDeployment is Azure.Core.Foundations.Operation<
   {
     @doc("Endpoint name")
     @path

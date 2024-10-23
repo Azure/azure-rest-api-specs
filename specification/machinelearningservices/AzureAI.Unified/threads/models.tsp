@@ -22,46 +22,35 @@ model AssistantThread {
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: utcDateTime;
 
-  /**
-   * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type
-   * of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list
-   * of vector store IDs.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.")
   @encodedName("application/json", "tool_resources")
   toolResources: ToolResources | null;
 
   ...RequiredNullableMetadata;
 }
 
-/** The details used to create a new assistant thread. */
+@doc("The details used to create a new assistant thread.")
 model AssistantThreadCreationOptions {
-  /** The initial messages to associate with the new thread. */
+  @doc("The initial messages to associate with the new thread.")
   messages?: ThreadMessageOptions[];
 
-  /**
-   * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
-   * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
-   * a list of vector store IDs.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.")
   @encodedName("application/json", "tool_resources")
   toolResources?: CreateToolResourcesOptions | null;
 
   ...OptionalNullableMetadata;
 }
 
-/** The details used to update an existing assistant thread */
+@doc("The details used to update an existing assistant thread")
 model UpdateAssistantThreadOptions {
-  /** The ID of the thread to modify. */
-  @path threadId: string;
+  @doc("The ID of the thread to modify.")
+  @path
+  threadId: string;
 
-  /**
-   * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
-   * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
-   * a list of vector store IDs
-   */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.")
   @encodedName("application/json", "tool_resources")
   toolResources?: UpdateToolResourcesOptions | null;
 

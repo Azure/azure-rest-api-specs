@@ -30,10 +30,9 @@ namespace Microsoft.MachineLearningServices;
 op createRun(
   @path threadId: string,
 
-  /**
-   * The details used when creating a new run of an assistant thread.
-   */
-  @bodyRoot body: CreateRunOptions,
+  @doc("The details used when creating a new run of an assistant thread.")
+  @bodyRoot
+  body: CreateRunOptions,
 ): ThreadRun;
 
 /**
@@ -137,9 +136,7 @@ op cancelRun(@path threadId: string, @path runId: string): ThreadRun;
 @route("/threads/runs")
 @doc("Creates a new assistant thread and immediately starts a run using that new thread.")
 op createThreadAndRun(
-  /**
-   * The details used when creating and immediately running a new assistant thread.
-   */
+  @doc("The details used when creating and immediately running a new assistant thread.")
   @bodyRoot
   body: CreateAndRunThreadOptions,
 ): ThreadRun;
