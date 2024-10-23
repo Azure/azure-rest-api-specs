@@ -177,7 +177,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "put": {
         "x-ms-examples": {
@@ -239,7 +242,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
@@ -509,7 +515,17 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "sourceType"
+            "name": "sourceType",
+            "values": [
+              {
+                "description": "The source from local file.",
+                "value": "Local file"
+              },
+              {
+                "description": "The source from remote storage.",
+                "value": "Remote storage"
+              }
+            ]
           }
         },
         "created": {
@@ -700,7 +716,37 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The New provisioning state.",
+            "value": "New"
+          },
+          {
+            "description": "The InProgress provisioning state.",
+            "value": "InProgress"
+          },
+          {
+            "description": "The Uploading provisioning state.",
+            "value": "Uploading"
+          },
+          {
+            "description": "The Deleting provisioning state.",
+            "value": "Deleting"
+          },
+          {
+            "description": "The Succeeded provisioning state.",
+            "value": "Succeeded"
+          },
+          {
+            "description": "The Failed provisioning state.",
+            "value": "Failed"
+          },
+          {
+            "description": "The Canceled provisioning state.",
+            "value": "Canceled"
+          }
+        ]
       },
       "readOnly": true
     }
