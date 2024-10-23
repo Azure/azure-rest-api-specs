@@ -81,8 +81,7 @@ model VectorStoreAutoChunkingStrategyResponse
 /** Type of vector storage configuration. */
 union VectorStorageDataSourceAssetType {
   uri_asset: "uri_asset",
-  id_asset: "id_asset",
-  string
+  id_asset: "id_asset"
 }
 
 /**
