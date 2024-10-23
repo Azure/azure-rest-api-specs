@@ -484,7 +484,7 @@
           "x-nullable": true
         },
         "provider": {
-          "description": "Name of the provider used for authentication. Azure provider can be used to authenticate to Azure DevOps repositories using Managed Identity. Generic is the default provider that indicates secret-based authentication mechanism.",
+          "description": "Name of the provider used for authentication.",
           "type": "string",
           "x-nullable": true,
           "enum": [
@@ -493,7 +493,19 @@
           ],
           "x-ms-enum": {
             "name": "ProviderType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Azure",
+                "value": "Azure",
+                "description": "Azure provider can be used to authenticate to Azure DevOps repositories using Managed Identity."
+              },
+              {
+                "name": "Generic",
+                "value": "Generic",
+                "description": "Generic is the default provider that indicates secret-based authentication mechanism."
+              }
+            ]
           }
         }
       }
