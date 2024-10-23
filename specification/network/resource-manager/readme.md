@@ -116,9 +116,6 @@ suppressions:
     from: ipAddressManager.json
     reason: False alarm.
   - code: PatchIdentityProperty
-    from: networkWatcher.json
-    reason: False alarm.
-  - code: PatchIdentityProperty
     reason: False alarm.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
