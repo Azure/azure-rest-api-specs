@@ -1446,6 +1446,9 @@
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string"
+              },
+              "Location": {
+                "type": "string"
               }
             }
           },
@@ -1455,7 +1458,8 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "operationId": "ContainerGroupProfile_Get",
@@ -1531,7 +1535,8 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -3441,7 +3446,11 @@
           "enum": [
             "Manual",
             "Rolling"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "NGroupUpdateMode",
+            "modelAsString": true
+          }
         },
         "rollingUpdateProfile": {
           "type": "object",
@@ -3449,12 +3458,12 @@
           "properties": {
             "maxBatchPercent": {
               "type": "integer",
-              "format": "int64",
+              "format": "int32",
               "description": "Maximum percentage of total Container Groups which can be updated simultaneously by rolling update in one batch."
             },
             "maxUnhealthyPercent": {
               "type": "integer",
-              "format": "int64",
+              "format": "int32",
               "description": "Maximum percentage of the updated Container Groups which can be in unhealthy state after each batch is updated."
             },
             "pauseTimeBetweenBatches": {
@@ -3475,7 +3484,7 @@
       "properties": {
         "faultDomainCount": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The number of fault domains to be used to spread CGs in a nGroup. This can only be specified during nGroup creation and is immutable after that."
         }
       }
@@ -3518,7 +3527,7 @@
         },
         "revision": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The revision of the CG profile is an optional property. If customer does not to provide a revision then nGroups will pickup the latest revision of CGProfile."
         },
         "networkProfile": {
