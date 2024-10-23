@@ -29,9 +29,9 @@ These settings apply only when `--tag=release_2023_11_15_preview` is specified o
 
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
-  - preview/2023-11-15-preview/questionanswering.json
+  - preview/2023-11-15-preview/questionanswering-authoring.json
 title:
-  Microsoft Cognitive Language Service - Question Answering
+  Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -42,9 +42,9 @@ These settings apply only when `--tag=release_2023_04_15_preview` is specified o
 
 ``` yaml $(tag) == 'release_2023-04-15-preview'
 input-file:
-  - preview/2023-04-15-preview/questionanswering.json
+  - preview/2023-04-15-preview/questionanswering-authoring.json
 title:
-  Microsoft Cognitive Language Service - Question Answering
+  Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -55,9 +55,9 @@ These settings apply only when `--tag=release_2023_04_01` is specified on the co
 
 ``` yaml $(tag) == 'release_2023_04_01'
 input-file:
-  - stable/2023-04-01/questionanswering.json
+  - stable/2023-04-01/questionanswering-authoring.json
 title:
-  Microsoft Cognitive Language Service - Question Answering
+  Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
 
@@ -69,9 +69,9 @@ These settings apply only when `--tag=release_2022_10_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2022_10_01_preview'
 input-file:
-  - preview/2022-10-01-preview/questionanswering.json
+  - preview/2022-10-01-preview/questionanswering-authoring.json
 title:
-  Microsoft Cognitive Language Service - Question Answering
+  Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
 
@@ -83,9 +83,9 @@ These settings apply only when `--tag=release_2022_07_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2022_07_01_preview'
 input-file:
-  - preview/2022-07-01-preview/questionanswering.json
+  - preview/2022-07-01-preview/questionanswering-authoring.json
 title:
-  Microsoft Cognitive Language Service - Question Answering
+  Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
 
@@ -97,9 +97,9 @@ These settings apply only when `--tag=release_2021_10_01` is specified on the co
 
 ``` yaml $(tag) == 'release_2021_10_01'
 input-file: 
-  - stable/2021-10-01/questionanswering.json
+  - stable/2021-10-01/questionanswering-authoring.json
 title: 
-  Microsoft Cognitive Language Service - Question Answering
+  Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -110,9 +110,9 @@ These settings apply only when `--tag=release_2021_07_15_preview` is specified o
 
 ``` yaml $(tag) == 'release_2021_07_15_preview'
 input-file:
-- preview/2021-07-15-preview/questionanswering.json
+- preview/2021-07-15-preview/questionanswering-authoring.json
 title:
-  Microsoft Cognitive Language Service - Question Answering
+  Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -123,9 +123,9 @@ These settings apply only when `--tag=release_2021_05_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2021_05_01_preview'
 input-file:
-- preview/2021-05-01-preview/questionanswering.json
+- preview/2021-05-01-preview/questionanswering-authoring.json
 title:
-  Microsoft Cognitive Language Service - Question Answering
+  Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
