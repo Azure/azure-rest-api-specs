@@ -66,10 +66,7 @@ interface SingleDocumentTranslationClient {
   "java"
 );
 
-@@clientName(DocumentTranslation.BatchRequest,
-  "documentBatch",
-  "python"
-);
+@@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
 @@access(DocumentTranslationClient.getSupportedFormats,
   Access.internal,
@@ -120,10 +117,7 @@ interface SingleDocumentTranslationClient {
   "java"
 );
 
-@@clientName(DocumentTranslation.Status,
-  "translationStatus",
-  "java"
-);
+@@clientName(DocumentTranslation.Status, "translationStatus", "java");
 
 @@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
   "createdOn",
@@ -188,7 +182,10 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.cancelled, "canceled", "python");
+@@clientName(DocumentTranslation.TranslationStatusSummary.cancelled,
+  "canceled",
+  "python"
+);
 
 @@clientName(DocumentTranslation.FileFormat.format, "file_format", "python");
 
