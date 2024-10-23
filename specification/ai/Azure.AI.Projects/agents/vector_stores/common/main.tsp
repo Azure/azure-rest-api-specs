@@ -78,6 +78,16 @@ model VectorStoreAutoChunkingStrategyResponse
   type: VectorStoreChunkingStrategyResponseType.other;
 }
 
+/** A statically configured chunking strategy. */
+model VectorStoreStaticChunkingStrategyResponse
+  extends VectorStoreChunkingStrategyResponse {
+  /** The object type, which is always 'static'. */
+  type: VectorStoreChunkingStrategyResponseType.static;
+
+  /** The options for the static chunking strategy. */
+  static: VectorStoreStaticChunkingStrategyOptions;
+}
+
 /** Type of vector storage configuration. */
 union VectorStorageDataSourceAssetType {
   uri_asset: "uri_asset",
@@ -91,7 +101,7 @@ model VectorStorageDataSource {
   /** Asset URI. */
   @encodedName("application/json", "uri")
   storageUri: string;
-  
+
   /** The asset type **/
   @encodedName("application/json", "type")
   assetType: VectorStorageDataSourceAssetType = VectorStorageDataSourceAssetType.uri_asset;
@@ -117,14 +127,4 @@ model VectorStoreFromAzure {
   /** Configurations */
   @encodedName("application/json", "configuration")
   storeConfiguration: VectorStorageConfiguration;
-}
-
-/** A statically configured chunking strategy. */
-model VectorStoreStaticChunkingStrategyResponse
-  extends VectorStoreChunkingStrategyResponse {
-  /** The object type, which is always 'static'. */
-  type: VectorStoreChunkingStrategyResponseType.static;
-
-  /** The options for the static chunking strategy. */
-  static: VectorStoreStaticChunkingStrategyOptions;
 }
