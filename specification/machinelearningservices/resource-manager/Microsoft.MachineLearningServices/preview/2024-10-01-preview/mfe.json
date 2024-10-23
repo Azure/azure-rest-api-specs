@@ -9060,7 +9060,8 @@
             "name": "inferencePoolName",
             "description": "Name of InferencePool",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -10201,14 +10202,16 @@
             "name": "poolName",
             "description": "InferencePool name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "path",
             "name": "groupName",
             "description": "InferenceGroup name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -10275,14 +10278,16 @@
             "name": "poolName",
             "description": "InferencePool name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "path",
             "name": "groupName",
             "description": "InferenceGroup name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -10299,7 +10304,20 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           },
           "default": {
             "description": "Error",
@@ -10312,6 +10330,10 @@
           "ModifyDeltaModelsAsync Inference Group.": {
             "$ref": "./examples/InferenceGroup/modifyDeltaModelsAsync.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -10399,14 +10421,16 @@
             "name": "poolName",
             "description": "Inference Pool name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "path",
             "name": "groupName",
             "description": "Inference Group name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -23752,6 +23776,7 @@
         "Canceled"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "PoolProvisioningState",
         "modelAsString": true,
