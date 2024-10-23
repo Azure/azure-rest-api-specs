@@ -119,8 +119,11 @@ suppressions:
     from: networkWatcher.json
     reason: False alarm.
   - code: PatchIdentityProperty
-    from: virtualNetworkGateway.json
     reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+
 ```
 
 ### Tag: package-2024-03
