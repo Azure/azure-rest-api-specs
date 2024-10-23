@@ -282,6 +282,10 @@ model ImportFromApimRequest {
 model ImportFromApimSuccessResult {
     @doc("The successful response status code.")
     @statusCode code: 200;
+
+    status: string;
+    startTime: utcDateTime;
+    endTime?: utcDateTime;
 }
 
 @doc("Assignment metadata")

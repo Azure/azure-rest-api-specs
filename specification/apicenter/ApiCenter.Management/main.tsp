@@ -111,8 +111,6 @@ enum Versions {
   "payload"
 );
 
-@@clientName(ApiDefinitions.importSpecification::parameters.body, "payload");
-
 @@encodedName(ApiDefinitions.exportSpecification::parameters.body,
   "application/json",
   "payload"

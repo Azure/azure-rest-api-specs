@@ -8,7 +8,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-
 namespace Microsoft.ApiCenter;
 
 @doc("The service entity.")
@@ -21,30 +20,30 @@ model Service is TrackedResource<ServiceProperties> {
   @key("serviceName")
   @segment("services")
   name: string;
-  
+
   ...ResourceSkuProperty;
   ...ManagedServiceIdentityProperty;
 }
 
-
 @@added(Service.sku, Versions.v2024_06_01_preview);
 @@added(Service.location, Versions.v2024_06_01_preview);
-
 
 @armResourceOperations
 interface Services {
   @doc("Returns details of the service.")
   get is Azure.ResourceManager.ArmResourceRead<Service>;
+
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Service>;
+
   @doc("Updates existing service.")
   update is ArmCustomPatchSync<
-  Service,
-  Azure.ResourceManager.Foundations.ResourceUpdateModel<
     Service,
-    ServiceProperties
-  >
- >;
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Service,
+      ServiceProperties
+    >
+  >;
 
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Service>;

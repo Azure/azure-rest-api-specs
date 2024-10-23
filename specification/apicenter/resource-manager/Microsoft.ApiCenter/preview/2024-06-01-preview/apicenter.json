@@ -708,7 +708,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The import operation was successfully completed."
+            "description": "The import operation was successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/ImportFromApimSuccessResult"
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -4938,7 +4941,25 @@
     },
     "ImportFromApimSuccessResult": {
       "type": "object",
-      "description": "The import operation was successfully completed."
+      "description": "The import operation was successfully completed.",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "status",
+        "startTime",
+        "endTime"
+      ]
     },
     "License": {
       "type": "object",
