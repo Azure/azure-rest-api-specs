@@ -168,7 +168,6 @@ alias CisaCveListTrait = {
 
 // Models
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("AlexaDetails", "java")
 model AlexaInfo {
   alexaRank?: int64;
   category?: string;
@@ -320,7 +319,6 @@ model AssetSummaryResult {
 }
 
 @doc("A request body used to update an asset.")
-@clientName("AssetUpdatePayload", "csharp")
 model AssetUpdateData {
   @doc("The state to update the asset to.")
   state?: AssetUpdateState;
@@ -376,7 +374,6 @@ model DeltaSummaryRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("AttributeDetails", "csharp")
 model Attribute {
   attributeType?: string;
   attributeValue?: string;
@@ -420,13 +417,9 @@ model AzureDataExplorerDataConnectionProperties
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
-@clientName("BannerDetails", "csharp")
 model Banner {
   port?: int32;
-
-  @clientName("bannerName", "csharp")
   banner?: string;
-
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
@@ -471,7 +464,6 @@ model ContactAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("CookieDetails", "csharp")
 model Cookie {
   cookieName?: string;
   cookieDomain?: string;
@@ -483,7 +475,6 @@ model Cookie {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("CveDetails", "csharp")
 model Cve {
   name?: string;
   cweId?: string;
@@ -496,7 +487,6 @@ model DataConnectionProperties {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @discriminator("kind")
-@clientName("DataConnectionPayload", "csharp")
 model DataConnectionData {
   /** Discriminator property for DataConnectionData. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -592,7 +582,6 @@ model DependentResource {
 }
 
 @doc("A request body used to create a discovery group.")
-@clientName("DiscoveryGroupPayload", "csharp")
 model DiscoGroupData {
   @doc("The name for a disco group.")
   name?: string;
@@ -621,19 +610,15 @@ model DiscoGroupData {
 
 @doc("A request body used to create a policy.")
 @Versioning.added(Versions.v2024_10_01_preview)
-@clientName("PolicyPayload", "csharp")
 model PolicyData {
   @doc("A human readable description of what the policy should do.")
   description?: string;
 
   @doc("Name of the saved filter query to be used to select assets that are to be updated by a given policy.")
-  filterName?: string;
+  filterName: string;
 
   @doc("Action specifying what the policy should do.")
-  action?: PolicyAction;
-
-  @doc("Priority of the policy.")
-  priority?: int32;
+  action: PolicyAction;
 
   @doc("Additional parameters needed to perform the policy action.")
   actionParameters?: ActionParameters;
@@ -642,21 +627,18 @@ model PolicyData {
 @doc("This is an object that exists to provide a common schema definition for the action parameters.")
 @Versioning.added(Versions.v2024_10_01_preview)
 model ActionParameters {
-  @doc("The value parameter that is used by the policy action..")
-  value?: string;
-
-  @doc("The optional name parameter that can be used by the policy action.")
-  name?: string;
+  @doc("""
+  The value parameter that is used by the policy action. This is action specific,
+  for further information please refer to documentation here:
+  https://learn.microsoft.com/en-us/azure/external-attack-surface-management/policy-engine
+  """)
+  value: string;
 }
 
-@doc("This is an object that exists to provide a common schema definition for the priority response.")
+@doc("This is an object that exists to provide a common schema definition for the policy response.")
 @Versioning.added(Versions.v2024_10_01_preview)
 @resource("policies")
-@clientName("Policy", "csharp")
 model Policy {
-  @doc("The system generated unique id for the resource.")
-  id?: string;
-
   @doc("The caller provided unique name for the resource.")
   @key("policyName")
   @visibility("read")
@@ -669,33 +651,29 @@ model Policy {
   description?: string;
 
   @doc("Name of the saved filter query to be used to select assets that are to be updated by a given policy.")
-  filterName?: string;
+  filterName: string;
 
   @doc("Action specifying what the policy should do.")
-  action?: PolicyAction;
+  action: PolicyAction;
 
   @doc("Number of assets in inventory that have been updated by this policy.")
-  updatedAssetsCount?: int64;
+  updatedAssetsCount: int64;
 
   @doc("The unique name of the user that created the policy user@gmail.com")
-  user?: string;
+  user: string;
 
-  @doc("The date this policy was created.")
-  createdDate?: utcDateTime;
+  @doc("The date this policy was created, in RFC3339 format.")
+  createdDate: utcDateTime;
 
-  @doc("The date this policy was last updated.")
-  updatedDate?: utcDateTime;
+  @doc("The date this policy was last updated, in RFC3339 format.")
+  updatedDate: utcDateTime;
 
   @doc("Additional parameters needed to perform the policy action.")
   actionParameters?: ActionParameters;
-
-  @doc("Priority of the policy.")
-  priority?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("discoGroups")
-@clientName("DiscoveryGroup", "csharp")
 model DiscoGroup {
   @doc("The system generated unique id for the resource.")
   id?: string;
@@ -738,7 +716,6 @@ model DiscoGroup {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @pagedResult
-@clientName("DiscoveryRunPageResult", "csharp")
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -753,7 +730,6 @@ model DiscoRunPageResult {
 }
 
 @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
-@clientName("DiscoveryRunResult", "csharp")
 model DiscoRunResult {
   @doc("The date for when the disco run was created in the system.")
   submittedDate?: utcDateTime;
@@ -784,7 +760,6 @@ model DiscoRunResult {
 }
 
 @doc("Source entity used to drive discovery.")
-@clientName("DiscoverySource", "csharp")
 model DiscoSource {
   @doc("The kind of disco source.")
   kind?: DiscoSourceKind;
@@ -794,7 +769,6 @@ model DiscoSource {
 }
 
 @doc("The items in the current page of results.")
-@clientName("DiscoveryTemplate", "csharp")
 @resource("discoTemplates")
 model DiscoTemplate {
   @doc("The system generated unique id for the resource.")
@@ -1015,9 +989,7 @@ model IpAddressAsset extends InventoryAsset {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
 model IpBlock {
-  @clientName("ipBlockName", "csharp")
   ipBlock?: string;
-
   sources?: Source[];
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
@@ -1061,7 +1033,6 @@ model IpBlockAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("ObservedLocationDetails", "csharp")
 model Location {
   countryCode?: string;
   countryName?: string;
@@ -1212,18 +1183,14 @@ model PageCause {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
-@clientName("PortDetails", "csharp")
 model Port {
-  @clientName("portName", "csharp")
   port?: int32;
-
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
 }
 
 @doc("A request body used for an asset report snapshot export.")
-@clientName("ReportAssetSnapshotExportPayload", "csharp")
 model ReportAssetSnapshotExportRequest {
   @doc("The metric to retrieve a snapshot for.")
   metric?: string;
@@ -1236,7 +1203,6 @@ model ReportAssetSnapshotExportRequest {
 }
 
 @doc("A request body used to retrieve an asset report snapshot.")
-@clientName("ReportAssetSnapshotPayload", "csharp")
 model ReportAssetSnapshotRequest {
   @doc("The metric to retrieve a snapshot for.")
   metric?: string;
@@ -1273,7 +1239,6 @@ model ReportAssetSnapshotResult {
 }
 
 @doc("A request body used to retrieve summary asset information. One and only one collection of summary identifiers must be provided: filters, metrics, or metricCategories.")
-@clientName("ReportAssetSummaryPayload", "csharp")
 model ReportAssetSummaryRequest {
   @doc("Categories to retrieve risk reporting data for.")
   metricCategories?: string[];
@@ -1327,7 +1292,6 @@ model ReportBillableAssetSummaryResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("ReputationDetails", "csharp")
 model Reputation {
   listName?: string;
   threatType?: string;
@@ -1340,7 +1304,6 @@ model Reputation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("ResourceUri", "csharp")
 model ResourceUrl {
   url?: url;
   resources?: DependentResource[];
@@ -1351,7 +1314,6 @@ model ResourceUrl {
 }
 
 @doc("A request body used to create a saved filter.")
-@clientName("SavedFilterPayload", "csharp")
 model SavedFilterData {
   @doc("An expression on the resource type that selects the resources to be returned.")
   filter: string;
@@ -1387,7 +1349,6 @@ model ScanMetadata {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("AssetService", "csharp")
 model Service {
   scheme?: string;
   port?: int32;
@@ -1415,11 +1376,8 @@ model SoaRecord {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
-@clientName("SourceDetails", "csharp")
 model Source {
-  @clientName("sourceName", "csharp")
   source?: string;
-
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
@@ -1488,7 +1446,6 @@ model SubResourceIntegrityCheck {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("tasks")
-@clientName("TaskResource", "csharp")
 model Task {
   @doc("The unique identifier of the task.")
   @key("taskId")
@@ -1665,13 +1622,13 @@ union AssetUpdateTransfers {
 @Versioning.added(Versions.v2024_10_01_preview)
 model ObservationRemediationItem {
   @doc("The kind of the observation to remediate.")
-  kind?: ObservationType;
+  kind: ObservationType;
 
   @doc("The name of the observation to remediate.")
-  name?: string;
+  name: string;
 
   @doc("The state to which to update the observation.")
-  state?: ObservationRemediationState;
+  state: ObservationRemediationState;
 }
 
 @doc("A list of observation states")
@@ -1691,10 +1648,10 @@ union ObservationRemediationState {
 union ObservationRemediationSource {
   string,
 
-  @doc("user")
+  @doc("The source of the observation state is a user.")
   "user",
 
-  @doc("system")
+  @doc("The source of the observation state is the system.")
   "system",
 }
 
@@ -1811,7 +1768,6 @@ union GlobalAssetType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state the task is in.")
-@clientName("TaskResourceState", "csharp")
 union TaskState {
   string,
   "pending",
@@ -1825,7 +1781,6 @@ union TaskState {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The phase the task is in.")
-@clientName("TaskResourcePhase", "csharp")
 union TaskPhase {
   string,
   "running",
@@ -1884,7 +1839,6 @@ union DataConnectionContent {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of disco source.")
-@clientName("DiscoverySourceKind", "csharp")
 union DiscoSourceKind {
   string,
   "as",
@@ -2044,24 +1998,23 @@ union AssetChainSource {
 union PolicyAction {
   string,
 
-  @doc("add resource")
+  @doc("Add a resource label with a given name.")
   "addResource",
 
-  @doc("remove resource")
+  @doc("Remove a resource label with a given name.")
   "removeResource",
 
-  @doc("set state")
+  @doc("Set inventory state to a given supported state value.")
   "setState",
 
-  @doc("set external id")
+  @doc("Set an external id.")
   "setExternalID",
 
-  @doc("remove from inventory")
+  @doc("Remove from inventory.")
   "removeFromInventory",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("LogAnalyticsDataConnectionPayload", "csharp")
 model LogAnalyticsDataConnectionData extends DataConnectionData {
   @doc("The kind of DataConnectionData ")
   kind: "logAnalytics";
@@ -2071,7 +2024,6 @@ model LogAnalyticsDataConnectionData extends DataConnectionData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("AzureDataExplorerDataConnectionPayload", "csharp")
 model AzureDataExplorerDataConnectionData extends DataConnectionData {
   @doc("The kind of DataConnectionData")
   kind: "azureDataExplorer";
@@ -2171,7 +2123,6 @@ model AzureDataExplorerDataConnection extends DataConnection {
 }
 
 @doc("The unique identifier for the discovery group.")
-@clientName("DiscoveryGroupNameParameter", "csharp")
 model DiscoGroupNameParameter {
   @doc("The unique identifier for the discovery group.")
   @path("groupName")

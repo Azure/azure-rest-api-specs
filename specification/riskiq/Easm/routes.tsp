@@ -298,7 +298,7 @@ interface Policies {
   getPolicy is Operations.ResourceRead<Policy>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create or update a policy with a given policyName.")
+  @doc("Create a policy with a given policyName.")
   @Versioning.added(Versions.v2024_10_01_preview)
   @createsOrReplacesResource(Policy)
   @put

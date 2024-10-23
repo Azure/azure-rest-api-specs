@@ -73,3 +73,40 @@ interface EasmClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   createOrReplacePolicy is Easm.Policies.createOrReplacePolicy;
 }
+
+@@clientName(Easm.PolicyData, "PolicyPayload", "csharp");
+@@clientName(Easm.Policy, "Policy", "csharp");
+@@clientName(Easm.AlexaInfo, "AlexaDetails", "java");
+@@clientName(Easm.AssetUpdateData, "AssetUpdatePayload", "csharp");
+@@clientName(Easm.Attribute, "AttributeDetails", "csharp");
+@@clientName(Easm.Banner, "BannerDetails", "csharp");
+@@clientName(Easm.Banner.banner, "bannerName", "csharp");
+@@clientName(Easm.Cookie, "CookieDetails", "csharp");
+@@clientName(Easm.Cve, "CveDetails", "csharp");
+@@clientName(Easm.DataConnectionData, "DataConnectionPayload", "csharp");
+@@clientName(Easm.DiscoGroupData, "DiscoveryGroupPayload", "csharp");
+@@clientName(Easm.DiscoGroup, "DiscoveryGroup", "csharp");
+@@clientName(Easm.DiscoRunPageResult, "DiscoveryRunPageResult", "csharp");
+@@clientName(Easm.DiscoRunResult, "DiscoveryRunResult", "csharp");
+@@clientName(Easm.DiscoSource, "DiscoverySource", "csharp");
+@@clientName(Easm.DiscoTemplate, "DiscoveryTemplate", "csharp");
+@@clientName(Easm.IpBlock.ipBlock, "ipBlockName", "csharp");
+@@clientName(Easm.Location, "ObservedLocationDetails", "csharp");
+@@clientName(Easm.Port, "PortDetails", "csharp");
+@@clientName(Easm.Port.port, "portName", "csharp");
+@@clientName(Easm.ReportAssetSnapshotExportRequest, "ReportAssetSnapshotExportPayload", "csharp");
+@@clientName(Easm.ReportAssetSnapshotRequest, "ReportAssetSnapshotPayload", "csharp");
+@@clientName(Easm.ReportAssetSummaryRequest, "ReportAssetSummaryPayload", "csharp");
+@@clientName(Easm.Reputation, "ReputationDetails", "csharp");
+@@clientName(Easm.ResourceUrl, "ResourceUri", "csharp");
+@@clientName(Easm.SavedFilterData, "SavedFilterPayload", "csharp");
+@@clientName(Easm.Service, "AssetService", "csharp");
+@@clientName(Easm.Source, "SourceDetails", "csharp");
+@@clientName(Easm.Source.source, "sourceName", "csharp");
+@@clientName(Easm.Task, "TaskResource", "csharp");
+@@clientName(Easm.TaskState, "TaskResourceState", "csharp");
+@@clientName(Easm.TaskPhase, "TaskResourcePhase", "csharp");
+@@clientName(Easm.DiscoSourceKind, "DiscoverySourceKind", "csharp");
+@@clientName(Easm.LogAnalyticsDataConnectionData, "LogAnalyticsDataConnectionPayload", "csharp");
+@@clientName(Easm.AzureDataExplorerDataConnectionData, "AzureDataExplorerDataConnectionPayload", "csharp");
+@@clientName(Easm.DiscoGroupNameParameter, "DiscoveryGroupNameParameter", "csharp");
