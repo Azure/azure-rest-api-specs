@@ -38,7 +38,7 @@ interface DocumentTranslationClient {
 })
 interface SingleDocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/byos"
-  documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
+  translate is DocumentTranslation.DocumentTranslationOperations.translate;
 }
 
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
@@ -51,14 +51,24 @@ interface SingleDocumentTranslationClient {
   "java"
 );
 
-@@clientName(DocumentTranslation.StartTranslationBody.body,
-  "startTranslationDetails",
+@@clientName(DocumentTranslation.StartTranslationDetails,
+  "translationBatch",
   "csharp"
 );
 
-@@clientName(DocumentTranslation.StartTranslationBody.body,
-  "startTranslationDetails",
+@@clientName(DocumentTranslation.StartTranslationDetails,
+  "translationBatch",
   "java"
+);
+
+@@clientName(DocumentTranslation.BatchRequest,
+  "documentTranslationInput",
+  "java"
+);
+
+@@clientName(DocumentTranslation.BatchRequest,
+  "documentBatch",
+  "python"
 );
 
 @@access(DocumentTranslationClient.getSupportedFormats,
@@ -75,14 +85,54 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
+@@clientName(DocumentTranslationClient.startTranslation,
+  "beginTranslation",
+  "java"
+);
+
 @@clientName(DocumentTranslationClient.getDocumentsStatus,
   "list_document_statuses",
   "python"
 );
 
+@@clientName(DocumentTranslationClient.getDocumentsStatus,
+  "listDocumentStatuses",
+  "java"
+);
+
 @@clientName(DocumentTranslationClient.getTranslationsStatus,
   "list_translation_statuses",
   "python"
+);
+
+@@clientName(DocumentTranslationClient.getTranslationsStatus,
+  "listTranslationStatuses",
+  "java"
+);
+
+@@clientName(DocumentTranslation.TranslationsStatus,
+  "translationsResult",
+  "java"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus,
+  "translationResult",
+  "java"
+);
+
+@@clientName(DocumentTranslation.Status,
+  "translationStatus",
+  "java"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
+  "createdOn",
+  "java"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
+  "lastUpdatedOn",
+  "java"
 );
 
 @@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
@@ -133,12 +183,12 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
+@@clientName(DocumentTranslation.TranslationStatusSummary.totalCharacterCharged,
   "total_characters_charged",
   "python"
 );
 
-@@clientName(DocumentTranslation.StatusSummary.cancelled, "canceled", "python");
+@@clientName(DocumentTranslation.TranslationStatusSummary.cancelled, "canceled", "python");
 
 @@clientName(DocumentTranslation.FileFormat.format, "file_format", "python");
 

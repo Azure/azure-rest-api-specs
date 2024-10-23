@@ -39,8 +39,8 @@ union FileFormatType {
   string,
 }
 
-@doc("Storage Source")
-union StorageSource {
+@doc("Translation Storage Source")
+union TranslationStorageSource {
   @doc("Azure blob storage source")
   AzureBlob: "AzureBlob",
 
@@ -154,7 +154,7 @@ model SourceInput {
   language?: string;
 
   @doc("Storage Source")
-  storageSource?: StorageSource;
+  translationStorageSource?: TranslationStorageSource;
 }
 
 @doc("Document filter")
@@ -190,7 +190,7 @@ model TargetInput {
   glossaries?: Glossary[];
 
   @doc("Storage Source")
-  storageSource?: StorageSource;
+  translationStorageSource?: TranslationStorageSource;
 }
 
 @doc("Glossary / translation memory for the request")
@@ -212,7 +212,7 @@ model Glossary {
   version?: string;
 
   @doc("Storage Source")
-  storageSource?: StorageSource;
+  translationStorageSource?: TranslationStorageSource;
 }
 
 @doc("""
@@ -310,8 +310,8 @@ model TranslationsStatus {
 
 @doc("Translation job status response")
 model TranslationStatus {
-  @doc("Id of the operation.")
-  id: string;
+  @doc("Id of the translation operation.")
+  translationId: string;
 
   @doc("Operation created date time")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -331,11 +331,11 @@ model TranslationStatus {
   error?: TranslationError;
 
   @doc("Status Summary")
-  summary: StatusSummary;
+  summary: TranslationStatusSummary;
 }
 
 @doc("Status Summary")
-model StatusSummary {
+model TranslationStatusSummary {
   @doc("Total count")
   total: int32;
 
@@ -391,7 +391,7 @@ model DocumentStatus {
   progress: float32;
 
   @doc("Document Id")
-  id: uuid;
+  documentId: string;
 
   @doc("Character charged by the API")
   characterCharged?: int32;
@@ -433,7 +433,7 @@ model FileFormat {
   versions?: string[];
 
   @doc("Supported Type for this format")
-  type?: string;
+  type?: FileFormatType;
 }
 
 @doc("Document Translate Request Body")

@@ -101,14 +101,13 @@
             "maximum": 100
           },
           {
-            "name": "ids",
+            "name": "translationIds",
             "in": "query",
-            "description": "Ids to use in filtering",
+            "description": "Translation Ids to use in filtering",
             "required": false,
             "type": "array",
             "items": {
-              "type": "string",
-              "format": "uuid"
+              "type": "string"
             },
             "collectionFormat": "csv"
           },
@@ -227,7 +226,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/document/batches/{id}": {
+    "/document/batches/{translationId}": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetTranslationStatus",
         "summary": "Returns the status for a document translation request",
@@ -237,12 +236,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "translationId",
             "in": "path",
-            "description": "Format - uuid.  The operation id",
+            "description": "Format - string.  The translation operation id",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         ],
         "responses": {
@@ -280,12 +278,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "translationId",
             "in": "path",
-            "description": "Format - uuid.  The operation-id",
+            "description": "Format - string.  The translation operation-id",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         ],
         "responses": {
@@ -315,7 +312,7 @@
         }
       }
     },
-    "/document/batches/{id}/documents": {
+    "/document/batches/{translationId}/documents": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentsStatus",
         "summary": "Returns the status for all documents in a batch document translation request",
@@ -325,12 +322,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "translationId",
             "in": "path",
-            "description": "Format - uuid.  The operation id",
+            "description": "Format - string.  The translation operation id",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           },
           {
             "name": "top",
@@ -362,14 +358,13 @@
             "maximum": 100
           },
           {
-            "name": "ids",
+            "name": "documentIds",
             "in": "query",
-            "description": "Ids to use in filtering",
+            "description": "DocumentIds to use in filtering",
             "required": false,
             "type": "array",
             "items": {
-              "type": "string",
-              "format": "uuid"
+              "type": "string"
             },
             "collectionFormat": "csv"
           },
@@ -442,7 +437,7 @@
         }
       }
     },
-    "/document/batches/{id}/documents/{documentId}": {
+    "/document/batches/{translationId}/documents/{documentId}": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentStatus",
         "summary": "Returns the status for a specific document",
@@ -452,20 +447,18 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "translationId",
             "in": "path",
-            "description": "Format - uuid.  The batch id",
+            "description": "Format - string.  The translation operation id",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           },
           {
             "name": "documentId",
             "in": "path",
-            "description": "Format - uuid.  The document id",
+            "description": "Format - string.  The document id",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         ],
         "responses": {
@@ -561,7 +554,7 @@
     },
     "/document:translate": {
       "post": {
-        "operationId": "DocumentTranslationOperations_DocumentTranslate",
+        "operationId": "DocumentTranslationOperations_Translate",
         "summary": "Submit a single document translation request to the Document Translation service",
         "description": "Use this API to submit a single translation request to the Document Translation Service.",
         "produces": [
@@ -730,11 +723,6 @@
         }
       }
     },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "BatchRequest": {
       "type": "object",
       "description": "Definition for the input batch translation request",
@@ -815,8 +803,8 @@
           "description": "Progress of the translation if available",
           "maximum": 1
         },
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+        "documentId": {
+          "type": "string",
           "description": "Document Id"
         },
         "characterCharged": {
@@ -832,7 +820,7 @@
         "status",
         "to",
         "progress",
-        "id"
+        "documentId"
       ]
     },
     "DocumentTranslateContent": {
@@ -880,7 +868,8 @@
           "description": "The detail status of individual documents",
           "items": {
             "$ref": "#/definitions/DocumentStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -925,7 +914,7 @@
           }
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/FileFormatType",
           "description": "Supported Type for this format"
         }
       },
@@ -975,8 +964,8 @@
           "type": "string",
           "description": "Optional Version.  If not specified, default is used."
         },
-        "storageSource": {
-          "$ref": "#/definitions/StorageSource",
+        "translationStorageSource": {
+          "$ref": "#/definitions/TranslationStorageSource",
           "description": "Storage Source"
         }
       },
@@ -1028,8 +1017,8 @@
           "type": "string",
           "description": "Language code\nIf none is specified, we will perform auto detect on the document"
         },
-        "storageSource": {
-          "$ref": "#/definitions/StorageSource",
+        "translationStorageSource": {
+          "$ref": "#/definitions/TranslationStorageSource",
           "description": "Storage Source"
         }
       },
@@ -1108,56 +1097,6 @@
         ]
       }
     },
-    "StatusSummary": {
-      "type": "object",
-      "description": "Status Summary",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total count"
-        },
-        "failed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Failed count"
-        },
-        "success": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of Success"
-        },
-        "inProgress": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of in progress"
-        },
-        "notYetStarted": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Count of not yet started"
-        },
-        "cancelled": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of cancelled"
-        },
-        "totalCharacterCharged": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total characters charged by the API"
-        }
-      },
-      "required": [
-        "total",
-        "failed",
-        "success",
-        "inProgress",
-        "notYetStarted",
-        "cancelled",
-        "totalCharacterCharged"
-      ]
-    },
     "StorageInputType": {
       "type": "string",
       "description": "Storage type of the input documents source string",
@@ -1178,24 +1117,6 @@
             "name": "File",
             "value": "File",
             "description": "File storage input type"
-          }
-        ]
-      }
-    },
-    "StorageSource": {
-      "type": "string",
-      "description": "Storage Source",
-      "enum": [
-        "AzureBlob"
-      ],
-      "x-ms-enum": {
-        "name": "StorageSource",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureBlob",
-            "value": "AzureBlob",
-            "description": "Azure blob storage source"
           }
         ]
       }
@@ -1241,8 +1162,8 @@
           },
           "x-ms-identifiers": []
         },
-        "storageSource": {
-          "$ref": "#/definitions/StorageSource",
+        "translationStorageSource": {
+          "$ref": "#/definitions/TranslationStorageSource",
           "description": "Storage Source"
         }
       },
@@ -1346,9 +1267,9 @@
       "type": "object",
       "description": "Translation job status response",
       "properties": {
-        "id": {
+        "translationId": {
           "type": "string",
-          "description": "Id of the operation."
+          "description": "Id of the translation operation."
         },
         "createdDateTimeUtc": {
           "type": "string",
@@ -1369,17 +1290,85 @@
           "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details."
         },
         "summary": {
-          "$ref": "#/definitions/StatusSummary",
+          "$ref": "#/definitions/TranslationStatusSummary",
           "description": "Status Summary"
         }
       },
       "required": [
-        "id",
+        "translationId",
         "createdDateTimeUtc",
         "lastActionDateTimeUtc",
         "status",
         "summary"
       ]
+    },
+    "TranslationStatusSummary": {
+      "type": "object",
+      "description": "Status Summary",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Failed count"
+        },
+        "success": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Success"
+        },
+        "inProgress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of in progress"
+        },
+        "notYetStarted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of not yet started"
+        },
+        "cancelled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cancelled"
+        },
+        "totalCharacterCharged": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total characters charged by the API"
+        }
+      },
+      "required": [
+        "total",
+        "failed",
+        "success",
+        "inProgress",
+        "notYetStarted",
+        "cancelled",
+        "totalCharacterCharged"
+      ]
+    },
+    "TranslationStorageSource": {
+      "type": "string",
+      "description": "Translation Storage Source",
+      "enum": [
+        "AzureBlob"
+      ],
+      "x-ms-enum": {
+        "name": "TranslationStorageSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureBlob",
+            "value": "AzureBlob",
+            "description": "Azure blob storage source"
+          }
+        ]
+      }
     },
     "TranslationsStatus": {
       "type": "object",
@@ -1390,7 +1379,8 @@
           "description": "The summary status of individual operation",
           "items": {
             "$ref": "#/definitions/TranslationStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
