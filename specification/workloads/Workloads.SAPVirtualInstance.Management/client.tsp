@@ -89,27 +89,6 @@ using Azure.ClientGenerator.Core;
   "SapDiskConfiguration",
   "java"
 );
-
-@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
-  "SapDiskConfiguration",
-  "java"
-);
-@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
-  "SapDiskConfiguration",
-  "java"
-);
-@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
-  "SapDiskConfiguration",
-  "java"
-);
-@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
-  "SapDiskConfiguration",
-  "java"
-);
-@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
-  "SapDiskConfiguration",
-  "java"
-);
 @@clientName(Microsoft.Workloads.SAPAvailabilityZoneDetailsRequest,
   "SapAvailabilityZoneDetailsRequest",
   "java"
