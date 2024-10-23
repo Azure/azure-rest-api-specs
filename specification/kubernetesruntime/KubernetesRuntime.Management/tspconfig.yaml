@@ -14,12 +14,23 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/kubernetesruntime.json"
     use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.ContainerOrchestratorRuntime"
+    flavor: azure
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-containerorchestratorruntime"
     package-name: "{package-dir}"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-containerorchestratorruntime"
+    namespace: "com.azure.resourcemanager.containerorchestratorruntime"
+    service-name: "Container Orchestrator Runtime"
+    flavor: "azure"
 
 linter:
   extends:
