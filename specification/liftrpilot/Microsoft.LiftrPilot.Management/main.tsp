@@ -35,10 +35,10 @@ enum Versions {
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
  * BaseResourceProperties contains Marketplace, useDetail related properties*/
 @doc("Properties specific to Organization")
-model OrganizationProperties is BaseResourceProperties {
-}
+model OrganizationProperties is BaseResourceProperties;
 
-model OrganizationResource is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
+model OrganizationResource
+  is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
   @segment("organizations")
@@ -65,7 +65,10 @@ model OrganizationResourceUpdate {
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
-  update is ArmCustomPatchSync<OrganizationResource, OrganizationResourceUpdate>;
+  update is ArmCustomPatchSync<
+    OrganizationResource,
+    OrganizationResourceUpdate
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
