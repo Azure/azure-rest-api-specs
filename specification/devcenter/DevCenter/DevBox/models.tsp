@@ -142,6 +142,18 @@ union StopOnDisconnectEnableStatus {
   string,
 }
 
+@doc("Stop on no connect enable or disable status.")
+@added(APIVersions.v2024_10_01_preview)
+union StopOnNoConnectEnableStatus {
+  @doc("Stop on no connect is enabled on the Dev Box.")
+  Enabled: "Enabled",
+
+  @doc("Stop on no connect is not enabled on the Dev Box.")
+  Disabled: "Disabled",
+
+  string,
+}
+
 @doc("Pool status indicating whether a pool is available to create Dev Boxes.")
 union PoolHealthStatus {
   @doc("The pool health status is not known.")
@@ -355,6 +367,14 @@ union DevBoxOperationKind {
   @doc("The operation represents a Dev Box repair.")
   Repair: "Repair",
 
+  @doc("The operation represents a Dev Box restore from snapshot.")
+  @added(APIVersions.v2024_09_01_preview)
+  RestoreSnapshot: "RestoreSnapshot",
+
+  @doc("The operation represents a Dev Box manual snapshot creation.")
+  @added(APIVersions.v2024_10_01_preview)
+  CaptureSnapshot: "CaptureSnapshot",
+
   string,
 }
 
@@ -369,6 +389,18 @@ union DevBoxRepairOutcome {
 
   @doc("The service did not identify any issues on the Dev Box.")
   NoIssuesDetected: "NoIssuesDetected",
+
+  string,
+}
+
+@doc("The type of snapshot.")
+@added(APIVersions.v2024_10_01_preview)
+union SnapshotType {
+  @doc("The snapshot type indicates that this is a manually taken snapshot.")
+  Manual: "Manual",
+
+  @doc("The snapshot type indicates that this is an automatically taken snapshot.")
+  Automatic: "Automatic",
 
   string,
 }
@@ -415,6 +447,10 @@ model Pool {
 
   @doc("Stop on disconnect configuration settings for Dev Boxes created in this pool.")
   stopOnDisconnect?: StopOnDisconnectConfiguration;
+
+  @doc("Stop on no connect configuration settings for Dev Boxes created in this pool.")
+  @added(APIVersions.v2024_10_01_preview)
+  stopOnNoConnect?: StopOnNoConnectConfiguration;
 
   @doc("""
     Overall health status of the Pool. Indicates whether or not the Pool is
@@ -476,7 +512,7 @@ model ImageReference {
   @visibility("read")
   osBuildNumber?: string;
 
-  @doc("The datetime that the backing image version was published.")
+  @doc("The datetime that the backing image version was published, in RFC3339 format.")
   @visibility("read")
   publishedDate?: utcDateTime;
 }
@@ -493,6 +529,18 @@ model StopOnDisconnectConfiguration {
     The specified time in minutes to wait before stopping a Dev Box once disconnect
     is detected.
     """)
+  gracePeriodMinutes?: int32;
+}
+
+@doc("Stop on no connect configuration settings for Dev Boxes created in this pool.")
+@added(APIVersions.v2024_10_01_preview)
+model StopOnNoConnectConfiguration {
+  @doc("""
+    Enables the feature to stop a started Dev Box when it has not been connected to, once the grace period has lapsed.
+    """)
+  status: StopOnNoConnectEnableStatus;
+
+  @doc("The specified time in minutes to wait before stopping a Dev Box if no connection is made. This will only be present if stop on no connect is enabled.")
   gracePeriodMinutes?: int32;
 }
 
@@ -623,9 +671,14 @@ model DevBox {
   @visibility("read")
   imageReference?: ImageReference;
 
-  @doc("Creation time of this Dev Box.")
+  @doc("Creation time of this Dev Box, in RFC3339 format.")
   @visibility("read")
   createdTime?: utcDateTime;
+
+  @doc("Last time a user connected to this Dev Box, in RFC3339 format.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  lastConnectedTime?: utcDateTime;
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
   @visibility("read", "create")
@@ -675,7 +728,7 @@ model DevBoxAction {
   @added(APIVersions.v2024_02_01)
   sourceType: DevBoxActionSourceType;
 
-  @doc("The earliest time that the action could occur (UTC).")
+  @doc("The earliest time that the action could occur (UTC), in RFC3339 format.")
   suspendedUntil?: utcDateTime;
 
   @doc("Details about the next run of this action.")
@@ -684,7 +737,7 @@ model DevBoxAction {
 
 @doc("Details about the next run of an action.")
 model DevBoxNextAction {
-  @doc("The time the action will be triggered (UTC).")
+  @doc("The time the action will be triggered (UTC), in RFC3339 format.")
   scheduledTime: utcDateTime;
 }
 
@@ -735,10 +788,10 @@ model DevBoxOperation {
   @doc("The object ID of the actor which initiated the operation.")
   createdByObjectId?: Azure.Core.uuid;
 
-  @doc("he time the operation started.")
+  @doc("he time the operation started, in RFC3339 format.")
   startTime?: utcDateTime;
 
-  @doc("The time the operation finished.")
+  @doc("The time the operation finished, in RFC3339 format.")
   endTime?: utcDateTime;
 
   @doc("Provisioning or operation error details. Populated only for error states.")
@@ -789,8 +842,25 @@ model DevBoxRepairOperationResult {
   message?: string;
 }
 
+@doc("Information about a restore from snapshot operation on a Dev Box.")
+@added(APIVersions.v2024_09_01_preview)
+model DevBoxRestoreSnapshotOperation extends DevBoxOperation {
+  @doc("Specifies the snapshot id that was used for the restore operation.")
+  snapshotId: string;
+
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.RestoreSnapshot;
+}
+
+@doc("Information about a snapshot creation operation on a Dev Box.")
+@added(APIVersions.v2024_10_01_preview)
+model DevBoxCaptureSnapshotOperation extends DevBoxOperation {
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.CaptureSnapshot;
+}
+
 @doc("The Customization Task list result.")
-model CustomizationTaskDefinitionResult
+model PagedCustomizationTaskDefinition
   is Azure.Core.Page<CustomizationTaskDefinition>;
 
 @doc("Represents a task to be used in customizing a Dev Box.")
@@ -879,11 +949,11 @@ model CustomizationTask {
   @visibility("read")
   status?: CustomizationTaskStatus;
 
-  @doc("Start time of the task.")
+  @doc("Start time of the task, in RFC3339 format.")
   @visibility("read")
   startTime?: utcDateTime;
 
-  @doc("End time of the task.")
+  @doc("End time of the task, in RFC3339 format.")
   @visibility("read")
   endTime?: utcDateTime;
 }
@@ -945,11 +1015,36 @@ model CustomizationGroup {
   @visibility("read")
   status?: CustomizationGroupStatus;
 
-  @doc("Start time of the customization group.")
+  @doc("Start time of the customization group, in RFC3339 format.")
   @visibility("read")
   startTime?: utcDateTime;
 
-  @doc("End time of the customization group.")
+  @doc("End time of the customization group, in RFC3339 format.")
   @visibility("read")
   endTime?: utcDateTime;
+}
+
+@added(APIVersions.v2024_09_01_preview)
+@doc("A DevBox snapshot")
+@resource("snapshots")
+@parentResource(DevBox)
+model DevBoxSnapshot {
+  @key("snapshotId")
+  @doc("The id of the snapshot. Should be treated as opaque string.")
+  @visibility("read")
+  snapshotId: string;
+
+  @doc("The datetime that the snapshot was created, in RFC3339 format.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("The datetime when the snapshot expires, will only be shown for a manual snapshot, in RFC3339 format.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  expirationTime?: utcDateTime;
+
+  @doc("The type of the snapshot indicates whether it is manual or automatic.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  snapshotType: SnapshotType;
 }

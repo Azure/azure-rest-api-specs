@@ -76,7 +76,7 @@ The [Azure API Review Board](https://aka.ms/azsdk/onboarding/restapischedule) is
 ## Getting help
 
 - First, please carefully read through this PR description, from top to bottom.
-- If you don't have permissions to remove or add labels to the PR, request `write access` per [aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories](https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories") 
+- If you don't have permissions to remove or add labels to the PR, request `write access` per [aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories](https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories) 
 - To understand what you must do next to merge this PR, see the `Next Steps to Merge` comment. It will appear within few minutes of submitting this PR and will continue to be up-to-date with current PR state.
 - For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
   and https://aka.ms/ci-fix.

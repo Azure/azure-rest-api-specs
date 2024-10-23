@@ -1,7 +1,9 @@
 import "@typespec/versioning";
+import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Versioning;
+using Http;
 
 namespace Azure.OpenAI;
 

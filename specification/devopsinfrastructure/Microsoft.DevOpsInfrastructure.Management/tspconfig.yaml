@@ -1,0 +1,40 @@
+parameters:
+  "service-dir":
+    default: "sdk/devopsinfrastructure"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
+    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
+    arm-resource-flattening: true
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/devopsinfrastructure.json"
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-devopsinfrastructure"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-devopsinfrastructure"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.devopsinfrastructure"
+    service-name: "DevOps Infrastructure"
+  "@azure-tools/cadl-csharp":
+    save-inputs: false
+    clear-output-folder: true
+    namespace: Microsoft.DevOpsInfrastructure
+    model-namespace: false
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    package-dir: "Azure.ResourceManager.DevOpsInfrastructure"
+    namespace: "{package-dir}"

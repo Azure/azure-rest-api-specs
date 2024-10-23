@@ -4120,6 +4120,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseBackupUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -4754,8 +4755,7 @@
           "type": "string",
           "description": "The Oracle Autonomous Database supported character sets.",
           "minLength": 1,
-          "maxLength": 255,
-          "readOnly": true
+          "maxLength": 255
         }
       },
       "required": [
@@ -5046,8 +5046,7 @@
           "type": "string",
           "description": "The Oracle Autonomous Database supported national character sets.",
           "minLength": 1,
-          "maxLength": 255,
-          "readOnly": true
+          "maxLength": 255
         }
       },
       "required": [
@@ -5104,6 +5103,7 @@
         },
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -5400,33 +5400,27 @@
           "type": "string",
           "description": "Supported Autonomous Db versions.",
           "minLength": 1,
-          "maxLength": 255,
-          "readOnly": true
+          "maxLength": 255
         },
         "dbWorkload": {
           "$ref": "#/definitions/WorkloadType",
-          "description": "The Autonomous Database workload type",
-          "readOnly": true
+          "description": "The Autonomous Database workload type"
         },
         "isDefaultForFree": {
           "type": "boolean",
-          "description": "True if this version of the Oracle Database software's default is free.",
-          "readOnly": true
+          "description": "True if this version of the Oracle Database software's default is free."
         },
         "isDefaultForPaid": {
           "type": "boolean",
-          "description": "True if this version of the Oracle Database software's default is paid.",
-          "readOnly": true
+          "description": "True if this version of the Oracle Database software's default is paid."
         },
         "isFreeTierEnabled": {
           "type": "boolean",
-          "description": "True if this version of the Oracle Database software can be used for Always-Free Autonomous Databases.",
-          "readOnly": true
+          "description": "True if this version of the Oracle Database software can be used for Always-Free Autonomous Databases."
         },
         "isPaidEnabled": {
           "type": "boolean",
-          "description": "True if this version of the Oracle Database software has payments enabled.",
-          "readOnly": true
+          "description": "True if this version of the Oracle Database software has payments enabled."
         }
       },
       "required": [
@@ -5937,6 +5931,7 @@
         },
         "properties": {
           "$ref": "#/definitions/CloudExadataInfrastructureUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -6461,6 +6456,7 @@
         },
         "properties": {
           "$ref": "#/definitions/CloudVmClusterUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -7026,122 +7022,100 @@
       "properties": {
         "ocid": {
           "$ref": "#/definitions/Ocid",
-          "description": "DbNode OCID",
-          "readOnly": true
+          "description": "DbNode OCID"
         },
         "additionalDetails": {
           "type": "string",
-          "description": "Additional information about the planned maintenance.",
-          "readOnly": true
+          "description": "Additional information about the planned maintenance."
         },
         "backupIpId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the backup IP address associated with the database node.",
-          "readOnly": true
+          "description": "The OCID of the backup IP address associated with the database node."
         },
         "backupVnic2Id": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the second backup VNIC.",
-          "readOnly": true
+          "description": "The OCID of the second backup VNIC."
         },
         "backupVnicId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the backup VNIC.",
-          "readOnly": true
+          "description": "The OCID of the backup VNIC."
         },
         "cpuCoreCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of CPU cores enabled on the Db node.",
-          "readOnly": true
+          "description": "The number of CPU cores enabled on the Db node."
         },
         "dbNodeStorageSizeInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The allocated local node storage in GBs on the Db node.",
-          "readOnly": true
+          "description": "The allocated local node storage in GBs on the Db node."
         },
         "dbServerId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the Exacc Db server associated with the database node.",
-          "readOnly": true
+          "description": "The OCID of the Exacc Db server associated with the database node."
         },
         "dbSystemId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the DB system.",
-          "readOnly": true
+          "description": "The OCID of the DB system."
         },
         "faultDomain": {
           "type": "string",
           "description": "The name of the Fault Domain the instance is contained in.",
           "minLength": 1,
-          "maxLength": 255,
-          "readOnly": true
+          "maxLength": 255
         },
         "hostIpId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the host IP address associated with the database node.",
-          "readOnly": true
+          "description": "The OCID of the host IP address associated with the database node."
         },
         "hostname": {
           "type": "string",
-          "description": "The host name for the database node.",
-          "readOnly": true
+          "description": "The host name for the database node."
         },
         "lifecycleState": {
           "$ref": "#/definitions/DbNodeProvisioningState",
-          "description": "The current state of the database node.",
-          "readOnly": true
+          "description": "The current state of the database node."
         },
         "lifecycleDetails": {
           "type": "string",
-          "description": "Lifecycle details of Db Node.",
-          "readOnly": true
+          "description": "Lifecycle details of Db Node."
         },
         "maintenanceType": {
           "$ref": "#/definitions/DbNodeMaintenanceType",
-          "description": "The type of database node maintenance.",
-          "readOnly": true
+          "description": "The type of database node maintenance."
         },
         "memorySizeInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The allocated memory in GBs on the Db node.",
-          "readOnly": true
+          "description": "The allocated memory in GBs on the Db node."
         },
         "softwareStorageSizeInGb": {
           "type": "integer",
           "format": "int32",
-          "description": "The size (in GB) of the block storage volume allocation for the DB system. This attribute applies only for virtual machine DB systems.",
-          "readOnly": true
+          "description": "The size (in GB) of the block storage volume allocation for the DB system. This attribute applies only for virtual machine DB systems."
         },
         "timeCreated": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time that the database node was created.",
-          "readOnly": true
+          "description": "The date and time that the database node was created."
         },
         "timeMaintenanceWindowEnd": {
           "type": "string",
           "format": "date-time",
-          "description": "End date and time of maintenance window.",
-          "readOnly": true
+          "description": "End date and time of maintenance window."
         },
         "timeMaintenanceWindowStart": {
           "type": "string",
           "format": "date-time",
-          "description": "Start date and time of maintenance window.",
-          "readOnly": true
+          "description": "Start date and time of maintenance window."
         },
         "vnic2Id": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the second VNIC.",
-          "readOnly": true
+          "description": "The OCID of the second VNIC."
         },
         "vnicId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the VNIC.",
-          "readOnly": true
+          "description": "The OCID of the VNIC."
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -7151,7 +7125,10 @@
       },
       "required": [
         "ocid",
-        "dbSystemId"
+        "dbSystemId",
+        "lifecycleState",
+        "timeCreated",
+        "vnicId"
       ]
     },
     "DbNodeProvisioningState": {
@@ -7546,122 +7523,102 @@
           "type": "string",
           "description": "The family of the shape used for the DB system.",
           "minLength": 1,
-          "maxLength": 255,
-          "readOnly": true
+          "maxLength": 255
         },
         "availableCoreCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of CPU cores that can be enabled on the DB system for this shape.",
-          "readOnly": true
+          "description": "The maximum number of CPU cores that can be enabled on the DB system for this shape."
         },
         "minimumCoreCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of CPU cores that can be enabled on the DB system for this shape.",
-          "readOnly": true
+          "description": "The minimum number of CPU cores that can be enabled on the DB system for this shape."
         },
         "runtimeMinimumCoreCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The runtime minimum number of CPU cores that can be enabled on the DB system for this shape.",
-          "readOnly": true
+          "description": "The runtime minimum number of CPU cores that can be enabled on the DB system for this shape."
         },
         "coreCountIncrement": {
           "type": "integer",
           "format": "int32",
-          "description": "The discrete number by which the CPU core count for this shape can be increased or decreased.",
-          "readOnly": true
+          "description": "The discrete number by which the CPU core count for this shape can be increased or decreased."
         },
         "minStorageCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of Exadata storage servers available for the Exadata infrastructure.",
-          "readOnly": true
+          "description": "The minimum number of Exadata storage servers available for the Exadata infrastructure."
         },
         "maxStorageCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of Exadata storage servers available for the Exadata infrastructure.",
-          "readOnly": true
+          "description": "The maximum number of Exadata storage servers available for the Exadata infrastructure."
         },
         "availableDataStoragePerServerInTbs": {
           "type": "number",
           "format": "double",
-          "description": "The maximum data storage available per storage server for this shape. Only applicable to ExaCC Elastic shapes.",
-          "readOnly": true
+          "description": "The maximum data storage available per storage server for this shape. Only applicable to ExaCC Elastic shapes."
         },
         "availableMemoryPerNodeInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum memory available per database node for this shape. Only applicable to ExaCC Elastic shapes.",
-          "readOnly": true
+          "description": "The maximum memory available per database node for this shape. Only applicable to ExaCC Elastic shapes."
         },
         "availableDbNodePerNodeInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum Db Node storage available per database node for this shape. Only applicable to ExaCC Elastic shapes.",
-          "readOnly": true
+          "description": "The maximum Db Node storage available per database node for this shape. Only applicable to ExaCC Elastic shapes."
         },
         "minCoreCountPerNode": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of CPU cores that can be enabled per node for this shape.",
-          "readOnly": true
+          "description": "The minimum number of CPU cores that can be enabled per node for this shape."
         },
         "availableMemoryInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum memory that can be enabled for this shape.",
-          "readOnly": true
+          "description": "The maximum memory that can be enabled for this shape."
         },
         "minMemoryPerNodeInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum memory that need be allocated per node for this shape.",
-          "readOnly": true
+          "description": "The minimum memory that need be allocated per node for this shape."
         },
         "availableDbNodeStorageInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum Db Node storage that can be enabled for this shape.",
-          "readOnly": true
+          "description": "The maximum Db Node storage that can be enabled for this shape."
         },
         "minDbNodeStoragePerNodeInGbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum Db Node storage that need be allocated per node for this shape.",
-          "readOnly": true
+          "description": "The minimum Db Node storage that need be allocated per node for this shape."
         },
         "availableDataStorageInTbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum DATA storage that can be enabled for this shape.",
-          "readOnly": true
+          "description": "The maximum DATA storage that can be enabled for this shape."
         },
         "minDataStorageInTbs": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum data storage that need be allocated for this shape.",
-          "readOnly": true
+          "description": "The minimum data storage that need be allocated for this shape."
         },
         "minimumNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of database nodes available for this shape.",
-          "readOnly": true
+          "description": "The minimum number of database nodes available for this shape."
         },
         "maximumNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of database nodes available for this shape.",
-          "readOnly": true
+          "description": "The maximum number of database nodes available for this shape."
         },
         "availableCoreCountPerNode": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of CPU cores per database node that can be enabled for this shape. Only applicable to the flex Exadata shape and ExaCC Elastic shapes.",
-          "readOnly": true
+          "description": "The maximum number of CPU cores per database node that can be enabled for this shape. Only applicable to the flex Exadata shape and ExaCC Elastic shapes."
         }
       },
       "required": [
@@ -7759,40 +7716,33 @@
       "properties": {
         "ocid": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the view",
-          "readOnly": true
+          "description": "The OCID of the view"
         },
         "displayName": {
           "type": "string",
-          "description": "The display name of the view resource",
-          "readOnly": true
+          "description": "The display name of the view resource"
         },
         "isProtected": {
           "type": "boolean",
-          "description": "A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.",
-          "readOnly": true
+          "description": "A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed."
         },
         "lifecycleState": {
           "$ref": "#/definitions/DnsPrivateViewsLifecycleState",
-          "description": "Views lifecycleState",
-          "readOnly": true
+          "description": "Views lifecycleState"
         },
         "self": {
           "type": "string",
-          "description": "The canonical absolute URL of the resource.",
-          "readOnly": true
+          "description": "The canonical absolute URL of the resource."
         },
         "timeCreated": {
           "type": "string",
           "format": "date-time",
-          "description": "views timeCreated",
-          "readOnly": true
+          "description": "views timeCreated"
         },
         "timeUpdated": {
           "type": "string",
           "format": "date-time",
-          "description": "views timeCreated",
-          "readOnly": true
+          "description": "views timeUpdated"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -7802,7 +7752,9 @@
       },
       "required": [
         "ocid",
+        "displayName",
         "isProtected",
+        "lifecycleState",
         "self",
         "timeCreated",
         "timeUpdated"
@@ -7887,50 +7839,41 @@
       "properties": {
         "ocid": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the Zone",
-          "readOnly": true
+          "description": "The OCID of the Zone"
         },
         "isProtected": {
           "type": "boolean",
-          "description": "A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.",
-          "readOnly": true
+          "description": "A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed."
         },
         "lifecycleState": {
           "$ref": "#/definitions/DnsPrivateZonesLifecycleState",
-          "description": "Zones lifecycleState",
-          "readOnly": true
+          "description": "Zones lifecycleState"
         },
         "self": {
           "type": "string",
-          "description": "The canonical absolute URL of the resource.",
-          "readOnly": true
+          "description": "The canonical absolute URL of the resource."
         },
         "serial": {
           "type": "integer",
           "format": "int32",
-          "description": "The current serial of the zone. As seen in the zone's SOA record.",
-          "readOnly": true
+          "description": "The current serial of the zone. As seen in the zone's SOA record."
         },
         "version": {
           "type": "string",
-          "description": "Version is the never-repeating, totally-orderable, version of the zone, from which the serial field of the zone's SOA record is derived.",
-          "readOnly": true
+          "description": "Version is the never-repeating, totally-orderable, version of the zone, from which the serial field of the zone's SOA record is derived."
         },
         "viewId": {
           "$ref": "#/definitions/Ocid",
-          "description": "The OCID of the private view containing the zone. This value will be null for zones in the global DNS, which are publicly resolvable and not part of a private view.",
-          "readOnly": true
+          "description": "The OCID of the private view containing the zone. This value will be null for zones in the global DNS, which are publicly resolvable and not part of a private view."
         },
         "zoneType": {
           "$ref": "#/definitions/ZoneType",
-          "description": "The type of the zone. Must be either PRIMARY or SECONDARY. SECONDARY is only supported for GLOBAL zones.",
-          "readOnly": true
+          "description": "The type of the zone. Must be either PRIMARY or SECONDARY. SECONDARY is only supported for GLOBAL zones."
         },
         "timeCreated": {
           "type": "string",
           "format": "date-time",
-          "description": "Zones timeCreated",
-          "readOnly": true
+          "description": "Zones timeCreated"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -7941,6 +7884,7 @@
       "required": [
         "ocid",
         "isProtected",
+        "lifecycleState",
         "self",
         "serial",
         "version",
@@ -8145,8 +8089,7 @@
           "type": "string",
           "description": "A valid Oracle Grid Infrastructure (GI) software version.",
           "minLength": 1,
-          "maxLength": 255,
-          "readOnly": true
+          "maxLength": 255
         }
       },
       "required": [
@@ -8730,6 +8673,7 @@
         },
         "properties": {
           "$ref": "#/definitions/OracleSubscriptionUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -9445,8 +9389,7 @@
       "properties": {
         "systemVersion": {
           "type": "string",
-          "description": "A valid Oracle System Version",
-          "readOnly": true
+          "description": "A valid Oracle System Version"
         }
       },
       "required": [

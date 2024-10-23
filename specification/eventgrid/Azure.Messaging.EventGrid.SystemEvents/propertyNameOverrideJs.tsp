@@ -45,10 +45,7 @@ using Microsoft.EventGrid.SystemEvents;
   "toCommunicationIdentifier",
   "javascript"
 );
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "javascript"
-);
+
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "javascript"
@@ -65,10 +62,7 @@ using Microsoft.EventGrid.SystemEvents;
   "summaryReportBlobUri",
   "javascript"
 );
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "javascript"
-);
+
 @@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
   "javascript"
