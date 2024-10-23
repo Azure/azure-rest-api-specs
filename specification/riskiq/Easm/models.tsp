@@ -621,7 +621,7 @@ model PolicyData {
   action: PolicyAction;
 
   @doc("Additional parameters needed to perform the policy action.")
-  actionParameters?: ActionParameters;
+  actionParameters: ActionParameters;
 }
 
 @doc("This is an object that exists to provide a common schema definition for the action parameters.")
@@ -632,7 +632,7 @@ model ActionParameters {
   for further information please refer to documentation here:
   https://learn.microsoft.com/en-us/azure/external-attack-surface-management/policy-engine
   """)
-  value: string;
+  value?: string;
 }
 
 @doc("This is an object that exists to provide a common schema definition for the policy response.")
