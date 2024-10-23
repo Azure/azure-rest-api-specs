@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Edge
-  output-folder: $(csharp-sdks-folder)/edgeresourceInsights/management/Microsoft.Edge/GeneratedProtocol
+  namespace: [[ResourceProviderName]]
+  output-folder: $(csharp-sdks-folder)/resourceInsights/management/[[ResourceProviderName]]/GeneratedProtocol
 ```

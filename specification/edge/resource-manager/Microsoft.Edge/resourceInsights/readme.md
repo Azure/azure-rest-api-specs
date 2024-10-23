@@ -1,8 +1,8 @@
-# edge
+# resourceInsights
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for edge.
+This is the AutoRest configuration file for resourceInsights.
 
 ## Getting Started
 
@@ -22,21 +22,46 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the edge.
+These are the global settings for the resourceInsights.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
-tag: resourceInsights-package-2024-10-01-preview
+openapi-subtype: rpaas
+tag: package-2024-09-01-preview
 ```
 
-### Tag: resourceInsights-package-2024-10-01-preview
+### Tag: package-2024-09-01-preview
 
-These settings apply only when `--tag=resourceInsights-package-2024-10-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-09-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'resourceInsights-package-2024-10-01-preview'
+```yaml $(tag) == 'package-2024-09-01-preview'
 input-file:
-  - preview/2024-10-01-preview/resourceInsights.json
+  - preview/2024-09-01-preview/resourceInsights.json
+```
+
+### Tag: package-2024-06-01-preview
+
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-01-preview'
+input-file:
+  - preview/2024-06-01-preview/resourceInsights.json
+```
+
+---
+
+---
+## Suppression
+```yaml
+directive:
+  - suppress: ResourceProvisioningState
+    reason: ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG @azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state
+    from:
+      - resourceInsights.json
+  - suppress: OperationsAPIImplementation
+    from: 
+      - resourceInsights.json
+    reason: RP is in Public and PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
 ```
 ---
 
@@ -49,13 +74,13 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-powershell
 ```
 ## Az
 
@@ -76,12 +101,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-### Suppress Operations API Implemented exception
-
- For operations API, we have defined it in a common folder "edge" under the RP. We don't have it in individual specs file for resources since we need partial manifest rollout. Hence the swagger has been split for each resource but operations API is at a common place here -- azure-rest-api-specs-pr\specification\edge\resource-manager\Microsoft.Edge\edge\preview\2023-07-01-preview\operations.json
-
-``` yaml
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP.

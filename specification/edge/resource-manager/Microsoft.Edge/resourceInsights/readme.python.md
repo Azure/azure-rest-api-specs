@@ -16,3 +16,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/resourceInsights/azure-mgmt-resourceInsights/azure/mgmt/resourceInsights
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```
