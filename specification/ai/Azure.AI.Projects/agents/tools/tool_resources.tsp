@@ -72,7 +72,7 @@ model FileSearchToolResource {
   @maxItems(1)
   @encodedName("application/json", "vector_store_ids")
   vectorStoreIds?: string[];
-  
+
   @maxItems(1)
   @encodedName("application/json", "vector_stores")
   vectorStores?: VectorStoreFromAzure[]; 
