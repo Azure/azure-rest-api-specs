@@ -16,12 +16,13 @@ using Azure.Core;
 op StorageOperation<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
+  MediaType extends string = "application/xml",
   TError = StorageError
 >(
   /** Content-Type header */
   #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
   @header("Content-Type")
-  contentType: "application/xml",
+  contentType: MediaType,
 
   /** Specifies the version of the operation to use for this request. */
   @header("x-ms-version")
@@ -33,7 +34,7 @@ op StorageOperation<
   /** Content-Type header */
   #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
   @header("Content-Type")
-  contentType: "application/xml";
+  contentType: MediaType;
 
   /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
   @header("x-ms-version")
@@ -1401,6 +1402,7 @@ interface PageBlob {
       ...BlobSequenceNumberParameter;
       ...BlobTagsHeaderParameter;
       ...ImmutabilityPolicyExpiryParameter;
+      ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
     },
     {
@@ -1413,22 +1415,25 @@ interface PageBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Upload Pages operation writes a range of pages to a page blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=page&update")
   uploadPages is StorageOperation<
     {
+      ...ContainerNameParameter;
+      ...BlobNameParameter;
+
       /** The data to upload. */
       ...BodyParameter;
 
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
       ...ContentLengthParameter;
       ...ContentMd5Parameter;
       ...ContentCrc64Parameter;
@@ -1456,7 +1461,8 @@ interface PageBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Clear Pages operation clears a range of pages from a page blob */
@@ -1473,6 +1479,10 @@ interface PageBlob {
       ...TimeoutParameter;
       ...RangeParameter;
       ...LeaseIdOptionalParameter;
+      ...EncryptionKeyParameter;
+      ...EncryptionKeySha256Parameter;
+      ...EncryptionAlgorithmParameter;
+      ...EncryptionScopeParameter;
       ...IfSequenceNumberLessThanOrEqualToParameter;
       ...IfSequenceNumberLessThanParameter;
       ...IfSequenceNumberEqualToParameter;
@@ -1483,9 +1493,12 @@ interface PageBlob {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
+      ...ContentMd5ResponseHeader;
+      ...ContentCrc64ResponseHeader;
       ...BlobSequenceNumberResponseHeader;
       ...DateResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL. */
@@ -1497,12 +1510,12 @@ interface PageBlob {
     {
       ...ContainerNameParameter;
       ...BlobNameParameter;
-      ...TimeoutParameter;
-      ...ContentLengthParameter;
       ...SourceUrlParameter;
       ...SourceRangeRequiredPutPageFromUrlParameter;
       ...SourceContentMd5Parameter;
       ...SourceContentCrc64Parameter;
+      ...ContentLengthParameter;
+      ...TimeoutParameter;
       ...RangeRequiredPutPageFromUrlParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
@@ -1521,17 +1534,18 @@ interface PageBlob {
       ...CopySourceAuthorizationParameter;
     },
     {
-      @statusCode statusCode: 202;
+      @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeader;
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...BlobSequenceNumberResponseHeader;
+      ...DateResponseHeader;
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
@@ -1543,6 +1557,7 @@ interface PageBlob {
       ...ContainerNameParameter;
       ...BlobNameParameter;
       ...SnapshotParameter;
+      ...TimeoutParameter;
       ...RangeParameter;
       ...LeaseIdOptionalParameter;
       ...ConditionalRequestHeaders;
@@ -1650,7 +1665,6 @@ interface PageBlob {
       ...TimeoutParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
-      ...LeaseIdOptionalParameter;
       ...CopySourceParameter;
     },
     {

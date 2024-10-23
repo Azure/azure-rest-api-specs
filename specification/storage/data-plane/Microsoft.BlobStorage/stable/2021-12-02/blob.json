@@ -4999,6 +4999,40 @@
             "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
+            "name": "x-ms-immutability-policy-mode",
+            "in": "header",
+            "description": "Specifies the immutability policy mode to set on the blob.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Mutable",
+              "Locked",
+              "Unlocked"
+            ],
+            "x-ms-enum": {
+              "name": "BlobImmutabilityPolicyMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Mutable",
+                  "value": "Mutable",
+                  "description": "The immutability policy is mutable."
+                },
+                {
+                  "name": "Locked",
+                  "value": "Locked",
+                  "description": "The immutability policy is locked."
+                },
+                {
+                  "name": "Unlocked",
+                  "value": "Unlocked",
+                  "description": "The immutability policy is unlocked."
+                }
+              ]
+            },
+            "x-ms-client-name": "immutabilityPolicyMode"
+          },
+          {
             "name": "x-ms-legal-hold",
             "in": "header",
             "description": "Specified if a legal hold should be set on the blob.",
@@ -5078,7 +5112,7 @@
         "operationId": "PageBlob_UploadPages",
         "description": "The Upload Pages operation writes a range of pages to a page blob",
         "consumes": [
-          "application/xml"
+          "application/octet-stream"
         ],
         "parameters": [
           {
@@ -5380,6 +5414,38 @@
             "x-ms-client-name": "leaseId"
           },
           {
+            "name": "x-ms-encryption-key",
+            "in": "header",
+            "description": "Optional.  Version 2019-07-07 and later.  Specifies the encryption key to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "encryptionKey"
+          },
+          {
+            "name": "x-ms-encryption-key-sha256",
+            "in": "header",
+            "description": "Optional.  Version 2019-07-07 and later.  Specifies the SHA256 hash of the encryption key used to encrypt the data provided in the request. This header is only used for encryption with a customer-provided key. If the request is authenticated with a client token, this header should be specified using the SHA256 hash of the encryption key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "encryptionKeySha256"
+          },
+          {
+            "name": "x-ms-encryption-algorithm",
+            "in": "header",
+            "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "encryptionAlgorithm"
+          },
+          {
+            "name": "x-ms-encryption-scope",
+            "in": "header",
+            "description": "Optional.  Version 2019-07-07 and later.  Specifies the encryption scope to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "encryptionScope"
+          },
+          {
             "name": "x-ms-if-sequence-number-le",
             "in": "header",
             "description": "Specify this header value to operate only on a blob if it has a sequence number less than or equal to the specified.",
@@ -5434,6 +5500,10 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
+              "Content-MD5": {
+                "type": "string",
+                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
+              },
               "Date": {
                 "type": "string",
                 "format": "date-time-rfc1123",
@@ -5457,6 +5527,10 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-content-crc64": {
+                "type": "string",
+                "description": "This response header is returned so that the client can check for the integrity of the copied content."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -5509,23 +5583,6 @@
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
           },
           {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "Content-Length",
-            "in": "header",
-            "description": "The length of the request.",
-            "required": true,
-            "type": "integer",
-            "format": "int64",
-            "x-ms-client-name": "contentLength"
-          },
-          {
             "name": "x-ms-source-url",
             "in": "header",
             "description": "Specify a URL to the copy source.",
@@ -5556,6 +5613,23 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "sourceContentCrc64"
+          },
+          {
+            "name": "Content-Length",
+            "in": "header",
+            "description": "The length of the request.",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "x-ms-client-name": "contentLength"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "x-ms-range",
@@ -5699,8 +5773,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
               "Content-MD5": {
                 "type": "string",
@@ -5808,6 +5882,14 @@
             "type": "string"
           },
           {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "name": "x-ms-range",
             "in": "header",
             "description": "Return only the bytes of the blob in the specified range.",
@@ -5910,6 +5992,9 @@
               "$ref": "#/definitions/StorageError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextMarker"
         }
       }
     },
@@ -6080,6 +6165,9 @@
               "$ref": "#/definitions/StorageError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextMarker"
         }
       }
     },
@@ -6460,14 +6548,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-lease-id",
-            "in": "header",
-            "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "leaseId"
           },
           {
             "name": "x-ms-copy-source",
