@@ -28,7 +28,7 @@ using TypeSpec.Http;
   "Extracts content, layout, and structured data from documents.",
   {
     @doc("The Document Intelligence service endpoint.")
-    endpoint: string,
+    endpoint: url,
   }
 )
 namespace DocumentIntelligence;
@@ -36,6 +36,6 @@ namespace DocumentIntelligence;
 @doc("Service API versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-02-29-preview version of the DocumentIntelligence service.")
-  v2024_02_29_preview: "2024-02-29-preview",
+  @doc("The 2024-07-31-preview version of the DocumentIntelligence service.")
+  v2024_07_31_preview: "2024-07-31-preview",
 }

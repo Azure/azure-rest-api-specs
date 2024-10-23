@@ -291,3 +291,15 @@ model BatchImageGenerationOperationResponse {
   @doc("The error if the operation failed.")
   error?: Foundations.Error;
 }
+
+/**
+ * Get image generation body.
+ */
+@added(ServiceApiVersions.v2023_06_01_Preview)
+model GetImageGenerationsBody {
+  /**
+   * Represents the request data used to generate images.
+   */
+  @bodyRoot
+  body: ImageGenerationOptions;
+}

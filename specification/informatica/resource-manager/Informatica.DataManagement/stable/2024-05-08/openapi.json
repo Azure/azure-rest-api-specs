@@ -1099,6 +1099,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "CdiConfigProps": {
       "type": "object",
       "description": "Informatica CDI Configuration Properties.",
@@ -1344,7 +1349,7 @@
           "description": "Compute Units"
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Tenant ID"
         },
         "subscriptionId": {
@@ -1357,7 +1362,11 @@
         },
         "serverlessArmResourceId": {
           "type": "string",
-          "description": "Serverless Arm Resource ID"
+          "format": "arm-id",
+          "description": "Serverless Arm Resource ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         }
       }
     },
@@ -1433,6 +1442,7 @@
         },
         "singleSignOnUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Single sing on URL for informatica organization"
         }
       }
@@ -1594,7 +1604,6 @@
         }
       },
       "required": [
-        "marketplaceSubscriptionId",
         "offerDetails"
       ]
     },
@@ -1618,11 +1627,19 @@
       "properties": {
         "vnetId": {
           "type": "string",
-          "description": "Virtual network resource id"
+          "format": "arm-id",
+          "description": "Virtual network resource id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "subnetId": {
           "type": "string",
-          "description": "Virtual network subnet resource id"
+          "format": "arm-id",
+          "description": "Virtual network subnet resource id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "vnetResourceGuid": {
           "type": "string",
@@ -1640,11 +1657,19 @@
       "properties": {
         "vnetId": {
           "type": "string",
-          "description": "Virtual network resource id"
+          "format": "arm-id",
+          "description": "Virtual network resource id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "subnetId": {
           "type": "string",
-          "description": "Virtual network subnet resource id"
+          "format": "arm-id",
+          "description": "Virtual network subnet resource id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "vnetResourceGuid": {
           "type": "string",
@@ -1784,7 +1809,11 @@
         },
         "existingResourceId": {
           "type": "string",
-          "description": "Existing Resource Id"
+          "format": "arm-id",
+          "description": "Existing Resource Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         }
       }
     },

@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -26,6 +28,7 @@ alias ContainerRegistryBaseEventData = {
   id?: string;
 
   /** The time at which the event occurred. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   timestamp: utcDateTime;
 
   /** The action that encompasses the provided event. */

@@ -101,8 +101,7 @@ op ReplaceOperation<TResource, TResponse> is RpcOperation<
 
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@doc("New rpc operation allowing multiple repsonses")
-@Foundations.Private.needsRoute
+@doc("New rpc operation allowing multiple responses")
 @head
 op ResourceInfoOperationWithAdditionalResponse<
   TParams extends TypeSpec.Reflection.Model,
@@ -183,7 +182,7 @@ alias FileResponseHeaders = {
 
   @header("Content-Length")
   @doc("The length of the file.")
-  contentLength: int64;
+  contentLength: string;
 
   ...BatchEtagResponseHeaders;
 
@@ -344,6 +343,7 @@ alias BatchCommonListHeaders = {
   @minValue(1)
   @maxValue(1000)
   @clientName("maxPageSize", "java")
+  @clientName("max_results", "python")
   maxresults?: int32 = 1000;
 };
 
@@ -380,7 +380,10 @@ alias BatchClientRequestHeaders = {
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)
   @query
-  @clientName("timeOutInSeconds")
+  @clientName("timeOutInSeconds", "java")
+  @clientName("timeOutInSeconds", "csharp")
+  @clientName("timeOutInSeconds", "javascript")
+  @clientName("timeout", "python")
   timeOut?: int32 = 30;
 
   @doc("""
