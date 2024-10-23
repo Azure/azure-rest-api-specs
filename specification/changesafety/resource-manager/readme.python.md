@@ -6,15 +6,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-changecontrol
-namespace: azure.mgmt.changecontrol
+package-name: azure-mgmt-changeSafety
+namespace: azure.mgmt.changeSafety
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/changecontrol/azure-mgmt-changecontrol/azure/mgmt/changecontrol
+output-folder: $(python-sdks-folder)/changeSafety/azure-mgmt-changeSafety/azure/mgmt/changeSafety
 ```
 
 ``` yaml $(python)

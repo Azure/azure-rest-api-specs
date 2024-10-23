@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: changecontrol
-    namespace: azure.mgmt.changecontrol
-    package-name: azure-mgmt-changecontrol
-az-output-folder: $(azure-cli-extension-folder)/src/changecontrol
-python-sdk-output-folder: "$(az-output-folder)/azext_changecontrol/vendored_sdks/changecontrol"
+    extensions: changesafety
+    namespace: azure.mgmt.changesafety
+    package-name: azure-mgmt-changesafety
+az-output-folder: $(azure-cli-extension-folder)/src/changesafety
+python-sdk-output-folder: "$(az-output-folder)/azext_changesafety/vendored_sdks/changesafety"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_changecontrol/vendored_sdks
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: changecontrol
-  namespace: azure.mgmt.changecontrol
-  package-name: azure-mgmt-changecontrol
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/changecontrol
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/changecontrol"
+  extensions: changesafety
+  namespace: azure.mgmt.changesafety
+  package-name: azure-mgmt-changesafety
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/changesafety
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/changesafety"
 ``` 

@@ -31,11 +31,11 @@ model InlineArmTemplateChangeArtifact extends ChangeArtifact {
 
   @visibility("read", "create")
   @doc("The actual payload content.")
-  artifactPayload: InlineTemplateArtifactContent;
+  artifactPayload: InlineArtifactContent;
 }
 
 /* ChangeArtifact for InlineBicep. */
-@doc("Describes the change payload for InlineArmTemplate or InlineBicep")
+@doc("Describes the change payload for InlineBicep")
 model InlineBicepTemplateChangeArtifact extends ChangeArtifact {
   @visibility("read", "create")
   @doc("The type of the artifact.")
@@ -43,11 +43,11 @@ model InlineBicepTemplateChangeArtifact extends ChangeArtifact {
 
   @visibility("read", "create")
   @doc("The actual payload content.")
-  artifactPayload: InlineTemplateArtifactContent;
+  artifactPayload: InlineArtifactContent;
 }
 
 /* ChangeArtifact for ArmOperation. */
-@doc("Describes the change payload for Kind=Inline & artifactType='ArmOperation'")
+@doc("Describes the change payload for artifactType='ArmOperation'")
 model ArmOperationChangeArtifact extends ChangeArtifact {
   @visibility("read", "create")
   @doc("The type of the artifact.")
@@ -67,7 +67,7 @@ model ExternalArmTemplateChangeArtifact extends ChangeArtifact {
 
   @visibility("read", "create")
   @doc("The actual payload content.")
-  artifactPayload: ExternalArmTemplateArtifactContent;
+  artifactPayload: ExternalArtifactContent;
 }
 
 /* ChangeArtifact for external bicep file.*/
@@ -79,11 +79,11 @@ model ExternalBicepTemplateChangeArtifact extends ChangeArtifact {
 
   @visibility("read", "create")
   @doc("The actual payload content.")
-  artifactPayload: ExternalArmTemplateArtifactContent;
+  artifactPayload: ExternalArtifactContent;
 }
 
 /* ChangeArtifact for TemplateSpec.*/
-@doc("Describes the change payload for Kind=External & artifactType='ArmTemplate' or Bicep.")
+@doc("Describes the change payload for artifactType=External & artifactType='ArmTemplate' or Bicep.")
 model TemplateSpecChangeArtifact extends ChangeArtifact {
   @visibility("read", "create")
   @doc("TemplateSpec Artifact type.")
@@ -96,7 +96,7 @@ model TemplateSpecChangeArtifact extends ChangeArtifact {
 
 /* Various content type definitions, based on the artifactType. */
 @doc("Artifact content model for Inline template or bicep content.")
-model InlineTemplateArtifactContent {
+model InlineArtifactContent {
   @doc("Inline ArmTemplate string or Bicep content.")
   script: string;
 }
@@ -119,8 +119,8 @@ model ArmOperationResource {
   operation: ArmOperation;
 }
 
-@doc("Artifact content model for External ArmTemplates.")
-model ExternalArmTemplateArtifactContent {
+@doc("Artifact content model for External ArmTemplates or Bicep files.")
+model ExternalArtifactContent {
   @doc("URI for the external ARM template or Bicep file.")
   @visibility("read", "create")
   uri: url;

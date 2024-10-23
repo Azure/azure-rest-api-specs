@@ -12,6 +12,7 @@ using Azure.ResourceManager;
 namespace Microsoft.ChangeSafety;
 
 @doc("Resource provides details about stages a deployment goes through.")
+@extensionResource
 model StageMap is ProxyResource<StageMapProperties> {
   @pattern("^[a-zA-Z0-9-]{3,100}$")
   @key("stageMapName")
@@ -64,10 +65,6 @@ model Stage {
   @doc("Stage Map Id.")
   @visibility("read", "create")
   nestedStageMapResourceId?: string;
-
-  @doc("Referenced StageMap snapshot.")
-  @visibility("hidden")
-  stageMapSnapshot?: StageMap;
 }
 
 @armResourceOperations
