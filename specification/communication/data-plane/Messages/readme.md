@@ -62,6 +62,17 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-2024-11-15
+
+These settings apply only when `--tag=package-2024-11-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-15'
+input-file:
+  - stable/2024-11-15/communicationservicesmessages.json
+title:
+  Azure Communication Services
+```
+
 ``` yaml
 suppressions:
   - code: LroExtension
