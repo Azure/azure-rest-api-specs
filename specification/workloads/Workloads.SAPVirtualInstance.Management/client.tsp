@@ -9,6 +9,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
+// interfaces
 @@clientName(Microsoft.Workloads.SAPApplicationServerInstances,
   "SapApplicationServerInstance",
   "java"
@@ -25,6 +26,7 @@ using Azure.ClientGenerator.Core;
   "SapVirtualInstances",
   "java"
 );
+// unions and models
 @@clientName(Microsoft.Workloads.SAPEnvironmentType,
   "SapEnvironmentType",
   "java"
@@ -144,5 +146,25 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.Workloads.SAPVirtualInstanceMetadata,
   "SapVirtualInstanceMetadata",
+  "java"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPVirtualInstanceRequest,
+  "UpdateSapVirtualInstanceRequest",
+  "java"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPVirtualInstanceProperties,
+  "UpdateSapVirtualInstanceProperties",
+  "java"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPCentralInstanceRequest,
+  "UpdateSapCentralInstanceRequest",
+  "java"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPDatabaseInstanceRequest,
+  "UpdateSapDatabaseInstanceRequest",
+  "java"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPApplicationInstanceRequest,
+  "UpdateSapApplicationInstanceRequest",
   "java"
 );
