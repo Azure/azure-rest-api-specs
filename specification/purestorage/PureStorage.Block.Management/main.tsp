@@ -37,6 +37,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v3_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v3_preview: "2024-08-01-preview",
+
+  @doc("Version 4 preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v4_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v4_preview: "2024-10-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -57,6 +63,7 @@ interface Reservations
   ): ArmResponse<LimitDetails> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @added(Versions.v2_preview)
   @doc("Change the marketplace plan of the reservation.")
   @armResourceAction(Reservation)
@@ -151,6 +158,7 @@ model AzureVmwareService {
   @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
   sddcResourceId?: string;
 
+  @removed(Versions.v4_preview)
   @doc("Immutable identifier for the vSpherePlugin provided by Pure Storage. The value is available if the vSpherePlugin has been enabled for the storage pool.")
   vSpherePluginKey?: string;
 }
@@ -178,6 +186,7 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<HealthResponse> | ErrorResponse;
 
+  @removed(Versions.v4_preview)
   @doc("Lists AVS properties for specific Storage Pool.")
   @armResourceAction(StoragePool)
   @action("getAvsParameters")
@@ -205,6 +214,7 @@ interface StoragePools {
   ): ArmResponse<AvsStatus> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Enable AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("enableAvs")
@@ -252,6 +262,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Disable AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("disableAvs")
@@ -291,6 +302,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Finalize AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("finalizeAvs")
@@ -354,6 +366,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Enable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("enableVspherePlugin")
@@ -377,6 +390,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Disable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("disableVspherePlugin")
@@ -396,6 +410,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Upgrade VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("upgradeVspherePlugin")
@@ -474,6 +489,7 @@ model RangeLimits {
   max: int64;
 }
 
+@removed(Versions.v4_preview)
 @doc("AVS (Azure VMware Solution) related properties.")
 model AvsDetails {
   @doc("Flag which tells if the AVS support is enabled.")
@@ -632,6 +648,7 @@ union AlertLevel {
   string,
 }
 
+@removed(Versions.v4_preview)
 @doc("Storage Pool enable AVS")
 model StoragePoolEnableAvs {
   @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
@@ -712,6 +729,7 @@ model StoragePoolFinalizeAvsConnectionPost {
   serviceInitializationData?: ServiceInitializationData;
 }
 
+@removed(Versions.v4_preview)
 @doc("Storage Pool enable VSphere plugins")
 model StoragePoolEnableVspherePlugin {
   @doc("Storage Pool Vsphere IP")
@@ -751,6 +769,7 @@ model AvsStorageContainerProperties {
   @visibility("read")
   resourceName: string;
 
+  @removed(Versions.v4_preview)
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
@@ -758,13 +777,26 @@ model AvsStorageContainerProperties {
   @doc("Maximum amount of bytes that can be provisioned in this storage container. It must be a multiple of 512. Each time a volume is provisioned in this container, its provisionedSize will be counted against the provisionLimit and the provisioning will fail if it goes over (minimum: 1048576 (1Mi), maximum: 4503599627370496 (4Pi)). By default it is unrestricted.")
   @visibility("create", "update", "read")
   provisionedLimit?: int64;
+
+  @added(Versions.v4_preview)
+  @doc("Current VMware datastore associate with this storage container")
+  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
+  @visibility("read")
+  datastore?: string;
+
+  @added(Versions.v4_preview)
+  @doc("Indicates whether the datastore is mounted in the VMware")
+  @visibility("read")
+  mounted?: boolean;
 }
 
 @armResourceOperations
 interface AvsStorageContainers {
+  @removed(Versions.v4_preview)
   create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
   get is ArmResourceRead<AvsStorageContainer>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
+  @removed(Versions.v4_preview)
   update is ArmCustomPatchAsync<
     AvsStorageContainer,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -810,6 +842,7 @@ model VolumeProperties {
   @visibility("read")
   space?: Space;
 
+  @removed(Versions.v4_preview)
   @doc("Name of the Performance Policy applied to the Volume.")
   @visibility("read")
   performancePolicy?: VolumePerformancePolicy;
@@ -818,6 +851,7 @@ model VolumeProperties {
   @visibility("read", "update")
   softDeletion: SoftDeletion;
 
+  @removed(Versions.v4_preview)
   @doc("Consistency Group the Volume belongs to.")
   @visibility("read")
   consistencyGroup?: VolumeConsistencyGroup;
@@ -838,6 +872,7 @@ model VolumeProperties {
   @visibility("read")
   avs?: AvsDiskDetails;
 
+  @removed(Versions.v4_preview)
   @doc("Azure Volume Group assigned to the volume.")
   @visibility("read")
   azure?: AzureProperties;
@@ -847,6 +882,7 @@ model VolumeProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
+@removed(Versions.v4_preview)
 @doc("Name of the Performance Policy applied to the Volume")
 model VolumePerformancePolicy {
   @doc("Resource id of the Performance Policy")
@@ -863,11 +899,13 @@ model SoftDeletion {
   @visibility("read")
   eradicationTimestamp?: string;
 
+  @removed(Versions.v4_preview)
   @doc("Set to the previous volumeResourceId for this volume if destroyed is true, and this used to be a VolumeGroup/Volume, the former Azure resourceId for that VolumeGroup/Volume before it was delete.")
   @visibility("read")
   previousResourceId?: string;
 }
 
+@removed(Versions.v4_preview)
 @doc("Consistency Group the Volume belongs to.")
 model VolumeConsistencyGroup {
   @doc("ID for the Consistency Group the Volume belongs to.")
@@ -877,6 +915,7 @@ model VolumeConsistencyGroup {
 @doc("Volume types.")
 union VolumeType {
   /** Azure Volume Type */
+  @removed(Versions.v4_preview)
   Azure: "azure",
 
   /** AVS Volume Type */
@@ -1021,6 +1060,7 @@ union VmType {
 @doc("Volume container types.")
 union VolumeContainerType {
   /** Azure Volume Container Type */
+  @removed(Versions.v4_preview)
   Azure: "azure",
 
   /** AVS Volume Container Type */
