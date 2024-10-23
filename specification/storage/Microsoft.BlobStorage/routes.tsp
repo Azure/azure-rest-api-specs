@@ -565,13 +565,13 @@ interface Container {
 }
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-@route("/{containerName}/{blob}")
 interface Blob {
   /** The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
+  @route("/{containerName}/{blob}")
   download(
     /** Specifies the version of the operation to use for this request. */
     @header("x-ms-version")
@@ -706,6 +706,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @head
+  @route("/{containerName}/{blob}")
   getProperties(
     /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
     @header("x-ms-version")
@@ -795,6 +796,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
+  @route("/{containerName}/{blob}")
   delete is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -814,11 +816,11 @@ interface Blob {
     }
   >;
 
-  /** "Undelete a blob that was previously soft deleted" */
+  /** Undelete a blob that was previously soft deleted */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-  @route("?comp=undelete")
   @put
+  @route("/{containerName}/{blob}?comp=undelete")
   undelete is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -828,11 +830,11 @@ interface Blob {
     DateResponseHeader
   >;
 
-  /** "Set the expiration time of a blob" */
+  /** Set the expiration time of a blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("?comp=expiry")
+  @route("/{containerName}/{blob}?comp=expiry")
   setExpiry is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -853,7 +855,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=properties&SetHTTPHeaders")
+  @route("/{containerName}/{blob}?comp=properties&SetHTTPHeaders")
   setHttpHeaders is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -877,12 +879,12 @@ interface Blob {
     }
   >;
 
-  /** "Set the immutability policy of a blob" */
+  /** Set the immutability policy of a blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=immutabilityPolicies")
+  @route("/{containerName}/{blob}?comp=immutabilityPolicies")
   setImmutabilityPolicy is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -903,7 +905,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
-  @route("?comp=immutabilityPolicies")
+  @route("/{containerName}/{blob}?comp=immutabilityPolicies")
   deleteImmutabilityPolicy is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -918,7 +920,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=legalhold")
+  @route("/{containerName}/{blob}?comp=legalhold")
   setLegalHold is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -937,7 +939,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=metadata")
+  @route("/{containerName}/{blob}?comp=metadata")
   setMetadata is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -970,7 +972,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&acquire")
+  @route("/{containerName}/{blob}?comp=lease&acquire")
   acquireLease is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -995,7 +997,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&release")
+  @route("/{containerName}/{blob}?comp=lease&release")
   releaseLease is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1017,7 +1019,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&renew")
+  @route("/{containerName}/{blob}?comp=lease&renew")
   renewLease is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1040,7 +1042,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&change")
+  @route("/{containerName}/{blob}?comp=lease&change")
   changeLease is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1063,7 +1065,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("?comp=lease&break")
+  @route("/{containerName}/{blob}?comp=lease&break")
   breakLease is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1086,7 +1088,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("?comp=snapshot")
+  @route("/{containerName}/{blob}?comp=snapshot")
   createSnapshot is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1119,7 +1121,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("?comp=copy")
+  @route("/{containerName}/{blob}?comp=copy")
   startCopyFromUrl is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1164,7 +1166,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("?comp=copy&sync")
+  @route("/{containerName}/{blob}?comp=copy&sync")
   copyFromUrl is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1208,7 +1210,7 @@ interface Blob {
   /** The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @put
-  @route("?comp=copy&copyid")
+  @route("/{containerName}/{blob}?comp=copy&copyid")
   abortCopyFromUrl is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1228,7 +1230,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=tier")
+  @route("/{containerName}/{blob}?comp=tier")
   setTier is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1251,7 +1253,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
-  @route("?restype=account&comp=properties")
+  @route("/{containerName}/{blob}?restype=account&comp=properties")
   getAccountInfo is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1267,7 +1269,7 @@ interface Blob {
   /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @post
-  @route("?comp=query")
+  @route("/{containerName}/{blob}?comp=query")
   query(
     ...ContainerNameParameter,
     ...BlobNameParameter,
@@ -1329,7 +1331,7 @@ interface Blob {
   /** The Get Blob Tags operation enables users to get tags on a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
-  @route("?comp=tags")
+  @route("/{containerName}/{blob}?comp=tags")
   getTags is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -1346,7 +1348,7 @@ interface Blob {
   /** The Set Tags operation enables users to set tags on a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @put
-  @route("?comp=tags")
+  @route("/{containerName}/{blob}?comp=tags")
   setTags is StorageOperation<
     {
       ...ContainerNameParameter;
