@@ -586,18 +586,28 @@ model ApiSourceProperties {
   apimSource?: ApimSource;
 }
 
-@doc("API source configuration for Azure API Management.")
+/**
+ * API source configuration for Azure API Management.
+ */
 model ApimSource {
-  @doc("API Management service resource ID.")
+  /**
+   * API Management service resource ID.
+   */
   resourceId: string;
 
-  @doc("The resource ID of the managed identity that has access to the API Management instance.")
-  msiResourceId?: string[];
+  /**
+   * The resource ID of the managed identity that has access to the API Management instance.
+   */
+  msiResourceId?: string;
 
-  @doc("The target environment resource ID.")
+  /**
+   * The target environment resource ID.
+   */
   targetEnvironmentId?: string;
 
-  @doc("The target lifecycle stage.")
+  /**
+   * The target lifecycle stage.
+   */
   targetLifecycleStage?: LifecycleStage;
 
   /**
@@ -607,14 +617,22 @@ model ApimSource {
   linkState?: LinkState;
 }
 
-@doc("The link state.")
+/**
+ * The link state.
+ */
 model LinkState {
-  @doc("The state of the link.")
+  /**
+   * The state of the link.
+   */
   state?: string;
 
-  @doc("The state message.")
+  /**
+   * The state message.
+   */
   message?: string;
 
-  @doc("The timestamp of the last update of the link state.")
+  /**
+   * The timestamp of the last update of the link state.
+   */
   lastUpdatedOn: utcDateTime;
 }
