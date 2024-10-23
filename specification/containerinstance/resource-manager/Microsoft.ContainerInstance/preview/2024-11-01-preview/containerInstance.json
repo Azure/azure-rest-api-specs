@@ -3760,119 +3760,128 @@
         "properties"
       ],
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/ContainerGroupIdentity",
+          "description": "The identity of the container group, if configured."
+        },
         "properties":{
-          "sku": {
-            "description": "The SKU for a container group.",
-            "$ref": "#/definitions/ContainerGroupSku"
-          },
-          "encryptionProperties": {
-            "description": "The encryption properties for a container group.",
-            "$ref": "#/definitions/EncryptionProperties"
-          },
-          "containers": {
-            "type": "array",
-            "description": "The containers within the container group.",
-            "items": {
-              "$ref": "#/definitions/Container"
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The container group profile properties",
+          "properties":{
+            "sku": {
+              "description": "The SKU for a container group.",
+              "$ref": "#/definitions/ContainerGroupSku"
             },
-            "x-ms-identifiers": [
-              "name"
-            ]
-          },
-          "initContainers": {
-            "type": "array",
-            "description": "The init containers for a container group.",
-            "items": {
-              "$ref": "#/definitions/InitContainerDefinition"
+            "encryptionProperties": {
+              "description": "The encryption properties for a container group.",
+              "$ref": "#/definitions/EncryptionProperties"
             },
-            "x-ms-identifiers": [
-              "name"
-            ]
-          },
-          "extensions": {
-            "type": "array",
-            "description": "extensions used by virtual kubelet",
-            "items": {
-              "$ref": "#/definitions/DeploymentExtensionSpec"
+            "containers": {
+              "type": "array",
+              "description": "The containers within the container group.",
+              "items": {
+                "$ref": "#/definitions/Container"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
-            "x-ms-identifiers": [
-              "name"
-            ]
-          },
-          "imageRegistryCredentials": {
-            "type": "array",
-            "description": "The image registry credentials by which the container group is created from.",
-            "items": {
-              "$ref": "#/definitions/ImageRegistryCredential"
+            "initContainers": {
+              "type": "array",
+              "description": "The init containers for a container group.",
+              "items": {
+                "$ref": "#/definitions/InitContainerDefinition"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
-            "x-ms-identifiers": [
-              "username"
-            ]
-          },
-          "restartPolicy": {
-            "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
-            "$ref": "#/definitions/ContainerGroupRestartPolicy"
-          },
-          "shutdownGracePeriod": {
-            "description": "Shutdown grace period for containers in a container group.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "ipAddress": {
-            "description": "The IP address type of the container group.",
-            "$ref": "#/definitions/IpAddress"
-          },
-          "timeToLive": {
-            "description": "Post completion time to live for containers of a CG",
-            "type": "string",
-            "format": "date-time"
-          },
-          "osType": {
-            "description": "The operating system type required by the containers in the container group.",
-            "$ref": "#/definitions/OSType"
-          },
-          "volumes": {
-            "type": "array",
-            "description": "The list of volumes that can be mounted by containers in this container group.",
-            "items": {
-              "$ref": "#/definitions/Volume"
+            "extensions": {
+              "type": "array",
+              "description": "extensions used by virtual kubelet",
+              "items": {
+                "$ref": "#/definitions/DeploymentExtensionSpec"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
-            "x-ms-identifiers": [
-              "name"
-            ]
-          },
-          "diagnostics": {
-            "description": "The diagnostic information for a container group.",
-            "$ref": "#/definitions/ContainerGroupDiagnostics"
-          },
-          "priority": {
-            "description": "The priority of the container group.",
-            "$ref": "#/definitions/Priority"
-          },
-          "confidentialComputeProperties": {
-            "description": "The properties for confidential container group",
-            "$ref": "#/definitions/ConfidentialComputeProperties"
-          },
-          "securityContext": {
-            "description": "The container security properties.",
-            "$ref": "#/definitions/SecurityContextDefinition"
-          },
-          "revision": {
-            "description": "Container group profile current revision number",
-            "type": "integer",
-            "format": "int64"
-          },
-          "registeredRevisions": {
-            "type": "array",
-            "items": {
+            "imageRegistryCredentials": {
+              "type": "array",
+              "description": "The image registry credentials by which the container group is created from.",
+              "items": {
+                "$ref": "#/definitions/ImageRegistryCredential"
+              },
+              "x-ms-identifiers": [
+                "username"
+              ]
+            },
+            "restartPolicy": {
+              "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
+              "$ref": "#/definitions/ContainerGroupRestartPolicy"
+            },
+            "shutdownGracePeriod": {
+              "description": "Shutdown grace period for containers in a container group.",
+              "type": "string",
+              "format": "date-time"
+            },
+            "ipAddress": {
+              "description": "The IP address type of the container group.",
+              "$ref": "#/definitions/IpAddress"
+            },
+            "timeToLive": {
+              "description": "Post completion time to live for containers of a CG",
+              "type": "string",
+              "format": "date-time"
+            },
+            "osType": {
+              "description": "The operating system type required by the containers in the container group.",
+              "$ref": "#/definitions/OSType"
+            },
+            "volumes": {
+              "type": "array",
+              "description": "The list of volumes that can be mounted by containers in this container group.",
+              "items": {
+                "$ref": "#/definitions/Volume"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "diagnostics": {
+              "description": "The diagnostic information for a container group.",
+              "$ref": "#/definitions/ContainerGroupDiagnostics"
+            },
+            "priority": {
+              "description": "The priority of the container group.",
+              "$ref": "#/definitions/Priority"
+            },
+            "confidentialComputeProperties": {
+              "description": "The properties for confidential container group",
+              "$ref": "#/definitions/ConfidentialComputeProperties"
+            },
+            "securityContext": {
+              "description": "The container security properties.",
+              "$ref": "#/definitions/SecurityContextDefinition"
+            },
+            "revision": {
+              "description": "Container group profile current revision number",
               "type": "integer",
               "format": "int64"
             },
-            "description": "Registered revisions are calculated at request time based off the records in the table logs."
-          },
-          "useKrypton": {
-            "type": "boolean",
-            "description": "Gets or sets Krypton use property."
+            "registeredRevisions": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "description": "Registered revisions are calculated at request time based off the records in the table logs."
+            },
+            "useKrypton": {
+              "type": "boolean",
+              "description": "Gets or sets Krypton use property."
+            }
           }
         }
       }
