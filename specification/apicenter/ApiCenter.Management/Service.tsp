@@ -26,7 +26,11 @@ model Service is TrackedResource<ServiceProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
+
 @@added(Service.sku, Versions.v2024_06_01_preview);
+@@added(Service.location, Versions.v2024_06_01_preview);
+@@added(Service.tags, Versions.v2024_06_01_preview);
+
 
 @armResourceOperations
 interface Services {
@@ -35,7 +39,14 @@ interface Services {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Service>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchSync<Service, ServiceProperties>;
+  update is ArmCustomPatchSync<
+  Service,
+  Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    Service,
+    ServiceProperties
+  >
+ >;
+
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Service>;
   @doc("Returns a collection of services within the resource group.")
