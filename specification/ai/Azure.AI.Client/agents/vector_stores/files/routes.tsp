@@ -52,12 +52,7 @@ op createVectorStoreFile is Azure.Core.Foundations.Operation<
     /** A File ID that the vector store should use. Useful for tools like `file_search` that can access files. */
     @doc("Identifier of the file.")
     @encodedName("application/json", "file_id")
-    fileId?: string;
-
-    /** The data sorces to be used. This option is mutually exclusive with fileId. */
-    @doc("Azure asset ID.")
-    @encodedName("application/json", "data_sources")
-    dataSources?: VectorStorageDataSource[];
+    fileId: string;
 
     /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. */
     @encodedName("application/json", "chunking_strategy")

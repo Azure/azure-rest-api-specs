@@ -87,3 +87,44 @@ model VectorStoreStaticChunkingStrategyResponse
   /** The options for the static chunking strategy. */
   static: VectorStoreStaticChunkingStrategyOptions;
 }
+
+/** Type of vector storage configuration. */
+union VectorStorageDataSourceAssetType {
+  uri_asset: "uri_asset",
+  id_asset: "id_asset"
+}
+
+/**
+ * The structure to be supplied when the vector store is being created from the Azure asset ID.
+ */
+model VectorStorageDataSource {
+  /** Asset URI. */
+  @encodedName("application/json", "uri")
+  storageUri: string;
+  
+  /** The asset type **/
+  @encodedName("application/json", "type")
+  assetType: VectorStorageDataSourceAssetType = VectorStorageDataSourceAssetType.uri_asset;
+}
+
+/**
+ * Vector storage configuration represents the collection of data sources.
+ */
+model VectorStorageConfiguration {
+  /** Data sources */
+  @encodedName("application/json", "data_sources")
+  dataSources: VectorStorageDataSource[]
+}
+
+/**
+ * Vector store, keeping several vector store configurations.
+ */
+model VectorStoreFromAzure {
+  /** Name */
+  @encodedName("application/json", "name")
+  storeName: string;
+
+  /** Configurations */
+  @encodedName("application/json", "configuration")
+  storeConfiguration: VectorStorageConfiguration;
+}
