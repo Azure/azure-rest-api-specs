@@ -8729,29 +8729,6 @@
         "value"
       ]
     },
-    "Recurrence": {
-      "type": "object",
-      "description": "Recurrence Definition",
-      "properties": {
-        "frequency": {
-          "$ref": "#/definitions/Frequency",
-          "description": "The frequency to trigger schedule."
-        },
-        "interval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies schedule interval in conjunction with frequency"
-        },
-        "schedule": {
-          "$ref": "#/definitions/RecurrenceSchedule",
-          "description": "The recurrence schedule."
-        }
-      },
-      "required": [
-        "frequency",
-        "interval"
-      ]
-    },
     "RecurrenceSchedule": {
       "type": "object",
       "description": "RecurrenceSchedule Definition",
@@ -8813,8 +8790,7 @@
       },
       "required": [
         "frequency",
-        "interval",
-        "schedule"
+        "interval"
       ],
       "allOf": [
         {

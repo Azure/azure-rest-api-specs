@@ -102,7 +102,7 @@ model RecurrenceTrigger extends Trigger {
   interval: int32;
 
   @doc("The recurrence schedule.")
-  schedule: RecurrenceSchedule;
+  schedule?: RecurrenceSchedule;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
@@ -177,18 +177,6 @@ union WeekDays {
   Saturday: "Saturday",
   Sunday: "Sunday",
   string,
-}
-
-@doc("Recurrence Definition")
-model Recurrence {
-  @doc("The frequency to trigger schedule.")
-  frequency: Frequency;
-
-  @doc("Specifies schedule interval in conjunction with frequency")
-  interval: int32;
-
-  @doc("The recurrence schedule.")
-  schedule?: RecurrenceSchedule;
 }
 
 @doc("RecurrenceSchedule Definition")
