@@ -14,6 +14,18 @@ using Azure.Core.Foundations;
 namespace Azure.AI.Projects.Connections;
 
 /*
+ See https://learn.microsoft.com/en-us/rest/api/azureml/workspaces/get?view=rest-azureml-2024-07-01-preview
+*/
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@doc("Gets the properties of the specified machine learning workspace.")
+@get
+op getWorkspace is Azure.Core.Foundations.Operation<
+  {
+  },
+  GetWorkspaceResponse
+>;
+
+/*
  See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list?view=rest-azureml-2024-07-01-preview
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -21,7 +33,7 @@ namespace Azure.AI.Projects.Connections;
 @doc("List the details of all the connections (not including their credentials)")
 @route("connections")
 @get
-op list is Azure.Core.Foundations.Operation<
+op listConnections is Azure.Core.Foundations.Operation<
   {
     @query
     @doc("Category of the workspace connection.")
@@ -35,7 +47,7 @@ op list is Azure.Core.Foundations.Operation<
     @doc("Target of the workspace connection.")
     target?: string;
   },
-  ConnectionsListResponse
+  ListConnectionsResponse
 >;
 
 /*
@@ -45,12 +57,12 @@ op list is Azure.Core.Foundations.Operation<
 @doc("Get the details of a single connection, without credentials.")
 @route("connections/{connectionName}")
 @get
-op get is Azure.Core.Foundations.Operation<
+op getConnection is Azure.Core.Foundations.Operation<
   {
     @doc("Connection Name")
     connectionName: string;
   },
-  ConnectionsListSecretsResponse
+  GetConnectionResponse
 >;
 
 /*
@@ -60,7 +72,7 @@ op get is Azure.Core.Foundations.Operation<
 @doc("Get the details of a single connection, including credentials (if available).")
 @route("connections/{connectionName}/listsecrets")
 @post
-op listSecrets is Azure.Core.Foundations.Operation<
+op getConnectionWithSecrets is Azure.Core.Foundations.Operation<
   {
     @doc("Connection Name")
     connectionName: string;
@@ -68,5 +80,5 @@ op listSecrets is Azure.Core.Foundations.Operation<
     @doc("The body is ignored. TODO: Can we remove this?")
     ignored: string;
   },
-  ConnectionsListSecretsResponse
+  GetConnectionResponse
 >;

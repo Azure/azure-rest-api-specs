@@ -14,8 +14,27 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
+@doc("Response from the Workspace - Get operation")
+model GetWorkspaceResponse {
+  @doc("A unique identifier for the resouce")
+  id: string;
+
+  @doc("The name of the resource")
+  name: string;
+
+  @doc("The properties of the resource")
+  properties: WorkspaceProperties;
+}
+
+@doc("workspace properties")
+model WorkspaceProperties {
+
+  @doc("Authentication type of the connection target")
+  applicationInsights: string;
+}
+
 @doc("Response from the listSecrets operation")
-model ConnectionsListSecretsResponse {
+model GetConnectionResponse {
   @doc("A unique identifier for the connection")
   id: string;
 
@@ -27,9 +46,9 @@ model ConnectionsListSecretsResponse {
 }
 
 @doc("Response from the list operation")
-model ConnectionsListResponse {
+model ListConnectionsResponse {
   @doc("A list of connection list secrets")
-  value: ConnectionsListSecretsResponse[];
+  value: GetConnectionResponse[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
