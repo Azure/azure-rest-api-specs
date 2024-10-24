@@ -1,6 +1,8 @@
 [CmdletBinding()]
 param (
   [switch]$CheckAll = $false,
+  [int]$Skip = 0,
+  [int]$Take = 0,
   [switch]$GitClean = $false,
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
@@ -10,7 +12,22 @@ param (
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
 
-$typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -BaseCommitish:$BaseCommitish -TargetCommitish:$TargetCommitish -CheckAll:$CheckAll
+$typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
+  -BaseCommitish:$BaseCommitish `
+  -TargetCommitish:$TargetCommitish `
+  -CheckAll:$CheckAll
+
+if ($Skip -gt 0) {
+  $typespecFolders = $typespecFolders | Select-Object -Skip $Skip
+}
+if ($Take -gt 0) {
+  $typespecFolders = $typespecFolders | Select-Object -First $Take
+}
+
+Write-Host "Checking $($typespecFolders.Count) TypeSpec folders:"
+foreach ($typespecFolder in $typespecFolders) {
+  Write-Host "  $typespecFolder"
+}
 
 $typespecFoldersWithFailures = @()
 if ($typespecFolders) {
