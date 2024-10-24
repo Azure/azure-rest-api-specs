@@ -2989,6 +2989,7 @@ model VirtualMachineScaleSetExtensionProperties {
   /**
    * Specifies the type of the extension; an example is "CustomScriptExtension".
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
   type?: string;
 
   /**
@@ -3009,12 +3010,12 @@ model VirtualMachineScaleSetExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: Record<unknown>;
+  settings?: {};
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: Record<unknown>;
+  protectedSettings?: {};
 
   /**
    * The provisioning state, which only appears in the response.
@@ -5485,6 +5486,7 @@ model VirtualMachineExtensionProperties {
   /**
    * Specifies the type of the extension; an example is "CustomScriptExtension".
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
   type?: string;
 
   /**
@@ -5505,12 +5507,12 @@ model VirtualMachineExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: Record<unknown>;
+  settings?: {};
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: Record<unknown>;
+  protectedSettings?: {};
 
   /**
    * The provisioning state, which only appears in the response.
@@ -5674,12 +5676,12 @@ model VirtualMachineExtensionUpdateProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: Record<unknown>;
+  settings?: {};
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: Record<unknown>;
+  protectedSettings?: {};
 
   /**
    * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
@@ -6365,7 +6367,7 @@ model VirtualMachineCaptureResult extends SubResource {
    * parameters of the captured virtual machine
    */
   @visibility("read")
-  parameters?: Record<unknown>;
+  parameters?: {};
 
   /**
    * a list of resource items of the captured virtual machine
