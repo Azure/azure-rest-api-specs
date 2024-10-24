@@ -529,7 +529,7 @@
         "tags": [
           "TaskHubs"
         ],
-        "description": "Create or update a Task Hub",
+        "description": "Create or Update a Task Hub",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -604,86 +604,6 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "TaskHubs_Update",
-        "tags": [
-          "TaskHubs"
-        ],
-        "description": "Update a Task Hub",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "schedulerName",
-            "in": "path",
-            "description": "The name of the Scheduler",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "taskHubName",
-            "in": "path",
-            "description": "The name of the TaskHub",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TaskHubUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TaskHub"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TaskHubs_Update": {
-            "$ref": "./examples/TaskHubs_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -881,7 +801,7 @@
           "description": "URL of the durable task scheduler",
           "readOnly": true
         },
-        "ipAllowList": {
+        "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
           "items": {
@@ -901,7 +821,7 @@
       "type": "object",
       "description": "Details of the Scheduler",
       "properties": {
-        "ipAllowList": {
+        "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
           "items": {
@@ -1044,21 +964,6 @@
           "readOnly": true
         }
       }
-    },
-    "TaskHubUpdate": {
-      "type": "object",
-      "description": "A Task Hub resource belonging to the scheduler",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TaskHubProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     }
   },
   "parameters": {}

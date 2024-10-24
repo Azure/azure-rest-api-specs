@@ -422,7 +422,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces/{namespaceName}/taskHubs": {
       "get": {
-        "operationId": "TaskHub_ListByNamespace",
+        "operationId": "TaskHubs_ListByNamespace",
         "tags": [
           "TaskHubs"
         ],
@@ -460,6 +460,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "TaskHubs_ListByNamespace": {
+            "$ref": "./examples/TaskHubs_ListByNamespace.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -467,7 +472,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces/{namespaceName}/taskHubs/{taskHubName}": {
       "get": {
-        "operationId": "TaskHub_Get",
+        "operationId": "TaskHubs_Get",
         "tags": [
           "TaskHubs"
         ],
@@ -512,10 +517,15 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Get": {
+            "$ref": "./examples/TaskHubs_Get.json"
+          }
         }
       },
       "put": {
-        "operationId": "TaskHub_CreateOrUpdate",
+        "operationId": "TaskHubs_CreateOrUpdate",
         "tags": [
           "TaskHubs"
         ],
@@ -587,70 +597,18 @@
             }
           }
         },
+        "x-ms-examples": {
+          "TaskHubs_CreateOrUpdate": {
+            "$ref": "./examples/TaskHubs_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "TaskHub_Update",
-        "tags": [
-          "TaskHubs"
-        ],
-        "description": "Update a Task Hub",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the never",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "taskHubName",
-            "in": "path",
-            "description": "The name of the TaskHub",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TaskHubUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TaskHub"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "delete": {
-        "operationId": "TaskHub_DeleteSync",
+        "operationId": "TaskHubs_Delete",
         "tags": [
           "TaskHubs"
         ],
@@ -694,6 +652,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Delete": {
+            "$ref": "./examples/TaskHubs_Delete.json"
           }
         }
       }
@@ -904,21 +867,6 @@
           "readOnly": true
         }
       }
-    },
-    "TaskHubUpdate": {
-      "type": "object",
-      "description": "A Task Hub resource belonging to the namespace",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TaskHubProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     }
   },
   "parameters": {}

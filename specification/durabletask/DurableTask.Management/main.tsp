@@ -57,7 +57,7 @@ model SchedulerProperties {
   endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
-  ipAllowList?: string[];
+  ipAllowlist?: string[];
 
   @doc("SKU of the durable task scheduler")
   sku: SchedulerSku;
@@ -131,10 +131,8 @@ interface Schedulers {
 interface TaskHubs {
   @doc("Get a Task Hub")
   get is ArmResourceRead<TaskHub>;
-  @doc("Create or update a Task Hub")
+  @doc("Create or Update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHub>;
-  @doc("Update a Task Hub")
-  update is ArmResourcePatchAsync<TaskHub, TaskHubProperties>;
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteWithoutOkAsync<TaskHub>;
   @doc("List Task Hubs")
@@ -201,7 +199,7 @@ interface Namespaces {
 }
 
 @removed(Versions.v2024_10_01_Preview)
-@renamedFrom(Versions.v2024_10_01_Preview, "TaskHub")
+@renamedFrom(Versions.v2024_10_01_Preview, "TaskHubs")
 @armResourceOperations(TaskHubUnderNamespace)
 @tag("TaskHubs")
 interface TaskHubsUnderNamespace {
@@ -209,10 +207,8 @@ interface TaskHubsUnderNamespace {
   get is ArmResourceRead<TaskHubUnderNamespace>;
   @doc("Create or update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHubUnderNamespace>;
-  @doc("Update a Task Hub")
-  update is ArmResourcePatchSync<TaskHubUnderNamespace, TaskHubProperties>;
   @doc("Delete a Task Hub")
-  deleteSync is ArmResourceDeleteSync<TaskHubUnderNamespace>;
+  delete is ArmResourceDeleteSync<TaskHubUnderNamespace>;
   @doc("List Task Hubs")
   listByNamespace is ArmResourceListByParent<TaskHubUnderNamespace>;
 }
