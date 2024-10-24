@@ -764,18 +764,33 @@
                 "Suspended",
                 "Ready"
               ],
-              "x-enum-descriptions": [
-                "Container App is transitioning between Stopped and Running states.",
-                "Container App is in Running state",
-                "Container App is in Stopped state",
-                "Container App Job is in Suspended state",
-                "Container App Job is in Ready state"
-              ],
               "type": "string",
               "readOnly": true,
               "x-ms-enum": {
                 "name": "ContainerAppRunningStatus",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Progressing",
+                    "description": "Container App is transitioning between Stopped and Running states."
+                  },
+                  {
+                    "value": "Running",
+                    "description": "Container App is in Running state."
+                  },
+                  {
+                    "value": "Stopped",
+                    "description": "Container App is in Stopped state."
+                  },
+                  {
+                    "value": "Suspended",
+                    "description": "Container App Job is in Suspended state."
+                  },
+                  {
+                    "value": "Ready",
+                    "description": "Container App Job is in Ready state."
+                  }
+                ]
               }
             },
             "deploymentErrors": {
