@@ -24,14 +24,14 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @doc("2024-10-01-preview")
-  v2024_10_01_Preview: "2024-10-01-preview",
+  @doc("2024-02-01-preview")
+  v2024_02_01_Preview: "2024-02-01-preview",
 
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @doc("2024-02-01-preview")
-  v2024_02_01_Preview: "2024-02-01-preview",
+  @doc("2024-10-01-preview")
+  v2024_10_01_Preview: "2024-10-01-preview",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -54,10 +54,10 @@ model SchedulerProperties {
 
   @doc("URL of the durable task scheduler")
   @visibility("read")
-  endpoint: string;
+  endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
-  ipAllowlist: string[];
+  ipAllowList?: string[];
 
   @doc("SKU of the durable task scheduler")
   sku: SchedulerSku;
@@ -126,41 +126,22 @@ interface Schedulers {
   listBySubscription is ArmListBySubscription<Scheduler>;
 }
 
+@added(Versions.v2024_10_01_Preview)
 @armResourceOperations(TaskHub)
 interface TaskHubs {
   @doc("Get a Task Hub")
   get is ArmResourceRead<TaskHub>;
   @doc("Create or update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHub>;
-  // https://azure.github.io/typespec-azure/docs/troubleshoot/versioning_operation_template_changes.
-  // This is a compilation trick for the method type to be updated to the new version.
   @doc("Update a Task Hub")
-  @added(Versions.v2024_10_01_Preview)
-  @sharedRoute
   update is ArmResourcePatchAsync<TaskHub, TaskHubProperties>;
-  @doc("Update a Task Hub")
-  @added(Versions.v2024_02_01_Preview)
-  @removed(Versions.v2024_10_01_Preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2024_10_01_Preview, "update")
-  updateSync is ArmResourcePatchSync<TaskHub, TaskHubProperties>;
-  // https://azure.github.io/typespec-azure/docs/troubleshoot/versioning_operation_template_changes.
-  // This is a compilation trick for the method type to be updated to the new version.
   @doc("Delete a Task Hub")
-  @added(Versions.v2024_10_01_Preview)
-  @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<TaskHub>;
-  @doc("Delete a Task Hub")
-  @added(Versions.v2024_02_01_Preview)
-  @removed(Versions.v2024_10_01_Preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2024_10_01_Preview, "delete")
-  deleteSync is ArmResourceDeleteSync<TaskHub>;
   @doc("List Task Hubs")
   listByScheduler is ArmResourceListByParent<TaskHub>;
 }
 
-// resource specific to the previous version (Private Preview only to be deprecated and not made public)
+// resource specific to the previous version 2024-02-01-preview (Private Preview only to be deprecated and not made public)
 
 @doc("A Durable Task Scheduler namespace resource")
 @added(Versions.v2024_02_01_Preview)
@@ -195,7 +176,6 @@ model NamespaceProperties {
 }
 
 @doc("A Task Hub resource belonging to the namespace")
-@added(Versions.v2024_02_01_Preview)
 @removed(Versions.v2024_10_01_Preview)
 @renamedFrom(Versions.v2024_10_01_Preview, "TaskHub")
 @parentResource(Namespace)
@@ -209,26 +189,30 @@ model TaskHubUnderNamespace
   >;
 }
 
-@added(Versions.v2024_02_01_Preview)
 @removed(Versions.v2024_10_01_Preview)
 @armResourceOperations(Namespace)
 interface Namespaces {
-  // @added(Versions.v2024_02_01_Preview)
-  // @removed(Versions.v2024_10_01_Preview)
   get is ArmResourceRead<Namespace>;
-  // @added(Versions.v2024_02_01_Preview)
-  // @removed(Versions.v2024_10_01_Preview)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
-  // @added(Versions.v2024_02_01_Preview)
-  // @removed(Versions.v2024_10_01_Preview)
   update is ArmResourcePatchAsync<Namespace, NamespaceProperties>;
-  // @added(Versions.v2024_02_01_Preview)
-  // @removed(Versions.v2024_10_01_Preview)
   delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
-  // @added(Versions.v2024_02_01_Preview)
-  // @removed(Versions.v2024_10_01_Preview)
   listByResourceGroup is ArmResourceListByParent<Namespace>;
-  // @added(Versions.v2024_02_01_Preview)
-  // @removed(Versions.v2024_10_01_Preview)
   listBySubscription is ArmListBySubscription<Namespace>;
+}
+
+@removed(Versions.v2024_10_01_Preview)
+@renamedFrom(Versions.v2024_10_01_Preview, "TaskHub")
+@armResourceOperations(TaskHubUnderNamespace)
+@tag("TaskHubs")
+interface TaskHubsUnderNamespace {
+  @doc("Get a Task Hub")
+  get is ArmResourceRead<TaskHubUnderNamespace>;
+  @doc("Create or update a Task Hub")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHubUnderNamespace>;
+  @doc("Update a Task Hub")
+  update is ArmResourcePatchSync<TaskHubUnderNamespace, TaskHubProperties>;
+  @doc("Delete a Task Hub")
+  deleteSync is ArmResourceDeleteSync<TaskHubUnderNamespace>;
+  @doc("List Task Hubs")
+  listByNamespace is ArmResourceListByParent<TaskHubUnderNamespace>;
 }

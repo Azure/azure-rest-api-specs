@@ -75,6 +75,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -107,6 +112,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_ListBySubscription": {
+            "$ref": "./examples/Schedulers_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -144,6 +154,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_ListByResourceGroup": {
+            "$ref": "./examples/Schedulers_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -189,6 +204,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_Get": {
+            "$ref": "./examples/Schedulers_Get.json"
           }
         }
       },
@@ -255,6 +275,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_CreateOrUpdate": {
+            "$ref": "./examples/Schedulers_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -324,6 +349,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Schedulers_Update": {
+            "$ref": "./examples/Schedulers_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -379,6 +409,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Schedulers_Delete": {
+            "$ref": "./examples/Schedulers_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -423,6 +458,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_ListByScheduler": {
+            "$ref": "./examples/TaskHubs_ListByScheduler.json"
           }
         },
         "x-ms-pageable": {
@@ -476,6 +516,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Get": {
+            "$ref": "./examples/TaskHubs_Get.json"
           }
         }
       },
@@ -550,6 +595,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_CreateOrUpdate": {
+            "$ref": "./examples/TaskHubs_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -627,6 +677,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "TaskHubs_Update": {
+            "$ref": "./examples/TaskHubs_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -688,6 +743,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Delete": {
+            "$ref": "./examples/TaskHubs_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -821,7 +881,7 @@
           "description": "URL of the durable task scheduler",
           "readOnly": true
         },
-        "ipAllowlist": {
+        "ipAllowList": {
           "type": "array",
           "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
           "items": {
@@ -834,8 +894,6 @@
         }
       },
       "required": [
-        "endpoint",
-        "ipAllowlist",
         "sku"
       ]
     },
@@ -843,7 +901,7 @@
       "type": "object",
       "description": "Details of the Scheduler",
       "properties": {
-        "ipAllowlist": {
+        "ipAllowList": {
           "type": "array",
           "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
           "items": {
