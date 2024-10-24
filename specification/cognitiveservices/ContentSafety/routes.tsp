@@ -35,6 +35,7 @@ interface TextOperations {
   @doc("A synchronous API for shielding prompt from direct and indirect injection attacks.")
   @route("/text:shieldPrompt")
   @post
+  @removed(ContentSafety.Versions.v2024_09_01)
   shieldPrompt is Azure.Core.RpcOperation<
     {
       @bodyRoot
