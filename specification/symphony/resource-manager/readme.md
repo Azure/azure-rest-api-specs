@@ -41,6 +41,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: toolchainOrchestrator.json
     reason: Service design forces behavior
+  - code: EnumInsteadOfBoolean
+    from: toolchainOrchestrator.json
+    reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
 ```
 
 ### Tag: package-2024-04-01-preview
@@ -54,4 +57,7 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: toolchainOrchestrator.json
     reason: Service design forces behavior
+  - code: EnumInsteadOfBoolean
+    from: toolchainOrchestrator.json
+    reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
 ```
