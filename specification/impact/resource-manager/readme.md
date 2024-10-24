@@ -36,7 +36,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].put
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"].put
 
-  - - code: AvoidAdditionalProperties
+  - code: AvoidAdditionalProperties
     from: impact.json
     where:
       - $.definitions.WorkloadImpactProperties.properties.additionalProperties
