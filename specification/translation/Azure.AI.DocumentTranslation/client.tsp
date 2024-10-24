@@ -43,21 +43,9 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(SingleDocumentTranslationClient.documentTranslate, "translate");
 
-@@clientName(DocumentTranslation.TranslationStatus.summary,
-  "translationStatusSummary"
-);
+@@clientName(DocumentTranslation.StatusSummary, "translationStatusSummary");
 
-@@clientName(DocumentTranslation.Glossary.storageSource,
-  "translationStorageSource"
-);
-
-@@clientName(DocumentTranslation.SourceInput.storageSource,
-  "translationStorageSource"
-);
-
-@@clientName(DocumentTranslation.TargetInput.storageSource,
-  "translationStorageSource"
-);
+@@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
 
 @@clientName(DocumentTranslation.TranslationStatus.id, "translationId");
 
@@ -147,15 +135,12 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.totalCharacterCharged,
+@@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
   "total_characters_charged",
   "python"
 );
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.cancelled,
-  "canceled",
-  "python"
-);
+@@clientName(DocumentTranslation.StatusSummary.cancelled, "canceled", "python");
 
 @@clientName(DocumentTranslation.FileFormat.format, "file_format", "python");
 
@@ -234,37 +219,28 @@ interface SingleDocumentTranslationClient {
   "java"
 );
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.cancelled,
+@@clientName(DocumentTranslation.StatusSummary.cancelled,
   "cancelledCount",
   "java"
 );
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.failed,
-  "failedCount",
-  "java"
-);
+@@clientName(DocumentTranslation.StatusSummary.failed, "failedCount", "java");
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.inProgress,
+@@clientName(DocumentTranslation.StatusSummary.inProgress,
   "inProgressCount",
   "java"
 );
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.notYetStarted,
+@@clientName(DocumentTranslation.StatusSummary.notYetStarted,
   "notYetStartedCount",
   "java"
 );
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.success,
-  "successCount",
-  "java"
-);
+@@clientName(DocumentTranslation.StatusSummary.success, "successCount", "java");
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.total,
-  "totalCount",
-  "java"
-);
+@@clientName(DocumentTranslation.StatusSummary.total, "totalCount", "java");
 
-@@clientName(DocumentTranslation.TranslationStatusSummary.totalCharacterCharged,
+@@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
   "totalCharactersChargedCount",
   "java"
 );

@@ -977,7 +977,7 @@
           "description": "Optional Version.  If not specified, default is used."
         },
         "storageSource": {
-          "$ref": "#/definitions/TranslationStorageSource",
+          "$ref": "#/definitions/StorageSource",
           "description": "Storage Source"
         }
       },
@@ -1030,7 +1030,7 @@
           "description": "Language code\nIf none is specified, we will perform auto detect on the document"
         },
         "storageSource": {
-          "$ref": "#/definitions/TranslationStorageSource",
+          "$ref": "#/definitions/StorageSource",
           "description": "Storage Source"
         }
       },
@@ -1109,6 +1109,56 @@
         ]
       }
     },
+    "StatusSummary": {
+      "type": "object",
+      "description": "Status Summary",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Failed count"
+        },
+        "success": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Success"
+        },
+        "inProgress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of in progress"
+        },
+        "notYetStarted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of not yet started"
+        },
+        "cancelled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cancelled"
+        },
+        "totalCharacterCharged": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total characters charged by the API"
+        }
+      },
+      "required": [
+        "total",
+        "failed",
+        "success",
+        "inProgress",
+        "notYetStarted",
+        "cancelled",
+        "totalCharacterCharged"
+      ]
+    },
     "StorageInputType": {
       "type": "string",
       "description": "Storage type of the input documents source string",
@@ -1129,6 +1179,24 @@
             "name": "File",
             "value": "File",
             "description": "File storage input type"
+          }
+        ]
+      }
+    },
+    "StorageSource": {
+      "type": "string",
+      "description": "Storage Source",
+      "enum": [
+        "AzureBlob"
+      ],
+      "x-ms-enum": {
+        "name": "StorageSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureBlob",
+            "value": "AzureBlob",
+            "description": "Azure blob storage source"
           }
         ]
       }
@@ -1175,7 +1243,7 @@
           "x-ms-identifiers": []
         },
         "storageSource": {
-          "$ref": "#/definitions/TranslationStorageSource",
+          "$ref": "#/definitions/StorageSource",
           "description": "Storage Source"
         }
       },
@@ -1302,7 +1370,7 @@
           "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details."
         },
         "summary": {
-          "$ref": "#/definitions/TranslationStatusSummary",
+          "$ref": "#/definitions/StatusSummary",
           "description": "Status Summary"
         }
       },
@@ -1313,74 +1381,6 @@
         "status",
         "summary"
       ]
-    },
-    "TranslationStatusSummary": {
-      "type": "object",
-      "description": "Status Summary",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total count"
-        },
-        "failed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Failed count"
-        },
-        "success": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of Success"
-        },
-        "inProgress": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of in progress"
-        },
-        "notYetStarted": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Count of not yet started"
-        },
-        "cancelled": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of cancelled"
-        },
-        "totalCharacterCharged": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total characters charged by the API"
-        }
-      },
-      "required": [
-        "total",
-        "failed",
-        "success",
-        "inProgress",
-        "notYetStarted",
-        "cancelled",
-        "totalCharacterCharged"
-      ]
-    },
-    "TranslationStorageSource": {
-      "type": "string",
-      "description": "Translation Storage Source",
-      "enum": [
-        "AzureBlob"
-      ],
-      "x-ms-enum": {
-        "name": "TranslationStorageSource",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureBlob",
-            "value": "AzureBlob",
-            "description": "Azure blob storage source"
-          }
-        ]
-      }
     },
     "TranslationsStatus": {
       "type": "object",

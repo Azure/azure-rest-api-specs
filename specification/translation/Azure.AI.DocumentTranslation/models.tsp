@@ -39,8 +39,8 @@ union FileFormatType {
   string,
 }
 
-@doc("Translation Storage Source")
-union TranslationStorageSource {
+@doc("Storage Source")
+union StorageSource {
   @doc("Azure blob storage source")
   AzureBlob: "AzureBlob",
 
@@ -154,7 +154,7 @@ model SourceInput {
   language?: string;
 
   @doc("Storage Source")
-  storageSource?: TranslationStorageSource;
+  storageSource?: StorageSource;
 }
 
 @doc("Document filter")
@@ -190,7 +190,7 @@ model TargetInput {
   glossaries?: Glossary[];
 
   @doc("Storage Source")
-  storageSource?: TranslationStorageSource;
+  storageSource?: StorageSource;
 }
 
 @doc("Glossary / translation memory for the request")
@@ -212,7 +212,7 @@ model Glossary {
   version?: string;
 
   @doc("Storage Source")
-  storageSource?: TranslationStorageSource;
+  storageSource?: StorageSource;
 }
 
 @doc("""
@@ -331,11 +331,11 @@ model TranslationStatus {
   error?: TranslationError;
 
   @doc("Status Summary")
-  summary: TranslationStatusSummary;
+  summary: StatusSummary;
 }
 
 @doc("Status Summary")
-model TranslationStatusSummary {
+model StatusSummary {
   @doc("Total count")
   total: int32;
 
