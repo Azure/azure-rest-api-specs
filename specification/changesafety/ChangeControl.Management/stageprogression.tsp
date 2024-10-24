@@ -42,7 +42,7 @@ model StageProgressionProperties {
   @visibility("read")
   @doc("The sequence of the stage within the ChangeStage parent resource.")
   @minValue(1)
-  sequence: int32;
+  sequence?: int32;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
