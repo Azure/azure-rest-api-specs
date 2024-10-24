@@ -23,7 +23,7 @@ union Type {
 }
 
 @doc("The target Azure Terraform Provider")
-union TargetTerraformProvider {
+union targetProvider {
   string,
 
   @doc("https://registry.terraform.io/providers/hashicorp/azurerm/latest")
@@ -35,12 +35,12 @@ union TargetTerraformProvider {
 
 @doc("The base export parameter")
 @discriminator("type")
-model CommonExportProperties {
+model BaseExportModel {
   @doc("The parameter type")
   type: Type;
 
   @doc("The target Azure Terraform Provider")
-  targetProvider?: TargetTerraformProvider = TargetTerraformProvider.azurerm;
+  targetProvider?: targetProvider = targetProvider.azurerm;
 
   @doc("Whether to output all non-computed properties in the generated Terraform configuration? This probably needs manual modifications to make it valid")
   fullProperties?: boolean = true;
@@ -50,7 +50,7 @@ model CommonExportProperties {
 }
 
 @doc("Export parameter for resources queried by ARG (Azure Resource Graph)")
-model ExportQuery extends CommonExportProperties {
+model ExportQuery extends BaseExportModel {
   @doc("The ARG where predicate. Note that you can combine multiple conditions in one `where` predicate, e.g. `resourceGroup =~ \"my-rg\" and type =~ \"microsoft.network/virtualnetworks\"`")
   query: string;
 
@@ -65,7 +65,7 @@ model ExportQuery extends CommonExportProperties {
 }
 
 @doc("Export parameter for individual resources.")
-model ExportResource extends CommonExportProperties {
+model ExportResource extends BaseExportModel {
   @doc("The id of the resource to be exported")
   resourceIds: armResourceIdentifier[];
 
@@ -83,7 +83,7 @@ model ExportResource extends CommonExportProperties {
 }
 
 @doc("Export parameter for a resource group")
-model ExportResourceGroup extends CommonExportProperties {
+model ExportResourceGroup extends BaseExportModel {
   @doc("The name of the resource group to be exported")
   resourceGroupName: string;
 

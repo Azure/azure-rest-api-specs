@@ -107,7 +107,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommonExportProperties"
+              "$ref": "#/definitions/BaseExportModel"
             }
           }
         ],
@@ -187,7 +187,7 @@
       },
       "readOnly": true
     },
-    "CommonExportProperties": {
+    "BaseExportModel": {
       "type": "object",
       "description": "The base export parameter",
       "properties": {
@@ -204,7 +204,7 @@
             "azapi"
           ],
           "x-ms-enum": {
-            "name": "TargetTerraformProvider",
+            "name": "targetProvider",
             "modelAsString": true,
             "values": [
               {
@@ -260,7 +260,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CommonExportProperties"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "x-ms-discriminator-value": "ExportQuery"
@@ -298,7 +298,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CommonExportProperties"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "x-ms-discriminator-value": "ExportResource"
@@ -322,7 +322,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CommonExportProperties"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "x-ms-discriminator-value": "ExportResourceGroup"
