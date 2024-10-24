@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-preview-2024-10
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: JavaComponents.json
+    reason: |
+      Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
+```
+
 ### Tag: package-preview-2024-10
 
 These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
