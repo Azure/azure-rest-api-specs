@@ -27,7 +27,7 @@ using TypeSpec.Versioning;
   title: "Azure AI Search",
 })
 @versioned(Versions)
-namespace SearchClient;
+namespace Search;
 
 /**
  * The available API versions.
