@@ -30,6 +30,7 @@ using TypeSpec.Versioning;
 /**
  * Compute Client
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
