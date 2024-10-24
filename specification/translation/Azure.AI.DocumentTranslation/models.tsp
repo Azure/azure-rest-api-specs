@@ -154,7 +154,7 @@ model SourceInput {
   language?: string;
 
   @doc("Storage Source")
-  translationStorageSource?: TranslationStorageSource;
+  storageSource?: TranslationStorageSource;
 }
 
 @doc("Document filter")
@@ -190,7 +190,7 @@ model TargetInput {
   glossaries?: Glossary[];
 
   @doc("Storage Source")
-  translationStorageSource?: TranslationStorageSource;
+  storageSource?: TranslationStorageSource;
 }
 
 @doc("Glossary / translation memory for the request")
@@ -212,7 +212,7 @@ model Glossary {
   version?: string;
 
   @doc("Storage Source")
-  translationStorageSource?: TranslationStorageSource;
+  storageSource?: TranslationStorageSource;
 }
 
 @doc("""
@@ -311,7 +311,7 @@ model TranslationsStatus {
 @doc("Translation job status response")
 model TranslationStatus {
   @doc("Id of the translation operation.")
-  translationId: string;
+  id: string;
 
   @doc("Operation created date time")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -391,7 +391,7 @@ model DocumentStatus {
   progress: float32;
 
   @doc("Document Id")
-  documentId: string;
+  id: string;
 
   @doc("Character charged by the API")
   characterCharged?: int32;

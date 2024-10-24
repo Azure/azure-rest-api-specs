@@ -22,7 +22,7 @@ interface DocumentTranslationOperations {
   @doc("Use this API to submit a single translation request to the Document Translation Service.")
   @route("document:translate")
   @post
-  translate is RpcOperation<
+  documentTranslate is RpcOperation<
     DocumentTranslateBody,
     DocumentTranslateResult,
     ServiceTraits
@@ -182,9 +182,10 @@ interface DocumentTranslationOperations {
       @query("maxpagesize")
       maxpagesize?: int32 = 50;
 
-      @doc("Translation Ids to use in filtering")
-      @query("translationIds")
-      translationIds?: string[];
+      @doc("Ids to use in filtering")
+      @clientName("translationIds")
+      @query("ids")
+      ids?: uuid[];
 
       @doc("Statuses to use in filtering")
       @query("statuses")
@@ -211,17 +212,18 @@ interface DocumentTranslationOperations {
     Returns the translation status for a specific document based on the request Id
     and document Id.
     """)
-  @route("/document/batches/{translationId}/documents/{documentId}")
+  @route("/document/batches/{id}/documents/{documentId}")
   @get
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
-      @doc("Format - string.  The translation operation id")
+      @doc("Format - uuid.  The batch id")
+      @clientName("translationId")
       @path
-      translationId: string;
+      id: uuid;
 
-      @doc("Format - string.  The document id")
+      @doc("Format - uuid.  The document id")
       @path
-      documentId: string;
+      documentId: uuid;
     },
     DocumentStatus
   >;
@@ -234,13 +236,14 @@ interface DocumentTranslationOperations {
     overall request status, as well as the status for documents that are being
     translated as part of that request.
     """)
-  @route("/document/batches/{translationId}")
+  @route("/document/batches/{id}")
   @get
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
-      @doc("Format - string.  The translation operation id")
+      @doc("Format - uuid.  The operation id")
+      @clientName("translationId")
       @path
-      translationId: string;
+      id: uuid;
     },
     TranslationStatus
   >;
@@ -257,13 +260,14 @@ interface DocumentTranslationOperations {
     All pending documents will be cancelled if
     possible.
     """)
-  @route("/document/batches/{translationId}")
+  @route("/document/batches/{id}")
   @delete
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
-      @doc("Format - string.  The translation operation-id")
+      @doc("Format - uuid.  The operation-id")
+      @clientName("translationId")
       @path
-      translationId: string;
+      id: uuid;
     },
     TranslationStatus
   >;
@@ -318,13 +322,14 @@ interface DocumentTranslationOperations {
     This reduces the risk of the client making assumptions about
     the data returned.
     """)
-  @route("/document/batches/{translationId}/documents")
+  @route("/document/batches/{id}/documents")
   @get
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
-      @doc("Format - string.  The translation operation id")
+      @doc("Format - uuid.  The operation id")
+      @clientName("translationId")
       @path
-      translationId: string;
+      id: uuid;
 
       @doc("""
         top indicates the total number of records the user wants to be returned across
@@ -378,9 +383,10 @@ interface DocumentTranslationOperations {
       @query("maxpagesize")
       maxpagesize?: int32 = 50;
 
-      @doc("DocumentIds to use in filtering")
-      @query("documentIds")
-      documentIds?: string[];
+      @doc("Ids to use in filtering")
+      @clientName("documentIds")
+      @query("ids")
+      ids?: uuid[];
 
       @doc("Statuses to use in filtering")
       @query("statuses")

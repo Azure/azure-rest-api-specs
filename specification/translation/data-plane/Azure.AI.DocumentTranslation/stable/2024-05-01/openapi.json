@@ -101,15 +101,17 @@
             "maximum": 100
           },
           {
-            "name": "translationIds",
+            "name": "ids",
             "in": "query",
-            "description": "Translation Ids to use in filtering",
+            "description": "Ids to use in filtering",
             "required": false,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "x-ms-client-name": "translationIds"
           },
           {
             "name": "statuses",
@@ -226,7 +228,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/document/batches/{translationId}": {
+    "/document/batches/{id}": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetTranslationStatus",
         "summary": "Returns the status for a document translation request",
@@ -236,11 +238,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "translationId",
+            "name": "id",
             "in": "path",
-            "description": "Format - string.  The translation operation id",
+            "description": "Format - uuid.  The operation id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
           }
         ],
         "responses": {
@@ -278,11 +282,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "translationId",
+            "name": "id",
             "in": "path",
-            "description": "Format - string.  The translation operation-id",
+            "description": "Format - uuid.  The operation-id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
           }
         ],
         "responses": {
@@ -312,7 +318,7 @@
         }
       }
     },
-    "/document/batches/{translationId}/documents": {
+    "/document/batches/{id}/documents": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentsStatus",
         "summary": "Returns the status for all documents in a batch document translation request",
@@ -322,11 +328,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "translationId",
+            "name": "id",
             "in": "path",
-            "description": "Format - string.  The translation operation id",
+            "description": "Format - uuid.  The operation id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
           },
           {
             "name": "top",
@@ -358,15 +366,17 @@
             "maximum": 100
           },
           {
-            "name": "documentIds",
+            "name": "ids",
             "in": "query",
-            "description": "DocumentIds to use in filtering",
+            "description": "Ids to use in filtering",
             "required": false,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "x-ms-client-name": "documentIds"
           },
           {
             "name": "statuses",
@@ -437,7 +447,7 @@
         }
       }
     },
-    "/document/batches/{translationId}/documents/{documentId}": {
+    "/document/batches/{id}/documents/{documentId}": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentStatus",
         "summary": "Returns the status for a specific document",
@@ -447,18 +457,21 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "translationId",
+            "name": "id",
             "in": "path",
-            "description": "Format - string.  The translation operation id",
+            "description": "Format - uuid.  The batch id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
           },
           {
             "name": "documentId",
             "in": "path",
-            "description": "Format - string.  The document id",
+            "description": "Format - uuid.  The document id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -554,7 +567,7 @@
     },
     "/document:translate": {
       "post": {
-        "operationId": "DocumentTranslationOperations_Translate",
+        "operationId": "DocumentTranslationOperations_DocumentTranslate",
         "summary": "Submit a single document translation request to the Document Translation service",
         "description": "Use this API to submit a single translation request to the Document Translation Service.",
         "produces": [
@@ -803,7 +816,7 @@
           "description": "Progress of the translation if available",
           "maximum": 1
         },
-        "documentId": {
+        "id": {
           "type": "string",
           "description": "Document Id"
         },
@@ -820,7 +833,7 @@
         "status",
         "to",
         "progress",
-        "documentId"
+        "id"
       ]
     },
     "DocumentTranslateContent": {
@@ -868,8 +881,7 @@
           "description": "The detail status of individual documents",
           "items": {
             "$ref": "#/definitions/DocumentStatus"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -964,7 +976,7 @@
           "type": "string",
           "description": "Optional Version.  If not specified, default is used."
         },
-        "translationStorageSource": {
+        "storageSource": {
           "$ref": "#/definitions/TranslationStorageSource",
           "description": "Storage Source"
         }
@@ -1017,7 +1029,7 @@
           "type": "string",
           "description": "Language code\nIf none is specified, we will perform auto detect on the document"
         },
-        "translationStorageSource": {
+        "storageSource": {
           "$ref": "#/definitions/TranslationStorageSource",
           "description": "Storage Source"
         }
@@ -1162,7 +1174,7 @@
           },
           "x-ms-identifiers": []
         },
-        "translationStorageSource": {
+        "storageSource": {
           "$ref": "#/definitions/TranslationStorageSource",
           "description": "Storage Source"
         }
@@ -1267,7 +1279,7 @@
       "type": "object",
       "description": "Translation job status response",
       "properties": {
-        "translationId": {
+        "id": {
           "type": "string",
           "description": "Id of the translation operation."
         },
@@ -1295,7 +1307,7 @@
         }
       },
       "required": [
-        "translationId",
+        "id",
         "createdDateTimeUtc",
         "lastActionDateTimeUtc",
         "status",
@@ -1379,8 +1391,7 @@
           "description": "The summary status of individual operation",
           "items": {
             "$ref": "#/definitions/TranslationStatus"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",

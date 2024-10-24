@@ -38,7 +38,7 @@ interface DocumentTranslationClient {
 })
 interface SingleDocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/byos"
-  translate is DocumentTranslation.DocumentTranslationOperations.translate;
+  documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
 
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
@@ -138,6 +138,28 @@ interface SingleDocumentTranslationClient {
   "last_updated_on",
   "python"
 );
+
+@@clientName(SingleDocumentTranslationClient.documentTranslate, "translate");
+
+@@clientName(DocumentTranslation.TranslationStatus.summary,
+  "translationStatusSummary"
+);
+
+@@clientName(DocumentTranslation.Glossary.storageSource,
+  "translationStorageSource"
+);
+
+@@clientName(DocumentTranslation.SourceInput.storageSource,
+  "translationStorageSource"
+);
+
+@@clientName(DocumentTranslation.TargetInput.storageSource,
+  "translationStorageSource"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.id, "translationId");
+
+@@clientName(DocumentTranslation.DocumentStatus.id, "documentId");
 
 @@clientName(DocumentTranslation.Glossary.format, "file_format", "python");
 
