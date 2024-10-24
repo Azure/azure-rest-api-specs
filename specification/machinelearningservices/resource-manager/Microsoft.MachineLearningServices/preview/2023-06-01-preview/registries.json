@@ -757,11 +757,6 @@
           "description": "Details of system created storage account to be used for the registry",
           "$ref": "#/definitions/SystemCreatedStorageAccount",
           "x-nullable": true
-        },
-        "userCreatedStorageAccount": {
-          "description": "Details of user created storage account to be used for the registry.  Not supported in most cases and will throw 400 error if provided.",
-          "$ref": "#/definitions/UserCreatedStorageAccount",
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -817,17 +812,6 @@
       "additionalProperties": false
     },
     "UserCreatedAcrAccount": {
-      "type": "object",
-      "properties": {
-        "armResourceId": {
-          "description": "ARM ResourceId of a resource",
-          "$ref": "#/definitions/ArmResourceId",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "UserCreatedStorageAccount": {
       "type": "object",
       "properties": {
         "armResourceId": {
