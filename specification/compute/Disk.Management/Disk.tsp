@@ -30,23 +30,26 @@ model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
   /**
    * List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
   @visibility("read")
   managedByExtended?: string[];
 
   /**
    * The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
   sku?: DiskSku;
 
   /**
    * The Logical zone list for Disk.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
   zones?: string[];
 
   /**
    * The extended location where the disk will be created. Extended location cannot be changed.
    */
-  extendedLocation?: ExtendedLocation;
+  ...ExtendedLocationProperty;
 }
 
 @armResourceOperations
@@ -64,7 +67,7 @@ interface Disks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Disk,
     Response = ArmResourceCreatedResponse<Disk> | ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
-      @body _: Disk;
+      @bodyRoot _: Disk;
     })
   >;
 
@@ -77,7 +80,7 @@ interface Disks {
     Disk,
     DiskUpdate,
     Response = ArmResponse<Disk> | (ArmAcceptedLroResponse & {
-      @body _: Disk;
+      @bodyRoot _: Disk;
     })
   >;
 

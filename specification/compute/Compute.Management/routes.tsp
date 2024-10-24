@@ -88,7 +88,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @action("publishers")
   listPublishers is ArmProviderActionAsync<
     Response = {
-      @body _: VirtualMachineImageResource[];
+      @bodyRoot _: VirtualMachineImageResource[];
     },
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -111,7 +111,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @action("artifacttypes/vmimage/offers")
   listOffers is ArmProviderActionAsync<
     Response = {
-      @body _: VirtualMachineImageResource[];
+      @bodyRoot _: VirtualMachineImageResource[];
     },
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -141,7 +141,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @action("skus")
   listSkus is ArmProviderActionAsync<
     Response = {
-      @body _: VirtualMachineImageResource[];
+      @bodyRoot _: VirtualMachineImageResource[];
     },
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -178,7 +178,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @action("versions")
   list is ArmProviderActionAsync<
     Response = {
-      @body _: VirtualMachineImageResource[];
+      @bodyRoot _: VirtualMachineImageResource[];
     },
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -308,7 +308,7 @@ interface VirtualMachineImagesOperations {
   @action("publishers")
   listPublishers is ArmProviderActionAsync<
     Response = {
-      @body _: VirtualMachineImageResource[];
+      @bodyRoot _: VirtualMachineImageResource[];
     },
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -322,7 +322,7 @@ interface VirtualMachineImagesOperations {
   @action("artifacttypes/vmimage/offers")
   listOffers is ArmProviderActionAsync<
     Response = {
-      @body _: VirtualMachineImageResource[];
+      @bodyRoot _: VirtualMachineImageResource[];
     },
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -345,7 +345,7 @@ interface VirtualMachineImagesOperations {
   @action("skus")
   listSkus is ArmProviderActionAsync<
     Response = {
-      @body _: VirtualMachineImageResource[];
+      @bodyRoot _: VirtualMachineImageResource[];
     },
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -375,7 +375,7 @@ interface VirtualMachineImagesOperations {
   @action("versions")
   list is ArmProviderActionAsync<
     Response = {
-      @body _: VirtualMachineImageResource[];
+      @bodyRoot _: VirtualMachineImageResource[];
     },
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -652,7 +652,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
     /**
      * Parameters supplied to the Create Virtual Machine RunCommand operation.
      */
-    @body
+    @bodyRoot
     runCommand: VirtualMachineRunCommand,
 
     /**
@@ -696,7 +696,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
     /**
      * Parameters supplied to the Update Virtual Machine RunCommand operation.
      */
-    @body
+    @bodyRoot
     runCommand: VirtualMachineRunCommandUpdate,
 
     /**

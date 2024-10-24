@@ -30,12 +30,13 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
   /**
    * The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
   sku?: SnapshotSku;
 
   /**
    * The extended location where the snapshot will be created. Extended location cannot be changed.
    */
-  extendedLocation?: ExtendedLocation;
+  ...ExtendedLocationProperty;
 }
 
 @armResourceOperations
@@ -53,7 +54,7 @@ interface Snapshots {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Snapshot,
     Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
-      @body _: Snapshot;
+      @bodyRoot _: Snapshot;
     })
   >;
 
@@ -66,7 +67,7 @@ interface Snapshots {
     Snapshot,
     SnapshotUpdate,
     Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
-      @body _: Snapshot;
+      @bodyRoot _: Snapshot;
     })
   >;
 

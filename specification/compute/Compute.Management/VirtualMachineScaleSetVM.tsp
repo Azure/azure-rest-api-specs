@@ -106,7 +106,7 @@ interface VirtualMachineScaleSetVMS {
       IfNoneMatch?: string;
     },
     Response = ArmResourceCreatedResponse<VirtualMachineScaleSetVM> | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
-      @body _: VirtualMachineScaleSetVM;
+      @bodyRoot _: VirtualMachineScaleSetVM;
     })
   >;
 
