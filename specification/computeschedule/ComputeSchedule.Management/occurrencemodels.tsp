@@ -80,6 +80,11 @@ model OccurrenceResource is AutoActionResource {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+model OccurrenceResourceRequest {
+    resources : OccurrenceResource[];
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Request to ask for a delay in an occurrence")
 model DelayRequest {
   @doc("The amount of delay the occurrence should have")

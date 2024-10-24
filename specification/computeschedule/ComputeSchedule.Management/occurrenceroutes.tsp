@@ -21,8 +21,7 @@ interface Occurrences {
   get is ArmResourceRead<Occurrence>;
   listByAutoAction is ArmResourceListByParent<Occurrence>;
 
-  @segment("resources")
-  getResources is ArmResourceListActionSync<Occurrence, OccurrenceResource>;
-  cancel is ArmResourceActionNoContentSync<Occurrence, OccurrenceResource[]>;
-  delay is ArmResourceActionNoContentSync<Occurrence, DelayRequest>;
+  getResources is ArmResourceActionSync<Occurrence, void, OccurrenceResourceList>;
+  cancel is ArmResourceActionSync<Occurrence, OccurrenceResourceRequest, void>;
+  delay is ArmResourceActionSync<Occurrence, DelayRequest, void>;
 }

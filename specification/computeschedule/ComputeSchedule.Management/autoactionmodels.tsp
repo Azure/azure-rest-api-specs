@@ -202,6 +202,9 @@ model NotificationProperties {
 
   @doc("The language the notification should be sent on.")
   language: Language;
+
+  @doc("Tells if the notification is enabled or not.")
+  disabled?: boolean = false;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
@@ -256,11 +259,6 @@ model AutoActionProperties {
   @doc("The time when the auto action is supposed to stop scheduling")
   endTime?: offsetDateTime;
 
-  @doc("The list of the resources the auto action is supposed to perform the actions on")
-  @visibility("create", "update")
-  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
-  resources: AutoActionResource[];
-
   @doc("The schedule the auto action is supposed to follow")
   schedule: AutoActionSchedule;
 
@@ -269,12 +267,53 @@ model AutoActionProperties {
   notificationSettings: NotificationProperties[];
 
   @doc("Tell if the auto action is disabled or not")
-  @visibility("read")
-  isDisabled: boolean;
+  disabled?: boolean = false;
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+model ResourceList is Azure.Core.Page<AutoActionResource>;
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("Request model to pass a list of resources. Used in attach/detach resources APIs.")
+model ResourceListRequest {
+    @doc("List of resources to be attached/detached")
+    @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+    resources : AutoActionResource[];
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+union ResourceState {
+    @doc("The resource was successfully attached")
+    Attached: "Attached",
+
+    @doc("The resource was successfully detached")
+    Detached: "Detached",
+
+    @doc("The resource has failed the attach/detach/update operation")
+    Failed: "Failed",
+
+    string
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+model ResourceStatus {
+    resourceId : validAutoActionResourceId;
+
+    error?: Azure.Core.Foundations.Error;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("Specify the result of resolve level actions, such as attach/detach resources.")
+model ResourceRequestStatus {
+    @doc("The total number of resources operated on.")
+    total: int32;
+    
+    @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+    resources : ResourceStatus[];
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
