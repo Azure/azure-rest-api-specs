@@ -41,25 +41,27 @@ interface SingleDocumentTranslationClient {
   documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
 
+@@clientName(SingleDocumentTranslationClient.documentTranslate, "translate");
+
+@@clientName(DocumentTranslation.StatusSummary, "translationStatusSummary");
+
+@@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
+
+@@clientName(DocumentTranslation.TranslationStatus.id, "translationId");
+
+@@clientName(DocumentTranslation.DocumentStatus.id, "documentId");
+
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
   "csharp"
 );
 
-@@clientName(DocumentTranslation.DocumentTranslateBody.body,
-  "documentTranslateContent",
-  "java"
-);
-
-@@clientName(DocumentTranslation.StartTranslationBody.body,
-  "startTranslationDetails",
+@@clientName(DocumentTranslation.StartTranslationDetails,
+  "translationBatch",
   "csharp"
 );
 
-@@clientName(DocumentTranslation.StartTranslationBody.body,
-  "startTranslationDetails",
-  "java"
-);
+@@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
 @@access(DocumentTranslationClient.getSupportedFormats,
   Access.internal,
@@ -169,3 +171,76 @@ interface SingleDocumentTranslationClient {
 @@clientName(DocumentTranslation.Status.Cancelled, "canceled", "python");
 
 @@clientName(DocumentTranslation.Status.Cancelling, "canceling", "python");
+
+@@clientName(DocumentTranslation.DocumentTranslateBody.body,
+  "documentTranslateContent",
+  "java"
+);
+
+@@clientName(DocumentTranslation.StartTranslationDetails,
+  "translationBatch",
+  "java"
+);
+
+@@clientName(DocumentTranslation.BatchRequest,
+  "documentTranslationInput",
+  "java"
+);
+
+@@clientName(DocumentTranslationClient.startTranslation,
+  "beginTranslation",
+  "java"
+);
+
+@@clientName(DocumentTranslationClient.getDocumentsStatus,
+  "listDocumentStatuses",
+  "java"
+);
+
+@@clientName(DocumentTranslationClient.getTranslationsStatus,
+  "listTranslationStatuses",
+  "java"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus,
+  "translationStatusResult",
+  "java"
+);
+
+@@clientName(DocumentTranslation.Status, "translationStatus", "java");
+
+@@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
+  "createdOn",
+  "java"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
+  "lastUpdatedOn",
+  "java"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.cancelled,
+  "cancelledCount",
+  "java"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.failed, "failedCount", "java");
+
+@@clientName(DocumentTranslation.StatusSummary.inProgress,
+  "inProgressCount",
+  "java"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.notYetStarted,
+  "notYetStartedCount",
+  "java"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.success, "successCount", "java");
+
+@@clientName(DocumentTranslation.StatusSummary.total, "totalCount", "java");
+
+@@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
+  "totalCharactersChargedCount",
+  "java"
+);
