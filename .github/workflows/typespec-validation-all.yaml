@@ -36,6 +36,14 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
+        entry:
+          - skip: 0
+            take: 71
+          - skip: 71
+            take: 71
+          - skip: 142
+            # Take 0 means take all
+            take: 0
 
     runs-on: ${{ matrix.os }}
 
@@ -54,7 +62,12 @@ jobs:
         
       - name: Validate All Specs
         run: |
-          ./eng/scripts/TypeSpec-Validation.ps1 -CheckAll -GitClean -Verbose
+          ./eng/scripts/TypeSpec-Validation.ps1 `
+            -Skip ${{ matrix.Skip }} `
+            -Take ${{ matrix.Take }} `
+            -CheckAll `
+            -GitClean `
+            -Verbose
           
           # Effectively the same as ignoreLASTEXITCODE: true in Azure DevOps
           exit 0
