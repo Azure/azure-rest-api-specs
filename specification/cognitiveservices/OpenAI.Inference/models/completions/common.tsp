@@ -29,7 +29,6 @@ model CompletionsUsage {
   @added(ServiceApiVersions.v2024_10_01_Preview)
   @encodedName("application/json", "prompt_tokens_details")
   promptTokensDetails?: {
-
     /** The number of cached prompt tokens. */
     @encodedName("application/json", "cached_tokens")
     cachedTokens?: int32;

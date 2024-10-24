@@ -193,7 +193,6 @@ model ContentFilterCompletionTextSpanResult {
 @added(ServiceApiVersions.v2024_10_01_Preview)
 @doc("Describes a span within generated completion text. Offset 0 is the first UTF32 code point of the completion text.")
 model ContentFilterCompletionTextSpan {
-
   @doc("Offset of the UTF32 code point which begins the span.")
   @encodedName("application/json", "completion_start_offset")
   completionStartOffset: int32;
