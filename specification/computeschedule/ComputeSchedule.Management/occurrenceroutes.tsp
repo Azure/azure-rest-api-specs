@@ -4,7 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./occurrencemodels.tsp";
-import "./commons.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -21,7 +20,7 @@ interface Occurrences {
   get is ArmResourceRead<Occurrence>;
   listByAutoAction is ArmResourceListByParent<Occurrence>;
 
-  getResources is ArmResourceActionSync<Occurrence, void, OccurrenceResourceList>;
-  cancel is ArmResourceActionSync<Occurrence, OccurrenceResourceRequest, void>;
+  getResources is ArmResourceActionSync<Occurrence, void, OccurrenceResourceListResponse>;
+  cancel is ArmResourceActionSync<Occurrence, CancelOccurrenceRequest, void>;
   delay is ArmResourceActionSync<Occurrence, DelayRequest, void>;
 }

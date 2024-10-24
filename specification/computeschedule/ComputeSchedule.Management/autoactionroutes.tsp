@@ -27,15 +27,15 @@ interface AutoActions {
   listByResourceGroup is ArmResourceListByParent<AutoAction>;
   listBySubscription is ArmListBySubscription<AutoAction>;
 
-  getResources is ArmResourceActionSync<AutoAction, void, ResourceList>;
-  attachResources is ArmResourceActionSync<AutoAction, ResourceListRequest, ResourceRequestStatus>;
-  detachResources is ArmResourceActionSync<AutoAction, ResourceListRequest, ResourceRequestStatus>;
-  updateResources is ArmResourceActionSync<AutoAction, ResourceListRequest, ResourceRequestStatus>;
+  getResources is ArmResourceActionSync<AutoAction, void, AutoActionResourceListResponse>;
+  attachResources is ArmResourceActionSync<AutoAction, AutoActionResourceOperationRequest, AutoActionResourceOperationResponse>;
+  detachResources is ArmResourceActionSync<AutoAction, AutoActionResourceOperationRequest, AutoActionResourceOperationResponse>;
+  patchResources is ArmResourceActionSync<AutoAction, AutoActionResourceOperationRequest, AutoActionResourceOperationResponse>;
 
   disable is ArmResourceActionSync<AutoAction, void, OkResponse>;
   enable is ArmResourceActionSync<AutoAction, void, OkResponse>;
 
-  cancelNextOccurrence is ArmResourceActionSync<AutoAction, OccurrenceResourceRequest, Occurrence>;
+  cancelNextOccurrence is ArmResourceActionSync<AutoAction, CancelOccurrenceRequest, Occurrence>;
   triggerManualOccurrence is ArmResourceActionSync<AutoAction, void, Occurrence>;
 }
 
