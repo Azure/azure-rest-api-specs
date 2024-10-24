@@ -4291,24 +4291,30 @@
         "shouldImportSpec": {
           "type": "string",
           "description": "Indicates if the specification should be imported along with metadata.",
-          "default": "true",
+          "default": "ondemand",
           "enum": [
-            "true",
-            "false"
+            "never",
+            "ondemand",
+            "always"
           ],
           "x-ms-enum": {
-            "name": "ApiSourceSpecImportOptions",
+            "name": "ShouldImportSpec",
             "modelAsString": true,
             "values": [
               {
-                "name": "ShouldImport",
-                "value": "true",
-                "description": "Indicates that the specification should be imported along with metadata."
+                "name": "Never",
+                "value": "never",
+                "description": "Indicates that the specification should be never be imported."
               },
               {
-                "name": "ShouldNotImport",
-                "value": "false",
-                "description": "Indicates that the specification should not be imported along with metadata."
+                "name": "OnDemand",
+                "value": "ondemand",
+                "description": "Indicates that the specification should be imported only by request."
+              },
+              {
+                "name": "Always",
+                "value": "always",
+                "description": "Indicates that the specification should always be imported along with metadata."
               }
             ]
           }
@@ -4317,30 +4323,6 @@
           "$ref": "#/definitions/ApimSource",
           "description": "API source configuration for Azure API Management."
         }
-      }
-    },
-    "ApiSourceSpecImportOptions": {
-      "type": "string",
-      "description": "The API source specification import options.",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "ApiSourceSpecImportOptions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ShouldImport",
-            "value": "true",
-            "description": "Indicates that the specification should be imported along with metadata."
-          },
-          {
-            "name": "ShouldNotImport",
-            "value": "false",
-            "description": "Indicates that the specification should not be imported along with metadata."
-          }
-        ]
       }
     },
     "ApiSpecExportResult": {
@@ -5470,6 +5452,36 @@
           "description": "Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.",
           "default": false
         }
+      }
+    },
+    "ShouldImportSpec": {
+      "type": "string",
+      "description": "The API source specification import options.",
+      "enum": [
+        "never",
+        "ondemand",
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "ShouldImportSpec",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Never",
+            "value": "never",
+            "description": "Indicates that the specification should be never be imported."
+          },
+          {
+            "name": "OnDemand",
+            "value": "ondemand",
+            "description": "Indicates that the specification should be imported only by request."
+          },
+          {
+            "name": "Always",
+            "value": "always",
+            "description": "Indicates that the specification should always be imported along with metadata."
+          }
+        ]
       }
     },
     "SmallString": {

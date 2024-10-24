@@ -594,7 +594,7 @@ model DeletedServiceProperties {
 @doc("API source properties.")
 model ApiSourceProperties {
   @doc("Indicates if the specification should be imported along with metadata.")
-  shouldImportSpec?: ApiSourceSpecImportOptions = ApiSourceSpecImportOptions.ShouldImport;
+  shouldImportSpec?: ShouldImportSpec = ShouldImportSpec.OnDemand;
 
   @doc("API source configuration for Azure API Management.")
   apimSource?: ApimSource;
@@ -605,18 +605,23 @@ model ApiSourceProperties {
  * The API source specification import options.
  */
 @added(Versions.v2024_06_01_preview)
-union ApiSourceSpecImportOptions {
-  /**
-   * Indicates that the specification should be imported along with metadata.
-   */
-  ShouldImport: "true",
+union ShouldImportSpec {
+  string,
 
   /**
-   * Indicates that the specification should not be imported along with metadata.
+   * Indicates that the specification should be never be imported.
    */
-  ShouldNotImport: "false",
+  Never: "never",
 
-  string
+  /**
+   * Indicates that the specification should be imported only by request.
+   */
+  OnDemand: "ondemand",
+
+  /**
+   * Indicates that the specification should always be imported along with metadata.
+   */
+  Always: "always"
 }
 
 /**
