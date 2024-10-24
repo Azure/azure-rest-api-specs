@@ -6,7 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./autoactionmodels.tsp";
 import "./occurrencemodels.tsp";
 import "./occurrenceroutes.tsp";
-import "./commons.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -28,9 +27,9 @@ interface AutoActions {
   listBySubscription is ArmListBySubscription<AutoAction>;
 
   getResources is ArmResourceActionSync<AutoAction, void, AutoActionResourceListResponse>;
-  attachResources is ArmResourceActionSync<AutoAction, AutoActionResourceOperationRequest, AutoActionResourceOperationResponse>;
-  detachResources is ArmResourceActionSync<AutoAction, AutoActionResourceOperationRequest, AutoActionResourceOperationResponse>;
-  patchResources is ArmResourceActionSync<AutoAction, AutoActionResourceOperationRequest, AutoActionResourceOperationResponse>;
+  attachResources is ArmResourceActionSync<AutoAction, AutoActionResourceAttachRequest, AutoActionResourceOperationResponse>;
+  detachResources is ArmResourceActionSync<AutoAction, AutoActionResourceDetachRequest, AutoActionResourceOperationResponse>;
+  patchResources is ArmResourceActionSync<AutoAction, AutoActionResourcePatchListRequest, AutoActionResourceOperationResponse>;
 
   disable is ArmResourceActionSync<AutoAction, void, OkResponse>;
   enable is ArmResourceActionSync<AutoAction, void, OkResponse>;

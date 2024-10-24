@@ -277,11 +277,52 @@ model AutoActionProperties {
 model AutoActionResourceListResponse is Azure.Core.Page<AutoActionResource>;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@doc("Request model to pass a list of auto action resources. Used in attach/detach/patched resources APIs.")
-model AutoActionResourceOperationRequest {
-    @doc("List of resources to be attached/detached/patched")
+@doc("Request model to attach a list of auto action resources.")
+model AutoActionResourceAttachRequest {
+    @doc("List of resources to be attached/patched")
     @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
-    resources : Array<AutoActionResource>;
+    resources: Array<AutoActionResource>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("Request model to detach a list of auto action resources.")
+model AutoActionResourceDetachRequest {
+    @doc("List of resources to be detached")
+    resources: Array<validAutoActionResourceId>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The type of operation we want to perform on the resource")
+union AutoActionResourceOperationType {
+    @doc("Attach resource operation")
+    Attach: "Attach",
+    
+    @doc("Detach resource operation")
+    Detach: "Detach",
+
+    @doc("Update resource operation")
+    Update: "Update",
+
+    string
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("Request model perform an operation in a resource")
+model AutoActionResourcePatchRequest 
+{
+    @doc("The auto action resource this request should act on. If the operation type is Detach, only the resourceId will be used.")
+    resource : AutoActionResource;
+
+    @doc("The type of operation we want to perform on the resource")
+    operation : AutoActionResourceOperationType;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("Request model perform a resource operation in a list of resources")
+model AutoActionResourcePatchListRequest {
+    @doc("The list of request for each resource we want to act on")
+    @OpenAPI.extension("x-ms-identifiers", [])
+    resourceRequests : Array<AutoActionResourcePatchRequest>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
