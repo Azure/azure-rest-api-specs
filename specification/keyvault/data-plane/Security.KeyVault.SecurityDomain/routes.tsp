@@ -26,6 +26,7 @@ interface HsmSecurityDomain {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   @pollingOperation(HsmSecurityDomain.downloadPending)
+  @finalOperation(HsmSecurityDomain.downloadPending)
   @useFinalStateVia("azure-async-operation")
   @route("/securitydomain/download")
   @post
