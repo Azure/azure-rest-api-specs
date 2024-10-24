@@ -88,7 +88,7 @@ interface DataConnections {
 
   @doc("Validate a data connection with a given dataConnectionName.")
   @action("validate")
-  validateDataConnection is Operations.ResourceCollectionAction<
+  validateDataConnection is Operations.ResourceAction<
     DataConnection,
     BodyParameter<DataConnection>,
     ValidateResult
@@ -120,7 +120,7 @@ interface DiscoveryGroups {
   @doc("Validate a discovery group with a given groupName.")
   @action("validate")
   @clientName("ValidateDiscoveryGroup", "csharp")
-  validateDiscoGroup is Operations.ResourceCollectionAction<
+  validateDiscoGroup is Operations.ResourceAction<
     DiscoGroup,
     BodyParameter<DiscoGroup>,
     ValidateResult

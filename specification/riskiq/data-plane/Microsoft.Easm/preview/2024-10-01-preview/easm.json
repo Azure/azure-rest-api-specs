@@ -593,6 +593,61 @@
         }
       }
     },
+    "/dataConnections/{dataConnectionName}:validate": {
+      "post": {
+        "operationId": "DataConnections_ValidateDataConnection",
+        "tags": [
+          "Data Connections"
+        ],
+        "description": "Validate a data connection with a given dataConnectionName.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "path",
+            "description": "The caller provided unique name for the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnections_ValidateDataConnection": {
+            "$ref": "./examples/DataConnections_ValidateDataConnection_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/dataConnections/{dataConnectionName}": {
       "get": {
         "operationId": "DataConnections_GetDataConnection",
@@ -733,54 +788,6 @@
         }
       }
     },
-    "/dataConnections:validate": {
-      "post": {
-        "operationId": "DataConnections_ValidateDataConnection",
-        "tags": [
-          "Data Connections"
-        ],
-        "description": "Validate a data connection with a given dataConnectionName.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ValidateResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataConnections_ValidateDataConnection": {
-            "$ref": "./examples/DataConnections_ValidateDataConnection_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/discoGroups": {
       "get": {
         "operationId": "DiscoveryGroups_ListDiscoGroup",
@@ -829,6 +836,61 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/discoGroups/{groupName}:validate": {
+      "post": {
+        "operationId": "DiscoveryGroups_ValidateDiscoGroup",
+        "tags": [
+          "Discovery Groups"
+        ],
+        "description": "Validate a discovery group with a given groupName.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The caller provided unique name for the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscoveryGroups_ValidateDiscoGroup": {
+            "$ref": "./examples/DiscoveryGroups_ValidateDiscoGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1161,54 +1223,6 @@
         "x-ms-examples": {
           "DiscoveryGroups_GetAssetChainSummary": {
             "$ref": "./examples/DiscoveryGroups_GetAssetChainSummary.json"
-          }
-        }
-      }
-    },
-    "/discoGroups:validate": {
-      "post": {
-        "operationId": "DiscoveryGroups_ValidateDiscoGroup",
-        "tags": [
-          "Discovery Groups"
-        ],
-        "description": "Validate a discovery group with a given groupName.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DiscoGroup"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ValidateResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_ValidateDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_ValidateDiscoGroup_MaximumSet_Gen.json"
           }
         }
       }
