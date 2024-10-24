@@ -12,8 +12,11 @@ options:
     namespace: "com.azure.resourcemanager.commonedgesitemanageroperations"
     flavor: azure
   "@azure-tools/typespec-python":
-    package-name: "azure-mgmt-commonedgesitemanageroperations"
-    flavor: "azure"
+    package-dir: "azure-mgmt-commonedgesitemanageroperations"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
