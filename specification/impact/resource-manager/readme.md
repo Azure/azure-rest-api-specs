@@ -19,25 +19,32 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ## Suppression
 
 ### AutoRest v3 Suppressions
-``` yaml
+
+```yaml
 suppressions:
-    
   - code: PathForPutOperation
     reason: Design forces us to not have resources under resource group but only have under subscription. proxy resources
     from: impact.json
     where:
-        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"]
-        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"]
-    
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"]
+
   - code: PutRequestResponseSchemeArm
     reason: False positive both request and response are same. proxy resources
     from: impact.json
     where:
-        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].put
-        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"].put
-  
-```
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"].put
 
+  - - code: AvoidAdditionalProperties
+    from: impact.json
+    where:
+      - $.definitions.WorkloadImpactProperties.properties.additionalProperties
+      - $.definitions.WorkloadImpactProperties.properties.additionalProperties
+    reason:
+      Property "settings" and "protectedSettings" for VirtualMachineExtension
+      and VirtualMachineScaleSetExtensionProperties were previously defined like an empty object.
+```
 
 ## Configuration
 
@@ -117,6 +124,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
