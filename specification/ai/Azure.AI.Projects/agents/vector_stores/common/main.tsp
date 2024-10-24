@@ -104,7 +104,7 @@ model VectorStorageDataSource {
 
   /** The asset type **/
   @encodedName("application/json", "type")
-  assetType: VectorStorageDataSourceAssetType = VectorStorageDataSourceAssetType.uri_asset;
+  assetType: VectorStorageDataSourceAssetType = "uri_asset"
 }
 
 /**
