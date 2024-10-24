@@ -834,7 +834,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/nGroups/{nGroupsName}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{nGroupsName}/skus": {
       "get": {
         "operationId": "NGroupsSkus_Get",
         "x-ms-examples": {},
@@ -873,7 +873,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/nGroups/{nGroupsName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{nGroupsName}": {
       "get": {
         "operationId": "NGroups_Get",
         "x-ms-examples": {},
@@ -1080,7 +1080,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/nGroups/{nGroupsName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{nGroupsName}/start": {
       "post": {
         "operationId": "NGroups_Start",
         "x-ms-examples": {},
@@ -1125,7 +1125,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/nGroups/{nGroupsName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{nGroupsName}/stop": {
       "post": {
         "operationId": "NGroups_Stop",
         "x-ms-examples": {},
@@ -1158,7 +1158,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/nGroups/{nGroupsName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{nGroupsName}/restart": {
       "post": {
         "operationId": "NGroups_Restart",
         "x-ms-examples": {},
@@ -1203,7 +1203,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/nGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups": {
       "get": {
         "operationId": "NGroups_ListByResourceGroup",
         "x-ms-examples": {},
@@ -1239,7 +1239,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/nGroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/ngroups": {
       "get": {
         "operationId": "NGroups_List",
         "x-ms-examples": {},
@@ -1421,7 +1421,7 @@
             "description": "The container group profile resource with just the tags to be updated.",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/ContainerGroupProfile"
+              "$ref": "#/definitions/Resource"
             }
           },
           {
@@ -1436,17 +1436,6 @@
             },
             "headers": {
               "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            }
-          },
-          "202": {
-            "description": "ContainerGroupProfile Updated",
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              },
-              "Location": {
                 "type": "string"
               }
             }
