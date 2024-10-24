@@ -57,7 +57,7 @@ model SchedulerProperties {
   endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
-  ipAllowlist?: string[];
+  ipAllowlist: string[];
 
   @doc("SKU of the durable task scheduler")
   sku: SchedulerSku;
@@ -66,9 +66,13 @@ model SchedulerProperties {
 @doc("The SKU (Stock Keeping Unit) assigned to this durable task scheduler")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerSku {
-  ...Azure.ResourceManager.Foundations.Sku;
+  @doc("The name of the SKU")
+  name: string;
 
-  @doc("Indicates whether the current SKU is zone redundant")
+  @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
+  capacity?: int32;
+
+  @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility("read")
   zoneRedundant: boolean;
 }
