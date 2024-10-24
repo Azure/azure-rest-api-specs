@@ -88,9 +88,9 @@ interface DataConnections {
 
   @doc("Validate a data connection with a given dataConnectionName.")
   @action("validate")
-  validateDataConnection is Operations.ResourceCollectionAction<
+  validateDataConnection is Operations.ResourceAction<
     DataConnection,
-    BodyParameter<DataConnectionData>,
+    BodyParameter<DataConnection>,
     ValidateResult
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
@@ -102,7 +102,7 @@ interface DataConnections {
   @put
   createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
-    BodyParameter<DataConnectionData>,
+    BodyParameter<DataConnection>,
     DataConnection
   >;
 
@@ -120,9 +120,9 @@ interface DiscoveryGroups {
   @doc("Validate a discovery group with a given groupName.")
   @action("validate")
   @clientName("ValidateDiscoveryGroup", "csharp")
-  validateDiscoGroup is Operations.ResourceCollectionAction<
+  validateDiscoGroup is Operations.ResourceAction<
     DiscoGroup,
-    BodyParameter<DiscoGroupData>,
+    BodyParameter<DiscoGroup>,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
@@ -136,7 +136,7 @@ interface DiscoveryGroups {
   @clientName("CreateOrReplaceDiscoveryGroup", "csharp")
   createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
-    BodyParameter<DiscoGroupData>,
+    BodyParameter<DiscoGroup>,
     DiscoGroup
   >;
   @doc("Run a discovery group with a given groupName.")
@@ -242,7 +242,7 @@ interface SavedFilters {
   @put
   createOrReplaceSavedFilter is Foundations.ResourceOperation<
     SavedFilter,
-    BodyParameter<SavedFilterData>,
+    BodyParameter<SavedFilter>,
     SavedFilter
   >;
   @doc("Delete a saved filter with a given filterName.")
@@ -281,4 +281,35 @@ interface CisaCves {
   @doc("Retrieve details of CisaCve by cveId")
   @Versioning.added(Versions.v2024_03_01_preview)
   getCisaCve is Operations.ResourceRead<CisaCveResult>;
+}
+
+@tag("Policies")
+@Versioning.added(Versions.v2024_10_01_preview)
+@doc("Provides access to policy resources.")
+interface Policies {
+  @doc("Retrieve a list of policies for the provided search parameters.")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  @clientName("GetPolicies", "csharp")
+  listPolicy is Operations.ResourceList<Policy, PoliciesListTrait>;
+
+  @doc("Retrieve a policy with a given policyName.")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  @clientName("GetPolicy", "csharp")
+  getPolicy is Operations.ResourceRead<Policy>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Create a policy with a given policyName.")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  @createsOrReplacesResource(Policy)
+  @put
+  @clientName("CreateOrReplacePolicy", "csharp")
+  createOrReplacePolicy is Foundations.ResourceOperation<
+    Policy,
+    BodyParameter<Policy>,
+    Policy
+  >;
+
+  @Versioning.added(Versions.v2024_10_01_preview)
+  @doc("Delete a policy with a given policyName.")
+  deletePolicy is Operations.ResourceDelete<Policy>;
 }
