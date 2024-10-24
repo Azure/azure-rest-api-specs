@@ -18,7 +18,6 @@ model StageMap is ProxyResource<StageMapProperties> {
   @key("stageMapName")
   @segment("stageMaps")
   @path
-  @visibility("read")
   @minLength(3)
   @maxLength(100) // 260 is the max limit.
   @doc("The name of the StageMap")
