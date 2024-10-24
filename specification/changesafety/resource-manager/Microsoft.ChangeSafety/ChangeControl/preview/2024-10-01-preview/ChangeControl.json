@@ -270,55 +270,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/getAuditTrail": {
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/retrieveNextStages": {
       "post": {
-        "operationId": "ChangeStates_GetAuditTrail",
-        "tags": [
-          "ChangeStates"
-        ],
-        "description": "Gets the Audit trail of the ChangeState resource from ARG.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "changeStateName",
-            "in": "path",
-            "description": "The name of the ChangeState resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 100,
-            "pattern": "^[a-zA-Z0-9-]{3,100}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GetAuditTrailResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ChangeStates_GetAuditTrail_MaximumSet": {
-            "$ref": "./examples/ChangeStates_GetAuditTrail.json"
-          }
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/getNextStages": {
-      "post": {
-        "operationId": "ChangeStates_GetNextStages",
+        "operationId": "ChangeStates_RetrieveNextStages",
         "tags": [
           "ChangeStates"
         ],
@@ -345,7 +299,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GetNextStagesResponse"
+              "$ref": "#/definitions/RetrieveNextStagesResponse"
             }
           },
           "default": {
@@ -356,7 +310,7 @@
           }
         },
         "x-ms-examples": {
-          "ChangeStates_GetNextStages_MaximumSet": {
+          "ChangeStates_RetrieveNextStages_MaximumSet": {
             "$ref": "./examples/ChangeStates_GetNextStages.json"
           }
         }
@@ -1027,32 +981,6 @@
         ]
       }
     },
-    "AuditTrailItem": {
-      "type": "object",
-      "description": "Model for single audit trail item",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "TenantId of the resource."
-        },
-        "identity": {
-          "type": "string",
-          "description": "User information."
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
     "ChangeArtifact": {
       "type": "object",
       "description": "Base type for the ChangeArtifact, which is polymorphic based on ArtifactType",
@@ -1106,7 +1034,7 @@
         },
         "changeType": {
           "$ref": "#/definitions/ChangeType",
-          "description": "The status of the last operation.",
+          "description": "Describes the type of the change.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1124,7 +1052,7 @@
         },
         "stageMapResourceId": {
           "type": "string",
-          "description": "ARM resource Id of the referenced StageMap.",
+          "description": "Azure resource Id of the referenced StageMap.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1176,7 +1104,7 @@
             "create"
           ]
         },
-        "updateComments": {
+        "comments": {
           "type": "string",
           "description": "Comments about the last update to the changeState resource.",
           "maxLength": 2000,
@@ -1250,7 +1178,7 @@
             "create"
           ]
         },
-        "updateComments": {
+        "comments": {
           "type": "string",
           "description": "Comments about the last update to the changeState resource.",
           "maxLength": 2000,
@@ -1418,77 +1346,6 @@
         }
       ],
       "x-ms-discriminator-value": "ExternalBicep"
-    },
-    "GetAuditTrailResponse": {
-      "type": "object",
-      "description": "GetAuditTrail response model.",
-      "properties": {
-        "totalRecords": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total Records in the response."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Result count"
-        },
-        "data": {
-          "type": "array",
-          "description": "Audit Trail items array.",
-          "items": {
-            "$ref": "#/definitions/AuditTrailItem"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
-        }
-      },
-      "required": [
-        "totalRecords",
-        "count",
-        "data"
-      ]
-    },
-    "GetNextStagesResponse": {
-      "type": "object",
-      "description": "GetNextStage POST Action response.",
-      "properties": {
-        "nextStages": {
-          "type": "array",
-          "description": "StageProgression resources that are ready to put in 'InProgress' state.",
-          "items": {
-            "$ref": "#/definitions/GetNextStagesResponseItem"
-          },
-          "x-ms-identifiers": [
-            "stageReference"
-          ]
-        }
-      },
-      "required": [
-        "nextStages"
-      ]
-    },
-    "GetNextStagesResponseItem": {
-      "type": "object",
-      "description": "StageProgression data comes from GetNextStages API.",
-      "properties": {
-        "stageReference": {
-          "type": "string",
-          "description": "Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changestate resource.",
-          "readOnly": true
-        },
-        "parameterValues": {
-          "type": "object",
-          "description": "Parameters to apply on the change for the stage.",
-          "additionalProperties": {},
-          "readOnly": true
-        }
-      },
-      "required": [
-        "stageReference",
-        "parameterValues"
-      ]
     },
     "InlineArmTemplateChangeArtifact": {
       "type": "object",
@@ -1694,6 +1551,57 @@
       },
       "readOnly": true
     },
+    "RetrieveNextStagesResponse": {
+      "type": "object",
+      "description": "RetrieveNextStage POST Action response.",
+      "properties": {
+        "changeStateResourceId": {
+          "type": "string",
+          "description": "ChangeState resource Id."
+        },
+        "lastStageSequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Last stage sequence in the StageProgression."
+        },
+        "nextStages": {
+          "type": "array",
+          "description": "StageProgression resources that are ready to put in 'InProgress' state.",
+          "items": {
+            "$ref": "#/definitions/RetrieveNextStagesResponseItem"
+          },
+          "x-ms-identifiers": [
+            "stageReference"
+          ]
+        }
+      },
+      "required": [
+        "changeStateResourceId",
+        "lastStageSequence",
+        "nextStages"
+      ]
+    },
+    "RetrieveNextStagesResponseItem": {
+      "type": "object",
+      "description": "StageProgression data comes from RetrieveNextStages API.",
+      "properties": {
+        "stageReference": {
+          "type": "string",
+          "description": "Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changestate resource.",
+          "readOnly": true
+        },
+        "parameterValues": {
+          "type": "object",
+          "description": "Parameters to apply on the change for the stage.",
+          "additionalProperties": {},
+          "readOnly": true
+        }
+      },
+      "required": [
+        "stageReference",
+        "parameterValues"
+      ]
+    },
     "Stage": {
       "type": "object",
       "description": "Defines details about each stage in the stage map resource.",
@@ -1706,6 +1614,7 @@
           "pattern": "^[a-zA-Z0-9-]{3,100}$",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -1716,6 +1625,7 @@
           "minimum": 1,
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -1725,6 +1635,7 @@
           "additionalProperties": {},
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -1733,6 +1644,7 @@
           "description": "Stage Map Id.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
@@ -1892,12 +1804,13 @@
           "additionalProperties": {},
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
-        "updateComments": {
+        "comments": {
           "type": "string",
-          "description": "Comments about the status update of the resource.",
+          "description": "Comments about the update to the resource.",
           "maxLength": 2000,
           "x-ms-mutability": [
             "read",
@@ -1909,6 +1822,7 @@
       "required": [
         "stageReference",
         "state",
+        "sequence",
         "parameterValues"
       ]
     },
@@ -1925,9 +1839,19 @@
             "create"
           ]
         },
-        "updateComments": {
+        "parameterValues": {
+          "type": "object",
+          "description": "Parameters to apply on the change of that stage. Key value pairs of parameter and values.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "comments": {
           "type": "string",
-          "description": "Comments about the status update of the resource.",
+          "description": "Comments about the update to the resource.",
           "maxLength": 2000,
           "x-ms-mutability": [
             "read",

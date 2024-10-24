@@ -48,22 +48,22 @@ model Stage {
   @minLength(3)
   @maxLength(100)
   @pattern("^[a-zA-Z0-9-]{3,100}$")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   name: string;
 
   @doc("Positive integer defining the orchestration order of the stages.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @minValue(1)
   sequence: int32;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   @doc("Parameters to apply on the change of that stage. Key value pairs of parameter and values.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   parameterValues?: Record<string | int32>;
 
   @doc("Stage Map Id.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   nestedStageMapResourceId?: string;
 }
 

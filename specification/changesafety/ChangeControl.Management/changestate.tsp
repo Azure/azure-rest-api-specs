@@ -35,7 +35,7 @@ model ChangeStateProperties {
   provisioningState?: ProvisioningState;
 
   @visibility("read", "create")
-  @doc("The status of the last operation.")
+  @doc("Describes the type of the change.")
   changeType: ChangeType;
 
   @visibility("read", "create", "update")
@@ -44,7 +44,7 @@ model ChangeStateProperties {
   description?: string;
 
   @visibility("read", "create")
-  @doc("ARM resource Id of the referenced StageMap.")
+  @doc("Azure resource Id of the referenced StageMap.")
   stageMapResourceId: string;
 
   @visibility("read", "create")
@@ -70,7 +70,7 @@ model ChangeStateProperties {
   @visibility("read", "create", "update")
   @doc("Comments about the last update to the changeState resource.")
   @maxLength(2000)
-  updateComments?: string;
+  comments?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
@@ -80,18 +80,24 @@ model ChangeStateProperties {
 
   @doc("Referenced stagemap snapshot.")
   @visibility("hidden")
-  stageMapSnapshot?: StageMap;
+  stageMapSnapshot?: string;
 }
 
-@doc("GetNextStage POST Action response.")
-model GetNextStagesResponse {
+@doc("RetrieveNextStage POST Action response.")
+model RetrieveNextStagesResponse {
+  @doc("ChangeState resource Id.")
+  changeStateResourceId: string;
+
+  @doc("Last stage sequence in the StageProgression.")
+  lastStageSequence: int32;
+
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
   @OpenAPI.extension("x-ms-identifiers", ["stageReference"])
-  nextStages: GetNextStagesResponseItem[];
+  nextStages: RetrieveNextStagesResponseItem[];
 }
 
-@doc("StageProgression data comes from GetNextStages API.")
-model GetNextStagesResponseItem {
+@doc("StageProgression data comes from RetrieveNextStages API.")
+model RetrieveNextStagesResponseItem {
   @doc("Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changestate resource.")
   @visibility("read")
   stageReference: string;
@@ -101,34 +107,6 @@ model GetNextStagesResponseItem {
   @doc("Parameters to apply on the change for the stage.")
   @visibility("read")
   parameterValues: Record<string | int32>;
-}
-
-@doc("GetAuditTrail response model.")
-model GetAuditTrailResponse {
-  @doc("Total Records in the response.")
-  totalRecords: int32;
-
-  @doc("Result count")
-  count: int32;
-
-  @doc("Audit Trail items array.")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
-  data: AuditTrailItem[];
-}
-
-@doc("Model for single audit trail item")
-model AuditTrailItem {
-  @doc("Resource Id.")
-  id: string;
-
-  @doc("Resource type.")
-  type: string;
-
-  @doc("TenantId of the resource.")
-  tenantId?: string;
-
-  @doc("User information.")
-  identity?: string;
 }
 
 @doc("Internal status of the ChangeState resource.")
@@ -177,18 +155,10 @@ interface ChangeStates {
   delete is ArmResourceDeleteWithoutOkAsync<ChangeState>;
 
   @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource.")
-  @action("getNextStages")
-  getNextStages is ArmResourceActionSync<
+  @action("retrieveNextStages")
+  retrieveNextStages is ArmResourceActionSync<
     ChangeState,
     void,
-    GetNextStagesResponse
-  >;
-
-  @doc("Gets the Audit trail of the ChangeState resource from ARG.")
-  @action("getAuditTrail")
-  getAuditTrail is ArmResourceActionSync<
-    ChangeState,
-    void,
-    GetAuditTrailResponse
+    RetrieveNextStagesResponse
   >;
 }
