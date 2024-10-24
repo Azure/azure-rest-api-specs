@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        entry:
+        folders:
           - skip: 0
             take: 71
           - skip: 71
@@ -63,8 +63,8 @@ jobs:
       - name: Validate All Specs
         run: |
           ./eng/scripts/TypeSpec-Validation.ps1 `
-            -Skip ${{ matrix.Skip }} `
-            -Take ${{ matrix.Take }} `
+            -Skip ${{ matrix.folders.skip }} `
+            -Take ${{ matrix.folders.take }} `
             -CheckAll `
             -GitClean `
             -Verbose
