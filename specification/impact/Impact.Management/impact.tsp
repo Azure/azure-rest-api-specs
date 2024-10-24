@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "Microsoft.Impact"
+  title: "Microsoft.Impact",
 })
 @versioned(Versions)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
