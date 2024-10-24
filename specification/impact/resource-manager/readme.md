@@ -40,7 +40,6 @@ suppressions:
     from: impact.json
     where:
       - $.definitions.WorkloadImpactProperties.properties.additionalProperties
-      - $.definitions.WorkloadImpactProperties.properties.additionalProperties
     reason:
       Property "settings" and "protectedSettings" for VirtualMachineExtension
       and VirtualMachineScaleSetExtensionProperties were previously defined like an empty object.
