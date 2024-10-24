@@ -4,9 +4,9 @@ using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.Private;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Workloads;
-
 /**
  * State of provisioning of the SAP monitor.
  */
@@ -670,4 +670,345 @@ model MsSqlServerProviderInstanceProperties extends ProviderSpecificProperties {
    * The provider type. For example, the value can be SapHana.
    */
   providerType: "MsSqlServer";
+}
+
+/**
+ * Gets or sets the Oracle provider properties.
+ */
+@added(Versions.v2024_02_01_preview)
+model OracleProviderInstanceProperties extends ProviderSpecificProperties {
+  /**
+   * Gets or sets the SQL server host name.
+   */
+  hostname?: string;
+
+  /**
+   * Gets or sets the database sql port.
+   */
+  dbPort?: string;
+
+  /**
+   * Gets or sets the database user name.
+   */
+  dbUsername?: string;
+
+  /**
+   * Gets or sets the database password.
+   */
+  @secret
+  dbPassword?: string;
+
+  /**
+   * Gets or sets the key vault URI to secret with the database password.
+   */
+  dbPasswordUri?: string;
+
+  /**
+   * Gets or sets the SAP System Identifier
+   */
+  sapSid?: string;
+
+  /**
+   * Gets or sets certificate preference if secure communication is enabled.
+   */
+  sslPreference?: SslPreference;
+
+  /**
+   * Gets or sets the blob URI to SSL certificate for the SQL Database.
+   */
+  sslCertificateUri?: string;
+
+  /**
+   * The provider type. For example, the value can be SapHana.
+   */
+  providerType: "Oracle";
+}
+
+/**
+ * Describes the properties of an Alert for SAP monitor.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertProperties {
+  /**
+   * Defines the SAP monitor Alert errors.
+   */
+  @visibility("read")
+  errors?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /**
+   * Defines the SAP monitor Alert Template Name.
+   */
+  templateName?: string;
+
+  /**
+   * Defines the provider type.
+   */
+  providerType?: string;
+
+  /**
+   * Defines the provider names.
+   */
+  providerNames?: string[];
+
+  /**
+   * Defines the alert rule properties.
+   */
+  alertRuleProperties?: AlertRuleProperties;
+
+  /**
+   * State of provisioning of the provider instance
+   */
+  @visibility("read")
+  provisioningState?: WorkloadMonitorProvisioningState;
+}
+
+/**
+ * Defines the Alert Rule Properties.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertRuleProperties {
+  /**
+   * Indicates whether the alert is in an enabled state.
+   */
+  status?: string;
+
+  /**
+   * Indicates the severity of the alert.
+   */
+  severity?: string;
+
+  /**
+   * The action group names.
+   */
+  actionGroups?: string[];
+
+  /**
+   * The threshold of the alert.
+   */
+  threshold?: int32;
+
+  /**
+   * The threshold operator of the alert.
+   */
+  thresholdOperator?: string;
+
+  /**
+   * The window size of the alert.
+   */
+  windowSize?: int32;
+
+  /**
+   * The evaluation frequency of the alert.
+   */
+  evaluationFrequency?: int32;
+
+  /**
+   * The number of failing periods to alert.
+   */
+  failingPeriodsToAlert?: int32;
+
+  /**
+   * The operator for failing periods.
+   */
+  failingPeriodsOperator?: string;
+
+  /**
+   * The duration to mute actions.
+   */
+  muteActionsDuration?: int32;
+
+  /**
+   * Indicates whether the alert is in an auto-mitigate state.
+   */
+  autoMitigate?: "string";
+
+  /**
+   * The alert dimension.
+   */
+  dimension?: "string";
+
+  /**
+   * The alert query parameters.
+   */
+  @maxItems(50)
+  @extension("x-ms-identifiers", ["name"])
+  alertQueryParameters?: AlertRuleQueryParameter[];
+}
+
+/**
+ * Defines the Alert Query Parameter.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertRuleQueryParameter {
+  /**
+   * The name of the alert query parameter.
+   */
+  name?: string;
+
+  /**
+   * The value of the alert query parameter.
+   */
+  value?: string;
+}
+
+/**
+ * Describes the properties of an Alert Template for SAP monitor.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertTemplateProperties {
+  /**
+   * Defines the SAP monitor Alert Template errors.
+   */
+  @visibility("read")
+  errors?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /**
+   * State of provisioning of the Alert Template.
+   */
+  @visibility("read")
+  provisioningState?: WorkloadMonitorProvisioningState;
+
+  /**
+   * Display name of the template.
+   */
+  templateDisplayName?: string;
+
+  /**
+   * Type of the provider.
+   */
+  providerType?: string;
+
+  /**
+   * Description of the template.
+   */
+  description?: string;
+
+  /**
+   * Severity level of the alert.
+   */
+  severity?: int32;
+
+  /**
+   * Query associated with the alert.
+   */
+  query?: string;
+
+  /**
+   * Operator used for threshold comparison.
+   */
+  thresholdOperator?: string;
+
+  /**
+   * Default threshold value.
+   */
+  defaultThreshold?: int32;
+
+  /**
+   * Lower bound for the threshold.
+   */
+  lowerBound?: int32;
+
+  /**
+   * Upper bound for the threshold.
+   */
+  upperBound?: int32;
+
+  /**
+   * Input option for the default threshold.
+   */
+  defaultThresholdInputOption?: string;
+
+  /**
+   * Unit of the alert.
+   */
+  alertUnit?: string;
+
+  /**
+   * Metric measurement details.
+   */
+  metricMeasurement?: AlertTemplateMetricMeasurement;
+
+  /**
+   * Parameters for the query input.
+   */
+  @maxItems(50)
+  @extension("x-ms-identifiers", ["name"])
+  queryInputParameters?: AlertTemplateQueryInputParameter[];
+}
+
+/**
+ * Defines the Alert Template MetricMeasurement Properties.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertTemplateMetricMeasurement {
+  /**
+   * Operator used for threshold comparison.
+   */
+  thresholdOperator?: string;
+
+  /**
+   * Threshold value.
+   */
+  threshold?: int32;
+
+  /**
+   * Type of metric trigger.
+   */
+  metricTriggerType?: string;
+
+  /**
+   * Column associated with the metric.
+   */
+  metricColumn?: string;
+
+  /**
+   * Frequency of measurement in minutes.
+   */
+  frequencyInMinutes?: int32;
+
+  /**
+   * Time window for measurement in minutes.
+   */
+  timeWindowInMinutes?: int32;
+}
+
+/**
+ * Defines the properties of a Query Input Parameter.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertTemplateQueryInputParameter {
+  /**
+   * Name of the parameter.
+   */
+  name?: string;
+
+  /**
+   * Type of the parameter.
+   */
+  type?: string;
+
+  /**
+   * Description of the parameter.
+   */
+  description?: string;
+
+  /**
+   * Default value of the parameter.
+   */
+  defaultValue?: string;
+
+  /**
+   * Log Analytics query associated with the parameter.
+   */
+  laQuery?: string;
+
+  /**
+   * Selection mode for the parameter.
+   */
+  selectionMode?: string;
+
+  /**
+   * Display name of the parameter.
+   */
+  displayName?: string;
 }
