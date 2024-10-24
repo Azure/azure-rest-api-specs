@@ -6,6 +6,7 @@ using Azure.ResourceManager;
 using Microsoft.AzureTerraform;
 
 @@clientName(ExportResult, "TerraformExportResult", "csharp");
+@@clientName(ExportResult.skippedResources, "SkippedResourceIds", "csharp");
 @@clientName(ResourceProvisioningState,
   "TerraformResourceProvisioningState",
   "csharp"
