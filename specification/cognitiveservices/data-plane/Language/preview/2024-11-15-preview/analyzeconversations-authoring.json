@@ -1127,6 +1127,256 @@
         }
       }
     },
+    "/authoring/analyze-conversations/projects/{projectName}/exported-models": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListExportedModels",
+        "description": "Lists the exported models belonging to a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringExportedTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Exported Models": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListExportedModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetExportedModel",
+        "description": "Gets the details of an exported model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "exportedModelName",
+            "in": "path",
+            "description": "The exported model name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportedModel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConversationalAnalysisAuthoring_CreateOrUpdateExportedModel",
+        "description": "Creates a new exported model or replaces an existing one.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exportedModelName",
+            "in": "path",
+            "description": "The exported model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The exported model info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportedModelOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCreateExportedModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConversationalAnalysisAuthoring_DeleteExportedModel",
+        "description": "Deletes an existing exported model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exportedModelName",
+            "in": "path",
+            "description": "The exported model name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteExportedModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetExportedModelJobStatus",
+        "description": "Gets the status for an existing job to create or update an exported model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "exportedModelName",
+            "in": "path",
+            "description": "The exported model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedModelJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportedModelStatus.json"
+          }
+        }
+      }
+    },
     "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "operationId": "ConversationalAnalysisAuthoring_GetImportStatus",
@@ -3449,6 +3699,57 @@
       ],
       "x-ms-discriminator-value": "Luis"
     },
+    "ConversationalAnalysisAuthoringExportedModelJobState": {
+      "type": "object",
+      "description": "Represents the state of a job to create or updated an exported model.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
     "ConversationalAnalysisAuthoringExportedOrchestrationOptions": {
       "type": "object",
       "description": "Represents the options used to define the orchestration behavior of an intent.",
@@ -3547,6 +3848,47 @@
         }
       ],
       "x-ms-discriminator-value": "QuestionAnswering"
+    },
+    "ConversationalAnalysisAuthoringExportedTrainedModel": {
+      "type": "object",
+      "description": "Represents an exported trained model.",
+      "properties": {
+        "exportedModelName": {
+          "type": "string",
+          "description": "The exported model name."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "The model ID."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last trained date time of the model."
+        },
+        "lastExportedModelDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last exported date time of the model."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The model expiration date."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "The model training config version."
+        }
+      },
+      "required": [
+        "exportedModelName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastExportedModelDateTime",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion"
+      ]
     },
     "ConversationalAnalysisAuthoringExportedUtteranceEntityLabel": {
       "type": "object",
@@ -4751,6 +5093,19 @@
         ]
       }
     },
+    "ExportedModelOptions": {
+      "type": "object",
+      "description": "Represents the options for creating or replacing an exported model.",
+      "properties": {
+        "trainedModelLabel": {
+          "type": "string",
+          "description": "The trained model label."
+        }
+      },
+      "required": [
+        "trainedModelLabel"
+      ]
+    },
     "InnerErrorCode": {
       "type": "string",
       "description": "Human-readable error code.",
@@ -4947,6 +5302,28 @@
           "description": "The ConversationalAnalysisAuthoringAssignedDeploymentResource items on this page",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedDeploymentResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringExportedTrainedModel": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringExportedTrainedModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringExportedTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedTrainedModel"
           },
           "x-ms-identifiers": []
         },
