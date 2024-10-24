@@ -40,7 +40,6 @@ using Azure.Core.Traits;
     Endpoint: string,
   }
 )
-
 @versioned(Versions)
 namespace Language.Conversations;
 

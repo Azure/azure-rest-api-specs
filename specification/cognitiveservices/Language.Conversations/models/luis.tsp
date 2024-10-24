@@ -27,39 +27,38 @@ model LuisTargetIntentResult extends TargetIntentResult {
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model LuisResult is Record<unknown>;
 
-
 /** This is a set of request parameters for LUIS Generally Available projects. */
 model LuisParameters extends AnalysisParameters {
-    /** The type of a target service */
-    targetProjectKind: targetProjectKind.Luis;
-  
-    /** The utterance to predict. */
-    @maxLength(500)
-    query?: string;
-  
-    /** This customizes how the service calls LUIS Generally Available projects. */
-    callingOptions?: LuisCallingOptions;
-  }
-  
+  /** The type of a target service */
+  targetProjectKind: targetProjectKind.Luis;
+
+  /** The utterance to predict. */
+  @maxLength(500)
+  query?: string;
+
   /** This customizes how the service calls LUIS Generally Available projects. */
-  model LuisCallingOptions {
-    /** Enable verbose response. */
-    verbose?: boolean;
-  
-    /** Save log to add in training utterances later. */
-    log?: boolean;
-  
-    /** Set true to show all intents. */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
-    `show-all-intents`?: boolean;
-  
-    /** The timezone offset for the location of the request. */
-    timezoneOffset?: int32;
-  
-    /** Enable spell checking. */
-    spellCheck?: boolean;
-  
-    /** The subscription key to use when enabling Bing spell check */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
-    `bing-spell-check-subscription-key`?: string;
-  }
+  callingOptions?: LuisCallingOptions;
+}
+
+/** This customizes how the service calls LUIS Generally Available projects. */
+model LuisCallingOptions {
+  /** Enable verbose response. */
+  verbose?: boolean;
+
+  /** Save log to add in training utterances later. */
+  log?: boolean;
+
+  /** Set true to show all intents. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  `show-all-intents`?: boolean;
+
+  /** The timezone offset for the location of the request. */
+  timezoneOffset?: int32;
+
+  /** Enable spell checking. */
+  spellCheck?: boolean;
+
+  /** The subscription key to use when enabling Bing spell check */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  `bing-spell-check-subscription-key`?: string;
+}

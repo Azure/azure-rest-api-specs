@@ -15,19 +15,18 @@ namespace Language.Conversations;
 
 /** This is a set of request parameters for Question Answering knowledge bases. */
 model QuestionAnsweringParameters extends AnalysisParameters {
-    /** This is a set of request parameters for Question Answering knowledge bases. */
-    targetProjectKind: targetProjectKind.QuestionAnswering;
-  
-    /** The options sent to a Question Answering KB. */
-    callingOptions?: AnswersOptions;
-  }
+  /** This is a set of request parameters for Question Answering knowledge bases. */
+  targetProjectKind: targetProjectKind.QuestionAnswering;
 
+  /** The options sent to a Question Answering KB. */
+  callingOptions?: AnswersOptions;
+}
 
 /** It is a wrap up a Question Answering KB response. */
 model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
-    /** It is a wrap up a Question Answering KB response. */
-    targetProjectKind: targetProjectKind.QuestionAnswering;
+  /** It is a wrap up a Question Answering KB response. */
+  targetProjectKind: targetProjectKind.QuestionAnswering;
 
-    /** The generated answer by a Question Answering KB. */
-    result?: AnswersResult;
-    }
+  /** The generated answer by a Question Answering KB. */
+  result?: AnswersResult;
+}

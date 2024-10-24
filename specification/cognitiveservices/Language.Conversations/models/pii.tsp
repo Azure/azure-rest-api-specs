@@ -47,7 +47,6 @@ model Entity {
   maskLength?: int32;
 }
 
-
 /** Result from the personally identifiable information detection and redaction operation performed on a list of conversations. */
 @added(Versions.v2024_05_01)
 model AnalyzeConversationConversationPiiResult
@@ -240,50 +239,49 @@ union ConversationPiiCategoriesExclude {
   USSocialSecurityNumber: "USSocialSecurityNumber",
 }
 
-
 /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
 union redactionCharacter {
-    string,
-  
-    /** Exclamation point character */
-    exclamationPoint: "!",
-  
-    /** Number sign character */
-    numberSign: "#",
-  
-    /** Dollar sign character */
-    dollar: "$",
-  
-    /** Percent sign character */
-    perCent: "%",
-  
-    /** Ampersand character */
-    ampersand: "&",
-  
-    /** Asterisk character */
-    asterisk: "*",
-  
-    /** Plus sign character */
-    plus: "+",
-  
-    /** Minus sign character */
-    minus: "-",
-  
-    /** Equals sign character */
-    equals: "=",
-  
-    /** Question mark character */
-    questionMark: "?",
-  
-    /** At sign character */
-    atSign: "@",
-  
-    /** Caret character */
-    caret: "^",
-  
-    /** Underscore character */
-    underscore: "_",
-  
-    /** Tilde character */
-    tilde: "~",
-  }
+  string,
+
+  /** Exclamation point character */
+  exclamationPoint: "!",
+
+  /** Number sign character */
+  numberSign: "#",
+
+  /** Dollar sign character */
+  dollar: "$",
+
+  /** Percent sign character */
+  perCent: "%",
+
+  /** Ampersand character */
+  ampersand: "&",
+
+  /** Asterisk character */
+  asterisk: "*",
+
+  /** Plus sign character */
+  plus: "+",
+
+  /** Minus sign character */
+  minus: "-",
+
+  /** Equals sign character */
+  equals: "=",
+
+  /** Question mark character */
+  questionMark: "?",
+
+  /** At sign character */
+  atSign: "@",
+
+  /** Caret character */
+  caret: "^",
+
+  /** Underscore character */
+  underscore: "_",
+
+  /** Tilde character */
+  tilde: "~",
+}

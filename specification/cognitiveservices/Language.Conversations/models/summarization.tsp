@@ -166,7 +166,6 @@ model ItemizedSummaryContext is SummaryContext {
   conversationItemId: string;
 }
 
-
 /** Enum that defines the length of the output summaries. */
 @added(Versions.v2024_05_01)
 union SummaryLengthBucket {
