@@ -359,7 +359,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content. The resource is not present or was already deleted."
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -529,7 +529,7 @@
             }
           },
           "204": {
-            "description": "NoContent"
+            "description": "No Content. The resource is not present or was already deleted."
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -1126,7 +1126,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content. The resource is not present or was already deleted."
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -1355,7 +1355,7 @@
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The operation is accepted and will be completed asynchronously.",
             "headers": {
               "Location": {
                 "description": "Operation URI for long running operation.",
@@ -1416,7 +1416,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content. The resource is not present or was already deleted."
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -2324,11 +2324,13 @@
         },
         "targetResourceId": {
           "description": "The resource Id of the Azure resource being integrated with Azure Managed Grafana. E.g., an Azure Kubernetes Service cluster.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "dataSourceResourceId": {
           "description": "The resource Id of the Azure resource which is used to configure Grafana data source. E.g., an Azure Monitor Workspace, an Azure Data Explorer cluster, etc.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "scenarios": {
           "description": "A list of integration scenarios covered by this integration fabric",
