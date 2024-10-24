@@ -24,20 +24,20 @@ model Validation is ProxyResource<ValidationProperties> {
 @armResourceOperations
 interface Validations {
     @doc("Get the validation.")
-    getValidations is ArmResourceRead<Validation>;
+    get is ArmResourceRead<Validation>;
 
     @doc("Creates a validation.")
-    createValidations is ArmResourceCreateOrReplaceAsync<Validation>;
+    create is ArmResourceCreateOrReplaceAsync<Validation>;
 
     @doc("Validation can be re-run by doing a PUT operation with the same parameters. The output of the validation will be updated based on the new validation run.")
-    updateValidations is ArmResourcePatchSync<Validation, ValidationProperties>;
+    update is ArmResourcePatchSync<Validation, ValidationProperties>;
 
     @doc("Deletes the validation.")
-    deleteValidations is ArmResourceDeleteSync<Validation>;
+    delete is ArmResourceDeleteSync<Validation>;
 
     @doc("List the validations.")
-    listValidationsByResourceGroup is ArmResourceListByParent<Validation>;
+    listByResourceGroup is ArmResourceListByParent<Validation>;
 
     @doc("List the validations.")
-    listValidationsBySubscription is ArmListBySubscription<Validation>;
+    listBySubscription is ArmListBySubscription<Validation>;
 }

@@ -35,39 +35,42 @@ model ValidatorVersion is ProxyResource<ValidatorVersionProperties> {
 
 @armResourceOperations
 interface Validators {
-    @doc("Get the validator.")
-    getValidator is ArmResourceRead<Validator>;
+  @doc("Get the validator.")
+  get is ArmResourceRead<Validator>;
 
-    @doc("Create the validator.")
-    createValidator is ArmResourceCreateOrReplaceAsync<Validator>;
+  @doc("Create the validator.")
+  create is ArmResourceCreateOrReplaceAsync<Validator>;
 
-    @doc("Update the validator.")
-    updateValidator is ArmResourcePatchSync<Validator, ValidatorProperties>;
+  @doc("Update the validator.")
+  update is ArmResourcePatchSync<Validator, ValidatorProperties>;
 
-    @doc("Deletes the validator.")
-    deleteValidator is ArmResourceDeleteSync<Validator>;
+  @doc("Deletes the validator.")
+  delete is ArmResourceDeleteSync<Validator>;
 
-    @doc("List the validators.")
-    listValidatorByResourceGroup is ArmResourceListByParent<Validator>;
+  @doc("List the validators.")
+  listByResourceGroup is ArmResourceListByParent<Validator>;
 
-    @doc("List the validators.")
-    listValidatorBySubscription is ArmListBySubscription<Validator>;
+  @doc("List the validators.")
+  listBySubscription is ArmListBySubscription<Validator>;
 
-    @doc("Get the validator version.")
-    getValidatorVersion is ArmResourceRead<ValidatorVersion>;
+  @doc("Get the validator version.")
+  getVersion is ArmResourceRead<ValidatorVersion>;
 
-    @doc("Create the validator version.")
-    createValidatorVersion is ArmResourceCreateOrReplaceAsync<ValidatorVersion>;
+  @doc("Create the validator version.")
+  createVersion is ArmResourceCreateOrReplaceAsync<ValidatorVersion>;
 
-    @doc("Update the validator version.")
-    updateValidatorVersion is ArmResourcePatchSync<ValidatorVersion, ValidatorVersionProperties>;
+  @doc("Update the validator version.")
+  updateVersion is ArmResourcePatchSync<
+    ValidatorVersion,
+    ValidatorVersionProperties
+  >;
 
-    @doc("Deletes the validator version.")
-    deleteValidatorVersion is ArmResourceDeleteSync<ValidatorVersion>;
+  @doc("Deletes the validator version.")
+  deleteVersion is ArmResourceDeleteSync<ValidatorVersion>;
 
-    @doc("List the validator versions.")
-    listValidatorVersionByResourceGroup is ArmResourceListByParent<ValidatorVersion>;
+  @doc("List the validator versions.")
+  listVersionByResourceGroup is ArmResourceListByParent<ValidatorVersion>;
 
-    @doc("List the validator versions.")
-    listValidatorVersionBySubscription is ArmListBySubscription<ValidatorVersion>;
+  @doc("List the validator versions.")
+  listVersionBySubscription is ArmListBySubscription<ValidatorVersion>;
 }

@@ -91,7 +91,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations": {
       "get": {
-        "operationId": "Validations_ListValidationsBySubscription",
+        "operationId": "Validations_ListBySubscription",
         "tags": [
           "Validations"
         ],
@@ -130,7 +130,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validators": {
       "get": {
-        "operationId": "Validators_ListValidatorBySubscription",
+        "operationId": "Validators_ListBySubscription",
         "tags": [
           "Validators"
         ],
@@ -169,7 +169,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validators/{validatorName}/versions": {
       "get": {
-        "operationId": "Validators_ListValidatorVersionBySubscription",
+        "operationId": "Validators_ListVersionBySubscription",
         "tags": [
           "Validators"
         ],
@@ -216,7 +216,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations": {
       "get": {
-        "operationId": "Validations_ListValidationsByResourceGroup",
+        "operationId": "Validations_ListByResourceGroup",
         "tags": [
           "Validations"
         ],
@@ -303,7 +303,7 @@
         }
       },
       "put": {
-        "operationId": "Validations_CreateValidations",
+        "operationId": "Validations_Create",
         "tags": [
           "Validations"
         ],
@@ -378,7 +378,7 @@
         }
       },
       "patch": {
-        "operationId": "Validations_UpdateValidations",
+        "operationId": "Validations_Update",
         "tags": [
           "Validations"
         ],
@@ -432,7 +432,7 @@
         }
       },
       "delete": {
-        "operationId": "Validations_DeleteValidations",
+        "operationId": "Validations_Delete",
         "tags": [
           "Validations"
         ],
@@ -479,7 +479,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validators": {
       "get": {
-        "operationId": "Validators_ListValidatorByResourceGroup",
+        "operationId": "Validators_ListByResourceGroup",
         "tags": [
           "Validators"
         ],
@@ -521,7 +521,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validators/{validatorName}": {
       "get": {
-        "operationId": "Validators_GetValidator",
+        "operationId": "Validators_Get",
         "tags": [
           "Validators"
         ],
@@ -566,7 +566,7 @@
         }
       },
       "put": {
-        "operationId": "Validators_CreateValidator",
+        "operationId": "Validators_Create",
         "tags": [
           "Validators"
         ],
@@ -695,7 +695,7 @@
         }
       },
       "delete": {
-        "operationId": "Validators_DeleteValidator",
+        "operationId": "Validators_Delete",
         "tags": [
           "Validators"
         ],
@@ -732,12 +732,17 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Validators_DeleteValidator": {
+            "$ref": "./examples/Validators_DeleteValidator.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validators/{validatorName}/versions": {
       "get": {
-        "operationId": "Validators_ListValidatorVersionByResourceGroup",
+        "operationId": "Validators_ListVersionByResourceGroup",
         "tags": [
           "Validators"
         ],
@@ -787,7 +792,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validators/{validatorName}/versions/{validatorVersionName}": {
       "get": {
-        "operationId": "Validators_GetValidatorVersion",
+        "operationId": "Validators_GetVersion",
         "tags": [
           "Validators"
         ],
@@ -840,7 +845,7 @@
         }
       },
       "put": {
-        "operationId": "Validators_CreateValidatorVersion",
+        "operationId": "Validators_CreateVersion",
         "tags": [
           "Validators"
         ],
@@ -985,7 +990,7 @@
         }
       },
       "delete": {
-        "operationId": "Validators_DeleteValidatorVersion",
+        "operationId": "Validators_DeleteVersion",
         "tags": [
           "Validators"
         ],
@@ -1121,17 +1126,17 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "The provisioning state Succeeded"
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "The provisioning state Failed"
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled"
+            "description": "The provisioning state Canceled"
           }
         ]
       },

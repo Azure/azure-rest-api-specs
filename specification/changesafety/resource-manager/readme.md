@@ -26,6 +26,7 @@ These are the global settings for the Validation.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: providerHub
 tag: package-2024-10-01-preview
 ```
 
