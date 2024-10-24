@@ -697,6 +697,7 @@ model GalleryApplicationProperties {
   /**
    * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   supportedOSType: OperatingSystemTypes;
 
   /**
@@ -993,6 +994,7 @@ model EncryptionImages {
  * Contains encryption settings for an OS disk image.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
 model OSDiskImageEncryption extends DiskImageEncryption {
   /**
    * This property specifies the security profile of an OS disk image.
@@ -1003,15 +1005,18 @@ model OSDiskImageEncryption extends DiskImageEncryption {
 /**
  * Contains security profile for an OS disk image.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
 model OSDiskImageSecurityProfile {
   /**
    * confidential VM encryption types
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   confidentialVMEncryptionType?: ConfidentialVMEncryptionType;
 
   /**
    * secure VM disk encryption set id
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   secureVMDiskEncryptionSetId?: string;
 }
 
@@ -1080,7 +1085,9 @@ model GalleryExtendedLocation {
 /**
  * The safety profile of the Gallery Application Version.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
 model GalleryApplicationVersionSafetyProfile
   extends GalleryArtifactSafetyProfileBase {}
 
@@ -1196,6 +1203,7 @@ model GalleryImageProperties {
   /**
    * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   hyperVGeneration?: HyperVGeneration;
 
   /**
@@ -1269,6 +1277,7 @@ model RecommendedMachineConfiguration {
   /**
    * Describes the resource range.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   vCPUs?: ResourceRange;
 
   /**
@@ -1396,6 +1405,7 @@ model GalleryImageVersionProperties {
  * The publishing profile of a gallery image Version.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model GalleryImageVersionPublishingProfile
   extends GalleryArtifactPublishingProfileBase {}
 
@@ -1449,6 +1459,8 @@ model GalleryArtifactVersionSource {
 /**
  * This is the OS disk image.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryOSDiskImage extends GalleryDiskImage {}
 
@@ -1459,6 +1471,7 @@ model GalleryDiskImage {
   /**
    * This property indicates the size of the VHD to be created.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility("read")
   sizeInGB?: int32;
 
@@ -1736,6 +1749,7 @@ model SharedGalleryImageProperties {
   /**
    * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   hyperVGeneration?: HyperVGeneration;
 
   /**
@@ -1831,6 +1845,8 @@ model SharedGalleryImageVersionStorageProfile {
  * This is the OS disk image.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model SharedGalleryOSDiskImage extends SharedGalleryDiskImage {}
 
 /**
@@ -1840,6 +1856,7 @@ model SharedGalleryDiskImage {
   /**
    * This property indicates the size of the VHD to be created.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility("read")
   diskSizeGB?: int32;
 
@@ -1996,6 +2013,7 @@ model CommunityGalleryImageProperties {
   /**
    * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   hyperVGeneration?: HyperVGeneration;
 
   /**
