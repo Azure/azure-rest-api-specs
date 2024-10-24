@@ -82,8 +82,7 @@ interface EasmClient {
 @@clientName(Easm.Banner.banner, "bannerName", "csharp");
 @@clientName(Easm.Cookie, "CookieDetails", "csharp");
 @@clientName(Easm.Cve, "CveDetails", "csharp");
-@@clientName(Easm.DataConnectionData, "DataConnectionPayload", "csharp");
-@@clientName(Easm.DiscoGroupData, "DiscoveryGroupPayload", "csharp");
+@@clientName(Easm.DataConnection, "DataConnectionPayload", "csharp");
 @@clientName(Easm.DiscoGroup, "DiscoveryGroup", "csharp");
 @@clientName(Easm.DiscoRunPageResult, "DiscoveryRunPageResult", "csharp");
 @@clientName(Easm.DiscoRunResult, "DiscoveryRunResult", "csharp");
@@ -107,7 +106,7 @@ interface EasmClient {
 );
 @@clientName(Easm.Reputation, "ReputationDetails", "csharp");
 @@clientName(Easm.ResourceUrl, "ResourceUri", "csharp");
-@@clientName(Easm.SavedFilterData, "SavedFilterPayload", "csharp");
+@@clientName(Easm.SavedFilter, "SavedFilter", "csharp");
 @@clientName(Easm.Service, "AssetService", "csharp");
 @@clientName(Easm.Source, "SourceDetails", "csharp");
 @@clientName(Easm.Source.source, "sourceName", "csharp");
@@ -115,11 +114,11 @@ interface EasmClient {
 @@clientName(Easm.TaskState, "TaskResourceState", "csharp");
 @@clientName(Easm.TaskPhase, "TaskResourcePhase", "csharp");
 @@clientName(Easm.DiscoSourceKind, "DiscoverySourceKind", "csharp");
-@@clientName(Easm.LogAnalyticsDataConnectionData,
+@@clientName(Easm.LogAnalyticsDataConnection,
   "LogAnalyticsDataConnectionPayload",
   "csharp"
 );
-@@clientName(Easm.AzureDataExplorerDataConnectionData,
+@@clientName(Easm.AzureDataExplorerDataConnection,
   "AzureDataExplorerDataConnectionPayload",
   "csharp"
 );

@@ -487,33 +487,14 @@ model DataConnectionProperties {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @discriminator("kind")
-model DataConnectionData {
-  /** Discriminator property for DataConnectionData. */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  kind: string;
-
-  @doc("The name of data connection")
-  name?: string;
-
-  @doc("The type of data the data connection will transfer.")
-  content?: DataConnectionContent;
-
-  @doc("The rate at which the data connection will receive updates.")
-  frequency?: DataConnectionFrequency;
-
-  @doc("The day to update the data connection on. (1-7 for weekly, 1-31 for monthly)")
-  frequencyOffset?: int32;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@discriminator("kind")
 @resource("dataConnections")
 model DataConnection {
   /** Discriminator property for DataConnection. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: string;
 
-  @doc("The system generated unique id for the resource.")
+  @doc("This is typically the same as the name but might be different for different models.")
+  @visibility("read")
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
@@ -534,7 +515,7 @@ model DataConnection {
   @doc("The rate at which the data connection will receive updates.")
   frequency?: DataConnectionFrequency;
 
-  @doc("The day to update the data connection on.")
+  @doc("The day to update the data connection on. (1-7 for weekly, 1-31 for monthly)")
   frequencyOffset?: int32;
 
   @doc("The date the data connection was last updated.")
@@ -579,33 +560,6 @@ model DependentResource {
   lastObservedValidation?: utcDateTime;
   lastObservedActualSriHash?: string;
   lastObservedExpectedSriHash?: string;
-}
-
-@doc("A request body used to create a discovery group.")
-model DiscoGroupData {
-  @doc("The name for a disco group.")
-  name?: string;
-
-  @doc("The description for a disco group.")
-  description?: string;
-
-  @doc("The tier for the disco group which will affect the algorithm used for the disco runs in this group.")
-  tier?: string;
-
-  @doc("The frequency at which the disco group is supposed to be rerun in milliseconds.")
-  frequencyMilliseconds?: int64;
-
-  @doc("The list of seeds used for the disco group runs.")
-  seeds?: DiscoSource[];
-
-  @doc("The list of names used for the disco group runs.")
-  names?: string[];
-
-  @doc("The list of excludes used for the disco group runs, aka assets to exclude from the discovery algorithm.")
-  excludes?: DiscoSource[];
-
-  @doc("The unique identifier for the disco template used for the disco group creation.")
-  templateId?: string;
 }
 
 @doc("This is an object that exists to provide a common schema definition for the action parameters.")
@@ -669,6 +623,7 @@ model Policy {
 @resource("discoGroups")
 model DiscoGroup {
   @doc("This is typically the same as the name but might be different for different models.")
+  @visibility("read")
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
@@ -677,6 +632,7 @@ model DiscoGroup {
   name: string;
 
   @doc("The name that can be used for display purposes.")
+  @visibility("read")
   displayName?: string;
 
   @doc("The description for a disco group.")
@@ -698,9 +654,11 @@ model DiscoGroup {
   excludes?: DiscoSource[];
 
   @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
+  @visibility("read")
   latestRun?: DiscoRunResult;
 
   @doc("The date for the disco group was created.")
+  @visibility("read")
   createdDate?: utcDateTime;
 
   @doc("The unique identifier for the disco template used for the disco group creation.")
@@ -1306,19 +1264,11 @@ model ResourceUrl {
   recent?: boolean;
 }
 
-@doc("A request body used to create a saved filter.")
-model SavedFilterData {
-  @doc("An expression on the resource type that selects the resources to be returned.")
-  filter: string;
-
-  @doc("A human readable description of the saved filter.")
-  description: string;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("savedFilters")
 model SavedFilter {
   @doc("This is typically the same as the name but might be different for different models.")
+  @visibility("read")
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
@@ -1327,6 +1277,7 @@ model SavedFilter {
   name: string;
 
   @doc("The name that can be used for display purposes.")
+  @visibility("read")
   displayName?: string;
 
   filter?: string;
@@ -2005,24 +1956,6 @@ union PolicyAction {
 
   @doc("Remove from inventory.")
   "removeFromInventory",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model LogAnalyticsDataConnectionData extends DataConnectionData {
-  @doc("The kind of DataConnectionData ")
-  kind: "logAnalytics";
-
-  @doc("properties")
-  properties: LogAnalyticsDataConnectionProperties;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model AzureDataExplorerDataConnectionData extends DataConnectionData {
-  @doc("The kind of DataConnectionData")
-  kind: "azureDataExplorer";
-
-  @doc("properties")
-  properties: AzureDataExplorerDataConnectionProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
