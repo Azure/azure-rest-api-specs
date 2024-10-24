@@ -175,7 +175,8 @@ union ContainerType {
   InferenceServer: "InferenceServer",
 }
 
-@doc("Online endpoint configuration")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("Online endpoint definition.")
 model OnlineEndpoint extends EndpointBase {
   @doc("ARM resource ID of the compute if it exists. optional")
   compute?: string;
@@ -194,6 +195,8 @@ model OnlineEndpoint extends EndpointBase {
   traffic?: Record<int32>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("Online deployment definition.")
 model OnlineDeployment extends EndpointDeploymentBase {
   @doc("If true, enables Application Insights logging.")
   appInsightsEnabled?: boolean;
@@ -371,11 +374,25 @@ model OnlineRequestSettings {
   requestTimeout?: duration;
 }
 
+@doc("Scale type for online endpoints.")
+union ScaleType {
+  string,
+
+  @doc("Default.")
+  Default: "Default",
+
+  @doc("TargetUtilization.")
+  TargetUtilization: "TargetUtilization",
+}
+
 @doc("Online deployment scaling configuration.")
 @discriminator("scaleType")
-model OnlineScaleSettings {}
+model OnlineScaleSettings {
+  @doc("The scale type for the deployment.")
+  scaleType: ScaleType;
+}
 
-@doc("Batch endpoint/deployment specific models.")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Batch endpoint configuration.")
 model BatchEndpoint extends EndpointBase {
   @doc("Default values for Batch Endpoint")
@@ -399,6 +416,7 @@ model PagedBatchEndpoint {
   nextLink?: ResourceLocation<BatchEndpoint>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Batch inference settings per deployment.")
 model BatchDeployment extends EndpointDeploymentBase {
   @doc("Compute target for batch inference operation.")
@@ -473,9 +491,23 @@ model BatchEndpointDefaults {
   deploymentName?: string;
 }
 
+@doc("The enumerated property types for batch deployments.")
+union BatchDeploymentConfigurationType {
+  string,
+
+  @doc("Model")
+  Model: "Model",
+
+  @doc("PipelineComponent")
+  PipelineComponent: "PipelineComponent",
+}
+
 @doc("Properties relevant to different deployment types.")
 @discriminator("deploymentConfigurationType")
-model BatchDeploymentConfiguration {}
+model BatchDeploymentConfiguration {
+  @doc("The batch deployment configuration type.")
+  deploymentConfigurationType: BatchDeploymentConfigurationType;
+}
 
 @doc("Log verbosity for batch inferencing. Increasing verbosity order for logging is : Warning, Info and Debug. The default value is Info.")
 union BatchLoggingLevel {
@@ -502,8 +534,11 @@ union BatchOutputAction {
   AppendRow: "AppendRow",
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("Deployment resource configuration.")
 model DeploymentResourceConfiguration extends ResourceConfiguration {}
 
+@doc("Resource configuration.")
 model ResourceConfiguration {
   @doc("Optional number of instances or nodes used by the compute target.")
   @visibility("read", "create")

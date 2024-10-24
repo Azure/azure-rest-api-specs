@@ -15,6 +15,8 @@ using Azure.Core.Foundations;
 namespace Microsoft.MachineLearningServices;
 
 interface Data {
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List data containers.")
   @route("/data")
   @get
@@ -28,6 +30,8 @@ interface Data {
     listViewType?: ListViewType,
   ): PagedDataContainer;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Delete container.")
   @route("/data/{name}")
   @delete
@@ -42,6 +46,8 @@ interface Data {
     name: string,
   ): void;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get container.")
   @route("/data/{name}")
   @get
@@ -51,6 +57,8 @@ interface Data {
     name: string,
   ): DataContainer;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or update container.")
   @route("/data/{name}")
   @put
@@ -66,6 +74,8 @@ interface Data {
 }
 
 interface DataVersionsBase {
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List data versions in the data container")
   @route("/data/{name}/versions")
   @get
@@ -96,6 +106,8 @@ interface DataVersionsBase {
     listViewType?: ListViewType,
   ): PagedDataVersionBase;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Delete version.")
   @route("/data/{name}/versions/{version}")
   @delete
@@ -110,6 +122,8 @@ interface DataVersionsBase {
     version: string,
   ): void;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get version.")
   @route("/data/{name}/versions/{version}")
   @get
@@ -124,6 +138,8 @@ interface DataVersionsBase {
     version: string,
   ): DataVersionBase;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or update version.")
   @route("/data/{name}/versions/{version}")
   @put
@@ -142,6 +158,8 @@ interface DataVersionsBase {
     body: DataVersionBase,
   ): DataVersionBase;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Publish version asset into registry.")
   @route("/data/{name}/versions/{version}/publish")
   @post

@@ -28,6 +28,7 @@ model EvaluatorConfiguration {
   dataMapping?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("Abstract data class.")
 @discriminator("type")
 model InputData {
@@ -51,6 +52,7 @@ model Dataset extends InputData {
   type: "dataset";
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @discriminator("type")
 @doc("Evaluation Target.")
 model EvaluationTarget {
@@ -60,6 +62,7 @@ model EvaluationTarget {
 
 @doc("Base Model and prompt for evaluation.")
 model BaseModel extends EvaluationTarget {
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("Base model for evaluation.")
   model_config: Record<Record<unknown>>;
 

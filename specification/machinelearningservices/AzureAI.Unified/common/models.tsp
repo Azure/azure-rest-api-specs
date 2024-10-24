@@ -187,9 +187,26 @@ union EgressPublicNetworkAccessType {
   Disabled: "Disabled",
 }
 
+@doc("Enum to determine which reference method to use for an asset.")
+union ReferenceType {
+  string,
+
+  @doc("Id")
+  Id: "Id",
+
+  @doc("DataPath")
+  DataPath: "DataPath",
+
+  @doc("OutputPath")
+  OutputPath: "OutputPath",
+}
+
 @doc("Base definition for asset references.")
 @discriminator("referenceType")
-model AssetReferenceBase {}
+model AssetReferenceBase {
+  @doc("Asset reference type.")
+  referenceType: ReferenceType;
+}
 
 @doc("Reference to an asset via its ARM resource ID.")
 model IdAssetReference extends AssetReferenceBase {
@@ -263,6 +280,7 @@ model PartialMinimalTrackedResource {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Strictly used in update requests.")
 model PartialMinimalTrackedResourceWithIdentity
   extends PartialMinimalTrackedResource {
@@ -270,6 +288,7 @@ model PartialMinimalTrackedResourceWithIdentity
   identity?: PartialManagedServiceIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Strictly used in update requests.")
 model PartialMinimalTrackedResourceWithSku
   extends PartialMinimalTrackedResource {
@@ -388,6 +407,8 @@ union SkuScaleType {
   None: "None",
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("Base definition for an asset.")
 model AssetBase extends ResourceBase {
   @doc("If the name version are system generated (anonymous registration).")
   @visibility("read", "create")
@@ -409,6 +430,7 @@ union DataType {
   uri_folder: "uri_folder",
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("AssetContainer definition")
 model AssetContainer extends ResourceBase {
   @doc("Is the asset archived?")

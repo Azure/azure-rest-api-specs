@@ -16,7 +16,9 @@ using Azure.Core.Traits;
 
 namespace Microsoft.MachineLearningServices;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DataContainer Definition")
+@discriminator("dataType")
 model DataContainer extends AssetContainer {
   @doc("[Required] Specifies the type of data")
   @visibility("read", "create")
@@ -36,13 +38,18 @@ model PagedDataContainer {
   nextLink?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DataVersionBase Definition")
+@discriminator("dataType")
 model DataVersionBase extends AssetBase {
   @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
   @visibility("read", "create")
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   dataUri: string;
+
+  @doc("Data type")
+  dataType: DataType;
 }
 
 @doc("PagedDataVersionBase Definition")
@@ -58,14 +65,16 @@ model PagedDataVersionBase {
   nextLink?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("UriFileDataVersion Definition")
 model UriFileDataVersion extends DataVersionBase {
   @doc("[Required] Specifies the type of data.")
-  dataType: "uri_file";
+  dataType: DataType.uri_file;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("UriFolderDataVersion Definition")
 model UriFolderDataVersion extends DataVersionBase {
   @doc("[Required] Specifies the type of data.")
-  dataType: "uri_folder";
+  dataType: DataType.uri_folder;
 }

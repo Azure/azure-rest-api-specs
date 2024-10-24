@@ -14,6 +14,8 @@ using Azure.Core.Foundations;
 
 namespace Microsoft.MachineLearningServices;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get an Online Endpoint.")
 @route("/onlineEndpoints/{name}")
 @get
@@ -28,6 +30,8 @@ op getOnlineEndpoint is Azure.Core.Foundations.Operation<
   OnlineEndpoint
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Delete an Online Endpoint.")
 @route("/onlineEndpoints/{name}")
 @delete
@@ -42,6 +46,8 @@ op deleteOnlineEndpoint is Azure.Core.Foundations.Operation<
   void
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Update an Online Endpoint.")
 @route("/onlineEndpoints/{name}")
 @patch
@@ -60,6 +66,8 @@ op updateOnlineEndpoint is Azure.Core.Foundations.Operation<
   OnlineEndpoint
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Create or Update an Online Endpoint.")
 @route("/onlineEndpoints/{name}")
 @put
@@ -78,6 +86,8 @@ op createOrUpdateOnlineEndpoint is Azure.Core.Foundations.Operation<
   OnlineEndpoint
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/onlineEndpoints")
 @doc("List Online Endpoints.")
 @get
@@ -107,6 +117,8 @@ op listOnlineEndpoints(
   orderBy?: OrderString,
 ): PagedOnlineEndpoint;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
 @route("/onlineEndpoints/{name}/listKeys")
 @post
@@ -125,6 +137,8 @@ op listKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
   EndpointAuthKeys
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
 @route("/onlineEndpoints/{name}/regenerateKeys")
 @post
@@ -139,6 +153,8 @@ op regenerateKeysOnlineEndpoint is Azure.Core.Foundations.Operation<
   EndpointAuthKeys
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.")
 @route("/onlineEndpoints/{name}/token")
 @put
@@ -153,6 +169,8 @@ op getTokenOnlineEndpoint is Azure.Core.Foundations.Operation<
   EndpointAuthToken
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/onlineEndpoints/{endpointName}/deployments")
 @doc("List Online Deployments.")
 @get
@@ -170,6 +188,8 @@ op listOnlineDeployments(
   $top?: int32,
 ): PagedOnlineDeployment;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Delete an Online Deployment.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
 @delete
@@ -186,6 +206,8 @@ op deleteOnlineDeployment is Azure.Core.Foundations.Operation<
   void
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Gets an online inference deployment by id.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
 @get
@@ -202,6 +224,8 @@ op getOnlineDeployment is Azure.Core.Foundations.Operation<
   OnlineDeployment
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Update a Online Deployment.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
 @patch
@@ -222,6 +246,8 @@ op updateOnlineDeployment is Azure.Core.Foundations.Operation<
   OnlineDeployment
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Create or Update an Online Deployment.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}")
 @put
@@ -242,6 +268,8 @@ op createOrUpdateOnlineDeployment is Azure.Core.Foundations.Operation<
   OnlineDeployment
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Polls an Endpoint operation.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs")
 @post
@@ -262,6 +290,8 @@ op pollLogsOnlineDeployment is Azure.Core.Foundations.Operation<
   DeploymentLogs
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("List Inference Endpoint Deployment Skus.")
 @route("/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus")
 @get
@@ -283,6 +313,8 @@ op getSkusOnlineDeployment is Azure.Core.Foundations.Operation<
 >;
 
 ///// Batch Endpoints ///////
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get a Batch Endpoint.")
 @route("/batchEndpoints/{endpointName}")
 @get
@@ -297,6 +329,8 @@ op getBatchEndpoint is Azure.Core.Foundations.Operation<
   BatchEndpoint
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Delete an Batch Endpoint.")
 @route("/batchEndpoints/{endpointName}")
 @delete
@@ -311,6 +345,8 @@ op deleteBatchEndpoint is Azure.Core.Foundations.Operation<
   void
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Update a Batch Endpoint.")
 @route("/batchEndpoints/{endpointName}")
 @patch
@@ -329,6 +365,8 @@ op updateBatchEndpoint is Azure.Core.Foundations.Operation<
   BatchEndpoint
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Create or Update a Batch Endpoint.")
 @route("/batchEndpoints/{endpointName}")
 @put
@@ -347,6 +385,8 @@ op createOrUpdateBatchEndpoint is Azure.Core.Foundations.Operation<
   BatchEndpoint
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/batchEndpoints")
 @doc("List Batch Endpoints.")
 @get
@@ -356,6 +396,8 @@ op listBatchEndpoints(
   count?: int32,
 ): PagedBatchEndpoint;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/batchEndpoints/{endpointName}/deployments")
 @doc("List Batch Deployments.")
 @get
@@ -377,6 +419,8 @@ op listBatchDeployments(
   $skip?: string,
 ): PagedBatchDeployment;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Delete an Batch Deployment.")
 @route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
 @delete
@@ -393,6 +437,8 @@ op deleteBatchDeployment is Azure.Core.Foundations.Operation<
   void
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Gets a batch inference deployment by id.")
 @route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
 @get
@@ -409,6 +455,8 @@ op getBatchDeployment is Azure.Core.Foundations.Operation<
   BatchDeployment
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Update a Batch Deployment.")
 @route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
 @patch
@@ -429,6 +477,8 @@ op updateBatchDeployment is Azure.Core.Foundations.Operation<
   BatchDeployment
 >;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Create or Update a Batch Deployment.")
 @route("/batchEndpoints/{endpointName}/deployments/{deploymentName}")
 @put

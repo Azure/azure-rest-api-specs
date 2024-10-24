@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "../main.tsp";
 import "../common/models.tsp";
 import "@typespec/openapi";
 
@@ -14,6 +15,7 @@ using Azure.Core.Traits;
 
 namespace Microsoft.MachineLearningServices;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Model Container Definition")
 model ModelContainer extends AssetContainer {
   @doc("Provisioning state for the model container.")
@@ -21,6 +23,7 @@ model ModelContainer extends AssetContainer {
   provisioningState?: AssetProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Model Version Definition")
 model ModelVersion extends AssetBase {
   @doc("Mapping of model flavors to their properties.")
@@ -57,7 +60,9 @@ model PagedModelVersion {
 }
 
 @doc("Asset Provisioning State Definition")
-enum AssetProvisioningState {
+union AssetProvisioningState {
+  string,
+
   @doc("The operation succeeded.")
   Succeeded: "Succeeded",
 

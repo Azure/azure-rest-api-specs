@@ -14,9 +14,7 @@ using Azure.Core.Foundations;
 namespace Microsoft.MachineLearningServices;
 
 interface ModelContainers {
-  /**
-   * Get model container.
-   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get a model container.")
   @route("/models/{name}")
   @get
@@ -31,6 +29,7 @@ interface ModelContainers {
     ModelContainer
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates or updates a model container.")
   @route("/models/{name}")
   @put
@@ -47,6 +46,7 @@ interface ModelContainers {
 }
 
 interface ModelVersions {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List model versions.")
   @route("/models/{name}/versions")
   @get
