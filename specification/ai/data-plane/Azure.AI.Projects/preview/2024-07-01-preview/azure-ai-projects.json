@@ -71,6 +71,37 @@
   },
   "tags": [],
   "paths": {
+    "/": {
+      "get": {
+        "operationId": "Connections_GetWorkspace",
+        "description": "Gets the properties of the specified machine learning workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetWorkspaceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/assistants": {
       "get": {
         "operationId": "Agents_ListAgents",
@@ -346,9 +377,47 @@
         }
       }
     },
+    "/components/{resourceName}": {
+      "get": {
+        "operationId": "Diagnostics_GetAppInsights",
+        "description": "Gets the properties of the specified Application Insights resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The AppInsights Azure resource Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetAppInsightsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/connections": {
       "get": {
-        "operationId": "Connections_List",
+        "operationId": "Connections_ListConnections",
         "description": "List the details of all the connections (not including their credentials)",
         "parameters": [
           {
@@ -412,7 +481,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConnectionsListResponse"
+              "$ref": "#/definitions/ListConnectionsResponse"
             }
           },
           "default": {
@@ -432,7 +501,7 @@
     },
     "/connections/{connectionName}": {
       "get": {
-        "operationId": "Connections_Get",
+        "operationId": "Connections_GetConnection",
         "description": "Get the details of a single connection, without credentials.",
         "parameters": [
           {
@@ -450,7 +519,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConnectionsListSecretsResponse"
+              "$ref": "#/definitions/GetConnectionResponse"
             }
           },
           "default": {
@@ -470,7 +539,7 @@
     },
     "/connections/{connectionName}/listsecrets": {
       "post": {
-        "operationId": "Connections_ListSecrets",
+        "operationId": "Connections_GetConnectionWithSecrets",
         "description": "Get the details of a single connection, including credentials (if available).",
         "parameters": [
           {
@@ -505,7 +574,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConnectionsListSecretsResponse"
+              "$ref": "#/definitions/GetConnectionResponse"
             }
           },
           "default": {
@@ -8065,6 +8134,19 @@
         }
       }
     },
+    "AppInsightsProperties": {
+      "type": "object",
+      "description": "The properties of the Application Insights resource",
+      "properties": {
+        "ConnectionString": {
+          "type": "string",
+          "description": "Authentication type of the connection target"
+        }
+      },
+      "required": [
+        "ConnectionString"
+      ]
+    },
     "ApplicationInsightsConfiguration": {
       "type": "object",
       "description": "Data Source for Application Insights.",
@@ -8320,45 +8402,6 @@
           }
         ]
       }
-    },
-    "ConnectionsListResponse": {
-      "type": "object",
-      "description": "Response from the list operation",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "A list of connection list secrets",
-          "items": {
-            "$ref": "#/definitions/ConnectionsListSecretsResponse"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ConnectionsListSecretsResponse": {
-      "type": "object",
-      "description": "Response from the listSecrets operation",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique identifier for the connection"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "properties": {
-          "$ref": "#/definitions/ConnectionProperties",
-          "description": "The properties of the resource"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "properties"
-      ]
     },
     "CreatedEvaluationResponse": {
       "type": "object",
@@ -8672,6 +8715,75 @@
         ]
       }
     },
+    "GetAppInsightsResponse": {
+      "type": "object",
+      "description": "Response from getting properties of the Application Insights resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the resouce"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "properties": {
+          "$ref": "#/definitions/AppInsightsProperties",
+          "description": "The properties of the resource"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "properties"
+      ]
+    },
+    "GetConnectionResponse": {
+      "type": "object",
+      "description": "Response from the listSecrets operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the connection"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionProperties",
+          "description": "The properties of the resource"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "properties"
+      ]
+    },
+    "GetWorkspaceResponse": {
+      "type": "object",
+      "description": "Response from the Workspace - Get operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the resouce"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The properties of the resource"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "properties"
+      ]
+    },
     "InputData": {
       "type": "object",
       "description": "Abstract data class for input data configuration.",
@@ -8684,6 +8796,22 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "ListConnectionsResponse": {
+      "type": "object",
+      "description": "Response from the list operation",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of connection list secrets",
+          "items": {
+            "$ref": "#/definitions/GetConnectionResponse"
+          }
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PagedEvaluation": {
@@ -8901,6 +9029,19 @@
           }
         ]
       }
+    },
+    "WorkspaceProperties": {
+      "type": "object",
+      "description": "workspace properties",
+      "properties": {
+        "applicationInsights": {
+          "type": "string",
+          "description": "Authentication type of the connection target"
+        }
+      },
+      "required": [
+        "applicationInsights"
+      ]
     }
   },
   "parameters": {
