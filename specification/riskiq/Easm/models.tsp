@@ -386,7 +386,7 @@ model Attribute {
 
 @doc("The history of how this asset was pulled into the workspace through the discovery process.")
 model AuditTrailItem {
-  @doc("The system generated unique id for the resource.")
+  @doc("This is typically the same as the name but might be different for different models.")
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
@@ -623,6 +623,10 @@ model ActionParameters {
 @Versioning.added(Versions.v2024_10_01_preview)
 @resource("policies")
 model Policy {
+  @doc("This is typically the same as the name but might be different for different models.")
+  @visibility("read")
+  id?: string;
+
   @doc("The caller provided unique name for the resource.")
   @key("policyName")
   @visibility("read")
@@ -643,19 +647,19 @@ model Policy {
 
   @doc("Number of assets in inventory that have been updated by this policy.")
   @visibility("read")
-  updatedAssetsCount: int64;
+  updatedAssetsCount?: int64;
 
   @doc("The unique name of the user that created the policy user@gmail.com")
   @visibility("read")
-  user: string;
+  user?: string;
 
   @doc("The date this policy was created, in RFC3339 format.")
   @visibility("read")
-  createdDate: utcDateTime;
+  createdDate?: utcDateTime;
 
   @doc("The date this policy was last updated, in RFC3339 format.")
   @visibility("read")
-  updatedDate: utcDateTime;
+  updatedDate?: utcDateTime;
 
   @doc("Additional parameters needed to perform the policy action.")
   actionParameters: ActionParameters;
@@ -664,7 +668,7 @@ model Policy {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("discoGroups")
 model DiscoGroup {
-  @doc("The system generated unique id for the resource.")
+  @doc("This is typically the same as the name but might be different for different models.")
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
@@ -1314,7 +1318,7 @@ model SavedFilterData {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("savedFilters")
 model SavedFilter {
-  @doc("The system generated unique id for the resource.")
+  @doc("This is typically the same as the name but might be different for different models.")
   id?: string;
 
   @doc("The caller provided unique name for the resource.")

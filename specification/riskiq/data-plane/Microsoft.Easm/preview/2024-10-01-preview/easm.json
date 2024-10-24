@@ -2823,7 +2823,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The system generated unique id for the resource."
+          "description": "This is typically the same as the name but might be different for different models."
         },
         "name": {
           "type": "string",
@@ -3778,7 +3778,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The system generated unique id for the resource."
+          "description": "This is typically the same as the name but might be different for different models."
         },
         "name": {
           "type": "string",
@@ -6430,8 +6430,7 @@
           "description": "The Policy items on this page",
           "items": {
             "$ref": "#/definitions/Policy"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -6504,6 +6503,11 @@
       "type": "object",
       "description": "This is an object that exists to provide a common schema definition for the policy response.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "This is typically the same as the name but might be different for different models.",
+          "readOnly": true
+        },
         "name": {
           "type": "string",
           "description": "The caller provided unique name for the resource.",
@@ -6558,10 +6562,6 @@
         "name",
         "filterName",
         "action",
-        "updatedAssetsCount",
-        "user",
-        "createdDate",
-        "updatedDate",
         "actionParameters"
       ]
     },
@@ -6887,7 +6887,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The system generated unique id for the resource."
+          "description": "This is typically the same as the name but might be different for different models."
         },
         "name": {
           "type": "string",
