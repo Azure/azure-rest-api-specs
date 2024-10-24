@@ -25,6 +25,16 @@ model CompletionsUsage {
   @encodedName("application/json", "total_tokens")
   totalTokens: int32;
 
+  @doc("Details of the prompt tokens.")
+  @added(ServiceApiVersions.v2024_10_01_Preview)
+  @encodedName("application/json", "prompt_tokens_details")
+  promptTokensDetails?: {
+
+    /** The number of cached prompt tokens. */
+    @encodedName("application/json", "cached_tokens")
+    cachedTokens?: int32;
+  };
+
   /** Breakdown of tokens used in a completion. */
   @added(ServiceApiVersions.v2024_09_01_Preview)
   @encodedName("application/json", "completion_tokens_details")
