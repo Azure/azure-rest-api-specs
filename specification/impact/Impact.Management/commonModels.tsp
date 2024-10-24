@@ -83,143 +83,154 @@ model ClientIncidentDetails {
 }
 
 @doc("List of incident interfaces.")
-enum IncidentSource {
+union IncidentSource {
+  string,
+
   /** When source of Incident is AzureDevops */
-  AzureDevops,
+  AzureDevops: "AzureDevops",
 
   /** When source of Incident is Microsoft ICM */
-  ICM,
+  ICM: "ICM",
 
   /** When source of Incident is Jira */
-  Jira,
+  Jira: "Jira",
 
   /** When source of Incident is ServiceNow */
-  ServiceNow,
+  ServiceNow: "ServiceNow",
 
   /** When source of Incident is Other */
-  Other,
+  Other: "Other",
 }
 
 @doc("List of impact categories.")
-enum ImpactCategoryEnum {
+union ImpactCategoryEnum {
+  string,
+
   /** Availability category */
-  Availability,
+  Availability: "Availability",
 
   /** Performance category */
-  Performance,
+  Performance: "Performance",
 
   /** Other category */
-  Other,
+  Other: "Other",
 }
 
 @doc("List of azure interfaces.")
-enum Toolset {
+union Toolset {
+  string,
+
   /** If communication toolset is Terraform */
-  Terraform,
+  Terraform: "Terraform",
 
   /** If communication toolset is Puppet */
-  Puppet,
+  Puppet: "Puppet",
 
   /** If communication toolset is Chef */
-  Chef,
+  Chef: "Chef",
 
   /** If communication toolset is SDK */
-  SDK,
+  SDK: "SDK",
 
   /** If communication toolset is Ansible */
-  Ansible,
+  Ansible: "Ansible",
 
   /** If communication toolset is ARM */
-  ARM,
+  ARM: "ARM",
 
   /** If communication toolset is Portal */
-  Portal,
+  Portal: "Portal",
 
   /** If communication toolset is Shell */
-  Shell,
+  Shell: "Shell",
 
   /** If communication toolset is Other */
-  Other,
+  Other: "Other",
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "This really is a fixed enum"
 @doc("Degree of confidence on the impact being a platform issue.")
-@fixed
-enum ConfidenceLevel {
+union ConfidenceLevel {
+  string,
+
   /** Low confidence on azure being the source of impact */
-  Low,
+  Low: "Low",
 
   /** Medium confidence on azure being the source of impact */
-  Medium,
+  Medium: "Medium",
 
   /** High confidence on azure being the source of impact */
-  High,
+  High: "High",
 }
 
 @doc("List of unit of the metric.")
-enum MetricUnit {
+union MetricUnit {
+  string,
+
   /** When measurement is in ByteSeconds */
-  ByteSeconds,
+  ByteSeconds: "ByteSeconds",
 
   /** When measurement is in Bytes */
-  Bytes,
+  Bytes: "Bytes",
 
   /** When measurement is in BytesPerSecond */
-  BytesPerSecond,
+  BytesPerSecond: "BytesPerSecond",
 
   /** When measurement is in Cores */
-  Cores,
+  Cores: "Cores",
 
   /** When measurement is in Count */
-  Count,
+  Count: "Count",
 
   /** When measurement is in CountPerSecond */
-  CountPerSecond,
+  CountPerSecond: "CountPerSecond",
 
   /** When measurement is in MilliCores */
-  MilliCores,
+  MilliCores: "MilliCores",
 
   /** When measurement is in MilliSeconds */
-  MilliSeconds,
+  MilliSeconds: "MilliSeconds",
 
   /** When measurement is in NanoCores */
-  NanoCores,
+  NanoCores: "NanoCores",
 
   /** When measurement is in Percent */
-  Percent,
+  Percent: "Percent",
 
   /** When measurement is in Seconds */
-  Seconds,
+  Seconds: "Seconds",
 
   /** When measurement is in Other than listed */
-  Other,
+  Other: "Other",
 }
 
 @doc("List of protocols")
-enum Protocol {
+union Protocol {
+  string,
+
   /** When communication protocol is TCP */
-  TCP,
+  TCP: "TCP",
 
   /** When communication protocol is UDP */
-  UDP,
+  UDP: "UDP",
 
   /** When communication protocol is HTTP */
-  HTTP,
+  HTTP: "HTTP",
 
   /** When communication protocol is HTTPS */
-  HTTPS,
+  HTTPS: "HTTPS",
 
   /** When communication protocol is RDP */
-  RDP,
+  RDP: "RDP",
 
   /** When communication protocol is FTP */
-  FTP,
+  FTP: "FTP",
 
   /** When communication protocol is SSH */
-  SSH,
+  SSH: "SSH",
 
   /** When communication protocol is Other */
-  Other,
+  Other: "Other",
 }
 
 @doc("Resource details")

@@ -11,14 +11,16 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "Microsoft.Impact",
+  title: "Microsoft.Impact"
 })
 @versioned(Versions)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.Impact;
 
 @doc("API Versions")
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @doc("Dec 01, 2023 Preview API Version")
-  v2023_12_01_preview: "2023-12-01-preview",
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("May 01, 2024 Preview API Version")
+  v2024_05_01_preview: "2024-05-01-preview",
 }

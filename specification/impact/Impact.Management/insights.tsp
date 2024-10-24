@@ -46,6 +46,9 @@ model InsightProperties is ResourceProperties {
   @doc("Identifier of the event that has been correlated with this insight. This can be used to aggregate insights for the same event.")
   eventId?: string;
 
+  @doc("Identifier that can be used to group similar insights.")
+  groupId?: string;
+
   @doc("Contains title & description for the insight")
   content: Content;
 
@@ -58,6 +61,7 @@ model InsightProperties is ResourceProperties {
   @doc("details of of the impact for which insight has been generated.")
   impact: ImpactDetails;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   @doc("additional details of the insight.")
   additionalDetails?: {};
 }

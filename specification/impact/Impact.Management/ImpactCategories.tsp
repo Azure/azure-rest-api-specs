@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -16,7 +15,7 @@ namespace Microsoft.Impact;
 
 @doc("ImpactCategory resource")
 @subscriptionResource
-model ImpactCategory is ProxyResource<ImpactCategoryProperties> {
+model ImpactCategory is Azure.ResourceManager.ProxyResource<ImpactCategoryProperties> {
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
   @key("impactCategoryName")
   @segment("impactCategories")
