@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2023-11-01
+tag: package-2024-10-23
 ```
 
 ### Tag: package-2015-10
@@ -476,6 +476,50 @@ input-file:
 - Microsoft.Automation/stable/2023-11-01/sourceControlSyncJobStreams.json
 - Microsoft.Automation/stable/2023-11-01/variable.json
 ```
+
+### Tag: package-2024-10-23
+
+These settings apply only when `--tag=package-2024-10-23` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-10-23'
+input-file:
+- Microsoft.Automation/preview/2024-10-23/dscNodeCounts.json
+- Microsoft.Automation/preview/2024-10-23/softwareUpdateConfiguration.json
+- Microsoft.Automation/preview/2024-10-23/deletedAutomationAccount.json
+- Microsoft.Automation/preview/2024-10-23/privateLinkResources.json
+- Microsoft.Automation/preview/2024-10-23/dscNode.json
+- Microsoft.Automation/preview/2024-10-23/account.json
+- Microsoft.Automation/preview/2024-10-23/certificate.json
+- Microsoft.Automation/preview/2024-10-23/connection.json
+- Microsoft.Automation/preview/2024-10-23/connectionType.json
+- Microsoft.Automation/preview/2024-10-23/credential.json
+- Microsoft.Automation/preview/2024-10-23/dscCompilationJob.json
+- Microsoft.Automation/preview/2024-10-23/dscConfiguration.json
+- Microsoft.Automation/preview/2024-10-23/dscNodeConfiguration.json
+- Microsoft.Automation/preview/2024-10-23/hybridRunbookWorker.json
+- Microsoft.Automation/preview/2024-10-23/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/preview/2024-10-23/job.json
+- Microsoft.Automation/preview/2024-10-23/jobSchedule.json
+- Microsoft.Automation/preview/2024-10-23/linkedWorkspace.json
+- Microsoft.Automation/preview/2024-10-23/module.json
+- Microsoft.Automation/preview/2024-10-23/operations.json
+- Microsoft.Automation/preview/2024-10-23/package.json
+- Microsoft.Automation/preview/2024-10-23/privateEndpointConnection.json
+- Microsoft.Automation/preview/2024-10-23/python2package.json
+- Microsoft.Automation/preview/2024-10-23/python3package.json
+- Microsoft.Automation/preview/2024-10-23/runbook.json
+- Microsoft.Automation/preview/2024-10-23/runtimeEnvironment.json
+- Microsoft.Automation/preview/2024-10-23/schedule.json
+- Microsoft.Automation/preview/2024-10-23/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/preview/2024-10-23/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/preview/2024-10-23/sourceControl.json
+- Microsoft.Automation/preview/2024-10-23/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2024-10-23/sourceControlSyncJobStreams.json
+- Microsoft.Automation/preview/2024-10-23/variable.json
+- Microsoft.Automation/preview/2024-10-23/watcher.json
+- Microsoft.Automation/preview/2024-10-23/webhook.json
+```
+
 
 ---
 ## Suppression
