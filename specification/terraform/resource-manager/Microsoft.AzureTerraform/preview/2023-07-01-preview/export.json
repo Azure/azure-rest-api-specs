@@ -107,7 +107,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BaseExportModel"
+              "$ref": "#/definitions/CommonExportProperties"
             }
           }
         ],
@@ -187,7 +187,7 @@
       },
       "readOnly": true
     },
-    "BaseExportModel": {
+    "CommonExportProperties": {
       "type": "object",
       "description": "The base export parameter",
       "properties": {
@@ -204,7 +204,7 @@
             "azapi"
           ],
           "x-ms-enum": {
-            "name": "targetProvider",
+            "name": "TargetTerraformProvider",
             "modelAsString": true,
             "values": [
               {
@@ -260,7 +260,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportModel"
+          "$ref": "#/definitions/CommonExportProperties"
         }
       ],
       "x-ms-discriminator-value": "ExportQuery"
@@ -273,7 +273,9 @@
           "type": "array",
           "description": "The id of the resource to be exported",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "resourceName": {
@@ -296,7 +298,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportModel"
+          "$ref": "#/definitions/CommonExportProperties"
         }
       ],
       "x-ms-discriminator-value": "ExportResource"
@@ -320,7 +322,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportModel"
+          "$ref": "#/definitions/CommonExportProperties"
         }
       ],
       "x-ms-discriminator-value": "ExportResourceGroup"
@@ -337,7 +339,9 @@
           "type": "array",
           "description": "A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "errors": {

@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using OpenAPI;
@@ -21,7 +23,7 @@ union Type {
 }
 
 @doc("The target Azure Terraform Provider")
-union targetProvider {
+union TargetTerraformProvider {
   string,
 
   @doc("https://registry.terraform.io/providers/hashicorp/azurerm/latest")
@@ -33,12 +35,12 @@ union targetProvider {
 
 @doc("The base export parameter")
 @discriminator("type")
-model BaseExportModel {
+model CommonExportProperties {
   @doc("The parameter type")
   type: Type;
 
   @doc("The target Azure Terraform Provider")
-  targetProvider?: targetProvider = targetProvider.azurerm;
+  targetProvider?: TargetTerraformProvider = TargetTerraformProvider.azurerm;
 
   @doc("Whether to output all non-computed properties in the generated Terraform configuration? This probably needs manual modifications to make it valid")
   fullProperties?: boolean = true;
@@ -48,7 +50,7 @@ model BaseExportModel {
 }
 
 @doc("Export parameter for resources queried by ARG (Azure Resource Graph)")
-model ExportQuery extends BaseExportModel {
+model ExportQuery extends CommonExportProperties {
   @doc("The ARG where predicate. Note that you can combine multiple conditions in one `where` predicate, e.g. `resourceGroup =~ \"my-rg\" and type =~ \"microsoft.network/virtualnetworks\"`")
   query: string;
 
@@ -63,9 +65,9 @@ model ExportQuery extends BaseExportModel {
 }
 
 @doc("Export parameter for individual resources.")
-model ExportResource extends BaseExportModel {
+model ExportResource extends CommonExportProperties {
   @doc("The id of the resource to be exported")
-  resourceIds: string[];
+  resourceIds: armResourceIdentifier[];
 
   @doc("The Terraform resource name. Only works when `resourceIds` contains only one item.")
   resourceName?: string = "res-0";
@@ -81,7 +83,7 @@ model ExportResource extends BaseExportModel {
 }
 
 @doc("Export parameter for a resource group")
-model ExportResourceGroup extends BaseExportModel {
+model ExportResourceGroup extends CommonExportProperties {
   @doc("The name of the resource group to be exported")
   resourceGroupName: string;
 
@@ -101,7 +103,7 @@ model ExportResult {
   configuration?: string;
 
   @doc("A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform")
-  skippedResources?: string[];
+  skippedResources?: armResourceIdentifier[];
 
   @doc("A list of errors derived during exporting each resource")
   @extension("x-ms-identifiers", [])
