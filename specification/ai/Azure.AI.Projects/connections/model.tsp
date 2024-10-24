@@ -28,7 +28,6 @@ model GetWorkspaceResponse {
 
 @doc("workspace properties")
 model WorkspaceProperties {
-
   @doc("Authentication type of the connection target")
   applicationInsights: string;
 }

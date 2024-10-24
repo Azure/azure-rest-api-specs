@@ -5,7 +5,9 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.AI.Projects.Connections.getWorkspace, Access.internal);
 @@access(Azure.AI.Projects.Connections.listConnections, Access.internal);
 @@access(Azure.AI.Projects.Connections.getConnection, Access.internal);
-@@access(Azure.AI.Projects.Connections.getConnectionWithSecrets, Access.internal);
+@@access(Azure.AI.Projects.Connections.getConnectionWithSecrets,
+  Access.internal
+);
 @@access(Azure.AI.Projects.GetConnectionResponse, Access.internal);
 @@access(Azure.AI.Projects.ConnectionProperties, Access.internal);
 @@access(Azure.AI.Projects.ConnectionPropertiesApiKeyAuth, Access.internal);

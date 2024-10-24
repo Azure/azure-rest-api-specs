@@ -19,11 +19,7 @@ namespace Azure.AI.Projects.Connections;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Gets the properties of the specified machine learning workspace.")
 @get
-op getWorkspace is Azure.Core.Foundations.Operation<
-  {
-  },
-  GetWorkspaceResponse
->;
+op getWorkspace is Azure.Core.Foundations.Operation<{}, GetWorkspaceResponse>;
 
 /*
  See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list?view=rest-azureml-2024-07-01-preview

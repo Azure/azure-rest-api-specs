@@ -14,7 +14,6 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-
 @doc("Response from getting properties of the Application Insights resource")
 model GetAppInsightsResponse {
   @doc("A unique identifier for the resouce")
