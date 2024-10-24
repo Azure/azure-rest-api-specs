@@ -161,9 +161,9 @@ union ApiSpecImportSourceFormat {
   @doc("The inlined content of a specification document.") "inline",
 
   @doc("""
-The link to a specification document hosted on a publicly accessible internet
-address.
-""")
+    The link to a specification document hosted on a publicly accessible internet
+    address.
+    """)
   "link",
 }
 
@@ -277,25 +277,25 @@ model ImportFromApimRequest {
 @added(Versions.v2024_06_01_preview)
 @doc("The import operation was successfully completed.")
 model ImportFromApimSuccessResult {
-    /**
-     * The successful response status code.
-     */
-    @statusCode code: 200;
+  /**
+   * The successful response status code.
+   */
+  @statusCode code: 200;
 
-    /**
-     * Async operation status.
-     */
-    status: string;
+  /**
+   * Async operation status.
+   */
+  status: string;
 
-    /**
-     * Async operation start time.
-     */
-    startTime: utcDateTime;
+  /**
+   * Async operation start time.
+   */
+  startTime: utcDateTime;
 
-    /**
-     * Async operation end time.
-     */
-    endTime?: utcDateTime;
+  /**
+   * Async operation end time.
+   */
+  endTime?: utcDateTime;
 }
 
 @doc("Assignment metadata")
@@ -409,16 +409,16 @@ model License {
   name?: string;
 
   @doc("""
-URL pointing to the license details. The URL field is mutually exclusive of the
-identifier field.
-""")
+    URL pointing to the license details. The URL field is mutually exclusive of the
+    identifier field.
+    """)
   @maxLength(200)
   url?: url;
 
   @doc("""
-SPDX license information for the API. The identifier field is mutually
-exclusive of the URL field.
-""")
+    SPDX license information for the API. The identifier field is mutually
+    exclusive of the URL field.
+    """)
   @maxLength(50)
   identifier?: url;
 }
@@ -600,7 +600,6 @@ model ApiSourceProperties {
   apimSource?: ApimSource;
 }
 
-
 /**
  * The API source specification import options.
  */
@@ -621,7 +620,7 @@ union ShouldImportSpec {
   /**
    * Indicates that the specification should always be imported along with metadata.
    */
-  Always: "always"
+  Always: "always",
 }
 
 /**

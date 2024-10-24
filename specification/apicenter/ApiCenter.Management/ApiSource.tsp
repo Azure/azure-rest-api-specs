@@ -33,7 +33,10 @@ interface ApiSources {
   @doc("Checks if specified API source exists.")
   @head
   head(
-    ...ResourceInstanceParameters<ApiSource, Foundations.BaseParameters<ApiSource>>,
+    ...ResourceInstanceParameters<
+      ApiSource,
+      Foundations.BaseParameters<ApiSource>
+    >,
   ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing API source.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ApiSource>;
