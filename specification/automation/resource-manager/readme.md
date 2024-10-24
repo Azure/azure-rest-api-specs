@@ -493,7 +493,6 @@ input-file:
 - Microsoft.Automation/stable/2024-10-23/connection.json
 - Microsoft.Automation/stable/2024-10-23/connectionType.json
 - Microsoft.Automation/stable/2024-10-23/credential.json
-- Microsoft.Automation/stable/2024-10-23/dscCompilationJob.json
 - Microsoft.Automation/stable/2024-10-23/dscConfiguration.json
 - Microsoft.Automation/stable/2024-10-23/dscNodeConfiguration.json
 - Microsoft.Automation/stable/2024-10-23/hybridRunbookWorker.json
