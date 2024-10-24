@@ -59,7 +59,7 @@ interface PrivateEndpointConnections {
   updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
-      @body _: PrivateEndpointConnection;
+      @bodyRoot _: PrivateEndpointConnection;
     })
   >;
 
