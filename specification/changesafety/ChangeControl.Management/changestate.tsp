@@ -164,11 +164,11 @@ interface ChangeStates {
 @doc("Base type for the ChangeArtifact, which is polymorphic based on ArtifactType")
 @discriminator("artifactType")
 model ChangeArtifact {
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("Artifact label.")
   name: string;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The type of the artifact.")
   artifactType: ArtifactType;
 }
@@ -176,7 +176,7 @@ model ChangeArtifact {
 /* ChangeArtifact for InlineArmTemplate. */
 @doc("Describes the change payload for InlineArmTemplate or InlineBicep")
 model InlineArmTemplateChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The type of the artifact.")
   artifactType: ArtifactType.InlineArmTemplate;
 
@@ -188,11 +188,11 @@ model InlineArmTemplateChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for InlineBicep. */
 @doc("Describes the change payload for InlineBicep")
 model InlineBicepTemplateChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The type of the artifact.")
   artifactType: ArtifactType.InlineBicep;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The actual payload content.")
   artifactPayload: InlineArtifactContent;
 }
@@ -200,11 +200,11 @@ model InlineBicepTemplateChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for ArmOperation. */
 @doc("Describes the change payload for artifactType='ArmOperation'")
 model ArmOperationChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The type of the artifact.")
   artifactType: ArtifactType.ArmOperation;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The actual payload content.")
   artifactPayload: ArmOperationArtifactContent;
 }
@@ -212,11 +212,11 @@ model ArmOperationChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for external ARM Template.*/
 @doc("Describes the change payload for External ArmTemplate file.")
 model ExternalArmTemplateChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The type of the artifact.")
   artifactType: ArtifactType.ExternalArmTemplate;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The actual payload content.")
   artifactPayload: ExternalArtifactContent;
 }
@@ -224,11 +224,11 @@ model ExternalArmTemplateChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for external bicep file.*/
 @doc("Describes the change payload for External Bicep file.")
 model ExternalBicepTemplateChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The type of the artifact.")
   artifactType: ArtifactType.ExternalBicep;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The actual payload content.")
   artifactPayload: ExternalArtifactContent;
 }
@@ -236,11 +236,11 @@ model ExternalBicepTemplateChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for TemplateSpec.*/
 @doc("Describes the change payload for artifactType=External & artifactType='ArmTemplate' or Bicep.")
 model TemplateSpecChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("TemplateSpec Artifact type.")
   artifactType: ArtifactType.TemplateSpec;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("The actual payload content.")
   artifactPayload: TemplateSpecArtifactContent;
 }
@@ -248,6 +248,7 @@ model TemplateSpecChangeArtifact extends ChangeArtifact {
 /* Various content type definitions, based on the artifactType. */
 @doc("Artifact content model for Inline template or bicep content.")
 model InlineArtifactContent {
+  @visibility("read", "create", "update")
   @doc("Inline ArmTemplate string or Bicep content.")
   script: string;
 }
@@ -255,6 +256,7 @@ model InlineArtifactContent {
 @doc("Artifact model when artifactType is ArmOperation.")
 model ArmOperationArtifactContent {
   @doc("Arm Operation array.")
+  @visibility("read", "create", "update")
   @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
   operations: ArmOperationResource[];
 }
@@ -262,25 +264,25 @@ model ArmOperationArtifactContent {
 @doc("Artifact content model for Inline ArmOperations.")
 model ArmOperationResource {
   @doc("Target resource Id that needs to be changed.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   resourceId: string;
 
   @doc("ARM operation. eg: DELETE")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   operation: ArmOperation;
 }
 
 @doc("Artifact content model for External ArmTemplates or Bicep files.")
 model ExternalArtifactContent {
   @doc("URI for the external ARM template or Bicep file.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   uri: url;
 }
 
 @doc("Artifact content model for TemplateSpec resource.")
 model TemplateSpecArtifactContent {
   @doc("TemplateSpec resource Id in ARM.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   resourceId: string;
 }
 
