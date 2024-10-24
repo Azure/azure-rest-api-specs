@@ -534,6 +534,52 @@ model TextAnalysisAuthoringTrainingJobOptions {
    * as 20.
    */
   evaluationOptions?: TextAnalysisAuthoringEvaluationOptions;
+
+  /**
+   * Represents the settings for using data generation as part of training a custom model.
+   */
+  @added(Versions.v2024_11_15_preview)
+  dataGenerationSettings?: TextAnalysisAuthoringDataGenerationSettings;
+}
+
+/**
+ * Represents the settings for using data generation as part of training a custom model.
+ */
+@added(Versions.v2024_11_15_preview)
+@clientName("DataGenerationSettings")
+model TextAnalysisAuthoringDataGenerationSettings {
+  /**
+   * If set to true, augment customer provided training data with synthetic data to improve model quality.
+   */
+  enableDataGeneration: boolean;
+
+  /**
+   * Represents the connection info for the Azure resource to use during data generation as part of training a custom model.
+   */
+  @added(Versions.v2024_11_15_preview)
+  dataGenerationConnectionInfo: TextAnalysisAuthoringDataGenerationConnectionInfo;
+}
+
+/**
+ * Represents the connection info for the Azure resource to use during data generation as part of training a custom model.
+ */
+@added(Versions.v2024_11_15_preview)
+@clientName("DataGenerationConnectionInfo")
+model TextAnalysisAuthoringDataGenerationConnectionInfo {
+  /**
+   * Connection type for data generation settings. Currently only supports Azure Open AI.
+   */
+  kind: "azureOpenAI";
+
+  /**
+   * Resource ID for the data generation resource. Looks something like "/subscriptions/<SUBSCRIPTION-ID-GUID>/resourceGroups/<RG-NAME>/providers/Microsoft.CognitiveServices/accounts/<AOAI-ACCOUNT-NAME>".
+   */
+  resourceId: string;
+
+  /**
+   * Deployment name of model to be used for synthetic data generation.
+   */
+  deploymentName: string;
 }
 
 /**
@@ -2517,6 +2563,12 @@ model TextAnalysisAuthoringExportedEntity {
    * The entity category.
    */
   category?: string;
+
+  /**
+   * Short description for entity category. Required when enabling synthetic data generation.
+   */
+  @added(Versions.v2024_11_15_preview)
+  description?: string;
 }
 
 /**
