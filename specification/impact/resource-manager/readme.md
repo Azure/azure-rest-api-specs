@@ -41,8 +41,8 @@ suppressions:
     where:
       - $.definitions.WorkloadImpactProperties.properties.additionalProperties
     reason:
-      Property "settings" and "protectedSettings" for VirtualMachineExtension
-      and VirtualMachineScaleSetExtensionProperties were previously defined like an empty object.
+      Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
+      and will be different for different categories
 ```
 
 ## Configuration
