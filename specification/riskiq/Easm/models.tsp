@@ -499,7 +499,7 @@ model DataConnection {
 
   @doc("The caller provided unique name for the resource.")
   @key("dataConnectionName")
-  @visibility("read", "create")
+  @visibility
   name: string;
 
   @doc("The name that can be used for display purposes.")
