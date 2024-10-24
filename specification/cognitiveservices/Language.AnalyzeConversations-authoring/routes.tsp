@@ -850,7 +850,7 @@ interface ConversationalAnalysisAuthoring {
     ErrorResponse
   >;
 
-   /**
+  /**
    * Gets the details of an exported model.
    */
   @added(Versions.v2024_11_15_preview)
@@ -863,10 +863,10 @@ interface ConversationalAnalysisAuthoring {
     ConversationalAnalysisAuthoringExportedTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
-/**
+  /**
    * Deletes an existing exported model.
    */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
   @pollingOperation(ConversationalAnalysisAuthoring.getExportedModelJobStatus)
@@ -878,6 +878,7 @@ interface ConversationalAnalysisAuthoring {
        */
       @path
       projectName: string;
+
       /**
        * The exported model name.
        */
@@ -888,7 +889,7 @@ interface ConversationalAnalysisAuthoring {
     {},
     ErrorResponse
   >;
-/**
+  /**
    * Creates a new exported model or replaces an existing one.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -903,11 +904,13 @@ interface ConversationalAnalysisAuthoring {
        */
       @path
       projectName: string;
+
       /**
        * The exported model name.
        */
       @path
       exportedModelName: string;
+
       /**
        * The exported model info.
        */
@@ -918,10 +921,9 @@ interface ConversationalAnalysisAuthoring {
     {},
     ErrorResponse
   >;
-/**
+  /**
    * Gets the status for an existing job to create or update an exported model.
    */
-@added(Versions.v2024_11_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getExportedModelJobStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringExportedModelJobState>;
-
 }

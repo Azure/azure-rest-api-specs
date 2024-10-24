@@ -2060,7 +2060,6 @@ model ConversationalAnalysisAuthoringOrchestrationExportedUtterance {
   dataset?: string;
 }
 
-
 /**
  * Represents an exported trained model.
  */
@@ -2074,24 +2073,29 @@ model ConversationalAnalysisAuthoringExportedTrainedModel {
   @key("exportedModelName")
   @visibility
   exportedModelName: string;
+
   /**
    * The model ID.
    */
   modelId: string;
+
   /**
    * The last trained date time of the model.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime: utcDateTime;
+
   /**
    * The last exported date time of the model.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastExportedModelDateTime: utcDateTime;
+
   /**
    * The model expiration date.
    */
   modelExpirationDate: plainDate;
+
   /**
    * The model training config version.
    */
@@ -2117,6 +2121,7 @@ model ConversationalAnalysisAuthoringModelFile {
    * The name of the file.
    */
   name: string;
+
   /**
    * The URI to retrieve the content of the file.
    */
