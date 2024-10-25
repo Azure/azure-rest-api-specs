@@ -177,6 +177,7 @@ model CommunityEndpointResource
   name: string;
 }
 
+
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Approval Model Resource")
 model ApprovalResource is ExtensionResource<ApprovalProperties> {
@@ -254,6 +255,23 @@ interface VirtualEnclave {
     @bodyRoot
     checkAddressSpaceAvailabilityRequest: CheckAddressSpaceAvailabilityRequest,
   ): ArmResponse<CheckAddressSpaceAvailabilityResponse> | ErrorResponse;
+
+  @doc("Callback that triggers on approval state change.")
+  @armResourceAction(EnclaveResource)
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  approvalCallback is ArmResourceActionAsync<
+    EnclaveResource,
+    ApprovalCallbackRequest,
+    ApprovalCallbackResponse
+  >;
+  @doc("Callback that triggers on approval deletion state change.")
+  @armResourceAction(EnclaveResource)
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  approvalDeletionCallback is ArmResourceActionAsync<
+    EnclaveResource,
+    ApprovalDeletionCallbackRequest,
+    ApprovalDeletionCallbackResponse
+  >;
 }
 
 @doc("Community Interface")
@@ -407,6 +425,23 @@ interface EnclaveEndpoints {
   delete is ArmResourceDeleteAsync<EnclaveEndpointResource>;
   listByEnclaveResource is ArmResourceListByParent<EnclaveEndpointResource>;
   listBySubscription is ArmListBySubscription<EnclaveEndpointResource>;
+
+  @doc("Callback that triggers on approval state change.")
+  @armResourceAction(EnclaveEndpointResource)
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  approvalCallback is ArmResourceActionAsync<
+    EnclaveEndpointResource,
+    ApprovalCallbackRequest,
+    ApprovalCallbackResponse
+  >;
+  @doc("Callback that triggers on approval deletion state change.")
+  @armResourceAction(EnclaveEndpointResource)
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  approvalDeletionCallback is ArmResourceActionAsync<
+    EnclaveEndpointResource,
+    ApprovalDeletionCallbackRequest,
+    ApprovalDeletionCallbackResponse
+  >;
 }
 
 @added(Microsoft.Mission.Versions.v2023_08_01_preview)
@@ -429,6 +464,23 @@ interface CommunityEndpoints {
   delete is ArmResourceDeleteAsync<CommunityEndpointResource>;
   listByCommunityResource is ArmResourceListByParent<CommunityEndpointResource>;
   listBySubscription is ArmListBySubscription<CommunityEndpointResource>;
+
+  @doc("Callback that triggers on approval state change.")
+  @armResourceAction(CommunityEndpointResource)
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  approvalCallback is ArmResourceActionAsync<
+    CommunityEndpointResource,
+    ApprovalCallbackRequest,
+    ApprovalCallbackResponse
+  >;
+  @doc("Callback that triggers on approval deletion state change.")
+  @armResourceAction(CommunityEndpointResource)
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  approvalDeletionCallback is ArmResourceActionAsync<
+    CommunityEndpointResource,
+    ApprovalDeletionCallbackRequest,
+    ApprovalDeletionCallbackResponse
+  >;
 }
 
 @doc("External Connections")
@@ -464,13 +516,9 @@ interface Approval {
       ArmAsyncOperationHeader
   >;
   listByParent is ArmResourceListByParent<ApprovalResource>;
-  update is ArmResourcePatchAsync<ApprovalResource, ApprovalProperties>;
-  delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
+  update is ArmResourcePatchAsync<ApprovalResource,ApprovalProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;  
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
   @armResourceAction(ApprovalResource)
-  initiatorCallback is ArmResourceActionAsync<
-    ApprovalResource,
-    InitiatorCallbackRequest,
-    InitiatorCallbackResponse
-  >;
+  initiatorCallback is ArmResourceActionAsync<ApprovalResource, InitiatorCallbackRequest, InitiatorCallbackResponse>;
 }

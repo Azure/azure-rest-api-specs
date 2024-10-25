@@ -4314,10 +4314,12 @@
         },
         "approvalStatus": {
           "type": "string",
-          "description": "Approval status indicating 'Approved' or 'Rejected'",
+          "description": "Approval status indicating 'Approved', 'Rejected', 'Deleted' or 'Expired'",
           "enum": [
             "Approved",
-            "Rejected"
+            "Rejected",
+            "Deleted",
+            "Expired"
           ],
           "x-ms-enum": {
             "modelAsString": true
@@ -4480,7 +4482,9 @@
       "enum": [
         "Approved",
         "Rejected",
-        "Pending"
+        "Pending",
+        "Deleted",
+        "Expired"
       ],
       "x-ms-enum": {
         "name": "ApprovalStatus",
@@ -4500,6 +4504,16 @@
             "name": "Pending",
             "value": "Pending",
             "description": "ApprovalStatus Type Pending"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "ApprovalStatus Type Deleted"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "ApprovalStatus Type Expired"
           }
         ]
       }
@@ -6288,11 +6302,11 @@
     },
     "Principal": {
       "type": "object",
-      "description": "Principal for Maintenance Mode",
+      "description": "Principal for maintenance mode or role assignments, for example",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The object id associated with the principal"
+          "description": "The object (or principal) id associated with the principal"
         },
         "type": {
           "type": "string",

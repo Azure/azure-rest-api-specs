@@ -7,6 +7,8 @@ import "../shared/provisioningstate.tsp";
 import "../community/community.tsp";
 import "../shared/resourceid.tsp";
 import "../shared/managedresourcegroupconfiguration.tsp";
+import "../shared/principal.tsp";
+import "../shared/roleassignmentitem.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -117,16 +119,6 @@ model EnclaveAddressSpaces {
 }
 
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-@doc("Principal for Maintenance Mode")
-model Principal {
-  @doc("The object id associated with the principal")
-  id: string;
-
-  @doc("The type of the object id. We currently allow users, groups, and service principals")
-  type: "User" | "Group" | "ServicePrincipal" | string;
-}
-
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Maintenance Mode")
 model MaintenanceModeConfiguration {
   @doc("Current mode of Maintenance Mode Configuration")
@@ -138,6 +130,7 @@ model MaintenanceModeConfiguration {
   @doc("Justification for entering or exiting Maintenance Mode")
   justification?: "Networking" | "Governance" | "Off" | string;
 }
+
 
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties {
@@ -181,4 +174,14 @@ model VirtualEnclaveProperties {
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Deploy Bastion service (True or False).")
   bastionEnabled?: boolean;
+
+  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @doc("Enclave role assignments")
+  enclaveRoleAssignmentList?: RoleAssignmentItem[];
+
+  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @doc("Workload role assignments")
+  workloadRoleAssignmentList?: RoleAssignmentItem[];
 }
