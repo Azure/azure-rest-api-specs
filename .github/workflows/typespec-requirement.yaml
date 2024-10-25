@@ -33,6 +33,7 @@ jobs:
 
     - if: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
       uses: ./.github/actions/upload-keyvalue-artifact
+      name: Upload artifact with results
       with:
         key: spec-lifecycle-${{ matrix.spec-type }}
         value: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
