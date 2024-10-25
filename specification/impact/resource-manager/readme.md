@@ -38,8 +38,6 @@ suppressions:
 
   - code: AvoidAdditionalProperties
     from: impact.json
-    where:
-      - $.definitions.WorkloadImpactProperties.properties.additionalProperties
     reason:
       Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
       and will be different for different categories
