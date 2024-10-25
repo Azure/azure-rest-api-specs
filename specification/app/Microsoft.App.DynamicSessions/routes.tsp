@@ -79,15 +79,16 @@ interface SessionResourceFiles {
     SessionResourceFilesTraits
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "GET allowed on Action"
   @doc("Get the content of the file.")
-  @route("/files/{name}/content")
-  getContent is Foundations.Operation<
+  @get
+  @action("content")
+  @actionSeparator("/")
+  getContent is SessionResourceFilesOperations.ResourceAction<
+    SessionResourceFile,
+    {},
     {
-      ...SessionIdentifier;
-      ...SessionResourceFileNamePathParameter;
-      ...SessionResourceFilePathQueryParameter;
-    },
-    bytes
+      @body _: bytes;
+    }
   >;
 }

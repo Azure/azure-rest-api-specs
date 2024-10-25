@@ -380,10 +380,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SessionIdentifier"
+            "name": "name",
+            "in": "path",
+            "description": "The name of the file.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/SessionResourceFileNamePathParameter"
+            "$ref": "#/parameters/SessionIdentifier"
           },
           {
             "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
@@ -755,6 +759,19 @@
       "required": [
         "value"
       ]
+    },
+    "SessionResourceFileNamePathParameter": {
+      "type": "object",
+      "description": "The session resource file name parameter.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the file."
+        }
+      },
+      "required": [
+        "name"
+      ]
     }
   },
   "parameters": {
@@ -786,14 +803,6 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[A-Za-z0-9-_]{1,256}$",
-      "x-ms-parameter-location": "method"
-    },
-    "SessionResourceFileNamePathParameter": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the file.",
-      "required": true,
-      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "SessionResourceFilePathQueryParameter": {
