@@ -423,6 +423,6 @@ interface DocumentTranslationOperations {
       @query("type")
       type?: FileFormatType;
     },
-    SupportedFileFormats
+    FileFormat[]
   >;
 }

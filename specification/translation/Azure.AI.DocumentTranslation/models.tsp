@@ -409,12 +409,6 @@ model DocumentsStatus {
   nextLink?: string;
 }
 
-@doc("List of supported file formats")
-model SupportedFileFormats {
-  @doc("list of objects")
-  value: FileFormat[];
-}
-
 @doc("File Format")
 model FileFormat {
   @doc("Name of the format")

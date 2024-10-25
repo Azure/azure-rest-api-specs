@@ -542,7 +542,11 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SupportedFileFormats"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FileFormat"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
@@ -1200,23 +1204,6 @@
           }
         ]
       }
-    },
-    "SupportedFileFormats": {
-      "type": "object",
-      "description": "List of supported file formats",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "list of objects",
-          "items": {
-            "$ref": "#/definitions/FileFormat"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "TargetInput": {
       "type": "object",
