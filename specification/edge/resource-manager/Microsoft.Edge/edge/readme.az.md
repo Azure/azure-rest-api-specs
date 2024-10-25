@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: edgeupdates
-    namespace: azure.mgmt.edgeupdates
-    package-name: azure-mgmt-edgeupdates
-az-output-folder: $(azure-cli-extension-folder)/src/edgeupdates
-python-sdk-output-folder: "$(az-output-folder)/azext_edgeupdates/vendored_sdks/edgeupdates"
+    extensions: commonedgesitemanageroperations
+    namespace: azure.mgmt.commonedgesitemanageroperations
+    package-name: azure-mgmt-commonedgesitemanageroperations
+az-output-folder: $(azure-cli-extension-folder)/src/commonedgesitemanageroperations
+python-sdk-output-folder: "$(az-output-folder)/azext_commonedgesitemanageroperations/vendored_sdks/commonedgesitemanageroperations"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_edgeupdates/vendored_sdks/e
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: edgeupdates
-  namespace: azure.mgmt.edgeupdates
-  package-name: azure-mgmt-edgeupdates
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/edgeupdates
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/edgeupdates"
+  extensions: commonedgesitemanageroperations
+  namespace: azure.mgmt.commonedgesitemanageroperations
+  package-name: azure-mgmt-commonedgesitemanageroperations
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/commonedgesitemanageroperations
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/commonedgesitemanageroperations"
 ``` 

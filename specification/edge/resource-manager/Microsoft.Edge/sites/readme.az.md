@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: edgesites
-    namespace: azure.mgmt.edgesites
-    package-name: azure-mgmt-edgesites
-az-output-folder: $(azure-cli-extension-folder)/src/edgesites
-python-sdk-output-folder: "$(az-output-folder)/azext_edgesites/vendored_sdks/edgesites"
+    extensions: sitemanager
+    namespace: azure.mgmt.sitemanager
+    package-name: azure-mgmt-sitemanager
+az-output-folder: $(azure-cli-extension-folder)/src/sitemanager
+python-sdk-output-folder: "$(az-output-folder)/azext_sitemanager/vendored_sdks/sitemanager"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_edgesites/vendored_sdks/edg
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: edgesites
-  namespace: azure.mgmt.edgesites
-  package-name: azure-mgmt-edgesites
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/edgesites
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/edgesites"
+  extensions: sitemanager
+  namespace: azure.mgmt.sitemanager
+  package-name: azure-mgmt-sitemanager
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/sitemanager
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/sitemanager"
 ``` 

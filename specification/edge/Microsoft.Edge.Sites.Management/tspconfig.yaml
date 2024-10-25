@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/sitemanager"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -7,6 +10,16 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/sites/{version-status}/{version}/sites.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-sitemanager"
+    namespace: "com.azure.resourcemanager.sitemanager"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-sitemanager"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Edge
-  output-folder: $(csharp-sdks-folder)/edgeupdates/management/Microsoft.Edge/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/commonedgesitemanageroperations/management/Microsoft.Edge/GeneratedProtocol
 ```
