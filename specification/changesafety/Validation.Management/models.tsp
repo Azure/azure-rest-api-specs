@@ -6,141 +6,145 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ChangeSafety;
 
-
-@doc("The validator types.") 
+@doc("The validator types.")
 union ValidatorType {
-    string, 
+  string,
 
-    @doc("This is a Validation RP owned validator.")
-    builtin: "builtin",
+  @doc("This is a Validation RP owned validator.")
+  builtin: "builtin",
 
-    @doc("This is a validator that is owned by the customer.")
-    custom: "custom"
+  @doc("This is a validator that is owned by the customer.")
+  custom: "custom",
 }
 
 @doc("The outcome of the validation.")
 union Outcome {
-    string, 
+  string,
 
-    @doc("The validation succeeded.")
-    Succeeded: "Succeeded",
+  @doc("The validation succeeded.")
+  Succeeded: "Succeeded",
 
-    @doc("THe validation failed.")
-    Failed: "Failed",
+  @doc("THe validation failed.")
+  Failed: "Failed",
 
-    @doc("The validation is running and the outcome is not yet known.")
-    Pending: "Pending",
+  @doc("The validation is running and the outcome is not yet known.")
+  Pending: "Pending",
 
-    @doc("The validation is deferred to a different system. When it is deferred to a different system, that system can inspect the validationOutput to determine the outcome.")
-    Deferred: "Deferred"
+  @doc("The validation is deferred to a different system. When it is deferred to a different system, that system can inspect the validationOutput to determine the outcome.")
+  Deferred: "Deferred",
 }
 
 @doc("The provisioning state of the resource.")
 union ProvisioningState {
-    string, 
+  string,
 
-    @doc("Succeeded")
-    Succeeded: "Succeeded",
+  @doc("Succeeded")
+  Succeeded: "Succeeded",
 
-    @doc("Failed")
-    Failed: "Failed",
+  @doc("Failed")
+  Failed: "Failed",
 
-    @doc("Canceled")
-    Canceled: "Canceled"
-  }
+  @doc("Canceled")
+  Canceled: "Canceled",
+}
 
 @doc("The validator properties.")
 model ValidatorProperties {
-    @doc("The description of the validator.")
-    @visibility("read")
-    description: string;
+  @doc("The description of the validator.")
+  @visibility("read")
+  description: string;
 
-    @doc("The type of the validator.")
-    @visibility("read")
-    validatorType: ValidatorType;
+  @doc("The type of the validator.")
+  @visibility("read")
+  validatorType: ValidatorType;
 
-    @doc("The provisioning state of the resource.")
-    @visibility("read")
-    provisioningState?: ProvisioningState;
-
+  @doc("The provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
-@doc("The validator version properties.") 
+@doc("The validator version properties.")
 model ValidatorVersionProperties {
-    @doc("The ARM resource id of the parent validator resource.")
-    validatorId: string;
+  @doc("The ARM resource id of the parent validator resource.")
+  validatorId: string;
 
-    @doc("The schema of parameters that is used for validation.")
-    validationParameterSchema: {};
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @doc("The schema of parameters that is used for validation.")
+  validationParameterSchema: {};
 
-    @doc("The schema for the output from a validation run.")
-    outputSchema: {};
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @doc("The schema for the output from a validation run.")
+  outputSchema: {};
 
-    @doc("The description of the validator version.")
-    description: string;
-    
-    @doc("The provisioning state of the resource.")
-    @visibility("read")
-    provisioningState?: ProvisioningState;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @doc("The description of the validator version.")
+  description: string;
+
+  @doc("The provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 @doc("The error definition.")
 model ErrorDefinition {
-    @doc("The error code.")
-    @visibility("read")
-    code: string;
+  @doc("The error code.")
+  @visibility("read")
+  code: string;
 
-    @doc("The error message.")
-    @visibility("read")
-    message: string;
+  @doc("The error message.")
+  @visibility("read")
+  message: string;
 
-    @doc("The error details.")
-    @visibility("read")
-    @extension("x-ms-identifiers", [])
-    details?: ErrorDefinition[];
+  @doc("The error details.")
+  @visibility("read")
+  @extension("x-ms-identifiers", [])
+  details?: ErrorDefinition[];
 }
 
 @doc("The validation properties.")
 model ValidationProperties {
-    @doc("The ARM resource Id of the validator version to use for validation.")
-    validatorVersionId: string;
+  @doc("The ARM resource Id of the validator version to use for validation.")
+  validatorVersionId: string;
 
-    @doc("The changeState is a new resource that encapsulates the change and tracks the change state. The changeStateId is the ARM resource id of the changeState resource. ")
-    changeStateId?: string;
+  @doc("The changeState is a new resource that encapsulates the change and tracks the change state. The changeStateId is the ARM resource id of the changeState resource. ")
+  changeStateId?: string;
 
-    @doc("The token Id.")
-    tokenId?: string;
+  @doc("The token Id.")
+  tokenId?: string;
 
-    @doc("The stage Id.")
-    stageId?: string;
+  @doc("The stage Id.")
+  stageId?: string;
 
-    @doc("The stage parameters.")
-    stageParameters?: {};
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @doc("The stage parameters.")
+  stageParameters?: {};
 
-    @doc("The parameters used for validation. This property will be checked against the validationParameterSchema in the validator resource.")
-    validationParameters?: {};
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @doc("The parameters used for validation. This property will be checked against the validationParameterSchema in the validator resource.")
+  validationParameters?: {};
 
-    @doc("The provisioning state of the resource.")
-    @visibility("read")
-    provisioningState?: ProvisioningState;
+  @doc("The provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 @doc("The validation properties extended.")
 model ValidationPropertiesExtended {
-    ...ValidationProperties;
-    
-    @doc("The output of the validation. This property will match the output schema in the validator version resource.")
-    validationOutput: {};
+  ...ValidationProperties;
 
-    @doc("The outcome of the validation.")
-    @visibility("read")
-    outcome: Outcome;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @doc("The output of the validation. This property will match the output schema in the validator version resource.")
+  validationOutput: {};
 
-    @doc("Time duration in ISO8601 format to retry after, when the outcome property is 'Pending'. For all other values, the retryAfter is not present. This is an indication to the client to 'PATCH' validation after the duration.")
-    @visibility("read")
-    retryAfter?: string;
+  @doc("The outcome of the validation.")
+  @visibility("read")
+  outcome: Outcome;
 
-    @doc("Optional message to provide descriptive information about the outcome of the validation.")
-    @visibility("read")
-    message?: string;
+  @doc("Time duration in ISO8601 format to retry after, when the outcome property is 'Pending'. For all other values, the retryAfter is not present. This is an indication to the client to 'PATCH' validation after the duration.")
+  @visibility("read")
+  retryAfter?: string;
+
+  @doc("Optional message to provide descriptive information about the outcome of the validation.")
+  @visibility("read")
+  message?: string;
 }
