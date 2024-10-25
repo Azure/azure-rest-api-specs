@@ -29,7 +29,7 @@ model StageProgressionProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("Stage name relevant to hierarchical StageMap.")
   @minLength(3)
   @maxLength(200)
@@ -83,11 +83,11 @@ union StageProgressionState {
 }
 
 @armResourceOperations
+@doc("The operations of the stageProgression resource.")
 interface StageProgressions {
   get is ArmResourceRead<StageProgression>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<StageProgression>;
   delete is ArmResourceDeleteSync<StageProgression>;
   update is ArmResourcePatchSync<StageProgression, StageProgressionProperties>;
-
   listByParent is ArmResourceListByParent<StageProgression>;
 }

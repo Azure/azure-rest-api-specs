@@ -14,8 +14,7 @@ using TypeSpec.Rest;
 namespace Microsoft.ChangeSafety;
 
 @doc("Resource allows the user to define the change that they intended to execute & indicate the progression it will use.")
-@extensionResource
-model ChangeState is ProxyResource<ChangeStateProperties> {
+model ChangeState is ExtensionResource<ChangeStateProperties> {
   @pattern("^[a-zA-Z0-9-]{3,100}$")
   @key("changeStateName")
   @segment("changeStates")
@@ -43,14 +42,14 @@ model ChangeStateProperties {
 
   @visibility("read", "create")
   @doc("Azure resource Id of the referenced StageMap.")
-  stageMapResourceId: string;
+  stageMapResourceId: StageMapResourceId;
 
   @visibility("read", "create")
   @doc("Object that describes the change payload.")
   changeArtifact: ChangeArtifact;
 
   @visibility("read", "create")
-  @doc("Change is expected to be completed by date, in ISO 8601 format.")
+  @doc("Change is expected to be expired by date, in ISO 8601 format.")
   expirationDate: utcDateTime;
 
   @visibility("read", "create", "update")
@@ -84,7 +83,7 @@ model ChangeStateProperties {
 @doc("RetrieveNextStage POST Action response.")
 model RetrieveNextStagesResponse {
   @doc("ChangeState resource Id.")
-  changeStateResourceId: string;
+  changeStateResourceId: ChangeStateResourceId;
 
   @doc("Last stage sequence in the StageProgression.")
   lastStageSequence: int32;
@@ -142,23 +141,6 @@ union ChangeType {
 
   @doc("Breakglass level resource change.")
   Breakglass: "Breakglass",
-}
-
-@armResourceOperations
-@doc("The operations of the ChangeState resource.")
-interface ChangeStates {
-  get is ArmResourceRead<ChangeState>;
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ChangeState>;
-  update is ArmResourcePatchSync<ChangeState, ChangeStateProperties>;
-  delete is ArmResourceDeleteWithoutOkAsync<ChangeState>;
-
-  @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource.")
-  @action("retrieveNextStages")
-  retrieveNextStages is ArmResourceActionSync<
-    ChangeState,
-    void,
-    RetrieveNextStagesResponse
-  >;
 }
 
 @doc("Base type for the ChangeArtifact, which is polymorphic based on ArtifactType")
@@ -283,7 +265,7 @@ model ExternalArtifactContent {
 model TemplateSpecArtifactContent {
   @doc("TemplateSpec resource Id in ARM.")
   @visibility("read", "create", "update")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 }
 
 /* Different ChangeArtifact types */
@@ -319,4 +301,29 @@ union ArmOperation {
 
   @doc("DELETE ARM Operation.")
   DELETE: "DELETE",
+}
+
+@doc("Azure resource Id of a ChangeState.")
+scalar ChangeStateResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/changeStates",
+    }
+  ]>;
+
+@armResourceOperations
+@doc("The operations of the ChangeState resource.")
+interface ChangeStates {
+  get is ArmResourceRead<ChangeState>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ChangeState>;
+  update is ArmResourcePatchSync<ChangeState, ChangeStateProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<ChangeState>;
+
+  @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource.")
+  @action("retrieveNextStages")
+  retrieveNextStages is ArmResourceActionSync<
+    ChangeState,
+    void,
+    RetrieveNextStagesResponse
+  >;
 }

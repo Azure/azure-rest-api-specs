@@ -12,8 +12,7 @@ using Azure.ResourceManager;
 namespace Microsoft.ChangeSafety;
 
 @doc("Resource provides details about stages a deployment goes through.")
-@extensionResource
-model StageMap is ProxyResource<StageMapProperties> {
+model StageMap is ExtensionResource<StageMapProperties> {
   @pattern("^[a-zA-Z0-9-]{3,100}$")
   @key("stageMapName")
   @segment("stageMaps")
@@ -32,12 +31,12 @@ model StageMapProperties {
 
   @doc("Array of stages objects.")
   @OpenAPI.extension("x-ms-identifiers", ["name"])
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   stages: Stage[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning of operation parameters should not be of type Record as per ARM."
   @doc("StageMap parameters schema for each stage.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   parameters?: Record<Parameter>;
 }
 
@@ -61,10 +60,18 @@ model Stage {
   @visibility("read", "create", "update")
   parameterValues?: Record<string | int32>;
 
-  @doc("Stage Map Id.")
+  @doc("Stage Map resource Id.")
   @visibility("read", "create", "update")
-  nestedStageMapResourceId?: string;
+  nestedStageMapResourceId?: StageMapResourceId;
 }
+
+@doc("Azure resource Id of a stage map.")
+scalar StageMapResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/stageMaps",
+    }
+  ]>;
 
 @armResourceOperations
 @doc("The operations of the StageMap resource.")

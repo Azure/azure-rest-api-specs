@@ -34,10 +34,10 @@ union ProvisioningState {
 union ParameterType {
   string,
 
-  @doc("string data type")
+  @doc("String data type")
   String: "string",
 
-  @doc("integer data type")
+  @doc("Integer data type")
   Number: "number",
 }
 

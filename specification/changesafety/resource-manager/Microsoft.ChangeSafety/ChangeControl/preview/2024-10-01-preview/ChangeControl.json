@@ -1061,7 +1061,7 @@
           ]
         },
         "stageMapResourceId": {
-          "type": "string",
+          "$ref": "#/definitions/StageMapResourceId",
           "description": "Azure resource Id of the referenced StageMap.",
           "x-ms-mutability": [
             "read",
@@ -1079,7 +1079,7 @@
         "expirationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Change is expected to be completed by date, in ISO 8601 format.",
+          "description": "Change is expected to be expired by date, in ISO 8601 format.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1198,6 +1198,18 @@
             "create"
           ]
         }
+      }
+    },
+    "ChangeStateResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource Id of a ChangeState.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ChangeSafety/changeStates"
+          }
+        ]
       }
     },
     "ChangeStateUpdate": {
@@ -1461,6 +1473,16 @@
       ],
       "x-ms-discriminator-value": "number"
     },
+    "NumberParameterUpdate": {
+      "type": "object",
+      "description": "Integer type parameter model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "number"
+    },
     "Parameter": {
       "type": "object",
       "description": "Base class for the Parameters.",
@@ -1505,15 +1527,34 @@
           {
             "name": "String",
             "value": "string",
-            "description": "string data type"
+            "description": "String data type"
           },
           {
             "name": "Number",
             "value": "number",
-            "description": "integer data type"
+            "description": "Integer data type"
           }
         ]
       }
+    },
+    "ParameterUpdate": {
+      "type": "object",
+      "description": "Base class for the Parameters.",
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "description": "user-specified parameter metadata",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "type"
     },
     "ProvisioningState": {
       "type": "string",
@@ -1575,7 +1616,7 @@
       "description": "RetrieveNextStage POST Action response.",
       "properties": {
         "changeStateResourceId": {
-          "type": "string",
+          "$ref": "#/definitions/ChangeStateResourceId",
           "description": "ChangeState resource Id."
         },
         "lastStageSequence": {
@@ -1659,8 +1700,8 @@
           ]
         },
         "nestedStageMapResourceId": {
-          "type": "string",
-          "description": "Stage Map Id.",
+          "$ref": "#/definitions/StageMapResourceId",
+          "description": "Stage Map resource Id.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1708,6 +1749,7 @@
           ],
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -1719,6 +1761,7 @@
           },
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
@@ -1729,7 +1772,48 @@
     },
     "StageMapPropertiesUpdate": {
       "type": "object",
-      "description": "Detailed properties of the StageMap resource."
+      "description": "Detailed properties of the StageMap resource.",
+      "properties": {
+        "stages": {
+          "type": "array",
+          "description": "Array of stages objects.",
+          "items": {
+            "$ref": "#/definitions/Stage"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "StageMap parameters schema for each stage.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterUpdate"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "StageMapResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource Id of a stage map.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ChangeSafety/stageMaps"
+          }
+        ]
+      }
     },
     "StageMapUpdate": {
       "type": "object",
@@ -1798,6 +1882,7 @@
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -1848,6 +1933,17 @@
       "type": "object",
       "description": "Detailed properties of the StageProgression resource.",
       "properties": {
+        "stageReference": {
+          "type": "string",
+          "description": "Stage name relevant to hierarchical StageMap.",
+          "minLength": 3,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "state": {
           "$ref": "#/definitions/StageProgressionState",
           "description": "StageProgression resource state.",
@@ -1982,12 +2078,23 @@
       ],
       "x-ms-discriminator-value": "string"
     },
+    "StringParameterUpdate": {
+      "type": "object",
+      "description": "String Type Parameter model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
     "TemplateSpecArtifactContent": {
       "type": "object",
       "description": "Artifact content model for TemplateSpec resource.",
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "TemplateSpec resource Id in ARM.",
           "x-ms-mutability": [
             "read",
