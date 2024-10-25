@@ -26,7 +26,7 @@ interface AutoActions {
   listByResourceGroup is ArmResourceListByParent<AutoAction>;
   listBySubscription is ArmListBySubscription<AutoAction>;
 
-  getResources is ArmResourceActionSync<
+  listResources is ArmResourceActionSync<
     AutoAction,
     void,
     AutoActionResourceListResponse
@@ -43,7 +43,7 @@ interface AutoActions {
   >;
   patchResources is ArmResourceActionSync<
     AutoAction,
-    AutoActionResourcePatchListRequest,
+    AutoActionResourcePatchRequest,
     AutoActionResourceOperationResponse
   >;
 

@@ -20,11 +20,11 @@ interface Occurrences {
   get is ArmResourceRead<Occurrence>;
   listByAutoAction is ArmResourceListByParent<Occurrence>;
 
-  getResources is ArmResourceActionSync<
+  listResources is ArmResourceActionSync<
     Occurrence,
     void,
     OccurrenceResourceListResponse
   >;
-  cancel is ArmResourceActionSync<Occurrence, CancelOccurrenceRequest, void>;
-  delay is ArmResourceActionSync<Occurrence, DelayRequest, void>;
+  cancel is ArmResourceActionSync<Occurrence, CancelOccurrenceRequest, Occurrence>;
+  delay is ArmResourceActionSync<Occurrence, DelayRequest, Occurrence>;
 }

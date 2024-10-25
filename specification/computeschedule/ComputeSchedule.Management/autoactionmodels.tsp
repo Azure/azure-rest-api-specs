@@ -208,7 +208,7 @@ model NotificationProperties {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-scalar validAutoActionResourceId
+scalar ValidAutoActionResourceId
   extends armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines",
@@ -223,7 +223,7 @@ scalar validAutoActionResourceId
 @doc("Represents an auto action resource metadata.")
 model AutoActionResource {
   @doc("The ARM Id of the resource.")
-  resourceId: validAutoActionResourceId;
+  resourceId: ValidAutoActionResourceId;
 
   @doc("The desired notification settings for the specified resource.")
   @OpenAPI.extension("x-ms-identifiers", ["destination"])
@@ -288,59 +288,31 @@ model AutoActionResourceAttachRequest {
 @doc("Request model to detach a list of auto action resources.")
 model AutoActionResourceDetachRequest {
   @doc("List of resources to be detached")
-  resources: Array<validAutoActionResourceId>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@doc("The type of operation we want to perform on the resource")
-union AutoActionResourceOperationType {
-  @doc("Attach resource operation")
-  Attach: "Attach",
-
-  @doc("Detach resource operation")
-  Detach: "Detach",
-
-  @doc("Update resource operation")
-  Update: "Update",
-
-  string,
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@doc("Request model perform an operation in a resource")
-model AutoActionResourcePatchRequest {
-  @doc("The auto action resource this request should act on. If the operation type is Detach, only the resourceId will be used.")
-  resource: AutoActionResource;
-
-  @doc("The type of operation we want to perform on the resource")
-  operation: AutoActionResourceOperationType;
+  resources: Array<ValidAutoActionResourceId>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Request model perform a resource operation in a list of resources")
-model AutoActionResourcePatchListRequest {
-  @doc("The list of request for each resource we want to act on")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  resourceRequests: Array<AutoActionResourcePatchRequest>;
+model AutoActionResourcePatchRequest {
+  @doc("The list of resources we watch to patch")
+  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+  resources: Array<AutoActionResource>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@doc("The request to cancel an occurrence. ")
+@doc("The request to cancel an occurrence.")
 model CancelOccurrenceRequest {
   @doc("The resources the cancellation should act on. If no resource is passed in the list, Auto Action will cancel the occurrence for all resources.")
-  resourceIds: Array<validAutoActionResourceId>;
+  resourceIds: Array<ValidAutoActionResourceId>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The state the resource is on after the resource operation is applied")
-union ResourceState {
-  @doc("The resource was successfully attached")
-  Attached: "Attached",
+union ResourceOperationStatus {
+  @doc("The resource operation was successful")
+  Succeeded: "Succeeded",
 
-  @doc("The resource was successfully detached")
-  Detached: "Detached",
-
-  @doc("The resource has failed the attach/detach/patch operation")
+  @doc("The resource operation has failed.")
   Failed: "Failed",
 
   string,
@@ -350,10 +322,10 @@ union ResourceState {
 @doc("The status of a resource after a resource level operation was performed")
 model ResourceStatus {
   @doc("The arm identifier of the resource")
-  resourceId: validAutoActionResourceId;
+  resourceId: ValidAutoActionResourceId;
 
   @doc("The state the resource is currently on")
-  state: ResourceState;
+  status: ResourceOperationStatus;
 
   @doc("Errors encountered while trying to perform")
   error?: Azure.Core.Foundations.Error;
@@ -363,9 +335,9 @@ model ResourceStatus {
 @doc("The response from auto action resource requests, which contains the status of each resource")
 model AutoActionResourceOperationResponse {
   @doc("The total number of resources operated on")
-  total: int32;
+  totalResources: int32;
 
-  @doc("The total number of resources operated on")
+  @doc("The resource status of for each resource")
   @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }

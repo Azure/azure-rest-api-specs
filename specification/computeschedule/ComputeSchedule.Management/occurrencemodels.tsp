@@ -89,5 +89,5 @@ model DelayRequest {
   delay: duration;
 
   @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.")
-  resourceIds: Array<validAutoActionResourceId>;
+  resourceIds: Array<ValidAutoActionResourceId>;
 }
