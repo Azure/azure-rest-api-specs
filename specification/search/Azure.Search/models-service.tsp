@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace SearchClient;
+namespace Search;
 
 /**
  * Defines the type of a datasource.
@@ -4842,22 +4842,19 @@ model SearchResourceEncryptionKey {
     /**
      * The name of your Azure Key Vault key to be used to encrypt your data at rest.
      */
-    @encodedName("application/json", "keyVaultKeyName")
-    keyName: string;
+    keyVaultKeyName: string;
 
     /**
      * The version of your Azure Key Vault key to be used to encrypt your data at rest.
      */
-    @encodedName("application/json", "keyVaultKeyVersion")
-    keyVersion: string;
+    keyVaultKeyVersion: string;
 
     /**
      * The URI of your Azure Key Vault, also referred to as DNS name, that contains
      * the key to be used to encrypt your data at rest. An example URI might be
      * `https://my-keyvault-name.vault.azure.net`.
      */
-    @encodedName("application/json", "keyVaultUri")
-    vaultUri: string;
+    keyVaultUri: string;
 
     /**
      * Optional Azure Active Directory credentials used for accessing your Azure Key
@@ -4894,8 +4891,7 @@ model ListDataSourcesResult {
      * The datasources in the Search service.
      */
     @visibility("read")
-    @encodedName("application/json", "value")
-    dataSources: SearchIndexerDataSource[];
+    value: SearchIndexerDataSource[];
 }
 
 /**
@@ -4955,8 +4951,7 @@ model SearchIndexer {
     /**
      * A value indicating whether the indexer is disabled. Default is false.
      */
-    @encodedName("application/json", "disabled")
-    isDisabled?: boolean;
+    disabled?: boolean;
 
     /**
      * The ETag of the indexer.
@@ -5188,8 +5183,7 @@ model ListIndexersResult {
      * The indexers in the Search service.
      */
     @visibility("read")
-    @encodedName("application/json", "value")
-    indexers: SearchIndexer[];
+    value: SearchIndexer[];
 }
 
 /**
@@ -5269,15 +5263,13 @@ model IndexerExecutionResult {
      * attempted but failed.
      */
     @visibility("read")
-    @encodedName("application/json", "itemsProcessed")
-    itemCount: int32;
+    itemsProcessed: int32;
 
     /**
      * The number of items that failed to be indexed during this indexer execution.
      */
     @visibility("read")
-    @encodedName("application/json", "itemsFailed")
-    failedItemCount: int32;
+    itemsFailed: int32;
 
     /**
      * Change tracking state with which an indexer execution started.
@@ -5429,8 +5421,7 @@ model SearchIndexerSkillset {
     /**
      * Details about the Azure AI service to be used when running skills.
      */
-    @encodedName("application/json", "cognitiveServices")
-    cognitiveServicesAccount?: CognitiveServicesAccount;
+    cognitiveServices?: CognitiveServicesAccount;
 
     /**
      * Definition of additional projections to Azure blob, table, or files, of
@@ -5441,8 +5432,7 @@ model SearchIndexerSkillset {
     /**
      * Definition of additional projections to secondary search index(es).
      */
-    @encodedName("application/json", "indexProjections")
-    indexProjection?: SearchIndexerIndexProjection;
+    indexProjections?: SearchIndexerIndexProjection;
 
     /**
      * The ETag of the skillset.
@@ -5738,8 +5728,7 @@ model ListSkillsetsResult {
      * The skillsets defined in the Search service.
      */
     @visibility("read")
-    @encodedName("application/json", "value")
-    skillsets: SearchIndexerSkillset[];
+    value: SearchIndexerSkillset[];
 }
 
 /**
@@ -5794,8 +5783,7 @@ model ListSynonymMapsResult {
      * The synonym maps in the Search service.
      */
     @visibility("read")
-    @encodedName("application/json", "value")
-    synonymMaps: SynonymMap[];
+    value: SynonymMap[];
 }
 
 /**
@@ -5882,8 +5870,7 @@ model SearchIndex {
     /**
      * Defines parameters for a search index that influence semantic capabilities.
      */
-    @encodedName("application/json", "semantic")
-    semanticSearch?: SemanticSearch;
+    semantic?: SemanticSearch;
 
     /**
      * Contains configuration options related to vector search.
@@ -6033,21 +6020,18 @@ model SearchField {
      */
     @maxValue(2048)
     @minValue(2)
-    @encodedName("application/json", "dimensions")
-    vectorSearchDimensions?: int32;
+    dimensions?: int32;
 
     /**
      * The name of the vector search profile that specifies the algorithm and
      * vectorizer to use when searching the vector field.
      */
-    @encodedName("application/json", "vectorSearchProfile")
-    vectorSearchProfileName?: string;
+    vectorSearchProfile?: string;
 
     /**
      * The encoding format to interpret the field contents.
      */
-    @encodedName("application/json", "vectorEncoding")
-    vectorEncodingFormat?: VectorEncodingFormat;
+    vectorEncoding?: VectorEncodingFormat;
 
     /**
      * A list of the names of synonym maps to associate with this field. This option
@@ -6078,8 +6062,7 @@ model ScoringProfile {
     /**
      * Parameters that boost scoring based on text matches in certain index fields.
      */
-    @encodedName("application/json", "text")
-    textWeights?: TextWeights;
+    text?: TextWeights;
 
     /**
      * The collection of functions that influence the scoring of documents.
@@ -6126,6 +6109,9 @@ model ScoringFunction {
      * defaults to "Linear".
      */
     interpolation?: ScoringFunctionInterpolation;
+
+    @doc("Type of ScoringFunction.")
+    kind: string;
 }
 
 /**
@@ -6262,8 +6248,7 @@ model SemanticSearch {
      * Allows you to set the name of a default semantic configuration in your index,
      * making it optional to pass it on as a query parameter every time.
      */
-    @encodedName("application/json", "defaultConfiguration")
-    defaultConfigurationName?: string;
+    defaultConfiguration?: string;
 
     /**
      * The semantic configurations for the index.
@@ -6308,8 +6293,7 @@ model SemanticPrioritizedFields {
      * represents their priority. Fields with lower priority may get truncated if the
      * content is long.
      */
-    @encodedName("application/json", "prioritizedContentFields")
-    contentFields?: SemanticField[];
+    prioritizedContentFields?: SemanticField[];
 
     /**
      * Defines the keyword fields to be used for semantic ranking, captions,
@@ -6318,8 +6302,7 @@ model SemanticPrioritizedFields {
      * their priority. Fields with lower priority may get truncated if the content is
      * long.
      */
-    @encodedName("application/json", "prioritizedKeywordsFields")
-    keywordsFields?: SemanticField[];
+    prioritizedKeywordsFields?: SemanticField[];
 }
 
 /**
@@ -6372,61 +6355,59 @@ model VectorSearchProfile {
      * The name of the vector search algorithm configuration that specifies the
      * algorithm and optional parameters.
      */
-    @encodedName("application/json", "algorithm")
-    algorithmConfigurationName: string;
+    algorithm: string;
 
     /**
      * The name of the vectorization being configured for use with vector search.
      */
-    @encodedName("application/json", "vectorizer")
-    vectorizerName?: string;
+    vectorizer?: string;
 
     /**
      * The name of the compression method configuration that specifies the compression
      * method and optional parameters.
      */
-    @encodedName("application/json", "compression")
-    compressionName?: string;
+    compression?: string;
 }
 
 /**
  * Contains configuration options specific to the algorithm used during indexing
  * or querying.
  */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
 model VectorSearchAlgorithmConfiguration {
     /**
      * The name to associate with this particular configuration.
      */
     name: string;
+
+    @doc("Type of VectorSearchAlgorithmConfiguration.")
+    kind: VectorSearchAlgorithmKind;
 }
 
 /**
  * Specifies the vectorization method to be used during query time.
  */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
 model VectorSearchVectorizer {
     /**
      * The name to associate with this particular vectorization method.
      */
-    @encodedName("application/json", "name")
-    vectorizerName: string;
+    name: string;
+
+    @doc("Type of VectorSearchVectorizer.")
+    kind: VectorSearchVectorizerKind;
 }
 
 /**
  * Contains configuration options specific to the compression method used during
  * indexing or querying.
  */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
 model VectorSearchCompression {
     /**
      * The name to associate with this particular configuration.
      */
-    @encodedName("application/json", "name")
-    compressionName: string;
+    name: string;
 
     /**
      * If set to true, once the ordered set of results calculated using compressed
@@ -6445,6 +6426,9 @@ model VectorSearchCompression {
      * values improve recall at the expense of latency.
      */
     defaultOversampling?: float64;
+
+    @doc("Type of VectorSearchCompression.")
+    kind: VectorSearchCompressionKind;
 }
 
 /**
@@ -6458,8 +6442,7 @@ model ListIndexesResult {
      */
     @visibility("read")
     @items
-    @encodedName("application/json", "value")
-    indexes: SearchIndex[];
+    value: SearchIndex[];
 }
 
 /**
@@ -6587,50 +6570,42 @@ model SearchServiceCounters {
     /**
      * Total number of documents across all indexes in the service.
      */
-    @encodedName("application/json", "documentCount")
-    documentCounter: ResourceCounter;
+    documentCount: ResourceCounter;
 
     /**
      * Total number of indexes.
      */
-    @encodedName("application/json", "indexesCount")
-    indexCounter: ResourceCounter;
+    indexesCount: ResourceCounter;
 
     /**
      * Total number of indexers.
      */
-    @encodedName("application/json", "indexersCount")
-    indexerCounter: ResourceCounter;
+    indexersCount: ResourceCounter;
 
     /**
      * Total number of data sources.
      */
-    @encodedName("application/json", "dataSourcesCount")
-    dataSourceCounter: ResourceCounter;
+    dataSourcesCount: ResourceCounter;
 
     /**
      * Total size of used storage in bytes.
      */
-    @encodedName("application/json", "storageSize")
-    storageSizeCounter: ResourceCounter;
+    storageSize: ResourceCounter;
 
     /**
      * Total number of synonym maps.
      */
-    @encodedName("application/json", "synonymMaps")
-    synonymMapCounter: ResourceCounter;
+    synonymMaps: ResourceCounter;
 
     /**
      * Total number of skillsets.
      */
-    @encodedName("application/json", "skillsetCount")
-    skillsetCounter: ResourceCounter;
+    skillsetCount: ResourceCounter;
 
     /**
      * Total memory consumption of all vector indexes within the service, in bytes.
      */
-    @encodedName("application/json", "vectorIndexSize")
-    vectorIndexSizeCounter: ResourceCounter;
+    vectorIndexSize: ResourceCounter;
 }
 
 /**
@@ -6677,8 +6652,7 @@ model SearchServiceLimits {
     /**
      * The maximum amount of storage in bytes allowed per index.
      */
-    @encodedName("application/json", "maxStoragePerIndex")
-    maxStoragePerIndexInBytes?: int64;
+    maxStoragePerIndex?: int64;
 }
 
 /**
@@ -6725,8 +6699,7 @@ model PatternAnalyzer extends LexicalAnalyzer {
     /**
      * A value indicating whether terms should be lower-cased. Default is true.
      */
-    @encodedName("application/json", "lowercase")
-    lowerCaseTerms?: boolean = true;
+    lowercase?: boolean = true;
 
     /**
      * A regular expression pattern to match token separators. Default is an
@@ -7003,14 +6976,12 @@ model PathHierarchyTokenizerV2 extends LexicalTokenizer {
      * A value indicating whether to generate tokens in reverse order. Default is
      * false.
      */
-    @encodedName("application/json", "reverse")
-    reverseTokenOrder?: boolean;
+    reverse?: boolean;
 
     /**
      * The number of initial tokens to skip. Default is 0.
      */
-    @encodedName("application/json", "skip")
-    numberOfTokensToSkip?: int32;
+    skip?: int32;
 
     /**
      * A URI fragment specifying the type of tokenizer.
@@ -7175,8 +7146,7 @@ model CommonGramTokenFilter extends TokenFilter {
      * mode, the token filter generates bigrams and then removes common words and
      * single terms followed by a common word. Default is false.
      */
-    @encodedName("application/json", "queryMode")
-    useQueryMode?: boolean;
+    queryMode?: boolean;
 
     /**
      * A URI fragment specifying the type of token filter.
@@ -7325,8 +7295,7 @@ model KeepTokenFilter extends TokenFilter {
     /**
      * A value indicating whether to lower case all words first. Default is false.
      */
-    @encodedName("application/json", "keepWordsCase")
-    lowerCaseKeepWords?: boolean;
+    keepWordsCase?: boolean;
 
     /**
      * A URI fragment specifying the type of token filter.
@@ -7369,15 +7338,13 @@ model LengthTokenFilter extends TokenFilter {
      * than the value of max.
      */
     @maxValue(300)
-    @encodedName("application/json", "min")
-    minLength?: int32;
+    min?: int32;
 
     /**
      * The maximum length in characters. Default and maximum is 300.
      */
     @maxValue(300)
-    @encodedName("application/json", "max")
-    maxLength?: int32 = 300;
+    max?: int32 = 300;
 
     /**
      * A URI fragment specifying the type of token filter.
@@ -7527,8 +7494,7 @@ model PhoneticTokenFilter extends TokenFilter {
      * A value indicating whether encoded tokens should replace original tokens. If
      * false, encoded tokens are added as synonyms. Default is true.
      */
-    @encodedName("application/json", "replace")
-    replaceOriginalTokens?: boolean = true;
+    replace?: boolean = true;
 
     /**
      * A URI fragment specifying the type of token filter.
@@ -7674,8 +7640,7 @@ model StopwordsTokenFilter extends TokenFilter {
      * A value indicating whether to ignore the last search term if it's a stop word.
      * Default is true.
      */
-    @encodedName("application/json", "removeTrailing")
-    removeTrailingStopWords?: boolean = true;
+    removeTrailing?: boolean = true;
 
     /**
      * A URI fragment specifying the type of token filter.
@@ -7933,8 +7898,7 @@ model HnswAlgorithmConfiguration extends VectorSearchAlgorithmConfiguration {
     /**
      * Contains the parameters specific to HNSW algorithm.
      */
-    @encodedName("application/json", "hnswParameters")
-    parameters?: HnswParameters;
+    hnswParameters?: HnswParameters;
 
     /**
      * The name of the kind of algorithm being configured for use with vector search.
@@ -7992,8 +7956,7 @@ model ExhaustiveKnnAlgorithmConfiguration
     /**
      * Contains the parameters specific to exhaustive KNN algorithm.
      */
-    @encodedName("application/json", "exhaustiveKnnParameters")
-    parameters?: ExhaustiveKnnParameters;
+    exhaustiveKnnParameters?: ExhaustiveKnnParameters;
 
     /**
      * The name of the kind of algorithm being configured for use with vector search.
@@ -8019,8 +7982,7 @@ model ScalarQuantizationCompression extends VectorSearchCompression {
     /**
      * Contains the parameters specific to Scalar Quantization.
      */
-    @encodedName("application/json", "scalarQuantizationParameters")
-    parameters?: ScalarQuantizationParameters;
+    scalarQuantizationParameters?: ScalarQuantizationParameters;
 
     /**
      * The name of the kind of compression method being configured for use with vector
@@ -8059,8 +8021,7 @@ model AzureOpenAIVectorizer extends VectorSearchVectorizer {
     /**
      * Contains the parameters specific to Azure OpenAI embedding vectorization.
      */
-    @encodedName("application/json", "azureOpenAIParameters")
-    parameters?: AzureOpenAIVectorizerParameters;
+    azureOpenAIParameters?: AzureOpenAIVectorizerParameters;
 
     /**
      * The name of the kind of vectorization method being configured for use with
@@ -8077,14 +8038,12 @@ model AzureOpenAIVectorizerParameters {
     /**
      * The resource URI of the Azure OpenAI resource.
      */
-    @encodedName("application/json", "resourceUri")
-    resourceUrl?: url;
+    resourceUri?: url;
 
     /**
      * ID of the Azure OpenAI model deployment on the designated resource.
      */
-    @encodedName("application/json", "deploymentId")
-    deploymentName?: string;
+    deploymentId?: string;
 
     /**
      * API key of the designated Azure OpenAI resource.
@@ -8123,8 +8082,7 @@ model WebApiVectorizer extends VectorSearchVectorizer {
     /**
      * Specifies the properties of the user-defined vectorizer.
      */
-    @encodedName("application/json", "customWebApiParameters")
-    webApiParameters?: WebApiVectorizerParameters;
+    customWebApiParameters?: WebApiVectorizerParameters;
 
     /**
      * The name of the kind of vectorization method being configured for use with
@@ -8140,8 +8098,7 @@ model WebApiVectorizerParameters {
     /**
      * The URI of the Web API providing the vectorizer.
      */
-    @encodedName("application/json", "uri")
-    url?: url;
+    uri?: url;
 
     /**
      * The headers required to make the HTTP request.
@@ -8201,8 +8158,7 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
      * "/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId"
      * that should have been assigned to the search service.
      */
-    @encodedName("application/json", "userAssignedIdentity")
-    resourceId: string;
+    userAssignedIdentity: string;
 
     /**
      * A URI fragment specifying the type of identity.
@@ -8276,8 +8232,7 @@ model DistanceScoringFunction extends ScoringFunction {
     /**
      * Parameter values for the distance scoring function.
      */
-    @encodedName("application/json", "distance")
-    parameters: DistanceScoringParameters;
+    distance: DistanceScoringParameters;
 
     /**
      * Indicates the type of function to use. Valid values include magnitude,
@@ -8310,8 +8265,7 @@ model FreshnessScoringFunction extends ScoringFunction {
     /**
      * Parameter values for the freshness scoring function.
      */
-    @encodedName("application/json", "freshness")
-    parameters: FreshnessScoringParameters;
+    freshness: FreshnessScoringParameters;
 
     /**
      * Indicates the type of function to use. Valid values include magnitude,
@@ -8337,8 +8291,7 @@ model MagnitudeScoringFunction extends ScoringFunction {
     /**
      * Parameter values for the magnitude scoring function.
      */
-    @encodedName("application/json", "magnitude")
-    parameters: MagnitudeScoringParameters;
+    magnitude: MagnitudeScoringParameters;
 
     /**
      * Indicates the type of function to use. Valid values include magnitude,
@@ -8365,8 +8318,7 @@ model MagnitudeScoringParameters {
      * A value indicating whether to apply a constant boost for field values beyond
      * the range end value; default is false.
      */
-    @encodedName("application/json", "constantBoostBeyondRange")
-    shouldBoostBeyondRangeByConstant?: boolean;
+    constantBoostBeyondRange?: boolean;
 }
 
 /**
@@ -8377,8 +8329,7 @@ model TagScoringFunction extends ScoringFunction {
     /**
      * Parameter values for the tag scoring function.
      */
-    @encodedName("application/json", "tag")
-    parameters: TagScoringParameters;
+    tag: TagScoringParameters;
 
     /**
      * Indicates the type of function to use. Valid values include magnitude,
@@ -8615,8 +8566,7 @@ model OcrSkill extends SearchIndexerSkill {
     /**
      * A value indicating to turn orientation detection on or not. Default is false.
      */
-    @encodedName("application/json", "detectOrientation")
-    shouldDetectOrientation?: boolean;
+    detectOrientation?: boolean;
 
     /**
      * Defines the sequence of characters to use between the lines of text recognized
@@ -8912,8 +8862,7 @@ model PIIDetectionSkill extends SearchIndexerSkill {
      * replace. Default is '*'.
      */
     @maxLength(1)
-    @encodedName("application/json", "maskingCharacter")
-    mask?: string;
+    maskingCharacter?: string;
 
     /**
      * The version of the model to use when calling the Text Analytics service. It

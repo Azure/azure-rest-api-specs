@@ -5,7 +5,7 @@ import "./models-service.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace SearchClient;
+namespace Search;
 
 interface DataSourcesOperations {
     /**

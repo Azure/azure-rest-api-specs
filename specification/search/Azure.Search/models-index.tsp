@@ -5,7 +5,7 @@ import "./models-shared.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-namespace SearchClient;
+namespace Search;
 
 /**
  * Allows the user to choose whether a semantic call should fail completely, or to
@@ -346,8 +346,7 @@ model SearchDocumentsResult {
    * The sequence of results returned by the query.
    */
   @visibility("read")
-  @encodedName("application/json", "value")
-  results: SearchResult[];
+  value: SearchResult[];
 
   /**
    * Continuation URL returned when the query can't return all the requested results
@@ -437,8 +436,7 @@ model SearchRequest {
    * false. Setting this value to true may have a performance impact. Note that the
    * count returned is an approximation.
    */
-  @encodedName("application/json", "count")
-  includeTotalResultCount?: boolean;
+  count?: boolean;
 
   /**
    * The list of facet expressions to apply to the search query. Each facet
@@ -456,8 +454,7 @@ model SearchRequest {
    * The comma-separated list of field names to use for hit highlights. Only
    * searchable fields can be used for hit highlighting.
    */
-  @encodedName("application/json", "highlight")
-  highlightFields?: string;
+  highlight?: string;
 
   /**
    * A string tag that is appended to hit highlights. Must be set with
@@ -488,8 +485,7 @@ model SearchRequest {
    * $orderby is specified, the default sort order is descending by document match
    * score. There can be at most 32 $orderby clauses.
    */
-  @encodedName("application/json", "orderby")
-  orderBy?: string;
+  orderby?: string;
 
   /**
    * A value that specifies the syntax of the search query. The default is 'simple'.
@@ -534,8 +530,7 @@ model SearchRequest {
    * A full-text search query expression; Use "*" or omit this parameter to match
    * all documents.
    */
-  @encodedName("application/json", "search")
-  searchText?: string;
+  search?: string;
 
   /**
    * The comma-separated list of field names to which to scope the full-text search.
@@ -628,7 +623,6 @@ model SearchRequest {
 /**
  * The query parameters for vector and hybrid search queries.
  */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
 model VectorQuery {
   /**
@@ -667,6 +661,9 @@ model VectorQuery {
    * larger than zero.
    */
   weight?: float32;
+
+  @doc("Type of query.")
+  kind: VectorQueryKind;
 }
 
 /**
@@ -744,8 +741,7 @@ model SuggestDocumentsResult {
    * The sequence of results returned by the query.
    */
   @visibility("read")
-  @encodedName("application/json", "value")
-  results: SuggestResult[];
+  value: SuggestResult[];
 
   /**
    * A value indicating the percentage of the index that was included in the query,
@@ -789,8 +785,7 @@ model SuggestRequest {
    * provides a better experience in some scenarios, it comes at a performance cost
    * as fuzzy suggestion searches are slower and consume more resources.
    */
-  @encodedName("application/json", "fuzzy")
-  useFuzzyMatching?: boolean;
+  fuzzy?: boolean;
 
   /**
    * A string tag that is appended to hit highlights. Must be set with
@@ -821,15 +816,13 @@ model SuggestRequest {
    * $orderby is specified, the default sort order is descending by document match
    * score. There can be at most 32 $orderby clauses.
    */
-  @encodedName("application/json", "orderby")
-  orderBy?: string;
+  orderby?: string;
 
   /**
    * The search text to use to suggest documents. Must be at least 1 character, and
    * no more than 100 characters.
    */
-  @encodedName("application/json", "search")
-  searchText: string;
+  search: string;
 
   /**
    * The comma-separated list of field names to search for the specified search
@@ -863,8 +856,7 @@ model IndexBatch {
   /**
    * The actions in the batch.
    */
-  @encodedName("application/json", "value")
-  actions: IndexAction[];
+  value: IndexAction[];
 }
 
 /**
@@ -893,8 +885,7 @@ model IndexDocumentsResult {
    * The list of status information for each document in the indexing request.
    */
   @visibility("read")
-  @encodedName("application/json", "value")
-  results: IndexingResult[];
+  value: IndexingResult[];
 }
 
 /**
@@ -919,8 +910,7 @@ model IndexingResult {
    * identified by the key.
    */
   @visibility("read")
-  @encodedName("application/json", "status")
-  succeeded: boolean;
+  status: boolean;
 
   /**
    * The status code of the indexing operation. Possible values include: 200 for a
@@ -950,8 +940,7 @@ model AutocompleteResult {
    * The list of returned Autocompleted items.
    */
   @visibility("read")
-  @encodedName("application/json", "value")
-  results: AutocompleteItem[];
+  value: AutocompleteItem[];
 }
 
 /**
@@ -978,8 +967,7 @@ model AutocompleteRequest {
   /**
    * The search text on which to base autocomplete results.
    */
-  @encodedName("application/json", "search")
-  searchText: string;
+  search: string;
 
   /**
    * Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms'
@@ -1001,8 +989,7 @@ model AutocompleteRequest {
    * provides a better experience in some scenarios, it comes at a performance cost
    * as fuzzy autocomplete queries are slower and consume more resources.
    */
-  @encodedName("application/json", "fuzzy")
-  useFuzzyMatching?: boolean;
+  fuzzy?: boolean;
 
   /**
    * A string tag that is appended to hit highlights. Must be set with

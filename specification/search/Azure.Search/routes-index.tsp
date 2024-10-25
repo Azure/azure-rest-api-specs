@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace SearchClient;
+namespace Search;
 
 
 @route("/indexes('{indexName}')")

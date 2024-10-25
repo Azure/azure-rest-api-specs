@@ -38,4 +38,10 @@ enum Versions {
    */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_07_01: "2024-07-01",
+
+  /**
+   * The 2024-11-01-preview API version.
+   */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_11_01_preview: "2024-11-01-preview",
 }
