@@ -11,7 +11,6 @@ using Azure.ResourceManager;
 
 @doc("Request body for calling post-action")
 model ApprovalDeletionCallbackRequest {
- 
   @doc("Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action")
   resourceRequestAction: "Create" | "Delete" | "Update" | string;
 }

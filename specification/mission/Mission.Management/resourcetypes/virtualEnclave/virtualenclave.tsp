@@ -131,7 +131,6 @@ model MaintenanceModeConfiguration {
   justification?: "Networking" | "Governance" | "Off" | string;
 }
 
-
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
