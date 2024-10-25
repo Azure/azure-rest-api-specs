@@ -54,7 +54,7 @@ jobs:
 
       - uses: ./.github/actions/setup-node-npm-ci
         
-      - name: Validate All Specs (Shard ${{ matrix.shard }} of ${{ matrix.total-shards }})
+      - name: Validate All Specs (Shard ${{ matrix.shard + 1 }} of ${{ matrix.total-shards }})
         run: |
           ./eng/scripts/TypeSpec-Validation.ps1 `
             -Shard ${{ matrix.shard }} `
