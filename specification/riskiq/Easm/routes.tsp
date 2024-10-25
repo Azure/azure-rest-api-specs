@@ -88,9 +88,9 @@ interface DataConnections {
 
   @doc("Validate a data connection with a given dataConnectionName.")
   @action("validate")
-  validateDataConnection is Operations.ResourceAction<
+  validateDataConnection is Operations.ResourceCollectionAction<
     DataConnection,
-    BodyParameter<DataConnection>,
+    BodyParameter<DataConnectionData>,
     ValidateResult
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
@@ -102,7 +102,7 @@ interface DataConnections {
   @put
   createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
-    BodyParameter<DataConnection>,
+    BodyParameter<DataConnectionData>,
     DataConnection
   >;
 
@@ -120,9 +120,9 @@ interface DiscoveryGroups {
   @doc("Validate a discovery group with a given groupName.")
   @action("validate")
   @clientName("ValidateDiscoveryGroup", "csharp")
-  validateDiscoGroup is Operations.ResourceAction<
+  validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
-    BodyParameter<DiscoGroup>,
+    BodyParameter<DiscoGroupData>,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
@@ -136,7 +136,7 @@ interface DiscoveryGroups {
   @clientName("CreateOrReplaceDiscoveryGroup", "csharp")
   createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
-    BodyParameter<DiscoGroup>,
+    BodyParameter<DiscoGroupData>,
     DiscoGroup
   >;
   @doc("Run a discovery group with a given groupName.")
@@ -242,7 +242,7 @@ interface SavedFilters {
   @put
   createOrReplaceSavedFilter is Foundations.ResourceOperation<
     SavedFilter,
-    BodyParameter<SavedFilter>,
+    BodyParameter<SavedFilterData>,
     SavedFilter
   >;
   @doc("Delete a saved filter with a given filterName.")

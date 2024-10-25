@@ -273,61 +273,6 @@
         }
       }
     },
-    "/dataConnections/{dataConnectionName}:validate": {
-      "post": {
-        "operationId": "DataConnections_ValidateDataConnection",
-        "tags": [
-          "Data Connections"
-        ],
-        "description": "Validate a data connection with a given dataConnectionName.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "dataConnectionName",
-            "in": "path",
-            "description": "The caller provided unique name for the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ValidateResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataConnections_ValidateDataConnection": {
-            "$ref": "./examples/DataConnections_ValidateDataConnection_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/dataConnections/{dataConnectionName}": {
       "get": {
         "operationId": "DataConnections_GetDataConnection",
@@ -396,7 +341,7 @@
             "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataConnection"
+              "$ref": "#/definitions/DataConnectionData"
             }
           }
         ],
@@ -468,6 +413,54 @@
         }
       }
     },
+    "/dataConnections:validate": {
+      "post": {
+        "operationId": "DataConnections_ValidateDataConnection",
+        "tags": [
+          "Data Connections"
+        ],
+        "description": "Validate a data connection with a given dataConnectionName.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnections_ValidateDataConnection": {
+            "$ref": "./examples/DataConnections_ValidateDataConnection_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/discoGroups": {
       "get": {
         "operationId": "DiscoveryGroups_ListDiscoGroup",
@@ -516,61 +509,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/discoGroups/{groupName}:validate": {
-      "post": {
-        "operationId": "DiscoveryGroups_ValidateDiscoGroup",
-        "tags": [
-          "Discovery Groups"
-        ],
-        "description": "Validate a discovery group with a given groupName.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "description": "The caller provided unique name for the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DiscoGroup"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ValidateResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_ValidateDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_ValidateDiscoGroup_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -642,7 +580,7 @@
             "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DiscoGroup"
+              "$ref": "#/definitions/DiscoGroupData"
             }
           }
         ],
@@ -767,6 +705,54 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/discoGroups:validate": {
+      "post": {
+        "operationId": "DiscoveryGroups_ValidateDiscoGroup",
+        "tags": [
+          "Discovery Groups"
+        ],
+        "description": "Validate a discovery group with a given groupName.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoGroupData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscoveryGroups_ValidateDiscoGroup": {
+            "$ref": "./examples/DiscoveryGroups_ValidateDiscoGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1121,7 +1107,7 @@
             "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SavedFilter"
+              "$ref": "#/definitions/SavedFilterData"
             }
           }
         ],
@@ -1999,6 +1985,24 @@
       ],
       "x-ms-discriminator-value": "azureDataExplorer"
     },
+    "AzureDataExplorerDataConnectionData": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDataExplorerDataConnectionProperties",
+          "description": "properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectionData"
+        }
+      ],
+      "x-ms-discriminator-value": "azureDataExplorer"
+    },
     "AzureDataExplorerDataConnectionProperties": {
       "type": "object",
       "properties": {
@@ -2244,8 +2248,7 @@
         },
         "id": {
           "type": "string",
-          "description": "This is typically the same as the name but might be different for different models.",
-          "readOnly": true
+          "description": "This is typically the same as the name but might be different for different models."
         },
         "name": {
           "type": "string",
@@ -2314,6 +2317,36 @@
         "name": "DataConnectionContent",
         "modelAsString": true
       }
+    },
+    "DataConnectionData": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for DataConnectionData."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of data connection"
+        },
+        "content": {
+          "$ref": "#/definitions/DataConnectionContent",
+          "description": "The type of data the data connection will transfer."
+        },
+        "frequency": {
+          "$ref": "#/definitions/DataConnectionFrequency",
+          "description": "The rate at which the data connection will receive updates."
+        },
+        "frequencyOffset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The day to update the data connection on. (1-7 for weekly, 1-31 for monthly)"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "DataConnectionFrequency": {
       "type": "string",
@@ -2441,8 +2474,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "This is typically the same as the name but might be different for different models.",
-          "readOnly": true
+          "description": "This is typically the same as the name but might be different for different models."
         },
         "name": {
           "type": "string",
@@ -2451,8 +2483,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The name that can be used for display purposes.",
-          "readOnly": true
+          "description": "The name that can be used for display purposes."
         },
         "description": {
           "type": "string",
@@ -2492,14 +2523,12 @@
         },
         "latestRun": {
           "$ref": "#/definitions/DiscoRunResult",
-          "description": "The latest run of this disco group with some limited information, null if the group has never been run.",
-          "readOnly": true
+          "description": "The latest run of this disco group with some limited information, null if the group has never been run."
         },
         "createdDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date for the disco group was created.",
-          "readOnly": true
+          "description": "The date for the disco group was created."
         },
         "templateId": {
           "type": "string",
@@ -2509,6 +2538,56 @@
       "required": [
         "name"
       ]
+    },
+    "DiscoGroupData": {
+      "type": "object",
+      "description": "A request body used to create a discovery group.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for a disco group."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description for a disco group."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier for the disco group which will affect the algorithm used for the disco runs in this group."
+        },
+        "frequencyMilliseconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The frequency at which the disco group is supposed to be rerun in milliseconds."
+        },
+        "seeds": {
+          "type": "array",
+          "description": "The list of seeds used for the disco group runs.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "x-ms-identifiers": []
+        },
+        "names": {
+          "type": "array",
+          "description": "The list of names used for the disco group runs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "description": "The list of excludes used for the disco group runs, aka assets to exclude from the discovery algorithm.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "x-ms-identifiers": []
+        },
+        "templateId": {
+          "type": "string",
+          "description": "The unique identifier for the disco template used for the disco group creation."
+        }
+      }
     },
     "DiscoRunPageResult": {
       "type": "object",
@@ -3854,6 +3933,24 @@
       ],
       "x-ms-discriminator-value": "logAnalytics"
     },
+    "LogAnalyticsDataConnectionData": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogAnalyticsDataConnectionProperties",
+          "description": "properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectionData"
+        }
+      ],
+      "x-ms-discriminator-value": "logAnalytics"
+    },
     "LogAnalyticsDataConnectionProperties": {
       "type": "object",
       "properties": {
@@ -4947,8 +5044,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "This is typically the same as the name but might be different for different models.",
-          "readOnly": true
+          "description": "This is typically the same as the name but might be different for different models."
         },
         "name": {
           "type": "string",
@@ -4957,8 +5053,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The name that can be used for display purposes.",
-          "readOnly": true
+          "description": "The name that can be used for display purposes."
         },
         "filter": {
           "type": "string"
@@ -4969,6 +5064,24 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "SavedFilterData": {
+      "type": "object",
+      "description": "A request body used to create a saved filter.",
+      "properties": {
+        "filter": {
+          "type": "string",
+          "description": "An expression on the resource type that selects the resources to be returned."
+        },
+        "description": {
+          "type": "string",
+          "description": "A human readable description of the saved filter."
+        }
+      },
+      "required": [
+        "filter",
+        "description"
       ]
     },
     "ScanMetadata": {
