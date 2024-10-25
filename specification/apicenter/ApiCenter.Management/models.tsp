@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/openapi3";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -266,6 +267,37 @@ model MetadataSchemaProperties {
   assignedTo?: MetadataAssignment[];
 }
 
+@added(Versions.v2024_06_01_preview)
+@doc("The import from Azure API Management request.")
+model ImportFromApimRequest {
+  @doc("An entity the metadata schema is requested for.")
+  sourceResourceIds?: string[];
+}
+
+@added(Versions.v2024_06_01_preview)
+@doc("The import operation was successfully completed.")
+model ImportFromApimSuccessResult {
+  /**
+   * The successful response status code.
+   */
+  @statusCode code: 200;
+
+  /**
+   * Async operation status.
+   */
+  status: string;
+
+  /**
+   * Async operation start time.
+   */
+  startTime: utcDateTime;
+
+  /**
+   * Async operation end time.
+   */
+  endTime?: utcDateTime;
+}
+
 @doc("Assignment metadata")
 model MetadataAssignment {
   @doc("The entities this metadata schema component gets applied to.")
@@ -487,7 +519,7 @@ model DeploymentProperties {
   customProperties?: CustomProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing service"
 @summary("Custom Properties")
 @doc("The custom metadata defined for API catalog entities.")
 model CustomProperties {}
@@ -556,4 +588,89 @@ model DeletedServiceProperties {
 
   @doc("UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
   softDeletionDate?: utcDateTime;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_06_01_preview)
+@doc("API source properties.")
+model ApiSourceProperties {
+  @doc("Indicates if the specification should be imported along with metadata.")
+  shouldImportSpec?: ShouldImportSpec = ShouldImportSpec.OnDemand;
+
+  @doc("API source configuration for Azure API Management.")
+  apimSource?: ApimSource;
+}
+
+/**
+ * The API source specification import options.
+ */
+@added(Versions.v2024_06_01_preview)
+union ShouldImportSpec {
+  string,
+
+  /**
+   * Indicates that the specification should be never be imported.
+   */
+  Never: "never",
+
+  /**
+   * Indicates that the specification should be imported only by request.
+   */
+  OnDemand: "ondemand",
+
+  /**
+   * Indicates that the specification should always be imported along with metadata.
+   */
+  Always: "always",
+}
+
+/**
+ * API source configuration for Azure API Management.
+ */
+model ApimSource {
+  /**
+   * API Management service resource ID.
+   */
+  resourceId: string;
+
+  /**
+   * The resource ID of the managed identity that has access to the API Management instance.
+   */
+  msiResourceId?: string;
+
+  /**
+   * The target environment resource ID.
+   */
+  targetEnvironmentId?: string;
+
+  /**
+   * The target lifecycle stage.
+   */
+  targetLifecycleStage?: LifecycleStage;
+
+  /**
+   * The state of the API source link
+   */
+  @visibility("read")
+  linkState?: LinkState;
+}
+
+/**
+ * The link state.
+ */
+model LinkState {
+  /**
+   * The state of the link.
+   */
+  state?: string;
+
+  /**
+   * The state message.
+   */
+  message?: string;
+
+  /**
+   * The timestamp of the last update of the link state.
+   */
+  lastUpdatedOn: utcDateTime;
 }
