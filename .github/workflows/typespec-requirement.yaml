@@ -13,33 +13,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
-          fetch-depth: 2
+    - uses: actions/checkout@v4
+      with:
+        # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
+        fetch-depth: 2
 
-      - name: Setup Node and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+    - name: Setup Node and run `npm ci`
+      uses: ./.github/actions/setup-node-npm-ci
 
-      # May set output "spec-lifecycle"
-      - run: |
-          eng/scripts/TypeSpec-Requirement.ps1 `
-            -BaseCommitish HEAD^ `
-            -TargetCommitish HEAD `
-            -SpecType ${{ matrix.spec-type }}
-        id: tsr-ps1
-        shell: pwsh
+    # Outputs
+    # - spec-lifecycle?: "brownfield"
+    - run: |
+        eng/scripts/TypeSpec-Requirement.ps1 `
+          -BaseCommitish HEAD^ `
+          -TargetCommitish HEAD `
+          -SpecType ${{ matrix.spec-type }}
+      id: tsr-ps1
+      shell: pwsh
 
-      - if: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
-        name: Create empty file to upload artifact
-        run: touch empty.txt
+    # TODO: Move to composite action
+    # https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
 
-      # Upload artifact named "key--value", so consumers only need artifact names
-      # Example: spec-lifecycle-data-plane--brownfield
-      - if: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: spec-lifecycle-${{ matrix.spec-type }}-${{ steps.tsr-ps1.outputs.spec-lifecycle }}
-          path: empty.txt
-          if-no-files-found: error
-          overwrite: true
+    # When possible, it's best to upload an empty file with all information in the artifact name, so consumers
+    # can query the information without needing to download files to disk.
+    #
+    # A recommended format is "key1=value1,key2=value2,...".  The maximum length is reported to be 260 characters.
+    #
+    # A full list of invalid artifact name characters is documented here:
+    # https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
+    # 
+    # Example: spec-lifecycle-data-plane=brownfield
+    - if: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
+      name: Create empty file to upload artifact
+      run: touch empty.txt
+
+    - if: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: spec-lifecycle-${{ matrix.spec-type }}=${{ steps.tsr-ps1.outputs.spec-lifecycle }}
+        path: empty.txt
+        if-no-files-found: error
+        overwrite: true

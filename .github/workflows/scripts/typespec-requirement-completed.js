@@ -33,8 +33,8 @@ module.exports = async (github, context, core) => {
 
   const label = "brownfield";
   if (
-    artifactNames.includes("spec-lifecycle-data-plane-brownfield") ||
-    artifactNames.includes("spec-lifecycle-resource-manager-brownfield")
+    artifactNames.includes("spec-lifecycle-data-plane=brownfield") ||
+    artifactNames.includes("spec-lifecycle-resource-manager=brownfield")
   ) {
     await addLabelIfNotExists(
       github,
