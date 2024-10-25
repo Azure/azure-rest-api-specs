@@ -14,6 +14,7 @@ import "./agents/vector_stores/files/routes.tsp";
 import "./agents/vector_stores/file_batches/routes.tsp";
 import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
+import "./diagnostics/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
