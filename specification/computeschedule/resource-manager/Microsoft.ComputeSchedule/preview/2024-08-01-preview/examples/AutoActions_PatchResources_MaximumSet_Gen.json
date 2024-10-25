@@ -1,23 +1,26 @@
 {
-  "title": "AutoActions_AttachResources",
-  "operationId": "AutoActions_AttachResources",
+  "title": "AutoActions_PatchResources",
+  "operationId": "AutoActions_PatchResources",
   "parameters": {
     "api-version": "2024-08-01-preview",
     "subscriptionId": "5F89910E-4E93-4366-B0B3-654936C9BDBB",
     "resourceGroupName": "rgcomputeschedule",
-    "autoActionName": "hwF2B8gYCNG4vIWfFcKYd15g",
+    "autoActionName": "23Zuc9OVjwtrkw5JDvlx",
     "body": {
-      "resources": [
+      "resourceRequests": [
         {
-          "resourceId": "/subscriptions/0845F741-5199-493A-8B59-B3465D8645E0/resourceGroups/myRg/providers/resourceProviderNamespace/myResourceType/myResource",
-          "notificationSettings": [
-            {
-              "destination": "bnuvdonvpmxqzggpuubrbnrhlxlu",
-              "type": "Email",
-              "language": "en-us",
-              "disabled": true
-            }
-          ]
+          "resource": {
+            "resourceId": "/subscriptions/0845F741-5199-493A-8B59-B3465D8645E0/resourceGroups/myRg/providers/resourceProviderNamespace/myResourceType/myResource",
+            "notificationSettings": [
+              {
+                "destination": "bnuvdonvpmxqzggpuubrbnrhlxlu",
+                "type": "Email",
+                "language": "en-us",
+                "disabled": true
+              }
+            ]
+          },
+          "operation": "Attach"
         }
       ]
     }
