@@ -42,7 +42,7 @@ model ChangeStateProperties {
 
   @visibility("read", "create")
   @doc("Azure resource Id of the referenced StageMap.")
-  stageMapResourceId: StageMapResourceId;
+  stageMapResourceId: armResourceIdentifier;
 
   @visibility("read", "create")
   @doc("Object that describes the change payload.")
@@ -83,7 +83,7 @@ model ChangeStateProperties {
 @doc("RetrieveNextStage POST Action response.")
 model RetrieveNextStagesResponse {
   @doc("ChangeState resource Id.")
-  changeStateResourceId: ChangeStateResourceId;
+  changeStateResourceId: armResourceIdentifier;
 
   @doc("Last stage sequence in the StageProgression.")
   lastStageSequence: int32;
@@ -302,14 +302,6 @@ union ArmOperation {
   @doc("DELETE ARM Operation.")
   DELETE: "DELETE",
 }
-
-@doc("Azure resource Id of a ChangeState.")
-scalar ChangeStateResourceId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ChangeSafety/changeStates",
-    }
-  ]>;
 
 @armResourceOperations
 @doc("The operations of the ChangeState resource.")

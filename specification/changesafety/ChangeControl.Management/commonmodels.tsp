@@ -45,7 +45,7 @@ union ParameterType {
 @discriminator("type")
 model Parameter {
   @doc("Data type of the parameter.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   type: ParameterType;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
@@ -58,7 +58,7 @@ model Parameter {
 @doc("String Type Parameter model.")
 model StringParameter extends Parameter {
   @doc("Data type of the parameter.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   type: ParameterType.String;
 
   @doc("Default value for the parameter.")
@@ -73,7 +73,7 @@ model StringParameter extends Parameter {
 @doc("Integer type parameter model")
 model NumberParameter extends Parameter {
   @doc("Data type of the parameter.")
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   type: ParameterType.Number;
 
   @doc("Default value for the parameter.")
