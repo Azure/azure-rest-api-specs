@@ -74,7 +74,7 @@ model SchedulerSku {
 
   @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility("read")
-  zoneRedundant: boolean;
+  redundancyState: RedundancyState;
 }
 
 @doc("A Task Hub resource belonging to the scheduler")
@@ -87,6 +87,17 @@ model TaskHub is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
     "taskHubs",
     "^[a-zA-Z0-9-]{3,64}$"
   >;
+}
+
+@doc("The state of the resource redundancy")
+union RedundancyState {
+  string,
+
+  @doc("The resource is not redundant")
+  None: "None",
+
+  @doc("The resource is zone redundant")
+  Zone: "Zone",
 }
 
 @doc("The properties of Task Hub")
@@ -122,6 +133,7 @@ union ProvisioningState {
 @added(Versions.v2024_10_01_Preview)
 @armResourceOperations(Scheduler)
 interface Schedulers {
+  @errorsDoc("Scheduler not found")
   get is ArmResourceRead<Scheduler>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   update is ArmResourcePatchAsync<Scheduler, SchedulerProperties>;
@@ -133,7 +145,6 @@ interface Schedulers {
 @added(Versions.v2024_10_01_Preview)
 @armResourceOperations(TaskHub)
 interface TaskHubs {
-  @doc("Get a Task Hub")
   get is ArmResourceRead<TaskHub>;
   @doc("Create or Update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHub>;

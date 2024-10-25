@@ -815,6 +815,30 @@
       },
       "readOnly": true
     },
+    "RedundancyState": {
+      "type": "string",
+      "description": "The state of the resource redundancy",
+      "enum": [
+        "None",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "RedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is not redundant"
+          },
+          {
+            "name": "Zone",
+            "value": "Zone",
+            "description": "The resource is zone redundant"
+          }
+        ]
+      }
+    },
     "TaskHub": {
       "type": "object",
       "description": "A Task Hub resource belonging to the namespace",

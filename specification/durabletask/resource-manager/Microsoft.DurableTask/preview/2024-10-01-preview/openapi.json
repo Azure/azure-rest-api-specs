@@ -200,7 +200,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Scheduler not found",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -476,7 +476,7 @@
         "tags": [
           "TaskHubs"
         ],
-        "description": "Get a Task Hub",
+        "description": "Get a TaskHub",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -751,6 +751,30 @@
       },
       "readOnly": true
     },
+    "RedundancyState": {
+      "type": "string",
+      "description": "The state of the resource redundancy",
+      "enum": [
+        "None",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "RedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is not redundant"
+          },
+          {
+            "name": "Zone",
+            "value": "Zone",
+            "description": "The resource is zone redundant"
+          }
+        ]
+      }
+    },
     "Scheduler": {
       "type": "object",
       "description": "A Durable Task Scheduler resource",
@@ -848,15 +872,15 @@
           "format": "int32",
           "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
         },
-        "zoneRedundant": {
-          "type": "boolean",
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
           "description": "Indicates whether the current SKU configuration is zone redundant",
           "readOnly": true
         }
       },
       "required": [
         "name",
-        "zoneRedundant"
+        "redundancyState"
       ]
     },
     "SchedulerSkuUpdate": {
