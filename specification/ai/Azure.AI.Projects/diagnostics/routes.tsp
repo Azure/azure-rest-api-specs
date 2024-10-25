@@ -22,7 +22,7 @@ namespace Azure.AI.Projects.Diagnostics;
 @get
 op getAppInsights is Azure.Core.Foundations.Operation<
   {
-    @doc("The AppInsights Azure resource Url. It should have the format: `/subscriptions/{subscription_id}/resourceGroups/{resouce_group_name}/providers/microsoft.insights/components/{resouce-name}`")
+    @doc("The AppInsights Azure resource Url. It should have the format: '/subscriptions/{subscription_id}/resourceGroups/{resource_group_name}/providers/microsoft.insights/components/{resourcename}'")
     appInsightsResourceUrl: string;
   },
   GetAppInsightsResponse

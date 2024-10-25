@@ -16,7 +16,7 @@ namespace Azure.AI.Projects;
 
 @doc("Response from the Workspace - Get operation")
 model GetWorkspaceResponse {
-  @doc("A unique identifier for the resouce")
+  @doc("A unique identifier for the resource")
   id: string;
 
   @doc("The name of the resource")
