@@ -61,8 +61,6 @@ suppressions:
   - code: GuidUsage
     reason: this is for getting a subscriptionId from customers
     from: impact.json
-    where:
-      - $.definitions.Azure.Core.uuid
 ```
 
 ## Configuration
