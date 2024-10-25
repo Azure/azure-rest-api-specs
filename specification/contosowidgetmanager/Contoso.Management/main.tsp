@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 /** Microsoft.Contoso Resource Provider management API. */
 @armProviderNamespace
 @service({
-  title: "Microsoft.Contoso management service",
+  title: "Microsoft.Contoso management service. A contrived error to check on rules.",
 })
 @versioned(Microsoft.Contoso.Versions)
 namespace Microsoft.Contoso;
