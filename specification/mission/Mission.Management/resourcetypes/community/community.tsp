@@ -129,7 +129,7 @@ model ApprovalSettings {
   @doc("Approval required for enclave connection update (True or False).")
   connectionUpdate?: boolean;
 
-  @doc("Behaviour of enclave connection update workflow after endpoint update is approved (Automatic or Manual).")
+  @doc("Behavior of enclave connection update workflow after endpoint update is approved (Automatic or Manual).")
   connectionUpdateMode?: "Automatic" | "Manual" | string;
 
   @doc("Approval required for enclave connection deletion (True or False).")
