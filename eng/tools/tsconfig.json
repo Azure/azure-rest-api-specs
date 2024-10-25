@@ -5,6 +5,16 @@
     "module": "Node16",
 
     // override "importHelpers:true" in root tsconfig.json
-    "importHelpers": false
-  }
+    "importHelpers": false,
+
+    // required to use project references
+    "composite": true,
+  },
+  "references": [
+    { "path": "./specs-model" },
+    { "path": "./suppressions" },
+    { "path": "./tsp-client-tests" },
+    { "path": "./typespec-requirement" },
+    { "path": "./typespec-validation" }
+  ]
 }
