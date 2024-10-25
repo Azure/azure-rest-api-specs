@@ -217,6 +217,10 @@
               "$ref": "#/definitions/Connector"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -550,6 +554,10 @@
               "$ref": "#/definitions/WorkloadImpact"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -939,12 +947,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConnectorProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1011,25 +1014,30 @@
         "lastRunTimeStamp"
       ]
     },
-    "ConnectorUpdate": {
+    "ConnectorPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectorUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ConnectorUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Connector.",
+      "description": "Details of the Connector.",
       "properties": {
         "connectorType": {
           "$ref": "#/definitions/Platform",
           "description": "connector type"
         }
       }
+    },
+    "ConnectorUpdate": {
+      "type": "object",
+      "description": "A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "Content": {
       "type": "object",
@@ -1089,12 +1097,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ImpactCategoryProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1280,12 +1283,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InsightProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1305,8 +1303,7 @@
         },
         "subscriptionId": {
           "type": "string",
-          "description": "The ID of the target subscription.",
-          "minLength": 1
+          "description": "The ID of the target subscription. The value must be an UUID."
         },
         "provider": {
           "type": "string",
@@ -1421,12 +1418,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InsightProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1753,24 +1745,6 @@
         ]
       }
     },
-    "Versions": {
-      "type": "string",
-      "description": "API Versions",
-      "enum": [
-        "2024-05-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_05_01_preview",
-            "value": "2024-05-01-preview",
-            "description": "May 01, 2024 Preview API Version"
-          }
-        ]
-      }
-    },
     "Workload": {
       "type": "object",
       "description": "Information about the impacted workload",
@@ -1791,12 +1765,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/WorkloadImpactProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

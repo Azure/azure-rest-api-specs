@@ -14,7 +14,7 @@ using Azure.ResourceManager;
   title: "Microsoft.Impact",
 })
 @versioned(Versions)
-@armCommonTypesVersion(CommonTypes.Versions.v5)
+@armCommonTypesVersion(CommonTypes.Versions.v3)
 namespace Microsoft.Impact;
 
 @doc("API Versions")
