@@ -389,6 +389,24 @@
               "$ref": "#/definitions/PortalExtension"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -400,7 +418,11 @@
           "Update a PortalExtension": {
             "$ref": "./examples/PortalExtensions_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PortalExtensions_Delete",
@@ -506,6 +528,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -530,7 +556,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1023,6 +1049,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1047,7 +1077,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1188,7 +1218,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^[a-zA-Z0-9_]+$"
           }
         ],
         "responses": {
@@ -1245,7 +1275,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^[a-zA-Z0-9_]+$"
           },
           {
             "name": "resource",
@@ -1332,7 +1362,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^[a-zA-Z0-9_]+$"
           },
           {
             "name": "parameters",
@@ -1398,7 +1428,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^[a-zA-Z0-9_]+$"
           }
         ],
         "responses": {
@@ -1729,6 +1759,10 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1756,7 +1790,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
