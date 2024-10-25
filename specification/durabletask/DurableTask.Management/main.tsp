@@ -133,20 +133,31 @@ union ProvisioningState {
 @added(Versions.v2024_10_01_Preview)
 @armResourceOperations(Scheduler)
 interface Schedulers {
-  @errorsDoc("Scheduler not found")
+  @doc("Get a Scheduler")
+  @errorsDoc("Not found error: resource does not exist")
   get is ArmResourceRead<Scheduler>;
+  @doc("Create or update a Scheduler")
+  @errorsDoc("Validation error: required parameters are missing")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
+  @doc("Update a Scheduler")
+  @errorsDoc("Validation error: required parameters are missing")
   update is ArmResourcePatchAsync<Scheduler, SchedulerProperties>;
+  @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
+  @doc("List Schedulers by resource group")
   listByResourceGroup is ArmResourceListByParent<Scheduler>;
+  @doc("List Schedulers by subscription")
   listBySubscription is ArmListBySubscription<Scheduler>;
 }
 
 @added(Versions.v2024_10_01_Preview)
 @armResourceOperations(TaskHub)
 interface TaskHubs {
+  @doc("Get a Task Hub")
+  @errorsDoc("Not found error: resource does not exist")
   get is ArmResourceRead<TaskHub>;
   @doc("Create or Update a Task Hub")
+  @errorsDoc("Validation error: required parameters are missing")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHub>;
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteWithoutOkAsync<TaskHub>;
@@ -205,8 +216,11 @@ model TaskHubUnderNamespace
 @removed(Versions.v2024_10_01_Preview)
 @armResourceOperations(Namespace)
 interface Namespaces {
+  @errorsDoc("Not found error: resource does not exist")
   get is ArmResourceRead<Namespace>;
+  @errorsDoc("Validation error: required parameters are missing")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
+  @errorsDoc("Validation error: required parameters are missing")
   update is ArmResourcePatchAsync<Namespace, NamespaceProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
@@ -219,8 +233,10 @@ interface Namespaces {
 @tag("TaskHubs")
 interface TaskHubsUnderNamespace {
   @doc("Get a Task Hub")
+  @errorsDoc("Not found error: resource does not exist")
   get is ArmResourceRead<TaskHubUnderNamespace>;
   @doc("Create or update a Task Hub")
+  @errorsDoc("Validation error: required parameters are missing")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHubUnderNamespace>;
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteSync<TaskHubUnderNamespace>;
