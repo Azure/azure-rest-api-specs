@@ -41,10 +41,12 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: changeControl.json
-    reason: Need to use Record for key-value pair properties
+    reason: Need to use Record for key-value pair properties.
   - code: TopLevelResourcesListByResourceGroup
     from: changeControl.json
     reason: List for ChangeStates and StageMaps are not supported by design.
+  - code: TenantLevelAPIsNotAllowed
+    reason: Presented design at the API review meeting.
 ```
 
 ---
