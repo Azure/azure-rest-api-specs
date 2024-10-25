@@ -9,7 +9,7 @@ param (
   [string]$TargetCommitish = "HEAD"
 )
 
-if ($Shard -ge $TotalShards) { 
+if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) { 
   throw "Shard ($Shard) must be less than TotalShards ($TotalShards)"
 }
 
