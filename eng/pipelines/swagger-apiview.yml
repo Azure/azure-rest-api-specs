@@ -1,0 +1,13 @@
+trigger: none
+
+jobs:
+- job:
+  pool:
+    name: azsdk-pool-mms-ubuntu-2204-general
+    vmImage: ubuntu-22.04
+
+  steps:
+  - pwsh: |
+      $(Build.SourcesDirectory)/eng/scripts/Swagger-APIView.ps1 -Verbose
+    displayName: Swagger APIView Check
+    ignoreLASTEXITCODE: true
