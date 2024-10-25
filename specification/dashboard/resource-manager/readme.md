@@ -32,7 +32,7 @@ tag: package-preview-2023-10-01
 ```
 
 
-### Tag: package-preview-2023-10-01-preview
+### Tag: package-2023-10-01-preview
 
 These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
 
