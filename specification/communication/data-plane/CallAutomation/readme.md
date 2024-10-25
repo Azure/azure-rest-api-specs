@@ -109,7 +109,6 @@ input-file:
 title:
   Azure Communication Services
 ```
----
 
 # Code Generation
 
