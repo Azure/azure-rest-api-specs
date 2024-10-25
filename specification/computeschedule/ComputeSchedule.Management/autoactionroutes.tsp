@@ -26,16 +26,40 @@ interface AutoActions {
   listByResourceGroup is ArmResourceListByParent<AutoAction>;
   listBySubscription is ArmListBySubscription<AutoAction>;
 
-  getResources is ArmResourceActionSync<AutoAction, void, AutoActionResourceListResponse>;
-  attachResources is ArmResourceActionSync<AutoAction, AutoActionResourceAttachRequest, AutoActionResourceOperationResponse>;
-  detachResources is ArmResourceActionSync<AutoAction, AutoActionResourceDetachRequest, AutoActionResourceOperationResponse>;
-  patchResources is ArmResourceActionSync<AutoAction, AutoActionResourcePatchListRequest, AutoActionResourceOperationResponse>;
+  getResources is ArmResourceActionSync<
+    AutoAction,
+    void,
+    AutoActionResourceListResponse
+  >;
+  attachResources is ArmResourceActionSync<
+    AutoAction,
+    AutoActionResourceAttachRequest,
+    AutoActionResourceOperationResponse
+  >;
+  detachResources is ArmResourceActionSync<
+    AutoAction,
+    AutoActionResourceDetachRequest,
+    AutoActionResourceOperationResponse
+  >;
+  patchResources is ArmResourceActionSync<
+    AutoAction,
+    AutoActionResourcePatchListRequest,
+    AutoActionResourceOperationResponse
+  >;
 
   disable is ArmResourceActionSync<AutoAction, void, OkResponse>;
   enable is ArmResourceActionSync<AutoAction, void, OkResponse>;
 
-  cancelNextOccurrence is ArmResourceActionSync<AutoAction, CancelOccurrenceRequest, Occurrence>;
-  triggerManualOccurrence is ArmResourceActionSync<AutoAction, void, Occurrence>;
+  cancelNextOccurrence is ArmResourceActionSync<
+    AutoAction,
+    CancelOccurrenceRequest,
+    Occurrence
+  >;
+  triggerManualOccurrence is ArmResourceActionSync<
+    AutoAction,
+    void,
+    Occurrence
+  >;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
