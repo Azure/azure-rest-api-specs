@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.DurableTask",
-    "version": "2024-02-01-preview",
+    "version": "2024-10-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -42,7 +42,7 @@
       "name": "Operations"
     },
     {
-      "name": "Namespaces"
+      "name": "Schedulers"
     },
     {
       "name": "TaskHubs"
@@ -85,13 +85,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/namespaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/schedulers": {
       "get": {
-        "operationId": "Namespaces_ListBySubscription",
+        "operationId": "Schedulers_ListBySubscription",
         "tags": [
-          "Namespaces"
+          "Schedulers"
         ],
-        "description": "List Namespace resources by subscription ID",
+        "description": "List Schedulers by subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -104,7 +104,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/SchedulerListResult"
             }
           },
           "default": {
@@ -115,8 +115,8 @@
           }
         },
         "x-ms-examples": {
-          "Namespaces_ListBySubscription": {
-            "$ref": "./examples/Namespaces_ListBySubscription.json"
+          "Schedulers_ListBySubscription": {
+            "$ref": "./examples/Schedulers_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -124,13 +124,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers": {
       "get": {
-        "operationId": "Namespaces_ListByResourceGroup",
+        "operationId": "Schedulers_ListByResourceGroup",
         "tags": [
-          "Namespaces"
+          "Schedulers"
         ],
-        "description": "List Namespace resources by resource group",
+        "description": "List Schedulers by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -146,7 +146,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/SchedulerListResult"
             }
           },
           "default": {
@@ -157,8 +157,8 @@
           }
         },
         "x-ms-examples": {
-          "Namespaces_ListByResourceGroup": {
-            "$ref": "./examples/Namespaces_ListByResourceGroup.json"
+          "Schedulers_ListByResourceGroup": {
+            "$ref": "./examples/Schedulers_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -166,13 +166,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces/{namespaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}": {
       "get": {
-        "operationId": "Namespaces_Get",
+        "operationId": "Schedulers_Get",
         "tags": [
-          "Namespaces"
+          "Schedulers"
         ],
-        "description": "Get a Namespace",
+        "description": "Get a Scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -184,9 +184,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
+            "name": "schedulerName",
             "in": "path",
-            "description": "The name of the never",
+            "description": "The name of the Scheduler",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -196,7 +196,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/Scheduler"
             }
           },
           "default": {
@@ -207,17 +207,17 @@
           }
         },
         "x-ms-examples": {
-          "Namespaces_Get": {
-            "$ref": "./examples/Namespaces_Get.json"
+          "Schedulers_Get": {
+            "$ref": "./examples/Schedulers_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Namespaces_CreateOrUpdate",
+        "operationId": "Schedulers_CreateOrUpdate",
         "tags": [
-          "Namespaces"
+          "Schedulers"
         ],
-        "description": "Create a Namespace",
+        "description": "Create or update a Scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -229,9 +229,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
+            "name": "schedulerName",
             "in": "path",
-            "description": "The name of the never",
+            "description": "The name of the Scheduler",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -242,21 +242,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/Scheduler"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Namespace' update operation succeeded",
+            "description": "Resource 'Scheduler' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/Scheduler"
             }
           },
           "201": {
-            "description": "Resource 'Namespace' create operation succeeded",
+            "description": "Resource 'Scheduler' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/Scheduler"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -278,8 +278,8 @@
           }
         },
         "x-ms-examples": {
-          "Namespaces_CreateOrUpdate": {
-            "$ref": "./examples/Namespaces_CreateOrUpdate.json"
+          "Schedulers_CreateOrUpdate": {
+            "$ref": "./examples/Schedulers_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -288,11 +288,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "Namespaces_Update",
+        "operationId": "Schedulers_Update",
         "tags": [
-          "Namespaces"
+          "Schedulers"
         ],
-        "description": "Update a Namespace",
+        "description": "Update a Scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -304,9 +304,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
+            "name": "schedulerName",
             "in": "path",
-            "description": "The name of the never",
+            "description": "The name of the Scheduler",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -317,7 +317,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceUpdate"
+              "$ref": "#/definitions/SchedulerUpdate"
             }
           }
         ],
@@ -325,7 +325,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/Scheduler"
             }
           },
           "202": {
@@ -350,8 +350,8 @@
           }
         },
         "x-ms-examples": {
-          "Namespaces_Update": {
-            "$ref": "./examples/Namespaces_Update.json"
+          "Schedulers_Update": {
+            "$ref": "./examples/Schedulers_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -360,11 +360,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Namespaces_Delete",
+        "operationId": "Schedulers_Delete",
         "tags": [
-          "Namespaces"
+          "Schedulers"
         ],
-        "description": "Delete a Namespace",
+        "description": "Delete a Scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -376,9 +376,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
+            "name": "schedulerName",
             "in": "path",
-            "description": "The name of the never",
+            "description": "The name of the Scheduler",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -410,8 +410,8 @@
           }
         },
         "x-ms-examples": {
-          "Namespaces_Delete": {
-            "$ref": "./examples/Namespaces_Delete.json"
+          "Schedulers_Delete": {
+            "$ref": "./examples/Schedulers_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -420,9 +420,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces/{namespaceName}/taskHubs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/taskHubs": {
       "get": {
-        "operationId": "TaskHubs_ListByNamespace",
+        "operationId": "TaskHubs_ListByScheduler",
         "tags": [
           "TaskHubs"
         ],
@@ -438,9 +438,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
+            "name": "schedulerName",
             "in": "path",
-            "description": "The name of the never",
+            "description": "The name of the Scheduler",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -461,8 +461,8 @@
           }
         },
         "x-ms-examples": {
-          "TaskHubs_ListByNamespace": {
-            "$ref": "./examples/TaskHubs_ListByNamespace.json"
+          "TaskHubs_ListByScheduler": {
+            "$ref": "./examples/TaskHubs_ListByScheduler.json"
           }
         },
         "x-ms-pageable": {
@@ -470,7 +470,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces/{namespaceName}/taskHubs/{taskHubName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/taskHubs/{taskHubName}": {
       "get": {
         "operationId": "TaskHubs_Get",
         "tags": [
@@ -488,9 +488,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
+            "name": "schedulerName",
             "in": "path",
-            "description": "The name of the never",
+            "description": "The name of the Scheduler",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -529,7 +529,7 @@
         "tags": [
           "TaskHubs"
         ],
-        "description": "Create or update a Task Hub",
+        "description": "Create or Update a Task Hub",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -541,9 +541,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
+            "name": "schedulerName",
             "in": "path",
-            "description": "The name of the never",
+            "description": "The name of the Scheduler",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -624,9 +624,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
+            "name": "schedulerName",
             "in": "path",
-            "description": "The name of the never",
+            "description": "The name of the Scheduler",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -641,8 +641,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -658,7 +669,11 @@
           "TaskHubs_Delete": {
             "$ref": "./examples/TaskHubs_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -678,85 +693,6 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
-    "Namespace": {
-      "type": "object",
-      "description": "A Durable Task Scheduler namespace resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "NamespaceListResult": {
-      "type": "object",
-      "description": "The response of a Namespace list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Namespace items on this page",
-          "items": {
-            "$ref": "#/definitions/Namespace"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "NamespaceProperties": {
-      "type": "object",
-      "description": "Details of the Namespace.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "url": {
-          "type": "string",
-          "description": "URL of the durable task service",
-          "readOnly": true
-        },
-        "dashboardUrl": {
-          "type": "string",
-          "description": "URL of the durable task service dashboard",
-          "readOnly": true
-        },
-        "ipAllowlist": {
-          "type": "array",
-          "description": "IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "NamespaceUpdate": {
-      "type": "object",
-      "description": "A Durable Task Scheduler namespace resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
     },
@@ -839,9 +775,147 @@
         ]
       }
     },
+    "Scheduler": {
+      "type": "object",
+      "description": "A Durable Task Scheduler resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchedulerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SchedulerListResult": {
+      "type": "object",
+      "description": "The response of a Scheduler list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Scheduler items on this page",
+          "items": {
+            "$ref": "#/definitions/Scheduler"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SchedulerProperties": {
+      "type": "object",
+      "description": "Details of the Scheduler",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "URL of the durable task scheduler",
+          "readOnly": true
+        },
+        "ipAllowlist": {
+          "type": "array",
+          "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/SchedulerSku",
+          "description": "SKU of the durable task scheduler"
+        }
+      },
+      "required": [
+        "ipAllowlist",
+        "sku"
+      ]
+    },
+    "SchedulerPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the Scheduler",
+      "properties": {
+        "ipAllowlist": {
+          "type": "array",
+          "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/SchedulerSkuUpdate",
+          "description": "SKU of the durable task scheduler"
+        }
+      }
+    },
+    "SchedulerSku": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
+        },
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
+          "description": "Indicates whether the current SKU configuration is zone redundant",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "redundancyState"
+      ]
+    },
+    "SchedulerSkuUpdate": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
+        }
+      }
+    },
+    "SchedulerUpdate": {
+      "type": "object",
+      "description": "A Durable Task Scheduler resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchedulerPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "TaskHub": {
       "type": "object",
-      "description": "A Task Hub resource belonging to the namespace",
+      "description": "A Task Hub resource belonging to the scheduler",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TaskHubProperties",
