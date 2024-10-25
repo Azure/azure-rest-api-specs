@@ -41,6 +41,30 @@ suppressions:
     reason:
       Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
       and will be different for different categories
+
+  - code: PutResponseCodes
+    reason: older spec, rectified in new specs. proxy resources
+    from: impact.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].put
+
+  - code: DeleteResponseCodes
+    reason: older spec, rectified in new specs. proxy resources
+    from: impact.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].delete
+
+  - code: LroLocationHeader
+    reason: proxy resources hence now location and this is a older spec
+    from: impact.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].delete
+
+  - code: GuidUsage
+    reason: this is for getting a subscriptionId from customers
+    from: impact.json
+    where:
+      - $.definitions.Azure.Core.uuid
 ```
 
 ## Configuration
