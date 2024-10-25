@@ -542,11 +542,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FileFormat"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/SupportedFileFormats"
             }
           },
           "default": {
@@ -740,6 +736,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BatchRequest": {
       "type": "object",
       "description": "Definition for the input batch translation request",
@@ -821,7 +822,7 @@
           "maximum": 1
         },
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Document Id"
         },
         "characterCharged": {
@@ -1205,6 +1206,23 @@
         ]
       }
     },
+    "SupportedFileFormats": {
+      "type": "object",
+      "description": "List of supported file formats",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "list of objects",
+          "items": {
+            "$ref": "#/definitions/FileFormat"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "TargetInput": {
       "type": "object",
       "description": "Destination for the finished translated documents",
@@ -1335,7 +1353,7 @@
       "description": "Translation job status response",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Id of the translation operation."
         },
         "createdDateTimeUtc": {

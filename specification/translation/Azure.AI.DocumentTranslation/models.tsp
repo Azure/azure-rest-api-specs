@@ -311,7 +311,7 @@ model TranslationsStatus {
 @doc("Translation job status response")
 model TranslationStatus {
   @doc("Id of the translation operation.")
-  id: string;
+  id: uuid;
 
   @doc("Operation created date time")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -391,7 +391,7 @@ model DocumentStatus {
   progress: float32;
 
   @doc("Document Id")
-  id: string;
+  id: uuid;
 
   @doc("Character charged by the API")
   characterCharged?: int32;
@@ -407,6 +407,12 @@ model DocumentsStatus {
   @doc("Url for the next page.  Null if no more pages available")
   @nextLink
   nextLink?: string;
+}
+
+@doc("List of supported file formats")
+model SupportedFileFormats {
+  @doc("list of objects")
+  value: FileFormat[];
 }
 
 @doc("File Format")
