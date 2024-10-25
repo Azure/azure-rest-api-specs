@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -13,6 +14,8 @@ interface HsmSecurityDomain {
    * Retrieves the Security Domain download operation status
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
+  @OpenAPI.operationId("HSMSecurityDomain_DownloadPending")
   @route("/securitydomain/download/pending")
   @get
   downloadPending is Azure.Core.Foundations.Operation<
@@ -25,8 +28,9 @@ interface HsmSecurityDomain {
    * be used to activate a provisioned managed HSM resource.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
+  @OpenAPI.operationId("HSMSecurityDomain_Download")
   @pollingOperation(HsmSecurityDomain.downloadPending)
-  @finalOperation(HsmSecurityDomain.downloadPending)
   @useFinalStateVia("azure-async-operation")
   @route("/securitydomain/download")
   @post
@@ -66,6 +70,8 @@ interface HsmSecurityDomain {
    * Retrieve Security Domain transfer key
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
+  @OpenAPI.operationId("HSMSecurityDomain_TransferKey")
   @route("/securitydomain/upload")
   @get
   transferKey is Azure.Core.Foundations.Operation<{}, TransferKey>;
@@ -74,7 +80,10 @@ interface HsmSecurityDomain {
    * Restore the provided Security Domain.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
+  @OpenAPI.operationId("HSMSecurityDomain_Upload")
   @pollingOperation(HsmSecurityDomain.uploadPending)
+  @finalOperation(HsmSecurityDomain.uploadPending)
   @useFinalStateVia("azure-async-operation")
   @route("/securitydomain/upload")
   @post
@@ -121,6 +130,8 @@ interface HsmSecurityDomain {
    * Get Security Domain upload operation status
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
+  @OpenAPI.operationId("HSMSecurityDomain_UploadPending")
   @route("/securitydomain/upload/pending")
   @get
   uploadPending is Azure.Core.Foundations.Operation<

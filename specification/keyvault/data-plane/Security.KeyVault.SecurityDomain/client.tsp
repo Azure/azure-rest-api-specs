@@ -11,19 +11,28 @@ using KeyVault;
 @TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.5`)
 namespace ClientCustomizations;
 
+@@access(CertificateInfoObject, Access.public);
+@@access(SecurityDomainObject, Access.public);
+
 @client({
-  name: "SecurityDomainClient",
+  name: "KeyVaultClient",
   service: KeyVault,
 })
-interface SecurityDomainClient {
+interface KeyVaultClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   getDownloadStatus is HsmSecurityDomain.downloadPending;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
+  @access(Access.internal)
   download is HsmSecurityDomain.download;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   getUploadStatus is HsmSecurityDomain.uploadPending;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
+  @access(Access.internal)
   upload is HsmSecurityDomain.upload;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   getTransferKey is HsmSecurityDomain.transferKey;
 }

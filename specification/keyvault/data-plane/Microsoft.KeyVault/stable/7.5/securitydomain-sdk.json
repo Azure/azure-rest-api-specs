@@ -54,7 +54,7 @@
   "paths": {
     "/securitydomain/download": {
       "post": {
-        "operationId": "HsmSecurityDomain_Download",
+        "operationId": "HSMSecurityDomain_Download",
         "description": "Retrieves the Security Domain from the managed HSM. Calling this endpoint can\nbe used to activate a provisioned managed HSM resource.",
         "parameters": [
           {
@@ -109,7 +109,7 @@
     },
     "/securitydomain/download/pending": {
       "get": {
-        "operationId": "HsmSecurityDomain_DownloadPending",
+        "operationId": "HSMSecurityDomain_DownloadPending",
         "description": "Retrieves the Security Domain download operation status",
         "parameters": [
           {
@@ -140,7 +140,7 @@
     },
     "/securitydomain/upload": {
       "get": {
-        "operationId": "HsmSecurityDomain_TransferKey",
+        "operationId": "HSMSecurityDomain_TransferKey",
         "description": "Retrieve Security Domain transfer key",
         "parameters": [
           {
@@ -169,7 +169,7 @@
         }
       },
       "post": {
-        "operationId": "HsmSecurityDomain_Upload",
+        "operationId": "HSMSecurityDomain_Upload",
         "description": "Restore the provided Security Domain.",
         "parameters": [
           {
@@ -227,7 +227,7 @@
     },
     "/securitydomain/upload/pending": {
       "get": {
-        "operationId": "HsmSecurityDomain_UploadPending",
+        "operationId": "HSMSecurityDomain_UploadPending",
         "description": "Get Security Domain upload operation status",
         "parameters": [
           {
@@ -379,39 +379,6 @@
       "required": [
         "certificates"
       ]
-    },
-    "Error": {
-      "type": "object",
-      "description": "The key vault server error.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message.",
-          "readOnly": true
-        },
-        "innererror": {
-          "$ref": "#/definitions/Error",
-          "description": "The key vault server error.",
-          "readOnly": true,
-          "x-ms-client-name": "innerError"
-        }
-      }
-    },
-    "KeyVaultError": {
-      "type": "object",
-      "description": "The key vault error exception.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "The key vault server error.",
-          "readOnly": true
-        }
-      }
     },
     "OperationStatus": {
       "type": "string",
