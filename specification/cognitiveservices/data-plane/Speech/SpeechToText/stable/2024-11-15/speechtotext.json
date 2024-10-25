@@ -5920,27 +5920,18 @@
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header",
       "description": "Provide your cognitive services account key here."
-    },
-    "token": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "Provide an access token from the JWT returned by the STS of this region. Make sure to add the management scope to the token by adding the following query string to the STS URL: ?scope=speechservicesmanagement"
     }
   },
   "security": [
     {
       "api_key": []
-    },
-    {
-      "token": []
     }
   ],
   "schemes": [
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/",
+    "hostTemplate": "{endpoint}/speechtotext",
     "useSchemePrefix": false,
     "parameters": [
       {
