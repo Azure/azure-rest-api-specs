@@ -1421,8 +1421,9 @@
             "name": "ContainerGroupProfile",
             "description": "Update a specified container group profile that will also update the revision.",
             "in": "body",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/ContainerGroupProfile"
             }
           },
           {
@@ -3746,6 +3747,7 @@
           "description": "The geo-location where the resource lives"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ContainerGroupProfileProperties"
         }
       },
