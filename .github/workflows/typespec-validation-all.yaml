@@ -23,7 +23,7 @@ on:
       - specification/common-types/**
 
       # Workflow and workflow dependencies
-      - .github/workflows/typespec-validation-all.yml
+      - .github/workflows/typespec-validation-all.yaml
       - .github/actions/setup-node-npm-ci/**
 
   schedule:
@@ -46,15 +46,12 @@ jobs:
     steps:
       - if: runner.os == 'Windows'
         run: git config --global core.longpaths true
-        shell: pwsh
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Setup CI environment
-        uses: ./.github/actions/setup-node-npm-ci
+      - uses: ./.github/actions/setup-node-npm-ci
         
       - name: Validate All Specs (Shard ${{ matrix.shard }} of ${{ matrix.total-shards }})
         run: |
