@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 namespace Microsoft.ChangeSafety;
 
 @doc("Resource provides details about stages a deployment goes through.")
-model StageMap is ExtensionResource<StageMapProperties> {
+model StageMap is ProxyResource<StageMapProperties> {
   @pattern("^[a-zA-Z0-9-]{3,100}$")
   @key("stageMapName")
   @segment("stageMaps")
@@ -77,7 +77,61 @@ scalar StageMapResourceId
 @doc("The operations of the StageMap resource.")
 interface StageMaps {
   get is ArmResourceRead<StageMap>;
+  getAtSubscriptionLevel is ArmResourceRead<
+    StageMap,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+  getAtTenantLevel is ArmResourceRead<
+    StageMap,
+    {
+      ...ApiVersionParameter;
+    }
+  >;
   createOrUpdate is ArmResourceCreateOrReplaceSync<StageMap>;
+  createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
+    StageMap,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+  createOrUpdateAtTenantLevel is ArmResourceCreateOrReplaceSync<
+    StageMap,
+    {
+      ...ApiVersionParameter;
+    }
+  >;
   update is ArmResourcePatchSync<StageMap, StageMapProperties>;
+  updateAtSubscriptionLevel is ArmResourcePatchSync<
+    StageMap,
+    StageMapProperties,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+  updateAtTenantLevel is ArmResourcePatchSync<
+    StageMap,
+    StageMapProperties,
+    {
+      ...ApiVersionParameter;
+    }
+  >;
   delete is ArmResourceDeleteSync<StageMap>;
+  deleteAtSubscriptionLevel is ArmResourceDeleteSync<
+    StageMap,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+  deleteAtTenantLevel is ArmResourceDeleteSync<
+    StageMap,
+    {
+      ...ApiVersionParameter;
+    }
+  >;
 }

@@ -86,8 +86,66 @@ union StageProgressionState {
 @doc("The operations of the stageProgression resource.")
 interface StageProgressions {
   get is ArmResourceRead<StageProgression>;
+
   createOrUpdate is ArmResourceCreateOrReplaceSync<StageProgression>;
+  createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+  createOrUpdateAtTenantLevel is ArmResourceCreateOrReplaceSync<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+    }
+  >;
+
   delete is ArmResourceDeleteSync<StageProgression>;
+  deleteAtSubscriptionLevel is ArmResourceDeleteSync<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+  deleteAtTenantLevel is ArmResourceDeleteSync<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+    }
+  >;
+
   update is ArmResourcePatchSync<StageProgression, StageProgressionProperties>;
+  updateAtSubscriptionLevel is ArmResourcePatchSync<
+    StageProgression,
+    StageProgressionProperties,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+  updateAtTenantLevel is ArmResourcePatchSync<
+    StageProgression,
+    StageProgressionProperties,
+    {
+      ...ApiVersionParameter;
+    }
+  >;
+
   listByParent is ArmResourceListByParent<StageProgression>;
+  listByParentAtSubscriptionLevel is ArmResourceListByParent<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+  listByParentAtTenantLevel is ArmResourceListByParent<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+    }
+  >;
 }
