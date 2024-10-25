@@ -25,6 +25,10 @@ interface Occurrences {
     void,
     OccurrenceResourceListResponse
   >;
-  cancel is ArmResourceActionSync<Occurrence, CancelOccurrenceRequest, Occurrence>;
+  cancel is ArmResourceActionSync<
+    Occurrence,
+    CancelOccurrenceRequest,
+    Occurrence
+  >;
   delay is ArmResourceActionSync<Occurrence, DelayRequest, Occurrence>;
 }
