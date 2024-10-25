@@ -22,7 +22,7 @@ $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -TargetCommitish:$TargetCommitish `
   -CheckAll:$CheckAll
 
-if ($TotalShards -gt 1) { 
+if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) { 
   $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
 }
 
