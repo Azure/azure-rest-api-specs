@@ -37,6 +37,7 @@ using TypeSpec.Versioning;
   title: "Azure Compute resource management API.",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Compute;
 
 /**
