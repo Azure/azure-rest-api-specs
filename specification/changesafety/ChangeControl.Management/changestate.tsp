@@ -324,12 +324,6 @@ interface ChangeStates {
       ...SubscriptionIdParameter;
     }
   >;
-  createOrUpdateAtTenantLevel is ArmResourceCreateOrReplaceSync<
-    ChangeState,
-    {
-      ...ApiVersionParameter;
-    }
-  >;
 
   update is ArmResourcePatchSync<ChangeState, ChangeStateProperties>;
   updateAtSubscriptionLevel is ArmResourcePatchSync<
@@ -338,13 +332,6 @@ interface ChangeStates {
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
-    }
-  >;
-  updateAtTenantLevel is ArmResourcePatchSync<
-    ChangeState,
-    ChangeStateProperties,
-    {
-      ...ApiVersionParameter;
     }
   >;
 
@@ -356,12 +343,6 @@ interface ChangeStates {
       ...SubscriptionIdParameter;
     }
   >;
-  deleteAtTenantLevel is ArmResourceDeleteWithoutOkAsync<
-    ChangeState,
-    {
-      ...ApiVersionParameter;
-    }
-  >;
 
   @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource.")
   @action("retrieveNextStages")
@@ -369,17 +350,6 @@ interface ChangeStates {
     ChangeState,
     void,
     RetrieveNextStagesResponse
-  >;
-
-  @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource at tenant level.")
-  @action("retrieveNextStages")
-  retrieveNextStagesAtTenantLevel is ArmResourceActionSync<
-    ChangeState,
-    void,
-    RetrieveNextStagesResponse,
-    {
-      ...ApiVersionParameter;
-    }
   >;
 
   @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource at subscription level.")

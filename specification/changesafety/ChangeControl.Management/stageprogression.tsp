@@ -95,12 +95,6 @@ interface StageProgressions {
       ...SubscriptionIdParameter;
     }
   >;
-  createOrUpdateAtTenantLevel is ArmResourceCreateOrReplaceSync<
-    StageProgression,
-    {
-      ...ApiVersionParameter;
-    }
-  >;
 
   delete is ArmResourceDeleteSync<StageProgression>;
   deleteAtSubscriptionLevel is ArmResourceDeleteSync<
@@ -108,12 +102,6 @@ interface StageProgressions {
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
-    }
-  >;
-  deleteAtTenantLevel is ArmResourceDeleteSync<
-    StageProgression,
-    {
-      ...ApiVersionParameter;
     }
   >;
 
@@ -126,13 +114,6 @@ interface StageProgressions {
       ...SubscriptionIdParameter;
     }
   >;
-  updateAtTenantLevel is ArmResourcePatchSync<
-    StageProgression,
-    StageProgressionProperties,
-    {
-      ...ApiVersionParameter;
-    }
-  >;
 
   listByParent is ArmResourceListByParent<StageProgression>;
   listByParentAtSubscriptionLevel is ArmResourceListByParent<
@@ -140,12 +121,6 @@ interface StageProgressions {
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
-    }
-  >;
-  listByParentAtTenantLevel is ArmResourceListByParent<
-    StageProgression,
-    {
-      ...ApiVersionParameter;
     }
   >;
 }

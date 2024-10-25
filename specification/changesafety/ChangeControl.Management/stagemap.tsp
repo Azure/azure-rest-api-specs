@@ -84,12 +84,7 @@ interface StageMaps {
       ...SubscriptionIdParameter;
     }
   >;
-  getAtTenantLevel is ArmResourceRead<
-    StageMap,
-    {
-      ...ApiVersionParameter;
-    }
-  >;
+
   createOrUpdate is ArmResourceCreateOrReplaceSync<StageMap>;
   createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
     StageMap,
@@ -98,12 +93,7 @@ interface StageMaps {
       ...SubscriptionIdParameter;
     }
   >;
-  createOrUpdateAtTenantLevel is ArmResourceCreateOrReplaceSync<
-    StageMap,
-    {
-      ...ApiVersionParameter;
-    }
-  >;
+
   update is ArmResourcePatchSync<StageMap, StageMapProperties>;
   updateAtSubscriptionLevel is ArmResourcePatchSync<
     StageMap,
@@ -113,25 +103,13 @@ interface StageMaps {
       ...SubscriptionIdParameter;
     }
   >;
-  updateAtTenantLevel is ArmResourcePatchSync<
-    StageMap,
-    StageMapProperties,
-    {
-      ...ApiVersionParameter;
-    }
-  >;
+
   delete is ArmResourceDeleteSync<StageMap>;
   deleteAtSubscriptionLevel is ArmResourceDeleteSync<
     StageMap,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
-    }
-  >;
-  deleteAtTenantLevel is ArmResourceDeleteSync<
-    StageMap,
-    {
-      ...ApiVersionParameter;
     }
   >;
 }

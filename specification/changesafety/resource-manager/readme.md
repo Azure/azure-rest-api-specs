@@ -45,8 +45,6 @@ suppressions:
   - code: TopLevelResourcesListByResourceGroup
     from: changeControl.json
     reason: List for ChangeStates and StageMaps are not supported by design.
-  - code: TenantLevelAPIsNotAllowed
-    reason: Presented design at the API review meeting.
 ```
 
 ---
