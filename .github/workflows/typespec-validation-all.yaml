@@ -56,7 +56,7 @@ jobs:
       - name: Setup CI environment
         uses: ./.github/actions/setup-node-npm-ci
         
-      - name: Validate All Specs
+      - name: Validate All Specs (Shard ${{ matrix.shard }} of ${{ matrix.total-shards }})
         run: |
           ./eng/scripts/TypeSpec-Validation.ps1 `
             -Shard ${{ matrix.shard }} `
