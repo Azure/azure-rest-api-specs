@@ -108,7 +108,7 @@ input-file:
   - preview/2024-09-01-preview/communicationservicescallautomation.json
 title:
   Azure Communication Services
-
+```
 ---
 
 # Code Generation
