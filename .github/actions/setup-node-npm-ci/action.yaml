@@ -5,9 +5,6 @@ inputs:
   node-version:
     description: 'Node version to use'
     default: 20.x
-  shell:
-    description: 'Shell to use for running npm commands'
-    default: ${{ defaults.run.shell }}
 
 runs:
   using: "composite"
@@ -19,8 +16,8 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - run: npm ci
-      shell: ${{ inputs.shell }}
+      shell: bash
 
     - run: npm ls -a
-      shell: ${{ inputs.shell }}
+      shell: bash
       continue-on-error: true
