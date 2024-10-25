@@ -1,0 +1,13 @@
+name: Get KeyValue Artifacts
+description: Sets env vars corresponding to keys and values encoded in artifact names
+
+runs:
+  using: composite
+
+  steps:
+    - name: Set env vars from artifact names
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const getKeyValueArtifacts = require('./.github/scripts/get-keyvalue-artifacts.js')
+          await getKeyValueArtifacts(github, context, core);
