@@ -56,7 +56,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart"]
   - code: AvoidAdditionalProperties
-    reason: Existing property in previous GA version
+    reason: Existing property in previous GA version.
     where:
       - $.definition.SparkJob.properties.conf
       - $.definition.SparkJob.properties.environmentVariables
@@ -67,18 +67,19 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].delete.responses.202
   - code: PatchBodyParametersSchema
-    reason: Existing API behavior, the property is not required but to patch this property some of the nest properties
-      are required.
+    reason: Existing API behavior, the whole property is not required.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
   - code: XmsPageableForListCalls
-    reason: Existing API behavior
+    reason: Existing API behavior.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources"].get
   - code: GuidUsage
-    reason: Existing property in previous GA version
+    reason: Existing property in previous GA version.
     where:
       - $.definition.WorkspaceConnectionOAuth2.properties.clientId.format
+  ```
+
 ### Tag: package-preview-2024-07
 
 These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
