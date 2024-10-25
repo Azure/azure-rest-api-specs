@@ -36,14 +36,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        folders:
-          - skip: 0
-            take: 71
-          - skip: 71
-            take: 71
-          - skip: 142
-            # Take 0 means take all
-            take: 0
+        # shards must start at 0 and increment by 1
+        shard: [0, 1, 2]
+        # total-shards must be an accurate count of the number of shards
+        total-shards: [3]
 
     runs-on: ${{ matrix.os }}
 
@@ -63,8 +59,8 @@ jobs:
       - name: Validate All Specs
         run: |
           ./eng/scripts/TypeSpec-Validation.ps1 `
-            -Skip ${{ matrix.folders.skip }} `
-            -Take ${{ matrix.folders.take }} `
+            -Shard ${{ matrix.shard }} `
+            -TotalShards ${{ matrix.total-shards }} `
             -CheckAll `
             -GitClean `
             -Verbose

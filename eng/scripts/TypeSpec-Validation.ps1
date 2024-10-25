@@ -1,13 +1,17 @@
 [CmdletBinding()]
 param (
   [switch]$CheckAll = $false,
-  [int]$Skip = 0,
-  [int]$Take = 0,
+  [int]$Shard = 0,
+  [int]$TotalShards = 0,
   [switch]$GitClean = $false,
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD"
 )
+
+if ($Shard -ge $TotalShards) { 
+  throw "Shard ($Shard) must be less than TotalShards ($TotalShards)"
+}
 
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
@@ -17,11 +21,19 @@ $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -TargetCommitish:$TargetCommitish `
   -CheckAll:$CheckAll
 
-if ($Skip -gt 0) {
-  $typespecFolders = $typespecFolders | Select-Object -Skip $Skip
+function shardArray($array, $shard, $totalShards) {
+  if ($totalShards -gt $array.Length) {
+    throw "Cannot shard array into more pieces than there are elements"
+  }
+
+  $shardSize = [math]::Ceiling($array.Length / $totalShards)
+  $start = $shard * $shardSize
+  $end = [math]::Min($start + $shardSize, $array.Length)
+  return $array[$start..($end - 1)]
 }
-if ($Take -gt 0) {
-  $typespecFolders = $typespecFolders | Select-Object -First $Take
+
+if ($TotalShards -gt 1) { 
+  $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
 }
 
 Write-Host "Checking $($typespecFolders.Count) TypeSpec folders:"
