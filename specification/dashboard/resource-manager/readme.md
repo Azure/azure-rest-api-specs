@@ -28,7 +28,7 @@ These are the global settings for the Dashboard API.
 title: DashboardManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10-01
+tag: package-2023-10-01-preview
 ```
 
 
