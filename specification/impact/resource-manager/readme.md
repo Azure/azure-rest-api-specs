@@ -57,8 +57,6 @@ suppressions:
   - code: LroLocationHeader
     reason: proxy resources hence now location and this is a older spec
     from: impact.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].delete
 
   - code: GuidUsage
     reason: this is for getting a subscriptionId from customers
