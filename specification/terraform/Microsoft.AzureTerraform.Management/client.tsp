@@ -8,7 +8,9 @@ using Microsoft.AzureTerraform;
 @@clientName(BaseExportModel, "CommonExportProperties", "csharp");
 // Name ending with "Resource" is reserved for ARM resource in .NET SDK
 // Refer to https://github.com/Azure/azure-sdk-for-net/blob/4dacd22df0cf904b11cb3b1389aa566c552fdd0f/common/ManagementTestShared/Redesign/InheritanceCheckTests.cs#L23
+@@clientName(ExportQuery, "ExportQueryTerraform", "csharp");
 @@clientName(ExportResource, "ExportResourceTerraform", "csharp");
+@@clientName(ExportResourceGroup, "ExportResourceGroupTerraform", "csharp");
 @@clientName(ExportResult, "TerraformExportResult", "csharp");
 @@clientName(ExportResult.skippedResources, "SkippedResourceIds", "csharp");
 @@clientName(ResourceProvisioningState,
