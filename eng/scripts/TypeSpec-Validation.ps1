@@ -2,7 +2,7 @@
 param (
   [switch]$CheckAll = $false,
   [int]$Shard = 0,
-  [int]$TotalShards = 0,
+  [int]$TotalShards = 1,
   [switch]$GitClean = $false,
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
@@ -15,22 +15,12 @@ if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) {
 
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
+. $PSScriptRoot/Array-Functions.ps1
 
 $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
   -TargetCommitish:$TargetCommitish `
   -CheckAll:$CheckAll
-
-function shardArray($array, $shard, $totalShards) {
-  if ($totalShards -gt $array.Length) {
-    throw "Cannot shard array into more pieces than there are elements"
-  }
-
-  $shardSize = [math]::Ceiling($array.Length / $totalShards)
-  $start = $shard * $shardSize
-  $end = [math]::Min($start + $shardSize, $array.Length)
-  return $array[$start..($end - 1)]
-}
 
 if ($TotalShards -gt 1) { 
   $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
