@@ -62,8 +62,16 @@ model Stage {
 
   @doc("Stage Map resource Id.")
   @visibility("read", "create", "update")
-  nestedStageMapResourceId?: armResourceIdentifier;
+  nestedStageMapResourceId?: StageMapResourceId;
 }
+
+@doc("Azure resource Id of a stage map.")
+scalar StageMapResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/stageMaps",
+    }
+  ]>;
 
 @armResourceOperations
 @doc("The operations of the StageMap resource.")

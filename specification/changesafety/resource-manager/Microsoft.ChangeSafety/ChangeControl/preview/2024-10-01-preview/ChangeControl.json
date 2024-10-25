@@ -1061,8 +1061,7 @@
           ]
         },
         "stageMapResourceId": {
-          "type": "string",
-          "format": "arm-id",
+          "$ref": "#/definitions/StageMapResourceId",
           "description": "Azure resource Id of the referenced StageMap.",
           "x-ms-mutability": [
             "read",
@@ -1199,6 +1198,18 @@
             "create"
           ]
         }
+      }
+    },
+    "ChangeStateResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource Id of a ChangeState.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ChangeSafety/changeStates"
+          }
+        ]
       }
     },
     "ChangeStateUpdate": {
@@ -1618,8 +1629,7 @@
       "description": "RetrieveNextStage POST Action response.",
       "properties": {
         "changeStateResourceId": {
-          "type": "string",
-          "format": "arm-id",
+          "$ref": "#/definitions/ChangeStateResourceId",
           "description": "ChangeState resource Id."
         },
         "lastStageSequence": {
@@ -1703,8 +1713,7 @@
           ]
         },
         "nestedStageMapResourceId": {
-          "type": "string",
-          "format": "arm-id",
+          "$ref": "#/definitions/StageMapResourceId",
           "description": "Stage Map resource Id.",
           "x-ms-mutability": [
             "read",
@@ -1805,6 +1814,18 @@
             "create"
           ]
         }
+      }
+    },
+    "StageMapResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource Id of a stage map.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ChangeSafety/stageMaps"
+          }
+        ]
       }
     },
     "StageMapUpdate": {
