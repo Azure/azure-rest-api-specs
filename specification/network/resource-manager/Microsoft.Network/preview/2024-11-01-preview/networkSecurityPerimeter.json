@@ -685,6 +685,12 @@
                 "$ref": "#/definitions/NspAssociation"
               }
             },
+            "202": {
+            "description": "Accepted - Returns the NspAssociation resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
@@ -711,8 +717,8 @@
             "202": {
               "description": "Delete in progress.",
               "headers": {
-                "location": {
-                  "description": "location header",
+                "Azure-AsyncOperation": {
+                  "description": "Azure async operation header",
                   "type": "string"
                 }
               }
