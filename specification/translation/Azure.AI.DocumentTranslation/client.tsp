@@ -47,10 +47,6 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
 
-@@clientName(DocumentTranslation.TranslationStatus.id, "translationId");
-
-@@clientName(DocumentTranslation.DocumentStatus.id, "documentId");
-
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
   "csharp"
