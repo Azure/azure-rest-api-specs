@@ -97,7 +97,7 @@ model FileSearchToolDefinitionDetails {
 model RankingOptions {
 
   @doc("File search ranker.")
-  ranker: string
+  ranker: string;
 
   @doc("Ranker search threshold.")
   @encodedName("application/json", "score_threshold")
