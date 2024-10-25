@@ -1226,7 +1226,10 @@
         },
         "arguments": {
           "type": "object",
-          "description": "The arguments for the command to be run"
+          "description": "The arguments for the command to be run",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "host": {
           "type": "string",
@@ -1236,7 +1239,7 @@
           "type": "boolean",
           "description": "If true, stops cassandra before executing the command and then start it again"
         },
-        "readWrite": {
+        "readwrite": {
           "type": "boolean",
           "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
         }
