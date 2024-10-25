@@ -18,12 +18,12 @@ namespace Azure.AI.Projects.Diagnostics;
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Gets the properties of the specified Application Insights resource")
-@route("components/{resourceName}")
+@route("/{appInsightsResourceUrl}")
 @get
 op getAppInsights is Azure.Core.Foundations.Operation<
   {
-    @doc("The AppInsights Azure resource Name")
-    resourceName: string;
+    @doc("The AppInsights Azure resource Url. It should have the format: `/subscriptions/{subscription_id}/resourceGroups/{resouce_group_name}/providers/microsoft.insights/components/{resouce-name}`")
+    appInsightsResourceUrl: string;
   },
   GetAppInsightsResponse
 >;
