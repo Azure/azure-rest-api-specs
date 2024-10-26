@@ -1,0 +1,24 @@
+name: TypeSpec Validation
+
+on: pull_request
+
+jobs:
+  typespec-validation:
+    name: TypeSpec Validation
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+
+    - name: Setup Node 20 and run `npm ci`
+      uses: ./.github/actions/setup-node-npm-ci
+
+    - name: Validate Impacted Specs
+      run: |
+        ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+        
+        # Effectively the same as ignoreLASTEXITCODE: true in Azure DevOps
+        exit 0
+      shell: pwsh
