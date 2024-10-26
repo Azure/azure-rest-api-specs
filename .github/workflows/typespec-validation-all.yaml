@@ -34,6 +34,7 @@ jobs:
   typespec-validation-all:
     name: TypeSpec Validation All
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
         # shards must start at 0 and increment by 1
@@ -57,13 +58,14 @@ jobs:
         
       - name: Validate All Specs
         run: |
+          # Keep processing when errors are written. Nonzero exit will mark the 
+          # step as failed. 
+          $ErrorActionPreference = 'Continue'
+
           ./eng/scripts/TypeSpec-Validation.ps1 `
             -Shard ${{ matrix.shard }} `
             -TotalShards ${{ matrix.total-shards }} `
             -CheckAll `
             -GitClean `
             -Verbose
-          
-          # Effectively the same as ignoreLASTEXITCODE: true in Azure DevOps
-          exit 0
         shell: pwsh
