@@ -311,7 +311,7 @@ model TranslationsStatus {
 @doc("Translation job status response")
 model TranslationStatus {
   @doc("Id of the translation operation.")
-  id: uuid;
+  id: string;
 
   @doc("Operation created date time")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
