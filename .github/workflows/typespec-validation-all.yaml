@@ -58,6 +58,10 @@ jobs:
         
       - name: Validate All Specs
         run: |
+          # Keep processing when errors are written. Nonzero exit will mark the 
+          # step as failed. 
+          $ErrorActionPreference = 'Continue'
+
           ./eng/scripts/TypeSpec-Validation.ps1 `
             -Shard ${{ matrix.shard }} `
             -TotalShards ${{ matrix.total-shards }} `
