@@ -39,7 +39,7 @@ function LogError {
     Write-Host ("##vso[task.LogIssue type=error;]$args" -replace "`n", "%0D%0A")
   }
   elseif (Test-SupportsGitHubLogging) {
-    Write-Error ("::error::$args" -replace "`n", "%0D%0A")
+    Write-Host ("::error::$args" -replace "`n", "%0D%0A")
   }
   else {
     Write-Error "$args"
