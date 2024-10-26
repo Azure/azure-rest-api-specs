@@ -29,6 +29,10 @@ jobs:
         continue-on-error: true
 
       - run: |
+          # Keep processing when errors are written. Nonzero exit will mark the 
+          # step as failed. 
+          $ErrorActionPreference = 'Continue'
+
           eng/scripts/TypeSpec-Requirement.ps1 `
             -BaseCommitish HEAD^ `
             -TargetCommitish HEAD `
