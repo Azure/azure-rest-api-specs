@@ -21,7 +21,13 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ### AutoRest v3 Suppressions
 
 ```yaml
-
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: impact.json
+    where: $.definitions.WorkloadImpactProperties.properties
+    reason:
+      Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
+      and will be different for different categories
 ```
 
 ## Configuration
