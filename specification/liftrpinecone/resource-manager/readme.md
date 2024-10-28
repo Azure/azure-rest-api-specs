@@ -35,5 +35,5 @@ These settings apply only when `--tag=package-2024-10-22-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-22-preview'
 input-file:
-  - Pinecone/preview/2024-10-22-preview/openapi.json
+  - Pinecone.VectorDb/preview/2024-10-22-preview/openapi.json
 ```
