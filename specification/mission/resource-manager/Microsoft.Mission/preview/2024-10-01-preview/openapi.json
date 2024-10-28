@@ -3987,17 +3987,8 @@
           }
         },
         "approvalStatus": {
-          "type": "string",
-          "description": "Approval status indicating 'Approved', 'Rejected', 'Deleted' or 'Expired'",
-          "enum": [
-            "Approved",
-            "Rejected",
-            "Deleted",
-            "Expired"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApprovalStatus",
+          "description": "Approval status indicating 'Approved', 'Rejected', 'Deleted' or 'Expired'"
         },
         "approvalCallbackPayload": {
           "type": "string",
@@ -4210,9 +4201,7 @@
       "enum": [
         "Approved",
         "Rejected",
-        "Pending",
-        "Deleted",
-        "Expired"
+        "Pending"
       ],
       "x-ms-enum": {
         "name": "ApprovalStatus",
@@ -4232,16 +4221,6 @@
             "name": "Pending",
             "value": "Pending",
             "description": "ApprovalStatus Type Pending"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "ApprovalStatus Type Deleted"
-          },
-          {
-            "name": "Expired",
-            "value": "Expired",
-            "description": "ApprovalStatus Type Expired"
           }
         ]
       }

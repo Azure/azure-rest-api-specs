@@ -25,9 +25,11 @@ union ApprovalStatus {
   @doc("ApprovalStatus Type Pending")
   Pending: "Pending",
 
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
   @doc("ApprovalStatus Type Deleted")
   Deleted: "Deleted",
 
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
   @doc("ApprovalStatus Type Expired")
   Expired: "Expired",
 
