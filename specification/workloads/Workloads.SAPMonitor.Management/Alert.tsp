@@ -6,18 +6,18 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Workloads;
 /**
- * A provider instance associated with SAP monitor.
+ * A alert associated with SAP monitor.
  */
 @parentResource(Monitor)
 @added(Versions.v2024_02_01_preview)
 model Alert is ProxyResource<AlertProperties> {
   /**
-   * Name of the provider instance.
+   * Name of the Alert.
    */
   @pattern("^[a-zA-Z0-9-_]+$")
   @path
-  @key("alert")
-  @segment("alert")
+  @key("alertName")
+  @segment("alerts")
   @visibility("read")
   name: string;
 }
@@ -26,27 +26,29 @@ model Alert is ProxyResource<AlertProperties> {
 @armResourceOperations
 interface Alerts {
   /**
-   * Gets properties of an Alert for the specified subscription, resource group, SAP monitor name, and resource name.
+   * Gets properties of an alert for the specified subscription, resource group, SAP monitor name, and resource name.
    */
   get is ArmResourceRead<Alert>;
 
   /**
-   * Creates An Alert for the specified subscription, resource group, SAP monitor name, and resource name.
+   * Creates an alert for the specified subscription, resource group, SAP monitor name, and resource name.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrReplaceAsync<
-    Alert,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<Alert>;
 
   /**
-   * Deletes a Alert for the specified subscription, resource group, SAP monitor name, and resource name.
+   * Deletes an alert for the specified subscription, resource group, SAP monitor name, and resource name.
    */
   delete is ArmResourceDeleteWithoutOkAsync<Alert>;
 
   /**
-   * Gets a list of Alert in the specified SAP monitor. The operations returns various properties of each provider instances.
+   * Gets a list of alerts in the specified SAP monitor. The operations returns various properties of each alerts.
    */
-  listByMonitor is ArmResourceListByParent<Alert>;
+  list is ArmResourceListByParent<Alert>;
 }
+
+@@minLength(Alert.name, 1);
+@@doc(Alert.name, "Name of the SAP monitor alert resource.");
+@@doc(Alert.properties, "Alert Instance properties");
+@@doc(Alerts.create::parameters.resource,
+  "Request body representing a SAP monitor's alert resource"
+);

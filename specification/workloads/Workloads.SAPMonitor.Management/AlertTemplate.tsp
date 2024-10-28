@@ -10,11 +10,11 @@ namespace Microsoft.Workloads;
 @added(Versions.v2024_02_01_preview)
 model AlertTemplate is ProxyResource<AlertTemplateProperties> {
   /**
-   * Name of the Alert Template instance.
+   * A alert template associated with SAP monitor.
    */
   @pattern("^[a-zA-Z0-9-_]+$")
   @path
-  @key("alertTemplate")
+  @key("alertTemplateName")
   @segment("alertTemplates")
   @visibility("read")
   name: string;
@@ -24,12 +24,26 @@ model AlertTemplate is ProxyResource<AlertTemplateProperties> {
 @armResourceOperations
 interface AlertTemplates {
   /**
-   * Gets an Alert Template in the specified SAP monitor. The operations returns various properties of each provider instances.
+   * Gets properties of an alert template for the specified subscription, resource group, SAP monitor name, and resource name.
    */
   get is ArmResourceRead<AlertTemplate>;
 
   /**
-   * Gets a list of Alert Template in the specified SAP monitor. The operations returns various properties of each provider instances.
+   * Gets a list of alert templates in the specified SAP monitor. The operations returns various properties of each alert template.
    */
-  listByMonitor is ArmResourceListByParent<AlertTemplate>;
+  list is ArmResourceListByParent<
+    AlertTemplate,
+    Parameters = {
+      /**
+       * The provider type for filtering alert templates.
+       */
+      @minLength(1)
+      @query("providerType")
+      providerType?: string;
+    }
+  >;
 }
+
+@@minLength(AlertTemplate.name, 1);
+@@doc(AlertTemplate.name, "SAP monitor alert template resource name.");
+@@doc(AlertTemplate.properties, "Alert Template properties");
