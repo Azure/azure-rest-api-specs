@@ -17,8 +17,7 @@ model ProtectedEndpoint {
 
   @doc("The status of the last attachment operation between the policy and the endpoint")
   @visibility("read")
-  @knownValues(ProvisioningState)
-  attachmentState?: string;
+  attachmentState?: ProvisioningState;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information")
   @visibility("read")
@@ -38,7 +37,7 @@ model FrontDoorProtectedEndpoint extends ProtectedEndpoint {
 }
 
 scalar ProtectedEndpointId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/applicationGateways",
     },

@@ -1,0 +1,69 @@
+name: TypeSpec Validation - All
+
+on:
+  push:
+    branches:
+      - main
+      - RPSaaSMaster
+      - typespec-next
+
+  pull_request:
+    branches:
+      - main
+      - RPSaaSMaster
+      - typespec-next
+    paths:
+      - .gitattributes
+      - .prettierrc.json
+      - package-lock.json
+      - package.json
+      - tsconfig.json
+      - eng/**
+      - specification/suppressions.yaml
+      - specification/common-types/**
+
+      # Workflow and workflow dependencies
+      - .github/workflows/typespec-validation-all.yaml
+      - .github/actions/setup-node-npm-ci/**
+
+  schedule:
+    # Run 4x/day
+    - cron: '0 0,6,12,18 * * * '
+
+jobs:
+  typespec-validation-all:
+    name: TypeSpec Validation All
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        # shards must start at 0 and increment by 1
+        shard: [0, 1, 2]
+        # total-shards must be an accurate count of the number of shards
+        total-shards: [3]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Enable git long paths
+        if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node 20 and run `npm ci`
+        uses: ./.github/actions/setup-node-npm-ci
+        
+      - name: Validate All Specs
+        run: |
+          ./eng/scripts/TypeSpec-Validation.ps1 `
+            -Shard ${{ matrix.shard }} `
+            -TotalShards ${{ matrix.total-shards }} `
+            -CheckAll `
+            -GitClean `
+            -Verbose
+          
+          # Effectively the same as ignoreLASTEXITCODE: true in Azure DevOps
+          exit 0
+        shell: pwsh

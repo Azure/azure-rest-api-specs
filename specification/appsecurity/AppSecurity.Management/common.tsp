@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -11,36 +10,40 @@ namespace Microsoft.AppSecurity;
 
 @doc("The provisioning state of a resource type")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
   @doc("Provisioning the resource is in progress")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Resource is being updated")
-  Updating,
+  Updating: "Updating",
 
   @doc("Resource is being deleted")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The change request has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Describes whether an object (a policy, a custom rule, a managed rule set or other objects) is enabled or disabled")
-enum EnabledState {
+union EnabledState {
+  string,
+
   @doc("The object is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The object is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("The type of the endpoint")
-enum EndpointType {
+union EndpointType {
+  string,
+
   @doc("application gateway endpoints, which are under Microsoft.Network/applicationGateways")
-  ApplicationGateway,
+  ApplicationGateway: "ApplicationGateway",
 
   @doc("FrontDoor endpoints, which are under Microsoft.Cdn/profiles")
-  FrontDoor,
+  FrontDoor: "FrontDoor",
 }
