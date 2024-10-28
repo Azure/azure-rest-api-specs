@@ -111,12 +111,9 @@ op getFile is Azure.Core.Foundations.Operation<
 @get
 @route("/files/{fileId}/content")
 @doc("Returns information about a specific file. Does not retrieve file content.")
-op getFileContent is Azure.Core.Foundations.Operation<
-  {
-    @doc("The ID of the file to retrieve.")
-    @path
-    @encodedName("application/json", "file_id")
-    fileId: string;
-  },
-  FileContentResponse
->;
+op getFileContent(
+  @doc("The ID of the file to retrieve.")
+  @path
+  @encodedName("application/json", "file_id")
+  fileId: string,
+): bytes;
