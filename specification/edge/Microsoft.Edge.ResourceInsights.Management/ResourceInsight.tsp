@@ -16,6 +16,16 @@ model ResourceInsight
   ...ResourceNameParameter<ResourceInsight, NamePattern = "^default$">;
 }
 
+@@path(ResourceUriParameter.resourceUri, "scope");
+@@Azure.ResourceManager.CommonTypes.Private.armCommonParameter(ResourceUriParameter.resourceUri,
+  "ScopeParameter",
+  Azure.ResourceManager.CommonTypes.Versions.v5
+);
+
+@@doc(Azure.ResourceManager.ResourceUriParameter.resourceUri,
+  "The scope of the operation or resource. Valid scopes is resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'"
+);
+
 @doc("ResourceInsight operations")
 @armResourceOperations
 interface ResourceInsights {
@@ -26,6 +36,7 @@ interface ResourceInsights {
   list is ArmResourceListByParent<ResourceInsight>;
 }
 
+
 @doc("Connectivity status enum")
 union ConnectivityStatusEnum {
   string,
@@ -33,10 +44,10 @@ union ConnectivityStatusEnum {
   @doc("The device is in Connected state")
   Connected: "Connected",
 
-  @doc("The device was NotRecentlyConnected")
+  @doc("The device was not recently connected")
   NotRecentlyConnected: "NotRecentlyConnected",
 
-  @doc("The device NeedsAttention")
+  @doc("The device needs attention")
   NeedsAttention: "NeedsAttention",
 }
 
@@ -56,7 +67,7 @@ union UpdateStatus {
   @doc("The device is in UpdateInProgress state")
   UpdateInProgress: "UpdateInProgress",
 
-  @doc("The device is in Needs attention state")
+  @doc("The device is in NeedsAttention state")
   NeedsAttention: "NeedsAttention",
 }
 
