@@ -465,40 +465,18 @@
     },
     "EmployeeUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Employee.",
+      "description": "Employee resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/EmployeeUpdateProperties",
+          "$ref": "#/definitions/EmployeeProperties",
           "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "EmployeeUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Employee.",
-      "properties": {
-        "age": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age of employee"
-        },
-        "city": {
-          "type": "string",
-          "description": "City of employee"
-        },
-        "profile": {
-          "type": "string",
-          "format": "base64url",
-          "description": "Profile of employee"
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
