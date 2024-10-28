@@ -46,7 +46,6 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 input-file:
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
   - Microsoft.Insights/preview/2024-01-01-preview/scheduledQueryRule_API.json
-  - Microsoft.Monitor/stable/2023-04-03/operations_API.json
 ```
 
 ### Tag: package-preview-2024-01
