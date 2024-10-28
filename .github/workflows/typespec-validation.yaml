@@ -17,8 +17,13 @@ jobs:
 
     - name: Validate Impacted Specs
       run: |
+        # Keep processing when errors are written. Nonzero exit will mark the 
+        # step as failed. 
+        $ErrorActionPreference = 'Continue'
+
+        eng/scripts/TypeSpec-Requirement.ps1 `
+          -BaseCommitish HEAD^ `
+          -TargetCommitish HEAD `
+          -SpecType ${{ matrix.spec-type }}
         ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
-        
-        # Effectively the same as ignoreLASTEXITCODE: true in Azure DevOps
-        exit 0
       shell: pwsh
