@@ -798,6 +798,12 @@
           },
           "Get a gallery image version with vhd as a source.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithVhdAsSource.json"
+          },
+          "Get a gallery image version with validation profile.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithValidationProfile.json"
+          },
+          "Get a gallery image version with validation profile and replication status.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithValidationProfileAndReplicationStatus.json"
           }
         }
       },
@@ -3832,6 +3838,13 @@
         "nextLink": {
           "type": "string",
           "description": "The uri to fetch the next page of galleries. Call ListNext() with this to fetch the next page of galleries."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/ImageVersionSecurityProfile"
+        },
+        "validationsProfile": {
+          "readOnly": true,
+          "$ref": "#/definitions/ValidationsProfile"
         }
       },
       "required": [
@@ -4091,6 +4104,29 @@
         }
       }
     },
+    "ValidationsProfile": {
+      "type": "object",
+      "properties": {
+        "validationEtag": {
+          "type": "string",
+          "description": "The published time of the image version"
+        },
+        "executedValidations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExecutedValidation"
+          }
+        },
+        "platformAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformAttribute"
+          },
+          "description": "This specifies the pub, offer, sku and version of the image version metadata"
+        }
+      },
+      "description": "This is the validations profile of a Gallery Image Version."
+    },
     "UefiKey": {
       "type": "object",
       "description": "A UEFI key signature.",
@@ -4130,6 +4166,43 @@
         }
       ],
       "description": "Specifies information about the gallery inVMAccessControlProfile that you want to create or update."
+    },
+    "ExecutedValidation": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "This property specifies the type of image version validation."
+        },
+        "status": {
+          "type": "string",
+          "description": "This property specifies the status of the validationProfile of the image version."
+        },
+        "version": {
+          "type": "string",
+          "description": "This property specifies the valid version of the validation."
+        },
+        "executionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This property specifies the starting timestamp."
+        }
+      },
+      "description": "This is the executed Validation."
+    },
+    "PlatformAttribute": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This property specifies the name of the platformAttributes. It could be either source_image_publisher or source_image_offer or source_image_sku or source_image_version"
+        },
+        "value": {
+          "type": "string",
+          "description": "This property specifies the value of the corresponding name property."
+        }
+      },
+      "description": "This is the platform attribute of the image version."
     },
     "GalleryInVMAccessControlProfileUpdate": {
       "type": "object",
