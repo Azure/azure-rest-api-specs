@@ -5,7 +5,7 @@
 This is the AutoRest configuration file for Automation.
 
 ---
-## Getting Started
+## Getting Started 
 To build the SDK for Automation, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
