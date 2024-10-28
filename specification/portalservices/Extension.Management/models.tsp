@@ -235,6 +235,11 @@ model DeploymentConfig {
    */
   @extension("x-ms-identifiers", [])
   stageDefinition?: Record<Array<string>>;
+
+  /**
+   * Defines the extension is using Managed SDP for rollouts.
+   */
+  managedSdpEnabled?: boolean;
 }
 
 /**
