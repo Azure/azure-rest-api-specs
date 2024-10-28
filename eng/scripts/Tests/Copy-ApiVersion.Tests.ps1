@@ -1,7 +1,7 @@
 Import-Module Pester
 
 BeforeAll {
-    . "$PSScriptRoot\..\..\Copy-ApiVersion-Functions.ps1"
+    . "$PSScriptRoot\..\Copy-ApiVersion-Functions.ps1"
 }
 
 Describe "Copy-ApiVersion regex tests" {
@@ -11,25 +11,25 @@ Describe "Copy-ApiVersion regex tests" {
                 version       = "2024-01-01-preview"
                 provider      = "Microsoft.AgFoodPlatform"
                 versionStatus = "preview"
-                specsDir      = '..\..\..\..\..\specification\agrifood\resource-manager\Microsoft.AgFoodPlatform\preview\2023-06-01-preview'
+                specsDir      = '..\..\..\..\specification\agrifood\resource-manager\Microsoft.AgFoodPlatform\preview\2023-06-01-preview'
             },
             @{
                 version       = "2024-01-01"
                 provider      = "Microsoft.Compute\ComputeRP"
                 versionStatus = "stable"
-                specsDir      = '..\..\..\..\..\specification\compute\resource-manager\Microsoft.Compute\ComputeRP\stable\2023-09-01'
+                specsDir      = '..\..\..\..\specification\compute\resource-manager\Microsoft.Compute\ComputeRP\stable\2023-09-01'
             },
             @{
                 version       = "7.6-preview.1"
                 provider      = "Microsoft.KeyVault"
                 versionStatus = "preview"
-                specsDir      = '..\..\..\..\..\specification\keyvault\data-plane\Microsoft.KeyVault\preview\7.6-preview.1'
+                specsDir      = '..\..\..\..\specification\keyvault\data-plane\Microsoft.KeyVault\preview\7.6-preview.1'
             },
             @{
                 version       = "7.5"
                 provider      = "Microsoft.Compute\ComputeRP"
                 versionStatus = "stable"
-                specsDir      = '..\..\..\..\..\specification\keyvault\data-plane\Microsoft.KeyVault\stable\7.5'
+                specsDir      = '..\..\..\..\specification\keyvault\data-plane\Microsoft.KeyVault\stable\7.5'
             }
         ) {
             param($version, $provider, $versionStatus, $specsDir)
@@ -48,12 +48,12 @@ Describe "Copy-ApiVersion regex tests" {
         # TODO: This is fragile. The tests stop working when a service team updates their readme.md. We should instead take fixed copies or something.
         It "Default version gets updated" -TestCases @(
             @{
-                inputReadme   = '..\..\..\..\..\specification\compute\resource-manager\readme.md'
+                inputReadme   = '..\..\..\..\specification\compute\resource-manager\readme.md'
                 apiVersion    = "2024-01-01"
                 versionStatus = "stable"
             },
             @{
-                inputReadme   = '..\..\..\..\..\specification\keyvault\data-plane\readme.md'
+                inputReadme   = '..\..\..\..\specification\keyvault\data-plane\readme.md'
                 apiVersion    = "7.6-preview.1"
                 versionStatus = "preview"
             }
