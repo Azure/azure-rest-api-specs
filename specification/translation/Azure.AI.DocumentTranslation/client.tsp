@@ -65,10 +65,15 @@ interface SingleDocumentTranslationClient {
   Access.internal,
   "python"
 );
-@@access(DocumentTranslation.FileFormat, Access.public, "python,java");
-@@usage(DocumentTranslation.FileFormat, Usage.output, "python,java");
-@@access(DocumentTranslation.FileFormatType, Access.public, "python,java");
-@@usage(DocumentTranslation.FileFormatType, Usage.output, "python,java");
+@@access(DocumentTranslation.FileFormat, Access.public, "java");
+@@usage(DocumentTranslation.FileFormat, Usage.output, "java");
+@@access(DocumentTranslation.FileFormatType, Access.public, "java");
+@@usage(DocumentTranslation.FileFormatType, Usage.output, "java");
+
+@@access(DocumentTranslation.FileFormat, Access.public, "python");
+@@usage(DocumentTranslation.FileFormat, Usage.output, "python");
+@@access(DocumentTranslation.FileFormatType, Access.public, "python");
+@@usage(DocumentTranslation.FileFormatType, Usage.output, "python");
 
 @@clientName(DocumentTranslationClient.startTranslation,
   "_begin_translation",
