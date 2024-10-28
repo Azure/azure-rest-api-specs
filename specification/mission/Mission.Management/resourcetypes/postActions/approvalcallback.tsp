@@ -13,6 +13,7 @@ using Azure.ResourceManager;
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
 @doc("Request body for calling post-action")
 model ApprovalCallbackRequest {
   @removed(Microsoft.Mission.Versions.v2024_11_01_preview)
