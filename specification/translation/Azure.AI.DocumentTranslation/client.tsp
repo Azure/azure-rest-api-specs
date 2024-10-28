@@ -70,9 +70,6 @@ interface SingleDocumentTranslationClient {
 @@access(DocumentTranslation.FileFormatType, Access.public, "python,java");
 @@usage(DocumentTranslation.FileFormatType, Usage.output, "python,java");
 
-@@access(DocumentTranslation.SupportedFileFormats, Access.internal, "java");
-@@usage(DocumentTranslation.SupportedFileFormats, Usage.output, "java");
-
 @@clientName(DocumentTranslationClient.startTranslation,
   "_begin_translation",
   "python"
