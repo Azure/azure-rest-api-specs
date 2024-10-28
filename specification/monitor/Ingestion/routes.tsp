@@ -10,10 +10,6 @@ using Azure.ClientGenerator.Core;
 
 namespace LogsIngestionClient;
 
-alias ServiceTraits = SupportsClientRequestId &
-  NoConditionalRequests &
-  NoRepeatableRequests;
-
 /**
  * Ingestion API used to directly ingest data using Data Collection Rules.
  */
@@ -43,6 +39,5 @@ op upload is Azure.Core.Foundations.Operation<
 
     ...ClientRequestIdHeader;
   },
-  void,
-  ServiceTraits
+  void
 >;
