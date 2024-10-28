@@ -1685,6 +1685,72 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/softDeletedArtifactTypes/{artifactType}/artifacts/{artifactName}/versions": {
+      "get": {
+        "tags": [
+          "SoftDelete"
+        ],
+        "operationId": "SoftDeletedResource_ListByArtifactName",
+        "description": "List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
+            "description": "The name of the Gallery in which the soft-deleted resources resides."
+          },
+          {
+            "name": "artifactType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
+            "description": "The type of the artifact to be listed, such as gallery image version."
+          },
+          {
+            "name": "artifactName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
+            "description": "The artifact name to be listed. If artifact type is Images, then the artifact name should be the gallery image name."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GallerySoftDeletedResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List soft-deleted resources of an artifact in the gallery.": {
+            "$ref": "./examples/galleryExamples/GallerySoftDeletedResource_ListByArtifactName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/share": {
       "post": {
         "tags": [
@@ -3721,6 +3787,39 @@
       },
       "description": "This is the regional replication status."
     },
+    "GallerySoftDeletedResourceProperties": {
+      "properties": {
+        "resourceArmId": {
+          "type": "string",
+          "description": "arm id of the soft-deleted resource"
+        },
+        "softDeletedArtifactType": {
+          "type": "string",
+          "description": "artifact type of the soft-deleted resource"
+        },
+        "softDeletedTime": {
+          "type": "string",
+          "description": "The timestamp for when the resource is soft-deleted."
+        }
+      },
+      "type": "object",
+      "description": "Describes the properties of a soft-deleted resource."
+    },
+    "GallerySoftDeletedResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GallerySoftDeletedResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "type": "object",
+      "description": "The details information of soft-deleted resource."
+    },
     "GalleryList": {
       "properties": {
         "value": {
@@ -3815,6 +3914,26 @@
         "value"
       ],
       "description": "The List Gallery Application version operation response."
+    },
+    "GallerySoftDeletedResourceList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GallerySoftDeletedResource"
+          },
+          "description": "A list of soft-deleted resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of soft-deleted resources. Call ListNext() with this to fetch the next page of soft-deleted resources."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "description": "The List Soft-deleted Resources operation response."
     },
     "UpdateResourceDefinition": {
       "description": "The Update Resource model definition.",
