@@ -173,10 +173,7 @@ interface SingleDocumentTranslationClient {
   "java"
 );
 
-@@clientName(DocumentTranslationClient.startTranslation,
-  "beginTranslation",
-  "java"
-);
+@@clientName(DocumentTranslationClient.startTranslation, "translation", "java");
 
 @@clientName(DocumentTranslationClient.getDocumentsStatus,
   "listDocumentStatuses",
