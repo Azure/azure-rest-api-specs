@@ -27,7 +27,7 @@ model ApprovalCallbackRequest {
 
   @added(Microsoft.Mission.Versions.v2024_10_01_preview)
   @doc("Payload requested by client upon approval action")
-  approvalCallbackPayload?: string;              
+  approvalCallbackPayload?: string;
 }
 
 @doc("Response body after handling of approvalCallbackRequest")
