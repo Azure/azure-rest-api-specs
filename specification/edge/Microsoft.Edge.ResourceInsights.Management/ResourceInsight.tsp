@@ -36,7 +36,6 @@ interface ResourceInsights {
   list is ArmResourceListByParent<ResourceInsight>;
 }
 
-
 @doc("Connectivity status enum")
 union ConnectivityStatusEnum {
   string,
