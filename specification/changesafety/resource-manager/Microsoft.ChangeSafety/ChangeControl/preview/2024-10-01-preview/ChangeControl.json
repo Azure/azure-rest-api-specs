@@ -90,6 +90,50 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}": {
+      "get": {
+        "operationId": "ChangeStates_GetAtSubscriptionLevel",
+        "tags": [
+          "ChangeStates"
+        ],
+        "description": "Get a ChangeState",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeStateName",
+            "in": "path",
+            "description": "The name of the ChangeState resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeStates_Get_MaximumSet_At_Subscription_Level": {
+            "$ref": "./examples/ChangeStates_Get_At_Subscription_Level.json"
+          }
+        }
+      },
       "put": {
         "operationId": "ChangeStates_CreateOrUpdateAtSubscriptionLevel",
         "tags": [

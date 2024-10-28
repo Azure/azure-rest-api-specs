@@ -315,6 +315,13 @@ scalar ChangeStateResourceId
 @doc("The operations of the ChangeState resource.")
 interface ChangeStates {
   get is ArmResourceRead<ChangeState>;
+  getAtSubscriptionLevel is ArmResourceRead<
+    ChangeState,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   createOrUpdate is ArmResourceCreateOrReplaceSync<ChangeState>;
   createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
