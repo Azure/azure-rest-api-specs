@@ -285,7 +285,7 @@ interface CisaCves {
 
 @tag("Policies")
 @Versioning.added(Versions.v2024_10_01_preview)
-@doc("Provides access to policy resources.")
+@doc("Provides access to policy resources. ")
 interface Policies {
   @doc("Retrieve a list of policies for the provided search parameters.")
   @Versioning.added(Versions.v2024_10_01_preview)
