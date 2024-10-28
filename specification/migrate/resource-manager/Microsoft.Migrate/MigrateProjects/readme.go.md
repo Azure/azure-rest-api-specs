@@ -6,12 +6,12 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
-  namespace: migrate
+  namespace: migrationhub
 ```
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/migrate/armmigrate
+module-name: sdk/resourcemanager/migrationhub/armmigrationhub
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true

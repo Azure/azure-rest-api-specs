@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-migrate"
-  output-folder: "$(typescript-sdks-folder)/sdk/migrate/arm-migrate"
+  package-name: "@azure/arm-migrationhub"
+  output-folder: "$(typescript-sdks-folder)/sdk/migrate/arm-migrationhub"
   generate-metadata: true
 ```

@@ -39,8 +39,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-migrate-2020-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2020_01_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_01_01
+  namespace: com.azure.resourcemanager.migrationdiscovery.v2020_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationdiscovery/mgmt-v2020_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -52,8 +52,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-migrate-2020-07' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2020_07_07
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_07_07
+  namespace: com.azure.resourcemanager.migrationdiscovery.v2020_07_07
+  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationdiscovery/mgmt-v2020_07_07
 regenerate-manager: true
 generate-interface: true
 ```

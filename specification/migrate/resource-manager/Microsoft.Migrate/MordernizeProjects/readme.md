@@ -20,8 +20,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-migrateengine-2022-05' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2022_05_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2022_05_01
+  namespace: com.azure.resourcemanager.migration.modernization.v2022_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationmodernization/mgmt-v2022_05_01
 regenerate-manager: true
 generate-interface: true
 ```

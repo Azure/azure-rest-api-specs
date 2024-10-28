@@ -6,15 +6,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-migrate
-namespace: azure.mgmt.migrate
+package-name: azure-mgmt-migrationhub
+namespace: azure.mgmt.migrationhub
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/migrate/azure-mgmt-migrate/azure/mgmt/migrate
+output-folder: $(python-sdks-folder)/migrate/azure-mgmt-migrationhub/azure/mgmt/migrationhub
 ```
 
 ``` yaml $(python)

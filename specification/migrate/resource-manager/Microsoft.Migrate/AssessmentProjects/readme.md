@@ -59,8 +59,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-migrate-2018-02' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2018_02_02
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2018_02_02
+  namespace: com.azure.resourcemanager.migration.assessment.v2018_02_02
+  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2018_02_02
 regenerate-manager: true
 generate-interface: true
 ```
@@ -72,8 +72,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-migrate-2019-10' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2019_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2019_10_01
+  namespace: com.azure.resourcemanager.migration.assessment.v2019_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2019_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -85,8 +85,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-migrate-2017-11' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2017_11_11
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2017_11_11
+  namespace: com.azure.resourcemanager.migration.assessment.v2017_11_11
+  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2017_11_11
 regenerate-manager: true
 generate-interface: true
 ```
