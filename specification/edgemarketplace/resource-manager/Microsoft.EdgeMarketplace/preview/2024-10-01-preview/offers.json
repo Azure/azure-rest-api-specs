@@ -526,6 +526,10 @@
         "stageName": {
           "type": "string",
           "description": "The stage name"
+        },
+        "launchType": {
+          "$ref": "#/definitions/OfferLaunchType",
+          "description": "The launch type of the offer"
         }
       },
       "description": "The marketplace sku version",
@@ -751,6 +755,30 @@
             "name": "GA",
             "value": "GA",
             "description": "The offer in GA"
+          }
+        ]
+      }
+    },
+    "OfferLaunchType": {
+      "type": "string",
+      "description": "Offer launch type",
+      "enum": [
+        "Trusted",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "OfferLaunchType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Trusted",
+            "value": "Trusted",
+            "description": "The offer has been certified"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The offer has not been certified"
           }
         ]
       }
