@@ -49,19 +49,19 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
-  "csharp"
+  "csharp, java"
 );
 
 @@clientName(DocumentTranslation.StartTranslationDetails,
   "translationBatch",
-  "csharp"
+  "csharp, java"
 );
 
 @@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
 @@access(DocumentTranslationClient.getSupportedFormats,
   Access.internal,
-  "python"
+  "python, java"
 );
 @@access(DocumentTranslation.FileFormat, Access.public, "python");
 @@usage(DocumentTranslation.FileFormat, Usage.output, "python");
@@ -167,16 +167,6 @@ interface SingleDocumentTranslationClient {
 @@clientName(DocumentTranslation.Status.Cancelled, "canceled", "python");
 
 @@clientName(DocumentTranslation.Status.Cancelling, "canceling", "python");
-
-@@clientName(DocumentTranslation.DocumentTranslateBody.body,
-  "documentTranslateContent",
-  "java"
-);
-
-@@clientName(DocumentTranslation.StartTranslationDetails,
-  "translationBatch",
-  "java"
-);
 
 @@clientName(DocumentTranslation.BatchRequest,
   "documentTranslationInput",
