@@ -255,6 +255,7 @@ directive:
   - suppress: ResourceNameRestriction
     from: dedicatedHost.json
     reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
+    
 
 suppressions:
   - code: OperationsAPIImplementation
@@ -282,6 +283,9 @@ suppressions:
     reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: gallery.json
     where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: gallery.json
+    reason: Existing issue from last version. 
 ```
 
 ### Tag: package-2024-03-03
