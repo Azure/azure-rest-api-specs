@@ -31,17 +31,7 @@ interface AlertTemplates {
   /**
    * Gets a list of alert templates in the specified SAP monitor. The operations returns various properties of each alert template.
    */
-  list is ArmResourceListByParent<
-    AlertTemplate,
-    Parameters = {
-      /**
-       * The provider type for filtering alert templates.
-       */
-      @minLength(1)
-      @query("providerType")
-      providerType?: string;
-    }
-  >;
+  list is ArmResourceListByParent<AlertTemplate>;
 }
 
 @@minLength(AlertTemplate.name, 1);
