@@ -43,7 +43,7 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Edge/resourceInsights": {
+    "/{scope}/providers/Microsoft.Edge/resourceInsights": {
       "get": {
         "operationId": "ResourceInsights_List",
         "tags": [
@@ -55,7 +55,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ScopeParameter"
           }
         ],
         "responses": {
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Edge/resourceInsights/{resourceInsightName}": {
+    "/{scope}/providers/Microsoft.Edge/resourceInsights/{resourceInsightName}": {
       "get": {
         "operationId": "ResourceInsights_Get",
         "tags": [
@@ -94,7 +94,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ScopeParameter"
           },
           {
             "name": "resourceInsightName",
@@ -163,12 +163,12 @@
           {
             "name": "NotRecentlyConnected",
             "value": "NotRecentlyConnected",
-            "description": "The device was NotRecentlyConnected"
+            "description": "The device was not recently connected"
           },
           {
             "name": "NeedsAttention",
             "value": "NeedsAttention",
-            "description": "The device NeedsAttention"
+            "description": "The device needs attention"
           }
         ]
       }
@@ -275,21 +275,11 @@
           {
             "name": "NeedsAttention",
             "value": "NeedsAttention",
-            "description": "The device is in Needs attention state"
+            "description": "The device is in NeedsAttention state"
           }
         ]
       }
     }
   },
-  "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    }
-  }
+  "parameters": {}
 }
