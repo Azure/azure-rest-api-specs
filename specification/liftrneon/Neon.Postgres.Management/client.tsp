@@ -3,7 +3,4 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Neon.Postgres,
-  "NeonPostgresMgmtClient",
-  "python"
-);
+@@clientName(Neon.Postgres, "NeonPostgresMgmtClient", "python");
