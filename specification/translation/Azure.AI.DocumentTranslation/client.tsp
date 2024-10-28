@@ -59,14 +59,19 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
+@@convenientAPI(DocumentTranslationClient.getSupportedFormats, false, "java");
+
 @@access(DocumentTranslationClient.getSupportedFormats,
   Access.internal,
-  "python, java"
+  "python"
 );
-@@access(DocumentTranslation.FileFormat, Access.public, "python");
-@@usage(DocumentTranslation.FileFormat, Usage.output, "python");
-@@access(DocumentTranslation.FileFormatType, Access.public, "python");
-@@usage(DocumentTranslation.FileFormatType, Usage.output, "python");
+@@access(DocumentTranslation.FileFormat, Access.public, "python, java");
+@@usage(DocumentTranslation.FileFormat, Usage.output, "python, java");
+@@access(DocumentTranslation.FileFormatType, Access.public, "python, java");
+@@usage(DocumentTranslation.FileFormatType, Usage.output, "python, java");
+
+@@access(DocumentTranslation.SupportedFileFormats, Access.internal, "java");
+@@usage(DocumentTranslation.SupportedFileFormats, Usage.output, "java");
 
 @@clientName(DocumentTranslationClient.startTranslation,
   "_begin_translation",
