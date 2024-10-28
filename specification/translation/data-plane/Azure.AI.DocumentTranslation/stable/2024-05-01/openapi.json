@@ -110,7 +110,8 @@
               "type": "string",
               "format": "uuid"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "x-ms-client-name": "translationIds"
           },
           {
             "name": "statuses",
@@ -242,7 +243,8 @@
             "description": "Format - uuid.  The operation id",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
           }
         ],
         "responses": {
@@ -285,7 +287,8 @@
             "description": "Format - uuid.  The operation-id",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
           }
         ],
         "responses": {
@@ -330,7 +333,8 @@
             "description": "Format - uuid.  The operation id",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
           },
           {
             "name": "top",
@@ -371,7 +375,8 @@
               "type": "string",
               "format": "uuid"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "x-ms-client-name": "documentIds"
           },
           {
             "name": "statuses",
@@ -457,7 +462,8 @@
             "description": "Format - uuid.  The batch id",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
           },
           {
             "name": "documentId",
@@ -925,7 +931,7 @@
           }
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/FileFormatType",
           "description": "Supported Type for this format"
         }
       },
@@ -1348,7 +1354,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Id of the operation."
+          "description": "Id of the translation operation."
         },
         "createdDateTimeUtc": {
           "type": "string",

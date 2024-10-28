@@ -183,6 +183,7 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
+      @clientName("translationIds")
       @query("ids")
       ids?: uuid[];
 
@@ -216,7 +217,7 @@ interface DocumentTranslationOperations {
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The batch id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
 
@@ -240,7 +241,7 @@ interface DocumentTranslationOperations {
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
     },
@@ -264,7 +265,7 @@ interface DocumentTranslationOperations {
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation-id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
     },
@@ -326,7 +327,7 @@ interface DocumentTranslationOperations {
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
 
@@ -383,6 +384,7 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
+      @clientName("documentIds")
       @query("ids")
       ids?: uuid[];
 
