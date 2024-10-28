@@ -633,6 +633,9 @@
           },
           "Create or update a simple Gallery Image Version using vhd as a source with custom UEFI keys.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVHD_UefiSettings.json"
+          },
+          "Create or update a simple Gallery Image Version with Direct Drive replicas": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithAdditionalReplicaSets.json"
           }
         }
       },
@@ -3131,7 +3134,8 @@
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
-            "Premium_LRS"
+            "Premium_LRS",
+            "PremiumV2_LRS"
           ],
           "x-ms-enum": {
             "name": "StorageAccountType",
@@ -3181,7 +3185,8 @@
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
-            "Premium_LRS"
+            "Premium_LRS",
+            "PremiumV2_LRS"
           ],
           "x-ms-enum": {
             "name": "StorageAccountType",
@@ -3194,12 +3199,45 @@
         "excludeFromLatest": {
           "type": "boolean",
           "description": "Contains the flag setting to hide an image when users specify version='latest'"
+        },
+        "additionalReplicaSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalReplicaSet"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of storage sku with replica count to create direct drive replicas."
         }
       },
       "required": [
         "name"
       ],
       "description": "Describes the target region information."
+    },
+    "AdditionalReplicaSet": {
+      "type": "object",
+      "properties": {
+        "storageAccountType": {
+          "type": "string",
+          "description": "Specifies the storage account type to be used to create the direct drive replicas",
+          "enum": [
+            "Standard_LRS",
+            "Standard_ZRS",
+            "Premium_LRS",
+            "PremiumV2_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        },
+        "regionalReplicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of direct drive replicas of the Image Version to be created.This Property is updatable"
+        }
+      },
+      "description": "Describes the additional replica set information."
     },
     "GalleryTargetExtendedLocation": {
       "type": "object",
