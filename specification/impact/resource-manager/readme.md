@@ -22,45 +22,11 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ```yaml
 suppressions:
-  - code: PathForPutOperation
-    reason: Design forces us to not have resources under resource group but only have under subscription. proxy resources
-    from: impact.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"]
-
-  - code: PutRequestResponseSchemeArm
-    reason: False positive both request and response are same. proxy resources
-    from: impact.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].put
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"].put
-
   - code: AvoidAdditionalProperties
     from: impact.json
     reason:
       Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
       and will be different for different categories
-
-  - code: PutResponseCodes
-    reason: older spec, rectified in new specs. proxy resources
-    from: impact.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].put
-
-  - code: DeleteResponseCodes
-    reason: older spec, rectified in new specs. proxy resources
-    from: impact.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].delete
-
-  - code: LroLocationHeader
-    reason: proxy resources hence now location and this is a older spec
-    from: impact.json
-
-  - code: GuidUsage
-    reason: this is for getting a subscriptionId from customers
-    from: impact.json
 ```
 
 ## Configuration
@@ -82,42 +48,6 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-05-01-preview'
 input-file:
   - Microsoft.Impact/preview/2024-05-01-preview/impact.json
-```
-
-### Tag: package-2023-12-01-preview
-
-These settings apply only when `--tag=package-2023-12-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-12-01-preview'
-input-file:
-  - Microsoft.Impact/preview/2023-12-01-preview/impact.json
-```
-
-### Tag: package-2023-07-01-preview
-
-These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-07-01-preview'
-input-file:
-  - Microsoft.Impact/preview/2023-07-01-preview/impact.json
-```
-
-### Tag: package-2023-02-01-preview
-
-These settings apply only when `--tag=package-2023-02-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-02-01-preview'
-input-file:
-  - Microsoft.Impact/preview/2023-02-01-preview/impact.json
-```
-
-### Tag: package-2022-11-01-preview
-
-These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-11-01-preview'
-input-file:
-  - Microsoft.Impact/preview/2022-11-01-preview/impact.json
 ```
 
 ---
