@@ -282,3 +282,34 @@ interface CisaCves {
   @Versioning.added(Versions.v2024_03_01_preview)
   getCisaCve is Operations.ResourceRead<CisaCveResult>;
 }
+
+@tag("Policies")
+@Versioning.added(Versions.v2024_10_01_preview)
+@doc("Provides access to policy resources. ")
+interface Policies {
+  @doc("Retrieve a list of policies for the provided search parameters.")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  @clientName("GetPolicies", "csharp")
+  listPolicy is Operations.ResourceList<Policy, PoliciesListTrait>;
+
+  @doc("Retrieve a policy with a given policyName.")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  @clientName("GetPolicy", "csharp")
+  getPolicy is Operations.ResourceRead<Policy>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Create a policy with a given policyName.")
+  @Versioning.added(Versions.v2024_10_01_preview)
+  @createsOrReplacesResource(Policy)
+  @put
+  @clientName("CreateOrReplacePolicy", "csharp")
+  createOrReplacePolicy is Foundations.ResourceOperation<
+    Policy,
+    BodyParameter<Policy>,
+    Policy
+  >;
+
+  @Versioning.added(Versions.v2024_10_01_preview)
+  @doc("Delete a policy with a given policyName.")
+  deletePolicy is Operations.ResourceDelete<Policy>;
+}
