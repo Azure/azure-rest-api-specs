@@ -421,11 +421,6 @@
           "description": "Details of system created ACR account to be used for the Registry",
           "$ref": "#/definitions/SystemCreatedAcrAccount",
           "x-nullable": true
-        },
-        "userCreatedAcrAccount": {
-          "description": "Details of user created ACR account to be used for the Registry",
-          "$ref": "#/definitions/UserCreatedAcrAccount",
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -806,17 +801,6 @@
         "storageAccountType": {
           "description": "Allowed values:\r\n\"Standard_LRS\",\r\n\"Standard_GRS\",\r\n\"Standard_RAGRS\",\r\n\"Standard_ZRS\",\r\n\"Standard_GZRS\",\r\n\"Standard_RAGZRS\",\r\n\"Premium_LRS\",\r\n\"Premium_ZRS\"",
           "type": "string",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "UserCreatedAcrAccount": {
-      "type": "object",
-      "properties": {
-        "armResourceId": {
-          "description": "ARM ResourceId of a resource",
-          "$ref": "#/definitions/ArmResourceId",
           "x-nullable": true
         }
       },
