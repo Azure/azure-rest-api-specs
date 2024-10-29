@@ -86,13 +86,13 @@ interface VirtualMachines {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will result in error from server as they are not supported.
        */
-      @header
+      @header("If-None-Match")
       IfNoneMatch?: string;
     }
   >;
