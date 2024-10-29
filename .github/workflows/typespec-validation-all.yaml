@@ -44,7 +44,7 @@ jobs:
         # total-shards must be an accurate count of the number of shards
         total-shards: [3]
         # When triggered by schedule, validate both the default branch and typespec-next
-        ref: ${{ fromJSON(github.event_name == 'pull_request' && '["default", "typespec-next"]' || '["default"]') }}
+        ref: ${{ fromJSON(github.event_name != 'schedule' && '["default", "typespec-next"]' || '["default"]') }}
 
     runs-on: ${{ matrix.os }}
 
