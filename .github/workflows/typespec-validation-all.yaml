@@ -44,7 +44,7 @@ jobs:
         # total-shards must be an accurate count of the number of shards
         total-shards: [3]
         # When triggered by schedule, validate both the default branch and typespec-next
-        ref: ${{ fromJSON(github.event_name == 'schedule' && '["", typespec-next]' || '[""]') }}
+        ref: ${{ fromJSON(github.event_name == 'schedule' && '["default", typespec-next]' || '["default"]') }}
 
     runs-on: ${{ matrix.os }}
 
@@ -55,7 +55,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          ref: ${{ matrix.ref }}
+          ref: ${{ matrix.ref != 'default' && matrix.ref || '' }}
 
       - name: Setup Node 20 and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
