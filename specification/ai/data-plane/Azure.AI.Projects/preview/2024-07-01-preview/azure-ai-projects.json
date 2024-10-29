@@ -1273,7 +1273,7 @@
     "/files/{fileId}/content": {
       "get": {
         "operationId": "Agents_GetFileContent",
-        "description": "Returns information about a specific file. Does not retrieve file content.",
+        "description": "Retrieves the raw content of a specific file.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1290,7 +1290,8 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.FileContentResponse"
+              "type": "string",
+              "format": "byte"
             }
           },
           "default": {
