@@ -10,8 +10,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -45,6 +45,12 @@ namespace KeyVault;
  * The available API versions.
  */
 enum Versions {
+  /**
+   * The 7.5 API version.
+   */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `v7.5`: "7.5",
+
   /**
    * The 7.6-preview.1 API version.
    */
