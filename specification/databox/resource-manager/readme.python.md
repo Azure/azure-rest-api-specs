@@ -10,6 +10,8 @@ package-name: azure-mgmt-databox
 namespace: azure.mgmt.databox
 package-version: 3.0.0
 clear-output-folder: true
+title: DataBoxManagementClient
+description: The DataBox Client.
 ```
 
 ``` yaml $(python)
