@@ -1450,6 +1450,12 @@ directive:
     from: privateLinkScopes_API.json
     where: $.definitions.PrivateEndpointConnectionProperties.properties.ingestOnlyToPrivateLinkResources
     reason: "This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''true'' or ''false'' options, so it fits boolean type."
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: privateLinkScopes_API.json
+    reason: "Updating the model would be a breaking change."
+  - suppress: XmsPageableForListCalls
+    from: privateLinkScopes_API.json
+    reason: "List scoped resources does not support pagination"
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: privateLinkScopes_API.json
