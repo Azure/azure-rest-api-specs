@@ -39,10 +39,10 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-11'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2024-11-01/extensions.json
   - Microsoft.KubernetesConfiguration/stable/2024-11-01/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json  
+  - Microsoft.KubernetesConfiguration/stable/2024-11-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2024-11-01/operations.json  
 ```
 
 ### Tag: package-preview-2024-04
