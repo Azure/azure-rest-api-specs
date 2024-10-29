@@ -1,0 +1,5600 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Cognitive Language Service - Analyze Conversations Authoring",
+    "version": "2024-11-15-preview",
+    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms. The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering. Further\ndocumentation can be found in <a\nhref=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\\n\\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoint (e.g.,\nhttps://<resource-name>.api.cognitiveservices.azure.com).",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "Endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/authoring/analyze-conversations/projects": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListProjects",
+        "description": "Lists the existing projects.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Projects": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListProjects.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetProject",
+        "description": "Gets the details of a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetProject.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ConversationalAnalysisAuthoring_CreateProject",
+        "description": "Creates a new project or updates an existing one.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateProjectOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCreateProject.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConversationalAnalysisAuthoring_DeleteProject",
+        "description": "Deletes a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_CopyProjectAuthorization",
+        "description": "Generates a copy project operation authorization to the current target Azure\nresource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyAuthorizationOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copy Project Authorization": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCopyProjectAuthorization.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:copy": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_CopyProject",
+        "description": "Copies an existing project to another Azure resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The copy project info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copy Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCopyProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:export": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_Export",
+        "description": "Triggers a job to export a project's data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The format of the exported project file to use.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Conversation",
+              "Luis"
+            ],
+            "x-ms-enum": {
+              "name": "ExportedProjectFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Conversation",
+                  "value": "Conversation",
+                  "description": "Specifies the format for a conversational project."
+                },
+                {
+                  "name": "Luis",
+                  "value": "Luis",
+                  "description": "Specifies the format for an application that was exported from LUIS."
+                }
+              ]
+            },
+            "x-ms-client-name": "ExportedProjectFormat"
+          },
+          {
+            "name": "stringIndexType",
+            "in": "query",
+            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Utf16CodeUnit"
+            ],
+            "x-ms-enum": {
+              "name": "StringIndexType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Utf16CodeUnit",
+                  "value": "Utf16CodeUnit",
+                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+                }
+              ]
+            }
+          },
+          {
+            "name": "assetKind",
+            "in": "query",
+            "description": "Kind of asset to export.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "query",
+            "description": "Trained model label to export. If the trainedModelLabel is null, the default behavior is to export the current working copy.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Export Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulExportProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:import": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_Import",
+        "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The format of the exported project file to use.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Conversation",
+              "Luis"
+            ],
+            "x-ms-enum": {
+              "name": "ExportedProjectFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Conversation",
+                  "value": "Conversation",
+                  "description": "Specifies the format for a conversational project."
+                },
+                {
+                  "name": "Luis",
+                  "value": "Luis",
+                  "description": "Specifies the format for an application that was exported from LUIS."
+                }
+              ]
+            },
+            "x-ms-client-name": "ExportedProjectFormat"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The project data to import.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Import Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulImportProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:train": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_Train",
+        "description": "Triggers a training job for a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The training input parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Train Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulTrainProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetCopyProjectStatus",
+        "description": "Gets the status of an existing copy project job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Copy Project Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetCopyProjectStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListDeployments",
+        "description": "Lists the deployments belonging to a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Deployments": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetDeployment",
+        "description": "Gets the details of a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Represents deployment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Deployment": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeployment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConversationalAnalysisAuthoring_DeployProject",
+        "description": "Creates a new deployment or replaces an existing one.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the specific deployment of the project to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The new deployment info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateDeploymentOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Deploy Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeployProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConversationalAnalysisAuthoring_DeleteDeployment",
+        "description": "Deletes a project deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the specific deployment of the project to use.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Deployment": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_DeleteDeploymentFromResources",
+        "description": "Deletes a project deployment from the specified assigned resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the specific deployment of the project to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The options for deleting the deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeleteDeploymentOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Deployment From Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeploymentFromResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetDeploymentDeleteFromResourcesStatus",
+        "description": "Gets the status of an existing delete deployment from specific resources job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Represents deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentDeleteFromResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Deployment Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeploymentDeleteFromResourcesStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetDeploymentStatus",
+        "description": "Gets the status of an existing deployment job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Represents deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Deployment Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeploymentStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/:swap": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_SwapDeployments",
+        "description": "Swaps two existing deployments with each other.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The job object to swap two deployments.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringSwapDeploymentsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Swap Deployments": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulSwapDeployments.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetSwapDeploymentsStatus",
+        "description": "Gets the status of an existing swap deployment job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringSwapDeploymentsJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Swap Deployments Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSwapDeploymentsStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetExportStatus",
+        "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportProjectJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Export Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/exported-models": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListExportedModels",
+        "description": "Lists the exported models belonging to a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringExportedTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Exported Models": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListExportedModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetExportedModel",
+        "description": "Gets the details of an exported model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "exportedModelName",
+            "in": "path",
+            "description": "The exported model name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportedModel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConversationalAnalysisAuthoring_CreateOrUpdateExportedModel",
+        "description": "Creates a new exported model or replaces an existing one.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exportedModelName",
+            "in": "path",
+            "description": "The exported model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The exported model info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportedModelOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCreateExportedModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConversationalAnalysisAuthoring_DeleteExportedModel",
+        "description": "Deletes an existing exported model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exportedModelName",
+            "in": "path",
+            "description": "The exported model name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteExportedModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetExportedModelJobStatus",
+        "description": "Gets the status for an existing job to create or update an exported model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "exportedModelName",
+            "in": "path",
+            "description": "The exported model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedModelJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportedModelStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetImportStatus",
+        "description": "Gets the status for an import.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringImportProjectJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Import Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetImportStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainedModels",
+        "description": "Lists the trained models belonging to a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Models": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetTrainedModel",
+        "description": "Gets the details of a trained model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConversationalAnalysisAuthoring_DeleteTrainedModel",
+        "description": "Deletes an existing trained model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteModel.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_EvaluateModel",
+        "description": "Triggers evaluation operation on a trained model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The training input parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluation Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulEvaluationProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_LoadSnapshot",
+        "description": "Restores the snapshot of this trained model to be the current working directory\nof the project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Load Snapshot": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulLoadSnapshot.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetEvaluationStatus",
+        "description": "Gets the status for an evaluation job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Evaluation Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetEvaluationStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetModelEvaluationResults",
+        "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/StringIndexTypeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringUtteranceEvaluationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Model Evaluation": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModelEvaluation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetModelEvaluationSummary",
+        "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Model Evaluation Summary": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModelEvaluationSummary.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetLoadSnapshotStatus",
+        "description": "Gets the status for loading a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringLoadSnapshotJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Load Snapshot Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetLoadSnapshotStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListDeploymentResources",
+        "description": "Lists the deployments resources assigned to the project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringAssignedDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListDeploymentResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_AssignDeploymentResources",
+        "description": "Assign new Azure resources to a project to allow deploying new deployments to\nthem. This API is available only via AAD authentication and not supported via\nsubscription key authentication. For more details about AAD authentication,\ncheck here:\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The new project resources info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Assign Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulAssignDeploymentResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_UnassignDeploymentResources",
+        "description": "Unassign resources from a project. This disallows deploying new deployments to\nthese resources, and deletes existing deployments assigned to them.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The info for the deployment resources to be deleted.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Unassign Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulUnassignDeploymentResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetAssignDeploymentResourcesStatus",
+        "description": "Gets the status of an existing assign deployment resources job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Assign Deployment Resources Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetAssignDeploymentResourcesStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetUnassignDeploymentResourcesStatus",
+        "description": "Gets the status of an existing unassign deployment resources job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Unassign Deployment Resources Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetUnassignDeploymentResourcesStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainingJobs",
+        "description": "Lists the non-expired training jobs created for a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringTrainingJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Training Jobs": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListTrainingJobs.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetTrainingStatus",
+        "description": "Gets the status for a training job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Train Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetTrainStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_CancelTrainingJob",
+        "description": "Triggers a cancellation for a running training job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Cancel Training Job": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCancelTrainingJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetProjectDeletionStatus",
+        "description": "Gets the status for a project deletion job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeletionJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Project Deletion Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetProjectDeletionStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/deployments/resources": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListAssignedResourceDeployments",
+        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Assigned Resource Deployments": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListAssignedResourceDeployments.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/languages": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetSupportedLanguages",
+        "description": "Lists the supported languages for the given project type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectKind",
+            "in": "query",
+            "description": "The project kind.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Conversation",
+              "Orchestration",
+              "CustomConversationSummarization"
+            ],
+            "x-ms-enum": {
+              "name": "ProjectKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Conversation",
+                  "value": "Conversation",
+                  "description": "A project to build natural language into apps, bots, and IoT devices."
+                },
+                {
+                  "name": "Orchestration",
+                  "value": "Orchestration",
+                  "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
+                },
+                {
+                  "name": "CustomConversationSummarization",
+                  "value": "CustomConversationSummarization",
+                  "description": "A project to build conversation summarization models which are able to summarize long conversations."
+                }
+              ]
+            },
+            "x-ms-client-name": "ProjectKind"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringSupportedLanguages"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Supported Languages": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedLanguages.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_GetSupportedPrebuiltEntities",
+        "description": "Lists the supported prebuilt entities that can be used while creating composed\nentities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to get supported prebuilt entities for. Required if multilingual\nis false. This is BCP-47 representation of a language. For example, use \"en\"\nfor English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "multilingual",
+            "in": "query",
+            "description": "Whether to get the support prebuilt entities for multilingual or monolingual\nprojects. If true, the language parameter is ignored.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringPrebuiltEntities"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Supported Prebuilt Entities": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedPrebuiltEntities.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/training-config-versions": {
+      "get": {
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainingConfigVersions",
+        "description": "Lists the support training config version for a given project type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectKind",
+            "in": "query",
+            "description": "The project kind.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Conversation",
+              "Orchestration",
+              "CustomConversationSummarization"
+            ],
+            "x-ms-enum": {
+              "name": "ProjectKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Conversation",
+                  "value": "Conversation",
+                  "description": "A project to build natural language into apps, bots, and IoT devices."
+                },
+                {
+                  "name": "Orchestration",
+                  "value": "Orchestration",
+                  "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
+                },
+                {
+                  "name": "CustomConversationSummarization",
+                  "value": "CustomConversationSummarization",
+                  "description": "A project to build conversation summarization models which are able to summarize long conversations."
+                }
+              ]
+            },
+            "x-ms-client-name": "ProjectKind"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingConfigVersions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Supported Training Config Versions": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedTrainingConfigVersions.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "CompositionSetting": {
+      "type": "string",
+      "enum": [
+        "returnLongestOverlap",
+        "requireExactOverlap",
+        "separateComponents",
+        "combineComponents"
+      ],
+      "x-ms-enum": {
+        "name": "CompositionSetting",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "returnLongestOverlap",
+            "value": "returnLongestOverlap",
+            "description": "When two or more components are found in the text and overlap, the component\nwith the longest set of characters is returned."
+          },
+          {
+            "name": "requireExactOverlap",
+            "value": "requireExactOverlap",
+            "description": "All components must overlap at the exact same characters in the text for the\nentity to return. If one of the defined components is not matched or predicted,\nthe entity will not return."
+          },
+          {
+            "name": "separateComponents",
+            "value": "separateComponents",
+            "description": "Every component's match or prediction is returned as a separate instance of the\nentity."
+          },
+          {
+            "name": "combineComponents",
+            "value": "combineComponents",
+            "description": "When two or more components are found in the text and overlap, the components'\nspans are merged together into one span combining all of them."
+          }
+        ]
+      }
+    },
+    "ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions": {
+      "type": "object",
+      "description": "Represents the options for assigning Azure resources to a project.",
+      "properties": {
+        "resourcesMetadata": {
+          "type": "array",
+          "description": "Represents the metadata for the resources to be assigned.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringResourceMetadata"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resourcesMetadata"
+      ]
+    },
+    "ConversationalAnalysisAuthoringAssignedDeploymentResource": {
+      "type": "object",
+      "description": "Represents the assigned deployment resource.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The resource ID."
+        },
+        "region": {
+          "type": "string",
+          "description": "The resource region."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "region"
+      ]
+    },
+    "ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata": {
+      "type": "object",
+      "description": "Represents the metadata for an assigned deployment",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Represents the deployment name."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last deployed time."
+        },
+        "deploymentExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime."
+        }
+      },
+      "required": [
+        "deploymentName",
+        "lastDeployedDateTime",
+        "deploymentExpirationDate"
+      ]
+    },
+    "ConversationalAnalysisAuthoringAssignedProjectDeploymentsMetadata": {
+      "type": "object",
+      "description": "Represents the metadata for assigned deployments for a project.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "Represents the project name."
+        },
+        "deploymentsMetadata": {
+          "type": "array",
+          "description": "Represents the resource region.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "projectName",
+        "deploymentsMetadata"
+      ]
+    },
+    "ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata": {
+      "type": "object",
+      "description": "Represents the metadata for deployments assigned to a resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of retrieved assigned project deployments.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedProjectDeploymentsMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next page link."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConversationalAnalysisAuthoringConfusionMatrix": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrixRow"
+      }
+    },
+    "ConversationalAnalysisAuthoringConfusionMatrixCell": {
+      "type": "object",
+      "description": "Represents a cell in a confusion matrix.",
+      "properties": {
+        "normalizedValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents normalized value in percentages."
+        },
+        "rawValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents raw value."
+        }
+      },
+      "required": [
+        "normalizedValue",
+        "rawValue"
+      ]
+    },
+    "ConversationalAnalysisAuthoringConfusionMatrixRow": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrixCell"
+      }
+    },
+    "ConversationalAnalysisAuthoringConversationExportedEntity": {
+      "type": "object",
+      "description": "Represents an entity with its components.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The category of the entity."
+        },
+        "compositionSetting": {
+          "$ref": "#/definitions/CompositionSetting",
+          "description": "The behavior to follow when the entity's components overlap with each other."
+        },
+        "list": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityList",
+          "description": "The list component of the entity."
+        },
+        "prebuilts": {
+          "type": "array",
+          "description": "The prebuilt entities components.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedPrebuiltEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "regex": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityRegex",
+          "description": "The regex component of the entity."
+        },
+        "requiredComponents": {
+          "type": "array",
+          "description": "The required components. Allowed values are 'learned', 'list', 'prebuilts' and 'regex'.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ConversationalAnalysisAuthoringConversationExportedIntent": {
+      "type": "object",
+      "description": "Represents an exported intent of a conversational project.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The intent category."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ConversationalAnalysisAuthoringConversationExportedProjectAssets": {
+      "type": "object",
+      "description": "Represents the exported assets of a conversational project.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The intents defined in the project.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedIntent"
+          },
+          "x-ms-identifiers": []
+        },
+        "entities": {
+          "type": "array",
+          "description": "The entities defined in the project.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "utterances": {
+          "type": "array",
+          "description": "The utterances defined in the project.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedUtterance"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "x-ms-discriminator-value": "Conversation"
+    },
+    "ConversationalAnalysisAuthoringConversationExportedUtterance": {
+      "type": "object",
+      "description": "Represents an exported utterance for a conversational project.",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "Represents the entity labels of the utterance.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedUtteranceEntityLabel"
+          },
+          "x-ms-identifiers": []
+        },
+        "text": {
+          "type": "string",
+          "description": "The utterance text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the utterance's language. This is BCP-47 representation of a\nlanguage. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+        },
+        "intent": {
+          "type": "string",
+          "description": "The intent of the utterance."
+        },
+        "dataset": {
+          "type": "string",
+          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'."
+        }
+      },
+      "required": [
+        "text",
+        "intent"
+      ]
+    },
+    "ConversationalAnalysisAuthoringCopyAuthorizationOptions": {
+      "type": "object",
+      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The name of the storage container."
+        },
+        "allowOverwrite": {
+          "type": "boolean",
+          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization."
+        }
+      },
+      "required": [
+        "projectKind"
+      ]
+    },
+    "ConversationalAnalysisAuthoringCopyProjectJobState": {
+      "type": "object",
+      "description": "Represents the state of a copy job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringCopyProjectOptions": {
+      "type": "object",
+      "description": "Represents the options for copying an existing project to another Azure\nresource.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "targetProjectName": {
+          "type": "string",
+          "description": "The project name to be copied-into."
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "The access token."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration of the access token."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Represents the target Azure resource ID."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "Represents the target Azure resource region."
+        }
+      },
+      "required": [
+        "projectKind",
+        "targetProjectName",
+        "accessToken",
+        "expiresAt",
+        "targetResourceId",
+        "targetResourceRegion"
+      ]
+    },
+    "ConversationalAnalysisAuthoringCreateDeploymentOptions": {
+      "type": "object",
+      "description": "Represents the options for creating or updating a project deployment.",
+      "properties": {
+        "trainedModelLabel": {
+          "type": "string",
+          "description": "Represents the trained model label."
+        },
+        "assignedResourceIds": {
+          "type": "array",
+          "description": "Represents the resource IDs to be assigned to the deployment.\nIf provided, the deployment will be rolled out to the resources\nprovided here as well as the original resource in which the project is created.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "trainedModelLabel"
+      ]
+    },
+    "ConversationalAnalysisAuthoringCreateProjectOptions": {
+      "type": "object",
+      "description": "Represents the options used to create or update a project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "settings": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings",
+          "description": "The project settings."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name in case of conversation summarization."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
+      "required": [
+        "projectKind",
+        "projectName",
+        "language"
+      ]
+    },
+    "ConversationalAnalysisAuthoringDeleteDeploymentOptions": {
+      "type": "object",
+      "description": "Represents the options for deleting a project deployment.",
+      "properties": {
+        "assignedResourceIds": {
+          "type": "array",
+          "description": "Represents the resource IDs to delete the deployment from.\nIf not provided, the deployment will be rolled out from all the\nresources it is deployed to.\nIf provided, it will delete the deployment only from the specified\nassigned resources, and leave it for the rest.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringDeploymentDeleteFromResourcesJobState": {
+      "type": "object",
+      "description": "Represents the state of an existing delete deployment from specific resources job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringDeploymentJobState": {
+      "type": "object",
+      "description": "Represents the state of a deployment job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringDeploymentResource": {
+      "type": "object",
+      "description": "Represents an Azure resource assigned to a deployment.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Represents the Azure resource Id."
+        },
+        "region": {
+          "type": "string",
+          "description": "Represents the resource region."
+        }
+      },
+      "required": [
+        "resourceId",
+        "region"
+      ]
+    },
+    "ConversationalAnalysisAuthoringDeploymentResourcesJobState": {
+      "type": "object",
+      "description": "Represents the state of a deployment resources job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringEntitiesEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation result summary for the project's entities.",
+      "properties": {
+        "confusionMatrix": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrix",
+          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
+        },
+        "entities": {
+          "type": "object",
+          "description": "Represents the entities evaluation summary.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringEntityEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "microRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+        }
+      },
+      "required": [
+        "confusionMatrix",
+        "entities",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ]
+    },
+    "ConversationalAnalysisAuthoringEntityEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation result for an entity.",
+      "properties": {
+        "f1": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model precision"
+        },
+        "precision": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model recall"
+        },
+        "recall": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model F1 score"
+        },
+        "truePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true positive"
+        },
+        "trueNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true negative"
+        },
+        "falsePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false positive"
+        },
+        "falseNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false negative"
+        }
+      },
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositiveCount",
+        "trueNegativeCount",
+        "falsePositiveCount",
+        "falseNegativeCount"
+      ]
+    },
+    "ConversationalAnalysisAuthoringEvaluationJobResult": {
+      "type": "object",
+      "properties": {
+        "evaluationOptions": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
+          "description": "Represents the options used running the evaluation."
+        },
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents trained model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents progress percentage."
+        }
+      },
+      "required": [
+        "evaluationOptions",
+        "modelLabel",
+        "trainingConfigVersion",
+        "percentComplete"
+      ]
+    },
+    "ConversationalAnalysisAuthoringEvaluationJobState": {
+      "type": "object",
+      "description": "Represents the state of a evaluation job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "result": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationJobResult",
+          "description": "Represents evaluation task detailed result."
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status",
+        "result"
+      ]
+    },
+    "ConversationalAnalysisAuthoringEvaluationOptions": {
+      "type": "object",
+      "description": "Represents the options used running the evaluation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
+        },
+        "trainingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        },
+        "testingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation result summary.",
+      "properties": {
+        "entitiesEvaluation": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEntitiesEvaluationSummary",
+          "description": "Contains the data related to entities evaluation."
+        },
+        "intentsEvaluation": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentsEvaluationSummary",
+          "description": "Contains the data related to intents evaluation."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
+          "description": "The options that were used while running the evaluation."
+        }
+      },
+      "required": [
+        "entitiesEvaluation",
+        "intentsEvaluation"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportProjectJobState": {
+      "type": "object",
+      "description": "Represents the state of an export job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "resultUrl": {
+          "type": "string",
+          "description": "The URL to use in order to download the exported project."
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedConversationOrchestration": {
+      "type": "object",
+      "description": "Defines the orchestration details for a Conversational project target.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "The name of the targeted project."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The name of the targeted deployment."
+        }
+      },
+      "required": [
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions": {
+      "type": "object",
+      "description": "Represents the orchestration options for a Conversational project target.",
+      "properties": {
+        "conversationOrchestration": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedConversationOrchestration",
+          "description": "The Conversational project target details."
+        }
+      },
+      "required": [
+        "conversationOrchestration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "Conversation"
+    },
+    "ConversationalAnalysisAuthoringExportedEntityList": {
+      "type": "object",
+      "description": "Represents a list component of an entity.",
+      "properties": {
+        "sublists": {
+          "type": "array",
+          "description": "The sub-lists of the list component.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntitySublist"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringExportedEntityListSynonym": {
+      "type": "object",
+      "description": "Represents a list of synonyms inside a list component",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Represents the language of the synonyms. This is BCP-47 representation of a\nlanguage. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+        },
+        "values": {
+          "type": "array",
+          "description": "The list of synonyms.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringExportedEntityRegex": {
+      "type": "object",
+      "description": "Represents a regex component of an entity.",
+      "properties": {
+        "expressions": {
+          "type": "array",
+          "description": "The regex expressions of the regex component. These expressions follow the .NET\nregex syntax. For reference, check here:\nhttps://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityRegexExpression"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringExportedEntityRegexExpression": {
+      "type": "object",
+      "description": "Represents a regex expression inside a regex component. This expression follows\nthe .NET regex syntax. For reference, check here:\nhttps://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
+      "properties": {
+        "regexKey": {
+          "type": "string",
+          "description": "The key of the regex expression."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the language of the regex expression. This is BCP-47 representation\nof a language. For example, use \"en\" for English, \"en-gb\" for English (UK),\n\"es\" for Spanish etc."
+        },
+        "regexPattern": {
+          "type": "string",
+          "description": "The regex pattern."
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringExportedEntitySublist": {
+      "type": "object",
+      "description": "Represents a sub-list inside a list component.",
+      "properties": {
+        "listKey": {
+          "type": "string",
+          "description": "The key of the sub-list."
+        },
+        "synonyms": {
+          "type": "array",
+          "description": "The phrases of that correspond to the sub-list.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityListSynonym"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringExportedLuisOrchestration": {
+      "type": "object",
+      "description": "Defines the orchestration details for a LUIS application target.",
+      "properties": {
+        "appId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The LUIS application ID."
+        },
+        "appVersion": {
+          "type": "string",
+          "description": "The targeted version Id."
+        },
+        "slotName": {
+          "type": "string",
+          "description": "The targeted slot name."
+        }
+      },
+      "required": [
+        "appId"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions": {
+      "type": "object",
+      "description": "Represents the orchestration options for a LUIS application target.",
+      "properties": {
+        "luisOrchestration": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedLuisOrchestration",
+          "description": "The LUIS application target details."
+        }
+      },
+      "required": [
+        "luisOrchestration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "Luis"
+    },
+    "ConversationalAnalysisAuthoringExportedModelJobState": {
+      "type": "object",
+      "description": "Represents the state of a job to create or updated an exported model.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedOrchestrationOptions": {
+      "type": "object",
+      "description": "Represents the options used to define the orchestration behavior of an intent.",
+      "properties": {
+        "targetProjectKind": {
+          "$ref": "#/definitions/OrchestrationTargetProjectKind"
+        }
+      },
+      "discriminator": "targetProjectKind",
+      "required": [
+        "targetProjectKind"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedPrebuiltEntity": {
+      "type": "object",
+      "description": "Represents an exported prebuilt entity component",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The prebuilt entity category."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedProject": {
+      "type": "object",
+      "description": "Represents an exported project.",
+      "properties": {
+        "projectFileVersion": {
+          "type": "string",
+          "description": "The version of the exported file."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateProjectOptions",
+          "description": "Represents the project metadata."
+        },
+        "assets": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets",
+          "description": "Represents the project assets."
+        }
+      },
+      "required": [
+        "projectFileVersion",
+        "stringIndexType",
+        "metadata"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedProjectAssets": {
+      "type": "object",
+      "description": "Represents the assets of an exported project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "The type of project containing the assets."
+        }
+      },
+      "discriminator": "projectKind",
+      "required": [
+        "projectKind"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration": {
+      "type": "object",
+      "description": "Defines the orchestration details for a Question Answering project target.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "The name of the target project."
+        }
+      },
+      "required": [
+        "projectName"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions": {
+      "type": "object",
+      "description": "Represents the orchestration options for a Question Answering project target.",
+      "properties": {
+        "questionAnsweringOrchestration": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration",
+          "description": "The Question Answering project details."
+        }
+      },
+      "required": [
+        "questionAnsweringOrchestration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "QuestionAnswering"
+    },
+    "ConversationalAnalysisAuthoringExportedTrainedModel": {
+      "type": "object",
+      "description": "Represents an exported trained model.",
+      "properties": {
+        "exportedModelName": {
+          "type": "string",
+          "description": "The exported model name."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "The model ID."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last trained date time of the model."
+        },
+        "lastExportedModelDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last exported date time of the model."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The model expiration date."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "The model training config version."
+        }
+      },
+      "required": [
+        "exportedModelName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastExportedModelDateTime",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedUtteranceEntityLabel": {
+      "type": "object",
+      "description": "Represents an entity label for an utterance.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The category of the entity label."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text."
+        }
+      },
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ]
+    },
+    "ConversationalAnalysisAuthoringImportProjectJobState": {
+      "type": "object",
+      "description": "Represents the state of an import job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringIntentEvaluationSummary": {
+      "type": "object",
+      "description": "The evaluation summary for an intent.",
+      "properties": {
+        "f1": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model precision"
+        },
+        "precision": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model recall"
+        },
+        "recall": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model F1 score"
+        },
+        "truePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true positive"
+        },
+        "trueNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true negative"
+        },
+        "falsePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false positive"
+        },
+        "falseNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false negative"
+        }
+      },
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositiveCount",
+        "trueNegativeCount",
+        "falsePositiveCount",
+        "falseNegativeCount"
+      ]
+    },
+    "ConversationalAnalysisAuthoringIntentsEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for the project's intents.",
+      "properties": {
+        "confusionMatrix": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrix",
+          "description": "Represents the confusion matrix between two intents (the two intents can be the\nsame). The matrix is between the intent that was labelled and the intent that\nwas predicted."
+        },
+        "intents": {
+          "type": "object",
+          "description": "Represents the intents evaluation summary.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "microRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+        }
+      },
+      "required": [
+        "confusionMatrix",
+        "intents",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ]
+    },
+    "ConversationalAnalysisAuthoringLoadSnapshotJobState": {
+      "type": "object",
+      "description": "Represents the state of loading a snapshot job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringOrchestrationExportedIntent": {
+      "type": "object",
+      "description": "Represents an exported intent for an orchestration project.",
+      "properties": {
+        "orchestration": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions",
+          "description": "Specifies the behavior of this intent in the orchestration flow."
+        },
+        "category": {
+          "type": "string",
+          "description": "The intent category."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets": {
+      "type": "object",
+      "description": "Represents the assets of an orchestration project.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "Represents the intents of the project.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationExportedIntent"
+          },
+          "x-ms-identifiers": []
+        },
+        "utterances": {
+          "type": "array",
+          "description": "Represents the utterances of the project.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationExportedUtterance"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "x-ms-discriminator-value": "Orchestration"
+    },
+    "ConversationalAnalysisAuthoringOrchestrationExportedUtterance": {
+      "type": "object",
+      "description": "Represents an utterance of an orchestration project.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The utterance text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the utterance's language. This is BCP-47 representation of a\nlanguage. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+        },
+        "intent": {
+          "type": "string",
+          "description": "The intent of the utterance."
+        },
+        "dataset": {
+          "type": "string",
+          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'."
+        }
+      },
+      "required": [
+        "text",
+        "intent"
+      ]
+    },
+    "ConversationalAnalysisAuthoringPrebuiltEntities": {
+      "type": "object",
+      "description": "Represents a list of the retrieved supported prebuilt entities.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The supported prebuilt entities.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringPrebuiltEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next page link."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConversationalAnalysisAuthoringPrebuiltEntity": {
+      "type": "object",
+      "description": "Represents a supported prebuilt entity.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The prebuilt entity category."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "examples": {
+          "type": "string",
+          "description": "English examples for the entity."
+        }
+      },
+      "required": [
+        "category",
+        "description",
+        "examples"
+      ]
+    },
+    "ConversationalAnalysisAuthoringProjectDeletionJobState": {
+      "type": "object",
+      "description": "Represents the state of a project deletion job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringProjectDeployment": {
+      "type": "object",
+      "description": "Represents a project deployment.",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Represents deployment name."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Represents deployment modelId."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last trained time."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last deployed time."
+        },
+        "deploymentExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "Represents model training config version."
+        },
+        "assignedResources": {
+          "type": "array",
+          "description": "Represents the metadata of the assigned Azure resources.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentResource"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "deploymentName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
+        "deploymentExpirationDate",
+        "modelTrainingConfigVersion",
+        "assignedResources"
+      ]
+    },
+    "ConversationalAnalysisAuthoringProjectMetadata": {
+      "type": "object",
+      "description": "Represents the metadata of a project.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project creation datetime."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project creation datetime."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last trained datetime."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last deployed datetime."
+        },
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "settings": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings",
+          "description": "The project settings.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name in case of conversation summarization.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name.",
+          "maxLength": 100,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "lastModifiedDateTime",
+        "projectKind",
+        "projectName",
+        "language"
+      ]
+    },
+    "ConversationalAnalysisAuthoringProjectSettings": {
+      "type": "object",
+      "description": "Represents the settings used to define the project behavior.",
+      "properties": {
+        "confidenceThreshold": {
+          "type": "number",
+          "format": "float",
+          "description": "The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive."
+        }
+      },
+      "required": [
+        "confidenceThreshold"
+      ]
+    },
+    "ConversationalAnalysisAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Represents a trained model.",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The trained model label."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "The model ID."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last trained date time of the model."
+        },
+        "lastTrainingDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration of the model's last training request in seconds."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The model expiration date."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "The model training config version."
+        },
+        "hasSnapshot": {
+          "type": "boolean",
+          "description": "The flag to indicate if the trained model has a snapshot ready."
+        }
+      },
+      "required": [
+        "label",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastTrainingDurationInSeconds",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion",
+        "hasSnapshot"
+      ]
+    },
+    "ConversationalAnalysisAuthoringResourceMetadata": {
+      "type": "object",
+      "description": "Represents metadata for the Azure resource..",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "Represents the Azure resource ID."
+        },
+        "customDomain": {
+          "type": "string",
+          "description": "Represents the Azure resource custom domain."
+        },
+        "region": {
+          "type": "string",
+          "description": "Represents the Azure resource region."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "customDomain",
+        "region"
+      ]
+    },
+    "ConversationalAnalysisAuthoringSubTrainingJobState": {
+      "type": "object",
+      "description": "Represents the detailed state of a training sub-operation.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents progress percentage."
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the start date time."
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the end date time."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Represents the status of the sub-operation."
+        }
+      },
+      "required": [
+        "percentComplete",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringSupportedLanguage": {
+      "type": "object",
+      "description": "Represents a supported language.",
+      "properties": {
+        "languageName": {
+          "type": "string",
+          "description": "The language name."
+        },
+        "languageCode": {
+          "type": "string",
+          "description": "The language code. This is BCP-47 representation of a language. For example,\n\"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
+      "required": [
+        "languageName",
+        "languageCode"
+      ]
+    },
+    "ConversationalAnalysisAuthoringSupportedLanguages": {
+      "type": "object",
+      "description": "Represents a list of retrieved languages.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of the languages.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringSupportedLanguage"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next page link."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConversationalAnalysisAuthoringSwapDeploymentsJobState": {
+      "type": "object",
+      "description": "Represents the state of a deployment job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "ConversationalAnalysisAuthoringSwapDeploymentsOptions": {
+      "type": "object",
+      "description": "Represents the options for swapping two deployments together.",
+      "properties": {
+        "firstDeploymentName": {
+          "type": "string",
+          "description": "Represents the first deployment name."
+        },
+        "secondDeploymentName": {
+          "type": "string",
+          "description": "Represents the second deployment name."
+        }
+      },
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ]
+    },
+    "ConversationalAnalysisAuthoringTrainingConfigVersion": {
+      "type": "object",
+      "description": "Represents a training config version.",
+      "properties": {
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents the version of the config."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents the training config version expiration date."
+        }
+      },
+      "required": [
+        "trainingConfigVersion",
+        "modelExpirationDate"
+      ]
+    },
+    "ConversationalAnalysisAuthoringTrainingConfigVersions": {
+      "type": "object",
+      "description": "Represents a list of training config versions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of the training config versions.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingConfigVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next page link."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConversationalAnalysisAuthoringTrainingJobOptions": {
+      "type": "object",
+      "description": "Represents the options for starting a new training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents the output model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version. By default, \"latest\" value is used which\nuses the latest released training config version."
+        },
+        "trainingMode": {
+          "$ref": "#/definitions/TrainingMode",
+          "description": "Represents the mode of the training operation."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
+          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingMode"
+      ]
+    },
+    "ConversationalAnalysisAuthoringTrainingJobResult": {
+      "type": "object",
+      "description": "Represents the output of a training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents trained model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "trainingMode": {
+          "$ref": "#/definitions/TrainingMode",
+          "description": "Represents the mode of the training operation."
+        },
+        "trainingStatus": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringSubTrainingJobState",
+          "description": "Represents the model training status."
+        },
+        "evaluationStatus": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringSubTrainingJobState",
+          "description": "Represents model evaluation status."
+        },
+        "estimatedEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the estimated end date time for training and evaluation."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingConfigVersion",
+        "trainingStatus"
+      ]
+    },
+    "ConversationalAnalysisAuthoringTrainingJobState": {
+      "type": "object",
+      "description": "Represents the state of a training job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "result": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobResult",
+          "description": "Represents training tasks detailed result."
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status",
+        "result"
+      ]
+    },
+    "ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions": {
+      "type": "object",
+      "description": "Represents the options to unassign Azure resources from a project.",
+      "properties": {
+        "assignedResourceIds": {
+          "type": "array",
+          "description": "Represents the assigned resource IDs to be unassigned.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "assignedResourceIds"
+      ]
+    },
+    "ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult": {
+      "type": "object",
+      "description": "Represents the comparison between the expected and predicted entities for an\nutterance.",
+      "properties": {
+        "expectedEntities": {
+          "type": "array",
+          "description": "Represents the expected entity labels.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "predictedEntities": {
+          "type": "array",
+          "description": "Represents the predicted entity labels.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "expectedEntities",
+        "predictedEntities"
+      ]
+    },
+    "ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult": {
+      "type": "object",
+      "description": "Represents the evaluation output of an entity label or prediction.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Represents the entity category."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the entity offset index relative to the original text."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the entity length."
+        }
+      },
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ]
+    },
+    "ConversationalAnalysisAuthoringUtteranceEvaluationResult": {
+      "type": "object",
+      "description": "Represents the evaluation result for an utterance.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Represents the utterance text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the utterance language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+        },
+        "entitiesResult": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult",
+          "description": "Represents the entities results for the utterance."
+        },
+        "intentsResult": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult",
+          "description": "Represents the intents results for the utterance."
+        }
+      },
+      "required": [
+        "text",
+        "language",
+        "entitiesResult",
+        "intentsResult"
+      ]
+    },
+    "ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult": {
+      "type": "object",
+      "description": "Represents the comparison between the expected and the predicted intent for an\nutterance.",
+      "properties": {
+        "expectedIntent": {
+          "type": "string",
+          "description": "Represents the utterance's expected intent."
+        },
+        "predictedIntent": {
+          "type": "string",
+          "description": "Represents the utterance's predicted intent."
+        }
+      },
+      "required": [
+        "expectedIntent",
+        "predictedIntent"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about\nthe error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "ProjectNotFound",
+        "OperationNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchIndexNotFound",
+        "TooManyRequests",
+        "AzureCognitiveSearchThrottling",
+        "AzureCognitiveSearchIndexLimitReached",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "Timeout",
+        "QuotaExceeded",
+        "Conflict",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidRequest",
+            "value": "InvalidRequest"
+          },
+          {
+            "name": "InvalidArgument",
+            "value": "InvalidArgument"
+          },
+          {
+            "name": "Unauthorized",
+            "value": "Unauthorized"
+          },
+          {
+            "name": "Forbidden",
+            "value": "Forbidden"
+          },
+          {
+            "name": "NotFound",
+            "value": "NotFound"
+          },
+          {
+            "name": "ProjectNotFound",
+            "value": "ProjectNotFound"
+          },
+          {
+            "name": "OperationNotFound",
+            "value": "OperationNotFound"
+          },
+          {
+            "name": "AzureCognitiveSearchNotFound",
+            "value": "AzureCognitiveSearchNotFound"
+          },
+          {
+            "name": "AzureCognitiveSearchIndexNotFound",
+            "value": "AzureCognitiveSearchIndexNotFound"
+          },
+          {
+            "name": "TooManyRequests",
+            "value": "TooManyRequests"
+          },
+          {
+            "name": "AzureCognitiveSearchThrottling",
+            "value": "AzureCognitiveSearchThrottling"
+          },
+          {
+            "name": "AzureCognitiveSearchIndexLimitReached",
+            "value": "AzureCognitiveSearchIndexLimitReached"
+          },
+          {
+            "name": "InternalServerError",
+            "value": "InternalServerError"
+          },
+          {
+            "name": "ServiceUnavailable",
+            "value": "ServiceUnavailable"
+          },
+          {
+            "name": "Timeout",
+            "value": "Timeout"
+          },
+          {
+            "name": "QuotaExceeded",
+            "value": "QuotaExceeded"
+          },
+          {
+            "name": "Conflict",
+            "value": "Conflict"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning"
+          }
+        ]
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "EvaluationKind": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "manual"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "percentage",
+            "value": "percentage",
+            "description": "Split the data into training and test sets according to user-defined\npercentages."
+          },
+          {
+            "name": "manual",
+            "value": "manual",
+            "description": "Split the data according to the chosen dataset for every example in the data."
+          }
+        ]
+      }
+    },
+    "ExportedModelOptions": {
+      "type": "object",
+      "description": "Represents the options for creating or replacing an exported model.",
+      "properties": {
+        "trainedModelLabel": {
+          "type": "string",
+          "description": "The trained model label."
+        }
+      },
+      "required": [
+        "trainedModelLabel"
+      ]
+    },
+    "InnerErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidParameterValue",
+        "KnowledgeBaseNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchThrottling",
+        "ExtractionFailure",
+        "InvalidRequestBodyFormat",
+        "EmptyRequest",
+        "MissingInputDocuments",
+        "InvalidDocument",
+        "ModelVersionIncorrect",
+        "InvalidDocumentBatch",
+        "UnsupportedLanguageCode",
+        "InvalidCountryHint"
+      ],
+      "x-ms-enum": {
+        "name": "InnerErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidRequest",
+            "value": "InvalidRequest"
+          },
+          {
+            "name": "InvalidParameterValue",
+            "value": "InvalidParameterValue"
+          },
+          {
+            "name": "KnowledgeBaseNotFound",
+            "value": "KnowledgeBaseNotFound"
+          },
+          {
+            "name": "AzureCognitiveSearchNotFound",
+            "value": "AzureCognitiveSearchNotFound"
+          },
+          {
+            "name": "AzureCognitiveSearchThrottling",
+            "value": "AzureCognitiveSearchThrottling"
+          },
+          {
+            "name": "ExtractionFailure",
+            "value": "ExtractionFailure"
+          },
+          {
+            "name": "InvalidRequestBodyFormat",
+            "value": "InvalidRequestBodyFormat"
+          },
+          {
+            "name": "EmptyRequest",
+            "value": "EmptyRequest"
+          },
+          {
+            "name": "MissingInputDocuments",
+            "value": "MissingInputDocuments"
+          },
+          {
+            "name": "InvalidDocument",
+            "value": "InvalidDocument"
+          },
+          {
+            "name": "ModelVersionIncorrect",
+            "value": "ModelVersionIncorrect"
+          },
+          {
+            "name": "InvalidDocumentBatch",
+            "value": "InvalidDocumentBatch"
+          },
+          {
+            "name": "UnsupportedLanguageCode",
+            "value": "UnsupportedLanguageCode"
+          },
+          {
+            "name": "InvalidCountryHint",
+            "value": "InvalidCountryHint"
+          }
+        ]
+      }
+    },
+    "InnerErrorModel": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per\nMicrosoft One API guidelines -\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/InnerErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "object",
+          "description": "Error details.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about\nthe error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "JobStatus": {
+      "type": "string",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "cancelling",
+        "partiallyCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notStarted",
+            "value": "notStarted"
+          },
+          {
+            "name": "running",
+            "value": "running"
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded"
+          },
+          {
+            "name": "failed",
+            "value": "failed"
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "cancelling",
+            "value": "cancelling"
+          },
+          {
+            "name": "partiallyCompleted",
+            "value": "partiallyCompleted"
+          }
+        ]
+      }
+    },
+    "OrchestrationTargetProjectKind": {
+      "type": "string",
+      "enum": [
+        "Luis",
+        "Conversation",
+        "QuestionAnswering"
+      ],
+      "x-ms-enum": {
+        "name": "OrchestrationTargetProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Luis",
+            "value": "Luis"
+          },
+          {
+            "name": "Conversation",
+            "value": "Conversation"
+          },
+          {
+            "name": "QuestionAnswering",
+            "value": "QuestionAnswering"
+          }
+        ]
+      }
+    },
+    "PagedConversationalAnalysisAuthoringAssignedDeploymentResource": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringAssignedDeploymentResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringAssignedDeploymentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedDeploymentResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringExportedTrainedModel": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringExportedTrainedModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringExportedTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedTrainedModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringProjectDeployment": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectDeployment items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringProjectDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringProjectMetadata": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectMetadata items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringProjectMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectTrainedModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringProjectTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringTrainingJobState": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringTrainingJobState items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringTrainingJobState items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobState"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringUtteranceEvaluationResult": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringUtteranceEvaluationResult items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringUtteranceEvaluationResult items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEvaluationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProjectKind": {
+      "type": "string",
+      "enum": [
+        "Conversation",
+        "Orchestration",
+        "CustomConversationSummarization"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Conversation",
+            "value": "Conversation",
+            "description": "A project to build natural language into apps, bots, and IoT devices."
+          },
+          {
+            "name": "Orchestration",
+            "value": "Orchestration",
+            "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
+          },
+          {
+            "name": "CustomConversationSummarization",
+            "value": "CustomConversationSummarization",
+            "description": "A project to build conversation summarization models which are able to summarize long conversations."
+          }
+        ]
+      }
+    },
+    "StringIndexType": {
+      "type": "string",
+      "enum": [
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Utf16CodeUnit",
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+          }
+        ]
+      }
+    },
+    "TrainingMode": {
+      "type": "string",
+      "enum": [
+        "advanced",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "TrainingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "advanced",
+            "value": "advanced",
+            "description": "Trains using fine-tuned neural network transformer models. Can train\nmultilingual projects."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Faster training times for quicker iterations."
+          }
+        ]
+      }
+    },
+    "Warning": {
+      "type": "object",
+      "description": "Represents a warning that was encountered while executing the request.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The warning message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "StringIndexTypeQueryParameter": {
+      "name": "stringIndexType",
+      "in": "query",
+      "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Utf16CodeUnit",
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

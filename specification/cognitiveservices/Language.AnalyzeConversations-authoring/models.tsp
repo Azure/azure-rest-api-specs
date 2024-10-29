@@ -2059,3 +2059,82 @@ model ConversationalAnalysisAuthoringOrchestrationExportedUtterance {
    */
   dataset?: string;
 }
+
+/**
+ * Represents an exported trained model.
+ */
+@clientName("ExportedTrainedModel", "csharp")
+@resource("exported-models")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
+model ConversationalAnalysisAuthoringExportedTrainedModel {
+  /**
+   * The exported model name.
+   */
+  @key("exportedModelName")
+  @visibility
+  exportedModelName: string;
+
+  /**
+   * The model ID.
+   */
+  modelId: string;
+
+  /**
+   * The last trained date time of the model.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastTrainedDateTime: utcDateTime;
+
+  /**
+   * The last exported date time of the model.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastExportedModelDateTime: utcDateTime;
+
+  /**
+   * The model expiration date.
+   */
+  modelExpirationDate: plainDate;
+
+  /**
+   * The model training config version.
+   */
+  modelTrainingConfigVersion: string;
+}
+/**
+ * Represents the state of a job to create or updated an exported model.
+ */
+@added(Versions.v2024_11_15_preview)
+@clientName("ExportedModelJobState", "csharp")
+@resource("jobs")
+@parentResource(ConversationalAnalysisAuthoringExportedTrainedModel)
+model ConversationalAnalysisAuthoringExportedModelJobState {
+  ...ConversationalAnalysisAuthoringJobState;
+}
+/**
+ * Represents the properties for the model file.
+ */
+@clientName("ModelFile", "csharp")
+@added(Versions.v2024_11_15_preview)
+model ConversationalAnalysisAuthoringModelFile {
+  /**
+   * The name of the file.
+   */
+  name: string;
+
+  /**
+   * The URI to retrieve the content of the file.
+   */
+  contentUri: url;
+}
+/**
+ * Represents the options for creating or replacing an exported model.
+ */
+@clientName("ExportedModelOptions")
+@added(Versions.v2024_11_15_preview)
+model ConversationalAnalysisAuthoringExportedModelOptions {
+  /**
+   * The trained model label.
+   */
+  trainedModelLabel: string;
+}
