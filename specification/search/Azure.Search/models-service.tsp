@@ -4986,7 +4986,6 @@ model IndexingSchedule {
     /**
      * The time when an indexer should start running.
      */
-    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
     startTime?: utcDateTime;
 }
 
@@ -5235,14 +5234,12 @@ model IndexerExecutionResult {
      * The start time of this indexer execution.
      */
     @visibility("read")
-    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
     startTime?: utcDateTime;
 
     /**
      * The end time of this indexer execution, if the execution has already completed.
      */
     @visibility("read")
-    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
     endTime?: utcDateTime;
 
     /**
