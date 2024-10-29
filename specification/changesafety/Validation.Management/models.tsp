@@ -38,13 +38,13 @@ union Outcome {
 union ProvisioningState {
   string,
 
-  @doc("Succeeded")
+  @doc("The succeeded provisioning state.")
   Succeeded: "Succeeded",
 
-  @doc("Failed")
+  @doc("The failed provisioning state.")
   Failed: "Failed",
 
-  @doc("Canceled")
+  @doc("The canceled provisioning state.")
   Canceled: "Canceled",
 }
 
