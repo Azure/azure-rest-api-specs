@@ -10,6 +10,7 @@ package-name: azure-mgmt-resourcehealth
 namespace: azure.mgmt.resourcehealth
 package-version: 1.0.0
 clear-output-folder: true
+title: ResourceHealthMgmtClient
 ```
 
 ``` yaml $(python)
