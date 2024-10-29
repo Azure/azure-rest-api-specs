@@ -1,3 +1,11 @@
+parameters:
+  - name: AzureSdkForNetDevOpsFeed
+    type: string
+    default: 'https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json'
+  - name: SwaggerApiParserVersion
+    type: string
+    default: '1.3.0-dev.20241029.2'
+
 trigger: none
 
 jobs:
@@ -8,6 +16,20 @@ jobs:
 
   steps:
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Swagger-APIView.ps1 -Verbose
-    displayName: Swagger APIView Check
+      dotnet tool install Azure.Sdk.Tools.SwaggerApiParser `
+        --version ${{ parameters.SwaggerApiParserVersion }}  `
+        --add-source ${{ parameters.AzureSdkForNetDevOpsFeed }} `
+        --global
+    displayName: Install APIView Swagger Parser
+
+  - pwsh: |
+      $(Build.SourcesDirectory)/eng/scripts/Swagger-APIView.ps1 `
+        -TempDirectory "$(Agent.TempDirectory)" `
+        -ArtiFactsDirectory "$(Build.ArtifactStagingDirectory)"
+    displayName: Generate Swagger APIView Tokens
+    ignoreLASTEXITCODE: true
+
+  - pwsh: |
+      Get-ChildItem -Path $(Build.ArtifactStagingDirectory) -Recurse
+    displayName: See Generated Files
     ignoreLASTEXITCODE: true
