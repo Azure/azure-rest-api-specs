@@ -399,7 +399,7 @@ union GenerateType {
 
 @doc("PeerDb Details")
 model PeerDbDetails {
-  @doc("The Azure ID of the Disaster Recovery peer database, which is located in a different region from the current peer database.")
+  @doc("The Azure resource ID of the Disaster Recovery peer database, which is located in a different region from the current peer database.")
   @minLength(1)
   @maxLength(255)
   peerDbId?: string;
@@ -617,7 +617,7 @@ model AutonomousDatabaseCloneProperties
   @visibility("create")
   source?: SourceType;
 
-  @doc("The Azure ID of the Autonomous Database that was cloned to create the current Autonomous Database.")
+  @doc("The Azure resource ID of the Autonomous Database that was cloned to create the current Autonomous Database.")
   @visibility("create", "read")
   sourceId: AutonomousDatabaseId;
 
@@ -657,7 +657,7 @@ model AutonomousDatabaseCrossRegionDisasterRecoveryProperties
   @visibility("create")
   source: SourceType.CrossRegionDisasterRecovery;
 
-  @doc("The Azure ID of the source Autonomous Database that will be used to create a new peer database for the DR association.")
+  @doc("The Azure resource ID of the source Autonomous Database that will be used to create a new peer database for the DR association.")
   @visibility("create", "read")
   sourceId: AutonomousDatabaseId;
 
@@ -788,11 +788,11 @@ model AutonomousDatabaseBaseProperties {
   @visibility("create", "read", "update")
   isAutoScalingForStorageEnabled?: boolean;
 
-  @doc("The list of Azure IDs of standby databases located in Autonomous Data Guard remote regions that are associated with the source database. Note that for Autonomous Database Serverless instances, standby databases located in the same region as the source primary database do not have Azure IDs.")
+  @doc("The list of Azure resource IDs of standby databases located in Autonomous Data Guard remote regions that are associated with the source database. Note that for Autonomous Database Serverless instances, standby databases located in the same region as the source primary database do not have Azure IDs.")
   @visibility("read")
   peerDbIds?: string[];
 
-  @doc("The database OCID of the Disaster Recovery peer database, which is located in a different region from the current peer database.")
+  @doc("The Azure resource ID of the Disaster Recovery peer database, which is located in a different region from the current peer database.")
   @visibility("update")
   @minLength(1)
   @maxLength(255)
