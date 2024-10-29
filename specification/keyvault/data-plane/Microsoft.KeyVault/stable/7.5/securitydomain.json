@@ -1,162 +1,183 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "KeyVaultClient",
-    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
-    "version": "7.5"
+    "title": "Key Vault",
+    "version": "7.5",
+    "description": "The key vault client performs cryptographic key operations and vault operations\nagainst the Key Vault service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
+  "schemes": [
+    "https"
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{vaultBaseUrl}",
     "useSchemePrefix": false,
-    "positionInOperation": "first",
     "parameters": [
       {
         "name": "vaultBaseUrl",
-        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "in": "path",
         "required": true,
         "type": "string",
-        "in": "path",
+        "format": "uri",
         "x-ms-skip-url-encoding": true
       }
     ]
   },
-  "consumes": [
-    "application/json"
-  ],
   "produces": [
     "application/json"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://vault.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://vault.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
   "paths": {
+    "/securitydomain/download": {
+      "post": {
+        "operationId": "HSMSecurityDomain_Download",
+        "description": "Retrieves the Security Domain from the managed HSM. Calling this endpoint can\nbe used to activate a provisioned managed HSM resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "certificateInfoObject",
+            "in": "body",
+            "description": "The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10)\ncontaining a public key in JWK format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateInfoObject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainObject"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in\nAzure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/securitydomain/download/pending": {
       "get": {
-        "tags": [
-          "HSMSecurityDomain"
-        ],
         "operationId": "HSMSecurityDomain_DownloadPending",
         "description": "Retrieves the Security Domain download operation status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Security Domain download operation status",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Find Security Domain download operation status": {
-            "$ref": "./examples/securitydomainoperationstatus-example.json"
-          }
-        }
-      }
-    },
-    "/securitydomain/download": {
-      "post": {
-        "tags": [
-          "HSMSecurityDomain"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "operationId": "HSMSecurityDomain_Download",
-        "description": "Retrieves the Security Domain from the managed HSM. Calling this endpoint can be used to activate a provisioned managed HSM resource.",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "CertificateInfoObject",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CertificateInfoObject"
-            },
-            "description": "The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing a public key in JWK format."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The response contains the Security Domain that is being confirmed.",
-            "schema": {
-              "$ref": "#/definitions/SecurityDomainObject"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve Security Domain": {
-            "$ref": "./examples/securitydomaindownloadpost-example.json"
           }
         }
       }
     },
     "/securitydomain/upload": {
       "get": {
-        "tags": [
-          "HSMSecurityDomain"
-        ],
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
         "operationId": "HSMSecurityDomain_TransferKey",
         "description": "Retrieve Security Domain transfer key",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Security Domain transfer key response",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/TransferKey"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve Security Domain transfer key": {
-            "$ref": "./examples/securitydomaintransferkey-example.json"
           }
         }
       },
       "post": {
-        "tags": [
-          "HSMSecurityDomain"
-        ],
         "operationId": "HSMSecurityDomain_Upload",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "description": "Restore the provided Security Domain.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "securityDomain",
             "in": "body",
-            "name": "security_domain",
             "description": "The Security Domain to be restored.",
             "required": true,
             "schema": {
@@ -166,83 +187,190 @@
         ],
         "responses": {
           "202": {
-            "description": "Restore of the Security Domain started.",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            },
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/SecurityDomainOperationStatus"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in\nAzure-AsyncOperation."
+              }
             }
           },
           "204": {
-            "description": "Final response"
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "x-ms-examples": {
-          "Security Domain upload operation": {
-            "$ref": "./examples/securitydomainuploadoperation-example.json"
-          }
-        }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/securitydomain/upload/pending": {
       "get": {
-        "tags": [
-          "HSMSecurityDomain"
-        ],
         "operationId": "HSMSecurityDomain_UploadPending",
         "description": "Get Security Domain upload operation status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Security Domain upload operation status",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Find Security Domain upload operation status": {
-            "$ref": "./examples/securitydomainoperationstatus-example.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "Attributes": {
+      "type": "object",
+      "description": "The object attributes managed by the KeyVault service.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether the object is enabled."
+        },
+        "nbf": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Not before date in UTC.",
+          "x-ms-client-name": "notBefore"
+        },
+        "exp": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Expiry date in UTC.",
+          "x-ms-client-name": "expires"
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Creation time in UTC.",
+          "readOnly": true
+        },
+        "updated": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Last updated time in UTC.",
+          "readOnly": true
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
     "CertificateInfoObject": {
+      "type": "object",
+      "description": "The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10)\ncontaining a public key in JWK format.",
       "properties": {
         "certificates": {
           "type": "array",
+          "description": "Certificates needed from customer.",
+          "minItems": 3,
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/SecurityDomainJsonWebKey"
           },
-          "minItems": 3,
-          "maxItems": 10,
-          "uniqueItems": true,
-          "description": "Certificates needed from customer"
+          "x-ms-identifiers": []
         },
         "required": {
-          "description": "Customer to specify the number of certificates (minimum 2 and maximum 10) to restore Security Domain",
           "type": "integer",
+          "format": "int32",
+          "description": "Customer to specify the number of certificates (minimum 2 and maximum 10) to restore Security Domain.",
           "default": 2,
           "minimum": 2,
           "maximum": 10
@@ -252,55 +380,39 @@
         "certificates"
       ]
     },
-    "TransferKey": {
-      "properties": {
-        "key_format": {
-          "type": "string",
-          "default": "jwk",
-          "description": "Specifies the format of the transfer key"
-        },
-        "transfer_key": {
-          "$ref": "#/definitions/SecurityDomainJsonWebKey",
-          "description": "Specifies the transfer key in JWK format"
-        }
-      },
-      "required": [
-        "transfer_key"
-      ]
-    },
-    "SecurityDomainObject": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The Security Domain."
-        }
-      },
-      "description": "The Security Domain.",
-      "required": [
-        "value"
-      ]
-    },
-    "SecurityDomainOperationStatus": {
-      "properties": {
-        "status": {
-          "description": "operation status",
-          "enum": [
-            "Success",
-            "InProgress",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "OperationStatus"
+    "OperationStatus": {
+      "type": "string",
+      "description": "Operation status.",
+      "enum": [
+        "Success",
+        "InProgress",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "The operation succeeded."
           },
-          "type": "string"
-        },
-        "status_details": {
-          "type": "string"
-        }
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          }
+        ]
       }
     },
     "SecurityDomainJsonWebKey": {
+      "type": "object",
+      "description": "A JSON Web Key (JWK) for use in a security domain operation.",
       "properties": {
         "kid": {
           "type": "string",
@@ -308,14 +420,15 @@
         },
         "kty": {
           "type": "string",
-          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For Security Domain this value must be RSA."
+          "description": "JsonWebKey Key Type (kty), as defined in\nhttps://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For\nSecurity Domain this value must be RSA."
         },
         "key_ops": {
           "type": "array",
+          "description": "Supported key operations.",
           "items": {
-            "type": "string",
-            "description": "Supported key operations."
-          }
+            "type": "string"
+          },
+          "x-ms-client-name": "keyOps"
         },
         "n": {
           "type": "string",
@@ -326,39 +439,102 @@
           "description": "RSA public exponent."
         },
         "x5c": {
-          "description": "X509 certificate chain parameter",
           "type": "array",
+          "description": "X509 certificate chain parameter.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "x5C"
         },
         "use": {
-          "description": "Public Key Use Parameter. This is optional and if present must be enc.",
-          "type": "string"
+          "type": "string",
+          "description": "Public Key Use Parameter. This is optional and if present must be enc."
         },
         "x5t": {
+          "type": "string",
           "description": "X509 certificate SHA1 thumbprint. This is optional.",
-          "type": "string"
+          "x-ms-client-name": "x5T"
         },
         "x5t#S256": {
+          "type": "string",
           "description": "X509 certificate SHA256 thumbprint.",
-          "type": "string"
+          "x-ms-client-name": "x5tS256"
         },
         "alg": {
-          "description": "Algorithm intended for use with the key.",
-          "type": "string"
+          "type": "string",
+          "description": "Algorithm intended for use with the key."
         }
       },
       "required": [
+        "kid",
         "kty",
         "key_ops",
-        "alg",
-        "kid",
+        "n",
+        "e",
         "x5c",
         "x5t#S256",
-        "n",
-        "e"
+        "alg"
       ]
+    },
+    "SecurityDomainObject": {
+      "type": "object",
+      "description": "The Security Domain.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The Security Domain."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecurityDomainOperationStatus": {
+      "type": "object",
+      "description": "The Security Domain operation status.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status."
+        },
+        "status_details": {
+          "type": "string",
+          "description": "Details of the operation status.",
+          "x-ms-client-name": "statusDetails"
+        }
+      }
+    },
+    "TransferKey": {
+      "type": "object",
+      "description": "Security Domain transfer key.",
+      "properties": {
+        "key_format": {
+          "type": "string",
+          "description": "Specifies the format of the transfer key.",
+          "default": "jwk",
+          "x-ms-client-name": "keyFormat"
+        },
+        "transfer_key": {
+          "$ref": "#/definitions/SecurityDomainJsonWebKey",
+          "description": "Specifies the transfer key in JWK format.",
+          "x-ms-client-name": "transferKeyJwk"
+        }
+      },
+      "required": [
+        "transfer_key"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
