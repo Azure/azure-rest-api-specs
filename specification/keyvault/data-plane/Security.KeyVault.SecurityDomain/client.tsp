@@ -11,13 +11,16 @@ using KeyVault;
 @TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.5`)
 namespace ClientCustomizations;
 
-@@access(CertificateInfoObject, Access.public);
-@@access(SecurityDomainObject, Access.public);
+@@access(CertificateInfoObject, Access.public, "python");
+@@access(SecurityDomainObject, Access.public, "python");
 
-@client({
-  name: "KeyVaultClient",
-  service: KeyVault,
-})
+@client(
+  {
+    name: "KeyVaultClient",
+    service: KeyVault,
+  },
+  "python"
+)
 interface KeyVaultClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   getDownloadStatus is HsmSecurityDomain.downloadPending;
