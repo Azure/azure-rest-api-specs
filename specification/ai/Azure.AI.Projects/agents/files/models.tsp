@@ -120,8 +120,3 @@ model FileDeletionStatus {
   object: "file";
 }
 
-@doc("A response from a file get content operation.")
-model FileContentResponse {
-  @doc("The content of the file, in bytes.")
-  content: bytes;
-}
