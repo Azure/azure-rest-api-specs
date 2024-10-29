@@ -21,7 +21,7 @@ model PublicIpAddressPropertiesBase {
   state: IpAddressState;
 
   @doc("Whether the IP belongs to a 1P service")
-  isFirstParty: boolean;
+  isFirstParty: IsFirstParty;
 
   @doc("Allocation type (Anycast, Multicast, ..)")
   allocationType: AllocationType;
@@ -55,6 +55,21 @@ model PublicIpAddressPropertiesBase {
 
   @doc("The Data Center where this asset resides")
   dcCode: string;
+
+  @doc("The provisioning state")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Conditions for whether the resource is first party.")
+union IsFirstParty {
+  string,
+
+  @doc("The resource is first party.")
+  True: "true",
+
+  @doc("The resource is not first party.")
+  False: "false",
 }
 
 @doc("Enum for State")
