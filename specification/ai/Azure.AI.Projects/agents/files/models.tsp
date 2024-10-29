@@ -119,4 +119,3 @@ model FileDeletionStatus {
   @doc("The object type, which is always 'file'.")
   object: "file";
 }
-
