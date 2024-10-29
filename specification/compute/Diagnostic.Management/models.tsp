@@ -184,6 +184,7 @@ model SpotPlacementRecommenderResponse {
   /**
    * The desired resource SKUs.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   desiredSizes?: ResourceSize[];
 
   /**
@@ -199,6 +200,7 @@ model SpotPlacementRecommenderResponse {
   /**
    * The spot placement scores.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   placementScores?: PlacementScore[];
 }
 
@@ -269,6 +271,7 @@ model SpotPlacementScoresResponse {
   /**
    * The desired resource SKUs.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   desiredSizes?: ResourceSize[];
 
   /**
@@ -284,6 +287,7 @@ model SpotPlacementScoresResponse {
   /**
    * The spot placement scores.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   placementScores?: PlacementScore[];
 }
 

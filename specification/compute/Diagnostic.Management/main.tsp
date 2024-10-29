@@ -21,13 +21,13 @@ using TypeSpec.Versioning;
 /**
  * Compute Client
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "existed in ComputeRP"
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Compute resource management API.",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Compute;
 
 /**
@@ -39,5 +39,6 @@ enum Versions {
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01_preview: "2024-06-01-preview",
 }

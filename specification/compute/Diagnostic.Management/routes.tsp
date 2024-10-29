@@ -25,13 +25,7 @@ interface DiagnosticOperationsOperations {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
-
-    /**
-     * The ID of an ongoing async operation.
-     */
-    @minLength(1)
-    @path
-    operationId: string,
+    ...CommonTypes.OperationIdParameter,
   ): ArmResponse<ComputeDiagnosticsOperationResult> | ArmAcceptedResponse | ErrorResponse;
 }
 
