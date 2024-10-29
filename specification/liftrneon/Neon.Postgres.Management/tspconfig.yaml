@@ -1,3 +1,4 @@
+output-dir: "{project-root}/"
 parameters:
   "service-dir":
     default: "sdk/neonpostgres"
@@ -20,3 +21,10 @@ options:
     generate-test: true
     generate-sample: true
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    package-dir: "Azure.ResourceManager.NeonPostgres"
+    namespace: "Azure.ResourceManager.NeonPostgres"
+    model-namespace: false
+    generate-sample-project: false
