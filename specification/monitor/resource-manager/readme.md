@@ -46,6 +46,38 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 input-file:
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
   - Microsoft.Insights/preview/2024-01-01-preview/scheduledQueryRule_API.json
+
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: BodyTopLevelProperties
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: LroErrorContent
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: NoErrorCodeResponses
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: OperationIdNounVerb
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: OperationsAPIImplementation
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: PatchBodyParametersSchema
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: PostResponseCodes
+    from: actionGroups_API.json
+    reason: To be updated
+  - code: ResourceNameRestriction
+    from: actionGroups_API.json
+    reason: To be updated
 ```
 
 ### Tag: package-preview-2024-01
@@ -1550,6 +1582,22 @@ directive:
     from: scheduledQueryRule_API.json
     where: $.definitions.Actions.properties.actionProperties
     reason: "This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values."
+```
+
+### Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAdditionalProperties
+  - code: BodyTopLevelProperties
+  - code: DefinitionsPropertiesNamesCamelCase
+  - code: LroErrorContent
+  - code: NoErrorCodeResponses
+  - code: OperationIdNounVerb
+  - code: OperationsAPIImplementation
+  - code: PatchBodyParametersSchema
+  - code: PostResponseCodes
+  - code: ResourceNameRestriction
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
