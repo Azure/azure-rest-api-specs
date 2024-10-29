@@ -1456,6 +1456,18 @@ directive:
   - suppress: XmsPageableForListCalls
     from: privateLinkScopes_API.json
     reason: "List scoped resources does not support pagination"
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: privateLinkScopes_API.json
+    reason: "This was based on older guidance for structuring long-running operations. Changing the contract would be a breaking change."
+  - suppress: PutResponseCodes
+    from: privateLinkScopes_API.json
+    reason: "This was based on older guidance for structuring long-running operations. Changing the contract would be a breaking change."
+  - suppress: DeleteResponseCodes
+    from: privateLinkScopes_API.json
+    reason: "This was based on older guidance for structuring long-running operations. Changing the contract would be a breaking change."
+  - suppress: BodyTopLevelProperties
+    from: privateLinkScopes_API.json
+    reason: "This was based on older guidance for structuring long-running operations. Changing the contract would be a breaking change."
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: privateLinkScopes_API.json
