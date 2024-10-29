@@ -98,7 +98,7 @@ interface Reservations
   @armResourceAction(Reservation)
   @action("getUsageDetails")
   @post
-  getReservationBillingUsageDetails(
+  getUsageDetails(
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<ReservationBillingStatus> | ErrorResponse;
 
@@ -107,7 +107,7 @@ interface Reservations
   @armResourceAction(Reservation)
   @action("getUsageUiDetails")
   @post
-  getReservationBillingUsageUiDetails(
+  getUsageUiDetails(
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<ReservationBillingStatusUiDetails> | ErrorResponse;
 }
