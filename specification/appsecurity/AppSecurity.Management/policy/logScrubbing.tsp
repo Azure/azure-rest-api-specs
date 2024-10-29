@@ -7,33 +7,37 @@ alias MaxScrubbingRuleSelectorLength = 128;
 alias MaxScrubbingRulesCount = 100;
 
 @doc("Supported variable types for scrubbing rules")
-enum ScrubbingRuleMatchVariable {
+union ScrubbingRuleMatchVariable {
+  string,
+
   @doc("The request headers to be scrubbed")
-  RequestHeaderNames,
+  RequestHeaderNames: "RequestHeaderNames",
 
   @doc("The request cookies to be scrubbed")
-  RequestCookieNames,
+  RequestCookieNames: "RequestCookieNames",
 
   @doc("The request arguments to be scrubbed")
-  RequestArgNames,
+  RequestArgNames: "RequestArgNames",
 
   @doc("The request post arguments to be scrubbed")
-  RequestPostArgNames,
+  RequestPostArgNames: "RequestPostArgNames",
 
   @doc("The request JSON arguments to be scrubbed")
-  RequestJSONArgNames,
+  RequestJSONArgNames: "RequestJSONArgNames",
 
   @doc("The request IP address")
-  RequestIPAddress,
+  RequestIPAddress: "RequestIPAddress",
 }
 
 @doc("Supported operators for scrubbing rules")
-enum ScrubbingRuleSelectorMatchOperator {
+union ScrubbingRuleSelectorMatchOperator {
+  string,
+
   @doc("Equals operator")
   Equals_: "Equals", // Changes the generated name and prevents error CS0108, in which Equal hides inherited member of 'ValueType.Equals(object?)'
 
   @doc("Equals any operator")
-  EqualsAny,
+  EqualsAny: "EqualsAny",
 }
 
 @doc("Allow certain variables to be scrubbed on WAF logs")

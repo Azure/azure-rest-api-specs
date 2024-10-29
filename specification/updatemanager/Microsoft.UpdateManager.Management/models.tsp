@@ -85,7 +85,7 @@ model Policies {
 
   @doc("Approve windows patches after the mentioned date.")
   @pattern(
-    "(?<!\\w)(2Tuesday)\\+Offset([0-6](?!\\d))(?!\\w)|(?<!\\w)Days(1(?!\\d)|([1-9]|1[0-4])(?!\\d))(?!\\w)",
+    "(?<!\\w)(2Tuesday)\\+Offset([0-6](?!\\d))(?!\\w)|(?<!\\w)Days(([1-9]|1[0-4])(?!\\d))(?!\\w)",
     "The value must be in the format of '2Tuesday+OffsetY' or 'DaysY' only"
   )
   installWindowsPatchesAfter?: string;
