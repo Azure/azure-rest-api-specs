@@ -24,7 +24,7 @@ model ApprovalCallbackRequest {
   @doc("Approval status indicating 'Approved' or 'Rejected'")
   approvalStatus: "Approved" | "Rejected" | string;
 
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
   @doc("Payload requested by client upon approval action")
   approvalCallbackPayload?: string;
 }

@@ -8,7 +8,6 @@ import "../community/community.tsp";
 import "../shared/resourceid.tsp";
 import "../shared/managedresourcegroupconfiguration.tsp";
 import "../shared/principal.tsp";
-import "../shared/roleassignmentitem.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -173,14 +172,4 @@ model VirtualEnclaveProperties {
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Deploy Bastion service (True or False).")
   bastionEnabled?: boolean;
-
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @doc("Enclave role assignments")
-  enclaveRoleAssignmentList?: RoleAssignmentItem[];
-
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @doc("Workload role assignments")
-  workloadRoleAssignmentList?: RoleAssignmentItem[];
 }

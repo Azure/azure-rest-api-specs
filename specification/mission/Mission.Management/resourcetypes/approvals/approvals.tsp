@@ -36,17 +36,6 @@ union ApprovalStatus {
   string,
 }
 
-@doc("Action Performed Enum")
-union ActionPerformed {
-  @doc("ActionPerformed Type Approved")
-  Approved: "Approved",
-
-  @doc("ActionPerformed Type Rejected")
-  Rejected: "Rejected",
-
-  string,
-}
-
 @doc("Request Metadata for approvals request.")
 model RequestMetadata {
   @doc("Resource Action of the item being approved or declined.")
@@ -64,18 +53,6 @@ model RequestMetadata {
   approvalCallbackPayload?: string;
 }
 
-@doc("Approver Metadata for approvals request.")
-model Approvers {
-  @doc("EntraId of the approver")
-  approverEntraId: string;
-
-  @doc("Action Performed by approver")
-  actionPerformed: ActionPerformed;
-
-  @doc("approval request last updated at")
-  lastUpdatedAt: utcDateTime;
-}
-
 @doc("Approvals Resource Properties")
 model ApprovalProperties {
   @doc("Provisioning State.")
@@ -90,18 +67,4 @@ model ApprovalProperties {
 
   @doc("Request metadata for the approval request.")
   requestMetadata: RequestMetadata;
-
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", ["approverEntraId"])
-  @doc("List of Multiple approvers for the approval request")
-  multipleApproversList?: Approvers[];
-
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", ["approverEntraId"])
-  @doc("List of Mandatory approvers for the approval request")
-  mandatoryApproversList?: Approvers[];
-
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @doc("Number of minimum approvers required for the approval request")
-  minApproversRequiredCount?: int64;
 }

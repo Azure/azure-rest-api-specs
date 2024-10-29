@@ -4767,30 +4767,6 @@
     }
   },
   "definitions": {
-    "ActionPerformed": {
-      "type": "string",
-      "description": "Action Performed Enum",
-      "enum": [
-        "Approved",
-        "Rejected"
-      ],
-      "x-ms-enum": {
-        "name": "ActionPerformed",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "ActionPerformed Type Approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "ActionPerformed Type Rejected"
-          }
-        ]
-      }
-    },
     "ApprovalCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
@@ -4896,31 +4872,6 @@
         "requestMetadata": {
           "$ref": "#/definitions/RequestMetadata",
           "description": "Request metadata for the approval request."
-        },
-        "multipleApproversList": {
-          "type": "array",
-          "description": "List of Multiple approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/Approvers"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
-        },
-        "mandatoryApproversList": {
-          "type": "array",
-          "description": "List of Mandatory approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/Approvers"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
-        },
-        "minApproversRequiredCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of minimum approvers required for the approval request"
         }
       },
       "required": [
@@ -4942,31 +4893,6 @@
         "requestMetadata": {
           "$ref": "#/definitions/RequestMetadataUpdate",
           "description": "Request metadata for the approval request."
-        },
-        "multipleApproversList": {
-          "type": "array",
-          "description": "List of Multiple approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/Approvers"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
-        },
-        "mandatoryApproversList": {
-          "type": "array",
-          "description": "List of Mandatory approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/Approvers"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
-        },
-        "minApproversRequiredCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of minimum approvers required for the approval request"
         }
       }
     },
@@ -5121,30 +5047,6 @@
           }
         ]
       }
-    },
-    "Approvers": {
-      "type": "object",
-      "description": "Approver Metadata for approvals request.",
-      "properties": {
-        "approverEntraId": {
-          "type": "string",
-          "description": "EntraId of the approver"
-        },
-        "actionPerformed": {
-          "$ref": "#/definitions/ActionPerformed",
-          "description": "Action Performed by approver"
-        },
-        "lastUpdatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "approval request last updated at"
-        }
-      },
-      "required": [
-        "approverEntraId",
-        "actionPerformed",
-        "lastUpdatedAt"
-      ]
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -5458,13 +5360,6 @@
           "description": "List of services governed by a community.",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
-        },
-        "communityRoleAssignmentList": {
-          "type": "array",
-          "description": "Community role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
           }
         },
         "approvalSettings": {
@@ -7098,26 +6993,6 @@
         }
       }
     },
-    "RoleAssignmentItem": {
-      "type": "object",
-      "description": "Role assignment item that indicates which principals should be assigned this role definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Role definition identifier"
-        },
-        "principals": {
-          "type": "array",
-          "description": "List of principal IDs to which to assign this role definition",
-          "items": {
-            "$ref": "#/definitions/Principal"
-          }
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "ServiceIdentifier": {
       "type": "string",
       "description": "Identifier for governed services.",
@@ -7508,20 +7383,6 @@
         "bastionEnabled": {
           "type": "boolean",
           "description": "Deploy Bastion service (True or False)."
-        },
-        "enclaveRoleAssignmentList": {
-          "type": "array",
-          "description": "Enclave role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "workloadRoleAssignmentList": {
-          "type": "array",
-          "description": "Workload role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
         }
       },
       "required": [
@@ -7563,20 +7424,6 @@
         "bastionEnabled": {
           "type": "boolean",
           "description": "Deploy Bastion service (True or False)."
-        },
-        "enclaveRoleAssignmentList": {
-          "type": "array",
-          "description": "Enclave role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "workloadRoleAssignmentList": {
-          "type": "array",
-          "description": "Workload role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
         }
       }
     },
