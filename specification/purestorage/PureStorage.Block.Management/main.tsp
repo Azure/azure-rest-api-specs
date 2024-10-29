@@ -43,6 +43,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v4_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v4_preview: "2024-10-01-preview",
+
+  @doc("Version 5 preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v5_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v5_preview: "2024-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -86,6 +92,157 @@ interface Reservations
     "Resource Operation accepted",
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
+
+  @added(Versions.v5_preview)
+  @doc("Provides various statistics about resources billed via given reservation.")
+  @armResourceAction(Reservation)
+  @action("getUsageDetails")
+  @post
+  getReservationBillingUsageDetails(
+    ...ResourceInstanceParameters<Reservation>,
+  ): ArmResponse<ReservationBillingStatus> | ErrorResponse;
+
+  @added(Versions.v5_preview)
+  @doc("This endpoint provides said data crunched into a format designed to provide more understandable explanations, useful for UI.")
+  @armResourceAction(Reservation)
+  @action("getUsageUiDetails")
+  @post
+  getReservationBillingUsageUiDetails(
+    ...ResourceInstanceParameters<Reservation>,
+  ): ArmResponse<ReservationBillingStatusUiDetails> | ErrorResponse;
+}
+
+@added(Versions.v5_preview)
+@doc("Various recent statistics for resources billed via a given reservation")
+model ReservationBillingStatus {
+  @doc("The time this usage was updated, in RFC 3339 format.")
+  timestamp: string;
+
+  @doc("Total used capacity as reported by associated storage pools. In bytes.")
+  totalUsedCapacityReported: int64;
+
+  @doc("How many associated storage pools have low DRR and thus cost more.")
+  lowDrrPoolCount: int32;
+
+  @doc("Average DRR for all pools.")
+  drrWeightedAverage: float64;
+
+  @doc("The sum of total used capacity for all pools with low DRR, if the DRR penalty applies. In bytes.")
+  totalNonReducibleReported: int64;
+
+  @doc("The extra base capacity accounted for low DRR storage pools; the total non-reducible, transformed into additional base bytes for billing. In bytes.")
+  extraUsedCapacityNonReducible: int64;
+
+  @doc("Extra base capacity accounted for rounding up low-usage pools to 30TiB. In bytes.")
+  extraUsedCapacityLowUsageRounding: int64;
+
+  @doc("Extra base capacity discounted due to plan forgiving some low-DRR usage. In bytes.")
+  extraUsedCapacityNonReduciblePlanDiscount: int64;
+
+  @doc("Total used capacity actually billed. In bytes.")
+  totalUsedCapacityBilled: int64;
+
+  @doc("Total used capacity included in plan. In bytes.")
+  totalUsedCapacityIncludedPlan: int64;
+
+  @doc("Total used capacity reported as overage. In bytes.")
+  totalUsedCapacityOverage: int64;
+
+  @doc("The sum of all performance settings across the pools under this reservation. In bytes per second.")
+  totalPerformanceReported: int64;
+
+  @doc("Total performance amount included in plan. In bytes per second.")
+  totalPerformanceIncludedPlan: int64;
+
+  @doc("Total performance amount reported as overage. In bytes per second.")
+  totalPerformanceOverage: int64;
+}
+
+@added(Versions.v5_preview)
+@doc("Reinterpreted billing statistics for resources billed under a given reservation.The format is designed for UI-based rendering. Text is UTF-8.")
+model ReservationBillingStatusUiDetails {
+  @doc("Rows of text to list.")
+  @extension("x-ms-identifiers", [])
+  rows: BillingDetailsRow[];
+}
+
+@added(Versions.v5_preview)
+@doc("Single informational row containing some text to show along with additional formatting directives.")
+model BillingDetailsRow {
+  @doc("Array of variably formatted text spans to show in the label column.")
+  @extension("x-ms-identifiers", [])
+  label: BillingDetailsSpan[];
+
+  @doc("Array of variably formatted text spans to show in the value column.")
+  @extension("x-ms-identifiers", [])
+  value: BillingDetailsSpan[];
+
+  @doc("Row indentation. Any value > 0 should include some formatting to make it clear it derives from a previous less indented line, for example a '↳' icon.")
+  indent: int32;
+
+  @doc("Tooltip meant to be used with 'ⓘ' icon.")
+  info?: BillingDetailsInfoBox;
+
+  @doc("Information boxes under the properties. The ones with '⚠' icon (warning) in Figma.")
+  alert?: BillingDetailsAlertBox;
+}
+
+@added(Versions.v5_preview)
+@doc("A text box with some additional information.")
+model BillingDetailsInfoBox {
+  @doc("Text lines to show. A line break should be inserted between two separate lines.")
+  @extension("x-ms-identifiers", [])
+  lines: BillingDetailsLine[];
+}
+
+@added(Versions.v5_preview)
+@doc("A text box with some additional information and icon.")
+model BillingDetailsAlertBox {
+  @doc("Which icon to show on the alert box.")
+  icon: Icon;
+
+  @doc("Text lines to show. A line break should be inserted between two separate lines.")
+  @extension("x-ms-identifiers", [])
+  lines: BillingDetailsLine[];
+}
+
+@added(Versions.v5_preview)
+@doc("Which icon to show on the alert box.")
+union Icon {
+  /** information icon */
+  info: "info",
+
+  /** alert icon */
+  alert: "alert",
+
+  /** error icon */
+  error: "error",
+
+  string,
+}
+
+@added(Versions.v5_preview)
+@doc("A text line to show.")
+model BillingDetailsLine {
+  @doc("Text spans to show.")
+  @extension("x-ms-identifiers", [])
+  spans: BillingDetailsSpan[];
+}
+
+@added(Versions.v5_preview)
+@doc("Formatted text span.")
+model BillingDetailsSpan {
+  @doc("Actual text to show. UTF-8.")
+  text: string;
+
+  @doc("If true the textual span should be rendered bold.")
+  bold: boolean;
+
+  @doc("If true the textual span should be rendered italic.")
+  italic: boolean;
+
+  @doc("If true the textual span should be rendered struck through.")
+  strikethrough: boolean;
 }
 
 @doc("Storage Pool resource type.")
