@@ -1,26 +1,14 @@
 {
+  "operationId": "RoleDefinitions_Delete",
+  "title": "Delete a custom role definition",
   "parameters": {
     "vaultBaseUrl": "https://myvault.vault.azure.net/",
-    "scope": "keys",
+    "scope": "/",
     "roleDefinitionName": "00000000-0000-0000-0000-000000000000",
-    "parameters": {
-      "properties": {
-        "roleName": "My custom role",
-        "type": "CustomRole",
-        "description": "Role description",
-        "permissions": [
-          {
-            "dataActions": [
-              "Microsoft.KeyVault/managedHsm/keys/sign/action"
-            ]
-          }
-        ]
-      }
-    },
-    "api-version": "7.6-preview.1"
+    "api-version": "7.5"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "properties": {
           "roleName": "My custom role",
