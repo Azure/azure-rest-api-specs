@@ -30,6 +30,8 @@ on:
     # Run 4x/day
     - cron: '0 0,6,12,18 * * *'
 
+  workflow_dispatch:
+
 jobs:
   typespec-validation-all:
     name: TypeSpec Validation All
@@ -41,6 +43,10 @@ jobs:
         shard: [0, 1, 2]
         # total-shards must be an accurate count of the number of shards
         total-shards: [3]
+        # When triggered by schedule, validate both the default branch and typespec-next
+        # Use the placeholder string "default" instead of passing "" directly, since the latter gets ignored by
+        # the GitHub Jobs UI.
+        ref: ${{ fromJSON(github.event_name == 'schedule' && '["default", "typespec-next"]' || '["default"]') }}
 
     runs-on: ${{ matrix.os }}
 
@@ -51,7 +57,8 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
+          ref: ${{ matrix.ref != 'default' && matrix.ref || '' }}
 
       - name: Setup Node 20 and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
