@@ -10,6 +10,8 @@ namespace: azure.mgmt.redisenterprise
 package-name: azure-mgmt-redisenterprise
 package-version: 2.0.0
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ```yaml $(python)

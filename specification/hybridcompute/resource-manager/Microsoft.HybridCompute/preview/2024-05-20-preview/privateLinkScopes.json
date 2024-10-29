@@ -951,6 +951,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1413,6 +1419,16 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationReconcileResult": {
+      "type": "object",
+      "description": "Result of network security perimeter configurations.",
+      "properties": {
+        "location": {
+          "description": "The URL of the resource used to check the status of the asynchronous operation.",
+          "type": "string"
         }
       }
     },

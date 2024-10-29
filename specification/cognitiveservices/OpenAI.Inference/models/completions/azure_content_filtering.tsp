@@ -173,7 +173,7 @@ model ContentFilterCitedDetectionResult {
   url?: url;
 
   @doc("The license description associated with the detection.")
-  license: string;
+  license?: string;
 }
 
 @doc("Represents the outcome of an evaluation against a custom blocklist as performed by content filtering.")
@@ -191,5 +191,5 @@ model ContentFilterDetailedResults {
   ...FilteredResultBase;
 
   @doc("The collection of detailed blocklist result information.")
-  details: ContentFilterBlocklistIdResult[];
+  details?: ContentFilterBlocklistIdResult[];
 }
