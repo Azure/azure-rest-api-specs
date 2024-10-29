@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
@@ -35,9 +37,10 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(fullBackupStatus)
+@finalOperation(fullBackupStatus)
 @route("/backup")
 @post
-op fullBackup is Azure.Core.Foundations.LongRunningOperation<
+op fullBackup is Azure.Core.Foundations.Operation<
   {
     /**
      * Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be
@@ -73,9 +76,10 @@ op fullBackup is Azure.Core.Foundations.LongRunningOperation<
  * backup operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@added(KeyVault.Versions.`v7.6_preview.1`)
 @route("/prebackup")
 @post
-op preFullBackup is Azure.Core.Foundations.LongRunningOperation<
+op preFullBackup is Azure.Core.Foundations.Operation<
   {
     /** Optional parameters to validate prior to performing a full backup operation. */
     @body preBackupOperationParameters?: PreBackupOperationParameters;
@@ -125,9 +129,10 @@ op restoreStatus is Azure.Core.Foundations.Operation<
  * restore operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@added(KeyVault.Versions.`v7.6_preview.1`)
 @route("/prerestore")
 @put
-op preFullRestoreOperation is Azure.Core.Foundations.LongRunningOperation<
+op preFullRestoreOperation is Azure.Core.Foundations.Operation<
   {
     /** Optional pre restore parameters to validate prior to performing a full restore operation. */
     @body preRestoreOperationParameters: PreRestoreOperationParameters;
@@ -161,9 +166,10 @@ op preFullRestoreOperation is Azure.Core.Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(restoreStatus)
+@finalOperation(restoreStatus)
 @route("/restore")
 @put
-op fullRestoreOperation is Azure.Core.Foundations.LongRunningOperation<
+op fullRestoreOperation is Azure.Core.Foundations.Operation<
   {
     /** The Azure blob SAS token pointing to a folder where the previous successful full backup was stored. */
     @body restoreBlobDetails: RestoreOperationParameters;
@@ -197,9 +203,10 @@ op fullRestoreOperation is Azure.Core.Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(restoreStatus)
+@finalOperation(restoreStatus)
 @route("/keys/{keyName}/restore")
 @put
-op selectiveKeyRestoreOperation is Azure.Core.Foundations.LongRunningOperation<
+op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key to be restored from the user supplied backup
