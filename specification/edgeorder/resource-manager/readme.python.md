@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-edgeorder
 namespace: azure.mgmt.edgeorder
-package-version: 2.0.0
+package-version: 3.0.0
 clear-output-folder: true
 title: EdgeOrderManagementClient
 description: The EdgeOrder Client.
