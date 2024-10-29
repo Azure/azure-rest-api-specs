@@ -9,10 +9,16 @@ using Azure.ClientGenerator.Core;
   Access.internal
 );
 @@access(Azure.AI.Projects.GetConnectionResponse, Access.internal);
-@@access(Azure.AI.Projects.ConnectionProperties, Access.internal);
-@@access(Azure.AI.Projects.ConnectionPropertiesApiKeyAuth, Access.internal);
-@@access(Azure.AI.Projects.ConnectionPropertiesAADAuth, Access.internal);
-@@access(Azure.AI.Projects.ConnectionPropertiesSASAuth, Access.internal);
+@@access(Azure.AI.Projects.InternalConnectionProperties, Access.internal);
+@@access(Azure.AI.Projects.InternalConnectionPropertiesApiKeyAuth,
+  Access.internal
+);
+@@access(Azure.AI.Projects.InternalConnectionPropertiesAADAuth,
+  Access.internal
+);
+@@access(Azure.AI.Projects.InternalConnectionPropertiesSASAuth,
+  Access.internal
+);
 @@access(Azure.AI.Projects.CredentialsApiKeyAuth, Access.internal);
 @@access(Azure.AI.Projects.CredentialsSASAuth, Access.internal);
 
