@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @service({
-  title: "Azure App Configuration",
+  title: "Azure App Configuration test",
 })
 @versioned(Versions)
 @useAuth(
