@@ -267,37 +267,6 @@ model MetadataSchemaProperties {
   assignedTo?: MetadataAssignment[];
 }
 
-@added(Versions.v2024_06_01_preview)
-@doc("The import from Azure API Management request.")
-model ImportFromApimRequest {
-  @doc("An entity the metadata schema is requested for.")
-  sourceResourceIds?: string[];
-}
-
-@added(Versions.v2024_06_01_preview)
-@doc("The import operation was successfully completed.")
-model ImportFromApimSuccessResult {
-  /**
-   * The successful response status code.
-   */
-  @statusCode code: 200;
-
-  /**
-   * Async operation status.
-   */
-  status: string;
-
-  /**
-   * Async operation start time.
-   */
-  startTime: utcDateTime;
-
-  /**
-   * Async operation end time.
-   */
-  endTime?: utcDateTime;
-}
-
 @doc("Assignment metadata")
 model MetadataAssignment {
   @doc("The entities this metadata schema component gets applied to.")
@@ -627,21 +596,22 @@ union ShouldImportSpec {
 /**
  * API source configuration for Azure API Management.
  */
+@added(Versions.v2024_06_01_preview)
 model ApimSource {
   /**
    * API Management service resource ID.
    */
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The resource ID of the managed identity that has access to the API Management instance.
    */
-  msiResourceId?: string;
+  msiResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * The target environment resource ID.
    */
-  targetEnvironmentId?: string;
+  targetEnvironmentId?: Azure.Core.armResourceIdentifier;
 
   /**
    * The target lifecycle stage.
@@ -658,6 +628,7 @@ model ApimSource {
 /**
  * The link state.
  */
+@added(Versions.v2024_06_01_preview)
 model LinkState {
   /**
    * The state of the link.

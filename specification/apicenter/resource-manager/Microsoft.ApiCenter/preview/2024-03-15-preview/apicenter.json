@@ -3954,36 +3954,6 @@
         "lifecycleStage"
       ]
     },
-    "ApimSource": {
-      "type": "object",
-      "description": "API source configuration for Azure API Management.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "API Management service resource ID."
-        },
-        "msiResourceId": {
-          "type": "string",
-          "description": "The resource ID of the managed identity that has access to the API Management instance."
-        },
-        "targetEnvironmentId": {
-          "type": "string",
-          "description": "The target environment resource ID."
-        },
-        "targetLifecycleStage": {
-          "$ref": "#/definitions/LifecycleStage",
-          "description": "The target lifecycle stage."
-        },
-        "linkState": {
-          "$ref": "#/definitions/LinkState",
-          "description": "The state of the API source link",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "resourceId"
-      ]
-    },
     "Contact": {
       "type": "object",
       "description": "Contact information",
@@ -4499,28 +4469,6 @@
           }
         ]
       }
-    },
-    "LinkState": {
-      "type": "object",
-      "description": "The link state.",
-      "properties": {
-        "state": {
-          "type": "string",
-          "description": "The state of the link."
-        },
-        "message": {
-          "type": "string",
-          "description": "The state message."
-        },
-        "lastUpdatedOn": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the last update of the link state."
-        }
-      },
-      "required": [
-        "lastUpdatedOn"
-      ]
     },
     "ManagedServiceIdentityType": {
       "type": "string",

@@ -49,12 +49,4 @@ interface Services {
     MetadataSchemaExportRequest,
     MetadataSchemaExportResult
   >;
-
-  @doc("Imports APIs from Azure API Management.")
-  @added(Versions.v2024_06_01_preview)
-  importFromApim is ArmResourceActionAsync<
-    Service,
-    ImportFromApimRequest,
-    ImportFromApimSuccessResult
-  >;
 }
