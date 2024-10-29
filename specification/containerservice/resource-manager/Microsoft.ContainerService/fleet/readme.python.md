@@ -10,6 +10,7 @@ package-name: azure-mgmt-containerservicefleet
 namespace: azure.mgmt.containerservicefleet
 package-version: 3.0.0
 clear-output-folder: true
+title: ContainerServiceFleetMgmtClient
 ```
 
 ``` yaml $(python)
