@@ -2001,14 +2001,6 @@
           "description": "The callback URI.",
           "type": "string"
         },
-        "mediaStreamingConfiguration": {
-          "$ref": "#/definitions/MediaStreamingConfiguration",
-          "description": "Media Streaming Configuration."
-        },
-        "transcriptionConfiguration": {
-          "$ref": "#/definitions/TranscriptionConfiguration",
-          "description": "Live Transcription Configuration."
-        },
         "callIntelligenceOptions": {
           "$ref": "#/definitions/CallIntelligenceOptions",
           "description": "AI options for the call."
@@ -2016,6 +2008,14 @@
         "customCallingContext": {
           "$ref": "#/definitions/CustomCallingContext",
           "description": "Used by customer to send custom calling context to targets"
+        },
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Options."
+        },
+        "transcriptionOptions": {
+          "$ref": "#/definitions/TranscriptionOptions",
+          "description": "Transcription Options."
         }
       }
     },
@@ -2055,6 +2055,36 @@
     "MicrosoftTeamsAppIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
     },
+    "CallIntelligenceOptions": {
+      "description": "AI options for the call.",
+      "type": "object",
+      "properties": {
+        "cognitiveServicesEndpoint": {
+          "description": "The identifier of the Cognitive Service resource assigned to this call.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomCallingContext": {
+      "description": "The custom calling context which will be sent to the target",
+      "type": "object",
+      "properties": {
+        "voipHeaders": {
+          "description": "Custom calling context VoiP headers",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sipHeaders": {
+          "description": "Custom calling context SIP headers",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "MediaStreamingTransportType": {
       "description": "The type of transport to be used for media streaming, eg. Websocket",
       "enum": [
@@ -2089,7 +2119,31 @@
         "modelAsString": true
       }
     },
-    "MediaStreamingConfiguration": {
+    "AudioFormat": {
+      "description": "Specifies the audio format used for encoding, including sample rate and channel type.",
+      "enum": [
+        "pcm16KMono",
+        "pcm24KMono"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AudioFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pcm16KMono",
+            "description": "Pcm16KMono",
+            "value": "Pcm16KMono"
+          },
+          {
+            "name": "Pcm24KMono",
+            "description": "Pcm24KMono",
+            "value": "Pcm24KMono"
+          }
+        ]
+      }
+    },
+    "MediaStreamingOptions": {
       "description": "Configuration of Media streaming.",
       "required": [
         "transportUrl",
@@ -2115,6 +2169,13 @@
         "startMediaStreaming": {
           "description": "Determines if the media streaming should be started immediately after call is answered or not.",
           "type": "boolean"
+        },
+        "enableBidirectional": {
+          "description": "A value indicating whether bidirectional streaming is enabled.",
+          "type": "boolean"
+        },
+        "audioFormat": {
+          "$ref": "#/definitions/AudioFormat"
         }
       }
     },
@@ -2129,7 +2190,7 @@
         "modelAsString": true
       }
     },
-    "TranscriptionConfiguration": {
+    "TranscriptionOptions": {
       "description": "Configuration of live transcription.",
       "required": [
         "transportUrl",
@@ -2150,39 +2211,17 @@
           "description": "Defines the locale for the data e.g en-CA, en-AU",
           "type": "string"
         },
+        "speechRecognitionModelEndpointId": {
+          "description": "Endpoint where the custom model was deployed.",
+          "type": "string"
+        },
         "startTranscription": {
           "description": "Determines if the transcription should be started immediately after call is answered or not.",
           "type": "boolean"
-        }
-      }
-    },
-    "CallIntelligenceOptions": {
-      "description": "AI options for the call.",
-      "type": "object",
-      "properties": {
-        "cognitiveServicesEndpoint": {
-          "description": "The identifier of the Cognitive Service resource assigned to this call.",
-          "type": "string"
-        }
-      }
-    },
-    "CustomCallingContext": {
-      "description": "The custom calling context which will be sent to the target",
-      "type": "object",
-      "properties": {
-        "voipHeaders": {
-          "description": "Custom calling context VoiP headers",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
-        "sipHeaders": {
-          "description": "Custom calling context SIP headers",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "enableIntermediateResults": {
+          "description": "Enables intermediate results for the transcribed speech.",
+          "type": "boolean"
         }
       }
     },
@@ -2401,14 +2440,6 @@
           "description": "A customer set value used to track the answering of a call.",
           "type": "string"
         },
-        "mediaStreamingConfiguration": {
-          "$ref": "#/definitions/MediaStreamingConfiguration",
-          "description": "Media Streaming Configuration."
-        },
-        "transcriptionConfiguration": {
-          "$ref": "#/definitions/TranscriptionConfiguration",
-          "description": "Live Transcription Configuration."
-        },
         "callIntelligenceOptions": {
           "$ref": "#/definitions/CallIntelligenceOptions",
           "description": "AI options for the call."
@@ -2416,6 +2447,14 @@
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the call automation entity which answers the call"
+        },
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Options."
+        },
+        "transcriptionOptions": {
+          "$ref": "#/definitions/TranscriptionOptions",
+          "description": "Transcription Options."
         }
       }
     },
@@ -2494,13 +2533,13 @@
           "$ref": "#/definitions/CallIntelligenceOptions",
           "description": "AI options for the call."
         },
-        "mediaStreamingConfiguration": {
-          "$ref": "#/definitions/MediaStreamingConfiguration",
-          "description": "Media Streaming Configuration."
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Options."
         },
-        "transcriptionConfiguration": {
-          "$ref": "#/definitions/TranscriptionConfiguration",
-          "description": "Live Transcription Configuration."
+        "transcriptionOptions": {
+          "$ref": "#/definitions/TranscriptionOptions",
+          "description": "Transcription Options."
         }
       }
     },
