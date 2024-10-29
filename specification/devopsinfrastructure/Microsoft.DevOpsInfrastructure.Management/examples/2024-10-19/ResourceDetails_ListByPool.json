@@ -1,0 +1,37 @@
+{
+  "title": "ResourceDetails_ListByPool",
+  "operationId": "ResourceDetails_ListByPool",
+  "parameters": {
+    "api-version": "2024-10-19",
+    "subscriptionId": "a2e95d27-c161-4b61-bda4-11512c14c2c2",
+    "resourceGroupName": "my-resource-group",
+    "poolName": "my-dev-ops-pool"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/my-resource-group/providers/Microsoft.DevOpsInfrastructure/pools/my-devops-pool/resources/my-dev-ops-pool:04dcde21-626e-5a7e-8659-ce12f9284b29:dd8cc705c_0",
+            "name": "dd8cc705c000000",
+            "properties": {
+              "image": "my-image",
+              "imageVersion": "4.0.0",
+              "status": "Ready"
+            }
+          },
+          {
+            "id": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/my-resource-group/providers/Microsoft.DevOpsInfrastructure/pools/my-devops-pool/resources/my-dev-ops-pool:04dcde21-626e-5a7e-8659-ce12f9284b29:dd8cc705c_1",
+            "name": "dd8cc705c000001",
+            "properties": {
+              "image": "my-image",
+              "imageVersion": "4.0.0",
+              "status": "Allocated"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

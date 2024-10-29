@@ -1,12 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace DocumentTranslation;
 
@@ -50,6 +52,7 @@ interface DocumentTranslationOperations {
     destination, it will be overwritten. The targetUrl for each target language
     must be unique.
     """)
+  @finalOperation(DocumentTranslationOperations.getTranslationStatus)
   @pollingOperation(DocumentTranslationOperations.getTranslationStatus)
   @route("/document/batches")
   @post
@@ -180,6 +183,7 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
+      @clientName("translationIds")
       @query("ids")
       ids?: uuid[];
 
@@ -213,6 +217,7 @@ interface DocumentTranslationOperations {
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The batch id")
+      @clientName("translationId")
       @path
       id: uuid;
 
@@ -236,6 +241,7 @@ interface DocumentTranslationOperations {
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
+      @clientName("translationId")
       @path
       id: uuid;
     },
@@ -259,6 +265,7 @@ interface DocumentTranslationOperations {
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation-id")
+      @clientName("translationId")
       @path
       id: uuid;
     },
@@ -320,6 +327,7 @@ interface DocumentTranslationOperations {
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
+      @clientName("translationId")
       @path
       id: uuid;
 
@@ -376,6 +384,7 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
+      @clientName("documentIds")
       @query("ids")
       ids?: uuid[];
 

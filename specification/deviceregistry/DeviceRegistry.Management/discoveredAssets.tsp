@@ -17,6 +17,7 @@ namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered Asset definition.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
   @doc("Discovered Asset name parameter.")
   @key("discoveredAssetName")
@@ -36,6 +37,7 @@ model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
 
 @doc("Defines the discovered asset properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredAssetProperties {
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
   @visibility("read", "create")
@@ -95,6 +97,7 @@ model DiscoveredAssetProperties {
 
 @doc("Defines the dataset properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredDataset {
   @doc("Name of the dataset.")
   name: string;
@@ -112,6 +115,7 @@ model DiscoveredDataset {
 
 @doc("Defines the data point properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredDataPoint {
   @doc("The name of the data point.")
   name: string;
@@ -128,6 +132,7 @@ model DiscoveredDataPoint {
 
 @doc("Defines the event properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredEvent {
   @doc("The name of the event.")
   name: string;
@@ -145,15 +150,9 @@ model DiscoveredEvent {
   lastUpdatedOn?: utcDateTime;
 }
 
-// The updateable properties of the Discovered Asset.
-// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-// since otherwise it extends the ARM TrackedResource type.
-alias DiscoveredAssetPropertiesUpdate = {
-  ...OptionalProperties<UpdateableProperties<DiscoveredAssetProperties>>;
-};
-
 @armResourceOperations
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 interface DiscoveredAssets {
   get is ArmResourceRead<DiscoveredAsset>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<DiscoveredAsset>;
@@ -164,7 +163,7 @@ interface DiscoveredAssets {
     DiscoveredAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       DiscoveredAsset,
-      DiscoveredAssetPropertiesUpdate
+      DiscoveredAssetProperties
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAsset>;
