@@ -587,6 +587,19 @@
               "$ref": "#/definitions/RouteOperation"
             }
           },
+          "404": {
+            "description": "The operation resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
@@ -615,7 +628,7 @@
         ],
         "x-ms-client-name": "Route_GetOperationResult",
         "x-ms-examples": {
-          "Successfully retrieve the async matrix result": {
+          "Retrieve the async matrix result": {
             "$ref": "./examples/GetRouteMatrixAsyncResult.json"
           }
         },
@@ -639,6 +652,19 @@
             "schema": {
               "$ref": "#/definitions/RouteOperationResponse"
             }
+          },
+          "404": {
+            "description": "The operation resource result was not found.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error occurred.",
