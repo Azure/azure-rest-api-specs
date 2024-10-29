@@ -1265,6 +1265,9 @@
           "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
         },
         {
+          "$ref": "#/parameters/LoggingConfigurationNameParameter"
+        },
+        {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
         }
       ],
@@ -2206,6 +2209,14 @@
       "required": true,
       "type": "string",
       "description": "The location of network security perimeter.",
+      "x-ms-parameter-location": "method"
+    },
+    "LoggingConfigurationNameParameter": {
+      "name": "loggingConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP logging configuration. Accepts 'instance' as name.",
       "x-ms-parameter-location": "method"
     }
   }
