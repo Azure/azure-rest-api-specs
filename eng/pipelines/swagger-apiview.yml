@@ -5,6 +5,9 @@ parameters:
   - name: SwaggerApiParserVersion
     type: string
     default: '1.3.0-dev.20241029.2'
+  - name: APIViewArtifactsDirectoryName
+    type: string
+    default: 'SwaggerAPIViewArtifacts'
 
 trigger: none
 
@@ -25,11 +28,14 @@ jobs:
   - pwsh: |
       $(Build.SourcesDirectory)/eng/scripts/Swagger-APIView.ps1 `
         -TempDirectory "$(Agent.TempDirectory)" `
-        -ArtiFactsDirectory "$(Build.ArtifactStagingDirectory)"
+        -ArtiFactsStagingDirectory "$(Build.ArtifactStagingDirectory)" `
+        -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} 
     displayName: Generate Swagger APIView Tokens
     ignoreLASTEXITCODE: true
 
-  - pwsh: |
-      Get-ChildItem -Path $(Build.ArtifactStagingDirectory) -Recurse
-    displayName: See Generated Files
-    ignoreLASTEXITCODE: true
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/${{ parameters.APIViewArtifactsDirectoryName }}'
+      artifactName: 'swaggerAPIViewArtifacts'
+      publishLocation: 'pipeline'
+    displayName: 'Publish Swagger APIView Artifacts'
