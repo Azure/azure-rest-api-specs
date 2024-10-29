@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLServerManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
-    "version": "2024-03-01-preview"
+    "version": "2024-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,63 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}": {
+      "put": {
         "tags": [
-          "Configurations"
+          "Backups"
         ],
-        "operationId": "Configurations_ListByServer",
+        "operationId": "Backups_Create",
         "x-ms-examples": {
-          "ConfigurationList": {
-            "$ref": "./examples/ConfigurationListByServer.json"
+          "Create a new Backup for a flexible server": {
+            "$ref": "./examples/BackupCreate.json"
           }
         },
-        "description": "List all the configurations in a given server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations/{configurationName}": {
-      "get": {
-        "tags": [
-          "Configurations"
-        ],
-        "operationId": "Configurations_Get",
-        "x-ms-examples": {
-          "ConfigurationGet": {
-            "$ref": "./examples/ConfigurationGet.json"
-          }
-        },
-        "description": "Gets information about a configuration of server.",
+        "description": "Create a specific backup for PostgreSQL flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -105,72 +60,20 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigurationNameParameter"
+            "$ref": "#/parameters/BackupNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Configuration"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Configurations"
-        ],
-        "operationId": "Configurations_Update",
-        "x-ms-examples": {
-          "Update a user configuration": {
-            "$ref": "./examples/ConfigurationUpdate.json"
-          }
-        },
-        "description": "Updates a configuration of a server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigurationNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationForUpdate"
-            },
-            "description": "The required parameters for updating a server configuration."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Configuration"
+              "$ref": "#/definitions/ServerBackup"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Successfully created backup",
             "schema": {
-              "$ref": "#/definitions/Configuration"
+              "$ref": "#/definitions/ServerBackup"
             }
           },
           "202": {
@@ -193,17 +96,17 @@
           "final-state-via": "azure-async-operation"
         }
       },
-      "put": {
+      "delete": {
         "tags": [
-          "Configurations"
+          "Backups"
         ],
-        "operationId": "Configurations_Put",
+        "operationId": "Backups_Delete",
         "x-ms-examples": {
-          "Update a user configuration": {
-            "$ref": "./examples/ConfigurationUpdate.json"
+          "Delete a specific backup": {
+            "$ref": "./examples/BackupDelete.json"
           }
         },
-        "description": "Updates a configuration of a server.",
+        "description": "Deletes a specific backup.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -218,31 +121,10 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigurationNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Configuration"
-            },
-            "description": "The required parameters for updating a server configuration."
+            "$ref": "#/parameters/BackupNameParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Configuration"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Configuration"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -250,6 +132,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -262,86 +147,132 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
+      },
+      "get": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Get",
+        "x-ms-examples": {
+          "Get a backup for a server": {
+            "$ref": "./examples/BackupGet.json"
+          }
+        },
+        "description": "Get specific backup for a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerBackup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups": {
+      "get": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_ListByServer",
+        "x-ms-examples": {
+          "List backups for a server": {
+            "$ref": "./examples/BackupListByServer.json"
+          }
+        },
+        "description": "List all the backups for a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerBackupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     }
   },
   "definitions": {
-    "ConfigurationProperties": {
+    "ServerBackupProperties": {
       "type": "object",
       "properties": {
-        "value": {
+        "backupType": {
           "type": "string",
-          "description": "Value of the configuration. Required to update the configuration."
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Description of the configuration."
-        },
-        "defaultValue": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Default value of the configuration."
-        },
-        "dataType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Data type of the configuration.",
+          "description": "Backup type.",
           "enum": [
-            "Boolean",
-            "Numeric",
-            "Integer",
-            "Enumeration"
+            "Full",
+            "Customer On-Demand"
           ],
           "x-ms-enum": {
-            "name": "ConfigurationDataType",
+            "name": "Origin",
             "modelAsString": true
           }
         },
-        "allowedValues": {
+        "completedTime": {
           "type": "string",
-          "readOnly": true,
-          "description": "Allowed values of the configuration."
+          "format": "date-time",
+          "description": "Backup completed time (ISO8601 format)."
         },
         "source": {
           "type": "string",
-          "description": "Source of the configuration. Required to update the configuration."
-        },
-        "isDynamicConfig": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Configuration dynamic or static."
-        },
-        "isReadOnly": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Configuration read-only or not."
-        },
-        "isConfigPendingRestart": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Configuration is pending restart or not."
-        },
-        "unit": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Configuration unit."
-        },
-        "documentationLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Configuration documentation link."
+          "description": "Backup source"
         }
       },
-      "description": "The properties of a configuration."
+      "description": "The properties of a server backup."
     },
-    "Configuration": {
+    "ServerBackup": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConfigurationProperties",
+          "$ref": "#/definitions/ServerBackupProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a configuration."
+          "description": "The properties of a server backup."
         }
       },
       "allOf": [
@@ -349,44 +280,33 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Represents a Configuration."
+      "description": "Server backup properties"
     },
-    "ConfigurationForUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConfigurationProperties",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a configuration."
-        }
-      },
-      "description": "Represents a Configuration."
-    },
-    "ConfigurationListResult": {
+    "ServerBackupListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Configuration"
+            "$ref": "#/definitions/ServerBackup"
           },
-          "description": "The list of server configurations."
+          "description": "The list of backups of a server."
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
           "type": "string"
         }
       },
-      "description": "A list of server configurations."
+      "description": "A list of server backups."
     }
   },
   "parameters": {
-    "ConfigurationNameParameter": {
-      "name": "configurationName",
+    "BackupNameParameter": {
+      "name": "backupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the server configuration.",
+      "description": "The name of the backup.",
       "minLength": 1,
       "pattern": "^[-\\w\\._]+$",
       "x-ms-parameter-location": "method"
