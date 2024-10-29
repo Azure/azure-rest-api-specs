@@ -21,9 +21,5 @@ jobs:
         # step as failed. 
         $ErrorActionPreference = 'Continue'
 
-        eng/scripts/TypeSpec-Requirement.ps1 `
-          -BaseCommitish HEAD^ `
-          -TargetCommitish HEAD `
-          -SpecType ${{ matrix.spec-type }}
         ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
       shell: pwsh
