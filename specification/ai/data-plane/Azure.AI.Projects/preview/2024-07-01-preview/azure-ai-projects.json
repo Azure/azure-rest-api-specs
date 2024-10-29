@@ -958,37 +958,31 @@
             }
           }
         }
-      },
-      "delete": {
-        "operationId": "Evaluations_DeleteSchedule",
-        "description": "Resource delete operation template.",
+      }
+    },
+    "/evaluations/schedules/{name}/disable": {
+      "patch": {
+        "operationId": "Evaluations_DisableSchedule",
+        "description": "Disable the evaluation schedule.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "apiVersion",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
+            "description": "Name of the evaluation schedule.",
             "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -8522,18 +8516,13 @@
         "trigger": {
           "$ref": "#/definitions/Trigger",
           "description": "Trigger for the evaluation."
-        },
-        "samplingStrategy": {
-          "$ref": "#/definitions/SamplingStrategy",
-          "description": "Sampling strategy for the evaluation."
         }
       },
       "required": [
         "name",
         "data",
         "evaluators",
-        "trigger",
-        "samplingStrategy"
+        "trigger"
       ]
     },
     "EvaluationUpdate": {
@@ -8926,20 +8915,6 @@
         }
       ],
       "x-ms-discriminator-value": "Recurrence"
-    },
-    "SamplingStrategy": {
-      "type": "object",
-      "description": "SamplingStrategy Definition",
-      "properties": {
-        "rate": {
-          "type": "number",
-          "format": "float",
-          "description": "Sampling rate"
-        }
-      },
-      "required": [
-        "rate"
-      ]
     },
     "SystemData": {
       "type": "object",

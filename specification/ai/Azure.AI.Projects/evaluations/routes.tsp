@@ -57,6 +57,19 @@ interface Evaluations {
     EvaluationSchedule,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
+  
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  @route("schedules/{name}/disable")
+  @patch
+  @doc("Disable the evaluation schedule.")
+  disableSchedule(
+    @query
+    @doc("The API version to use for this operation.")
+    apiVersion: string,
 
-  deleteSchedule is EvaluationsOperations.ResourceDelete<EvaluationSchedule>;
+    @path
+    @doc("Name of the evaluation schedule.")
+    name: string,
+  ): NoContentResponse | ErrorResponse;
 }
