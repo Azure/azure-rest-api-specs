@@ -3885,6 +3885,15 @@
     "Agents.BingGroundingToolDefinition": {
       "type": "object",
       "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
+      "properties": {
+        "bing_grounding": {
+          "$ref": "#/definitions/Agents.ToolConnectionList",
+          "description": "The list of connections used by the bing grounding tool."
+        }
+      },
+      "required": [
+        "bing_grounding"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.ToolDefinition"
@@ -3917,36 +3926,6 @@
           "x-ms-client-name": "fileIds"
         }
       }
-    },
-    "Agents.ConnectionListResource": {
-      "type": "object",
-      "description": "A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint` tools.",
-      "properties": {
-        "connections": {
-          "type": "array",
-          "description": "The connections attached to this agent. There can be a maximum of 1 connection\nresource attached to the agent.",
-          "maxItems": 1,
-          "items": {
-            "$ref": "#/definitions/Agents.ConnectionResource"
-          },
-          "x-ms-client-name": "connectionList",
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "Agents.ConnectionResource": {
-      "type": "object",
-      "description": "A connection resource.",
-      "properties": {
-        "connection_id": {
-          "type": "string",
-          "description": "A connection in a ConnectionListResource attached to this agent.",
-          "x-ms-client-name": "connectionId"
-        }
-      },
-      "required": [
-        "connection_id"
-      ]
     },
     "Agents.CreateAgentOptions": {
       "type": "object",
@@ -4311,21 +4290,6 @@
           "$ref": "#/definitions/Agents.CreateFileSearchToolResourceOptions",
           "description": "A list of vector stores or their IDs made available to the `file_search` tool.",
           "x-ms-client-name": "fileSearch"
-        },
-        "bing_grounding": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "A list of connections to be used by the `bing_grounding` tool consisting of connection IDs.",
-          "x-ms-client-name": "bingGrounding"
-        },
-        "microsoft_fabric": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "A list of connections to be used by the `microsoft_fabric` tool consisting of connection IDs.",
-          "x-ms-client-name": "microsoftFabric"
-        },
-        "sharepoint": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "A list of connections to be used by the `sharepoint` tool consisting of connection IDs.",
-          "x-ms-client-name": "sharePoint"
         },
         "azure_ai_search": {
           "$ref": "#/definitions/Agents.AzureAISearchResource",
@@ -5344,6 +5308,15 @@
     "Agents.MicrosoftFabricToolDefinition": {
       "type": "object",
       "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
+      "properties": {
+        "microsoft_fabric": {
+          "$ref": "#/definitions/Agents.ToolConnectionList",
+          "description": "The list of connections used by the Microsoft Fabric tool."
+        }
+      },
+      "required": [
+        "microsoft_fabric"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.ToolDefinition"
@@ -6608,6 +6581,15 @@
     "Agents.SharepointToolDefinition": {
       "type": "object",
       "description": "The input definition information for a sharepoint tool as used to configure an agent.",
+      "properties": {
+        "sharepoint": {
+          "$ref": "#/definitions/Agents.ToolConnectionList",
+          "description": "The list of connections used by the SharePoint tool."
+        }
+      },
+      "required": [
+        "sharepoint"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.ToolDefinition"
@@ -7079,6 +7061,36 @@
         ]
       }
     },
+    "Agents.ToolConnection": {
+      "type": "object",
+      "description": "A connection resource.",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "A connection in a ToolConnectionList attached to this tool.",
+          "x-ms-client-name": "connectionId"
+        }
+      },
+      "required": [
+        "connection_id"
+      ]
+    },
+    "Agents.ToolConnectionList": {
+      "type": "object",
+      "description": "A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint` tools.",
+      "properties": {
+        "connections": {
+          "type": "array",
+          "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Agents.ToolConnection"
+          },
+          "x-ms-client-name": "connectionList",
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "Agents.ToolDefinition": {
       "type": "object",
       "description": "An abstract representation of an input tool definition that an agent can use.",
@@ -7121,21 +7133,6 @@
           "$ref": "#/definitions/Agents.FileSearchToolResource",
           "description": "Resources to be used by the `file_search` tool consisting of vector store IDs.",
           "x-ms-client-name": "fileSearch"
-        },
-        "bing_grounding": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "Resources to be used by the `bing_grounding` tool consisting of connection IDs.",
-          "x-ms-client-name": "bingGrounding"
-        },
-        "microsoft_fabric": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "Resources to be used by the `microsoft_fabric` tool consisting of connection IDs.",
-          "x-ms-client-name": "microsoftFabric"
-        },
-        "sharepoint": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "Resources to be used by the `sharepoint` tool consisting of connection IDs.",
-          "x-ms-client-name": "sharePoint"
         },
         "azure_ai_search": {
           "$ref": "#/definitions/Agents.AzureAISearchResource",
@@ -7345,21 +7342,6 @@
           "$ref": "#/definitions/Agents.UpdateFileSearchToolResourceOptions",
           "description": "Overrides the vector store attached to this agent. There can be a maximum of 1 vector store attached to the agent.",
           "x-ms-client-name": "fileSearch"
-        },
-        "bing_grounding": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "Overrides the list of connections to be used by the `bing_grounding` tool consisting of connection IDs.",
-          "x-ms-client-name": "bingGrounding"
-        },
-        "microsoft_fabric": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "Overrides the list of connections to be used by the `microsoft_fabric` tool consisting of connection IDs.",
-          "x-ms-client-name": "microsoftFabric"
-        },
-        "sharepoint": {
-          "$ref": "#/definitions/Agents.ConnectionListResource",
-          "description": "Overrides the list of connections to be used by the `sharepoint` tool consisting of connection IDs.",
-          "x-ms-client-name": "sharePoint"
         },
         "azure_ai_search": {
           "$ref": "#/definitions/Agents.AzureAISearchResource",
