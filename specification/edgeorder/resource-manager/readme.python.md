@@ -10,6 +10,8 @@ package-name: azure-mgmt-edgeorder
 namespace: azure.mgmt.edgeorder
 package-version: 2.0.0
 clear-output-folder: true
+title: EdgeOrderManagementClient
+description: The EdgeOrder Client.
 ```
 
 ``` yaml $(python)
