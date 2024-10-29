@@ -110,7 +110,7 @@ op getFile is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/files/{fileId}/content")
-@doc("Returns information about a specific file. Does not retrieve file content.")
+@doc("Retrieves the raw content of a specific file.")
 op getFileContent is Azure.Core.Foundations.Operation<
   {
     @doc("The ID of the file to retrieve.")
@@ -118,5 +118,5 @@ op getFileContent is Azure.Core.Foundations.Operation<
     @encodedName("application/json", "file_id")
     fileId: string;
   },
-  FileContentResponse
+  bytes
 >;

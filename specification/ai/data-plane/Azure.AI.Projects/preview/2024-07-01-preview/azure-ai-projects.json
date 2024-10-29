@@ -1267,7 +1267,7 @@
     "/files/{fileId}/content": {
       "get": {
         "operationId": "Agents_GetFileContent",
-        "description": "Returns information about a specific file. Does not retrieve file content.",
+        "description": "Retrieves the raw content of a specific file.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1284,7 +1284,8 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.FileContentResponse"
+              "type": "string",
+              "format": "byte"
             }
           },
           "default": {
@@ -4368,20 +4369,6 @@
           }
         ]
       }
-    },
-    "Agents.FileContentResponse": {
-      "type": "object",
-      "description": "A response from a file get content operation.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "format": "byte",
-          "description": "The content of the file, in bytes."
-        }
-      },
-      "required": [
-        "content"
-      ]
     },
     "Agents.FileDeletionStatus": {
       "type": "object",

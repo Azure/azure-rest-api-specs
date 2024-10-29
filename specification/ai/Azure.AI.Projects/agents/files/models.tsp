@@ -119,9 +119,3 @@ model FileDeletionStatus {
   @doc("The object type, which is always 'file'.")
   object: "file";
 }
-
-@doc("A response from a file get content operation.")
-model FileContentResponse {
-  @doc("The content of the file, in bytes.")
-  content: bytes;
-}
