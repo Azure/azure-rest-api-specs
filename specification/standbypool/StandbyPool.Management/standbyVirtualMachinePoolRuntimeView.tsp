@@ -48,7 +48,7 @@ model StandbyVirtualMachinePoolRuntimeViewResourceProperties {
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
-@doc("Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.")
+@doc("Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider. Note: any resources in the Running state may still be installing extensions / not fully provisioned.")
 model VirtualMachineInstanceCountSummary {
   @doc("The zone that the provided counts are in. This is null if zones are not enabled on the attached VMSS.")
   zone?: int64;
