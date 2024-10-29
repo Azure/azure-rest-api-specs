@@ -310,7 +310,7 @@ model TranslationsStatus {
 
 @doc("Translation job status response")
 model TranslationStatus {
-  @doc("Id of the operation.")
+  @doc("Id of the translation operation.")
   id: string;
 
   @doc("Operation created date time")
@@ -433,7 +433,7 @@ model FileFormat {
   versions?: string[];
 
   @doc("Supported Type for this format")
-  type?: string;
+  type?: FileFormatType;
 }
 
 @doc("Document Translate Request Body")

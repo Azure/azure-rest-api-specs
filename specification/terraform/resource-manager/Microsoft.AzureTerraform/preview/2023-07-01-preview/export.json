@@ -273,7 +273,9 @@
           "type": "array",
           "description": "The id of the resource to be exported",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "resourceName": {
@@ -337,7 +339,9 @@
           "type": "array",
           "description": "A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "errors": {
