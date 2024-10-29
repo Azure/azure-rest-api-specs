@@ -1939,6 +1939,11 @@
           "x-ms-format": "dfe-string",
           "description": "Database name for connection. Type: string."
         },
+        "authenticationType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The authentication type to use. Type: string."
+        },
         "sslMode": {
           "type": "object",
           "x-ms-format": "dfe-int",
@@ -2017,7 +2022,8 @@
         "server",
         "username",
         "database",
-        "sslMode"
+        "sslMode",
+        "authenticationType"
       ]
     },
     "SybaseLinkedService": {
@@ -8053,6 +8059,11 @@
         "privateKeyPassphrase": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of private key password for KeyPair auth with encrypted private key."
+        },
+        "host": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The host name of the Snowflake account."
         },
         "encryptedCredential": {
           "type": "string",
