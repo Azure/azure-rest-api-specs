@@ -1,12 +1,20 @@
 {
+  "operationId": "RoleAssignments_Create",
+  "title": "Create a role assignment",
   "parameters": {
     "vaultBaseUrl": "https://myvault.vault.azure.net/",
     "scope": "keys",
     "roleAssignmentName": "roleAssignmentName",
-    "api-version": "7.6-preview.1"
+    "parameters": {
+      "properties": {
+        "roleDefinitionId": "/keys/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId",
+        "principalId": "principalId"
+      }
+    },
+    "api-version": "7.5"
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
         "properties": {
           "roleDefinitionId": "/keys/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId",
