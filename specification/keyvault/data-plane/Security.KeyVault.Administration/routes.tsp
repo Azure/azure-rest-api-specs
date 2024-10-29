@@ -38,6 +38,7 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(fullBackupStatus)
 @finalOperation(fullBackupStatus)
+@useFinalStateVia("azure-async-operation")
 @route("/backup")
 @post
 op fullBackup is Azure.Core.Foundations.Operation<
@@ -77,6 +78,9 @@ op fullBackup is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @added(KeyVault.Versions.`v7.6_preview.1`)
+@pollingOperation(fullBackupStatus)
+@finalOperation(fullBackupStatus)
+@useFinalStateVia("azure-async-operation")
 @route("/prebackup")
 @post
 op preFullBackup is Azure.Core.Foundations.Operation<
@@ -130,6 +134,9 @@ op restoreStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @added(KeyVault.Versions.`v7.6_preview.1`)
+@pollingOperation(restoreStatus)
+@finalOperation(restoreStatus)
+@useFinalStateVia("azure-async-operation")
 @route("/prerestore")
 @put
 op preFullRestoreOperation is Azure.Core.Foundations.Operation<
@@ -167,6 +174,7 @@ op preFullRestoreOperation is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(restoreStatus)
 @finalOperation(restoreStatus)
+@useFinalStateVia("azure-async-operation")
 @route("/restore")
 @put
 op fullRestoreOperation is Azure.Core.Foundations.Operation<
@@ -204,6 +212,7 @@ op fullRestoreOperation is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(restoreStatus)
 @finalOperation(restoreStatus)
+@useFinalStateVia("azure-async-operation")
 @route("/keys/{keyName}/restore")
 @put
 op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
