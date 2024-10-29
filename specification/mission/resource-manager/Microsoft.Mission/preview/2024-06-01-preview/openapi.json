@@ -4313,8 +4313,15 @@
           }
         },
         "approvalStatus": {
-          "$ref": "#/definitions/ApprovalStatus",
-          "description": "Approval status indicating 'Approved', 'Rejected', 'Deleted' or 'Expired'"
+          "type": "string",
+          "description": "Approval status indicating 'Approved' or 'Rejected'",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [
