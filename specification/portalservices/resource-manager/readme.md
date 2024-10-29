@@ -108,7 +108,7 @@ input-file:
   - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2024-09-01-preview/azurecoreexperiencesassistant.json
   - Microsoft.PortalServices/copilotSettings/preview/2024-09-01-preview/copilotSettings.json
   - Microsoft.PortalServices/dashboards/preview/2024-09-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2024-09-01-preview/extensions.json
+  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
   - Microsoft.PortalServices/settings/preview/2024-09-01-preview/settings.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
@@ -177,7 +177,7 @@ input-file:
   - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2024-08-01-preview/azurecoreexperiencesassistant.json
   - Microsoft.PortalServices/copilotSettings/preview/2024-08-01-preview/copilotSettings.json
   - Microsoft.PortalServices/dashboards/preview/2024-08-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2024-08-01-preview/extensions.json
+  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     reason: >
@@ -218,7 +218,7 @@ input-file:
   - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2024-07-01-preview/azurecoreexperiencesassistant.json
   - Microsoft.PortalServices/copilotSettings/preview/2024-07-01-preview/copilotSettings.json
   - Microsoft.PortalServices/dashboards/preview/2024-07-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2024-07-01-preview/extensions.json
+  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     reason: >
@@ -258,7 +258,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 input-file:
   - Microsoft.PortalServices/copilotSettings/preview/2024-04-01-preview/copilotSettings.json
   - Microsoft.PortalServices/dashboards/preview/2024-04-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2024-04-01-preview/extensions.json
+  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     reason: >
@@ -297,7 +297,7 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
   - Microsoft.PortalServices/dashboards/preview/2024-01-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2024-03-01-preview/extensions.json
+  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
 ```
 
 ### Tag: package-2024-01-01-preview
