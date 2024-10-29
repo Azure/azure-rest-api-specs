@@ -5039,7 +5039,7 @@ model IndexingParametersConfiguration {
      * Azure blob storage.  For example, you could exclude ".png, .mp4" to skip over
      * those files during indexing.
      */
-    excludedFileNameExtensions?: string = "";
+    excludedFileNameExtensions?: string;
 
     /**
      * Comma-delimited list of filename extensions to select when processing from
@@ -5047,7 +5047,7 @@ model IndexingParametersConfiguration {
      * application files ".docx, .pptx, .msg" to specifically include those file
      * types.
      */
-    indexedFileNameExtensions?: string = "";
+    indexedFileNameExtensions?: string;
 
     /**
      * For Azure blobs, set to false if you want to continue indexing when an
