@@ -688,6 +688,11 @@ model OracleProviderInstanceProperties extends ProviderSpecificProperties {
   dbPort?: string;
 
   /**
+   * Gets or sets the database name.
+   */
+  dbName?: string;
+
+  /**
    * Gets or sets the database user name.
    */
   dbUsername?: string;
@@ -736,6 +741,12 @@ model AlertProperties {
   errors?: Azure.ResourceManager.Foundations.ErrorDetail;
 
   /**
+   * The ARM ID of the alert rule resource.
+   */
+  @visibility("read")
+  alertRuleResourceId?: string;
+
+  /**
    * Defines the SAP monitor Alert Template Name.
    */
   templateName?: string;
@@ -775,7 +786,7 @@ model AlertRuleProperties {
   /**
    * Indicates the severity of the alert.
    */
-  severity?: string;
+  severity?: int32;
 
   /**
    * The action group names.

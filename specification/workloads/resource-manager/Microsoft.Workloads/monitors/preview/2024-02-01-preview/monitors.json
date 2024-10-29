@@ -1371,6 +1371,11 @@
           "description": "Defines the SAP monitor Alert errors.",
           "readOnly": true
         },
+        "alertRuleResourceId": {
+          "type": "string",
+          "description": "The ARM ID of the alert rule resource.",
+          "readOnly": true
+        },
         "templateName": {
           "type": "string",
           "description": "Defines the SAP monitor Alert Template Name."
@@ -1406,7 +1411,8 @@
           "description": "Indicates whether the alert is in an enabled state."
         },
         "severity": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "Indicates the severity of the alert."
         },
         "actionGroups": {
@@ -1993,6 +1999,10 @@
         "dbPort": {
           "type": "string",
           "description": "Gets or sets the database sql port."
+        },
+        "dbName": {
+          "type": "string",
+          "description": "Gets or sets the database name."
         },
         "dbUsername": {
           "type": "string",
