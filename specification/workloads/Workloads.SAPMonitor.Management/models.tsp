@@ -820,12 +820,12 @@ model AlertRuleProperties {
   /**
    * Indicates whether the alert is in an auto-mitigate state.
    */
-  autoMitigate?: "string";
+  autoMitigate?: string;
 
   /**
    * The alert dimension.
    */
-  dimension?: "string";
+  dimension?: string;
 
   /**
    * The alert query parameters.

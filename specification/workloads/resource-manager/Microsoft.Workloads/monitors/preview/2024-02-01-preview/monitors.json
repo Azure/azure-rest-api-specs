@@ -491,6 +491,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get properties of an Alert Template": {
+            "$ref": "./examples/AlertTemplates_Get.json"
+          }
         }
       }
     },
@@ -592,6 +597,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get properties of an Alert": {
+            "$ref": "./examples/Alerts_Get.json"
+          }
         }
       },
       "put": {
@@ -668,6 +678,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates an Alert": {
+            "$ref": "./examples/Alerts_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -730,6 +745,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an Alert": {
+            "$ref": "./examples/Alerts_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1431,23 +1451,11 @@
         },
         "autoMitigate": {
           "type": "string",
-          "description": "Indicates whether the alert is in an auto-mitigate state.",
-          "enum": [
-            "string"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "description": "Indicates whether the alert is in an auto-mitigate state."
         },
         "dimension": {
           "type": "string",
-          "description": "The alert dimension.",
-          "enum": [
-            "string"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "description": "The alert dimension."
         },
         "alertQueryParameters": {
           "type": "array",
