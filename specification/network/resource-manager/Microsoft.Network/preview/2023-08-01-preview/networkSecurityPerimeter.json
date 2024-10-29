@@ -1253,7 +1253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations/instance": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations/{loggingConfigurationName}": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -1351,7 +1351,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2093,7 +2092,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the NSP logging configuration."
+          "description": "The name of the NSP logging configuration. Accepts 'instance' as name."
         },
         "properties": {
           "x-ms-client-flatten": true,
