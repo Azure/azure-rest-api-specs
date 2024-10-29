@@ -10,6 +10,8 @@ package-name: azure-mgmt-appconfiguration
 namespace: azure.mgmt.appconfiguration
 package-version: 4.0.0
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python)
