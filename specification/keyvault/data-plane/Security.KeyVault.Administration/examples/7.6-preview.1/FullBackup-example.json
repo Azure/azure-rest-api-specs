@@ -1,7 +1,9 @@
 {
+  "operationId": "FullBackup",
+  "title": "Create a full backup",
   "parameters": {
     "vaultBaseUrl": "https://myvault.vault.azure.net/",
-    "preBackupOperationParameters": {
+    "azureStorageBlobContainerUri": {
       "storageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
       "token": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=REDACTED"
     },
@@ -15,8 +17,8 @@
       },
       "body": {
         "status": "InProgress",
-        "statusDetails": "Pre Full backup is in progress",
-        "azureStorageBlobContainerUri": null,
+        "statusDetails": "Full backup is in progress",
+        "azureStorageBlobContainerUri": "https://myaccount.blob.core.windows.net/sascontainer/fullbackup-pool-61e8dd3ae21f-1579243113",
         "jobId": "45aacd568ab049a2803861e8dd3ae21f",
         "startTime": 1490790000,
         "endTime": 0
