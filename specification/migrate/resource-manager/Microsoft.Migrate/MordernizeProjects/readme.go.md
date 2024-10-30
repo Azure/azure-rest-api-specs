@@ -16,9 +16,3 @@ module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-```
