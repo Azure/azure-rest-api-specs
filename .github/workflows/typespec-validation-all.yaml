@@ -34,21 +34,26 @@ on:
 
 jobs:
   typespec-validation-all:
-    name: TypeSpec Validation All
+    # Use short name to maximize space for parameters in UI
+    name: TSVAll
+
     strategy:
+      # Validate all specs, even if one job fails early
       fail-fast: false
+      # Sort matrix elements from "most important" to "least important" for the best grouping and UI
+      # Keep matrix values short, to maximize number of parameters shown in UI
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        # shards must start at 0 and increment by 1
-        shard: [0, 1, 2]
-        # total-shards must be an accurate count of the number of shards
-        total-shards: [3]
         # When triggered by schedule, validate both the default branch and typespec-next
         # Use the placeholder string "default" instead of passing "" directly, since the latter gets ignored by
         # the GitHub Jobs UI.
         ref: ${{ fromJSON(github.event_name == 'schedule' && '["default", "typespec-next"]' || '["default"]') }}
+        os: [ubuntu, windows]
+        # shards must start at 0 and increment by 1
+        shard: [0, 1, 2]
+        # total-shards must be an accurate count of the number of shards
+        total-shards: [3]
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-latest
 
     steps:
       - name: Enable git long paths
