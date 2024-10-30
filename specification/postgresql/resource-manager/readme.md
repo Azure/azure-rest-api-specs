@@ -39,7 +39,7 @@ tag: package-flexibleserver-2024-11-01-preview
 tag: package-2020-01-01
 ```
 
-### Tag: package-flexibleserver-2024-11-preview
+### Tag: package-flexibleserver-2024-11-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2024-11-01-preview` is specified on the command line.
 
