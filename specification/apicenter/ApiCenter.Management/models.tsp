@@ -656,15 +656,15 @@ union ApiSourceLinkStateEnum {
   /**
    * API source link is initializing.
    */
-  Initializing : "initializing",
+  Initializing: "initializing",
 
   /***
    * API source is synching.
    */
-  Syncing : "syncing",
+  Syncing: "syncing",
 
   /**
    * API source sync is blocked due to an error.
    */
-  Error : "error"
+  Error: "error",
 }
