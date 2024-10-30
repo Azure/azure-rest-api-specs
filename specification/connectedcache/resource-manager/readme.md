@@ -42,14 +42,6 @@ input-file:
 
 ## Suppression
 
-``` yaml
-directive:
-  - suppress: ENUM_CASE_MISMATCH
-    where: $.definitions.Identity.properties.type
-    from: connectedcache.json
-    reason: Managed Identity type can be case in-sensitive
-```
-
 ---
 
 # Code Generation
