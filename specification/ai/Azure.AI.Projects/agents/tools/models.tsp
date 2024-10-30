@@ -67,11 +67,11 @@ model MicrosoftFabricToolDefinition extends ToolDefinition {
 
 @doc("The input definition information for a sharepoint tool as used to configure an agent.")
 model SharepointToolDefinition extends ToolDefinition {
-  @doc("The object type, which is always 'sharepoint'.")
-  type: "sharepoint";
+  @doc("The object type, which is always 'sharepoint_grounding'.")
+  type: "sharepoint_grounding";
 
   @doc("The list of connections used by the SharePoint tool.")
-  sharepoint: ToolConnectionList;
+  sharepoint_grounding: ToolConnectionList;
 }
 
 @doc("The input definition information for an Azure AI search tool as used to configure an agent.")

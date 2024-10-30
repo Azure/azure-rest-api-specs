@@ -6582,20 +6582,20 @@
       "type": "object",
       "description": "The input definition information for a sharepoint tool as used to configure an agent.",
       "properties": {
-        "sharepoint": {
+        "sharepoint_grounding": {
           "$ref": "#/definitions/Agents.ToolConnectionList",
           "description": "The list of connections used by the SharePoint tool."
         }
       },
       "required": [
-        "sharepoint"
+        "sharepoint_grounding"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.ToolDefinition"
         }
       ],
-      "x-ms-discriminator-value": "sharepoint"
+      "x-ms-discriminator-value": "sharepoint_grounding"
     },
     "Agents.SubmitToolOutputsAction": {
       "type": "object",
