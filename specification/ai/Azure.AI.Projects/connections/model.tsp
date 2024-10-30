@@ -146,7 +146,7 @@ enum ConnectionType {
   AzureBlobStorage: "AzureBlob",
 
   @doc("Azure AI Services")
-  AIServices: "AIServices",
+  AzureAIServices: "AIServices",
 
   @doc("Azure AI Search")
   AzureAISearch: "CognitiveSearch",
