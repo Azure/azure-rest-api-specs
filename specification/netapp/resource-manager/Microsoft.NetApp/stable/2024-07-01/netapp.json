@@ -6022,7 +6022,7 @@
         },
         "kdcIP": {
           "type": "string",
-          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$",
+          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
           "description": "kdc server IP address for the active directory machine. This optional parameter is used only while creating kerberos volume.",
           "example": "101.102.103.104"
         },
@@ -7179,9 +7179,6 @@
     "replicationObject": {
       "description": "Replication properties",
       "type": "object",
-      "required": [
-        "remoteVolumeResourceId"
-      ],
       "properties": {
         "replicationId": {
           "type": "string",
@@ -7215,7 +7212,7 @@
         },
         "remoteVolumeResourceId": {
           "type": "string",
-          "description": "The resource ID of the remote volume."
+          "description": "The resource ID of the remote volume. Required for cross region and cross zone replication"
         },
         "remotePath": {
           "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
