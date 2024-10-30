@@ -50,34 +50,22 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: actionGroups_API.json
-    reason: To be updated
+    reason: Existing service design behavior. Fixing this causes breaking changes.
   - code: BodyTopLevelProperties
     from: actionGroups_API.json
-    reason: To be updated
+    reason: Existing service design behavior. Fixing this causes breaking changes.
   - code: DefinitionsPropertiesNamesCamelCase
     from: actionGroups_API.json
-    reason: To be updated
-  - code: LroErrorContent
-    from: actionGroups_API.json
-    reason: To be updated
-  - code: NoErrorCodeResponses
-    from: actionGroups_API.json
-    reason: To be updated
+    reason: Existing service design behavior. Fixing this causes breaking changes.
   - code: OperationIdNounVerb
     from: actionGroups_API.json
-    reason: To be updated
+    reason: Existing service design behavior. Fixing this causes breaking changes.
   - code: OperationsAPIImplementation
     from: actionGroups_API.json
-    reason: To be updated
+    reason: False positive. Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)
   - code: PatchBodyParametersSchema
     from: actionGroups_API.json
-    reason: To be updated
-  - code: PostResponseCodes
-    from: actionGroups_API.json
-    reason: To be updated
-  - code: ResourceNameRestriction
-    from: actionGroups_API.json
-    reason: To be updated
+    reason: Existing service design behavior. Fixing this causes breaking changes.
 ```
 
 ### Tag: package-preview-2024-01
