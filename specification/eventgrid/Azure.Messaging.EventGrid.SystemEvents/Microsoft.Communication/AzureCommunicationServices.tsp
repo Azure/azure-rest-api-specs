@@ -403,7 +403,7 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   /** Router Job Received Requested Worker Selectors */
   requestedWorkerSelectors: AcsRouterWorkerSelector[];
 
-  /** Router Job Received Scheduled Time in UTC, will be given in following format: "3/28/2007 7:13:50 PM +00:00"*/
+  /** Router Job Received Scheduled Time in UTC, will be given in following format: '3/28/2007 7:13:50 PM +00:00' */
   scheduledOn: string;
 
   /** Unavailable For Matching for Router Job Received */
