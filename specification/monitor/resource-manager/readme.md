@@ -66,6 +66,9 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: actionGroups_API.json
     reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: PostResponseCodes
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
 ```
 
 ### Tag: package-preview-2024-01
