@@ -273,7 +273,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
     version: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineImage> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImage> | CloudError;
 }
 
 @armResourceOperations
@@ -453,7 +453,7 @@ interface VirtualMachineImagesOperations {
     version: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineImage> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImage> | CloudError;
 }
 
 @armResourceOperations
@@ -532,7 +532,7 @@ interface VirtualMachineRunCommandsOperations {
      */
     @header
     accept: "application/json, text/json",
-  ): ArmResponse<RunCommandDocument> | ErrorResponse;
+  ): ArmResponse<RunCommandDocument> | CloudError;
 }
 
 interface VirtualMachineScaleSetVMRunCommandsOperations {
@@ -572,7 +572,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
      */
     @header
     accept: "application/json, text/json",
-  ): ArmResponse<VirtualMachineRunCommandsListResult> | ErrorResponse;
+  ): ArmResponse<VirtualMachineRunCommandsListResult> | CloudError;
 
   /**
    * The operation to get the VMSS VM run command.
@@ -616,7 +616,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
      */
     @header
     accept: "application/json, text/json",
-  ): ArmResponse<VirtualMachineRunCommand> | ErrorResponse;
+  ): ArmResponse<VirtualMachineRunCommand> | CloudError;
 
   /**
    * The operation to create or update the VMSS VM run command.
@@ -660,7 +660,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
      */
     @header
     accept: "application/json, text/json",
-  ): ArmResponse<VirtualMachineRunCommand> | ErrorResponse;
+  ): ArmResponse<VirtualMachineRunCommand> | CloudError;
 
   /**
    * The operation to update the VMSS VM run command.
@@ -704,7 +704,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
      */
     @header
     accept: "application/json, text/json",
-  ): ArmResponse<VirtualMachineRunCommand> | ErrorResponse;
+  ): ArmResponse<VirtualMachineRunCommand> | CloudError;
 
   /**
    * The operation to delete the VMSS VM run command.
@@ -742,5 +742,5 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
      */
     @header
     accept: "application/json, text/json",
-  ): OkResponse | ArmAcceptedResponse | ErrorResponse;
+  ): OkResponse | ArmAcceptedResponse | CloudError;
 }
