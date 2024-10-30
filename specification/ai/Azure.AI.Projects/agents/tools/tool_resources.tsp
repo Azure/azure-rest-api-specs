@@ -73,9 +73,14 @@ model FileSearchToolResource {
   @encodedName("application/json", "vector_store_ids")
   vectorStoreIds?: string[];
 
+  /**
+   * The list of vector store configuration objects from Azure. This list is limited to one
+   * element. The only element of this list contains 
+   * the list of azure asset IDs used by the search tool.
+   */
   @maxItems(1)
   @encodedName("application/json", "vector_stores")
-  vectorStores?: VectorStoreFromAzure[]; 
+  vectorStores?: VectorStoreAzureConfigurations[]; 
 }
 
 /**

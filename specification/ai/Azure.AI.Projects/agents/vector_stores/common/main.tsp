@@ -95,7 +95,8 @@ union VectorStorageDataSourceAssetType {
 }
 
 /**
- * The structure to be supplied when the vector store is being created from the Azure asset ID.
+ * The structure, containing Azure asset ID and the asset type of the file used as a data source
+ * the enterprise file search.
  */
 model VectorStorageDataSource {
   /** Asset URI. */
@@ -108,7 +109,8 @@ model VectorStorageDataSource {
 }
 
 /**
- * Vector storage configuration represents the collection of data sources.
+ * Vector storage configuration is the list of data sources, used when multiple
+ * files can be used for the enterprise file search.
  */
 model VectorStorageConfiguration {
   /** Data sources */
@@ -117,9 +119,9 @@ model VectorStorageConfiguration {
 }
 
 /**
- * Vector store, keeping several vector store configurations.
+ * The structure, containing the list of vector storage configurations i.e. the list of azure asset IDs.
  */
-model VectorStoreFromAzure {
+model VectorStoreAzureConfigurations {
   /** Name */
   @encodedName("application/json", "name")
   storeName: string;
