@@ -41,7 +41,7 @@ model GetConnectionResponse {
   name: string;
 
   @doc("The properties of the resource")
-  properties: ConnectionProperties;
+  properties: InternalConnectionProperties;
 }
 
 @doc("Response from the list operation")
@@ -53,7 +53,7 @@ model ListConnectionsResponse {
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("Connection properties")
 @discriminator("authType")
-model ConnectionProperties {
+model InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType;
 }
@@ -72,7 +72,8 @@ enum AuthenticationType {
 }
 
 @doc("Connection properties for connections with API key authentication")
-model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
+model InternalConnectionPropertiesApiKeyAuth
+  extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.apiKey;
 
@@ -91,7 +92,7 @@ model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)")
-model ConnectionPropertiesAADAuth extends ConnectionProperties {
+model InternalConnectionPropertiesAADAuth extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.AAD;
 
@@ -104,7 +105,7 @@ model ConnectionPropertiesAADAuth extends ConnectionProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Connection properties for connections with SAS authentication")
-model ConnectionPropertiesSASAuth extends ConnectionProperties {
+model InternalConnectionPropertiesSASAuth extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.SAS;
 
