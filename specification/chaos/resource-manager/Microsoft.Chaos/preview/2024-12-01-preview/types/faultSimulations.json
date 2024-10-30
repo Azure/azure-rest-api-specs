@@ -1,0 +1,150 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0",
+      "title": "Common types used by Resource Providers to implement standard fault simulation actions on resource-types"
+    },
+    "paths": {},
+    "definitions": {
+      "FaultKind": {
+        "type": "string",
+        "description": "The fault scenario to simulate",
+        "enum": [
+          "ZoneDown"
+        ],
+        "x-ms-enum": {
+          "name": "FaultKind",
+          "modelAsString": true,
+          "values": "ZoneDown",
+          "description": "Simulates an availability zone outage on the provider managed resources underlying this resource"
+        }
+      },
+      "FaultSimulationStatus": {
+        "type": "string",
+        "description": "The status of a fault simulation job",
+        "enum": [
+          "Accepted",
+          "Starting",
+          "Active",
+          "Stopping",
+          "Completed",
+          "FailedToStart",
+          "FailedToStop"
+        ]
+      },
+      "FaultSimulation": {
+        "type": "object",
+        "properties": {
+          "simulationId": {
+            "type": "string",
+            "description": "The provider specific ID used to identify and track this simulation"
+          },
+          "status": {
+            "$ref": "#/definitions/FaultSimulationStatus",
+            "description": "Status of this fault simulation"
+          },
+          "submitTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The time this fault simulation request was accepted"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The time this fault simulation was started"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The time this fault simulation completed"
+          },
+          "expirationTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The absolute expiration time after which this fault should be abandoned or cancelled"
+          },
+          "parameters": {
+            "$ref": "#/definitions/FaultSimulationParameters",
+            "description": "The parameters used when starting this fault simulation"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the fault-simulation"
+          }
+        },
+        "description": "The fault simulation definition."
+      },
+      "FaultSimulationListResult": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "description": "Array of fault simulation resources",
+            "items": {
+              "$ref": "#/definitions/FaultSimulation"
+            }
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The URL to use for getting the next set of results."
+          }
+        },
+        "description": "List of fault simulation results associated with this resource"
+      },
+      "FaultSimulationParameters": {
+        "type": "object",
+        "required": [
+          "faultKind"
+        ],
+        "properties": {
+          "faultKind": {
+            "$ref": "#/definitions/FaultKind"
+          },
+          "constraints": {
+            "type": "object",
+            "description": "TODO_TODO_TODO",
+            "properties": {
+              "expirationTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The absolute expiration timestamp (UTC) after which this fault simulation should be abandoned or reverted."
+              },
+              "maxDurationMinutes": {
+                "type": "integer",
+                "description": "The targeted duration that this simulation should run for."
+              }
+            },
+            "required": [
+              "expirationTime"
+            ]
+          }
+        },
+        "discriminator": "faultKind"
+      },
+      "ZoneDownFaultSimulationParameters":{
+        "type": "object",
+        "x-ms-discriminator-value": "ZoneDown",
+        "allOf": [
+          {
+            "$ref": "#/definitions/FaultSimulationParameters"
+          }
+        ],
+        "properties": {
+            "zones" : {
+              "type": "array",
+              "description": "One or more availability zone that an outage will be simulated on. Some providers may only support simulations on one zone at a time.",
+              "items":{
+                "type": "string",
+                "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ]
+            }
+            }
+          }
+        }
+       }
+      }
