@@ -5,10 +5,6 @@ parameters:
     default: "{project-root}/azure-sdk-for-python/"
   "java-sdk-folder":
     default: "{project-root}/azure-sdk-for-java/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-net/"
   "service-directory-name":
     default: "sitemanager"
 emit:
@@ -46,7 +42,6 @@ options:
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.ResourceManager.SiteManager"
     namespace: "{package-dir}"
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
