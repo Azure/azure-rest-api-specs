@@ -496,8 +496,7 @@ model DiskProperties {
    * The time when the disk was created.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 
   /**
    * The Operating System type.
@@ -616,8 +615,7 @@ model DiskProperties {
    * Latest time when bursting was last enabled on a disk.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  burstingEnabledTime?: utcDateTime;
+  burstingEnabledTime?: offsetDateTime;
 
   /**
    * Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.
@@ -670,8 +668,7 @@ model DiskProperties {
    */
   @visibility("read")
   @encodedName("application/json", "LastOwnershipUpdateTime")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastOwnershipUpdateTime?: utcDateTime;
+  lastOwnershipUpdateTime?: offsetDateTime;
 }
 
 /**
@@ -1178,8 +1175,7 @@ model DiskAccessProperties {
    * The time when the disk access was created.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 /**
@@ -1474,8 +1470,7 @@ model EncryptionSetProperties {
    * The time when the active key of this disk encryption set was updated.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastKeyRotationTimestamp?: utcDateTime;
+  lastKeyRotationTimestamp?: offsetDateTime;
 
   /**
    * The error that was encountered during auto-key rotation. If an error is present, then auto-key rotation will not be attempted until the error on this disk encryption set is fixed.
@@ -1587,8 +1582,7 @@ model DiskRestorePointProperties {
    * The timestamp of restorePoint creation
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 
   /**
    * arm id of source disk or source disk restore point.
@@ -1737,8 +1731,7 @@ model SnapshotProperties {
    * The time when the snapshot was created.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 
   /**
    * The Operating System type.
