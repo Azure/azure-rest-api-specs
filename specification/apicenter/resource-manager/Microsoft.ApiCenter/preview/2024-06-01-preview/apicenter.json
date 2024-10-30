@@ -4185,6 +4185,36 @@
         }
       ]
     },
+    "ApiSourceLinkStateEnum": {
+      "type": "string",
+      "description": "The API source link state.",
+      "enum": [
+        "initializing",
+        "syncing",
+        "error"
+      ],
+      "x-ms-enum": {
+        "name": "ApiSourceLinkStateEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Initializing",
+            "value": "initializing",
+            "description": "API source link is initizing."
+          },
+          {
+            "name": "Syncing",
+            "value": "syncing",
+            "description": "*\nAPI source is synching."
+          },
+          {
+            "name": "Error",
+            "value": "error",
+            "description": "API source sync is blocked due to an error."
+          }
+        ]
+      }
+    },
     "ApiSourceListResult": {
       "type": "object",
       "description": "The response of a ApiSource list operation.",
@@ -4212,7 +4242,7 @@
       "type": "object",
       "description": "API source properties.",
       "properties": {
-        "shouldImportSpec": {
+        "importSpecification": {
           "type": "string",
           "description": "Indicates if the specification should be imported along with metadata.",
           "default": "ondemand",
@@ -4222,7 +4252,7 @@
             "always"
           ],
           "x-ms-enum": {
-            "name": "ShouldImportSpec",
+            "name": "ImportSpecification",
             "modelAsString": true,
             "values": [
               {
@@ -4418,6 +4448,7 @@
         },
         "targetEnvironmentId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The target environment resource ID."
         },
         "targetLifecycleStage": {
@@ -4873,6 +4904,36 @@
         "url"
       ]
     },
+    "ImportSpecification": {
+      "type": "string",
+      "description": "The API source specification import options.",
+      "enum": [
+        "never",
+        "ondemand",
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "ImportSpecification",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Never",
+            "value": "never",
+            "description": "Indicates that the specification should be never be imported."
+          },
+          {
+            "name": "OnDemand",
+            "value": "ondemand",
+            "description": "Indicates that the specification should be imported only by request."
+          },
+          {
+            "name": "Always",
+            "value": "always",
+            "description": "Indicates that the specification should always be imported along with metadata."
+          }
+        ]
+      }
+    },
     "License": {
       "type": "object",
       "description": "The license information for the API.",
@@ -4955,7 +5016,7 @@
       "description": "The link state.",
       "properties": {
         "state": {
-          "type": "string",
+          "$ref": "#/definitions/ApiSourceLinkStateEnum",
           "description": "The state of the link."
         },
         "message": {
@@ -5333,36 +5394,6 @@
           "description": "Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.",
           "default": false
         }
-      }
-    },
-    "ShouldImportSpec": {
-      "type": "string",
-      "description": "The API source specification import options.",
-      "enum": [
-        "never",
-        "ondemand",
-        "always"
-      ],
-      "x-ms-enum": {
-        "name": "ShouldImportSpec",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Never",
-            "value": "never",
-            "description": "Indicates that the specification should be never be imported."
-          },
-          {
-            "name": "OnDemand",
-            "value": "ondemand",
-            "description": "Indicates that the specification should be imported only by request."
-          },
-          {
-            "name": "Always",
-            "value": "always",
-            "description": "Indicates that the specification should always be imported along with metadata."
-          }
-        ]
       }
     },
     "SmallString": {

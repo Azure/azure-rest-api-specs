@@ -564,7 +564,7 @@ model DeletedServiceProperties {
 @doc("API source properties.")
 model ApiSourceProperties {
   @doc("Indicates if the specification should be imported along with metadata.")
-  shouldImportSpec?: ShouldImportSpec = ShouldImportSpec.OnDemand;
+  importSpecification?: ImportSpecification = ImportSpecification.OnDemand;
 
   @doc("API source configuration for Azure API Management.")
   apimSource?: ApimSource;
@@ -574,7 +574,7 @@ model ApiSourceProperties {
  * The API source specification import options.
  */
 @added(Versions.v2024_06_01_preview)
-union ShouldImportSpec {
+union ImportSpecification {
   string,
 
   /**
@@ -633,7 +633,7 @@ model LinkState {
   /**
    * The state of the link.
    */
-  state?: string;
+  state?: ApiSourceLinkStateEnum;
 
   /**
    * The state message.
@@ -644,4 +644,27 @@ model LinkState {
    * The timestamp of the last update of the link state.
    */
   lastUpdatedOn: utcDateTime;
+}
+
+/**
+ * The API source link state.
+ */
+@added(Versions.v2024_06_01_preview)
+union ApiSourceLinkStateEnum {
+  string,
+
+  /**
+   * API source link is initizing.
+   */
+  Initializing : "initializing",
+
+  /***
+   * API source is synching.
+   */
+  Syncing : "syncing",
+
+  /**
+   * API source sync is blocked due to an error.
+   */
+  Error : "error"
 }
