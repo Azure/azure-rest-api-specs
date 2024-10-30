@@ -37,6 +37,8 @@ interface GalleryApplications {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @extension("x-ms-long-running-operation", true)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryApplication,
     Response = ArmResourceCreatedResponse<GalleryApplication> | ArmResourceUpdatedResponse<GalleryApplication> | (ArmAcceptedLroResponse & {

@@ -691,8 +691,7 @@ model GalleryApplicationProperties {
   /**
    * The end of life date of the gallery Application Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
+  endOfLifeDate?: offsetDateTime;
 
   /**
    * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
@@ -918,14 +917,12 @@ model GalleryArtifactPublishingProfileBase {
    * The timestamp for when the gallery image version is published.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  publishedDate?: utcDateTime;
+  publishedDate?: offsetDateTime;
 
   /**
    * The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
+  endOfLifeDate?: offsetDateTime;
 
   /**
    * Specifies the storage account type to be used to store the image. This property is not updatable.
@@ -1209,8 +1206,7 @@ model GalleryImageProperties {
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
+  endOfLifeDate?: offsetDateTime;
 
   /**
    * This is the gallery image definition identifier.
@@ -1728,8 +1724,7 @@ model SharedGalleryImageProperties {
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
+  endOfLifeDate?: offsetDateTime;
 
   /**
    * This is the gallery image definition identifier.
@@ -1799,14 +1794,12 @@ model SharedGalleryImageVersionProperties {
   /**
    * The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  publishedDate?: utcDateTime;
+  publishedDate?: offsetDateTime;
 
   /**
    * The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
+  endOfLifeDate?: offsetDateTime;
 
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
@@ -1885,7 +1878,13 @@ model CommunityGalleryProperties {
   /**
    * The disclaimer for a community gallery resource.
    */
-  disclaimer?: string;
+  disclaimer?: {
+    /**
+     * Community gallery disclaimer
+     */
+    @visibility("read")
+    disclaimer: string;
+  };
 
   /**
    * The artifact tags of a community gallery resource.
@@ -1992,8 +1991,7 @@ model CommunityGalleryImageProperties {
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
+  endOfLifeDate?: offsetDateTime;
 
   /**
    * This is the community gallery image definition identifier.
@@ -2045,7 +2043,13 @@ model CommunityGalleryImageProperties {
   /**
    * The disclaimer for a community gallery resource.
    */
-  disclaimer?: string;
+  disclaimer?: {
+    /**
+     * Community gallery disclaimer
+     */
+    @visibility("read")
+    disclaimer: string;
+  };
 
   /**
    * The artifact tags of a community gallery resource.
@@ -2088,14 +2092,12 @@ model CommunityGalleryImageVersionProperties {
   /**
    * The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  publishedDate?: utcDateTime;
+  publishedDate?: offsetDateTime;
 
   /**
    * The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
+  endOfLifeDate?: offsetDateTime;
 
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
@@ -2110,7 +2112,13 @@ model CommunityGalleryImageVersionProperties {
   /**
    * The disclaimer for a community gallery resource.
    */
-  disclaimer?: string;
+  disclaimer?: {
+    /**
+     * Community gallery disclaimer
+     */
+    @visibility("read")
+    disclaimer: string;
+  };
 
   /**
    * The artifact tags of a community gallery resource.

@@ -86,12 +86,17 @@ interface Galleries {
   /**
    * Update sharing profile of a gallery.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GallerySharingProfile_Update")
-  gallerySharingProfileUpdate is ArmResourceActionAsync<
+  share is ArmResourceActionAsync<
     Gallery,
     SharingUpdate,
-    SharingUpdate
+    SharingUpdate,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        @bodyRoot _: SharingUpdate;
+      }
   >;
 }
 
@@ -105,6 +110,6 @@ interface Galleries {
 @@doc(Galleries.update::parameters.properties,
   "Parameters supplied to the update Shared Image Gallery operation."
 );
-@@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
+@@doc(Galleries.share::parameters.body,
   "Parameters supplied to the update gallery sharing profile."
 );
