@@ -220,6 +220,9 @@ namespace Azure.AI.Projects.Agents {
   @@usage(FilePurpose, Usage.input | Usage.output);
   @@usage(ListSortOrder, Usage.input | Usage.output);
 
+  // Make getFileContent internal method in Python (override with get_file_content_stream)
+  @@access(getFileContent, Access.internal, "python");
+
   // Additional, language-specific idiomatic renames
 
   @@clientName(OpenAIFile, "OpenAIFile", "csharp");
