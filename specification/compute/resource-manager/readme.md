@@ -283,7 +283,7 @@ suppressions:
     reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: gallery.json
     where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
-  - suppress: GetCollectionOnlyHasValueAndNextLink
+  - code: GetCollectionOnlyHasValueAndNextLink
     from: gallery.json
     reason: Existing issue from last version. 
 ```
