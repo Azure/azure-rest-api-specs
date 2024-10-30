@@ -4,6 +4,7 @@ using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.Private;
+using Azure.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Workloads;
@@ -36,6 +37,119 @@ union WorkloadMonitorProvisioningState {
 
   /** The resource operation was canceled. */
   Canceled: "Canceled",
+}
+
+/**
+ * The value which indicates whether this scheduled query rule is enabled. Value should be enabled or disabled
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertRuleStatus {
+  string,
+
+  /** The scheduled query rule is enabled */
+  Enabled: "Enabled",
+
+  /** The scheduled query rule is disabled */
+  Disabled: "Disabled",
+}
+
+/**
+ * Result Condition Evaluation Criteria
+ */
+@added(Versions.v2024_02_01_preview)
+union ConditionalOperator {
+  string,
+
+  /** The value is less than the specified value. */
+  LessThan: "LessThan",
+
+  /** The value is greater than the specified value. */
+  GreaterThan: "GreaterThan",
+
+  /** The value is equal to the specified value. */
+  Equal: "Equal",
+
+  /** The value is greater than or equal to the specified value. */
+  GreaterThanOrEqual: "GreaterThanOrEqual",
+
+  /** The value is less than or equal to the specified value. */
+  LessThanOrEqual: "LessThanOrEqual",
+}
+
+/**
+ * The value that indicates whether the alert should be automatically resolved or not. The default is Disable.
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertAutoMitigate {
+  string,
+
+  /** The alert should be automatically resolved. */
+  Enable: "Enable",
+
+  /** The alert should not be automatically resolved. */
+  Disable: "Disable",
+}
+
+/**
+ * Is input required for Default Threshold Value Associated with the Alert Template
+ */
+@added(Versions.v2024_02_01_preview)
+union DefaultThresholdInputOption {
+  string,
+
+  /** The default threshold value is required. */
+  Required: "Required",
+
+  /** The default threshold value is not required. */
+  NotRequired: "NotRequired",
+
+  /** The default threshold value is optional. */
+  Optional: "Optional",
+}
+
+/**
+ * Metric Trigger Type Associated with the Alert Template for Metric Measurement
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertTemplateMetricTriggerType {
+  string,
+
+  /** The metric trigger type is consecutive. */
+  Consecutive: "Consecutive",
+
+  /** The metric trigger type is total. */
+  Total: "Total",
+}
+
+/**
+ * Type of the Query Input Parameter
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertTemplateParameterType {
+  string,
+
+  /** Log Analytics query parameter */
+  LogAnalyticsQuery: "LogAnalyticsQuery",
+
+  /** Provider property parameter */
+  ProviderProperty: "ProviderProperty",
+
+  /** Custom input parameter */
+  CustomInput: "CustomInput",
+}
+
+/**
+ * Selection Mode of the Query Input Parameter
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertTemplateSelectionMode {
+  string,
+
+  /** The selection mode is single. */
+  Single: "Single",
+
+  /** The selection mode is Multiple. */
+  Multiple: "Multiple",
 }
 
 /**
@@ -678,27 +792,27 @@ model MsSqlServerProviderInstanceProperties extends ProviderSpecificProperties {
 @added(Versions.v2024_02_01_preview)
 model OracleProviderInstanceProperties extends ProviderSpecificProperties {
   /**
-   * Gets or sets the SQL server host name.
+   * Gets or sets the target virtual machine name.
    */
   hostname?: string;
 
   /**
-   * Gets or sets the database sql port.
+   * Gets or sets the oracle database sql port.
    */
   dbPort?: string;
 
   /**
-   * Gets or sets the database name.
+   * Gets or sets the oracle database name.
    */
   dbName?: string;
 
   /**
-   * Gets or sets the database user name.
+   * Gets or sets the oracle database user name.
    */
   dbUsername?: string;
 
   /**
-   * Gets or sets the database password.
+   * Gets or sets the oracle database password.
    */
   @secret
   dbPassword?: string;
@@ -719,7 +833,7 @@ model OracleProviderInstanceProperties extends ProviderSpecificProperties {
   sslPreference?: SslPreference;
 
   /**
-   * Gets or sets the blob URI to SSL certificate for the SQL Database.
+   * Gets or sets the blob URI to SSL certificate for the Oracle Database.
    */
   sslCertificateUri?: string;
 
@@ -735,63 +849,65 @@ model OracleProviderInstanceProperties extends ProviderSpecificProperties {
 @added(Versions.v2024_02_01_preview)
 model AlertProperties {
   /**
-   * Defines the SAP monitor Alert errors.
+   * Defines the alert instance errors.
    */
   @visibility("read")
-  errors?: Azure.ResourceManager.Foundations.ErrorDetail;
+  errors?: ErrorDetail;
 
   /**
-   * The ARM ID of the alert rule resource.
+   * ID of the alert rule resource created.
    */
   @visibility("read")
-  alertRuleResourceId?: string;
+  alertRuleResourceId?: armResourceIdentifier;
 
   /**
-   * Defines the SAP monitor Alert Template Name.
+   * Name of the alert template from which it was created.
    */
   templateName?: string;
 
   /**
-   * Defines the provider type.
+   * The provider type for alert. For example, the value can be SapHana.
    */
   providerType?: string;
 
   /**
-   * Defines the provider names.
+   * Name of provider instances associated with the alert.
    */
   providerNames?: string[];
 
   /**
-   * Defines the alert rule properties.
+   * Describes the properties of an alert.
    */
   alertRuleProperties?: AlertRuleProperties;
 
   /**
-   * State of provisioning of the provider instance
+   * State of provisioning of the alert instance
    */
   @visibility("read")
   provisioningState?: WorkloadMonitorProvisioningState;
 }
 
 /**
- * Defines the Alert Rule Properties.
+ * Describes the properties of an alert.
  */
 @added(Versions.v2024_02_01_preview)
 model AlertRuleProperties {
   /**
    * Indicates whether the alert is in an enabled state.
    */
-  status?: string;
+  status?: AlertRuleStatus;
 
   /**
-   * Indicates the severity of the alert.
+   * Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest.
    */
+  @minValue(0)
+  @maxValue(4)
   severity?: int32;
 
   /**
-   * The action group names.
+   * Action Group resource Ids to invoke when the alert fires
    */
-  actionGroups?: string[];
+  actionGroups?: armResourceIdentifier[];
 
   /**
    * The threshold of the alert.
@@ -801,56 +917,55 @@ model AlertRuleProperties {
   /**
    * The threshold operator of the alert.
    */
-  thresholdOperator?: string;
+  thresholdOperator?: ConditionalOperator;
 
   /**
-   * The window size of the alert.
+   * The period of time on which the Alert query will be executed.
    */
   windowSize?: int32;
 
   /**
-   * The evaluation frequency of the alert.
+   * How often the scheduled query rule is evaluated.
    */
   evaluationFrequency?: int32;
 
   /**
-   * The number of failing periods to alert.
+   * The number of failing periods to trigger an alert.
    */
   failingPeriodsToAlert?: int32;
 
   /**
    * The operator for failing periods.
    */
-  failingPeriodsOperator?: string;
+  failingPeriodsOperator?: ConditionalOperator;
 
   /**
-   * The duration to mute actions.
+   * Mute actions for the chosen period of time after the alert is fired.
    */
   muteActionsDuration?: int32;
 
   /**
-   * Indicates whether the alert is in an auto-mitigate state.
+   * The value that indicates whether the alert should be automatically resolved or not. The default is Disable.
    */
-  autoMitigate?: string;
+  autoMitigate?: AlertAutoMitigate;
 
   /**
-   * The alert dimension.
+   * Evaluation of metric on a particular column.
    */
   dimension?: string;
 
   /**
    * The alert query parameters.
    */
-  @maxItems(50)
   @extension("x-ms-identifiers", ["name"])
-  alertQueryParameters?: AlertRuleQueryParameter[];
+  alertQueryParameters?: AlertQueryParameter[];
 }
 
 /**
  * Defines the Alert Query Parameter.
  */
 @added(Versions.v2024_02_01_preview)
-model AlertRuleQueryParameter {
+model AlertQueryParameter {
   /**
    * The name of the alert query parameter.
    */
@@ -871,7 +986,7 @@ model AlertTemplateProperties {
    * Defines the SAP monitor Alert Template errors.
    */
   @visibility("read")
-  errors?: Azure.ResourceManager.Foundations.ErrorDetail;
+  errors?: ErrorDetail;
 
   /**
    * State of provisioning of the Alert Template.
@@ -880,12 +995,12 @@ model AlertTemplateProperties {
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
-   * Display name of the template.
+   * Display name of the alert template.
    */
   templateDisplayName?: string;
 
   /**
-   * Type of the provider.
+   * The provider type for alert template. For example, the value can be SapHana.
    */
   providerType?: string;
 
@@ -895,19 +1010,21 @@ model AlertTemplateProperties {
   description?: string;
 
   /**
-   * Severity level of the alert.
+   * Severity of the alert. Should be an integer between [0-4]. Value of 0 is most severe and value of 4 is least severe.
    */
+  @minValue(0)
+  @maxValue(4)
   severity?: int32;
 
   /**
-   * Query associated with the alert.
+   * Query associated with the alert template.
    */
   query?: string;
 
   /**
    * Operator used for threshold comparison.
    */
-  thresholdOperator?: string;
+  thresholdOperator?: ConditionalOperator;
 
   /**
    * Default threshold value.
@@ -915,19 +1032,19 @@ model AlertTemplateProperties {
   defaultThreshold?: int32;
 
   /**
-   * Lower bound for the threshold.
+   * Minimum possible Default Threshold Value Associated with the Alert Template.
    */
   lowerBound?: int32;
 
   /**
-   * Upper bound for the threshold.
+   * Maximum possible Default Threshold Value Associated with the Alert Template.
    */
   upperBound?: int32;
 
   /**
    * Input option for the default threshold.
    */
-  defaultThresholdInputOption?: string;
+  defaultThresholdInputOption?: DefaultThresholdInputOption;
 
   /**
    * Unit of the alert.
@@ -935,12 +1052,12 @@ model AlertTemplateProperties {
   alertUnit?: string;
 
   /**
-   * Metric measurement details.
+   * Describes the properties for metric measurement in alerts template.
    */
   metricMeasurement?: AlertTemplateMetricMeasurement;
 
   /**
-   * Parameters for the query input.
+   * Describes the Query Input Parameter properties in alerts template.
    */
   @maxItems(50)
   @extension("x-ms-identifiers", ["name"])
@@ -955,56 +1072,56 @@ model AlertTemplateMetricMeasurement {
   /**
    * Operator used for threshold comparison.
    */
-  thresholdOperator?: string;
+  thresholdOperator?: ConditionalOperator;
 
   /**
-   * Threshold value.
+   * The Threshold Value Associated with the Alert Template for Metric Measurement.
    */
   threshold?: int32;
 
   /**
-   * Type of metric trigger.
+   * Metric Trigger Type Associated with the Alert Template for Metric Measurement.
    */
-  metricTriggerType?: string;
+  metricTriggerType?: AlertTemplateMetricTriggerType;
 
   /**
-   * Column associated with the metric.
+   * Metric Column Associated with the Alert Template for Metric Measurement.
    */
   metricColumn?: string;
 
   /**
-   * Frequency of measurement in minutes.
+   * Frequency (mins) value Associated with the Alert Template for Metric Measurement.
    */
   frequencyInMinutes?: int32;
 
   /**
-   * Time window for measurement in minutes.
+   * Time Window (mins) Value Associated with the Alert Template for Metric Measurement.
    */
   timeWindowInMinutes?: int32;
 }
 
 /**
- * Defines the properties of a Query Input Parameter.
+ * Describes the Query Input Parameter properties in alerts template.
  */
 @added(Versions.v2024_02_01_preview)
 model AlertTemplateQueryInputParameter {
   /**
-   * Name of the parameter.
+   * Name of the Query Input Parameter
    */
   name?: string;
 
   /**
-   * Type of the parameter.
+   * Type of the Query Input Parameter
    */
-  type?: string;
+  type?: AlertTemplateParameterType;
 
   /**
-   * Description of the parameter.
+   * Description of the Query Input Parameter
    */
   description?: string;
 
   /**
-   * Default value of the parameter.
+   * Default Value of the Query Input Parameter
    */
   defaultValue?: string;
 
@@ -1016,10 +1133,10 @@ model AlertTemplateQueryInputParameter {
   /**
    * Selection mode for the parameter.
    */
-  selectionMode?: string;
+  selectionMode?: AlertTemplateSelectionMode;
 
   /**
-   * Display name of the parameter.
+   * Display Name of the Query Input Parameter.
    */
   displayName?: string;
 }

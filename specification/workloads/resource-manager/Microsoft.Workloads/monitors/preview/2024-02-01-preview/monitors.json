@@ -417,6 +417,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "providerType",
+            "in": "query",
+            "description": "The provider type for filtering alert templates.",
+            "required": false,
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1341,6 +1349,30 @@
         }
       ]
     },
+    "AlertAutoMitigate": {
+      "type": "string",
+      "description": "The value that indicates whether the alert should be automatically resolved or not. The default is Disable.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "AlertAutoMitigate",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "The alert should be automatically resolved."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "The alert should not be automatically resolved."
+          }
+        ]
+      }
+    },
     "AlertListResult": {
       "type": "object",
       "description": "The response of a Alert list operation.",
@@ -1368,115 +1400,42 @@
       "properties": {
         "errors": {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "Defines the SAP monitor Alert errors.",
+          "description": "Defines the alert instance errors.",
           "readOnly": true
         },
         "alertRuleResourceId": {
           "type": "string",
-          "description": "The ARM ID of the alert rule resource.",
+          "format": "arm-id",
+          "description": "ID of the alert rule resource created.",
           "readOnly": true
         },
         "templateName": {
           "type": "string",
-          "description": "Defines the SAP monitor Alert Template Name."
+          "description": "Name of the alert template from which it was created."
         },
         "providerType": {
           "type": "string",
-          "description": "Defines the provider type."
+          "description": "The provider type for alert. For example, the value can be SapHana."
         },
         "providerNames": {
           "type": "array",
-          "description": "Defines the provider names.",
+          "description": "Name of provider instances associated with the alert.",
           "items": {
             "type": "string"
           }
         },
         "alertRuleProperties": {
           "$ref": "#/definitions/AlertRuleProperties",
-          "description": "Defines the alert rule properties."
+          "description": "Describes the properties of an alert."
         },
         "provisioningState": {
           "$ref": "#/definitions/WorkloadMonitorProvisioningState",
-          "description": "State of provisioning of the provider instance",
+          "description": "State of provisioning of the alert instance",
           "readOnly": true
         }
       }
     },
-    "AlertRuleProperties": {
-      "type": "object",
-      "description": "Defines the Alert Rule Properties.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Indicates whether the alert is in an enabled state."
-        },
-        "severity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Indicates the severity of the alert."
-        },
-        "actionGroups": {
-          "type": "array",
-          "description": "The action group names.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "threshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The threshold of the alert."
-        },
-        "thresholdOperator": {
-          "type": "string",
-          "description": "The threshold operator of the alert."
-        },
-        "windowSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The window size of the alert."
-        },
-        "evaluationFrequency": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The evaluation frequency of the alert."
-        },
-        "failingPeriodsToAlert": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of failing periods to alert."
-        },
-        "failingPeriodsOperator": {
-          "type": "string",
-          "description": "The operator for failing periods."
-        },
-        "muteActionsDuration": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The duration to mute actions."
-        },
-        "autoMitigate": {
-          "type": "string",
-          "description": "Indicates whether the alert is in an auto-mitigate state."
-        },
-        "dimension": {
-          "type": "string",
-          "description": "The alert dimension."
-        },
-        "alertQueryParameters": {
-          "type": "array",
-          "description": "The alert query parameters.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/AlertRuleQueryParameter"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "AlertRuleQueryParameter": {
+    "AlertQueryParameter": {
       "type": "object",
       "description": "Defines the Alert Query Parameter.",
       "properties": {
@@ -1488,6 +1447,107 @@
           "type": "string",
           "description": "The value of the alert query parameter."
         }
+      }
+    },
+    "AlertRuleProperties": {
+      "type": "object",
+      "description": "Describes the properties of an alert.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AlertRuleStatus",
+          "description": "Indicates whether the alert is in an enabled state."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest.",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "actionGroups": {
+          "type": "array",
+          "description": "Action Group resource Ids to invoke when the alert fires",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The threshold of the alert."
+        },
+        "thresholdOperator": {
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "The threshold operator of the alert."
+        },
+        "windowSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The period of time on which the Alert query will be executed."
+        },
+        "evaluationFrequency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often the scheduled query rule is evaluated."
+        },
+        "failingPeriodsToAlert": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failing periods to trigger an alert."
+        },
+        "failingPeriodsOperator": {
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "The operator for failing periods."
+        },
+        "muteActionsDuration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Mute actions for the chosen period of time after the alert is fired."
+        },
+        "autoMitigate": {
+          "$ref": "#/definitions/AlertAutoMitigate",
+          "description": "The value that indicates whether the alert should be automatically resolved or not. The default is Disable."
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Evaluation of metric on a particular column."
+        },
+        "alertQueryParameters": {
+          "type": "array",
+          "description": "The alert query parameters.",
+          "items": {
+            "$ref": "#/definitions/AlertQueryParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AlertRuleStatus": {
+      "type": "string",
+      "description": "The value which indicates whether this scheduled query rule is enabled. Value should be enabled or disabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AlertRuleStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The scheduled query rule is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The scheduled query rule is disabled"
+          }
+        ]
       }
     },
     "AlertTemplate": {
@@ -1532,32 +1592,86 @@
       "description": "Defines the Alert Template MetricMeasurement Properties.",
       "properties": {
         "thresholdOperator": {
-          "type": "string",
+          "$ref": "#/definitions/ConditionalOperator",
           "description": "Operator used for threshold comparison."
         },
         "threshold": {
           "type": "integer",
           "format": "int32",
-          "description": "Threshold value."
+          "description": "The Threshold Value Associated with the Alert Template for Metric Measurement."
         },
         "metricTriggerType": {
-          "type": "string",
-          "description": "Type of metric trigger."
+          "$ref": "#/definitions/AlertTemplateMetricTriggerType",
+          "description": "Metric Trigger Type Associated with the Alert Template for Metric Measurement."
         },
         "metricColumn": {
           "type": "string",
-          "description": "Column associated with the metric."
+          "description": "Metric Column Associated with the Alert Template for Metric Measurement."
         },
         "frequencyInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Frequency of measurement in minutes."
+          "description": "Frequency (mins) value Associated with the Alert Template for Metric Measurement."
         },
         "timeWindowInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Time window for measurement in minutes."
+          "description": "Time Window (mins) Value Associated with the Alert Template for Metric Measurement."
         }
+      }
+    },
+    "AlertTemplateMetricTriggerType": {
+      "type": "string",
+      "description": "Metric Trigger Type Associated with the Alert Template for Metric Measurement",
+      "enum": [
+        "Consecutive",
+        "Total"
+      ],
+      "x-ms-enum": {
+        "name": "AlertTemplateMetricTriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Consecutive",
+            "value": "Consecutive",
+            "description": "The metric trigger type is consecutive."
+          },
+          {
+            "name": "Total",
+            "value": "Total",
+            "description": "The metric trigger type is total."
+          }
+        ]
+      }
+    },
+    "AlertTemplateParameterType": {
+      "type": "string",
+      "description": "Type of the Query Input Parameter",
+      "enum": [
+        "LogAnalyticsQuery",
+        "ProviderProperty",
+        "CustomInput"
+      ],
+      "x-ms-enum": {
+        "name": "AlertTemplateParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LogAnalyticsQuery",
+            "value": "LogAnalyticsQuery",
+            "description": "Log Analytics query parameter"
+          },
+          {
+            "name": "ProviderProperty",
+            "value": "ProviderProperty",
+            "description": "Provider property parameter"
+          },
+          {
+            "name": "CustomInput",
+            "value": "CustomInput",
+            "description": "Custom input parameter"
+          }
+        ]
       }
     },
     "AlertTemplateProperties": {
@@ -1576,11 +1690,11 @@
         },
         "templateDisplayName": {
           "type": "string",
-          "description": "Display name of the template."
+          "description": "Display name of the alert template."
         },
         "providerType": {
           "type": "string",
-          "description": "Type of the provider."
+          "description": "The provider type for alert template. For example, the value can be SapHana."
         },
         "description": {
           "type": "string",
@@ -1589,14 +1703,16 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "Severity level of the alert."
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is most severe and value of 4 is least severe.",
+          "minimum": 0,
+          "maximum": 4
         },
         "query": {
           "type": "string",
-          "description": "Query associated with the alert."
+          "description": "Query associated with the alert template."
         },
         "thresholdOperator": {
-          "type": "string",
+          "$ref": "#/definitions/ConditionalOperator",
           "description": "Operator used for threshold comparison."
         },
         "defaultThreshold": {
@@ -1607,15 +1723,15 @@
         "lowerBound": {
           "type": "integer",
           "format": "int32",
-          "description": "Lower bound for the threshold."
+          "description": "Minimum possible Default Threshold Value Associated with the Alert Template."
         },
         "upperBound": {
           "type": "integer",
           "format": "int32",
-          "description": "Upper bound for the threshold."
+          "description": "Maximum possible Default Threshold Value Associated with the Alert Template."
         },
         "defaultThresholdInputOption": {
-          "type": "string",
+          "$ref": "#/definitions/DefaultThresholdInputOption",
           "description": "Input option for the default threshold."
         },
         "alertUnit": {
@@ -1624,11 +1740,11 @@
         },
         "metricMeasurement": {
           "$ref": "#/definitions/AlertTemplateMetricMeasurement",
-          "description": "Metric measurement details."
+          "description": "Describes the properties for metric measurement in alerts template."
         },
         "queryInputParameters": {
           "type": "array",
-          "description": "Parameters for the query input.",
+          "description": "Describes the Query Input Parameter properties in alerts template.",
           "maxItems": 50,
           "items": {
             "$ref": "#/definitions/AlertTemplateQueryInputParameter"
@@ -1641,36 +1757,60 @@
     },
     "AlertTemplateQueryInputParameter": {
       "type": "object",
-      "description": "Defines the properties of a Query Input Parameter.",
+      "description": "Describes the Query Input Parameter properties in alerts template.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the parameter."
+          "description": "Name of the Query Input Parameter"
         },
         "type": {
-          "type": "string",
-          "description": "Type of the parameter."
+          "$ref": "#/definitions/AlertTemplateParameterType",
+          "description": "Type of the Query Input Parameter"
         },
         "description": {
           "type": "string",
-          "description": "Description of the parameter."
+          "description": "Description of the Query Input Parameter"
         },
         "defaultValue": {
           "type": "string",
-          "description": "Default value of the parameter."
+          "description": "Default Value of the Query Input Parameter"
         },
         "laQuery": {
           "type": "string",
           "description": "Log Analytics query associated with the parameter."
         },
         "selectionMode": {
-          "type": "string",
+          "$ref": "#/definitions/AlertTemplateSelectionMode",
           "description": "Selection mode for the parameter."
         },
         "displayName": {
           "type": "string",
-          "description": "Display name of the parameter."
+          "description": "Display Name of the Query Input Parameter."
         }
+      }
+    },
+    "AlertTemplateSelectionMode": {
+      "type": "string",
+      "description": "Selection Mode of the Query Input Parameter",
+      "enum": [
+        "Single",
+        "Multiple"
+      ],
+      "x-ms-enum": {
+        "name": "AlertTemplateSelectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Single",
+            "value": "Single",
+            "description": "The selection mode is single."
+          },
+          {
+            "name": "Multiple",
+            "value": "Multiple",
+            "description": "The selection mode is Multiple."
+          }
+        ]
       }
     },
     "AppServicePlanConfiguration": {
@@ -1709,6 +1849,48 @@
             "name": "PremiumV3",
             "value": "PremiumV3",
             "description": "Dedicated Premium V3 plan"
+          }
+        ]
+      }
+    },
+    "ConditionalOperator": {
+      "type": "string",
+      "description": "Result Condition Evaluation Criteria",
+      "enum": [
+        "LessThan",
+        "GreaterThan",
+        "Equal",
+        "GreaterThanOrEqual",
+        "LessThanOrEqual"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionalOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LessThan",
+            "value": "LessThan",
+            "description": "The value is less than the specified value."
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan",
+            "description": "The value is greater than the specified value."
+          },
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "The value is equal to the specified value."
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual",
+            "description": "The value is greater than or equal to the specified value."
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual",
+            "description": "The value is less than or equal to the specified value."
           }
         ]
       }
@@ -1762,6 +1944,36 @@
         }
       ],
       "x-ms-discriminator-value": "Db2"
+    },
+    "DefaultThresholdInputOption": {
+      "type": "string",
+      "description": "Is input required for Default Threshold Value Associated with the Alert Template",
+      "enum": [
+        "Required",
+        "NotRequired",
+        "Optional"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultThresholdInputOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "The default threshold value is required."
+          },
+          {
+            "name": "NotRequired",
+            "value": "NotRequired",
+            "description": "The default threshold value is not required."
+          },
+          {
+            "name": "Optional",
+            "value": "Optional",
+            "description": "The default threshold value is optional."
+          }
+        ]
+      }
     },
     "HanaDbProviderInstanceProperties": {
       "type": "object",
@@ -1994,24 +2206,24 @@
       "properties": {
         "hostname": {
           "type": "string",
-          "description": "Gets or sets the SQL server host name."
+          "description": "Gets or sets the target virtual machine name."
         },
         "dbPort": {
           "type": "string",
-          "description": "Gets or sets the database sql port."
+          "description": "Gets or sets the oracle database sql port."
         },
         "dbName": {
           "type": "string",
-          "description": "Gets or sets the database name."
+          "description": "Gets or sets the oracle database name."
         },
         "dbUsername": {
           "type": "string",
-          "description": "Gets or sets the database user name."
+          "description": "Gets or sets the oracle database user name."
         },
         "dbPassword": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the database password.",
+          "description": "Gets or sets the oracle database password.",
           "x-ms-secret": true
         },
         "dbPasswordUri": {
@@ -2028,7 +2240,7 @@
         },
         "sslCertificateUri": {
           "type": "string",
-          "description": "Gets or sets the blob URI to SSL certificate for the SQL Database."
+          "description": "Gets or sets the blob URI to SSL certificate for the Oracle Database."
         }
       },
       "allOf": [
