@@ -973,9 +973,9 @@ union OnboardingStatus {
   Failed: "Failed",
 }
 
-@doc("The properties passed in the enableOnboarding POST request.")
+@doc("The properties passed in the prepareForOnboarding POST request.")
 @added(Versions.v2024_12_01_preview)
-model EnableOnboardingProperties {
+model PrepareForOnboardingProperties {
   @doc("Desired maximum duration by which a device can be onboarded")
   ttl: duration; // TODO, determine min/max enforcement, correct format here
 }
@@ -988,8 +988,8 @@ interface DeviceStates {
   update is ArmResourcePatchSync<DeviceState, DeviceStateProperties>;
   listByParent is ArmResourceListByParent<DeviceState>;
   @added(Versions.v2024_12_01_preview)
-  enableOnboarding is ArmResourceActionNoResponseContentAsync<
+  prepareForOnboarding is ArmResourceActionNoResponseContentAsync<
     DeviceState,
-    EnableOnboardingProperties
+    PrepareForOnboardingProperties
   >; // TODO: revisit error response body after private RP testing if needed
 }
