@@ -1885,7 +1885,13 @@ model CommunityGalleryProperties {
   /**
    * The disclaimer for a community gallery resource.
    */
-  disclaimer?: string;
+  disclaimer?: {
+    /**
+     * Community gallery disclaimer
+     */
+    @visibility("read")
+    disclaimer: string;
+  };
 
   /**
    * The artifact tags of a community gallery resource.
@@ -2045,7 +2051,13 @@ model CommunityGalleryImageProperties {
   /**
    * The disclaimer for a community gallery resource.
    */
-  disclaimer?: string;
+  disclaimer?: {
+    /**
+     * Community gallery disclaimer
+     */
+    @visibility("read")
+    disclaimer: string;
+  };
 
   /**
    * The artifact tags of a community gallery resource.
@@ -2110,7 +2122,13 @@ model CommunityGalleryImageVersionProperties {
   /**
    * The disclaimer for a community gallery resource.
    */
-  disclaimer?: string;
+  disclaimer?: {
+    /**
+     * Community gallery disclaimer
+     */
+    @visibility("read")
+    disclaimer: string;
+  };
 
   /**
    * The artifact tags of a community gallery resource.
