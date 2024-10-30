@@ -654,7 +654,7 @@ union ApiSourceLinkStateEnum {
   string,
 
   /**
-   * API source link is initizing.
+   * API source link is initializing.
    */
   Initializing : "initializing",
 
