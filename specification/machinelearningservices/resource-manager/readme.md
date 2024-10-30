@@ -58,10 +58,10 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: Existing property in previous GA version.
     where:
-      - $.definition.SparkJob.properties.conf
-      - $.definition.SparkJob.properties.environmentVariables
-      - $.definition.WorkspaceConnectionPropertiesV2.properties.metadata
-      - $.definition.CustomKeys.properties.keys
+      - $.definitions.SparkJob.properties.conf
+      - $.definitions.SparkJob.properties.environmentVariables
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+      - $.definitions.CustomKeys.properties.keys
   - code: LroLocationHeader
     reason: Existing API behavior
     where:
@@ -77,7 +77,7 @@ suppressions:
   - code: GuidUsage
     reason: Existing property in previous GA version.
     where:
-      - $.definition.WorkspaceConnectionOAuth2.properties.clientId.format
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
   ```
 
 ### Tag: package-preview-2024-10
