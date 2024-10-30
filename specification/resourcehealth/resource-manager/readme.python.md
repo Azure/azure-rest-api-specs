@@ -17,3 +17,7 @@ title: ResourceHealthMgmtClient
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/resourcehealth/azure-mgmt-resourcehealth/azure/mgmt/resourcehealth
 ```
+
+``` yaml $(python)
+flatten-models: false
+```
