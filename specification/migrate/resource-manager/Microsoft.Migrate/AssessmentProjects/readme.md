@@ -10,9 +10,9 @@ This is the AutoRest configuration file for Azure Migrate.
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-migrate-2018-02
-  - tag: package-migrate-2019-10
-  - tag: package-migrate-2017-11
+  - tag: package-2018-02
+  - tag: package-2019-10
+  - tag: package-2017-11
 ```
 
 ### Tag: package-preview-2023-09
@@ -47,11 +47,11 @@ suppressions:
     reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
 ```
 
-### Tag: package-migrate-2023-04
+### Tag: package-2023-04
 
-These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-04'
+```yaml $(tag) == 'package-2023-04'
 input-file:
   - preview/2023-04-01-preview/migrate.json
 suppressions:
@@ -59,21 +59,21 @@ suppressions:
     reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
 ```
 
-### Tag: package-migrate-2023-03
+### Tag: package-2023-03
 
-These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-03'
+```yaml $(tag) == 'package-2023-03'
 input-file:
   - stable/2023-03-15/migrate.json
 ```
 
-### Tag: package-migrate-2018-02 and java
+### Tag: package-2018-02 and java
 
-These settings apply only when `--tag=package-migrate-2018-02 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-migrate-2018-02' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.azure.resourcemanager.migration.assessment.v2018_02_02
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2018_02_02
@@ -81,12 +81,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-migrate-2019-10 and java
+### Tag: package-2019-10 and java
 
-These settings apply only when `--tag=package-migrate-2019-10 --java` is specified on the command line.
+These settings apply only when `--tag=package-2019-10 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-migrate-2019-10' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2019-10' && $(java) && $(multiapi)
 java:
   namespace: com.azure.resourcemanager.migration.assessment.v2019_10_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2019_10_01
@@ -94,12 +94,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-migrate-2017-11 and java
+### Tag: package-2017-11 and java
 
-These settings apply only when `--tag=package-migrate-2017-11 --java` is specified on the command line.
+These settings apply only when `--tag=package-2017-11 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-migrate-2017-11' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
 java:
   namespace: com.azure.resourcemanager.migration.assessment.v2017_11_11
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2017_11_11
@@ -162,47 +162,47 @@ suppressions:
     reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
 ```
 
-### Tag: package-migrate-2023-03
+### Tag: package-2023-03
 
-These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-03'
+```yaml $(tag) == 'package-2023-03'
 input-file:
   - stable/2023-03-15/migrate.json
 ```
 
-### Tag: package-migrate-2023-04
+### Tag: package-2023-04
 
-These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-04'
+```yaml $(tag) == 'package-2023-04'
 input-file:
   - preview/2023-04-01-preview/migrate.json
 ```
 
-### Tag: package-migrate-2018-02
+### Tag: package-2018-02
 
-These settings apply only when `--tag=package-migrate-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-migrate-2018-02'
+``` yaml $(tag) == 'package-2018-02'
 input-file:
 - stable/2018-02-02/migrate.json
 ```
 
-### Tag: package-migrate-2019-10
+### Tag: package-2019-10
 
-These settings apply only when `--tag=package-migrate-2019-10` is specified on the command line.
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-migrate-2019-10'
+``` yaml $(tag) == 'package-2019-10'
 input-file:
 - stable/2019-10-01/migrate.json
 ```
 
-### Tag: package-migrate-2017-11
+### Tag: package-2017-11
 
-These settings apply only when `--tag=package-migrate-2017-11` is specified on the command line.
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-migrate-2017-11'
+``` yaml $(tag) == 'package-2017-11'
 input-file:
 - preview/2017-11-11-preview/migrate.json
 ```

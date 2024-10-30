@@ -10,8 +10,8 @@ This is the AutoRest configuration file for Microsoft.OffAzure in Azure Migrate.
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-migrate-2020-01
-  - tag: package-migrate-2020-07
+  - tag: package-2020-01
+  - tag: package-2020-07
 ```
 
 ### Tag: package-preview-2023-10
@@ -32,12 +32,12 @@ input-file:
   - stable/2023-06-06/migrate.json
 ```
 
-### Tag: package-migrate-2020-01 and java
+### Tag: package-2020-01 and java
 
-These settings apply only when `--tag=package-migrate-2020-01 --java` is specified on the command line.
+These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-migrate-2020-01' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
 java:
   namespace: com.azure.resourcemanager.migrationdiscovery.v2020_01_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationdiscovery/mgmt-v2020_01_01
@@ -45,12 +45,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-migrate-2020-07 and java
+### Tag: package-2020-07 and java
 
-These settings apply only when `--tag=package-migrate-2020-07 --java` is specified on the command line.
+These settings apply only when `--tag=package-2020-07 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-migrate-2020-07' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-07' && $(java) && $(multiapi)
 java:
   namespace: com.azure.resourcemanager.migrationdiscovery.v2020_07_07
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationdiscovery/mgmt-v2020_07_07
@@ -81,20 +81,20 @@ openapi-type: arm
 tag: package-preview-2023-10
 ```
 
-### Tag: package-migrate-2020-01
+### Tag: package-2020-01
 
-These settings apply only when `--tag=package-migrate-2020-01` is specified on the command line.
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-migrate-2020-01'
+``` yaml $(tag) == 'package-2020-01'
 input-file:
 - stable/2020-01-01/migrate.json
 ```
 
-### Tag: package-migrate-2020-07
+### Tag: package-2020-07
 
-These settings apply only when `--tag=package-migrate-2020-07` is specified on the command line.
+These settings apply only when `--tag=package-2020-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-migrate-2020-07'
+``` yaml $(tag) == 'package-2020-07'
 input-file:
 - stable/2020-07-07/migrate.json
 ```

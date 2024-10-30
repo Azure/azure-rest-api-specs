@@ -10,16 +10,16 @@ This is the AutoRest configuration file for Azure Migrate.
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-hubmigrate-2020-05
-  - tag: package-hubmigrate-2023-01
+  - tag: package-2020-05
+  - tag: package-2023-01
 ```
 
-### Tag: package-hubmigrate-2020-05 and java
+### Tag: package-2020-05 and java
 
-These settings apply only when `--tag=package-hubmigrate-2020-05 --java` is specified on the command line.
+These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-hubmigrate-2020-05' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
 java:
   namespace: com.azure.resourcemanager.migration.hub.v2020_05_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationhub/mgmt-v2020_05_01
@@ -27,12 +27,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-hubmigrate-2023-01 and java
+### Tag: package-2023-01 and java
 
-These settings apply only when `--tag=package-hubmigrate-2023-01 --java` is specified on the command line.
+These settings apply only when `--tag=package-2023-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-hubmigrate-2023-01' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2023-01' && $(java) && $(multiapi)
 java:
   namespace: com.azure.resourcemanager.migration.hub.v2023_01_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationhub/mgmt-v2023_01_01
@@ -60,23 +60,23 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-hubmigrate-2023-01
+tag: package-2023-01
 ```
 
-### Tag: package-hubmigrate-2020-05
+### Tag: package-2020-05
 
-These settings apply only when `--tag=package-hubmigrate-2020-05` is specified on the command line.
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-hubmigrate-2020-05'
+``` yaml $(tag) == 'package-2020-05'
 input-file:
 - stable/2020-05-01/hubmigrate.json
 ```
 
-### Tag: package-hubmigrate-2023-01
+### Tag: package-2023-01
 
-These settings apply only when `--tag=package-hubmigrate-2023-01` is specified on the command line.
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-hubmigrate-2023-01'
+``` yaml $(tag) == 'package-2023-01'
 input-file:
 - stable/2023-01-01/hubmigrate.json
 ```
