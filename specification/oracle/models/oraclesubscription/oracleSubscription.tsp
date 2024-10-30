@@ -11,6 +11,7 @@ union OracleSubscriptionProvisioningState {
   string,
 }
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
 @singleton
 @subscriptionResource
 @doc("OracleSubscription resource definition")

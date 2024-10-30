@@ -1852,10 +1852,10 @@
       "title": "OperationState",
       "description": "The state of a job or item.",
       "enum": [
-        "NotRunning",
-        "Running",
-        "Succeeded",
-        "Failed"
+        "notRunning",
+        "running",
+        "succeeded",
+        "failed"
       ],
       "type": "string",
       "readOnly": true,
@@ -1864,19 +1864,19 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "NotRunning",
+            "value": "notRunning",
             "description": "The operation is not yet queued to be processed in the future."
           },
           {
-            "value": "Running",
+            "value": "running",
             "description": "The operation has started to be processed."
           },
           {
-            "value": "Succeeded",
+            "value": "succeeded",
             "description": "The operation has successfully be processed and is ready for consumption."
           },
           {
-            "value": "Failed",
+            "value": "failed",
             "description": "The operation has completed processing with a failure and cannot be further consumed."
           }
         ]
@@ -2077,8 +2077,8 @@
       "type": "string",
       "description": "The compute type.",
       "enum": [
-        "serverless",
-        "custom"
+        "ServerlessCompute",
+        "CustomCompute"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
@@ -2086,12 +2086,12 @@
         "values": [
           {
             "name": "ServerlessCompute",
-            "value": "serverless",
+            "value": "ServerlessCompute",
             "description": "Serverless user compute."
           },
           {
             "name": "CustomCompute",
-            "value": "custom",
+            "value": "CustomCompute",
             "description": "Custom user compute."
           }
         ]
@@ -2117,7 +2117,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "serverless"
+      "x-ms-discriminator-value": "ServerlessCompute"
     },
     "CustomCompute": {
       "description": "Custom compute.",
@@ -2138,7 +2138,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "custom"
+      "x-ms-discriminator-value": "CustomCompute"
     },
     "TargetIndex": {
       "title": "TargetIndex",
@@ -2158,34 +2158,34 @@
       "type": "string",
       "description": "The target type.",
       "enum": [
-        "acs",
-        "cosmosdb",
-        "pinecone"
+        "AzureAISearch",
+        "CosmosDB",
+        "Pinecone"
       ],
       "x-ms-enum": {
         "name": "TargetType",
         "modelAsString": true,
         "values": [
           {
-            "name": "AzureSearch",
-            "value": "acs",
+            "name": "AzureAISearch",
+            "value": "AzureAISearch",
             "description": "Azure AI Search Index."
           },
           {
             "name": "CosmosDB",
-            "value": "cosmosdb",
+            "value": "CosmosDB",
             "description": "CosmosDB Index."
           },
           {
             "name": "Pinecone",
-            "value": "pinecone",
+            "value": "Pinecone",
             "description": "Pinecone Index."
           }
         ]
       }
     },
-    "ACSIndex": {
-      "description": "ACS Index.",
+    "AzureAISearchIndex": {
+      "description": "Azure AI Search Index.",
       "required": [
         "connectionId"
       ],
@@ -2198,12 +2198,12 @@
           "properties": {
             "connectionId": {
               "type": "string",
-              "description": "The id of the connection pointing to the ACS Index."
+              "description": "The id of the connection pointing to the Azure AI Search Index."
             }
           }
         }
       ],
-      "x-ms-discriminator-value": "acs"
+      "x-ms-discriminator-value": "AzureAISearch"
     },
     "CosmosDBIndex": {
       "description": "CosmosDB Index.",
@@ -2232,7 +2232,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "cosmosdb"
+      "x-ms-discriminator-value": "CosmosDB"
     },
     "PineconeIndex": {
       "description": "Pinecone Index.",
@@ -2253,7 +2253,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "pinecone"
+      "x-ms-discriminator-value": "Pinecone"
     },
     "UserComputeDatasource": {
       "title": "UserComputeDatasource",
@@ -2272,8 +2272,8 @@
       "type": "string",
       "description": "The datasource type.",
       "enum": [
-        "dataset",
-        "urls"
+        "Dataset",
+        "Urls"
       ],
       "x-ms-enum": {
         "name": "UserComputeDatasourceType",
@@ -2281,12 +2281,12 @@
         "values": [
           {
             "name": "Dataset",
-            "value": "dataset",
+            "value": "Dataset",
             "description": "Workspace Dataset."
           },
           {
             "name": "Urls",
-            "value": "urls",
+            "value": "Urls",
             "description": "URLs."
           }
         ]
@@ -2300,7 +2300,7 @@
         "datasetId",
         "datasetType"
       ],
-      "x-ms-discriminator-value": "dataset",
+      "x-ms-discriminator-value": "Dataset",
       "allOf": [
         {
           "$ref": "#/definitions/UserComputeDatasource"
@@ -2335,7 +2335,7 @@
         "urls",
         "embeddings"
       ],
-      "x-ms-discriminator-value": "urls",
+      "x-ms-discriminator-value": "Urls",
       "allOf": [
         {
           "$ref": "#/definitions/UserComputeDatasource"
@@ -2382,8 +2382,8 @@
       "type": "string",
       "description": "The datasource type.",
       "enum": [
-        "storage",
-        "urls"
+        "Storage",
+        "Urls"
       ],
       "x-ms-enum": {
         "name": "SystemComputeDatasourceType",
@@ -2391,12 +2391,12 @@
         "values": [
           {
             "name": "Storage",
-            "value": "storage",
+            "value": "Storage",
             "description": "Azure Storage Account."
           },
           {
             "name": "Urls",
-            "value": "urls",
+            "value": "Urls",
             "description": "URLs."
           }
         ]
@@ -2410,7 +2410,7 @@
         "containerName",
         "embeddings"
       ],
-      "x-ms-discriminator-value": "storage",
+      "x-ms-discriminator-value": "Storage",
       "allOf": [
         {
           "$ref": "#/definitions/SystemComputeDatasource"
@@ -2447,7 +2447,7 @@
         "containerName",
         "embeddings"
       ],
-      "x-ms-discriminator-value": "urls",
+      "x-ms-discriminator-value": "Urls",
       "allOf": [
         {
           "$ref": "#/definitions/SystemComputeDatasource"
@@ -2569,39 +2569,39 @@
       "type": "string",
       "description": "The connection type.",
       "enum": [
-        "endpointKey",
-        "connectionString",
-        "endpointMI",
-        "workspace",
-        "relativeConnection"
+        "EndpointWithKey",
+        "ConnectionString",
+        "EndpointWithManagedIdentity",
+        "WorkspaceConnection",
+        "RelativeConnection"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
         "modelAsString": true,
         "values": [
           {
-            "name": "EndpointKey",
-            "value": "endpointKey",
+            "name": "EndpointWithKey",
+            "value": "EndpointWithKey",
             "description": "Endpoint and key connection."
           },
           {
             "name": "ConnectionString",
-            "value": "connectionString",
+            "value": "ConnectionString",
             "description": "Connection string."
           },
           {
-            "name": "EndpointManagedIdentity",
-            "value": "endpointMI",
+            "name": "EndpointWithManagedIdentity",
+            "value": "EndpointWithManagedIdentity",
             "description": "Endpoint and managed identity."
           },
           {
-            "name": "AMLWorkspace",
-            "value": "workspace",
+            "name": "WorkspaceConnection",
+            "value": "WorkspaceConnection",
             "description": "AML Workspace connection."
           },
           {
-            "name": "RelativeDeployment",
-            "value": "relativeDeployment",
+            "name": "RelativeConnection",
+            "value": "RelativeConnection",
             "description": "Relative deployment"
           }
         ]
@@ -2631,7 +2631,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "endpointKey"
+      "x-ms-discriminator-value": "EndpointWithKey"
     },
     "ConnectionStringConnection": {
       "description": "Connection string connection.",
@@ -2652,7 +2652,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "connectionString"
+      "x-ms-discriminator-value": "ConnectionString"
     },
     "EndpointMIConnection": {
       "description": "Endpoint Managed Identity connection.",
@@ -2677,7 +2677,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "endpointMI"
+      "x-ms-discriminator-value": "EndpointWithManagedIdentity"
     },
     "WorkspaceConnection": {
       "description": "AML Workspace connection.",
@@ -2698,7 +2698,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "workspace"
+      "x-ms-discriminator-value": "WorkspaceConnection"
     },
     "DeploymentConnection": {
       "description": "Relative deployment connection.",
@@ -2707,13 +2707,13 @@
           "$ref": "#/definitions/BaseConnection"
         }
       ],
-      "x-ms-discriminator-value": "relativeConnection"
+      "x-ms-discriminator-value": "RelativeConnection"
     },
     "CompletionAction": {
       "type": "string",
       "description": "The completion action.",
       "enum": [
-        "cleanUpAssets",
+        "cleanUpTempAssets",
         "keepAllAssets"
       ],
       "x-ms-enum": {
@@ -2726,8 +2726,8 @@
             "description": "Will not clean up any of the intermediate assets created during the ingestion process."
           },
           {
-            "name": "cleanUpAssets",
-            "value": "cleanUpAssets",
+            "name": "cleanUpTempAssets",
+            "value": "cleanUpTempAssets",
             "description": "Will clean up intermediate assets created during the ingestion process."
           }
         ]

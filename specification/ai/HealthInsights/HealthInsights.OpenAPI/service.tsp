@@ -31,4 +31,7 @@ model EntraIdToken
 enum ApiVersion {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_04_01: "2024-04-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_08_01_preview: "2024-08-01-preview",
 }

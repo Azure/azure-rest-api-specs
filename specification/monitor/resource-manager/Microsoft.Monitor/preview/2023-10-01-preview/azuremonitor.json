@@ -741,6 +741,48 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.ExtendedLocationType": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types.",
+      "enum": [
+        "EdgeZone",
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone",
+            "description": "Azure Edge Zones location type"
+          },
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation",
+            "description": "Azure Custom Locations type"
+          }
+        ]
+      }
+    },
     "AzureMonitorWorkspace": {
       "type": "object",
       "description": "An Azure Monitor Workspace definition.",
@@ -1008,42 +1050,6 @@
         ]
       }
     },
-    "ExtendedLocation": {
-      "type": "object",
-      "description": "The extended location info.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ExtendedLocationType",
-          "description": "The type of extended location."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of extended location."
-        }
-      },
-      "required": [
-        "type",
-        "name"
-      ]
-    },
-    "ExtendedLocationType": {
-      "type": "string",
-      "description": "The extended location type.",
-      "enum": [
-        "CustomLocation"
-      ],
-      "x-ms-enum": {
-        "name": "ExtendedLocationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CustomLocation",
-            "value": "CustomLocation",
-            "description": "Custom location."
-          }
-        ]
-      }
-    },
     "ExternalNetworkingMode": {
       "type": "string",
       "description": "The mode of the external networking.",
@@ -1179,16 +1185,6 @@
         "persistentVolumeName"
       ]
     },
-    "PersistenceConfigurationsUpdate": {
-      "type": "object",
-      "description": "Persistence options to all pipelines in the instance.",
-      "properties": {
-        "persistentVolumeName": {
-          "type": "string",
-          "description": "The name of the mounted persistent volume."
-        }
-      }
-    },
     "Pipeline": {
       "type": "object",
       "description": "Pipeline Info.",
@@ -1244,7 +1240,7 @@
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
           "description": "The extended location for given pipeline group.",
           "x-ms-mutability": [
             "read",
@@ -1389,7 +1385,7 @@
           "x-ms-identifiers": []
         },
         "service": {
-          "$ref": "#/definitions/ServiceUpdate",
+          "$ref": "#/definitions/Service",
           "description": "The service section for a given pipeline group instance."
         },
         "networkingConfigurations": {
@@ -1709,25 +1705,6 @@
       "required": [
         "pipelines"
       ]
-    },
-    "ServiceUpdate": {
-      "type": "object",
-      "description": "Service Info.",
-      "properties": {
-        "pipelines": {
-          "type": "array",
-          "description": "Pipelines belonging to a given pipeline group.",
-          "items": {
-            "$ref": "#/definitions/Pipeline"
-          },
-          "x-ms-identifiers": []
-        },
-        "persistence": {
-          "$ref": "#/definitions/PersistenceConfigurationsUpdate",
-          "description": "Persistence options to all pipelines in the instance.",
-          "x-ms-identifiers": []
-        }
-      }
     },
     "SyslogReceiver": {
       "type": "object",

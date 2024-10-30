@@ -1,0 +1,12 @@
+title: Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the delete file endpoint.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2024-08-01-preview
+  vector_store_id: vs_abc123
+  file_id: file_abc123
+responses:
+  "200":
+    body:
+      id: file_abc123
+      object: vector_store.file.deleted
+      deleted: true
