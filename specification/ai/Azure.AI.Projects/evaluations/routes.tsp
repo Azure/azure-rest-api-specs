@@ -57,7 +57,7 @@ interface Evaluations {
     EvaluationSchedule,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
-  
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
   @route("schedules/{name}/disable")
