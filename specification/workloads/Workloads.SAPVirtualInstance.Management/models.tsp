@@ -1015,7 +1015,7 @@ model UpdateSAPVirtualInstanceRequest {
   /**
    * Managed service identity (user assigned identities)
    */
-  identity?: CommonTypes.ManagedServiceIdentity;
+  identity?: CommonTypes.UserAssignedIdentity;
 
   /**
    * The update properties.

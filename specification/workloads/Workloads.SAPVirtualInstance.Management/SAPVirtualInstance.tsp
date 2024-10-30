@@ -17,7 +17,12 @@ model SAPVirtualInstance is TrackedResource<SAPVirtualInstanceProperties> {
     SegmentName = "sapVirtualInstances",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9]{2}$"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /**
+   * The identity of the Virtual Instance for SAP solutions resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  identity?: CommonTypes.UserAssignedIdentity;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
