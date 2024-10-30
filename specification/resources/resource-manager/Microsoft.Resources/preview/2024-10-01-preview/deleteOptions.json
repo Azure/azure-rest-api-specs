@@ -1,0 +1,296 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-10-01-preview",
+    "title": "DeleteOptions",
+    "description": "Provides APIs for delete options resource type."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{rootResourceProviderNamespace}/{rootResourceType}/{rootResourceName}/providers/Microsoft.Resources/deleteOptions/default": {
+      "put": {
+        "tags": [
+          "DeleteOptions"
+        ],
+        "operationId": "DeleteOptions_Put",
+        "description": "Create delete options resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceNameParameter"
+          },
+          {
+            "name": "deleteOptionsRequestDefinition",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteOptionsRequestDefinition"
+            },
+            "description": "The definition to create deleteOptions resource."
+          }
+        ],
+        "x-ms-examples": {
+          "create delete options object": {
+            "$ref": "./examples/CreateOrUpdateDeleteOptions.json"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created -- Delete Options created.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOptionsResponseDefinition"
+            }
+          },
+          "200": {
+            "description": "OK - Returns the delete options definition.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOptionsResponseDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DeleteOptions"
+        ],
+        "operationId": "DeleteOptions_Get",
+        "description": "Get delete options of resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get delete options": {
+            "$ref": "./examples/GetDeleteOptions.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the delete options response definition.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOptionsResponseDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeleteOptions"
+        ],
+        "operationId": "DeleteOptions_Delete",
+        "description": "Delete delete options of resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/rootResourceNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete DeleteOptions": {
+            "$ref": "./examples/DeleteDeleteOptions.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the delete options response definition.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOptionsResponseDefinition"
+            },
+            "204": {
+              "description": "Delete Options does not exist."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "DeleteOptionsDefinition": {
+        "description": "A delete options response definition.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/DeleteOptionsProperties"
+          }
+        }
+      },
+      "DeleteOptionsProperties": {
+        "type": "object",
+        "description": "Delete option properties",
+        "properties": {
+          "deleteOptionsId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "A unique GUID representing delete options."
+          },
+          "SubscriptionId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The Azure subscription ID"
+          },
+          "ResourceGroup": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The name of the resource group. The name is case insensitive."
+          },
+          "retentionTime": {
+            "type": "string",
+            "description": "ISO 8601 duration format (e.g., P3Y6M4DT12H30M5S)"
+          },
+          "location": {
+            "type": "string",
+            "description": "The resource location."
+          },
+          "resourceId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The resource id of the delete options"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The Azure subscription ID.",
+        "x-ms-parameter-location": "client"
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "The API version to use for this operation."
+      },
+      "resourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the resource group. The name is case insensitive.",
+        "pattern": "^[-\\w\\._\\(\\)]+$",
+        "minLength": 1,
+        "maxLength": 90
+      },
+      "rootResourceProviderNamespaceParameter": {
+        "name": "rootResourceProviderNamespace",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The provider namespace.",
+        "x-ms-parameter-location": "method"
+      },
+      "rootResourceTypeParameter": {
+        "name": "rootResourceType",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The resource type name. For example the type name of a web app is 'sites' (from Microsoft.Web/sites).",
+        "x-ms-skip-url-encoding": true
+      },
+      "rootResourceNameParameter": {
+        "name": "rootResourceName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the resource."
+      }
+    }
+  }
+}

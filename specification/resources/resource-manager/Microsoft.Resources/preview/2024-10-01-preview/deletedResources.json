@@ -1,0 +1,315 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-10-01-preview",
+    "title": "DeletedResource",
+    "description": "Provides APIs for deleted resource resource type."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}": {
+      "get": {
+        "tags": [
+          "DeletedResources"
+        ],
+        "operationId": "DeletedResources_Get",
+        "description": "Get deleted resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deletedResourceIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get deleted resource": {
+            "$ref": "./examples/GetDeletedResource.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the deleted resource definition.",
+            "schema": {
+              "$ref": "#/definitions/DeletedResourceDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Resources/deletedResources": {
+      "get": {
+        "tags": [
+          "DeletedResources"
+        ],
+        "operationId": "DeletedResources_List",
+        "description": "Get deleted resources at specified scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get deleted resources at scope": {
+            "$ref": "./examples/GetScopedDeletedResources.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the deleted resources.",
+            "schema": {
+              "$ref": "#/definitions/DeletedResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}/purge": {
+      "post": {
+        "tags": [
+          "DeletedResources"
+        ],
+        "operationId": "DeletedResource_Purge",
+        "description": "Deletes soft deleted resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deletedResourceIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Purge deleted resource": {
+            "$ref": "./examples/PurgeDeletedResource.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the resource."
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}/undelete": {
+      "post": {
+        "tags": [
+          "DeletedResources"
+        ],
+        "operationId": "DeletedResource_Purge",
+        "description": "Deletes soft deleted resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deletedResourceIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Undelete deleted resource": {
+            "$ref": "./examples/UndeleteDeletedResource.json"
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns URL in Location header to query for long-running operation status.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before polling for status."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeletedResourcesListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedResourceDefintion"
+          },
+          "description": "Gets or sets the list of deleted resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the URL to get the next set of results."
+        }
+      },
+      "description": "List of deleted resources."
+    },
+    "DeletedResourceDefinition": {
+      "description": "Deleted Resource information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "deletedResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "GUID representing deletedresource id."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Azure subscription ID"
+        },
+        "ResourceGroup": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource group. The name is case insensitive."
+        },
+        "originalResourceLocation": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "originalResourceId": {
+          "type": "string",
+          "description": "The resource id of the original resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "State of the deletedResource.",
+          "enum": [
+            "Accepted",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "DeletedResourceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "purgeTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which deleted resource should be purged."
+        },
+        "softDeletedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which original resource got deleted."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID.",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "deletedResourceIdParameter": {
+      "name": "deletedResourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The deleted resource id."
+    }
+  }
+}
