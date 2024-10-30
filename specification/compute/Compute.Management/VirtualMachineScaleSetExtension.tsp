@@ -36,7 +36,7 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to get the extension.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     VirtualMachineScaleSetExtension,
     Parameters = {
       /**
@@ -50,13 +50,13 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to create or update an extension.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineScaleSetExtension>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<VirtualMachineScaleSetExtension>;
 
   /**
    * The operation to update an extension.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate
   >;
@@ -67,12 +67,12 @@ interface VirtualMachineScaleSetExtensions {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<VirtualMachineScaleSetExtension>;
+  delete is ComputeResourceDeleteAsync<VirtualMachineScaleSetExtension>;
 
   /**
    * Gets a list of all extensions in a VM scale set.
    */
-  list is ArmResourceListByParent<
+  list is ComputeResourceListByParent<
     VirtualMachineScaleSetExtension,
     Response = VirtualMachineScaleSetExtensionListResult
   >;

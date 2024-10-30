@@ -59,7 +59,7 @@ interface VirtualMachineScaleSets {
   /**
    * Display information about a virtual machine scale set.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     VirtualMachineScaleSet,
     Parameters = {
       /**
@@ -73,7 +73,7 @@ interface VirtualMachineScaleSets {
   /**
    * Create or update a VM scale set.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     VirtualMachineScaleSet,
     Parameters = {
       /**
@@ -94,7 +94,7 @@ interface VirtualMachineScaleSets {
    * Update a VM scale set.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetUpdate,
     Parameters = {
@@ -118,7 +118,7 @@ interface VirtualMachineScaleSets {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<
+  delete is ComputeResourceDeleteAsync<
     VirtualMachineScaleSet,
     Parameters = {
       /**
@@ -132,7 +132,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of all VM scale sets under a resource group.
    */
-  list is ArmResourceListByParent<
+  list is ComputeResourceListByParent<
     VirtualMachineScaleSet,
     Response = VirtualMachineScaleSetListResult
   >;
@@ -140,7 +140,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.
    */
-  listAll is ArmListBySubscription<
+  listAll is ComputeListBySubscription<
     VirtualMachineScaleSet,
     Response = VirtualMachineScaleSetListWithLinkResult
   >;
@@ -148,7 +148,7 @@ interface VirtualMachineScaleSets {
   /**
    * Approve upgrade on deferred rolling upgrades for OS disks in the virtual machines in a VM scale set.
    */
-  approveRollingUpgrade is ArmResourceActionNoResponseContentAsync<
+  approveRollingUpgrade is ComputeResourceActionNoResponseContentAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs
   >;
@@ -156,7 +156,7 @@ interface VirtualMachineScaleSets {
   /**
    * Converts SinglePlacementGroup property to false for a existing virtual machine scale set.
    */
-  convertToSinglePlacementGroup is ArmResourceActionSync<
+  convertToSinglePlacementGroup is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     VMScaleSetConvertToSinglePlacementGroupInput,
     void
@@ -165,7 +165,7 @@ interface VirtualMachineScaleSets {
   /**
    * Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
    */
-  deallocate is ArmResourceActionAsync<
+  deallocate is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void,
@@ -181,7 +181,7 @@ interface VirtualMachineScaleSets {
   /**
    * Deletes virtual machines in a VM scale set.
    */
-  deleteInstances is ArmResourceActionAsync<
+  deleteInstances is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
     void,
@@ -197,7 +197,7 @@ interface VirtualMachineScaleSets {
   /**
    * Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set.
    */
-  forceRecoveryServiceFabricPlatformUpdateDomainWalk is ArmResourceActionSync<
+  forceRecoveryServiceFabricPlatformUpdateDomainWalk is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
     RecoveryWalkResponse,
@@ -226,7 +226,7 @@ interface VirtualMachineScaleSets {
    * Gets the status of a VM scale set instance.
    */
   @get
-  getInstanceView is ArmResourceActionSync<
+  getInstanceView is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
     VirtualMachineScaleSetInstanceView
@@ -235,7 +235,7 @@ interface VirtualMachineScaleSets {
   /**
    * Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
    */
-  updateInstances is ArmResourceActionAsync<
+  updateInstances is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
     void
@@ -247,7 +247,7 @@ interface VirtualMachineScaleSets {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
-  getOSUpgradeHistory is ArmResourceActionSync<
+  getOSUpgradeHistory is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
     VirtualMachineScaleSetListOSUpgradeHistory
@@ -256,7 +256,7 @@ interface VirtualMachineScaleSets {
   /**
    * Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
    */
-  performMaintenance is ArmResourceActionAsync<
+  performMaintenance is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void
@@ -265,7 +265,7 @@ interface VirtualMachineScaleSets {
   /**
    * Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
    */
-  powerOff is ArmResourceActionAsync<
+  powerOff is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void,
@@ -281,12 +281,12 @@ interface VirtualMachineScaleSets {
   /**
    * Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual Machine Instances
    */
-  reapply is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
+  reapply is ComputeResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
   /**
    * Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
    */
-  redeploy is ArmResourceActionAsync<
+  redeploy is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void
@@ -295,7 +295,7 @@ interface VirtualMachineScaleSets {
   /**
    * Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.
    */
-  reimage is ArmResourceActionAsync<
+  reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetReimageParameters,
     void
@@ -304,7 +304,7 @@ interface VirtualMachineScaleSets {
   /**
    * Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
    */
-  reimageAll is ArmResourceActionAsync<
+  reimageAll is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void
@@ -313,7 +313,7 @@ interface VirtualMachineScaleSets {
   /**
    * Restarts one or more virtual machines in a VM scale set.
    */
-  restart is ArmResourceActionAsync<
+  restart is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void
@@ -322,7 +322,7 @@ interface VirtualMachineScaleSets {
   /**
    * Changes ServiceState property for a given service
    */
-  setOrchestrationServiceState is ArmResourceActionAsync<
+  setOrchestrationServiceState is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     OrchestrationServiceStateInput,
     void
@@ -332,7 +332,7 @@ interface VirtualMachineScaleSets {
    * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
    */
   @get
-  listSkus is ArmResourceActionSync<
+  listSkus is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
     VirtualMachineScaleSetListSkusResult
@@ -341,7 +341,7 @@ interface VirtualMachineScaleSets {
   /**
    * Starts one or more virtual machines in a VM scale set.
    */
-  start is ArmResourceActionAsync<
+  start is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void
@@ -352,7 +352,7 @@ interface VirtualMachineScaleSets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade")
-  startExtensionUpgrade is ArmResourceActionAsync<
+  startExtensionUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
     void
@@ -363,14 +363,18 @@ interface VirtualMachineScaleSets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
-  startOSUpgrade is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
+  startOSUpgrade is ComputeResourceActionAsync<
+    VirtualMachineScaleSet,
+    void,
+    void
+  >;
 
   /**
    * Cancels the current virtual machine scale set rolling upgrade.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
-  cancel is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
+  cancel is ComputeResourceActionAsync<VirtualMachineScaleSet, void, void>;
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");

@@ -30,7 +30,7 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to get the run command.
    */
-  getByVirtualMachine is ArmResourceRead<
+  getByVirtualMachine is ComputeResourceRead<
     VirtualMachineRunCommand,
     Parameters = {
       /**
@@ -44,13 +44,13 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to create or update the run command.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineRunCommand>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<VirtualMachineRunCommand>;
 
   /**
    * The operation to update the run command.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate
   >;
@@ -61,12 +61,12 @@ interface VirtualMachineRunCommands {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;
+  delete is ComputeResourceDeleteAsync<VirtualMachineRunCommand>;
 
   /**
    * The operation to get all run commands of a Virtual Machine.
    */
-  listByVirtualMachine is ArmResourceListByParent<
+  listByVirtualMachine is ComputeResourceListByParent<
     VirtualMachineRunCommand,
     Parameters = {
       /**

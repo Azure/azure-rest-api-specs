@@ -30,7 +30,7 @@ interface VirtualMachineExtensions {
   /**
    * The operation to get the extension.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     VirtualMachineExtension,
     Parameters = {
       /**
@@ -44,13 +44,13 @@ interface VirtualMachineExtensions {
   /**
    * The operation to create or update the extension.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineExtension>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<VirtualMachineExtension>;
 
   /**
    * The operation to update the extension.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     VirtualMachineExtension,
     VirtualMachineExtensionUpdate
   >;
@@ -61,12 +61,12 @@ interface VirtualMachineExtensions {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<VirtualMachineExtension>;
+  delete is ComputeResourceDeleteAsync<VirtualMachineExtension>;
 
   /**
    * The operation to get all extensions of a Virtual Machine.
    */
-  list is ArmResourceListByParent<
+  list is ComputeResourceListByParent<
     VirtualMachineExtension,
     Parameters = {
       /**

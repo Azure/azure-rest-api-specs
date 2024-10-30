@@ -30,14 +30,14 @@ interface SshPublicKeyResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SshPublicKeys_Get")
-  get is ArmResourceRead<SshPublicKeyResource>;
+  get is ComputeResourceRead<SshPublicKeyResource>;
 
   /**
    * Creates a new SSH public key resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SshPublicKeys_Create")
-  create is ArmResourceCreateOrReplaceSync<SshPublicKeyResource>;
+  create is ComputeResourceCreateOrReplaceSync<SshPublicKeyResource>;
 
   /**
    * Updates a new SSH public key resource.
@@ -45,7 +45,7 @@ interface SshPublicKeyResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("SshPublicKeys_Update")
-  update is ArmCustomPatchSync<
+  update is ComputeCustomPatchSync<
     SshPublicKeyResource,
     SshPublicKeyUpdateResource
   >;
@@ -56,14 +56,14 @@ interface SshPublicKeyResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("SshPublicKeys_Delete")
-  delete is ArmResourceDeleteSync<SshPublicKeyResource>;
+  delete is ComputeResourceDeleteSync<SshPublicKeyResource>;
 
   /**
    * Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SshPublicKeys_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ComputeResourceListByParent<
     SshPublicKeyResource,
     Response = SshPublicKeysGroupListResult
   >;
@@ -73,7 +73,7 @@ interface SshPublicKeyResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SshPublicKeys_ListBySubscription")
-  listBySubscription is ArmListBySubscription<
+  listBySubscription is ComputeListBySubscription<
     SshPublicKeyResource,
     Response = SshPublicKeysGroupListResult
   >;
@@ -83,7 +83,7 @@ interface SshPublicKeyResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SshPublicKeys_GenerateKeyPair")
-  generateKeyPair is ArmResourceActionSync<
+  generateKeyPair is ComputeResourceActionSync<
     SshPublicKeyResource,
     SshGenerateKeyPairInputParameters,
     SshPublicKeyGenerateKeyPairResult

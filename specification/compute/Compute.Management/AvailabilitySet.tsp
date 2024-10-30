@@ -25,7 +25,7 @@ model AvailabilitySet
   /**
    * Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
    */
-  sku?: Sku;
+  sku?: Microsoft.Compute.Sku;
 }
 
 @armResourceOperations
@@ -33,29 +33,29 @@ interface AvailabilitySets {
   /**
    * Retrieves information about an availability set.
    */
-  get is ArmResourceRead<AvailabilitySet>;
+  get is ComputeResourceRead<AvailabilitySet>;
 
   /**
    * Create or update an availability set.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AvailabilitySet>;
+  createOrUpdate is ComputeResourceCreateOrReplaceSync<AvailabilitySet>;
 
   /**
    * Update an availability set.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<AvailabilitySet, AvailabilitySetUpdate>;
+  update is ComputeCustomPatchSync<AvailabilitySet, AvailabilitySetUpdate>;
 
   /**
    * Delete an availability set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteSync<AvailabilitySet>;
+  delete is ComputeResourceDeleteSync<AvailabilitySet>;
 
   /**
    * Lists all availability sets in a resource group.
    */
-  list is ArmResourceListByParent<
+  list is ComputeResourceListByParent<
     AvailabilitySet,
     Response = AvailabilitySetListResult
   >;
@@ -63,7 +63,7 @@ interface AvailabilitySets {
   /**
    * Lists all availability sets in a subscription.
    */
-  listBySubscription is ArmListBySubscription<
+  listBySubscription is ComputeListBySubscription<
     AvailabilitySet,
     Parameters = {
       /**
@@ -79,7 +79,7 @@ interface AvailabilitySets {
    * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
    */
   @get
-  listAvailableSizes is ArmResourceActionSync<
+  listAvailableSizes is ComputeResourceActionSync<
     AvailabilitySet,
     void,
     VirtualMachineSizeListResult

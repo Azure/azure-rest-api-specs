@@ -33,7 +33,7 @@ interface RollingUpgradeStatusInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_GetLatest")
-  getLatest is ArmResourceRead<RollingUpgradeStatusInfo>;
+  getLatest is ComputeResourceRead<RollingUpgradeStatusInfo>;
 }
 
 @@doc(RollingUpgradeStatusInfo.name, "");

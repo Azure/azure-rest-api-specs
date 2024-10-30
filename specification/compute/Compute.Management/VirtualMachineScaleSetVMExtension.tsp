@@ -44,7 +44,7 @@ interface VirtualMachineScaleSetVMExtensions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMExtensions_Get")
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     VirtualMachineScaleSetVMExtension,
     Parameters = {
       /**
@@ -60,7 +60,7 @@ interface VirtualMachineScaleSetVMExtensions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMExtensions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineScaleSetVMExtension>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<VirtualMachineScaleSetVMExtension>;
 
   /**
    * The operation to update the VMSS VM extension.
@@ -68,7 +68,7 @@ interface VirtualMachineScaleSetVMExtensions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("VirtualMachineScaleSetVMExtensions_Update")
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
     VirtualMachineScaleSetVMExtensionUpdate
   >;
@@ -81,14 +81,14 @@ interface VirtualMachineScaleSetVMExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMExtensions_Delete")
-  delete is ArmResourceDeleteAsync<VirtualMachineScaleSetVMExtension>;
+  delete is ComputeResourceDeleteAsync<VirtualMachineScaleSetVMExtension>;
 
   /**
    * The operation to get all extensions of an instance in Virtual Machine Scaleset.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMExtensions_List")
-  list is ArmResourceListByParent<
+  list is ComputeResourceListByParent<
     VirtualMachineScaleSetVMExtension,
     Parameters = {
       /**

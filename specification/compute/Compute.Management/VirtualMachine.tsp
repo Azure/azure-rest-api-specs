@@ -66,7 +66,7 @@ interface VirtualMachines {
   /**
    * Retrieves information about the model view or the instance view of a virtual machine.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     VirtualMachine,
     Parameters = {
       /**
@@ -80,7 +80,7 @@ interface VirtualMachines {
   /**
    * The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     VirtualMachine,
     Parameters = {
       /**
@@ -101,7 +101,7 @@ interface VirtualMachines {
    * The operation to update a virtual machine.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     VirtualMachine,
     VirtualMachineUpdate,
     Parameters = {
@@ -125,7 +125,7 @@ interface VirtualMachines {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<
+  delete is ComputeResourceDeleteAsync<
     VirtualMachine,
     Parameters = {
       /**
@@ -139,7 +139,7 @@ interface VirtualMachines {
   /**
    * Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.
    */
-  list is ArmResourceListByParent<
+  list is ComputeResourceListByParent<
     VirtualMachine,
     Parameters = {
       /**
@@ -160,7 +160,7 @@ interface VirtualMachines {
   /**
    * Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
    */
-  listAll is ArmListBySubscription<
+  listAll is ComputeListBySubscription<
     VirtualMachine,
     Parameters = {
       /**
@@ -187,7 +187,7 @@ interface VirtualMachines {
   /**
    * Assess patches on the VM.
    */
-  assessPatches is ArmResourceActionAsync<
+  assessPatches is ComputeResourceActionAsync<
     VirtualMachine,
     void,
     VirtualMachineAssessPatchesResult
@@ -196,7 +196,7 @@ interface VirtualMachines {
   /**
    * Attach and detach data disks to/from the virtual machine.
    */
-  attachDetachDataDisks is ArmResourceActionAsync<
+  attachDetachDataDisks is ComputeResourceActionAsync<
     VirtualMachine,
     AttachDetachDataDisksRequest,
     StorageProfile
@@ -205,7 +205,7 @@ interface VirtualMachines {
   /**
    * Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.
    */
-  capture is ArmResourceActionAsync<
+  capture is ComputeResourceActionAsync<
     VirtualMachine,
     VirtualMachineCaptureParameters,
     VirtualMachineCaptureResult
@@ -214,12 +214,16 @@ interface VirtualMachines {
   /**
    * Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.
    */
-  convertToManagedDisks is ArmResourceActionAsync<VirtualMachine, void, void>;
+  convertToManagedDisks is ComputeResourceActionAsync<
+    VirtualMachine,
+    void,
+    void
+  >;
 
   /**
    * Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
    */
-  deallocate is ArmResourceActionAsync<
+  deallocate is ComputeResourceActionAsync<
     VirtualMachine,
     void,
     void,
@@ -235,12 +239,12 @@ interface VirtualMachines {
   /**
    * Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource). For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image).
    */
-  generalize is ArmResourceActionSync<VirtualMachine, void, void>;
+  generalize is ComputeResourceActionSync<VirtualMachine, void, void>;
 
   /**
    * Installs patches on the VM.
    */
-  installPatches is ArmResourceActionAsync<
+  installPatches is ComputeResourceActionAsync<
     VirtualMachine,
     VirtualMachineInstallPatchesParameters,
     VirtualMachineInstallPatchesResult
@@ -250,7 +254,7 @@ interface VirtualMachines {
    * Retrieves information about the run-time state of a virtual machine.
    */
   @get
-  instanceView is ArmResourceActionSync<
+  instanceView is ComputeResourceActionSync<
     VirtualMachine,
     void,
     VirtualMachineInstanceView
@@ -259,12 +263,12 @@ interface VirtualMachines {
   /**
    * The operation to perform maintenance on a virtual machine.
    */
-  performMaintenance is ArmResourceActionAsync<VirtualMachine, void, void>;
+  performMaintenance is ComputeResourceActionAsync<VirtualMachine, void, void>;
 
   /**
    * The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.
    */
-  powerOff is ArmResourceActionAsync<
+  powerOff is ComputeResourceActionAsync<
     VirtualMachine,
     void,
     void,
@@ -280,17 +284,17 @@ interface VirtualMachines {
   /**
    * The operation to reapply a virtual machine's state.
    */
-  reapply is ArmResourceActionAsync<VirtualMachine, void, void>;
+  reapply is ComputeResourceActionAsync<VirtualMachine, void, void>;
 
   /**
    * Shuts down the virtual machine, moves it to a new node, and powers it back on.
    */
-  redeploy is ArmResourceActionAsync<VirtualMachine, void, void>;
+  redeploy is ComputeResourceActionAsync<VirtualMachine, void, void>;
 
   /**
    * Reimages (upgrade the operating system) a virtual machine which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. NOTE: The retaining of old OS disk depends on the value of deleteOption of OS disk. If deleteOption is detach, the old OS disk will be preserved after reimage. If deleteOption is delete, the old OS disk will be deleted after reimage. The deleteOption of the OS disk should be updated accordingly before performing the reimage.
    */
-  reimage is ArmResourceActionAsync<
+  reimage is ComputeResourceActionAsync<
     VirtualMachine,
     VirtualMachineReimageParameters,
     void
@@ -299,12 +303,12 @@ interface VirtualMachines {
   /**
    * The operation to restart a virtual machine.
    */
-  restart is ArmResourceActionAsync<VirtualMachine, void, void>;
+  restart is ComputeResourceActionAsync<VirtualMachine, void, void>;
 
   /**
    * The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.
    */
-  retrieveBootDiagnosticsData is ArmResourceActionSync<
+  retrieveBootDiagnosticsData is ComputeResourceActionSync<
     VirtualMachine,
     void,
     RetrieveBootDiagnosticsDataResult,
@@ -320,18 +324,18 @@ interface VirtualMachines {
   /**
    * The operation to simulate the eviction of spot virtual machine.
    */
-  simulateEviction is ArmResourceActionNoContentSync<VirtualMachine, void>;
+  simulateEviction is ComputeResourceActionSync<VirtualMachine, void, void>;
 
   /**
    * The operation to start a virtual machine.
    */
-  start is ArmResourceActionAsync<VirtualMachine, void, void>;
+  start is ComputeResourceActionAsync<VirtualMachine, void, void>;
 
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
    */
   @get
-  listAvailableSizes is ArmResourceActionSync<
+  listAvailableSizes is ComputeResourceActionSync<
     VirtualMachine,
     void,
     VirtualMachineSizeListResult
@@ -340,7 +344,7 @@ interface VirtualMachines {
   /**
    * Run command on the VM.
    */
-  runCommand is ArmResourceActionAsync<
+  runCommand is ComputeResourceActionAsync<
     VirtualMachine,
     RunCommandInput,
     RunCommandResult

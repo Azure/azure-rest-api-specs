@@ -32,7 +32,7 @@ interface Images {
   /**
    * Gets an image.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     Image,
     Parameters = {
       /**
@@ -46,13 +46,13 @@ interface Images {
   /**
    * Create or update an image.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<Image>;
 
   /**
    * Update an image.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Image, ImageUpdate>;
+  update is ComputeCustomPatchAsync<Image, ImageUpdate>;
 
   /**
    * Deletes an Image.
@@ -60,12 +60,12 @@ interface Images {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Image>;
+  delete is ComputeResourceDeleteAsync<Image>;
 
   /**
    * Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ComputeResourceListByParent<
     Image,
     Response = ImageListResult
   >;
@@ -73,7 +73,7 @@ interface Images {
   /**
    * Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  list is ArmListBySubscription<Image, Response = ImageListResult>;
+  list is ComputeListBySubscription<Image, Response = ImageListResult>;
 }
 
 @@doc(Image.name, "The name of the image.");
