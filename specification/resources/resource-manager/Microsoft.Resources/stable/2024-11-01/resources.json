@@ -6856,14 +6856,29 @@
     },
     "ValidationLevel": {
       "type": "string",
-      "description": "The level of validation performed on the deployment. This value can be either Template, Provider, or ProviderWithoutWritePermissionChecks. At Template level, static analysis and validation of the template is performed. At Provider level, static analysis of the template is performed and resource declarations are sent to resource providers for semantic validation. At ProviderWithoutWritePermissionChecks level, static analysis of the template is performed and resource declarations are sent to resource providers for semantic validation without checking for write permissions.",
+      "description": "The level of validation performed on the deployment.",
       "enum": [
         "Template",
         "Provider",
-        "ProviderWithoutWritePermissionChecks"
+        "ProviderNoRbac"
       ],
       "x-ms-enum": {
-        "name": "ValidationLevel"
+        "name": "ValidationLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "Static analysis of the template is performed.",
+            "value": "Template"
+          },
+          {
+            "description": "Static analysis of the template is performed and resource declarations are sent to resource providers for semantic validation. Validates that the caller has RBAC write permissions on each resource.",
+            "value": "Provider"
+          },
+          {
+            "description": "Static analysis of the template is performed and resource declarations are sent to resource providers for semantic validation. Skips validating that the caller has RBAC write permissions on each resource.",
+            "value": "ProviderNoRbac"
+          }
+        ]
       }
     }
   },
