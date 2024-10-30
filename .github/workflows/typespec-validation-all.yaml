@@ -46,7 +46,7 @@ jobs:
         # When triggered by schedule, validate both the default branch and typespec-next
         # Use the placeholder string "default" instead of passing "" directly, since the latter gets ignored by
         # the GitHub Jobs UI.
-        ref: ${{ fromJSON(github.event_name == 'schedule' && '["default", "typespec-next"]' || '["default"]') }}
+        ref: ${{ fromJSON(github.event_name != 'schedule' && '["default", "typespec-next"]' || '["default"]') }}
         os: [ubuntu, windows]
         # shards must start at 0 and increment by 1
         shard: [0, 1, 2]
