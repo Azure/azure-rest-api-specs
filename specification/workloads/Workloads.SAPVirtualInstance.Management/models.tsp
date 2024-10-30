@@ -1015,7 +1015,7 @@ model UpdateSAPVirtualInstanceRequest {
   /**
    * Managed service identity (user assigned identities)
    */
-  identity?: CommonTypes.ManagedServiceIdentity;
+  identity?: SapVirtualInstanceIdentity;
 
   /**
    * The update properties.
@@ -2496,4 +2496,33 @@ model DeployerVmPackages {
    * The deployer VM packages storage account id
    */
   storageAccountId?: string;
+}
+
+/**
+ * Managed service identity (system assigned and/or user assigned identities)
+ */
+model SapVirtualInstanceIdentity {
+  /** The type of managed identity assigned to this resource. */
+  type: SapVirtualInstanceIdentityType;
+
+  /** The identities assigned to this resource by the user. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  userAssignedIdentities?: Record<UserAssignedIdentity | null>;
+}
+
+/**
+ * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+ */
+union SapVirtualInstanceIdentityType {
+  /** User assigned managed identity. */
+  UserAssigned: "UserAssigned",
+
+  string,
+}
+
+@doc("The managed service identities envelope.")
+model SapVirtualInstanceIdentityProperty {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @doc("The managed service identities assigned to this resource.")
+  identity?: SapVirtualInstanceIdentity;
 }
