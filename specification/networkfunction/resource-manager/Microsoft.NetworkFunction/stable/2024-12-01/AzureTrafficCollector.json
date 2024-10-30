@@ -431,6 +431,9 @@
         "x-ms-examples": {
           "Get Collection Policy": {
             "$ref": "./examples/CollectorPolicyGet.json"
+          },
+          "Get Collector Policy with Vtap": {
+            "$ref": "./examples/CollectorPolicyGetVirtualTap.json"
           }
         }
       },
@@ -635,7 +638,6 @@
     },
     "AzureTrafficCollectorPropertiesFormat": {
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
         "collectorPolicies": {
           "type": "array",
@@ -727,7 +729,8 @@
         "emissionType": {
           "type": "string",
           "enum": [
-            "IPFIX"
+            "IPFIX",
+            "FlowLogs"
           ],
           "description": "Emission format type.",
           "x-ms-enum": {
@@ -774,7 +777,8 @@
           "type": "string",
           "description": "The ingestion type.",
           "enum": [
-            "IPFIX"
+            "IPFIX",
+            "VirtualTap"
           ],
           "x-ms-enum": {
             "name": "ingestionType",
