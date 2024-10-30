@@ -35,7 +35,7 @@ on:
 jobs:
   typespec-validation-all:
     # Use short name to maximize space for parameters in UI
-    name: TSVAll
+    name: TSV
 
     strategy:
       # Validate all specs, even if one job fails early
@@ -46,7 +46,7 @@ jobs:
         # When triggered by schedule, validate both the default branch and typespec-next
         # Use the placeholder string "default" instead of passing "" directly, since the latter gets ignored by
         # the GitHub Jobs UI.
-        ref: ${{ fromJSON(github.event_name != 'schedule' && '["default", "typespec-next"]' || '["default"]') }}
+        ref: ${{ fromJSON(github.event_name != 'schedule' && '["default", "next"]' || '["default"]') }}
         os: [ubuntu, windows]
         # shards must start at 0 and increment by 1
         shard: [0, 1, 2]
@@ -63,7 +63,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
-          ref: ${{ matrix.ref != 'default' && matrix.ref || '' }}
+          ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
 
       - name: Setup Node 20 and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
