@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}": {
       "get": {
         "tags": [
           "DeletedResources"
@@ -43,7 +43,7 @@
         "description": "Get deleted resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -115,7 +115,7 @@
         }
       }
     },
-    "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}/purge": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}/purge": {
       "post": {
         "tags": [
           "DeletedResources"
@@ -124,7 +124,7 @@
         "description": "Deletes soft deleted resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -157,7 +157,7 @@
         }
       }
     },
-    "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}/undelete": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources/{deletedResourceId}/undelete": {
       "post": {
         "tags": [
           "DeletedResources"
@@ -166,7 +166,7 @@
         "description": "Deletes soft deleted resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -286,13 +286,6 @@
       "type": "string",
       "description": "The Azure subscription ID.",
       "x-ms-parameter-location": "client"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
