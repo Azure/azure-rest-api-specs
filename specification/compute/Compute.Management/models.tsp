@@ -1719,8 +1719,7 @@ model VirtualMachineScaleSetProperties {
    * Specifies the time at which the Virtual Machine Scale Set resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 
   /**
    * Optional property which must either be set to True or omitted.
@@ -2009,8 +2008,7 @@ model VirtualMachineScaleSetVMProfile {
    * Specifies the time in which this VM profile for the Virtual Machine Scale Set was created. This value will be added to VMSS Flex VM tags when creating/updating the VMSS VM Profile. Minimum API version for this property is 2023-09-01.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 /**
@@ -4127,8 +4125,7 @@ model InstanceViewStatus {
   /**
    * The time of the status.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  time?: utcDateTime;
+  time?: offsetDateTime;
 }
 
 /**
@@ -4232,15 +4229,13 @@ model UpgradeOperationHistoryStatus {
    * Start time of the upgrade.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: offsetDateTime;
 
   /**
    * End time of the upgrade.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: offsetDateTime;
 }
 
 /**
@@ -4396,8 +4391,7 @@ model RollingUpgradeRunningStatus {
    * Start time of the upgrade.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: offsetDateTime;
 
   /**
    * The last action performed on the rolling upgrade.
@@ -4409,8 +4403,7 @@ model RollingUpgradeRunningStatus {
    * Last action time of the upgrade.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastActionTime?: utcDateTime;
+  lastActionTime?: offsetDateTime;
 }
 
 /**
@@ -4591,8 +4584,7 @@ model VirtualMachineScaleSetVMProperties {
    * Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 /**
@@ -4739,26 +4731,22 @@ model MaintenanceRedeployStatus {
   /**
    * Start Time for the Pre Maintenance Window.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  preMaintenanceWindowStartTime?: utcDateTime;
+  preMaintenanceWindowStartTime?: offsetDateTime;
 
   /**
    * End Time for the Pre Maintenance Window.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  preMaintenanceWindowEndTime?: utcDateTime;
+  preMaintenanceWindowEndTime?: offsetDateTime;
 
   /**
    * Start Time for the Maintenance Window.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  maintenanceWindowStartTime?: utcDateTime;
+  maintenanceWindowStartTime?: offsetDateTime;
 
   /**
    * End Time for the Maintenance Window.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  maintenanceWindowEndTime?: utcDateTime;
+  maintenanceWindowEndTime?: offsetDateTime;
 
   /**
    * The Last Maintenance Operation Result Code.
@@ -5925,8 +5913,7 @@ model VirtualMachineProperties {
    * Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 /**
@@ -6085,15 +6072,13 @@ model AvailablePatchSummary {
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: offsetDateTime;
 
   /**
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedTime?: utcDateTime;
+  lastModifiedTime?: offsetDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
@@ -6158,15 +6143,13 @@ model LastPatchInstallationSummary {
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: offsetDateTime;
 
   /**
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedTime?: utcDateTime;
+  lastModifiedTime?: offsetDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
@@ -6241,8 +6224,7 @@ model VirtualMachineAssessPatchesResult {
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startDateTime?: utcDateTime;
+  startDateTime?: offsetDateTime;
 
   /**
    * The list of patches that have been detected as available for installation.
@@ -6308,15 +6290,13 @@ model VirtualMachineSoftwarePatchProperties {
    * The UTC timestamp when the repository published this patch.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  publishedDate?: utcDateTime;
+  publishedDate?: offsetDateTime;
 
   /**
    * The UTC timestamp of the last update to this patch record.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedDateTime?: utcDateTime;
+  lastModifiedDateTime?: offsetDateTime;
 
   /**
    * Describes the availability of a given patch.
@@ -6452,8 +6432,7 @@ model WindowsParameters {
   /**
    * This is used to install patches that were published on or before this given max published date.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  maxPatchPublishDate?: utcDateTime;
+  maxPatchPublishDate?: offsetDateTime;
 }
 
 /**
@@ -6550,8 +6529,7 @@ model VirtualMachineInstallPatchesResult {
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startDateTime?: utcDateTime;
+  startDateTime?: offsetDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
@@ -6779,8 +6757,7 @@ model ImageDeprecationStatus {
   /**
    * The time, in future, at which this image will be marked as deprecated. This scheduled time is chosen by the Publisher.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  scheduledDeprecationTime?: utcDateTime;
+  scheduledDeprecationTime?: offsetDateTime;
 
   /**
    * Describes the alternative option specified by the Publisher for this image when this image is deprecated.
@@ -7156,8 +7133,7 @@ model DedicatedHostProperties {
    * The date when the host was first provisioned.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  provisioningTime?: utcDateTime;
+  provisioningTime?: offsetDateTime;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -7176,8 +7152,7 @@ model DedicatedHostProperties {
    * Specifies the time at which the Dedicated Host resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 /**
@@ -7483,8 +7458,7 @@ model RestorePointProperties {
   /**
    * Gets the creation time of the restore point.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 
   /**
    * Resource Id of the source restore point from which a copy needs to be created.
@@ -7944,8 +7918,7 @@ model CapacityReservationProperties {
    * The date time when the capacity reservation was last updated.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  provisioningTime?: utcDateTime;
+  provisioningTime?: offsetDateTime;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -7964,8 +7937,7 @@ model CapacityReservationProperties {
    * Specifies the time at which the Capacity Reservation resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeCreated?: utcDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 /**
@@ -8009,14 +7981,12 @@ model LogAnalyticsInputBase {
   /**
    * From time of the query
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  fromTime: utcDateTime;
+  fromTime: offsetDateTime;
 
   /**
    * To time of the query
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  toTime: utcDateTime;
+  toTime: offsetDateTime;
 
   /**
    * Group query result by Throttle Policy applied.
@@ -8323,14 +8293,12 @@ model VirtualMachineRunCommandInstanceView {
   /**
    * Script start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: offsetDateTime;
 
   /**
    * Script end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: offsetDateTime;
 
   /**
    * The resource status information.

@@ -48,7 +48,6 @@ model ComputeDiagnosticsOperationResult {
   /**
    * The time when the disk inspection was completed.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdUTC?: utcDateTime;
 }
 
