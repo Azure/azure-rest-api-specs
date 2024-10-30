@@ -67,7 +67,7 @@ model SchedulerSku {
 
   @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility("read")
-  redundancyState: RedundancyState;
+  redundancyState?: RedundancyState;
 }
 
 @doc("A Task Hub resource belonging to the scheduler")
