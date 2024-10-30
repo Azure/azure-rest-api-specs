@@ -136,10 +136,10 @@ model CredentialsSASAuth {
 #suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("The Type (or category) of the connection")
 enum ConnectionType {
-  @doc("Azure OpenAI service")
+  @doc("Azure OpenAI Service")
   AzureOpenAI: "AzureOpenAI", //TODO: In Python this results in .AZURE_OPEN_AI. How do I make it .AZURE_OPENAI?
 
-  @doc("Serverless API service")
+  @doc("Serverless API Service")
   Serverless: "Serverless",
 
   @doc("Azure Blob Storage")
@@ -147,6 +147,9 @@ enum ConnectionType {
 
   @doc("Azure AI Services")
   AIServices: "AIServices",
+
+  @doc("Azure AI Search")
+  AzureAISearch: "CognitiveSearch",
 }
 
 /*
