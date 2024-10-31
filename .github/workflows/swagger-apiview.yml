@@ -15,6 +15,9 @@ on:
         description: 'APIView Artifacts Directory Name'
         required: true
         default: 'SwaggerAPIViewArtifacts'
+      PullRequestRef:
+        description: 'Pull Request Reference'
+        default: 'refs/pull/31320/merge'
   pull_request:
     branches:
       - main
@@ -26,6 +29,8 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.PullRequestRef }}
 
     - name: Install .NET SDK
       uses: actions/setup-dotnet@v2
