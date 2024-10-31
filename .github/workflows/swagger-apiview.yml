@@ -1,0 +1,53 @@
+name: Swagger APIView
+
+on:
+  workflow_dispatch:
+    inputs:
+      AzureSdkForNetDevOpsFeed:
+        description: 'Azure SDK for .NET DevOps Feed'
+        required: true
+        default: 'https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json'
+      SwaggerApiParserVersion:
+        description: 'Swagger API Parser Version'
+        required: true
+        default: '1.3.0-dev.20241029.2'
+      APIViewArtifactsDirectoryName:
+        description: 'APIView Artifacts Directory Name'
+        required: true
+        default: 'SwaggerAPIViewArtifacts'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.x'
+
+    - name: Install APIView Swagger Parser
+      run: |
+        dotnet tool install Azure.Sdk.Tools.SwaggerApiParser \
+          --version ${{ github.event.inputs.SwaggerApiParserVersion }} \
+          --add-source ${{ github.event.inputs.AzureSdkForNetDevOpsFeed }} \
+          --global
+
+    - name: Generate Swagger APIView Tokens
+      shell: pwsh
+      run: |
+        eng/scripts/Swagger-APIView.ps1 `
+          -TempDirectory ${{ github.workspace }}/temp `
+          -ArtiFactsStagingDirectory ${{ github.workspace }}/artifacts `
+          -APIViewArtifactsDirectoryName ${{ github.event.inputs.APIViewArtifactsDirectoryName }}
+      env:
+        DOTNET_ROOT: /home/runner/.dotnet
+      
+    - name: Publish Swagger APIView Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: swaggerAPIViewArtifacts
+        path: ${{ github.workspace }}/artifacts/${{ github.event.inputs.APIViewArtifactsDirectoryName }}
