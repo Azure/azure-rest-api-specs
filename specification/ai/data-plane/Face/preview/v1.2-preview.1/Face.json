@@ -8104,6 +8104,35 @@
         ]
       }
     },
+    "LivenessDecisionTarget": {
+      "type": "object",
+      "description": "The liveness classification for target face.",
+      "properties": {
+        "faceRectangle": {
+          "$ref": "#/definitions/FaceRectangle",
+          "description": "The face region where the liveness classification was made on."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name which contains the face rectangle where the liveness classification was made on."
+        },
+        "timeOffsetWithinFile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time offset within the file of the frame which contains the face rectangle where the liveness classification was made on."
+        },
+        "imageType": {
+          "$ref": "#/definitions/ImageType",
+          "description": "The image type which contains the face rectangle where the liveness classification was made on."
+        }
+      },
+      "required": [
+        "faceRectangle",
+        "fileName",
+        "timeOffsetWithinFile",
+        "imageType"
+      ]
+    },
     "LivenessModel": {
       "type": "string",
       "description": "The model version used for liveness classification.",
@@ -8150,35 +8179,6 @@
         ]
       }
     },
-    "LivenessOutputsTarget": {
-      "type": "object",
-      "description": "The liveness classification for target face.",
-      "properties": {
-        "faceRectangle": {
-          "$ref": "#/definitions/FaceRectangle",
-          "description": "The face region where the liveness classification was made on."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "The file name which contains the face rectangle where the liveness classification was made on."
-        },
-        "timeOffsetWithinFile": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The time offset within the file of the frame which contains the face rectangle where the liveness classification was made on."
-        },
-        "imageType": {
-          "$ref": "#/definitions/ImageType",
-          "description": "The image type which contains the face rectangle where the liveness classification was made on."
-        }
-      },
-      "required": [
-        "faceRectangle",
-        "fileName",
-        "timeOffsetWithinFile",
-        "imageType"
-      ]
-    },
     "LivenessResponseBody": {
       "type": "object",
       "description": "The response body of detect liveness API call.",
@@ -8188,7 +8188,7 @@
           "description": "The liveness classification for the target face."
         },
         "target": {
-          "$ref": "#/definitions/LivenessOutputsTarget",
+          "$ref": "#/definitions/LivenessDecisionTarget",
           "description": "Specific targets used for liveness classification."
         },
         "modelVersionUsed": {

@@ -166,7 +166,7 @@ union ImageType {
 }
 
 @doc("The liveness classification for target face.")
-model LivenessOutputsTarget {
+model LivenessDecisionTarget {
   @doc("The face region where the liveness classification was made on.")
   faceRectangle: FaceRectangle;
 
@@ -226,7 +226,7 @@ model LivenessResponseBody extends Record<unknown> {
   livenessDecision?: LivenessDecision;
 
   @doc("Specific targets used for liveness classification.")
-  target?: LivenessOutputsTarget;
+  target?: LivenessDecisionTarget;
 
   @doc("The model version used for liveness classification.")
   modelVersionUsed?: LivenessModel;
