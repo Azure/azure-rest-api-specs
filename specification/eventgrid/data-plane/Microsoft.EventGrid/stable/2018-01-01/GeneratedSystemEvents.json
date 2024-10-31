@@ -8526,6 +8526,10 @@
           "type": "string",
           "description": "The time the policy task was scheduled."
         },
+        "policyRunSummary": {
+          "$ref": "#/definitions/StorageLifecyclePolicyRunSummary",
+          "description": "Policy execution summary which shows the completion status of a LCM run\""
+        },
         "deleteSummary": {
           "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail",
           "description": "Execution statistics of a specific policy action in a Blob Management cycle."
@@ -8544,11 +8548,22 @@
         }
       },
       "required": [
+        "policyRunSummary",
         "deleteSummary",
         "tierToCoolSummary",
         "tierToArchiveSummary",
         "tierToColdSummary"
       ]
+    },
+    "StorageLifecyclePolicyRunSummary": {
+      "type": "object",
+      "description": "Policy run status of an account in a Blob Management cycle.",
+      "properties": {
+        "completionStatus": {
+          "type": "string",
+          "description": "Policy status can be Completed/CompletedWithError/Incomplete."
+        }
+      }
     },
     "StorageTaskAssignmentCompletedEventData": {
       "type": "object",
