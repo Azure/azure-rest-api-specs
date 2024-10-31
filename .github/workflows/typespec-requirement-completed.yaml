@@ -44,6 +44,10 @@ jobs:
         repo: ${{ inputs.repo }}
         run_id: ${{ inputs.run_id }}
 
+    # TODO: Add label
+    - if: env.spec-lifecycle-resource-manager == 'brownfield'
+      run: echo "brownfield"
+
     # - if: ${{ fromJSON(steps.get-keyvalue-artifacts.outputs.result).spec-lifecycle-brownfield == 'true' }}
     #   name: Add label
     #   uses: actions/github-script@v7
