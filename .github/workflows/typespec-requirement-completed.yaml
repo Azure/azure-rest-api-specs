@@ -5,9 +5,20 @@ on:
     workflows: ["TypeSpec Requirement"]
     types: [completed]
   workflow_dispatch:
+    # If any inputs are not set, we will attempt to extract them from the event context
     inputs:
-      logLevel:
-        description
+      owner:
+        description: The account owner of the repository. The name is not case sensitive.
+        required: false
+        type: string
+      repo:
+        description: The name of the repository without the .git extension. The name is not case sensitive.
+        required: false
+        type: string
+      run_id:
+        description: The unique identifier of the workflow run.
+        required: false
+        type: number
 
 jobs:
   typespec-requirement-completed:
@@ -25,14 +36,17 @@ jobs:
         sparse-checkout: |
           .github
 
-    - name: Get KeyValue artifacts
-      id: get-keyvalue-artifacts
+    - id: get-keyvalue-artifacts
+      name: Get KeyValue artifacts
       uses: ./.github/actions/get-keyvalue-artifacts
+      with:
+        owner: ${{ inputs.owner }}
+        repo: ${{ inputs.repo }}
+        run_id: ${{ inputs.run_id }}
 
-    - name: Add label
-      if: ${{ fromJSON(steps.get-keyvalue-artifacts.outputs.result).spec-lifecycle-brownfield == 'true' }}
-      uses: actions/github-script@v7
-      
+    # - if: ${{ fromJSON(steps.get-keyvalue-artifacts.outputs.result).spec-lifecycle-brownfield == 'true' }}
+    #   name: Add label
+    #   uses: actions/github-script@v7
 
     # - name: Add label if artifact
     #   uses: actions/github-script@v7
