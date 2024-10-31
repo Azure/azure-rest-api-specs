@@ -50,7 +50,7 @@ model CreateLivenessWithVerifySessionJsonContent
   @added(Versions.v1_2_preview_1)
   returnVerifyImageHash?: boolean;
 
-  @doc("Threshold for confidence of the face verification.")
+  @doc("Threshold for confidence of the face verification. Please refer to the documentation for more details. https://learn.microsoft.com/legal/cognitive-services/face/characteristics-and-limitations?context=%2Fazure%2Fai-services%2Fcomputer-vision%2Fcontext%2Fcontext#recognition-confidence-score")
   @added(Versions.v1_2_preview_1)
   @minValue(0)
   @maxValue(1)
@@ -184,8 +184,15 @@ model LivenessOutputsTarget {
 @doc("The model version used for liveness classification.")
 union LivenessModel {
   string,
+
+  @removed(Versions.v1_2)
   v2022_10_15_preview_04: "2022-10-15-preview.04",
+
+  @removed(Versions.v1_2)
   v2023_12_20_preview_06: "2023-12-20-preview.06",
+
+  @added(Versions.v1_2)
+  v2024_11_15: "2024-11-15",
 }
 
 @doc("The detail of face for verification.")
