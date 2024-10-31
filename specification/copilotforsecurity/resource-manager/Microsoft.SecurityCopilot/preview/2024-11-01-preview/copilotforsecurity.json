@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SecurityCopilotClient",
-    "version": "2023-12-01-preview",
+    "version": "2024-11-01-preview",
     "description": "SecurityCopilot Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -441,6 +441,17 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "overageState": {
+          "$ref": "#/definitions/OverageState",
+          "description": "The status of the resource's overage limit."
+        },
+        "overageAmount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Overage limit if overageState is Limited.",
+          "minimum": 1,
+          "maximum": 999
         }
       },
       "required": [
@@ -480,6 +491,17 @@
         "crossGeoCompute": {
           "$ref": "#/definitions/IsAllowed",
           "description": "Is cross geo compute allowed"
+        },
+        "overageState": {
+          "$ref": "#/definitions/OverageState",
+          "description": "The status of the resource's overage limit."
+        },
+        "overageAmount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Overage limit if overageState is Limited.",
+          "minimum": 1,
+          "maximum": 999
         }
       }
     },
@@ -503,6 +525,36 @@
             "name": "NotAllowed",
             "value": "NotAllowed",
             "description": "Not allowed to do"
+          }
+        ]
+      }
+    },
+    "OverageState": {
+      "type": "string",
+      "description": "The overage state of a resource.",
+      "enum": [
+        "None",
+        "Limited",
+        "Unlimited"
+      ],
+      "x-ms-enum": {
+        "name": "OverageState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource has no overage enabled."
+          },
+          {
+            "name": "Limited",
+            "value": "Limited",
+            "description": "The resource has specified a limited amount of overage."
+          },
+          {
+            "name": "Unlimited",
+            "value": "Unlimited",
+            "description": "The resource has unlimted overage."
           }
         ]
       }
