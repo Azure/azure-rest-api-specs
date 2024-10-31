@@ -179,9 +179,10 @@ model ListContainersSegmentResponse {
   @Xml.name("ContainerItems") containerItems: ContainerItem[];
 
   /** The next marker of the containers. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
   @nextLink
   @Xml.name("NextMarker")
-  nextMarker?: string;
+  NextMarker?: string;
 }
 
 /** An Azure Storage container. */
@@ -884,9 +885,10 @@ model ListBlobsFlatSegmentResponse {
   @Xml.name("Segment") segment: BlobFlatListSegment;
 
   /** The next marker of the blobs. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
   @nextLink
   @Xml.name("NextMarker")
-  nextMarker?: string;
+  NextMarker?: string;
 }
 
 /** The blob flat list segment. */
@@ -906,9 +908,10 @@ model PageList {
   @Xml.name("ClearRange") clearRange: ClearRange[];
 
   /** The next marker. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
   @nextLink
   @Xml.name("NextMarker")
-  nextMarker?: string;
+  NextMarker?: string;
 }
 
 /** The page range. */
@@ -2170,9 +2173,10 @@ model ListBlobsHierarchySegmentResponse {
   @Xml.name("Segment") segment: BlobHierarchyListSegment;
 
   /** The next marker of the blobs. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
   @nextLink
   @Xml.name("NextMarker")
-  nextMarker?: string;
+  NextMarker?: string;
 }
 
 /** The delimiter parameter. */
