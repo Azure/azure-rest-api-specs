@@ -4,6 +4,10 @@ on:
   workflow_run:
     workflows: ["TypeSpec Requirement"]
     types: [completed]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description
 
 jobs:
   typespec-requirement-completed:
@@ -21,8 +25,14 @@ jobs:
         sparse-checkout: |
           .github
 
-    - name: Get keyvalue artifacts
+    - name: Get KeyValue artifacts
+      id: get-keyvalue-artifacts
       uses: ./.github/actions/get-keyvalue-artifacts
+
+    - name: Add label
+      if: ${{ fromJSON(steps.get-keyvalue-artifacts.outputs.result).spec-lifecycle-brownfield == 'true' }}
+      uses: actions/github-script@v7
+      
 
     # - name: Add label if artifact
     #   uses: actions/github-script@v7

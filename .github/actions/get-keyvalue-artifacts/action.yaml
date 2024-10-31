@@ -1,13 +1,26 @@
 name: Get KeyValue Artifacts
 description: Sets env vars corresponding to keys and values encoded in artifact names
+# description: Returns JSON object of keys and values encoded in artifact names
+
+# If any inputs are not set, we will attempt to extract them from the event context
+inputs:
+  owner:
+    description: The account owner of the repository. The name is not case sensitive.
+    required: false
+  repo:
+    description: The name of the repository without the .git extension. The name is not case sensitive.
+    required: false
+  run_id:
+    description: The unique identifier of the workflow run.
+    required: false
 
 runs:
   using: composite
 
   steps:
-    - name: Set env vars from artifact names
+    - name: Get KeyValue Artifacts
       uses: actions/github-script@v7
       with:
         script: |
           const getKeyValueArtifacts = require('./.github/scripts/get-keyvalue-artifacts.js')
-          await getKeyValueArtifacts({ github, context, core });
+          await getKeyValueArtifacts({ github, context, core }, ${{ inputs.owner }}, ${{ inputs.repo }}, ${{ inputs.run_id }});
