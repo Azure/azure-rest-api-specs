@@ -557,7 +557,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/exportTransfers/default": {
+    "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "put": {
         "description": "Transfer subscriptions to destination email id.",
         "operationId": "Transfers_SendExport",
@@ -568,9 +568,6 @@
         },
         "x-ms-long-running-operation": true,
         "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -599,39 +596,6 @@
           }
         }
       },
-      "get": {
-        "operationId": "Transfers_GetLatestBySubscriptionId",
-        "x-ms-examples": {
-          "GetLatestTransferBySubscriptionId": {
-            "$ref": "./examples/getLatestTransferBySubscriptionId.json"
-          }
-        },
-        "description": "Get transfer details by subscription id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Transfer details.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "get": {
         "operationId": "Transfers_GetById",
         "x-ms-examples": {
@@ -663,7 +627,39 @@
           }
         }
       }
-    }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/transfers/default": {
+      "get": {
+        "operationId": "Transfers_GetLatestBySubscriptionId",
+        "x-ms-examples": {
+          "GetLatestTransferBySubscriptionId": {
+            "$ref": "./examples/getLatestTransferBySubscriptionId.json"
+          }
+        },
+        "description": "Get transfer details by subscription id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
   },
   "definitions": {
     "ErrorResponse": {
@@ -1341,6 +1337,10 @@
       "description": "Transfer creation request",
       "type": "object",
       "properties": {
+        "subscriptionId": {
+          "description": "Subscription Id.",
+          "type": "array"
+        },
         "destinationEmailId": {
           "description": "Destination email id.",
           "type": "string"
