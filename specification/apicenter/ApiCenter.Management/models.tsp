@@ -564,7 +564,7 @@ model DeletedServiceProperties {
 @doc("API source properties.")
 model ApiSourceProperties {
   @doc("Indicates if the specification should be imported along with metadata.")
-  importSpecification?: ImportSpecification = ImportSpecification.OnDemand;
+  importSpecification?: ImportSpecificationOption = ImportSpecificationOption.OnDemand;
 
   @doc("API source configuration for Azure API Management.")
   apimSource?: ApimSource;
@@ -574,7 +574,7 @@ model ApiSourceProperties {
  * The API source specification import options.
  */
 @added(Versions.v2024_06_01_preview)
-union ImportSpecification {
+union ImportSpecificationOption {
   string,
 
   /**
@@ -633,7 +633,7 @@ model LinkState {
   /**
    * The state of the link.
    */
-  state?: ApiSourceLinkStateEnum;
+  state?: ApiSourceLinkState;
 
   /**
    * The state message.
@@ -650,7 +650,7 @@ model LinkState {
  * The API source link state.
  */
 @added(Versions.v2024_06_01_preview)
-union ApiSourceLinkStateEnum {
+union ApiSourceLinkState {
   string,
 
   /**
