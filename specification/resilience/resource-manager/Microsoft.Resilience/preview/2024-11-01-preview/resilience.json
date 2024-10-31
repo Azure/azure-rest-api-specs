@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Resilience",
-    "version": "2024-06-01-preview",
+    "version": "2024-11-01-preview",
     "description": "Microsoft.Resilience Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -298,6 +298,16 @@
           "description": "Type of event that triggered the resilience evaluation.",
           "readOnly": true
         },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID of the resource(s) being evaluated.",
+          "readOnly": true
+        },
+        "resilienceState": {
+          "$ref": "#/definitions/ResilienceState",
+          "description": "Resilience state of the resource after evaluating all its related resources' resilience states.",
+          "readOnly": true
+        },
         "resilienceProfiles": {
           "type": "array",
           "description": "Resilience evaluation for the resource and all its related resources.",
@@ -314,6 +324,8 @@
       },
       "required": [
         "eventType",
+        "tenantId",
+        "resilienceState",
         "resilienceProfiles"
       ]
     },
