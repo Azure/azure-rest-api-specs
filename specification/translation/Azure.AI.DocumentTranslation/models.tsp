@@ -33,12 +33,11 @@ model DocumentTranslateResult {
   @added(Versions.v2024_11_15_preview)
   meteredUsageImageScanPassed: int32;
 
-
   @header("x-metered-usage-image-scan-count-fail")
   @doc("Specifies the number of failed image translations within a document translation job")
   @added(Versions.v2024_11_15_preview)
   meteredUsageImageScanFailed: int32;
-  
+
   @doc("Request response, response is a translated document.")
   @body
   document: bytes;
