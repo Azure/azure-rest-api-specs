@@ -1663,12 +1663,12 @@ interface PageBlob {
 }
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-@route("/{containerName}/{blob}?AppendBlob")
 interface AppendBlob {
   /** The Create operation creates a new append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
+  @route("/{containerName}/{blob}?AppendBlob")
   create is StorageOperation<
     {
       // TODO: Metadata
@@ -1705,7 +1705,8 @@ interface AppendBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Append Block operation commits a new block of data to the end of an append blob. */
@@ -1716,11 +1717,12 @@ interface AppendBlob {
   @route("/{containerName}/{blob}?comp=appendblock")
   appendBlock is StorageOperation<
     {
+      ...ContainerNameParameter;
+      ...BlobNameParameter;
+
       /** The data to upload. */
       ...BodyParameter;
 
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
       ...TimeoutParameter;
       ...ContentLengthParameter;
       ...ContentMd5Parameter;
@@ -1739,10 +1741,9 @@ interface AppendBlob {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...BlobSequenceNumberResponseHeader;
-      ...DateResponseHeader;
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
+      ...DateResponseHeader;
       ...BlobAppendOffsetResponseHeader;
       ...BlobCommittedBlockCountResponseHeader;
       ...IsServerEncryptedResponseHeader;
@@ -1761,30 +1762,35 @@ interface AppendBlob {
     {
       ...ContainerNameParameter;
       ...BlobNameParameter;
-      ...TimeoutParameter;
-      ...ContentLengthParameter;
       ...SourceUrlParameter;
       ...SourceRangeParameter;
       ...SourceContentMd5Parameter;
       ...SourceContentCrc64Parameter;
-      ...LeaseIdOptionalParameter;
-      ...BlobConditionMaxSizeParameter;
-      ...BlobConditionAppendPosParameter;
+      ...TimeoutParameter;
+      ...ContentLengthParameter;
+      ...ContentMd5Parameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
+      ...LeaseIdOptionalParameter;
+      ...BlobConditionMaxSizeParameter;
+      ...BlobConditionAppendPosParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
+      ...SourceIfModifiedSinceParameter;
+      ...SourceIfUnmodifiedSinceParameter;
+      ...SourceIfMatchParameter;
+      ...SourceIfNoneMatchParameter;
       ...CopySourceAuthorizationParameter;
     },
     {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeader;
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
+      ...DateResponseHeader;
       ...BlobAppendOffsetResponseHeader;
       ...BlobCommittedBlockCountResponseHeader;
       ...IsServerEncryptedResponseHeader;
@@ -1805,9 +1811,8 @@ interface AppendBlob {
       ...BlobNameParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-      ...BlobConditionAppendPosParameter;
       ...ConditionalRequestHeaders;
-      ...IfTagsParameter;
+      ...BlobConditionAppendPosParameter;
     },
     {
       ...EtagResponseHeader;
