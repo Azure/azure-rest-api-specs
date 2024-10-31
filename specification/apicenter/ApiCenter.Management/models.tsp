@@ -564,7 +564,7 @@ model DeletedServiceProperties {
 @doc("API source properties.")
 model ApiSourceProperties {
   @doc("Indicates if the specification should be imported along with metadata.")
-  importSpecification?: ImportSpecificationOption = ImportSpecificationOption.OnDemand;
+  importSpecification?: ImportSpecificationOptions = ImportSpecificationOptions.OnDemand;
 
   @doc("API source configuration for Azure API Management.")
   apimSource?: ApimSource;
@@ -574,7 +574,7 @@ model ApiSourceProperties {
  * The API source specification import options.
  */
 @added(Versions.v2024_06_01_preview)
-union ImportSpecificationOption {
+union ImportSpecificationOptions {
   string,
 
   /**
