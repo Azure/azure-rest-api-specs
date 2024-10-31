@@ -26,7 +26,16 @@ These are the global settings for the CodeSigning API.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-02-05-preview
+tag: package-2024-09-30-preview
+```
+
+### Tag: package-2024-09-30-preview
+
+These settings apply only when `--tag=package-2024-09-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-30-preview'
+input-file:
+- Microsoft.CodeSigning/preview/2024-09-30-preview/codeSigningAccount.json
 ```
 
 ### Tag: package-2024-02-05-preview
