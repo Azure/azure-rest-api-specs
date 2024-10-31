@@ -26,7 +26,7 @@
         "operationId": "Sms_Send",
         "x-ms-examples": {
           "SuccessfulSend": {
-            "$ref": "./examples/send.json"
+            "$ref": "./examples/SmsSend.json"
           }
         },
         "consumes": [
@@ -58,6 +58,138 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/SmsSendResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sms/optouts/:add": {
+      "post": {
+        "tags": [
+          "OptOuts"
+        ],
+        "summary": "Allows Contoso's users to opt out (unsubscribe) from a phone number and block receiving messages from that number.",
+        "x-ms-examples": {
+          "Opt Out": {
+            "$ref": "./examples/OptOutAdd.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OptOutSendRequest"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OptOutSendResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sms/optouts/:remove": {
+      "post": {
+        "tags": [
+          "OptOuts"
+        ],
+        "summary": "Allows Contoso's users to opt in (subscribe) to a phone number and enable receiving messages from that number.",
+        "x-ms-examples": {
+          "Opt In": {
+            "$ref": "./examples/OptOutRemove.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OptOutSendRequest"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OptOutSendResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sms/optouts/:check": {
+      "post": {
+        "tags": [
+          "OptOuts"
+        ],
+        "summary": "Allows Contoso's users to check opt status for a phone number if it can receive messages from that number.",
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Opt Check": {
+            "$ref": "./examples/OptOutCheck.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OptOutSendRequest"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OptOutSendResponse"
             }
           }
         }
@@ -197,6 +329,84 @@
           "type": "string"
         }
       }
+    },
+    "OptOutSendRecipient": {
+      "description": "Represents properties for a single recipient.",
+      "required": [
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient's phone number (in E.164 format).",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "OptOutSendRequest": {
+      "description": "Represents properties for a Opt request.",
+      "required": [
+        "from",
+        "recipients"
+      ],
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The sender's identifier (typically phone number in E.164 format) that is owned by the authenticated account.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "recipients": {
+          "maxItems": 100,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptOutSendRecipient"
+          }
+        }
+      }
+    },
+    "OptOutSendResponse": {
+      "description": "Response for a successful or multi status Opt send request.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptOutSendResponseItem"
+          }
+        }
+      }
+    },
+    "OptOutSendResponseItem": {
+      "required": [
+        "httpStatusCode",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient phone number (in E.164 format).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "httpStatusCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isOptedOut": {
+          "description": "Optional flag specifying if number was Opted Out from receiving messages",
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "description": "Optional error message in case of 4xx/5xx errors.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {},
@@ -217,4 +427,3 @@
     ]
   }
 }
-
