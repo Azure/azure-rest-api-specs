@@ -12,7 +12,7 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Setup Node 20 and run `npm ci`
+    - name: Setup Node and run `npm ci`
       uses: ./.github/actions/setup-node-npm-ci
 
     - name: Validate Impacted Specs
@@ -21,9 +21,5 @@ jobs:
         # step as failed. 
         $ErrorActionPreference = 'Continue'
 
-        eng/scripts/TypeSpec-Requirement.ps1 `
-          -BaseCommitish HEAD^ `
-          -TargetCommitish HEAD `
-          -SpecType ${{ matrix.spec-type }}
         ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
       shell: pwsh
