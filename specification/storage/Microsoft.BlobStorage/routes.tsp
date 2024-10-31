@@ -1829,6 +1829,7 @@ interface BlockBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @put
   @route("/{containerName}/{blob}?BlockBlob")
   upload is StorageOperation<
@@ -1841,6 +1842,7 @@ interface BlockBlob {
       ...BodyParameter;
       ...TimeoutParameter;
       ...ContentMd5Parameter;
+      ...ContentLengthParameter;
       ...BlobContentTypeParameter;
       ...BlobContentEncodingParameter;
       ...BlobContentLanguageParameter;
@@ -1871,7 +1873,8 @@ interface BlockBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List. */
@@ -1905,6 +1908,7 @@ interface BlockBlob {
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...SourceIfModifiedSinceParameter;
+      ...SourceIfUnmodifiedSinceParameter;
       ...SourceIfMatchParameter;
       ...SourceIfNoneMatchParameter;
       ...SourceIfTagsParameter;
@@ -1920,28 +1924,32 @@ interface BlockBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
+      ...VersionIdResponseHeader;
+      ...DateResponseHeader;
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Stage Block operation creates a new block to be committed as part of a blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=block")
   stageBlock is StorageOperation<
     {
-      ...BodyParameter;
       ...ContainerNameParameter;
       ...BlobNameParameter;
       ...BlockIdParameter;
       ...ContentLengthParameter;
       ...ContentMd5Parameter;
-      ...TimeoutParameter;
       ...ContentCrc64Parameter;
+      ...BodyParameter;
+      ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
@@ -1956,7 +1964,8 @@ interface BlockBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL. */
@@ -1964,7 +1973,7 @@ interface BlockBlob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=block&fromURL")
+  @route("/{containerName}/{blob}?comp=block&fromURL")
   stageBlockFromUrl is StorageOperation<
     {
       ...ContainerNameParameter;
@@ -2003,12 +2012,9 @@ interface BlockBlob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=blocklist")
+  @route("/{containerName}/{blob}?comp=blocklist")
   commitBlockList is StorageOperation<
     {
-      /** Blob Blocks. */
-      @body blocks: BlockLookupList;
-
       ...ContainerNameParameter;
       ...BlobNameParameter;
       ...TimeoutParameter;
@@ -2021,8 +2027,9 @@ interface BlockBlob {
       ...ContentCrc64Parameter;
 
       // TODO: ...MetadataParameter;
-      ...BlobContentDispositionParameter;
+      ...LeaseIdOptionalParameter;
 
+      ...BlobContentDispositionParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
@@ -2030,6 +2037,10 @@ interface BlockBlob {
       ...AccessTierOptionalParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
+
+      /** Blob Blocks. */
+      @body blocks: BlockLookupList;
+
       ...BlobTagsHeaderParameter;
       ...ImmutabilityPolicyExpiryParameter;
       ...ImmutabilityPolicyModeParameter;
@@ -2041,6 +2052,7 @@ interface BlockBlob {
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
+      ...VersionIdResponseHeader;
       ...DateResponseHeader;
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
@@ -2051,13 +2063,14 @@ interface BlockBlob {
   /** The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
-  @route("?comp=blocklist")
+  @route("/{containerName}/{blob}?comp=blocklist")
   getBlockList is StorageOperation<
     {
       ...ContainerNameParameter;
       ...BlobNameParameter;
       ...SnapshotParameter;
       ...BlockListTypeParameter;
+      ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
     },
