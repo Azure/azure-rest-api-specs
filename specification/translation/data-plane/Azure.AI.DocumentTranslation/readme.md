@@ -20,7 +20,7 @@ openapi-type: data-plane
 ### Release 2024-11-15-preview
 These settings apply only when `--tag=package-2024-11-15-preview` is specified on the command line.
 
-``` yaml $(tag) == '2024-11-15-preview'
+``` yaml $(tag) == 'package-2024-11-15-preview'
 version: 2024-11-15-preview
 input-file:
   - preview/2024-11-15-preview/openapi.json
