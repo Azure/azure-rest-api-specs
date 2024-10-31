@@ -20,7 +20,11 @@ runs:
   steps:
     - name: Get KeyValue Artifacts
       uses: actions/github-script@v7
+      env:
+        OWNER: ${{ inputs.owner }}
+        REPO: ${{ inputs.repo }}
+        RUN_ID: ${{ inputs.run_id }}
       with:
         script: |
           const getKeyValueArtifacts = require('./.github/scripts/get-keyvalue-artifacts.js')
-          await getKeyValueArtifacts({ github, context, core }, ${{ inputs.owner }}, ${{ inputs.repo }}, ${{ inputs.run_id }});
+          await getKeyValueArtifacts({ github, context, core });
