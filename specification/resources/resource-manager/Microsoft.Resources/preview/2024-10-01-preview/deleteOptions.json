@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{rootResourceProviderNamespace}/{rootResourceType}/{rootResourceName}/providers/Microsoft.Resources/deleteOptions/default": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/deleteOptions/default": {
       "put": {
         "tags": [
           "DeleteOptions"
@@ -46,26 +46,26 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceProviderNamespaceParameter"
+            "$ref": "#/parameters/resourceProviderNamespaceParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceTypeParameter"
+            "$ref": "#/parameters/resourceTypeParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceNameParameter"
+            "$ref": "#/parameters/resourceNameParameter"
           },
           {
             "name": "deleteOptionsRequestDefinition",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeleteOptionsRequestDefinition"
+              "$ref": "#/definitions/DeleteOptionsDefinition"
             },
             "description": "The definition to create deleteOptions resource."
           }
@@ -79,13 +79,13 @@
           "201": {
             "description": "Created -- Delete Options created.",
             "schema": {
-              "$ref": "#/definitions/DeleteOptionsResponseDefinition"
+              "$ref": "#/definitions/DeleteOptionsDefinition"
             }
           },
           "200": {
             "description": "OK - Returns the delete options definition.",
             "schema": {
-              "$ref": "#/definitions/DeleteOptionsResponseDefinition"
+              "$ref": "#/definitions/DeleteOptionsDefinition"
             }
           },
           "default": {
@@ -107,19 +107,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceProviderNamespaceParameter"
+            "$ref": "#/parameters/resourceProviderNamespaceParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceTypeParameter"
+            "$ref": "#/parameters/resourceTypeParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceNameParameter"
+            "$ref": "#/parameters/resourceNameParameter"
           }
         ],
         "x-ms-examples": {
@@ -131,7 +131,7 @@
           "200": {
             "description": "OK - Returns the delete options response definition.",
             "schema": {
-              "$ref": "#/definitions/DeleteOptionsResponseDefinition"
+              "$ref": "#/definitions/DeleteOptionsDefinition"
             }
           },
           "default": {
@@ -153,19 +153,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceProviderNamespaceParameter"
+            "$ref": "#/parameters/resourceProviderNamespaceParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceTypeParameter"
+            "$ref": "#/parameters/resourceTypeParameter"
           },
           {
-            "$ref": "#/parameters/rootResourceNameParameter"
+            "$ref": "#/parameters/resourceNameParameter"
           }
         ],
         "x-ms-examples": {
@@ -177,7 +177,7 @@
           "200": {
             "description": "OK - Returns the delete options response definition.",
             "schema": {
-              "$ref": "#/definitions/DeleteOptionsResponseDefinition"
+              "$ref": "#/definitions/DeleteOptionsDefinition"
             },
             "204": {
               "description": "Delete Options does not exist."
@@ -216,12 +216,12 @@
             "readOnly": true,
             "description": "A unique GUID representing delete options."
           },
-          "SubscriptionId": {
+          "subscriptionId": {
             "type": "string",
             "readOnly": true,
             "description": "The Azure subscription ID"
           },
-          "ResourceGroup": {
+          "resourceGroup": {
             "type": "string",
             "readOnly": true,
             "description": "The name of the resource group. The name is case insensitive."
@@ -243,7 +243,7 @@
       }
     },
     "parameters": {
-      "SubscriptionIdParameter": {
+      "subscriptionIdParameter": {
         "name": "subscriptionId",
         "in": "path",
         "required": true,
@@ -261,7 +261,7 @@
         "minLength": 1,
         "maxLength": 90
       },
-      "rootResourceProviderNamespaceParameter": {
+      "resourceProviderNamespaceParameter": {
         "name": "rootResourceProviderNamespace",
         "in": "path",
         "required": true,
@@ -269,7 +269,7 @@
         "description": "The provider namespace.",
         "x-ms-parameter-location": "method"
       },
-      "rootResourceTypeParameter": {
+      "resourceTypeParameter": {
         "name": "rootResourceType",
         "in": "path",
         "required": true,
@@ -277,7 +277,7 @@
         "description": "The resource type name. For example the type name of a web app is 'sites' (from Microsoft.Web/sites).",
         "x-ms-skip-url-encoding": true
       },
-      "rootResourceNameParameter": {
+      "resourceNameParameter": {
         "name": "rootResourceName",
         "in": "path",
         "required": true,
