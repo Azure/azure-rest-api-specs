@@ -14,7 +14,7 @@ describe("compile", function () {
   it("should fail if no emitter was configured", async function () {
     let host = new TsvTestHost();
     host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("tsp compile .")) {
+      if (cmd.includes("tsp compile")) {
         return [null, "no emitter was configured", ""];
       } else {
         return [null, "", ""];
@@ -29,7 +29,7 @@ describe("compile", function () {
   it("should fail if no output was generated", async function () {
     let host = new TsvTestHost();
     host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("tsp compile .")) {
+      if (cmd.includes("tsp compile")) {
         return [null, "no output was generated", ""];
       } else {
         return [null, "", ""];
