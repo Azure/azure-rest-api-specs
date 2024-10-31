@@ -1,14 +1,12 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -28,79 +26,92 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-02-01-preview")
   v2024_02_01_Preview: "2024-02-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2024-10-01-preview")
+  v2024_10_01_Preview: "2024-10-01-preview",
 }
 
-@doc("A DurableTaskService resource")
-model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
-  @doc("The name of the service")
-  @pattern("^[a-zA-Z0-9-]{3,64}$")
-  @key("namespaceName")
-  @segment("namespaces")
-  @path
-  @visibility("read", "create")
-  name: string;
+@doc("A Durable Task Scheduler resource")
+@added(Versions.v2024_10_01_Preview)
+model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
+  ...ResourceNameParameter<
+    Scheduler,
+    "schedulerName",
+    "schedulers",
+    "^[a-zA-Z0-9-]{3,64}$"
+  >;
 }
 
-@doc("Update namespace")
-model NamespaceUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** RP-specific properties */
-  properties?: NamespaceProperties;
-}
-
-model NamespacePropertiesUpdate
-  is OptionalProperties<UpdateableProperties<NamespaceProperties>>;
-
-@doc("Details of the Namespace.")
-model NamespaceProperties {
+@doc("Details of the Scheduler")
+@added(Versions.v2024_10_01_Preview)
+model SchedulerProperties {
   @visibility("read")
-  @doc("The status of the last operation.")
+  @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
-  @doc("URL of the durable task service")
+  @doc("URL of the durable task scheduler")
   @visibility("read")
-  url?: string;
+  endpoint?: string;
 
-  @doc("URL of the durable task service dashboard")
-  @visibility("read")
-  dashboardUrl?: string;
+  @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
+  ipAllowlist: string[];
 
-  @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")
-  ipAllowlist?: string[];
+  @doc("SKU of the durable task scheduler")
+  sku: SchedulerSku;
 }
 
-@doc("An Task Hub resource belonging to the namespace.")
-@parentResource(Namespace)
-model TaskHub is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
-  @doc("Task Hub name")
-  @key("taskHubName")
-  @pattern("^[a-zA-Z0-9-]{3,64}$")
-  @segment("taskHubs")
-  @path
-  @visibility("read", "create")
+@doc("The SKU (Stock Keeping Unit) assigned to this durable task scheduler")
+@added(Versions.v2024_10_01_Preview)
+model SchedulerSku {
+  @doc("The name of the SKU")
   name: string;
 
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
+  capacity?: int32;
+
+  @doc("Indicates whether the current SKU configuration is zone redundant")
+  @visibility("read")
+  redundancyState: RedundancyState;
+}
+
+@doc("A Task Hub resource belonging to the scheduler")
+@added(Versions.v2024_10_01_Preview)
+@parentResource(Scheduler)
+model TaskHub is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
+  ...ResourceNameParameter<
+    TaskHub,
+    "taskHubName",
+    "taskHubs",
+    "^[a-zA-Z0-9-]{3,64}$"
+  >;
+}
+
+@doc("The state of the resource redundancy")
+union RedundancyState {
+  string,
+
+  @doc("The resource is not redundant")
+  None: "None",
+
+  @doc("The resource is zone redundant")
+  Zone: "Zone",
 }
 
 @doc("The properties of Task Hub")
 model TaskHubProperties {
   @visibility("read")
-  @doc("The status of the last operation.")
+  @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
-  @doc("URL of the durable task service dashboard")
+  @doc("URL of the durable task scheduler dashboard")
   @visibility("read")
   dashboardUrl?: url;
 }
 
-@doc("Update Task Hub")
-model TaskHubUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-}
-
-@doc("The status of the current operation.")
+@doc("The status of the current operation")
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
@@ -119,27 +130,116 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
+@added(Versions.v2024_10_01_Preview)
+@armResourceOperations(Scheduler)
+interface Schedulers {
+  @doc("Get a Scheduler")
+  @errorsDoc("Not found error: resource does not exist")
+  get is ArmResourceRead<Scheduler>;
+  @doc("Create or update a Scheduler")
+  @errorsDoc("Validation error: required parameters are missing")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
+  @doc("Update a Scheduler")
+  @errorsDoc("Validation error: required parameters are missing")
+  update is ArmResourcePatchAsync<Scheduler, SchedulerProperties>;
+  @doc("Delete a Scheduler")
+  delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
+  @doc("List Schedulers by resource group")
+  listByResourceGroup is ArmResourceListByParent<Scheduler>;
+  @doc("List Schedulers by subscription")
+  listBySubscription is ArmListBySubscription<Scheduler>;
+}
+
+@added(Versions.v2024_10_01_Preview)
+@armResourceOperations(TaskHub)
+interface TaskHubs {
+  @doc("Get a Task Hub")
+  @errorsDoc("Not found error: resource does not exist")
+  get is ArmResourceRead<TaskHub>;
+  @doc("Create or Update a Task Hub")
+  @errorsDoc("Validation error: required parameters are missing")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHub>;
+  @doc("Delete a Task Hub")
+  delete is ArmResourceDeleteWithoutOkAsync<TaskHub>;
+  @doc("List Task Hubs")
+  listByScheduler is ArmResourceListByParent<TaskHub>;
+}
+
+// resource specific to the previous version 2024-02-01-preview (Private Preview only to be deprecated and not made public)
+
+@doc("A Durable Task Scheduler namespace resource")
+@added(Versions.v2024_02_01_Preview)
+@removed(Versions.v2024_10_01_Preview)
+model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
+  ...ResourceNameParameter<
+    Scheduler,
+    "namespaceName",
+    "namespaces",
+    "^[a-zA-Z0-9-]{3,64}$"
+  >;
+}
+
+@doc("Details of the Namespace.")
+@added(Versions.v2024_02_01_Preview)
+@removed(Versions.v2024_10_01_Preview)
+model NamespaceProperties {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+
+  @doc("URL of the durable task service")
+  @visibility("read")
+  url?: string;
+
+  @doc("URL of the durable task service dashboard")
+  @visibility("read")
+  dashboardUrl?: string;
+
+  @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")
+  ipAllowlist?: string[];
+}
+
+@doc("A Task Hub resource belonging to the namespace")
+@removed(Versions.v2024_10_01_Preview)
+@renamedFrom(Versions.v2024_10_01_Preview, "TaskHub")
+@parentResource(Namespace)
+model TaskHubUnderNamespace
+  is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
+  ...ResourceNameParameter<
+    TaskHubUnderNamespace,
+    "taskHubName",
+    "taskHubs",
+    "^[a-zA-Z0-9-]{3,64}$"
+  >;
+}
+
+@removed(Versions.v2024_10_01_Preview)
 @armResourceOperations(Namespace)
 interface Namespaces {
+  @errorsDoc("Not found error: resource does not exist")
   get is ArmResourceRead<Namespace>;
+  @errorsDoc("Validation error: required parameters are missing")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
-  update is ArmCustomPatchAsync<Namespace, NamespaceUpdate>;
-  //update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
+  @errorsDoc("Validation error: required parameters are missing")
+  update is ArmResourcePatchAsync<Namespace, NamespaceProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
   listBySubscription is ArmListBySubscription<Namespace>;
 }
 
-@armResourceOperations(TaskHub)
-interface TaskHubs {
+@removed(Versions.v2024_10_01_Preview)
+@renamedFrom(Versions.v2024_10_01_Preview, "TaskHubs")
+@armResourceOperations(TaskHubUnderNamespace)
+@tag("TaskHubs")
+interface TaskHubsUnderNamespace {
   @doc("Get a Task Hub")
-  get is ArmResourceRead<TaskHub>;
+  @errorsDoc("Not found error: resource does not exist")
+  get is ArmResourceRead<TaskHubUnderNamespace>;
   @doc("Create or update a Task Hub")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
-  @doc("Update a Task Hub")
-  update is ArmCustomPatchSync<TaskHub, TaskHubUpdate>;
+  @errorsDoc("Validation error: required parameters are missing")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHubUnderNamespace>;
   @doc("Delete a Task Hub")
-  delete is ArmResourceDeleteSync<TaskHub>;
+  delete is ArmResourceDeleteSync<TaskHubUnderNamespace>;
   @doc("List Task Hubs")
-  listByNamespace is ArmResourceListByParent<TaskHub>;
+  listByNamespace is ArmResourceListByParent<TaskHubUnderNamespace>;
 }

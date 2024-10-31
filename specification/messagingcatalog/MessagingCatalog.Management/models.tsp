@@ -141,9 +141,39 @@ model AssociationDefinition {
   @doc("The workspace id to associate.")
   workspaceId?: string;
 
+  @doc("The artifact id to associate.")
+  artifactId?: string;
+
   @doc("The message group id to associate.")
   messageGroupId?: string;
 
   @doc("The schema group id to associate.")
   schemaGroupId?: string;
+}
+
+@doc("An request to remove an association.")
+model AssociationRemoveRequest {
+  @doc("Id of the association, which by default is a guid.")
+  associationId: string;
+}
+
+@doc("An request to paginate a list of result.")
+model AssociationListRequest {
+  @doc("Controls how many results to skip.")
+  skip?: int32;
+
+  @doc("Controls how many results to retrieve.")
+  top?: int32;
+}
+
+@doc("An response of paginated associations.")
+model AssociationListResponse {
+  @doc("List of associations.")
+  associations: Association[];
+}
+
+@doc("An response of a association deletion.")
+model AssociationDeleteResponse {
+  @doc("A string detailing the result of the operation.")
+  status: ProvisioningState;
 }
