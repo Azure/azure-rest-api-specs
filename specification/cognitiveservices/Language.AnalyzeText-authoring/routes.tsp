@@ -219,6 +219,7 @@ interface TextAnalysisAuthoring {
    * Gets the status of an existing copy project job.
    */
   @added(Versions.v2023_04_15_preview)
+  @clientName("GetCopyProjectStatusResult","csharp")
   getCopyProjectStatus is languageOperations.ResourceRead<TextAnalysisAuthoringCopyProjectJobState>;
 
   /**
@@ -680,6 +681,7 @@ interface TextAnalysisAuthoring {
    * Gets the status of an existing assign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
+  @clientName("GetAssignDeploymentResourcesStatusResult","csharp")
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringAssignDeploymentResourcesJobState>;
 
   /**
