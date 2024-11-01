@@ -61,7 +61,7 @@ suppressions:
     reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
 ```
 
-### Tag: package-2023-04
+### Tag: package-preview-2023-04
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
 
