@@ -61,6 +61,32 @@ model GatewayProperties {
 }
 
 /**
+ * Details about the Application Owner (i.e.e organization) that would use the Operator's Network APIs.
+ */
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+model ApplicationOwnerProperties {
+  /**
+   * Legal name of the organization owning the application.
+   */
+  legalName?: string;
+
+  /**
+   * A description of the organization owning the application.
+   */
+  organizationDescription?: string;
+
+  /**
+   * Unique Tax Number for the user's organization in the country/region the APC Gateway is being purchased.
+   */
+  taxNumber?: string;
+
+  /**
+   * Email address of the Privacy contact or Data Protection officer of the organization.
+   */
+  privacyContactEmailAddress?: string;
+}
+
+/**
  * Details about the Application that would use the Operator's Network APIs.
  */
 model ApplicationProperties {
@@ -82,21 +108,25 @@ model ApplicationProperties {
   /**
    * Legal name of the organization owning the application.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   legalName?: string;
 
   /**
    * A description of the organization owning the application.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   organizationDescription?: string;
 
   /**
    * Unique Tax Number for the user's organization in the country/region the APC Gateway is being purchased.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   taxNumber?: string;
 
   /**
    * Email address of the Privacy contact or Data Protection officer of the organization.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   privacyContactEmailAddress?: string;
 }
 

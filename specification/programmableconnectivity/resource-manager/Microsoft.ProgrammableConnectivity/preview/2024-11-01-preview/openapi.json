@@ -779,22 +779,10 @@
     }
   },
   "definitions": {
-    "ApplicationProperties": {
+    "ApplicationOwnerProperties": {
       "type": "object",
-      "description": "Details about the Application that would use the Operator's Network APIs.",
+      "description": "Details about the Application Owner (i.e.e organization) that would use the Operator's Network APIs.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the application. Example: Contoso App."
-        },
-        "applicationDescription": {
-          "type": "string",
-          "description": "Description of the application."
-        },
-        "applicationType": {
-          "type": "string",
-          "description": "The category that describes the application."
-        },
         "legalName": {
           "type": "string",
           "description": "Legal name of the organization owning the application."
@@ -810,6 +798,24 @@
         "privacyContactEmailAddress": {
           "type": "string",
           "description": "Email address of the Privacy contact or Data Protection officer of the organization."
+        }
+      }
+    },
+    "ApplicationProperties": {
+      "type": "object",
+      "description": "Details about the Application that would use the Operator's Network APIs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the application. Example: Contoso App."
+        },
+        "applicationDescription": {
+          "type": "string",
+          "description": "Description of the application."
+        },
+        "applicationType": {
+          "type": "string",
+          "description": "The category that describes the application."
         }
       }
     },
