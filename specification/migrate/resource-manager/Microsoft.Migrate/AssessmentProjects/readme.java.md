@@ -12,15 +12,6 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-migrationassessment
 ```
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-10
-  - tag: package-2018-02
-  - tag: package-preview-2017-11
-```
-
 ### Tag: package-preview-2023-09 and java
 
 These settings apply only when `--tag=package-preview-2023-09 --java` is specified on the command line.
@@ -78,7 +69,7 @@ generate-interface: true
 These settings apply only when `--tag=package-2019-10 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2019-10' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2019-10' && $(java)
 java:
   namespace: com.azure.resourcemanager.migration.assessment.v2019_10_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2019_10_01
@@ -91,7 +82,7 @@ generate-interface: true
 These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-02' && $(java)
 java:
   namespace: com.azure.resourcemanager.migration.assessment.v2018_02_02
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2018_02_02
@@ -104,7 +95,7 @@ generate-interface: true
 These settings apply only when `--tag=package-preview-2017-11 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-preview-2017-11' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-preview-2017-11' && $(java)
 java:
   namespace: com.azure.resourcemanager.migration.assessment.v2017_11_11
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2017_11_11

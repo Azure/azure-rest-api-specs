@@ -38,6 +38,15 @@ input-file:
   - preview/2023-10-01-preview/migrate.json
 ```
 
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - stable/2023-06-06/migrate.json
+```
+
 ### Tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.

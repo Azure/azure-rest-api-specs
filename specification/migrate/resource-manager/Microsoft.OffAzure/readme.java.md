@@ -12,14 +12,6 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-migrationdiscovery
 ```
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2020-01
-  - tag: package-2020-07
-```
-
 ### Tag: package-preview-2023-10 and java
 
 These settings apply only when `--tag=package-preview-2023-10 --java` is specified on the command line.
@@ -51,7 +43,7 @@ generate-interface: true
 These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-01' && $(java)
 java:
   namespace: com.azure.resourcemanager.migrationdiscovery.v2020_01_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationdiscovery/mgmt-v2020_01_01
@@ -64,7 +56,7 @@ generate-interface: true
 These settings apply only when `--tag=package-2020-07 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-07' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-07' && $(java)
 java:
   namespace: com.azure.resourcemanager.migrationdiscovery.v2020_07_07
   output-folder: $(azure-libraries-for-java-folder)/sdk/migrationdiscovery/mgmt-v2020_07_07
