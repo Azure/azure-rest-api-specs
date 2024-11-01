@@ -20,4 +20,5 @@ output-folder: $(python-sdks-folder)/migrate/azure-mgmt-migrationassessment/azur
 ``` yaml $(python)
 modelerfour:
   flatten-models: false
+  lenient-model-deduplication: true
 ```
