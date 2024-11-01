@@ -183,7 +183,7 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.TargetInput, "TranslationTarget", "python");
 
-@@clientName(DocumentTranslation.TranslationError,
+@@clientName(DocumentTranslation.TranslationStatus.error,
   "DocumentTranslationError",
   "python"
 );
