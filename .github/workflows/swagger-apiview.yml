@@ -1,34 +1,48 @@
 name: Swagger APIView
 
-
 on:
+  pull_request:
+    branches:
+      - main
+
   workflow_dispatch:
     inputs:
       AzureSdkForNetDevOpsFeed:
         description: 'Azure SDK for .NET DevOps Feed'
-        required: true
         default: 'https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json'
       SwaggerApiParserVersion:
         description: 'Swagger API Parser Version'
-        required: true
         default: '1.3.0-dev.20241029.2'
       APIViewArtifactsDirectoryName:
         description: 'APIView Artifacts Directory Name'
-        required: true
         default: 'SwaggerAPIViewArtifacts'
+      APIViewAPIUri:
+        description: 'URI for APIView Creation Endpoint'
+        default: 'https:/apiview.dev/PullRequest/DetectAPIChanges'
       PullRequestRef:
-        description: 'Pull Request Reference'
-        default: 'refs/pull/31320/merge'
+        description: 'Pull Request ref'
+        default: 'refs/pull/4/merge'
+      PullRequestNumber:
+        description: 'Pull Request Number'
+        default: '4'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      AzureSdkForNetDevOpsFeed: ${{ github.event.inputs.AzureSdkForNetDevOpsFeed || 'https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json' }}
+      SwaggerApiParserVersion: ${{ github.event.inputs.SwaggerApiParserVersion || '1.3.0-dev.20241029.2' }}
+      APIViewArtifactsDirectoryName: ${{ github.event.inputs.APIViewArtifactsDirectoryName || 'SwaggerAPIViewArtifacts' }}
+      APIViewAPIUri: ${{ github.event.inputs.APIViewAPIUri || 'https:/apiview.dev/PullRequest/DetectAPIChanges' }}
+      PullRequestRef: ${{ github.event.pull_request.head.ref || github.event.inputs.PullRequestRef }}
+      PullRequestNumber: ${{ github.event.pull_request.number || github.event.inputs.PullRequestNumber }}
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.event.inputs.PullRequestRef }}
+        ref: ${{ env.PullRequestRef }}
         fetch-depth: 0
 
     - name: Install .NET SDK
@@ -39,17 +53,17 @@ jobs:
     - name: Install APIView Swagger Parser
       run: |
         dotnet tool install Azure.Sdk.Tools.SwaggerApiParser \
-          --version ${{ github.event.inputs.SwaggerApiParserVersion }} \
-          --add-source ${{ github.event.inputs.AzureSdkForNetDevOpsFeed }} \
+          --version ${{ env.SwaggerApiParserVersion }} \
+          --add-source ${{ env.AzureSdkForNetDevOpsFeed }} \
           --global
 
     - name: Generate Swagger APIView Tokens
       shell: pwsh
       run: |
-        eng/scripts/Swagger-APIView.ps1 `
+        eng/scripts/Create-Swagger-APIView-Artifacts.ps1 `
           -TempDirectory ${{ github.workspace }}/temp `
           -ArtiFactsStagingDirectory ${{ github.workspace }}/artifacts `
-          -APIViewArtifactsDirectoryName ${{ github.event.inputs.APIViewArtifactsDirectoryName }}
+          -APIViewArtifactsDirectoryName ${{ env.APIViewArtifactsDirectoryName }}
       env:
         DOTNET_ROOT: /home/runner/.dotnet
       
@@ -57,4 +71,17 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: swaggerAPIViewArtifacts
-        path: ${{ github.workspace }}/artifacts/${{ github.event.inputs.APIViewArtifactsDirectoryName }}
+        path: ${{ github.workspace }}/artifacts/${{ env.APIViewArtifactsDirectoryName }}
+
+    - name: Create Swagger APIView
+      shell: pwsh
+      run: |
+        eng/scripts/Create-Swagger-APIView.ps1 `
+          -ArtiFactsStagingDirectory ${{ github.workspace }}/artifacts `
+          -APIViewArtifactsDirectoryName ${{ env.APIViewArtifactsDirectoryName }} `
+          -APIViewUri ${{ env.APIViewAPIUri }} `
+          -BuildId ${{ github.run_id }} `
+          -RepoName ${{ github.repository }} `
+          -PullRequestNumber ${{ env.PullRequestNumber }} `
+          -Language 'Swagger' `
+          -CommitSha ${{ github.sha }}

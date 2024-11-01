@@ -129,7 +129,7 @@ function Invoke-SwaggerAPIViewParser {
         $arguments += "$Tag"
       }
 
-      LogDebug " $command $arguments"
+      LogInfo " $command $arguments"
       LogGroupStart " Generating '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'..."
 
       & $command @arguments 2>&1 | ForEach-Object { Write-Host $_ }
@@ -161,7 +161,7 @@ $SourceCommitId = $(git rev-parse HEAD^)
 $TargetCommitId = $(git rev-parse HEAD)
 
 # Get Changed Swagger Files
-LogDebug " Getting changed swagger files in PR, between $SourceCommitId and $TargetCommitId"
+LogInfo " Getting changed swagger files in PR, between $SourceCommitId and $TargetCommitId"
 $changedFiles = Get-ChangedFiles -baseCommitish $SourceCommitId -targetCommitish $TargetCommitId
 $changedSwaggerFiles = Get-ChangedSwaggerFiles -changedFiles $changedFiles
 
