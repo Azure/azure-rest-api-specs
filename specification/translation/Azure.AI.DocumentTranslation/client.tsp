@@ -57,6 +57,16 @@ interface SingleDocumentTranslationClient {
   "csharp, java"
 );
 
+@@clientName(DocumentTranslation.SourceInput,
+  "TranslationSource",
+  "csharp, java"
+);
+
+@@clientName(DocumentTranslation.TargetInput,
+  "TranslationTarget",
+  "csharp, java"
+);
+
 @@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
 @@convenientAPI(DocumentTranslationClient.getSupportedFormats, false, "java");
@@ -108,7 +118,10 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.Glossary.version, "format_version", "python");
 
-@@clientName(DocumentTranslation.Glossary, "TranslationGlossary", "python");
+@@clientName(DocumentTranslation.Glossary,
+  "TranslationGlossary",
+  "python, java"
+);
 
 @@clientName(DocumentTranslation.DocumentStatus.createdDateTimeUtc,
   "created_on",
@@ -198,6 +211,11 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.TranslationStatus,
   "translationStatusResult",
+  "java"
+);
+
+@@clientName(DocumentTranslation.DocumentsStatus,
+  "documentStatusResult",
   "java"
 );
 
