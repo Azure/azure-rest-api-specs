@@ -65,7 +65,7 @@ jobs:
           # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
           ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
 
-      - name: Setup Node 20 and run `npm ci`
+      - name: Setup Node and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
         
       - name: Validate All Specs
