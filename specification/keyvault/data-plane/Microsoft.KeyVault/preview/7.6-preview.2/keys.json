@@ -335,7 +335,7 @@
           {
             "name": "key-version",
             "in": "path",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "Adding the version parameter retrieves attestation blob for specific version of a key. This URI fragment is optional. If not specified, the latest version of the key attestation blob is returned."
           },
@@ -1542,17 +1542,17 @@
         "certificates": {
           "type": "string",
           "format": "base64url",
-          "description": "The certificates used for validating attestation."
+          "description": "A base64url encoded string containing certificates in PEM format, used for attestation validation."
         },
         "privateKeyAttestation": {
           "type": "string",
           "format": "base64url",
-          "description": "The attestation blob corresponding to a private key."
+          "description": "The attestation blob bytes encoded as base64url string corresponding to a private key."
         },
         "publicKeyAttestation": {
           "type": "string",
           "format": "base64url",
-          "description": "The attestation blob corresponding to a public key in case of asymmetric key."
+          "description": "The attestation blob bytes encoded as base64url string corresponding to a public key in case of asymmetric key."
         }
       }
     },
