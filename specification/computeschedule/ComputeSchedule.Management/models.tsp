@@ -82,8 +82,8 @@ union OperationState {
   @doc("Operations that have failed")
   Failed: "Failed",
 
-  @doc("Operations that have been Canceled by the user")
-  Canceled: "Canceled",
+  @doc("Operations that have been Cancelled by the user")
+  Cancelled: "Cancelled",
 
   @doc("Operations that are blocked")
   Blocked: "Blocked",
@@ -408,7 +408,7 @@ model CancelOperationsRequest {
 @doc("This is the response from a cancel operations request")
 model CancelOperationsResponse {
   @extension("x-ms-identifiers", ["resourceId"])
-  @doc("An array of resource operations that were successfully canceled")
+  @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
 }
 
