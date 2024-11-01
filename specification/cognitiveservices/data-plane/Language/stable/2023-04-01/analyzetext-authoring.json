@@ -382,7 +382,7 @@
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TrainingJobOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobOptions"
             }
           }
         ],
@@ -680,7 +680,7 @@
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwapDeploymentsOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringSwapDeploymentsOptions"
             }
           }
         ],
@@ -1660,26 +1660,6 @@
         ]
       }
     },
-    "EvaluationOptions": {
-      "type": "object",
-      "description": "Represents the options used running the evaluation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EvaluationKind",
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
-        },
-        "trainingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        },
-        "testingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        }
-      }
-    },
     "ExportedProject": {
       "type": "object",
       "description": "Represents an exported project.",
@@ -2091,24 +2071,6 @@
           }
         ]
       }
-    },
-    "SwapDeploymentsOptions": {
-      "type": "object",
-      "description": "Represents the options for swapping two deployments together.",
-      "properties": {
-        "firstDeploymentName": {
-          "type": "string",
-          "description": "Represents the first deployment name."
-        },
-        "secondDeploymentName": {
-          "type": "string",
-          "description": "Represents the second deployment name."
-        }
-      },
-      "required": [
-        "firstDeploymentName",
-        "secondDeploymentName"
-      ]
     },
     "TextAnalysisAuthoringConfusionMatrix": {
       "type": "object",
@@ -2573,6 +2535,26 @@
         "macroRecall"
       ]
     },
+    "TextAnalysisAuthoringEvaluationOptions": {
+      "type": "object",
+      "description": "Represents the options used running the evaluation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
+        },
+        "trainingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        },
+        "testingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        }
+      }
+    },
     "TextAnalysisAuthoringEvaluationSummary": {
       "type": "object",
       "description": "Represents the summary for an evaluation operation.",
@@ -2582,7 +2564,7 @@
           "description": "Represents the project type that the evaluation ran on."
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
           "description": "Represents the options used running the evaluation."
         }
       },
@@ -3487,6 +3469,24 @@
         "status"
       ]
     },
+    "TextAnalysisAuthoringSwapDeploymentsOptions": {
+      "type": "object",
+      "description": "Represents the options for swapping two deployments together.",
+      "properties": {
+        "firstDeploymentName": {
+          "type": "string",
+          "description": "Represents the first deployment name."
+        },
+        "secondDeploymentName": {
+          "type": "string",
+          "description": "Represents the second deployment name."
+        }
+      },
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ]
+    },
     "TextAnalysisAuthoringTrainingConfigVersion": {
       "type": "object",
       "description": "Represents a training config version.",
@@ -3504,6 +3504,28 @@
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
+      ]
+    },
+    "TextAnalysisAuthoringTrainingJobOptions": {
+      "type": "object",
+      "description": "Represents the options for starting a new training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents the output model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
+          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingConfigVersion"
       ]
     },
     "TextAnalysisAuthoringTrainingJobResult": {
@@ -3610,28 +3632,6 @@
       "required": [
         "code",
         "message"
-      ]
-    },
-    "TrainingJobOptions": {
-      "type": "object",
-      "description": "Represents the options for starting a new training job.",
-      "properties": {
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents the output model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version."
-        },
-        "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
-          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
-        }
-      },
-      "required": [
-        "modelLabel",
-        "trainingConfigVersion"
       ]
     }
   },
