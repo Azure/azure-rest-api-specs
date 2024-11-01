@@ -114,6 +114,7 @@ model OperatorApiConnectionProperties {
 /**
  * The Account Type of the Operator API Connections.
  */
+@TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
 union AccountType {
   /**
    * Managed by Azure on-behalf-of the user.
