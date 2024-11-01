@@ -210,7 +210,7 @@ model OperationErrorDetails {
   errorCode: string;
 
   @doc("The error details of the operation")
-  errorDetails: offsetDateTime;
+  errorDetails: string;
 
   @doc("The timestamp of the error occurence")
   timeStamp: offsetDateTime;
