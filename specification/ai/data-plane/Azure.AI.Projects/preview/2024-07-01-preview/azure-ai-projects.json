@@ -3793,7 +3793,7 @@
         "file_search",
         "bing_grounding",
         "microsoft_fabric",
-        "sharepoint",
+        "sharepoint_grounding",
         "azure_ai_search"
       ],
       "x-ms-enum": {
@@ -3827,8 +3827,8 @@
           },
           {
             "name": "sharepoint",
-            "value": "sharepoint",
-            "description": "Tool type `sharepoint`"
+            "value": "sharepoint_grounding",
+            "description": "Tool type `sharepoint_grounding`"
           },
           {
             "name": "azureAISearch",
@@ -6337,7 +6337,7 @@
       "type": "object",
       "description": "A record of a call to a SharePoint tool, issued by the model in evaluation of a defined tool, that represents\nexecuted SharePoint actions.",
       "properties": {
-        "sharepoint": {
+        "sharepoint_grounding": {
           "type": "object",
           "description": "Reserved for future use.",
           "additionalProperties": {
@@ -6347,14 +6347,14 @@
         }
       },
       "required": [
-        "sharepoint"
+        "sharepoint_grounding"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.RunStepToolCall"
         }
       ],
-      "x-ms-discriminator-value": "sharepoint"
+      "x-ms-discriminator-value": "sharepoint_grounding"
     },
     "Agents.RunStepStatus": {
       "type": "string",
@@ -7083,7 +7083,7 @@
     },
     "Agents.ToolConnectionList": {
       "type": "object",
-      "description": "A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint` tools.",
+      "description": "A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint_grounding` tools.",
       "properties": {
         "connections": {
           "type": "array",
