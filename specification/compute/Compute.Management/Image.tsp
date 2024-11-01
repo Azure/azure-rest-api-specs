@@ -46,13 +46,20 @@ interface Images {
   /**
    * Create or update an image.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
+  @Azure.Core.useFinalStateVia("location")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<Image>;
 
   /**
    * Update an image.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @parameterVisibility
-  update is ComputeCustomPatchAsync<Image, ImageUpdate>;
+  update is ComputeCustomPatchAsync<
+    Image,
+    ImageUpdate,
+    Response = ArmResponse<Image> | ArmCreatedResponse<Image>
+  >;
 
   /**
    * Deletes an Image.
