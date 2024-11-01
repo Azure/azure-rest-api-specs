@@ -28,9 +28,9 @@ model SessionCodeExecutionResult {
   @doc("The standard error of the code execution.")
   stderr?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of this field depends on the code execution result."
   @doc("The result of the code execution. The type of this field is same as the type of actual result of the code execution after being Json serialized.")
-  executionResult?: Record<unknown>;
+  executionResult?: unknown;
 
   @doc("The execution time of the code in milliseconds.")
   executionTimeInMilliseconds?: int64;

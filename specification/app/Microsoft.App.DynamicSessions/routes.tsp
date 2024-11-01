@@ -23,7 +23,7 @@ alias CodeExecutionTraits = BaseOperationTraits &
 alias CodeExecutionOperations = Azure.Core.ResourceOperations<CodeExecutionTraits>;
 
 interface CodeExecution {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @doc("Execute code in a session.")
   @route("/executions")
   @pollingOperation(CodeExecution.get)
@@ -63,7 +63,7 @@ interface SessionResourceFiles {
   @doc("Delete the file.")
   delete is SessionResourceFilesOperations.ResourceDelete<SessionResourceFile>;
 
-  #suppress "@azure-tools/typespec-azure-core/byos" ""
+  #suppress "@azure-tools/typespec-azure-core/byos" "Storage service is not used"
   @doc("Upload a file to a session.")
   @route("/files")
   upload is RpcOperation<
