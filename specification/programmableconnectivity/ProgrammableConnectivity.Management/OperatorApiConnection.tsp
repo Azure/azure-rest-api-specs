@@ -50,12 +50,14 @@ model OperatorApiConnectionProperties {
   /**
    * Details about the Application that would use the Operator's Network APIs.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   @visibility("read", "create", "update")
   configuredApplication?: ApplicationProperties;
 
   /**
    * Application ID of the App Developer that is registered with the Operator in a specific country/region.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   @visibility("read", "create", "update")
   appId?: string;
 
@@ -72,12 +74,14 @@ model OperatorApiConnectionProperties {
   /**
    * Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   @visibility("read", "create")
   accountType: AccountType;
 
   /**
    * Application secret linked to the 'appId'. This should be stored securely and is not returned back when the resource information is read.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   @visibility("create", "update")
   @secret
   appSecret?: string;
@@ -122,46 +126,6 @@ union AccountType {
   UserManaged: "UserManaged",
 
   string,
-}
-
-/**
- * Details about the Application that would use the Operator's Network APIs.
- */
-model ApplicationProperties {
-  /**
-   * Name of the application. Example: Contoso App.
-   */
-  name?: string;
-
-  /**
-   * Description of the application.
-   */
-  applicationDescription?: string;
-
-  /**
-   * The category that describes the application.
-   */
-  applicationType?: string;
-
-  /**
-   * Legal name of the organization owning the application.
-   */
-  legalName?: string;
-
-  /**
-   * A description of the organization owning the application.
-   */
-  organizationDescription?: string;
-
-  /**
-   * Unique Tax Number for the user's organization in the country/region the APC Gateway is being purchased.
-   */
-  taxNumber?: string;
-
-  /**
-   * Email address of the Privacy contact or Data Protection officer of the organization.
-   */
-  privacyContactEmailAddress?: string;
 }
 
 /**

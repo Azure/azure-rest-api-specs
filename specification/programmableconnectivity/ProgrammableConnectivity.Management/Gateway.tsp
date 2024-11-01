@@ -51,6 +51,53 @@ model GatewayProperties {
    */
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  /**
+   * Details about the Application that would use the Operator's Network APIs.
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  @visibility("read", "create", "update")
+  configuredApplication?: ApplicationProperties;
+}
+
+/**
+ * Application properties
+ */
+model ApplicationProperties {
+  /**
+   * Name of the application. Example: Contoso App.
+   */
+  name?: string;
+
+  /**
+   * Description of the application.
+   */
+  applicationDescription?: string;
+
+  /**
+   * The category that describes the application.
+   */
+  applicationType?: string;
+
+  /**
+   * Legal name of the organization owning the application.
+   */
+  legalName?: string;
+
+  /**
+   * A description of the organization owning the application.
+   */
+  organizationDescription?: string;
+
+  /**
+   * Unique Tax Number for the user's organization in the country/region the APC Gateway is being purchased.
+   */
+  taxNumber?: string;
+
+  /**
+   * Email address of the Privacy contact or Data Protection officer of the organization.
+   */
+  privacyContactEmailAddress?: string;
 }
 
 @armResourceOperations
