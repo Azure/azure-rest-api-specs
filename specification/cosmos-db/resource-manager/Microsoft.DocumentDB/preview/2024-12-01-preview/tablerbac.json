@@ -287,9 +287,6 @@
         "description": "Creates or updates an Azure Cosmos DB Table Role Assignment.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleAssignmentIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -297,6 +294,9 @@
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/roleAssignmentIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -350,9 +350,6 @@
         "description": "Deletes an existing Azure Cosmos DB Table Role Assignment.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleAssignmentIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -360,6 +357,9 @@
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/roleAssignmentIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -477,7 +477,8 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the resource."
+          "description": "Provisioning state of the resource.",		  
+          "readOnly": true,
         }
       },
       "description": "Azure Cosmos DB Table Role Definition resource object."
@@ -501,6 +502,10 @@
     "Permission": {
       "type": "object",
       "properties": {
+		"id": {
+          "type": "string",
+          "description": "The id for the permission."
+        },
         "dataActions": {
           "type": "array",
           "items": {
@@ -554,7 +559,8 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the resource."
+          "description": "Provisioning state of the resource.",		  
+          "readOnly": true,
         }
       },
       "description": "Azure Cosmos DB Table Role Assignment resource object."
