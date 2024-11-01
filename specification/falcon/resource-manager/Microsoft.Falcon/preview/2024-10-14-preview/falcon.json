@@ -463,11 +463,15 @@
       "type": "object",
       "description": "Namespace properties",
       "properties": {
-        "namespaceName": {
+        "falconNamespace": {
           "type": "string",
           "description": "Name of the falcon fleet namespace. IMMUTABLE",
           "minLength": 1,
-          "maxLength": 12
+          "maxLength": 26,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "description": {
           "type": "string",
@@ -475,7 +479,8 @@
         },
         "owner": {
           "type": "string",
-          "description": "An email enable SG"
+          "description": "An email enable SG",
+          "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
         },
         "icmPublicId": {
           "type": "string",
@@ -493,7 +498,7 @@
         }
       },
       "required": [
-        "namespaceName",
+        "falconNamespace",
         "description",
         "owner",
         "icmPublicId",
@@ -504,19 +509,14 @@
       "type": "object",
       "description": "Namespace properties",
       "properties": {
-        "namespaceName": {
-          "type": "string",
-          "description": "Name of the falcon fleet namespace. IMMUTABLE",
-          "minLength": 1,
-          "maxLength": 12
-        },
         "description": {
           "type": "string",
           "description": "Description of the purpose of the name space"
         },
         "owner": {
           "type": "string",
-          "description": "An email enable SG"
+          "description": "An email enable SG",
+          "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
         },
         "icmPublicId": {
           "type": "string",

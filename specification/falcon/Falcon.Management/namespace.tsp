@@ -12,63 +12,70 @@ namespace Microsoft.Falcon;
 
 /** Namespace resource */
 model Namespace is TrackedResource<NamespaceProperties> {
-    ...ResourceNameParameter<Namespace>;
+  ...ResourceNameParameter<Namespace>;
 }
 
 /** Namespace properties */
 model NamespaceProperties {
-    /** Name of the falcon fleet namespace. IMMUTABLE */
-    @minLength(1)
-    @maxLength(12)
-    namespaceName: string;
+  /** Name of the falcon fleet namespace. IMMUTABLE */
+  @minLength(1)
+  @maxLength(26)
+  @visibility("read", "create", "query", "delete")
+  falconNamespace: string;
 
-    /** Description of the purpose of the name space */
-    description: string;
+  /** Description of the purpose of the name space */
+  description: string;
 
-    /** An email enable SG */
-    @pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", "Must be a valid email. Will be checked for existence.")
-    owner: string;
+  /** An email enable SG */
+  @pattern(
+    "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    "Must be a valid email. Will be checked for existence."
+  )
+  owner: string;
 
-    /** Teams IcM id so incidents can be properly routed. */
-    icmPublicId: string;
+  /** Teams IcM id so incidents can be properly routed. */
+  icmPublicId: string;
 
-    /** The PME group used to provide access and JIT to resources.
-     *  In the format of TM-<teamname>
-     */
-    @pattern("TM-[a-zA-Z0-9-]+", "Must start with TM- and followed by a string consisting of letters, numbers, and dashes.")
-    managementGroup: string;
+  /** The PME group used to provide access and JIT to resources.
+   *  In the format of TM-<teamname>
+   */
+  @pattern(
+    "TM-[a-zA-Z0-9-]+",
+    "Must start with TM- and followed by a string consisting of letters, numbers, and dashes."
+  )
+  managementGroup: string;
 
-    /** The status of the last operation. */
-    @visibility("read")
-    provisioningState?: ProvisioningState;
+  /** The status of the last operation. */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 /** The resource provisioning state. */
 @lroStatus
 union ProvisioningState {
-    ResourceProvisioningState,
+  ResourceProvisioningState,
 
-    /** The resource is being provisioned */
-    Provisioning: "Provisioning",
+  /** The resource is being provisioned */
+  Provisioning: "Provisioning",
 
-    /** The resource is updating */
-    Updating: "Updating",
+  /** The resource is updating */
+  Updating: "Updating",
 
-    /** The resource is being deleted */
-    Deleting: "Deleting",
+  /** The resource is being deleted */
+  Deleting: "Deleting",
 
-    /** The resource create request has been accepted */
-    Accepted: "Accepted",
+  /** The resource create request has been accepted */
+  Accepted: "Accepted",
 
-    string,
+  string,
 }
 
 @armResourceOperations
 interface Namespaces {
-    get is ArmResourceRead<Namespace>;
-    createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
-    update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
-    delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
-    listByResourceGroup is ArmResourceListByParent<Namespace>;
-    listBySubscription is ArmListBySubscription<Namespace>;
+  get is ArmResourceRead<Namespace>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
+  update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
+  listByResourceGroup is ArmResourceListByParent<Namespace>;
+  listBySubscription is ArmListBySubscription<Namespace>;
 }
