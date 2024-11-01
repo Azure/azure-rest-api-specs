@@ -1,10 +1,10 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using Language.Authoring.Text;
+using Language.Authoring.Analyzetext;
 using Azure.ClientGenerator.Core;
 
-namespace Language.Authoring.TextClientCustomizations;
+namespace Language.Authoring.AnalyzetextClientCustomizations;
 
 @@clientName(TextAnalysisAuthoring.getAssignDeploymentResourcesStatus,
   "GetAssignDeploymentResourcesStatusResult",
