@@ -13,13 +13,13 @@
         "value": [
           {
             "name": "documents_smith_1",
+            "operation": "Redact",
             "sourceLocation": {
               "location": "https://blobtest.blob.core.windows.net/container",
               "prefix": "/documents",
               "extensions": [
                 "*"
-              ],
-              "dataType": "Plaintext"
+              ]
             },
             "targetLocation": {
               "location": "https://blobtest.blob.core.windows.net/container",
@@ -28,7 +28,6 @@
             },
             "customizations": {
               "redactionFormat": "[{type}]",
-              "operation": "Redact",
               "surrogateLocale": "en-US"
             },
             "status": "Succeeded",

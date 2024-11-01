@@ -3,6 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
+import "./models_document_flow.tsp";
+import "./models_text_flow.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -30,7 +32,7 @@ alias DeidentifyOperations = ResourceOperations<
 
 @summary("Create a de-identification job.")
 @pollingOperation(getJob)
-op createJob is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentificationJob>;
+op deidentifyDocuments is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentificationJob>;
 
 @summary("Get a de-identification job.")
 op getJob is DeidentifyOperations.ResourceRead<DeidentificationJob>;
@@ -46,6 +48,15 @@ op listJobDocuments is DeidentifyOperations.ResourceList<
   DocumentDetails,
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
+
+@doc("Query parameters for list operation.")
+model PaginationByTokenQueryParameters {
+  ...MaxPageSizeQueryParameter;
+
+  @query
+  @doc("Token to continue a previous query.")
+  continuationToken?: string;
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" ""
 @summary("Cancel a de-identification job.")
@@ -70,7 +81,7 @@ op deleteJob is DeidentifyOperations.ResourceDelete<DeidentificationJob>;
 @summary("De-identify text.")
 @route("/deid")
 @post
-op deidentify is Azure.Core.RpcOperation<
+op deidentifyText is Azure.Core.RpcOperation<
   {
     @doc("Request body for de-identification operation.")
     @body
@@ -78,3 +89,13 @@ op deidentify is Azure.Core.RpcOperation<
   },
   DeidentificationResult
 >;
+
+// 
+// @doc("Query parameters for list operation.")
+// model PaginationByTokenQueryParameters {
+//   ...MaxPageSizeQueryParameter;
+// 
+//   @query
+//   @doc("Token to continue a previous query.")
+//   continuationToken?: string;
+// }

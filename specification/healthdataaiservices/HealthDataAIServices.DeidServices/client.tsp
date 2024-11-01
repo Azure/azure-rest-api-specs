@@ -6,7 +6,6 @@ using Azure.ClientGenerator.Core;
 
 // @TypeSpec.Versioning.versioned(HealthDataAIServices.DeidServices.Versions)
 namespace HealthDataAIServices.DeidServices {
-  @@clientName(CustomizationOptions, "CustomizationConfig", "csharp");
-
-  @@clientName(JobCustomizationOptions, "JobCustomizationConfig", "csharp");
+  // @@clientName("DeidServicesServiceVersion", "DeidentificationServiceVersion", "java");
+  // @@clientName(listJobDocuments::name, "job_name", "java");
 }

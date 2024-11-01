@@ -1,0 +1,188 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
+namespace HealthDataAIServices.DeidServices;
+
+@doc("A job containing a batch of documents to de-identify.")
+@resource("jobs")
+model DeidentificationJob {
+  @key
+  @doc("The name of a job.")
+  @visibility("read")
+  @maxLength(36)
+  @minLength(3) // Must be 3 to match regex
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  name: string;
+
+  @doc("Operation to perform on the input documents.")
+  operation?: OperationType = OperationType.Surrogate;
+
+  @doc("Storage location to perform the operation on.")
+  sourceLocation: SourceStorageLocation;
+
+  @doc("Target location to store output of operation.")
+  targetLocation: TargetStorageLocation;
+
+  @doc("Customization parameters to override default service behaviors.")
+  customizations?: JobCustomizationOptions;
+
+  // Readonly Properties
+
+  @doc("Current status of a job.")
+  @visibility("read")
+  @pollingOperationParameter
+  status: JobStatus;
+
+  @doc("Error when job fails in it's entirety.")
+  @visibility("read")
+  error?: Azure.Core.Foundations.Error;
+
+  @doc("""
+    Date and time when the job was completed.
+    
+    If the job is canceled, this is the time when the job was canceled.
+    
+    If the job failed, this is the time when the job failed.
+    """)
+  @visibility("read")
+  lastUpdatedAt: utcDateTime;
+
+  @doc("Date and time when the job was created.")
+  @visibility("read")
+  createdAt: utcDateTime;
+
+  @doc("Date and time when the job was started.")
+  @visibility("read")
+  startedAt?: utcDateTime;
+
+  @doc("Summary of a job. Exists only when the job is completed.")
+  @visibility("read")
+  summary?: JobSummary;
+}
+
+@doc("List of statuses a job can have.")
+@lroStatus
+union JobStatus {
+  // Cannot use Azure.Core.Foundations.OperationState. because it is not a union type.
+  @doc("Job has been submitted and is waiting to be processed.")
+  NotStarted: "NotStarted",
+
+  @doc("Job has been started.")
+  Running: "Running",
+
+  @lroSucceeded
+  @doc("Job has completed successfully. All documents have succeeded.")
+  Succeeded: "Succeeded",
+
+  @lroFailed
+  @doc("Job has completed with at least a single document failing.")
+  PartialFailed: "PartialFailed",
+
+  @lroFailed
+  @doc("Job has completed with all documents failing, or a validation failure.")
+  Failed: "Failed",
+
+  @lroCanceled
+  @doc("Job has been canceled after user request.")
+  Canceled: "Canceled",
+
+  string,
+}
+
+@doc("Summary metrics of a job.")
+model JobSummary {
+  @doc("Number of documents that have completed.")
+  successful: int32;
+
+  @doc("Number of documents that have failed.")
+  failed: int32;
+
+  @doc("Number of documents that have been canceled.")
+  canceled: int32;
+
+  @doc("Number of documents total.")
+  total: int32;
+
+  @doc("Number of bytes processed.")
+  bytesProcessed: int64;
+}
+
+@doc("Details of a single document in a job.")
+@resource("documents")
+@parentResource(DeidentificationJob)
+model DocumentDetails {
+  @key
+  @doc("Id of the document details.")
+  @visibility("read")
+  id: string;
+
+  @doc("Location for the input.")
+  input: DocumentLocation;
+
+  @doc("Location for the output.")
+  output?: DocumentLocation;
+
+  @doc("Status of the document.")
+  status: Azure.Core.Foundations.OperationState;
+
+  @doc("Error when document fails.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@doc("Location of a document.")
+model DocumentLocation {
+  @doc("Location of document in storage.")
+  @maxLength(1024)
+  location: url;
+
+  ...EtagProperty;
+}
+
+@doc("Customizations options to override default service behaviors for job usage.")
+model JobCustomizationOptions {
+  ...SharedCustomizationOptions;
+}
+
+@doc("Storage location.")
+model SourceStorageLocation {
+  @doc("URL to storage location.")
+  location: url;
+
+  @doc("Prefix to filter path by.")
+  @minLength(1)
+  @maxLength(1024)
+  prefix: string;
+
+  @doc("List of extensions to filter path by.")
+  @minItems(1)
+  extensions?: Array<string> = #["*"];
+}
+
+@doc("Storage location.")
+model TargetStorageLocation {
+  @doc("URL to storage location.")
+  location: url;
+
+  @doc("""
+    Replaces the input prefix of a file path with the output prefix, preserving the rest of the path structure.
+    
+    Example:
+    File full path: documents/user/note.txt
+    Input Prefix: "documents/user/"
+    Output Prefix: "output_docs/"
+    
+    Output file: "output_docs/note.txt"
+    """)
+  @minLength(1)
+  @maxLength(1024)
+  prefix: string;
+
+  @doc("When set to true during a job, the service will overwrite the output location if it already exists.")
+  overwrite?: boolean = false;
+}
