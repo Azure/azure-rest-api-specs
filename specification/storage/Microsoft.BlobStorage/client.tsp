@@ -26,6 +26,7 @@ model BlobStorageClientOptions {
 );
 @@clientName(BlobPropertiesInternal.expiryTime, "ExpiresOn");
 @@clientName(BlobPropertiesInternal.sealed, "IsSealed");
+@@clientName(BlobPropertiesInternal.lastAccessTime, "LastAccessedOn");
 @@clientName(BlobPropertiesInternal.immutabilityPolicyUntilDate,
   "ImmutabilityPolicyExpiresOn"
 );

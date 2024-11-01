@@ -180,10 +180,10 @@ interface Container {
       // TODO should we define metadata headers like:
       // ...MetadataHeaders;
 
-      ...BlobPublicAccessParameter;
+      ...BlobPublicAccess;
 
       ...DefaultEncryptionScopeParameter;
-      ...DenyEncryptionScopeOverrideParameter;
+      ...DenyEncryptionScopeOverride;
     },
     {
       @statusCode statusCode: 201;
@@ -215,12 +215,25 @@ interface Container {
       ...LeaseDurationResponseHeader;
       ...LeaseStateResponseHeader;
       ...LeaseStatusResponseHeader;
-      ...PublicAccessResponseHeader;
-      ...HasImmutabilityPolicyResponseHeader;
-      ...HasLegalHoldResponseHeader;
-      ...DefaultEncryptionScopeResponseHeader;
-      ...DenyEncryptionScopeOverrideResponseHeader;
-      ...IsImmutableStorageWithVersioningEnabledResponseHeader;
+      ...BlobPublicAccess;
+
+      /** Indicates whether the container has an immutability policy set on it. */
+      @header("x-ms-has-immutability-policy")
+      hasImmutabilityPolicy?: boolean;
+
+      /** Indicates whether the container has a legal hold. */
+      @header("x-ms-has-legal-hold")
+      hasLegalHold?: boolean;
+
+      /** The default encryption scope for the container. */
+      @header("x-ms-default-encryption-scope")
+      defaultEncryptionScope?: string;
+
+      ...DenyEncryptionScopeOverride;
+
+      /** Indicates whether version level worm is enabled on a container */
+      @header("x-ms-immutable-storage-with-versioning-enabled")
+      isImmutableStorageWithVersioningEnabled?: boolean;
     }
   >;
 
@@ -278,7 +291,7 @@ interface Container {
     },
     {
       @body body: SignedIdentifiers;
-      ...PublicAccessResponseHeader;
+      ...BlobPublicAccess;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
@@ -302,7 +315,7 @@ interface Container {
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-      ...BlobPublicAccessParameter;
+      ...BlobPublicAccess;
       ...IfModifiedSinceParameter;
       ...IfUnmodifiedSinceParameter;
     },
@@ -757,15 +770,27 @@ interface Blob {
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
       ...AccessTierResponseHeader;
-      ...AccessTierInferredResponseHeader;
-      ...ArchiveStatusResponseHeader;
-      ...AccessTierChangeTimeResponseHeader;
+
+      /** For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value. */
+      @header("x-ms-access-tier-inferred")
+      accessTierInferred?: boolean;
+
+      /** For blob storage LRS accounts, valid values are rehydrate-pending-to-hot/rehydrate-pending-to-cool. If the blob is being rehydrated and is not complete then this header is returned indicating that rehydrate is pending and also tells the destination tier. */
+      @header("x-ms-archive-status")
+      archiveStatus?: ArchiveStatus;
+
+      /** The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set. */
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+      @encode("date-time-rfc1123")
+      @header("x-ms-access-tier-change-time")
+      accessTierChangeTime?: string;
+
       ...VersionIdResponseHeader;
       ...IsCurrentVersionResponseHeader;
       ...TagCountResponseHeader;
-      ...ExpiresOnResponseHeader;
+      ...ExpiryTimeHeader;
       ...IsSealedResponseHeader;
-      ...RehydratePriorityResponseHeader;
+      ...RehydratePriorityHeader;
       ...LastAccessedResponseHeader;
       ...ImmutabilityPolicyExpiresOnResponseHeader;
       ...ImmutabilityPolicyModeResponseHeader;
@@ -823,7 +848,7 @@ interface Blob {
       ...BlobNameParameter;
       ...TimeoutParameter;
       ...BlobExpiryOptionsParameter;
-      ...BlobExpiryTimeParameter;
+      ...ExpiryTimeHeader;
     },
     {
       ...EtagResponseHeader;
@@ -1113,7 +1138,7 @@ interface Blob {
       // TODO: ...MetadataParameter;
       ...AccessTierOptionalParameter;
 
-      ...RehydratePriorityParameter;
+      ...RehydratePriorityHeader;
       ...SourceIfModifiedSinceParameter;
       ...SourceIfUnmodifiedSinceParameter;
       ...SourceIfMatchParameter;
@@ -1221,7 +1246,7 @@ interface Blob {
       ...VersionIdParameter;
       ...TimeoutParameter;
       ...AccessTierRequiredParameter;
-      ...RehydratePriorityParameter;
+      ...RehydratePriorityHeader;
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
     },
@@ -1382,7 +1407,7 @@ interface PageBlob {
       ...EncryptionScopeParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
-      ...BlobContentLengthRequiredParameter;
+      ...BlobContentLengthRequired;
       ...BlobSequenceNumberParameter;
       ...BlobTagsHeaderParameter;
       ...ImmutabilityPolicyExpiryParameter;
@@ -1552,7 +1577,7 @@ interface PageBlob {
     PageList & {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
-      ...BlobContentLengthResponseHeader;
+      ...BlobContentLengthRequired;
       ...DateResponseHeader;
     }
   >;
@@ -1567,8 +1592,15 @@ interface PageBlob {
       ...BlobNameParameter;
       ...SnapshotParameter;
       ...TimeoutParameter;
-      ...PrevSnapshotParameter;
-      ...PrevSnapshotUrlParameter;
+
+      /** Optional in version 2015-07-08 and newer. The prevsnapshot parameter is a DateTime value that specifies that the response will contain only pages that were changed between target blob and previous snapshot. Changed pages include both updated and cleared pages. The target blob may be a snapshot, as long as the snapshot specified by prevsnapshot is the older of the two. Note that incremental snapshots are currently supported only for blobs created on or after January 1, 2016. */
+      @query
+      prevsnapshot?: string;
+
+      /** Optional. This header is only supported in service versions 2019-04-19 and after and specifies the URL of a previous snapshot of the target blob. The response will only contain pages that were changed between the target blob and its previous snapshot. */
+      @header("x-ms-previous-snapshot-url")
+      prevSnapshotUrl?: string;
+
       ...RangeParameter;
       ...LeaseIdOptionalParameter;
       ...ConditionalRequestHeaders;
@@ -1579,7 +1611,7 @@ interface PageBlob {
     PageList & {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
-      ...BlobContentLengthResponseHeader;
+      ...BlobContentLengthRequired;
       ...DateResponseHeader;
     }
   >;
@@ -1602,7 +1634,7 @@ interface PageBlob {
       ...EncryptionScopeParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
-      ...BlobContentLengthRequiredParameter;
+      ...BlobContentLengthRequired;
     },
     {
       ...EtagResponseHeader;
@@ -2077,7 +2109,7 @@ interface BlockBlob {
     BlockLookupList & {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
-      ...BlobContentLengthResponseHeader;
+      ...BlobContentLengthRequired;
       ...DateResponseHeader;
     }
   >;
