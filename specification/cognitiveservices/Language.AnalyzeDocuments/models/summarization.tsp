@@ -116,7 +116,12 @@ model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
 
   /** (Optional) If provided, the query will be used to generate the summary. */
+  @removed(Versions.v2024_11_15_preview)
   query?: string;
+
+  /** (Optional) If provided, the instruction will be used to generate the summary. */
+  @added(Versions.v2024_11_15_preview)
+  instruction?: string;
 }
 
 /** An object representing the results for an Abstractive Summarization task. */
