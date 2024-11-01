@@ -1,9 +1,11 @@
-import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace KeyVault;
@@ -226,6 +228,14 @@ union JsonWebKeyEncryptionAlgorithm {
 
   /** 256-bit AES-CBC with PKCS padding. */
   A256_CBCPAD: "A256CBCPAD",
+
+  /** CKM AES key wrap. */
+  @added(KeyVault.Versions.`v7.6_preview.1`)
+  CKM_AES_KEY_WRAP: "CKM_AES_KEY_WRAP",
+
+  /** CKM AES key wrap with padding. */
+  @added(KeyVault.Versions.`v7.6_preview.1`)
+  CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
 }
 
 /**
