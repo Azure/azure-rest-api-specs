@@ -15,5 +15,5 @@ title: ContainerServiceFleetMgmtClient
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/containerservicefleet/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet
 ```
