@@ -51,18 +51,27 @@ model FunctionToolDefinition extends ToolDefinition {
 model BingGroundingToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_grounding'.")
   type: "bing_grounding";
+
+  @doc("The list of connections used by the bing grounding tool.")
+  bing_grounding: ToolConnectionList;
 }
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
 model MicrosoftFabricToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'microsoft_fabric'.")
   type: "microsoft_fabric";
+
+  @doc("The list of connections used by the Microsoft Fabric tool.")
+  microsoft_fabric: ToolConnectionList;
 }
 
 @doc("The input definition information for a sharepoint tool as used to configure an agent.")
 model SharepointToolDefinition extends ToolDefinition {
-  @doc("The object type, which is always 'sharepoint'.")
-  type: "sharepoint";
+  @doc("The object type, which is always 'sharepoint_grounding'.")
+  type: "sharepoint_grounding";
+
+  @doc("The list of connections used by the SharePoint tool.")
+  sharepoint_grounding: ToolConnectionList;
 }
 
 @doc("The input definition information for an Azure AI search tool as used to configure an agent.")
@@ -226,11 +235,11 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
   executed SharePoint actions.
   """)
 model RunStepSharepointToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'sharepoint'.")
-  type: "sharepoint";
+  @doc("The object type, which is always 'sharepoint_grounding'.")
+  type: "sharepoint_grounding";
 
   @doc("Reserved for future use.")
-  @encodedName("application/json", "sharepoint")
+  @encodedName("application/json", "sharepoint_grounding")
   sharePoint: Record<string>;
 }
 
@@ -390,8 +399,8 @@ union AgentsNamedToolChoiceType {
   /** Tool type `microsoft_fabric` */
   microsoftFabric: "microsoft_fabric",
 
-  /** Tool type `sharepoint` */
-  sharepoint: "sharepoint",
+  /** Tool type `sharepoint_grounding` */
+  sharepoint: "sharepoint_grounding",
 
   /** Tool type `azure_ai_search` */
   azureAISearch: "azure_ai_search",
@@ -401,4 +410,28 @@ union AgentsNamedToolChoiceType {
 model FunctionName {
   /** The name of the function to call */
   name: string;
+}
+
+/**
+ * A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint_grounding` tools.
+ */
+model ToolConnectionList {
+  /**
+   * The connections attached to this tool. There can be a maximum of 1 connection
+   * resource attached to the tool.
+   */
+  @maxItems(1)
+  @encodedName("application/json", "connections")
+  connectionList?: ToolConnection[];
+}
+
+/**
+ * A connection resource.
+ */
+model ToolConnection {
+  /**
+   * A connection in a ToolConnectionList attached to this tool.
+   */
+  @encodedName("application/json", "connection_id")
+  connectionId: string;
 }
