@@ -61,7 +61,7 @@ model GatewayProperties {
 }
 
 /**
- * Application properties
+ * Details about the Application that would use the Operator's Network APIs.
  */
 model ApplicationProperties {
   /**
