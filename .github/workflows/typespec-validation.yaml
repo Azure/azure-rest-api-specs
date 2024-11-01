@@ -16,7 +16,7 @@ jobs:
     - name: git merge origin/main
       run: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
 
-    - name: Setup Node 20 and run `npm ci`
+    - name: Setup Node and run `npm ci`
       uses: ./.github/actions/setup-node-npm-ci
 
     - name: Validate Impacted Specs
