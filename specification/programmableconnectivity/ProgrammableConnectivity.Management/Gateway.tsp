@@ -57,7 +57,14 @@ model GatewayProperties {
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
   @visibility("read", "create", "update")
-  configuredApplication?: ApplicationProperties;
+  configuredApplication: ApplicationProperties;
+
+  /**
+   * Details about the Organization owning the Application that would use the Operator's Network APIs.
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  @visibility("read", "create", "update")
+  configuredApplicationOwner: ApplicationOwnerProperties;
 }
 
 /**
@@ -66,24 +73,58 @@ model GatewayProperties {
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 model ApplicationOwnerProperties {
   /**
+   * Common name of the organization owning the application.
+   */
+  name: string;
+
+  /**
    * Legal name of the organization owning the application.
    */
-  legalName?: string;
+  legalName: string;
+
+  /**
+   * Trading name of the organization owning the application.
+   */
+  tradingName: string;
 
   /**
    * A description of the organization owning the application.
    */
-  organizationDescription?: string;
+  organizationDescription: string;
 
   /**
    * Unique Tax Number for the user's organization in the country/region the APC Gateway is being purchased.
    */
-  taxNumber?: string;
+  taxNumber: string;
 
   /**
-   * Email address of the Privacy contact or Data Protection officer of the organization.
+   * ID number for official identification of the organization
    */
-  privacyContactEmailAddress?: string;
+  organizationIdentificationId: string;
+
+  /**
+   * Issuing organization of the ID for official identification of the organization
+   */
+  organizationIdentificationIssuer: string;
+
+  /**
+   * Contact email address for the use of Network APIs at the company
+   */
+  contactEmailAddress: string;
+
+  /**
+   * Legal representative of the organization
+   */
+  legalRepresentative: Person;
+
+  /**
+   * Privacy manager of the organization
+   */
+  privacyManager: Person;
+
+  /**
+   * Registered Geographic address  TO DO
+   */
 }
 
 /**
@@ -93,17 +134,32 @@ model ApplicationProperties {
   /**
    * Name of the application. Example: Contoso App.
    */
-  name?: string;
+  @TypeSpec.Versioning.madeRequired(Versions.v2024_11_01_preview)
+  name: string;
 
   /**
    * Description of the application.
    */
-  applicationDescription?: string;
+  @TypeSpec.Versioning.madeRequired(Versions.v2024_11_01_preview)
+  applicationDescription: string;
 
   /**
    * The category that describes the application.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   applicationType?: string;
+
+  /**
+   * The category of the application.
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  category: Category;
+
+  /**
+   * Privacy rights request email address TO DO need to find out what this actually is
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  privacyRightsRequestEmailAddres: string;
 
   /**
    * Legal name of the organization owning the application.
@@ -128,6 +184,60 @@ model ApplicationProperties {
    */
   @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   privacyContactEmailAddress?: string;
+}
+
+/**
+ * Model defining a contactable person
+ */
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+model Person {
+  /**
+   * Family name of the contactable person.
+   */
+  familyName: string;
+
+  /**
+   * Given name of the contactable person
+   */
+  givenName: string;
+
+  /**
+   * Email address of the contactable person
+   */
+  emailAddress: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+union Category {
+  artAndDesign: "Art and Design",
+  autoAndVehicle: "Auto and Vehicle",
+  beauty: "Beauty",
+  booksAndReference: "Books and Reference",
+  business: "Business",
+  developerTools: "Develpoer tools",
+  education: "Education",
+  eventsAndEntertainment: "Events and Entertainment",
+  finance: "Finance",
+  foodAndDrink: "Food and Drink",
+  games: "Games",
+  healthAndFitness: "Health and Fitness",
+  kids: "Kids",
+  librariesAndDemo: "Libraries and Demo",
+  lifestyle: "Lifestyle",
+  mapsAndNavigation: "Maps and Navigation",
+  medical: "Medical",
+  musicAndAudio: "Music and Audio",
+  newsAndMagazines: "News and Magazines",
+  photoAndVideo: "Photo and Video",
+  productivity: "Productivity",
+  shopping: "Shopping",
+  socialNetworkingAndCommunications: "Social Networking and Communications",
+  sports: "Sports",
+  utilities: "Utilities",
+  travelAndLocal: "Travel and Local",
+  weather: "Weather",
+  string,
 }
 
 @armResourceOperations

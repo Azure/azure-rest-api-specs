@@ -42,7 +42,7 @@ model OperatorApiConnectionProperties {
   ]>;
 
   /**
-   * Details about the SaaS offer purchased from the marketplace.
+   * Details about the SaaS offer purchased from the marketplace. TO DO figure out how to change this to read only
    */
   @visibility("read", "create", "update")
   saasProperties?: SaasProperties;
@@ -109,6 +109,12 @@ model OperatorApiConnectionProperties {
    */
   @visibility("read")
   status?: Status;
+
+  /**
+   * The purpose for which the Application will use the API
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  purpose: Purpose;
 }
 
 /**
@@ -125,6 +131,19 @@ union AccountType {
    * Managed by the User themselves on the Operator end.
    */
   UserManaged: "UserManaged",
+
+  string,
+}
+
+/**
+ * TO DO decide whether to include the almost 100 different options here
+ */
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+union Purpose {
+  /**
+   * Fraud Prevention and Detection purpose
+   */
+  FraudPreventionAndDetection: "dpv:FraudPreventionAndDetection",
 
   string,
 }

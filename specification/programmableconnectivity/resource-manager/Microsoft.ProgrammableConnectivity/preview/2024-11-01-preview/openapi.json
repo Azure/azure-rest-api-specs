@@ -783,9 +783,17 @@
       "type": "object",
       "description": "Details about the Application Owner (i.e.e organization) that would use the Operator's Network APIs.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Common name of the organization owning the application."
+        },
         "legalName": {
           "type": "string",
           "description": "Legal name of the organization owning the application."
+        },
+        "tradingName": {
+          "type": "string",
+          "description": "Trading name of the organization owning the application."
         },
         "organizationDescription": {
           "type": "string",
@@ -795,11 +803,39 @@
           "type": "string",
           "description": "Unique Tax Number for the user's organization in the country/region the APC Gateway is being purchased."
         },
-        "privacyContactEmailAddress": {
+        "organizationIdentificationId": {
           "type": "string",
-          "description": "Email address of the Privacy contact or Data Protection officer of the organization."
+          "description": "ID number for official identification of the organization"
+        },
+        "organizationIdentificationIssuer": {
+          "type": "string",
+          "description": "Issuing organization of the ID for official identification of the organization"
+        },
+        "contactEmailAddress": {
+          "type": "string",
+          "description": "Contact email address for the use of Network APIs at the company"
+        },
+        "legalRepresentative": {
+          "$ref": "#/definitions/Person",
+          "description": "Legal representative of the organization"
+        },
+        "privacyManager": {
+          "$ref": "#/definitions/Person",
+          "description": "Privacy manager of the organization"
         }
-      }
+      },
+      "required": [
+        "name",
+        "legalName",
+        "tradingName",
+        "organizationDescription",
+        "taxNumber",
+        "organizationIdentificationId",
+        "organizationIdentificationIssuer",
+        "contactEmailAddress",
+        "legalRepresentative",
+        "privacyManager"
+      ]
     },
     "ApplicationProperties": {
       "type": "object",
@@ -813,10 +849,166 @@
           "type": "string",
           "description": "Description of the application."
         },
-        "applicationType": {
+        "category": {
+          "$ref": "#/definitions/Category",
+          "description": "The category of the application."
+        },
+        "privacyRightsRequestEmailAddres": {
           "type": "string",
-          "description": "The category that describes the application."
+          "description": "Privacy rights request email address TO DO need to find out what this actually is"
         }
+      },
+      "required": [
+        "name",
+        "applicationDescription",
+        "category",
+        "privacyRightsRequestEmailAddres"
+      ]
+    },
+    "Category": {
+      "type": "string",
+      "enum": [
+        "Art and Design",
+        "Auto and Vehicle",
+        "Beauty",
+        "Books and Reference",
+        "Business",
+        "Develpoer tools",
+        "Education",
+        "Events and Entertainment",
+        "Finance",
+        "Food and Drink",
+        "Games",
+        "Health and Fitness",
+        "Kids",
+        "Libraries and Demo",
+        "Lifestyle",
+        "Maps and Navigation",
+        "Medical",
+        "Music and Audio",
+        "News and Magazines",
+        "Photo and Video",
+        "Productivity",
+        "Shopping",
+        "Social Networking and Communications",
+        "Sports",
+        "Utilities",
+        "Travel and Local",
+        "Weather"
+      ],
+      "x-ms-enum": {
+        "name": "Category",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "artAndDesign",
+            "value": "Art and Design"
+          },
+          {
+            "name": "autoAndVehicle",
+            "value": "Auto and Vehicle"
+          },
+          {
+            "name": "beauty",
+            "value": "Beauty"
+          },
+          {
+            "name": "booksAndReference",
+            "value": "Books and Reference"
+          },
+          {
+            "name": "business",
+            "value": "Business"
+          },
+          {
+            "name": "developerTools",
+            "value": "Develpoer tools"
+          },
+          {
+            "name": "education",
+            "value": "Education"
+          },
+          {
+            "name": "eventsAndEntertainment",
+            "value": "Events and Entertainment"
+          },
+          {
+            "name": "finance",
+            "value": "Finance"
+          },
+          {
+            "name": "foodAndDrink",
+            "value": "Food and Drink"
+          },
+          {
+            "name": "games",
+            "value": "Games"
+          },
+          {
+            "name": "healthAndFitness",
+            "value": "Health and Fitness"
+          },
+          {
+            "name": "kids",
+            "value": "Kids"
+          },
+          {
+            "name": "librariesAndDemo",
+            "value": "Libraries and Demo"
+          },
+          {
+            "name": "lifestyle",
+            "value": "Lifestyle"
+          },
+          {
+            "name": "mapsAndNavigation",
+            "value": "Maps and Navigation"
+          },
+          {
+            "name": "medical",
+            "value": "Medical"
+          },
+          {
+            "name": "musicAndAudio",
+            "value": "Music and Audio"
+          },
+          {
+            "name": "newsAndMagazines",
+            "value": "News and Magazines"
+          },
+          {
+            "name": "photoAndVideo",
+            "value": "Photo and Video"
+          },
+          {
+            "name": "productivity",
+            "value": "Productivity"
+          },
+          {
+            "name": "shopping",
+            "value": "Shopping"
+          },
+          {
+            "name": "socialNetworkingAndCommunications",
+            "value": "Social Networking and Communications"
+          },
+          {
+            "name": "sports",
+            "value": "Sports"
+          },
+          {
+            "name": "utilities",
+            "value": "Utilities"
+          },
+          {
+            "name": "travelAndLocal",
+            "value": "Travel and Local"
+          },
+          {
+            "name": "weather",
+            "value": "Weather"
+          }
+        ]
       }
     },
     "Gateway": {
@@ -895,8 +1087,21 @@
             "update",
             "create"
           ]
+        },
+        "configuredApplicationOwner": {
+          "$ref": "#/definitions/ApplicationOwnerProperties",
+          "description": "Details about the Organization owning the Application that would use the Operator's Network APIs.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
-      }
+      },
+      "required": [
+        "configuredApplication",
+        "configuredApplicationOwner"
+      ]
     },
     "GatewayTagsUpdate": {
       "type": "object",
@@ -997,7 +1202,7 @@
         },
         "saasProperties": {
           "$ref": "#/definitions/SaasProperties",
-          "description": "Details about the SaaS offer purchased from the marketplace.",
+          "description": "Details about the SaaS offer purchased from the marketplace. TO DO figure out how to change this to read only",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1039,11 +1244,16 @@
           "$ref": "#/definitions/Status",
           "description": "The status of the OperatorApiConnection resource.",
           "readOnly": true
+        },
+        "purpose": {
+          "$ref": "#/definitions/Purpose",
+          "description": "The purpose for which the Application will use the API"
         }
       },
       "required": [
         "operatorApiPlanId",
-        "gatewayId"
+        "gatewayId",
+        "purpose"
       ]
     },
     "OperatorApiConnectionUpdate": {
@@ -1087,12 +1297,16 @@
         },
         "saasProperties": {
           "$ref": "#/definitions/SaasProperties",
-          "description": "Details about the SaaS offer purchased from the marketplace.",
+          "description": "Details about the SaaS offer purchased from the marketplace. TO DO figure out how to change this to read only",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
+        },
+        "purpose": {
+          "$ref": "#/definitions/Purpose",
+          "description": "The purpose for which the Application will use the API"
         }
       }
     },
@@ -1181,6 +1395,29 @@
         }
       }
     },
+    "Person": {
+      "type": "object",
+      "description": "Model defining a contactable person",
+      "properties": {
+        "familyName": {
+          "type": "string",
+          "description": "Family name of the contactable person."
+        },
+        "givenName": {
+          "type": "string",
+          "description": "Given name of the contactable person"
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "Email address of the contactable person"
+        }
+      },
+      "required": [
+        "familyName",
+        "givenName",
+        "emailAddress"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource.",
@@ -1235,6 +1472,24 @@
         ]
       },
       "readOnly": true
+    },
+    "Purpose": {
+      "type": "string",
+      "description": "TO DO decide whether to include the almost 100 different options here",
+      "enum": [
+        "dpv:FraudPreventionAndDetection"
+      ],
+      "x-ms-enum": {
+        "name": "Purpose",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FraudPreventionAndDetection",
+            "value": "dpv:FraudPreventionAndDetection",
+            "description": "Fraud Prevention and Detection purpose"
+          }
+        ]
+      }
     },
     "SaasProperties": {
       "type": "object",
