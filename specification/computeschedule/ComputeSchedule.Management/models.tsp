@@ -82,8 +82,8 @@ union OperationState {
   @doc("Operations that have failed")
   Failed: "Failed",
 
-  @doc("Operations that have been cancelled by the user")
-  Cancelled: "Cancelled",
+  @doc("Operations that have been Canceled by the user")
+  Canceled: "Canceled",
 
   @doc("Operations that are blocked")
   Blocked: "Blocked",
@@ -108,10 +108,10 @@ alias Params = {
 model Schedule {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("The deadline for the operation")
-  deadLine: offsetDateTime;
+  deadline: offsetDateTime;
 
   @doc("The timezone for the operation")
-  timeZone: string;
+  timezone: string;
 
   @doc("The deadlinetype of the operation, this can either be InitiateAt or CompleteBy")
   deadlineType: DeadlineType = DeadlineType.Unknown;
@@ -175,7 +175,7 @@ model ResourceOperationDetails {
   state: OperationState = OperationState.Unknown;
 
   @doc("Timezone for the operation")
-  timeZone?: string;
+  timezone?: string;
 
   @doc("Operation level errors if they exist")
   resourceOperationError?: ResourceOperationError;
@@ -210,13 +210,10 @@ model OperationErrorDetails {
   errorCode: string;
 
   @doc("The error details of the operation")
-  errorDetails: offsetDateTime;
+  errorDetails: string;
 
   @doc("The timestamp of the error occurence")
-  timeStamp: offsetDateTime;
-
-  @doc("CRP operationid of the operation for deeper analysis")
-  crpOperationId: string;
+  timestamp: offsetDateTime;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
@@ -411,7 +408,7 @@ model CancelOperationsRequest {
 @doc("This is the response from a cancel operations request")
 model CancelOperationsResponse {
   @extension("x-ms-identifiers", ["resourceId"])
-  @doc("An array of resource operations that were successfully cancelled")
+  @doc("An array of resource operations that were successfully canceled")
   results: Array<ResourceOperation>;
 }
 
