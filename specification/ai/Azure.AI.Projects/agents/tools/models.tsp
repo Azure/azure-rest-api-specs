@@ -219,11 +219,11 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
   executed SharePoint actions.
   """)
 model RunStepSharepointToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'sharepoint'.")
-  type: "sharepoint";
+  @doc("The object type, which is always 'sharepoint_grounding'.")
+  type: "sharepoint_grounding";
 
   @doc("Reserved for future use.")
-  @encodedName("application/json", "sharepoint")
+  @encodedName("application/json", "sharepoint_grounding")
   sharePoint: Record<string>;
 }
 
@@ -383,8 +383,8 @@ union AgentsNamedToolChoiceType {
   /** Tool type `microsoft_fabric` */
   microsoftFabric: "microsoft_fabric",
 
-  /** Tool type `sharepoint` */
-  sharepoint: "sharepoint",
+  /** Tool type `sharepoint_grounding` */
+  sharepoint: "sharepoint_grounding",
 
   /** Tool type `azure_ai_search` */
   azureAISearch: "azure_ai_search",
@@ -397,7 +397,7 @@ model FunctionName {
 }
 
 /**
- * A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint` tools.
+ * A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint_grounding` tools.
  */
 model ToolConnectionList {
   /**
