@@ -73,7 +73,7 @@
   "paths": {
     "/{appInsightsResourceUrl}": {
       "get": {
-        "operationId": "Diagnostics_GetAppInsights",
+        "operationId": "Telemetry_GetAppInsights",
         "description": "Gets the properties of the specified Application Insights resource",
         "parameters": [
           {
@@ -433,7 +433,8 @@
               "AzureOpenAI",
               "Serverless",
               "AzureBlob",
-              "AIServices"
+              "AIServices",
+              "CognitiveSearch"
             ],
             "x-ms-enum": {
               "name": "ConnectionType",
@@ -442,12 +443,12 @@
                 {
                   "name": "AzureOpenAI",
                   "value": "AzureOpenAI",
-                  "description": "Azure OpenAI service"
+                  "description": "Azure OpenAI Service"
                 },
                 {
                   "name": "Serverless",
                   "value": "Serverless",
-                  "description": "Serverless API service"
+                  "description": "Serverless API Service"
                 },
                 {
                   "name": "AzureBlobStorage",
@@ -455,9 +456,14 @@
                   "description": "Azure Blob Storage"
                 },
                 {
-                  "name": "AIServices",
+                  "name": "AzureAIServices",
                   "value": "AIServices",
                   "description": "Azure AI Services"
+                },
+                {
+                  "name": "AzureAISearch",
+                  "value": "CognitiveSearch",
+                  "description": "Azure AI Search"
                 }
               ]
             }
@@ -8241,7 +8247,8 @@
         "AzureOpenAI",
         "Serverless",
         "AzureBlob",
-        "AIServices"
+        "AIServices",
+        "CognitiveSearch"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
@@ -8250,12 +8257,12 @@
           {
             "name": "AzureOpenAI",
             "value": "AzureOpenAI",
-            "description": "Azure OpenAI service"
+            "description": "Azure OpenAI Service"
           },
           {
             "name": "Serverless",
             "value": "Serverless",
-            "description": "Serverless API service"
+            "description": "Serverless API Service"
           },
           {
             "name": "AzureBlobStorage",
@@ -8263,9 +8270,14 @@
             "description": "Azure Blob Storage"
           },
           {
-            "name": "AIServices",
+            "name": "AzureAIServices",
             "value": "AIServices",
             "description": "Azure AI Services"
+          },
+          {
+            "name": "AzureAISearch",
+            "value": "CognitiveSearch",
+            "description": "Azure AI Search"
           }
         ]
       }
