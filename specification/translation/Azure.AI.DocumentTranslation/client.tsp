@@ -214,7 +214,7 @@ interface SingleDocumentTranslationClient {
   "java"
 );
 
-@@clientName(DocumentTranslation.DocumentsStatus,
+@@clientName(DocumentTranslation.DocumentStatus,
   "documentStatusResult",
   "java"
 );
