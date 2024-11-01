@@ -2,110 +2,9 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Azure Migrate.
+This is the AutoRest configuration file for Azure Migrate - Assessment.
 
 ---
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-02
-  - tag: package-2019-10
-  - tag: package-2017-11
-```
-
-### Tag: package-preview-2023-09
-
-These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-09'
-input-file:
-  - preview/2023-09-09-preview/migrate.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
-  - code: ProvisioningStateMustBeReadOnly
-    reason: The current swagger version only modifies the resources which do not have Provisioning states as readOnly and not introducing any new Resources, These are incorrectly flagged for previous versions.
-  - code: UnSupportedPatchProperties
-    reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
-```
-
-### Tag: package-preview-2023-05
-
-These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-05'
-input-file:
-  - preview/2023-05-01-preview/migrate.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
-  - code: ProvisioningStateMustBeReadOnly
-    reason: The current swagger version only modifies the resources which do not have Provisioning states as readOnly and not introducing any new Resources, These are incorrectly flagged for previous versions.
-  - code: UnSupportedPatchProperties
-    reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
-```
-
-### Tag: package-2023-04
-
-These settings apply only when `--tag=package-2023-04` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-04'
-input-file:
-  - preview/2023-04-01-preview/migrate.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
-```
-
-### Tag: package-2023-03
-
-These settings apply only when `--tag=package-2023-03` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-03'
-input-file:
-  - stable/2023-03-15/migrate.json
-```
-
-### Tag: package-2018-02 and java
-
-These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
-java:
-  namespace: com.azure.resourcemanager.migration.assessment.v2018_02_02
-  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2018_02_02
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-10 and java
-
-These settings apply only when `--tag=package-2019-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-10' && $(java) && $(multiapi)
-java:
-  namespace: com.azure.resourcemanager.migration.assessment.v2019_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2019_10_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-11 and java
-
-These settings apply only when `--tag=package-2017-11 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
-java:
-  namespace: com.azure.resourcemanager.migration.assessment.v2017_11_11
-  output-folder: $(azure-libraries-for-java-folder)/sdk/migrationassessment/mgmt-v2017_11_11
-regenerate-manager: true
-generate-interface: true
-```
 
 ## Getting Started
 
@@ -162,6 +61,15 @@ suppressions:
     reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
 ```
 
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - preview/2023-04-01-preview/migrate.json
+```
+
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
@@ -169,24 +77,6 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 ```yaml $(tag) == 'package-2023-03'
 input-file:
   - stable/2023-03-15/migrate.json
-```
-
-### Tag: package-2023-04
-
-These settings apply only when `--tag=package-2023-04` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-04'
-input-file:
-  - preview/2023-04-01-preview/migrate.json
-```
-
-### Tag: package-2018-02
-
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-02'
-input-file:
-- stable/2018-02-02/migrate.json
 ```
 
 ### Tag: package-2019-10
@@ -198,11 +88,20 @@ input-file:
 - stable/2019-10-01/migrate.json
 ```
 
-### Tag: package-2017-11
+### Tag: package-2018-02
 
-These settings apply only when `--tag=package-2017-11` is specified on the command line.
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-11'
+``` yaml $(tag) == 'package-2018-02'
+input-file:
+- stable/2018-02-02/migrate.json
+```
+
+### Tag: package-preview-2017-11
+
+These settings apply only when `--tag=package-preview-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2017-11'
 input-file:
 - preview/2017-11-11-preview/migrate.json
 ```
