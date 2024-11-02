@@ -16,6 +16,9 @@ model DeidentificationContent {
   @maxLength(48000) // 50k total request size. 2k for other fields.
   inputText: string;
 
+  @doc("Operation to perform on the input documents.")
+  operation?: OperationType = OperationType.Surrogate;
+
   @doc("Customization parameters to override default service behaviors.")
   customizations?: CustomizationOptions;
 }
