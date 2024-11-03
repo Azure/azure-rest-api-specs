@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
@@ -18,6 +19,7 @@ model DeidentificationJob {
   @maxLength(36)
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  // @clientName("jobName", "java") // Need to change ONLY for DocumentDetails child resource
   name: string;
 
   @doc("Operation to perform on the input documents.")
@@ -98,15 +100,19 @@ union JobStatus {
 @doc("Summary metrics of a job.")
 model JobSummary {
   @doc("Number of documents that have completed.")
+  @clientName("successfulCount", "java")
   successful: int32;
 
   @doc("Number of documents that have failed.")
+  @clientName("failedCount", "java")
   failed: int32;
 
   @doc("Number of documents that have been canceled.")
+  @clientName("canceledCount", "java")
   canceled: int32;
 
   @doc("Number of documents total.")
+  @clientName("totalCount", "java")
   total: int32;
 
   @doc("Number of bytes processed.")
@@ -121,6 +127,13 @@ model DocumentDetails {
   @doc("Id of the document details.")
   @visibility("read")
   id: string;
+
+  // @doc("The name of a job.") // TODO - is this correct?
+  // @maxLength(36)
+  // @minLength(3) // Must be 3 to match regex
+  // @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  // @clientName("jobName", "java")
+  // name: string;
 
   @doc("Location for the input.")
   input: DocumentLocation;
