@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Workloads Client",
-    "version": "2023-12-01-preview",
+    "version": "2024-02-01-preview",
     "description": "The workload SAP monitor Client.",
     "x-typespec-generated": [
       {
@@ -47,6 +47,12 @@
     },
     {
       "name": "SapLandscapeMonitor"
+    },
+    {
+      "name": "Alerts"
+    },
+    {
+      "name": "AlertTemplates"
     }
   ],
   "paths": {
@@ -387,6 +393,379 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates": {
+      "get": {
+        "operationId": "AlertTemplates_List",
+        "tags": [
+          "AlertTemplates"
+        ],
+        "description": "Gets a list of alert templates in the specified SAP monitor. The operations returns various properties of each alert template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "providerType",
+            "in": "query",
+            "description": "The provider type for filtering alert templates.",
+            "required": false,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Alert Templates in a subscription": {
+            "$ref": "./examples/AlertTemplates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates/{alertTemplateName}": {
+      "get": {
+        "operationId": "AlertTemplates_Get",
+        "tags": [
+          "AlertTemplates"
+        ],
+        "description": "Gets properties of an alert template for the specified subscription, resource group, SAP monitor name, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "alertTemplateName",
+            "in": "path",
+            "description": "SAP monitor alert template resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of an Alert Template": {
+            "$ref": "./examples/AlertTemplates_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alerts": {
+      "get": {
+        "operationId": "Alerts_List",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Gets a list of alerts in the specified SAP monitor. The operations returns various properties of each alerts.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Alerts in a subscription": {
+            "$ref": "./examples/Alerts_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alerts/{alertName}": {
+      "get": {
+        "operationId": "Alerts_Get",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Gets properties of an alert for the specified subscription, resource group, SAP monitor name, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "alertName",
+            "in": "path",
+            "description": "Name of the SAP monitor alert resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of an Alert": {
+            "$ref": "./examples/Alerts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Alerts_Create",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Creates an alert for the specified subscription, resource group, SAP monitor name, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "alertName",
+            "in": "path",
+            "description": "Name of the SAP monitor alert resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request body representing a SAP monitor's alert resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Alert' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "201": {
+            "description": "Resource 'Alert' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates an Alert": {
+            "$ref": "./examples/Alerts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Alerts_Delete",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Deletes an alert for the specified subscription, resource group, SAP monitor name, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "alertName",
+            "in": "path",
+            "description": "Name of the SAP monitor alert resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an Alert": {
+            "$ref": "./examples/Alerts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/providerInstances": {
       "get": {
         "operationId": "ProviderInstances_ListByMonitor",
@@ -503,6 +882,9 @@
           },
           "Get properties of a SAP monitor NetWeaver provider": {
             "$ref": "./examples/ProviderInstances_Get_Get_Properties_Of_A_Sap_Monitor_Net_Weaver_Provider.json"
+          },
+          "Get properties of a SAP monitor Oracle provider": {
+            "$ref": "./examples/ProviderInstances_Get_Get_Properties_Of_A_Sap_Monitor_Oracle_Provider.json"
           }
         }
       },
@@ -594,6 +976,9 @@
           "Create a OS provider with Root Certificate": {
             "$ref": "./examples/ProviderInstances_Create_Create_A_Os_Provider_With_Root_Certificate.json"
           },
+          "Create a Oracle provider": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Sap_Monitor_Oracle_provider.json"
+          },
           "Create a PrometheusHaCluster provider": {
             "$ref": "./examples/ProviderInstances_Create_Create_A_Prometheus_Ha_Cluster_Provider.json"
           },
@@ -611,6 +996,9 @@
           },
           "Create a SAP monitor NetWeaver provider with Root Certificate": {
             "$ref": "./examples/ProviderInstances_Create_Create_A_Sap_Monitor_Net_Weaver_Provider_With_Root_Certificate.json"
+          },
+          "Create a SAP monitor Oracle provider with Root Certificate": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Sap_Monitor_Oracle_Provider_With_Root_Certificate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -945,6 +1333,486 @@
     }
   },
   "definitions": {
+    "Alert": {
+      "type": "object",
+      "description": "A alert associated with SAP monitor.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertProperties",
+          "description": "Alert Instance properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertAutoMitigate": {
+      "type": "string",
+      "description": "The value that indicates whether the alert should be automatically resolved or not. The default is Disable.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "AlertAutoMitigate",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "The alert should be automatically resolved."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "The alert should not be automatically resolved."
+          }
+        ]
+      }
+    },
+    "AlertListResult": {
+      "type": "object",
+      "description": "The response of a Alert list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Alert items on this page",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertProperties": {
+      "type": "object",
+      "description": "Describes the properties of an Alert for SAP monitor.",
+      "properties": {
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Defines the alert instance errors.",
+          "readOnly": true
+        },
+        "alertRuleResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ID of the alert rule resource created.",
+          "readOnly": true
+        },
+        "templateName": {
+          "type": "string",
+          "description": "Name of the alert template from which it was created."
+        },
+        "providerType": {
+          "type": "string",
+          "description": "The provider type for alert. For example, the value can be SapHana."
+        },
+        "providerNames": {
+          "type": "array",
+          "description": "Name of provider instances associated with the alert.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alertRuleProperties": {
+          "$ref": "#/definitions/AlertRuleProperties",
+          "description": "Describes the properties of an alert."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/WorkloadMonitorProvisioningState",
+          "description": "State of provisioning of the alert instance",
+          "readOnly": true
+        }
+      }
+    },
+    "AlertQueryParameter": {
+      "type": "object",
+      "description": "Defines the Alert Query Parameter.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the alert query parameter."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the alert query parameter."
+        }
+      }
+    },
+    "AlertRuleProperties": {
+      "type": "object",
+      "description": "Describes the properties of an alert.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AlertRuleStatus",
+          "description": "Indicates whether the alert is in an enabled state."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest.",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "actionGroups": {
+          "type": "array",
+          "description": "Action Group resource Ids to invoke when the alert fires",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The threshold of the alert."
+        },
+        "thresholdOperator": {
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "The threshold operator of the alert."
+        },
+        "windowSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The period of time on which the Alert query will be executed."
+        },
+        "evaluationFrequency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often the scheduled query rule is evaluated."
+        },
+        "failingPeriodsToAlert": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failing periods to trigger an alert."
+        },
+        "failingPeriodsOperator": {
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "The operator for failing periods."
+        },
+        "muteActionsDuration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Mute actions for the chosen period of time after the alert is fired."
+        },
+        "autoMitigate": {
+          "$ref": "#/definitions/AlertAutoMitigate",
+          "description": "The value that indicates whether the alert should be automatically resolved or not. The default is Disable."
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Evaluation of metric on a particular column."
+        },
+        "alertQueryParameters": {
+          "type": "array",
+          "description": "The alert query parameters.",
+          "items": {
+            "$ref": "#/definitions/AlertQueryParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AlertRuleStatus": {
+      "type": "string",
+      "description": "The value which indicates whether this scheduled query rule is enabled. Value should be enabled or disabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AlertRuleStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The scheduled query rule is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The scheduled query rule is disabled"
+          }
+        ]
+      }
+    },
+    "AlertTemplate": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertTemplateProperties",
+          "description": "Alert Template properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertTemplateListResult": {
+      "type": "object",
+      "description": "The response of a AlertTemplate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertTemplate items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertTemplate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertTemplateMetricMeasurement": {
+      "type": "object",
+      "description": "Defines the Alert Template MetricMeasurement Properties.",
+      "properties": {
+        "thresholdOperator": {
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "Operator used for threshold comparison."
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Threshold Value Associated with the Alert Template for Metric Measurement."
+        },
+        "metricTriggerType": {
+          "$ref": "#/definitions/AlertTemplateMetricTriggerType",
+          "description": "Metric Trigger Type Associated with the Alert Template for Metric Measurement."
+        },
+        "metricColumn": {
+          "type": "string",
+          "description": "Metric Column Associated with the Alert Template for Metric Measurement."
+        },
+        "frequencyInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency (mins) value Associated with the Alert Template for Metric Measurement."
+        },
+        "timeWindowInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time Window (mins) Value Associated with the Alert Template for Metric Measurement."
+        }
+      }
+    },
+    "AlertTemplateMetricTriggerType": {
+      "type": "string",
+      "description": "Metric Trigger Type Associated with the Alert Template for Metric Measurement",
+      "enum": [
+        "Consecutive",
+        "Total"
+      ],
+      "x-ms-enum": {
+        "name": "AlertTemplateMetricTriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Consecutive",
+            "value": "Consecutive",
+            "description": "The metric trigger type is consecutive."
+          },
+          {
+            "name": "Total",
+            "value": "Total",
+            "description": "The metric trigger type is total."
+          }
+        ]
+      }
+    },
+    "AlertTemplateParameterType": {
+      "type": "string",
+      "description": "Type of the Query Input Parameter",
+      "enum": [
+        "LogAnalyticsQuery",
+        "ProviderProperty",
+        "CustomInput"
+      ],
+      "x-ms-enum": {
+        "name": "AlertTemplateParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LogAnalyticsQuery",
+            "value": "LogAnalyticsQuery",
+            "description": "Log Analytics query parameter"
+          },
+          {
+            "name": "ProviderProperty",
+            "value": "ProviderProperty",
+            "description": "Provider property parameter"
+          },
+          {
+            "name": "CustomInput",
+            "value": "CustomInput",
+            "description": "Custom input parameter"
+          }
+        ]
+      }
+    },
+    "AlertTemplateProperties": {
+      "type": "object",
+      "description": "Describes the properties of an Alert Template for SAP monitor.",
+      "properties": {
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Defines the SAP monitor Alert Template errors.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/WorkloadMonitorProvisioningState",
+          "description": "State of provisioning of the Alert Template.",
+          "readOnly": true
+        },
+        "templateDisplayName": {
+          "type": "string",
+          "description": "Display name of the alert template."
+        },
+        "providerType": {
+          "type": "string",
+          "description": "The provider type for alert template. For example, the value can be SapHana."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the template."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is most severe and value of 4 is least severe.",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "query": {
+          "type": "string",
+          "description": "Query associated with the alert template."
+        },
+        "thresholdOperator": {
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "Operator used for threshold comparison."
+        },
+        "defaultThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default threshold value."
+        },
+        "lowerBound": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum possible Default Threshold Value Associated with the Alert Template."
+        },
+        "upperBound": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum possible Default Threshold Value Associated with the Alert Template."
+        },
+        "defaultThresholdInputOption": {
+          "$ref": "#/definitions/DefaultThresholdInputOption",
+          "description": "Input option for the default threshold."
+        },
+        "alertUnit": {
+          "type": "string",
+          "description": "Unit of the alert."
+        },
+        "metricMeasurement": {
+          "$ref": "#/definitions/AlertTemplateMetricMeasurement",
+          "description": "Describes the properties for metric measurement in alerts template."
+        },
+        "queryInputParameters": {
+          "type": "array",
+          "description": "Describes the Query Input Parameter properties in alerts template.",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/AlertTemplateQueryInputParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AlertTemplateQueryInputParameter": {
+      "type": "object",
+      "description": "Describes the Query Input Parameter properties in alerts template.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Query Input Parameter"
+        },
+        "type": {
+          "$ref": "#/definitions/AlertTemplateParameterType",
+          "description": "Type of the Query Input Parameter"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Query Input Parameter"
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default Value of the Query Input Parameter"
+        },
+        "laQuery": {
+          "type": "string",
+          "description": "Log Analytics query associated with the parameter."
+        },
+        "selectionMode": {
+          "$ref": "#/definitions/AlertTemplateSelectionMode",
+          "description": "Selection mode for the parameter."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name of the Query Input Parameter."
+        }
+      }
+    },
+    "AlertTemplateSelectionMode": {
+      "type": "string",
+      "description": "Selection Mode of the Query Input Parameter",
+      "enum": [
+        "Single",
+        "Multiple"
+      ],
+      "x-ms-enum": {
+        "name": "AlertTemplateSelectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Single",
+            "value": "Single",
+            "description": "The selection mode is single."
+          },
+          {
+            "name": "Multiple",
+            "value": "Multiple",
+            "description": "The selection mode is Multiple."
+          }
+        ]
+      }
+    },
     "AppServicePlanConfiguration": {
       "type": "object",
       "description": "Configuration details of app service plan",
@@ -981,6 +1849,48 @@
             "name": "PremiumV3",
             "value": "PremiumV3",
             "description": "Dedicated Premium V3 plan"
+          }
+        ]
+      }
+    },
+    "ConditionalOperator": {
+      "type": "string",
+      "description": "Result Condition Evaluation Criteria",
+      "enum": [
+        "LessThan",
+        "GreaterThan",
+        "Equal",
+        "GreaterThanOrEqual",
+        "LessThanOrEqual"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionalOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LessThan",
+            "value": "LessThan",
+            "description": "The value is less than the specified value."
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan",
+            "description": "The value is greater than the specified value."
+          },
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "The value is equal to the specified value."
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual",
+            "description": "The value is greater than or equal to the specified value."
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual",
+            "description": "The value is less than or equal to the specified value."
           }
         ]
       }
@@ -1034,6 +1944,36 @@
         }
       ],
       "x-ms-discriminator-value": "Db2"
+    },
+    "DefaultThresholdInputOption": {
+      "type": "string",
+      "description": "Is input required for Default Threshold Value Associated with the Alert Template",
+      "enum": [
+        "Required",
+        "NotRequired",
+        "Optional"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultThresholdInputOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "The default threshold value is required."
+          },
+          {
+            "name": "NotRequired",
+            "value": "NotRequired",
+            "description": "The default threshold value is not required."
+          },
+          {
+            "name": "Optional",
+            "value": "Optional",
+            "description": "The default threshold value is optional."
+          }
+        ]
+      }
     },
     "HanaDbProviderInstanceProperties": {
       "type": "object",
@@ -1259,6 +2199,56 @@
         }
       ],
       "x-ms-discriminator-value": "MsSqlServer"
+    },
+    "OracleProviderInstanceProperties": {
+      "type": "object",
+      "description": "Gets or sets the Oracle provider properties.",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Gets or sets the target virtual machine name."
+        },
+        "dbPort": {
+          "type": "string",
+          "description": "Gets or sets the oracle database sql port."
+        },
+        "dbName": {
+          "type": "string",
+          "description": "Gets or sets the oracle database name."
+        },
+        "dbUsername": {
+          "type": "string",
+          "description": "Gets or sets the oracle database user name."
+        },
+        "dbPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Gets or sets the oracle database password.",
+          "x-ms-secret": true
+        },
+        "dbPasswordUri": {
+          "type": "string",
+          "description": "Gets or sets the key vault URI to secret with the database password."
+        },
+        "sapSid": {
+          "type": "string",
+          "description": "Gets or sets the SAP System Identifier"
+        },
+        "sslPreference": {
+          "$ref": "#/definitions/SslPreference",
+          "description": "Gets or sets certificate preference if secure communication is enabled."
+        },
+        "sslCertificateUri": {
+          "type": "string",
+          "description": "Gets or sets the blob URI to SSL certificate for the Oracle Database."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Oracle"
     },
     "PrometheusHaClusterProviderInstanceProperties": {
       "type": "object",
