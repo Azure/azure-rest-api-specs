@@ -915,7 +915,7 @@ interface ConversationalAnalysisAuthoring {
        * The exported model info.
        */
       @body
-      body: ConversationalAnalysisAuthoringExportedModelOptions;
+      body: ExportedModelOptions;
     },
     AcceptedResponse,
     {},

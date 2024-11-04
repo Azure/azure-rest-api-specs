@@ -378,7 +378,7 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-@clientName("CreateProjectOptions", "csharp")
+@clientName("CreateProjectConfig", "csharp")
 model ConversationalAnalysisAuthoringCreateProjectOptions {
   /**
    * Represents the project kind.
@@ -421,7 +421,7 @@ model ConversationalAnalysisAuthoringCreateProjectOptions {
  * Represents the options for authorizing a project copy to the current Azure resource.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CopyAuthorizationOptions", "csharp")
+@clientName("CopyAuthorizationConfig", "csharp")
 model ConversationalAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
@@ -444,7 +444,7 @@ model ConversationalAnalysisAuthoringCopyAuthorizationOptions {
  * resource.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CopyProjectOptions", "csharp")
+@clientName("CopyProjectConfig", "csharp")
 model ConversationalAnalysisAuthoringCopyProjectOptions {
   /**
    * Represents the project kind.
@@ -519,7 +519,7 @@ model ConversationalAnalysisAuthoringExportedProjectAssets {
 /**
  * Represents the options for starting a new training job.
  */
-@clientName("TrainingJobOptions", "csharp")
+@clientName("TrainingJobConfig", "csharp")
 model ConversationalAnalysisAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
@@ -548,7 +548,7 @@ model ConversationalAnalysisAuthoringTrainingJobOptions {
 /**
  * Represents the options used running the evaluation.
  */
-@clientName("EvaluationOptions", "csharp")
+@clientName("EvaluationConfig", "csharp")
 model ConversationalAnalysisAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to
@@ -719,7 +719,7 @@ model ConversationalAnalysisAuthoringDeploymentResource {
 /**
  * Represents the options for creating or updating a project deployment.
  */
-@clientName("CreateDeploymentOptions", "csharp")
+@clientName("CreateDeploymentConfig", "csharp")
 model ConversationalAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
@@ -738,7 +738,7 @@ model ConversationalAnalysisAuthoringCreateDeploymentOptions {
 /**
  * Represents the options for deleting a project deployment.
  */
-@clientName("DeleteDeploymentOptions", "csharp")
+@clientName("DeleteDeploymentConfig", "csharp")
 model ConversationalAnalysisAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from.
@@ -783,7 +783,7 @@ model ConversationalAnalysisAuthoringSwapDeploymentsJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
-@clientName("SwapDeploymentsOptions", "csharp")
+@clientName("SwapDeploymentsConfig", "csharp")
 model ConversationalAnalysisAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
@@ -1319,7 +1319,7 @@ model ConversationalAnalysisAuthoringAssignedDeploymentResource {
  * Represents the options for assigning Azure resources to a project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("AssignDeploymentResourcesOptions", "csharp")
+@clientName("AssignDeploymentResourcesConfig", "csharp")
 model ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
@@ -1352,7 +1352,7 @@ model ConversationalAnalysisAuthoringResourceMetadata {
  * Represents the options to unassign Azure resources from a project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("UnassignDeploymentResourcesOptions", "csharp")
+@clientName("UnassignDeploymentResourcesConfig", "csharp")
 model ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
@@ -1905,7 +1905,7 @@ model ConversationalAnalysisAuthoringExportedConversationOrchestration {
 /**
  * Represents the orchestration options for a Conversational project target.
  */
-@clientName("ExportedConversationOrchestrationOptions", "csharp")
+@clientName("ExportedConversationOrchestrationConfig", "csharp")
 model ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions
   extends ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   /**
@@ -1923,7 +1923,7 @@ model ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions
  * Represents the options used to define the orchestration behavior of an intent.
  */
 @discriminator("targetProjectKind")
-@clientName("ExportedOrchestrationOptions", "csharp")
+@clientName("ExportedOrchestrationConfig", "csharp")
 model ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   targetProjectKind: OrchestrationTargetProjectKind;
 }
@@ -1952,7 +1952,7 @@ model ConversationalAnalysisAuthoringExportedLuisOrchestration {
 /**
  * Represents the orchestration options for a LUIS application target.
  */
-@clientName("ExportedLuisOrchestrationOptions", "csharp")
+@clientName("ExportedLuisOrchestrationConfig", "csharp")
 model ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions
   extends ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   /**
@@ -1980,7 +1980,7 @@ model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration {
 /**
  * Represents the orchestration options for a Question Answering project target.
  */
-@clientName("ExportedQuestionAnsweringOrchestrationOptions", "csharp")
+@clientName("ExportedQuestionAnsweringOrchestrationConfig", "csharp")
 model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions
   extends ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   /**
@@ -2130,9 +2130,9 @@ model ConversationalAnalysisAuthoringModelFile {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-@clientName("ExportedModelOptions")
+@clientName("ExportedModelConfig", "csharp")
 @added(Versions.v2024_11_15_preview)
-model ConversationalAnalysisAuthoringExportedModelOptions {
+model ExportedModelOptions {
   /**
    * The trained model label.
    */
