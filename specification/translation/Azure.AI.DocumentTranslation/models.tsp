@@ -278,7 +278,7 @@ model DocumentStatus {
     This contains an outer error with error code, message, details, target and an
     inner error with more descriptive details.
     """)
-  error?: ErrorResponse;
+  error?: Error;
 
   @doc("Progress of the translation if available")
   @maxValue(1)
