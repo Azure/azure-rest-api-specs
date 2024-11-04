@@ -771,13 +771,3 @@ interface TextAnalysisAuthoring {
       StandardListQueryParameters>
   >;
 }
-
-@@clientName(TextAnalysisAuthoring.getAssignDeploymentResourcesStatus,
-  "GetAssignDeploymentResourcesStatusResult",
-  "csharp"
-);
-
-@@clientName(TextAnalysisAuthoring.getCopyProjectStatus,
-  "GetCopyProjectStatusResult",
-  "csharp"
-);
