@@ -26,18 +26,6 @@ model ToolResources {
   @encodedName("application/json", "file_search")
   fileSearch?: FileSearchToolResource;
 
-  /** Resources to be used by the `bing_grounding` tool consisting of connection IDs. */
-  @encodedName("application/json", "bing_grounding")
-  bingGrounding?: ConnectionListResource;
-
-  /** Resources to be used by the `microsoft_fabric` tool consisting of connection IDs. */
-  @encodedName("application/json", "microsoft_fabric")
-  microsoftFabric?: ConnectionListResource;
-
-  /** Resources to be used by the `sharepoint` tool consisting of connection IDs. */
-  @encodedName("application/json", "sharepoint")
-  sharePoint?: ConnectionListResource;
-
   /** Resources to be used by the `azure_ai_search` tool consisting of index IDs and names. */
   @encodedName("application/json", "azure_ai_search")
   azureAISearch?: AzureAISearchResource;
@@ -67,30 +55,6 @@ model FileSearchToolResource {
   @maxItems(1)
   @encodedName("application/json", "vector_store_ids")
   vectorStoreIds?: string[];
-}
-
-/**
- * A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint` tools.
- */
-model ConnectionListResource {
-  /**
-   * The connections attached to this agent. There can be a maximum of 1 connection
-   * resource attached to the agent.
-   */
-  @maxItems(1)
-  @encodedName("application/json", "connections")
-  connectionList?: ConnectionResource[];
-}
-
-/**
- * A connection resource.
- */
-model ConnectionResource {
-  /**
-   * A connection in a ConnectionListResource attached to this agent.
-   */
-  @encodedName("application/json", "connection_id")
-  connectionId: string;
 }
 
 /**
@@ -144,24 +108,10 @@ model CreateToolResourcesOptions {
   @encodedName("application/json", "file_search")
   fileSearch?: CreateFileSearchToolResourceOptions;
 
-  /** A list of connections to be used by the `bing_grounding` tool consisting of connection IDs. */
-  @encodedName("application/json", "bing_grounding")
-  bingGrounding?: ConnectionListResourceOptions;
-
-  /** A list of connections to be used by the `microsoft_fabric` tool consisting of connection IDs. */
-  @encodedName("application/json", "microsoft_fabric")
-  microsoftFabric?: ConnectionListResourceOptions;
-
-  /** A list of connections to be used by the `sharepoint` tool consisting of connection IDs. */
-  @encodedName("application/json", "sharepoint")
-  sharePoint?: ConnectionListResourceOptions;
-
   /** Resources to be used by the `azure_ai_search` tool consisting of index IDs and names. */
   @encodedName("application/json", "azure_ai_search")
   azureAISearch?: AzureAISearchToolResourceOptions;
 }
-
-alias ConnectionListResourceOptions = ConnectionListResource;
 
 alias AzureAISearchToolResourceOptions = AzureAISearchResource;
 
@@ -231,18 +181,6 @@ model UpdateToolResourcesOptions {
   /** Overrides the vector store attached to this agent. There can be a maximum of 1 vector store attached to the agent. */
   @encodedName("application/json", "file_search")
   fileSearch?: UpdateFileSearchToolResourceOptions;
-
-  /** Overrides the list of connections to be used by the `bing_grounding` tool consisting of connection IDs. */
-  @encodedName("application/json", "bing_grounding")
-  bingGrounding?: ConnectionListResourceOptions;
-
-  /** Overrides the list of connections to be used by the `microsoft_fabric` tool consisting of connection IDs. */
-  @encodedName("application/json", "microsoft_fabric")
-  microsoftFabric?: ConnectionListResourceOptions;
-
-  /** Overrides the list of connections to be used by the `sharepoint` tool consisting of connection IDs. */
-  @encodedName("application/json", "sharepoint")
-  sharePoint?: ConnectionListResourceOptions;
 
   /** Overrides the resources to be used by the `azure_ai_search` tool consisting of index IDs and names. */
   @encodedName("application/json", "azure_ai_search")

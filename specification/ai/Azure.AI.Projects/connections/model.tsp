@@ -14,8 +14,26 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
+@doc("Response from the Workspace - Get operation")
+model GetWorkspaceResponse {
+  @doc("A unique identifier for the resource")
+  id: string;
+
+  @doc("The name of the resource")
+  name: string;
+
+  @doc("The properties of the resource")
+  properties: WorkspaceProperties;
+}
+
+@doc("workspace properties")
+model WorkspaceProperties {
+  @doc("Authentication type of the connection target")
+  applicationInsights: string;
+}
+
 @doc("Response from the listSecrets operation")
-model ConnectionsListSecretsResponse {
+model GetConnectionResponse {
   @doc("A unique identifier for the connection")
   id: string;
 
@@ -23,19 +41,19 @@ model ConnectionsListSecretsResponse {
   name: string;
 
   @doc("The properties of the resource")
-  properties: ConnectionProperties;
+  properties: InternalConnectionProperties;
 }
 
 @doc("Response from the list operation")
-model ConnectionsListResponse {
+model ListConnectionsResponse {
   @doc("A list of connection list secrets")
-  value: ConnectionsListSecretsResponse[];
+  value: GetConnectionResponse[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("Connection properties")
 @discriminator("authType")
-model ConnectionProperties {
+model InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType;
 }
@@ -54,7 +72,8 @@ enum AuthenticationType {
 }
 
 @doc("Connection properties for connections with API key authentication")
-model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
+model InternalConnectionPropertiesApiKeyAuth
+  extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.apiKey;
 
@@ -73,7 +92,7 @@ model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)")
-model ConnectionPropertiesAADAuth extends ConnectionProperties {
+model InternalConnectionPropertiesAADAuth extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.AAD;
 
@@ -86,7 +105,7 @@ model ConnectionPropertiesAADAuth extends ConnectionProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Connection properties for connections with SAS authentication")
-model ConnectionPropertiesSASAuth extends ConnectionProperties {
+model InternalConnectionPropertiesSASAuth extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.SAS;
 
@@ -117,17 +136,20 @@ model CredentialsSASAuth {
 #suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("The Type (or category) of the connection")
 enum ConnectionType {
-  @doc("Azure OpenAI service")
+  @doc("Azure OpenAI Service")
   AzureOpenAI: "AzureOpenAI", //TODO: In Python this results in .AZURE_OPEN_AI. How do I make it .AZURE_OPENAI?
 
-  @doc("Serverless API service")
+  @doc("Serverless API Service")
   Serverless: "Serverless",
 
   @doc("Azure Blob Storage")
   AzureBlobStorage: "AzureBlob",
 
   @doc("Azure AI Services")
-  AIServices: "AIServices",
+  AzureAIServices: "AIServices",
+
+  @doc("Azure AI Search")
+  AzureAISearch: "CognitiveSearch",
 }
 
 /*

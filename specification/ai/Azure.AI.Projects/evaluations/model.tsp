@@ -194,12 +194,6 @@ model RecurrenceSchedule {
   monthDays?: int32[];
 }
 
-@doc("SamplingStrategy Definition")
-model SamplingStrategy {
-  @doc("Sampling rate")
-  rate: float32;
-}
-
 @doc("Evaluation Schedule Definition")
 // NoteNote: I modeled ScheduledEvaluation as a type of Evaluation. But can also be modeled as a separate Schedule entity. We can discuss
 @resource("schedules")
@@ -239,9 +233,6 @@ model EvaluationSchedule {
 
   @doc("Trigger for the evaluation.")
   trigger: Trigger;
-
-  @doc("Sampling strategy for the evaluation.")
-  samplingStrategy: SamplingStrategy;
 }
 
 // Define the response model with status code 201
