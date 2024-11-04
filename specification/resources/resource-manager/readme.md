@@ -49,6 +49,14 @@ tag: package-policy-2024-05-stable
 tag: package-databoundaries-2024-08
 ```
 
+``` yaml $(package-deleteoptions)
+tag: package-deleteoptions-2024-10
+```
+
+``` yaml $(package-deletedresources)
+tag: package-deletedresources-2024-10
+```
+
 ``` yaml $(package-resources)
 tag: package-resources-2024-03
 ```
@@ -318,6 +326,24 @@ These settings apply only when `--tag=package-databoundaries-2024-08` is specifi
 ``` yaml $(tag) == 'package-databoundaries-2024-08'
 input-file:
   - Microsoft.Resources/stable/2024-08-01/dataBoundaries.json
+```
+
+### Tag: package-deleteoptions-2024-10
+
+These settings apply only when `--tag=package-deleteoptions-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-deleteoptions-2024-10'
+input-file:
+  - Microsoft.Resources/preview/2024-10-01-preview/deleteoptions.json
+```
+
+### Tag: package-deletedresources-2024-10
+
+These settings apply only when `--tag=package-deletedresources-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-deletedresources-2024-10'
+input-file:
+  - Microsoft.Resources/preview/2024-10-01-preview/deletedresources.json
 ```
 
 ### Tag: package-changes-2022-05
