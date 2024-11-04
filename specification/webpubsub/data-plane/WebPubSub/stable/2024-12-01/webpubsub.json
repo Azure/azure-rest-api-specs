@@ -77,7 +77,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "default": {
             "description": "Error response",
@@ -249,7 +249,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ClientTokenResponse"
             }
@@ -316,7 +316,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "default": {
             "description": "Error response",
@@ -529,7 +529,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "404": {
             "description": "Not Found"
@@ -732,7 +732,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "404": {
             "description": "Not Found"
@@ -935,6 +935,96 @@
         }
       }
     },
+    "/api/hubs/{hub}/groups/{group}/connections": {
+      "get": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "List connections in a group.",
+        "operationId": "WebPubSub_ListConnectionsInGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "group",
+            "description": "Target group name, whose length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The maximum number of connections to include in a single response. It should be between 1 and 200.",
+            "type": "integer",
+            "format": "int32",
+            "default": 200,
+            "maximum": 200,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The maximum number of connections to return. If the value is not set, then all the connections in a group are returned.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "continuationToken",
+            "description": "A token that allows the client to retrieve the next page of results. This parameter is provided by the service in the response of a previous request when there are additional results to be fetched. Clients should include the continuationToken in the next request to receive the subsequent page of data. If this parameter is omitted, the server will return the first page of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GroupMemberPagedValues"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ListConnectionsInGroup": {
+            "$ref": "./examples/WebPubSub_ListConnectionsInGroup.json"
+          }
+        }
+      }
+    },
     "/api/hubs/{hub}/groups/{group}/connections/{connectionId}": {
       "delete": {
         "tags": [
@@ -1050,7 +1140,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "default": {
             "description": "Error response",
@@ -1207,7 +1297,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "404": {
             "description": "Not Found"
@@ -1286,7 +1376,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "default": {
             "description": "Error response",
@@ -1343,7 +1433,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "404": {
             "description": "Not Found"
@@ -1707,7 +1797,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "default": {
             "description": "Error response",
@@ -1747,7 +1837,8 @@
           "description": "An OData filter which target connections satisfy",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ClientTokenResponse": {
       "description": "The response object containing the token for the client",
@@ -1757,7 +1848,8 @@
           "description": "The token value for the WebSocket client to connect to the service",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ErrorDetail": {
       "description": "The error object.",
@@ -1785,7 +1877,48 @@
         "inner": {
           "$ref": "#/definitions/InnerError"
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "GroupMember": {
+      "required": [
+        "connectionId"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionId": {
+          "description": "A unique identifier of a connection.",
+          "type": "string",
+          "example": "connection1"
+        },
+        "userId": {
+          "description": "The user ID of the connection. A user can have multiple connections.",
+          "type": "string",
+          "example": "user1"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GroupMemberPagedValues": {
+      "description": "Represents a page of elements as a LIST REST API result.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupMember"
+          }
+        },
+        "nextLink": {
+          "format": "uri",
+          "description": "An absolute URL that the client can GET in order to retrieve the next page of the collection.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "InnerError": {
       "type": "object",
@@ -1797,7 +1930,8 @@
         "inner": {
           "$ref": "#/definitions/InnerError"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "RemoveFromGroupsRequest": {
       "description": "The request object containing targets groups and a connection filter",
@@ -1814,7 +1948,8 @@
           "description": "An OData filter which target connections satisfy",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "x-ms-parameterized-host": {
@@ -1834,4 +1969,3 @@
     ]
   }
 }
-
