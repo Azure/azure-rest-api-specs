@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-edgesites
-namespace: azure.mgmt.edgesites
+package-name: azure-mgmt-sitemanager
+namespace: azure.mgmt.sitemanager
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/edgesites/azure-mgmt-edgesites/azure/mgmt/edgesites
+output-folder: $(python-sdks-folder)/sitemanager/azure-mgmt-sitemanager/azure/mgmt/sitemanager
 ```

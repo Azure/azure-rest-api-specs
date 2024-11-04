@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-edgesites"
-  output-folder: "$(typescript-sdks-folder)/sdk/edgesites/arm-edgesites"
+  package-name: "@azure/arm-sitemanager"
+  output-folder: "$(typescript-sdks-folder)/sdk/sitemanager/arm-sitemanager"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
