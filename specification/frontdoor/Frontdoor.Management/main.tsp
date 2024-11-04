@@ -5,3 +5,4 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./resources/virtualmachine.tsp";
+import "./resources/publicipaddress.tsp";

@@ -40,5 +40,6 @@ interface ProposalResources {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ProposalResource>;
   update is ArmResourcePatchSync<ProposalResource, ProposalResourceProperties>;
   delete is ArmResourceDeleteSync<ProposalResource>;
-  listByScope is ArmResourceListByParent<ProposalResource>;
+  listByResourceGroup is ArmResourceListByParent<ProposalResource>;
+  listBySubscription is ArmListBySubscription<ProposalResource>;
 }
