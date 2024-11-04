@@ -25,38 +25,45 @@ model VirtualMachine
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   plan?: Plan;
 
   /**
    * The virtual machine child extension resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   resources?: VirtualMachineExtension[];
 
   /**
    * The identity of the virtual machine, if configured.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   identity?: VirtualMachineIdentity;
 
   /**
    * The virtual machine zones.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   zones?: string[];
 
   /**
    * The extended location of the Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   extendedLocation?: ExtendedLocation;
 
   /**
    * ManagedBy is set to Virtual Machine Scale Set(VMSS) flex ARM resourceID, if the VM is part of the VMSS. This property is used by platform for internal resource group delete optimization.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   managedBy?: string;
 
   /**
    * Etag is property returned in Create/Update/Get response of the VM, so that customer can supply it in the header to ensure optimistic updates.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   etag?: string;
 }
@@ -80,6 +87,7 @@ interface VirtualMachines {
   /**
    * The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     VirtualMachine,
     Parameters = {
@@ -94,7 +102,8 @@ interface VirtualMachines {
        */
       @header("If-None-Match")
       IfNoneMatch?: string;
-    }
+    },
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -116,7 +125,10 @@ interface VirtualMachines {
        */
       @header
       IfNoneMatch?: string;
-    }
+    },
+    Response = ArmResponse<VirtualMachine> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -217,7 +229,7 @@ interface VirtualMachines {
   convertToManagedDisks is ComputeResourceActionAsync<
     VirtualMachine,
     void,
-    void
+    Response = OkResponse
   >;
 
   /**
@@ -226,7 +238,7 @@ interface VirtualMachines {
   deallocate is ComputeResourceActionAsync<
     VirtualMachine,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * Optional parameter to hibernate a virtual machine.
@@ -239,7 +251,7 @@ interface VirtualMachines {
   /**
    * Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource). For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image).
    */
-  generalize is ComputeResourceActionSync<VirtualMachine, void, void>;
+  generalize is ComputeResourceActionSync<VirtualMachine, void, OkResponse>;
 
   /**
    * Installs patches on the VM.
@@ -284,12 +296,12 @@ interface VirtualMachines {
   /**
    * The operation to reapply a virtual machine's state.
    */
-  reapply is ComputeResourceActionAsync<VirtualMachine, void, void>;
+  reapply is ComputeResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * Shuts down the virtual machine, moves it to a new node, and powers it back on.
    */
-  redeploy is ComputeResourceActionAsync<VirtualMachine, void, void>;
+  redeploy is ComputeResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * Reimages (upgrade the operating system) a virtual machine which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. NOTE: The retaining of old OS disk depends on the value of deleteOption of OS disk. If deleteOption is detach, the old OS disk will be preserved after reimage. If deleteOption is delete, the old OS disk will be deleted after reimage. The deleteOption of the OS disk should be updated accordingly before performing the reimage.
@@ -297,13 +309,13 @@ interface VirtualMachines {
   reimage is ComputeResourceActionAsync<
     VirtualMachine,
     VirtualMachineReimageParameters,
-    void
+    NoContentResponse
   >;
 
   /**
    * The operation to restart a virtual machine.
    */
-  restart is ComputeResourceActionAsync<VirtualMachine, void, void>;
+  restart is ComputeResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.
@@ -311,7 +323,9 @@ interface VirtualMachines {
   retrieveBootDiagnosticsData is ComputeResourceActionSync<
     VirtualMachine,
     void,
-    RetrieveBootDiagnosticsDataResult,
+    RetrieveBootDiagnosticsDataResult &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
@@ -324,7 +338,13 @@ interface VirtualMachines {
   /**
    * The operation to simulate the eviction of spot virtual machine.
    */
-  simulateEviction is ComputeResourceActionSync<VirtualMachine, void, void>;
+  simulateEviction is ComputeResourceActionSync<
+    VirtualMachine,
+    void,
+    NoContentResponse &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to start a virtual machine.
@@ -335,6 +355,7 @@ interface VirtualMachines {
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
    */
   @get
+  @action("vmSizes")
   listAvailableSizes is ComputeResourceActionSync<
     VirtualMachine,
     void,

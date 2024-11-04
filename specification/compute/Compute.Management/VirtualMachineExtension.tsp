@@ -52,7 +52,8 @@ interface VirtualMachineExtensions {
   @parameterVisibility
   update is ComputeCustomPatchAsync<
     VirtualMachineExtension,
-    VirtualMachineExtensionUpdate
+    VirtualMachineExtensionUpdate,
+    Response = ArmResponse<VirtualMachineExtension>
   >;
 
   /**

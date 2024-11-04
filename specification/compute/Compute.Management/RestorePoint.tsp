@@ -44,7 +44,14 @@ interface RestorePoints {
   /**
    * The operation to create the restore point. Updating properties of an existing restore point is not allowed
    */
-  create is ComputeResourceCreateOrReplaceAsync<RestorePoint>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"
+  create is ComputeResourceCreateOrReplaceAsync<
+    RestorePoint,
+    Response = ArmResourceCreatedResponse<
+      RestorePoint,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   /**
    * The operation to delete the restore point.

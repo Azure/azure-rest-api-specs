@@ -38,7 +38,11 @@ interface AvailabilitySets {
   /**
    * Create or update an availability set.
    */
-  createOrUpdate is ComputeResourceCreateOrReplaceSync<AvailabilitySet>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"
+  createOrUpdate is ComputeResourceCreateOrReplaceSync<
+    AvailabilitySet,
+    Response = ArmResourceUpdatedResponse<AvailabilitySet>
+  >;
 
   /**
    * Update an availability set.

@@ -49,13 +49,19 @@ interface DedicatedHosts {
   /**
    * Create or update a dedicated host .
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
+  @Azure.Core.useFinalStateVia("location")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<DedicatedHost>;
 
   /**
    * Update a dedicated host .
    */
   @parameterVisibility
-  update is ComputeCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;
+  update is ComputeCustomPatchAsync<
+    DedicatedHost,
+    DedicatedHostUpdate,
+    Response = ArmResponse<DedicatedHost>
+  >;
 
   /**
    * Delete a dedicated host.
@@ -91,7 +97,11 @@ interface DedicatedHosts {
   /**
    * Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.
    */
-  restart is ComputeResourceActionAsync<DedicatedHost, void, void>;
+  restart is ComputeResourceActionAsync<
+    DedicatedHost,
+    void,
+    Response = OkResponse
+  >;
 }
 
 @@doc(DedicatedHost.name, "The name of the dedicated host.");

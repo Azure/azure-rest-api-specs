@@ -54,12 +54,15 @@ interface CapacityReservations {
   /**
    * The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
+  @Azure.Core.useFinalStateVia("location")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<CapacityReservation>;
 
   /**
    * The operation to update a capacity reservation.
    */
   @parameterVisibility
+  @Azure.Core.useFinalStateVia("location")
   update is ComputeCustomPatchAsync<
     CapacityReservation,
     CapacityReservationUpdate
@@ -71,6 +74,7 @@ interface CapacityReservations {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("location")
   delete is ComputeResourceDeleteAsync<CapacityReservation>;
 
   /**

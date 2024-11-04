@@ -62,7 +62,11 @@ interface ProximityPlacementGroups {
    * Delete a proximity placement group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ComputeResourceDeleteSync<ProximityPlacementGroup>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
+  delete is ComputeResourceDeleteSync<
+    ProximityPlacementGroup,
+    Response = ArmDeletedResponse
+  >;
 
   /**
    * Lists all proximity placement groups in a resource group.
