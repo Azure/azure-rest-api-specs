@@ -314,6 +314,7 @@ model ErrorResponse {
 /**
  * The error object.
  */
+@clientName("AuthoringConversationsError", "csharp")
 model Error {
   /**
    * One of a server-defined set of error codes.
@@ -626,6 +627,7 @@ model ConversationalAnalysisAuthoringJobState {
 /**
  * Represents a warning that was encountered while executing the request.
  */
+@clientName("AuthoringConversationsWarning", "csharp")
 model Warning {
   /**
    * The warning code.
