@@ -22,6 +22,10 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2023-12-01-preview`,
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2024-11-01-preview`,
 }
 
 @doc("A Capacity resource")
@@ -51,6 +55,16 @@ model CapacityProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  @doc("The status of the resource's overage limit.")
+  @added(Versions.`2024-11-01-preview`)
+  overageState?: OverageState;
+
+  @doc("Overage limit if overageState is Limited.")
+  @minValue(1)
+  @maxValue(999)
+  @added(Versions.`2024-11-01-preview`)
+  overageAmount?: int64;
 }
 
 @doc("Enum to represent Allowed or NotAllowed")
@@ -92,6 +106,21 @@ union ProvisioningState {
 
   @doc("The resource create request has been accepted")
   Accepted: "Accepted",
+}
+
+@doc("The overage state of a resource.")
+@added(Versions.`2024-11-01-preview`)
+union OverageState {
+  string,
+
+  @doc("The resource has no overage enabled.")
+  None: "None",
+
+  @doc("The resource has specified a limited amount of overage.")
+  Limited: "Limited",
+
+  @doc("The resource has unlimted overage.")
+  Unlimited: "Unlimited",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
