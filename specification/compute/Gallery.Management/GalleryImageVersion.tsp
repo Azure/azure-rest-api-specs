@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -6,9 +7,10 @@ import "./models.tsp";
 import "./GalleryImage.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Compute;
 /**
@@ -87,4 +89,10 @@ interface GalleryImageVersions {
 );
 @@doc(GalleryImageVersions.update::parameters.properties,
   "Parameters supplied to the update gallery image version operation."
+);
+@@clientName(GalleryImageVersions.update::parameters.properties,
+  "galleryImageVersion"
+);
+@@clientName(GalleryImageVersions.createOrUpdate::parameters.resource,
+  "galleryImageVersion"
 );
