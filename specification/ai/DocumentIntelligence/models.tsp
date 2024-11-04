@@ -1005,7 +1005,7 @@ model DocumentLanguage {
     Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\")
     or BCP 47 language tag (ex. \"zh-Hans\").
     """)
-  locale: string;
+  locale: int64;
 
   @doc("""
     Location of the text elements in the concatenated content the language applies
