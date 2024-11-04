@@ -6,9 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-commonedgesitemanageroperations"
-  output-folder: "$(typescript-sdks-folder)/sdk/commonedgesitemanageroperations/arm-commonedgesitemanageroperations"
-  payload-flattening-threshold: 1
-  clear-output-folder: true
+  package-name: "@azure/arm-migrationassessment"
+  output-folder: "$(typescript-sdks-folder)/sdk/migrate/arm-migrationassessment"
   generate-metadata: true
 ```
