@@ -42,7 +42,7 @@ module.exports = async ({ github, context, core }) => {
   const artifactNames = artifacts.data.artifacts.map((a) => a.name);
 
   for (const artifactName of artifactNames) {
-    // If artifactName has format `key=value`, add the key and value as env vars.
+    // If artifactName has format "key=value", add the key and value as env vars.
     // If artifactName does not contain "=", ignore.
     // If artifactName contains multiple "=", the key is everything before the first "=",
     // and the value is everything else.
