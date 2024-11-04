@@ -114,7 +114,8 @@ model OperatorApiConnectionProperties {
    * The purpose for which the Application will use the API
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
-  purpose: Purpose;
+  @maxItems(1)
+  purposes: Purpose[];
 }
 
 /**

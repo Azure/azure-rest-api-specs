@@ -1245,15 +1245,19 @@
           "description": "The status of the OperatorApiConnection resource.",
           "readOnly": true
         },
-        "purpose": {
-          "$ref": "#/definitions/Purpose",
-          "description": "The purpose for which the Application will use the API"
+        "purposes": {
+          "type": "array",
+          "description": "The purpose for which the Application will use the API",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Purpose"
+          }
         }
       },
       "required": [
         "operatorApiPlanId",
         "gatewayId",
-        "purpose"
+        "purposes"
       ]
     },
     "OperatorApiConnectionUpdate": {
@@ -1304,9 +1308,13 @@
             "create"
           ]
         },
-        "purpose": {
-          "$ref": "#/definitions/Purpose",
-          "description": "The purpose for which the Application will use the API"
+        "purposes": {
+          "type": "array",
+          "description": "The purpose for which the Application will use the API",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Purpose"
+          }
         }
       }
     },
