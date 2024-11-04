@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Nginx.NginxPlus",
-    "version": "2024-09-01-preview"
+    "version": "2024-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -911,6 +911,9 @@
         "x-ms-examples": {
           "Deployments_Update": {
             "$ref": "./examples/Deployments_Update.json"
+          },
+          "Deployments_UpdateSubnet": {
+            "$ref": "./examples/Deployments_UpdateSubnet.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1055,7 +1058,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "List all operations provided by Nginx.NginxPlus for the 2024-06-01-preview api version.",
+        "summary": "List all operations provided by Nginx.NginxPlus for the 2024-11-01-preview api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -1739,6 +1742,9 @@
         "userProfile": {
           "$ref": "#/definitions/NginxDeploymentUserProfile"
         },
+        "networkProfile": {
+          "$ref": "#/definitions/NginxNetworkProfile"
+        },
         "autoUpgradeProfile": {
           "$ref": "#/definitions/AutoUpgradeProfile"
         },
@@ -1989,6 +1995,12 @@
               "items": {
                 "$ref": "#/definitions/AnalysisDiagnostic"
               }
+            },
+            "diagnostics": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnosticItem"
+              }
             }
           }
         }
@@ -2037,6 +2049,68 @@
         }
       }
     },
+    "DiagnosticItem": {
+      "type": "object",
+      "description": "A config diagnostic object found during the analysis of an NGINX configuration that can be a warning or recommendation.",
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule",
+        "level"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the error"
+        },
+        "directive": {
+          "type": "string",
+          "example": "worker_processes"
+        },
+        "description": {
+          "type": "string",
+          "example": "Directives outside the http context are not allowed"
+        },
+        "file": {
+          "type": "string",
+          "description": "the filepath of the most relevant config file",
+          "example": "nginx.conf"
+        },
+        "line": {
+          "type": "number",
+          "example": 2
+        },
+        "message": {
+          "type": "string",
+          "example": "You are not allowed to set the worker_processes directive"
+        },
+        "rule": {
+          "type": "string",
+          "example": "nginx-azure-load-balancer-allowed-directives"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Info",
+            "Warning"
+          ],
+          "description": "Warning or Info",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "level"
+          },
+          "example": "Warning"
+        },
+        "category": {
+          "type": "string",
+          "description": "category of warning",
+          "example": "Security"
+        }
+      }
+    },
     "WebApplicationFirewallSettings": {
       "type": "object",
       "description": "Settings for the NGINX App Protect Web Application Firewall (WAF)",
@@ -2050,7 +2124,7 @@
           "description": "The activation state of the WAF. Use 'Enabled' to enable the WAF and 'Disabled' to disable it.",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "WebApplicationFirewallSettings"
+            "name": "activationState"
           }
         }
       }

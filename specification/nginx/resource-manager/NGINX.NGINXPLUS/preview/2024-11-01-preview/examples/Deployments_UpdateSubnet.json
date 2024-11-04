@@ -5,46 +5,16 @@
     "resourceGroupName": "myResourceGroup",
     "deploymentName": "myDeployment",
     "requestBody": {
-      "name": "myDeployment",
       "tags": {
         "Environment": "Dev"
       },
       "properties": {
         "networkProfile": {
-          "frontEndIPConfiguration": {
-            "publicIPAddresses": [
-              {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
-              }
-            ],
-            "privateIPAddresses": [
-              {
-                "privateIPAddress": "1.1.1.1",
-                "privateIPAllocationMethod": "Static",
-                "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
-              }
-            ]
-          },
           "networkInterfaceConfiguration": {
-            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
-          }
-        },
-        "userProfile": {
-          "preferredEmail": "example@example.email"
-        },
-        "scalingProperties": {
-          "capacity": 10
-        },
-        "autoUpgradeProfile": {
-          "upgradeChannel": "stable"
-        },
-        "nginxAppProtect": {
-          "webApplicationFirewallSettings": {
-            "activationState": "Enabled"
+            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet2/subnets/mySubnet"
           }
         }
-      },
-      "location": "West US"
+      }
     }
   },
   "responses": {
@@ -68,17 +38,14 @@
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
                 }
               ],
-              "privateIPAddresses": [
-                {
-                  "privateIPAddress": "1.1.1.1",
-                  "privateIPAllocationMethod": "Static",
-                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
-                }
-              ]
+              "privateIPAddresses": []
             },
             "networkInterfaceConfiguration": {
-              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet2/subnets/mySubnet"
             }
+          },
+          "userProfile": {
+            "preferredEmail": "example@example.email"
           },
           "scalingProperties": {
             "capacity": 10
@@ -125,7 +92,6 @@
         "properties": {
           "provisioningState": "Accepted",
           "nginxVersion": "nginx-1.19.6",
-          "ipAddress": "1.1.1.1",
           "networkProfile": {
             "frontEndIPConfiguration": {
               "publicIPAddresses": [
@@ -133,16 +99,10 @@
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
                 }
               ],
-              "privateIPAddresses": [
-                {
-                  "privateIPAddress": "1.1.1.1",
-                  "privateIPAllocationMethod": "Static",
-                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
-                }
-              ]
+              "privateIPAddresses": []
             },
             "networkInterfaceConfiguration": {
-              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet2/subnets/mySubnet"
             }
           },
           "scalingProperties": {
@@ -155,7 +115,8 @@
             "webApplicationFirewallSettings": {
               "activationState": "Enabled"
             }
-          }
+          },
+          "dataplaneApiEndpoint": "mynginx-75b3bf22a555.eastus2.nginxaas.net"
         }
       }
     }
