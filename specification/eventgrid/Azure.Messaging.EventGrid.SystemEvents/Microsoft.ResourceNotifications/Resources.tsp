@@ -22,5 +22,3 @@ Microsoft.ResourceNotifications.Resources.Deleted event.
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model ResourceNotificationsResourceManagementDeletedEventData
   extends ResourceNotificationsResourceDeletedEventData {}
-
-
