@@ -23,6 +23,13 @@ model NamespaceProperties {
   @visibility("read", "create", "query", "delete")
   falconNamespace: string;
 
+  /** This is an existing namespace that manages this one and has all the same permissions for this namespace
+   *  as the current namespace itself.
+   */
+  @maxLength(26)
+  @visibility("read", "create", "query", "delete")
+  managingNamespace?: string;
+
   /** Description of the purpose of the name space */
   description: string;
 
@@ -31,7 +38,7 @@ model NamespaceProperties {
     "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
     "Must be a valid email. Will be checked for existence."
   )
-  owner: string;
+  ownerContacts: string;
 
   /** Teams IcM id so incidents can be properly routed. */
   icmPublicId: string;
@@ -43,7 +50,7 @@ model NamespaceProperties {
     "TM-[a-zA-Z0-9-]+",
     "Must start with TM- and followed by a string consisting of letters, numbers, and dashes."
   )
-  managementGroup: string;
+  adminGroup: string;
 
   /** The status of the last operation. */
   @visibility("read")

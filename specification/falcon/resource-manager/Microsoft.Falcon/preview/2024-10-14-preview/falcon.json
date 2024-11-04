@@ -473,11 +473,20 @@
             "create"
           ]
         },
+        "managingNamespace": {
+          "type": "string",
+          "description": "This is an existing namespace that manages this one and has all the same permissions for this namespace\nas the current namespace itself.",
+          "maxLength": 26,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "description": {
           "type": "string",
           "description": "Description of the purpose of the name space"
         },
-        "owner": {
+        "ownerContacts": {
           "type": "string",
           "description": "An email enable SG",
           "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
@@ -486,7 +495,7 @@
           "type": "string",
           "description": "Teams IcM id so incidents can be properly routed."
         },
-        "managementGroup": {
+        "adminGroup": {
           "type": "string",
           "description": "The PME group used to provide access and JIT to resources.\nIn the format of TM-<teamname>",
           "pattern": "TM-[a-zA-Z0-9-]+"
@@ -500,9 +509,9 @@
       "required": [
         "falconNamespace",
         "description",
-        "owner",
+        "ownerContacts",
         "icmPublicId",
-        "managementGroup"
+        "adminGroup"
       ]
     },
     "NamespacePropertiesUpdate": {
@@ -513,7 +522,7 @@
           "type": "string",
           "description": "Description of the purpose of the name space"
         },
-        "owner": {
+        "ownerContacts": {
           "type": "string",
           "description": "An email enable SG",
           "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
@@ -522,7 +531,7 @@
           "type": "string",
           "description": "Teams IcM id so incidents can be properly routed."
         },
-        "managementGroup": {
+        "adminGroup": {
           "type": "string",
           "description": "The PME group used to provide access and JIT to resources.\nIn the format of TM-<teamname>",
           "pattern": "TM-[a-zA-Z0-9-]+"
