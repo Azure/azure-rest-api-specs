@@ -884,12 +884,17 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of the error occurence"
+        },
+        "azureOperationName": {
+          "type": "string",
+          "description": "The compute operationid of the Start/Deallocate/Hibernate request"
         }
       },
       "required": [
         "errorCode",
         "errorDetails",
-        "timestamp"
+        "timestamp",
+        "azureOperationName"
       ]
     },
     "OperationErrorsResult": {
