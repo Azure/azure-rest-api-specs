@@ -102,9 +102,156 @@ openapi-type: arm
 tag: package-preview-2024-10
 ```
 
-### Composite packages
+### Custom composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-latest
+
+These settings apply only when `--tag=package-latest` is specified on the command line.
+
+``` yaml $(tag) == 'package-latest'
+input-file:
+- Microsoft.Security/preview/2015-06-01-preview/locations.json
+- Microsoft.Security/preview/2015-06-01-preview/tasks.json
+- Microsoft.Security/preview/2017-08-01-preview/compliances.json
+- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
+- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+- Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
+- Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
+- Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
+- Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
+- Microsoft.Security/preview/2022-07-01-preview/applications.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
+- Microsoft.Security/preview/2023-12-01-preview/automations.json
+- Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
+- Microsoft.Security/preview/2023-05-01-preview/healthReports.json
+- Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+- Microsoft.Security/preview/2024-10-01-preview/operations.json
+- Microsoft.Security/preview/2024-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
+- Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
+- Microsoft.Security/stable/2017-08-01/complianceResults.json
+- Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
+- Microsoft.Security/stable/2019-01-01/autoProvisioningSettings.json
+- Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
+- Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
+- Microsoft.Security/stable/2021-06-01/assessments.json
+- Microsoft.Security/stable/2022-05-01/settings.json
+- Microsoft.Security/stable/2022-01-01/alerts.json
+- Microsoft.Security/stable/2023-11-15/apiCollections.json
+- Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
+- Microsoft.Security/stable/2024-08-01/customRecommedations.json
+- Microsoft.Security/stable/2024-08-01/securityStandards.json
+- Microsoft.Security/stable/2024-08-01/standardAssignments.json
+- Microsoft.Security/stable/2024-01-01/pricings.json
+
+```
+
+### Tag: package-stable
+
+These settings apply only when `--tag=package-stable` is specified on the command line.
+
+``` yaml $(tag) == 'package-stable'
+input-file:
+- Microsoft.Security/stable/2017-08-01/complianceResults.json
+- Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
+- Microsoft.Security/stable/2019-01-01/autoProvisioningSettings.json
+- Microsoft.Security/stable/2019-01-01/workspaceSettings.json
+- Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
+- Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
+- Microsoft.Security/stable/2021-06-01/assessments.json
+- Microsoft.Security/stable/2022-05-01/settings.json
+- Microsoft.Security/stable/2022-01-01/alerts.json
+- Microsoft.Security/stable/2023-11-15/apiCollections.json
+- Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
+- Microsoft.Security/stable/2024-08-01/customRecommedations.json
+- Microsoft.Security/stable/2024-08-01/securityStandards.json
+- Microsoft.Security/stable/2024-08-01/standardAssignments.json
+- Microsoft.Security/stable/2024-04-01/securityConnectorsDevOps.json
+- Microsoft.Security/stable/2024-01-01/pricings.json
+
+```
+
+### Tag: package-preview
+
+These settings apply only when `--tag=package-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview'
+input-file:
+- Microsoft.Security/preview/2015-06-01-preview/alerts.json
+- Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
+- Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
+- Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
+- Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
+- Microsoft.Security/preview/2015-06-01-preview/locations.json
+- Microsoft.Security/preview/2015-06-01-preview/tasks.json
+- Microsoft.Security/preview/2015-06-01-preview/topologies.json
+- Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
+- Microsoft.Security/preview/2017-08-01-preview/compliances.json
+- Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
+- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
+- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
+- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
+- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+- Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
+- Microsoft.Security/preview/2019-01-01-preview/assessments.json
+- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
+- Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
+- Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
+- Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
+- Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+- Microsoft.Security/preview/2022-07-01-preview/applications.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
+- Microsoft.Security/preview/2023-12-01-preview/automations.json
+- Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
+- Microsoft.Security/preview/2023-05-01-preview/healthReports.json
+- Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+- Microsoft.Security/preview/2024-10-01-preview/operations.json
+- Microsoft.Security/preview/2024-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
+
+```
+
+### Composite packages
 
 ### Tag: package-preview-2024-10
 
