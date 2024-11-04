@@ -32,6 +32,8 @@ tag: package-preview-2024-11-01
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
+modelerfour:
+  lenient-model-deduplication: true
 
 license-header: MICROSOFT_MIT
 ```
