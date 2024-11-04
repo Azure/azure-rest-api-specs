@@ -12,13 +12,14 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Setup Node 20 and run `npm ci`
+    - name: Setup Node and run `npm ci`
       uses: ./.github/actions/setup-node-npm-ci
 
     - name: Validate Impacted Specs
       run: |
+        # Keep processing when errors are written. Nonzero exit will mark the 
+        # step as failed. 
+        $ErrorActionPreference = 'Continue'
+
         ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
-        
-        # Effectively the same as ignoreLASTEXITCODE: true in Azure DevOps
-        exit 0
       shell: pwsh
