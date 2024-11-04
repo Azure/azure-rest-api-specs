@@ -88,6 +88,8 @@ batch:
   - multiapiscript-deploymentstacks: true
   - tag: package-changes-2022-05
   - multiapiscript-changes: true
+  - tag: package-databoundaries-2024-08
+  - multiapiscript-databoundaries: true
 ```
 
 ```yaml $(multiapiscript-changes)
@@ -185,6 +187,29 @@ multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/links
 perform-load: false
 clear-output-folder: false
+```
+
+```yaml $(multiapiscript-databoundaries)
+title: DataBoundaryMgmtClient
+package-name: azure-mgmt-resource#databoundaries
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/databoundaries
+perform-load: false
+clear-output-folder: false
+```
+
+### Tag: package-databoundaries-2024-08 and python
+
+These settings apply only when `--tag=package-databoundaries-2024-08 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-databoundaries-2024-08'
+default-api-version: "2024-08-01"
+title: DataBoundaryMgmtClient
+namespace: azure.mgmt.resource.databoundaries.v2024_08_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/databoundaries/v2024_08_01
+directive:
+  - remove-operation: "Operations_List"
 ```
 
 ### Tag: package-changes-2022-05 and python
