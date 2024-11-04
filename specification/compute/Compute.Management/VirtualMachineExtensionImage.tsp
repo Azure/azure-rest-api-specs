@@ -30,7 +30,7 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a virtual machine extension image.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     VirtualMachineExtensionImage,
     Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
@@ -38,7 +38,7 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a list of virtual machine extension image types.
    */
-  listTypes is ArmResourceListByParent<
+  listTypes is ComputeResourceListByParent<
     VirtualMachineExtensionImage,
     Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;

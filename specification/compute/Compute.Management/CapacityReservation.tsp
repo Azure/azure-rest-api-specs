@@ -40,7 +40,7 @@ interface CapacityReservations {
   /**
    * The operation that retrieves information about the capacity reservation.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     CapacityReservation,
     Parameters = {
       /**
@@ -54,13 +54,19 @@ interface CapacityReservations {
   /**
    * The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CapacityReservation>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
+  @Azure.Core.useFinalStateVia("location")
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<CapacityReservation>;
 
   /**
    * The operation to update a capacity reservation.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<CapacityReservation, CapacityReservationUpdate>;
+  @Azure.Core.useFinalStateVia("location")
+  update is ComputeCustomPatchAsync<
+    CapacityReservation,
+    CapacityReservationUpdate
+  >;
 
   /**
    * The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details.
@@ -68,12 +74,13 @@ interface CapacityReservations {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<CapacityReservation>;
+  @Azure.Core.useFinalStateVia("location")
+  delete is ComputeResourceDeleteAsync<CapacityReservation>;
 
   /**
    * Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.
    */
-  listByCapacityReservationGroup is ArmResourceListByParent<
+  listByCapacityReservationGroup is ComputeResourceListByParent<
     CapacityReservation,
     Response = CapacityReservationListResult
   >;

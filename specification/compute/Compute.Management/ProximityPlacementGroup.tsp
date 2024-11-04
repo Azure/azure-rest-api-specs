@@ -33,7 +33,7 @@ interface ProximityPlacementGroups {
   /**
    * Retrieves information about a proximity placement group .
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     ProximityPlacementGroup,
     Parameters = {
       /**
@@ -47,13 +47,13 @@ interface ProximityPlacementGroups {
   /**
    * Create or update a proximity placement group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
+  createOrUpdate is ComputeResourceCreateOrReplaceSync<ProximityPlacementGroup>;
 
   /**
    * Update a proximity placement group.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<
+  update is ComputeCustomPatchSync<
     ProximityPlacementGroup,
     ProximityPlacementGroupUpdate
   >;
@@ -62,12 +62,16 @@ interface ProximityPlacementGroups {
    * Delete a proximity placement group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
+  delete is ComputeResourceDeleteSync<
+    ProximityPlacementGroup,
+    Response = ArmDeletedResponse
+  >;
 
   /**
    * Lists all proximity placement groups in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ComputeResourceListByParent<
     ProximityPlacementGroup,
     Response = ProximityPlacementGroupListResult
   >;
@@ -75,7 +79,7 @@ interface ProximityPlacementGroups {
   /**
    * Lists all proximity placement groups in a subscription.
    */
-  listBySubscription is ArmListBySubscription<
+  listBySubscription is ComputeListBySubscription<
     ProximityPlacementGroup,
     Response = ProximityPlacementGroupListResult
   >;

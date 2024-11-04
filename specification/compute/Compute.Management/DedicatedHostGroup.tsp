@@ -33,7 +33,7 @@ interface DedicatedHostGroups {
   /**
    * Retrieves information about a dedicated host group.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     DedicatedHostGroup,
     Parameters = {
       /**
@@ -47,24 +47,27 @@ interface DedicatedHostGroups {
   /**
    * Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DedicatedHostGroup>;
+  createOrUpdate is ComputeResourceCreateOrReplaceSync<DedicatedHostGroup>;
 
   /**
    * Update an dedicated host group.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<DedicatedHostGroup, DedicatedHostGroupUpdate>;
+  update is ComputeCustomPatchSync<
+    DedicatedHostGroup,
+    DedicatedHostGroupUpdate
+  >;
 
   /**
    * Delete a dedicated host group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteSync<DedicatedHostGroup>;
+  delete is ComputeResourceDeleteSync<DedicatedHostGroup>;
 
   /**
    * Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ComputeResourceListByParent<
     DedicatedHostGroup,
     Response = DedicatedHostGroupListResult
   >;
@@ -72,7 +75,7 @@ interface DedicatedHostGroups {
   /**
    * Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  listBySubscription is ArmListBySubscription<
+  listBySubscription is ComputeListBySubscription<
     DedicatedHostGroup,
     Response = DedicatedHostGroupListResult
   >;

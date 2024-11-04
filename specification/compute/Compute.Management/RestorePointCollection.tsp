@@ -28,7 +28,7 @@ interface RestorePointCollections {
   /**
    * The operation to get the restore point collection.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     RestorePointCollection,
     Parameters = {
       /**
@@ -42,13 +42,13 @@ interface RestorePointCollections {
   /**
    * The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<RestorePointCollection>;
+  createOrUpdate is ComputeResourceCreateOrReplaceSync<RestorePointCollection>;
 
   /**
    * The operation to update the restore point collection.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<
+  update is ComputeCustomPatchSync<
     RestorePointCollection,
     RestorePointCollectionUpdate
   >;
@@ -59,12 +59,12 @@ interface RestorePointCollections {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<RestorePointCollection>;
+  delete is ComputeResourceDeleteAsync<RestorePointCollection>;
 
   /**
    * Gets the list of restore point collections in a resource group.
    */
-  list is ArmResourceListByParent<
+  list is ComputeResourceListByParent<
     RestorePointCollection,
     Response = RestorePointCollectionListResult
   >;
@@ -72,7 +72,7 @@ interface RestorePointCollections {
   /**
    * Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.
    */
-  listAll is ArmListBySubscription<
+  listAll is ComputeListBySubscription<
     RestorePointCollection,
     Response = RestorePointCollectionListResult
   >;

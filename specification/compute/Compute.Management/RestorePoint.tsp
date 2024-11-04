@@ -30,7 +30,7 @@ interface RestorePoints {
   /**
    * The operation to get the restore point.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     RestorePoint,
     Parameters = {
       /**
@@ -44,7 +44,14 @@ interface RestorePoints {
   /**
    * The operation to create the restore point. Updating properties of an existing restore point is not allowed
    */
-  create is ArmResourceCreateOrReplaceAsync<RestorePoint>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"
+  create is ComputeResourceCreateOrReplaceAsync<
+    RestorePoint,
+    Response = ArmResourceCreatedResponse<
+      RestorePoint,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   /**
    * The operation to delete the restore point.
@@ -52,7 +59,7 @@ interface RestorePoints {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<RestorePoint>;
+  delete is ComputeResourceDeleteAsync<RestorePoint>;
 }
 
 @@doc(RestorePoint.name, "The name of the restore point.");

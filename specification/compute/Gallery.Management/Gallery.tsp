@@ -1,18 +1,22 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Compute;
 /**
  * Specifies information about the Shared Image Gallery that you want to create or update.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+@extension("x-ms-azure-resource", false)
 model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
   ...ResourceNameParameter<
     Resource = Gallery,
@@ -86,12 +90,17 @@ interface Galleries {
   /**
    * Update sharing profile of a gallery.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GallerySharingProfile_Update")
-  gallerySharingProfileUpdate is ArmResourceActionAsync<
+  share is ArmResourceActionAsync<
     Gallery,
     SharingUpdate,
-    SharingUpdate
+    SharingUpdate,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        @bodyRoot _: SharingUpdate;
+      }
   >;
 }
 
@@ -105,6 +114,9 @@ interface Galleries {
 @@doc(Galleries.update::parameters.properties,
   "Parameters supplied to the update Shared Image Gallery operation."
 );
-@@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
+@@doc(Galleries.share::parameters.body,
   "Parameters supplied to the update gallery sharing profile."
 );
+@@clientName(Galleries.share::parameters.body, "sharingUpdate");
+@@clientName(Galleries.update::parameters.properties, "gallery");
+@@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");

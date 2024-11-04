@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -6,9 +7,10 @@ import "./models.tsp";
 import "./Gallery.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Compute;
 /**
@@ -37,6 +39,8 @@ interface GalleryApplications {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "no-standard-operations"
+  @extension("x-ms-long-running-operation", true)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryApplication,
     Response = ArmResourceCreatedResponse<GalleryApplication> | ArmResourceUpdatedResponse<GalleryApplication> | (ArmAcceptedLroResponse & {
@@ -78,4 +82,10 @@ interface GalleryApplications {
 );
 @@doc(GalleryApplications.update::parameters.properties,
   "Parameters supplied to the update gallery Application operation."
+);
+@@clientName(GalleryApplications.update::parameters.properties,
+  "galleryApplication"
+);
+@@clientName(GalleryApplications.createOrUpdate::parameters.resource,
+  "galleryApplication"
 );
