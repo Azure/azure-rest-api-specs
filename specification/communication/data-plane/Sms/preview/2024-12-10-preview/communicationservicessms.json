@@ -68,7 +68,7 @@
         "tags": [
           "OptOutsAdd"
         ],
-        "summary": "Allows Contoso's users to opt out (unsubscribe) from a phone number and block receiving messages from that number.",
+        "summary": "Add phone numbers to the optouts list which shall stop receiving messages from a sender number.",
         "operationId": "OptOutsAdd",
         "x-ms-examples": {
           "Opt Out": {
@@ -113,7 +113,7 @@
         "tags": [
           "OptOutsRemove"
         ],
-        "summary": "Allows Contoso's users to opt in (subscribe) to a phone number and enable receiving messages from that number.",
+        "summary": "Remove phone numbers from the optouts list.",
         "operationId": "OptOutsRemove",
         "x-ms-examples": {
           "Opt In": {
@@ -158,7 +158,7 @@
         "tags": [
           "OptOutsCheck"
         ],
-        "summary": "Allows Contoso's users to check opt status for a phone number if it can receive messages from that number.",
+        "summary": "Check the opt out status for a recipient phone number with a sender phone number.",
         "operationId": "OptOutsCheck",
         "consumes": [
           "application/json"
@@ -334,7 +334,7 @@
       }
     },
     "OptOutSendRecipient": {
-      "description": "Represents properties for a single recipient.",
+      "description": "A single opt out recipient number.",
       "required": [
         "to"
       ],
@@ -348,7 +348,7 @@
       }
     },
     "OptOutSendRequest": {
-      "description": "Represents properties for a Opt request.",
+      "description": "An opt out request.",
       "required": [
         "from",
         "recipients"
@@ -371,7 +371,7 @@
       }
     },
     "OptOutSendResponse": {
-      "description": "Response for a successful or multi status Opt send request.",
+      "description": "Response for an opt out request. Validate the returned items in the response to see which recipients were successfully added or removed from the opt outs list.",
       "required": [
         "value"
       ],
