@@ -24,7 +24,7 @@ model NamespaceProperties {
   falconNamespace: string;
 
   /** This is an existing namespace that manages this one and has all the same permissions for this namespace
-   *  as the current namespace itself.
+   *  as the current namespace itself. IMMUTABLE
    */
   @maxLength(26)
   @visibility("read", "create", "query", "delete")
@@ -44,7 +44,7 @@ model NamespaceProperties {
   icmPublicId: string;
 
   /** The PME group used to provide access and JIT to resources.
-   *  In the format of TM-<teamname>
+   *  i.e. TM-Falcon replace Falcon with your team name.
    */
   @pattern(
     "TM-[a-zA-Z0-9-]+",
