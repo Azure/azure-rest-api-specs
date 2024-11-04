@@ -49,3 +49,4 @@ namespace Microsoft.Fabric {
 }
 
 @@clientName(Microsoft.Fabric, "FabricMgmtClient", "python");
+@@clientName(Microsoft.Fabric, "FabricManagementClient", "java");
