@@ -222,7 +222,7 @@ model TranslationStatus {
     This contains an outer error with error code, message, details, target and an
     inner error with more descriptive details.
     """)
-  error?: ErrorResponse;
+  error?: Error;
 
   @doc("Status Summary")
   summary: StatusSummary;
