@@ -822,6 +822,10 @@
         "privacyManager": {
           "$ref": "#/definitions/Person",
           "description": "Privacy manager of the organization"
+        },
+        "registeredGeographicaAddress": {
+          "$ref": "#/definitions/GeographicAddress",
+          "description": "Registered Geographic address"
         }
       },
       "required": [
@@ -834,7 +838,8 @@
         "organizationIdentificationIssuer",
         "contactEmailAddress",
         "legalRepresentative",
-        "privacyManager"
+        "privacyManager",
+        "registeredGeographicaAddress"
       ]
     },
     "ApplicationProperties": {
@@ -1115,6 +1120,42 @@
           }
         }
       }
+    },
+    "GeographicAddress": {
+      "type": "object",
+      "description": "Model defining a geographic address",
+      "properties": {
+        "streetNumber": {
+          "type": "string",
+          "description": "Street Number of the address"
+        },
+        "streetName": {
+          "type": "string",
+          "description": "Street Name of the address"
+        },
+        "locality": {
+          "type": "string",
+          "description": "Locality of the address"
+        },
+        "city": {
+          "type": "string",
+          "description": "City of the address"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code of the address"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Country code of the address",
+          "pattern": "[A-Z]{2}"
+        }
+      },
+      "required": [
+        "streetName",
+        "city",
+        "countryCode"
+      ]
     },
     "MarketplaceProperties": {
       "type": "object",

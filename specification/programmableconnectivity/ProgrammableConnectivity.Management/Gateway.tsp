@@ -123,8 +123,9 @@ model ApplicationOwnerProperties {
   privacyManager: Person;
 
   /**
-   * Registered Geographic address  TO DO
+   * Registered Geographic address
    */
+  registeredGeographicaAddress: GeographicAddress;
 }
 
 /**
@@ -205,6 +206,43 @@ model Person {
    * Email address of the contactable person
    */
   emailAddress: string;
+}
+
+/**
+ * Model defining a geographic address
+ */
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+model GeographicAddress {
+  /**
+   * Street Number of the address
+   */
+  streetNumber?: string;
+
+  /**
+   * Street Name of the address
+   */
+  streetName: string;
+
+  /**
+   * Locality of the address
+   */
+  locality?: string;
+
+  /**
+   * City of the address
+   */
+  city: string;
+
+  /**
+   * Postal code of the address
+   */
+  postalCode?: string;
+
+  /**
+   * Country code of the address
+   */
+  @pattern("[A-Z]{2}", "Provide 2 letter country code")
+  countryCode: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
