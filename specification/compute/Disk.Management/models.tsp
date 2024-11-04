@@ -496,7 +496,7 @@ model DiskProperties {
    * The time when the disk was created.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 
   /**
    * The Operating System type.
@@ -615,7 +615,7 @@ model DiskProperties {
    * Latest time when bursting was last enabled on a disk.
    */
   @visibility("read")
-  burstingEnabledTime?: offsetDateTime;
+  burstingEnabledTime?: utcDateTime;
 
   /**
    * Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.
@@ -668,7 +668,7 @@ model DiskProperties {
    */
   @visibility("read")
   @encodedName("application/json", "LastOwnershipUpdateTime")
-  lastOwnershipUpdateTime?: offsetDateTime;
+  lastOwnershipUpdateTime?: utcDateTime;
 }
 
 /**
@@ -1175,7 +1175,7 @@ model DiskAccessProperties {
    * The time when the disk access was created.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 }
 
 /**
@@ -1470,7 +1470,7 @@ model EncryptionSetProperties {
    * The time when the active key of this disk encryption set was updated.
    */
   @visibility("read")
-  lastKeyRotationTimestamp?: offsetDateTime;
+  lastKeyRotationTimestamp?: utcDateTime;
 
   /**
    * The error that was encountered during auto-key rotation. If an error is present, then auto-key rotation will not be attempted until the error on this disk encryption set is fixed.
@@ -1582,7 +1582,7 @@ model DiskRestorePointProperties {
    * The timestamp of restorePoint creation
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 
   /**
    * arm id of source disk or source disk restore point.
@@ -1731,7 +1731,7 @@ model SnapshotProperties {
    * The time when the snapshot was created.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 
   /**
    * The Operating System type.
