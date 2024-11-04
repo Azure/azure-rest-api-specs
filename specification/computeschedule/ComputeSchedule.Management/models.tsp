@@ -214,6 +214,9 @@ model OperationErrorDetails {
 
   @doc("The timestamp of the error occurence")
   timestamp: offsetDateTime;
+
+  @doc("The compute operationid of the Start/Deallocate/Hibernate request")
+  azureOperationName: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
