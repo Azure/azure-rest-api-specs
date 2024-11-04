@@ -567,7 +567,7 @@ model ApiSourceProperties {
   importSpecification?: ImportSpecificationOptions = ImportSpecificationOptions.OnDemand;
 
   @doc("API source configuration for Azure API Management.")
-  apimSource?: ApimSource;
+  azureApiManagementSource?: AzureApiManagementSource;
 }
 
 /**
@@ -597,7 +597,7 @@ union ImportSpecificationOptions {
  * API source configuration for Azure API Management.
  */
 @added(Versions.v2024_06_01_preview)
-model ApimSource {
+model AzureApiManagementSource {
   /**
    * API Management service resource ID.
    */
