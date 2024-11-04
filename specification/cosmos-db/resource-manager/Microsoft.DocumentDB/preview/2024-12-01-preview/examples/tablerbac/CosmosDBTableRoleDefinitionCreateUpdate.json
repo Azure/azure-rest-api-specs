@@ -1,7 +1,7 @@
 {
   "parameters": {
     "roleDefinitionId": "myRoleDefinitionId",
-    "subscriptionId": "mySubscriptionId",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
     "api-version": "2024-12-01-preview",
@@ -10,14 +10,14 @@
         "roleName": "myRoleName",
         "type": "CustomRole",
         "assignableScopes": [
-          "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
-          "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
         ],
         "permissions": [
           {
             "dataActions": [
-              "Microsoft.DocumentDB/databaseAccounts/tables/entities/create",
-              "Microsoft.DocumentDB/databaseAccounts/tables/entities/read"
+              "Microsoft.DocumentDB/databaseAccounts/tableDatabases/containers/entities/create",
+              "Microsoft.DocumentDB/databaseAccounts/tableDatabases/containers/entities/read"
             ],
             "notDataActions": []
           }
@@ -28,27 +28,32 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/tableRoleDefinitions/myRoleDefinitionId",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/tableRoleDefinitions/myRoleDefinitionId",
         "name": "myRoleDefinitionId",
         "type": "Microsoft.DocumentDB/databaseAccounts/tableRoleDefinitions",
         "properties": {
           "roleName": "myRoleName",
           "type": "CustomRole",
           "assignableScopes": [
-            "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
-            "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
           ],
           "permissions": [
             {
               "dataActions": [
-                "Microsoft.DocumentDB/databaseAccounts/tables/entities/create",
-                "Microsoft.DocumentDB/databaseAccounts/tables/entities/read"
+                "Microsoft.DocumentDB/databaseAccounts/tableDatabases/containers/entities/create",
+                "Microsoft.DocumentDB/databaseAccounts/tableDatabases/containers/entities/read"
               ]
             }
           ]
         }
       }
     },
-    "202": {}
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-12-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-12-01-preview"
+      }
+    }
   }
 }
