@@ -87,7 +87,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OptOutSendRequest"
+              "$ref": "#/definitions/OptOutRequest"
             }
           },
           {
@@ -102,7 +102,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OptOutSendResponse"
+              "$ref": "#/definitions/OptOutResponse"
             }
           }
         }
@@ -132,7 +132,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OptOutSendRequest"
+              "$ref": "#/definitions/OptOutRequest"
             }
           },
           {
@@ -147,7 +147,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OptOutSendResponse"
+              "$ref": "#/definitions/OptOutResponse"
             }
           }
         }
@@ -177,7 +177,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OptOutSendRequest"
+              "$ref": "#/definitions/OptOutRequest"
             }
           },
           {
@@ -192,7 +192,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OptOutSendResponse"
+              "$ref": "#/definitions/OptOutResponse"
             }
           }
         }
@@ -333,7 +333,7 @@
         }
       }
     },
-    "OptOutSendRecipient": {
+    "OptOutRecipient": {
       "description": "A single opt out recipient number.",
       "required": [
         "to"
@@ -347,7 +347,7 @@
         }
       }
     },
-    "OptOutSendRequest": {
+    "OptOutRequest": {
       "description": "An opt out request.",
       "required": [
         "from",
@@ -365,12 +365,12 @@
           "minItems": 1,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OptOutSendRecipient"
+            "$ref": "#/definitions/OptOutRecipient"
           }
         }
       }
     },
-    "OptOutSendResponse": {
+    "OptOutResponse": {
       "description": "Response for an opt out request. Validate the returned items in the response to see which recipients were successfully added or removed from the opt outs list.",
       "required": [
         "value"
@@ -380,12 +380,12 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OptOutSendResponseItem"
+            "$ref": "#/definitions/OptOutResponseItem"
           }
         }
       }
     },
-    "OptOutSendResponseItem": {
+    "OptOutResponseItem": {
       "required": [
         "httpStatusCode",
         "to"
