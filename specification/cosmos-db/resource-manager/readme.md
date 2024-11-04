@@ -929,6 +929,18 @@ directive:
   - suppress: BodyTopLevelProperties
     from: chaosFault.json
     reason: Temporarily suppressing existing linter errors due to known issue in linter validation as discussed in the ARM Office hours.
+  - suppress: DeleteResponseCodes
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: PutResponseCodes
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: MissingSegmentsInNestedResourceListOperation
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
 
 ```
 

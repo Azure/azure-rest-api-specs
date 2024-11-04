@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Cosmos DB",
-    "description": "Azure Cosmos DB API for Table Role Based Access Control Resource Provider REST API",
+    "description": "Azure Cosmos DB Role Based Access Control Resource Provider REST API",
     "version": "2024-12-01-preview"
   },
   "host": "management.azure.com",
@@ -45,32 +45,32 @@
         "description": "Retrieves the properties of an existing Azure Cosmos DB Table Role Definition with the given Id.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleDefinitionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/roleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The Role Definition was successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/TableRoleDefinitionGetResults"
+              "$ref": "#/definitions/TableRoleDefinitionResource"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+			  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -86,19 +86,19 @@
         "description": "Creates or updates an Azure Cosmos DB Table Role Definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleDefinitionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/roleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "createUpdateTableRoleDefinitionParameters",
@@ -106,7 +106,7 @@
             "required": true,
             "description": "The properties required to create or update a Role Definition.",
             "schema": {
-              "$ref": "#/definitions/TableRoleDefinitionCreateUpdateParameters"
+              "$ref": "#/definitions/TableRoleDefinitionResource"
             }
           }
         ],
@@ -114,16 +114,26 @@
           "200": {
             "description": "The Role Definition create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TableRoleDefinitionGetResults"
+              "$ref": "#/definitions/TableRoleDefinitionResource"
             }
           },
           "202": {
-            "description": "The Role Definition create or update request was accepted and will complete asynchronously."
+            "description": "The Role Definition create or update request was accepted and will complete asynchronously.",
+			"headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+			  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -139,35 +149,45 @@
         "description": "Deletes an existing Azure Cosmos DB Table Role Definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleDefinitionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/roleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The Table Role Definition delete operation was completed successfully."
+            "description": "The Role Definition delete operation was completed successfully."
           },
           "202": {
-            "description": "The Table Role Definition delete request was accepted and will complete asynchronously."
+            "description": "The Role Definition delete request was accepted and will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
           },
           "204": {
-            "description": "The requested Table Role Definition does not exist."
+            "description": "The requested Role Definition does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+			  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -187,16 +207,16 @@
         "description": "Retrieves the list of all Azure Cosmos DB Table Role Definitions.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -209,7 +229,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+			  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -226,32 +246,32 @@
         "description": "Retrieves the properties of an existing Azure Cosmos DB Table Role Assignment with the given Id.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleAssignmentIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/roleAssignmentIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The Table Role Assignment was successfully retrieved.",
+            "description": "The Role Assignment was successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/TableRoleAssignmentGetResults"
+              "$ref": "#/definitions/TableRoleAssignmentResource"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+			  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -267,44 +287,54 @@
         "description": "Creates or updates an Azure Cosmos DB Table Role Assignment.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleAssignmentIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/roleAssignmentIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "createUpdateTableRoleAssignmentParameters",
             "in": "body",
             "required": true,
-            "description": "The properties required to create or update a Table Role Assignment.",
+            "description": "The properties required to create or update a Role Assignment.",
             "schema": {
-              "$ref": "#/definitions/TableRoleAssignmentCreateUpdateParameters"
+              "$ref": "#/definitions/TableRoleAssignmentResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The Table Role Assignment create or update operation was completed successfully.",
+            "description": "The Role Assignment create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TableRoleAssignmentGetResults"
+              "$ref": "#/definitions/TableRoleAssignmentResource"
             }
           },
           "202": {
-            "description": "The Table Role Assignment create or update request was accepted and will complete asynchronously."
+            "description": "The Role Assignment create or update request was accepted and will complete asynchronously.",
+			"headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+			  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -320,35 +350,45 @@
         "description": "Deletes an existing Azure Cosmos DB Table Role Assignment.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleAssignmentIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/roleAssignmentIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The Table Role Assignment delete operation was completed successfully."
+            "description": "The Role Assignment delete operation was completed successfully."
           },
           "202": {
-            "description": "The Table Role Assignment delete request was accepted and will complete asynchronously."
+            "description": "The Role Assignment delete request was accepted and will complete asynchronously.",
+			"headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
           },
           "204": {
-            "description": "The requested Table Role Assignment does not exist."
+            "description": "The requested Role Assignment does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+			  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -368,16 +408,16 @@
         "description": "Retrieves the list of all Azure Cosmos DB Table Role Assignments.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -390,7 +430,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+			  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -398,8 +438,13 @@
     }
   },
   "definitions": {
-    "TableRoleDefinitionResource": {
+    "TableRoleDefinitionResourceProperties": {
+      "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The path id for the Role Definition."
+        },
         "roleName": {
           "type": "string",
           "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
@@ -429,40 +474,38 @@
             "$ref": "#/definitions/Permission"
           },
           "description": "The set of operations allowed through this Role Definition."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource.",		  
+          "readOnly": true
         }
       },
       "description": "Azure Cosmos DB Table Role Definition resource object."
     },
-    "TableRoleDefinitionCreateUpdateParameters": {
+    "TableRoleDefinitionResource": {
       "description": "Parameters to create and update an Azure Cosmos DB Table Role Definition.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties to create and update an Azure Cosmos DB Table Role Definition.",
-          "$ref": "#/definitions/TableRoleDefinitionResource"
-        }
-      }
-    },
-    "TableRoleDefinitionGetResults": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TableRoleDefinitionResource",
-          "description": "Properties related to the Role Definition."
+          "$ref": "#/definitions/TableRoleDefinitionResourceProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ],
-      "description": "An Azure Cosmos DB Table Role Definition."
+      ]
     },
     "Permission": {
       "type": "object",
       "properties": {
+		"id": {
+          "type": "string",
+          "description": "The id for the permission."
+        },
         "dataActions": {
           "type": "array",
           "items": {
@@ -481,19 +524,25 @@
       "description": "The set of data plane operations permitted through this Role Definition."
     },
     "TableRoleDefinitionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/TableRoleDefinitionGetResults"
+            "$ref": "#/definitions/TableRoleDefinitionResource"
           },
           "description": "List of Role Definitions and their properties."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "The relevant Role Definitions."
     },
-    "TableRoleAssignmentResource": {
+    "TableRoleAssignmentResourceProperties": {
       "type": "object",
       "properties": {
         "roleDefinitionId": {
@@ -507,49 +556,49 @@
         "principalId": {
           "type": "string",
           "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this Table Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource.",		  
+          "readOnly": true
         }
       },
       "description": "Azure Cosmos DB Table Role Assignment resource object."
     },
-    "TableRoleAssignmentCreateUpdateParameters": {
+    "TableRoleAssignmentResource": {
       "description": "Parameters to create and update an Azure Cosmos DB Table Role Assignment.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties to create and update an Azure Cosmos DB Table Role Assignment.",
-          "$ref": "#/definitions/TableRoleAssignmentResource"
-        }
-      }
-    },
-    "TableRoleAssignmentGetResults": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TableRoleAssignmentResource",
-          "description": "Properties related to the Table Role Assignment."
+          "$ref": "#/definitions/TableRoleAssignmentResourceProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ],
-      "description": "An Azure Cosmos DB Table Role Assignment"
-    },
+      ]
+    },	
     "TableRoleAssignmentListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/TableRoleAssignmentGetResults"
+            "$ref": "#/definitions/TableRoleAssignmentResource"
           },
-          "description": "List of Table Role Assignments and their properties"
+          "description": "List of Role Assignments and their properties"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
-      "description": "The relevant Table Role Assignments."
+      "description": "The relevant Role Assignments."
     }
   },
   "parameters": {
@@ -567,7 +616,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The GUID for the Table Role Assignment."
+      "description": "The GUID for the Role Assignment."
     }
   }
 }
