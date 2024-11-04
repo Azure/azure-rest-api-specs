@@ -119,7 +119,7 @@ union OverageState {
   @doc("The resource has specified a limited amount of overage.")
   Limited: "Limited",
 
-  @doc("The resource has unlimted overage.")
+  @doc("The resource has unlimited overage.")
   Unlimited: "Unlimited",
 }
 
