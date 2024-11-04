@@ -30,6 +30,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      # May be set by get-keyvalue-artifacts.  Setting to null here avoids warning in VS Code.
+      spec-lifecycle-resource-manager:
+
     steps:
     - uses: actions/checkout@v4
       with:
@@ -48,13 +52,3 @@ jobs:
     - if: env.spec-lifecycle-resource-manager == 'brownfield'
       run: echo "brownfield"
 
-    # - if: ${{ fromJSON(steps.get-keyvalue-artifacts.outputs.result).spec-lifecycle-brownfield == 'true' }}
-    #   name: Add label
-    #   uses: actions/github-script@v7
-
-    # - name: Add label if artifact
-    #   uses: actions/github-script@v7
-    #   with:
-    #     script: |
-    #       const typespecRequirementCompleted = require('./.github/scripts/typespec-requirement-completed.js')
-    #       await typespecRequirementCompleted(github, context, core);
