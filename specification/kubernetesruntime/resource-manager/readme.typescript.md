@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-kubernetesruntime"
+  package-name: "@azure/arm-containerorchestratorruntime"
   output-folder: "$(typescript-sdks-folder)/sdk/kubernetesruntime/arm-containerorchestratorruntime"
   clear-output-folder: true
   generate-metadata: true
