@@ -4627,7 +4627,7 @@
     },
     "SapVirtualInstanceIdentity": {
       "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "description": "Managed service identity (user assigned identities)",
       "properties": {
         "type": {
           "$ref": "#/definitions/SapVirtualInstanceIdentityType",
@@ -4653,14 +4653,20 @@
     },
     "SapVirtualInstanceIdentityType": {
       "type": "string",
-      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+      "description": "Type of managed service identity (where only None and UserAssigned types are allowed).",
       "enum": [
+        "None",
         "UserAssigned"
       ],
       "x-ms-enum": {
         "name": "SapVirtualInstanceIdentityType",
         "modelAsString": true,
         "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
           {
             "name": "UserAssigned",
             "value": "UserAssigned",

@@ -2499,7 +2499,7 @@ model DeployerVmPackages {
 }
 
 /**
- * Managed service identity (system assigned and/or user assigned identities)
+ * Managed service identity (user assigned identities)
  */
 model SapVirtualInstanceIdentity {
   /** The type of managed identity assigned to this resource. */
@@ -2511,9 +2511,12 @@ model SapVirtualInstanceIdentity {
 }
 
 /**
- * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+ * Type of managed service identity (where only None and UserAssigned types are allowed).
  */
 union SapVirtualInstanceIdentityType {
+  /** No managed identity. */
+  None: "None",
+
   /** User assigned managed identity. */
   UserAssigned: "UserAssigned",
 
