@@ -2593,11 +2593,6 @@
           "type": "string",
           "description": "Private IP Address for this gateway."
         },
-        "privateIPv6Address": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Private IP Address for this gateway."
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -4386,6 +4381,11 @@
           "description": "The public Ip of a connected vpn client."
         },
         "privateIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The assigned private Ip of a connected vpn client."
+        },
+        "privateIpv6Address": {
           "type": "string",
           "readOnly": true,
           "description": "The assigned private Ip of a connected vpn client."
