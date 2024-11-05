@@ -51,13 +51,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}.x
 
-      - run: npm install --no-package-lock
-        shell: pwsh
-
-      - run: npm ls -a
-        shell: pwsh
-        continue-on-error: true
-
       - run: npm run build
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
