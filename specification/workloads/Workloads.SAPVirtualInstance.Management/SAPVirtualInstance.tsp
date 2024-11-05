@@ -101,7 +101,11 @@ interface SAPVirtualInstances {
   @operationId("SapVirtualInstances_InvokeSapSupportedSku")
   getSapSupportedSku is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
-    SAPSupportedSkusRequest,
+    {
+      @doc("The SAP Supported SKUs request body.")
+      @body
+      SapSupportedSku: SAPSupportedSkusRequest;
+    },
     SAPSupportedResourceSkusResult
   >;
 
@@ -112,7 +116,11 @@ interface SAPVirtualInstances {
   @operationId("SapVirtualInstances_InvokeDiskConfigurations")
   getDiskConfigurations is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
-    SAPDiskConfigurationsRequest,
+    {
+      @doc("The SAP Disk Configurations request body.")
+      @body
+      SAPDiskConfigurations: SAPDiskConfigurationsRequest;
+    },
     SAPDiskConfigurationsResult
   >;
 
@@ -123,7 +131,11 @@ interface SAPVirtualInstances {
   @operationId("SapVirtualInstances_InvokeAvailabilityZoneDetails")
   getAvailabilityZoneDetails is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
-    SAPAvailabilityZoneDetailsRequest,
+    {
+      @doc("The SAP Availability Zone Details request body.")
+      @body
+      SAPAvailabilityZoneDetails: SAPAvailabilityZoneDetailsRequest;
+    },
     SAPAvailabilityZoneDetailsResult
   >;
 }
