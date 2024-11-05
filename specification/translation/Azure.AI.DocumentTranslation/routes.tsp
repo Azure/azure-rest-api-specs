@@ -97,7 +97,7 @@ interface DocumentTranslationOperations {
     time.
     maxpagesize is the maximum items returned in a page.  If more items are
     requested via top (or top is not specified and there are more items to be
-    returned), @Azure.Core.nextLink will contain the link to the next page.
+    returned), @nextLink will contain the link to the next page.
                
     
     orderby query parameter can be used to sort the returned list (ex
@@ -171,7 +171,7 @@ interface DocumentTranslationOperations {
       @doc("""
         maxpagesize is the maximum items returned in a page.  If more items are
         requested via top (or top is not specified and there are more items to be
-        returned), @Azure.Core.nextLink will contain the link to the next page.
+        returned), @nextLink will contain the link to the next page.
                    
         
         Clients MAY request server-driven paging with a specific page size by
@@ -299,7 +299,7 @@ interface DocumentTranslationOperations {
     descending start time.
     maxpagesize is the maximum items returned in a page. 
     If more items are requested via top (or top is not specified and there are
-    more items to be returned), @Azure.Core.nextLink will contain the link to the next page.
+    more items to be returned), @nextLink will contain the link to the next page.
      
               
     orderby query parameter can be used to sort the returned list (ex
@@ -374,7 +374,7 @@ interface DocumentTranslationOperations {
       @doc("""
         maxpagesize is the maximum items returned in a page.  If more items are
         requested via top (or top is not specified and there are more items to be
-        returned), @Azure.Core.nextLink will contain the link to the next page.
+        returned), @nextLink will contain the link to the next page.
                    
         
         Clients MAY request server-driven paging with a specific page size by
