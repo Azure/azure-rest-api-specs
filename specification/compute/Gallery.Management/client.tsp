@@ -25,40 +25,41 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PirCommunityGalleryResource.identifier);
 
-@@clientName(Galleries.update,
-  "Galleries.update::parameters.properties",
-  "gallery"
-);
-@@clientName(Galleries.gallerySharingProfileUpdate,
-  "Galleries.gallerySharingProfileUpdate::parameters.body",
-  "sharingUpdate"
-);
+@@clientName(Galleries.share::parameters.body, "sharingUpdate");
+@@clientName(Galleries.update::parameters.properties, "gallery");
+@@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Gallery.properties);
 
-@@clientName(GalleryApplications.update,
-  "GalleryApplications.update::parameters.properties",
-  "galleryApplication"
-);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplication.properties);
+@@clientName(GalleryApplications.update::parameters.properties,
+  "galleryApplication"
+);
+@@clientName(GalleryApplications.createOrUpdate::parameters.resource,
+  "galleryApplication"
+);
 
-@@clientName(GalleryApplicationVersions.update,
-  "GalleryApplicationVersions.update::parameters.properties",
+@@clientName(GalleryApplicationVersions.update::parameters.properties,
   "galleryApplicationVersion"
 );
+@@clientName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+  "galleryApplicationVersion"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplicationVersion.properties);
 
-@@clientName(GalleryImages.update,
-  "GalleryImages.update::parameters.properties",
-  "galleryImage"
-);
+@@clientName(GalleryImages.update::parameters.properties, "galleryImage");
+@@clientName(GalleryImages.createOrUpdate::parameters.resource, "galleryImage");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryImage.properties);
 
-@@clientName(GalleryImageVersions.update,
-  "GalleryImageVersions.update::parameters.properties",
+@@clientName(GalleryImageVersions.update::parameters.properties,
+  "galleryImageVersion"
+);
+@@clientName(GalleryImageVersions.createOrUpdate::parameters.resource,
   "galleryImageVersion"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

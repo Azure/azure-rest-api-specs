@@ -1,5 +1,4 @@
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -9,14 +8,11 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Compute;
 /**
  * Specifies information about the Shared Image Gallery that you want to create or update.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
-@extension("x-ms-azure-resource", false)
 model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
   ...ResourceNameParameter<
     Resource = Gallery,
@@ -117,6 +113,3 @@ interface Galleries {
 @@doc(Galleries.share::parameters.body,
   "Parameters supplied to the update gallery sharing profile."
 );
-@@clientName(Galleries.share::parameters.body, "sharingUpdate");
-@@clientName(Galleries.update::parameters.properties, "gallery");
-@@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");
