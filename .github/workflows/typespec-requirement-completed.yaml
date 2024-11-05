@@ -5,19 +5,18 @@ on:
     workflows: ["TypeSpec Requirement"]
     types: [completed]
   workflow_dispatch:
-    # If any inputs are not set, we will attempt to extract them from the event context
     inputs:
       owner:
         description: The account owner of the repository. The name is not case sensitive.
-        required: false
+        required: true
         type: string
       repo:
         description: The name of the repository without the .git extension. The name is not case sensitive.
-        required: false
+        required: true
         type: string
       run_id:
         description: The unique identifier of the workflow run.
-        required: false
+        required: true
         type: number
 
 jobs:
@@ -51,4 +50,3 @@ jobs:
     # TODO: Add label
     - if: env.spec-lifecycle-resource-manager == 'brownfield'
       run: echo "brownfield"
-
