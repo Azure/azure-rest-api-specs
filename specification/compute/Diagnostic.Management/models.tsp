@@ -48,6 +48,7 @@ model ComputeDiagnosticsOperationResult {
   /**
    * The time when the disk inspection was completed.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
   createdUTC?: utcDateTime;
 }
 
@@ -148,6 +149,7 @@ model SpotPlacementRecommenderInput {
   /**
    * The desired resource SKUs.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   desiredSizes?: ResourceSize[];
 
   /**
@@ -245,6 +247,7 @@ model SpotPlacementScoresInput {
   /**
    * The desired resource SKUs.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   desiredSizes?: ResourceSize[];
 
   /**
