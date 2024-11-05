@@ -42,10 +42,12 @@ function Get-ChangedCoreFiles($changedFiles = (Get-ChangedFiles)) {
     ".prettierrc.json",
     "package-lock.json",
     "package.json",
-    "tsconfig.json"
+    "tsconfig.json",
+    "specification/suppressions.yaml"
   )
 
   $coreFiles = $changedFiles.Where({ 
+    $_.StartsWith(".github/") -or
     $_.StartsWith("eng/") -or
     $_.StartsWith("specification/common-types/") -or
     $_ -in $rootFiles

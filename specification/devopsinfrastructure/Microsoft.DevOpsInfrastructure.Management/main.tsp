@@ -21,10 +21,10 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-04-04-preview preview version */
+  /** 2024-10-19 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2024-04-04-preview`,
+  `2024-10-19`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -63,6 +63,7 @@ model PoolProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines the organization in which the pool will be used.")
 @discriminator("kind")
 model OrganizationProfile {}
@@ -79,7 +80,7 @@ model GitHubOrganizationProfile extends OrganizationProfile {
 @doc("Defines a GitHub organization")
 model GitHubOrganization {
   @doc("The GitHub organization URL in which the pool should be created.")
-  url: string;
+  url: url;
 
   @doc("Optional list of repositories in which the pool should be created.")
   repositories?: string[];
@@ -100,7 +101,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
 @doc("Defines an Azure DevOps organization.")
 model Organization {
   @doc("The Azure DevOps organization URL in which the pool should be created.")
-  url: string;
+  url: url;
 
   @doc("Optional list of projects in which the pool should be created.")
   projects?: string[];
@@ -134,6 +135,7 @@ union AzureDevOpsPermissionType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
@@ -229,13 +231,13 @@ union OsDiskStorageAccountType {
   string,
 
   @doc("Standard OS disk type.")
-  "Standard",
+  Standard: "Standard",
 
   @doc("Premium OS disk type.")
-  "Premium",
+  Premium: "Premium",
 
   @doc("Standard SSD OS disk type.")
-  "StandardSSD",
+  StandardSSD: "StandardSSD",
 }
 
 @doc("The VM image of the machines in the pool.")
@@ -315,6 +317,7 @@ model Stateful extends AgentProfile {
   @doc("How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week.")
   gracePeriodTimeSpan?: string;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines pool buffer.")
 model ResourcePredictions {}
 
@@ -408,6 +411,7 @@ interface Pools {
     Pool,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     Pool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>
@@ -552,7 +556,7 @@ union ResourceSkuRestrictionsType {
 @doc("Describes an available Compute SKU Restriction Information.")
 model ResourceSkuRestrictionInfo {
   @doc("Locations where the SKU is restricted")
-  locations?: string[];
+  locations?: azureLocation[];
 
   @doc("List of availability zones where the SKU is restricted.")
   zones?: string[];
@@ -572,7 +576,7 @@ union ResourceSkuRestrictionsReasonCode {
 @doc("Describes an available Compute SKU Location Information.")
 model ResourceSkuLocationInfo {
   @doc("Location of the SKU")
-  location: string;
+  location: azureLocation;
 
   @doc("List of availability zones where the SKU is supported.")
   zones: string[];
@@ -620,7 +624,7 @@ model ResourceSkuProperties {
   family: string;
 
   @doc("The set of locations that the SKU is available.")
-  locations: string[];
+  locations: azureLocation[];
 
   @doc("A list of locations and availability zones in those locations where the SKU is available")
   @extension("x-ms-identifiers", [])
@@ -649,6 +653,7 @@ model Location is ProxyResource<LocationProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Properties of a location.")
 model LocationProperties {}
 
@@ -668,7 +673,7 @@ interface SubscriptionUsages {
   usages(
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
-    ...LocationParameter,
+    ...LocationResourceParameter,
     ...ApiVersionParameter,
   ): ArmResponse<Page<Quota>> | ErrorResponse;
 }
@@ -676,11 +681,8 @@ interface SubscriptionUsages {
 @doc("Describes Resource Quota")
 @parentResource(Location)
 model Quota {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The name of the quota.")
-  @segment("usages")
   @visibility("read")
-  @path
   name?: QuotaName;
 
   @doc("Fully qualified ARM resource id")
@@ -719,6 +721,7 @@ model Image is ProxyResource<ImageProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Properties of an image.")
 model ImageProperties {}
 

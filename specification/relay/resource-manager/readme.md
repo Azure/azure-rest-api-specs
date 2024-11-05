@@ -25,7 +25,7 @@ These are the global settings for the Relay API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-11
+tag: package-2024-01
 ```
 
 ### Tag: package-2021-11-01
@@ -74,6 +74,19 @@ input-file:
 - Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
 ```
 
+### Tag: package-2024-01-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+- Microsoft.Relay/stable/2024-01-01/authorizationRules.json
+- Microsoft.Relay/stable/2024-01-01/hybridConnections.json
+- Microsoft.Relay/stable/2024-01-01/Namespaces.json
+- Microsoft.Relay/stable/2024-01-01/NetworkRuleSets.json
+- Microsoft.Relay/stable/2024-01-01/operations.json
+- Microsoft.Relay/stable/2024-01-01/wcfRelays.json
+```
 
 ---
 # Code Generation
