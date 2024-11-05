@@ -426,7 +426,7 @@ interface Pools {
   @doc("Checks that the pool name is valid and is not already in use.")
   checkNameAvailability is checkGlobalNameAvailability<
     CheckNameAvailability,
-    CheckNameAvailabilityResponse
+    CheckNameAvailabilityResult
   >;
 }
 
@@ -788,7 +788,7 @@ union CheckNameAvailabilityReason {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
 @doc("The CheckNameAvailability operation response.")
-model CheckNameAvailabilityResponse {
+model CheckNameAvailabilityResult {
   @doc("True if the name is available, otherwise false.")
   available: boolean;
 
