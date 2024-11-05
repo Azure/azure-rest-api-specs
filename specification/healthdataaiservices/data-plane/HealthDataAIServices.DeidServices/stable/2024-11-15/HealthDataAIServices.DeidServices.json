@@ -111,9 +111,6 @@
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
-            "$ref": "#/parameters/PaginationByTokenQueryParameters.continuationToken"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -411,33 +408,24 @@
         }
       }
     },
-    "/jobs/{name}/documents": {
+    "/jobs/{jobName}/documents": {
       "get": {
         "operationId": "ListJobDocuments",
         "summary": "List processed documents within a job.",
-        "description": "Resource list operation template.",
+        "description": "The most basic operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "name",
+            "name": "jobName",
             "in": "path",
             "description": "The name of a job.",
             "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/PaginationByTokenQueryParameters.continuationToken"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -445,13 +433,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedDocumentDetails"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -586,7 +567,7 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
-    "CustomizationOptions": {
+    "CustomizationConfig": {
       "type": "object",
       "description": "Customizations options to override default service behaviors for synchronous usage.",
       "properties": {
@@ -612,8 +593,39 @@
           "description": "Input text to de-identify.",
           "maxLength": 48000
         },
+        "operation": {
+          "type": "string",
+          "description": "Operation to perform on the input documents.",
+          "default": "Surrogate",
+          "enum": [
+            "Redact",
+            "Surrogate",
+            "Tag"
+          ],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Redact",
+                "value": "Redact",
+                "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
+              },
+              {
+                "name": "Surrogate",
+                "value": "Surrogate",
+                "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
+              },
+              {
+                "name": "Tag",
+                "value": "Tag",
+                "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
+              }
+            ]
+          }
+        },
         "customizations": {
-          "$ref": "#/definitions/CustomizationOptions",
+          "$ref": "#/definitions/CustomizationConfig",
           "description": "Customization parameters to override default service behaviors."
         }
       },
@@ -673,7 +685,7 @@
           "description": "Target location to store output of operation."
         },
         "customizations": {
-          "$ref": "#/definitions/JobCustomizationOptions",
+          "$ref": "#/definitions/JobCustomizationConfig",
           "description": "Customization parameters to override default service behaviors."
         },
         "status": {
@@ -786,7 +798,7 @@
         "etag"
       ]
     },
-    "JobCustomizationOptions": {
+    "JobCustomizationConfig": {
       "type": "object",
       "description": "Customizations options to override default service behaviors for job usage.",
       "properties": {
@@ -1280,14 +1292,6 @@
       "required": false,
       "type": "integer",
       "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "PaginationByTokenQueryParameters.continuationToken": {
-      "name": "continuationToken",
-      "in": "query",
-      "description": "Token to continue a previous query.",
-      "required": false,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

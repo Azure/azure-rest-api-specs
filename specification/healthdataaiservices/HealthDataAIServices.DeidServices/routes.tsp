@@ -55,9 +55,14 @@ op listJobs is DeidentifyOperations.ResourceList<
 op listJobDocuments is Azure.Core.Foundations.Operation<
   {
     @doc("The name of a job.")
+    @maxLength(36)
+    @minLength(3) // Must be 3 to match regex
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
     jobName: string;
 
     ...PaginationByTokenQueryParameters;
+
+    
   }, Page<DocumentDetails>
 >;
 
@@ -90,7 +95,8 @@ op deidentifyText is Azure.Core.RpcOperation<
     @body
     body: DeidentificationContent;
   },
-  DeidentificationResult
+  DeidentificationResult,
+  ServiceTraits
 >;
 
 
@@ -101,5 +107,6 @@ model PaginationByTokenQueryParameters {
   @query
   @doc("Token to continue a previous query.")
   @visibility("read")
+  // @access(Access.internal)
   continuationToken?: string;
 }
