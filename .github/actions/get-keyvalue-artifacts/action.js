@@ -11,7 +11,7 @@ module.exports = async ({ github, context, core }) => {
   let run_id = parseInt(process.env.RUN_ID || "");
 
   if (!owner && !repo && !run_id) {
-    if (context.eventName !== "workflow_run" || context.action == "completed") {
+    if (context.eventName !== "workflow_run" || context.action != "completed") {
       throw new Error(
         `Invalid context: '${context.eventName}:${context.action}'.  Expected 'workflow_run:completed'.`,
       );
