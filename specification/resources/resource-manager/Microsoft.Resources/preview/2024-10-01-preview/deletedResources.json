@@ -46,7 +46,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -127,7 +127,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -169,7 +169,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -265,7 +265,9 @@
           "description": "State of the deletedResource.",
           "enum": [
             "Accepted",
-            "Succeeded"
+            "Succeeded",
+            "Failed",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "DeletedResourceProvisioningState",
@@ -288,14 +290,6 @@
     }
   },
   "parameters": {
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID.",
-      "x-ms-parameter-location": "client"
-    },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
