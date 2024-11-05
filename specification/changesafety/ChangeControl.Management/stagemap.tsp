@@ -112,4 +112,6 @@ interface StageMaps {
       ...SubscriptionIdParameter;
     }
   >;
+
+  list is ArmResourceListAtScope<StageMap>;
 }

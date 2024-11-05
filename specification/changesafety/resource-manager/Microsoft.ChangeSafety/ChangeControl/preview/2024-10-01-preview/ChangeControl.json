@@ -791,6 +791,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeStates": {
+      "get": {
+        "operationId": "ChangeStates_ListByResourceGroup",
+        "tags": [
+          "ChangeStates"
+        ],
+        "description": "List ChangeState resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeStateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeStates_List_MaximumSet": {
+            "$ref": "./examples/ChangeStates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}": {
       "get": {
         "operationId": "ChangeStates_Get",
@@ -1375,6 +1417,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/stageMaps": {
+      "get": {
+        "operationId": "StageMaps_ListByResourceGroup",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "List StageMap resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMapListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_Listt_MaximumSet": {
+            "$ref": "./examples/StageMaps_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/stageMaps/{stageMapName}": {
       "get": {
         "operationId": "StageMaps_Get",
@@ -1775,6 +1859,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "ChangeStateListResult": {
+      "type": "object",
+      "description": "The response of a ChangeState list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChangeState items on this page",
+          "items": {
+            "$ref": "#/definitions/ChangeState"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ChangeStateProperties": {
@@ -2484,6 +2589,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "StageMapListResult": {
+      "type": "object",
+      "description": "The response of a StageMap list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StageMap items on this page",
+          "items": {
+            "$ref": "#/definitions/StageMap"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "StageMapProperties": {

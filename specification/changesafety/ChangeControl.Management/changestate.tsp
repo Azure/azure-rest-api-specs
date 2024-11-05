@@ -370,4 +370,6 @@ interface ChangeStates {
       ...SubscriptionIdParameter;
     }
   >;
+
+  list is ArmResourceListAtScope<ChangeState>;
 }

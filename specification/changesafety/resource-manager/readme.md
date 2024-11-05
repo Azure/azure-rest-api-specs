@@ -40,11 +40,23 @@ input-file:
   - Microsoft.ChangeSafety/ChangeControl/preview/2024-10-01-preview/ChangeControl.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from: changeControl.json
-    reason: Need to use Record for key-value pair properties.
-  - code: TopLevelResourcesListByResourceGroup
-    from: changeControl.json
-    reason: List for ChangeStates and StageMaps are not supported by design.
+    from: $.definitions["ChangeStateProperties.StageParameters"].format
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
+  - code: AvoidAdditionalProperties
+    from: $.definitions["RetrieveNextStagesResponseItem.parameterValues"].format
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
+  - code: AvoidAdditionalProperties
+    from: $.definitions["Parameter.metadata"].format
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
+  - code: AvoidAdditionalProperties
+    from: $.definitions["Stage.parameterValues"].format
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
+  - code: AvoidAdditionalProperties
+    from: $.definitions["StageMapProperties.parameters"].format
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
+  - code: AvoidAdditionalProperties
+    from: $.definitions["StageProgressionProperties.parameterValues"].format
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
 ```
 
 ---
