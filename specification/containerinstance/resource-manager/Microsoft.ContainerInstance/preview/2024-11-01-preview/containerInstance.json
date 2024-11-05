@@ -3843,24 +3843,13 @@
       }
     },
     "ContainerGroupProfile": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ContainerGroupProfileProperties"
-        }
-      },
+      "description": "container group profile object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/ContainerGroupProfileProperties"
         }
       ]
     },
