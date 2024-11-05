@@ -295,17 +295,6 @@
       },
       "description": "The artifact tags of a community gallery resource."
     },
-    "CommunityGalleryDisclaimer": {
-      "type": "string",
-      "properties": {
-        "disclaimer": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Community gallery disclaimer"
-        }
-      },
-      "description": "The disclaimer for a community gallery resource."
-    },
     "CommunityGalleryIdentifier": {
       "properties": {
         "uniqueId": {
@@ -368,7 +357,8 @@
       "type": "object",
       "properties": {
         "disclaimer": {
-          "$ref": "#/definitions/CommunityGalleryDisclaimer"
+          "type": "string",
+          "description": "The disclaimer for a community gallery resource."
         },
         "artifactTags": {
           "$ref": "#/definitions/CommunityGalleryArtifactTags"
@@ -491,7 +481,8 @@
           "description": "The end-user license agreement for the current community gallery image."
         },
         "disclaimer": {
-          "$ref": "#/definitions/CommunityGalleryDisclaimer"
+          "type": "string",
+          "description": "The disclaimer for a community gallery resource."
         },
         "artifactTags": {
           "$ref": "#/definitions/CommunityGalleryArtifactTags"
@@ -560,7 +551,8 @@
           "description": "Describes the storage profile of the image version."
         },
         "disclaimer": {
-          "$ref": "#/definitions/CommunityGalleryDisclaimer"
+          "type": "string",
+          "description": "The disclaimer for a community gallery resource."
         },
         "artifactTags": {
           "$ref": "#/definitions/CommunityGalleryArtifactTags"
