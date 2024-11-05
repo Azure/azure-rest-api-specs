@@ -3825,11 +3825,11 @@
       "description": "The container group profile properties",
       "type": "object",
       "properties": {
-        "properties":{
+        "properties": {
           "x-ms-client-flatten": true,
           "type": "object",
           "description": "The container group profile properties",
-          "properties":{
+          "properties": {
             "sku": {
               "description": "The SKU for a container group.",
               "$ref": "#/definitions/ContainerGroupSku"
@@ -4011,6 +4011,28 @@
       "required": true,
       "type": "string",
       "description": "The operation Id.",
+      "x-ms-parameter-location": "method"
+    },
+    "NGroupsNameParameter": {
+      "name": "ngroupsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "minLength": 1,
+      "maxLength": 63,
+      "description": "The NGroups name.",
+      "x-ms-parameter-location": "method"
+    },
+    "ContainerGroupProfileNameParameter": {
+      "name": "containerGroupProfileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "minLength": 1,
+      "maxLength": 63,
+      "description": "ContainerGroupProfile name.",
       "x-ms-parameter-location": "method"
     }
   }
