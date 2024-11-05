@@ -43,10 +43,15 @@ op listJobs is DeidentifyOperations.ResourceList<
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
+// @summary("List processed documents within a job.")
+// op listJobDocuments is DeidentifyOperations.ResourceList<
+//   DocumentDetails,
+//   ListQueryParametersTrait<PaginationByTokenQueryParameters>
+// >;
+
 @summary("List processed documents within a job.")
-op listJobDocuments is DeidentifyOperations.ResourceList<
-  DocumentDetails,
-  ListQueryParametersTrait<PaginationByTokenQueryParameters>
+op listJobDocuments is Azure.Core.Foundations.ListOperation<
+  {}, DocumentDetails
 >;
 
 @doc("Query parameters for list operation.")

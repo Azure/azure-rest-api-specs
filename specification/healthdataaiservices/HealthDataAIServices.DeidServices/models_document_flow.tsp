@@ -10,6 +10,15 @@ using Azure.Core;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
 
+// model DeidentificationJobNameParameter {
+//   @doc("The name of a job.")
+//   @bodyRoot
+//   @maxLength(36)
+//   @minLength(3) // Must be 3 to match regex
+//   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+//   name: string;
+// }
+
 @doc("A job containing a batch of documents to de-identify.")
 @resource("jobs")
 model DeidentificationJob {
@@ -19,7 +28,6 @@ model DeidentificationJob {
   @maxLength(36)
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
-  // @clientName("jobName", "java") // Need to change ONLY for DocumentDetails child resource
   name: string;
 
   @doc("Operation to perform on the input documents.")
@@ -32,7 +40,7 @@ model DeidentificationJob {
   targetLocation: TargetStorageLocation;
 
   @doc("Customization parameters to override default service behaviors.")
-  customizations?: JobCustomizationOptions;
+  customizations?: JobCustomizationConfig;
 
   // Readonly Properties
 
@@ -119,21 +127,29 @@ model JobSummary {
   bytesProcessed: int64;
 }
 
-@doc("Details of a single document in a job.")
+@doc("Paginated details of all documents in a job.")
 @resource("documents")
-@parentResource(DeidentificationJob)
+@parentResource(DeidentificationJob) // TODO - retrieving a single document by id won't work with this
+@pagedResult
 model DocumentDetails {
   @key
-  @doc("Id of the document details.")
+  @doc("List of documents.")
   @visibility("read")
-  id: string;
+  value: Array<DocumentDetail>;
 
-  // @doc("The name of a job.") // TODO - is this correct?
-  // @maxLength(36)
-  // @minLength(3) // Must be 3 to match regex
-  // @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
-  // @clientName("jobName", "java")
-  // name: string;
+  @doc("Token to continue a previous query.")
+  @nextLink
+  nextLink: string;
+}
+
+@doc("Details of a single document in a job.")
+// @resource("documents")
+// @parentResource(DeidentificationJob)
+model DocumentDetail {
+  // @key
+  @doc("Id of the document details.")
+  // @visibility("read")
+  id: string;
 
   @doc("Location for the input.")
   input: DocumentLocation;
@@ -158,7 +174,7 @@ model DocumentLocation {
 }
 
 @doc("Customizations options to override default service behaviors for job usage.")
-model JobCustomizationOptions {
+model JobCustomizationConfig {
   ...SharedCustomizationOptions;
 }
 
