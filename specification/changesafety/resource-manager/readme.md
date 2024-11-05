@@ -40,8 +40,7 @@ input-file:
   - Microsoft.ChangeSafety/ChangeControl/preview/2024-10-01-preview/ChangeControl.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from:
-      - ChangeControl.json
+    from: ChangeControl.json
     where:
       - $.definitions.ChangeStateProperties.StageParameters
       - $.definitions.Parameter.metadata
