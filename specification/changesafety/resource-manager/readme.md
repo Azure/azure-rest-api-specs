@@ -41,31 +41,13 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: changeControl.json
-    where: $.definitions["ChangeStateProperties.StageParameters"].format
-    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
-  - code: AvoidAdditionalProperties
-    from: changeControl.json
-    where: $.definitions["RetrieveNextStagesResponseItem.parameterValues"].format
-    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
-  - code: AvoidAdditionalProperties
-    from: changeControl.json
-    where: $.definitions["Parameter.metadata"].format
-    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
-  - code: AvoidAdditionalProperties
-    from: changeControl.json
-    where: $.definitions["Stage.parameterValues"].format
-    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
-  - code: AvoidAdditionalProperties
-    from: changeControl.json
-    where: $.definitions["StageMapProperties.parameters"].format
-    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
-  - code: AvoidAdditionalProperties
-    from: changeControl.json
-    where: $.definitions["StageProgressionProperties.parameterValues"].format
-    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
-  - code: AvoidAdditionalProperties
-    from: changeControl.json
-    where: $.definitions["StageProgressionPropertiesUpdate.parameterValues"].format
+    where:
+      - $.definitions.ChangeStateProperties.StageParameters
+      - $.definitions.Parameter.metadata
+      - $.definitions.Stage.parameterValues
+      - $.definitions.StageMapProperties.parameters
+      - $.definitions.StageProgressionProperties.parameterValues
+      - $.definitions.StageProgressionPropertiesUpdate.parameterValues
     reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
 ```
 
