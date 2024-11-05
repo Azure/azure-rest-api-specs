@@ -27,12 +27,14 @@ model VirtualMachineScaleSetVMExtension
   /**
    * Resource type
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   type?: string;
 
   /**
    * The location of the extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read", "create")
   location?: string;
 }
@@ -60,7 +62,10 @@ interface VirtualMachineScaleSetVMExtensions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMExtensions_CreateOrUpdate")
-  createOrUpdate is ComputeResourceCreateOrReplaceAsync<VirtualMachineScaleSetVMExtension>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
+    VirtualMachineScaleSetVMExtension,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update the VMSS VM extension.
@@ -70,7 +75,10 @@ interface VirtualMachineScaleSetVMExtensions {
   @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
-    VirtualMachineScaleSetVMExtensionUpdate
+    VirtualMachineScaleSetVMExtensionUpdate,
+    Response = OkResponse &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

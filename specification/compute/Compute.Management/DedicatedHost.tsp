@@ -27,6 +27,7 @@ model DedicatedHost
   /**
    * SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   sku: Sku;
 }
 
@@ -49,9 +50,10 @@ interface DedicatedHosts {
   /**
    * Create or update a dedicated host .
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
-  @Azure.Core.useFinalStateVia("location")
-  createOrUpdate is ComputeResourceCreateOrReplaceAsync<DedicatedHost>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
+    DedicatedHost,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a dedicated host .
@@ -60,7 +62,9 @@ interface DedicatedHosts {
   update is ComputeCustomPatchAsync<
     DedicatedHost,
     DedicatedHostUpdate,
-    Response = ArmResponse<DedicatedHost>
+    Response = ArmResponse<DedicatedHost> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

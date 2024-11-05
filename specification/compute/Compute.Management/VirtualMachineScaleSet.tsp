@@ -25,31 +25,37 @@ model VirtualMachineScaleSet
   /**
    * The virtual machine scale set sku.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   sku?: Sku;
 
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   plan?: Plan;
 
   /**
    * The identity of the virtual machine scale set, if configured.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   identity?: VirtualMachineScaleSetIdentity;
 
   /**
    * The virtual machine scale set zones.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   zones?: string[];
 
   /**
    * The extended location of the Virtual Machine Scale Set.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   extendedLocation?: ExtendedLocation;
 
   /**
    * Etag is property returned in Create/Update/Get response of the VMSS, so that customer can supply it in the header to ensure optimistic updates
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   etag?: string;
 }
@@ -87,7 +93,8 @@ interface VirtualMachineScaleSets {
        */
       @header
       IfNoneMatch?: string;
-    }
+    },
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -109,7 +116,10 @@ interface VirtualMachineScaleSets {
        */
       @header
       IfNoneMatch?: string;
-    }
+    },
+    Response = ArmResponse<VirtualMachineScaleSet> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -150,7 +160,12 @@ interface VirtualMachineScaleSets {
    */
   approveRollingUpgrade is ComputeResourceActionNoResponseContentAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    }
   >;
 
   /**
@@ -159,7 +174,7 @@ interface VirtualMachineScaleSets {
   convertToSinglePlacementGroup is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     VMScaleSetConvertToSinglePlacementGroupInput,
-    void
+    OkResponse
   >;
 
   /**
@@ -167,7 +182,12 @@ interface VirtualMachineScaleSets {
    */
   deallocate is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    },
     void,
     Parameters = {
       /**
@@ -181,10 +201,11 @@ interface VirtualMachineScaleSets {
   /**
    * Deletes virtual machines in a VM scale set.
    */
+  @action("delete")
   deleteInstances is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)
@@ -226,6 +247,7 @@ interface VirtualMachineScaleSets {
    * Gets the status of a VM scale set instance.
    */
   @get
+  @action("instanceView")
   getInstanceView is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -235,10 +257,11 @@ interface VirtualMachineScaleSets {
   /**
    * Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
    */
+  @action("manualupgrade")
   updateInstances is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
-    void
+    OkResponse
   >;
 
   /**
@@ -247,6 +270,7 @@ interface VirtualMachineScaleSets {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
+  @action("osUpgradeHistory")
   getOSUpgradeHistory is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -258,17 +282,28 @@ interface VirtualMachineScaleSets {
    */
   performMaintenance is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    },
     void
   >;
 
   /**
    * Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
    */
+  @action("poweroff")
   powerOff is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void,
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    },
+    OkResponse,
     Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
@@ -281,15 +316,24 @@ interface VirtualMachineScaleSets {
   /**
    * Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual Machine Instances
    */
-  reapply is ComputeResourceActionAsync<VirtualMachineScaleSet, void, void>;
+  reapply is ComputeResourceActionAsync<
+    VirtualMachineScaleSet,
+    void,
+    OkResponse
+  >;
 
   /**
    * Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
    */
   redeploy is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    },
+    OkResponse
   >;
 
   /**
@@ -297,17 +341,28 @@ interface VirtualMachineScaleSets {
    */
   reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetReimageParameters,
-    void
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    },
+    OkResponse
   >;
 
   /**
    * Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
    */
+  @action("reimageall")
   reimageAll is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    },
+    OkResponse
   >;
 
   /**
@@ -315,8 +370,13 @@ interface VirtualMachineScaleSets {
    */
   restart is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    },
+    OkResponse
   >;
 
   /**
@@ -325,13 +385,14 @@ interface VirtualMachineScaleSets {
   setOrchestrationServiceState is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     OrchestrationServiceStateInput,
-    void
+    OkResponse
   >;
 
   /**
    * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
    */
   @get
+  @action("skus")
   listSkus is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -343,8 +404,13 @@ interface VirtualMachineScaleSets {
    */
   start is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
+    {
+      /**
+       * A list of virtual machine instance IDs from the VM scale set.
+       */
+      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+    },
+    OkResponse
   >;
 
   /**
