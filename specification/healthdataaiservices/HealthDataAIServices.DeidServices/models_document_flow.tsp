@@ -76,6 +76,8 @@ model DeidentificationJob {
   summary?: JobSummary;
 }
 
+
+
 @doc("List of statuses a job can have.")
 @lroStatus
 union JobStatus {
@@ -128,14 +130,12 @@ model JobSummary {
 }
 
 @doc("Paginated details of all documents in a job.")
-@resource("documents")
-@parentResource(DeidentificationJob) // TODO - retrieving a single document by id won't work with this
 @pagedResult
-model DocumentDetails {
+model PagedDocumentDetails {
   @key
   @doc("List of documents.")
   @visibility("read")
-  value: Array<DocumentDetail>;
+  value: Array<DocumentDetails>;
 
   @doc("Token to continue a previous query.")
   @nextLink
@@ -143,12 +143,12 @@ model DocumentDetails {
 }
 
 @doc("Details of a single document in a job.")
-// @resource("documents")
-// @parentResource(DeidentificationJob)
-model DocumentDetail {
-  // @key
+@parentResource(DeidentificationJob) 
+@resource("documents")
+model DocumentDetails {
+  @key
   @doc("Id of the document details.")
-  // @visibility("read")
+  @visibility("read")
   id: string;
 
   @doc("Location for the input.")

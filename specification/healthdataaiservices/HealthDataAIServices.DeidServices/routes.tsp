@@ -49,19 +49,17 @@ op listJobs is DeidentifyOperations.ResourceList<
 //   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 // >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @summary("List processed documents within a job.")
-op listJobDocuments is Azure.Core.Foundations.ListOperation<
-  {}, DocumentDetails
+@route("/jobs/{jobName}/documents")
+op listJobDocuments is Azure.Core.Foundations.Operation<
+  {
+    @doc("The name of a job.")
+    jobName: string;
+
+    ...PaginationByTokenQueryParameters;
+  }, PagedDocumentDetails
 >;
-
-@doc("Query parameters for list operation.")
-model PaginationByTokenQueryParameters {
-  ...MaxPageSizeQueryParameter;
-
-  @query
-  @doc("Token to continue a previous query.")
-  continuationToken?: string;
-}
 
 #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" ""
 @summary("Cancel a de-identification job.")
@@ -95,12 +93,12 @@ op deidentifyText is Azure.Core.RpcOperation<
   DeidentificationResult
 >;
 
-// 
-// @doc("Query parameters for list operation.")
-// model PaginationByTokenQueryParameters {
-//   ...MaxPageSizeQueryParameter;
-// 
-//   @query
-//   @doc("Token to continue a previous query.")
-//   continuationToken?: string;
-// }
+
+@doc("Query parameters for list operation.")
+model PaginationByTokenQueryParameters {
+  ...MaxPageSizeQueryParameter;
+
+  @query
+  @doc("Token to continue a previous query.")
+  continuationToken?: string;
+}
