@@ -12,7 +12,7 @@ module.exports = async ({ github, context, core }) => {
 
   if (!owner || !repo || !run_id) {
     // TODO: Add support for more event types
-    if (context.eventName == "workflow_run" && context.action == "completed") {
+    if (context.eventName == "workflow_run" && context.payload.action == "completed") {
       const payload =
         /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
           context.payload
@@ -24,7 +24,7 @@ module.exports = async ({ github, context, core }) => {
       run_id = run_id || payload.workflow_run.id;
     } else {
       throw new Error(
-        `Invalid context: '${context.eventName}:${context.action}'.  Expected 'workflow_run:completed'.`,
+        `Invalid context: '${context.eventName}:${context.payload.action}'.  Expected 'workflow_run:completed'.`,
       );
     }
   }
