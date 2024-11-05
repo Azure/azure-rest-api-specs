@@ -379,6 +379,7 @@ model InnerErrorModel {
  * Represents the options used to create or update a project.
  */
 @clientName("CreateProjectOptions")
+@clientName("CreateProjectConfig","csharp")
 model TextAnalysisAuthoringCreateProjectOptions {
   /**
    * The project kind.
@@ -422,6 +423,7 @@ model TextAnalysisAuthoringCreateProjectOptions {
  * resource.
  */
 @clientName("CopyAuthorizationOptions")
+@clientName("CopyAuthorizationConfig","csharp")
 model TextAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
@@ -445,6 +447,7 @@ model TextAnalysisAuthoringCopyAuthorizationOptions {
  * resource.
  */
 @clientName("CopyProjectOptions")
+@clientName("CopyProjectConfig","csharp")
 model TextAnalysisAuthoringCopyProjectOptions {
   /**
    * Represents the project kind.
@@ -517,6 +520,7 @@ model TextAnalysisAuthoringExportedProjectAssets {
  * Represents the options for starting a new training job.
  */
 @clientName("TrainingJobOptions")
+@clientName("TrainingJobConfig","csharp")
 model TextAnalysisAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
@@ -586,6 +590,7 @@ model TextAnalysisAuthoringDataGenerationConnectionInfo {
  * Represents the options used running the evaluation.
  */
 @clientName("EvaluationOptions")
+@clientName("EvaluationConfig","csharp")
 model TextAnalysisAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to
@@ -757,7 +762,7 @@ model TextAnalysisAuthoringDeploymentResource {
 /**
  * Represents the options for creating or updating a project deployment.
  */
-@clientName("CreateDeploymentOptions", "csharp")
+@clientName("CreateDeploymentConfig", "csharp")
 model TextAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
@@ -777,7 +782,7 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
  * Represents the options for deleting a project deployment.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("DeleteDeploymentOptions", "csharp")
+@clientName("DeleteDeploymentConfig", "csharp")
 model TextAnalysisAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from.
@@ -823,6 +828,7 @@ model TextAnalysisAuthoringSwapDeploymentsJobState {
  * Represents the options for swapping two deployments together.
  */
 @clientName("SwapDeploymentsOptions")
+@clientName("SwapDeploymentsConfig","csharp")
 model TextAnalysisAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
@@ -912,6 +918,7 @@ model TextAnalysisAuthoringExportedTrainedModel {
  * Represents the options for creating or replacing an exported model.
  */
 @clientName("ExportedModelOptions")
+@clientName("ExportedModelConfig","csharp")
 model TextAnalysisAuthoringExportedModelOptions {
   /**
    * The trained model label.
@@ -1227,6 +1234,7 @@ model TextAnalysisAuthoringAssignedDeploymentResource {
  * Represents the options for assigning Azure resources to a project.
  */
 @clientName("AssignDeploymentResourcesOptions")
+@clientName("AssignDeploymentResourcesConfig","csharp")
 model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
@@ -1260,6 +1268,7 @@ model TextAnalysisAuthoringResourceMetadata {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("UnassignDeploymentResourcesOptions")
+@clientName("UnassignDeploymentResourcesConfig","csharp")
 model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
