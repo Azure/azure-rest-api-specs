@@ -18,6 +18,23 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.deviceregistry"
     service-name: "Device Registry"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-deviceregistry"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-deviceregistry"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-deviceregistry"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

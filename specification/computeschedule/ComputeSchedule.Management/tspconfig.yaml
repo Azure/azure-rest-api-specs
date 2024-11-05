@@ -14,16 +14,6 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.ComputeSchedule"
-    flavor: azure
-    clear-output-folder: true
-    namespace: "{package-dir}"
-  "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-computeschedule"
-    flavor: "azure"
-    namespace: "com.azure.resourcemanager.computeschedule"
-    service-name: "Compute Schedule"
   "@azure-tools/typespec-ts":
     azureSdkForJs: true
     isModularLibrary: true
@@ -35,6 +25,16 @@ options:
     flavor: "azure"
     packageDetails:
       name: "@azure/arm-computeschedule"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.ComputeSchedule"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-computeschedule"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.computeschedule"
+    service-name: "Compute Schedule"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

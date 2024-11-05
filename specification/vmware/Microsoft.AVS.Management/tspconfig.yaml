@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/vmware"
+    default: "sdk/avs"
   "service-directory-name":
     default: "vmware"
 emit: ["@azure-tools/typespec-autorest"]
@@ -17,3 +17,21 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/vmware.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    clear-output-folder: true
+    package-dir: "arm-avs"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-avs"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-avs"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true

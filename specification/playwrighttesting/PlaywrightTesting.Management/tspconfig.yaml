@@ -7,6 +7,8 @@ linter:
   disable:
     "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
 parameters:
+  "service-dir":
+    default: "sdk/playwrighttesting"
   "service-directory-name":
     default: "playwrighttesting"
 options:
@@ -19,7 +21,24 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
-#  "@azure-tools/typespec-providerhub-controller":
-#    azure-resource-provider-folder: "resource-manager"
-#    emitter-output-dir: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/generated"
-#    code-kind: model
+  #  "@azure-tools/typespec-providerhub-controller":
+  #     azure-resource-provider-folder: "resource-manager"
+  #     emitter-output-dir: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/generated"
+  #     code-kind: model
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-playwrighttesting"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-playwrighttesting"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-playwrighttesting"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
