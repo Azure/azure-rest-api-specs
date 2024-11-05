@@ -42,10 +42,18 @@ model OperatorApiConnectionProperties {
   ]>;
 
   /**
-   * Details about the SaaS offer purchased from the marketplace. TO DO figure out how to change this to read only
+   * Details about the SaaS offer purchased from the marketplace.
    */
-  @visibility("read")
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
+  @visibility("read", "create", "update")
   saasProperties?: SaasProperties;
+
+  /**
+   * Details about the SaaS offer purchased from the Azure Marketplace.
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  @visibility("read")
+  marketplaceSaasProperties?: SaasProperties;
 
   /**
    * Details about the Application that would use the Operator's Network APIs.

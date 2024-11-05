@@ -1081,8 +1081,12 @@
         },
         "saasProperties": {
           "$ref": "#/definitions/SaasProperties",
-          "description": "Details about the SaaS offer purchased from the marketplace. TO DO figure out how to change this to read only",
-          "readOnly": true
+          "description": "Details about the SaaS offer purchased from the marketplace.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "configuredApplication": {
           "$ref": "#/definitions/ApplicationProperties",
@@ -1201,6 +1205,15 @@
               }
             ]
           }
+        },
+        "saasProperties": {
+          "$ref": "#/definitions/SaasProperties",
+          "description": "Details about the SaaS offer purchased from the marketplace.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "configuredApplication": {
           "$ref": "#/definitions/ApplicationProperties",
