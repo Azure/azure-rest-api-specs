@@ -1,18 +1,14 @@
 parameters:
   "service-dir":
     default: "sdk/durabletask"
-  "dependencies":
-    "additionalDirectories": []
-    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
-
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     azure-resource-provider-folder: "resource-manager"
     emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/durabletask.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-durabletask"
     package-name: "{package-dir}"
@@ -21,9 +17,9 @@ options:
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-durabletask"
-    flavor: "azure"
     namespace: "com.azure.resourcemanager.durabletask"
-    service-name: "Durable Task"
+    service-name: "durabletask"
+    flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/durabletask"
     package-dir: "armdurabletask"
@@ -39,6 +35,7 @@ options:
     package-dir: "Azure.ResourceManager.DurableTask"
     flavor: azure
     clear-output-folder: true
+    model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
     azureSdkForJs: true
@@ -48,7 +45,6 @@ options:
     experimentalExtensibleEnums: true
     enableOperationGroup: true
     package-dir: "arm-durabletask"
-    emitter-output-dir: "{project-root}/sdk/durabletask/arm-durabletask"
     flavor: "azure"
     packageDetails:
       name: "@azure/arm-durabletask"
