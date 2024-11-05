@@ -32,11 +32,45 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-01
+tag: package-preview-2024-10
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
 ```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
+  - Microsoft.Insights/preview/2024-01-01-preview/scheduledQueryRule_API.json
+
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: BodyTopLevelProperties
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: OperationIdNounVerb
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: OperationsAPIImplementation
+    from: actionGroups_API.json
+    reason: False positive. Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)
+  - code: PatchBodyParametersSchema
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: PostResponseCodes
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+```
+
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
@@ -1539,6 +1573,22 @@ directive:
     from: scheduledQueryRule_API.json
     where: $.definitions.Actions.properties.actionProperties
     reason: "This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values."
+```
+
+### Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAdditionalProperties
+  - code: BodyTopLevelProperties
+  - code: DefinitionsPropertiesNamesCamelCase
+  - code: LroErrorContent
+  - code: NoErrorCodeResponses
+  - code: OperationIdNounVerb
+  - code: OperationsAPIImplementation
+  - code: PatchBodyParametersSchema
+  - code: PostResponseCodes
+  - code: ResourceNameRestriction
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
