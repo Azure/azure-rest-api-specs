@@ -56,6 +56,12 @@ model ListConnectionsResponse {
 model InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType;
+
+  @doc("Category of the connection")
+  category: ConnectionType;
+
+  @doc("The connection URL to be used for this service")
+  target: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum"
@@ -77,17 +83,9 @@ model InternalConnectionPropertiesApiKeyAuth
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.apiKey;
 
-  @doc("Category of the connection")
-  category: ConnectionType;
-
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsApiKeyAuth;
 
-  @doc("The connection URL to be used for this service")
-  target: string;
-
-  //@doc("to do")
-  //metadata: PropertiesMetadata;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -95,12 +93,6 @@ model InternalConnectionPropertiesApiKeyAuth
 model InternalConnectionPropertiesAADAuth extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.AAD;
-
-  @doc("Category of the connection")
-  category: ConnectionType;
-
-  @doc("The connection URL to be used for this service")
-  target: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -109,14 +101,8 @@ model InternalConnectionPropertiesSASAuth extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.SAS;
 
-  @doc("Category of the connection")
-  category: ConnectionType;
-
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsSASAuth;
-
-  @doc("The connection URL to be used for this service")
-  target: string;
 }
 
 @doc("The credentials needed for API key authentication")
