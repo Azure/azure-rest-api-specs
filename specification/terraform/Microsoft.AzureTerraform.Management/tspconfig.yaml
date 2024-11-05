@@ -16,6 +16,12 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-terraform"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
