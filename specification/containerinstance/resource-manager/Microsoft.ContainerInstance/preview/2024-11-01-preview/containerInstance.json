@@ -1276,7 +1276,11 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
         "operationId": "ContainerGroupProfile_ListBySubscription",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesList": {
+            "$ref": "./examples/ContainerGroupProfilesList.json"
+          }
+        },
         "summary": "Gets a list of all container group profiles under a subscription.",
         "description": "Gets a list of all container group profiles under a subscription.",
         "parameters": [
@@ -1309,7 +1313,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
         "operationId": "ContainerGroupProfile_ListByResourceGroup",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesListByResourceGroup": {
+            "$ref": "./examples/ContainerGroupProfilesListByResourceGroup.json"
+          }
+        },
         "summary": "Gets a list of all container group profiles under a resource group.",
         "description": "Gets a list of all container group profiles under a resource group.",
         "parameters": [
@@ -1357,9 +1365,6 @@
           },
           "ConfidentialContainerGroupProfile": {
             "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_CreateConfidential.json"
-          },
-          "ContainerGroupsCreateWithPriority": {
-            "$ref": "./examples/ContainerGroupsProfileCreateOrUpdate_CreatePriority.json"
           }
         },
         "summary": "Create or Update a ContainerGroupProfile",
@@ -1471,7 +1476,14 @@
       },
       "get": {
         "operationId": "ContainerGroupProfile_Get",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesGet_Succeeded": {
+            "$ref": "./examples/ContainerGroupProfilesGet.json"
+          },
+          "ContainerGroupProfilesGetWithPriority": {
+            "$ref": "./examples/ContainerGroupProfilesGetPriority.json"
+          }
+        },
         "summary": "Display information about a specified ContainerGroupProfile.",
         "description": "Get the properties of the specified container group profile.",
         "parameters": [
