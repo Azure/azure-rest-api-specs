@@ -330,61 +330,52 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
         }
       ],
       "properties": {
         "properties": {
-          "description": "Dapr component properties",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentProperties"
-            }
-          ],
-          "properties": {
-            "provisioningState": {
-              "description": "Provisioning state of the Connected Environment Dapr Component.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "InProgress"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "ConnectedEnvironmentDaprComponentProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "deploymentErrors": {
-              "description": "Any errors that occurred during deployment or deployment validation",
-              "type": "string",
-              "readOnly": true
+          "provisioningState": {
+            "description": "Provisioning state of the Connected Environment Dapr Component.",
+            "enum": [
+              "Succeeded",
+              "Failed",
+              "Canceled",
+              "InProgress"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ConnectedEnvironmentDaprComponentProvisioningState",
+              "modelAsString": true
             }
           },
-          "x-ms-client-flatten": true
+          "deploymentErrors": {
+            "description": "Any errors that occurred during deployment or deployment validation",
+            "type": "string",
+            "readOnly": true
+          }
         }
       }
     }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
+  }
+},
+"securityDefinitions": {
+  "azure_auth": {
+    "type": "oauth2",
+    "description": "Azure Active Directory OAuth2 Flow",
+    "flow": "implicit",
+    "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+    "scopes": {
+      "user_impersonation": "impersonate your user account"
     }
-  },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ]
+  }
+},
+"security": [
+  {
+    "azure_auth": [
+      "user_impersonation"
+    ]
+  }
+]
 }
