@@ -730,7 +730,7 @@ model Image is ProxyResource<ImageProperties> {
 }
 
 @doc("The type of resource.")
-union ResourceType {
+union DevOpsInfrastructureResourceType {
   string,
 
   @doc("DevOpsInfrastructure pool resource.")
@@ -743,7 +743,7 @@ model CheckNameAvailability {
   name: string;
 
   @doc("The type of resource that is used as the scope of the availability check.")
-  type: ResourceType;
+  type: DevOpsInfrastructureResourceType;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"

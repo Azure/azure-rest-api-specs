@@ -826,7 +826,7 @@
           "description": "The name of the resource."
         },
         "type": {
-          "$ref": "#/definitions/ResourceType",
+          "$ref": "#/definitions/DevOpsInfrastructureResourceType",
           "description": "The type of resource that is used as the scope of the availability check."
         }
       },
@@ -922,6 +922,24 @@
       "required": [
         "name"
       ]
+    },
+    "DevOpsInfrastructureResourceType": {
+      "type": "string",
+      "description": "The type of resource.",
+      "enum": [
+        "Microsoft.DevOpsInfrastructure/pools"
+      ],
+      "x-ms-enum": {
+        "name": "DevOpsInfrastructureResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.DevOpsInfrastructure/pools",
+            "value": "Microsoft.DevOpsInfrastructure/pools",
+            "description": "DevOpsInfrastructure pool resource."
+          }
+        ]
+      }
     },
     "FabricProfile": {
       "type": "object",
@@ -1937,24 +1955,6 @@
             "name": "Reimaging",
             "value": "Reimaging",
             "description": "Represents a machine resource that is reimaging."
-          }
-        ]
-      }
-    },
-    "ResourceType": {
-      "type": "string",
-      "description": "The type of resource.",
-      "enum": [
-        "Microsoft.DevOpsInfrastructure/pools"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Microsoft.DevOpsInfrastructure/pools",
-            "value": "Microsoft.DevOpsInfrastructure/pools",
-            "description": "DevOpsInfrastructure pool resource."
           }
         ]
       }
