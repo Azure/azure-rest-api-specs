@@ -11,22 +11,22 @@ module.exports = async ({ github, context, core }) => {
   let run_id = parseInt(process.env.RUN_ID || "");
 
   if (!owner || !repo || !run_id) {
-  // TODO: Add support for more event types
-    if (context.eventName !== "workflow_run" || context.action != "completed") {
+    // TODO: Add support for more event types
+    if (context.eventName == "workflow_run" && context.action == "completed") {
+      const payload =
+        /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
+          context.payload
+        );
+
+      // Only update vars not already set
+      owner = owner || payload.workflow_run.repository.owner.login;
+      repo = repo || payload.workflow_run.repository.name;
+      run_id = run_id || payload.workflow_run.id;
+    } else {
       throw new Error(
         `Invalid context: '${context.eventName}:${context.action}'.  Expected 'workflow_run:completed'.`,
       );
     }
-
-    const payload =
-      /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
-        context.payload
-      );
-
-    // Only update vars not already set
-    owner = owner || payload.workflow_run.repository.owner.login;
-    repo = repo || payload.workflow_run.repository.name;
-    run_id = run_id || payload.workflow_run.id;
   }
 
   const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
