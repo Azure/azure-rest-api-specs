@@ -94,6 +94,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/checkNameAvailability": {
+      "post": {
+        "operationId": "Pools_CheckNameAvailability",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Checks that the pool name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/locations/{locationName}/skus": {
       "get": {
         "operationId": "Sku_ListByLocation",
@@ -771,6 +811,76 @@
           }
         ]
       }
+    },
+    "CheckNameAvailability": {
+      "type": "object",
+      "description": "The parameters used to check the availability of a resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource that is used as the scope of the availability check."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "CheckNameAvailabilityReason": {
+      "type": "string",
+      "description": "The reason code explaining why the name is unavailable. Will be null if the name is available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "CheckNameAvailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "The name already exists."
+          }
+        ]
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "The CheckNameAvailability operation response.",
+      "properties": {
+        "available": {
+          "type": "boolean",
+          "description": "True if the name is available, otherwise false."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining why the name is unavailable. Will be null if the name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name whose availability was checked."
+        },
+        "reason": {
+          "$ref": "#/definitions/CheckNameAvailabilityReason",
+          "description": "The reason code explaining why the name is unavailable. Will be null if the name is available."
+        }
+      },
+      "required": [
+        "available",
+        "message",
+        "name",
+        "reason"
+      ]
     },
     "DataDisk": {
       "type": "object",
@@ -1822,6 +1932,24 @@
             "name": "Reimaging",
             "value": "Reimaging",
             "description": "Represents a machine resource that is reimaging."
+          }
+        ]
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "The type of resource",
+      "enum": [
+        "Microsoft.DevOpsInfrastructure/pools"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.DevOpsInfrastructure/pools",
+            "value": "Microsoft.DevOpsInfrastructure/pools",
+            "description": "DevOpsInfrastructure pool resource"
           }
         ]
       }
