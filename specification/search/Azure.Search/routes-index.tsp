@@ -84,7 +84,7 @@ interface DocumentsOperations {
        * A string tag that is prepended to hit highlights. Must be set with
        * highlightPostTag. Default is &lt;em&gt;.
        */
-      @query("highlightPreTag")
+      @query
       highlightPreTag?: string;
 
       /**
