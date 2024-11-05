@@ -4,7 +4,7 @@ on: pull_request
 
 env:
   # Users allowed to edit protected files without failing check
-  user-allowed: ${{ github.event.pull_request.user.login == 'azure-sdk' || github.event.pull_request.user.login == 'dependabot[bot]' }}
+  user-allowed: ${{ github.event.pull_request.user.login == 'azure-sdk' }}
 
 jobs:
   protected-files:
