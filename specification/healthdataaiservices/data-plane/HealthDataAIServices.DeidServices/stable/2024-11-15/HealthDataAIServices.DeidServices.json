@@ -62,6 +62,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "Request body for de-identification operation.",
@@ -76,6 +79,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeidentificationResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -422,7 +432,10 @@
             "in": "path",
             "description": "The name of a job.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"

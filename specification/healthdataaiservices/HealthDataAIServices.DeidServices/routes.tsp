@@ -43,12 +43,6 @@ op listJobs is DeidentifyOperations.ResourceList<
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
-// @summary("List processed documents within a job.")
-// op listJobDocuments is DeidentifyOperations.ResourceList<
-//   DocumentDetails,
-//   ListQueryParametersTrait<PaginationByTokenQueryParameters>
-// >;
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @summary("List processed documents within a job.")
 @route("/jobs/{jobName}/documents")
@@ -61,10 +55,20 @@ op listJobDocuments is Azure.Core.Foundations.Operation<
     jobName: string;
 
     ...PaginationByTokenQueryParameters;
+  }, 
+  Page<DocumentDetails>,
+  Azure.Core.Foundations.ErrorResponse
+>; 
 
-    
-  }, Page<DocumentDetails>
->;
+@doc("Query parameters for list operation.")
+model PaginationByTokenQueryParameters {
+  ...MaxPageSizeQueryParameter;
+
+  @query
+  @doc("Token to continue a previous query.")
+  @visibility("read")
+  continuationToken?: string;
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" ""
 @summary("Cancel a de-identification job.")
@@ -100,13 +104,12 @@ op deidentifyText is Azure.Core.RpcOperation<
 >;
 
 
-@doc("Query parameters for list operation.")
-model PaginationByTokenQueryParameters {
-  ...MaxPageSizeQueryParameter;
+// @doc("Query parameters for list operation.")
+// model PaginationByTokenQueryParameters {
+//   ...MaxPageSizeQueryParameter;
 
-  @query
-  @doc("Token to continue a previous query.")
-  @visibility("read")
-  // @access(Access.internal)
-  continuationToken?: string;
-}
+//   @query
+//   @doc("Token to continue a previous query.")
+//   @visibility("read")
+//   continuationToken?: string;
+// }

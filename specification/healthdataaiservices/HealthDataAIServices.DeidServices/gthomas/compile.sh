@@ -1,0 +1,1 @@
+npx tsp compile .
