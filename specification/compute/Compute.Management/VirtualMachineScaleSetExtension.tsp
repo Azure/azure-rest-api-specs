@@ -27,6 +27,7 @@ model VirtualMachineScaleSetExtension
   /**
    * Resource type
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   type?: string;
 }

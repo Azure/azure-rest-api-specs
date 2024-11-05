@@ -25,6 +25,7 @@ model ProximityPlacementGroup
   /**
    * Specifies the Availability Zone where virtual machine, virtual machine scale set or availability set associated with the  proximity placement group can be created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   zones?: string[];
 }
 

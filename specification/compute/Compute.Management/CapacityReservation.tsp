@@ -27,11 +27,13 @@ model CapacityReservation
   /**
    * SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   sku: Sku;
 
   /**
    * Availability Zone to use for this capacity reservation. The zone has to be single value and also should be part for the list of zones specified during the capacity reservation group creation. The zone can be assigned only during creation. If not provided, the reservation supports only non-zonal deployments. If provided, enforces VM/VMSS using this capacity reservation to be in same zone.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   zones?: string[];
 }
 
@@ -54,18 +56,19 @@ interface CapacityReservations {
   /**
    * The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
-  @Azure.Core.useFinalStateVia("location")
-  createOrUpdate is ComputeResourceCreateOrReplaceAsync<CapacityReservation>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
+    CapacityReservation,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update a capacity reservation.
    */
   @parameterVisibility
-  @Azure.Core.useFinalStateVia("location")
   update is ComputeCustomPatchAsync<
     CapacityReservation,
-    CapacityReservationUpdate
+    CapacityReservationUpdate,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -73,9 +76,10 @@ interface CapacityReservations {
    */
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  @Azure.Core.useFinalStateVia("location")
-  delete is ComputeResourceDeleteAsync<CapacityReservation>;
+  delete is ComputeResourceDeleteAsync<
+    CapacityReservation,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.

@@ -24,6 +24,7 @@ model Image is Azure.ResourceManager.TrackedResource<ImageProperties> {
   /**
    * The extended location of the Image.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -46,9 +47,10 @@ interface Images {
   /**
    * Create or update an image.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
-  @Azure.Core.useFinalStateVia("location")
-  createOrUpdate is ComputeResourceCreateOrReplaceAsync<Image>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
+    Image,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update an image.
