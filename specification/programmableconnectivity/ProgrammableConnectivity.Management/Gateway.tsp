@@ -125,7 +125,7 @@ model ApplicationOwnerProperties {
   /**
    * Registered Geographic address
    */
-  registeredGeographicaAddress: GeographicAddress;
+  registeredGeographicAddress: GeographicAddress;
 }
 
 /**
@@ -253,7 +253,7 @@ union Category {
   beauty: "Beauty",
   booksAndReference: "Books and Reference",
   business: "Business",
-  developerTools: "Develpoer tools",
+  developerTools: "Developer tools",
   education: "Education",
   eventsAndEntertainment: "Events and Entertainment",
   finance: "Finance",
