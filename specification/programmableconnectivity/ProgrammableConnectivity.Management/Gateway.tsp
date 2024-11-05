@@ -160,7 +160,7 @@ model ApplicationProperties {
    * Privacy rights request email address TO DO need to find out what this actually is
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
-  privacyRightsRequestEmailAddres: string;
+  privacyRightsRequestEmailAddress: string;
 
   /**
    * Legal name of the organization owning the application.

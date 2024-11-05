@@ -111,7 +111,7 @@ model OperatorApiConnectionProperties {
   status?: Status;
 
   /**
-   * The purpose for which the Application will use the API
+   * The purpose for which the Application will use the API. Max Items 1 currently as Operators do not support multiple.
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
   @maxItems(1)
