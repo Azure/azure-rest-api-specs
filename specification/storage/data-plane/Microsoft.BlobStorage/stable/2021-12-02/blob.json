@@ -83,7 +83,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -141,7 +142,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -208,7 +210,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -285,7 +288,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -367,28 +371,9 @@
                 "description": "Indicates whether version level worm is enabled on a container"
               },
               "x-ms-lease-duration": {
-                "type": "string",
-                "description": "When a blob is leased, specifies whether the lease is of infinite or fixed duration.",
-                "enum": [
-                  "infinite",
-                  "fixed"
-                ],
-                "x-ms-enum": {
-                  "name": "LeaseDuration",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "Infinite",
-                      "value": "infinite",
-                      "description": "The lease is of infinite duration."
-                    },
-                    {
-                      "name": "Fixed",
-                      "value": "fixed",
-                      "description": "The lease is of fixed duration."
-                    }
-                  ]
-                }
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change."
               },
               "x-ms-lease-state": {
                 "type": "string",
@@ -500,7 +485,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-blob-public-access",
@@ -625,7 +611,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-version",
@@ -700,7 +687,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -824,7 +812,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-range",
@@ -845,10 +834,10 @@
           {
             "name": "x-ms-range-get-content-md5",
             "in": "header",
-            "description": "Optional.  When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size.",
+            "description": "When set to true and specified together with the Range, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "rangeContentMd5"
+            "x-ms-client-name": "rangeGetContentMd5"
           },
           {
             "name": "x-ms-range-get-content-crc64",
@@ -856,7 +845,7 @@
             "description": "Optional.  When this header is set to true and specified together with the Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "rangeContentCrc64"
+            "x-ms-client-name": "rangeGetContentCrc64"
           },
           {
             "name": "x-ms-encryption-key",
@@ -880,6 +869,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -1126,28 +1129,9 @@
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob was last read or written to"
               },
               "x-ms-lease-duration": {
-                "type": "string",
-                "description": "When a blob is leased, specifies whether the lease is of infinite or fixed duration.",
-                "enum": [
-                  "infinite",
-                  "fixed"
-                ],
-                "x-ms-enum": {
-                  "name": "LeaseDuration",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "Infinite",
-                      "value": "infinite",
-                      "description": "The lease is of infinite duration."
-                    },
-                    {
-                      "name": "Fixed",
-                      "value": "fixed",
-                      "description": "The lease is of fixed duration."
-                    }
-                  ]
-                }
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change."
               },
               "x-ms-lease-state": {
                 "type": "string",
@@ -1473,28 +1457,9 @@
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob was last read or written to"
               },
               "x-ms-lease-duration": {
-                "type": "string",
-                "description": "When a blob is leased, specifies whether the lease is of infinite or fixed duration.",
-                "enum": [
-                  "infinite",
-                  "fixed"
-                ],
-                "x-ms-enum": {
-                  "name": "LeaseDuration",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "Infinite",
-                      "value": "infinite",
-                      "description": "The lease is of infinite duration."
-                    },
-                    {
-                      "name": "Fixed",
-                      "value": "fixed",
-                      "description": "The lease is of fixed duration."
-                    }
-                  ]
-                }
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change."
               },
               "x-ms-lease-state": {
                 "type": "string",
@@ -1637,7 +1602,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1725,7 +1691,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -1757,6 +1724,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -1966,28 +1947,9 @@
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
               },
               "x-ms-lease-duration": {
-                "type": "string",
-                "description": "When a blob is leased, specifies whether the lease is of infinite or fixed duration.",
-                "enum": [
-                  "infinite",
-                  "fixed"
-                ],
-                "x-ms-enum": {
-                  "name": "LeaseDuration",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "Infinite",
-                      "value": "infinite",
-                      "description": "The lease is of infinite duration."
-                    },
-                    {
-                      "name": "Fixed",
-                      "value": "fixed",
-                      "description": "The lease is of fixed duration."
-                    }
-                  ]
-                }
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change."
               },
               "x-ms-lease-state": {
                 "type": "string",
@@ -2243,28 +2205,9 @@
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
               },
               "x-ms-lease-duration": {
-                "type": "string",
-                "description": "When a blob is leased, specifies whether the lease is of infinite or fixed duration.",
-                "enum": [
-                  "infinite",
-                  "fixed"
-                ],
-                "x-ms-enum": {
-                  "name": "LeaseDuration",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "Infinite",
-                      "value": "infinite",
-                      "description": "The lease is of infinite duration."
-                    },
-                    {
-                      "name": "Fixed",
-                      "value": "fixed",
-                      "description": "The lease is of fixed duration."
-                    }
-                  ]
-                }
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change."
               },
               "x-ms-lease-state": {
                 "type": "string",
@@ -2405,7 +2348,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -2422,7 +2366,7 @@
             "required": false,
             "type": "string",
             "enum": [
-              "none",
+              "only",
               "include"
             ],
             "x-ms-enum": {
@@ -2430,9 +2374,9 @@
               "modelAsString": true,
               "values": [
                 {
-                  "name": "Nonne",
-                  "value": "none",
-                  "description": "The delete snapshots include option is not specified."
+                  "name": "Only",
+                  "value": "only",
+                  "description": "The delete snapshots include option is only."
                 },
                 {
                   "name": "Include",
@@ -2470,22 +2414,16 @@
             "required": false,
             "type": "string",
             "enum": [
-              "none",
-              "include"
+              "Permanent"
             ],
             "x-ms-enum": {
-              "name": "DeleteSnapshotsOptionType",
+              "name": "BlobDeleteType",
               "modelAsString": true,
               "values": [
                 {
-                  "name": "Nonne",
-                  "value": "none",
-                  "description": "The delete snapshots include option is not specified."
-                },
-                {
-                  "name": "Include",
-                  "value": "include",
-                  "description": "The delete snapshots include option is include."
+                  "name": "Permanent",
+                  "value": "Permanent",
+                  "description": "Permanently delete the blob."
                 }
               ]
             },
@@ -2578,7 +2516,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -2610,6 +2549,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -2685,7 +2638,7 @@
               },
               "x-ms-access-tier": {
                 "type": "string",
-                "description": "The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/premium-storage#features. For blob storage LRS accounts, valid values are Hot/Cool/Archive.",
+                "description": "The tier to be set on the blob.",
                 "enum": [
                   "P4",
                   "P6",
@@ -3007,28 +2960,9 @@
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob was last read or written to"
               },
               "x-ms-lease-duration": {
-                "type": "string",
-                "description": "When a blob is leased, specifies whether the lease is of infinite or fixed duration.",
-                "enum": [
-                  "infinite",
-                  "fixed"
-                ],
-                "x-ms-enum": {
-                  "name": "LeaseDuration",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "Infinite",
-                      "value": "infinite",
-                      "description": "The lease is of infinite duration."
-                    },
-                    {
-                      "name": "Fixed",
-                      "value": "fixed",
-                      "description": "The lease is of fixed duration."
-                    }
-                  ]
-                }
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change."
               },
               "x-ms-lease-state": {
                 "type": "string",
@@ -3189,7 +3123,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -3285,7 +3220,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -3398,7 +3334,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -3552,7 +3489,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3634,7 +3572,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3704,7 +3643,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "where",
@@ -3726,7 +3666,8 @@
             "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1
           },
           {
             "name": "include",
@@ -3824,7 +3765,7 @@
             "name": "x-ms-lease-duration",
             "in": "header",
             "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "duration"
@@ -3835,7 +3776,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-proposed-lease-id",
@@ -3948,7 +3890,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "If-Modified-Since",
@@ -4049,7 +3992,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "If-Modified-Since",
@@ -4146,7 +4090,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "If-Modified-Since",
@@ -4273,7 +4218,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "If-Modified-Since",
@@ -4388,7 +4334,8 @@
             "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1
           },
           {
             "name": "include",
@@ -4399,7 +4346,7 @@
             "items": {
               "type": "string",
               "enum": [
-                "copies",
+                "copy",
                 "deleted",
                 "metadata",
                 "snapshots",
@@ -4411,12 +4358,12 @@
                 "deletedwithversions"
               ],
               "x-ms-enum": {
-                "name": "ListBlobsIncludes",
+                "name": "ListBlobsIncludeItem",
                 "modelAsString": true,
                 "values": [
                   {
-                    "name": "Copies",
-                    "value": "copies",
+                    "name": "Copy",
+                    "value": "copy",
                     "description": "The include copies."
                   },
                   {
@@ -4475,7 +4422,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4572,7 +4520,8 @@
             "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1
           },
           {
             "name": "include",
@@ -4583,7 +4532,7 @@
             "items": {
               "type": "string",
               "enum": [
-                "copies",
+                "copy",
                 "deleted",
                 "metadata",
                 "snapshots",
@@ -4595,12 +4544,12 @@
                 "deletedwithversions"
               ],
               "x-ms-enum": {
-                "name": "ListBlobsIncludes",
+                "name": "ListBlobsIncludeItem",
                 "modelAsString": true,
                 "values": [
                   {
-                    "name": "Copies",
-                    "value": "copies",
+                    "name": "Copy",
+                    "value": "copy",
                     "description": "The include copies."
                   },
                   {
@@ -4659,7 +4608,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4701,7 +4651,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "NextMarker"
+          "nextLinkName": "nextMarker"
         }
       }
     },
@@ -4883,7 +4833,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-expiry-option",
@@ -5017,7 +4968,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-blob-cache-control",
@@ -5041,6 +4993,7 @@
             "description": "Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "blobContentMd5"
           },
           {
@@ -5183,7 +5136,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "If-Unmodified-Since",
@@ -5346,7 +5300,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -5422,7 +5377,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-legal-hold",
@@ -5510,7 +5466,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -5542,6 +5499,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -5671,13 +5642,14 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-duration",
             "in": "header",
             "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "duration"
@@ -5797,7 +5769,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -5910,7 +5883,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -6027,7 +6001,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -6152,7 +6127,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-break-period",
@@ -6271,7 +6247,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-encryption-key",
@@ -6295,6 +6272,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -6428,12 +6419,13 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-access-tier",
             "in": "header",
-            "description": "Optional.  The tier to be set on the blob.",
+            "description": "The tier to be set on the blob.",
             "required": false,
             "type": "string",
             "enum": [
@@ -6842,12 +6834,13 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-access-tier",
             "in": "header",
-            "description": "Optional.  The tier to be set on the blob.",
+            "description": "The tier to be set on the blob.",
             "required": false,
             "type": "string",
             "enum": [
@@ -7256,11 +7249,12 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
-            "name": "x-ms-copy-id",
-            "in": "header",
+            "name": "copyid",
+            "in": "query",
             "description": "The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation.",
             "required": true,
             "type": "string",
@@ -7363,7 +7357,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-access-tier",
@@ -7475,7 +7470,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "accessTier"
+            "x-ms-client-name": "tier"
           },
           {
             "name": "x-ms-rehydrate-priority",
@@ -7765,7 +7760,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "snapshot",
@@ -7878,7 +7874,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "versionid",
@@ -8003,7 +8000,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "Content-Length",
@@ -8015,7 +8013,86 @@
             "x-ms-client-name": "contentLength"
           },
           {
-            "$ref": "#/parameters/PremiumPageBlobAccessTierOptional"
+            "name": "x-ms-access-tier",
+            "in": "header",
+            "description": "Optional. Indicates the tier to be set on the page blob.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P4",
+              "P6",
+              "P10",
+              "P15",
+              "P20",
+              "P30",
+              "P40",
+              "P50",
+              "P60",
+              "P70",
+              "P80"
+            ],
+            "x-ms-enum": {
+              "name": "PremiumPageBlobAccessTier",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "P4",
+                  "value": "P4",
+                  "description": "The premium page blob access tier is P4."
+                },
+                {
+                  "name": "P6",
+                  "value": "P6",
+                  "description": "The premium page blob access tier is P6."
+                },
+                {
+                  "name": "P10",
+                  "value": "P10",
+                  "description": "The premium page blob access tier is P10."
+                },
+                {
+                  "name": "P15",
+                  "value": "P15",
+                  "description": "The premium page blob access tier is P15."
+                },
+                {
+                  "name": "P20",
+                  "value": "P20",
+                  "description": "The premium page blob access tier is P20."
+                },
+                {
+                  "name": "P30",
+                  "value": "P30",
+                  "description": "The premium page blob access tier is P30."
+                },
+                {
+                  "name": "P40",
+                  "value": "P40",
+                  "description": "The premium page blob access tier is P40."
+                },
+                {
+                  "name": "P50",
+                  "value": "P50",
+                  "description": "The premium page blob access tier is P50."
+                },
+                {
+                  "name": "P60",
+                  "value": "P60",
+                  "description": "The premium page blob access tier is P60."
+                },
+                {
+                  "name": "P70",
+                  "value": "P70",
+                  "description": "The premium page blob access tier is P70."
+                },
+                {
+                  "name": "P80",
+                  "value": "P80",
+                  "description": "The premium page blob access tier is P80."
+                }
+              ]
+            },
+            "x-ms-client-name": "tier"
           },
           {
             "name": "x-ms-blob-content-type",
@@ -8047,6 +8124,7 @@
             "description": "Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "blobContentMd5"
           },
           {
@@ -8095,6 +8173,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -8333,7 +8425,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-range",
@@ -8373,6 +8466,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -8557,7 +8664,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-range",
@@ -8597,6 +8705,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -8745,7 +8867,7 @@
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
           },
           {
-            "name": "x-ms-source-url",
+            "name": "x-ms-copy-source",
             "in": "header",
             "description": "Specify a URL to the copy source.",
             "required": true,
@@ -8774,6 +8896,7 @@
             "description": "Specify the crc64 calculated for the range of bytes that must be read from the copy source.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "sourceContentCrc64"
           },
           {
@@ -8791,7 +8914,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-range",
@@ -8823,6 +8947,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -9049,7 +9187,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-range",
@@ -9100,7 +9239,8 @@
             "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -9207,7 +9347,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "prevsnapshot",
@@ -9273,7 +9414,8 @@
             "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -9369,7 +9511,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -9401,6 +9544,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -9528,7 +9685,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -9690,7 +9848,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
@@ -9843,7 +10002,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "Content-Length",
@@ -9884,6 +10044,7 @@
             "description": "Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "blobContentMd5"
           },
           {
@@ -9932,6 +10093,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -10127,7 +10302,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "Content-Length",
@@ -10202,6 +10378,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -10349,7 +10539,7 @@
             "pattern": "^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$"
           },
           {
-            "name": "x-ms-source-url",
+            "name": "x-ms-copy-source",
             "in": "header",
             "description": "Specify a URL to the copy source.",
             "required": true,
@@ -10360,7 +10550,7 @@
             "name": "x-ms-source-range",
             "in": "header",
             "description": "Bytes of source data in the specified range.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "sourceRange"
           },
@@ -10378,6 +10568,7 @@
             "description": "Specify the crc64 calculated for the range of bytes that must be read from the copy source.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "sourceContentCrc64"
           },
           {
@@ -10386,7 +10577,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "Content-Length",
@@ -10427,6 +10619,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -10637,7 +10843,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -10758,7 +10965,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "Content-MD5",
@@ -10807,6 +11015,7 @@
             "description": "Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "blobContentMd5"
           },
           {
@@ -10855,6 +11064,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -10868,7 +11091,7 @@
           {
             "name": "x-ms-access-tier",
             "in": "header",
-            "description": "Optional.  The tier to be set on the blob.",
+            "description": "The tier to be set on the blob.",
             "required": false,
             "type": "string",
             "enum": [
@@ -11177,7 +11400,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "Content-MD5",
@@ -11226,6 +11450,7 @@
             "description": "Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "blobContentMd5"
           },
           {
@@ -11274,6 +11499,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -11287,7 +11526,7 @@
           {
             "name": "x-ms-access-tier",
             "in": "header",
-            "description": "Optional.  The tier to be set on the blob.",
+            "description": "The tier to be set on the blob.",
             "required": false,
             "type": "string",
             "enum": [
@@ -11645,7 +11884,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -11677,6 +11917,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -11803,7 +12057,7 @@
             "x-ms-client-name": "contentLength"
           },
           {
-            "name": "x-ms-source-url",
+            "name": "x-ms-copy-source",
             "in": "header",
             "description": "Specify a URL to the copy source.",
             "required": true,
@@ -11814,7 +12068,7 @@
             "name": "x-ms-source-range",
             "in": "header",
             "description": "Bytes of source data in the specified range.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "sourceRange"
           },
@@ -11832,6 +12086,7 @@
             "description": "Specify the crc64 calculated for the range of bytes that must be read from the copy source.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "sourceContentCrc64"
           },
           {
@@ -11840,7 +12095,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-encryption-key",
@@ -11864,6 +12120,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -12021,7 +12291,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-blob-cache-control",
@@ -12061,6 +12332,7 @@
             "description": "Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "blobContentMd5"
           },
           {
@@ -12117,6 +12389,20 @@
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.",
             "required": false,
             "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
@@ -12130,7 +12416,7 @@
           {
             "name": "x-ms-access-tier",
             "in": "header",
-            "description": "Optional.  The tier to be set on the blob.",
+            "description": "The tier to be set on the blob.",
             "required": false,
             "type": "string",
             "enum": [
@@ -12479,7 +12765,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "x-ms-lease-id",
@@ -12578,7 +12865,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -12658,7 +12946,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "where",
@@ -12680,7 +12969,8 @@
             "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1
           },
           {
             "name": "include",
@@ -12791,7 +13081,8 @@
             "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1
           },
           {
             "name": "timeout",
@@ -12799,7 +13090,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "include",
@@ -13039,7 +13331,8 @@
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -13455,8 +13748,7 @@
         }
       },
       "required": [
-        "blobItems",
-        "blobPrefixes"
+        "blobItems"
       ]
     },
     "BlobImmutabilityPolicyMode": {
@@ -14087,7 +14379,7 @@
       "type": "string",
       "description": "The delete snapshots option type.",
       "enum": [
-        "none",
+        "only",
         "include"
       ],
       "x-ms-enum": {
@@ -14095,9 +14387,9 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Nonne",
-            "value": "none",
-            "description": "The delete snapshots include option is not specified."
+            "name": "Only",
+            "value": "only",
+            "description": "The delete snapshots include option is only."
           },
           {
             "name": "Include",
@@ -14131,6 +14423,24 @@
           "type": "boolean",
           "description": "Represents whether the data has headers."
         }
+      }
+    },
+    "EncryptionAlgorithmType": {
+      "type": "string",
+      "description": "The algorithm used to produce the encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-encryption-key header is provided.",
+      "enum": [
+        "AES256"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionAlgorithmType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AES256",
+            "value": "AES256",
+            "description": "The AES256 encryption algorithm."
+          }
+        ]
       }
     },
     "FilterBlobItem": {
@@ -14458,7 +14768,7 @@
           "$ref": "#/definitions/BlobHierarchyListSegment",
           "description": "The blob segment."
         },
-        "NextMarker": {
+        "nextMarker": {
           "type": "string",
           "description": "The next marker of the blobs."
         }
@@ -14469,11 +14779,11 @@
         "segment"
       ]
     },
-    "ListBlobsIncludes": {
+    "ListBlobsIncludeItem": {
       "type": "string",
       "description": "The list blob includes parameter values.",
       "enum": [
-        "copies",
+        "copy",
         "deleted",
         "metadata",
         "snapshots",
@@ -14485,12 +14795,12 @@
         "deletedwithversions"
       ],
       "x-ms-enum": {
-        "name": "ListBlobsIncludes",
+        "name": "ListBlobsIncludeItem",
         "modelAsString": true,
         "values": [
           {
-            "name": "Copies",
-            "value": "copies",
+            "name": "Copy",
+            "value": "copy",
             "description": "The include copies."
           },
           {
@@ -15269,89 +15579,6 @@
       "format": "date-time",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "ifUnmodifiedSince"
-    },
-    "PremiumPageBlobAccessTierOptional": {
-      "name": "x-ms-access-tier",
-      "in": "header",
-      "description": "Optional. Indicates the tier to be set on the page blob.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "P4",
-        "P6",
-        "P10",
-        "P15",
-        "P20",
-        "P30",
-        "P40",
-        "P50",
-        "P60",
-        "P70",
-        "P80"
-      ],
-      "x-ms-enum": {
-        "name": "PremiumPageBlobAccessTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "P4",
-            "value": "P4",
-            "description": "The premium page blob access tier is P4."
-          },
-          {
-            "name": "P6",
-            "value": "P6",
-            "description": "The premium page blob access tier is P6."
-          },
-          {
-            "name": "P10",
-            "value": "P10",
-            "description": "The premium page blob access tier is P10."
-          },
-          {
-            "name": "P15",
-            "value": "P15",
-            "description": "The premium page blob access tier is P15."
-          },
-          {
-            "name": "P20",
-            "value": "P20",
-            "description": "The premium page blob access tier is P20."
-          },
-          {
-            "name": "P30",
-            "value": "P30",
-            "description": "The premium page blob access tier is P30."
-          },
-          {
-            "name": "P40",
-            "value": "P40",
-            "description": "The premium page blob access tier is P40."
-          },
-          {
-            "name": "P50",
-            "value": "P50",
-            "description": "The premium page blob access tier is P50."
-          },
-          {
-            "name": "P60",
-            "value": "P60",
-            "description": "The premium page blob access tier is P60."
-          },
-          {
-            "name": "P70",
-            "value": "P70",
-            "description": "The premium page blob access tier is P70."
-          },
-          {
-            "name": "P80",
-            "value": "P80",
-            "description": "The premium page blob access tier is P80."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "accessTier"
     }
   }
 }

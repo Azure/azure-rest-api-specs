@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -112,7 +113,10 @@ interface Service {
       ...DateResponseHeader;
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
-      ...IsHierarchicalNamespaceEnabledResponseHeader;
+
+      /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */
+      @header("x-ms-is-hns-enabled")
+      isHierarchicalNamespaceEnabled?: boolean;
     }
   >;
 
@@ -174,7 +178,7 @@ interface Container {
   @route("/{containerName}?restype=container")
   create is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...TimeoutParameter;
 
       // TODO should we define metadata headers like:
@@ -182,7 +186,9 @@ interface Container {
 
       ...BlobPublicAccess;
 
-      ...DefaultEncryptionScopeParameter;
+      /** Optional.  Version 2019-07-07 and later.  Specifies the default encryption scope to set on the container and use for all future writes. */
+      @header("x-ms-default-encryption-scope") defaultEncryptionScope?: string;
+
       ...DenyEncryptionScopeOverride;
     },
     {
@@ -200,7 +206,7 @@ interface Container {
   @route("/{containerName}?restype=container")
   getProperties is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
     },
@@ -212,7 +218,7 @@ interface Container {
 
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
-      ...LeaseDurationResponseHeader;
+      ...LeaseDurationHeader;
       ...LeaseStateResponseHeader;
       ...LeaseStatusResponseHeader;
       ...BlobPublicAccess;
@@ -244,7 +250,7 @@ interface Container {
   @route("/{containerName}?restype=container")
   delete is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...IfModifiedSinceParameter;
@@ -264,7 +270,7 @@ interface Container {
   @route("/{containerName}?restype=container&comp=metadata")
   setMetadata is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
 
@@ -285,7 +291,7 @@ interface Container {
   @route("/{containerName}?restype=container&comp=acl")
   getAccessPolicy is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
     },
@@ -306,7 +312,7 @@ interface Container {
   @route("/{containerName}?restype=container&comp=acl")
   setAccessPolicy is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
 
       /** The access control list for the container. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
@@ -334,9 +340,16 @@ interface Container {
   @route("/{containerName}?restype=container&comp=undelete")
   restore is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...DeletedContainerNameParameter;
-      ...DeletedContainerVersionParameter;
+      ...ContainerNamePathParameter;
+
+      /** Optional.  Version 2019-12-12 and later.  Specifies the name of the deleted container to restore. */
+      @header("x-ms-deleted-container-name")
+      deletedContainerName?: string;
+
+      /** Optional.  Version 2019-12-12 and later.  Specifies the version of the deleted container to restore. */
+      @header("x-ms-deleted-container-version")
+      deletedContainerVersion?: string;
+
       ...TimeoutParameter;
     },
     {
@@ -353,9 +366,16 @@ interface Container {
   @route("/{containerName}?restype=container&comp=rename")
   rename is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...SourceContainerNameParameter;
-      ...SourceLeaseIdParameter;
+      ...ContainerNamePathParameter;
+
+      /** Required.  Specifies the name of the container to rename. */
+      @header("x-ms-source-container-name")
+      sourceContainerName: string;
+
+      /** A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match. */
+      @header("x-ms-source-lease-id")
+      sourceLeaseId?: string;
+
       ...TimeoutParameter;
     },
     DateResponseHeader
@@ -367,7 +387,7 @@ interface Container {
   @post
   @route("/{containerName}?restype=container&comp=batch")
   submitBatch(
-    ...ContainerNameParameter,
+    ...ContainerNamePathParameter,
 
     /** The batch request content */
     ...BodyParameter,
@@ -405,7 +425,7 @@ interface Container {
   @route("/{containerName}?restype=container&comp=blobs")
   filterBlobs is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...TimeoutParameter;
       ...FilterBlobsWhereParameter;
       ...MarkerParameter;
@@ -423,8 +443,8 @@ interface Container {
   @route("/{containerName}?comp=lease&restype=container&acquire")
   acquireLease is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...LeaseDurationParameter;
+      ...ContainerNamePathParameter;
+      ...LeaseDurationHeader;
       ...TimeoutParameter;
       ...ProposedLeaseIdOptionalParameter;
       ...IfModifiedSinceParameter;
@@ -447,7 +467,7 @@ interface Container {
   @route("/{containerName}?comp=lease&restype=container&release")
   releaseLease is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...LeaseIdRequiredParameter;
       ...TimeoutParameter;
       ...IfModifiedSinceParameter;
@@ -468,7 +488,7 @@ interface Container {
   @route("/{containerName}?comp=lease&restype=container&renew")
   renewLease is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...LeaseIdRequiredParameter;
       ...TimeoutParameter;
       ...IfModifiedSinceParameter;
@@ -489,7 +509,7 @@ interface Container {
   @route("/{containerName}?comp=lease&restype=container&break")
   breakLease is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...TimeoutParameter;
       ...IfModifiedSinceParameter;
       ...IfUnmodifiedSinceParameter;
@@ -513,7 +533,7 @@ interface Container {
   @route("/{containerName}?comp=lease&restype=container&change")
   changeLease is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...LeaseIdRequiredParameter;
       ...ProposedLeaseIdRequiredParameter;
       ...TimeoutParameter;
@@ -535,7 +555,7 @@ interface Container {
   @route("/{containerName}?restype=container&comp=list&flat")
   listBlobFlatSegment is StorageOperation<
     {
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
       ...PrefixParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
@@ -552,8 +572,11 @@ interface Container {
   @route("/{containerName}?restype=container&comp=list&hierarchy")
   listBlobHierarchySegment is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...DelimiterParameter;
+      ...ContainerNamePathParameter;
+
+      /** When the request includes this parameter, the operation returns a BlobPrefix element in the response body that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
+      @query delimiter: string;
+
       ...PrefixParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
@@ -569,7 +592,7 @@ interface Container {
   @get
   @route("/{containerName}?restype=account&comp=properties")
   getAccountInfo is StorageOperation<
-    ContainerNameParameter,
+    ContainerNamePathParameter,
     {
       ...DateResponseHeader;
       ...SkuNameResponseHeader;
@@ -592,15 +615,22 @@ interface Blob {
     version: string,
 
     ...ClientRequestIdHeader,
-    ...ContainerNameParameter,
-    ...BlobNameParameter,
+    ...ContainerNamePathParameter,
+    ...BlobPathParameter,
     ...SnapshotParameter,
     ...VersionIdParameter,
     ...TimeoutParameter,
     ...RangeParameter,
     ...LeaseIdOptionalParameter,
-    ...GetRangeContentMd5Parameter,
-    ...GetRangeContentCrc64Parameter,
+
+    /** When set to true and specified together with the Range, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+    @header("x-ms-range-get-content-md5")
+    rangeGetContentMd5?: boolean,
+
+    /** Optional.  When this header is set to true and specified together with the Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+    @header("x-ms-range-get-content-crc64")
+    rangeGetContentCrc64?: boolean,
+
     ...EncryptionKeyParameter,
     ...EncryptionKeySha256Parameter,
     ...EncryptionAlgorithmParameter,
@@ -640,7 +670,7 @@ interface Blob {
     ...CopyProgressResponseHeader;
     ...CopyStatusResponseHeader;
     ...CopySourceResponseHeader;
-    ...LeaseDurationResponseHeader;
+    ...LeaseDurationHeader;
     ...LeaseStateResponseHeader;
     ...LeaseStatusResponseHeader;
     ...VersionIdResponseHeader;
@@ -696,7 +726,7 @@ interface Blob {
     ...CopyProgressResponseHeader;
     ...CopyStatusResponseHeader;
     ...CopySourceResponseHeader;
-    ...LeaseDurationResponseHeader;
+    ...LeaseDurationHeader;
     ...LeaseStateResponseHeader;
     ...LeaseStatusResponseHeader;
     ...VersionIdResponseHeader;
@@ -723,8 +753,8 @@ interface Blob {
   @route("/{containerName}/{blob}")
   getProperties is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
       ...TimeoutParameter;
@@ -750,9 +780,16 @@ interface Blob {
       ...CopyProgressResponseHeader;
       ...CopyStatusResponseHeader;
       ...CopySourceResponseHeader;
-      ...IsIncrementalCopyResponseHeader;
-      ...DestinationSnapshotResponseHeader;
-      ...LeaseDurationResponseHeader;
+
+      /** Included if the blob is incremental copy blob. */
+      @header("x-ms-incremental-copy")
+      isIncrementalCopy?: boolean;
+
+      /** Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. Snapshot time of the last successful incremental copy snapshot for this blob. */
+      @header("x-ms-copy-destination-snapshot")
+      destinationSnapshot?: string;
+
+      ...LeaseDurationHeader;
       ...LeaseStateResponseHeader;
       ...LeaseStatusResponseHeader;
       ...ContentLengthResponseHeader;
@@ -769,7 +806,7 @@ interface Blob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-      ...AccessTierResponseHeader;
+      ...AccessTierOptional;
 
       /** For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value. */
       @header("x-ms-access-tier-inferred")
@@ -806,16 +843,24 @@ interface Blob {
   @route("/{containerName}/{blob}")
   delete is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-      ...DeleteSnapshotsParameter;
+
+      /** Required if the blob has associated snapshots. Specify one of the following two options: include: Delete the base blob and all of its snapshots. only: Delete only the blob's snapshots and not the blob itself */
+      @header("x-ms-delete-snapshots")
+      deleteSnapshots?: DeleteSnapshotsOptionType;
+
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
-      ...BlobDeleteTypeParameter;
+
+      /** Optional.  Only possible value is 'permanent', which specifies to permanently delete a blob if blob soft delete is enabled. */
+      @query
+      @clientName("blobDeleteType")
+      deletetype?: BlobDeleteType;
     },
     {
       @statusCode statusCode: 202;
@@ -830,8 +875,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=undelete")
   undelete is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
     },
     DateResponseHeader
@@ -844,8 +889,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=expiry")
   setExpiry is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...BlobExpiryOptionsParameter;
       ...ExpiryTimeHeader;
@@ -865,8 +910,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=properties&SetHTTPHeaders")
   setHttpHeaders is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...BlobCacheControlParameter;
       ...BlobContentTypeParameter;
@@ -894,8 +939,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=immutabilityPolicies")
   setImmutabilityPolicy is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...IfUnmodifiedSinceParameter;
       ...ImmutabilityPolicyExpiryParameter;
@@ -915,8 +960,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=immutabilityPolicies")
   deleteImmutabilityPolicy is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
     },
     DateResponseHeader
@@ -930,8 +975,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=legalhold")
   setLegalHold is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...LegalHoldRequiredParameter;
     },
@@ -949,8 +994,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=metadata")
   setMetadata is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
 
       // TODO: Metadata ...MetadataParameter;
@@ -982,10 +1027,10 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=lease&acquire")
   acquireLease is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
-      ...LeaseDurationParameter;
+      ...LeaseDurationHeader;
       ...ProposedLeaseIdOptionalParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
@@ -1007,8 +1052,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=lease&release")
   releaseLease is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...LeaseIdRequiredParameter;
       ...ConditionalRequestHeaders;
@@ -1029,8 +1074,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=lease&renew")
   renewLease is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...LeaseIdRequiredParameter;
       ...ConditionalRequestHeaders;
@@ -1052,8 +1097,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=lease&change")
   changeLease is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...LeaseIdRequiredParameter;
       ...ProposedLeaseIdOptionalParameter;
@@ -1075,8 +1120,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=lease&break")
   breakLease is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...LeaseBreakPeriodParameter;
       ...ConditionalRequestHeaders;
@@ -1098,8 +1143,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=snapshot")
   createSnapshot is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
 
       // TODO: ...MetadataParameter;
@@ -1115,7 +1160,11 @@ interface Blob {
     },
     {
       @statusCode statusCode: 201;
-      ...SnapshotResponseHeader;
+
+      /** Uniquely identifies the snapshot and indicates the snapshot version. It may be used in subsequent requests to access the snapshot. */
+      @header("x-ms-snapshot")
+      snapshot?: string;
+
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...VersionIdResponseHeader;
@@ -1131,12 +1180,12 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=copy")
   startCopyFromUrl is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
 
       // TODO: ...MetadataParameter;
-      ...AccessTierOptionalParameter;
+      ...AccessTierOptional;
 
       ...RehydratePriorityHeader;
       ...SourceIfModifiedSinceParameter;
@@ -1176,12 +1225,12 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=copy&sync")
   copyFromUrl is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
 
       // TODO: ...MetadataParameter;
-      ...AccessTierOptionalParameter;
+      ...AccessTierOptional;
 
       ...SourceIfModifiedSinceParameter;
       ...SourceIfUnmodifiedSinceParameter;
@@ -1220,10 +1269,15 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=copy&copyid")
   abortCopyFromUrl is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
-      ...CopyIdParameter;
+
+      /** The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation. */
+      @clientName("copyId")
+      @query
+      copyid: string;
+
       ...LeaseIdOptionalParameter;
     },
     {
@@ -1240,12 +1294,16 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=tier")
   setTier is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
       ...TimeoutParameter;
-      ...AccessTierRequiredParameter;
+
+      /** Indicates the tier to be set on the blob. */
+      @header("x-ms-access-tier")
+      tier: AccessTier;
+
       ...RehydratePriorityHeader;
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
@@ -1263,8 +1321,8 @@ interface Blob {
   @route("/{containerName}/{blob}?restype=account&comp=properties")
   getAccountInfo is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
     },
     {
       ...DateResponseHeader;
@@ -1280,8 +1338,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=query")
   query is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
 
       /** The query request */
       @body
@@ -1321,7 +1379,7 @@ interface Blob {
       ...CopyProgressResponseHeader;
       ...CopySourceResponseHeader;
       ...CopyStatusResponseHeader;
-      ...LeaseDurationResponseHeader;
+      ...LeaseDurationHeader;
       ...LeaseStateResponseHeader;
       ...LeaseStatusResponseHeader;
       ...AcceptRangesResponseHeader;
@@ -1341,8 +1399,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=tags")
   getTags is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
@@ -1358,8 +1416,8 @@ interface Blob {
   @route("/{containerName}/{blob}?comp=tags")
   setTags is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...VersionIdParameter;
       ...ContentMd5Parameter;
@@ -1388,12 +1446,16 @@ interface PageBlob {
   create is StorageOperation<
     {
       // TODO: Metadata
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
 
-      ...BlobNameParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...ContentLengthParameter;
-      ...PremiumPageBlobAccessTierOptional;
+
+      /** Optional. Indicates the tier to be set on the page blob. */
+      @header("x-ms-access-tier")
+      tier?: PremiumPageBlobAccessTier;
+
       ...BlobContentTypeParameter;
       ...BlobContentEncodingParameter;
       ...BlobContentLanguageParameter;
@@ -1437,8 +1499,8 @@ interface PageBlob {
   @route("/{containerName}/{blob}?comp=page&update")
   uploadPages is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
 
       /** The data to upload. */
       ...BodyParameter;
@@ -1482,8 +1544,8 @@ interface PageBlob {
   @route("/{containerName}/{blob}?comp=page&clear")
   clearPages is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...ContentLengthParameter;
       ...TimeoutParameter;
       ...RangeParameter;
@@ -1517,15 +1579,23 @@ interface PageBlob {
   @route("/{containerName}/{blob}?comp=page&update&fromUrl")
   uploadPagesFromUrl is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...SourceUrlParameter;
-      ...SourceRangeRequiredPutPageFromUrlParameter;
+
+      /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
+      @header("x-ms-source-range")
+      sourceRange: string;
+
       ...SourceContentMd5Parameter;
       ...SourceContentCrc64Parameter;
       ...ContentLengthParameter;
       ...TimeoutParameter;
-      ...RangeRequiredPutPageFromUrlParameter;
+
+      /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
+      @header("x-ms-range")
+      range: string;
+
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
@@ -1563,8 +1633,8 @@ interface PageBlob {
   @route("/{containerName}/{blob}?comp=pagelist")
   getPageRanges is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...SnapshotParameter;
       ...TimeoutParameter;
       ...RangeParameter;
@@ -1588,8 +1658,8 @@ interface PageBlob {
   @route("/{containerName}/{blob}?comp=pagelist&diff")
   getPageRangesDiff is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...SnapshotParameter;
       ...TimeoutParameter;
 
@@ -1624,8 +1694,8 @@ interface PageBlob {
   @route("/{containerName}/{blob}?comp=properties&Resize")
   resize is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...EncryptionKeyParameter;
@@ -1652,8 +1722,8 @@ interface PageBlob {
   @route("/{containerName}/{blob}?comp=properties&UpdateSequenceNumber")
   updateSequenceNumber is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...ConditionalRequestHeaders;
@@ -1676,8 +1746,8 @@ interface PageBlob {
   @route("/{containerName}/{blob}?comp=incrementalcopy")
   copyIncremental is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
@@ -1704,9 +1774,9 @@ interface AppendBlob {
   create is StorageOperation<
     {
       // TODO: Metadata
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
 
-      ...BlobNameParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...ContentLengthParameter;
       ...BlobContentTypeParameter;
@@ -1749,8 +1819,8 @@ interface AppendBlob {
   @route("/{containerName}/{blob}?comp=appendblock")
   appendBlock is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
 
       /** The data to upload. */
       ...BodyParameter;
@@ -1792,8 +1862,8 @@ interface AppendBlob {
   @route("/{containerName}/{blob}?comp=appendblock&fromUrl")
   appendBlockFromUrl is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...SourceUrlParameter;
       ...SourceRangeParameter;
       ...SourceContentMd5Parameter;
@@ -1839,8 +1909,8 @@ interface AppendBlob {
   @route("/{containerName}/{blob}?comp=seal")
   seal is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...ConditionalRequestHeaders;
@@ -1868,9 +1938,9 @@ interface BlockBlob {
     {
       // TODO: Metadata
 
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
 
-      ...BlobNameParameter;
+      ...BlobPathParameter;
       ...BodyParameter;
       ...TimeoutParameter;
       ...ContentMd5Parameter;
@@ -1886,7 +1956,7 @@ interface BlockBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...AccessTierOptionalParameter;
+      ...AccessTierOptional;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...BlobTagsHeaderParameter;
@@ -1919,9 +1989,9 @@ interface BlockBlob {
     {
       // TODO: Metadata
 
-      ...ContainerNameParameter;
+      ...ContainerNamePathParameter;
 
-      ...BlobNameParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...ContentMd5Parameter;
       ...ContentLengthParameter;
@@ -1936,7 +2006,7 @@ interface BlockBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...AccessTierOptionalParameter;
+      ...AccessTierOptional;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
       ...SourceIfModifiedSinceParameter;
@@ -1974,8 +2044,8 @@ interface BlockBlob {
   @route("/{containerName}/{blob}?comp=block")
   stageBlock is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...BlockIdParameter;
       ...ContentLengthParameter;
       ...ContentMd5Parameter;
@@ -2008,8 +2078,8 @@ interface BlockBlob {
   @route("/{containerName}/{blob}?comp=block&fromURL")
   stageBlockFromUrl is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...BlockIdParameter;
       ...ContentLengthParameter;
       ...SourceUrlParameter;
@@ -2047,8 +2117,8 @@ interface BlockBlob {
   @route("/{containerName}/{blob}?comp=blocklist")
   commitBlockList is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...TimeoutParameter;
       ...BlobCacheControlParameter;
       ...BlobContentTypeParameter;
@@ -2066,7 +2136,7 @@ interface BlockBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
-      ...AccessTierOptionalParameter;
+      ...AccessTierOptional;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
 
@@ -2098,10 +2168,15 @@ interface BlockBlob {
   @route("/{containerName}/{blob}?comp=blocklist")
   getBlockList is StorageOperation<
     {
-      ...ContainerNameParameter;
-      ...BlobNameParameter;
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
       ...SnapshotParameter;
-      ...BlockListTypeParameter;
+
+      /** Specifies whether to return the list of committed blocks, the list of uncommitted blocks, or both lists together. */
+      @query
+      @clientName("listType")
+      blocklisttype: BlockListType;
+
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
