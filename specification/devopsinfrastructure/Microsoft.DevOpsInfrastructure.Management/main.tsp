@@ -726,7 +726,7 @@ model Image is ProxyResource<ImageProperties> {
   name: string;
 }
 
-@doc("The type of resource")
+@doc("The type of resource.")
 union ResourceType {
   string,
 
