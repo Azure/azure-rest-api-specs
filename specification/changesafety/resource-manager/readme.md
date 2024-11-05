@@ -38,17 +38,27 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
   - Microsoft.ChangeSafety/ChangeControl/preview/2024-10-01-preview/ChangeControl.json
-suppressions:
-  - code: AvoidAdditionalProperties
+```
+
+---
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
     from: ChangeControl.json
     where:
-      - $.definitions.ChangeStateProperties.StageParameters
-      - $.definitions.Parameter.metadata
-      - $.definitions.Stage.parameterValues
-      - $.definitions.StageMapProperties.parameters
-      - $.definitions.StageProgressionProperties.parameterValues
-      - $.definitions.StageProgressionPropertiesUpdate.parameterValues
-    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
+      - $.definitions.ChangeStateProperties.properties.stageParameters
+      - $.definitions.Parameter.properties.metadata
+      - $.definitions.ParameterUpdate.properties.metadata
+      - $.definitions.Stage.properties.parameterValues
+      - $.definitions.StageProgressionProperties.properties.parameterValues
+      - $.definitions.StageProgressionPropertiesUpdate.properties.parameterValues
+      - $.definitions.RetrieveNextStagesResponseItem.parameterValues
+      - $.definitions.StageMapProperties.properties.parameters
+      - $.definitions.StageMapPropertiesUpdate.properties.parameters
 ```
 
 ---
