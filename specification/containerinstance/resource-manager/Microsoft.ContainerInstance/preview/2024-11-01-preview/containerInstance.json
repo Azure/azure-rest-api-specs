@@ -2571,7 +2571,11 @@
           "type": "string",
           "x-ms-secret": true
         }
-      }
+      },
+      "required": [
+        "workspaceId",
+        "workspaceKey"
+      ]
     },
     "ContainerGroupSubnetId": {
       "description": "Container group subnet information.",
@@ -2644,7 +2648,11 @@
           "type": "string",
           "description": "The FQDN for the IP."
         }
-      }
+      },
+      "required": [
+        "ports",
+        "type"
+      ]
     },
     "Port": {
       "description": "The port exposed on the container group.",
@@ -3191,7 +3199,12 @@
           "type": "string",
           "description": "The keyvault managed identity."
         }
-      }
+      },
+      "required": [
+        "vaultBaseUrl",
+        "keyName",
+        "keyVersion"
+      ]
     },
     "InitContainerDefinition": {
       "description": "The init container definition.",
