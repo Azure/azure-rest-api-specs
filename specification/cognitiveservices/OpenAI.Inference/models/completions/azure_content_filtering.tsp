@@ -142,7 +142,7 @@ model ContentFilterResultsForChoice {
   @added(ServiceApiVersions.v2024_10_01_Preview)
   @encodedName("application/json", "ungrounded_material")
   @doc("Information about detection of ungrounded material.")
-  ungroundedMaterial: ContentFilterCompletionTextSpanResult;
+  ungroundedMaterial?: ContentFilterCompletionTextSpanResult;
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
