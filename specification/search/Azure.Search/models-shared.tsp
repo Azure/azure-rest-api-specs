@@ -30,7 +30,7 @@ alias selectQuery = {
        Specified as a comma-separated list of JSON property names,
        or '*' for all properties. The default is all properties.
        """)  
-  @query("$select")
+  @query
   $select?: string;
 };
 
