@@ -56,7 +56,7 @@ directive:
       - $.definitions.Stage.properties.parameterValues
       - $.definitions.StageProgressionProperties.properties.parameterValues
       - $.definitions.StageProgressionPropertiesUpdate.properties.parameterValues
-      - $.definitions.RetrieveNextStagesResponseItem.parameterValues
+      - $.definitions.RetrieveNextStagesResponseItem.properties.parameterValues
       - $.definitions.StageMapProperties.properties.parameters
       - $.definitions.StageMapPropertiesUpdate.properties.parameters
 ```
