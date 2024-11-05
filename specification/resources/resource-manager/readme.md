@@ -334,7 +334,7 @@ These settings apply only when `--tag=package-deleteoptions-2024-10` is specifie
 
 ``` yaml $(tag) == 'package-deleteoptions-2024-10'
 input-file:
-  - Microsoft.Resources/preview/2024-10-01-preview/deleteoptions.json
+  - Microsoft.Resources/preview/2024-10-01-preview/deleteOptions.json
 ```
 
 ### Tag: package-deletedresources-2024-10
@@ -343,7 +343,7 @@ These settings apply only when `--tag=package-deletedresources-2024-10` is speci
 
 ``` yaml $(tag) == 'package-deletedresources-2024-10'
 input-file:
-  - Microsoft.Resources/preview/2024-10-01-preview/deletedresources.json
+  - Microsoft.Resources/preview/2024-10-01-preview/deletedResources.json
 ```
 
 ### Tag: package-changes-2022-05
