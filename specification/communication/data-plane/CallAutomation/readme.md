@@ -98,6 +98,21 @@ suppressions:
     reason: Our LRO behavior does not fit the default behavior
 ```
 
+### Tag: package-2024-09-15
+
+These settings apply only when `--tag=package-2024-09-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-15'
+input-file:
+  - stable/2024-09-15/communicationservicescallautomation.json
+title:
+  Azure Communication Services
+suppressions:
+  - code: LroExtension
+    from: communicationservicescallautomation.json
+    reason: Our LRO behavior does not fit the default behavior
+```
+
 ### Tag: package-2024-11-15-preview
 
 These settings apply only when `--tag=package-2024-11-15-preview` is specified on the command line.
