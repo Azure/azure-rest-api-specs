@@ -3252,16 +3252,7 @@
       "properties": {
         "defaultAccess": {
           "description": "The default access level.",
-          "type": "string",
-          "enum": [
-            "All",
-            "System",
-            "User"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityAccessLevel",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IdentityAccessLevel"
         },
         "acls": {
           "description": "The access control levels for each identity.",
@@ -3281,22 +3272,26 @@
       "properties": {
         "access": {
           "description": "The access level of the identity.",
-          "type": "string",
-          "enum": [
-            "All",
-            "System",
-            "User"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityAccessLevel",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IdentityAccessLevel"
         },
         "identity": {
           "description": "An identity.",
           "type": "string",
           "format": "arm-id"
         }
+      }
+    },
+    "IdentityAccessLevel": {
+      "description": "The access level of an identity.",
+      "type": "string",
+      "enum": [
+        "All",
+        "System",
+        "User"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityAccessLevel",
+        "modelAsString": true
       }
     },
     "Priority": {
