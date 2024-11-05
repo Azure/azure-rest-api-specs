@@ -58,9 +58,7 @@ interface DataSourcesOperations {
     @route("/datasources")
     @get
     list is SearchOperation<
-        {
-            ...selectQuery;
-        },
+        selectQuery,
         ListDataSourcesResult
     >;
 
@@ -155,9 +153,7 @@ interface IndexersOperations {
     @route("/indexers")
     @get
     list is SearchOperation<
-        {
-            ...selectQuery;
-        },
+        selectQuery,
         ListIndexersResult
     >;
 
@@ -243,9 +239,7 @@ interface SkillsetsOperations {
     @route("/skillsets")
     @get
     list is SearchOperation<
-        {
-            ...selectQuery;
-        },
+        selectQuery,
         ListSkillsetsResult
     >;
 
@@ -318,9 +312,7 @@ interface SynonymMapsOperations {
     @route("/synonymmaps")
     @get
     list is SearchOperation<
-        {
-            ...selectQuery;
-        },
+        selectQuery,
         ListSynonymMapsResult
     >;
 
@@ -367,9 +359,7 @@ interface IndexesOperations {
     @route("/indexes")
     @get
     list is SearchOperation<
-        {
-            ...selectQuery;
-        },
+        selectQuery,
         ListIndexesResult
     >;
 
@@ -389,7 +379,7 @@ interface IndexesOperations {
              * availability of the index can be impaired for several minutes after the index
              * is updated, or longer for very large indexes.
              */
-            @query("allowIndexDowntime")
+            @query
             allowIndexDowntime?: boolean;
             ...preferHeader;
             /**

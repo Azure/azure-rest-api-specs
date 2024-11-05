@@ -5284,6 +5284,7 @@ model IndexerExecutionResult {
 /**
  * Represents an item- or document-level indexing error.
  */
+@error
 model SearchIndexerError {
     /**
      * The key of the item for which indexing failed.

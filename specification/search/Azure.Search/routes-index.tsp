@@ -61,7 +61,7 @@ interface DocumentsOperations {
       /**
        * The OData $filter expression to apply to the search query.
        */
-      @query("$filter")
+      @query
       $filter?: string;
 
       /**
@@ -77,7 +77,7 @@ interface DocumentsOperations {
        * A string tag that is appended to hit highlights. Must be set with
        * highlightPreTag. Default is &lt;/em&gt;.
        */
-      @query("highlightPostTag")
+      @query
       highlightPostTag?: string;
 
       /**
@@ -93,7 +93,7 @@ interface DocumentsOperations {
        * This parameter can be useful for ensuring search availability even for services
        * with only one replica. The default is 100.
        */
-      @query("minimumCoverage")
+      @query
       minimumCoverage?: float64;
 
       /**
@@ -105,16 +105,14 @@ interface DocumentsOperations {
        * specified, the default sort order is descending by document match score. There
        * can be at most 32 $orderby clauses.
        */
-      @query(#{
-        name: "$orderby",
-      })
+      @query
       orderBy?: string[];
 
       /**
        * A value that specifies the syntax of the search query. The default is 'simple'.
        * Use 'full' if your query uses the Lucene query syntax.
        */
-      @query("queryType")
+      @query
       queryType?: QueryType;
 
       /**
@@ -134,7 +132,7 @@ interface DocumentsOperations {
        * The name of a scoring profile to evaluate match scores for matching documents
        * in order to sort the results.
        */
-      @query("scoringProfile")
+      @query
       scoringProfile?: string;
 
       /**
@@ -152,7 +150,7 @@ interface DocumentsOperations {
        * A value that specifies whether any or all of the search terms must be matched
        * in order to count the document as a match.
        */
-      @query("searchMode")
+      @query
       searchMode?: SearchMode;
 
       /**
@@ -160,7 +158,7 @@ interface DocumentsOperations {
        * document frequency) globally for more consistent scoring, or locally, for lower
        * latency.
        */
-      @query("scoringStatistics")
+      @query
       scoringStatistics?: ScoringStatistics;
 
       /**
@@ -171,7 +169,7 @@ interface DocumentsOperations {
        * requests across replicas and adversely affect the performance of the search
        * service. The value used as sessionId cannot start with a '_' character.
        */
-      @query("sessionId")
+      @query
       sessionId?: string;
 
       /**
@@ -189,7 +187,7 @@ interface DocumentsOperations {
        * this limitation, consider using $orderby on a totally-ordered key and $filter
        * with a range query instead.
        */
-      @query("$skip")
+      @query
       $skip?: int32;
 
       /**
@@ -199,21 +197,21 @@ interface DocumentsOperations {
        * token that can be used to issue another Search request for the next page of
        * results.
        */
-      @query("$top")
+      @query
       $top?: int32;
 
       /**
        * The name of the semantic configuration that lists which fields should be used
        * for semantic ranking, captions, highlights, and answers
        */
-      @query("semanticConfiguration")
+      @query
       semanticConfiguration?: string;
 
       /**
        * Allows the user to choose whether a semantic call should fail completely, or to
        * return partial results (default).
        */
-      @query("semanticErrorHandling")
+      @query
       semanticErrorHandling?: SemanticErrorMode;
 
       /**
@@ -221,7 +219,7 @@ interface DocumentsOperations {
        * semantic enrichment to finish processing before the request fails.
        */
       @minValue(700)
-      @query("semanticMaxWaitInMilliseconds")
+      @query
       semanticMaxWaitInMilliseconds?: int32;
 
       /**
@@ -234,7 +232,7 @@ interface DocumentsOperations {
        * followed by the `threshold-<confidence threshold>` option after the answers
        * parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.
        */
-      @query("answers")
+      @query
       answers?: QueryAnswerType;
 
       /**
@@ -245,7 +243,7 @@ interface DocumentsOperations {
        * `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults
        * to `None`.
        */
-      @query("captions")
+      @query
       captions?: QueryCaptionType;
 
       /**
@@ -254,7 +252,7 @@ interface DocumentsOperations {
        * where there is a need to use different queries between the base retrieval and
        * ranking phase, and the L2 semantic phase.
        */
-      @query("semanticQuery")
+      @query
       semanticQuery?: string;
     },
     SearchDocumentsResult
@@ -322,13 +320,13 @@ interface DocumentsOperations {
        * The name of the suggester as specified in the suggesters collection that's part
        * of the index definition.
        */
-      @query("suggesterName")
+      @query
       suggesterName: string;
 
       /**
        * An OData expression that filters the documents considered for suggestions.
        */
-      @query("$filter")
+      @query
       $filter?: string;
 
       /**
@@ -345,14 +343,14 @@ interface DocumentsOperations {
        * A string tag that is appended to hit highlights. Must be set with
        * highlightPreTag. If omitted, hit highlighting of suggestions is disabled.
        */
-      @query("highlightPostTag")
+      @query
       highlightPostTag?: string;
 
       /**
        * A string tag that is prepended to hit highlights. Must be set with
        * highlightPostTag. If omitted, hit highlighting of suggestions is disabled.
        */
-      @query("highlightPreTag")
+      @query
       highlightPreTag?: string;
 
       /**
@@ -361,7 +359,7 @@ interface DocumentsOperations {
        * success. This parameter can be useful for ensuring search availability even for
        * services with only one replica. The default is 80.
        */
-      @query("minimumCoverage")
+      @query
       minimumCoverage?: float64;
 
       /**
@@ -400,7 +398,7 @@ interface DocumentsOperations {
        * The number of suggestions to retrieve. The value must be a number between 1 and
        * 100. The default is 5.
        */
-      @query("$top")
+      @query
       $top?: int32;
     },
     SuggestDocumentsResult
@@ -459,7 +457,7 @@ interface DocumentsOperations {
        * The name of the suggester as specified in the suggesters collection that's part
        * of the index definition.
        */
-      @query("suggesterName")
+      @query
       suggesterName: string;
 
       /**
@@ -467,14 +465,14 @@ interface DocumentsOperations {
        * to get shingles and 'oneTermWithContext' to use the current context while
        * producing auto-completed terms.
        */
-      @query("autocompleteMode")
+      @query
       autocompleteMode?: AutocompleteMode;
 
       /**
        * An OData expression that filters the documents used to produce completed terms
        * for the Autocomplete result.
        */
-      @query("$filter")
+      @query
       $filter?: string;
 
       /**
@@ -491,14 +489,14 @@ interface DocumentsOperations {
        * A string tag that is appended to hit highlights. Must be set with
        * highlightPreTag. If omitted, hit highlighting is disabled.
        */
-      @query("highlightPostTag")
+      @query
       highlightPostTag?: string;
 
       /**
        * A string tag that is prepended to hit highlights. Must be set with
        * highlightPostTag. If omitted, hit highlighting is disabled.
        */
-      @query("highlightPreTag")
+      @query
       highlightPreTag?: string;
 
       /**
@@ -507,7 +505,7 @@ interface DocumentsOperations {
        * success. This parameter can be useful for ensuring search availability even for
        * services with only one replica. The default is 80.
        */
-      @query("minimumCoverage")
+      @query
       minimumCoverage?: float64;
 
       /**
@@ -523,7 +521,7 @@ interface DocumentsOperations {
        * The number of auto-completed terms to retrieve. This must be a value between 1
        * and 100. The default is 5.
        */
-      @query("$top")
+      @query
       $top?: int32;
     },
     AutocompleteResult
