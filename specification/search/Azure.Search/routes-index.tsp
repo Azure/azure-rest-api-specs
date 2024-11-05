@@ -68,9 +68,7 @@ interface DocumentsOperations {
        * The list of field names to use for hit highlights. Only searchable fields can
        * be used for hit highlighting.
        */
-      @query(#{
-        name: "highlight",
-      })
+      @query("highlight")
       highlightFields?: string[];
 
       /**
@@ -105,7 +103,7 @@ interface DocumentsOperations {
        * specified, the default sort order is descending by document match score. There
        * can be at most 32 $orderby clauses.
        */
-      @query
+      @query("$orderby")
       orderBy?: string[];
 
       /**
@@ -141,9 +139,7 @@ interface DocumentsOperations {
        * names of each fielded search expression take precedence over any field names
        * listed in this parameter.
        */
-      @query(#{
-        name: "searchFields",
-      })
+      @query
       searchFields?: string[];
 
       /**
@@ -176,9 +172,7 @@ interface DocumentsOperations {
        * The list of fields to retrieve. If unspecified, all fields marked as
        * retrievable in the schema are included.
        */
-      @query(#{
-        name: "$select",
-      })
+      @query
       $select?: string[];
 
       /**
@@ -293,9 +287,7 @@ interface DocumentsOperations {
        * List of field names to retrieve for the document; Any field not retrieved will
        * be missing from the returned document.
        */
-      @query(#{
-        name: "$select",
-      })
+      @query("$select")
       selectedFields?: string[];
     },
     Record<unknown>
@@ -371,27 +363,21 @@ interface DocumentsOperations {
        * specified, the default sort order is descending by document match score. There
        * can be at most 32 $orderby clauses.
        */
-      @query(#{
-        name: "$orderby",
-      })
+      @query("$orderby")
       orderBy?: string[];
 
       /**
        * The list of field names to search for the specified search text. Target fields
        * must be included in the specified suggester.
        */
-      @query(#{
-        name: "searchFields",
-      })
+      @query
       searchFields?: string[];
 
       /**
        * The list of fields to retrieve. If unspecified, only the key field will be
        * included in the results.
        */
-      @query(#{
-        name: "$select",
-      })
+      @query
       $select?: string[];
 
       /**
@@ -512,9 +498,7 @@ interface DocumentsOperations {
        * The list of field names to consider when querying for auto-completed terms.
        * Target fields must be included in the specified suggester.
        */
-      @query(#{
-        name: "searchFields",
-      })
+      @query
       searchFields?: string[];
 
       /**
