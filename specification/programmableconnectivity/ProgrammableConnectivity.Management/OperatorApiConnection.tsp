@@ -44,7 +44,7 @@ model OperatorApiConnectionProperties {
   /**
    * Details about the SaaS offer purchased from the marketplace. TO DO figure out how to change this to read only
    */
-  @visibility("read", "create", "update")
+  @visibility("read")
   saasProperties?: SaasProperties;
 
   /**
