@@ -19,6 +19,7 @@ interface DiagnosticOperationsOperations {
    * Gets status of a Diagnostic operation issued for Disk Inspection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @operationId("DiagnosticOperations_Read")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnosticOperations/{operationId}")
   @get
