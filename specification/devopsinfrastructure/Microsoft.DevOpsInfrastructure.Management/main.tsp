@@ -730,13 +730,13 @@ model Image is ProxyResource<ImageProperties> {
 union ResourceType {
   string,
 
-  @doc("DevOpsInfrastructure pool resource")
+  @doc("DevOpsInfrastructure pool resource.")
   "Microsoft.DevOpsInfrastructure/pools",
 }
 
 @doc("The parameters used to check the availability of a resource.")
 model CheckNameAvailability {
-  @doc("The name of the resource")
+  @doc("The name of the resource.")
   name: string;
 
   @doc("The type of resource that is used as the scope of the availability check.")
