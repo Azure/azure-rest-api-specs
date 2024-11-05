@@ -314,6 +314,7 @@ model ErrorResponse {
 /**
  * The error object.
  */
+@clientName("TextAnalysisAuthoringError", "csharp")
 model Error {
   /**
    * One of a server-defined set of error codes.
@@ -668,7 +669,7 @@ model TextAnalysisAuthoringJobState {
 /**
  * Represents a warning that was encountered while executing the request.
  */
-@clientName("Warning", "csharp")
+@clientName("TextAnalysisAuthoringWarning", "csharp")
 model TextAnalysisAuthoringWarning {
   /**
    * The warning code.
