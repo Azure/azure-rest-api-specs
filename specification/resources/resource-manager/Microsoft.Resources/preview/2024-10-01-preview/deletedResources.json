@@ -50,7 +50,7 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },          
+          },
           {
             "$ref": "#/parameters/deletedResourceIdParameter"
           }
@@ -131,7 +131,7 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }, 
+          },
           {
             "$ref": "#/parameters/deletedResourceIdParameter"
           }
@@ -173,7 +173,7 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }, 
+          },
           {
             "$ref": "#/parameters/deletedResourceIdParameter"
           }
@@ -183,7 +183,7 @@
             "$ref": "./examples/UndeleteDeletedResource.json"
           }
         },
-        "x-ms-long-running-operation": true,        
+        "x-ms-long-running-operation": true,
         "responses": {
           "202": {
             "description": "Accepted - Returns URL in Location header to query for long-running operation status.",
@@ -195,19 +195,19 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "URL to get status of this long-running operation."
-              },              
+              },
               "Retry-After": {
                 "type": "string",
                 "description": "Number of seconds to wait before polling for status."
               }
-            }          
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }          
+          }
         }
       }
     }
