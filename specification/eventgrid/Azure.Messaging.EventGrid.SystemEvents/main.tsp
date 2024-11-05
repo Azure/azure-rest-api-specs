@@ -23,7 +23,8 @@ import "./Microsoft.SignalRService/SignalRService.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.Web/Web.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/HealthResources.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 
 import "./propertyNameOverride.tsp";
 
