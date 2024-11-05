@@ -58,7 +58,7 @@ op listJobDocuments is Azure.Core.Foundations.Operation<
     jobName: string;
 
     ...PaginationByTokenQueryParameters;
-  }, PagedDocumentDetails
+  }, Page<DocumentDetails>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" ""

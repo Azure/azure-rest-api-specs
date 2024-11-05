@@ -129,19 +129,6 @@ model JobSummary {
   bytesProcessed: int64;
 }
 
-@doc("Paginated details of all documents in a job.")
-@pagedResult
-model PagedDocumentDetails {
-  @key
-  @doc("List of documents.")
-  @visibility("read")
-  value: Array<DocumentDetails>;
-
-  @doc("Token to continue a previous query.")
-  @nextLink
-  nextLink: string;
-}
-
 @doc("Details of a single document in a job.")
 @parentResource(DeidentificationJob) 
 @resource("documents")
