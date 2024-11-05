@@ -1443,11 +1443,12 @@
             "$ref": "#/parameters/ContainerGroupProfileNameParameter"
           },
           {
-            "name": "ContainerGroupProfile",
-            "description": "Update a specified container group profile that will also update the revision.",
+            "name": "properties",
+            "description": "The container group profile properties that need to be updated.",
+            "required": true,
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/ContainerGroupProfile"
+              "$ref": "#/definitions/ContainerGroupProfilePatch"
             }
           },
           {
@@ -1542,7 +1543,7 @@
           "202": {
             "description": "Accepted",
             "headers": {
-              "Ax-ms-correlation-request-id": {
+              "x-ms-correlation-request-id": {
                 "type": "string"
               },
               "Location": {
@@ -3839,6 +3840,19 @@
         "nextLink": {
           "type": "string",
           "description": "The URI to fetch the next page of Container Group Profiles."
+        }
+      }
+    },
+    "ContainerGroupProfilePatch": {
+      "type": "object",
+      "description": "Properties of container group profile that need to be patched",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
