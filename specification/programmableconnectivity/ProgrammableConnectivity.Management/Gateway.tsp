@@ -184,7 +184,7 @@ model ApplicationProperties {
    * Email address of the Privacy contact or Data Protection officer of the organization.
    */
   @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
-  privacyContactEmailAddress?: string;
+  privacyContactEmailAddres?: string;
 }
 
 /**
