@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure.AI.DocumentTranslation",
-    "version": "2024-11-15-preview",
+    "version": "2024-11-01-preview",
     "description": "Document translation service",
     "x-typespec-generated": [
       {
@@ -630,20 +630,20 @@
                 "format": "int32",
                 "description": "Specifies consumption (the number of characters for which the user will be charged) for the translation job request"
               },
-              "x-metered-usage-image-scan-count-fail": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Specifies the number of failed image translations within a document translation job"
-              },
-              "x-metered-usage-image-scan-count-pass": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Specifies the number of successful image translations within a document translation job"
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-total-image-scans-failed": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the number of failed image translations within a document translation job"
+              },
+              "x-total-image-scans-succeeded": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the number of successful image translations within a document translation job"
               }
             }
           },
@@ -859,7 +859,7 @@
           "format": "int32",
           "description": "Character charged by the API"
         },
-        "totalImageScansCharged": {
+        "totalImageScansSucceeded": {
           "type": "integer",
           "format": "int32",
           "description": "Total image scans charged by the API"
@@ -1196,10 +1196,15 @@
           "format": "int64",
           "description": "Total characters charged by the API"
         },
-        "totalImageScansCharged": {
+        "totalImageScansSucceeded": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Total image scans charged by the API"
+        },
+        "totalImageScansFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans failed"
         }
       },
       "required": [

@@ -25,18 +25,18 @@ model DocumentTranslateResult {
 
   @header("x-metered-usage")
   @doc("Specifies consumption (the number of characters for which the user will be charged) for the translation job request")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2024_11_01_preview)
   meteredUsage: int32;
 
-  @header("x-metered-usage-image-scan-count-pass")
+  @header("x-total-image-scans-succeeded")
   @doc("Specifies the number of successful image translations within a document translation job")
-  @added(Versions.v2024_11_15_preview)
-  meteredUsageImageScanPassed: int32;
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded: int32;
 
-  @header("x-metered-usage-image-scan-count-fail")
+  @header("x-total-image-scans-failed")
   @doc("Specifies the number of failed image translations within a document translation job")
-  @added(Versions.v2024_11_15_preview)
-  meteredUsageImageScanFailed: int32;
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansFailed: int32;
 
   @doc("Request response, response is a translated document.")
   @body
@@ -142,12 +142,12 @@ model StartTranslationDetails {
   inputs: BatchRequest[];
 
   @doc("The batch operation options")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2024_11_01_preview)
   options?: BatchOptions;
 }
 
 @doc("Translation batch request options")
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2024_11_01_preview)
 model BatchOptions {
   @doc("Translation text within an image option")
   translateTextWithinImage?: boolean = false;
@@ -384,8 +384,12 @@ model StatusSummary {
   totalCharacterCharged: int64;
 
   @doc("Total image scans charged by the API")
-  @added(Versions.v2024_11_15_preview)
-  totalImageScansCharged?: int64;
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded?: int32;
+
+  @doc("Total image scans failed")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansFailed?: int32;
 }
 
 @doc("Document Status Response")
@@ -427,11 +431,11 @@ model DocumentStatus {
   characterCharged?: int32;
 
   @doc("Total image scans charged by the API")
-  @added(Versions.v2024_11_15_preview)
-  totalImageScansCharged?: int32;
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded?: int32;
 
   @doc("Total image scans failed")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2024_11_01_preview)
   totalImageScansFailed?: int32;
 }
 
@@ -513,7 +517,7 @@ model DocumentTranslateBody {
 
   @doc("Optional boolean parameter to translate text within an image in the document")
   @query("translateTextWithinImage")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2024_11_01_preview)
   translateTextWithinImage?: boolean;
 
   @doc("Document Translate Request Content")

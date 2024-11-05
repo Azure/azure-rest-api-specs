@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 @TypeSpec.Versioning.useDependency(
-  DocumentTranslation.Versions.v2024_11_15_preview
+  DocumentTranslation.Versions.v2024_11_01_preview
 )
 namespace ClientCustomizations;
 
