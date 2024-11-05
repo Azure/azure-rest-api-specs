@@ -36,29 +36,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - Microsoft.DurableTask/preview/2024-10-01-preview/openapi.json
+  - Microsoft.DurableTask/preview/2024-10-01-preview/durabletask.json
 ```
 
 ---
-
-# Code Generation
-
-## Az
-
-See configuration in [readme.az.md](./readme.az.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)
