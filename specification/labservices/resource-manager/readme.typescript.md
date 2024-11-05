@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-labservices"
   output-folder: "$(typescript-sdks-folder)/sdk/labservices/arm-labservices"
-  clear-output-folder: true
   generate-metadata: true
 ```

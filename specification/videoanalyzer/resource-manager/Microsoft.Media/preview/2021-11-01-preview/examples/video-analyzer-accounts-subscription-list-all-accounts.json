@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "api-version": "2021-11-01-Preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "contosomovies",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/videoAnalyzers/contosomovies",
+            "type": "Microsoft.Media/videoAnalyzers",
+            "location": "South Central US",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "encryption": {
+                "type": "SystemKey"
+              },
+              "storageAccounts": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/storage1",
+                  "identity": {
+                    "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2"
+                  }
+                }
+              ],
+              "iotHubs": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Devices/IotHubs/hub1",
+                  "identity": {
+                    "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id3"
+                  },
+                  "status": "Ok"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Devices/IotHubs/hub2",
+                  "identity": {
+                    "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id3"
+                  },
+                  "status": "Ok"
+                }
+              ],
+              "privateEndpointConnections": [
+                {
+                  "name": "00000000-0000-0000-0000-000000000001",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Media/videoAnalyzers/contososports/privateEndpointConnections/00000000-0000-0000-0000-000000000001",
+                  "type": "Microsoft.Media/videoAnalyzers/privateEndpointConnections",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "test description"
+                    },
+                    "privateEndpoint": {
+                      "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/reosuceGroup1/providers/Microsoft.Network/privateEndpoints/pe1"
+                    }
+                  }
+                },
+                {
+                  "name": "00000000-0000-0000-0000-000000000002",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Media/videoAnalyzers/contososports/privateEndpointConnections/00000000-0000-0000-0000-000000000002",
+                  "type": "Microsoft.Media/videoAnalyzers/privateEndpointConnections",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateLinkServiceConnectionState": {
+                      "status": "Pending",
+                      "description": "test description"
+                    },
+                    "privateEndpoint": {
+                      "id": "/subscriptions/22222222-2222-2222-2222-222222222222/resourceGroups/reosuceGroup2/providers/Microsoft.Network/privateEndpoints/pe2"
+                    }
+                  }
+                }
+              ]
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "clientId": "00000000-0000-0000-0000-000000000000"
+                },
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "clientId": "00000000-0000-0000-0000-000000000000"
+                },
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id3": {
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "clientId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "fakeapplication@contoso.com",
+              "createdByType": "Application",
+              "createdAt": "2021-01-01T00:00:00Z",
+              "lastModifiedBy": "fakeuser@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-01T00:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

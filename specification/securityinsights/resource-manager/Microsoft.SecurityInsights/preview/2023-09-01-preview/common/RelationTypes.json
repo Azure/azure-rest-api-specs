@@ -1,0 +1,95 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-09-01-preview",
+    "title": "Common Relation types"
+  },
+  "paths": {},
+  "definitions": {
+    "RelationList": {
+      "description": "List of relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Relation"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "Relation": {
+      "type": "object",
+      "description": "Represents a relation between two resources",
+      "allOf": [
+        {
+          "$ref": "../../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RelationProperties",
+          "description": "Relation properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RelationProperties": {
+      "description": "Relation property bag.",
+      "properties": {
+        "relatedResourceId": {
+          "description": "The resource ID of the related resource",
+          "type": "string"
+        },
+        "relatedResourceName": {
+          "description": "The name of the related resource",
+          "readOnly": true,
+          "type": "string"
+        },
+        "relatedResourceType": {
+          "description": "The resource type of the related resource",
+          "readOnly": true,
+          "type": "string"
+        },
+        "relatedResourceKind": {
+          "description": "The resource kind of the related resource",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "relatedResourceId"
+      ],
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "RelationName": {
+      "name": "relationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Relation Name",
+      "x-ms-parameter-location": "method"
+    },
+    "Relation": {
+      "name": "relation",
+      "in": "body",
+      "description": "The relation model",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Relation"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

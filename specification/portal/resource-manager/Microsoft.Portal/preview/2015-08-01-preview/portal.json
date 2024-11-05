@@ -395,6 +395,11 @@
       },
       "description": "List of dashboards."
     },
+    "DashboardPartMetadata": {
+      "description": "A dashboard part metadata.",
+      "type": "object",
+      "additionalProperties": true
+    },
     "DashboardParts": {
       "type": "object",
       "description": "A dashboard part.",
@@ -413,19 +418,19 @@
           "description": "The dashboard's part position.",
           "properties": {
             "x": {
-              "type": "number",
+              "type": "integer",
               "description": "The dashboard's part x coordinate."
             },
             "y": {
-              "type": "number",
+              "type": "integer",
               "description": "The dashboard's part y coordinate."
             },
             "rowSpan": {
-              "type": "number",
+              "type": "integer",
               "description": "The dashboard's part row span."
             },
             "colSpan": {
-              "type": "number",
+              "type": "integer",
               "description": "The dashboard's part column span."
             },
             "metadata": {
@@ -438,11 +443,7 @@
           }
         },
         "metadata": {
-          "description": "The dashboard part's metadata.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "$ref": "#/definitions/DashboardPartMetadata"
         }
       }
     },

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "catalogName": "CentralCatalog"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationError": {
+          "code": "Conflict",
+          "message": "The source control credentials could not be validated successfully."
+        },
+        "conflicts": [
+          {
+            "path": "/Environments/Duplicate/manifest.yaml",
+            "name": "DuplicateEnvironmentName"
+          }
+        ],
+        "errors": [
+          {
+            "path": "/Environments/Invalid/manifest.yaml",
+            "errorDetails": [
+              {
+                "code": "ParseError",
+                "message": "Schema Error Within Catalog Item: Missing Name"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -8,6 +8,16 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-recoveryservices-siterecovery"
   output-folder: "$(typescript-sdks-folder)/sdk/recoveryservicessiterecovery/arm-recoveryservices-siterecovery"
-  clear-output-folder: true
   generate-metadata: true
+
+directive: 
+  - from: swagger-document
+    where: $.parameters.ResourceGroupName
+    transform: >
+      $["x-ms-parameter-location"] = "method"; 
+      
+  - from: swagger-document
+    where: $.parameters.ResourceName
+    transform: >
+      $["x-ms-parameter-location"] = "method";
 ```

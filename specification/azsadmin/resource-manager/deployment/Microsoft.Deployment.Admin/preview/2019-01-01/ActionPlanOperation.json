@@ -5,7 +5,7 @@
     "title": "DeploymentAdminClient",
     "description": "Deployment Admin Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -44,6 +44,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ActionPlanOperationsList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
             }
           }
         },
@@ -85,8 +91,11 @@
               "$ref": "#/definitions/ActionPlanOperationResourceEntity"
             }
           },
-          "404": {
-            "description": "NOT FOUND"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       }

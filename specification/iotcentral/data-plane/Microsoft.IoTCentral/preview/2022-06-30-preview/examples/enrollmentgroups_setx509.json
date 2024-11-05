@@ -1,0 +1,26 @@
+{
+  "title": "Set X509 certificate for an enrollment group",
+  "description": "Set the X509 certificate of an enrollment group.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "enrollmentGroupId": "myEnrollmentGroupId",
+    "entry": "primary",
+    "api-version": "2022-06-30-preview",
+    "body": {
+      "verified": true,
+      "certificate": "<base64-certificate>"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "verified": true,
+        "info": {
+          "sha1Thumbprint": "644543467786B60C14DFE6B7C968A1990CF63EAC"
+        },
+        "etag": "IjE3MDAwODNhLTAwMDAtMDcwMC0wMDAwLTYyNjFmNzk0MDAwMCI="
+      }
+    }
+  }
+}

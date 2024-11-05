@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "udid": "[udid]",
+    "lat": 47.622942,
+    "lon": -122.316456
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "sourcePoint": {
+            "lat": 33.5362475,
+            "lon": -111.9267386
+          },
+          "udid": "[udid from request]",
+          "information": "4 polygons processed in user data"
+        },
+        "result": {
+          "pointInPolygons": true,
+          "intersectingGeometries": [
+            "1001",
+            "1003"
+          ]
+        }
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ClientParams",
+          "message": "Udid should be acquired from user data ingestion API.",
+          "innererror": {
+            "code": "UdidWrongFormat"
+          }
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

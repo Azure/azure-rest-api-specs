@@ -9,49 +9,43 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
         "type": "Microsoft.ApiManagement/service/diagnostics",
         "name": "applicationinsights",
         "properties": {
           "alwaysLog": "allErrors",
-          "loggerId": "/loggers/applicationinsights",
+          "httpCorrelationProtocol": "Legacy",
+          "logClientIp": true,
+          "loggerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/aisamplingtest",
           "sampling": {
             "samplingType": "fixed",
-            "percentage": 50
+            "percentage": 100
           },
           "frontend": {
             "request": {
-              "headers": [
-                "Content-type"
-              ],
+              "headers": [],
               "body": {
-                "bytes": 512
+                "bytes": 100
               }
             },
             "response": {
-              "headers": [
-                "Content-type"
-              ],
+              "headers": [],
               "body": {
-                "bytes": 512
+                "bytes": 100
               }
             }
           },
           "backend": {
             "request": {
-              "headers": [
-                "Content-type"
-              ],
+              "headers": [],
               "body": {
-                "bytes": 512
+                "bytes": 100
               }
             },
             "response": {
-              "headers": [
-                "Content-type"
-              ],
+              "headers": [],
               "body": {
-                "bytes": 512
+                "bytes": 100
               }
             }
           }

@@ -1,14 +1,14 @@
 {
   "parameters": {
-    "subscriptionId": "76cb77fa-8b17-4eab-9493-b65dace99813",
+    "subscriptionId": "subid",
     "supportTicketName": "testticket",
     "api-version": "2019-05-01-preview",
     "createSupportTicketParameters": {
       "properties": {
-        "serviceId": "/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc",
+        "serviceId": "/providers/Microsoft.Support/services/billing_service_guid",
         "title": "my title",
         "description": "my description",
-        "problemClassificationId": "/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc/problemClassifications/a8d819ba-73bd-10c2-fcd5-7059fc386df3",
+        "problemClassificationId": "/providers/Microsoft.Support/services/billing_service_guid/problemClassifications/billing_problemClassification_guid",
         "severity": "moderate",
         "contactDetails": {
           "firstName": "abc",
@@ -24,20 +24,20 @@
   },
   "responses": {
     "202": {
-        "headers": {
-            "location": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationResults/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview",
-            "azure-asyncoperation": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationsStatus/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview"
-        }
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Support/operationResults/operationid?api-version=2019-05-01-preview",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Support/operationsStatus/operationid?api-version=2019-05-01-preview"
+      }
     },
     "200": {
       "body": {
-        "id": "/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/supportTickets/testticket",
+        "id": "/subscriptions/subid/providers/Microsoft.Support/supportTickets/testticket",
         "name": "testticket",
         "type": "Microsoft.Support/supportTickets",
         "properties": {
           "supportTicketId": "119120321001170",
           "description": "my description",
-          "problemClassificationId": "/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc/problemClassifications/8b6c2e08-cd75-c2d1-7a12-e4daf1e16f2e",
+          "problemClassificationId": "/providers/Microsoft.Support/services/billing_service_guid/problemClassifications/billing_problemClassification_guid",
           "problemClassificationDisplayName": "Refund request",
           "severity": "moderate",
           "productionOutage": false,
@@ -58,7 +58,7 @@
           },
           "supportPlanType": "Premier",
           "title": "my title",
-          "serviceId": "/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc",
+          "serviceId": "/providers/Microsoft.Support/services/billing_service_guid",
           "serviceDisplayName": "Billing",
           "status": "Open",
           "createdDate": "2018-03-20T21:36:18Z",

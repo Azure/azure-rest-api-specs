@@ -1,18 +1,17 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
-    "labName": "{devtestlab-name}",
-    "name": "{virtualmachine-name}",
     "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{vmName}",
     "labVirtualMachine": {
       "properties": {
-        "osType": "Linux",
         "size": "Standard_A2_v2",
-        "userName": "{user-name}",
-        "password": "{user-password}",
-        "labSubnetName": "{virtualnetwork-name}Subnet",
-        "labVirtualNetworkId": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
+        "userName": "{userName}",
+        "password": "{userPassword}",
+        "labSubnetName": "{virtualNetworkName}Subnet",
+        "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
         "disallowPublicIpAddress": true,
         "galleryImageReference": {
           "offer": "UbuntuServer",
@@ -24,9 +23,9 @@
         "allowClaim": true,
         "storageType": "Standard"
       },
-      "location": "{azure-location}",
+      "location": "{location}",
       "tags": {
-        "MyTag": "MyValue"
+        "tagName1": "tagValue1"
       }
     }
   },
@@ -40,9 +39,9 @@
           "createdByUser": "",
           "createdDate": "2018-10-01T16:53:02.4830866-07:00",
           "size": "Standard_A2_v2",
-          "userName": "{user-name}",
-          "labSubnetName": "{virtualnetwork-name}Subnet",
-          "labVirtualNetworkId": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
+          "userName": "{userName}",
+          "labSubnetName": "{virtualNetworkName}Subnet",
+          "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
           "disallowPublicIpAddress": true,
           "artifactDeploymentStatus": {
             "artifactsApplied": 0,
@@ -61,14 +60,14 @@
           "virtualMachineCreationSource": "FromGalleryImage",
           "dataDiskParameters": [],
           "provisioningState": "Creating",
-          "uniqueIdentifier": "{unique-identifier}"
+          "uniqueIdentifier": "{uniqueIdentifier}"
         },
-        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualmachines/{virtualmachine-name}",
-        "name": "{virtualmachine-name}",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}",
+        "name": "{vmName}",
         "type": "Microsoft.DevTestLab/labs/virtualMachines",
-        "location": "{azure-location}",
+        "location": "{location}",
         "tags": {
-          "MyTag": "MyValue"
+          "tagName1": "tagValue1"
         }
       }
     },
@@ -81,9 +80,9 @@
           "createdByUser": "",
           "createdDate": "2018-10-01T16:53:02.4830866-07:00",
           "size": "Standard_A2_v2",
-          "userName": "{user-name}",
-          "labSubnetName": "{virtualnetwork-name}Subnet",
-          "labVirtualNetworkId": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
+          "userName": "{userName}",
+          "labSubnetName": "{virtualNetworkName}Subnet",
+          "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
           "disallowPublicIpAddress": true,
           "artifactDeploymentStatus": {
             "artifactsApplied": 0,
@@ -102,14 +101,14 @@
           "virtualMachineCreationSource": "FromGalleryImage",
           "dataDiskParameters": [],
           "provisioningState": "Creating",
-          "uniqueIdentifier": "{unique-identifier}"
+          "uniqueIdentifier": "{uniqueIdentifier}"
         },
-        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualmachines/{virtualmachine-name}",
-        "name": "{virtualmachine-name}",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}",
+        "name": "{vmName}",
         "type": "Microsoft.DevTestLab/labs/virtualMachines",
-        "location": "{azure-location}",
+        "location": "{location}",
         "tags": {
-          "MyTag": "MyValue"
+          "tagName1": "tagValue1"
         }
       }
     }

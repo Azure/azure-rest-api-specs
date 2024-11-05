@@ -1,0 +1,173 @@
+{
+  "parameters": {
+    "subscriptionId": "bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21",
+    "resourceGroupName": "tugamidiAlerts",
+    "providerName": "Microsoft.Compute",
+    "resourceCollectionName": "virtualMachines",
+    "resourceName": "linuxEUS",
+    "monitorId": "logical-disks|C@3A",
+    "api-version": "2020-01-13-preview",
+    "startTimestampUtc": "2020-10-19T07:22:25.824Z",
+    "endTimestampUtc": "2020-10-21T13:22:25.822Z",
+    "$expand": "evidence,configuration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A|free-space/history/1578514818",
+            "name": "1578514818",
+            "type": "Microsoft.WorkloadMonitor/monitors/history",
+            "properties": {
+              "monitorName": "logical-disks|C:|free-space",
+              "monitorType": "logical-disks|*|free-space",
+              "monitoredObject": "C:",
+              "evaluationTimestamp": "2020-10-20T07:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-10-20T07:24:14Z",
+              "previousMonitorState": "Critical",
+              "currentMonitorState": "Warning",
+              "evidence": {
+                "reason": {
+                  "code": 2200,
+                  "message": "Collected samples met warning condition for this monitor."
+                },
+                "samples": [
+                  {
+                    "value": 7.9,
+                    "timestamp": "2020-10-20T07:21:25.823Z"
+                  },
+                  {
+                    "value": 5.7,
+                    "timestamp": "2020-10-20T07:22:25.824Z"
+                  }
+                ]
+              },
+              "monitorConfiguration": {
+                "isEnabled": true,
+                "monitorConfiguration": {
+                  "criticalCondition": {
+                    "isEnabled": true,
+                    "operator": "<",
+                    "threshold": 5
+                  },
+                  "warningCondition": {
+                    "isEnabled": true,
+                    "operator": "<",
+                    "threshold": 8
+                  },
+                  "evaluationType": "Max",
+                  "evaluationFrequencySecs": 60,
+                  "lookbackSecs": 120,
+                  "maxSamples": 1,
+                  "minSamples": 1
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A|free-space/history/1578255618",
+            "name": "1578255618",
+            "type": "Microsoft.WorkloadMonitor/monitors/history",
+            "properties": {
+              "monitorName": "logical-disks|C:|free-space",
+              "monitorType": "logical-disks|*|free-space",
+              "monitoredObject": "C:",
+              "evaluationTimestamp": "2020-10-20T13:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-10-19T19:24:14Z",
+              "previousMonitorState": "Warning",
+              "currentMonitorState": "Warning",
+              "evidence": {
+                "reason": {
+                  "code": 2200,
+                  "message": "Collected samples met warning condition for this monitor."
+                },
+                "samples": [
+                  {
+                    "value": 6.7,
+                    "timestamp": "2020-10-19T19:21:25.822Z"
+                  },
+                  {
+                    "value": 7,
+                    "timestamp": "2020-10-19T19:22:25.822Z"
+                  }
+                ]
+              },
+              "monitorConfiguration": {
+                "isEnabled": true,
+                "monitorConfiguration": {
+                  "criticalCondition": {
+                    "isEnabled": true,
+                    "operator": "<",
+                    "threshold": 5
+                  },
+                  "warningCondition": {
+                    "isEnabled": true,
+                    "operator": "<",
+                    "threshold": 8
+                  },
+                  "evaluationType": "Max",
+                  "evaluationFrequencySecs": 60,
+                  "lookbackSecs": 120,
+                  "maxSamples": 1,
+                  "minSamples": 1
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A|free-space/history/1578255618",
+            "name": "1578255618",
+            "type": "Microsoft.WorkloadMonitor/monitors/history",
+            "properties": {
+              "monitorName": "logical-disks|C:|free-space",
+              "monitorType": "logical-disks|*|free-space",
+              "monitoredObject": "C:",
+              "evaluationTimestamp": "2020-10-20T19:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-10-20T19:24:14Z",
+              "previousMonitorState": "Warning",
+              "currentMonitorState": "Healthy",
+              "evidence": {
+                "reason": {
+                  "code": 2300,
+                  "message": "Collected samples met healthy condition for this monitor."
+                },
+                "samples": [
+                  {
+                    "value": 9,
+                    "timestamp": "2020-10-19T19:21:25.822Z"
+                  },
+                  {
+                    "value": 10.6,
+                    "timestamp": "2020-10-19T19:22:25.822Z"
+                  }
+                ]
+              },
+              "monitorConfiguration": {
+                "isEnabled": true,
+                "monitorConfiguration": {
+                  "criticalCondition": {
+                    "isEnabled": true,
+                    "operator": "<",
+                    "threshold": 5
+                  },
+                  "warningCondition": {
+                    "isEnabled": true,
+                    "operator": "<",
+                    "threshold": 8
+                  },
+                  "evaluationType": "Max",
+                  "evaluationFrequencySecs": 60,
+                  "lookbackSecs": 120,
+                  "maxSamples": 1,
+                  "minSamples": 1
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

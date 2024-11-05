@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "addressName": "TestAddressName2",
+    "api-version": "2020-12-01-preview",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://management.azure.com/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/addresses/TestAddressName2?api-version=2020-12-01-preview"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "612"
+    ],
+    "addressUpdateParameter": {
+      "properties": {
+        "shippingAddress": {
+          "streetAddress1": "16 TOWNSEND STT",
+          "streetAddress2": "UNIT 1",
+          "city": "San Francisco",
+          "stateOrProvince": "CA",
+          "country": "US",
+          "postalCode": "94107",
+          "companyName": "Microsoft",
+          "addressType": "None"
+        },
+        "contactDetails": {
+          "contactName": "XXXX XXXX",
+          "phone": "0000000000",
+          "phoneExtension": "",
+          "emailList": [
+            "xxxx@xxxx.xxx"
+          ]
+        }
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "shippingAddress": {
+            "streetAddress1": "16 TOWNSEND STT",
+            "streetAddress2": "UNIT 1",
+            "city": "San Francisco",
+            "stateOrProvince": "CA",
+            "country": "US",
+            "postalCode": "94107",
+            "companyName": "Microsoft",
+            "addressType": "None"
+          },
+          "contactDetails": {
+            "contactName": "XXXX XXXX",
+            "phone": "0000000000",
+            "phoneExtension": "",
+            "emailList": [
+              "xxxx@xxxx.xxx"
+            ]
+          }
+        },
+        "location": "eastus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "name": "TestAddressName2",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/addresses/TestAddressName2",
+        "type": "Microsoft.EdgeOrder/addresses"
+      }
+    },
+    "202": {}
+  }
+}

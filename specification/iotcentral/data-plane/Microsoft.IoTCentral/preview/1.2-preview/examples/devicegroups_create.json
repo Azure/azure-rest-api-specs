@@ -1,0 +1,31 @@
+{
+  "title": "Create a device group",
+  "description": "Create a device group.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "deviceGroupId": "group1",
+    "api-version": "1.2-preview",
+    "body": {
+      "displayName": "Device group 1",
+      "description": "Custom device group.",
+      "filter": "SELECT * FROM devices WHERE $template = \"dtmi:modelDefinition:dtdlv2\" AND $provisioned = true",
+      "organizations": [
+        "seattle"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "group1",
+        "displayName": "Device group 1",
+        "description": "Custom device group.",
+        "filter": "SELECT * FROM devices WHERE $template = \"dtmi:modelDefinition:dtdlv2\" AND $provisioned = true",
+        "organizations": [
+          "seattle"
+        ]
+      }
+    }
+  }
+}

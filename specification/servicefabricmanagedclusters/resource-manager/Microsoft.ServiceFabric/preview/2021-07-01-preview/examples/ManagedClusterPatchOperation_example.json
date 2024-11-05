@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "api-version": "2021-07-01-preview",
+    "parameters": {
+      "tags": {
+        "a": "b"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster",
+        "name": "myCluster",
+        "tags": {
+          "a": "b"
+        },
+        "etag": "W/\"636462502169240745\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterCodeVersion": "7.1.168.9494",
+          "clusterUpgradeMode": "Automatic",
+          "clusterUpgradeCadence": "Wave0",
+          "clusterState": "WaitingForNodes",
+          "dnsName": "myCluster",
+          "fqdn": "MyCluster.eastus.cloudapp.azure.com",
+          "clusterCertificateThumbprints": [
+            "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+          ],
+          "clientConnectionPort": 19001,
+          "httpGatewayConnectionPort": 19081,
+          "loadBalancingRules": [
+            {
+              "frontendPort": 80,
+              "backendPort": 80,
+              "probePort": 80,
+              "protocol": "http",
+              "probeProtocol": "http"
+            },
+            {
+              "frontendPort": 443,
+              "backendPort": 443,
+              "probePort": 443,
+              "protocol": "http",
+              "probeProtocol": "http"
+            },
+            {
+              "frontendPort": 10000,
+              "backendPort": 10000,
+              "probePort": 10000,
+              "protocol": "tcp",
+              "probeProtocol": "http"
+            }
+          ],
+          "allowRdpAccess": true,
+          "networkSecurityRules": [
+            {
+              "name": "TestName",
+              "protocol": "tcp",
+              "access": "allow",
+              "priority": 1010,
+              "direction": "inbound",
+              "sourcePortRanges": [
+                "*"
+              ],
+              "destinationPortRanges": [
+                "*"
+              ],
+              "sourceAddressPrefixes": [
+                "*"
+              ],
+              "destinationAddressPrefixes": [
+                "*"
+              ],
+              "description": "Test description"
+            }
+          ],
+          "adminUserName": "vmadmin",
+          "fabricSettings": [
+            {
+              "name": "ManagedIdentityTokenService",
+              "parameters": [
+                {
+                  "name": "IsEnabled",
+                  "value": "false"
+                }
+              ]
+            }
+          ],
+          "addonFeatures": [
+            "DnsService",
+            "BackupRestoreService",
+            "ResourceMonitorService"
+          ],
+          "enableAutoOSUpgrade": true
+        }
+      }
+    }
+  }
+}

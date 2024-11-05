@@ -12,6 +12,8 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2021-11
+  - tag: package-2018-01-preview
   - tag: package-2017-04
   - tag: package-2016-07
 ```
@@ -33,5 +35,27 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2016-07' && $(ruby)
 namespace: "Azure::Relay::Mgmt::V2016_07_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_relay/lib
+```
+
+### Tag: package-2018-01-preview and ruby
+
+These settings apply only when `--tag=package-2018-01-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2018-01-preview' && $(ruby)
+
+namespace: "Azure::Relay::Mgmt::V2018_01_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_relay/lib
+```
+
+### Tag: package-2021-11 and ruby
+
+These settings apply only when `--tag=package-2021-11 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2021-11' && $(ruby)
+
+namespace: "Azure::Relay::Mgmt::V2021_11_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_relay/lib
 ```

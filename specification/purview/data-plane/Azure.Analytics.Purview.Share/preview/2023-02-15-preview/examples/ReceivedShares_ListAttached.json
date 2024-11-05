@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2023-02-15-preview",
+    "endpoint": "accountName.purview.azure.com/share",
+    "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/blobAccount",
+    "filter": "Name eq 'testName'"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 12 July 2022 18:04:32 GMT",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "0D67B9C8-A6C6-4990-9EDE-12EA059D3002",
+            "properties": {
+              "assetLocation": "eastus",
+              "assetStoreKind": "BlobAccount",
+              "createdAt": "2022-07-12T18:18:50.7095202Z",
+              "displayName": "receivedShareName1",
+              "state": "Succeeded",
+              "shareStatus": "Attached",
+              "receiverEmail": "janedoe@fabrikam.com",
+              "receiverName": "Jane Doe",
+              "receiverTenantName": "Fabrikam",
+              "senderEmail": "ali.smith@contoso.com",
+              "senderName": "Ali Smith",
+              "senderTenantName": "Contoso",
+              "sentShareDescription": "description",
+              "sharedAt": "2022-07-12T18:17:56.1065304Z",
+              "sink": {
+                "storeKind": "BlobAccount",
+                "storeReference": {
+                  "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/blobAccount",
+                  "type": "ArmResourceReference"
+                },
+                "properties": {
+                  "containerName": "receivingContainer",
+                  "folder": "receivingFolder",
+                  "location": "eastus",
+                  "mountPath": "path"
+                }
+              }
+            },
+            "shareKind": "InPlace",
+            "type": "receivedShares"
+          },
+          {
+            "id": "35E28F0E-DEA4-472F-84E4-5F1E45FB9937",
+            "properties": {
+              "assetLocation": "eastus",
+              "assetStoreKind": "AdlsGen2Account",
+              "createdAt": "2022-07-19T18:18:50.7095202Z",
+              "displayName": "receivedShareName1",
+              "state": "Succeeded",
+              "shareStatus": "Attached",
+              "receiverEmail": "johndoe@fabrikam.com",
+              "receiverName": "John Doe",
+              "receiverTenantName": "Fabrikam",
+              "senderEmail": "ali.smith@contoso.com",
+              "senderName": "Ali Smith",
+              "senderTenantName": "Contoso",
+              "sentShareDescription": "description",
+              "sharedAt": "2022-07-18T18:17:56.1065304Z",
+              "sink": {
+                "storeKind": "AdlsGen2Account",
+                "storeReference": {
+                  "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/adlsAccount",
+                  "type": "ArmResourceReference"
+                },
+                "properties": {
+                  "containerName": "receivingContainerAbc",
+                  "folder": "receivingFolderAbc",
+                  "location": "eastus",
+                  "mountPath": "pathAbc"
+                }
+              }
+            },
+            "shareKind": "InPlace",
+            "type": "receivedShares"
+          }
+        ],
+        "nextLink": "https://accountName.purview.azure.com/share/receivedShares/attached?api-version=2023-02-15-preview&skipToken=skip_token_to_fetch_more_attached_received_shares"
+      }
+    }
+  }
+}

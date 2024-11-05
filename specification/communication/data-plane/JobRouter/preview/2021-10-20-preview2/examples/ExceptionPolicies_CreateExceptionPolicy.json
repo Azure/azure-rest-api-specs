@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-10-20-preview2",
+    "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+    "patch": {
+      "name": "Main",
+      "exceptionRules": {
+        "MaxWaitTimeExceeded": {
+          "actions": {
+            "MoveJobToEscalatedQueue": {
+              "kind": "reclassify",
+              "classificationPolicyId": "Main",
+              "labelsToUpsert": {
+                "escalated": true
+              }
+            }
+          },
+          "trigger": {
+            "kind": "wait-time",
+            "threshold": "00:20:00"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+        "name": "Main",
+        "exceptionRules": {
+          "MaxWaitTimeExceeded": {
+            "trigger": {
+              "kind": "wait-time",
+              "threshold": "00:20:00"
+            },
+            "actions": {
+              "MoveJobToEscalatedQueue": {
+                "kind": "reclassify",
+                "classificationPolicyId": "Main",
+                "labelsToUpsert": {
+                  "escalated": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

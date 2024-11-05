@@ -1,0 +1,325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
+    "version": "2023-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/administrators/{administratorName}": {
+      "put": {
+        "tags": [
+          "AzureADAdministrators"
+        ],
+        "operationId": "AzureADAdministrators_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create an azure ad administrator": {
+            "$ref": "./examples/AzureADAdministratorCreate.json"
+          }
+        },
+        "description": "Creates or updates an existing Azure Active Directory administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdministratorNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureADAdministrator"
+            },
+            "description": "The required parameters for creating or updating an aad administrator."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureADAdministrator"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AzureADAdministrator"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AzureADAdministrators"
+        ],
+        "operationId": "AzureADAdministrators_Delete",
+        "x-ms-examples": {
+          "Delete an azure ad administrator": {
+            "$ref": "./examples/AzureADAdministratorDelete.json"
+          }
+        },
+        "description": "Deletes an Azure AD Administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdministratorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "AzureADAdministrators"
+        ],
+        "operationId": "AzureADAdministrators_Get",
+        "x-ms-examples": {
+          "Get an azure ad administrator": {
+            "$ref": "./examples/AzureADAdministratorGet.json"
+          }
+        },
+        "description": "Gets information about an azure ad administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdministratorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureADAdministrator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "AzureADAdministrators"
+        ],
+        "operationId": "AzureADAdministrators_ListByServer",
+        "x-ms-examples": {
+          "List Azure AD administrators in a server": {
+            "$ref": "./examples/AzureADAdministratorsListByServer.json"
+          }
+        },
+        "description": "List all the AAD administrators in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdministratorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdministratorProperties": {
+      "type": "object",
+      "properties": {
+        "administratorType": {
+          "type": "string",
+          "description": "Type of the sever administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "AdministratorType",
+            "modelAsString": true
+          }
+        },
+        "login": {
+          "type": "string",
+          "description": "Login name of the server administrator."
+        },
+        "sid": {
+          "type": "string",
+          "description": "SID (object ID) of the server administrator."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID of the administrator."
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "The resource id of the identity used for AAD Authentication."
+        }
+      },
+      "description": "The properties of an administrator."
+    },
+    "AzureADAdministrator": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of an administrator."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Administrator."
+    },
+    "AdministratorListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureADAdministrator"
+          },
+          "description": "The list of azure ad administrator of a server"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A List of azure ad administrators."
+    }
+  },
+  "parameters": {
+    "AdministratorNameParameter": {
+      "name": "administratorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "ActiveDirectory"
+      ],
+      "x-ms-enum": {
+        "name": "AdministratorName",
+        "modelAsString": true
+      },
+      "description": "The name of the Azure AD Administrator.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -4,14 +4,14 @@
     "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     "resourceGroupName": "myRg",
     "workspaceName": "myWorkspace",
-    "operationalInsightsResourceProvider": "Microsoft.OperationalIinsights"
+    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
             "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
             "type": "Microsoft.SecurityInsights/alertRules",
             "kind": "Scheduled",
@@ -33,11 +33,27 @@
               "triggerThreshold": 0,
               "suppressionDuration": "PT1H",
               "suppressionEnabled": false,
-              "lastModifiedUtc": "2019-01-01T13:15:30Z"
+              "lastModifiedUtc": "2019-01-01T13:15:30Z",
+              "eventGroupingSettings": {
+                "aggregationKind": "AlertPerResult"
+              },
+              "incidentConfiguration": {
+                "createIncident": true,
+                "groupingConfiguration": {
+                  "enabled": true,
+                  "reopenClosedIncident": false,
+                  "lookbackDuration": "PT5H",
+                  "entitiesMatchingMethod": "Custom",
+                  "groupByEntities": [
+                    "Host",
+                    "Account"
+                  ]
+                }
+              }
             }
           },
           {
-            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/microsoftSecurityIncidentCreationRuleExample",
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/microsoftSecurityIncidentCreationRuleExample",
             "name": "microsoftSecurityIncidentCreationRuleExample",
             "etag": "\"260097e0-0000-0d00-0000-5d6fa88f0000\"",
             "type": "Microsoft.SecurityInsights/alertRules",
@@ -49,13 +65,12 @@
               "displayName": "testing displayname",
               "enabled": true,
               "description": null,
-              "tactics": [],
               "alertRuleTemplateName": null,
               "lastModifiedUtc": "2019-09-04T12:05:35.7296311Z"
             }
           },
           {
-            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/myFirstFusionRule",
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/myFirstFusionRule",
             "name": "myFirstFusionRule",
             "etag": "\"25005c11-0000-0d00-0000-5d6cc0e20000\"",
             "type": "Microsoft.SecurityInsights/alertRules",

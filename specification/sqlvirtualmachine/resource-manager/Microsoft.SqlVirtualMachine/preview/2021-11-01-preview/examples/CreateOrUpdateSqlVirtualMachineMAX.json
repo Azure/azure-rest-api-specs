@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "api-version": "2021-11-01-preview",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "sqlServerLicenseType": "PAYG",
+        "sqlImageSku": "Enterprise",
+        "sqlManagement": "Full",
+        "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
+        "serverConfigurationsManagementSettings": {
+          "sqlConnectivityUpdateSettings": {
+            "connectivityType": "PRIVATE",
+            "port": 1433,
+            "sqlAuthUpdateUserName": "sqllogin",
+            "sqlAuthUpdatePassword": "<password>"
+          },
+          "sqlStorageUpdateSettings": {
+            "diskCount": 1,
+            "startingDeviceId": 2,
+            "diskConfigurationType": "NEW"
+          },
+          "sqlWorkloadTypeUpdateSettings": {
+            "sqlWorkloadType": "OLTP"
+          },
+          "additionalFeaturesServerConfigurations": {
+            "isRServicesEnabled": false
+          },
+          "sqlInstanceSettings": {
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxDop": 8,
+            "isOptimizeForAdHocWorkloadsEnabled": true,
+            "minServerMemoryMB": 0,
+            "maxServerMemoryMB": 128
+          }
+        },
+        "keyVaultCredentialSettings": {
+          "enable": false
+        },
+        "autoPatchingSettings": {
+          "enable": true,
+          "dayOfWeek": "Sunday",
+          "maintenanceWindowStartingHour": 2,
+          "maintenanceWindowDuration": 60
+        },
+        "autoBackupSettings": {
+          "enable": true,
+          "retentionPeriod": 17,
+          "enableEncryption": true,
+          "password": "<Password>",
+          "backupScheduleType": "Manual",
+          "backupSystemDbs": true,
+          "storageAccountUrl": "https://teststorage.blob.core.windows.net/",
+          "storageContainerName": "testcontainer",
+          "storageAccessKey": "<primary storage access key>",
+          "fullBackupFrequency": "Daily",
+          "fullBackupStartTime": 6,
+          "fullBackupWindowHours": 11,
+          "logBackupFrequency": 10
+        },
+        "assessmentSettings": {
+          "enable": true,
+          "runImmediately": true,
+          "schedule": {
+            "enable": true,
+            "weeklyInterval": 1,
+            "monthlyOccurrence": null,
+            "dayOfWeek": "Sunday",
+            "startTime": "23:17"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
+          "provisioningState": "Updating",
+          "sqlServerLicenseType": "PAYG",
+          "sqlImageSku": "Enterprise",
+          "sqlManagement": "Full"
+        },
+        "location": "northeurope",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
+          "provisioningState": "Provisioning",
+          "sqlServerLicenseType": "PAYG",
+          "sqlImageSku": "Unknown",
+          "sqlManagement": "Full"
+        },
+        "location": "northeurope",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
+      }
+    }
+  }
+}

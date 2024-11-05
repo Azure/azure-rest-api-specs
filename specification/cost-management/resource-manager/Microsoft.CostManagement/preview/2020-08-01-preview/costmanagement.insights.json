@@ -1,0 +1,221 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.CostManagement/insights": {
+      "get": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_Get",
+        "description": "Get cost-related insights for the given scope",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "PrivateView": {
+            "$ref": "./examples/GetInsights.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeGetInsightsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InsightsCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../cost-management/resource-manager/Microsoft.CostManagement/stable/2021-10-01/common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InsightsCollectionResponse": {
+      "description": "Result of listing insights. It contains a list of available cost insights.",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "The list of cost insights.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Insights"
+          }
+        },
+        "nextLink": {
+          "description": "The link (URL) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Insights": {
+      "description": "Important cost-related details about the scope. This can include critical alerts, change advisories, important data points, or tips to optimize costs and facilitate cost management.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithKind"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InsightsProperties",
+          "title": "Insights properties"
+        }
+      }
+    },
+    "InsightsProperties": {
+      "type": "object",
+      "description": "The properties of the Insights.",
+      "properties": {
+        "status": {
+          "description": "Insight status kept from storage.",
+          "type": "string"
+        },
+        "eventDate": {
+          "description": "The day the insight pertains to.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "scope": {
+          "description": "Cost Management scope for Insights in storage. This includes 'subscriptions/{subscriptionId}' for subscription scope",
+          "type": "string"
+        },
+        "impactTerm": {
+          "description": "The period where the impact was observed.",
+          "type": "string"
+        },
+        "impactResolution": {
+          "description": "Date when the user last modified this view.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "timeDetected": {
+          "description": "The datetime when this anomaly was detected.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "severity": {
+          "description": "Severity of anomaly to be used for surfacing High severity anomalies first.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Lower-level background information about this insight. Note that details schema changes based on kind.",
+          "type": "object"
+        },
+        "justification": {
+          "description": "High-level summary information about this insight. Note that justification schema changes based on kind.",
+          "type": "object"
+        }
+      }
+    },
+    "ResourceWithKind": {
+      "description": "The Resource model definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "sku": {
+          "readOnly": true,
+          "type": "string",
+          "description": "SKU of the resource."
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ETag of the resource."
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version for Insights is 2020-08-01-preview"
+    },
+    "scopeGetInsightsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with Insights operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId} for BillingProfile scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

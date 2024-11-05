@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "resourceGroupName": "000pikumar",
+    "vaultName": "PrivatePreviewVault1",
+    "api-version": "2021-06-01-preview",
+    "backupInstanceName": "testInstance1",
+    "parameters": {
+      "objectType": "AzureBackupRecoveryPointBasedRestoreRequest",
+      "recoveryPointId": "hardcodedRP",
+      "sourceDataStoreType": "VaultStore",
+      "restoreTargetInfo": {
+        "targetDetails": {
+          "url": "https://teststorage.blob.core.windows.net/restoretest",
+          "filePrefix": "restoredblob",
+          "restoreTargetLocationType": "AzureBlobs"
+        },
+        "restoreLocation": "southeastasia",
+        "recoveryOption": "FailIfExists",
+        "objectType": "RestoreFilesTargetInfo"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupInstances/testInstance1/operationResults/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2021-06-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/providers/Microsoft.DataProtection/locations/westus/operationStatus/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2021-06-01-preview",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "jobId": "c60cb49-63e8-4b21-b9bd-26277b3fdfae"
+      }
+    }
+  }
+}

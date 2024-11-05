@@ -1,0 +1,219 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "udid": "[udid]",
+    "distances": "176.3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "udid": "[udid from request]",
+          "information": "1 feature processed in user data"
+        },
+        "result": {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "properties": {
+                "geometryId": "ExampleId",
+                "bufferDist": 176.3
+              },
+              "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                  [
+                    [
+                      -111.92483859605078,
+                      33.5362475
+                    ],
+                    [
+                      -111.92487510409389,
+                      33.53587682761772
+                    ],
+                    [
+                      -111.92498322523961,
+                      33.535520399967204
+                    ],
+                    [
+                      -111.92515880445296,
+                      33.535191914363196
+                    ],
+                    [
+                      -111.92539509432322,
+                      33.53490399432323
+                    ],
+                    [
+                      -111.92568301436319,
+                      33.534667704452971
+                    ],
+                    [
+                      -111.9260114999672,
+                      33.53449212523963
+                    ],
+                    [
+                      -111.9263679276177,
+                      33.5343840040939
+                    ],
+                    [
+                      -111.9267386,
+                      33.534347496050785
+                    ],
+                    [
+                      -111.92710927238228,
+                      33.5343840040939
+                    ],
+                    [
+                      -111.92746570003278,
+                      33.53449212523963
+                    ],
+                    [
+                      -111.9277941856368,
+                      33.534667704452971
+                    ],
+                    [
+                      -111.92808210567676,
+                      33.53490399432323
+                    ],
+                    [
+                      -111.92831839554702,
+                      33.535191914363196
+                    ],
+                    [
+                      -111.92849397476037,
+                      33.535520399967204
+                    ],
+                    [
+                      -111.9286020959061,
+                      33.53587682761772
+                    ],
+                    [
+                      -111.92863860394921,
+                      33.5362475
+                    ],
+                    [
+                      -111.9286020959061,
+                      33.536618172382283
+                    ],
+                    [
+                      -111.92849397476037,
+                      33.5369746000328
+                    ],
+                    [
+                      -111.92831839554702,
+                      33.537303085636808
+                    ],
+                    [
+                      -111.92808210567676,
+                      33.537591005676774
+                    ],
+                    [
+                      -111.9277941856368,
+                      33.537827295547032
+                    ],
+                    [
+                      -111.92746570003278,
+                      33.538002874760373
+                    ],
+                    [
+                      -111.92710927238228,
+                      33.5381109959061
+                    ],
+                    [
+                      -111.9267386,
+                      33.538147503949219
+                    ],
+                    [
+                      -111.9263679276177,
+                      33.5381109959061
+                    ],
+                    [
+                      -111.9260114999672,
+                      33.538002874760373
+                    ],
+                    [
+                      -111.92568301436319,
+                      33.537827295547032
+                    ],
+                    [
+                      -111.92539509432322,
+                      33.537591005676774
+                    ],
+                    [
+                      -111.92515880445296,
+                      33.537303085636808
+                    ],
+                    [
+                      -111.92498322523961,
+                      33.5369746000328
+                    ],
+                    [
+                      -111.92487510409389,
+                      33.536618172382283
+                    ],
+                    [
+                      -111.92483859605078,
+                      33.5362475
+                    ]
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ClientParams",
+          "message": "One or more parameters are missing.",
+          "innererror": {
+            "code": "MissingQueryParameter",
+            "message": "Input parameter udid is missing."
+          }
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

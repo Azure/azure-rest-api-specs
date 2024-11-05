@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2021-08-31-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "testresourcegroup",
+    "resourceName": "customLocation01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/customLocation01",
+        "name": "customLocation01",
+        "type": "Microsoft.ExtendedLocation/customLocations",
+        "location": "West US",
+        "properties": {
+          "hostResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01",
+          "namespace": "namespace01",
+          "displayName": "customLocationLocation01",
+          "provisioningState": "Succeeded",
+          "clusterExtensionIds": [
+            "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/fooExtension"
+          ],
+          "authentication": {
+            "type": "KubeConfig"
+          }
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "111111-1111-1111-1111-111111111111"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-04-24T18:53:29.0928001Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-04-24T18:53:29.0928001Z"
+        }
+      }
+    }
+  }
+}

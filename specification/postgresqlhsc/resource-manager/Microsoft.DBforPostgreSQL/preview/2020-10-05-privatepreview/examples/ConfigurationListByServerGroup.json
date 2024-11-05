@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "serverGroupName": "hsctestsg",
+    "api-version": "2020-10-05-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg/configurations/array_nulls",
+            "name": "array_nulls",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "description": "Enable input of NULL elements in arrays.",
+              "dataType": "Boolean",
+              "allowedValues": "on,off",
+              "serverRoleGroupConfigurations": [
+                {
+                  "role": "Coordinator",
+                  "value": "on",
+                  "defaultValue": "on",
+                  "source": "system-default"
+                },
+                {
+                  "role": "Worker",
+                  "value": "off",
+                  "defaultValue": "on",
+                  "source": "user-override"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg/configurations/backslash_quote",
+            "name": "backslash_quote",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "description": "Sets whether \"\\'\" is allowed in string literals.",
+              "dataType": "Enumeration",
+              "allowedValues": "safe_encoding,on,off",
+              "serverRoleGroupConfigurations": [
+                {
+                  "role": "Coordinator",
+                  "value": "off",
+                  "defaultValue": "safe_encoding",
+                  "source": "user-override"
+                },
+                {
+                  "role": "Worker",
+                  "value": "safe_encoding",
+                  "defaultValue": "safe_encoding",
+                  "source": "system-default"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg/configurations/work_mem",
+            "name": "work_mem",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "description": "Sets the amount of memory to be used by internal sort operations and hash tables before writing to temporary disk files.",
+              "dataType": "Integer",
+              "allowedValues": "4096-2097151",
+              "serverRoleGroupConfigurations": [
+                {
+                  "role": "Coordinator",
+                  "value": "158720",
+                  "defaultValue": "158720",
+                  "source": "system-default"
+                },
+                {
+                  "role": "Worker",
+                  "value": "115712",
+                  "defaultValue": "115712",
+                  "source": "system-default"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg/configurations/client_encoding",
+            "name": "client_encoding",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "description": "Sets the client's character set encoding.",
+              "dataType": "Enumeration",
+              "allowedValues": "BIG5,EUC_CN,EUC_JP,EUC_JIS_2004,EUC_KR,EUC_TW,GB18030,GBK,ISO_8859_5,ISO_8859_6,ISO_8859_7,ISO_8859_8,JOHAB,KOI8R,KOI8U,LATIN1,LATIN2,LATIN3,LATIN4,LATIN5,LATIN6,LATIN7,LATIN8,LATIN9,LATIN10,MULE_INTERNAL,SJIS,SHIFT_JIS_2004,SQL_ASCII,UHC,UTF8,WIN866,WIN874,WIN1250,WIN1251,WIN1252,WIN1253,WIN1254,WIN1255,WIN1256,WIN1257,WIN1258",
+              "serverRoleGroupConfigurations": [
+                {
+                  "role": "Coordinator",
+                  "value": "ISO_8859_7",
+                  "defaultValue": "sql_ascii",
+                  "source": "user-override"
+                },
+                {
+                  "role": "Worker",
+                  "value": "ISO_8859_7",
+                  "defaultValue": "sql_ascii",
+                  "source": "user-override"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

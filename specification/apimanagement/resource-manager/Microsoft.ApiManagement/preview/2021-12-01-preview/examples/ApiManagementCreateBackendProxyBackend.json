@@ -1,0 +1,126 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "subid",
+    "backendId": "proxybackend",
+    "parameters": {
+      "properties": {
+        "description": "description5308",
+        "url": "https://backendname2644/",
+        "protocol": "http",
+        "tls": {
+          "validateCertificateChain": true,
+          "validateCertificateName": true
+        },
+        "proxy": {
+          "url": "http://192.168.1.1:8080",
+          "username": "Contoso\\admin",
+          "password": "<password>"
+        },
+        "credentials": {
+          "query": {
+            "sv": [
+              "xx",
+              "bb",
+              "cc"
+            ]
+          },
+          "header": {
+            "x-my-1": [
+              "val1",
+              "val2"
+            ]
+          },
+          "authorization": {
+            "scheme": "Basic",
+            "parameter": "opensesma"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "name": "proxybackend",
+        "properties": {
+          "description": "description5308",
+          "url": "https://backendname2644/",
+          "protocol": "http",
+          "credentials": {
+            "query": {
+              "sv": [
+                "xx",
+                "bb",
+                "cc"
+              ]
+            },
+            "header": {
+              "x-my-1": [
+                "val1",
+                "val2"
+              ]
+            },
+            "authorization": {
+              "scheme": "Basic",
+              "parameter": "opensesma"
+            }
+          },
+          "proxy": {
+            "url": "http://192.168.1.1:8080",
+            "username": "Contoso\\admin",
+            "password": "<password>"
+          },
+          "tls": {
+            "validateCertificateChain": false,
+            "validateCertificateName": false
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "name": "proxybackend",
+        "properties": {
+          "description": "description5308",
+          "url": "https://backendname2644/",
+          "protocol": "http",
+          "credentials": {
+            "query": {
+              "sv": [
+                "xx",
+                "bb",
+                "cc"
+              ]
+            },
+            "header": {
+              "x-my-1": [
+                "val1",
+                "val2"
+              ]
+            },
+            "authorization": {
+              "scheme": "Basic",
+              "parameter": "opensesma"
+            }
+          },
+          "proxy": {
+            "url": "http://192.168.1.1:8080",
+            "username": "Contoso\\admin",
+            "password": "<password>"
+          },
+          "tls": {
+            "validateCertificateChain": false,
+            "validateCertificateName": false
+          }
+        }
+      }
+    }
+  }
+}

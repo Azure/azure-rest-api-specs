@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "v1.1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "429": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "RequestRateTooHigh",
+          "message": "User's request rate is too high",
+          "innerError": {
+            "code": "RateTooHigh",
+            "message": "Request rate is too high"
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error",
+          "innerError": {
+            "code": "InternalServerError",
+            "message": "Unexpected internal server error has occurred"
+          }
+        }
+      }
+    },
+    "503": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "Service is temporary unavailable",
+          "innerError": {
+            "code": "ServiceTemporaryUnavailable",
+            "message": "Service is currently unavailable.  Please try again later"
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "retry-after": "30",
+        "ETag": "686897696a7c876b7e"
+      },
+      "body": {
+        "value": [
+          "AzureBlob"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "resourceGroupName": "000pikumar",
+    "vaultName": "PrivatePreviewVault",
+    "backupPolicyName": "OSSDBPolicy",
+    "api-version": "2022-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PrivatePreviewVault/backupPolicies/OSSDBPolicy",
+        "name": "OSSDBPolicy",
+        "type": "Microsoft.DataProtection/backupVaults/backupPolicies",
+        "properties": {
+          "policyRules": [
+            {
+              "backupParameters": {
+                "backupType": "Full",
+                "objectType": "AzureBackupParams"
+              },
+              "trigger": {
+                "schedule": {
+                  "repeatingTimeIntervals": [
+                    "R/2019-11-20T08:00:00-08:00/P1W"
+                  ]
+                },
+                "taggingCriteria": [
+                  {
+                    "tagInfo": {
+                      "tagName": "Default",
+                      "id": "Default_"
+                    },
+                    "taggingPriority": 99,
+                    "isDefault": true
+                  },
+                  {
+                    "tagInfo": {
+                      "tagName": "Weekly",
+                      "id": "Weekly_"
+                    },
+                    "taggingPriority": 20,
+                    "isDefault": false,
+                    "criteria": [
+                      {
+                        "scheduleTimes": [
+                          "2019-03-01T13:00:00Z"
+                        ],
+                        "daysOfTheWeek": [
+                          "Sunday"
+                        ],
+                        "objectType": "ScheduleBasedBackupCriteria"
+                      }
+                    ]
+                  }
+                ],
+                "objectType": "ScheduleBasedTriggerContext"
+              },
+              "dataStore": {
+                "dataStoreType": "VaultStore",
+                "objectType": "DataStoreInfoBase"
+              },
+              "name": "BackupWeekly",
+              "objectType": "AzureBackupRule"
+            },
+            {
+              "lifecycles": [
+                {
+                  "sourceDataStore": {
+                    "dataStoreType": "VaultStore",
+                    "objectType": "DataStoreInfoBase"
+                  },
+                  "deleteAfter": {
+                    "objectType": "AbsoluteDeleteOption",
+                    "duration": "P1W"
+                  }
+                }
+              ],
+              "isDefault": true,
+              "name": "Default",
+              "objectType": "AzureRetentionRule"
+            },
+            {
+              "lifecycles": [
+                {
+                  "sourceDataStore": {
+                    "dataStoreType": "VaultStore",
+                    "objectType": "DataStoreInfoBase"
+                  },
+                  "deleteAfter": {
+                    "objectType": "AbsoluteDeleteOption",
+                    "duration": "P12W"
+                  }
+                }
+              ],
+              "isDefault": false,
+              "name": "Weekly",
+              "objectType": "AzureRetentionRule"
+            }
+          ],
+          "datasourceTypes": [
+            "OssDB"
+          ],
+          "objectType": "BackupPolicy"
+        }
+      }
+    }
+  }
+}

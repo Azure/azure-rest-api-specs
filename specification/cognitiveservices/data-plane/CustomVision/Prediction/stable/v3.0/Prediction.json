@@ -61,9 +61,6 @@
             "required": false,
             "type": "string",
             "x-nullable": true
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -134,9 +131,6 @@
             "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 4MB.",
             "required": true,
             "type": "file"
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -211,9 +205,6 @@
             "required": false,
             "type": "string",
             "x-nullable": true
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -284,9 +275,6 @@
             "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 0MB.",
             "required": true,
             "type": "file"
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -361,9 +349,6 @@
             "required": false,
             "type": "string",
             "x-nullable": true
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -434,9 +419,6 @@
             "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 4MB.",
             "required": true,
             "type": "file"
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -511,9 +493,6 @@
             "required": false,
             "type": "string",
             "x-nullable": true
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -584,9 +563,6 @@
             "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 0MB.",
             "required": true,
             "type": "file"
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -879,15 +855,6 @@
     }
   },
   "parameters": {
-    "ApiKey": {
-      "name": "Prediction-Key",
-      "in": "header",
-      "description": "API key.",
-      "required": true,
-      "type": "string",
-      "x-ms-client-name": "ApiKey",
-      "x-ms-parameter-location": "client"
-    },
     "Endpoint": {
       "name": "Endpoint",
       "in": "path",
@@ -898,6 +865,18 @@
       "x-ms-skip-url-encoding": true
     }
   },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Prediction-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}",
     "useSchemePrefix": false,

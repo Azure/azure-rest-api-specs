@@ -1,0 +1,204 @@
+{
+  "title": "Post Metadata",
+  "description": "A metadata request that returns the app schema and other information",
+  "parameters": {
+    "appId": "cf58dcfd-0683-487c-bc84-048789bca8e5",
+    "apiVersion": "2018-04-20"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tables": [
+          {
+            "id": "t/requests",
+            "name": "requests",
+            "timespanColumn": "timestamp",
+            "columns": [
+              {
+                "name": "timestamp",
+                "type": "datetime"
+              },
+              {
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "name": "source",
+                "type": "string"
+              },
+              {
+                "name": "name",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "url",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "success",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "resultCode",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "duration",
+                "type": "real"
+              },
+              {
+                "name": "performanceBucket",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "itemType",
+                "type": "string"
+              },
+              {
+                "name": "customDimensions",
+                "type": "dynamic",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "customMeasurements",
+                "type": "dynamic"
+              },
+              {
+                "name": "operation_Name",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "operation_Id",
+                "type": "string"
+              },
+              {
+                "name": "operation_ParentId",
+                "type": "string"
+              },
+              {
+                "name": "operation_SyntheticSource",
+                "type": "string"
+              },
+              {
+                "name": "session_Id",
+                "type": "string"
+              },
+              {
+                "name": "user_Id",
+                "type": "string"
+              },
+              {
+                "name": "user_AuthenticatedId",
+                "type": "string"
+              },
+              {
+                "name": "user_AccountId",
+                "type": "string"
+              },
+              {
+                "name": "application_Version",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "client_Type",
+                "type": "string"
+              },
+              {
+                "name": "client_Model",
+                "type": "string"
+              },
+              {
+                "name": "client_OS",
+                "type": "string"
+              },
+              {
+                "name": "client_IP",
+                "type": "string"
+              },
+              {
+                "name": "client_City",
+                "type": "string"
+              },
+              {
+                "name": "client_StateOrProvince",
+                "type": "string"
+              },
+              {
+                "name": "client_CountryOrRegion",
+                "type": "string"
+              },
+              {
+                "name": "client_Browser",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "cloud_RoleName",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "cloud_RoleInstance",
+                "type": "string",
+                "isPreferredFacet": true
+              },
+              {
+                "name": "appId",
+                "type": "string"
+              },
+              {
+                "name": "appName",
+                "type": "string"
+              },
+              {
+                "name": "iKey",
+                "type": "string"
+              },
+              {
+                "name": "sdkVersion",
+                "type": "string"
+              },
+              {
+                "name": "itemId",
+                "type": "string"
+              },
+              {
+                "name": "itemCount",
+                "type": "int"
+              }
+            ]
+          }
+        ],
+        "tableGroups": [
+          {
+            "id": "ai/StandardSchema",
+            "name": "StandardSchema",
+            "source": "ai",
+            "tables": [
+              "t/requests"
+            ]
+          }
+        ],
+        "applications": [
+          {
+            "id": "cf58dcfd-0683-487c-bc84-048789bca8e5",
+            "name": "FabrikamProd",
+            "resourceId": "/subscriptions/72993b69-db12-44fc-9a66-9c2005c30513/resourceGroups/Fabrikam/providers/microsoft.insights/components/FabrikamProd",
+            "tables": [],
+            "region": "southcentralus",
+            "tableGroups": [
+              "ai/StandardSchema"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

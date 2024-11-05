@@ -46,6 +46,13 @@
             "description": "Client sent unknown metadata name",
             "schema": {
               "$ref": "#/definitions/ARMErrorResponseBody"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -73,6 +80,12 @@
             "description": "OK. Successfully retrieved metadata entities",
             "schema": {
               "$ref": "#/definitions/MetadataEntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -157,7 +170,9 @@
             "description": "Advisor configuration name. Value must be 'default'",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "ConfigurationName",
               "modelAsString": true
@@ -262,7 +277,9 @@
             "description": "Advisor configuration name. Value must be 'default'",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "ConfigurationName",
               "modelAsString": true
@@ -326,6 +343,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -365,6 +388,12 @@
           },
           "204": {
             "description": "NoContent. Recommendation generation has been completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -392,7 +421,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'",
             "required": false,
             "type": "string"
           },
@@ -401,7 +430,8 @@
             "in": "query",
             "description": "The number of recommendations per page if a paged version of this API is being used.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$skipToken",
@@ -416,6 +446,12 @@
             "description": "OK. Successfully obtained cached recommendations.",
             "schema": {
               "$ref": "#/definitions/ResourceRecommendationBaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -448,11 +484,22 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListRecommendations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     },
@@ -487,6 +534,12 @@
             "description": "OK. Successfully got recommendation detail.",
             "schema": {
               "$ref": "#/definitions/ResourceRecommendationBase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -536,6 +589,19 @@
             "description": "OK. Successfully got suppression detail.",
             "schema": {
               "$ref": "#/definitions/SuppressionContract"
+            }
+          },
+          "404": {
+            "description": "Suppression name is not specified or Suppression Id not found.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -593,6 +659,19 @@
             "schema": {
               "$ref": "#/definitions/SuppressionContract"
             }
+          },
+          "404": {
+            "description": "Recommendation to be suppressed is not found.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -637,6 +716,12 @@
         "responses": {
           "204": {
             "description": "NoContent. The recommendation has been activated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -682,6 +767,12 @@
             "description": "OK. Successfully got all suppressions in a subscription.",
             "schema": {
               "$ref": "#/definitions/SuppressionContractListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -850,7 +941,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DigestConfig"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -858,13 +952,18 @@
       "description": "Advisor Digest configuration entity",
       "type": "object",
       "properties": {
+        "name": {
+          "description": "Name of digest configuration. Value is case-insensitive and must be unique within a subscription.",
+          "type": "string"
+        },
         "actionGroupResourceId": {
           "description": "Action group resource id used by digest.",
           "type": "string"
         },
         "frequency": {
-          "description": "Frequency that digest will be triggered. Value must conform to ISO 8601 standard and must be greater than equal to 7 day and less than or equal to 30 days.",
-          "type": "string"
+          "format": "int32",
+          "description": "Frequency that digest will be triggered, in days. Value must be between 7 and 30 days inclusive.",
+          "type": "integer"
         },
         "categories": {
           "description": "Categories to send digest for. If categories are not provided, then digest will be sent for all categories.",
@@ -887,6 +986,18 @@
         "language": {
           "description": "Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).",
           "type": "string"
+        },
+        "state": {
+          "description": "State of digest configuration.",
+          "enum": [
+            "Active",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DigestConfigState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1001,19 +1112,6 @@
           "description": "The recommendation-type GUID.",
           "type": "string"
         },
-        "risk": {
-          "description": "The potential risk of not implementing the recommendation.",
-          "enum": [
-            "Error",
-            "Warning",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "risk",
-            "modelAsString": true
-          }
-        },
         "shortDescription": {
           "$ref": "#/definitions/ShortDescription",
           "description": "A summary of the recommendation."
@@ -1031,6 +1129,51 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "resourceMetadata": {
+          "$ref": "#/definitions/ResourceMetadata",
+          "description": "Metadata of resource that was assessed"
+        },
+        "description": {
+          "description": "The detailed description of recommendation.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The label of recommendation.",
+          "type": "string"
+        },
+        "learnMoreLink": {
+          "description": "The link to learn more about recommendation and generation logic.",
+          "type": "string"
+        },
+        "potentialBenefits": {
+          "description": "The potential benefit of implementing recommendation.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of recommended actions to implement recommendation.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "remediation": {
+          "description": "The automated way to apply recommendation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "exposedMetadataProperties": {
+          "description": "The recommendation metadata properties exposed to customer to provide additional information.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
           }
         }
       }
@@ -1061,11 +1204,40 @@
       "type": "object",
       "properties": {
         "problem": {
-          "description": "The issue or opportunity identified by the recommendation.",
+          "description": "The issue or opportunity identified by the recommendation and proposed solution.",
           "type": "string"
         },
         "solution": {
-          "description": "The remediation action suggested by the recommendation.",
+          "description": "The issue or opportunity identified by the recommendation and proposed solution.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceMetadata": {
+      "description": "Recommendation resource metadata",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Azure resource Id of the assessed resource",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source from which recommendation is generated",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action to view resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "singular": {
+          "description": "The singular user friendly name of resource type. eg: virtual machine",
+          "type": "string"
+        },
+        "plural": {
+          "description": "The plural user friendly name of resource type. eg: virtual machines",
           "type": "string"
         }
       }
@@ -1083,7 +1255,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1149,6 +1324,12 @@
         },
         "ttl": {
           "description": "The duration for which the suppression is valid.",
+          "type": "string"
+        },
+        "expirationTimeStamp": {
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Gets or sets the expiration time stamp.",
           "type": "string"
         }
       }

@@ -1,0 +1,41 @@
+parameters:
+  "service-dir":
+    default: "sdk/contosowidgetmanager"
+  "dependencies":
+    "additionalDirectories":
+      - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/widgets.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-contoso-widgetmanager"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    examples-directory: "{project-root}/examples"
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Template.Contoso"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "contosowidgetmanager-rest"
+    packageDetails:
+      name: "@azure-rest/contoso-widgetmanager-rest"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-contoso-widgetmanager"
+    namespace: com.azure.contoso.widgetmanager
+    flavor: azure

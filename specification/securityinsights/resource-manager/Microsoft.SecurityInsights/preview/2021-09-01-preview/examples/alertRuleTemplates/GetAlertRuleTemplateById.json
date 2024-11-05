@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "alertRuleTemplateId": "65360bb0-8986-4ade-a89d-af3cf44d28aa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRuleTemplates/65360bb0-8986-4ade-a89d-af3cf44d28aa",
+        "name": "65360bb0-8986-4ade-a89d-af3cf44d28aa",
+        "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+        "kind": "Scheduled",
+        "properties": {
+          "severity": "Low",
+          "query": "let timeframe = 1d;\nAWSCloudTrail\n| where TimeGenerated >= ago(timeframe)\n| where EventName == \"CreateNetworkAclEntry\"\n    or EventName == \"CreateRoute\"\n| project TimeGenerated, EventName, EventTypeName, UserIdentityAccountId, UserIdentityPrincipalid, UserAgent, UserIdentityUserName, SessionMfaAuthenticated, SourceIpAddress, AWSRegion, EventSource, AdditionalEventData, ResponseElements\n| extend AccountCustomEntity = UserIdentityUserName, IPCustomEntity = SourceIpAddress",
+          "queryFrequency": "P1D",
+          "queryPeriod": "P1D",
+          "triggerOperator": "GreaterThan",
+          "triggerThreshold": 0,
+          "displayName": "Changes to Amazon VPC settings",
+          "description": "This alert monitors changes to Amazon VPC (Virtual Private Cloud) settings such as new ACL entries and routes in route tables.\nMore information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255 \nand https://aws.amazon.com/vpc/",
+          "eventGroupingSettings": {
+            "aggregationKind": "AlertPerResult"
+          },
+          "tactics": [
+            "PrivilegeEscalation",
+            "LateralMovement"
+          ],
+          "lastUpdatedDateUTC": "2020-02-27T00:00:00Z",
+          "version": "1.0.2",
+          "createdDateUTC": "2019-02-27T00:00:00Z",
+          "status": "Available",
+          "requiredDataConnectors": [
+            {
+              "connectorId": "AWS",
+              "dataTypes": [
+                "AWSCloudTrail"
+              ]
+            }
+          ],
+          "alertRulesCreatedByTemplateCount": 0
+        }
+      }
+    }
+  }
+}

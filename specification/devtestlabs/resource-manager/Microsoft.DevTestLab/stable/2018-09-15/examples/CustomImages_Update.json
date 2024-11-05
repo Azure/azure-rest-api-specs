@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{customImageName}",
+    "customImage": {
+      "tags": {
+        "tagName1": "tagValue2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/customimages/{customImageName}",
+        "name": "{customImageName}",
+        "type": "Microsoft.DevTestLab/labs/customImages",
+        "location": "{location}",
+        "properties": {
+          "vm": {
+            "linuxOsInfo": {
+              "linuxOsState": "NonDeprovisioned"
+            },
+            "sourceVmId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}"
+          },
+          "description": "My Custom Image",
+          "author": "{authorName}",
+          "creationDate": "2021-10-10T09:59:28.7985144+00:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue2"
+        }
+      }
+    }
+  }
+}

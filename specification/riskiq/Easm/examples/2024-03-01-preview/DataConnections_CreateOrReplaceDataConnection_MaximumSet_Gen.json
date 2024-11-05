@@ -1,0 +1,36 @@
+{
+  "operationId": "DataConnections_CreateOrReplaceDataConnection",
+  "title": "DataConnections_CreateOrReplaceDataConnection",
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace",
+    "dataConnectionName": "ThisisaDataConnection",
+    "body": {
+      "kind": "logAnalytics",
+      "properties": {
+        "apiKey": "ThisisApiKey",
+        "workspaceId": "ThisisWorkspaceId"
+      },
+      "frequency": "weekly",
+      "frequencyOffset": 1
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "ThisisaDataConnection",
+        "name": "ThisisaDataConnection",
+        "displayName": "ThisisaDataConnection",
+        "kind": "logAnalytics",
+        "properties": {
+          "apiKey": "ThisisApiKey",
+          "workspaceId": "ThisisWorkspaceId"
+        },
+        "createdDate": "2022-05-02T19:30:14.432+00:00",
+        "updatedDate": "2022-05-02T19:30:14.432+00:00"
+      }
+    }
+  }
+}

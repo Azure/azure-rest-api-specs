@@ -2142,7 +2142,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter. You can expand createdTime and changedTime. For example, to expand both properties, use $expand=changedTime,createdTime"
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -2640,7 +2640,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter. You can expand createdTime and changedTime. For example, to expand both properties, use $expand=changedTime,createdTime"
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -2648,7 +2648,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resource groups."
+            "description": "The number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2726,7 +2726,12 @@
             "description": "The name of the resource to check whether it exists."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2795,7 +2800,12 @@
             "description": "The name of the resource to delete."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2868,7 +2878,12 @@
             "description": "The name of the resource to create."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -2956,7 +2971,12 @@
             "description": "The name of the resource to update."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3038,7 +3058,12 @@
             "description": "The name of the resource to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3077,7 +3102,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3111,7 +3141,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3149,7 +3184,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3202,7 +3242,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3249,7 +3294,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -4247,6 +4297,12 @@
           },
           "description": "The API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
         "capabilities": {
           "type": "string",
           "description": "The additional capabilities offered by this resource type."
@@ -4411,6 +4467,11 @@
         "onErrorDeployment": {
           "$ref": "#/definitions/OnErrorDeploymentExtended",
           "description": "The deployment on error behavior."
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The deployment error."
         }
       },
       "description": "Deployment properties with additional details."
@@ -4573,6 +4634,33 @@
       ],
       "description": "Resource information."
     },
+    "GenericResourceExpanded": {
+      "properties": {
+        "createdTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "changedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource. This is only present if requested via the $expand query parameter."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenericResource"
+        }
+      ],
+      "description": "Resource information."
+    },
     "Plan": {
       "properties": {
         "name": {
@@ -4681,7 +4769,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GenericResource"
+            "$ref": "#/definitions/GenericResourceExpanded"
           },
           "description": "An array of resources."
         },
@@ -5305,6 +5393,20 @@
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "Error when What-If operation fails."
+        }
+      }
+    },
+    "ZoneMapping": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

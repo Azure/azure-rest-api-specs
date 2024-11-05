@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
+    "runCommandName": "myRunCommand",
+    "api-version": "2021-04-01",
+    "runCommand": {
+      "properties": {
+        "source": {
+          "script": "Write-Host Script Source Updated!"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRunCommand",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
+        "location": "westus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "source": {
+            "script": "Write-Host Script Source Updated!"
+          },
+          "parameters": [
+            {
+              "name": "param1",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "value": "value2"
+            }
+          ],
+          "asyncExecution": false,
+          "runAsUser": "user1",
+          "timeoutInSeconds": 3600,
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  }
+}

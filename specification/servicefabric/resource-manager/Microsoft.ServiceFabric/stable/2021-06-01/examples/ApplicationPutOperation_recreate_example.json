@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "api-version": "2021-06-01",
+    "parameters": {
+      "tags": {},
+      "properties": {
+        "typeName": "myAppType",
+        "typeVersion": "1.0",
+        "parameters": {
+          "param1": "value1"
+        },
+        "upgradePolicy": {
+          "recreateApplication": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": "10",
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/9c2ce367-47ea-43de-b69e-c5a423da4557?api-version=2021-06-01"
+      },
+      "body": {
+        "type": "applications",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp",
+        "name": "myCluster",
+        "tags": {},
+        "etag": "W/\"636462502180261859\"",
+        "properties": {
+          "provisioningState": "Updating",
+          "typeName": "myAppType",
+          "typeVersion": "1.0",
+          "parameters": {
+            "param1": "value1"
+          },
+          "upgradePolicy": {
+            "recreateApplication": true
+          }
+        }
+      }
+    }
+  }
+}

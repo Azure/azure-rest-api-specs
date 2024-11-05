@@ -1,0 +1,455 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-10",
+    "title": "IoT Firmware Defense",
+    "description": "Firmware & IoT Security REST API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/summaries": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_ListByFirmware",
+        "description": "Lists analysis result summary names of a firmware. To fetch the full summary data, get that summary by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SummaryListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Summaries_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "Summaries_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/summaries/{summaryName}": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Get",
+        "description": "Get an analysis result summary of a firmware by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SummaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SummaryResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Summaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MaximumSet_Gen.json"
+          },
+          "Summaries_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SummaryType": {
+      "type": "string",
+      "enum": [
+        "Firmware",
+        "CVE",
+        "BinaryHardening",
+        "CryptoCertificate",
+        "CryptoKey"
+      ],
+      "description": "Describes the type of summary.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SummaryType"
+      }
+    },
+    "SummaryListResult": {
+      "type": "object",
+      "description": "List of analysis summaries.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SummaryResource"
+          },
+          "description": "The list of summaries."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "SummaryResourceProperties": {
+      "description": "Properties of an analysis summary.",
+      "type": "object",
+      "discriminator": "summaryType",
+      "properties": {
+        "summaryType": {
+          "$ref": "#/definitions/SummaryType"
+        }
+      },
+      "readOnly": true,
+      "required": [
+        "summaryType"
+      ]
+    },
+    "SummaryResource": {
+      "description": "The object representing a firmware analysis summary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      }
+    },
+    "FirmwareSummary": {
+      "description": "Properties for high level summary of firmware analysis results.",
+      "type": "object",
+      "x-ms-discriminator-value": "Firmware",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "extractedSize": {
+          "description": "Total extracted size of the firmware in bytes.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "fileSize": {
+          "description": "Firmware file size in bytes.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "extractedFileCount": {
+          "description": "Extracted file count.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "componentCount": {
+          "description": "Components count.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "binaryCount": {
+          "description": "Binary count",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "analysisTimeSeconds": {
+          "description": "Time used for analysis",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "rootFileSystems": {
+          "description": "The number of root file systems found.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        }
+      }
+    },
+    "CveSummary": {
+      "description": "Properties for a CVE analysis summary.",
+      "type": "object",
+      "x-ms-discriminator-value": "CVE",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "critical": {
+          "description": "The total number of critical severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "high": {
+          "description": "The total number of high severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "medium": {
+          "description": "The total number of medium severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "low": {
+          "description": "The total number of low severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "unknown": {
+          "description": "The total number of unknown severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        }
+      }
+    },
+    "BinaryHardeningSummaryResource": {
+      "description": "Properties for a binary hardening analysis summary.",
+      "type": "object",
+      "x-ms-discriminator-value": "BinaryHardening",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "totalFiles": {
+          "description": "Total number of binaries that were analyzed",
+          "type": "integer",
+          "format": "int64"
+        },
+        "nx": {
+          "description": "NX summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "pie": {
+          "description": "PIE summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "relro": {
+          "description": "RELRO summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "canary": {
+          "description": "Canary summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "stripped": {
+          "description": "Stripped summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        }
+      }
+    },
+    "CryptoCertificateSummaryResource": {
+      "description": "Properties for cryptographic certificate summary.",
+      "type": "object",
+      "x-ms-discriminator-value": "CryptoCertificate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "totalCertificates": {
+          "description": "Total number of certificates found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "pairedKeys": {
+          "description": "Total number of paired private keys found for the certificates.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "expired": {
+          "description": "Total number of expired certificates found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "expiringSoon": {
+          "description": "Total number of nearly expired certificates found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "weakSignature": {
+          "description": "Total number of certificates found using a weak signature algorithm.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "selfSigned": {
+          "description": "Total number of certificates found that are self-signed.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "shortKeySize": {
+          "description": "Total number of certificates found that have an insecure key size for the key algorithm.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CryptoKeySummaryResource": {
+      "description": "Properties for cryptographic key summary.",
+      "type": "object",
+      "x-ms-discriminator-value": "CryptoKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "totalKeys": {
+          "description": "Total number of cryptographic keys found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "publicKeys": {
+          "description": "Total number of (non-certificate) public keys found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "privateKeys": {
+          "description": "Total number of private keys found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "pairedKeys": {
+          "description": "Total number of keys found that have a matching paired key or certificate.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "shortKeySize": {
+          "description": "Total number of keys found that have an insecure key size for the algorithm.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SummaryNameParameter": {
+      "name": "summaryName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "enum": [
+        "Firmware",
+        "CVE",
+        "BinaryHardening",
+        "CryptoCertificate",
+        "CryptoKey"
+      ],
+      "x-ms-parameter-location": "method",
+      "description": "The Firmware analysis summary name describing the type of summary.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "summaryName"
+      }
+    }
+  }
+}

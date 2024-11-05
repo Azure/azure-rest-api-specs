@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "autoscaleSettingName": "vmss1-Autoscale-775",
+    "timespan": "2021-10-14T22:00:00.000Z/2021-10-16T22:00:00.000Z",
+    "metricNamespace": "Microsoft.Compute/virtualMachineScaleSets",
+    "metricName": "PercentageCPU",
+    "aggregation": "Total",
+    "interval": "PT1H",
+    "api-version": "2021-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timespan": "2021-10-14T22:00:00.000Z/2021-10-16T22:00:00.000Z",
+        "interval": "PT1H",
+        "metricName": "PercentageCPU",
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1",
+        "data": [
+          {
+            "timeStamp": "2021-10-14T22:00:00Z",
+            "value": 123.0
+          },
+          {
+            "timeStamp": "2021-10-14T22:02:00Z",
+            "value": 120.0
+          },
+          {
+            "timeStamp": "2021-10-14T22:02:00Z",
+            "value": 88.0
+          },
+          {
+            "timeStamp": "2021-10-14T22:03:00Z",
+            "value": 100.0
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,628 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureChangeAnalysisManagementClient",
+    "version": "2021-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.ChangeAnalysis/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Lists all the supported operations by the Microsoft.ChangeAnalysis resource provider along with their descriptions.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.ChangeAnalysis/resourceChanges": {
+      "post": {
+        "tags": [
+          "ResourceChanges"
+        ],
+        "summary": "List the changes of a resource within the specified time range. Customer data will be masked if the user doesn't have access.",
+        "operationId": "ResourceChanges_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/ScanLatestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ChangeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ResourceChanges_List": {
+            "$ref": "./examples/ResourceChangesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeAnalysis/changes": {
+      "get": {
+        "tags": [
+          "Changes"
+        ],
+        "summary": "List the changes of a resource group within the specified time range. Customer data will always be masked.",
+        "operationId": "Changes_ListChangesByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ChangeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Changes_ListChangesByResourceGroupFiltered": {
+            "$ref": "./examples/ChangesListChangesByResourceGroupFiltered.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeAnalysis/changes": {
+      "get": {
+        "tags": [
+          "Changes"
+        ],
+        "summary": "List the changes of a subscription within the specified time range. Customer data will always be masked.",
+        "operationId": "Changes_ListChangesBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ChangeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Changes_ListChangesBySubscriptionFiltered": {
+            "$ref": "./examples/ChangesListChangesBySubscriptionFiltered.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeAnalysis/changeSnapshots": {
+      "post": {
+        "tags": [
+          "ChangeSnapshots"
+        ],
+        "summary": "Gets change snapshots for the given resource Id and change Id.",
+        "operationId": "ChangeSnapshots_GetChangeSnapshots",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceIdQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ChangeIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ChangeSnapshots"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeSnapshots": {
+            "$ref": "./examples/ChangeSnapshotsGetChangeSnapshots.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceProviderOperationDisplay": {
+      "description": "The resource provider operation details.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the resource provider.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the resource provider operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the resource provider operation.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderOperationDefinition": {
+      "description": "The resource provider operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The resource provider operation name.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplay"
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "description": "The resource provider operation list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Resource provider operations list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperationDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next page for list of Azure operations.",
+          "type": "string"
+        }
+      }
+    },
+    "ChangeType": {
+      "description": "The type of the change.",
+      "enum": [
+        "Add",
+        "Remove",
+        "Update"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChangeType",
+        "modelAsString": true
+      }
+    },
+    "Level": {
+      "enum": [
+        "Noisy",
+        "Normal",
+        "Important"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Level",
+        "modelAsString": true
+      }
+    },
+    "PropertyChange": {
+      "description": "Data of a property change.",
+      "type": "object",
+      "properties": {
+        "changeType": {
+          "$ref": "#/definitions/ChangeType"
+        },
+        "changeCategory": {
+          "description": "The change category.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ChangeCategory",
+            "modelAsString": false
+          }
+        },
+        "jsonPath": {
+          "description": "The json path of the changed property.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The enhanced display name of the json path. E.g., the json path value[0].properties will be translated to something meaningful like slots[\"Staging\"].properties.",
+          "type": "string"
+        },
+        "level": {
+          "$ref": "#/definitions/Level"
+        },
+        "description": {
+          "description": "The description of the changed property.",
+          "type": "string"
+        },
+        "oldValue": {
+          "description": "The value of the property before the change.",
+          "type": "string"
+        },
+        "newValue": {
+          "description": "The value of the property after the change.",
+          "type": "string"
+        },
+        "isDataMasked": {
+          "description": "The boolean indicating whether the oldValue and newValue are masked. The values are masked if it contains sensitive information that the user doesn't have access to.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ChangeProperties": {
+      "description": "The properties of a change.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource id that the change is attached to.",
+          "type": "string"
+        },
+        "timeStamp": {
+          "format": "date-time",
+          "description": "The time when the change is detected.",
+          "type": "string"
+        },
+        "initiatedByList": {
+          "description": "The list of identities who might initiated the change.\r\nThe identity could be user name (email address) or the object ID of the Service Principal.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changeType": {
+          "$ref": "#/definitions/ChangeType"
+        },
+        "propertyChanges": {
+          "description": "The list of detailed changes at json property level.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyChange"
+          }
+        }
+      }
+    },
+    "Change": {
+      "description": "The detected change.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeProperties"
+        }
+      }
+    },
+    "ChangeList": {
+      "description": "The list of detected changes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of changes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Change"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next page of changes.",
+          "type": "string"
+        }
+      }
+    },
+    "ChangeSnapshotsProperties": {
+      "description": "The change snapshot, represented by a pair of before and after resource snapshots.",
+      "type": "object",
+      "properties": {
+        "beforeSnapshot": {
+          "description": "The snapshot before the change.",
+          "type": "object"
+        },
+        "afterSnapshot": {
+          "description": "The snapshot after the change.",
+          "type": "object"
+        },
+        "isHidden": {
+          "description": "Is the snapshot hidden",
+          "type": "boolean"
+        }
+      }
+    },
+    "ChangeSnapshots": {
+      "description": "The detected change snapshots.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeSnapshotsProperties"
+        }
+      }
+    },
+    "ResourceGraphSnapshotData": {
+      "description": "Data on a specific resource snapshot.",
+      "type": "object",
+      "properties": {
+        "snapshotId": {
+          "description": "The ID of the snapshot.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The time when the snapshot was created.\nThe snapshot timestamp provides an approximation as to when a modification to a resource was detected.  There can be a difference between the actual modification time and the detection time.  This is due to differences in how operations that modify a resource are processed, versus how operation that record resource snapshots are processed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "content": {
+          "description": "The resource snapshot content (in resourceChangeDetails response only).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "timestamp"
+      ]
+    },
+    "ResourceGraphChangeData": {
+      "description": "Data on a specific change, represented by a pair of before and after resource snapshots.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource for a change.",
+          "type": "string"
+        },
+        "changeId": {
+          "description": "The change Id.",
+          "type": "string"
+        },
+        "beforeSnapshot": {
+          "description": "The snapshot before the change from ARG.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceGraphSnapshotData"
+            }
+          ]
+        },
+        "afterSnapshot": {
+          "description": "The snapshot after the change from ARG.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceGraphSnapshotData"
+            }
+          ]
+        },
+        "changeType": {
+          "description": "The change type for snapshot. PropertyChanges will be provided in case of Update change type",
+          "type": "string",
+          "enum": [
+            "Create",
+            "Update",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "ChangeType",
+            "modelAsString": false
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceIdParameter": {
+      "in": "path",
+      "name": "resourceId",
+      "description": "The identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "StartTimeParameter": {
+      "in": "query",
+      "name": "$startTime",
+      "description": "Specifies the start time of the changes request.",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "EndTimeParameter": {
+      "in": "query",
+      "name": "$endTime",
+      "description": "Specifies the end time of the changes request.",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "type": "string",
+      "required": false,
+      "description": "Reduces the set of data collected.<br>This argument is not required. Only accepts 'resourceId' and 'resourceType' and only accepts the following patterns. <br>- *List changes for a resource type*: $filter=resourceType eq 'microsoft.web/sites'.<br>- *List changes for multiple resource types:* $filter=resourceType eq 'microsoft.web/sites,microsoft.compute/virtualmachines'.<br> - *List changes for a resource Id*: $filter=resourceId eq '{resourceId}'.<br>- *List changes for multiple resource Ids:* $filter=resourceId eq '{resourceId1},{resourceId2}}'.",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "in": "query",
+      "name": "$skipToken",
+      "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceIdQueryParameter": {
+      "in": "query",
+      "name": "$resourceId",
+      "description": "Specifies the resource Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ChangeIdParameter": {
+      "in": "query",
+      "name": "$changeId",
+      "description": "Specifies the change Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ScanLatestParameter": {
+      "in": "query",
+      "name": "$scanLatest",
+      "description": "Specifies whether to scan latest",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

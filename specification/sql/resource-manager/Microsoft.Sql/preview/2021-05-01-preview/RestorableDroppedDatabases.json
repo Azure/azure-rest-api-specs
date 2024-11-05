@@ -1,0 +1,234 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases": {
+      "get": {
+        "tags": [
+          "RestorableDroppedDatabases"
+        ],
+        "description": "Gets a list of restorable dropped databases.",
+        "operationId": "RestorableDroppedDatabases_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of restorable dropped databases.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of restorable dropped databases.": {
+            "$ref": "./examples/ListRestorableDroppedDatabasesByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppedDatabaseId}": {
+      "get": {
+        "tags": [
+          "RestorableDroppedDatabases"
+        ],
+        "description": "Gets a restorable dropped database.",
+        "operationId": "RestorableDroppedDatabases_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "restorableDroppedDatabaseId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified restorable dropped database.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedDatabase"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidRestorableDroppedDatabaseDeletionDate - The restorable dropped database deletion date given is invalid\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a restorable dropped database.": {
+            "$ref": "./examples/GetRestorableDroppedDatabase.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestorableDroppedDatabaseListResult": {
+      "description": "A list of restorable dropped databases.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableDroppedDatabase"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RestorableDroppedDatabaseProperties": {
+      "description": "The restorable dropped database's properties.",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "The name of the database.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maxSizeBytes": {
+          "format": "int64",
+          "description": "The max size of the database expressed in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the database (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "deletionDate": {
+          "format": "date-time",
+          "description": "The deletion date of the database (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "earliestRestoreDate": {
+          "format": "date-time",
+          "description": "The earliest restore date of the database (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupStorageRedundancy": {
+          "description": "The storage account type used to store backups for this database.",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone",
+            "GeoZone"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BackupStorageRedundancy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RestorableDroppedDatabase": {
+      "description": "A restorable dropped database resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RestorableDroppedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

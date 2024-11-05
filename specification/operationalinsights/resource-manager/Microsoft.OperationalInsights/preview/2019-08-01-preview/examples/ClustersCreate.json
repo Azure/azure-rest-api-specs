@@ -4,7 +4,15 @@
     "clusterName": "oiautorest6685",
     "parameters": {
       "properties": {
-        "encryptionKeyUri": "https://aztest2170.vault.azure.net/certificates/aztest2170cert/654ft6c4e63845cbb50fd6fg51540429"
+        "keyVaultProperties": {
+          "keyVaultUri": "https://aztest2170.vault.azure.net",
+          "keyName": "aztest2170cert",
+          "keyVersion": "654ft6c4e63845cbb50fd6fg51540429"
+        }
+      },
+      "sku": {
+        "name": "CapacityReservation",
+        "capacity": 1000
       },
       "location": "australiasoutheast",
       "tags": {
@@ -15,47 +23,6 @@
     "subscriptionId": "00000000-0000-0000-0000-00000000000"
   },
   "responses": {
-    "200": {
-      "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000005/resourcegroups/oiautorest6685/providers/microsoft.operationalinsights/clusters/aztest2170",
-        "identity": {
-          "principalId": "356d057d-cba5-44dd-8a30-b2e547bc416b",
-          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-          "type": "SystemAssigned"
-        },
-        "name": "AzTest2170",
-        "type": "Microsoft.OperationalInsights/clusters",
-        "location": "australiasoutheast",
-        "tags": {
-          "tag1": "val1"
-        },
-        "properties": {
-          "clusterId": "bc089d7b-485c-4aff-a71e-c00f362d8d2f",
-          "provisioningState": "Creating",
-          "encryptionKeyUri": "https://aztest2170.vault.azure.net/certificates/aztest2170cert/654ft6c4e63845cbb50fd6fg51540429"
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000005/resourcegroups/oiautorest6685/providers/microsoft.operationalinsights/clusters/aztest2170",
-        "identity": {
-          "principalId": "356d057d-cba5-44dd-8a30-b2e547bc416b",
-          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-          "type": "SystemAssigned"
-        },
-        "name": "AzTest2170",
-        "type": "Microsoft.OperationalInsights/clusters",
-        "location": "australiasoutheast",
-        "tags": {
-          "tag1": "val1"
-        },
-        "properties": {
-          "clusterId": "bc089d7b-485c-4aff-a71e-c00f362d8d2f",
-          "provisioningState": "Creating",
-          "encryptionKeyUri": "https://aztest2170.vault.azure.net/certificates/aztest2170cert/654ft6c4e63845cbb50fd6fg51540429"
-        }
-      }
-    }
+    "202": {}
   }
 }

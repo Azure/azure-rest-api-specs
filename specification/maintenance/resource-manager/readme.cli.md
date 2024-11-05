@@ -6,23 +6,61 @@ These settings apply only when `--cli` is specified on the command line.
 cli:
   namespace: azure.mgmt.maintenance
   flatten-all: true
-  test-scenario:
-    - name: MaintenanceConfigurations_CreateOrUpdateForResource
-    - name: ApplyUpdates_CreateOrUpdate
-    - name: ConfigurationAssignments_CreateOrUpdate
-    - name: ApplyUpdates_CreateOrUpdateParent
-    - name: ConfigurationAssignments_CreateOrUpdateParent
-    - name: ApplyUpdates_GetParent
-    - name: ConfigurationAssignments_ListParent
-    - name: Updates_ListParent
-    - name: ApplyUpdates_Get
-    - name: ConfigurationAssignments_List
-    - name: Updates_List
-    - name: MaintenanceConfigurations_GetForResource
-    - name: MaintenanceConfigurations_List
-    - name: Operations_List
-    - name: MaintenanceConfigurations_UpdateForResource
-    - name: ConfigurationAssignments_DeleteParent
-    - name: ConfigurationAssignments_Delete
-    - name: MaintenanceConfigurations_DeleteForResource
+  cli-directive:
+      - select: 'operationGroup'
+        where:
+            operationGroup: 'ApplyUpdateForResourceGroup'
+        hidden: true
+      - where:
+            operationGroup: 'MaintenanceConfigurationsForResourceGroup'
+        hidden: true
+      - where:
+            operationGroup: 'ConfigurationAssignmentsWithinSubscription'
+        hidden: true
+      - select: 'parameter'
+        where:
+          parameter: duration
+        alias:
+          - maintenance-window-duration
+          - duration
+      - where:
+          parameter: 'expirationDateTime'
+        alias:
+          - maintenance-window-expiration-date-time
+          - expiration-date-time
+      - where:
+          parameter: 'recurEvery'
+        alias:
+          - maintenance-window-recur-every
+          - recur-every
+      - where:
+          param: startDateTime
+        alias:
+          - maintenance-window-start-date-time
+          - start-date-time
+      - where:
+          param: timeZone
+        alias:
+          - maintenance-window-time-zone
+          - time-zone
+      - where:
+          param: linuxParameters
+        alias:
+          - install-patches-linux-parameters
+          - linux-parameters
+      - where:
+          param: windowsParameters
+        alias:
+          - install-patches-windows-parameters
+          - windows-parameters
+      - where:
+          param: postTasks
+        alias:
+          - install-patches-post-tasks
+          - post-tasks       
+      - where:
+          param: preTasks
+        alias:
+          - install-patches-pre-tasks
+          - pre-tasks          
 ```

@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "packetCoreControlPlaneName": "TestPacketCoreCP"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/routingInfo/default",
+            "name": "default",
+            "type": "Microsoft.MobileNetwork/packetCoreControlPlanes/routingInfo",
+            "properties": {
+              "controlPlaneAccessRoutes": [
+                {
+                  "destination": "198.51.100.1/32",
+                  "nextHops": [
+                    {
+                      "address": "198.0.2.1",
+                      "priority": 100
+                    },
+                    {
+                      "address": "198.0.2.128",
+                      "priority": 100
+                    }
+                  ]
+                }
+              ],
+              "userPlaneAccessRoutes": [
+                {
+                  "destination": "198.51.100.2/32",
+                  "nextHops": [
+                    {
+                      "address": "198.0.2.2",
+                      "priority": 100
+                    },
+                    {
+                      "address": "198.0.2.129",
+                      "priority": 200
+                    }
+                  ]
+                }
+              ],
+              "userPlaneDataRoutes": [
+                {
+                  "attachedDataNetwork": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestAttachedDataNetwork"
+                  },
+                  "routes": [
+                    {
+                      "destination": "2.2.0.0/16",
+                      "nextHops": [
+                        {
+                          "address": "203.0.113.1",
+                          "priority": 100
+                        },
+                        {
+                          "address": "203.0.113.128",
+                          "priority": 200
+                        }
+                      ]
+                    },
+                    {
+                      "destination": "2.4.0.0/16",
+                      "nextHops": [
+                        {
+                          "address": "203.0.113.1",
+                          "priority": 100
+                        },
+                        {
+                          "address": "203.0.113.128",
+                          "priority": 200
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

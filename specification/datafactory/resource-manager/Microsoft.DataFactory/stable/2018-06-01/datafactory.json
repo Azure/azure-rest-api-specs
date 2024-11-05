@@ -255,6 +255,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryFeaturesValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_QueryFeatureValuesByFactory",
+        "x-ms-examples": {
+          "ExposureControl_QueryFeatureValuesByFactory": {
+            "$ref": "./examples/ExposureControl_QueryFeatureValuesByFactory.json"
+          }
+        },
+        "description": "Get list of exposure control features for specific factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlBatchRequest",
+            "description": "The exposure control request for list of features.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -884,6 +935,51 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints",
+        "description": "Gets the list of outbound network dependencies for a given Azure-SSIS integration runtime.",
+        "x-ms-examples": {
+          "IntegrationRuntimes_OutboundNetworkDependenciesEndpoints": {
+            "$ref": "./examples/IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse"
             }
           },
           "default": {
@@ -2336,6 +2432,14 @@
             "x-ms-parameter-location": "method"
           },
           {
+            "name": "startFromFailure",
+            "description": "In recovery mode, if set to true, the rerun will start from failed activities. The property will be used only if startActivityName is not specified.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
             "name": "parameters",
             "description": "Parameters of the pipeline run. These parameters will be used only if the runId is not specified.",
             "in": "body",
@@ -2602,6 +2706,57 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querytriggers": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Triggers_QueryByFactory",
+        "x-ms-examples": {
+          "Triggers_QueryByFactory": {
+            "$ref": "./examples/Triggers_QueryByFactory.json"
+          }
+        },
+        "description": "Query triggers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "filterParameters",
+            "description": "Parameters to filter the triggers.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
       }
     },
@@ -3039,76 +3194,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}": {
-      "put": {
-        "tags": [
-          "rerunTriggers"
-        ],
-        "operationId": "RerunTriggers_Create",
-        "x-ms-examples": {
-          "RerunTriggers_Create": {
-            "$ref": "./examples/RerunTriggers_Create.json"
-          }
-        },
-        "description": "Creates a rerun trigger.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/rerunTriggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "rerunTumblingWindowTriggerActionParameters",
-            "description": "Rerun tumbling window trigger action parameters.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RerunTumblingWindowTriggerActionParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/TriggerResource"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel": {
       "post": {
         "tags": [
-          "rerunTriggers"
+          "triggerruns"
         ],
-        "operationId": "RerunTriggers_Start",
+        "operationId": "TriggerRuns_Cancel",
         "x-ms-examples": {
-          "RerunTriggers_Start": {
-            "$ref": "./examples/RerunTriggers_Start.json"
+          "Triggers_Cancel": {
+            "$ref": "./examples/TriggerRuns_Cancel.json"
           }
         },
-        "description": "Starts a trigger.",
-        "x-ms-long-running-operation": true,
+        "description": "Cancel a single trigger instance by runId.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3123,7 +3220,7 @@
             "$ref": "#/parameters/triggerName"
           },
           {
-            "$ref": "#/parameters/rerunTriggerName"
+            "$ref": "#/parameters/runId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3131,7 +3228,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Trigger has been started successfully."
+            "description": "TriggerRun has been cancelled."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -3139,146 +3236,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/stop": {
-      "post": {
-        "tags": [
-          "rerunTriggers"
-        ],
-        "operationId": "RerunTriggers_Stop",
-        "x-ms-examples": {
-          "RerunTriggers_Stop": {
-            "$ref": "./examples/RerunTriggers_Stop.json"
-          }
-        },
-        "description": "Stops a trigger.",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/rerunTriggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Trigger has been stopped successfully."
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/cancel": {
-      "post": {
-        "tags": [
-          "rerunTriggers"
-        ],
-        "operationId": "RerunTriggers_Cancel",
-        "x-ms-examples": {
-          "RerunTriggers_Cancel": {
-            "$ref": "./examples/RerunTriggers_Cancel.json"
-          }
-        },
-        "description": "Cancels a trigger.",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/rerunTriggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Trigger has been canceled successfully."
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers": {
-      "get": {
-        "tags": [
-          "rerunTriggers"
-        ],
-        "operationId": "RerunTriggers_ListByTrigger",
-        "x-ms-examples": {
-          "RerunTriggers_ListByTrigger": {
-            "$ref": "./examples/RerunTriggers_ListByTrigger.json"
-          }
-        },
-        "description": "Lists rerun triggers by an original trigger name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/RerunTriggerListResponse"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3800,6 +3757,1334 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks": {
+      "get": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_ListByFactory",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_ListByFactory": {
+            "$ref": "./examples/ManagedVirtualNetworks_ListByFactory.json"
+          }
+        },
+        "description": "Lists managed Virtual Networks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}": {
+      "put": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Create": {
+            "$ref": "./examples/ManagedVirtualNetworks_Create.json"
+          }
+        },
+        "description": "Creates or updates a managed Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed Virtual Network entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "managedVirtualNetwork",
+            "description": "Managed Virtual Network resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT managed Virtual Network operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_Get",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Get": {
+            "$ref": "./examples/ManagedVirtualNetworks_Get.json"
+          }
+        },
+        "description": "Gets a managed Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed Virtual Network entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET managed Virtual Network operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints": {
+      "get": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_ListByFactory",
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_ListByFactory": {
+            "$ref": "./examples/ManagedPrivateEndpoints_ListByFactory.json"
+          }
+        },
+        "description": "Lists managed private endpoints.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/managedPrivateEndpointListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials": {
+      "get": {
+        "tags": [
+          "credentials"
+        ],
+        "operationId": "CredentialOperations_ListByFactory",
+        "x-ms-examples": {
+          "Credentials_ListByFactory": {
+            "$ref": "./examples/Credentials_ListByFactory.json"
+          }
+        },
+        "description": "List credentials.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CredentialListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}": {
+      "put": {
+        "tags": [
+          "credentials"
+        ],
+        "operationId": "CredentialOperations_CreateOrUpdate",
+        "x-ms-examples": {
+          "Credentials_Create": {
+            "$ref": "./examples/Credentials_Create.json"
+          }
+        },
+        "description": "Creates or updates a credential.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/credentialName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the credential entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "credential",
+            "description": "Credential resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CredentialResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CredentialResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT credential operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "credentials"
+        ],
+        "operationId": "CredentialOperations_Get",
+        "x-ms-examples": {
+          "Credentials_Get": {
+            "$ref": "./examples/Credentials_Get.json"
+          }
+        },
+        "description": "Gets a credential.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/credentialName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the credential entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CredentialResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from GET credential operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "credentials"
+        ],
+        "operationId": "CredentialOperations_Delete",
+        "x-ms-examples": {
+          "Credentials_Delete": {
+            "$ref": "./examples/Credentials_Delete.json"
+          }
+        },
+        "description": "Deletes a credential.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/credentialName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from DELETE credential operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "put": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_CreateOrUpdate",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Create": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
+          }
+        },
+        "description": "Creates or updates a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed private endpoint entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "managedPrivateEndpoint",
+            "description": "Managed private endpoint resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT managed private endpoint operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_Get": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Get.json"
+          }
+        },
+        "description": "Gets a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed private endpoint entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET managed private endpoint operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Delete": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Delete.json"
+          }
+        },
+        "description": "Deletes a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from DELETE managed private endpoint operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndPointConnections": {
+      "get": {
+        "tags": [
+          "privateEndPointConnections"
+        ],
+        "operationId": "privateEndPointConnections_ListByFactory",
+        "x-ms-examples": {
+          "privateEndPointConnections_ListByFactory": {
+            "$ref": "./examples/PrivateEndPointConnections_ListByFactory.json"
+          }
+        },
+        "description": "Lists Private endpoint connections",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "privateEndpointConnections"
+        ],
+        "description": "Approves or rejects a private endpoint connection",
+        "operationId": "PrivateEndpointConnection_CreateOrUpdate",
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection for a factory.": {
+            "$ref": "./examples/ApproveRejectPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the private endpoint connection entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "privateEndpointWrapper",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT privateEndpointConnections operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "privateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection",
+        "operationId": "PrivateEndpointConnection_Get",
+        "x-ms-examples": {
+          "Get a private endpoint connection for a datafactory.": {
+            "$ref": "./examples/GetPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the private endpoint connection entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET privateEndpointConnections operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "privateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection",
+        "operationId": "PrivateEndpointConnection_Delete",
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a datafactory.": {
+            "$ref": "./examples/DeletePrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "An error response received from DELETE privateEndpointConnections operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "privateLinkResources"
+        ],
+        "description": "Gets the private link resources",
+        "operationId": "privateLinkResources_Get",
+        "x-ms-examples": {
+          "Get private link resources of a site": {
+            "$ref": "./examples/GetPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesWrapper"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters": {
+      "get": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_ListByFactory",
+        "x-ms-examples": {
+          "GlobalParameters_ListByFactory": {
+            "$ref": "./examples/GlobalParameters_ListByFactory.json"
+          }
+        },
+        "description": "Lists Global parameters",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters/{globalParameterName}": {
+      "get": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_Get",
+        "x-ms-examples": {
+          "GlobalParameters_Get": {
+            "$ref": "./examples/GlobalParameters_Get.json"
+          }
+        },
+        "description": "Gets a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_CreateOrUpdate",
+        "x-ms-examples": {
+          "GlobalParameters_Create": {
+            "$ref": "./examples/GlobalParameters_Create.json"
+          },
+          "GlobalParameters_Update": {
+            "$ref": "./examples/GlobalParameters_Update.json"
+          }
+        },
+        "description": "Creates or updates a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "default",
+            "description": "Global parameter resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_Delete",
+        "x-ms-examples": {
+          "GlobalParameters_Delete": {
+            "$ref": "./examples/GlobalParameters_Delete.json"
+          }
+        },
+        "description": "Deletes a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs": {
+      "get": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_ListByFactory",
+        "x-ms-examples": {
+          "ChangeDataCapture_ListByFactory": {
+            "$ref": "./examples/ChangeDataCapture_ListByFactory.json"
+          }
+        },
+        "description": "Lists all resources of type change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}": {
+      "put": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_CreateOrUpdate",
+        "x-ms-examples": {
+          "ChangeDataCapture_Create": {
+            "$ref": "./examples/ChangeDataCapture_Create.json"
+          },
+          "ChangeDataCapture_Update": {
+            "$ref": "./examples/ChangeDataCapture_Update.json"
+          }
+        },
+        "description": "Creates or updates a change data capture resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the change data capture entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "changeDataCapture",
+            "description": "Change data capture resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Get",
+        "x-ms-examples": {
+          "ChangeDataCapture_Get": {
+            "$ref": "./examples/ChangeDataCapture_Get.json"
+          }
+        },
+        "description": "Gets a change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the change data capture entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Delete",
+        "x-ms-examples": {
+          "ChangeDataCapture_Delete": {
+            "$ref": "./examples/ChangeDataCapture_Delete.json"
+          }
+        },
+        "description": "Deletes a change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/start": {
+      "post": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Start",
+        "x-ms-examples": {
+          "ChangeDataCapture_Start": {
+            "$ref": "./examples/ChangeDataCapture_Start.json"
+          }
+        },
+        "description": "Starts a change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change data capture has been started successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/stop": {
+      "post": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Stop",
+        "x-ms-examples": {
+          "ChangeDataCapture_Stop": {
+            "$ref": "./examples/ChangeDataCapture_Stop.json"
+          }
+        },
+        "description": "Stops a change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change data capture has been stopped successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/status": {
+      "get": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Status",
+        "x-ms-examples": {
+          "ChangeDataCapture_Start": {
+            "$ref": "./examples/ChangeDataCapture_Status.json"
+          }
+        },
+        "description": "Gets the current status for the change data capture resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3935,10 +5220,12 @@
         },
         "secretName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
         },
         "secretVersion": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
         }
       },
@@ -4088,7 +5375,10 @@
           "description": "List of integration runtime status.",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
@@ -4217,6 +5507,26 @@
         }
       }
     },
+    "TriggerQueryResponse": {
+      "description": "A query of triggers.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of triggers.",
+          "items": {
+            "$ref": "#/definitions/TriggerResource"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
     "TriggerListResponse": {
       "description": "A list of trigger resources.",
       "type": "object",
@@ -4249,6 +5559,26 @@
       "required": [
         "runId"
       ]
+    },
+    "GlobalParameterListResponse": {
+      "description": "A list of Global parameters.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of global parameters.",
+          "items": {
+            "$ref": "#/definitions/GlobalParameterResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,
@@ -4287,7 +5617,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -4399,6 +5730,16 @@
         "type": "object"
       }
     },
+    "PurviewConfiguration": {
+      "description": "Purview configuration.",
+      "type": "object",
+      "properties": {
+        "purviewResourceId": {
+          "description": "Purview resource id.",
+          "type": "string"
+        }
+      }
+    },
     "FactoryRepoConfiguration": {
       "description": "Factory's git repo information.",
       "type": "object",
@@ -4427,6 +5768,10 @@
         "lastCommitId": {
           "description": "Last commit id.",
           "type": "string"
+        },
+        "disablePublish": {
+          "description": "Disable manual publish operation in ADF studio to favor automated publish.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -4471,7 +5816,29 @@
       ],
       "properties": {
         "hostName": {
-          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
+          "description": "GitHub Enterprise host name. For example: `https://github.mydomain.com`",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "GitHub bring your own app client id.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "$ref": "#/definitions/GitHubClientSecret",
+          "description": "GitHub bring your own app client secret information."
+        }
+      }
+    },
+    "GitHubClientSecret": {
+      "description": "Client secret information for factory's bring your own app repository configuration.",
+      "type": "object",
+      "properties": {
+        "byoaSecretAkvUrl": {
+          "description": "Bring your own app client secret AKV URL.",
+          "type": "string"
+        },
+        "byoaSecretName": {
+          "description": "Bring your own app client secret name in AKV.",
           "type": "string"
         }
       }
@@ -4499,6 +5866,10 @@
         "gitHubClientId": {
           "description": "GitHub application client ID.",
           "type": "string"
+        },
+        "gitHubClientSecret": {
+          "$ref": "#/definitions/GitHubClientSecret",
+          "description": "GitHub bring your own app client secret information."
         },
         "gitHubAccessTokenBaseUrl": {
           "description": "GitHub access token base URL.",
@@ -4580,11 +5951,124 @@
           "type": "string",
           "readOnly": true
         },
+        "purviewConfiguration": {
+          "$ref": "#/definitions/PurviewConfiguration",
+          "description": "Purview information of the factory."
+        },
         "repoConfiguration": {
           "$ref": "#/definitions/FactoryRepoConfiguration",
           "description": "Git repo information of the factory."
+        },
+        "globalParameters": {
+          "$ref": "#/definitions/GlobalParameterDefinitionSpecification",
+          "description": "List of parameters for factory."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionConfiguration",
+          "description": "Properties to enable Customer Managed Key for the factory."
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the data factory.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
+    },
+    "FactoryUpdateProperties": {
+      "description": "Factory update resource properties.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the data factory.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EncryptionConfiguration": {
+      "description": "Definition of CMK for the factory.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key in Azure Key Vault to use as Customer Managed Key."
+        },
+        "vaultBaseUrl": {
+          "type": "string",
+          "description": "The url of the Azure Key Vault used for CMK."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key used for CMK. If not provided, latest version will be used."
+        },
+        "identity": {
+          "$ref": "#/definitions/CMKIdentityDefinition",
+          "description": "User assigned identity to use to authenticate to customer's key vault. If not provided Managed Service Identity will be used."
+        }
+      },
+      "required": [
+        "keyName",
+        "vaultBaseUrl"
+      ]
+    },
+    "CMKIdentityDefinition": {
+      "description": "Managed Identity used for CMK.",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The resource id of the user assigned identity to authenticate to customer's key vault."
+        }
+      }
+    },
+    "GlobalParameterDefinitionSpecification": {
+      "description": "Definition of all parameters for an entity.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/GlobalParameterSpecification"
+      }
+    },
+    "GlobalParameterSpecification": {
+      "description": "Definition of a single parameter for an entity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Global Parameter type.",
+          "enum": [
+            "Object",
+            "String",
+            "Int",
+            "Float",
+            "Bool",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "GlobalParameterType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "object",
+          "description": "Value of parameter."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
     },
     "PipelineResource": {
       "description": "Pipeline resource type.",
@@ -4662,6 +6146,24 @@
         "properties"
       ]
     },
+    "GlobalParameterResource": {
+      "description": "Global parameters resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/GlobalParameter.json#/definitions/GlobalParameter",
+          "description": "Properties of the global parameter."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "Factory": {
       "description": "Factory resource type.",
       "type": "object",
@@ -4698,6 +6200,11 @@
         "identity": {
           "$ref": "#/definitions/FactoryIdentity",
           "description": "Managed service identity of the factory."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FactoryUpdateProperties",
+          "description": "Properties of update the factory."
         }
       }
     },
@@ -4706,13 +6213,15 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
+          "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "x-ms-enum": {
             "name": "FactoryIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "principalId": {
@@ -4726,11 +6235,27 @@
           "format": "uuid",
           "readOnly": true,
           "description": "The client tenant id of the identity."
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentitiesDefinitionSpecification",
+          "description": "List of user assigned identities for the factory."
         }
       },
       "required": [
         "type"
       ]
+    },
+    "UserAssignedIdentitiesDefinitionSpecification": {
+      "description": "Definition of all user assigned identities for a factory.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentitySpecification"
+      }
+    },
+    "UserAssignedIdentitySpecification": {
+      "description": "Definition of a single user assigned identity for a factory.",
+      "type": "object",
+      "properties": {}
     },
     "DatasetReference": {
       "description": "Dataset reference type.",
@@ -4792,13 +6317,18 @@
     },
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "description": "Linked service reference type.",
           "enum": [
             "LinkedServiceReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -4848,6 +6378,42 @@
         "properties"
       ]
     },
+    "ChangeDataCaptureResource": {
+      "description": "Change data capture resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./entityTypes/ChangeDataCapture.json#/definitions/ChangeDataCapture",
+          "description": "Properties of the change data capture."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "TriggerFilterParameters": {
+      "description": "Query parameters for triggers.",
+      "type": "object",
+      "properties": {
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results. Null for first page.",
+          "type": "string"
+        },
+        "parentTriggerName": {
+          "description": "The name of the parent TumblingWindowTrigger to get the child rerun triggers",
+          "type": "string"
+        }
+      }
+    },
     "RunFilterParameters": {
       "description": "Query parameters for listing runs.",
       "type": "object",
@@ -4871,14 +6437,16 @@
           "description": "List of filters.",
           "items": {
             "$ref": "#/definitions/RunQueryFilter"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "orderBy": {
           "type": "array",
           "description": "List of OrderBy option.",
           "items": {
             "$ref": "#/definitions/RunQueryOrderBy"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -4993,7 +6561,10 @@
           "description": "List of pipeline runs.",
           "items": {
             "$ref": "#/definitions/PipelineRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "runId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -5070,7 +6641,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of a pipeline run.",
+          "description": "The status of a pipeline run. Possible values: Queued, InProgress, Succeeded, Failed, Canceling, Cancelled",
           "type": "string",
           "readOnly": true
         },
@@ -5102,6 +6673,16 @@
           "description": "The type of the entity that started the run.",
           "type": "string",
           "readOnly": true
+        },
+        "pipelineName": {
+          "description": "The name of the pipeline that triggered the run, if any.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineRunId": {
+          "description": "The run id of the pipeline that triggered the run, if any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5117,7 +6698,10 @@
           "description": "List of activity runs.",
           "items": {
             "$ref": "#/definitions/ActivityRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "pipelineRunId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -5213,7 +6797,10 @@
           "description": "List of trigger runs.",
           "items": {
             "$ref": "#/definitions/TriggerRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "triggerRunId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -5302,71 +6889,6 @@
         "type": "object"
       }
     },
-    "RerunTumblingWindowTriggerActionParameters": {
-      "description": "Rerun tumbling window trigger Parameters.",
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "endTime": {
-          "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "maxConcurrency": {
-          "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 50
-        }
-      },
-      "required": [
-        "startTime",
-        "endTime",
-        "maxConcurrency"
-      ]
-    },
-    "RerunTriggerListResponse": {
-      "description": "A list of rerun triggers.",
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of rerun triggers.",
-          "items": {
-            "$ref": "#/definitions/RerunTriggerResource"
-          }
-        },
-        "nextLink": {
-          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "RerunTriggerResource": {
-      "description": "RerunTrigger resource type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "./entityTypes/Trigger.json#/definitions/RerunTumblingWindowTrigger",
-          "description": "Properties of the rerun trigger."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
     "OperationListResponse": {
       "description": "A list of operations that can be performed by the Data Factory service.",
       "properties": {
@@ -5375,7 +6897,10 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "List of Data Factory operations supported by the Data Factory resource provider."
+          "description": "List of Data Factory operations supported by the Data Factory resource provider.",
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -5443,14 +6968,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Details about operations related to metrics.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -5513,14 +7044,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricAvailability"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "dimensions": {
           "description": "Defines the metric dimension.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -5588,6 +7123,25 @@
         }
       }
     },
+    "ExposureControlBatchRequest": {
+      "description": "A list of exposure control features.",
+      "type": "object",
+      "required": [
+        "exposureControlRequests"
+      ],
+      "properties": {
+        "exposureControlRequests": {
+          "type": "array",
+          "description": "List of exposure control features.",
+          "items": {
+            "$ref": "#/definitions/ExposureControlRequest"
+          },
+          "x-ms-identifiers": [
+            "featureName"
+          ]
+        }
+      }
+    },
     "ExposureControlRequest": {
       "type": "object",
       "description": "The exposure control request.",
@@ -5599,6 +7153,25 @@
         "featureType": {
           "type": "string",
           "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlBatchResponse": {
+      "description": "A list of exposure control feature values.",
+      "type": "object",
+      "required": [
+        "exposureControlResponses"
+      ],
+      "properties": {
+        "exposureControlResponses": {
+          "type": "array",
+          "description": "List of exposure control feature values.",
+          "items": {
+            "$ref": "#/definitions/ExposureControlResponse"
+          },
+          "x-ms-identifiers": [
+            "featureName"
+          ]
         }
       }
     },
@@ -5637,6 +7210,30 @@
           "type": "string"
         }
       }
+    },
+    "ChangeDataCaptureListResponse": {
+      "description": "A list of change data capture resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Lists all resources of type change data capture.",
+          "items": {
+            "$ref": "#/definitions/ChangeDataCaptureResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ChangeDataCaptureStatusResponse": {
+      "description": "Current status of the change data capture resource.",
+      "type": "string"
     },
     "CreateDataFlowDebugSessionRequest": {
       "description": "Request body structure for creating data flow debug session.",
@@ -5699,8 +7296,9 @@
           "$ref": "#/definitions/LinkedServiceReference"
         },
         "folderPath": {
-          "description": "Folder path for staging blob.",
-          "type": "string"
+          "description": "Folder path for staging blob. Type: string (or Expression with resultType string)",
+          "x-ms-format": "dfe-string",
+          "type": "object"
         }
       }
     },
@@ -5716,19 +7314,35 @@
           "description": "Data flow instance.",
           "$ref": "#/definitions/DataFlowDebugResource"
         },
+        "dataFlows": {
+          "description": "List of Data flows",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFlowDebugResource"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "datasets": {
           "type": "array",
           "description": "List of datasets.",
           "items": {
             "$ref": "#/definitions/DatasetDebugResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "linkedServices": {
           "type": "array",
           "description": "List of linked services.",
           "items": {
             "$ref": "#/definitions/LinkedServiceDebugResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "staging": {
           "description": "Staging info for debug session.",
@@ -5743,7 +7357,10 @@
               "description": "Source setting for data flow debug.",
               "items": {
                 "$ref": "#/definitions/DataFlowSourceSetting"
-              }
+              },
+              "x-ms-identifiers": [
+                "sourceName"
+              ]
             },
             "parameters": {
               "description": "Data flow parameters.",
@@ -5858,7 +7475,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataFlowDebugSessionInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "dataFlowName",
+            "sessionId"
+          ]
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
@@ -5966,7 +7587,11 @@
           "description": "Data flow reference type.",
           "enum": [
             "DataFlowReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -5975,6 +7600,10 @@
         "datasetParameters": {
           "type": "object",
           "description": "Reference data flow parameters from dataset."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Data flow parameters"
         }
       },
       "additionalProperties": {
@@ -5983,6 +7612,345 @@
       "required": [
         "type",
         "referenceName"
+      ]
+    },
+    "managedPrivateEndpointListResponse": {
+      "description": "A list of managed private endpoint resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed private endpoints.",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpointResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "CredentialListResponse": {
+      "description": "A list of credential resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of credentials.",
+          "items": {
+            "$ref": "#/definitions/CredentialResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedPrivateEndpointResource": {
+      "description": "Managed private endpoint resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/ManagedPrivateEndpoint.json#/definitions/ManagedPrivateEndpoint",
+          "description": "Managed private endpoint properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ManagedVirtualNetworkListResponse": {
+      "description": "A list of managed Virtual Network resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed Virtual Networks.",
+          "items": {
+            "$ref": "#/definitions/ManagedVirtualNetworkResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedVirtualNetworkReference": {
+      "description": "Managed Virtual Network reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Managed Virtual Network reference type.",
+          "enum": [
+            "ManagedVirtualNetworkReference"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedVirtualNetworkReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference ManagedVirtualNetwork name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "ManagedVirtualNetworkResource": {
+      "description": "Managed Virtual Network resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/ManagedVirtualNetwork.json#/definitions/ManagedVirtualNetwork",
+          "description": "Managed Virtual Network properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PrivateEndpointConnectionListResponse": {
+      "description": "A list of linked service resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Private Endpoint Connections.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionResource": {
+      "description": "Private Endpoint Connection ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Core resource properties"
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "A remote private endpoint connection",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ArmIdWrapper",
+          "description": "PrivateEndpoint of a remote private endpoint connection"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
+        }
+      }
+    },
+    "ArmIdWrapper": {
+      "description": "A wrapper for an ARM resource id",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkConnectionState": {
+      "description": "The state of a private link connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of a private link connection",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of a private link connection",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "ActionsRequired for a private link connection",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkConnectionApprovalRequestResource": {
+      "description": "Private Endpoint Connection Approval ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
+          "description": "Core resource properties"
+        }
+      }
+    },
+    "PrivateLinkConnectionApprovalRequest": {
+      "description": "A request to approve or reject a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private endpoint."
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "Private endpoint which a connection belongs to.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource Id for private endpoint",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourcesWrapper": {
+      "description": "Wrapper for a collection of private link resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Core resource properties"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "GroupId of a private link resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "RequiredMembers of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "RequiredZoneNames of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CredentialReference": {
+      "description": "Credential reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Credential reference type.",
+          "enum": [
+            "CredentialReference"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference credential name."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "CredentialResource": {
+      "description": "Credential resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Credential.json#/definitions/Credential",
+          "description": "Properties of credentials."
+        }
+      },
+      "required": [
+        "properties"
       ]
     }
   },
@@ -6068,9 +8036,9 @@
       "maxLength": 260,
       "x-ms-parameter-location": "method"
     },
-    "rerunTriggerName": {
-      "name": "rerunTriggerName",
-      "description": "The rerun trigger name.",
+    "changeDataCaptureName": {
+      "name": "changeDataCaptureName",
+      "description": "The change data capture name.",
       "in": "path",
       "required": true,
       "type": "string",
@@ -6120,12 +8088,64 @@
       "maxLength": 260,
       "x-ms-parameter-location": "method"
     },
+    "managedVirtualNetworkName": {
+      "name": "managedVirtualNetworkName",
+      "description": "Managed virtual network name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "minLength": 1,
+      "maxLength": 127,
+      "x-ms-parameter-location": "method"
+    },
+    "credentialName": {
+      "name": "credentialName",
+      "description": "Credential name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "minLength": 1,
+      "maxLength": 127,
+      "x-ms-parameter-location": "method"
+    },
+    "managedPrivateEndpointName": {
+      "name": "managedPrivateEndpointName",
+      "description": "Managed private endpoint name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "minLength": 1,
+      "maxLength": 127,
+      "x-ms-parameter-location": "method"
+    },
     "api-version": {
       "name": "api-version",
       "description": "The API version.",
       "in": "query",
       "required": true,
       "type": "string"
+    },
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "description": "The private endpoint connection name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "globalParameterName": {
+      "name": "globalParameterName",
+      "description": "The global parameter name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
     }
   }
 }

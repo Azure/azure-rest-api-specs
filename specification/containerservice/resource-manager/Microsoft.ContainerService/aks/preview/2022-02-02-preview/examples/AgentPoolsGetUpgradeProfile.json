@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2022-02-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "agentpool1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1/upgradeprofiles/default",
+        "name": "default",
+        "properties": {
+          "kubernetesVersion": "1.12.8",
+          "osType": "Linux",
+          "upgrades": [
+            {
+              "kubernetesVersion": "1.13.5"
+            }
+          ],
+          "latestNodeImageVersion": "AKSUbuntu:1604:2020.03.11"
+        },
+        "type": "Microsoft.ContainerService/managedClusters/agentPools/upgradeProfiles"
+      }
+    }
+  }
+}

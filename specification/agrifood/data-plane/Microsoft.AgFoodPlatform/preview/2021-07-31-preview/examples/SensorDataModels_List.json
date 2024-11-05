@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2021-07-31-preview",
+    "sensorPartnerId": "sp1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Sensor",
+            "manufacturer": "Some sensor manufacturer",
+            "productCode": "soil m",
+            "measures": {
+              "soilMoisture": {
+                "description": "measures soil moisture",
+                "dataType": "Bool",
+                "type": "sm",
+                "unit": "none",
+                "properties": {
+                  "abc": "def",
+                  "elevation": 5
+                }
+              }
+            },
+            "sensorPartnerId": "sp1",
+            "id": "sdm124",
+            "status": "new",
+            "createdDateTime": "2022-01-24T06:12:15Z",
+            "modifiedDateTime": "2022-01-24T06:12:42Z",
+            "eTag": "040161a2-0000-0700-0000-61ee435a0000",
+            "name": "my sdm for soil moisture",
+            "description": "description goes here",
+            "properties": {
+              "key1": "value1",
+              "key2": 123.45
+            }
+          }
+        ],
+        "$skipToken": "skipToken",
+        "nextLink": "https://{{resourceName}}.farmbeats.azure.net/sensor-partners/{{sensorPartnerId}}/sensor-data-models?api-version={{apiVersion}}&$skipToken=%5b%7b%22token%22%3a%22%2bRID%3a%7e23TRC%3a10%23ISA%3d%22%2c%22range%22%3a%7b%22min%22%3a%22%22%2c%22max%22%3a%22FF%22%7d%7d%5d"
+      }
+    }
+  }
+}

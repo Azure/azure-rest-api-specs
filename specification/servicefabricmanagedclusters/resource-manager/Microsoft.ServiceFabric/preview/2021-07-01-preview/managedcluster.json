@@ -1,0 +1,1463 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceFabricManagementClient",
+    "description": "Azure Service Fabric Resource Provider API Client",
+    "version": "2021-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters": {
+      "get": {
+        "operationId": "ManagedClusters_ListByResourceGroup",
+        "summary": "Gets the list of Service Fabric cluster resources created in the specified resource group.",
+        "description": "Gets all Service Fabric cluster resources created or in the process of being created in the resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "tags": [
+          "ManagedCluster"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List cluster by resource group": {
+            "$ref": "./examples/ManagedClusterListByResourceGroupOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/managedClusters": {
+      "get": {
+        "operationId": "ManagedClusters_ListBySubscription",
+        "summary": "Gets the list of Service Fabric cluster resources created in the specified subscription.",
+        "description": "Gets all Service Fabric cluster resources created or in the process of being created in the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "tags": [
+          "ManagedCluster"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed clusters": {
+            "$ref": "./examples/ManagedClusterListBySubscriptionOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}": {
+      "get": {
+        "tags": [
+          "ManagedCluster"
+        ],
+        "operationId": "ManagedClusters_Get",
+        "summary": "Gets a Service Fabric managed cluster resource.",
+        "description": "Get a Service Fabric managed cluster resource created or in the process of being created in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a cluster": {
+            "$ref": "./examples/ManagedClusterGetOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedCluster"
+        ],
+        "operationId": "ManagedClusters_CreateOrUpdate",
+        "summary": "Creates or updates a Service Fabric managed cluster resource.",
+        "description": "Create or update a Service Fabric managed cluster resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The cluster resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Put a cluster with minimum parameters": {
+            "$ref": "./examples/ManagedClusterPutOperation_example_min.json"
+          },
+          "Put a cluster with maximum parameters": {
+            "$ref": "./examples/ManagedClusterPutOperation_example_max.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedCluster"
+        ],
+        "operationId": "ManagedClusters_Update",
+        "summary": "Updates the tags of of a Service Fabric managed cluster resource.",
+        "description": "Update the tags of of a Service Fabric managed cluster resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The managed cluster resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterUpdateParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Patch a managed cluster": {
+            "$ref": "./examples/ManagedClusterPatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedCluster"
+        ],
+        "operationId": "ManagedClusters_Delete",
+        "summary": "Deletes a Service Fabric managed cluster resource.",
+        "description": "Delete a Service Fabric managed cluster resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a cluster": {
+            "$ref": "./examples/ManagedClusterDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions/{clusterVersion}": {
+      "get": {
+        "operationId": "ManagedClusterVersion_Get",
+        "summary": "Gets information about a Service Fabric managed cluster code version available in the specified location.",
+        "description": "Gets information about an available Service Fabric managed cluster code version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get cluster version": {
+            "$ref": "./examples/ManagedClusterVersionGet_example.json"
+          }
+        },
+        "tags": [
+          "ManagedClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterCodeVersionResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions/{clusterVersion}": {
+      "get": {
+        "operationId": "ManagedClusterVersion_GetByEnvironment",
+        "summary": "Gets information about a Service Fabric cluster code version available for the specified environment.",
+        "description": "Gets information about an available Service Fabric cluster code version by environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get cluster version by environment": {
+            "$ref": "./examples/ManagedClusterVersionGetByEnvironment_example.json"
+          }
+        },
+        "tags": [
+          "ManagedClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterCodeVersionResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions": {
+      "get": {
+        "operationId": "ManagedClusterVersion_List",
+        "summary": "Gets the list of Service Fabric cluster code versions available for the specified location.",
+        "description": "Gets all available code versions for Service Fabric cluster resources by location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List cluster versions": {
+            "$ref": "./examples/ManagedClusterVersionList_example.json"
+          }
+        },
+        "tags": [
+          "ManagedClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterCodeVersionListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions": {
+      "get": {
+        "operationId": "ManagedClusterVersion_ListByEnvironment",
+        "summary": "Gets the list of Service Fabric cluster code versions available for the specified environment.",
+        "description": "Gets all available code versions for Service Fabric cluster resources by environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List cluster versions by environment": {
+            "$ref": "./examples/ManagedClusterVersionListByEnvironment.json"
+          }
+        },
+        "tags": [
+          "ManagedClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterCodeVersionListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ServiceFabric/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Lists all of the available Service Fabric resource provider API operations.",
+        "description": "Get the list of available Service Fabric resource provider API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The version of the Service Fabric resource provider API",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "x-ms-examples": {
+          "List available operations": {
+            "$ref": "./examples/Operations_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedClusterAddOnFeature": {
+      "type": "string",
+      "description": "Available cluster add-on features",
+      "enum": [
+        "DnsService",
+        "BackupRestoreService",
+        "ResourceMonitorService"
+      ]
+    },
+    "ApplicationTypeVersionsCleanupPolicy": {
+      "type": "object",
+      "required": [
+        "maxUnusedVersionsToKeep"
+      ],
+      "properties": {
+        "maxUnusedVersionsToKeep": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Number of unused versions per application type to keep."
+        }
+      },
+      "description": "The policy used to clean up unused versions. When the policy is not specified explicitly, the default unused application versions to keep will be 3."
+    },
+    "AzureActiveDirectory": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Azure active directory tenant id."
+        },
+        "clusterApplication": {
+          "type": "string",
+          "description": "Azure active directory cluster application id."
+        },
+        "clientApplication": {
+          "type": "string",
+          "description": "Azure active directory client application id."
+        }
+      },
+      "description": "The settings to enable AAD authentication on the cluster."
+    },
+    "ClientCertificate": {
+      "type": "object",
+      "required": [
+        "isAdmin"
+      ],
+      "properties": {
+        "isAdmin": {
+          "type": "boolean",
+          "description": "Indicates if the client certificate has admin access to the cluster. Non admin clients can perform only read only operations on the cluster."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint."
+        },
+        "commonName": {
+          "type": "string",
+          "description": "Certificate common name."
+        },
+        "issuerThumbprint": {
+          "type": "string",
+          "description": "Issuer thumbprint for the certificate. Only used together with CommonName."
+        }
+      },
+      "description": "Client certificate definition."
+    },
+    "ClusterState": {
+      "type": "string",
+      "description": "The current state of the cluster.\n",
+      "enum": [
+        "WaitingForNodes",
+        "Deploying",
+        "BaselineUpgrade",
+        "Upgrading",
+        "UpgradeFailed",
+        "Ready"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "WaitingForNodes",
+            "description": "Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it."
+          },
+          {
+            "value": "Deploying",
+            "description": "Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up."
+          },
+          {
+            "value": "BaselineUpgrade",
+            "description": "Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time."
+          },
+          {
+            "value": "Upgrading",
+            "description": "Indicates that the cluster is being upgraded with the user provided configuration."
+          },
+          {
+            "value": "UpgradeFailed",
+            "description": "Indicates that the last upgrade for the cluster has failed."
+          },
+          {
+            "value": "Ready",
+            "description": "Indicates that the cluster is in a stable state."
+          }
+        ]
+      }
+    },
+    "ClusterUpgradeCadence": {
+      "type": "string",
+      "enum": [
+        "Wave0",
+        "Wave1",
+        "Wave2"
+      ],
+      "x-ms-enum": {
+        "name": "clusterUpgradeCadence",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Wave0",
+            "description": "Cluster upgrade starts immediately after a new version is rolled out. Recommended for Test/Dev clusters."
+          },
+          {
+            "value": "Wave1",
+            "description": "Cluster upgrade starts 7 days after a new version is rolled out. Recommended for Pre-prod clusters."
+          },
+          {
+            "value": "Wave2",
+            "description": "Cluster upgrade starts 14 days after a new version is rolled out. Recommended for Production clusters."
+          }
+        ]
+      },
+      "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
+    },
+    "ClusterUpgradeMode": {
+      "type": "string",
+      "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n",
+      "enum": [
+        "Automatic",
+        "Manual"
+      ],
+      "default": "Automatic",
+      "x-ms-enum": {
+        "name": "ClusterUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Automatic",
+            "description": "The cluster will be automatically upgraded to the latest Service Fabric runtime version, **clusterUpgradeCadence** will determine when the upgrade starts after the new version becomes available."
+          },
+          {
+            "value": "Manual",
+            "description": "The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource."
+          }
+        ]
+      }
+    },
+    "IPTag": {
+      "type": "object",
+      "required": [
+        "ipTagType",
+        "tag"
+      ],
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "The IP tag type."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The value of the IP tag."
+        }
+      },
+      "description": "IPTag associated with the object."
+    },
+    "LoadBalancingRule": {
+      "type": "object",
+      "required": [
+        "frontendPort",
+        "backendPort",
+        "protocol",
+        "probeProtocol"
+      ],
+      "properties": {
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values are between 1 and 65534.",
+          "minimum": 1,
+          "maximum": 65534
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535.",
+          "minimum": 1,
+          "maximum": 65534
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The reference to the transport protocol used by the load balancing rule.",
+          "enum": [
+            "tcp",
+            "udp"
+          ],
+          "x-ms-enum": {
+            "name": "protocol",
+            "modelAsString": true
+          }
+        },
+        "probePort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The prob port used by the load balancing rule. Acceptable values are between 1 and 65535.",
+          "minimum": 1,
+          "maximum": 65534
+        },
+        "probeProtocol": {
+          "type": "string",
+          "description": "the reference to the load balancer probe used by the load balancing rule.",
+          "enum": [
+            "tcp",
+            "http",
+            "https"
+          ],
+          "x-ms-enum": {
+            "name": "probeProtocol",
+            "modelAsString": true
+          }
+        },
+        "probeRequestPath": {
+          "type": "string",
+          "description": "The probe request path. Only supported for HTTP/HTTPS probes."
+        }
+      },
+      "description": "Describes a load balancing rule."
+    },
+    "ManagedCluster": {
+      "type": "object",
+      "description": "The manged cluster resource\n",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedClusterProperties",
+          "description": "The managed cluster resource properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the managed cluster"
+        }
+      }
+    },
+    "ManagedClusterCodeVersionListResult": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ManagedClusterCodeVersionResult"
+      },
+      "description": "The list results of the Service Fabric runtime versions."
+    },
+    "ManagedClusterCodeVersionResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identification of the result"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the result"
+        },
+        "type": {
+          "type": "string",
+          "description": "The result resource type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedClusterVersionDetails"
+        }
+      },
+      "description": "The result of the Service Fabric runtime versions"
+    },
+    "ManagedClusterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Managed Cluster list results"
+    },
+    "ManagedClusterProperties": {
+      "type": "object",
+      "required": [
+        "dnsName",
+        "adminUserName"
+      ],
+      "properties": {
+        "dnsName": {
+          "type": "string",
+          "description": "The cluster dns name."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "The fully qualified domain name associated with the public load balancer of the cluster.",
+          "readOnly": true
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address associated with the public load balancer of the cluster.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "A service generated unique identifier for the cluster resource.",
+          "readOnly": true
+        },
+        "clusterState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ClusterState",
+          "description": "The current state of the cluster."
+        },
+        "clusterCertificateThumbprints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of thumbprints of the cluster certificates.",
+          "readOnly": true
+        },
+        "clientConnectionPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for client connections to the cluster.",
+          "default": 19000
+        },
+        "httpGatewayConnectionPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for HTTP connections to the cluster.",
+          "default": 19080
+        },
+        "adminUserName": {
+          "type": "string",
+          "description": "VM admin user name."
+        },
+        "adminPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "description": "VM admin user password."
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
+          "description": "Load balancing rules that are applied to the public load balancer of the cluster."
+        },
+        "allowRdpAccess": {
+          "type": "boolean",
+          "description": "Setting this to true enables RDP access to the VM. The default NSG rule opens RDP port to Internet which can be overridden with custom Network Security Rules. The default value for this setting is false."
+        },
+        "networkSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityRule"
+          },
+          "description": "Custom Network Security Rules that are applied to the Virtual Network of the cluster."
+        },
+        "clients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientCertificate"
+          },
+          "description": "Client certificates that are allowed to manage the cluster."
+        },
+        "azureActiveDirectory": {
+          "$ref": "#/definitions/AzureActiveDirectory",
+          "description": "The AAD authentication settings of the cluster."
+        },
+        "fabricSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          },
+          "description": "The list of custom fabric settings to configure the cluster."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ManagedResourceProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state of the managed cluster resource."
+        },
+        "clusterCodeVersion": {
+          "type": "string",
+          "description": "The Service Fabric runtime version of the cluster. This property is required when **clusterUpgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
+        },
+        "clusterUpgradeMode": {
+          "$ref": "#/definitions/ClusterUpgradeMode"
+        },
+        "clusterUpgradeCadence": {
+          "$ref": "#/definitions/ClusterUpgradeCadence",
+          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0. Only applies when **clusterUpgradeMode** is set to 'Automatic'."
+        },
+        "addonFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedClusterAddOnFeature"
+          },
+          "description": "List of add-on features to enable on the cluster."
+        },
+        "enableAutoOSUpgrade": {
+          "type": "boolean",
+          "description": "Setting this to true enables automatic OS upgrade for the node types that are created using any platform OS image with version 'latest'. The default value for this setting is false."
+        },
+        "zonalResiliency": {
+          "type": "boolean",
+          "description": "Indicates if the cluster has zone resiliency.",
+          "default": false
+        },
+        "applicationTypeVersionsCleanupPolicy": {
+          "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
+          "description": "The policy used to clean up unused versions."
+        },
+        "enableIpv6": {
+          "type": "boolean",
+          "description": "Setting this to true creates IPv6 address space for the default VNet used by the cluster. This setting cannot be changed once the cluster is created. The default value for this setting is false."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "If specified, the node types for the cluster are created in this subnet instead of the default VNet. The **networkSecurityRules** specified for the cluster are also applied to this subnet. This setting cannot be changed once the cluster is created."
+        },
+        "ipTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPTag"
+          },
+          "description": "The list of IP tags associated with the default public IP address of the cluster."
+        }
+      },
+      "description": "Describes the managed cluster resource properties."
+    },
+    "ManagedClusterUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Managed cluster update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Managed cluster update request"
+    },
+    "ManagedClusterVersionDetails": {
+      "type": "object",
+      "properties": {
+        "clusterCodeVersion": {
+          "type": "string",
+          "description": "The Service Fabric runtime version of the cluster."
+        },
+        "supportExpiryUtc": {
+          "type": "string",
+          "description": "The date of expiry of support of the version."
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType"
+        }
+      },
+      "description": "The detail of the Service Fabric runtime version result"
+    },
+    "OsType": {
+      "type": "string",
+      "description": "Cluster operating system, the default will be Windows",
+      "enum": [
+        "Windows"
+      ]
+    },
+    "Sku": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "Sku Name."
+        }
+      },
+      "description": "Service Fabric managed cluster Sku definition"
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "Sku Name.",
+      "enum": [
+        "Basic",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Basic",
+            "description": "Basic requires a minimum of 3 nodes and allows only 1 node type."
+          },
+          {
+            "value": "Standard",
+            "description": "Requires a minimum of 5 nodes and allows 1 or more node type."
+          }
+        ]
+      }
+    },
+    "AvailableOperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that can be performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        }
+      },
+      "description": "Operation supported by the Service Fabric resource provider"
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The error details."
+        }
+      },
+      "description": "The structure of the error."
+    },
+    "ErrorModelError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "The error details."
+    },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "NetworkSecurityRule": {
+      "type": "object",
+      "required": [
+        "name",
+        "protocol",
+        "access",
+        "priority",
+        "direction"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Network security rule name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Network security rule description."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol this rule applies to.",
+          "enum": [
+            "http",
+            "https",
+            "tcp",
+            "udp",
+            "icmp",
+            "ah",
+            "esp"
+          ],
+          "x-ms-enum": {
+            "name": "nsgProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The CIDR or source IP ranges."
+        },
+        "destinationAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The source port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination port ranges."
+        },
+        "access": {
+          "type": "string",
+          "description": "The network traffic is allowed or denied.",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "x-ms-enum": {
+            "name": "access",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be in the range 1000 to 3000. Values outside this range are reserved for Service Fabric ManagerCluster Resource Provider. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1000,
+          "maximum": 3000
+        },
+        "direction": {
+          "type": "string",
+          "description": "Network security rule direction.",
+          "enum": [
+            "inbound",
+            "outbound"
+          ],
+          "x-ms-enum": {
+            "name": "direction",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes a network security rule."
+    },
+    "OperationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations supported by the Service Fabric resource provider.",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes the result of the request to list Service Fabric resource provider operations."
+    },
+    "OperationResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin result"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Available operation list result"
+    },
+    "Resource": {
+      "type": "object",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Azure resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Azure resource etag.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      },
+      "description": "The resource model definition.",
+      "x-ms-azure-resource": true
+    },
+    "SettingsParameterDescription": {
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The parameter name of fabric setting."
+        },
+        "value": {
+          "type": "string",
+          "description": "The parameter value of fabric setting."
+        }
+      },
+      "description": "Describes a parameter in fabric settings of the cluster."
+    },
+    "SettingsSectionDescription": {
+      "type": "object",
+      "required": [
+        "name",
+        "parameters"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The section name of the fabric settings."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The collection of parameters in the section.",
+          "items": {
+            "$ref": "#/definitions/SettingsParameterDescription"
+          }
+        }
+      },
+      "description": "Describes a section in the fabric settings of the cluster."
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-07-01-preview\" for this specification.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2021-07-01-preview"
+      ],
+      "x-ms-parameter-location": "client"
+    },
+    "clusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "description": "The name of the cluster resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "clusterVersion": {
+      "name": "clusterVersion",
+      "in": "path",
+      "description": "The cluster code version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "environment": {
+      "name": "environment",
+      "in": "path",
+      "description": "The operating system of the cluster. The default means all.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Windows"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "locationForClusterCodeVersions": {
+      "name": "location",
+      "in": "path",
+      "description": "The location for the cluster code versions. This is different from cluster location.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The customer subscription identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

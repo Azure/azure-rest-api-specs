@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "privateLinkSubResourceName": "privateLinkSubResourceName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateLinkResources/privateLinkSubResourceName",
+        "name": "Gateway",
+        "type": "Microsoft.ApiManagement/service/privateLinkResources",
+        "properties": {
+          "groupId": "Gateway",
+          "requiredMembers": [
+            "Gateway_west_us"
+          ],
+          "requiredZoneNames": [
+            "privateLink.azure.api.net"
+          ]
+        }
+      }
+    }
+  }
+}

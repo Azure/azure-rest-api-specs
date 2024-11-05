@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-08-01",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "North Central US",
+      "properties": {
+        "osType": "Windows",
+        "securityProfile": {
+          "securityType": "TrustedLaunch"
+        },
+        "creationData": {
+          "createOption": "FromImage",
+          "imageReference": {
+            "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "North Central US",
+        "properties": {
+          "provisioningState": "Updating",
+          "osType": "Windows",
+          "securityProfile": {
+            "securityType": "TrustedLaunch"
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}"
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "North Central US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "osType": "Windows",
+          "securityProfile": {
+            "securityType": "TrustedLaunch"
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

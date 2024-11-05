@@ -20,30 +20,48 @@ To see additional help and options, run:
 ## Configuration
 Following are the settings for using this specification with [AutoRest](https://aka.ms/autorest) tool to validation and optionally generate SDK.
 
-### Suppression
-
-``` yaml
-directive:
-  - suppress: R3023 
-    from: attestation.json
-    reason: This is the attestation data plane APIs, this rule is not applicable
-```
-
 ### Basic Information
 These are the global settings for the Attestation APIs.
 
 ``` yaml
-openapi-type: arm
-tag: package-2018-09-preview
+openapi-type: data-plane
+tag: package-2022-08-01
 ```
 
-### Tag: package-2018-09-preview
+### Tag: package-2018-09-01
 
-These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-09-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09-preview'
+``` yaml $(tag) == 'package-2018-09-01'
 input-file:
-- Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
+- Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+```
+
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01'
+input-file:
+- Microsoft.Attestation/stable/2020-10-01/attestation.json
+```
+
+### Tag: package-2022-08-01
+
+These settings apply only when `--tag=package-2022-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-01'
+input-file:
+- Microsoft.Attestation/stable/2022-08-01/attestation.json
+```
+
+### Tag: package-2022-09-01-preview
+
+These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09-01-preview'
+input-file:
+- Microsoft.Attestation/preview/2022-09-01-preview/attestation.json
 ```
 
 ---
@@ -56,8 +74,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
 ```
 
 ## Python
@@ -79,7 +96,9 @@ csharp:
   clear-output-folder: true
 ```
 
+## Go
 
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -93,8 +112,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
-
+  - $(this-folder)/Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+  - $(this-folder)/Microsoft.Attestation/stable/2020-10-01/attestation.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
@@ -103,5 +122,46 @@ uncomment the  `exclude-file` section below and add the file paths.
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.StoredAttestationPolicy.properties.AttestationPolicy
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult.properties.policy_signer
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult.properties.policy_hash
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult.properties.rp_data
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.response_types_supported
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.id_token_signing_alg_values_supported
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.revocation_endpoint
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.jwks_uri
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.claims_supported
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
 ```
 

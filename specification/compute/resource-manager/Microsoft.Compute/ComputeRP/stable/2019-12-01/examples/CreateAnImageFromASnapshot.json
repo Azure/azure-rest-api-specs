@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-12-01",
+    "imageName": "myImage",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "storageProfile": {
+          "osDisk": {
+            "osType": "Linux",
+            "snapshot": {
+              "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+            },
+            "osState": "Generalized"
+          },
+          "zoneResilient": false
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storageProfile": {
+            "osDisk": {
+              "osType": "Linux",
+              "snapshot": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              },
+              "osState": "Generalized",
+              "caching": "ReadWrite"
+            },
+            "dataDisks": [],
+            "zoneResilient": false
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "storageProfile": {
+            "osDisk": {
+              "osType": "Linux",
+              "snapshot": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              },
+              "osState": "Generalized",
+              "caching": "ReadWrite"
+            },
+            "dataDisks": [],
+            "zoneResilient": false
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
+      }
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "description": "Gets all instance pool usage metrics",
+        "operationId": "Usages_ListByInstancePool",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expandChildren",
+            "in": "query",
+            "description": "Optional request parameter to include managed instance usages within the instance pool.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the instance pool usages.",
+            "schema": {
+              "$ref": "#/definitions/UsageListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InstancePoolWrongUsageName - Request for an instance pool's usage has an unsupported usage name\n\n * 400 InstancePoolManagedInstanceInfoUnavailable - Information for managed instances inside this instance pool is not available\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List instance pool usages.": {
+            "$ref": "./examples/ListInstancePoolUsage.json"
+          },
+          "List instance pool usages expanded with children.": {
+            "$ref": "./examples/ListInstancePoolUsageExpanded.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Name": {
+      "description": "ARM Usage Name",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Usage name value",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Usage name localized value.",
+          "type": "string"
+        }
+      }
+    },
+    "Usage": {
+      "description": "ARM usage.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/Name",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Usage unit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentValue": {
+          "format": "int32",
+          "description": "Usage current value.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "limit": {
+          "format": "int32",
+          "description": "Usage limit.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "requestedLimit": {
+          "format": "int32",
+          "description": "Usage requested limit.",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "UsageListResult": {
+      "description": "A list of usages.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId1",
+    "resourceGroupName": "resourceGroup1",
+    "resourceProviderNamespace": "resourceProvider1",
+    "resourceType": "resourceType1",
+    "resourceName": "resourceName1",
+    "api-version": "2022-03-01-preview",
+    "changeResourceId": "1d58d72f-0719-4a48-9228-b7ea682885bf"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId1/resourceGroups/resourceGroup1/providers/resourceProvider1/resourceType1/resourceName1/Microsoft.Resources/changes/1d58d72f-0719-4a48-9228-b7ea682885bf",
+        "name": "1d58d72f-0719-4a48-9228-b7ea682885bf",
+        "type": "Microsoft.Resources/changes",
+        "properties": {
+          "targetResourceId": "/subscriptions/subscriptionId1/resourceGroups/resourceGroup1/providers/resourceProvider1/resourceType1/resourceName1",
+          "targetResourceType": "resourceProvider1/resourceType1",
+          "changeType": "Update",
+          "changeAttributes": {
+            "correlationId": "88420d5d-8d0e-471f-9115-10d34750c617",
+            "timestamp": "2021-11-19T14:29:09.9210000Z",
+            "changesCount": 2,
+            "previousResourceSnapshotId": "ed90e35a-1661-42cc-a44c-e27f508005be",
+            "newResourceSnapshotId": "6eac9d0f-63b4-4e7f-97a5-740c73757efb"
+          },
+          "changes": {
+            "properties.provisioningState": {
+              "propertyChangeType": "Update",
+              "changeCategory": "System",
+              "previousValue": "Updating",
+              "newValue": "Succeeded"
+            },
+            "tags.key1": {
+              "propertyChangeType": "Insert",
+              "changeCategory": "User",
+              "previousValue": "null",
+              "newValue": "someValue"
+            }
+          }
+        }
+      }
+    }
+  }
+}

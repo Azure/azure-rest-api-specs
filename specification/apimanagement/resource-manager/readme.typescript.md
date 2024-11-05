@@ -8,6 +8,11 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-apimanagement"
   output-folder: "$(typescript-sdks-folder)/sdk/apimanagement/arm-apimanagement"
-  clear-output-folder: true
   generate-metadata: true
+
+directive:
+- from: definitions.json
+  where: $.definitions.ApiVersionSetContractDetails
+  transform: >
+    $.properties.versioningScheme["x-ms-enum"].name = "ApiVersionSetContractDetailsVersioningScheme"
 ```

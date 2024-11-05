@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-10-20_preview2",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "DefaultWorker",
+            "state": "active",
+            "queueAssignments": {
+              "MainQueue": {},
+              "SecondaryQueue": {}
+            },
+            "totalCapacity": 100,
+            "labels": {},
+            "tags": {},
+            "channelConfigurations": {
+              "CustomChatChannel": {
+                "capacityCostPerJob": 10
+              },
+              "CustomVoiceChannel": {
+                "capacityCostPerJob": 100
+              }
+            },
+            "offers": [],
+            "assignedJobs": [],
+            "loadRatio": 0,
+            "availableForOffers": true
+          },
+          {
+            "id": "SecondWorker",
+            "state": "active",
+            "queueAssignments": {
+              "MainQueue": {},
+              "SecondaryQueue": {}
+            },
+            "totalCapacity": 100,
+            "labels": {},
+            "tags": {},
+            "channelConfigurations": {
+              "CustomEmailChannel": {
+                "capacityCostPerJob": 10
+              },
+              "CustomSMSChannel": {
+                "capacityCostPerJob": 100
+              }
+            },
+            "offers": [],
+            "assignedJobs": [],
+            "loadRatio": 0,
+            "availableForOffers": true
+          }
+        ],
+        "nextLink": "null"
+      }
+    }
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "ManagedInstancePrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "operationId": "ManagedInstancePrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstancePrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 PrivateEndpointConnectionDoesNotExist - Private Endpoint Connection does not exist\n\n * 400 PrivateEndpointConnectionStatusNotPending - Private Endpoint Connection Status is not Pending\n\n * 400 NullRemotePrivateLinkServiceConnectionState - Remote Private Link Service Connection State is Null\n\n * 400 NullPrivateEndpointConnectionProperties - Private Endpoint Connection Properties is Null\n\n * 400 NullRemotePrivateLinkServiceConnectionStateStatus - Remote Private Link Service Connection State Status is Null\n\n * 400 IncorrectPrivateLinkServiceConnectionStateStatus - Private Link Service Connection State Status must be \"Approved\" or \"Rejected\"\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/ManagedInstancePrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedInstancePrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "operationId": "ManagedInstancePrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstancePrivateEndpointConnection"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstancePrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 PrivateEndpointConnectionDoesNotExist - Private Endpoint Connection does not exist\n\n * 400 PrivateEndpointConnectionStatusNotPending - Private Endpoint Connection Status is not Pending\n\n * 400 NullRemotePrivateLinkServiceConnectionState - Remote Private Link Service Connection State is Null\n\n * 400 NullPrivateEndpointConnectionProperties - Private Endpoint Connection Properties is Null\n\n * 400 NullRemotePrivateLinkServiceConnectionStateStatus - Remote Private Link Service Connection State Status is Null\n\n * 400 IncorrectPrivateLinkServiceConnectionStateStatus - Private Link Service Connection State Status must be \"Approved\" or \"Rejected\"\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/ManagedInstancePrivateEndpointConnectionUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedInstancePrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "operationId": "ManagedInstancePrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted private endpoint connection."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 PrivateEndpointConnectionDoesNotExist - Private Endpoint Connection does not exist\n\n * 400 PrivateEndpointConnectionStatusNotPending - Private Endpoint Connection Status is not Pending\n\n * 400 NullRemotePrivateLinkServiceConnectionState - Remote Private Link Service Connection State is Null\n\n * 400 NullPrivateEndpointConnectionProperties - Private Endpoint Connection Properties is Null\n\n * 400 NullRemotePrivateLinkServiceConnectionStateStatus - Remote Private Link Service Connection State Status is Null\n\n * 400 IncorrectPrivateLinkServiceConnectionStateStatus - Private Link Service Connection State Status must be \"Approved\" or \"Rejected\"\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/ManagedInstancePrivateEndpointConnectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "ManagedInstancePrivateEndpointConnections"
+        ],
+        "description": "Gets all private endpoint connections on a server.",
+        "operationId": "ManagedInstancePrivateEndpointConnections_ListByManagedInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 PrivateEndpointConnectionDoesNotExist - Private Endpoint Connection does not exist\n\n * 400 PrivateEndpointConnectionStatusNotPending - Private Endpoint Connection Status is not Pending\n\n * 400 NullRemotePrivateLinkServiceConnectionState - Remote Private Link Service Connection State is Null\n\n * 400 NullPrivateEndpointConnectionProperties - Private Endpoint Connection Properties is Null\n\n * 400 NullRemotePrivateLinkServiceConnectionStateStatus - Remote Private Link Service Connection State Status is Null\n\n * 400 IncorrectPrivateLinkServiceConnectionStateStatus - Private Link Service Connection State Status must be \"Approved\" or \"Rejected\"\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a server.": {
+            "$ref": "./examples/ManagedInstancePrivateEndpointConnectionList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstancePrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/ManagedInstancePrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ManagedInstancePrivateLinkServiceConnectionStateProperty",
+          "description": "Connection State of the Private Endpoint Connection."
+        },
+        "provisioningState": {
+          "description": "State of the Private Endpoint Connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstancePrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstancePrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The private link service connection description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstancePrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedInstancePrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstancePrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1924,11 +1924,11 @@
       "description": "Dc Access Security code for device.",
       "type": "object",
       "properties": {
-        "forwardDcAccessCode": {
+        "forwardDCAccessCode": {
           "description": "Dc Access Code for dispatching from DC.",
           "type": "string"
         },
-        "reverseDcAccessCode": {
+        "reverseDCAccessCode": {
           "description": "Dc Access code for dropping off at DC.",
           "type": "string"
         }
@@ -2038,7 +2038,7 @@
     "DiskScheduleAvailabilityRequest": {
       "description": "Request body to get the availability for scheduling disk orders.",
       "required": [
-        "expectedDataSizeInTerabytes",
+        "expectedDataSizeInTeraBytes",
         "storageLocation",
         "skuName"
       ],
@@ -2049,7 +2049,7 @@
         }
       ],
       "properties": {
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
           "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
@@ -2125,7 +2125,7 @@
       ],
       "type": "object",
       "properties": {
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
           "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
@@ -2402,7 +2402,8 @@
                 "description": "Scheduled job."
               }
             ]
-          }
+          },
+          "default": "NonScheduled"
         },
         "deliveryInfo": {
           "$ref": "#/definitions/JobDeliveryInfo",
@@ -2748,7 +2749,8 @@
         },
         "sendNotification": {
           "description": "Notification is required or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -3271,7 +3273,8 @@
                 "description": "Commercial Address."
               }
             ]
-          }
+          },
+          "default": "None"
         }
       }
     },

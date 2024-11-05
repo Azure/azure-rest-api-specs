@@ -1,0 +1,201 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "nodeTypeName": "BE",
+    "api-version": "2022-01-01",
+    "parameters": {
+      "properties": {
+        "isPrimary": false,
+        "dataDiskSizeGB": 200,
+        "dataDiskType": "Premium_LRS",
+        "placementProperties": {
+          "HasSSD": "true",
+          "NodeColor": "green",
+          "SomeProperty": "5"
+        },
+        "capacities": {
+          "ClientConnections": "65536"
+        },
+        "vmSize": "Standard_DS3",
+        "vmImagePublisher": "MicrosoftWindowsServer",
+        "vmImageOffer": "WindowsServer",
+        "vmImageSku": "2016-Datacenter-Server-Core",
+        "vmImageVersion": "latest",
+        "vmInstanceCount": -1,
+        "isStateless": true,
+        "multiplePlacementGroups": true,
+        "vmSecrets": [
+          {
+            "sourceVault": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+            },
+            "vaultCertificates": [
+              {
+                "certificateStore": "My",
+                "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+              }
+            ]
+          }
+        ],
+        "vmExtensions": [
+          {
+            "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+            "properties": {
+              "autoUpgradeMinorVersion": true,
+              "publisher": "Microsoft.Azure.Geneva",
+              "type": "GenevaMonitoring",
+              "typeHandlerVersion": "2.0",
+              "settings": {}
+            }
+          }
+        ],
+        "vmManagedIdentity": {
+          "userAssignedIdentities": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity2"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-01-01",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-01-01"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
+        "name": "BE",
+        "tags": {},
+        "sku": {
+          "name": "Standard_S2",
+          "tier": "Standard",
+          "capacity": 10
+        },
+        "properties": {
+          "provisioningState": "Updating",
+          "isPrimary": false,
+          "dataDiskSizeGB": 200,
+          "dataDiskType": "Premium_LRS",
+          "placementProperties": {
+            "HasSSD": "true",
+            "NodeColor": "green",
+            "SomeProperty": "5"
+          },
+          "capacities": {
+            "ClientConnections": "65536"
+          },
+          "vmSize": "Standard_DS3",
+          "vmImagePublisher": "MicrosoftWindowsServer",
+          "vmImageOffer": "WindowsServer",
+          "vmImageSku": "2016-Datacenter-Server-Core",
+          "vmImageVersion": "latest",
+          "vmInstanceCount": 10,
+          "isStateless": true,
+          "multiplePlacementGroups": true,
+          "vmSecrets": [
+            {
+              "sourceVault": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateStore": "My",
+                  "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+                }
+              ]
+            }
+          ],
+          "vmExtensions": [
+            {
+              "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+              "properties": {
+                "autoUpgradeMinorVersion": true,
+                "forceUpdateTag": "v.1.0",
+                "publisher": "Microsoft.Azure.Geneva",
+                "type": "GenevaMonitoring",
+                "typeHandlerVersion": "2.0",
+                "settings": {}
+              }
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-01-01",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-01-01"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
+        "name": "BE",
+        "tags": {},
+        "sku": {
+          "name": "Standard_S2",
+          "tier": "Standard",
+          "capacity": 10
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "isPrimary": false,
+          "dataDiskSizeGB": 200,
+          "dataDiskType": "Premium_LRS",
+          "placementProperties": {
+            "HasSSD": "true",
+            "NodeColor": "green",
+            "SomeProperty": "5"
+          },
+          "capacities": {
+            "ClientConnections": "65536"
+          },
+          "vmSize": "Standard_DS3",
+          "vmImagePublisher": "MicrosoftWindowsServer",
+          "vmImageOffer": "WindowsServer",
+          "vmImageSku": "2016-Datacenter-Server-Core",
+          "vmImageVersion": "latest",
+          "vmInstanceCount": 10,
+          "isStateless": true,
+          "multiplePlacementGroups": true,
+          "vmSecrets": [
+            {
+              "sourceVault": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateStore": "My",
+                  "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+                }
+              ]
+            }
+          ],
+          "vmExtensions": [
+            {
+              "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+              "properties": {
+                "autoUpgradeMinorVersion": true,
+                "forceUpdateTag": "v.1.0",
+                "publisher": "Microsoft.Azure.Geneva",
+                "type": "GenevaMonitoring",
+                "typeHandlerVersion": "2.0",
+                "settings": {}
+              }
+            }
+          ],
+          "vmManagedIdentity": {
+            "userAssignedIdentities": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity",
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity2"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

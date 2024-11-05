@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "parameters": {
+      "source": {
+        "resourceId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/sourceResourceGroup/providers/Microsoft.ContainerRegistry/registries/sourceRegistry",
+        "sourceImage": "sourceRepository@sha256:0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "targetTags": [
+        "targetRepository:targetTag"
+      ],
+      "untaggedTargetRepositories": [
+        "targetRepository1"
+      ],
+      "mode": "Force"
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {}
+  }
+}

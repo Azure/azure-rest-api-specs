@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-08-01",
+    "diskName": "myDisk",
+    "disk": {
+      "properties": {
+        "tier": "P30"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2021-04-01"
+      },
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "provisioningState": "Updating",
+          "tier": "P10",
+          "propertyUpdatesInProgress": {
+            "targetTier": "P30"
+          }
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "provisioningState": "Succeeded",
+          "tier": "P30"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    }
+  }
+}

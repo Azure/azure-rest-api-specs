@@ -1,0 +1,153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01",
+    "title": "ContainerServiceAdminClient",
+    "description": "Admin Container Service Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService.Admin/locations/{location}/managedClusters": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of managed clusters at the given location.": {
+            "$ref": "./examples/managedClusters/List.json"
+          }
+        },
+        "tags": [
+          "ContainerServices"
+        ],
+        "description": "Returns a list of managed clusters present in all tenant location.",
+        "operationId": "ContainerServices_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of managed clusters has been returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerServicesList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerServiceProperties": {
+      "description": "Container service properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Container service id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Container service name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Container service location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "SubscriptionId where container service is present.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The time at which the managed cluster was created.",
+          "type": "string"
+        },
+        "orchestratorVersion": {
+          "description": "Orchestrator version of managed cluster",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning State of the managed cluster",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerServicesList": {
+      "description": "List of managed clusters.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of managed clusters.",
+          "type": "array",
+          "items": {
+            "description": "Container service properties.",
+            "type": "object",
+            "properties": {
+              "properties": {
+                "description": "Container service properties.",
+                "x-ms-client-flatten": true,
+                "$ref": "#/definitions/ContainerServiceProperties"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+              }
+            ]
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

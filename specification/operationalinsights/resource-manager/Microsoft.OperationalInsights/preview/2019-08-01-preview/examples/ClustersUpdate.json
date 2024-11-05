@@ -4,7 +4,15 @@
     "clusterName": "oiautorest6685",
     "parameters": {
       "properties": {
-        "encryptionKeyUri": "https://aztest2170.vault.azure.net/certificates/aztest2170cert/654ft6c4e63845cbb50fd6fg51540429"
+        "keyVaultProperties": {
+          "keyVaultUri": "https://aztest2170.vault.azure.net",
+          "keyName": "aztest2170cert",
+          "keyVersion": "654ft6c4e63845cbb50fd6fg51540429"
+        }
+      },
+      "sku": {
+        "name": "CapacityReservation",
+        "capacity": 1000
       },
       "tags": {
         "tag1": "val1"
@@ -17,7 +25,17 @@
     "200": {
       "body": {
         "properties": {
-          "encryptionKeyUri": "https://aztest2170.vault.azure.net/certificates/aztest2170cert/654ft6c4e63845cbb50fd6fg51540429"
+          "keyVaultProperties": {
+            "keyVaultUri": "https://aztest2170.vault.azure.net",
+            "keyName": "aztest2170cert",
+            "keyVersion": "654ft6c4e63845cbb50fd6fg51540429"
+          },
+          "provisioningState": "Succeeded",
+          "clusterId": "1c3f2afc-9ec1-4e74-bfe8-022b83bcd7b1"
+        },
+        "sku": {
+          "name": "CapacityReservation",
+          "capacity": 1000
         },
         "location": "australiasoutheast",
         "tags": {

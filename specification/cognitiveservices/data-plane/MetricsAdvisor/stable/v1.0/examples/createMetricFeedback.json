@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "body": {
+      "startTime": "2020-01-01T00:00:00.000Z",
+      "endTime": "2020-01-01T00:00:00.000Z",
+      "value": {
+        "anomalyValue": "NotAnomaly"
+      },
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "dimensionFilter": {
+        "dimension": {
+          "city": "Beijing"
+        }
+      },
+      "feedbackType": "Anomaly"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": ""
+      }
+    }
+  }
+}

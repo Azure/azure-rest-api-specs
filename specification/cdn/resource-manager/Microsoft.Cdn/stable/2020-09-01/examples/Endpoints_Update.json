@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "endpointUpdateProperties": {
+      "tags": {
+        "additionalProperties": "Tag1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "endpoint1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "tags": {
+          "additionalProperties": "Tag1"
+        },
+        "location": "WestCentralUs",
+        "properties": {
+          "hostName": "endpoint1.azureedge.net",
+          "originHostHeader": null,
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "queryStringCachingBehavior": "IgnoreQueryString",
+          "originPath": null,
+          "origins": [
+            {
+              "name": "www-bing-com",
+              "properties": {
+                "hostName": "www.bing.com",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50,
+                "enabled": true
+              }
+            }
+          ],
+          "originGroups": [
+            {
+              "name": "originGroup1",
+              "properties": {
+                "healthProbeSettings": {
+                  "probePath": "/health.aspx",
+                  "probeRequestType": "GET",
+                  "probeProtocol": "Http",
+                  "probeIntervalInSeconds": 120
+                },
+                "origins": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-bing-com"
+                  }
+                ]
+              }
+            }
+          ],
+          "defaultOriginGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+          },
+          "contentTypesToCompress": [],
+          "isCompressionEnabled": false,
+          "optimizationType": null,
+          "probePath": null,
+          "geoFilters": []
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "endpoint1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "tags": {
+          "additionalProperties": "Tag1"
+        },
+        "location": "WestCentralUs",
+        "properties": {
+          "hostName": "endpoint1.azureedge.net",
+          "originHostHeader": null,
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "queryStringCachingBehavior": "IgnoreQueryString",
+          "originPath": null,
+          "origins": [
+            {
+              "name": "www-bing-com",
+              "properties": {
+                "hostName": "www.bing.com",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50,
+                "enabled": true
+              }
+            }
+          ],
+          "originGroups": [
+            {
+              "name": "originGroup1",
+              "properties": {
+                "healthProbeSettings": {
+                  "probePath": "/health.aspx",
+                  "probeRequestType": "GET",
+                  "probeProtocol": "Http",
+                  "probeIntervalInSeconds": 120
+                },
+                "origins": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-bing-com"
+                  }
+                ]
+              }
+            }
+          ],
+          "contentTypesToCompress": [],
+          "isCompressionEnabled": false,
+          "optimizationType": null,
+          "probePath": null,
+          "geoFilters": [],
+          "defaultOriginGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+          }
+        }
+      }
+    }
+  }
+}

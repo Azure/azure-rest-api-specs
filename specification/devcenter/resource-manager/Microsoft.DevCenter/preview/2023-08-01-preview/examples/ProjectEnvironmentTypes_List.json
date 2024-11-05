@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "projectName": "ContosoProj",
+    "environmentTypeName": "DevTest"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/ContosoProj/environmentTypes/DevTest",
+            "name": "DevTest",
+            "type": "Microsoft.DevCenter/projects/environmentTypes",
+            "properties": {
+              "deploymentTargetId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+              "status": "Enabled",
+              "provisioningState": "Succeeded",
+              "creatorRoleAssignment": {
+                "roles": {
+                  "4cbf0b6c-e750-441c-98a7-10da8387e4d6": {
+                    "roleName": "Developer",
+                    "description": "Allows Developer access to project virtual machine resources."
+                  }
+                }
+              },
+              "userRoleAssignments": {
+                "e45e3m7c-176e-416a-b466-0c5ec8298f8a": {
+                  "roles": {
+                    "4cbf0b6c-e750-441c-98a7-10da8387e4d6": {
+                      "roleName": "Developer",
+                      "description": "Allows Developer access to project virtual machine resources."
+                    }
+                  }
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "User1@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:24:24.818Z",
+              "lastModifiedBy": "User1@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+            },
+            "tags": {
+              "CostCenter": "RnD"
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1": {
+                  "clientId": "e35621a5-f615-4a20-940e-de8a84b15abc",
+                  "principalId": "2111b8fc-e123-485a-b408-bf1153189494"
+                }
+              }
+            },
+            "location": "centralus"
+          }
+        ]
+      }
+    }
+  }
+}

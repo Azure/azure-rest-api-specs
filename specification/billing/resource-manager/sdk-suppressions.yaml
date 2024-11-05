@@ -1,0 +1,703 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/billing/armbilling
+      breaking-changes:
+        - Function `*AccountsClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, AccountUpdateRequest, *AccountsClientBeginUpdateOptions)` to `(context.Context, string, AccountPatch, *AccountsClientBeginUpdateOptions)`
+        - Function `*CustomersClient.Get` parameter(s) have been changed from `(context.Context, string, string, *CustomersClientGetOptions)` to `(context.Context, string, string, string, *CustomersClientGetOptions)`
+        - Function `*EnrollmentAccountsClient.Get` parameter(s) have been changed from `(context.Context, string, *EnrollmentAccountsClientGetOptions)` to `(context.Context, string, string, *EnrollmentAccountsClientGetOptions)`
+        - Function `*InvoicesClient.Get` parameter(s) have been changed from `(context.Context, string, string, *InvoicesClientGetOptions)` to `(context.Context, string, *InvoicesClientGetOptions)`
+        - Function `*InvoicesClient.NewListByBillingAccountPager` parameter(s) have been changed from `(string, string, string, *InvoicesClientListByBillingAccountOptions)` to `(string, *InvoicesClientListByBillingAccountOptions)`
+        - Function `*InvoicesClient.NewListByBillingProfilePager` parameter(s) have been changed from `(string, string, string, string, *InvoicesClientListByBillingProfileOptions)` to `(string, string, *InvoicesClientListByBillingProfileOptions)`
+        - Function `*InvoicesClient.NewListByBillingSubscriptionPager` parameter(s) have been changed from `(string, string, *InvoicesClientListByBillingSubscriptionOptions)` to `(*InvoicesClientListByBillingSubscriptionOptions)`
+        - Function `*PermissionsClient.NewListByCustomerPager` parameter(s) have been changed from `(string, string, *PermissionsClientListByCustomerOptions)` to `(string, string, string, *PermissionsClientListByCustomerOptions)`
+        - Function `*PoliciesClient.GetByCustomer` parameter(s) have been changed from `(context.Context, string, string, *PoliciesClientGetByCustomerOptions)` to `(context.Context, string, string, string, ServiceDefinedResourceName, *PoliciesClientGetByCustomerOptions)`
+        - Function `*ProductsClient.Update` parameter(s) have been changed from `(context.Context, string, string, Product, *ProductsClientUpdateOptions)` to `(context.Context, string, string, ProductPatch, *ProductsClientUpdateOptions)`
+        - Function `*SubscriptionsClient.BeginMove` parameter(s) have been changed from `(context.Context, string, TransferBillingSubscriptionRequestProperties, *SubscriptionsClientBeginMoveOptions)` to `(context.Context, string, string, MoveBillingSubscriptionRequest, *SubscriptionsClientBeginMoveOptions)`
+        - Function `*SubscriptionsClient.Get` parameter(s) have been changed from `(context.Context, string, *SubscriptionsClientGetOptions)` to `(context.Context, string, string, *SubscriptionsClientGetOptions)`
+        - Function `*SubscriptionsClient.NewListByCustomerPager` parameter(s) have been changed from `(string, string, *SubscriptionsClientListByCustomerOptions)` to `(string, string, string, *SubscriptionsClientListByCustomerOptions)`
+        - Type of `AccountProperties.EnrollmentDetails` has been changed from `*Enrollment` to `*AccountPropertiesEnrollmentDetails`
+        - Type of `AccountProperties.SoldTo` has been changed from `*AddressDetails` to `*AccountPropertiesSoldTo`
+        - Type of `AgreementProperties.BillingProfileInfo` has been changed from `*ProfileInfo` to `[]*ProfileInfo`
+        - Type of `AgreementProperties.Participants` has been changed from `[]*Participants` to `[]*Participant`
+        - Type of `AvailableBalanceProperties.Amount` has been changed from `*Amount` to `*AvailableBalancePropertiesAmount`
+        - Type of `CustomerPolicyProperties.ViewCharges` has been changed from `*ViewCharges` to `*ViewChargesPolicy`
+        - Type of `EnrollmentAccountListResult.Value` has been changed from `[]*EnrollmentAccountSummary` to `[]*EnrollmentAccount`
+        - Type of `ErrorResponse.Error` has been changed from `*ErrorDetails` to `*ErrorDetail`
+        - Type of `InvoiceProperties.AmountDue` has been changed from `*Amount` to `*InvoicePropertiesAmountDue`
+        - Type of `InvoiceProperties.AzurePrepaymentApplied` has been changed from `*Amount` to `*InvoicePropertiesAzurePrepaymentApplied`
+        - Type of `InvoiceProperties.BilledAmount` has been changed from `*Amount` to `*InvoicePropertiesBilledAmount`
+        - Type of `InvoiceProperties.CreditAmount` has been changed from `*Amount` to `*InvoicePropertiesCreditAmount`
+        - Type of `InvoiceProperties.Documents` has been changed from `[]*Document` to `[]*InvoiceDocument`
+        - Type of `InvoiceProperties.FreeAzureCreditApplied` has been changed from `*Amount` to `*InvoicePropertiesFreeAzureCreditApplied`
+        - Type of `InvoiceProperties.Payments` has been changed from `[]*PaymentProperties` to `[]*Payment`
+        - Type of `InvoiceProperties.RebillDetails` has been changed from `map[string]*RebillDetails` to `*InvoicePropertiesRebillDetails`
+        - Type of `InvoiceProperties.SubTotal` has been changed from `*Amount` to `*InvoicePropertiesSubTotal`
+        - Type of `InvoiceProperties.TaxAmount` has been changed from `*Amount` to `*InvoicePropertiesTaxAmount`
+        - Type of `InvoiceProperties.TotalAmount` has been changed from `*Amount` to `*InvoicePropertiesTotalAmount`
+        - Type of `InvoiceSectionWithCreateSubPermission.BillingProfileSpendingLimit` has been changed from `*SpendingLimitForBillingProfile` to `*SpendingLimit`
+        - Type of `InvoiceSectionWithCreateSubPermission.BillingProfileStatusReasonCode` has been changed from `*StatusReasonCodeForBillingProfile` to `*BillingProfileStatusReasonCode`
+        - Type of `ProductProperties.BillingFrequency` has been changed from `*BillingFrequency` to `*string`
+        - Type of `ProductProperties.EndDate` has been changed from `*time.Time` to `*string`
+        - Type of `ProductProperties.LastCharge` has been changed from `*Amount` to `*ProductPropertiesLastCharge`
+        - Type of `ProductProperties.LastChargeDate` has been changed from `*time.Time` to `*string`
+        - Type of `ProductProperties.PurchaseDate` has been changed from `*time.Time` to `*string`
+        - Type of `ProductProperties.Quantity` has been changed from `*float32` to `*int64`
+        - Type of `ProductProperties.Reseller` has been changed from `*Reseller` to `*ProductPropertiesReseller`
+        - Type of `ProductProperties.Status` has been changed from `*ProductStatusType` to `*ProductStatus`
+        - Type of `ProfileProperties.BillTo` has been changed from `*AddressDetails` to `*ProfilePropertiesBillTo`
+        - Type of `ProfileProperties.IndirectRelationshipInfo` has been changed from `*IndirectRelationshipInfo` to `*ProfilePropertiesIndirectRelationshipInfo`
+        - Type of `ProfileProperties.StatusReasonCode` has been changed from `*StatusReasonCode` to `*BillingProfileStatusReasonCode`
+        - Type of `PropertyProperties.BillingProfileSpendingLimit` has been changed from `*BillingProfileSpendingLimit` to `*SpendingLimit`
+        - Type of `RebillDetails.RebillDetails` has been changed from `map[string]*RebillDetails` to `*RebillDetails`
+        - Type of `ReservationProperty.EffectiveDateTime` has been changed from `*string` to `*time.Time`
+        - Type of `RoleAssignmentProperties.CreatedOn` has been changed from `*string` to `*time.Time`
+        - Type of `RoleDefinitionProperties.Permissions` has been changed from `[]*PermissionsProperties` to `[]*Permission`
+        - Type of `TransactionProperties.AzureCreditApplied` has been changed from `*Amount` to `*TransactionPropertiesAzureCreditApplied`
+        - Type of `TransactionProperties.EffectivePrice` has been changed from `*Amount` to `*TransactionPropertiesEffectivePrice`
+        - Type of `TransactionProperties.Kind` has been changed from `*TransactionTypeKind` to `*TransactionKind`
+        - Type of `TransactionProperties.MarketPrice` has been changed from `*Amount` to `*TransactionPropertiesMarketPrice`
+        - Type of `TransactionProperties.SubTotal` has been changed from `*Amount` to `*TransactionPropertiesSubTotal`
+        - Type of `TransactionProperties.Tax` has been changed from `*Amount` to `*TransactionPropertiesTax`
+        - Type of `TransactionProperties.TransactionAmount` has been changed from `*Amount` to `*TransactionPropertiesTransactionAmount`
+        - Type of `TransactionProperties.TransactionType` has been changed from `*ReservationType` to `*string`
+        - "`InvoiceTypeAzureService` from enum `InvoiceType` has been removed"
+        - "`SubscriptionTransferValidationErrorCodeNotAvailableForDestinationMarket` from enum `SubscriptionTransferValidationErrorCode` has been removed"
+        - Enum `BillingFrequency` has been removed
+        - Enum `BillingProfileSpendingLimit` has been removed
+        - Enum `BillingSubscriptionStatusType` has been removed
+        - Enum `DocumentType` has been removed
+        - Enum `ProductStatusType` has been removed
+        - Enum `ProductTransferValidationErrorCode` has been removed
+        - Enum `ReservationType` has been removed
+        - Enum `SpendingLimitForBillingProfile` has been removed
+        - Enum `StatusReasonCode` has been removed
+        - Enum `StatusReasonCodeForBillingProfile` has been removed
+        - Enum `TransactionTypeKind` has been removed
+        - Enum `ViewCharges` has been removed
+        - Function `*AvailableBalancesClient.Get` has been removed
+        - Function `*ClientFactory.NewInstructionsClient` has been removed
+        - Function `*ClientFactory.NewPeriodsClient` has been removed
+        - Function `*ClientFactory.NewRoleDefinitionsClient` has been removed
+        - Function `*EnrollmentAccountsClient.NewListPager` has been removed
+        - Function `NewInstructionsClient` has been removed
+        - Function `*InstructionsClient.Get` has been removed
+        - Function `*InstructionsClient.NewListByBillingProfilePager` has been removed
+        - Function `*InstructionsClient.Put` has been removed
+        - Function `*InvoicesClient.BeginDownloadBillingSubscriptionInvoice` has been removed
+        - Function `*InvoicesClient.BeginDownloadInvoice` has been removed
+        - Function `*InvoicesClient.BeginDownloadMultipleBillingProfileInvoices` has been removed
+        - Function `*InvoicesClient.BeginDownloadMultipleBillingSubscriptionInvoices` has been removed
+        - Function `*InvoicesClient.GetByID` has been removed
+        - Function `*InvoicesClient.GetBySubscriptionAndInvoiceID` has been removed
+        - Function `NewPeriodsClient` has been removed
+        - Function `*PeriodsClient.Get` has been removed
+        - Function `*PeriodsClient.NewListPager` has been removed
+        - Function `*PermissionsClient.NewListByInvoiceSectionsPager` has been removed
+        - Function `*PoliciesClient.Update` has been removed
+        - Function `*PoliciesClient.UpdateCustomer` has been removed
+        - Function `PossibleStatusReasonCodeValues` has been removed
+        - Function `*ProductsClient.ValidateMove` has been removed
+        - Function `NewRoleDefinitionsClient` has been removed
+        - Function `*RoleDefinitionsClient.GetByBillingAccount` has been removed
+        - Function `*RoleDefinitionsClient.GetByBillingProfile` has been removed
+        - Function `*RoleDefinitionsClient.GetByInvoiceSection` has been removed
+        - Function `*RoleDefinitionsClient.NewListByBillingAccountPager` has been removed
+        - Function `*RoleDefinitionsClient.NewListByBillingProfilePager` has been removed
+        - Function `*RoleDefinitionsClient.NewListByInvoiceSectionPager` has been removed
+        - Function `*SubscriptionsClient.ValidateMove` has been removed
+        - Operation `*ProductsClient.Move` has been changed to LRO, use `*ProductsClient.BeginMove` instead.
+        - Operation `*SubscriptionsClient.Update` has been changed to LRO, use `*SubscriptionsClient.BeginUpdate` instead.
+        - Struct `AccountUpdateRequest` has been removed
+        - Struct `Document` has been removed
+        - Struct `DownloadURL` has been removed
+        - Struct `Enrollment` has been removed
+        - Struct `EnrollmentAccountContext` has been removed
+        - Struct `EnrollmentAccountSummary` has been removed
+        - Struct `EnrollmentAccountSummaryProperties` has been removed
+        - Struct `EnrollmentPolicies` has been removed
+        - Struct `ErrorDetails` has been removed
+        - Struct `ErrorSubDetailsItem` has been removed
+        - Struct `Instruction` has been removed
+        - Struct `InstructionListResult` has been removed
+        - Struct `InstructionProperties` has been removed
+        - Struct `InvoiceSectionCreationRequest` has been removed
+        - Struct `InvoiceSectionListWithCreateSubPermissionResult` has been removed
+        - Struct `InvoiceSectionsOnExpand` has been removed
+        - Struct `OperationsErrorDetails` has been removed
+        - Struct `OperationsErrorResponse` has been removed
+        - Struct `Participants` has been removed
+        - Struct `PaymentProperties` has been removed
+        - Struct `Period` has been removed
+        - Struct `PeriodProperties` has been removed
+        - Struct `PeriodsListResult` has been removed
+        - Struct `PermissionsListResult` has been removed
+        - Struct `PermissionsProperties` has been removed
+        - Struct `Policy` has been removed
+        - Struct `PolicyProperties` has been removed
+        - Struct `ProductsListResult` has been removed
+        - Struct `ProfileCreationRequest` has been removed
+        - Struct `ProfilesOnExpand` has been removed
+        - Struct `SubscriptionsListResult` has been removed
+        - Struct `TransferBillingSubscriptionRequestProperties` has been removed
+        - Struct `TransferProductRequestProperties` has been removed
+        - Struct `ValidateAddressResponse` has been removed
+        - Struct `ValidateProductTransferEligibilityError` has been removed
+        - Struct `ValidateProductTransferEligibilityResult` has been removed
+        - Struct `ValidateSubscriptionTransferEligibilityError` has been removed
+        - Struct `ValidateSubscriptionTransferEligibilityResult` has been removed
+        - Field `BillingProfiles`, `Departments`, `EnrollmentAccounts` of struct `AccountProperties` has been removed
+        - Field `Expand` of struct `AccountsClientGetOptions` has been removed
+        - Field `InvoiceSectionListWithCreateSubPermissionResult` of struct `AccountsClientListInvoiceSectionsByCreateSubscriptionPermissionResponse` has been removed
+        - Field `ValidateAddressResponse` of struct `AddressClientValidateResponse` has been removed
+        - Field `Expand` of struct `AgreementsClientGetOptions` has been removed
+        - Field `TotalCount` of struct `CustomerListResult` has been removed
+        - Field `Expand` of struct `CustomersClientGetOptions` has been removed
+        - Field `DepartmentName`, `EnrollmentAccounts` of struct `DepartmentProperties` has been removed
+        - Field `AccountName`, `AccountOwnerEmail`, `Department` of struct `EnrollmentAccountProperties` has been removed
+        - Field `EnrollmentAccountSummary` of struct `EnrollmentAccountsClientGetResponse` has been removed
+        - Field `TotalCount` of struct `InvoiceListResult` has been removed
+        - Field `TotalCount` of struct `InvoiceSectionListResult` has been removed
+        - Field `Labels` of struct `InvoiceSectionProperties` has been removed
+        - Field `PermissionsListResult` of struct `PermissionsClientListByBillingAccountResponse` has been removed
+        - Field `PermissionsListResult` of struct `PermissionsClientListByBillingProfileResponse` has been removed
+        - Field `PermissionsListResult` of struct `PermissionsClientListByCustomerResponse` has been removed
+        - Field `Policy` of struct `PoliciesClientGetByBillingProfileResponse` has been removed
+        - Field `ProductsListResult` of struct `ProductsClientListByBillingAccountResponse` has been removed
+        - Field `ProductsListResult` of struct `ProductsClientListByBillingProfileResponse` has been removed
+        - Field `ProductsListResult` of struct `ProductsClientListByCustomerResponse` has been removed
+        - Field `ProductsListResult` of struct `ProductsClientListByInvoiceSectionResponse` has been removed
+        - Field `TotalCount` of struct `ProfileListResult` has been removed
+        - Field `InvoiceSections` of struct `ProfileProperties` has been removed
+        - Field `Expand` of struct `ProfilesClientGetOptions` has been removed
+        - Field `Expand` of struct `ProfilesClientListByBillingAccountOptions` has been removed
+        - Field `Orderby` of struct `ReservationsClientListByBillingAccountOptions` has been removed
+        - Field `Orderby` of struct `ReservationsClientListByBillingProfileOptions` has been removed
+        - Field `RoleAssignment` of struct `RoleAssignmentsClientDeleteByBillingAccountResponse` has been removed
+        - Field `RoleAssignment` of struct `RoleAssignmentsClientDeleteByBillingProfileResponse` has been removed
+        - Field `RoleAssignment` of struct `RoleAssignmentsClientDeleteByInvoiceSectionResponse` has been removed
+        - Field `CostCenter`, `SubscriptionBillingStatus` of struct `SubscriptionProperties` has been removed
+        - Field `SubscriptionsListResult` of struct `SubscriptionsClientListByBillingAccountResponse` has been removed
+        - Field `SubscriptionsListResult` of struct `SubscriptionsClientListByBillingProfileResponse` has been removed
+        - Field `SubscriptionsListResult` of struct `SubscriptionsClientListByCustomerResponse` has been removed
+        - Field `SubscriptionsListResult` of struct `SubscriptionsClientListByInvoiceSectionResponse` has been removed
+        - Field `TotalCount` of struct `TransactionListResult` has been removed
+        - Field `OrderID`, `OrderName`, `SubscriptionID`, `SubscriptionName` of struct `TransactionProperties` has been removed
+
+        ### Features Added
+
+        - Type of `TransactionProperties.BillingProfileDisplayName` has been changed from `*string` to `any`
+        - New value `AcceptanceModeImplicit`, `AcceptanceModeOffline`, `AcceptanceModeOther`, `AcceptanceModePhysicalSign` added to enum type `AcceptanceMode`
+        - New value `AccountStatusNew`, `AccountStatusOther`, `AccountStatusPending`, `AccountStatusUnderReview` added to enum type `AccountStatus`
+        - New value `AccountTypeBusiness`, `AccountTypeClassicPartner`, `AccountTypeInternal`, `AccountTypeOther`, `AccountTypeReseller`, `AccountTypeTenant` added to enum type `AccountType`
+        - New value `AddressValidationStatusOther` added to enum type `AddressValidationStatus`
+        - New value `AgreementTypeOther` added to enum type `AgreementType`
+        - New value `BillingProfileStatusDeleted`, `BillingProfileStatusOther`, `BillingProfileStatusUnderReview` added to enum type `BillingProfileStatus`
+        - New value `BillingProfileStatusReasonCodeOther`, `BillingProfileStatusReasonCodeUnusualActivity` added to enum type `BillingProfileStatusReasonCode`
+        - New value `BillingRelationshipTypeCSPCustomer`, `BillingRelationshipTypeOther` added to enum type `BillingRelationshipType`
+        - New value `CategoryIndirectForGovernmentAgreement`, `CategoryMicrosoftPartnerAgreement`, `CategoryUKCloudComputeFramework` added to enum type `Category`
+        - New value `DocumentSourceOther` added to enum type `DocumentSource`
+        - New value `InvoiceDocumentTypeOther`, `InvoiceDocumentTypeSummary`, `InvoiceDocumentTypeTaxReceipt`, `InvoiceDocumentTypeTransactions`, `InvoiceDocumentTypeVoidNote` added to enum type `InvoiceDocumentType`
+        - New value `InvoiceSectionStateDeleted`, `InvoiceSectionStateDisabled`, `InvoiceSectionStateOther`, `InvoiceSectionStateUnderReview`, `InvoiceSectionStateWarned` added to enum type `InvoiceSectionState`
+        - New value `InvoiceStatusLocked`, `InvoiceStatusOther` added to enum type `InvoiceStatus`
+        - New value `InvoiceTypeAzureServices`, `InvoiceTypeOther` added to enum type `InvoiceType`
+        - New value `MarketplacePurchasesPolicyDisabled`, `MarketplacePurchasesPolicyOther` added to enum type `MarketplacePurchasesPolicy`
+        - New value `PaymentMethodFamilyDirectDebit`, `PaymentMethodFamilyEWallet`, `PaymentMethodFamilyOther`, `PaymentMethodFamilyTaskOrder` added to enum type `PaymentMethodFamily`
+        - New value `ReservationPurchasesPolicyDisabled`, `ReservationPurchasesPolicyOther` added to enum type `ReservationPurchasesPolicy`
+        - New value `SubscriptionTransferValidationErrorCodeAccountIsLocked`, `SubscriptionTransferValidationErrorCodeAssetHasCap`, `SubscriptionTransferValidationErrorCodeAssetNotActive`, `SubscriptionTransferValidationErrorCodeBillingProfilePastDue`, `SubscriptionTransferValidationErrorCodeInvoiceSectionIsRestricted`, `SubscriptionTransferValidationErrorCodeNoActiveAzurePlan`, `SubscriptionTransferValidationErrorCodeNone`, `SubscriptionTransferValidationErrorCodeOther`, `SubscriptionTransferValidationErrorCodeSubscriptionHasReservations` added to enum type `SubscriptionTransferValidationErrorCode`
+        - New value `TargetCloudInternal`, `TargetCloudOther` added to enum type `TargetCloud`
+        - New value `ViewChargesPolicyOther` added to enum type `ViewChargesPolicy`
+        - New enum type `AccessDecision` with values `AccessDecisionAllowed`, `AccessDecisionNotAllowed`, `AccessDecisionOther`
+        - New enum type `AccountSubType` with values `AccountSubTypeEnterprise`, `AccountSubTypeIndividual`, `AccountSubTypeNone`, `AccountSubTypeOther`, `AccountSubTypeProfessional`
+        - New enum type `AppliedScopeType` with values `AppliedScopeTypeManagementGroup`, `AppliedScopeTypeShared`, `AppliedScopeTypeSingle`
+        - New enum type `BillingAccountStatusReasonCode` with values `BillingAccountStatusReasonCodeExpired`, `BillingAccountStatusReasonCodeManuallyTerminated`, `BillingAccountStatusReasonCodeOther`, `BillingAccountStatusReasonCodeTerminateProcessing`, `BillingAccountStatusReasonCodeTransferred`, `BillingAccountStatusReasonCodeUnusualActivity`
+        - New enum type `BillingManagementTenantState` with values `BillingManagementTenantStateActive`, `BillingManagementTenantStateNotAllowed`, `BillingManagementTenantStateOther`, `BillingManagementTenantStateRevoked`
+        - New enum type `BillingPlan` with values `BillingPlanP1M`
+        - New enum type `BillingRequestStatus` with values `BillingRequestStatusApproved`, `BillingRequestStatusCancelled`, `BillingRequestStatusCompleted`, `BillingRequestStatusDeclined`, `BillingRequestStatusExpired`, `BillingRequestStatusOther`, `BillingRequestStatusPending`
+        - New enum type `BillingRequestType` with values `BillingRequestTypeInvoiceAccess`, `BillingRequestTypeOther`, `BillingRequestTypeProvisioningAccess`, `BillingRequestTypeRoleAssignment`, `BillingRequestTypeUpdateBillingPolicy`
+        - New enum type `BillingSubscriptionOperationStatus` with values `BillingSubscriptionOperationStatusLockedForUpdate`, `BillingSubscriptionOperationStatusNone`, `BillingSubscriptionOperationStatusOther`
+        - New enum type `BillingSubscriptionStatus` with values `BillingSubscriptionStatusActive`, `BillingSubscriptionStatusAutoRenew`, `BillingSubscriptionStatusCancelled`, `BillingSubscriptionStatusDeleted`, `BillingSubscriptionStatusDisabled`, `BillingSubscriptionStatusExpired`, `BillingSubscriptionStatusExpiring`, `BillingSubscriptionStatusFailed`, `BillingSubscriptionStatusOther`, `BillingSubscriptionStatusSuspended`, `BillingSubscriptionStatusUnknown`, `BillingSubscriptionStatusWarned`
+        - New enum type `Cancellation` with values `CancellationAllowed`, `CancellationNotAllowed`
+        - New enum type `CancellationReason` with values `CancellationReasonCompromise`, `CancellationReasonDispute`, `CancellationReasonOther`
+        - New enum type `CommitmentGrain` with values `CommitmentGrainHourly`
+        - New enum type `CreatedByType` with values `CreatedByTypeApplication`, `CreatedByTypeKey`, `CreatedByTypeManagedIdentity`, `CreatedByTypeUser`
+        - New enum type `CreditType` with values `CreditTypeAzureCreditOffer`, `CreditTypeAzureFreeCredit`, `CreditTypeOther`, `CreditTypeRefund`, `CreditTypeServiceInterruption`
+        - New enum type `CustomerStatus` with values `CustomerStatusActive`, `CustomerStatusDeleted`, `CustomerStatusDisabled`, `CustomerStatusOther`, `CustomerStatusPending`, `CustomerStatusUnderReview`, `CustomerStatusWarned`
+        - New enum type `DeleteBillingProfileEligibilityCode` with values `DeleteBillingProfileEligibilityCodeActiveBillingSubscriptions`, `DeleteBillingProfileEligibilityCodeActiveCreditCard`, `DeleteBillingProfileEligibilityCodeActiveCredits`, `DeleteBillingProfileEligibilityCodeLastBillingProfile`, `DeleteBillingProfileEligibilityCodeNone`, `DeleteBillingProfileEligibilityCodeNotSupported`, `DeleteBillingProfileEligibilityCodeOutstandingCharges`, `DeleteBillingProfileEligibilityCodePendingCharges`, `DeleteBillingProfileEligibilityCodeReservedInstances`
+        - New enum type `DeleteBillingProfileEligibilityStatus` with values `DeleteBillingProfileEligibilityStatusAllowed`, `DeleteBillingProfileEligibilityStatusNotAllowed`
+        - New enum type `DeleteInvoiceSectionEligibilityCode` with values `DeleteInvoiceSectionEligibilityCodeActiveAzurePlans`, `DeleteInvoiceSectionEligibilityCodeActiveBillingSubscriptions`, `DeleteInvoiceSectionEligibilityCodeLastInvoiceSection`, `DeleteInvoiceSectionEligibilityCodeOther`, `DeleteInvoiceSectionEligibilityCodeReservedInstances`
+        - New enum type `DeleteInvoiceSectionEligibilityStatus` with values `DeleteInvoiceSectionEligibilityStatusAllowed`, `DeleteInvoiceSectionEligibilityStatusNotAllowed`
+        - New enum type `EligibleProductType` with values `EligibleProductTypeAzureReservation`, `EligibleProductTypeDevTestAzureSubscription`, `EligibleProductTypeStandardAzureSubscription`
+        - New enum type `EnrollmentAccountOwnerViewCharges` with values `EnrollmentAccountOwnerViewChargesAllowed`, `EnrollmentAccountOwnerViewChargesDisabled`, `EnrollmentAccountOwnerViewChargesNotAllowed`, `EnrollmentAccountOwnerViewChargesOther`
+        - New enum type `EnrollmentAuthLevelState` with values `EnrollmentAuthLevelStateMicrosoftAccountOnly`, `EnrollmentAuthLevelStateMixedAccount`, `EnrollmentAuthLevelStateOrganizationalAccountCrossTenant`, `EnrollmentAuthLevelStateOrganizationalAccountOnly`, `EnrollmentAuthLevelStateOther`
+        - New enum type `EnrollmentDepartmentAdminViewCharges` with values `EnrollmentDepartmentAdminViewChargesAllowed`, `EnrollmentDepartmentAdminViewChargesDisabled`, `EnrollmentDepartmentAdminViewChargesNotAllowed`, `EnrollmentDepartmentAdminViewChargesOther`
+        - New enum type `ExtendedTermOption` with values `ExtendedTermOptionOptedIn`, `ExtendedTermOptionOptedOut`, `ExtendedTermOptionOther`
+        - New enum type `FailedPaymentReason` with values `FailedPaymentReasonBankDeclined`, `FailedPaymentReasonCardExpired`, `FailedPaymentReasonIncorrectCardDetails`, `FailedPaymentReasonOther`
+        - New enum type `InitiatorCustomerType` with values `InitiatorCustomerTypeEA`, `InitiatorCustomerTypePartner`
+        - New enum type `InstanceFlexibility` with values `InstanceFlexibilityOff`, `InstanceFlexibilityOn`
+        - New enum type `InvoiceSectionLabelManagementPolicy` with values `InvoiceSectionLabelManagementPolicyAllowed`, `InvoiceSectionLabelManagementPolicyNotAllowed`, `InvoiceSectionLabelManagementPolicyOther`
+        - New enum type `InvoiceSectionStateReasonCode` with values `InvoiceSectionStateReasonCodeOther`, `InvoiceSectionStateReasonCodePastDue`, `InvoiceSectionStateReasonCodeSpendingLimitExpired`, `InvoiceSectionStateReasonCodeSpendingLimitReached`, `InvoiceSectionStateReasonCodeUnusualActivity`
+        - New enum type `MarkupStatus` with values `MarkupStatusDisabled`, `MarkupStatusLocked`, `MarkupStatusOther`, `MarkupStatusPreview`, `MarkupStatusPublished`
+        - New enum type `MoveValidationErrorCode` with values `MoveValidationErrorCodeBillingAccountInactive`, `MoveValidationErrorCodeDestinationBillingProfileInactive`, `MoveValidationErrorCodeDestinationBillingProfileNotFound`, `MoveValidationErrorCodeDestinationBillingProfilePastDue`, `MoveValidationErrorCodeDestinationInvoiceSectionInactive`, `MoveValidationErrorCodeDestinationInvoiceSectionNotFound`, `MoveValidationErrorCodeInsufficientPermissionOnDestination`, `MoveValidationErrorCodeInsufficientPermissionOnSource`, `MoveValidationErrorCodeInvalidDestination`, `MoveValidationErrorCodeInvalidSource`, `MoveValidationErrorCodeMarketplaceNotEnabledOnDestination`, `MoveValidationErrorCodeOther`, `MoveValidationErrorCodeProductInactive`, `MoveValidationErrorCodeProductNotFound`, `MoveValidationErrorCodeProductTypeNotSupported`, `MoveValidationErrorCodeSourceBillingProfilePastDue`, `MoveValidationErrorCodeSourceInvoiceSectionInactive`
+        - New enum type `PaymentMethodStatus` with values `PaymentMethodStatusActive`, `PaymentMethodStatusInactive`
+        - New enum type `PaymentStatus` with values `PaymentStatusCancelled`, `PaymentStatusCompleted`, `PaymentStatusFailed`, `PaymentStatusPending`, `PaymentStatusScheduled`, `PaymentStatusSucceeded`
+        - New enum type `PaymentTermsEligibilityCode` with values `PaymentTermsEligibilityCodeBillingAccountNotFound`, `PaymentTermsEligibilityCodeInactiveBillingAccount`, `PaymentTermsEligibilityCodeIneligibleBillingAccountStatus`, `PaymentTermsEligibilityCodeInvalidBillingAccountType`, `PaymentTermsEligibilityCodeInvalidDateFormat`, `PaymentTermsEligibilityCodeInvalidDateRange`, `PaymentTermsEligibilityCodeInvalidTerms`, `PaymentTermsEligibilityCodeNullOrEmptyPaymentTerms`, `PaymentTermsEligibilityCodeOther`, `PaymentTermsEligibilityCodeOverlappingPaymentTerms`
+        - New enum type `PaymentTermsEligibilityStatus` with values `PaymentTermsEligibilityStatusInvalid`, `PaymentTermsEligibilityStatusOther`, `PaymentTermsEligibilityStatusValid`
+        - New enum type `PolicyType` with values `PolicyTypeOther`, `PolicyTypeSystemControlled`, `PolicyTypeUserControlled`
+        - New enum type `PrincipalType` with values `PrincipalTypeDirectoryRole`, `PrincipalTypeEveryone`, `PrincipalTypeGroup`, `PrincipalTypeNone`, `PrincipalTypeServicePrincipal`, `PrincipalTypeUnknown`, `PrincipalTypeUser`
+        - New enum type `ProductStatus` with values `ProductStatusActive`, `ProductStatusAutoRenew`, `ProductStatusCanceled`, `ProductStatusDeleted`, `ProductStatusDisabled`, `ProductStatusExpired`, `ProductStatusExpiring`, `ProductStatusOther`, `ProductStatusPastDue`, `ProductStatusSuspended`
+        - New enum type `ProductTransferStatus` with values `ProductTransferStatusCompleted`, `ProductTransferStatusFailed`, `ProductTransferStatusInProgress`, `ProductTransferStatusNotStarted`
+        - New enum type `ProductType` with values `ProductTypeAzureReservation`, `ProductTypeAzureSubscription`, `ProductTypeDepartment`, `ProductTypeSAAS`, `ProductTypeSavingsPlan`
+        - New enum type `ProvisioningState` with values `ProvisioningStateCanceled`, `ProvisioningStateConfirmedBilling`, `ProvisioningStateCreated`, `ProvisioningStateCreating`, `ProvisioningStateExpired`, `ProvisioningStateFailed`, `ProvisioningStateNew`, `ProvisioningStatePending`, `ProvisioningStatePendingBilling`, `ProvisioningStateProvisioning`, `ProvisioningStateSucceeded`
+        - New enum type `ProvisioningTenantState` with values `ProvisioningTenantStateActive`, `ProvisioningTenantStateBillingRequestDeclined`, `ProvisioningTenantStateBillingRequestExpired`, `ProvisioningTenantStateNotRequested`, `ProvisioningTenantStateOther`, `ProvisioningTenantStatePending`, `ProvisioningTenantStateRevoked`
+        - New enum type `RefundReasonCode` with values `RefundReasonCodeAccidentalConversion`, `RefundReasonCodeAccidentalPurchase`, `RefundReasonCodeForgotToCancel`, `RefundReasonCodeOther`, `RefundReasonCodeUnclearDocumentation`, `RefundReasonCodeUnclearPricing`
+        - New enum type `RefundStatus` with values `RefundStatusApproved`, `RefundStatusCancelled`, `RefundStatusCompleted`, `RefundStatusDeclined`, `RefundStatusExpired`, `RefundStatusOther`, `RefundStatusPending`
+        - New enum type `ReservationBillingPlan` with values `ReservationBillingPlanMonthly`, `ReservationBillingPlanUpfront`
+        - New enum type `ReservationStatusCode` with values `ReservationStatusCodeActive`, `ReservationStatusCodeCapacityError`, `ReservationStatusCodeCapacityRestricted`, `ReservationStatusCodeCreditLineCheckFailed`, `ReservationStatusCodeExchanged`, `ReservationStatusCodeExpired`, `ReservationStatusCodeMerged`, `ReservationStatusCodeNoBenefit`, `ReservationStatusCodeNoBenefitDueToSubscriptionDeletion`, `ReservationStatusCodeNoBenefitDueToSubscriptionTransfer`, `ReservationStatusCodeNone`, `ReservationStatusCodePaymentInstrumentError`, `ReservationStatusCodePending`, `ReservationStatusCodeProcessing`, `ReservationStatusCodePurchaseError`, `ReservationStatusCodeRiskCheckFailed`, `ReservationStatusCodeSplit`, `ReservationStatusCodeSucceeded`, `ReservationStatusCodeUnknownError`, `ReservationStatusCodeWarning`
+        - New enum type `SavingsPlanPurchasesPolicy` with values `SavingsPlanPurchasesPolicyAllowed`, `SavingsPlanPurchasesPolicyDisabled`, `SavingsPlanPurchasesPolicyNotAllowed`, `SavingsPlanPurchasesPolicyOther`
+        - New enum type `SavingsPlanTerm` with values `SavingsPlanTermP1Y`, `SavingsPlanTermP3Y`, `SavingsPlanTermP5Y`
+        - New enum type `ServiceDefinedResourceName` with values `ServiceDefinedResourceNameDefault`
+        - New enum type `SpecialTaxationType` with values `SpecialTaxationTypeInvoiceLevel`, `SpecialTaxationTypeSubtotalLevel`
+        - New enum type `SpendingLimitStatus` with values `SpendingLimitStatusActive`, `SpendingLimitStatusExpired`, `SpendingLimitStatusLimitReached`, `SpendingLimitStatusLimitRemoved`, `SpendingLimitStatusNone`, `SpendingLimitStatusOther`
+        - New enum type `SpendingLimitType` with values `SpendingLimitTypeAcademicSponsorship`, `SpendingLimitTypeAzureConsumptionCredit`, `SpendingLimitTypeAzureForStudents`, `SpendingLimitTypeAzureForStudentsStarter`, `SpendingLimitTypeAzurePassSponsorship`, `SpendingLimitTypeFreeAccount`, `SpendingLimitTypeMSDN`, `SpendingLimitTypeMpnSponsorship`, `SpendingLimitTypeNonProfitSponsorship`, `SpendingLimitTypeNone`, `SpendingLimitTypeOther`, `SpendingLimitTypeSandbox`, `SpendingLimitTypeSponsorship`, `SpendingLimitTypeStartupSponsorship`, `SpendingLimitTypeVisualStudio`
+        - New enum type `SubscriptionBillingType` with values `SubscriptionBillingTypeBenefit`, `SubscriptionBillingTypeFree`, `SubscriptionBillingTypeNone`, `SubscriptionBillingTypePaid`, `SubscriptionBillingTypePrePaid`
+        - New enum type `SubscriptionEnrollmentAccountStatus` with values `SubscriptionEnrollmentAccountStatusActive`, `SubscriptionEnrollmentAccountStatusCancelled`, `SubscriptionEnrollmentAccountStatusDeleted`, `SubscriptionEnrollmentAccountStatusExpired`, `SubscriptionEnrollmentAccountStatusInactive`, `SubscriptionEnrollmentAccountStatusTransferredOut`, `SubscriptionEnrollmentAccountStatusTransferring`
+        - New enum type `SubscriptionStatusReason` with values `SubscriptionStatusReasonCancelled`, `SubscriptionStatusReasonExpired`, `SubscriptionStatusReasonNone`, `SubscriptionStatusReasonOther`, `SubscriptionStatusReasonPastDue`, `SubscriptionStatusReasonPolicyViolation`, `SubscriptionStatusReasonSpendingLimitReached`, `SubscriptionStatusReasonSuspiciousActivity`, `SubscriptionStatusReasonTransferred`
+        - New enum type `SubscriptionWorkloadType` with values `SubscriptionWorkloadTypeDevTest`, `SubscriptionWorkloadTypeInternal`, `SubscriptionWorkloadTypeNone`, `SubscriptionWorkloadTypeProduction`
+        - New enum type `SupportLevel` with values `SupportLevelDeveloper`, `SupportLevelOther`, `SupportLevelProDirect`, `SupportLevelStandard`
+        - New enum type `SupportedAccountType` with values `SupportedAccountTypeEnterprise`, `SupportedAccountTypeIndividual`, `SupportedAccountTypeNone`, `SupportedAccountTypePartner`
+        - New enum type `TaxIdentifierStatus` with values `TaxIdentifierStatusInvalid`, `TaxIdentifierStatusOther`, `TaxIdentifierStatusValid`
+        - New enum type `TaxIdentifierType` with values `TaxIdentifierTypeBrazilCcmID`, `TaxIdentifierTypeBrazilCnpjID`, `TaxIdentifierTypeBrazilCpfID`, `TaxIdentifierTypeCanadianFederalExempt`, `TaxIdentifierTypeCanadianProvinceExempt`, `TaxIdentifierTypeExternalTaxation`, `TaxIdentifierTypeIndiaFederalServiceTaxID`, `TaxIdentifierTypeIndiaFederalTanID`, `TaxIdentifierTypeIndiaPanID`, `TaxIdentifierTypeIndiaStateCstID`, `TaxIdentifierTypeIndiaStateGstINID`, `TaxIdentifierTypeIndiaStateVatID`, `TaxIdentifierTypeIntlExempt`, `TaxIdentifierTypeLoveCode`, `TaxIdentifierTypeMobileBarCode`, `TaxIdentifierTypeNationalIdentificationNumber`, `TaxIdentifierTypeOther`, `TaxIdentifierTypePublicSectorID`, `TaxIdentifierTypeUSExempt`, `TaxIdentifierTypeVatID`
+        - New enum type `TransactionKind` with values `TransactionKindAll`, `TransactionKindOther`, `TransactionKindReservation`
+        - New enum type `TransactionType` with values `TransactionTypeBilled`, `TransactionTypeOther`, `TransactionTypeUnbilled`
+        - New enum type `TransferStatus` with values `TransferStatusCanceled`, `TransferStatusCompleted`, `TransferStatusCompletedWithErrors`, `TransferStatusDeclined`, `TransferStatusExpired`, `TransferStatusFailed`, `TransferStatusInProgress`, `TransferStatusPending`
+        - New function `*AccountsClient.BeginAddPaymentTerms(context.Context, string, []*PaymentTerm, *AccountsClientBeginAddPaymentTermsOptions) (*runtime.Poller[AccountsClientAddPaymentTermsResponse], error)`
+        - New function `*AccountsClient.BeginCancelPaymentTerms(context.Context, string, time.Time, *AccountsClientBeginCancelPaymentTermsOptions) (*runtime.Poller[AccountsClientCancelPaymentTermsResponse], error)`
+        - New function `*AccountsClient.ConfirmTransition(context.Context, string, *AccountsClientConfirmTransitionOptions) (AccountsClientConfirmTransitionResponse, error)`
+        - New function `*AccountsClient.ValidatePaymentTerms(context.Context, string, []*PaymentTerm, *AccountsClientValidatePaymentTermsOptions) (AccountsClientValidatePaymentTermsResponse, error)`
+        - New function `NewAssociatedTenantsClient(azcore.TokenCredential, *arm.ClientOptions) (*AssociatedTenantsClient, error)`
+        - New function `*AssociatedTenantsClient.BeginCreateOrUpdate(context.Context, string, string, AssociatedTenant, *AssociatedTenantsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AssociatedTenantsClientCreateOrUpdateResponse], error)`
+        - New function `*AssociatedTenantsClient.BeginDelete(context.Context, string, string, *AssociatedTenantsClientBeginDeleteOptions) (*runtime.Poller[AssociatedTenantsClientDeleteResponse], error)`
+        - New function `*AssociatedTenantsClient.Get(context.Context, string, string, *AssociatedTenantsClientGetOptions) (AssociatedTenantsClientGetResponse, error)`
+        - New function `*AssociatedTenantsClient.NewListByBillingAccountPager(string, *AssociatedTenantsClientListByBillingAccountOptions) *runtime.Pager[AssociatedTenantsClientListByBillingAccountResponse]`
+        - New function `*AvailableBalancesClient.GetByBillingAccount(context.Context, string, *AvailableBalancesClientGetByBillingAccountOptions) (AvailableBalancesClientGetByBillingAccountResponse, error)`
+        - New function `*AvailableBalancesClient.GetByBillingProfile(context.Context, string, string, *AvailableBalancesClientGetByBillingProfileOptions) (AvailableBalancesClientGetByBillingProfileResponse, error)`
+        - New function `*ClientFactory.NewAssociatedTenantsClient() *AssociatedTenantsClient`
+        - New function `*ClientFactory.NewDepartmentsClient() *DepartmentsClient`
+        - New function `*ClientFactory.NewPartnerTransfersClient() *PartnerTransfersClient`
+        - New function `*ClientFactory.NewPaymentMethodsClient() *PaymentMethodsClient`
+        - New function `*ClientFactory.NewRecipientTransfersClient() *RecipientTransfersClient`
+        - New function `*ClientFactory.NewRequestsClient() *RequestsClient`
+        - New function `*ClientFactory.NewReservationOrdersClient() *ReservationOrdersClient`
+        - New function `*ClientFactory.NewRoleDefinitionClient() *RoleDefinitionClient`
+        - New function `*ClientFactory.NewSavingsPlanOrdersClient() *SavingsPlanOrdersClient`
+        - New function `*ClientFactory.NewSavingsPlansClient() *SavingsPlansClient`
+        - New function `*ClientFactory.NewSubscriptionsAliasesClient() *SubscriptionsAliasesClient`
+        - New function `*ClientFactory.NewTransfersClient() *TransfersClient`
+        - New function `*CustomersClient.GetByBillingAccount(context.Context, string, string, *CustomersClientGetByBillingAccountOptions) (CustomersClientGetByBillingAccountResponse, error)`
+        - New function `NewDepartmentsClient(azcore.TokenCredential, *arm.ClientOptions) (*DepartmentsClient, error)`
+        - New function `*DepartmentsClient.Get(context.Context, string, string, *DepartmentsClientGetOptions) (DepartmentsClientGetResponse, error)`
+        - New function `*DepartmentsClient.NewListByBillingAccountPager(string, *DepartmentsClientListByBillingAccountOptions) *runtime.Pager[DepartmentsClientListByBillingAccountResponse]`
+        - New function `*EnrollmentAccountsClient.GetByDepartment(context.Context, string, string, string, *EnrollmentAccountsClientGetByDepartmentOptions) (EnrollmentAccountsClientGetByDepartmentResponse, error)`
+        - New function `*EnrollmentAccountsClient.NewListByBillingAccountPager(string, *EnrollmentAccountsClientListByBillingAccountOptions) *runtime.Pager[EnrollmentAccountsClientListByBillingAccountResponse]`
+        - New function `*EnrollmentAccountsClient.NewListByDepartmentPager(string, string, *EnrollmentAccountsClientListByDepartmentOptions) *runtime.Pager[EnrollmentAccountsClientListByDepartmentResponse]`
+        - New function `*InvoiceSectionsClient.BeginDelete(context.Context, string, string, string, *InvoiceSectionsClientBeginDeleteOptions) (*runtime.Poller[InvoiceSectionsClientDeleteResponse], error)`
+        - New function `*InvoiceSectionsClient.ValidateDeleteEligibility(context.Context, string, string, string, *InvoiceSectionsClientValidateDeleteEligibilityOptions) (InvoiceSectionsClientValidateDeleteEligibilityResponse, error)`
+        - New function `*InvoicesClient.BeginAmend(context.Context, string, string, *InvoicesClientBeginAmendOptions) (*runtime.Poller[InvoicesClientAmendResponse], error)`
+        - New function `*InvoicesClient.BeginDownloadByBillingAccount(context.Context, string, string, *InvoicesClientBeginDownloadByBillingAccountOptions) (*runtime.Poller[InvoicesClientDownloadByBillingAccountResponse], error)`
+        - New function `*InvoicesClient.BeginDownloadByBillingSubscription(context.Context, string, *InvoicesClientBeginDownloadByBillingSubscriptionOptions) (*runtime.Poller[InvoicesClientDownloadByBillingSubscriptionResponse], error)`
+        - New function `*InvoicesClient.BeginDownloadDocumentsByBillingAccount(context.Context, string, []*DocumentDownloadRequest, *InvoicesClientBeginDownloadDocumentsByBillingAccountOptions) (*runtime.Poller[InvoicesClientDownloadDocumentsByBillingAccountResponse], error)`
+        - New function `*InvoicesClient.BeginDownloadDocumentsByBillingSubscription(context.Context, []*DocumentDownloadRequest, *InvoicesClientBeginDownloadDocumentsByBillingSubscriptionOptions) (*runtime.Poller[InvoicesClientDownloadDocumentsByBillingSubscriptionResponse], error)`
+        - New function `*InvoicesClient.BeginDownloadSummaryByBillingAccount(context.Context, string, string, *InvoicesClientBeginDownloadSummaryByBillingAccountOptions) (*runtime.Poller[InvoicesClientDownloadSummaryByBillingAccountResponse], error)`
+        - New function `*InvoicesClient.GetByBillingAccount(context.Context, string, string, *InvoicesClientGetByBillingAccountOptions) (InvoicesClientGetByBillingAccountResponse, error)`
+        - New function `*InvoicesClient.GetByBillingSubscription(context.Context, string, *InvoicesClientGetByBillingSubscriptionOptions) (InvoicesClientGetByBillingSubscriptionResponse, error)`
+        - New function `NewPartnerTransfersClient(azcore.TokenCredential, *arm.ClientOptions) (*PartnerTransfersClient, error)`
+        - New function `*PartnerTransfersClient.Cancel(context.Context, string, string, string, string, *PartnerTransfersClientCancelOptions) (PartnerTransfersClientCancelResponse, error)`
+        - New function `*PartnerTransfersClient.Get(context.Context, string, string, string, string, *PartnerTransfersClientGetOptions) (PartnerTransfersClientGetResponse, error)`
+        - New function `*PartnerTransfersClient.Initiate(context.Context, string, string, string, string, PartnerInitiateTransferRequest, *PartnerTransfersClientInitiateOptions) (PartnerTransfersClientInitiateResponse, error)`
+        - New function `*PartnerTransfersClient.NewListPager(string, string, string, *PartnerTransfersClientListOptions) *runtime.Pager[PartnerTransfersClientListResponse]`
+        - New function `NewPaymentMethodsClient(azcore.TokenCredential, *arm.ClientOptions) (*PaymentMethodsClient, error)`
+        - New function `*PaymentMethodsClient.BeginDeleteAtBillingProfile(context.Context, string, string, string, *PaymentMethodsClientBeginDeleteAtBillingProfileOptions) (*runtime.Poller[PaymentMethodsClientDeleteAtBillingProfileResponse], error)`
+        - New function `*PaymentMethodsClient.DeleteByUser(context.Context, string, *PaymentMethodsClientDeleteByUserOptions) (PaymentMethodsClientDeleteByUserResponse, error)`
+        - New function `*PaymentMethodsClient.GetByBillingAccount(context.Context, string, string, *PaymentMethodsClientGetByBillingAccountOptions) (PaymentMethodsClientGetByBillingAccountResponse, error)`
+        - New function `*PaymentMethodsClient.GetByBillingProfile(context.Context, string, string, string, *PaymentMethodsClientGetByBillingProfileOptions) (PaymentMethodsClientGetByBillingProfileResponse, error)`
+        - New function `*PaymentMethodsClient.GetByUser(context.Context, string, *PaymentMethodsClientGetByUserOptions) (PaymentMethodsClientGetByUserResponse, error)`
+        - New function `*PaymentMethodsClient.NewListByBillingAccountPager(string, *PaymentMethodsClientListByBillingAccountOptions) *runtime.Pager[PaymentMethodsClientListByBillingAccountResponse]`
+        - New function `*PaymentMethodsClient.NewListByBillingProfilePager(string, string, *PaymentMethodsClientListByBillingProfileOptions) *runtime.Pager[PaymentMethodsClientListByBillingProfileResponse]`
+        - New function `*PaymentMethodsClient.NewListByUserPager(*PaymentMethodsClientListByUserOptions) *runtime.Pager[PaymentMethodsClientListByUserResponse]`
+        - New function `*PermissionsClient.CheckAccessByBillingAccount(context.Context, string, CheckAccessRequest, *PermissionsClientCheckAccessByBillingAccountOptions) (PermissionsClientCheckAccessByBillingAccountResponse, error)`
+        - New function `*PermissionsClient.CheckAccessByBillingProfile(context.Context, string, string, CheckAccessRequest, *PermissionsClientCheckAccessByBillingProfileOptions) (PermissionsClientCheckAccessByBillingProfileResponse, error)`
+        - New function `*PermissionsClient.CheckAccessByCustomer(context.Context, string, string, string, CheckAccessRequest, *PermissionsClientCheckAccessByCustomerOptions) (PermissionsClientCheckAccessByCustomerResponse, error)`
+        - New function `*PermissionsClient.CheckAccessByDepartment(context.Context, string, string, CheckAccessRequest, *PermissionsClientCheckAccessByDepartmentOptions) (PermissionsClientCheckAccessByDepartmentResponse, error)`
+        - New function `*PermissionsClient.CheckAccessByEnrollmentAccount(context.Context, string, string, CheckAccessRequest, *PermissionsClientCheckAccessByEnrollmentAccountOptions) (PermissionsClientCheckAccessByEnrollmentAccountResponse, error)`
+        - New function `*PermissionsClient.CheckAccessByInvoiceSection(context.Context, string, string, string, CheckAccessRequest, *PermissionsClientCheckAccessByInvoiceSectionOptions) (PermissionsClientCheckAccessByInvoiceSectionResponse, error)`
+        - New function `*PermissionsClient.NewListByCustomerAtBillingAccountPager(string, string, *PermissionsClientListByCustomerAtBillingAccountOptions) *runtime.Pager[PermissionsClientListByCustomerAtBillingAccountResponse]`
+        - New function `*PermissionsClient.NewListByDepartmentPager(string, string, *PermissionsClientListByDepartmentOptions) *runtime.Pager[PermissionsClientListByDepartmentResponse]`
+        - New function `*PermissionsClient.NewListByEnrollmentAccountPager(string, string, *PermissionsClientListByEnrollmentAccountOptions) *runtime.Pager[PermissionsClientListByEnrollmentAccountResponse]`
+        - New function `*PermissionsClient.NewListByInvoiceSectionPager(string, string, string, *PermissionsClientListByInvoiceSectionOptions) *runtime.Pager[PermissionsClientListByInvoiceSectionResponse]`
+        - New function `*PoliciesClient.BeginCreateOrUpdateByBillingAccount(context.Context, string, AccountPolicy, *PoliciesClientBeginCreateOrUpdateByBillingAccountOptions) (*runtime.Poller[PoliciesClientCreateOrUpdateByBillingAccountResponse], error)`
+        - New function `*PoliciesClient.BeginCreateOrUpdateByBillingProfile(context.Context, string, string, ProfilePolicy, *PoliciesClientBeginCreateOrUpdateByBillingProfileOptions) (*runtime.Poller[PoliciesClientCreateOrUpdateByBillingProfileResponse], error)`
+        - New function `*PoliciesClient.BeginCreateOrUpdateByCustomer(context.Context, string, string, string, CustomerPolicy, *PoliciesClientBeginCreateOrUpdateByCustomerOptions) (*runtime.Poller[PoliciesClientCreateOrUpdateByCustomerResponse], error)`
+        - New function `*PoliciesClient.BeginCreateOrUpdateByCustomerAtBillingAccount(context.Context, string, string, CustomerPolicy, *PoliciesClientBeginCreateOrUpdateByCustomerAtBillingAccountOptions) (*runtime.Poller[PoliciesClientCreateOrUpdateByCustomerAtBillingAccountResponse], error)`
+        - New function `*PoliciesClient.GetByBillingAccount(context.Context, string, *PoliciesClientGetByBillingAccountOptions) (PoliciesClientGetByBillingAccountResponse, error)`
+        - New function `*PoliciesClient.GetByCustomerAtBillingAccount(context.Context, string, string, *PoliciesClientGetByCustomerAtBillingAccountOptions) (PoliciesClientGetByCustomerAtBillingAccountResponse, error)`
+        - New function `*PoliciesClient.GetBySubscription(context.Context, *PoliciesClientGetBySubscriptionOptions) (PoliciesClientGetBySubscriptionResponse, error)`
+        - New function `PossibleCancellationValues() []Cancellation`
+        - New function `*ProductsClient.ValidateMoveEligibility(context.Context, string, string, MoveProductRequest, *ProductsClientValidateMoveEligibilityOptions) (ProductsClientValidateMoveEligibilityResponse, error)`
+        - New function `*ProfilesClient.BeginDelete(context.Context, string, string, *ProfilesClientBeginDeleteOptions) (*runtime.Poller[ProfilesClientDeleteResponse], error)`
+        - New function `*ProfilesClient.ValidateDeleteEligibility(context.Context, string, string, *ProfilesClientValidateDeleteEligibilityOptions) (ProfilesClientValidateDeleteEligibilityResponse, error)`
+        - New function `NewRecipientTransfersClient(azcore.TokenCredential, *arm.ClientOptions) (*RecipientTransfersClient, error)`
+        - New function `*RecipientTransfersClient.Accept(context.Context, string, AcceptTransferRequest, *RecipientTransfersClientAcceptOptions) (RecipientTransfersClientAcceptResponse, error)`
+        - New function `*RecipientTransfersClient.Decline(context.Context, string, *RecipientTransfersClientDeclineOptions) (RecipientTransfersClientDeclineResponse, error)`
+        - New function `*RecipientTransfersClient.Get(context.Context, string, *RecipientTransfersClientGetOptions) (RecipientTransfersClientGetResponse, error)`
+        - New function `*RecipientTransfersClient.NewListPager(*RecipientTransfersClientListOptions) *runtime.Pager[RecipientTransfersClientListResponse]`
+        - New function `*RecipientTransfersClient.Validate(context.Context, string, AcceptTransferRequest, *RecipientTransfersClientValidateOptions) (RecipientTransfersClientValidateResponse, error)`
+        - New function `NewRequestsClient(azcore.TokenCredential, *arm.ClientOptions) (*RequestsClient, error)`
+        - New function `*RequestsClient.BeginCreateOrUpdate(context.Context, string, Request, *RequestsClientBeginCreateOrUpdateOptions) (*runtime.Poller[RequestsClientCreateOrUpdateResponse], error)`
+        - New function `*RequestsClient.Get(context.Context, string, *RequestsClientGetOptions) (RequestsClientGetResponse, error)`
+        - New function `*RequestsClient.NewListByBillingAccountPager(string, *RequestsClientListByBillingAccountOptions) *runtime.Pager[RequestsClientListByBillingAccountResponse]`
+        - New function `*RequestsClient.NewListByBillingProfilePager(string, string, *RequestsClientListByBillingProfileOptions) *runtime.Pager[RequestsClientListByBillingProfileResponse]`
+        - New function `*RequestsClient.NewListByCustomerPager(string, string, string, *RequestsClientListByCustomerOptions) *runtime.Pager[RequestsClientListByCustomerResponse]`
+        - New function `*RequestsClient.NewListByInvoiceSectionPager(string, string, string, *RequestsClientListByInvoiceSectionOptions) *runtime.Pager[RequestsClientListByInvoiceSectionResponse]`
+        - New function `*RequestsClient.NewListByUserPager(*RequestsClientListByUserOptions) *runtime.Pager[RequestsClientListByUserResponse]`
+        - New function `NewReservationOrdersClient(azcore.TokenCredential, *arm.ClientOptions) (*ReservationOrdersClient, error)`
+        - New function `*ReservationOrdersClient.GetByBillingAccount(context.Context, string, string, *ReservationOrdersClientGetByBillingAccountOptions) (ReservationOrdersClientGetByBillingAccountResponse, error)`
+        - New function `*ReservationOrdersClient.NewListByBillingAccountPager(string, *ReservationOrdersClientListByBillingAccountOptions) *runtime.Pager[ReservationOrdersClientListByBillingAccountResponse]`
+        - New function `*ReservationsClient.GetByReservationOrder(context.Context, string, string, string, *ReservationsClientGetByReservationOrderOptions) (ReservationsClientGetByReservationOrderResponse, error)`
+        - New function `*ReservationsClient.NewListByReservationOrderPager(string, string, *ReservationsClientListByReservationOrderOptions) *runtime.Pager[ReservationsClientListByReservationOrderResponse]`
+        - New function `*ReservationsClient.BeginUpdateByBillingAccount(context.Context, string, string, string, Patch, *ReservationsClientBeginUpdateByBillingAccountOptions) (*runtime.Poller[ReservationsClientUpdateByBillingAccountResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginCreateByBillingAccount(context.Context, string, RoleAssignmentProperties, *RoleAssignmentsClientBeginCreateByBillingAccountOptions) (*runtime.Poller[RoleAssignmentsClientCreateByBillingAccountResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginCreateByBillingProfile(context.Context, string, string, RoleAssignmentProperties, *RoleAssignmentsClientBeginCreateByBillingProfileOptions) (*runtime.Poller[RoleAssignmentsClientCreateByBillingProfileResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginCreateByCustomer(context.Context, string, string, string, RoleAssignmentProperties, *RoleAssignmentsClientBeginCreateByCustomerOptions) (*runtime.Poller[RoleAssignmentsClientCreateByCustomerResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginCreateByInvoiceSection(context.Context, string, string, string, RoleAssignmentProperties, *RoleAssignmentsClientBeginCreateByInvoiceSectionOptions) (*runtime.Poller[RoleAssignmentsClientCreateByInvoiceSectionResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginCreateOrUpdateByBillingAccount(context.Context, string, string, RoleAssignment, *RoleAssignmentsClientBeginCreateOrUpdateByBillingAccountOptions) (*runtime.Poller[RoleAssignmentsClientCreateOrUpdateByBillingAccountResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginCreateOrUpdateByDepartment(context.Context, string, string, string, RoleAssignment, *RoleAssignmentsClientBeginCreateOrUpdateByDepartmentOptions) (*runtime.Poller[RoleAssignmentsClientCreateOrUpdateByDepartmentResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginCreateOrUpdateByEnrollmentAccount(context.Context, string, string, string, RoleAssignment, *RoleAssignmentsClientBeginCreateOrUpdateByEnrollmentAccountOptions) (*runtime.Poller[RoleAssignmentsClientCreateOrUpdateByEnrollmentAccountResponse], error)`
+        - New function `*RoleAssignmentsClient.DeleteByCustomer(context.Context, string, string, string, string, *RoleAssignmentsClientDeleteByCustomerOptions) (RoleAssignmentsClientDeleteByCustomerResponse, error)`
+        - New function `*RoleAssignmentsClient.DeleteByDepartment(context.Context, string, string, string, *RoleAssignmentsClientDeleteByDepartmentOptions) (RoleAssignmentsClientDeleteByDepartmentResponse, error)`
+        - New function `*RoleAssignmentsClient.DeleteByEnrollmentAccount(context.Context, string, string, string, *RoleAssignmentsClientDeleteByEnrollmentAccountOptions) (RoleAssignmentsClientDeleteByEnrollmentAccountResponse, error)`
+        - New function `*RoleAssignmentsClient.GetByCustomer(context.Context, string, string, string, string, *RoleAssignmentsClientGetByCustomerOptions) (RoleAssignmentsClientGetByCustomerResponse, error)`
+        - New function `*RoleAssignmentsClient.GetByDepartment(context.Context, string, string, string, *RoleAssignmentsClientGetByDepartmentOptions) (RoleAssignmentsClientGetByDepartmentResponse, error)`
+        - New function `*RoleAssignmentsClient.GetByEnrollmentAccount(context.Context, string, string, string, *RoleAssignmentsClientGetByEnrollmentAccountOptions) (RoleAssignmentsClientGetByEnrollmentAccountResponse, error)`
+        - New function `*RoleAssignmentsClient.NewListByCustomerPager(string, string, string, *RoleAssignmentsClientListByCustomerOptions) *runtime.Pager[RoleAssignmentsClientListByCustomerResponse]`
+        - New function `*RoleAssignmentsClient.NewListByDepartmentPager(string, string, *RoleAssignmentsClientListByDepartmentOptions) *runtime.Pager[RoleAssignmentsClientListByDepartmentResponse]`
+        - New function `*RoleAssignmentsClient.NewListByEnrollmentAccountPager(string, string, *RoleAssignmentsClientListByEnrollmentAccountOptions) *runtime.Pager[RoleAssignmentsClientListByEnrollmentAccountResponse]`
+        - New function `*RoleAssignmentsClient.BeginResolveByBillingAccount(context.Context, string, *RoleAssignmentsClientBeginResolveByBillingAccountOptions) (*runtime.Poller[RoleAssignmentsClientResolveByBillingAccountResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginResolveByBillingProfile(context.Context, string, string, *RoleAssignmentsClientBeginResolveByBillingProfileOptions) (*runtime.Poller[RoleAssignmentsClientResolveByBillingProfileResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginResolveByCustomer(context.Context, string, string, string, *RoleAssignmentsClientBeginResolveByCustomerOptions) (*runtime.Poller[RoleAssignmentsClientResolveByCustomerResponse], error)`
+        - New function `*RoleAssignmentsClient.BeginResolveByInvoiceSection(context.Context, string, string, string, *RoleAssignmentsClientBeginResolveByInvoiceSectionOptions) (*runtime.Poller[RoleAssignmentsClientResolveByInvoiceSectionResponse], error)`
+        - New function `NewRoleDefinitionClient(azcore.TokenCredential, *arm.ClientOptions) (*RoleDefinitionClient, error)`
+        - New function `*RoleDefinitionClient.GetByBillingAccount(context.Context, string, string, *RoleDefinitionClientGetByBillingAccountOptions) (RoleDefinitionClientGetByBillingAccountResponse, error)`
+        - New function `*RoleDefinitionClient.GetByBillingProfile(context.Context, string, string, string, *RoleDefinitionClientGetByBillingProfileOptions) (RoleDefinitionClientGetByBillingProfileResponse, error)`
+        - New function `*RoleDefinitionClient.GetByCustomer(context.Context, string, string, string, string, *RoleDefinitionClientGetByCustomerOptions) (RoleDefinitionClientGetByCustomerResponse, error)`
+        - New function `*RoleDefinitionClient.GetByDepartment(context.Context, string, string, string, *RoleDefinitionClientGetByDepartmentOptions) (RoleDefinitionClientGetByDepartmentResponse, error)`
+        - New function `*RoleDefinitionClient.GetByEnrollmentAccount(context.Context, string, string, string, *RoleDefinitionClientGetByEnrollmentAccountOptions) (RoleDefinitionClientGetByEnrollmentAccountResponse, error)`
+        - New function `*RoleDefinitionClient.GetByInvoiceSection(context.Context, string, string, string, string, *RoleDefinitionClientGetByInvoiceSectionOptions) (RoleDefinitionClientGetByInvoiceSectionResponse, error)`
+        - New function `*RoleDefinitionClient.NewListByBillingAccountPager(string, *RoleDefinitionClientListByBillingAccountOptions) *runtime.Pager[RoleDefinitionClientListByBillingAccountResponse]`
+        - New function `*RoleDefinitionClient.NewListByBillingProfilePager(string, string, *RoleDefinitionClientListByBillingProfileOptions) *runtime.Pager[RoleDefinitionClientListByBillingProfileResponse]`
+        - New function `*RoleDefinitionClient.NewListByCustomerPager(string, string, string, *RoleDefinitionClientListByCustomerOptions) *runtime.Pager[RoleDefinitionClientListByCustomerResponse]`
+        - New function `*RoleDefinitionClient.NewListByDepartmentPager(string, string, *RoleDefinitionClientListByDepartmentOptions) *runtime.Pager[RoleDefinitionClientListByDepartmentResponse]`
+        - New function `*RoleDefinitionClient.NewListByEnrollmentAccountPager(string, string, *RoleDefinitionClientListByEnrollmentAccountOptions) *runtime.Pager[RoleDefinitionClientListByEnrollmentAccountResponse]`
+        - New function `*RoleDefinitionClient.NewListByInvoiceSectionPager(string, string, string, *RoleDefinitionClientListByInvoiceSectionOptions) *runtime.Pager[RoleDefinitionClientListByInvoiceSectionResponse]`
+        - New function `NewSavingsPlanOrdersClient(azcore.TokenCredential, *arm.ClientOptions) (*SavingsPlanOrdersClient, error)`
+        - New function `*SavingsPlanOrdersClient.GetByBillingAccount(context.Context, string, string, *SavingsPlanOrdersClientGetByBillingAccountOptions) (SavingsPlanOrdersClientGetByBillingAccountResponse, error)`
+        - New function `*SavingsPlanOrdersClient.NewListByBillingAccountPager(string, *SavingsPlanOrdersClientListByBillingAccountOptions) *runtime.Pager[SavingsPlanOrdersClientListByBillingAccountResponse]`
+        - New function `NewSavingsPlansClient(azcore.TokenCredential, *arm.ClientOptions) (*SavingsPlansClient, error)`
+        - New function `*SavingsPlansClient.GetByBillingAccount(context.Context, string, string, string, *SavingsPlansClientGetByBillingAccountOptions) (SavingsPlansClientGetByBillingAccountResponse, error)`
+        - New function `*SavingsPlansClient.NewListByBillingAccountPager(string, *SavingsPlansClientListByBillingAccountOptions) *runtime.Pager[SavingsPlansClientListByBillingAccountResponse]`
+        - New function `*SavingsPlansClient.NewListBySavingsPlanOrderPager(string, string, *SavingsPlansClientListBySavingsPlanOrderOptions) *runtime.Pager[SavingsPlansClientListBySavingsPlanOrderResponse]`
+        - New function `*SavingsPlansClient.BeginUpdateByBillingAccount(context.Context, string, string, string, SavingsPlanUpdateRequest, *SavingsPlansClientBeginUpdateByBillingAccountOptions) (*runtime.Poller[SavingsPlansClientUpdateByBillingAccountResponse], error)`
+        - New function `*SavingsPlansClient.ValidateUpdateByBillingAccount(context.Context, string, string, string, SavingsPlanUpdateValidateRequest, *SavingsPlansClientValidateUpdateByBillingAccountOptions) (SavingsPlansClientValidateUpdateByBillingAccountResponse, error)`
+        - New function `NewSubscriptionsAliasesClient(azcore.TokenCredential, *arm.ClientOptions) (*SubscriptionsAliasesClient, error)`
+        - New function `*SubscriptionsAliasesClient.BeginCreateOrUpdate(context.Context, string, string, SubscriptionAlias, *SubscriptionsAliasesClientBeginCreateOrUpdateOptions) (*runtime.Poller[SubscriptionsAliasesClientCreateOrUpdateResponse], error)`
+        - New function `*SubscriptionsAliasesClient.Get(context.Context, string, string, *SubscriptionsAliasesClientGetOptions) (SubscriptionsAliasesClientGetResponse, error)`
+        - New function `*SubscriptionsAliasesClient.NewListByBillingAccountPager(string, *SubscriptionsAliasesClientListByBillingAccountOptions) *runtime.Pager[SubscriptionsAliasesClientListByBillingAccountResponse]`
+        - New function `*SubscriptionsClient.BeginCancel(context.Context, string, string, CancelSubscriptionRequest, *SubscriptionsClientBeginCancelOptions) (*runtime.Poller[SubscriptionsClientCancelResponse], error)`
+        - New function `*SubscriptionsClient.BeginDelete(context.Context, string, string, *SubscriptionsClientBeginDeleteOptions) (*runtime.Poller[SubscriptionsClientDeleteResponse], error)`
+        - New function `*SubscriptionsClient.GetByBillingProfile(context.Context, string, string, string, *SubscriptionsClientGetByBillingProfileOptions) (SubscriptionsClientGetByBillingProfileResponse, error)`
+        - New function `*SubscriptionsClient.NewListByCustomerAtBillingAccountPager(string, string, *SubscriptionsClientListByCustomerAtBillingAccountOptions) *runtime.Pager[SubscriptionsClientListByCustomerAtBillingAccountResponse]`
+        - New function `*SubscriptionsClient.NewListByEnrollmentAccountPager(string, string, *SubscriptionsClientListByEnrollmentAccountOptions) *runtime.Pager[SubscriptionsClientListByEnrollmentAccountResponse]`
+        - New function `*SubscriptionsClient.BeginMerge(context.Context, string, string, SubscriptionMergeRequest, *SubscriptionsClientBeginMergeOptions) (*runtime.Poller[SubscriptionsClientMergeResponse], error)`
+        - New function `*SubscriptionsClient.BeginSplit(context.Context, string, string, SubscriptionSplitRequest, *SubscriptionsClientBeginSplitOptions) (*runtime.Poller[SubscriptionsClientSplitResponse], error)`
+        - New function `*SubscriptionsClient.ValidateMoveEligibility(context.Context, string, string, MoveBillingSubscriptionRequest, *SubscriptionsClientValidateMoveEligibilityOptions) (SubscriptionsClientValidateMoveEligibilityResponse, error)`
+        - New function `*TransactionsClient.GetTransactionSummaryByInvoice(context.Context, string, string, *TransactionsClientGetTransactionSummaryByInvoiceOptions) (TransactionsClientGetTransactionSummaryByInvoiceResponse, error)`
+        - New function `*TransactionsClient.NewListByBillingProfilePager(string, string, time.Time, time.Time, TransactionType, *TransactionsClientListByBillingProfileOptions) *runtime.Pager[TransactionsClientListByBillingProfileResponse]`
+        - New function `*TransactionsClient.NewListByCustomerPager(string, string, string, time.Time, time.Time, TransactionType, *TransactionsClientListByCustomerOptions) *runtime.Pager[TransactionsClientListByCustomerResponse]`
+        - New function `*TransactionsClient.NewListByInvoiceSectionPager(string, string, string, time.Time, time.Time, TransactionType, *TransactionsClientListByInvoiceSectionOptions) *runtime.Pager[TransactionsClientListByInvoiceSectionResponse]`
+        - New function `*TransactionsClient.BeginTransactionsDownloadByInvoice(context.Context, string, string, *TransactionsClientBeginTransactionsDownloadByInvoiceOptions) (*runtime.Poller[TransactionsClientTransactionsDownloadByInvoiceResponse], error)`
+        - New function `NewTransfersClient(azcore.TokenCredential, *arm.ClientOptions) (*TransfersClient, error)`
+        - New function `*TransfersClient.Cancel(context.Context, string, string, string, string, *TransfersClientCancelOptions) (TransfersClientCancelResponse, error)`
+        - New function `*TransfersClient.Get(context.Context, string, string, string, string, *TransfersClientGetOptions) (TransfersClientGetResponse, error)`
+        - New function `*TransfersClient.Initiate(context.Context, string, string, string, string, InitiateTransferRequest, *TransfersClientInitiateOptions) (TransfersClientInitiateResponse, error)`
+        - New function `*TransfersClient.NewListPager(string, string, string, *TransfersClientListOptions) *runtime.Pager[TransfersClientListResponse]`
+        - New struct `AcceptTransferProperties`
+        - New struct `AcceptTransferRequest`
+        - New struct `AccountPatch`
+        - New struct `AccountPolicy`
+        - New struct `AccountPolicyProperties`
+        - New struct `AccountPolicyPropertiesEnterpriseAgreementPolicies`
+        - New struct `AccountPropertiesEnrollmentDetails`
+        - New struct `AccountPropertiesRegistrationNumber`
+        - New struct `AccountPropertiesSoldTo`
+        - New struct `AddressValidationResponse`
+        - New struct `AppliedScopeProperties`
+        - New struct `AssociatedTenant`
+        - New struct `AssociatedTenantListResult`
+        - New struct `AssociatedTenantProperties`
+        - New struct `AvailableBalancePropertiesAmount`
+        - New struct `AvailableBalancePropertiesTotalPaymentsOnAccount`
+        - New struct `Beneficiary`
+        - New struct `CancelSubscriptionRequest`
+        - New struct `CheckAccessRequest`
+        - New struct `CheckAccessResponse`
+        - New struct `Commitment`
+        - New struct `DeleteBillingProfileEligibilityDetail`
+        - New struct `DeleteBillingProfileEligibilityResult`
+        - New struct `DeleteInvoiceSectionEligibilityDetail`
+        - New struct `DeleteInvoiceSectionEligibilityResult`
+        - New struct `DepartmentListResult`
+        - New struct `DetailedTransferStatus`
+        - New struct `DocumentDownloadRequest`
+        - New struct `DocumentDownloadResult`
+        - New struct `EnrollmentAccountSubscriptionDetails`
+        - New struct `EnrollmentDetails`
+        - New struct `EnrollmentDetailsIndirectRelationshipInfo`
+        - New struct `EnterpriseAgreementPolicies`
+        - New struct `ErrorAdditionalInfo`
+        - New struct `ErrorDetail`
+        - New struct `ExtendedStatusDefinitionProperties`
+        - New struct `ExtendedStatusInfo`
+        - New struct `ExtendedStatusInfoProperties`
+        - New struct `ExternalReference`
+        - New struct `FailedPayment`
+        - New struct `InitiateTransferProperties`
+        - New struct `InitiateTransferRequest`
+        - New struct `InvoiceDocument`
+        - New struct `InvoicePropertiesAmountDue`
+        - New struct `InvoicePropertiesAzurePrepaymentApplied`
+        - New struct `InvoicePropertiesBilledAmount`
+        - New struct `InvoicePropertiesCreditAmount`
+        - New struct `InvoicePropertiesFreeAzureCreditApplied`
+        - New struct `InvoicePropertiesRebillDetails`
+        - New struct `InvoicePropertiesRefundDetails`
+        - New struct `InvoicePropertiesSubTotal`
+        - New struct `InvoicePropertiesTaxAmount`
+        - New struct `InvoicePropertiesTotalAmount`
+        - New struct `InvoiceSectionWithCreateSubPermissionListResult`
+        - New struct `MoveBillingSubscriptionEligibilityResult`
+        - New struct `MoveBillingSubscriptionErrorDetails`
+        - New struct `MoveBillingSubscriptionRequest`
+        - New struct `MoveProductEligibilityResult`
+        - New struct `MoveProductEligibilityResultErrorDetails`
+        - New struct `MoveProductErrorDetails`
+        - New struct `MoveProductRequest`
+        - New struct `NextBillingCycleDetails`
+        - New struct `Participant`
+        - New struct `PartnerInitiateTransferProperties`
+        - New struct `PartnerInitiateTransferRequest`
+        - New struct `PartnerTransferDetails`
+        - New struct `PartnerTransferDetailsListResult`
+        - New struct `PartnerTransferProperties`
+        - New struct `Patch`
+        - New struct `PatchProperties`
+        - New struct `PatchPropertiesRenewProperties`
+        - New struct `Payment`
+        - New struct `PaymentAmount`
+        - New struct `PaymentDetail`
+        - New struct `PaymentMethod`
+        - New struct `PaymentMethodLink`
+        - New struct `PaymentMethodLinkProperties`
+        - New struct `PaymentMethodLinksListResult`
+        - New struct `PaymentMethodLogo`
+        - New struct `PaymentMethodProperties`
+        - New struct `PaymentMethodsListResult`
+        - New struct `PaymentOnAccount`
+        - New struct `PaymentOnAccountAmount`
+        - New struct `PaymentTerm`
+        - New struct `PaymentTermsEligibilityDetail`
+        - New struct `PaymentTermsEligibilityResult`
+        - New struct `Permission`
+        - New struct `PermissionListResult`
+        - New struct `PlanInformation`
+        - New struct `PolicySummary`
+        - New struct `Price`
+        - New struct `Principal`
+        - New struct `ProductDetails`
+        - New struct `ProductListResult`
+        - New struct `ProductPatch`
+        - New struct `ProductPropertiesLastCharge`
+        - New struct `ProductPropertiesReseller`
+        - New struct `ProfilePolicy`
+        - New struct `ProfilePolicyProperties`
+        - New struct `ProfilePolicyPropertiesEnterpriseAgreementPolicies`
+        - New struct `ProfilePropertiesBillTo`
+        - New struct `ProfilePropertiesCurrentPaymentTerm`
+        - New struct `ProfilePropertiesIndirectRelationshipInfo`
+        - New struct `ProfilePropertiesShipTo`
+        - New struct `ProfilePropertiesSoldTo`
+        - New struct `PropertyPropertiesEnrollmentDetails`
+        - New struct `PropertyPropertiesSubscriptionServiceUsageAddress`
+        - New struct `ProxyResource`
+        - New struct `ProxyResourceWithTags`
+        - New struct `PurchaseRequest`
+        - New struct `PurchaseRequestProperties`
+        - New struct `RecipientTransferDetails`
+        - New struct `RecipientTransferDetailsListResult`
+        - New struct `RecipientTransferProperties`
+        - New struct `RefundDetailsSummary`
+        - New struct `RefundDetailsSummaryAmountRefunded`
+        - New struct `RefundDetailsSummaryAmountRequested`
+        - New struct `RefundTransactionDetails`
+        - New struct `RefundTransactionDetailsAmountRefunded`
+        - New struct `RefundTransactionDetailsAmountRequested`
+        - New struct `RegistrationNumber`
+        - New struct `RenewProperties`
+        - New struct `RenewPropertiesResponse`
+        - New struct `RenewalTermDetails`
+        - New struct `Request`
+        - New struct `RequestListResult`
+        - New struct `RequestProperties`
+        - New struct `RequestPropertiesCreatedBy`
+        - New struct `RequestPropertiesLastUpdatedBy`
+        - New struct `RequestPropertiesReviewedBy`
+        - New struct `ReservationAppliedScopeProperties`
+        - New struct `ReservationExtendedStatusInfo`
+        - New struct `ReservationList`
+        - New struct `ReservationMergeProperties`
+        - New struct `ReservationOrder`
+        - New struct `ReservationOrderBillingPlanInformation`
+        - New struct `ReservationOrderList`
+        - New struct `ReservationOrderProperty`
+        - New struct `ReservationPaymentDetail`
+        - New struct `ReservationPurchaseRequest`
+        - New struct `ReservationPurchaseRequestProperties`
+        - New struct `ReservationPurchaseRequestPropertiesReservedResourceProperties`
+        - New struct `ReservationSplitProperties`
+        - New struct `ReservationSwapProperties`
+        - New struct `SKU`
+        - New struct `SKUName`
+        - New struct `SavingsPlanModel`
+        - New struct `SavingsPlanModelList`
+        - New struct `SavingsPlanModelListResult`
+        - New struct `SavingsPlanModelProperties`
+        - New struct `SavingsPlanOrderModel`
+        - New struct `SavingsPlanOrderModelList`
+        - New struct `SavingsPlanOrderModelProperties`
+        - New struct `SavingsPlanSummaryCount`
+        - New struct `SavingsPlanUpdateRequest`
+        - New struct `SavingsPlanUpdateRequestProperties`
+        - New struct `SavingsPlanUpdateValidateRequest`
+        - New struct `SavingsPlanValidResponseProperty`
+        - New struct `SavingsPlanValidateResponse`
+        - New struct `SpendingLimitDetails`
+        - New struct `SubscriptionAlias`
+        - New struct `SubscriptionAliasListResult`
+        - New struct `SubscriptionAliasProperties`
+        - New struct `SubscriptionEnrollmentDetails`
+        - New struct `SubscriptionListResult`
+        - New struct `SubscriptionMergeRequest`
+        - New struct `SubscriptionPatch`
+        - New struct `SubscriptionPolicy`
+        - New struct `SubscriptionPolicyProperties`
+        - New struct `SubscriptionSplitRequest`
+        - New struct `SubscriptionStatusDetails`
+        - New struct `SystemData`
+        - New struct `SystemOverrides`
+        - New struct `TaxIdentifier`
+        - New struct `TransactionPropertiesAzureCreditApplied`
+        - New struct `TransactionPropertiesConsumptionCommitmentDecremented`
+        - New struct `TransactionPropertiesEffectivePrice`
+        - New struct `TransactionPropertiesMarketPrice`
+        - New struct `TransactionPropertiesRefundTransactionDetails`
+        - New struct `TransactionPropertiesSubTotal`
+        - New struct `TransactionPropertiesTax`
+        - New struct `TransactionPropertiesTransactionAmount`
+        - New struct `TransactionSummary`
+        - New struct `TransferDetails`
+        - New struct `TransferDetailsListResult`
+        - New struct `TransferError`
+        - New struct `TransferItemQueryParameter`
+        - New struct `TransferProperties`
+        - New struct `TransitionDetails`
+        - New struct `Utilization`
+        - New struct `UtilizationAggregates`
+        - New struct `ValidateTransferListResponse`
+        - New struct `ValidateTransferResponse`
+        - New struct `ValidateTransferResponseProperties`
+        - New struct `ValidationResultProperties`
+        - New field `SystemData`, `Tags` in struct `Account`
+        - New field `AccountStatusReasonCode`, `AccountSubType`, `BillingRelationshipTypes`, `HasNoBillingProfiles`, `PrimaryBillingTenantID`, `ProvisioningState`, `Qualifications`, `RegistrationNumber`, `TaxIDs` in struct `AccountProperties`
+        - New field `Filter` in struct `AccountsClientListInvoiceSectionsByCreateSubscriptionPermissionOptions`
+        - New anonymous field `InvoiceSectionWithCreateSubPermissionListResult` in struct `AccountsClientListInvoiceSectionsByCreateSubscriptionPermissionResponse`
+        - New field `Filter`, `IncludeAll`, `IncludeAllWithoutBillingProfiles`, `IncludeDeleted`, `IncludePendingAgreement`, `IncludeResellee`, `LegalOwnerOID`, `LegalOwnerTID`, `Search`, `Skip`, `Top` in struct `AccountsClientListOptions`
+        - New anonymous field `AddressValidationResponse` in struct `AddressClientValidateResponse`
+        - New field `IsValidAddress` in struct `AddressDetails`
+        - New field `SystemData`, `Tags` in struct `Agreement`
+        - New field `DisplayName`, `LeadBillingAccountName` in struct `AgreementProperties`
+        - New field `SystemData`, `Tags` in struct `AvailableBalance`
+        - New field `PaymentsOnAccount`, `TotalPaymentsOnAccount` in struct `AvailableBalanceProperties`
+        - New field `ProductID` in struct `AzurePlan`
+        - New field `SystemData`, `Tags` in struct `Customer`
+        - New field `SystemData`, `Tags` in struct `CustomerPolicy`
+        - New field `Policies`, `ProvisioningState` in struct `CustomerPolicyProperties`
+        - New field `Status`, `SystemID`, `Tags` in struct `CustomerProperties`
+        - New field `Count`, `Expand`, `OrderBy`, `Skip`, `Top` in struct `CustomersClientListByBillingAccountOptions`
+        - New field `Count`, `Expand`, `OrderBy`, `Skip`, `Top` in struct `CustomersClientListByBillingProfileOptions`
+        - New field `SystemData`, `Tags` in struct `Department`
+        - New field `DisplayName`, `ID` in struct `DepartmentProperties`
+        - New field `SystemData`, `Tags` in struct `EnrollmentAccount`
+        - New field `AuthType`, `DepartmentDisplayName`, `DepartmentID`, `DisplayName`, `IsDevTestEnabled` in struct `EnrollmentAccountProperties`
+        - New anonymous field `EnrollmentAccount` in struct `EnrollmentAccountsClientGetResponse`
+        - New field `SystemData`, `Tags` in struct `Invoice`
+        - New field `FailedPayments`, `RefundDetails`, `SpecialTaxationType`, `SubscriptionDisplayName` in struct `InvoiceProperties`
+        - New field `SystemData`, `Tags` in struct `InvoiceSection`
+        - New field `ProvisioningState`, `ReasonCode` in struct `InvoiceSectionProperties`
+        - New field `Count`, `Filter`, `IncludeDeleted`, `OrderBy`, `Search`, `Skip`, `Top` in struct `InvoiceSectionsClientListByBillingProfileOptions`
+        - New field `Count`, `Filter`, `OrderBy`, `PeriodEndDate`, `PeriodStartDate`, `Search`, `Skip`, `Top` in struct `InvoicesClientListByBillingAccountOptions`
+        - New field `Count`, `Filter`, `OrderBy`, `PeriodEndDate`, `PeriodStartDate`, `Search`, `Skip`, `Top` in struct `InvoicesClientListByBillingProfileOptions`
+        - New field `Count`, `Filter`, `OrderBy`, `PeriodEndDate`, `PeriodStartDate`, `Search`, `Skip`, `Top` in struct `InvoicesClientListByBillingSubscriptionOptions`
+        - New anonymous field `PermissionListResult` in struct `PermissionsClientListByBillingAccountResponse`
+        - New anonymous field `PermissionListResult` in struct `PermissionsClientListByBillingProfileResponse`
+        - New anonymous field `PermissionListResult` in struct `PermissionsClientListByCustomerResponse`
+        - New anonymous field `ProfilePolicy` in struct `PoliciesClientGetByBillingProfileResponse`
+        - New field `SystemData`, `Tags` in struct `Product`
+        - New field `Count`, `OrderBy`, `Search`, `Skip`, `Top` in struct `ProductsClientListByBillingAccountOptions`
+        - New anonymous field `ProductListResult` in struct `ProductsClientListByBillingAccountResponse`
+        - New field `Count`, `OrderBy`, `Search`, `Skip`, `Top` in struct `ProductsClientListByBillingProfileOptions`
+        - New anonymous field `ProductListResult` in struct `ProductsClientListByBillingProfileResponse`
+        - New field `Count`, `Filter`, `OrderBy`, `Search`, `Skip`, `Top` in struct `ProductsClientListByCustomerOptions`
+        - New anonymous field `ProductListResult` in struct `ProductsClientListByCustomerResponse`
+        - New field `Count`, `OrderBy`, `Search`, `Skip`, `Top` in struct `ProductsClientListByInvoiceSectionOptions`
+        - New anonymous field `ProductListResult` in struct `ProductsClientListByInvoiceSectionResponse`
+        - New field `SystemData`, `Tags` in struct `Profile`
+        - New field `BillingAccountID`, `BillingProfileSystemID` in struct `ProfileInfo`
+        - New field `CurrentPaymentTerm`, `InvoiceRecipients`, `OtherPaymentTerms`, `ProvisioningState`, `ShipTo`, `SoldTo`, `SpendingLimitDetails` in struct `ProfileProperties`
+        - New field `Count`, `Filter`, `IncludeDeleted`, `OrderBy`, `Search`, `Skip`, `Top` in struct `ProfilesClientListByBillingAccountOptions`
+        - New field `SystemData`, `Tags` in struct `Property`
+        - New field `IncludeBillingCountry`, `IncludeTransitionStatus` in struct `PropertyClientGetOptions`
+        - New field `BillingAccountAgreementType`, `BillingAccountSoldToCountry`, `BillingAccountStatus`, `BillingAccountStatusReasonCode`, `BillingAccountSubType`, `BillingAccountType`, `BillingCurrency`, `BillingProfilePaymentMethodFamily`, `BillingProfilePaymentMethodType`, `BillingProfileSpendingLimitDetails`, `CustomerDisplayName`, `CustomerID`, `CustomerStatus`, `EnrollmentDetails`, `InvoiceSectionStatus`, `InvoiceSectionStatusReasonCode`, `IsTransitionedBillingAccount`, `SubscriptionBillingStatus`, `SubscriptionBillingStatusDetails`, `SubscriptionBillingType`, `SubscriptionServiceUsageAddress`, `SubscriptionWorkloadType` in struct `PropertyProperties`
+        - New field `Etag`, `SystemData`, `Tags` in struct `Reservation`
+        - New field `AppliedScopeProperties`, `Archived`, `BenefitStartTime`, `BillingPlan`, `BillingScopeID`, `Capabilities`, `ExpiryDateTime`, `ExtendedStatusInfo`, `InstanceFlexibility`, `LastUpdatedDateTime`, `MergeProperties`, `ProductCode`, `PurchaseDate`, `PurchaseDateTime`, `RenewDestination`, `RenewProperties`, `ReviewDateTime`, `SplitProperties`, `SwapProperties` in struct `ReservationProperty`
+        - New field `NoBenefitCount`, `ProcessingCount`, `WarningCount` in struct `ReservationSummary`
+        - New field `OrderBy`, `Skiptoken`, `Take` in struct `ReservationsClientListByBillingAccountOptions`
+        - New field `OrderBy`, `Skiptoken`, `Take` in struct `ReservationsClientListByBillingProfileOptions`
+        - New field `SystemData` in struct `Resource`
+        - New field `SystemData`, `Tags` in struct `RoleAssignment`
+        - New field `BillingAccountDisplayName`, `BillingAccountID`, `BillingProfileDisplayName`, `BillingProfileID`, `BillingRequestID`, `CreatedByPrincipalPuid`, `CustomerDisplayName`, `CustomerID`, `InvoiceSectionDisplayName`, `InvoiceSectionID`, `ModifiedByPrincipalID`, `ModifiedByPrincipalPuid`, `ModifiedByPrincipalTenantID`, `ModifiedByUserEmailAddress`, `ModifiedOn`, `PrincipalDisplayName`, `PrincipalPuid`, `PrincipalTenantName`, `PrincipalType`, `ProvisioningState` in struct `RoleAssignmentProperties`
+        - New field `Filter`, `Skip`, `Top` in struct `RoleAssignmentsClientListByBillingAccountOptions`
+        - New field `Filter`, `Skip`, `Top` in struct `RoleAssignmentsClientListByBillingProfileOptions`
+        - New field `Filter`, `Skip`, `Top` in struct `RoleAssignmentsClientListByInvoiceSectionOptions`
+        - New field `SystemData`, `Tags` in struct `RoleDefinition`
+        - New field `SystemData`, `Tags` in struct `Subscription`
+        - New field `AutoRenew`, `Beneficiary`, `BeneficiaryTenantID`, `BillingFrequency`, `BillingPolicies`, `BillingProfileName`, `ConsumptionCostCenter`, `CustomerName`, `EnrollmentAccountDisplayName`, `EnrollmentAccountID`, `EnrollmentAccountSubscriptionDetails`, `InvoiceSectionName`, `NextBillingCycleDetails`, `OfferID`, `OperationStatus`, `ProductCategory`, `ProductType`, `ProductTypeID`, `ProvisioningState`, `ProvisioningTenantID`, `PurchaseDate`, `Quantity`, `RenewalTermDetails`, `ResourceURI`, `Status`, `SuspensionReasonDetails`, `SystemOverrides`, `TermDuration`, `TermEndDate`, `TermStartDate` in struct `SubscriptionProperties`
+        - New field `Expand` in struct `SubscriptionsClientGetOptions`
+        - New field `Count`, `Expand`, `Filter`, `IncludeDeleted`, `IncludeFailed`, `IncludeTenantSubscriptions`, `OrderBy`, `Search`, `Skip`, `Top` in struct `SubscriptionsClientListByBillingAccountOptions`
+        - New anonymous field `SubscriptionListResult` in struct `SubscriptionsClientListByBillingAccountResponse`
+        - New field `Count`, `Expand`, `Filter`, `IncludeDeleted`, `OrderBy`, `Search`, `Skip`, `Top` in struct `SubscriptionsClientListByBillingProfileOptions`
+        - New anonymous field `SubscriptionListResult` in struct `SubscriptionsClientListByBillingProfileResponse`
+        - New field `Count`, `Expand`, `Filter`, `IncludeDeleted`, `OrderBy`, `Search`, `Skip`, `Top` in struct `SubscriptionsClientListByCustomerOptions`
+        - New anonymous field `SubscriptionListResult` in struct `SubscriptionsClientListByCustomerResponse`
+        - New field `Count`, `Expand`, `Filter`, `IncludeDeleted`, `OrderBy`, `Search`, `Skip`, `Top` in struct `SubscriptionsClientListByInvoiceSectionOptions`
+        - New anonymous field `SubscriptionListResult` in struct `SubscriptionsClientListByInvoiceSectionResponse`
+        - New field `SystemData`, `Tags` in struct `Transaction`
+        - New field `ConsumptionCommitmentDecremented`, `CreditType`, `IsThirdParty`, `PartNumber`, `ReasonCode`, `RefundTransactionDetails`, `SpecialTaxationType` in struct `TransactionProperties`
+        - New field `Count`, `Filter`, `OrderBy`, `Search`, `Skip`, `Top` in struct `TransactionsClientListByInvoiceOptions`

@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "api-version": "2019-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "type": "applications",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp",
+        "name": "myCluster",
+        "tags": {},
+        "etag": "W/\"636462502180261859\"",
+        "properties": {
+          "provisioningState": "Updating",
+          "typeName": "myAppType",
+          "typeVersion": "1.0",
+          "parameters": {
+            "param1": "value1"
+          },
+          "upgradePolicy": {
+            "upgradeMode": "Monitored",
+            "applicationHealthPolicy": {
+              "considerWarningAsError": true,
+              "maxPercentUnhealthyDeployedApplications": 0,
+              "defaultServiceTypeHealthPolicy": {
+                "maxPercentUnhealthyServices": 0,
+                "maxPercentUnhealthyPartitionsPerService": 0,
+                "maxPercentUnhealthyReplicasPerPartition": 0
+              }
+            },
+            "rollingUpgradeMonitoringPolicy": {
+              "failureAction": "Rollback",
+              "healthCheckRetryTimeout": "00:10:00",
+              "healthCheckWaitDuration": "00:02:00",
+              "healthCheckStableDuration": "00:05:00",
+              "upgradeDomainTimeout": "1.06:00:00",
+              "upgradeTimeout": "01:00:00"
+            },
+            "upgradeReplicaSetCheckTimeout": "01:00:00",
+            "forceRestart": false
+          },
+          "maximumNodes": 3,
+          "minimumNodes": 1,
+          "removeApplicationCapacity": false,
+          "metrics": [
+            {
+              "name": "metric1",
+              "reservationCapacity": 1,
+              "maximumCapacity": 3,
+              "totalApplicationCapacity": 5
+            }
+          ]
+        }
+      }
+    }
+  }
+}

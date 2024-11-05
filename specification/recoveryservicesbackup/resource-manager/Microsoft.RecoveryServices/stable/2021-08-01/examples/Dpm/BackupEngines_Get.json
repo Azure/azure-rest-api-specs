@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "vaultName": "testVault",
+    "backupEngineName": "testServer",
+    "api-version": "2021-08-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupEngines/testServer",
+        "name": "testServer",
+        "type": "Microsoft.RecoveryServices/vaults/backupEngines",
+        "properties": {
+          "backupEngineType": "DpmBackupEngine",
+          "dpmVersion": "5.1.348.0",
+          "isDpmUpgradeAvailable": false,
+          "azureBackupAgentVersion": "2.0.9532.0",
+          "isAzureBackupAgentUpgradeAvailable": false,
+          "registrationStatus": "Registered",
+          "backupEngineState": "Active",
+          "friendlyName": "testServer",
+          "extendedInfo": {
+            "protectedItemsCount": 35,
+            "protectedServersCount": 21,
+            "diskCount": 5,
+            "availableDiskSpace": 50,
+            "usedDiskSpace": 20
+          }
+        }
+      }
+    }
+  }
+}

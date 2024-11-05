@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/automationRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+            "type": "Microsoft.SecurityInsights/automationRules",
+            "properties": {
+              "displayName": "Suspicious user sign-in events",
+              "order": 1,
+              "triggeringLogic": {
+                "isEnabled": true,
+                "triggersOn": "Incidents",
+                "triggersWhen": "Created",
+                "conditions": [
+                  {
+                    "conditionType": "Property",
+                    "conditionProperties": {
+                      "propertyName": "IncidentRelatedAnalyticRuleIds",
+                      "operator": "Contains",
+                      "propertyValues": [
+                        "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/fab3d2d4-747f-46a7-8ef0-9c0be8112bf7",
+                        "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/8deb8303-e94d-46ff-96e0-5fd94b33df1a"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "actions": [
+                {
+                  "order": 1,
+                  "actionType": "AddIncidentTask",
+                  "actionConfiguration": {
+                    "title": "Reset user passwords",
+                    "description": "Reset passwords for compromised users."
+                  }
+                }
+              ],
+              "lastModifiedTimeUtc": "2019-01-01T13:00:30Z",
+              "createdTimeUtc": "2019-01-01T13:00:00Z",
+              "lastModifiedBy": {
+                "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+                "email": "john.doe@contoso.com",
+                "name": "john doe",
+                "userPrincipalName": "john@contoso.com"
+              },
+              "createdBy": {
+                "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+                "email": "john.doe@contoso.com",
+                "name": "john doe",
+                "userPrincipalName": "john@contoso.com"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

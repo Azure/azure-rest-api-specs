@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ConstosoRG",
+    "cloudServiceName": "{cs-name}",
+    "api-version": "2021-03-01",
+    "parameters": {
+      "tags": {
+        "Documentation": "RestAPI"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{cs-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "location": "eastus2euap",
+        "tags": {
+          "Documentation": "RestAPI"
+        },
+        "properties": {
+          "configuration": "{ServiceConfiguration}",
+          "upgradeMode": "Auto",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "tier": "Standard",
+                  "capacity": 2
+                }
+              },
+              {
+                "name": "ContosoBackend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "tier": "Standard",
+                  "capacity": 2
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": []
+          },
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "name": "contosolb",
+                "properties": {
+                  "frontendIPConfigurations": [
+                    {
+                      "name": "contosofe",
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "provisioningState": "Updating",
+          "uniqueId": "4ccb4323-4740-4545-bb81-780b27375947"
+        }
+      }
+    }
+  }
+}

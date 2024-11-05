@@ -1,0 +1,2555 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
+    "title": "Storage Cache Mgmt Client",
+    "version": "2021-05-01"
+  },
+  "host": "management.azure.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.StorageCache/operations": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of available Resource Provider operations.",
+            "schema": {
+              "$ref": "#/definitions/ApiOperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Resource Provider operations.",
+        "x-ms-examples": {
+          "StorageTargets_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/skus": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of SKU descriptors.",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Skus_List": {
+            "$ref": "./examples/Skus_List.json"
+          }
+        },
+        "tags": [
+          "SKUs"
+        ],
+        "description": "Get the list of StorageCache.Cache SKUs available to this subscription.",
+        "operationId": "Skus_List"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/usageModels": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of UsageModel descriptors.",
+            "schema": {
+              "$ref": "#/definitions/UsageModelsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "UsageModels_List": {
+            "$ref": "./examples/UsageModels_List.json"
+          }
+        },
+        "tags": [
+          "UsageModels"
+        ],
+        "description": "Get the list of Cache Usage Models available to this subscription.",
+        "operationId": "UsageModels_List"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the region used to look up the operation."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation id which uniquely identifies the asynchronous operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The asynchronous operation was returned.",
+            "schema": {
+              "$ref": "#/definitions/AscOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AscOperations_Get": {
+            "$ref": "./examples/AscOperations_Get.json"
+          }
+        },
+        "tags": [
+          "AscOperations"
+        ],
+        "description": "Gets the status of an asynchronous operation for the Azure HPC Cache",
+        "operationId": "AscOperations_Get"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/caches": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of Cache objects. Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/CachesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Caches_List": {
+            "$ref": "./examples/Caches_List.json"
+          }
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Returns all Caches the user has access to under a subscription.",
+        "operationId": "Caches_List"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of Cache objects. Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/CachesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_ListByResourceGroup": {
+            "$ref": "./examples/Caches_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Returns all Caches the user has access to under a resource group.",
+        "operationId": "Caches_ListByResourceGroup"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cache deleted."
+          },
+          "202": {
+            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor."
+          },
+          "204": {
+            "description": "Cache deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_Delete": {
+            "$ref": "./examples/Caches_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "Caches"
+        ],
+        "description": "Schedules a Cache for deletion.",
+        "operationId": "Caches_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Cache object corresponding to cacheName.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_Get": {
+            "$ref": "./examples/Caches_Get.json"
+          }
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Returns a Cache.",
+        "operationId": "Caches_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the new Cache. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "cache",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cache created or updated.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
+          "201": {
+            "description": "Cache creation or update has been initiated. Poll the Cache's provisioningState property to monitor creation/update progress.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
+          "202": {
+            "description": "Cache creation or update has been initiated. Poll the Cache's provisioningState property to monitor creation/update progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_CreateOrUpdate": {
+            "$ref": "./examples/Caches_CreateOrUpdate.json"
+          },
+          "Caches_CreateOrUpdate_ldap_only": {
+            "$ref": "./examples/Caches_CreateOrUpdate_ldap_only.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "Caches"
+        ],
+        "description": "Create or update a Cache.",
+        "operationId": "Caches_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the Cache. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "cache",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the Cache.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_Update": {
+            "$ref": "./examples/Caches_Update.json"
+          },
+          "Caches_Update_ldap_only": {
+            "$ref": "./examples/Caches_Update_ldap_only.json"
+          }
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Update a Cache instance.",
+        "operationId": "Caches_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/dnsRefresh": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cache has refreshed the storage target's DNS information."
+          },
+          "202": {
+            "description": "Cache has started refreshing storage target DNS information."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_DnsRefresh": {
+            "$ref": "./examples/StorageTargets_DnsRefresh.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Tells a storage target to refresh its DNS information.",
+        "operationId": "StorageTargets_DnsRefresh"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/debugInfo": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cache has started generating debug info."
+          },
+          "202": {
+            "description": "Cache has started generating debug info."
+          },
+          "204": {
+            "description": "Cache has started generating debug info."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_DebugInfo": {
+            "$ref": "./examples/Caches_DebugInfo.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Tells a Cache to write generate debug info for support to process.",
+        "operationId": "Caches_DebugInfo"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/flush": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All cached data has been flushed to the Storage Target(s)."
+          },
+          "202": {
+            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor."
+          },
+          "204": {
+            "description": "Cache flush already in progress or has completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_Flush": {
+            "$ref": "./examples/Caches_Flush.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Tells a Cache to write all dirty data to the Storage Target(s). During the flush, clients will see errors returned until the flush is complete.",
+        "operationId": "Caches_Flush"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/start": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cache is Active."
+          },
+          "202": {
+            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor."
+          },
+          "204": {
+            "description": "Restarted VMs associated with the cache."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_Start": {
+            "$ref": "./examples/Caches_Start.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Tells a Stopped state Cache to transition to Active state.",
+        "operationId": "Caches_Start"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stop": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cache is stopped."
+          },
+          "202": {
+            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor."
+          },
+          "204": {
+            "description": "Stopped VMs associated with the cache."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_Stop": {
+            "$ref": "./examples/Caches_Stop.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Tells an Active Cache to transition to Stopped state.",
+        "operationId": "Caches_Stop"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of Storage Targets defined by cacheName.",
+            "schema": {
+              "$ref": "#/definitions/StorageTargetsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_List": {
+            "$ref": "./examples/StorageTargets_ListByCache.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Returns a list of Storage Targets for the specified Cache.",
+        "operationId": "StorageTargets_ListByCache"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Boolean value requesting the force delete operation for a storage target. Force delete discards unwritten-data in the cache instead of flushing it to back-end storage."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Storage Target deleted."
+          },
+          "202": {
+            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor."
+          },
+          "204": {
+            "description": "Storage Target deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Delete": {
+            "$ref": "./examples/StorageTargets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Removes a Storage Target from a Cache. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual removal of the Storage Target may be delayed until the Cache is healthy again. Note that if the Cache has data to flush to the Storage Target, the data will be flushed before the Storage Target will be deleted.",
+        "operationId": "StorageTargets_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Storage Target object corresponding to storageTargetName.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Get": {
+            "$ref": "./examples/StorageTargets_Get.json"
+          }
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Returns a Storage Target from a Cache.",
+        "operationId": "StorageTargets_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          },
+          {
+            "description": "Object containing the definition of a Storage Target.",
+            "in": "body",
+            "name": "storagetarget",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Storage Target has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
+          "201": {
+            "description": "Storage Target creation or update has been initiated. Poll the Storage Target's provisioningState property to monitor creation/update progress.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
+          "202": {
+            "description": "Storage Target creation or update has been initiated. Poll the Storage Target's provisioningState property to monitor creation/update progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_CreateOrUpdate": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate.json"
+          },
+          "StorageTargets_CreateOrUpdate_NoJunctions": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate_NoJunctions.json"
+          },
+          "StorageTargets_CreateOrUpdate_BlobNfs": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate_BlobNfs.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.",
+        "operationId": "StorageTargets_CreateOrUpdate"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/flush": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All data has been flushed to the storage target."
+          },
+          "202": {
+            "description": "Cache has started flushing to the storage target. Poll the storage target's state field to monitor."
+          },
+          "204": {
+            "description": "Flush already in progress or has completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Flush": {
+            "$ref": "./examples/StorageTargets_Flush.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Tells the cache to write all dirty data to the Storage Target's backend storage. Client requests to this storage target's namespace will return errors until the flush operation completes.",
+        "operationId": "StorageTarget_Flush"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/suspend": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client access to the storage target has been suspended."
+          },
+          "202": {
+            "description": "Storage target suspend has started. Poll the storage target's state field to monitor."
+          },
+          "204": {
+            "description": "The storage target is already suspended or suspend is in progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Suspend": {
+            "$ref": "./examples/StorageTargets_Suspend.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Suspends client access to a storage target.",
+        "operationId": "StorageTarget_Suspend"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/resume": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client access to the storage target has been resumed."
+          },
+          "202": {
+            "description": "Storage target resume has started. Poll the storage target's state field to monitor."
+          },
+          "204": {
+            "description": "The storage target has already resumed or resume is in progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Resume": {
+            "$ref": "./examples/StorageTargets_Resume.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Resumes client access to a previously suspended storage target.",
+        "operationId": "StorageTarget_Resume"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cache firmware is up to date."
+          },
+          "202": {
+            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor."
+          },
+          "204": {
+            "description": "Cache firmware is up to date."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_UpgradeFirmware": {
+            "$ref": "./examples/Caches_UpgradeFirmware.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Upgrade a Cache's firmware if a new version is available. Otherwise, this operation has no effect.",
+        "operationId": "Caches_UpgradeFirmware"
+      }
+    }
+  },
+  "definitions": {
+    "ApiOperation": {
+      "description": "REST API operation description: see https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md#r3023-operationsapiimplementation",
+      "properties": {
+        "display": {
+          "type": "object",
+          "description": "The object that represents the operation.",
+          "properties": {
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Service provider: Microsoft.StorageCache",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Cache, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description of the operation",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "description": "Origin of the operation.",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Additional details about an operation.",
+          "type": "object",
+          "properties": {
+            "serviceSpecification": {
+              "type": "object",
+              "description": "Specification of the all the metrics provided for a resource type.",
+              "properties": {
+                "metricSpecifications": {
+                  "description": "Details about operations related to metrics.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/MetricSpecification"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "type": "object"
+    },
+    "ApiOperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Resource Provider operations supported by the Microsoft.StorageCache resource provider.",
+          "items": {
+            "$ref": "#/definitions/ApiOperation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "An error response.",
+      "properties": {
+        "error": {
+          "description": "The body of the error.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "type": "object"
+    },
+    "CloudErrorBody": {
+      "description": "An error response.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "type": "string"
+        },
+        "details": {
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error. For example, the name of the property in error.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AscOperation": {
+      "description": "The status of operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "type": "object",
+          "description": "The error detail of the operation if any.",
+          "$ref": "#/definitions/ErrorResponse"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Additional operation-specific properties",
+          "$ref": "#/definitions/AscOperationProperties"
+        }
+      }
+    },
+    "AscOperationProperties": {
+      "type": "object",
+      "description": "Additional operation-specific output.",
+      "properties": {
+        "output": {
+          "type": "object",
+          "description": "Additional operation-specific output.",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "Cache": {
+      "description": "A Cache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "id": {
+          "description": "Resource ID of the Cache.",
+          "readOnly": true,
+          "$ref": "#/definitions/URLString"
+        },
+        "location": {
+          "description": "Region name string.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "description": "Name of Cache.",
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceName"
+        },
+        "type": {
+          "description": "Type of the Cache; Microsoft.StorageCache/Cache",
+          "readOnly": true,
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/CacheIdentity",
+          "description": "The identity of the cache, if configured."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the Cache.",
+          "properties": {
+            "cacheSizeGB": {
+              "description": "The size of this Cache, in GB.",
+              "type": "integer",
+              "format": "int32",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "health": {
+              "description": "Health of the Cache.",
+              "readOnly": true,
+              "$ref": "#/definitions/CacheHealth"
+            },
+            "mountAddresses": {
+              "description": "Array of IP addresses that can be used by clients mounting this Cache.",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "provisioningState": {
+              "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Cancelled",
+                "Creating",
+                "Deleting",
+                "Updating"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningStateType",
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "subnet": {
+              "description": "Subnet used for the Cache.",
+              "$ref": "#/definitions/URLString",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "upgradeStatus": {
+              "description": "Upgrade status of the Cache.",
+              "$ref": "#/definitions/CacheUpgradeStatus",
+              "readOnly": true
+            },
+            "networkSettings": {
+              "$ref": "#/definitions/CacheNetworkSettings",
+              "description": "Specifies network settings of the cache."
+            },
+            "encryptionSettings": {
+              "$ref": "#/definitions/CacheEncryptionSettings",
+              "description": "Specifies encryption settings of the cache."
+            },
+            "securitySettings": {
+              "$ref": "#/definitions/CacheSecuritySettings",
+              "description": "Specifies security settings of the cache."
+            },
+            "directoryServicesSettings": {
+              "$ref": "#/definitions/CacheDirectorySettings",
+              "description": "Specifies Directory Services settings of the cache."
+            }
+          },
+          "type": "object"
+        },
+        "sku": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "SKU for the Cache.",
+          "properties": {
+            "name": {
+              "description": "SKU name for this Cache.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "type": "object"
+    },
+    "CacheIdentity": {
+      "type": "object",
+      "description": "Cache identity properties.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID for the system-assigned identity of the cache."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID associated with the cache."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the cache",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "CacheIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal ID of the user-assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client ID of the user-assigned identity."
+              }
+            }
+          }
+        }
+      }
+    },
+    "CacheNetworkSettings": {
+      "type": "object",
+      "description": "Cache network settings.",
+      "properties": {
+        "mtu": {
+          "description": "The IPv4 maximum transmission unit configured for the subnet.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 576,
+          "maximum": 1500,
+          "default": 1500
+        },
+        "utilityAddresses": {
+          "description": "Array of additional IP addresses used by this Cache.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dnsServers": {
+          "description": "DNS servers for the cache to use.  It will be set from the network configuration if no value is provided.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsSearchDomain": {
+          "description": "DNS search domain",
+          "type": "string"
+        },
+        "ntpServer": {
+          "description": "NTP server IP Address or FQDN for the cache to use. The default is time.windows.com.",
+          "type": "string",
+          "default": "time.windows.com"
+        }
+      }
+    },
+    "CacheEncryptionSettings": {
+      "type": "object",
+      "description": "Cache encryption settings.",
+      "properties": {
+        "keyEncryptionKey": {
+          "x-ms-secret": true,
+          "$ref": "#/definitions/KeyVaultKeyReference",
+          "description": "Specifies the location of the key encryption key in Key Vault."
+        },
+        "rotationToLatestKeyVersionEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether the service will automatically rotate to the newest version of the key in the Key Vault."
+        }
+      }
+    },
+    "CacheSecuritySettings": {
+      "type": "object",
+      "description": "Cache security settings.",
+      "properties": {
+        "accessPolicies": {
+          "description": "NFS access policies defined for this cache.",
+          "items": {
+            "$ref": "#/definitions/NfsAccessPolicy"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "CacheDirectorySettings": {
+      "description": "Cache Directory Services settings.",
+      "type": "object",
+      "properties": {
+        "activeDirectory": {
+          "$ref": "#/definitions/CacheActiveDirectorySettings",
+          "description": "Specifies settings for joining the HPC Cache to an Active Directory domain."
+        },
+        "usernameDownload": {
+          "$ref": "#/definitions/CacheUsernameDownloadSettings",
+          "description": "Specifies settings for Extended Groups. Extended Groups allows users to be members of more than 16 groups."
+        }
+      }
+    },
+    "CacheActiveDirectorySettings": {
+      "description": "Active Directory settings used to join a cache to a domain.",
+      "properties": {
+        "primaryDnsIpAddress": {
+          "description": "Primary DNS IP address used to resolve the Active Directory domain controller's fully qualified domain name.",
+          "type": "string"
+        },
+        "secondaryDnsIpAddress": {
+          "description": "Secondary DNS IP address used to resolve the Active Directory domain controller's fully qualified domain name.",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "The fully qualified domain name of the Active Directory domain controller.",
+          "type": "string"
+        },
+        "domainNetBiosName": {
+          "description": "The Active Directory domain's NetBIOS name.",
+          "type": "string"
+        },
+        "cacheNetBiosName": {
+          "description": "The NetBIOS name to assign to the HPC Cache when it joins the Active Directory domain as a server. Length must 1-15 characters from the class [-0-9a-zA-Z].",
+          "pattern": "^[-0-9a-zA-Z]{1,15}$",
+          "type": "string"
+        },
+        "domainJoined": {
+          "description": "True if the HPC Cache is joined to the Active Directory domain.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Yes",
+            "No",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "DomainJoinedType",
+            "modelAsString": true
+          }
+        },
+        "credentials": {
+          "type": "object",
+          "description": "Active Directory admin credentials used to join the HPC Cache to a domain.",
+          "properties": {
+            "username": {
+              "description": "Username of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
+              "type": "string"
+            },
+            "password": {
+              "description": "Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
+              "x-ms-secret": true,
+              "type": "string"
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "primaryDnsIpAddress",
+        "domainNetBiosName",
+        "domainName",
+        "cacheNetBiosName"
+      ]
+    },
+    "CacheUsernameDownloadSettings": {
+      "description": "Settings for Extended Groups username and group download.",
+      "type": "object",
+      "properties": {
+        "extendedGroups": {
+          "type": "boolean",
+          "description": "Whether or not Extended Groups is enabled."
+        },
+        "usernameSource": {
+          "description": "This setting determines how the cache gets username and group names for clients.",
+          "enum": [
+            "AD",
+            "LDAP",
+            "File",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "UsernameSource",
+            "modelAsString": true
+          },
+          "type": "string",
+          "default": "None"
+        },
+        "groupFileURI": {
+          "type": "string",
+          "description": "The URI of the file containing group information (in /etc/group file format). This field must be populated when 'usernameSource' is set to 'File'."
+        },
+        "userFileURI": {
+          "type": "string",
+          "description": "The URI of the file containing user information (in /etc/passwd file format). This field must be populated when 'usernameSource' is set to 'File'."
+        },
+        "ldapServer": {
+          "type": "string",
+          "description": "The fully qualified domain name or IP address of the LDAP server to use."
+        },
+        "ldapBaseDN": {
+          "type": "string",
+          "description": "The base distinguished name for the LDAP domain."
+        },
+        "encryptLdapConnection": {
+          "type": "boolean",
+          "description": "Whether or not the LDAP connection should be encrypted."
+        },
+        "requireValidCertificate": {
+          "type": "boolean",
+          "description": "Determines if the certificates must be validated by a certificate authority. When true, caCertificateURI must be provided."
+        },
+        "autoDownloadCertificate": {
+          "type": "boolean",
+          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' only if 'requireValidCertificate' is true."
+        },
+        "caCertificateURI": {
+          "type": "string",
+          "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to true."
+        },
+        "usernameDownloaded": {
+          "description": "Indicates whether or not the HPC Cache has performed the username download successfully.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Yes",
+            "No",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "UsernameDownloadedType",
+            "modelAsString": true
+          }
+        },
+        "credentials": {
+          "type": "object",
+          "description": "When present, these are the credentials for the secure LDAP connection.",
+          "properties": {
+            "bindDn": {
+              "type": "string",
+              "description": "The Bind Distinguished Name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
+            },
+            "bindPassword": {
+              "type": "string",
+              "x-ms-secret": true,
+              "description": "The Bind password to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
+            }
+          }
+        }
+      }
+    },
+    "NfsAccessPolicy": {
+      "type": "object",
+      "description": "A set of rules describing access policies applied to NFSv3 clients of the cache.",
+      "properties": {
+        "name": {
+          "description": "Name identifying this policy. Access Policy names are not case sensitive.",
+          "type": "string"
+        },
+        "accessRules": {
+          "description": "The set of rules describing client accesses allowed under this policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NfsAccessRule"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "accessRules"
+      ]
+    },
+    "NfsAccessRule": {
+      "type": "object",
+      "description": "Rule to place restrictions on portions of the cache namespace being presented to clients.",
+      "properties": {
+        "scope": {
+          "description": "Scope for this rule. The scope and filter determine which clients match the rule.",
+          "type": "string",
+          "enum": [
+            "default",
+            "network",
+            "host"
+          ],
+          "x-ms-enum": {
+            "name": "NfsAccessRuleScope",
+            "modelAsString": true
+          }
+        },
+        "filter": {
+          "description": "Filter applied to the scope for this rule. The filter's format depends on its scope. 'default' scope matches all clients and has no filter value. 'network' scope takes a filter in CIDR format (for example, 10.99.1.0/24). 'host' takes an IP address or fully qualified domain name as filter. If a client does not match any filter rule and there is no default rule, access is denied.",
+          "type": "string"
+        },
+        "access": {
+          "description": "Access allowed by this rule.",
+          "type": "string",
+          "enum": [
+            "no",
+            "ro",
+            "rw"
+          ],
+          "x-ms-enum": {
+            "name": "NfsAccessRuleAccess",
+            "modelAsString": true
+          }
+        },
+        "suid": {
+          "description": "Allow SUID semantics.",
+          "type": "boolean"
+        },
+        "submountAccess": {
+          "description": "For the default policy, allow access to subdirectories under the root export. If this is set to no, clients can only mount the path '/'. If set to yes, clients can mount a deeper path, like '/a/b'.",
+          "type": "boolean"
+        },
+        "rootSquash": {
+          "description": "Map root accesses to anonymousUID and anonymousGID.",
+          "type": "boolean"
+        },
+        "anonymousUID": {
+          "description": "UID value that replaces 0 when rootSquash is true. 65534 will be used if not provided.",
+          "type": "string"
+        },
+        "anonymousGID": {
+          "description": "GID value that replaces 0 when rootSquash is true. This will use the value of anonymousUID if not provided.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scope",
+        "access"
+      ]
+    },
+    "KeyVaultKeyReference": {
+      "type": "object",
+      "description": "Describes a reference to Key Vault Key.",
+      "properties": {
+        "keyUrl": {
+          "type": "string",
+          "description": "The URL referencing a key encryption key in Key Vault."
+        },
+        "sourceVault": {
+          "type": "object",
+          "description": "Describes a resource Id to source Key Vault.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Resource Id."
+            }
+          }
+        }
+      },
+      "required": [
+        "keyUrl",
+        "sourceVault"
+      ]
+    },
+    "CachesListResult": {
+      "description": "Result of the request to list Caches. It contains a list of Caches and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of Cache list results, if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Caches.",
+          "items": {
+            "$ref": "#/definitions/Cache"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "CacheHealth": {
+      "type": "object",
+      "description": "An indication of Cache health. Gives more information about health than just that related to provisioning.",
+      "properties": {
+        "state": {
+          "description": "List of Cache health states.",
+          "enum": [
+            "Unknown",
+            "Healthy",
+            "Degraded",
+            "Down",
+            "Transitioning",
+            "Stopping",
+            "Stopped",
+            "Upgrading",
+            "Flushing"
+          ],
+          "x-ms-enum": {
+            "name": "HealthStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "statusDescription": {
+          "description": "Describes explanation of state.",
+          "type": "string"
+        },
+        "conditions": {
+          "description": "Outstanding conditions that need to be investigated and resolved.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          }
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "Outstanding conditions that will need to be resolved.",
+      "properties": {
+        "timestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the condition was raised."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The issue requiring attention."
+        }
+      }
+    },
+    "CacheUpgradeStatus": {
+      "description": "Properties describing the software upgrade state of the Cache.",
+      "properties": {
+        "currentFirmwareVersion": {
+          "description": "Version string of the firmware currently installed on this Cache.",
+          "type": "string",
+          "readOnly": true
+        },
+        "firmwareUpdateStatus": {
+          "description": "True if there is a firmware update ready to install on this Cache. The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
+          "enum": [
+            "available",
+            "unavailable"
+          ],
+          "x-ms-enum": {
+            "name": "FirmwareStatusType",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "type": "string"
+        },
+        "firmwareUpdateDeadline": {
+          "description": "Time at which the pending firmware update will automatically be installed on the Cache.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastFirmwareUpdate": {
+          "description": "Time of the last successful firmware update.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "pendingFirmwareVersion": {
+          "description": "When firmwareUpdateAvailable is true, this field holds the version string for the update.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "UnknownProperties": {
+      "description": "Properties of an unknown type of Storage Target.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "StorageTarget": {
+      "type": "object",
+      "description": "Type of the Storage Target.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "StorageTarget properties",
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      }
+    },
+    "StorageTargetResource": {
+      "type": "object",
+      "description": "Resource used by a Cache.",
+      "properties": {
+        "name": {
+          "description": "Name of the Storage Target.",
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceName"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID of the Storage Target."
+        },
+        "type": {
+          "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
+          "readOnly": true,
+          "type": "string"
+        },
+        "location": {
+          "description": "Region name string.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "StorageTargetProperties": {
+      "type": "object",
+      "description": "Properties of the Storage Target.",
+      "required": [
+        "targetType"
+      ],
+      "properties": {
+        "junctions": {
+          "description": "List of Cache namespace junctions to target for namespace associations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceJunction"
+          }
+        },
+        "targetType": {
+          "description": "Type of the Storage Target.",
+          "enum": [
+            "nfs3",
+            "clfs",
+            "unknown",
+            "blobNfs"
+          ],
+          "x-ms-enum": {
+            "name": "StorageTargetType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "readOnly": true
+        },
+        "nfs3": {
+          "description": "Properties when targetType is nfs3.",
+          "$ref": "#/definitions/Nfs3Target"
+        },
+        "clfs": {
+          "description": "Properties when targetType is clfs.",
+          "$ref": "#/definitions/ClfsTarget"
+        },
+        "unknown": {
+          "description": "Properties when targetType is unknown.",
+          "$ref": "#/definitions/UnknownTarget"
+        },
+        "blobNfs": {
+          "description": "Properties when targetType is blobNfs.",
+          "$ref": "#/definitions/BlobNfsTarget"
+        }
+      }
+    },
+    "Nfs3Target": {
+      "type": "object",
+      "description": "Properties pertaining to the Nfs3Target",
+      "properties": {
+        "target": {
+          "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
+          "pattern": "^[-.,0-9a-zA-Z]+$",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "usageModel": {
+          "description": "Identifies the StorageCache usage model to be used for this storage target.",
+          "type": "string"
+        }
+      }
+    },
+    "ClfsTarget": {
+      "type": "object",
+      "description": "Properties pertaining to the ClfsTarget",
+      "properties": {
+        "target": {
+          "description": "Resource ID of storage container.",
+          "$ref": "#/definitions/URLString",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "UnknownTarget": {
+      "type": "object",
+      "description": "Properties pertaining to the UnknownTarget",
+      "properties": {
+        "attributes": {
+          "description": "Dictionary of string->string pairs containing information about the Storage Target.",
+          "$ref": "#/definitions/UnknownProperties"
+        }
+      }
+    },
+    "BlobNfsTarget": {
+      "type": "object",
+      "description": "Properties pertaining to the BlobNfsTarget.",
+      "properties": {
+        "target": {
+          "description": "Resource ID of the storage container.",
+          "$ref": "#/definitions/URLString",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "usageModel": {
+          "description": "Identifies the StorageCache usage model to be used for this storage target.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceName": {
+      "description": "Schema for the name of resources served by this provider. Note that objects will contain an odata @id annotation as appropriate. This will contain the complete URL of the object. These names are case-preserving, but not case sensitive.",
+      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+      "type": "string"
+    },
+    "ResourceSku": {
+      "description": "A resource SKU.",
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "capabilities": {
+          "description": "A list of capabilities of this SKU, such as throughput or ops/sec.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          },
+          "type": "array"
+        },
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of locations where the SKU is available. This is the supported and registered Azure Geo Regions (e.g., West US, East US, Southeast Asia, etc.)."
+        },
+        "locationInfo": {
+          "description": "The set of locations where the SKU is available.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "The name of this SKU.",
+          "type": "string"
+        },
+        "restrictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Restriction"
+          },
+          "description": "The restrictions preventing this SKU from being used. This is empty if there are no restrictions."
+        }
+      },
+      "type": "object"
+    },
+    "Restriction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of restrictions. In this version, the only possible value for this is location."
+        },
+        "values": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location, then this would be the different locations where the SKU is restricted."
+        },
+        "reasonCode": {
+          "type": "string",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ReasonCode",
+            "modelAsString": true
+          },
+          "description": "The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". \"QuotaId\" is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. \"NotAvailableForSubscription\" is related to capacity at the datacenter."
+        }
+      },
+      "description": "The restrictions preventing this SKU from being used."
+    },
+    "ResourceSkuCapabilities": {
+      "description": "A resource SKU capability.",
+      "properties": {
+        "name": {
+          "description": "Name of a capability, such as ops/sec.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Quantity, if the capability is measured by quantity.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceSkuLocationInfo": {
+      "description": "Resource SKU location information.",
+      "properties": {
+        "location": {
+          "description": "Location where this SKU is available.",
+          "type": "string"
+        },
+        "zones": {
+          "description": "Zones if any.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "ResourceSkusResult": {
+      "type": "object",
+      "description": "The response from the List Cache SKUs operation.",
+      "properties": {
+        "nextLink": {
+          "description": "The URI to fetch the next page of Cache SKUs.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of SKUs available for the subscription.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "NamespaceJunction": {
+      "description": "A namespace junction.",
+      "type": "object",
+      "properties": {
+        "namespacePath": {
+          "description": "Namespace path on a Cache for a Storage Target.",
+          "type": "string"
+        },
+        "targetPath": {
+          "description": "Path in Storage Target to which namespacePath points.",
+          "type": "string"
+        },
+        "nfsExport": {
+          "description": "NFS export where targetPath exists.",
+          "type": "string"
+        },
+        "nfsAccessPolicy": {
+          "description": "Name of the access policy applied to this junction.",
+          "type": "string",
+          "default": "default"
+        }
+      }
+    },
+    "StorageTargetsResult": {
+      "description": "A list of Storage Targets.",
+      "properties": {
+        "nextLink": {
+          "description": "The URI to fetch the next page of Storage Targets.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Storage Targets defined for the Cache.",
+          "items": {
+            "$ref": "#/definitions/StorageTarget"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "URLString": {
+      "description": "A fully qualified URL.",
+      "type": "string"
+    },
+    "UsageModel": {
+      "description": "A usage model.",
+      "properties": {
+        "display": {
+          "description": "Localized information describing this usage model.",
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "String to display for this usage model.",
+              "type": "string"
+            }
+          }
+        },
+        "modelName": {
+          "description": "Non-localized keyword name for this usage model.",
+          "type": "string"
+        },
+        "targetType": {
+          "description": "The type of Storage Target to which this model is applicable (only nfs3 as of this version).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UsageModelsResult": {
+      "description": "A list of Cache usage models.",
+      "properties": {
+        "nextLink": {
+          "description": "The URI to fetch the next page of Cache usage models.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of usage models available for the subscription.",
+          "items": {
+            "$ref": "#/definitions/UsageModel"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Details about operation related to metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit that the metric is measured in."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The type of metric aggregation."
+        },
+        "supportedAggregationTypes": {
+          "description": "Support metric aggregation type.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "NotSpecified",
+              "None",
+              "Average",
+              "Minimum",
+              "Maximum",
+              "Total",
+              "Count"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricAggregationType",
+              "modelAsString": true
+            }
+          }
+        },
+        "metricClass": {
+          "description": "Type of metrics.",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        }
+      }
+    },
+    "MetricDimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension"
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of the dimension."
+        },
+        "toBeExportedForShoebox": {
+          "description": "To be exported to shoe box.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    },
+    "ResourceGroupParameter": {
+      "description": "Target resource group.",
+      "in": "path",
+      "name": "resourceGroupName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CacheNameParameter": {
+      "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
+      "in": "path",
+      "name": "cacheName",
+      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "StorageTargetParameter": {
+      "description": "Name of Storage Target.",
+      "in": "path",
+      "name": "storageTargetName",
+      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

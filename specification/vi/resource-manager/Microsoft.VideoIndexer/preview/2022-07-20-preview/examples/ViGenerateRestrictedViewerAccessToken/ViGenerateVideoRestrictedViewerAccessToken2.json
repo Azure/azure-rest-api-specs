@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "accountName": "contosto-azurevideoindexer",
+    "resourceGroupName": "contosto-azurevideoindexer-rg",
+    "api-version": "2022-07-20-preview",
+    "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
+    "parameters": {
+      "scope": "Video",
+      "videoId": "07ec9e38d4"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "accessToken": "<jwt token of 1260 characters length>"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Account '/subscriptions/b04775c3-63fa-40f3-9430-139d2e5522d3/resourceGroups/contosto-azurevideoindexer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-azurevideoindexer' not found."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Playlist '07ec9e38d4' does not belong to account '74h866ca-f74f-7963-a926-4712f5bc0123'. Trace id: '9677927b-ae6b-496g-1df8-9ec3048b4bf2'"
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "GENERAL",
+          "message": "Trace id: '9677927b-ae6b-496g-1df8-9ec3048b4bf2'."
+        }
+      }
+    }
+  }
+}

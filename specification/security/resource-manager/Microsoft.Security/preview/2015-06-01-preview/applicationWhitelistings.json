@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "version": "2015-06-01-preview"
   },
   "host": "management.azure.com",
@@ -168,13 +168,56 @@
             }
           }
         }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an application control VM/server group": {
+            "$ref": "./examples/ApplicationWhitelistings/DeleteApplicationWhitelistings_example.json"
+          }
+        },
+        "tags": [
+          "applicationWhitelistings"
+        ],
+        "description": "Delete an application control VM/server group",
+        "operationId": "AdaptiveApplicationControls_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/GroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - The response indicates that the delete operation completed successfully"
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "No Content. The response indicates the resource is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
       }
     }
   },
   "definitions": {
     "AppWhitelistingGroups": {
       "type": "object",
-      "description": "Represents a list of VM/server groups and set of rules that are Recommended by Azure Security Center to be allowed",
+      "description": "Represents a list of VM/server groups and set of rules that are Recommended by Microsoft Defender for Cloud to be allowed",
       "properties": {
         "value": {
           "type": "array",
@@ -206,7 +249,7 @@
     },
     "AppWhitelistingGroupData": {
       "type": "object",
-      "description": "Represents a VM/server group and set of rules that are Recommended by Azure Security Center to be allowed",
+      "description": "Represents a VM/server group and set of rules that are Recommended by Microsoft Defender for Cloud to be allowed",
       "properties": {
         "enforcementMode": {
           "$ref": "#/definitions/EnforcementMode"
@@ -272,6 +315,15 @@
         "Audit",
         "Enforce",
         "None"
+      ]
+    },
+    "EnforcementSupport": {
+      "type": "string",
+      "description": "The VM/server supportability of Enforce feature",
+      "enum": [
+        "Supported",
+        "NotSupported",
+        "Unknown"
       ]
     },
     "ProtectionMode": {
@@ -395,6 +447,9 @@
         },
         "resourceId": {
           "$ref": "#/definitions/VmResourceId"
+        },
+        "enforcementSupport": {
+          "$ref": "#/definitions/EnforcementSupport"
         }
       }
     },
@@ -450,7 +505,7 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "The full path to whitelist",
+          "description": "The full path to the application to allow",
           "example": "C:\\Windows\\System32\\calc.exe"
         },
         "action": {

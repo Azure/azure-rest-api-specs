@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-06-30"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateSsisTaskInput": {
+      "type": "object",
+      "description": "Input for task that migrates SSIS packages from SQL Server to Azure SQL Database Managed Instance.",
+      "allOf": [
+        {
+          "$ref": "./TasksCommon.json#/definitions/SqlMigrationTaskInput"
+        }
+      ],
+      "properties": {
+        "ssisMigrationInfo": {
+          "$ref": "./TasksCommon.json#/definitions/SsisMigrationInfo",
+          "description": "SSIS package migration information."
+        }
+      },
+      "required": [
+        "ssisMigrationInfo"
+      ]
+    },
+    "MigrateSsisTaskOutput": {
+      "type": "object",
+      "description": "Output for task that migrates SSIS packages from SQL Server to Azure SQL Database Managed Instance.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateSsisTaskOutputMigrationLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "properties": {
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "TasksCommon.json#/definitions/MigrationStatus",
+          "description": "Current status of migration",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServerBrandVersion": {
+          "type": "string",
+          "description": "Source server brand version",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServerBrandVersion": {
+          "type": "string",
+          "description": "Target server brand version",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "stage": {
+          "description": "Stage of SSIS migration.",
+          "$ref": "./TasksCommon.json#/definitions/SsisMigrationStage",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSsisTaskOutput"
+        }
+      ]
+    },
+    "MigrateSsisTaskOutputProjectLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "SsisProjectLevelOutput",
+      "properties": {
+        "folderName": {
+          "type": "string",
+          "description": "Name of the folder",
+          "readOnly": true
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Name of the project",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "stage": {
+          "description": "Stage of SSIS migration.",
+          "$ref": "./TasksCommon.json#/definitions/SsisMigrationStage",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings",
+          "type": "array",
+          "items": {
+            "$ref": "Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSsisTaskOutput"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,511 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Operator Connect",
+    "version": "2022-06-01-preview"
+  },
+  "paths": {
+    "/operatorconnect/operators": {
+      "get": {
+        "tags": [
+          "Operator"
+        ],
+        "x-ms-examples": {
+          "GetOperators": {
+            "$ref": "./examples/GetOperators.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "description": "This endpoint gets a list of all operators",
+        "summary": "Get a list of all operators",
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "GetOperators",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "An optional parameter for how many entries to return, for pagination purposes. The default will return the entire list.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of API",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ListOfOperators"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Microsoft request id used for tracing requests."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operatorconnect/consents": {
+      "get": {
+        "tags": [
+          "Consent"
+        ],
+        "x-ms-examples": {
+          "GetConsents": {
+            "$ref": "./examples/GetConsents.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "description": "This endpoint gets a list of all Consents with Operators for the current user",
+        "summary": "Get a list of all Consents with Operators for current user",
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "GetConsents",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "An optional parameter for how many entries to return, for pagination purposes. The default will return the entire list.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of API",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ListOfConsents"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Microsoft request id used for tracing requests."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operatorconnect/consents/{operatorId}": {
+      "get": {
+        "tags": [
+          "Consent"
+        ],
+        "x-ms-examples": {
+          "GetConsents": {
+            "$ref": "./examples/GetConsent.json"
+          }
+        },
+        "description": "This endpoint gets single Consent with Operator for current user",
+        "summary": "Get single Consent with Operator for current user",
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "GetConsent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "operatorId",
+            "description": "The id of Operator with who user has signed consent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of API",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Microsoft request id used for tracing requests."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Consent"
+        ],
+        "x-ms-examples": {
+          "CreateConsent": {
+            "$ref": "./examples/CreateConsent.json"
+          },
+          "UpdateConsent": {
+            "$ref": "./examples/UpdateConsent.json"
+          }
+        },
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "CreateOrUpdateConsent",
+        "description": "This endpoint creates new or updates the existing Consent with Operator",
+        "summary": "Create new or update existing Consent with Operator for current user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of API",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operatorId",
+            "description": "The id of the Operator with who user wants to create new or update existing consent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request to send to create new or update existing consent with an operator",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateConsentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consent Updated",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Microsoft request id used for tracing requests."
+              }
+            }
+          },
+          "201": {
+            "description": "Consent Created",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Microsoft request id used for tracing requests."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ListOfOperators": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operator"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Represents the URL link to the next page of operators."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListOfConsents": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Consent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Represents the URL link to the next page of consents."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CreateOrUpdateConsentRequest": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ConsentStatus"
+        },
+        "consentedBy": {
+          "$ref": "#/definitions/Contact"
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Contact"
+        },
+        "consentedCountries": {
+          "type": "array",
+          "description": "List of 2 character codes of available countries in ISO 3166-1 format",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        },
+        "companyName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Operator": {
+      "type": "object",
+      "properties": {
+        "operatorId": {
+          "type": "string",
+          "description": "Unique GUID that represents the operator record"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Public facing brand name of the operator"
+        },
+        "landingPage": {
+          "type": "string",
+          "description": "URL of the Operator's Operator Connect offerings"
+        },
+        "logoUri": {
+          "type": "string",
+          "description": "URL of the Operator's logo"
+        },
+        "logoThumbnailUri": {
+          "type": "string",
+          "description": "URL of the Operator's thumbnail logo"
+        },
+        "acquiredNumbersCount": {
+          "type": "integer",
+          "description": "Count of phone numbers acquired from the operator"
+        },
+        "offerings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperatorOffering"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Consent": {
+      "type": "object",
+      "properties": {
+        "operatorId": {
+          "type": "string",
+          "description": "Unique GUID that represents the operator record"
+        },
+        "status": {
+          "$ref": "#/definitions/ConsentStatus"
+        },
+        "consentedBy": {
+          "$ref": "#/definitions/Contact",
+          "description": "Contact information of user that granted the consent to operator"
+        },
+        "consentedOn": {
+          "type": "string",
+          "description": "Date/Time when the consent was provided",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Contact",
+          "description": "Contact information of user that last modified the consent"
+        },
+        "lastModifiedOn": {
+          "type": "string",
+          "description": "Date/Time when the consent was last updated",
+          "format": "date-time"
+        },
+        "consentedCountries": {
+          "type": "array",
+          "description": "List of 2 character codes of available countries in ISO 3166-1 format",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          },
+          "description": "List of contact information"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "User company name"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "Full name of the contact"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the contact"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the contact with a leading + and country code"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ConsentStatus": {
+      "type": "string",
+      "description": "Status of the consent",
+      "enum": [
+        "Active",
+        "Suspended",
+        "Removed"
+      ]
+    },
+    "OperatorOffering": {
+      "type": "object",
+      "properties": {
+        "offerType": {
+          "type": "string",
+          "description": "The type of offer that operator is advertising"
+        },
+        "availableCountries": {
+          "type": "array",
+          "description": "List of 2 character codes of available countries in ISO 3166-1 format",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

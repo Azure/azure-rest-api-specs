@@ -255,7 +255,7 @@
           }
         },
         "userWhitelistedIpRanges": {
-          "description": "User added ip ranges to whitelist on ASE db",
+          "description": "User added list of IP Ranges allowed on ASE db",
           "type": "array",
           "items": {
             "type": "string"
@@ -1232,9 +1232,10 @@
         "type": {
           "description": "Type of managed service identity.",
           "enum": [
-            "None",
             "SystemAssigned",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1505,7 +1506,7 @@
               "type": "boolean"
             },
             "tagWhitelistJson": {
-              "description": "Gets or sets a JSON string containing a list of tags that are whitelisted for use by the push registration endpoint.",
+              "description": "Gets or sets a JSON string containing a list of tags that are in the allowed list for use by the push registration endpoint.",
               "type": "string"
             },
             "tagsRequiringAuth": {
@@ -1921,6 +1922,10 @@
           "description": "Version of Node.js.",
           "type": "string"
         },
+        "powerShellVersion": {
+          "description": "Version of PowerShell.",
+          "type": "string"
+        },
         "linuxFxVersion": {
           "description": "Linux App Framework and version",
           "type": "string"
@@ -1949,6 +1954,14 @@
         "httpLoggingEnabled": {
           "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
           "type": "boolean"
+        },
+        "acrUseManagedIdentityCreds": {
+          "description": "Flag to use Managed Identity Creds for ACR pull",
+          "type": "boolean"
+        },
+        "acrUserManagedIdentityID": {
+          "description": "If using user managed identity, the user managed identity ClientId",
+          "type": "string"
         },
         "logsDirectorySizeLimit": {
           "format": "int32",
@@ -2483,6 +2496,25 @@
         "timeInterval": {
           "description": "Time interval.",
           "type": "string"
+        }
+      }
+    },
+    "StringDictionary": {
+      "description": "String dictionary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Settings.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-flatten": true
         }
       }
     },

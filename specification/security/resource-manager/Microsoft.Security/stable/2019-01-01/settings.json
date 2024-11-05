@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "version": "2019-01-01"
   },
   "host": "management.azure.com",
@@ -44,7 +44,7 @@
         "tags": [
           "Settings"
         ],
-        "description": "Settings about different configurations in security center",
+        "description": "Settings about different configurations in Microsoft Defender for Cloud",
         "operationId": "Settings_List",
         "parameters": [
           {
@@ -83,7 +83,7 @@
         "tags": [
           "Settings"
         ],
-        "description": "Settings of different configurations in security center",
+        "description": "Settings of different configurations in Microsoft Defender for Cloud",
         "operationId": "Settings_Get",
         "parameters": [
           {
@@ -120,7 +120,7 @@
         "tags": [
           "Settings"
         ],
-        "description": "updating settings about different configurations in security center",
+        "description": "updating settings about different configurations in Microsoft Defender for Cloud",
         "operationId": "Settings_Update",
         "parameters": [
           {
@@ -172,21 +172,9 @@
         }
       }
     },
-    "Setting": {
-      "type": "object",
-      "description": "Represents a security setting in Azure Security Center.",
-      "discriminator": "kind",
-      "properties": {},
-      "allOf": [
-        {
-          "$ref": "#/definitions/SettingResource"
-        }
-      ]
-    },
-    "DataExportSetting": {
+    "DataExportSettings": {
       "type": "object",
       "description": "Represents a data export setting",
-      "x-ms-discriminator-value": "DataExportSetting",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -198,17 +186,18 @@
         {
           "$ref": "#/definitions/Setting"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "DataExportSettings"
     },
-    "SettingResource": {
+    "Setting": {
       "type": "object",
       "description": "The kind of the security setting",
       "properties": {
         "kind": {
           "type": "string",
-          "description": "the kind of the settings string (DataExportSetting)",
+          "description": "the kind of the settings string (DataExportSettings)",
           "enum": [
-            "DataExportSetting",
+            "DataExportSettings",
             "AlertSuppressionSetting"
           ],
           "x-ms-enum": {
@@ -216,7 +205,7 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "DataExportSetting"
+                "value": "DataExportSettings"
               },
               {
                 "value": "AlertSuppressionSetting"
@@ -225,6 +214,7 @@
           }
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],

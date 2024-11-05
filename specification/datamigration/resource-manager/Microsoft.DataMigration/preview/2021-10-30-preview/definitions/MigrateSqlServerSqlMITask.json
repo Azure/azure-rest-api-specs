@@ -1,0 +1,384 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-10-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateSqlServerSqlMITaskInput": {
+      "type": "object",
+      "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance.",
+      "allOf": [
+        {
+          "$ref": "./TasksCommon.json#/definitions/SqlMigrationTaskInput"
+        }
+      ],
+      "properties": {
+        "selectedDatabases": {
+          "description": "Databases to migrate",
+          "type": "array",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlMIDatabaseInput"
+          }
+        },
+        "startedOn": {
+          "type": "string",
+          "description": "Date and time relative to UTC when the migration was started on"
+        },
+        "selectedLogins": {
+          "type": "array",
+          "description": "Logins to migrate.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selectedAgentJobs": {
+          "description": "Agent Jobs to migrate.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "backupFileShare": {
+          "$ref": "./TasksCommon.json#/definitions/FileShare",
+          "description": "Backup file share information for all selected databases."
+        },
+        "backupBlobShare": {
+          "$ref": "./TasksCommon.json#/definitions/BlobShare",
+          "description": "SAS URI of Azure Storage Account Container to be used for storing backup files."
+        },
+        "backupMode": {
+          "$ref": "./TasksCommon.json#/definitions/BackupMode",
+          "description": "Backup Mode to specify whether to use existing backup or create new backup. If using existing backups, backup file paths are required to be provided in selectedDatabases."
+        },
+        "aadDomainName": {
+          "type": "string",
+          "description": "Azure Active Directory domain name in the format of 'contoso.com' for federated Azure AD or 'contoso.onmicrosoft.com' for managed domain, required if and only if Windows logins are selected"
+        }
+      },
+      "required": [
+        "selectedDatabases",
+        "backupBlobShare"
+      ]
+    },
+    "MigrateSqlServerSqlMITaskOutput": {
+      "type": "object",
+      "description": "Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateSqlServerSqlMITaskOutputMigrationLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "properties": {
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "TasksCommon.json#/definitions/MigrationStatus",
+          "description": "Current status of migration",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "agentJobs": {
+          "type": "string",
+          "description": "Selected agent jobs as a map from name to id",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "logins": {
+          "type": "string",
+          "description": "Selected logins as a map from name to id",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "serverRoleResults": {
+          "type": "string",
+          "description": "Map of server role migration results.",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Server role migration result object.",
+            "$ref": "TasksCommon.json#/definitions/StartMigrationScenarioServerRoleResult"
+          },
+          "readOnly": true
+        },
+        "orphanedUsersInfo": {
+          "type": "array",
+          "description": "List of orphaned users.",
+          "items": {
+            "$ref": "./Common.json#/definitions/OrphanedUserInfo"
+          },
+          "readOnly": true
+        },
+        "databases": {
+          "type": "string",
+          "description": "Selected databases as a map from database name to database id",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServerBrandVersion": {
+          "type": "string",
+          "description": "Source server brand version",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServerBrandVersion": {
+          "type": "string",
+          "description": "Target server brand version",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlMITaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMITaskOutputDatabaseLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database",
+          "readOnly": true
+        },
+        "sizeMB": {
+          "type": "number",
+          "format": "double",
+          "description": "Size of the database in megabytes",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "stage": {
+          "$ref": "./TasksCommon.json#/definitions/DatabaseMigrationStage",
+          "description": "Current stage of migration",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings",
+          "type": "array",
+          "items": {
+            "$ref": "Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlMITaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMITaskOutputAgentJobLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "AgentJobLevelOutput",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Agent Job name.",
+          "readOnly": true
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "The state of the original Agent Job.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration errors and warnings per job",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlMITaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMITaskOutputLoginLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "LoginLevelOutput",
+      "properties": {
+        "loginName": {
+          "type": "string",
+          "description": "Login name.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of login",
+          "readOnly": true
+        },
+        "stage": {
+          "$ref": "./TasksCommon.json#/definitions/LoginMigrationStage",
+          "description": "Current stage of login",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Login migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Login migration end time",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Login migration progress message",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Login migration errors and warnings per login",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlMITaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMITaskOutputError": {
+      "type": "object",
+      "x-ms-discriminator-value": "ErrorOutput",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the exception",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "Common.json#/definitions/ReportableException",
+          "description": "Migration error",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlMITaskOutput"
+        }
+      ]
+    }
+  }
+}

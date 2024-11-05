@@ -8,8 +8,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.WindowsESU
-  package-name: windowsesu
+  namespace: azure.mgmt.windowsesu
+  package-name: azure-mgmt-windowsesu
   package-version: 2019-09-16-preview
   clear-output-folder: true
 ```
@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/windowsesu
+  output-folder: $(python-sdks-folder)/windowsesu/azure-mgmt-windowsesu/azure/mgmt/windowsesu
 ```

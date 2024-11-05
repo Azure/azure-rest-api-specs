@@ -1,0 +1,443 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-10-01",
+    "title": "AuthorizationManagementClient"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "Permission": {
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed actions."
+        },
+        "notActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Denied actions."
+        },
+        "dataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed Data actions."
+        },
+        "notDataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Denied Data actions."
+        }
+      },
+      "type": "object",
+      "description": "Role definition permissions."
+    },
+    "Principal": {
+      "readOnly": true,
+      "type": "object",
+      "description": "The name of the entity last modified it",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the principal made changes"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the principal made changes"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of principal such as user , group etc"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of principal"
+        }
+      }
+    },
+    "RoleManagementPolicyRule": {
+      "description": "The role management policy rule.",
+      "type": "object",
+      "required": [
+        "ruleType"
+      ],
+      "discriminator": "ruleType",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the rule."
+        },
+        "ruleType": {
+          "description": "The type of rule",
+          "$ref": "#/definitions/RoleManagementPolicyRuleType"
+        },
+        "target": {
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
+          "description": "The target of the current rule."
+        }
+      }
+    },
+    "RoleManagementPolicyApprovalRule": {
+      "description": "The role management policy approval rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "setting": {
+          "$ref": "#/definitions/ApprovalSettings",
+          "description": "The approval setting"
+        }
+      }
+    },
+    "ApprovalSettings": {
+      "description": "The approval settings.",
+      "type": "object",
+      "properties": {
+        "isApprovalRequired": {
+          "type": "boolean",
+          "description": "Determines whether approval is required or not."
+        },
+        "isApprovalRequiredForExtension": {
+          "type": "boolean",
+          "description": "Determines whether approval is required for assignment extension."
+        },
+        "isRequestorJustificationRequired": {
+          "type": "boolean",
+          "description": "Determine whether requestor justification is required."
+        },
+        "approvalMode": {
+          "type": "string",
+          "description": "The type of rule",
+          "enum": [
+            "SingleStage",
+            "Serial",
+            "Parallel",
+            "NoApproval"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalMode",
+            "modelAsString": true
+          }
+        },
+        "approvalStages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApprovalStage"
+          },
+          "x-ms-identifiers": [],
+          "description": "The approval stages of the request."
+        }
+      }
+    },
+    "ApprovalStage": {
+      "description": "The approval stage.",
+      "type": "object",
+      "properties": {
+        "approvalStageTimeOutInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in days when approval request would be timed out"
+        },
+        "isApproverJustificationRequired": {
+          "type": "boolean",
+          "description": "Determines whether approver need to provide justification for his decision."
+        },
+        "escalationTimeInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes when the approval request would be escalated if the primary approver does not approve"
+        },
+        "primaryApprovers": {
+          "type": "array",
+          "description": "The primary approver of the request.",
+          "items": {
+            "$ref": "#/definitions/UserSet"
+          }
+        },
+        "isEscalationEnabled": {
+          "type": "boolean",
+          "description": "The value determine whether escalation feature is enabled."
+        },
+        "escalationApprovers": {
+          "type": "array",
+          "description": "The escalation approver of the request.",
+          "items": {
+            "$ref": "#/definitions/UserSet"
+          }
+        }
+      }
+    },
+    "UserSet": {
+      "description": "The detail of a user.",
+      "type": "object",
+      "properties": {
+        "userType": {
+          "type": "string",
+          "description": "The type of user.",
+          "enum": [
+            "User",
+            "Group"
+          ],
+          "x-ms-enum": {
+            "name": "UserType",
+            "modelAsString": true
+          }
+        },
+        "isBackup": {
+          "type": "boolean",
+          "description": "The value indicating whether the user is a backup fallback approver"
+        },
+        "id": {
+          "type": "string",
+          "description": "The object id of the user."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the user."
+        }
+      }
+    },
+    "RoleManagementPolicyAuthenticationContextRule": {
+      "description": "The role management policy authentication context rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "The value indicating if rule is enabled."
+        },
+        "claimValue": {
+          "type": "string",
+          "description": "The claim value."
+        }
+      }
+    },
+    "RoleManagementPolicyEnablementRule": {
+      "description": "The role management policy enablement rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "enabledRules": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The type of enablement rule",
+            "enum": [
+              "MultiFactorAuthentication",
+              "Justification",
+              "Ticketing"
+            ],
+            "x-ms-enum": {
+              "name": "EnablementRules",
+              "modelAsString": true
+            }
+          },
+          "description": "The list of enabled rules."
+        }
+      }
+    },
+    "RoleManagementPolicyExpirationRule": {
+      "description": "The role management policy expiration rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "isExpirationRequired": {
+          "type": "boolean",
+          "description": "The value indicating whether expiration is required."
+        },
+        "maximumDuration": {
+          "type": "string",
+          "description": "The maximum duration of expiration in timespan."
+        }
+      }
+    },
+    "RoleManagementPolicyNotificationRule": {
+      "description": "The role management policy notification rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "notificationType": {
+          "type": "string",
+          "description": "The type of notification.",
+          "enum": [
+            "Email"
+          ],
+          "x-ms-enum": {
+            "name": "NotificationDeliveryMechanism",
+            "modelAsString": true
+          }
+        },
+        "notificationLevel": {
+          "type": "string",
+          "description": "The notification level.",
+          "enum": [
+            "None",
+            "Critical",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "NotificationLevel",
+            "modelAsString": true
+          }
+        },
+        "recipientType": {
+          "type": "string",
+          "description": "The recipient type.",
+          "enum": [
+            "Requestor",
+            "Approver",
+            "Admin"
+          ],
+          "x-ms-enum": {
+            "name": "RecipientType",
+            "modelAsString": true
+          }
+        },
+        "notificationRecipients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of notification recipients."
+        },
+        "isDefaultRecipientsEnabled": {
+          "type": "boolean",
+          "description": "Determines if the notification will be sent to the recipient type specified in the policy rule."
+        }
+      }
+    },
+    "RoleManagementPolicyRuleTarget": {
+      "description": "The role management policy rule target.",
+      "type": "object",
+      "properties": {
+        "caller": {
+          "type": "string",
+          "description": "The caller of the setting."
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The type of operation."
+        },
+        "level": {
+          "type": "string",
+          "description": "The assignment level to which rule is applied."
+        },
+        "targetObjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of target objects."
+        },
+        "inheritableSettings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of inheritable settings."
+        },
+        "enforcedSettings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of enforced settings."
+        }
+      }
+    },
+    "RoleManagementPolicyRuleType": {
+      "type": "string",
+      "description": "The type of rule",
+      "enum": [
+        "RoleManagementPolicyApprovalRule",
+        "RoleManagementPolicyAuthenticationContextRule",
+        "RoleManagementPolicyEnablementRule",
+        "RoleManagementPolicyExpirationRule",
+        "RoleManagementPolicyNotificationRule"
+      ],
+      "x-ms-enum": {
+        "name": "RoleManagementPolicyRuleType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ResourceProviderNamespaceParameter": {
+      "name": "resourceProviderNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The namespace of the resource provider.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceTypeParameter": {
+      "name": "resourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource type name. For example the type name of a web app is 'sites' (from Microsoft.Web/sites).",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource name.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
