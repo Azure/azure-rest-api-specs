@@ -13,6 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
+@armResourceOperations
 interface DiagnosticOperationsOperations {
   /**
    * Gets status of a Diagnostic operation issued for Disk Inspection.
