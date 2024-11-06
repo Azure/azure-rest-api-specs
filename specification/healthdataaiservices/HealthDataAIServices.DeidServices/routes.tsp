@@ -66,7 +66,7 @@ model PaginationByTokenQueryParameters {
 
   @query
   @doc("Token to continue a previous query.")
-  @visibility("read")
+  //@visibility("read")
   continuationToken?: string;
 }
 

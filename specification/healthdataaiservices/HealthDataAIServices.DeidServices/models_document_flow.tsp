@@ -40,7 +40,7 @@ model DeidentificationJob {
   targetLocation: TargetStorageLocation;
 
   @doc("Customization parameters to override default service behaviors.")
-  customizations?: JobCustomizationConfig;
+  customizations?: JobCustomizationOptions;
 
   // Readonly Properties
 
@@ -161,7 +161,7 @@ model DocumentLocation {
 }
 
 @doc("Customizations options to override default service behaviors for job usage.")
-model JobCustomizationConfig {
+model JobCustomizationOptions {
   ...SharedCustomizationOptions;
 }
 

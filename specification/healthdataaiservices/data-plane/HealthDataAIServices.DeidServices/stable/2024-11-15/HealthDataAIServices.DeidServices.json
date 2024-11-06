@@ -121,6 +121,9 @@
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
+            "$ref": "#/parameters/PaginationByTokenQueryParameters.continuationToken"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -439,6 +442,9 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationByTokenQueryParameters.continuationToken"
           }
         ],
         "responses": {
@@ -580,7 +586,7 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
-    "CustomizationConfig": {
+    "CustomizationOptions": {
       "type": "object",
       "description": "Customizations options to override default service behaviors for synchronous usage.",
       "properties": {
@@ -638,7 +644,7 @@
           }
         },
         "customizations": {
-          "$ref": "#/definitions/CustomizationConfig",
+          "$ref": "#/definitions/CustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
         }
       },
@@ -698,7 +704,7 @@
           "description": "Target location to store output of operation."
         },
         "customizations": {
-          "$ref": "#/definitions/JobCustomizationConfig",
+          "$ref": "#/definitions/JobCustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
         },
         "status": {
@@ -811,7 +817,7 @@
         "etag"
       ]
     },
-    "JobCustomizationConfig": {
+    "JobCustomizationOptions": {
       "type": "object",
       "description": "Customizations options to override default service behaviors for job usage.",
       "properties": {
@@ -1305,6 +1311,14 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "PaginationByTokenQueryParameters.continuationToken": {
+      "name": "continuationToken",
+      "in": "query",
+      "description": "Token to continue a previous query.",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

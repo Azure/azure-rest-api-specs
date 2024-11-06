@@ -8,5 +8,9 @@ using Azure.ClientGenerator.Core;
 
 // @TypeSpec.Versioning.versioned(HealthDataAIServices.DeidServices.Versions)
 namespace HealthDataAIServices.DeidServices {
-  //@@clientName(DocumentDetails.name, "jobName");
+  // @override(HealthDataAIServices.DeidServices.listJobDocuments)
+  // op listJobDocumentsCustomization(
+  //   continuationToken?: None,
+  //   jobName: string
+  // ): Azure.Core.Page<HealthDataAIServices.DeidServices.DocumentDetails> | Azure.Core.Foundations.ErrorResponse;
 }
