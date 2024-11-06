@@ -21,10 +21,6 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** Enumeration of PII categories to be excluded in the response. */
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  /** Character to be used for redaction. Default in '*'. */
-  @removed(Versions.v2024_11_15_preview)
-  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
-
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
@@ -125,17 +121,6 @@ model Entity {
   /** Entity text as appears in the request. */
   text: string;
 
-  /** Entity category is the broad grouping of the entity detected. It is a legacy field and replaces the the Type and Tags field in the future. */
-  category: string;
-
-  /** Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned. */
-  @removed(Versions.v2024_11_15_preview)
-  offset: int32;
-
-  /** Entity subcategory */
-  @removed(Versions.v2024_11_15_preview)
-  subCategory?: string;
-
   /** Length for the entity text. Use of different 'stringIndexType' values can affect the length returned. */
   length: int32;
 
@@ -143,15 +128,12 @@ model Entity {
   confidenceScore: float64;
 
   /** Most granular type of the entity detected */
-  @added(Versions.v2024_11_15_preview)
   type: string;
 
   /** An identifier for mappping the extracted entity with the redacted data in the original document. */
-  @added(Versions.v2024_11_15_preview)
-  referenceId: string;
+  entityId: string;
 
   /** List of entity tags. Tags are to express some similarities/affinity between entities. */
-  @added(Versions.v2024_11_15_preview)
   tags: Array<EntityTag>;
 }
 
