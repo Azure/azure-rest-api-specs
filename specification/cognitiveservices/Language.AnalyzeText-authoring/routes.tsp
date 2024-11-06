@@ -571,6 +571,7 @@ interface TextAnalysisAuthoring {
    * Gets the detailed results of the evaluation for a trained model. This includes
    * the raw inference results for the data included in the evaluation process.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getModelEvaluationResults is languageOperations.ResourceList<
     TextAnalysisAuthoringDocumentEvaluationResult,
     ListQueryParametersTrait<StandardListQueryParameters &
@@ -746,6 +747,7 @@ interface TextAnalysisAuthoring {
   /**
    * Lists the supported languages.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getSupportedLanguages is languageOperations.ResourceList<
     TextAnalysisAuthoringSupportedLanguage,
     ListQueryParametersTrait<ProjectKindQueryParameter &
@@ -756,6 +758,7 @@ interface TextAnalysisAuthoring {
    * Lists the supported prebuilt entities that can be used while creating composed
    * entities.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @added(Versions.v2023_04_15_preview)
   getSupportedPrebuiltEntities is languageOperations.ResourceList<
     TextAnalysisAuthoringPrebuiltEntity,

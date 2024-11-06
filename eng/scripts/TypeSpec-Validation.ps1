@@ -1,16 +1,35 @@
 [CmdletBinding()]
 param (
   [switch]$CheckAll = $false,
+  [int]$Shard = 0,
+  [int]$TotalShards = 1,
   [switch]$GitClean = $false,
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD"
 )
 
-. $PSScriptRoot/Logging-Functions.ps1
-. $PSScriptRoot/Suppressions-Functions.ps1
+if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) { 
+  throw "Shard ($Shard) must be less than TotalShards ($TotalShards)"
+}
 
-$typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -BaseCommitish:$BaseCommitish -TargetCommitish:$TargetCommitish -CheckAll:$CheckAll
+. $PSScriptRoot/../common/scripts/logging.ps1
+. $PSScriptRoot/Suppressions-Functions.ps1
+. $PSScriptRoot/Array-Functions.ps1
+
+$typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
+  -BaseCommitish:$BaseCommitish `
+  -TargetCommitish:$TargetCommitish `
+  -CheckAll:$CheckAll
+
+if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) { 
+  $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
+}
+
+Write-Host "Checking $($typespecFolders.Count) TypeSpec folders:"
+foreach ($typespecFolder in $typespecFolders) {
+  Write-Host "  $typespecFolder"
+}
 
 $typespecFoldersWithFailures = @()
 if ($typespecFolders) {

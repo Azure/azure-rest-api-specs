@@ -362,7 +362,7 @@ model ModelList {
   maxCount: int32;
 
   @doc("Link to fetch more models.")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 

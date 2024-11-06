@@ -12,6 +12,8 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/operation-missing-api-version": "Not using standard versioning"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"

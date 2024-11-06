@@ -489,6 +489,7 @@ interface ConversationalAnalysisAuthoring {
    * Gets the detailed results of the evaluation for a trained model. This includes
    * the raw inference results for the data included in the evaluation process.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getModelEvaluationResults is languageOperations.ResourceList<
     ConversationalAnalysisAuthoringUtteranceEvaluationResult,
     ListQueryParametersTrait<StandardListQueryParameters &
@@ -699,6 +700,7 @@ interface ConversationalAnalysisAuthoring {
    * returns deployments belonging to projects owned by other resources.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @route("/authoring/analyze-conversations/projects/global/deployments/resources")
   @get
   @added(Versions.v2023_04_15_preview)
@@ -816,6 +818,7 @@ interface ConversationalAnalysisAuthoring {
    * Lists the support training config version for a given project type.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @route("/authoring/analyze-conversations/projects/global/training-config-versions")
   @get
   listTrainingConfigVersions is Azure.Core.Foundations.Operation<
@@ -849,4 +852,81 @@ interface ConversationalAnalysisAuthoring {
     {},
     ErrorResponse
   >;
+
+  /**
+   * Gets the details of an exported model.
+   */
+  @added(Versions.v2024_11_15_preview)
+  getExportedModel is languageOperations.ResourceRead<ConversationalAnalysisAuthoringExportedTrainedModel>;
+  /**
+   * Lists the exported models belonging to a project.
+   */
+  @added(Versions.v2024_11_15_preview)
+  listExportedModels is languageOperations.ResourceList<
+    ConversationalAnalysisAuthoringExportedTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+  /**
+   * Deletes an existing exported model.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
+  @delete
+  @pollingOperation(ConversationalAnalysisAuthoring.getExportedModelJobStatus)
+  @added(Versions.v2024_11_15_preview)
+  deleteExportedModel is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @path
+      projectName: string;
+
+      /**
+       * The exported model name.
+       */
+      @path
+      exportedModelName: string;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
+  >;
+  /**
+   * Creates a new exported model or replaces an existing one.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
+  @put
+  @pollingOperation(ConversationalAnalysisAuthoring.getExportedModelJobStatus)
+  @added(Versions.v2024_11_15_preview)
+  createOrUpdateExportedModel is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @path
+      projectName: string;
+
+      /**
+       * The exported model name.
+       */
+      @path
+      exportedModelName: string;
+
+      /**
+       * The exported model info.
+       */
+      @body
+      body: ConversationalAnalysisAuthoringExportedModelOptions;
+    },
+    AcceptedResponse,
+    {},
+    ErrorResponse
+  >;
+  /**
+   * Gets the status for an existing job to create or update an exported model.
+   */
+  @added(Versions.v2024_11_15_preview)
+  getExportedModelJobStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringExportedModelJobState>;
 }

@@ -151,11 +151,6 @@
     }
   },
   "definitions": {
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -273,7 +268,9 @@
           "type": "array",
           "description": "The id of the resource to be exported",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "resourceName": {
@@ -337,7 +334,9 @@
           "type": "array",
           "description": "A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "errors": {
@@ -364,7 +363,7 @@
           "description": "The operation status"
         },
         "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "The unique identifier for the operationStatus resource"
         },
         "name": {

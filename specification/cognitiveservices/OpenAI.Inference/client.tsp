@@ -7,7 +7,7 @@ using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @TypeSpec.Versioning.useDependency(
-  Azure.OpenAI.ServiceApiVersions.v2024_07_01_Preview
+  Azure.OpenAI.ServiceApiVersions.v2024_08_01_Preview
 )
 namespace Client;
 
@@ -42,6 +42,7 @@ interface OpenAIClient {
 
   getEmbeddings is Azure.OpenAI.getEmbeddings;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   listFiles is Azure.OpenAI.listFiles;
 
@@ -58,6 +59,7 @@ interface OpenAIClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   getFileContent is Azure.OpenAI.getFileContent;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   listBatches is Azure.OpenAI.listBatches;
 
@@ -69,6 +71,19 @@ interface OpenAIClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   cancelBatch is Azure.OpenAI.cancelBatch;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  createUpload is Azure.OpenAI.createUpload;
+
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  addUploadPart is Azure.OpenAI.addUploadPart;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  completeUpload is Azure.OpenAI.completeUpload;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  cancelUpload is Azure.OpenAI.cancelUpload;
 }
 
 @@clientName(Azure.OpenAI.GenerateSpeechFromTextBody.body,

@@ -20,6 +20,7 @@ interface Environments {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cannot model with standard operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   @doc("List a collection of environments across workspaces.")
   @route("/environments")
   listAll is Azure.Core.Foundations.Operation<

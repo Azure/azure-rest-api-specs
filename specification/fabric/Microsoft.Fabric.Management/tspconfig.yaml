@@ -31,7 +31,6 @@ options:
     experimentalExtensibleEnums: true
     enableOperationGroup: true
     package-dir: "arm-fabric"
-    emitter-output-dir: "{project-root}/{service-dir}/{package-dir}"
     flavor: "azure"
     packageDetails:
       name: "@azure/arm-fabric"
@@ -39,6 +38,17 @@ options:
     package-dir: "azure-resourcemanager-fabric"
     flavor: azure
     namespace: "com.azure.resourcemanager.fabric"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/fabric"
+    package-dir: "armfabric"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
