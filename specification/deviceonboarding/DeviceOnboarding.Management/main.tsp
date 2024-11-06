@@ -214,6 +214,10 @@ union OnboardingResourceType {
   @doc("Azure device registry device. Microsoft.DeviceRegistry/devices")
   DeviceRegistryDevice: "Microsoft.DeviceRegistry/devices",
 
+  @doc("Azure device registry namespace device. Microsoft.DeviceRegistry/namespaces/devices")
+  @added(Versions.v2024_12_01_preview)
+  DeviceRegistryNamespaceDevice: "Microsoft.DeviceRegistry/namespaces/devices",
+
   @doc("Arc enabled device. Microsoft.HybridCompute/machines")
   HybridComputeMachine: "Microsoft.HybridCompute/machines",
 }
@@ -240,6 +244,39 @@ model DeviceRegistryPolicyResourceDetails extends PolicyResourceDetails {
   @doc("Resource metadata.")
   resourceMetadata?: ResourceMetadata; // for customer to label the devices
 }
+
+@doc("Details of the OnboardingService Device Registry Namespace Policy.")
+@added(Versions.v2024_12_01_preview)
+model DeviceRegistryNamespacePolicyResourceDetails
+  extends PolicyResourceDetails {
+  @doc("The policy resource type for device registry namespace devices.")
+  type: OnboardingResourceType.DeviceRegistryNamespaceDevice;
+
+  @doc("The just-in-time connection properties for device registry namespace devices.")
+  jitProperties?: DeviceRegistryNamespaceDeviceJitProperties;
+
+  @doc("Identity information.")
+  operationalIdentityInfo?: IdentityInfo;
+
+  @doc("Resource metadata.")
+  resourceMetadata?: ResourceMetadata; // for customer to label the devices
+}
+
+@doc("The just-in-time connection properties for device registry namespace devices.")
+@added(Versions.v2024_12_01_preview)
+model DeviceRegistryNamespaceDeviceJitProperties {
+  @doc("Resource id of the device registry namespace, required for device type Microsoft.DeviceRegistry/namespaces/devices")
+  namespaceResourceId: DeviceRegistryNamespaceResourceId;
+}
+
+@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.DeviceRegistry/namespaces/(.+)$")
+@added(Versions.v2024_12_01_preview)
+scalar DeviceRegistryNamespaceResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces",
+    }
+  ]>;
 
 @doc("Details of the OnboardingService Hybrid Compute Machines Policy.")
 @renamedFrom(Versions.v2024_12_01_preview, "DiscoveryPolicyResourceDetails")
@@ -825,6 +862,23 @@ model PatchDeviceRegistryPolicyResourceDetails
   extends PolicyPatchResourceDetails {
   @doc("The policy resource type for device registry devices.")
   type: OnboardingResourceType.DeviceRegistryDevice;
+
+  @doc("Identity information.")
+  operationalIdentityInfo?: IdentityInfo;
+
+  @doc("Resource metadata.")
+  resourceMetadata?: ResourceMetadata; // for customer to label the devices
+}
+
+@doc("Details of the OnboardingService Device Registry Namespace Policy.")
+@added(Versions.v2024_12_01_preview)
+model PatchDeviceRegistryNamespacePolicyResourceDetails
+  extends PolicyPatchResourceDetails {
+  @doc("The policy resource type for device registry namespace devices.")
+  type: OnboardingResourceType.DeviceRegistryNamespaceDevice;
+
+  @doc("The just-in-time connection properties for device registry namespace devices.")
+  jitProperties?: DeviceRegistryNamespaceDeviceJitProperties;
 
   @doc("Identity information.")
   operationalIdentityInfo?: IdentityInfo;

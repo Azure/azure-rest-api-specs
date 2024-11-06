@@ -2050,6 +2050,56 @@
         }
       }
     },
+    "DeviceRegistryNamespaceDeviceJitProperties": {
+      "type": "object",
+      "description": "The just-in-time connection properties for device registry namespace devices.",
+      "properties": {
+        "namespaceResourceId": {
+          "$ref": "#/definitions/DeviceRegistryNamespaceResourceId",
+          "description": "Resource id of the device registry namespace, required for device type Microsoft.DeviceRegistry/namespaces/devices"
+        }
+      },
+      "required": [
+        "namespaceResourceId"
+      ]
+    },
+    "DeviceRegistryNamespacePolicyResourceDetails": {
+      "type": "object",
+      "description": "Details of the OnboardingService Device Registry Namespace Policy.",
+      "properties": {
+        "jitProperties": {
+          "$ref": "#/definitions/DeviceRegistryNamespaceDeviceJitProperties",
+          "description": "The just-in-time connection properties for device registry namespace devices."
+        },
+        "operationalIdentityInfo": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information."
+        },
+        "resourceMetadata": {
+          "$ref": "#/definitions/ResourceMetadata",
+          "description": "Resource metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.DeviceRegistry/namespaces/devices"
+    },
+    "DeviceRegistryNamespaceResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "pattern": "^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.DeviceRegistry/namespaces/(.+)$",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.DeviceRegistry/namespaces"
+          }
+        ]
+      }
+    },
     "DeviceRegistryPolicyResourceDetails": {
       "type": "object",
       "description": "Details of the OnboardingService Device Registry Policy.",
@@ -2497,6 +2547,7 @@
       "description": "Type of resource being provisioned.",
       "enum": [
         "Microsoft.DeviceRegistry/devices",
+        "Microsoft.DeviceRegistry/namespaces/devices",
         "Microsoft.HybridCompute/machines"
       ],
       "x-ms-enum": {
@@ -2507,6 +2558,11 @@
             "name": "DeviceRegistryDevice",
             "value": "Microsoft.DeviceRegistry/devices",
             "description": "Azure device registry device. Microsoft.DeviceRegistry/devices"
+          },
+          {
+            "name": "DeviceRegistryNamespaceDevice",
+            "value": "Microsoft.DeviceRegistry/namespaces/devices",
+            "description": "Azure device registry namespace device. Microsoft.DeviceRegistry/namespaces/devices"
           },
           {
             "name": "HybridComputeMachine",
@@ -2794,6 +2850,30 @@
       "required": [
         "type"
       ]
+    },
+    "PatchDeviceRegistryNamespacePolicyResourceDetails": {
+      "type": "object",
+      "description": "Details of the OnboardingService Device Registry Namespace Policy.",
+      "properties": {
+        "jitProperties": {
+          "$ref": "#/definitions/DeviceRegistryNamespaceDeviceJitProperties",
+          "description": "The just-in-time connection properties for device registry namespace devices."
+        },
+        "operationalIdentityInfo": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information."
+        },
+        "resourceMetadata": {
+          "$ref": "#/definitions/ResourceMetadata",
+          "description": "Resource metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyPatchResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.DeviceRegistry/namespaces/devices"
     },
     "PatchDeviceRegistryPolicyResourceDetails": {
       "type": "object",
