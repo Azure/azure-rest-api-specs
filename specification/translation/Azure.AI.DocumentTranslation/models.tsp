@@ -304,7 +304,7 @@ model TranslationsStatus {
   value: TranslationStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 
@@ -405,7 +405,7 @@ model DocumentsStatus {
   value: DocumentStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 
