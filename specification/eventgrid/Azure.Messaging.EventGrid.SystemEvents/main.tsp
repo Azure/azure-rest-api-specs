@@ -25,6 +25,7 @@ import "./Microsoft.Web/Web.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
 import "./Microsoft.ResourceNotifications/HealthResources.tsp";
 import "./Microsoft.ResourceNotifications/Resources.tsp";
+import "./Microsoft.ResourceNotifications/ContainerServiceEventResources.tsp";
 
 import "./propertyNameOverride.tsp";
 
