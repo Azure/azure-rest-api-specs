@@ -34,6 +34,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Resources/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "DeleteOptionsOperations_List",
+        "description": "Lists all of the available Microsoft.Resources REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operation List": {
+            "$ref": "./examples/DeleteOptionsOperations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },    
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/deleteOptions/default": {
       "put": {
         "tags": [
