@@ -101,14 +101,13 @@ interface Service {
     UserDelegationKey & DateResponseHeader
   >;
 
-  // TODO: The swagger didnt specify all of the headers we have in the template, like the request id headers
   /** Returns the sku name and account kind. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
   @route("/?restype=account&comp=properties")
   getAccountInfo is StorageOperation<
-    {},
+    TimeoutParameter,
     {
       ...DateResponseHeader;
       ...SkuNameResponseHeader;
@@ -584,11 +583,15 @@ interface Container {
   @get
   @route("/{containerName}?restype=account&comp=properties")
   getAccountInfo is StorageOperation<
-    ContainerNamePathParameter,
+    {
+      ...ContainerNamePathParameter;
+      ...TimeoutParameter;
+    },
     {
       ...DateResponseHeader;
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
+      ...IsHierarchicalNamespaceEnabled;
     }
   >;
 }
@@ -622,6 +625,10 @@ interface Blob {
     /** Optional.  When this header is set to true and specified together with the Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size. */
     @header("x-ms-range-get-content-crc64")
     rangeGetContentCrc64?: boolean,
+
+    /** Specifies the response content should be returned as a structured message and specifies the message schema version and properties. */
+    @header("x-ms-structured-body")
+    structuredBodyType?: string,
 
     ...EncryptionKeyParameter,
     ...EncryptionKeySha256Parameter,
@@ -678,6 +685,8 @@ interface Blob {
     ...ImmutabilityPolicyExpiresOnResponseHeader;
     ...ImmutabilityPolicyModeResponseHeader;
     ...LegalHoldResponseHeader;
+    ...StructuredBodyTypeResponseHeader;
+    ...StructuredContentLengthResponseHeader;
   }) | (BodyParameter & {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
     @statusCode statusCode: 206;
@@ -732,6 +741,8 @@ interface Blob {
     ...ImmutabilityPolicyExpiresOnResponseHeader;
     ...ImmutabilityPolicyModeResponseHeader;
     ...LegalHoldResponseHeader;
+    ...StructuredBodyTypeResponseHeader;
+    ...StructuredContentLengthResponseHeader;
   }) | StorageError;
 
   /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
@@ -931,6 +942,8 @@ interface Blob {
       ...IfUnmodifiedSinceParameter;
       ...ImmutabilityPolicyExpiryParameter;
       ...ImmutabilityPolicyModeParameter;
+      ...SnapshotParameter;
+      ...VersionIdParameter;
     },
     {
       ...DateResponseHeader;
@@ -949,6 +962,8 @@ interface Blob {
       ...ContainerNamePathParameter;
       ...BlobPathParameter;
       ...TimeoutParameter;
+      ...SnapshotParameter;
+      ...VersionIdParameter;
     },
     DateResponseHeader
   >;
@@ -965,6 +980,8 @@ interface Blob {
       ...BlobPathParameter;
       ...TimeoutParameter;
       ...LegalHoldRequiredParameter;
+      ...SnapshotParameter;
+      ...VersionIdParameter;
     },
     {
       ...DateResponseHeader;
@@ -1295,16 +1312,18 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
-  @route("/{containerName}/{blob}?restype=account&comp=properties")
+  @route("/{containerName}/{blob}?restype=account&comp=properties&blob")
   getAccountInfo is StorageOperation<
     {
       ...ContainerNamePathParameter;
       ...BlobPathParameter;
+      ...TimeoutParameter;
     },
     {
       ...DateResponseHeader;
       ...AccountKindResponseHeader;
       ...SkuNameResponseHeader;
+      ...IsHierarchicalNamespaceEnabled;
     }
   >;
 
@@ -1493,6 +1512,8 @@ interface PageBlob {
       ...IfSequenceNumberEqualToParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
+      ...StructuredBodyPut;
+      ...StructuredContentLengthParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -1505,6 +1526,7 @@ interface PageBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
+      ...StructuredBodyTypeResponseHeader;
     },
     "application/octet-stream"
   >;
@@ -1810,6 +1832,8 @@ interface AppendBlob {
       ...EncryptionScopeParameter;
       ...ConditionalRequestHeaders;
       ...IfTagsParameter;
+      ...StructuredBodyPut;
+      ...StructuredContentLengthParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -1823,6 +1847,7 @@ interface AppendBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
+      ...StructuredBodyTypeResponseHeader;
     }
   >;
 
@@ -1934,6 +1959,8 @@ interface BlockBlob {
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
       ...ContentCrc64Parameter;
+      ...StructuredBodyPut;
+      ...StructuredContentLengthParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -1945,6 +1972,7 @@ interface BlockBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
+      ...StructuredBodyTypeResponseHeader;
     },
     "application/octet-stream"
   >;
@@ -2025,6 +2053,8 @@ interface BlockBlob {
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
+      ...StructuredBodyPut;
+      ...StructuredContentLengthParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -2034,6 +2064,7 @@ interface BlockBlob {
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
+      ...StructuredBodyTypeResponseHeader;
     },
     "application/octet-stream"
   >;

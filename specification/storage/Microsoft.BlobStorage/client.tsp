@@ -13,7 +13,7 @@ model BlobStorageClientOptions {
   @header("x-ms-version")
   version: string;
 
-  ...ContainerNameParameter;
+  ...ContainerNamePathParameter;
 }
 
 @@clientInitialization(Storage.Blob, BlobStorageClientOptions);
@@ -30,4 +30,3 @@ model BlobStorageClientOptions {
 @@clientName(BlobPropertiesInternal.immutabilityPolicyUntilDate,
   "ImmutabilityPolicyExpiresOn"
 );
-@@clientName(PremiumPageBlobAccessTierOptional.accessTier, "tier");

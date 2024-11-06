@@ -811,14 +811,6 @@
             "type": "string"
           },
           {
-            "name": "versionid",
-            "in": "query",
-            "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "versionId"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
@@ -2371,14 +2363,6 @@
             "type": "string"
           },
           {
-            "name": "versionid",
-            "in": "query",
-            "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "versionId"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
@@ -2537,14 +2521,6 @@
             "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to retrieve. For more information on working with blob snapshots, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/creating-a-snapshot-of-a-blob\">Creating a Snapshot of a Blob.</a>",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "versionid",
-            "in": "query",
-            "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "versionId"
           },
           {
             "name": "timeout",
@@ -7428,14 +7404,6 @@
             "type": "string"
           },
           {
-            "name": "versionid",
-            "in": "query",
-            "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "versionId"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
@@ -7652,7 +7620,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?restype=account&comp=properties": {
+    "/{containerName}/{blob}?restype=account&comp=properties&blob": {
       "get": {
         "operationId": "Blob_GetAccountInfo",
         "description": "Returns the sku name and account kind",
@@ -7855,14 +7823,6 @@
             "type": "string"
           },
           {
-            "name": "versionid",
-            "in": "query",
-            "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "versionId"
-          },
-          {
             "name": "x-ms-lease-id",
             "in": "header",
             "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
@@ -7960,14 +7920,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "versionid",
-            "in": "query",
-            "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "versionId"
           },
           {
             "name": "Content-MD5",
