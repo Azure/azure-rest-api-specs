@@ -1276,7 +1276,11 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
         "operationId": "ContainerGroupProfile_ListBySubscription",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesList": {
+            "$ref": "./examples/ContainerGroupProfilesList.json"
+          }
+        },
         "summary": "Gets a list of all container group profiles under a subscription.",
         "description": "Gets a list of all container group profiles under a subscription.",
         "parameters": [
@@ -1309,7 +1313,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
         "operationId": "ContainerGroupProfile_ListByResourceGroup",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesListByResourceGroup": {
+            "$ref": "./examples/ContainerGroupProfilesListByResourceGroup.json"
+          }
+        },
         "summary": "Gets a list of all container group profiles under a resource group.",
         "description": "Gets a list of all container group profiles under a resource group.",
         "parameters": [
@@ -1345,7 +1353,20 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}": {
       "put": {
         "operationId": "ContainerGroupProfile_CreateOrUpdate",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesCreateOrUpdate": {
+            "$ref": "./examples/ContainerGroupProfilesCreateOrUpdate.json"
+          },
+          "ContainerGroupProfileCreateWithExtensions": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_Extensions.json"
+          },
+          "ContainerGroupProfileWithEncryptionProperties": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_EncryptionProperties.json"
+          },
+          "ConfidentialContainerGroupProfile": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_CreateConfidential.json"
+          }
+        },
         "summary": "Create or Update a ContainerGroupProfile",
         "description": "Create a CGProfile if it doesn't exist or update an existing CGProfile.",
         "parameters": [
@@ -1404,7 +1425,11 @@
       },
       "patch": {
         "operationId": "ContainerGroupProfile_Update",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesPatch": {
+            "$ref": "./examples/ContainerGroupProfilesPatch.json"
+          }
+        },
         "summary": "Update a specified ContainerGroupProfile.",
         "description": "Update a specified container group profile.",
         "parameters": [
@@ -1418,11 +1443,12 @@
             "$ref": "#/parameters/ContainerGroupProfileNameParameter"
           },
           {
-            "name": "ContainerGroupProfile",
-            "description": "Update a specified container group profile that will also update the revision.",
+            "name": "properties",
+            "description": "The container group profile properties that need to be updated.",
+            "required": true,
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/ContainerGroupProfile"
+              "$ref": "#/definitions/ContainerGroupProfilePatch"
             }
           },
           {
@@ -1451,7 +1477,14 @@
       },
       "get": {
         "operationId": "ContainerGroupProfile_Get",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesGet_Succeeded": {
+            "$ref": "./examples/ContainerGroupProfilesGet.json"
+          },
+          "ContainerGroupProfilesGetWithPriority": {
+            "$ref": "./examples/ContainerGroupProfilesGetPriority.json"
+          }
+        },
         "summary": "Display information about a specified ContainerGroupProfile.",
         "description": "Get the properties of the specified container group profile.",
         "parameters": [
@@ -1485,7 +1518,11 @@
       },
       "delete": {
         "operationId": "ContainerGroupProfile_Delete",
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "ContainerGroupProfilesDelete": {
+            "$ref": "./examples/ContainerGroupProfilesDelete.json"
+          }
+        },
         "summary": "Delete a ContainerGroupProfile.",
         "description": "Deletes a container group profile.",
         "parameters": [
@@ -1506,7 +1543,7 @@
           "202": {
             "description": "Accepted",
             "headers": {
-              "Ax-ms-correlation-request-id": {
+              "x-ms-correlation-request-id": {
                 "type": "string"
               },
               "Location": {
@@ -1525,6 +1562,92 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}/revisions": {
+      "get": {
+        "operationId": "ContainerGroupProfile_ListAllRevisions",
+        "x-ms-examples": {
+          "ContainerGroupProfileListAllRevisions": {
+            "$ref": "./examples/ContainerGroupProfileListAllRevisions.json"
+          }
+        },
+        "summary": "Get a list of all the revisions of the specified container group profile in the given subscription and resource group.",
+        "description": "Get a list of all the revisions of the specified container group profile in the given subscription and resource group. This operation returns properties of each revision of the specified container group profile including containers, image registry credentials, restart policy, IP address type, OS type volumes, revision number, etc.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}/revisions/{revisionNumber}": {
+      "get": {
+        "operationId": "ContainerGroupProfile_GetByRevisionNumber",
+        "x-ms-examples": {
+          "ContainerGroupProfileGetByRevisionNumber": {
+            "$ref": "./examples/ContainerGroupProfileGetByRevisionNumber.json"
+          }
+        },
+        "summary": "Get the properties of the specified revision of the container group profile.",
+        "description": "Gets the properties of the specified revision of the container group profile in the given subscription and resource group. The operation returns the properties of container group profile including containers, image registry credentials, restart policy, IP address type, OS type, volumes, current revision number, etc.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RevisionNumberParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
       }
     }
   },
@@ -2478,7 +2601,11 @@
           "type": "string",
           "x-ms-secret": true
         }
-      }
+      },
+      "required": [
+        "workspaceId",
+        "workspaceKey"
+      ]
     },
     "ContainerGroupSubnetId": {
       "description": "Container group subnet information.",
@@ -2541,6 +2668,7 @@
             "ResourceGroupReuse",
             "Noreuse"
           ],
+          "default": "Unsecure",
           "x-ms-enum": {
             "name": "dnsNameLabelReusePolicy",
             "modelAsString": true
@@ -2551,7 +2679,11 @@
           "type": "string",
           "description": "The FQDN for the IP."
         }
-      }
+      },
+      "required": [
+        "ports",
+        "type"
+      ]
     },
     "Port": {
       "description": "The port exposed on the container group.",
@@ -3098,7 +3230,12 @@
           "type": "string",
           "description": "The keyvault managed identity."
         }
-      }
+      },
+      "required": [
+        "vaultBaseUrl",
+        "keyName",
+        "keyVersion"
+      ]
     },
     "InitContainerDefinition": {
       "description": "The init container definition.",
@@ -3798,25 +3935,27 @@
         }
       }
     },
-    "ContainerGroupProfile": {
+    "ContainerGroupProfilePatch": {
       "type": "object",
+      "description": "Properties of container group profile that need to be patched",
       "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The container group profile."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ContainerGroupProfileProperties"
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
+      }
+    },
+    "ContainerGroupProfile": {
+      "description": "container group profile object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/ContainerGroupProfileProperties"
         }
       ]
     },
@@ -4032,6 +4171,14 @@
       "minLength": 1,
       "maxLength": 63,
       "description": "ContainerGroupProfile name.",
+      "x-ms-parameter-location": "method"
+    },
+    "RevisionNumberParameter": {
+      "name": "revisionNumber",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The revision number of the container group profile.",
       "x-ms-parameter-location": "method"
     }
   }
