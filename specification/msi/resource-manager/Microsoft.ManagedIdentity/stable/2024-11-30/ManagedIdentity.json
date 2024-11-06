@@ -695,6 +695,24 @@
           "readOnly": true,
           "format": "uuid",
           "description": "The id of the app associated with the identity. This is a random generated UUID by MSI."
+        },
+        "isolationScope": {
+          "type": "string",
+          "description": "Enum to configure regional restrictions on identity assignment, as necessary.",
+          "enum": [
+            "None",
+            "Regional"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "x-ms-enum": {
+            "name": "isolationScope",
+            "modelAsString": true,
+            "modelAsExtensible": true
+          }
         }
       }
     },
