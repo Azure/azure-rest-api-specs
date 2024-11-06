@@ -8,7 +8,8 @@ using AzureAppConfiguration;
 namespace SdkCustomizations;
 
 // Cross-language customizations
-@@clientName(Foundations.Error, "ErrorDetail");
+// except Java, since Java has built-in type in azure-core for Error model.
+@@clientName(Foundations.Error, "ErrorDetail", "python,csharp,javascript,go");
 
 // Python specific customizations
 @@clientName(KeyValueFields, "ConfigurationSettingFields", "python");
