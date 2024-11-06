@@ -8167,9 +8167,9 @@
             "description": "API Key authentication"
           },
           {
-            "name": "AAD",
+            "name": "entraId",
             "value": "AAD",
-            "description": "Entra ID authentication"
+            "description": "Entra ID authentication (formerly known as AAD)"
           },
           {
             "name": "SAS",
@@ -8679,17 +8679,7 @@
         "authType": {
           "$ref": "#/definitions/AuthenticationType",
           "description": "Authentication type of the connection target"
-        }
-      },
-      "discriminator": "authType",
-      "required": [
-        "authType"
-      ]
-    },
-    "InternalConnectionPropertiesAADAuth": {
-      "type": "object",
-      "description": "Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)",
-      "properties": {
+        },
         "category": {
           "$ref": "#/definitions/ConnectionType",
           "description": "Category of the connection"
@@ -8699,10 +8689,16 @@
           "description": "The connection URL to be used for this service"
         }
       },
+      "discriminator": "authType",
       "required": [
+        "authType",
         "category",
         "target"
-      ],
+      ]
+    },
+    "InternalConnectionPropertiesAADAuth": {
+      "type": "object",
+      "description": "Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)",
       "allOf": [
         {
           "$ref": "#/definitions/InternalConnectionProperties"
@@ -8714,23 +8710,13 @@
       "type": "object",
       "description": "Connection properties for connections with API key authentication",
       "properties": {
-        "category": {
-          "$ref": "#/definitions/ConnectionType",
-          "description": "Category of the connection"
-        },
         "credentials": {
           "$ref": "#/definitions/CredentialsApiKeyAuth",
           "description": "Credentials will only be present for authType=ApiKey"
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used for this service"
         }
       },
       "required": [
-        "category",
-        "credentials",
-        "target"
+        "credentials"
       ],
       "allOf": [
         {
@@ -8743,23 +8729,13 @@
       "type": "object",
       "description": "Connection properties for connections with SAS authentication",
       "properties": {
-        "category": {
-          "$ref": "#/definitions/ConnectionType",
-          "description": "Category of the connection"
-        },
         "credentials": {
           "$ref": "#/definitions/CredentialsSASAuth",
           "description": "Credentials will only be present for authType=ApiKey"
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used for this service"
         }
       },
       "required": [
-        "category",
-        "credentials",
-        "target"
+        "credentials"
       ],
       "allOf": [
         {
