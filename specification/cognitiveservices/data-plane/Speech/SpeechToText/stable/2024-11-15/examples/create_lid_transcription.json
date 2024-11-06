@@ -4,6 +4,8 @@
     "Ocp-Apim-Subscription-Key": "{API Key}",
     "api-version": "2024-11-15",
     "transcription": {
+      "displayName": "Transcription using language identification with three candidate languages, 'fr-FR' as fallback locale and a custom model for transcribing utterances that were classified as 'nl-NL' locale.",
+      "locale": "fr-FR",
       "contentUrls": [
         "https://contoso.com/mystoragelocation"
       ],
@@ -18,7 +20,6 @@
         "profanityFilterMode": "Masked",
         "timeToLiveHours": 48,
         "languageIdentification": {
-          "mode": "Single",
           "candidateLocales": [
             "fr-FR",
             "nl-NL",
@@ -28,11 +29,10 @@
             "nl-NL": {
               "self": "https://westus.api.cognitive.microsoft.com/speechtotext/models/827712a5-f942-4997-91c3-7c6cde35600b?api-version=2024-11-15"
             }
-          }
+          },
+          "mode": "Single"
         }
-      },
-      "locale": "fr-FR",
-      "displayName": "Transcription using language identification with three candidate languages, 'fr-FR' as fallback locale and a custom model for transcribing utterances that were classified as 'nl-NL' locale."
+      }
     },
     "Content-Type": "application/json"
   },
@@ -41,6 +41,13 @@
       "headers": {},
       "body": {
         "self": "https://westus.api.cognitive.microsoft.com/speechtotext/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683?api-version=2024-11-15",
+        "displayName": "Transcription using language identification with three candidate languages, 'fr-FR' as fallback locale and a custom model for transcribing utterances that were classified as 'nl-NL' locale.",
+        "customProperties": {
+          "key": "value"
+        },
+        "locale": "fr-FR",
+        "createdDateTime": "2019-01-07T11:34:12Z",
+        "lastActionDateTime": "2019-01-07T11:36:07Z",
         "model": {
           "self": "https://westus.api.cognitive.microsoft.com/speechtotext/models/827712a5-f942-4997-91c3-7c6cde35600b?api-version=2024-11-15"
         },
@@ -56,10 +63,8 @@
           ],
           "punctuationMode": "DictatedAndAutomatic",
           "profanityFilterMode": "Masked",
-          "durationMilliseconds": 42000,
           "timeToLiveHours": 48,
           "languageIdentification": {
-            "mode": "Single",
             "candidateLocales": [
               "fr-FR",
               "nl-NL",
@@ -69,17 +74,12 @@
               "nl-NL": {
                 "self": "https://westus.api.cognitive.microsoft.com/speechtotext/models/827712a5-f942-4997-91c3-7c6cde35600b?api-version=2024-11-15"
               }
-            }
-          }
+            },
+            "mode": "Single"
+          },
+          "durationMilliseconds": 42000
         },
-        "lastActionDateTime": "2019-01-07T11:36:07Z",
-        "status": "Succeeded",
-        "createdDateTime": "2019-01-07T11:34:12Z",
-        "locale": "fr-FR",
-        "displayName": "Transcription using language identification with three candidate languages, 'fr-FR' as fallback locale and a custom model for transcribing utterances that were classified as 'nl-NL' locale.",
-        "customProperties": {
-          "key": "value"
-        }
+        "status": "Succeeded"
       }
     }
   }

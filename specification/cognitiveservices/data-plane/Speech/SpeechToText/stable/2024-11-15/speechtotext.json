@@ -2978,7 +2978,7 @@
         "tags": [
           "Transcribe"
         ],
-        "summary": "Transcribes the provided audio stream.",
+        "summary": "Synchronous transcription of an audio file.",
         "operationId": "Transcriptions_Transcribe",
         "consumes": [
           "multipart/form-data"
@@ -2992,17 +2992,17 @@
           },
           {
             "in": "formData",
-            "name": "definition",
-            "description": "Metadata for a fast transcription request. This field contains a JSON-serialized object of type `TranscribeDefinition`.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
             "name": "audio",
-            "description": "The audio as a stream of bytes.",
+            "description": "The content of the audio file to be transcribed. The audio file must be shorter than 2 hours in audio duration and smaller than 250 MB in size.",
             "required": true,
             "type": "file",
             "format": "binary"
+          },
+          {
+            "in": "formData",
+            "name": "definition",
+            "description": "Metadata for a transcription request. This field contains a JSON-serialized object of type `TranscribeDefinition`.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -3010,6 +3010,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/TranscribeResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -3164,11 +3170,12 @@
         }
       ],
       "properties": {
-        "links": {
-          "$ref": "#/definitions/CustomModelLinks"
-        },
-        "properties": {
-          "$ref": "#/definitions/CustomModelProperties"
+        "customProperties": {
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "baseModel": {
           "$ref": "#/definitions/EntityReference"
@@ -3180,12 +3187,11 @@
             "$ref": "#/definitions/EntityReference"
           }
         },
-        "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "links": {
+          "$ref": "#/definitions/CustomModelLinks"
+        },
+        "properties": {
+          "$ref": "#/definitions/CustomModelProperties"
         }
       }
     },
@@ -3217,6 +3223,12 @@
       "title": "CustomModelLinks",
       "type": "object",
       "properties": {
+        "manifest": {
+          "format": "uri",
+          "description": "The location to get a manifest for this model to be used in the on-prem container. See operation \"Models_GetCustomModelManifest\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
         "copy": {
           "format": "uri",
           "description": "The location to the model copy action. See operation \"Models_Copy\" for more details.",
@@ -3228,12 +3240,6 @@
           "description": "The location to get all files of this entity. See operation \"Models_ListFiles\" for more details.",
           "type": "string",
           "readOnly": true
-        },
-        "manifest": {
-          "format": "uri",
-          "description": "The location to get a manifest for this model to be used in the on-prem container. See operation \"Models_GetCustomModelManifest\" for more details.",
-          "type": "string",
-          "readOnly": true
         }
       },
       "readOnly": true
@@ -3242,15 +3248,15 @@
       "title": "CustomModelProperties",
       "type": "object",
       "properties": {
+        "deprecationDates": {
+          "$ref": "#/definitions/CustomModelDeprecationDates"
+        },
         "customModelWeightPercent": {
           "format": "int32",
-          "description": "The weight of custom model between 1 (1% custom model and 99% base model) and 100 (100% custom model and 0% base model).\r\nWhen this property is not set, the service chooses a suitable value (get the model to retrieve the selected weight).\r\nStart without using this property. If needed, choose a larger (or smaller) weight to increase (or decrease) the impact of the custom model.",
+          "description": "The weight of custom model between 1 (1% custom model and 99% base model) and 100 (100% custom model and 0% base model).\nWhen this property is not set, the service chooses a suitable value (get the model to retrieve the selected weight).\nStart without using this property. If needed, choose a larger (or smaller) weight to increase (or decrease) the impact of the custom model.",
           "maximum": 100,
           "minimum": 1,
           "type": "integer"
-        },
-        "deprecationDates": {
-          "$ref": "#/definitions/CustomModelDeprecationDates"
         },
         "features": {
           "$ref": "#/definitions/CustomModelFeatures"
@@ -3264,20 +3270,11 @@
       "title": "Dataset",
       "required": [
         "displayName",
-        "kind",
-        "locale"
+        "locale",
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "links": {
-          "$ref": "#/definitions/DatasetLinks"
-        },
-        "properties": {
-          "$ref": "#/definitions/DatasetProperties"
-        },
-        "kind": {
-          "$ref": "#/definitions/DatasetKind"
-        },
         "self": {
           "format": "uri",
           "description": "The location of this entity.",
@@ -3293,13 +3290,8 @@
           "description": "The description of the object.",
           "type": "string"
         },
-        "contentUrl": {
-          "format": "uri",
-          "description": "The URL of the data for the dataset.",
-          "type": "string"
-        },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -3310,20 +3302,34 @@
           "minLength": 1,
           "type": "string"
         },
-        "lastActionDateTime": {
+        "createdDateTime": {
           "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The time-stamp when the object was created.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the current status was entered.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/DatasetKind"
+        },
+        "links": {
+          "$ref": "#/definitions/DatasetLinks"
+        },
+        "properties": {
+          "$ref": "#/definitions/DatasetProperties"
+        },
+        "contentUrl": {
+          "format": "uri",
+          "description": "The URL of the data for the dataset.",
+          "type": "string"
         },
         "status": {
           "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -3461,7 +3467,7 @@
         },
         "durationMilliseconds": {
           "format": "int64",
-          "description": "The total duration in milliseconds of the datasets if it contains audio files.\r\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.",
+          "description": "The total duration in milliseconds of the datasets if it contains audio files.\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.",
           "default": 0,
           "type": "integer",
           "readOnly": true
@@ -3487,7 +3493,7 @@
           "type": "string"
         },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -3570,7 +3576,14 @@
         "InvalidTimeToLive",
         "InvalidSourceAzureResourceId",
         "ModelCopyAuthorizationExpired",
-        "EndpointLoggingNotSupported"
+        "EndpointLoggingNotSupported",
+        "NoLanguageIdentified",
+        "MultipleLanguagesIdentified",
+        "InvalidAudioFormat",
+        "BadChannelConfiguration",
+        "InvalidChannelSpecification",
+        "AudioLengthLimitExceeded",
+        "EmptyAudioFile"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3864,6 +3877,34 @@
           {
             "value": "EndpointLoggingNotSupported",
             "description": "Endpoint logging not supported."
+          },
+          {
+            "value": "NoLanguageIdentified",
+            "description": "Language Identification did not recognize any language."
+          },
+          {
+            "value": "MultipleLanguagesIdentified",
+            "description": "Language Identification recognized multiple languages. No dominant language could be determined."
+          },
+          {
+            "value": "InvalidAudioFormat",
+            "description": "The format of input audio is not supported."
+          },
+          {
+            "value": "BadChannelConfiguration",
+            "description": "There is a mismatch between audio channels in the data, in the configuration, or the requirements of the application."
+          },
+          {
+            "value": "InvalidChannelSpecification",
+            "description": "The selection of channels in the transcription request is not supported (e.g., neither 0 nor 1 have been selected.)"
+          },
+          {
+            "value": "AudioLengthLimitExceeded",
+            "description": "The audio file is longer than the maximum allowed duration."
+          },
+          {
+            "value": "EmptyAudioFile",
+            "description": "The audio file is empty."
           }
         ]
       }
@@ -3912,17 +3953,14 @@
       ],
       "type": "object",
       "properties": {
-        "links": {
-          "$ref": "#/definitions/EndpointLinks"
-        },
-        "properties": {
-          "$ref": "#/definitions/EndpointProperties"
-        },
         "self": {
           "format": "uri",
           "description": "The location of this entity.",
           "type": "string",
           "readOnly": true
+        },
+        "model": {
+          "$ref": "#/definitions/EntityReference"
         },
         "displayName": {
           "description": "The display name of the object.",
@@ -3933,35 +3971,38 @@
           "description": "The description of the object.",
           "type": "string"
         },
-        "model": {
-          "$ref": "#/definitions/EntityReference"
+        "customProperties": {
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "locale": {
           "description": "The locale of the contained data.",
           "minLength": 1,
           "type": "string"
         },
-        "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
         },
         "lastActionDateTime": {
           "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The time-stamp when the current status was entered.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties"
+        },
+        "links": {
+          "$ref": "#/definitions/EndpointLinks"
         },
         "status": {
           "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -3996,7 +4037,7 @@
       "type": "object",
       "properties": {
         "contentLoggingEnabled": {
-          "description": "A value indicating whether content logging (audio & transcriptions)\r\nis being used for a deployment.",
+          "description": "A value indicating whether content logging (audio & transcriptions)\nis being used for a deployment.",
           "type": "boolean"
         }
       }
@@ -4005,12 +4046,6 @@
       "title": "EndpointUpdate",
       "type": "object",
       "properties": {
-        "model": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "properties": {
-          "$ref": "#/definitions/EndpointPropertiesUpdate"
-        },
         "displayName": {
           "description": "The name of the object.",
           "type": "string"
@@ -4019,8 +4054,14 @@
           "description": "The description of the object.",
           "type": "string"
         },
+        "model": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "properties": {
+          "$ref": "#/definitions/EndpointPropertiesUpdate"
+        },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -4061,9 +4102,20 @@
     },
     "Error": {
       "title": "Error",
-      "description": "New format which conforms to the new Cognitive Services API guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "description": "This error type contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
       "type": "object",
       "properties": {
+        "message": {
+          "description": "High level error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The source of the error.\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError"
+        },
         "code": {
           "$ref": "#/definitions/ErrorCode"
         },
@@ -4073,17 +4125,6 @@
           "items": {
             "$ref": "#/definitions/Error"
           }
-        },
-        "message": {
-          "description": "High level error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The source of the error.\r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError"
         }
       }
     },
@@ -4173,56 +4214,14 @@
     "Evaluation": {
       "title": "Evaluation",
       "required": [
-        "dataset",
         "displayName",
-        "locale",
         "model1",
-        "model2"
+        "model2",
+        "dataset",
+        "locale"
       ],
       "type": "object",
       "properties": {
-        "model1": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "model2": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "transcription1": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "transcription2": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "dataset": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "links": {
-          "$ref": "#/definitions/EvaluationLinks"
-        },
-        "properties": {
-          "$ref": "#/definitions/EvaluationProperties"
-        },
-        "self": {
-          "format": "uri",
-          "description": "The location of this entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        },
         "displayName": {
           "description": "The display name of the object.",
           "minLength": 1,
@@ -4233,16 +4232,58 @@
           "type": "string"
         },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
+        "self": {
+          "format": "uri",
+          "description": "The location of this entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the current status was entered.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "model1": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "model2": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "dataset": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "transcription1": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "transcription2": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "links": {
+          "$ref": "#/definitions/EvaluationLinks"
+        },
         "locale": {
           "description": "The locale of the contained data.",
           "minLength": 1,
           "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/EvaluationProperties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
         }
       }
     },
@@ -4456,7 +4497,7 @@
           "type": "string"
         },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -4468,29 +4509,29 @@
       "title": "File",
       "type": "object",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/FileKind"
-        },
-        "links": {
-          "$ref": "#/definitions/FileLinks"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The creation time of this file.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+        "self": {
+          "format": "uri",
+          "description": "The location of this entity.",
           "type": "string",
           "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/FileProperties"
         },
         "name": {
           "description": "The name of this file.",
           "type": "string",
           "readOnly": true
         },
-        "self": {
-          "format": "uri",
-          "description": "The location of this entity.",
+        "kind": {
+          "$ref": "#/definitions/FileKind"
+        },
+        "links": {
+          "$ref": "#/definitions/FileLinks"
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperties"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The creation time of this file.\nThe time stamp is encoded as ISO 8601 date and time format\n(see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
         }
@@ -4598,9 +4639,20 @@
     },
     "InnerError": {
       "title": "InnerError",
-      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
       "type": "object",
       "properties": {
+        "message": {
+          "description": "High level error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The source of the error.\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError"
+        },
         "code": {
           "$ref": "#/definitions/DetailedErrorCode"
         },
@@ -4610,17 +4662,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "message": {
-          "description": "High level error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The source of the error.\r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError"
         }
       }
     },
@@ -4655,9 +4696,6 @@
       ],
       "type": "object",
       "properties": {
-        "mode": {
-          "$ref": "#/definitions/LanguageIdentificationMode"
-        },
         "candidateLocales": {
           "description": "The candidate locales for language identification (example [\"en-US\", \"de-DE\", \"es-ES\"]). A minimum of 2 and a maximum of 10 candidate locales, including the main locale for the transcription, is supported for continuous mode. For single language identification, the maximum number of candidate locales is unbounded.",
           "type": "array",
@@ -4666,23 +4704,26 @@
           }
         },
         "speechModelMapping": {
-          "description": "An optional mapping of locales to speech model entities. If no model is given for a locale, the default base model is used.\r\nKeys must be locales contained in the candidate locales, values are entities for models of the respective locales.",
+          "description": "An optional mapping of locales to speech model entities. If no model is given for a locale, the default base model is used.\nKeys must be locales contained in the candidate locales, values are entities for models of the respective locales.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/EntityReference"
           }
+        },
+        "mode": {
+          "$ref": "#/definitions/LanguageIdentificationMode"
         }
       }
     },
     "ModelCopyAuthorization": {
       "title": "ModelCopyAuthorization",
       "required": [
-        "expirationDateTime",
-        "id",
-        "sourceResourceId",
-        "targetResourceEndpoint",
+        "targetResourceRegion",
         "targetResourceId",
-        "targetResourceRegion"
+        "targetResourceEndpoint",
+        "sourceResourceId",
+        "expirationDateTime",
+        "id"
       ],
       "type": "object",
       "properties": {
@@ -4788,7 +4829,7 @@
           "type": "string"
         },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -4808,32 +4849,32 @@
           "description": "The identifier of this Operation.",
           "type": "string"
         },
-        "result": {
-          "$ref": "#/definitions/OperationResult"
-        },
-        "error": {
-          "$ref": "#/definitions/EntityError"
-        },
         "self": {
           "format": "uri",
           "description": "The location of this entity.",
           "type": "string",
           "readOnly": true
         },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
         "lastActionDateTime": {
           "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The time-stamp when the current status was entered.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/Status"
         },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
+        "result": {
+          "$ref": "#/definitions/OperationResult"
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -4877,7 +4918,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\n            \nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BaseModel"
@@ -4897,7 +4938,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\n            \nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomModel"
@@ -4917,7 +4958,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\n            \nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dataset"
@@ -4937,7 +4978,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\n            \nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Endpoint"
@@ -4957,7 +4998,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\n            \nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Evaluation"
@@ -4977,7 +5018,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\n            \nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/File"
@@ -4997,7 +5038,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\n            \nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Transcription"
@@ -5017,7 +5058,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\n            \nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebHook"
@@ -5128,11 +5169,6 @@
           "type": "string",
           "readOnly": true
         },
-        "locale": {
-          "description": "The locale of the contained data.",
-          "minLength": 1,
-          "type": "string"
-        },
         "displayName": {
           "description": "The display name of the object.",
           "minLength": 1,
@@ -5142,20 +5178,25 @@
           "description": "The description of the object.",
           "type": "string"
         },
+        "locale": {
+          "description": "The locale of the contained data.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
         "lastActionDateTime": {
           "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The time-stamp when the current status was entered.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -5282,41 +5323,11 @@
       ],
       "type": "object",
       "properties": {
-        "links": {
-          "$ref": "#/definitions/TranscriptionLinks"
-        },
-        "properties": {
-          "$ref": "#/definitions/TranscriptionProperties"
-        },
         "self": {
           "format": "uri",
           "description": "The location of this entity.",
           "type": "string",
           "readOnly": true
-        },
-        "model": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "dataset": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "contentUrls": {
-          "description": "A list of content urls to get audio files to transcribe. Up to 1000 urls are allowed.\r\nThis property will not be returned in a response.",
-          "type": "array",
-          "items": {
-            "format": "uri",
-            "type": "string"
-          }
-        },
-        "contentContainerUrl": {
-          "format": "uri",
-          "description": "A URL for an Azure blob container that contains the audio files. A container is allowed to have a maximum size of 5GB and a maximum number of 10000 blobs.\r\nThe maximum size for a blob is 2.5GB.\r\nContainer SAS should contain 'r' (read) and 'l' (list) permissions.\r\nThis property will not be returned in a response.",
-          "type": "string"
-        },
-        "locale": {
-          "description": "The locale of the contained data. If Language Identification is used, this locale is used to transcribe speech for which no language could be detected.",
-          "minLength": 1,
-          "type": "string"
         },
         "displayName": {
           "description": "The display name of the object.",
@@ -5328,26 +5339,56 @@
           "type": "string"
         },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
+        "locale": {
+          "description": "The locale of the contained data. If Language Identification is used, this locale is used to transcribe speech for which no language could be detected.",
+          "minLength": 1,
+          "type": "string"
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The time-stamp when the object was created.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the current status was entered.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "contentUrls": {
+          "description": "A list of content urls to get audio files to transcribe. Up to 1000 urls are allowed.\nThis property will not be returned in a response.",
+          "type": "array",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "model": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "links": {
+          "$ref": "#/definitions/TranscriptionLinks"
+        },
+        "properties": {
+          "$ref": "#/definitions/TranscriptionProperties"
+        },
+        "contentContainerUrl": {
+          "format": "uri",
+          "description": "A URL for an Azure blob container that contains the audio files. A container is allowed to have a maximum size of 5GB and a maximum number of 10000 blobs.\nThe maximum size for a blob is 2.5GB.\nContainer SAS should contain 'r' (read) and 'l' (list) permissions.\nThis property will not be returned in a response.",
+          "type": "string"
+        },
+        "dataset": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
         }
       }
     },
@@ -5390,32 +5431,20 @@
       "type": "object",
       "properties": {
         "wordLevelTimestampsEnabled": {
-          "description": "A value indicating whether word level timestamps are requested. The default value is\r\n`false`.",
+          "description": "A value indicating whether word level timestamps are requested. The default value is\n`false`.",
           "type": "boolean"
         },
         "displayFormWordLevelTimestampsEnabled": {
           "description": "A value indicating whether word level timestamps for the display form are requested. The default value is `false`.",
           "type": "boolean"
         },
-        "durationMilliseconds": {
-          "format": "int64",
-          "description": "The duration in milliseconds of the transcription.\r\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.",
-          "default": 0,
-          "type": "integer",
-          "readOnly": true
-        },
         "channels": {
-          "description": "A collection of the requested channel numbers.\r\nIn the default case, the channels 0 and 1 are considered.",
+          "description": "A collection of the requested channel numbers.\nIn the default case, the channels 0 and 1 are considered.",
           "type": "array",
           "items": {
             "format": "int32",
             "type": "integer"
           }
-        },
-        "destinationContainerUrl": {
-          "format": "uri",
-          "description": "The requested destination container.\r\n### Remarks ###\r\nWhen a destination container is used in combination with a `timeToLive`, the metadata of a\r\ntranscription will be deleted normally, but the data stored in the destination container, including\r\ntranscription results, will remain untouched, because no delete permissions are required for this\r\ncontainer.\n\r\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\"\r\ninstead of `destinationContainerUrl`, where blobs can be cleaned up.",
-          "type": "string"
         },
         "punctuationMode": {
           "$ref": "#/definitions/PunctuationMode"
@@ -5423,19 +5452,31 @@
         "profanityFilterMode": {
           "$ref": "#/definitions/ProfanityFilterMode"
         },
+        "destinationContainerUrl": {
+          "format": "uri",
+          "description": "The requested destination container.\n### Remarks ###\nWhen a destination container is used in combination with a `timeToLive`, the metadata of a\ntranscription will be deleted normally, but the data stored in the destination container, including\ntranscription results, will remain untouched, because no delete permissions are required for this\ncontainer.\n\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\"\ninstead of `destinationContainerUrl`, where blobs can be cleaned up.",
+          "type": "string"
+        },
         "timeToLiveHours": {
           "format": "int32",
-          "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted.\r\n            \r\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account\r\nwill also be deleted. Use either destinationContainerUrl to specify a separate container for result files\r\nwhich will not be deleted when the timeToLive expires, or retrieve the result files through the API and\r\nstore them as needed.\r\n            \r\nThe shortest supported duration is 6 hours, the longest supported duration is 31 days. 2 days (48 hours) is the recommended default value\r\nwhen data is consumed directly.",
+          "description": "How long the transcription will be kept in the system after it has completed. Once the\ntranscription reaches the time to live after completion(successful or failed) it will be automatically\ndeleted.\n\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account\nwill also be deleted.Use either destinationContainerUrl to specify a separate container for result files\nwhich will not be deleted when the timeToLive expires, or retrieve the result files through the API and\nstore them as needed.\n\nThe shortest supported duration is 6 hours, the longest supported duration is 31 days. 2 days (48 hours) is the recommended default value\nwhen data is consumed directly.",
           "type": "integer"
         },
-        "error": {
-          "$ref": "#/definitions/EntityError"
+        "languageIdentification": {
+          "$ref": "#/definitions/LanguageIdentificationProperties"
         },
         "diarization": {
           "$ref": "#/definitions/DiarizationProperties"
         },
-        "languageIdentification": {
-          "$ref": "#/definitions/LanguageIdentificationProperties"
+        "error": {
+          "$ref": "#/definitions/EntityError"
+        },
+        "durationMilliseconds": {
+          "format": "int64",
+          "description": "The duration in milliseconds of the transcription.\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.",
+          "default": 0,
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -5452,7 +5493,7 @@
           "type": "string"
         },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -5485,22 +5526,11 @@
       "title": "WebHook",
       "required": [
         "displayName",
-        "events",
-        "webUrl"
+        "webUrl",
+        "events"
       ],
       "type": "object",
       "properties": {
-        "webUrl": {
-          "format": "uri",
-          "description": "The registered URL that will be used to send the POST requests for the registered events to.",
-          "type": "string"
-        },
-        "links": {
-          "$ref": "#/definitions/WebHookLinks"
-        },
-        "properties": {
-          "$ref": "#/definitions/WebHookProperties"
-        },
         "self": {
           "format": "uri",
           "description": "The location of this entity.",
@@ -5516,30 +5546,41 @@
           "description": "The description of the object.",
           "type": "string"
         },
+        "customProperties": {
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WebHookProperties"
+        },
+        "webUrl": {
+          "format": "uri",
+          "description": "The registered URL that will be used to send the POST requests for the registered events to.",
+          "type": "string"
+        },
         "events": {
           "$ref": "#/definitions/WebHookEvents"
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The time-stamp when the object was created.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
           "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The time-stamp when the current status was entered.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/Status"
         },
-        "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "links": {
+          "$ref": "#/definitions/WebHookLinks"
         }
       }
     },
@@ -5619,15 +5660,15 @@
       "title": "WebHookLinks",
       "type": "object",
       "properties": {
-        "ping": {
-          "format": "uri",
-          "description": "The URL that can be used to trigger the sending of a ping event to the registered URL of a web hook registration. See operation \"WebHooks_Ping\" for more details.",
-          "type": "string",
-          "readOnly": true
-        },
         "test": {
           "format": "uri",
           "description": "The URL that can be used sending test events to the registered URL of a web hook registration. See operation \"WebHooks_Test\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ping": {
+          "format": "uri",
+          "description": "The URL that can be used to trigger the sending of a ping event to the registered URL of a web hook registration. See operation \"WebHooks_Ping\" for more details.",
           "type": "string",
           "readOnly": true
         }
@@ -5638,17 +5679,17 @@
       "title": "WebHookProperties",
       "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/EntityError"
-        },
         "apiVersion": {
-          "description": "The API version the web hook was created in. This defines the shape of the payload in the callbacks.\r\nIf the payload type is not supported anymore, because the shape changed and the API version using it is removed (after deprecation),\r\nthe web hook will be disabled.",
+          "description": "The API version the web hook was created in. This defines the shape of the payload in the callbacks.\nIf the payload type is not supported anymore, because the shape changed and the API version using it is removed (after deprecation),\nthe web hook will be disabled.",
           "type": "string",
           "readOnly": true
         },
         "secret": {
-          "description": "A secret that will be used to create a SHA256 hash of the payload with the secret as HMAC key.\r\nThis hash will be set as X-MicrosoftSpeechServices-Signature header when calling back into the registered URL.",
+          "description": "A secret that will be used to create a SHA256 hash of the payload with the secret as HMAC key.\nThis hash will be set as X-MicrosoftSpeechServices-Signature header when calling back into the registered URL.",
           "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -5657,7 +5698,7 @@
       "type": "object",
       "properties": {
         "secret": {
-          "description": "A secret that will be used to create a SHA256 hash of the payload with the secret as HMAC key.\r\nThis hash will be set as X-MicrosoftSpeechServices-Signature header when calling back into the registered URL.",
+          "description": "A secret that will be used to create a SHA256 hash of the payload with the secret as HMAC key.\nThis hash will be set as X-MicrosoftSpeechServices-Signature header when calling back into the registered URL.",
           "type": "string"
         }
       }
@@ -5666,17 +5707,6 @@
       "title": "WebHookUpdate",
       "type": "object",
       "properties": {
-        "webUrl": {
-          "format": "uri",
-          "description": "The registered URL that will be used to send the POST requests for the registered events to.",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/WebHookPropertiesUpdate"
-        },
-        "events": {
-          "$ref": "#/definitions/WebHookEvents"
-        },
         "displayName": {
           "description": "The name of the object.",
           "type": "string"
@@ -5685,16 +5715,28 @@
           "description": "The description of the object.",
           "type": "string"
         },
+        "webUrl": {
+          "format": "uri",
+          "description": "The registered URL that will be used to send the POST requests for the registered events to.",
+          "type": "string"
+        },
         "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/WebHookPropertiesUpdate"
+        },
+        "events": {
+          "$ref": "#/definitions/WebHookEvents"
         }
       }
     },
-    "CombinedPhrases": {
+    "ChannelCombinedPhrases": {
+      "description": "The full transcript per channel.",
       "required": [
         "text"
       ],
@@ -5706,7 +5748,7 @@
           "type": "integer"
         },
         "text": {
-          "description": "The complete transcribed text for the channel.",
+          "description": "The transcribed text.",
           "type": "string"
         }
       }
@@ -5728,7 +5770,7 @@
         },
         "speaker": {
           "format": "int32",
-          "description": "The speaker number. Only present if speaker diarization is enabled.",
+          "description": "A unique integer number that is assigned to each speaker detected in the audio without particular order. Only present if speaker diarization is enabled.",
           "type": "integer"
         },
         "offsetMilliseconds": {
@@ -5764,7 +5806,7 @@
       }
     },
     "TranscribeDefinition": {
-      "description": "Metadata for a fast transcription request.",
+      "description": "Metadata for a transcription request.",
       "type": "object",
       "properties": {
         "locales": {
@@ -5830,10 +5872,10 @@
           "type": "integer"
         },
         "combinedPhrases": {
-          "description": "The combined transcription results for each channel.",
+          "description": "The full transcript for each channel.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CombinedPhrases"
+            "$ref": "#/definitions/ChannelCombinedPhrases"
           }
         },
         "phrases": {

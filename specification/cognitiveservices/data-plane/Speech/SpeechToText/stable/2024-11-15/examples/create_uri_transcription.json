@@ -4,6 +4,8 @@
     "Ocp-Apim-Subscription-Key": "{API Key}",
     "api-version": "2024-11-15",
     "transcription": {
+      "displayName": "Transcription using default model for en-US",
+      "locale": "en-US",
       "contentUrls": [
         "https://contoso.com/mystoragelocation",
         "https://contoso.com/myotherstoragelocation"
@@ -14,9 +16,7 @@
         "punctuationMode": "DictatedAndAutomatic",
         "profanityFilterMode": "Masked",
         "timeToLiveHours": 48
-      },
-      "locale": "en-US",
-      "displayName": "Transcription using default model for en-US"
+      }
     },
     "Content-Type": "application/json"
   },
@@ -25,6 +25,13 @@
       "headers": {},
       "body": {
         "self": "https://westus.api.cognitive.microsoft.com/speechtotext/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683?api-version=2024-11-15",
+        "displayName": "Transcription using adapted model en-US",
+        "customProperties": {
+          "key": "value"
+        },
+        "locale": "en-US",
+        "createdDateTime": "2019-01-07T11:34:12Z",
+        "lastActionDateTime": "2019-01-07T11:36:07Z",
         "model": {
           "self": "https://westus.api.cognitive.microsoft.com/speechtotext/models/827712a5-f942-4997-91c3-7c6cde35600b?api-version=2024-11-15"
         },
@@ -40,17 +47,10 @@
           ],
           "punctuationMode": "DictatedAndAutomatic",
           "profanityFilterMode": "Masked",
-          "durationMilliseconds": 42000,
-          "timeToLiveHours": 48
+          "timeToLiveHours": 48,
+          "durationMilliseconds": 42000
         },
-        "lastActionDateTime": "2019-01-07T11:36:07Z",
-        "status": "Succeeded",
-        "createdDateTime": "2019-01-07T11:34:12Z",
-        "locale": "en-US",
-        "displayName": "Transcription using adapted model en-US",
-        "customProperties": {
-          "key": "value"
-        }
+        "status": "Succeeded"
       }
     }
   }
