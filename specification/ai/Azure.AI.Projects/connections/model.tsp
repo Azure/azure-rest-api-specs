@@ -70,8 +70,8 @@ enum AuthenticationType {
   @doc("API Key authentication")
   apiKey: "ApiKey",
 
-  @doc("Entra ID authentication")
-  AAD: "AAD",
+  @doc("Entra ID authentication (formerly known as AAD)")
+  entraId: "AAD",
 
   @doc("Shared Access Signature (SAS) authentication")
   SAS: "SAS",
