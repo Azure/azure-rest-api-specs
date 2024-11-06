@@ -1,4 +1,4 @@
-import "../versions.tsp";
+import "./versions.tsp";
 import "./pushagentv2account.tsp";
 
 using TypeSpec.Versioning;
