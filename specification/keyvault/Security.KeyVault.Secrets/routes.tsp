@@ -17,7 +17,7 @@ namespace KeyVault;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Sets a secret in a specified key vault.")
-@route("/secrets/{secretName}")
+@route("/secrets/{secret-name}")
 @put
 op setSecret is Azure.Core.Foundations.Operation<
   {
@@ -27,7 +27,7 @@ op setSecret is Azure.Core.Foundations.Operation<
      * personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
-    @path
+    @path("secret-name")
     secretName: string;
 
     /**
@@ -48,14 +48,14 @@ op setSecret is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a secret from a specified key vault.")
-@route("/secrets/{secretName}")
+@route("/secrets/{secret-name}")
 @delete
 op deleteSecret is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the secret.
      */
-    @path
+    @path("secret-name")
     secretName: string;
   },
   DeletedSecretBundle
@@ -69,20 +69,20 @@ op deleteSecret is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the attributes associated with a specified secret in a given key vault.")
-@route("/secrets/{secretName}/{secretVersion}")
+@route("/secrets/{secret-name}/{secret-version}")
 @patch
 op updateSecret is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the secret.
      */
-    @path
+    @path("secret-name")
     secretName: string;
 
     /**
      * The version of the secret.
      */
-    @path
+    @path("secret-version")
     secretVersion: string;
 
     /**
@@ -102,21 +102,21 @@ op updateSecret is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Get a specified secret from a given key vault.")
-@route("/secrets/{secretName}/{secretVersion}")
+@route("/secrets/{secret-name}/{secret-version}")
 @get
 op getSecret is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the secret.
      */
-    @path
+    @path("secret-name")
     secretName: string;
 
     /**
      * The version of the secret. This URI fragment is optional. If not specified, the
      * latest version of the secret is returned.
      */
-    @path
+    @path("secret-version")
     secretVersion: string;
   },
   SecretBundle
@@ -153,14 +153,14 @@ op getSecrets is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("List all versions of the specified secret.")
-@route("/secrets/{secretName}/versions")
+@route("/secrets/{secret-name}/versions")
 @get
 op getSecretVersions is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the secret.
      */
-    @path
+    @path("secret-name")
     secretName: string;
 
     /**
@@ -204,14 +204,14 @@ op getDeletedSecrets is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the specified deleted secret.")
-@route("/deletedsecrets/{secretName}")
+@route("/deletedsecrets/{secret-name}")
 @get
 op getDeletedSecret is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the secret.
      */
-    @path
+    @path("secret-name")
     secretName: string;
   },
   DeletedSecretBundle
@@ -224,14 +224,14 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Permanently deletes the specified secret.")
-@route("/deletedsecrets/{secretName}")
+@route("/deletedsecrets/{secret-name}")
 @delete
 op purgeDeletedSecret is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the secret.
      */
-    @path
+    @path("secret-name")
     secretName: string;
   },
   void
@@ -244,14 +244,14 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Recovers the deleted secret to the latest version.")
-@route("/deletedsecrets/{secretName}/recover")
+@route("/deletedsecrets/{secret-name}/recover")
 @post
 op recoverDeletedSecret is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the deleted secret.
      */
-    @path
+    @path("secret-name")
     secretName: string;
   },
   SecretBundle
@@ -264,14 +264,14 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Backs up the specified secret.")
-@route("/secrets/{secretName}/backup")
+@route("/secrets/{secret-name}/backup")
 @post
 op backupSecret is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the secret.
      */
-    @path
+    @path("secret-name")
     secretName: string;
   },
   BackupSecretResult
