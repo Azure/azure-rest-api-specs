@@ -128,7 +128,7 @@ interface Service {
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: string,
+    multipartContentType: "multipart/mixed",
 
     /** Specifies the version of the operation to use for this request. */
     @header("x-ms-version")
@@ -142,7 +142,7 @@ interface Service {
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
     #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
     @header("Content-Type")
-    contentType: string;
+    contentType: "multipart/mixed";
 
     /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
     @header("x-ms-version")
@@ -386,7 +386,7 @@ interface Container {
 
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: string,
+    multipartContentType: "multipart/mixed",
 
     ...ContentLengthParameter,
     ...TimeoutParameter,
@@ -401,7 +401,7 @@ interface Container {
 
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: string;
+    multipartContentType: "multipart/mixed";
 
     /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
     @header("x-ms-version")
