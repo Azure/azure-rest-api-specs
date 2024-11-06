@@ -1243,7 +1243,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_PowerOff",
-        "description": "Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges. Additionally, this operation is not allowed on a VM scale set with a deallocated virtual machine.",
+        "description": "Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges. Additionally, this operation is not allowed on virtual machines in a VM scale set that are being deallocated or have already been deallocated.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3256,7 +3256,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_PowerOff",
-        "description": "Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges. Additionally, this operation is not allowed on a deallocated virtual machine.",
+        "description": "Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges. Additionally, this operation is not allowed on a virtual machine that is being deallocated or already has been deallocated.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4249,7 +4249,7 @@
         },
         "createOption": {
           "$ref": "./computeRPCommon.json#/definitions/CreateOption",
-          "description": "Specifies how the virtual machines in the scale set should be created. The only allowed value is: **FromImage.** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machines in the scale set should be created. The only allowed value is: **fromImage.** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diffDiskSettings": {
           "$ref": "./computeRPCommon.json#/definitions/DiffDiskSettings",
