@@ -47,14 +47,15 @@ op getCertificates is KeyVaultOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a certificate from a specified key vault.")
-@route("/certificates/{certificateName}")
+@route("/certificates/{certificate-name}")
 @delete
 op deleteCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
   },
   DeletedCertificateBundle
 >;
@@ -124,7 +125,7 @@ op getCertificateIssuers is KeyVaultOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Sets the specified certificate issuer.")
-@route("/certificates/issuers/{issuerName}")
+@route("/certificates/issuers/{issuer-name}")
 @put
 op setCertificateIssuer is Azure.Core.Foundations.Operation<
   {
@@ -133,7 +134,8 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
      * purpose of running the service. The value provided should not include
      * personally identifiable or sensitive information.
      */
-    @path issuerName: string;
+    @path("issuer-name")
+    issuerName: string;
 
     /**
      * Certificate issuer set parameter.
@@ -153,14 +155,15 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified certificate issuer.")
-@route("/certificates/issuers/{issuerName}")
+@route("/certificates/issuers/{issuer-name}")
 @patch
 op updateCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the issuer.
      */
-    @path issuerName: string;
+    @path("issuer-name")
+    issuerName: string;
 
     /**
      * Certificate issuer update parameter.
@@ -180,14 +183,15 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the specified certificate issuer.")
-@route("/certificates/issuers/{issuerName}")
+@route("/certificates/issuers/{issuer-name}")
 @get
 op getCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the issuer.
      */
-    @path issuerName: string;
+    @path("issuer-name")
+    issuerName: string;
   },
   IssuerBundle
 >;
@@ -199,14 +203,15 @@ op getCertificateIssuer is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes the specified certificate issuer.")
-@route("/certificates/issuers/{issuerName}")
+@route("/certificates/issuers/{issuer-name}")
 @delete
 op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the issuer.
      */
-    @path issuerName: string;
+    @path("issuer-name")
+    issuerName: string;
   },
   IssuerBundle
 >;
@@ -217,7 +222,7 @@ op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Creates a new certificate.")
-@route("/certificates/{certificateName}/create")
+@route("/certificates/{certificate-name}/create")
 @post
 op createCertificate is Azure.Core.Foundations.Operation<
   {
@@ -227,7 +232,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
      * personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
-    @path
+    @path("certificate-name")
     certificateName: string;
 
     /**
@@ -250,7 +255,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Imports a certificate into a specified key vault.")
-@route("/certificates/{certificateName}/import")
+@route("/certificates/{certificate-name}/import")
 @post
 op importCertificate is Azure.Core.Foundations.Operation<
   {
@@ -260,7 +265,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
      * personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
-    @path
+    @path("certificate-name")
     certificateName: string;
 
     /**
@@ -281,14 +286,15 @@ op importCertificate is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("List the versions of a certificate.")
-@route("/certificates/{certificateName}/versions")
+@route("/certificates/{certificate-name}/versions")
 @get
 op getCertificateVersions is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
 
     /**
      * Maximum number of results to return in a page. If not specified the service
@@ -309,14 +315,15 @@ op getCertificateVersions is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the policy for a certificate.")
-@route("/certificates/{certificateName}/policy")
+@route("/certificates/{certificate-name}/policy")
 @get
 op getCertificatePolicy is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate in a given key vault.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
   },
   CertificatePolicy
 >;
@@ -327,14 +334,15 @@ op getCertificatePolicy is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the policy for a certificate.")
-@route("/certificates/{certificateName}/policy")
+@route("/certificates/{certificate-name}/policy")
 @patch
 op updateCertificatePolicy is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate in the given vault.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
 
     /**
      * The policy for the certificate.
@@ -351,19 +359,21 @@ op updateCertificatePolicy is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified attributes associated with the given certificate.")
-@route("/certificates/{certificateName}/{certificateVersion}")
+@route("/certificates/{certificate-name}/{certificate-version}")
 @patch
 op updateCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate in the given key vault.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
 
     /**
      * The version of the certificate.
      */
-    @path certificateVersion: string;
+    @path("certificate-version")
+    certificateVersion: string;
 
     /**
      * The parameters for certificate update.
@@ -382,20 +392,22 @@ op updateCertificate is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets information about a certificate.")
-@route("/certificates/{certificateName}/{certificateVersion}")
+@route("/certificates/{certificate-name}/{certificate-version}")
 @get
 op getCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate in the given vault.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
 
     /**
      * The version of the certificate. This URI fragment is optional. If not
      * specified, the latest version of the certificate is returned.
      */
-    @path certificateVersion: string;
+    @path("certificate-version")
+    certificateVersion: string;
   },
   CertificateBundle
 >;
@@ -406,14 +418,15 @@ op getCertificate is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates a certificate operation.")
-@route("/certificates/{certificateName}/pending")
+@route("/certificates/{certificate-name}/pending")
 @patch
 op updateCertificateOperation is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
 
     /**
      * The certificate operation response.
@@ -432,14 +445,15 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the creation operation of a certificate.")
-@route("/certificates/{certificateName}/pending")
+@route("/certificates/{certificate-name}/pending")
 @get
 op getCertificateOperation is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
   },
   CertificateOperation
 >;
@@ -451,14 +465,15 @@ op getCertificateOperation is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes the creation operation for a specific certificate.")
-@route("/certificates/{certificateName}/pending")
+@route("/certificates/{certificate-name}/pending")
 @delete
 op deleteCertificateOperation is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
   },
   CertificateOperation
 >;
@@ -473,14 +488,15 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
   Merges a certificate or a certificate chain with a key pair existing on the
   server.
   """)
-@route("/certificates/{certificateName}/pending/merge")
+@route("/certificates/{certificate-name}/pending/merge")
 @post
 op mergeCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
 
     /**
      * The parameters to merge certificate.
@@ -500,14 +516,15 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Backs up the specified certificate.")
-@route("/certificates/{certificateName}/backup")
+@route("/certificates/{certificate-name}/backup")
 @post
 op backupCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
   },
   BackupCertificateResult
 >;
@@ -557,14 +574,15 @@ op getDeletedCertificates is KeyVaultOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Retrieves information about the specified deleted certificate.")
-@route("/deletedcertificates/{certificateName}")
+@route("/deletedcertificates/{certificate-name}")
 @get
 op getDeletedCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
   },
   DeletedCertificateBundle
 >;
@@ -577,14 +595,15 @@ op getDeletedCertificate is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Permanently deletes the specified deleted certificate.")
-@route("/deletedcertificates/{certificateName}")
+@route("/deletedcertificates/{certificate-name}")
 @delete
 op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
   },
   void
 >;
@@ -601,14 +620,15 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
   Recovers the deleted certificate back to its current version under
   /certificates.
   """)
-@route("/deletedcertificates/{certificateName}/recover")
+@route("/deletedcertificates/{certificate-name}/recover")
 @post
 op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the deleted certificate
      */
-    @path certificateName: string;
+    @path("certificate-name")
+    certificateName: string;
   },
   CertificateBundle
 >;

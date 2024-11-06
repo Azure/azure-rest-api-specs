@@ -109,7 +109,7 @@
         }
       }
     },
-    "/certificates/{certificateName}": {
+    "/certificates/{certificate-name}": {
       "delete": {
         "operationId": "DeleteCertificate",
         "summary": "Deletes a certificate from a specified key vault.",
@@ -119,11 +119,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           }
         ],
         "responses": {
@@ -153,7 +154,7 @@
         }
       }
     },
-    "/certificates/{certificateName}/{certificateVersion}": {
+    "/certificates/{certificate-name}/{certificate-version}": {
       "get": {
         "operationId": "GetCertificate",
         "summary": "Gets information about a certificate.",
@@ -163,18 +164,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate in the given vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           },
           {
-            "name": "certificateVersion",
+            "name": "certificate-version",
             "in": "path",
             "description": "The version of the certificate. This URI fragment is optional. If not\nspecified, the latest version of the certificate is returned.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateVersion"
           }
         ],
         "responses": {
@@ -212,18 +215,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate in the given key vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           },
           {
-            "name": "certificateVersion",
+            "name": "certificate-version",
             "in": "path",
             "description": "The version of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateVersion"
           },
           {
             "name": "parameters",
@@ -262,7 +267,7 @@
         }
       }
     },
-    "/certificates/{certificateName}/backup": {
+    "/certificates/{certificate-name}/backup": {
       "post": {
         "operationId": "BackupCertificate",
         "summary": "Backs up the specified certificate.",
@@ -272,11 +277,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           }
         ],
         "responses": {
@@ -306,7 +312,7 @@
         }
       }
     },
-    "/certificates/{certificateName}/create": {
+    "/certificates/{certificate-name}/create": {
       "post": {
         "operationId": "CreateCertificate",
         "summary": "Creates a new certificate.",
@@ -316,12 +322,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate. The value you provide may be copied globally for\nthe purpose of running the service. The value provided should not include\npersonally identifiable or sensitive information.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$"
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "x-ms-client-name": "certificateName"
           },
           {
             "name": "parameters",
@@ -360,7 +367,7 @@
         }
       }
     },
-    "/certificates/{certificateName}/import": {
+    "/certificates/{certificate-name}/import": {
       "post": {
         "operationId": "ImportCertificate",
         "summary": "Imports a certificate into a specified key vault.",
@@ -370,12 +377,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate. The value you provide may be copied globally for\nthe purpose of running the service. The value provided should not include\npersonally identifiable or sensitive information.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$"
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "x-ms-client-name": "certificateName"
           },
           {
             "name": "parameters",
@@ -414,7 +422,7 @@
         }
       }
     },
-    "/certificates/{certificateName}/pending": {
+    "/certificates/{certificate-name}/pending": {
       "get": {
         "operationId": "GetCertificateOperation",
         "summary": "Gets the creation operation of a certificate.",
@@ -424,11 +432,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           }
         ],
         "responses": {
@@ -466,11 +475,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           },
           {
             "name": "certificateOperation",
@@ -517,11 +527,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           }
         ],
         "responses": {
@@ -551,7 +562,7 @@
         }
       }
     },
-    "/certificates/{certificateName}/pending/merge": {
+    "/certificates/{certificate-name}/pending/merge": {
       "post": {
         "operationId": "MergeCertificate",
         "summary": "Merges a certificate or a certificate chain with a key pair existing on the\nserver.",
@@ -561,11 +572,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           },
           {
             "name": "parameters",
@@ -604,7 +616,7 @@
         }
       }
     },
-    "/certificates/{certificateName}/policy": {
+    "/certificates/{certificate-name}/policy": {
       "get": {
         "operationId": "GetCertificatePolicy",
         "summary": "Lists the policy for a certificate.",
@@ -614,11 +626,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate in a given key vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           }
         ],
         "responses": {
@@ -656,11 +669,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate in the given vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           },
           {
             "name": "certificatePolicy",
@@ -699,7 +713,7 @@
         }
       }
     },
-    "/certificates/{certificateName}/versions": {
+    "/certificates/{certificate-name}/versions": {
       "get": {
         "operationId": "GetCertificateVersions",
         "summary": "List the versions of a certificate.",
@@ -709,11 +723,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           },
           {
             "name": "maxresults",
@@ -922,7 +937,7 @@
         }
       }
     },
-    "/certificates/issuers/{issuerName}": {
+    "/certificates/issuers/{issuer-name}": {
       "get": {
         "operationId": "GetCertificateIssuer",
         "summary": "Lists the specified certificate issuer.",
@@ -932,11 +947,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "issuerName",
+            "name": "issuer-name",
             "in": "path",
             "description": "The name of the issuer.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "issuerName"
           }
         ],
         "responses": {
@@ -974,11 +990,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "issuerName",
+            "name": "issuer-name",
             "in": "path",
             "description": "The name of the issuer. The value you provide may be copied globally for the\npurpose of running the service. The value provided should not include\npersonally identifiable or sensitive information.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "issuerName"
           },
           {
             "name": "parameter",
@@ -1025,11 +1042,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "issuerName",
+            "name": "issuer-name",
             "in": "path",
             "description": "The name of the issuer.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "issuerName"
           },
           {
             "name": "parameter",
@@ -1076,11 +1094,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "issuerName",
+            "name": "issuer-name",
             "in": "path",
             "description": "The name of the issuer.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "issuerName"
           }
         ],
         "responses": {
@@ -1213,7 +1232,7 @@
         }
       }
     },
-    "/deletedcertificates/{certificateName}": {
+    "/deletedcertificates/{certificate-name}": {
       "get": {
         "operationId": "GetDeletedCertificate",
         "summary": "Retrieves information about the specified deleted certificate.",
@@ -1223,11 +1242,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           }
         ],
         "responses": {
@@ -1265,11 +1285,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the certificate",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           }
         ],
         "responses": {
@@ -1296,7 +1317,7 @@
         }
       }
     },
-    "/deletedcertificates/{certificateName}/recover": {
+    "/deletedcertificates/{certificate-name}/recover": {
       "post": {
         "operationId": "RecoverDeletedCertificate",
         "summary": "Recovers the deleted certificate back to its current version under\n/certificates.",
@@ -1306,11 +1327,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificateName",
+            "name": "certificate-name",
             "in": "path",
             "description": "The name of the deleted certificate",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateName"
           }
         ],
         "responses": {
