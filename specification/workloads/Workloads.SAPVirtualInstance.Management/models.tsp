@@ -7,6 +7,9 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Workloads;
 
+@armResourceOperations
+interface Operations extends Microsoft.Workloads.Operations {}
+
 /**
  * Defines the environment type - Production/Non Production.
  */
