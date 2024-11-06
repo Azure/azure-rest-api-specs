@@ -334,13 +334,29 @@
         }
       ],
       "properties": {
-        "provisioningState": {
-          "description": "Provisioning state of the Connected Environment Dapr Component.",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "InProgress"
+        "properties": {
+          "description": "Dapr component properties",
+          "type": "object",
+                    "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Connected Environment Dapr Component.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ConnectedEnvironmentDaprComponentProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
           ],
           "type": "string",
           "readOnly": true,
