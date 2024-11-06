@@ -85,14 +85,13 @@ model InternalConnectionPropertiesApiKeyAuth
 
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsApiKeyAuth;
-
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)")
 model InternalConnectionPropertiesAADAuth extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
-  authType: AuthenticationType.AAD;
+  authType: AuthenticationType.entraId;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
