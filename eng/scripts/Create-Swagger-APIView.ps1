@@ -26,7 +26,7 @@ param (
     [string]$CommitSha
 )
 
-. "$PSScriptRoot/Logging-Functions.ps1"
+. $PSScriptRoot/../common/scripts/logging.ps1
 
 $apiViewArtifactsDirectory = [System.IO.Path]::Combine($ArtiFactsStagingDirectory, $APIViewArtifactsDirectoryName)
 $publishedPackages = Get-ChildItem -Path $apiViewArtifactsDirectory -Directory -ErrorAction SilentlyContinue
@@ -70,4 +70,11 @@ $publishedPackages | ForEach-Object {
 
   LogInfo "Create APIView for resource provider '$($_.BaseName)'"
   LogInfo "APIView Uri: $($uri.Uri)"
+
+  try {
+    Invoke-WebRequest -Method 'GET' -Uri $uri.Uri -MaximumRetryCount 3
+  }
+  catch {
+    LogError "Failed to create APIView for resource provider '$($_.BaseName)'. Error: $($_.Exception.Response)"
+  }
 }

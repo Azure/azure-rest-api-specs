@@ -25,8 +25,8 @@ param (
     [string]$APIViewArtifactsDirectoryName
 )
 
-. "$PSScriptRoot/ChangedFiles-Functions.ps1"
-. "$PSScriptRoot/Logging-Functions.ps1"
+. $PSScriptRoot/ChangedFiles-Functions.ps1
+. $PSScriptRoot/../common/scripts/logging.ps1
 
 <#
 .DESCRIPTION
