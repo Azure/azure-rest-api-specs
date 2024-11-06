@@ -39,6 +39,7 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+
 ### Tag: package-preview-2024-10
 
 These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
@@ -46,6 +47,19 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
   - preview/2024-10-01-preview/route.json
+  
+suppressions:
+  - code: OperationIdNounVerb
+    reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
+```
+
+### Tag: package-preview-2024-7
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - preview/2024-07-01-preview/route.json
   
 suppressions:
   - code: OperationIdNounVerb
@@ -64,6 +78,7 @@ suppressions:
   - code: OperationIdNounVerb
     reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
 ```
+
 ### Tag: package-preview-2024-5
 
 These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
@@ -75,7 +90,15 @@ input-file:
 suppressions:
   - code: OperationIdNounVerb
     reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
+```
 
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - preview/2024-04-01-preview/route.json
 ```
 
 ### Tag: package-preview-2023-10

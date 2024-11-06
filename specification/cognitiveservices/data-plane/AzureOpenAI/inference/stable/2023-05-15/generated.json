@@ -405,6 +405,10 @@
         "messages"
       ]
     },
+    "ChatMessageContent": {
+      "type": "string",
+      "x-nullable": false
+    },
     "ChatRequestAssistantMessage": {
       "type": "object",
       "description": "A request chat message representing response or action from the assistant.",
@@ -471,6 +475,7 @@
       "description": "A request chat message representing user input to the assistant.",
       "properties": {
         "content": {
+          "$ref": "#/definitions/ChatMessageContent",
           "description": "The contents of the user message, with available input types varying by selected model."
         },
         "name": {
