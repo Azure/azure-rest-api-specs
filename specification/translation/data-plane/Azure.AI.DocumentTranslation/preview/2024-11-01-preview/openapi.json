@@ -625,6 +625,16 @@
               "type": "file"
             },
             "headers": {
+              "total-image-scans-failed": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the number of failed image translations within a document translation job"
+              },
+              "total-image-scans-succeeded": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the number of successful image translations within a document translation job"
+              },
               "x-metered-usage": {
                 "type": "integer",
                 "format": "int32",
@@ -634,16 +644,6 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-total-image-scans-failed": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Specifies the number of failed image translations within a document translation job"
-              },
-              "x-total-image-scans-succeeded": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Specifies the number of successful image translations within a document translation job"
               }
             }
           },

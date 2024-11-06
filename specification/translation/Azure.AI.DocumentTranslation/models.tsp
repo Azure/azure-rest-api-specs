@@ -28,12 +28,12 @@ model DocumentTranslateResult {
   @added(Versions.v2024_11_01_preview)
   meteredUsage: int32;
 
-  @header("x-total-image-scans-succeeded")
+  @header("total-image-scans-succeeded")
   @doc("Specifies the number of successful image translations within a document translation job")
   @added(Versions.v2024_11_01_preview)
   totalImageScansSucceeded: int32;
 
-  @header("x-total-image-scans-failed")
+  @header("total-image-scans-failed")
   @doc("Specifies the number of failed image translations within a document translation job")
   @added(Versions.v2024_11_01_preview)
   totalImageScansFailed: int32;
