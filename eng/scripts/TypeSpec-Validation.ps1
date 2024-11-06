@@ -13,7 +13,7 @@ if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) {
   throw "Shard ($Shard) must be less than TotalShards ($TotalShards)"
 }
 
-. $PSScriptRoot/Logging-Functions.ps1
+. $PSScriptRoot/../common/scripts/logging.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
 . $PSScriptRoot/Array-Functions.ps1
 
