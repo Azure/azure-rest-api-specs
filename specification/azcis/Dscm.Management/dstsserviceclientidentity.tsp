@@ -8,6 +8,7 @@ using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -36,6 +37,7 @@ model DstsServiceClientIdentityResourceProperties {
   groupName?: string;
 
   @doc("Gets or sets the region for the SCI. This is optional. E.g. \"francec\" for France Central..")
+  @removed(Versions.v2024_06_24_preview)
   region?: string;
 
   @doc("Gets or sets the subscriptions for the SCI. This is optional. E.g. \"5d711910-92ea-4ff9-b70d-1e61307faaac,a524674c-7024-40f1-afe9-127ab5a2e1b0\".")
@@ -46,7 +48,7 @@ model DstsServiceClientIdentityResourceProperties {
 
   @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
-  armLocation?: string;
+  azureLocation: azureLocation;
 
   @doc("Provisioning state")
   @visibility("read")
