@@ -15,7 +15,7 @@ param (
 Set-StrictMode -Version 3
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
-. $PSScriptRoot/Logging-Functions.ps1
+. $PSScriptRoot/../common/scripts/logging.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
 
 function Get-ValidatedSuppression {
