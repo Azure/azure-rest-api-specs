@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -24,8 +25,8 @@ model CanonicalNameRecordResourceProperties {
   @doc("Gets or sets the TTL")
   ttl: string;
 
-  @doc("Azure location")
-  azureLocation?: string;
+  @doc("The Azure location")
+  azureLocation?: azureLocation;
 
   @doc("Provisioning state")
   @visibility("read")
