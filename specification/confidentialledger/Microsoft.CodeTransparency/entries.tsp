@@ -27,6 +27,7 @@ op getEntryStatus is Foundations.Operation<
   ServiceTraits
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the status of all entries operations")
 @route("/operations")
