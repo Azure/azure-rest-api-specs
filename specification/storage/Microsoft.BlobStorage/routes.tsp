@@ -180,10 +180,7 @@ interface Container {
     {
       ...ContainerNamePathParameter;
       ...TimeoutParameter;
-
-      // TODO should we define metadata headers like:
-      // ...MetadataHeaders;
-
+      ...MetadataHeaders;
       ...BlobPublicAccess;
 
       /** Optional.  Version 2019-07-07 and later.  Specifies the default encryption scope to set on the container and use for all future writes. */
@@ -211,11 +208,8 @@ interface Container {
       ...LeaseIdOptionalParameter;
     },
     {
-      // TODO: x-ms-meta headers
-      // ...MetadataHeaders;
-
+      ...MetadataHeaders;
       ...EtagResponseHeader;
-
       ...LastModifiedResponseHeader;
       ...DateResponseHeader;
       ...LeaseDurationHeader;
@@ -273,9 +267,7 @@ interface Container {
       ...ContainerNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-
-      // TODO: ...MetadataParameter; or MetadataHeaders?
-
+      ...MetadataHeaders;
       ...IfModifiedSinceParameter;
     },
     {
@@ -647,11 +639,9 @@ interface Blob {
 
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
-
-    // TODO: x-ms-meta headers
-    // TODO: x-ms-or headers
+    ...MetadataHeaders;
+    ...ObjectReplicationHeaders;
     ...LastModifiedResponseHeader;
-
     ...CreationTimeResponseHeader;
     ...ObjectReplicationPolicyIdResponseHeader;
     ...ContentLengthResponseHeader;
@@ -702,11 +692,9 @@ interface Blob {
 
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
-
-    // TODO: x-ms-meta headers
-    // TODO: x-ms-or headers
+    ...MetadataHeaders;
+    ...ObjectReplicationHeaders;
     ...LastModifiedResponseHeader;
-
     ...CreationTimeResponseHeader;
     ...ObjectReplicationPolicyIdResponseHeader;
     ...ContentLengthResponseHeader;
@@ -766,11 +754,9 @@ interface Blob {
       ...IfTagsParameter;
     },
     {
-      // TODO: x-ms-meta headers
-      // TODO: x-ms-or headers
-
+      ...MetadataHeaders;
+      ...ObjectReplicationHeaders;
       ...LastModifiedResponseHeader;
-
       ...CreationTimeResponseHeader;
       ...ObjectReplicationPolicyIdResponseHeader;
       ...BlobTypeResponseHeader;
@@ -997,10 +983,8 @@ interface Blob {
       ...ContainerNamePathParameter;
       ...BlobPathParameter;
       ...TimeoutParameter;
-
-      // TODO: Metadata ...MetadataParameter;
+      ...MetadataHeaders;
       ...LeaseIdOptionalParameter;
-
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
@@ -1146,11 +1130,8 @@ interface Blob {
       ...ContainerNamePathParameter;
       ...BlobPathParameter;
       ...TimeoutParameter;
-
-      // TODO: ...MetadataParameter;
-
+      ...MetadataHeaders;
       ...EncryptionKeyParameter;
-
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
       ...EncryptionScopeParameter;
@@ -1183,10 +1164,8 @@ interface Blob {
       ...ContainerNamePathParameter;
       ...BlobPathParameter;
       ...TimeoutParameter;
-
-      // TODO: ...MetadataParameter;
+      ...MetadataHeaders;
       ...AccessTierOptional;
-
       ...RehydratePriorityHeader;
       ...SourceIfModifiedSinceParameter;
       ...SourceIfUnmodifiedSinceParameter;
@@ -1228,10 +1207,8 @@ interface Blob {
       ...ContainerNamePathParameter;
       ...BlobPathParameter;
       ...TimeoutParameter;
-
-      // TODO: ...MetadataParameter;
+      ...MetadataHeaders;
       ...AccessTierOptional;
-
       ...SourceIfModifiedSinceParameter;
       ...SourceIfUnmodifiedSinceParameter;
       ...SourceIfMatchParameter;
@@ -1357,11 +1334,8 @@ interface Blob {
     BodyParameter & {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
       @statusCode statusCode: 200 | 206;
-
-      // TODO: MetadataResponseHeader;
-
+      ...MetadataHeaders;
       ...LastModifiedResponseHeader;
-
       ...ContentLengthResponseHeader;
       ...ContentRangeResponseHeader;
       ...EtagResponseHeader;
@@ -1445,9 +1419,8 @@ interface PageBlob {
   @route("/{containerName}/{blob}?PageBlob")
   create is StorageOperation<
     {
-      // TODO: Metadata
+      ...MetadataHeaders;
       ...ContainerNamePathParameter;
-
       ...BlobPathParameter;
       ...TimeoutParameter;
       ...ContentLengthParameter;
@@ -1773,9 +1746,8 @@ interface AppendBlob {
   @route("/{containerName}/{blob}?AppendBlob")
   create is StorageOperation<
     {
-      // TODO: Metadata
+      ...MetadataHeaders;
       ...ContainerNamePathParameter;
-
       ...BlobPathParameter;
       ...TimeoutParameter;
       ...ContentLengthParameter;
@@ -1936,10 +1908,8 @@ interface BlockBlob {
   @route("/{containerName}/{blob}?BlockBlob")
   upload is StorageOperation<
     {
-      // TODO: Metadata
-
+      ...MetadataHeaders;
       ...ContainerNamePathParameter;
-
       ...BlobPathParameter;
       ...BodyParameter;
       ...TimeoutParameter;
@@ -1987,10 +1957,8 @@ interface BlockBlob {
   @route("/{containerName}/{blob}?BlockBlob&fromUrl")
   putBlobFromUrl is StorageOperation<
     {
-      // TODO: Metadata
-
+      ...MetadataHeaders;
       ...ContainerNamePathParameter;
-
       ...BlobPathParameter;
       ...TimeoutParameter;
       ...ContentMd5Parameter;
@@ -2127,10 +2095,8 @@ interface BlockBlob {
       ...BlobContentMd5Parameter;
       ...ContentMd5Parameter;
       ...ContentCrc64Parameter;
-
-      // TODO: ...MetadataParameter;
+      ...MetadataHeaders;
       ...LeaseIdOptionalParameter;
-
       ...BlobContentDispositionParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;

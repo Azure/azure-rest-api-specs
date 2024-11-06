@@ -2023,11 +2023,16 @@ alias ContainerNamePathParameter = {
   containerName: string;
 };
 
-// TODO: Figure out how to better represent this
-/** Optional. Specifies a user-defined name-value pair associated with the blob. If no name-value pairs are specified, the operation will copy the metadata from the source blob or file to the destination blob. If one or more name-value pairs are specified, the destination blob is created with the specified metadata, and metadata is not copied from the source blob or file. Note that beginning with version 2009-09-19, metadata names must adhere to the naming rules for C# identifiers. See Naming and Referencing Containers, Blobs, and Metadata for more information. */
+// NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
-  @header("x-ms-meta") metadata?: Record<string>;
+  @header("x-ms-meta") metadata?: string;
+};
+
+// NOTE: this does not explicitly let emitters know that this is a special type of header used for collection of object replication headers. Logic should be handwritten to handle this.
+alias ObjectReplicationHeaders = {
+  /** Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed). */
+  @header("x-ms-or") objectReplicationRules?: string;
 };
 
 /** The If-Unmodified-Since header. */
