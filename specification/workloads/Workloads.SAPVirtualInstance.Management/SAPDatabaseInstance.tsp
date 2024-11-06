@@ -60,9 +60,12 @@ interface SAPDatabaseInstances {
   start is ArmResourceActionAsync<
     SAPDatabaseInstance,
     {
+      @header
+      contentType: "application/json";
+
       @doc("SAP Database server instance start request body.")
       @body
-      body?: StartRequest;
+      body?: StartContent;
     },
     Foundations.OperationStatusResult
   >;
@@ -73,9 +76,12 @@ interface SAPDatabaseInstances {
   stop is ArmResourceActionAsync<
     SAPDatabaseInstance,
     {
+      @header
+      contentType: "application/json";
+
       @doc("Stop request for the database instance of the SAP system.")
       @body
-      body?: StopRequest;
+      body?: StopContent;
     },
     Foundations.OperationStatusResult
   >;
