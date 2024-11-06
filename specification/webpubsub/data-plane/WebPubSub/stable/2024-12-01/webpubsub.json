@@ -942,6 +942,9 @@
         ],
         "summary": "List connections in a group.",
         "operationId": "WebPubSub_ListConnectionsInGroup",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "produces": [
           "application/json"
         ],
@@ -970,7 +973,6 @@
             "description": "The maximum number of connections to include in a single response. It should be between 1 and 200.",
             "type": "integer",
             "format": "int32",
-            "default": 200,
             "maximum": 200,
             "minimum": 1
           },
