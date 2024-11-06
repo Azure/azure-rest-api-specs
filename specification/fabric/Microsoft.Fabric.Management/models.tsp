@@ -115,7 +115,7 @@ model RpSkuEnumerationForNewResourceResult {
   value: Array<RpSkuDetailsForNewResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 
@@ -145,7 +145,7 @@ model RpSkuEnumerationForExistingResourceResult {
   value: Array<RpSkuDetailsForExistingResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 

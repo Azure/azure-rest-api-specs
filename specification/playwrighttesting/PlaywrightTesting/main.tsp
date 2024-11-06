@@ -190,6 +190,7 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface AccessTokens {
   // AccessToken Operations
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @doc("Creates an access-token with given access-token id in guid format.")
   createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
 

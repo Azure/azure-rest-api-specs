@@ -14,6 +14,7 @@ namespace Customizations;
 @@clientName(MetricDimensionsRequest.timespan, "time_interval", "python");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
   name: "LoadTestAdministrationClient",
   service: Microsoft.LoadTestService,
@@ -36,6 +37,7 @@ interface AdministrationOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
   name: "LoadTestRunClient",
   service: Microsoft.LoadTestService,
@@ -65,6 +67,7 @@ interface TestRunOperations {
 
 // NOTE: `LoadTestAdministrationClient` will contain all administration operations and `LoadTestRunClient` will contain all run based operations
 // A separate interface is made to just segregate the operations by resource type
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
   name: "LoadTestAdministrationClient",
   service: Microsoft.LoadTestService,
@@ -76,6 +79,7 @@ interface TestProfileAdministrationOperations {
   listTestProfiles is TestProfileAdministration.listTestProfiles;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
   name: "LoadTestRunClient",
   service: Microsoft.LoadTestService,

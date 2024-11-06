@@ -42,6 +42,7 @@ interface OpenAIClient {
 
   getEmbeddings is Azure.OpenAI.getEmbeddings;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   listFiles is Azure.OpenAI.listFiles;
 
@@ -58,6 +59,7 @@ interface OpenAIClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   getFileContent is Azure.OpenAI.getFileContent;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   listBatches is Azure.OpenAI.listBatches;
 

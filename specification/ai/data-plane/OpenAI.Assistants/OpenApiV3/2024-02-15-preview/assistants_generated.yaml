@@ -2655,7 +2655,7 @@ components:
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         incomplete_details:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/IncompleteRunDetails'
           nullable: true
           description: Details on why the run is incomplete. Will be `null` if the run is not incomplete.

@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.Versioning;
 
+#suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"
 @service({
   title: "Text Translation",
 })

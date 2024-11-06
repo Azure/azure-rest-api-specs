@@ -71,6 +71,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Returns a list of batch requests submitted and the status for each request")
   @doc("""
     Returns a list of batch requests submitted and the status for each
@@ -249,6 +250,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Cancel a currently processing or queued translation")
   @doc("""
     Cancel a currently processing or queued translation.
@@ -273,6 +275,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Returns the status for all documents in a batch document translation request")
   @doc("""
     Returns the status for all documents in a batch document translation request.

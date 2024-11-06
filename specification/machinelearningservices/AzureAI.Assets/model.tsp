@@ -53,7 +53,7 @@ model PagedIndex {
   value: Index[];
 
   @doc("The link to the next page of items")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: ResourceLocation<Index>;
 }
 
@@ -77,7 +77,7 @@ model PagedPrompt {
   value: Prompt[];
 
   @doc("The link to the next page of items")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: ResourceLocation<Prompt>;
 }
 
