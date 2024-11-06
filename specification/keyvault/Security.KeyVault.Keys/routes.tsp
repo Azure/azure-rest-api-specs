@@ -34,7 +34,7 @@ alias KeyVaultListParameters = ListQueryParametersTrait<{
   Creates a new key, stores it, then returns key parameters and attributes to the
   client.
   """)
-@route("/keys/{keyName}/create")
+@route("/keys/{key-name}/create")
 @post
 op createKey is Azure.Core.Foundations.Operation<
   {
@@ -45,7 +45,7 @@ op createKey is Azure.Core.Foundations.Operation<
      * sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
@@ -68,7 +68,7 @@ op createKey is Azure.Core.Foundations.Operation<
   Creates a new key version, stores it, then returns key parameters, attributes
   and policy to the client.
   """)
-@route("/keys/{keyName}/rotate")
+@route("/keys/{key-name}/rotate")
 @post
 op rotateKey is Azure.Core.Foundations.Operation<
   {
@@ -77,7 +77,7 @@ op rotateKey is Azure.Core.Foundations.Operation<
      * specified key.
      */
     @pattern("^[0-9a-zA-Z-]+$")
-    @path
+    @path("key-name")
     keyName: string;
   },
   KeyBundle
@@ -93,7 +93,7 @@ op rotateKey is Azure.Core.Foundations.Operation<
   Imports an externally created key, stores it, and returns key parameters and
   attributes to the client.
   """)
-@route("/keys/{keyName}")
+@route("/keys/{key-name}")
 @put
 op importKey is Azure.Core.Foundations.Operation<
   {
@@ -103,7 +103,7 @@ op importKey is Azure.Core.Foundations.Operation<
      * personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
@@ -125,14 +125,14 @@ op importKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a key of any type from storage in Azure Key Vault.")
-@route("/keys/{keyName}")
+@route("/keys/{key-name}")
 @delete
 op deleteKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key to delete.
      */
-    @path
+    @path("key-name")
     keyName: string;
   },
   DeletedKeyBundle
@@ -148,20 +148,20 @@ op deleteKey is Azure.Core.Foundations.Operation<
   The update key operation changes specified attributes of a stored key and can
   be applied to any key type and key version stored in Azure Key Vault.
   """)
-@route("/keys/{keyName}/{keyVersion}")
+@route("/keys/{key-name}/{key-version}")
 @patch
 op updateKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of key to update.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
      * The version of the key to update.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
 
     /**
@@ -182,14 +182,14 @@ op updateKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the public part of a stored key.")
-@route("/keys/{keyName}/{keyVersion}")
+@route("/keys/{key-name}/{key-version}")
 @get
 op getKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key to get.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
@@ -197,7 +197,7 @@ op getKey is Azure.Core.Foundations.Operation<
      * fragment is optional. If not specified, the latest version of the key is
      * returned.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
   },
   KeyBundle
@@ -209,14 +209,14 @@ op getKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Retrieves a list of individual key versions with the same key name.")
-@route("/keys/{keyName}/versions")
+@route("/keys/{key-name}/versions")
 @get
 op getKeyVersions is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
@@ -258,14 +258,14 @@ op getKeys is KeyVaultOperations.ResourceList<KeyItem, KeyVaultListParameters>;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Requests that a backup of the specified key be downloaded to the client.")
-@route("/keys/{keyName}/backup")
+@route("/keys/{key-name}/backup")
 @post
 op backupKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
   },
   BackupKeyResult
@@ -316,20 +316,20 @@ op restoreKey is Azure.Core.Foundations.Operation<
   Encrypts an arbitrary sequence of bytes using an encryption key that is stored
   in a key vault.
   """)
-@route("/keys/{keyName}/{keyVersion}/encrypt")
+@route("/keys/{key-name}/{key-version}/encrypt")
 @post
 op encrypt is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
      * The version of the key.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
 
     /**
@@ -358,20 +358,20 @@ op encrypt is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Decrypts a single block of encrypted data.")
-@route("/keys/{keyName}/{keyVersion}/decrypt")
+@route("/keys/{key-name}/{key-version}/decrypt")
 @post
 op decrypt is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
      * The version of the key.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
 
     /**
@@ -392,20 +392,20 @@ op decrypt is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Creates a signature from a digest using the specified key.")
-@route("/keys/{keyName}/{keyVersion}/sign")
+@route("/keys/{key-name}/{key-version}/sign")
 @post
 op sign is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
      * The version of the key.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
 
     /**
@@ -429,20 +429,20 @@ op sign is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Verifies a signature using a specified key.")
-@route("/keys/{keyName}/{keyVersion}/verify")
+@route("/keys/{key-name}/{key-version}/verify")
 @post
 op verify is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
      * The version of the key.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
 
     /**
@@ -467,20 +467,20 @@ op verify is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Wraps a symmetric key using a specified key.")
-@route("/keys/{keyName}/{keyVersion}/wrapkey")
+@route("/keys/{key-name}/{key-version}/wrapkey")
 @post
 op wrapKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
      * The version of the key.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
 
     /**
@@ -506,20 +506,20 @@ op wrapKey is Azure.Core.Foundations.Operation<
   Unwraps a symmetric key using the specified key that was initially used for
   wrapping that key.
   """)
-@route("/keys/{keyName}/{keyVersion}/unwrapkey")
+@route("/keys/{key-name}/{key-version}/unwrapkey")
 @post
 op unwrapKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
      * The version of the key.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
 
     /**
@@ -539,20 +539,20 @@ op unwrapKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Releases a key.")
-@route("/keys/{keyName}/{keyVersion}/release")
+@route("/keys/{key-name}/{key-version}/release")
 @post
 op release is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key to get.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**
      * Adding the version parameter retrieves a specific version of a key.
      */
-    @path
+    @path("key-version")
     keyVersion: string;
 
     /**
@@ -588,14 +588,14 @@ op getDeletedKeys is KeyVaultOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the public part of a deleted key.")
-@route("/deletedkeys/{keyName}")
+@route("/deletedkeys/{key-name}")
 @get
 op getDeletedKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key.
      */
-    @path
+    @path("key-name")
     keyName: string;
   },
   DeletedKeyBundle
@@ -609,14 +609,14 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Permanently deletes the specified key.")
-@route("/deletedkeys/{keyName}")
+@route("/deletedkeys/{key-name}")
 @delete
 op purgeDeletedKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key
      */
-    @path
+    @path("key-name")
     keyName: string;
   },
   void
@@ -631,14 +631,14 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Recovers the deleted key to its latest version.")
-@route("/deletedkeys/{keyName}/recover")
+@route("/deletedkeys/{key-name}/recover")
 @post
 op recoverDeletedKey is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the deleted key.
      */
-    @path
+    @path("key-name")
     keyName: string;
   },
   KeyBundle
@@ -650,14 +650,14 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the policy for a key.")
-@route("/keys/{keyName}/rotationpolicy")
+@route("/keys/{key-name}/rotationpolicy")
 @get
 op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key in a given key vault.
      */
-    @path
+    @path("key-name")
     keyName: string;
   },
   KeyRotationPolicy
@@ -669,14 +669,14 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the rotation policy for a key.")
-@route("/keys/{keyName}/rotationpolicy")
+@route("/keys/{key-name}/rotationpolicy")
 @put
 op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the key in the given vault.
      */
-    @path
+    @path("key-name")
     keyName: string;
 
     /**

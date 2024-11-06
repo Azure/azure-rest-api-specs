@@ -102,7 +102,7 @@
         }
       }
     },
-    "/deletedkeys/{keyName}": {
+    "/deletedkeys/{key-name}": {
       "get": {
         "operationId": "GetDeletedKey",
         "summary": "Gets the public part of a deleted key.",
@@ -112,11 +112,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           }
         ],
         "responses": {
@@ -154,11 +155,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           }
         ],
         "responses": {
@@ -185,7 +187,7 @@
         }
       }
     },
-    "/deletedkeys/{keyName}/recover": {
+    "/deletedkeys/{key-name}/recover": {
       "post": {
         "operationId": "RecoverDeletedKey",
         "summary": "Recovers the deleted key to its latest version.",
@@ -195,11 +197,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the deleted key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           }
         ],
         "responses": {
@@ -279,7 +282,7 @@
         }
       }
     },
-    "/keys/{keyName}": {
+    "/keys/{key-name}": {
       "put": {
         "operationId": "ImportKey",
         "summary": "Imports an externally created key, stores it, and returns key parameters and\nattributes to the client.",
@@ -289,12 +292,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "Name for the imported key. The value you provide may be copied globally for the\npurpose of running the service. The value provided should not include\npersonally identifiable or sensitive information.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$"
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "x-ms-client-name": "keyName"
           },
           {
             "name": "parameters",
@@ -341,11 +345,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key to delete.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           }
         ],
         "responses": {
@@ -375,7 +380,7 @@
         }
       }
     },
-    "/keys/{keyName}/{keyVersion}": {
+    "/keys/{key-name}/{key-version}": {
       "get": {
         "operationId": "GetKey",
         "summary": "Gets the public part of a stored key.",
@@ -385,18 +390,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key to get.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "Adding the version parameter retrieves a specific version of a key. This URI\nfragment is optional. If not specified, the latest version of the key is\nreturned.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           }
         ],
         "responses": {
@@ -434,18 +441,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of key to update.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "The version of the key to update.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           },
           {
             "name": "parameters",
@@ -484,7 +493,7 @@
         }
       }
     },
-    "/keys/{keyName}/{keyVersion}/decrypt": {
+    "/keys/{key-name}/{key-version}/decrypt": {
       "post": {
         "operationId": "Decrypt",
         "summary": "Decrypts a single block of encrypted data.",
@@ -494,18 +503,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "The version of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           },
           {
             "name": "parameters",
@@ -539,7 +550,7 @@
         }
       }
     },
-    "/keys/{keyName}/{keyVersion}/encrypt": {
+    "/keys/{key-name}/{key-version}/encrypt": {
       "post": {
         "operationId": "Encrypt",
         "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored\nin a key vault.",
@@ -549,18 +560,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "The version of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           },
           {
             "name": "parameters",
@@ -594,7 +607,7 @@
         }
       }
     },
-    "/keys/{keyName}/{keyVersion}/release": {
+    "/keys/{key-name}/{key-version}/release": {
       "post": {
         "operationId": "Release",
         "summary": "Releases a key.",
@@ -604,18 +617,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key to get.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "Adding the version parameter retrieves a specific version of a key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           },
           {
             "name": "parameters",
@@ -649,7 +664,7 @@
         }
       }
     },
-    "/keys/{keyName}/{keyVersion}/sign": {
+    "/keys/{key-name}/{key-version}/sign": {
       "post": {
         "operationId": "Sign",
         "summary": "Creates a signature from a digest using the specified key.",
@@ -659,18 +674,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "The version of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           },
           {
             "name": "parameters",
@@ -704,7 +721,7 @@
         }
       }
     },
-    "/keys/{keyName}/{keyVersion}/unwrapkey": {
+    "/keys/{key-name}/{key-version}/unwrapkey": {
       "post": {
         "operationId": "UnwrapKey",
         "summary": "Unwraps a symmetric key using the specified key that was initially used for\nwrapping that key.",
@@ -714,18 +731,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "The version of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           },
           {
             "name": "parameters",
@@ -759,7 +778,7 @@
         }
       }
     },
-    "/keys/{keyName}/{keyVersion}/verify": {
+    "/keys/{key-name}/{key-version}/verify": {
       "post": {
         "operationId": "Verify",
         "summary": "Verifies a signature using a specified key.",
@@ -769,18 +788,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "The version of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           },
           {
             "name": "parameters",
@@ -814,7 +835,7 @@
         }
       }
     },
-    "/keys/{keyName}/{keyVersion}/wrapkey": {
+    "/keys/{key-name}/{key-version}/wrapkey": {
       "post": {
         "operationId": "WrapKey",
         "summary": "Wraps a symmetric key using a specified key.",
@@ -824,18 +845,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
-            "name": "keyVersion",
+            "name": "key-version",
             "in": "path",
             "description": "The version of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
           },
           {
             "name": "parameters",
@@ -869,7 +892,7 @@
         }
       }
     },
-    "/keys/{keyName}/backup": {
+    "/keys/{key-name}/backup": {
       "post": {
         "operationId": "BackupKey",
         "summary": "Requests that a backup of the specified key be downloaded to the client.",
@@ -879,11 +902,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           }
         ],
         "responses": {
@@ -913,7 +937,7 @@
         }
       }
     },
-    "/keys/{keyName}/create": {
+    "/keys/{key-name}/create": {
       "post": {
         "operationId": "CreateKey",
         "summary": "Creates a new key, stores it, then returns key parameters and attributes to the\nclient.",
@@ -923,12 +947,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name for the new key. The system will generate the version name for the new\nkey. The value you provide may be copied globally for the purpose of running\nthe service. The value provided should not include personally identifiable or\nsensitive information.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$"
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "x-ms-client-name": "keyName"
           },
           {
             "name": "parameters",
@@ -967,7 +992,7 @@
         }
       }
     },
-    "/keys/{keyName}/rotate": {
+    "/keys/{key-name}/rotate": {
       "post": {
         "operationId": "RotateKey",
         "summary": "Creates a new key version, stores it, then returns key parameters, attributes\nand policy to the client.",
@@ -977,12 +1002,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of key to be rotated. The system will generate a new version in the\nspecified key.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$"
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "x-ms-client-name": "keyName"
           }
         ],
         "responses": {
@@ -1012,7 +1038,7 @@
         }
       }
     },
-    "/keys/{keyName}/rotationpolicy": {
+    "/keys/{key-name}/rotationpolicy": {
       "get": {
         "operationId": "GetKeyRotationPolicy",
         "summary": "Lists the policy for a key.",
@@ -1022,11 +1048,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key in a given key vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           }
         ],
         "responses": {
@@ -1064,11 +1091,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key in the given vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
             "name": "keyRotationPolicy",
@@ -1107,7 +1135,7 @@
         }
       }
     },
-    "/keys/{keyName}/versions": {
+    "/keys/{key-name}/versions": {
       "get": {
         "operationId": "GetKeyVersions",
         "summary": "Retrieves a list of individual key versions with the same key name.",
@@ -1117,11 +1145,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "keyName",
+            "name": "key-name",
             "in": "path",
             "description": "The name of the key.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "keyName"
           },
           {
             "name": "maxresults",
