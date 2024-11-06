@@ -303,14 +303,11 @@ model SecretListResult is Azure.Core.Page<SecretItem>;
 /**
  * The secret item containing secret metadata.
  */
-@resource("secrets")
 model SecretItem {
   /**
    * Secret identifier.
    */
-  @visibility("read")
-  @key // The ID isn't really the key; it should be the certificate name, but we don't have this attribute on the model
-  id: string;
+  id?: string;
 
   /**
    * The secret management attributes.
@@ -343,7 +340,6 @@ model DeletedSecretListResult is Azure.Core.Page<DeletedSecretItem>;
 /**
  * The deleted secret item containing metadata about the deleted secret.
  */
-@resource("deletedsecrets")
 model DeletedSecretItem {
   ...SecretItem;
 
