@@ -2526,9 +2526,11 @@ union SapVirtualInstanceIdentityType {
   string,
 }
 
-@doc("The managed service identities envelope.")
+/**
+ * The managed service identities envelope."
+ */
 model SapVirtualInstanceIdentityProperty {
+  /** The managed service identities assigned to this resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  @doc("The managed service identities assigned to this resource.")
   identity?: SapVirtualInstanceIdentity;
 }
