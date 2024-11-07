@@ -23,7 +23,9 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-namespace Azure.AI;
+namespace Azure.AI {
+
+}
 
 @useAuth(
   OAuth2Auth<[
