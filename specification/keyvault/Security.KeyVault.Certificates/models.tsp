@@ -200,6 +200,7 @@ model CertificateItem {
    * Thumbprint of the certificate.
    */
   @encodedName("application/json", "x5t")
+  @encode("base64url")
   x509Thumbprint?: bytes;
 }
 
@@ -238,15 +239,18 @@ model Attributes {
   /**
    * Not before date in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "nbf")
   @encode("unixTimestamp", int32)
-  notBefore?: utcDateTime;
+  NotBefore?: utcDateTime;
 
   /**
    * Expiry date in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  @encodedName("application/json", "exp")
   @encode("unixTimestamp", int32)
-  expires?: utcDateTime;
+  Expires?: utcDateTime;
 
   /**
    * Creation time in UTC.
@@ -354,6 +358,7 @@ model CertificateBundle {
    */
   @visibility("read")
   @encodedName("application/json", "x5t")
+  @encode("base64url")
   x509Thumbprint?: bytes;
 
   /**
@@ -504,8 +509,10 @@ model X509CertificateProperties {
   /**
    * The duration that the certificate is valid in months.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "validity_months")
-  validityInMonths?: int32;
+  @minValue(0)
+  ValidityInMonths?: int32;
 }
 
 /**
@@ -1005,6 +1012,8 @@ model BackupCertificateResult {
   /**
    * The backup blob containing the backed up certificate.
    */
+  @visibility("read")
+  @encode("base64url")
   value?: bytes;
 }
 

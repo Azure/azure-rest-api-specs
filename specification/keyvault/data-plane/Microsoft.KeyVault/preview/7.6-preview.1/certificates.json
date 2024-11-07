@@ -1436,12 +1436,13 @@
           "type": "integer",
           "format": "unixtime",
           "description": "Not before date in UTC.",
-          "x-ms-client-name": "notBefore"
+          "x-ms-client-name": "NotBefore"
         },
-        "expires": {
+        "exp": {
           "type": "integer",
           "format": "unixtime",
-          "description": "Expiry date in UTC."
+          "description": "Expiry date in UTC.",
+          "x-ms-client-name": "Expires"
         },
         "created": {
           "type": "integer",
@@ -1524,8 +1525,9 @@
       "properties": {
         "value": {
           "type": "string",
-          "format": "byte",
-          "description": "The backup blob containing the backed up certificate."
+          "format": "base64url",
+          "description": "The backup blob containing the backed up certificate.",
+          "readOnly": true
         }
       }
     },
@@ -1541,12 +1543,13 @@
           "type": "integer",
           "format": "unixtime",
           "description": "Not before date in UTC.",
-          "x-ms-client-name": "notBefore"
+          "x-ms-client-name": "NotBefore"
         },
-        "expires": {
+        "exp": {
           "type": "integer",
           "format": "unixtime",
-          "description": "Expiry date in UTC."
+          "description": "Expiry date in UTC.",
+          "x-ms-client-name": "Expires"
         },
         "created": {
           "type": "integer",
@@ -1594,7 +1597,7 @@
         },
         "x5t": {
           "type": "string",
-          "format": "byte",
+          "format": "base64url",
           "description": "Thumbprint of the certificate.",
           "readOnly": true,
           "x-ms-client-name": "x509Thumbprint"
@@ -1790,7 +1793,7 @@
         },
         "x5t": {
           "type": "string",
-          "format": "byte",
+          "format": "base64url",
           "description": "Thumbprint of the certificate.",
           "x-ms-client-name": "x509Thumbprint"
         }
@@ -2048,7 +2051,7 @@
         },
         "x5t": {
           "type": "string",
-          "format": "byte",
+          "format": "base64url",
           "description": "Thumbprint of the certificate.",
           "readOnly": true,
           "x-ms-client-name": "x509Thumbprint"
@@ -2117,7 +2120,7 @@
         },
         "x5t": {
           "type": "string",
-          "format": "byte",
+          "format": "base64url",
           "description": "Thumbprint of the certificate.",
           "x-ms-client-name": "x509Thumbprint"
         },
@@ -2651,7 +2654,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The duration that the certificate is valid in months.",
-          "x-ms-client-name": "validityInMonths"
+          "minimum": 0,
+          "x-ms-client-name": "ValidityInMonths"
         }
       }
     }
