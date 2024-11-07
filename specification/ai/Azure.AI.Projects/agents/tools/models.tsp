@@ -97,13 +97,13 @@ model FileSearchToolDefinitionDetails {
   maxNumResults?: int32;
 
   @encodedName("application/json", "ranking_options")
-  rankingOptions?: RankingOptions
+  rankingOptions?: FileSearchRankingOptions
 }
 
 /**
  * Ranking options for file search.
  */
-model RankingOptions {
+model FileSearchRankingOptions {
 
   @doc("File search ranker.")
   ranker: string;

@@ -38,7 +38,7 @@ op createVectorStoreFileBatch is Azure.Core.Foundations.Operation<
     @maxItems(500)
     @encodedName("application/json", "data_sources")
     @doc("List of Azure assets.")
-    dataSources?: VectorStorageDataSource[];
+    dataSources?: VectorStoreDataSource[];
 
     /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. */
     @encodedName("application/json", "chunking_strategy")

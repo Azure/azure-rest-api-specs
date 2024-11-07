@@ -89,7 +89,7 @@ model VectorStoreStaticChunkingStrategyResponse
 }
 
 /** Type of vector storage configuration. */
-union VectorStorageDataSourceAssetType {
+union VectorStoreDataSourceAssetType {
   uri_asset: "uri_asset",
   id_asset: "id_asset"
 }
@@ -98,35 +98,35 @@ union VectorStorageDataSourceAssetType {
  * The structure, containing Azure asset ID and the asset type of the file used as a data source
  * the enterprise file search.
  */
-model VectorStorageDataSource {
+model VectorStoreDataSource {
   /** Asset URI. */
   @encodedName("application/json", "uri")
   storageUri: string;
 
   /** The asset type **/
   @encodedName("application/json", "type")
-  assetType: VectorStorageDataSourceAssetType;
+  assetType: VectorStoreDataSourceAssetType;
 }
 
 /**
  * Vector storage configuration is the list of data sources, used when multiple
  * files can be used for the enterprise file search.
  */
-model VectorStorageConfiguration {
+model VectorStoreConfiguration {
   /** Data sources */
   @encodedName("application/json", "data_sources")
-  dataSources: VectorStorageDataSource[]
+  dataSources: VectorStoreDataSource[]
 }
 
 /**
  * The structure, containing the list of vector storage configurations i.e. the list of azure asset IDs.
  */
-model VectorStoreAzureConfigurations {
+model VectorStoreConfigurations {
   /** Name */
   @encodedName("application/json", "name")
   storeName: string;
 
   /** Configurations */
   @encodedName("application/json", "configuration")
-  storeConfiguration: VectorStorageConfiguration;
+  storeConfiguration: VectorStoreConfiguration;
 }

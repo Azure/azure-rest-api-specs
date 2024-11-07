@@ -100,10 +100,6 @@ model VectorStore {
   @encodedName("application/json", "last_active_at")
   lastActiveAt: utcDateTime | null;
 
-  /** The vector store configuration, used when vector store is created from Azure asset ID. */
-  @encodedName("application/json", "configuration")
-  storeConfiguration?: VectorStorageConfiguration;
-
   /**
    * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
    * additional information about the object in a structured format. Keys can be a maximum of 64
@@ -124,7 +120,7 @@ model VectorStoreOptions {
 
   /** The vector store configuration, used when vector store is created from Azure asset ID. */
   @encodedName("application/json", "configuration")
-  storeConfiguration?: VectorStorageConfiguration;
+  storeConfiguration?: VectorStoreConfiguration;
 
   /** Details on when this vector store expires */
   @encodedName("application/json", "expires_after")

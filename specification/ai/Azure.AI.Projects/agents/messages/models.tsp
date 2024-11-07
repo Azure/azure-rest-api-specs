@@ -99,7 +99,7 @@ model MessageAttachment {
   /** The data sources to be used. This option is mutually exclusive with fileId. */
   @doc("Azure asset ID.")
   @encodedName("application/json", "data_sources")
-  dataSources?: VectorStorageDataSource[];
+  dataSources?: VectorStoreDataSource[];
 
   /** The tools to add to this file. */
   tools: MessageAttachmentToolDefinition[];
