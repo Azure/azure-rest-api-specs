@@ -654,17 +654,22 @@ union ApiSourceLinkState {
   string,
 
   /**
-   * API source link is initializing.
+   * The API source link is initializing.
    */
   Initializing: "initializing",
 
   /***
-   * API source is synching.
+   * The API source is syncing.
    */
   Syncing: "syncing",
 
   /**
-   * API source sync is blocked due to an error.
+   * The API source sync is blocked due to an error.
    */
   Error: "error",
+
+  /**
+   * The API source is being deleted.
+   */
+  Deleting: "deleting"
 }
