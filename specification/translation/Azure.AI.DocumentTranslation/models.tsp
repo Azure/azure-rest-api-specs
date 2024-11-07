@@ -6,7 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.Versioning;
-using Azure.Core.Foundations;
 
 namespace DocumentTranslation;
 @doc("Document Translate Request Content")
@@ -66,6 +65,32 @@ union StorageInputType {
 
   @doc("File storage input type")
   File: "File",
+
+  string,
+}
+
+@doc("Enums containing high level error codes.")
+union TranslationErrorCode {
+  @doc("InvalidRequest")
+  InvalidRequest: "InvalidRequest",
+
+  @doc("InvalidArgument")
+  InvalidArgument: "InvalidArgument",
+
+  @doc("InternalServerError")
+  InternalServerError: "InternalServerError",
+
+  @doc("ServiceUnavailable")
+  ServiceUnavailable: "ServiceUnavailable",
+
+  @doc("ResourceNotFound")
+  ResourceNotFound: "ResourceNotFound",
+
+  @doc("Unauthorized")
+  Unauthorized: "Unauthorized",
+
+  @doc("RequestRateTooHigh")
+  RequestRateTooHigh: "RequestRateTooHigh",
 
   string,
 }
@@ -222,10 +247,74 @@ model TranslationStatus {
     This contains an outer error with error code, message, details, target and an
     inner error with more descriptive details.
     """)
-  error?: Error;
+  error?: TranslationError;
 
   @doc("Status Summary")
   summary: StatusSummary;
+}
+
+@doc("""
+  This contains an outer error with error code, message, details, target and an
+  inner error with more descriptive details.
+  """)
+model TranslationError {
+  @doc("Enums containing high level error codes.")
+  code: TranslationErrorCode;
+
+  @doc("Gets high level error message.")
+  message: string;
+
+  @doc("""
+    Gets the source of the error. 
+    For example it would be \"documents\" or
+    \"document id\" in case of invalid document.
+    """)
+  @visibility("read")
+  target?: string;
+
+  @doc("""
+    New Inner Error format which conforms to Cognitive Services API Guidelines
+    which is available at
+    https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+    This
+    contains required properties ErrorCode, message and optional properties target,
+    details(key value pair), inner error(this can be nested).
+    """)
+  innerError?: InnerTranslationError;
+}
+
+@doc("""
+  New Inner Error format which conforms to Cognitive Services API Guidelines
+  which is available at
+  https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+  This
+  contains required properties ErrorCode, message and optional properties target,
+  details(key value pair), inner error(this can be nested).
+  """)
+model InnerTranslationError {
+  @doc("Gets code error string.")
+  code: string;
+
+  @doc("Gets high level error message.")
+  message: string;
+
+  @doc("""
+    Gets the source of the error. 
+    For example it would be \"documents\" or
+    \"document id\" in case of invalid document.
+    """)
+  @visibility("read")
+  target?: string;
+
+  @doc("""
+    New Inner Error format which conforms to Cognitive Services API Guidelines
+    which is available at
+    https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+    This
+    contains required properties ErrorCode, message and optional properties target,
+    details(key value pair), inner error(this can be nested).
+    """)
+  innerError?: InnerTranslationError;
 }
 
 @doc("Status Summary")
@@ -278,7 +367,7 @@ model DocumentStatus {
     This contains an outer error with error code, message, details, target and an
     inner error with more descriptive details.
     """)
-  error?: Error;
+  error?: TranslationError;
 
   @doc("Progress of the translation if available")
   @maxValue(1)

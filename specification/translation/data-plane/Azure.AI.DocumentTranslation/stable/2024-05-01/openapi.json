@@ -812,7 +812,7 @@
           "description": "To language"
         },
         "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "$ref": "#/definitions/TranslationError",
           "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details."
         },
         "progress": {
@@ -989,6 +989,33 @@
       "required": [
         "glossaryUrl",
         "format"
+      ]
+    },
+    "InnerTranslationError": {
+      "type": "object",
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines\nwhich is available at\nhttps://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\nThis\ncontains required properties ErrorCode, message and optional properties target,\ndetails(key value pair), inner error(this can be nested).",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets code error string."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets high level error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets the source of the error. \nFor example it would be \"documents\" or\n\"document id\" in case of invalid document.",
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerTranslationError",
+          "description": "New Inner Error format which conforms to Cognitive Services API Guidelines\nwhich is available at\nhttps://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\nThis\ncontains required properties ErrorCode, message and optional properties target,\ndetails(key value pair), inner error(this can be nested)."
+        }
+      },
+      "required": [
+        "code",
+        "message"
       ]
     },
     "SourceInput": {
@@ -1230,6 +1257,87 @@
         "language"
       ]
     },
+    "TranslationError": {
+      "type": "object",
+      "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/TranslationErrorCode",
+          "description": "Enums containing high level error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets high level error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets the source of the error. \nFor example it would be \"documents\" or\n\"document id\" in case of invalid document.",
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerTranslationError",
+          "description": "New Inner Error format which conforms to Cognitive Services API Guidelines\nwhich is available at\nhttps://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\nThis\ncontains required properties ErrorCode, message and optional properties target,\ndetails(key value pair), inner error(this can be nested)."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "TranslationErrorCode": {
+      "type": "string",
+      "description": "Enums containing high level error codes.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "ResourceNotFound",
+        "Unauthorized",
+        "RequestRateTooHigh"
+      ],
+      "x-ms-enum": {
+        "name": "TranslationErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidRequest",
+            "value": "InvalidRequest",
+            "description": "InvalidRequest"
+          },
+          {
+            "name": "InvalidArgument",
+            "value": "InvalidArgument",
+            "description": "InvalidArgument"
+          },
+          {
+            "name": "InternalServerError",
+            "value": "InternalServerError",
+            "description": "InternalServerError"
+          },
+          {
+            "name": "ServiceUnavailable",
+            "value": "ServiceUnavailable",
+            "description": "ServiceUnavailable"
+          },
+          {
+            "name": "ResourceNotFound",
+            "value": "ResourceNotFound",
+            "description": "ResourceNotFound"
+          },
+          {
+            "name": "Unauthorized",
+            "value": "Unauthorized",
+            "description": "Unauthorized"
+          },
+          {
+            "name": "RequestRateTooHigh",
+            "value": "RequestRateTooHigh",
+            "description": "RequestRateTooHigh"
+          }
+        ]
+      }
+    },
     "TranslationStatus": {
       "type": "object",
       "description": "Translation job status response",
@@ -1253,7 +1361,7 @@
           "description": "List of possible statuses for job or document"
         },
         "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "$ref": "#/definitions/TranslationError",
           "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details."
         },
         "summary": {
