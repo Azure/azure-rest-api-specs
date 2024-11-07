@@ -21,10 +21,10 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-04-04-preview preview version */
+  /** 2024-10-19 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2024-04-04-preview`,
+  `2024-10-19`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -63,6 +63,7 @@ model PoolProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines the organization in which the pool will be used.")
 @discriminator("kind")
 model OrganizationProfile {}
@@ -134,6 +135,7 @@ union AzureDevOpsPermissionType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
@@ -315,6 +317,7 @@ model Stateful extends AgentProfile {
   @doc("How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week.")
   gracePeriodTimeSpan?: string;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines pool buffer.")
 model ResourcePredictions {}
 
@@ -650,6 +653,7 @@ model Location is ProxyResource<LocationProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Properties of a location.")
 model LocationProperties {}
 
@@ -717,6 +721,7 @@ model Image is ProxyResource<ImageProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Properties of an image.")
 model ImageProperties {}
 
