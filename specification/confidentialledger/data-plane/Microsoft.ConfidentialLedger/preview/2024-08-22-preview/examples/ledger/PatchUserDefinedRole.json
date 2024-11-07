@@ -1,24 +1,16 @@
 {
   "parameters": {
     "api-version": "2024-08-22-preview",
-    "roles": [
-      {
-        "roleName": "administrator",
-        "roleActions": [
-          "Microsoft.ConfidentialLedger/ledger/users/write"
-        ]
-      },
-      {
-        "roleName": "reader",
-        "roleActions": [
-          "Microsoft.ConfidentialLedger/ledger/users/read"
-        ]
+    "role": {
+      "roleName": "administrator",
+      "roleActions": [
+        "Microsoft.ConfidentialLedger/ledger/users/write"
+      ]
+     }
+    },
+    "responses": {
+      "200": {
+        "description": "Created new user defined roles and actions"
       }
-    ]
-  },
-  "responses": {
-    "200": {
-      "description": "Created new user defined roles and actions"
     }
   }
-}
