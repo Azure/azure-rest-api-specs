@@ -63,12 +63,9 @@ interface SAPVirtualInstances {
   start is ArmResourceActionAsync<
     SAPVirtualInstance,
     {
-      @header
-      contentType: "application/json";
-
       @doc("The Virtual Instance for SAP solutions resource start request body.")
       @body
-      body?: StartContent;
+      body?: StartRequest;
     },
     Foundations.OperationStatusResult
   >;
@@ -79,12 +76,9 @@ interface SAPVirtualInstances {
   stop is ArmResourceActionAsync<
     SAPVirtualInstance,
     {
-      @header
-      contentType: "application/json";
-
       @doc("The Virtual Instance for SAP solutions resource stop request body.")
       @body
-      body?: StopContent;
+      body?: StopRequest;
     },
     Foundations.OperationStatusResult
   >;

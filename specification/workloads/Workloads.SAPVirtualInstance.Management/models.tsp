@@ -948,13 +948,13 @@ model SAPVirtualInstanceError {
   /**
    * The Virtual Instance for SAP error body.
    */
-  properties?: ErrorInformation;
+  properties?: ErrorDefinition;
 }
 
 /**
  * Error definition.
  */
-model ErrorInformation {
+model ErrorDefinition {
   /**
    * Service specific error code which serves as the substatus for the HTTP error code.
    */
@@ -972,7 +972,7 @@ model ErrorInformation {
    */
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", [])
-  details?: ErrorInformation[];
+  details?: ErrorDefinition[];
 }
 
 /**
@@ -1561,7 +1561,7 @@ model UpdateSAPApplicationInstanceRequest {
 /**
  * Start SAP instance(s) request body.
  */
-model StartContent {
+model StartRequest {
   /**
    * The boolean value indicates whether to start the virtual machines before starting the SAP instances.
    */
@@ -1571,7 +1571,7 @@ model StartContent {
 /**
  * Stop SAP instance(s) request body.
  */
-model StopContent {
+model StopRequest {
   /**
    * This parameter defines how long (in seconds) the soft shutdown waits until the RFC/HTTP clients no longer consider the server for calls with load balancing. Value 0 means that the kernel does not wait, but goes directly into the next shutdown state, i.e. hard stop.
    */
@@ -1640,7 +1640,7 @@ model OSConfiguration {
  */
 model SshPublicKey {
   /**
-   * SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).
+   * SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).
    */
   keyData?: string;
 }
@@ -1657,7 +1657,7 @@ model SshConfiguration {
 }
 
 /**
- * Specifies the Linux operating system settings on the virtual machine. For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
+ * Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
  */
 model LinuxConfiguration extends OSConfiguration {
   /**
@@ -1682,7 +1682,7 @@ model LinuxConfiguration extends OSConfiguration {
 }
 
 /**
- * The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).
+ * The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).
  */
 model SshKeyPair {
   /**
@@ -1703,12 +1703,12 @@ model SshKeyPair {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OS represents the Operation System."
 model OSProfile {
   /**
-   * Specifies the name of the administrator account.  This property cannot be updated after the VM is created.  **Windows-only restriction:** Cannot end in "."  **Disallowed values:** "administrator", "admin", "user", "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a", "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest", "john", "owner", "root", "server", "sql", "support", "support_388945a0", "sys", "test2", "test3", "user4", "user5".  **Minimum-length (Linux):** 1  character  **Max-length (Linux):** 64 characters  **Max-length (Windows):** 20 characters.
+   * Specifies the name of the administrator account. <br><br> This property cannot be updated after the VM is created. <br><br> **Windows-only restriction:** Cannot end in "." <br><br> **Disallowed values:** "administrator", "admin", "user", "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a", "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest", "john", "owner", "root", "server", "sql", "support", "support_388945a0", "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters.
    */
   adminUsername?: string;
 
   @secret
-  @doc("Specifies the password of the administrator account.  **Minimum-length (Windows):** 8 characters  **Minimum-length (Linux):** 6 characters  **Max-length (Windows):** 123 characters  **Max-length (Linux):** 72 characters  **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled  Has lower characters Has upper characters  Has a digit  Has a special character (Regex match [\\W_])  **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\"  For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp)  For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)")
+  @doc("Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)")
   adminPassword?: string;
 
   /**
@@ -1804,7 +1804,7 @@ model VirtualMachineConfiguration {
 }
 
 /**
- * Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&amp;clcid=0x409)
+ * Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)
  */
 model SingleServerConfiguration extends InfrastructureConfiguration {
   /**
@@ -2032,7 +2032,7 @@ model StorageConfiguration {
 }
 
 /**
- * Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&amp;clcid=0x409)
+ * Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)
  */
 model ThreeTierConfiguration extends InfrastructureConfiguration {
   /**
@@ -2397,7 +2397,7 @@ model DiscoveryConfiguration extends SAPConfiguration {
   centralServerVmId?: string;
 
   /**
-   * The custom storage account name for the storage account created by the service in the managed resource group created as part of VIS deployment.Refer to the storage account naming rules [here](https://learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules#microsoftstorage).If not provided, the service will create the storage account with a random name.
+   * The custom storage account name for the storage account created by the service in the managed resource group created as part of VIS deployment.<br><br>Refer to the storage account naming rules [here](https://learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules#microsoftstorage).<br><br>If not provided, the service will create the storage account with a random name.
    */
   @maxLength(24)
   @minLength(3)
