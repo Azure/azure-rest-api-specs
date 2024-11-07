@@ -63,7 +63,8 @@ $publishedPackages | ForEach-Object {
   $query.Add('pullRequestNumber', $PullRequestNumber)
   $query.Add('packageName', $_.BaseName)
   $query.Add('language', $Language)
-  $query.Add('commentOnPR', $false)
+  $query.Add('commentOnPR', $true)
+  $query.Add('location', "GitHub")
 
   $uri = [System.UriBuilder]$APIViewUri
   $uri.Query = $query.ToString()
