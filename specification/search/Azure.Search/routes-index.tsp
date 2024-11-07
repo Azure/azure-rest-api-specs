@@ -5,9 +5,9 @@ import "./models-index.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Search;
-
 
 @route("/indexes('{indexName}')")
 interface DocumentsOperations {
@@ -17,11 +17,7 @@ interface DocumentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/docs/$count")
   @get
-  count is SearchIndexOperation<
-    {
-    },
-    int32
-  >;
+  count is SearchIndexOperation<{}, int32>;
 
   /**
    * Searches for documents in the index.
@@ -52,10 +48,7 @@ interface DocumentsOperations {
        * of name:value pairs.
        */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
-      @query(#{
-        name: "facet",
-        explode: true,
-      })
+      @query(#{ name: "facet", explode: true })
       facets?: string[];
 
       /**
@@ -120,10 +113,7 @@ interface DocumentsOperations {
        * parameter string would be "mylocation--122.2,44.8" (without the quotes).
        */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
-      @query(#{
-        name: "scoringParameter",
-        explode: true,
-      })
+      @query(#{ name: "scoringParameter", explode: true })
       scoringParameters?: string[];
 
       /**
@@ -225,6 +215,9 @@ interface DocumentsOperations {
        * confidence threshold can be configured by appending the pipe character `|`
        * followed by the `threshold-<confidence threshold>` option after the answers
        * parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.
+       * The maximum character length of answers can be configured by appending the pipe
+       * character '|' followed by the 'count-<number of maximum character length>',
+       * such as 'extractive|maxcharlength-600'.
        */
       @query
       answers?: QueryAnswerType;
@@ -235,7 +228,9 @@ interface DocumentsOperations {
        * When Captions is set to `extractive`, highlighting is enabled by default, and
        * can be configured by appending the pipe character `|` followed by the
        * `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults
-       * to `None`.
+       * to `None`. The maximum character length of captions can be configured by
+       * appending the pipe character '|' followed by the 'count-<number of maximum
+       * character length>', such as 'extractive|maxcharlength-600'.
        */
       @query
       captions?: QueryCaptionType;
@@ -248,6 +243,47 @@ interface DocumentsOperations {
        */
       @query
       semanticQuery?: string;
+
+      /**
+       * When QueryRewrites is set to `generative`, the query terms are sent to a
+       * generate model which will produce 10 (default) rewrites to help increase the
+       * recall of the request. The requested count can be configured by appending the
+       * pipe character `|` followed by the `count-<number of rewrites>` option, such as
+       * `generative|count-3`. Defaults to `None`. This parameter is only valid if the
+       * query type is `semantic`.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      queryRewrites?: QueryRewritesType;
+
+      /**
+       * Enables a debugging tool that can be used to further explore your search
+       * results.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      debug?: QueryDebugMode;
+
+      /**
+       * The language of the query.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      queryLanguage?: QueryLanguage;
+
+      /**
+       * Improve search recall by spell-correcting individual search query terms.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      speller?: QuerySpellerType;
+
+      /**
+       * The list of field names used for semantic ranking.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      semanticFields?: string[];
     },
     SearchDocumentsResult
   >;
@@ -414,7 +450,7 @@ interface DocumentsOperations {
   @route("/docs/search.index")
   @post
   index is SearchIndexOperation<
-    {      
+    {
       /**
        * The batch of index actions.
        */

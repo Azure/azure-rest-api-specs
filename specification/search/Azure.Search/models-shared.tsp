@@ -26,10 +26,10 @@ alias preferHeader = {
 
 alias selectQuery = {
   @doc("""
-       Selects which top-level properties to retrieve.
-       Specified as a comma-separated list of JSON property names,
-       or '*' for all properties. The default is all properties.
-       """)  
+    Selects which top-level properties to retrieve.
+    Specified as a comma-separated list of JSON property names,
+    or '*' for all properties. The default is all properties.
+    """)
   @query
   $select?: string;
 };
@@ -62,6 +62,12 @@ alias synonymMapNamePath = {
   @doc("The name of the synonym map.")
   @path
   synonymMapName: string;
+};
+
+alias aliasNamePath = {
+  @doc("The name of the alias.")
+  @path
+  aliasName: string;
 };
 
 alias SearchOperation<
@@ -131,6 +137,18 @@ alias SearchSynonymMapOperation<
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
   TParams & ClientRequestIdHeader & synonymMapNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchAliasOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & aliasNamePath,
   TResponse,
   Traits,
   TError
