@@ -98,7 +98,7 @@ union VectorStoreDataSourceAssetType {
 
 /**
  * The structure, containing Azure asset URI path and the asset type of the file used as a data source
- * the enterprise file search.
+ * for the enterprise file search.
  */
 model VectorStoreDataSource {
   /** Asset URI. */
