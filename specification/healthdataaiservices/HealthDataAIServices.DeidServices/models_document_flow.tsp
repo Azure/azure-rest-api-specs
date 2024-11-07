@@ -132,6 +132,7 @@ model JobSummary {
 @doc("Details of a single document in a job.")
 @parentResource(DeidentificationJob) 
 @resource("documents")
+@access(Access.public, "csharp")
 model DocumentDetails {
   @key
   @doc("Id of the document details.")
