@@ -6123,7 +6123,7 @@ model ScoringFunction {
     interpolation?: ScoringFunctionInterpolation;
 
     @doc("Type of ScoringFunction.")
-    kind: string;
+    type: string;
 }
 
 /**
