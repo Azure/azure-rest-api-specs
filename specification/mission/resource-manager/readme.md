@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-2024-11-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-11-01-preview'
 input-file:
   - Microsoft.Mission/preview/2024-11-01-preview/openapi.json
-tag: package-2024-10-01-preview
 ```
 
 ### Tag: package-2024-10-01-preview
