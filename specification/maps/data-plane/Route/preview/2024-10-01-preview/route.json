@@ -144,8 +144,8 @@
     },
     "/route/directions:batch": {
       "post": {
-        "summary": "Use to send a batch of queries to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2024-10-01-preview) API in a single synchronous request.",
-        "description": "\n\n\nThe `Route Directions Batch` API is an HTTP `POST` request that sends batches of up to **100** queries in a single call to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2024-10-01-preview) API.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2024-10-01-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"optionalId\": \"a191de3c-1268-4986-98f0-03f0a5d9302a\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [Request body](/rest/api/maps/route/post-directions?view=rest-maps-2024-10-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](/rest/api/maps/route/post-directions#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "summary": "Use to send a batch of queries to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2023-10-01-preview) API in a single synchronous request.",
+        "description": "\n\n\nThe `Route Directions Batch` API is an HTTP `POST` request that sends batches of up to **100** queries in a single call to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2023-10-01-preview) API.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2023-10-01-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"optionalId\": \"a191de3c-1268-4986-98f0-03f0a5d9302a\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [Request body](/rest/api/maps/route/post-directions?view=rest-maps-2023-10-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](/rest/api/maps/route/post-directions#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostRouteDirectionsBatch",
         "consumes": [
           "application/json"
@@ -167,6 +167,9 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
             "name": "routeDirectionsBatchRequest",
             "in": "body",
             "description": "The list of route directions queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
@@ -179,12 +182,6 @@
         "responses": {
           "200": {
             "description": "Batch request successfully processed. The response body contains all the batch results.",
-            "schema": {
-              "$ref": "#/definitions/DirectionsBatchResponse"
-            }
-          },
-          "207": {
-            "description": "Multi-Status. One or more batch items could not be processed and return different status code.",
             "schema": {
               "$ref": "#/definitions/DirectionsBatchResponse"
             }
@@ -267,7 +264,7 @@
     },
     "/route/snapToRoads": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as longitude and latitude coordinates, and generates points that aligns with existing roadways on a map. This process, known as \"snapping to roads\", produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 2.5 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Route_PostSnapToRoads",
         "consumes": [
           "application/geo+json"
@@ -278,7 +275,7 @@
         ],
         "x-ms-client-name": "Route_PostSnapToRoads",
         "x-ms-examples": {
-          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+          "Successfully retrieve snap to roads points with additional parameters in the body": {
             "$ref": "./examples/PostSnapToRoads.json"
           }
         },
@@ -327,7 +324,7 @@
     },
     "/route/snapToRoads:batch": {
       "post": {
-        "description": "**SnapToRoads Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Snap To Roads Batch API sends batches of up to **100** queries as a single call to the [Snap To Roads API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-06-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/snapToRoads:batch?api-version=2024-06-01-preview\n```\n### POST Body for Batch Request\nTo send the _snap to roads_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _snap to roads_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.122353,\n              47.672662\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n                         \n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.132452,\n              47.644234\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n                             \n          }\n        }\n      ],\n      \"interpolate\": true,\n      \"includeSpeedLimit\": true,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.33669,\n              47.590849\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              122.34509,\n              47.610524\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1\n          }\n        }\n      ],\n      \"interpolate\": false,\n      \"includeSpeedLimit\": false,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n```\n\nA _snap to roads_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-06-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`SnapToRoadsResponse`](/rest/api/maps/route/post-snap-to-roads#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "**SnapToRoads Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Snap To Roads Batch API sends batches of up to **100** queries as a single call to the [Snap To Roads API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-10-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/snapToRoads:batch?api-version=2024-10-01-preview\n```\n### POST Body for Batch Request\nTo send the _snap to roads_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _snap to roads_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.122353,\n              47.672662\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n                         \n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.132452,\n              47.644234\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n                             \n          }\n        }\n      ],\n      \"interpolate\": true,\n      \"includeSpeedLimit\": true,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.33669,\n              47.590849\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              122.34509,\n              47.610524\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1\n          }\n        }\n      ],\n      \"interpolate\": false,\n      \"includeSpeedLimit\": false,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n```\n\nA _snap to roads_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-10-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`SnapToRoadsResponse`](/rest/api/maps/route/post-snap-to-roads#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostSnapToRoadsBatch",
         "consumes": [
           "application/geo+json"
@@ -349,6 +346,9 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
             "name": "snapToRoadsBatchRequest",
             "in": "body",
             "description": "The list of Snap To Roads queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
@@ -361,12 +361,6 @@
         "responses": {
           "200": {
             "description": "Batch request successfully processed. The response body contains all the batch results.",
-            "schema": {
-              "$ref": "#/definitions/SnapToRoadsBatchResponse"
-            }
-          },
-          "207": {
-            "description": "Multi-Status. One or more batch items could not be processed and return different status code.",
             "schema": {
               "$ref": "#/definitions/SnapToRoadsBatchResponse"
             }
@@ -389,7 +383,7 @@
     },
     "/route/range": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry) to  search for POIs within the provided Isochrone.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Route Range API creates a polygon that depicts the area reachable from a given location within a certain threshold based on the specified time or distance budget. A polygon boundary (or Isochrone) is returned in a counterclockwise orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for spatial filtering to search for features of interest within the provided Isochrone.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Route_PostRouteRange",
         "consumes": [
           "application/geo+json"
@@ -400,7 +394,7 @@
         ],
         "x-ms-client-name": "Route_PostRouteRange",
         "x-ms-examples": {
-          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+          "Successfully retrieve a set of locations that can be reached from the origin point based on the specified conditions": {
             "$ref": "./examples/PostRouteRange.json"
           }
         },
@@ -410,9 +404,6 @@
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
           },
           {
             "name": "routeRangeRequest",
@@ -449,7 +440,7 @@
     },
     "/route/range:batch": {
       "post": {
-        "description": "**Route Range Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Range Batch API sends batches of up to **100** queries as a single call to the [Route Range API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-range?view=rest-maps-2024-06-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/range:batch?api-version=2024-06-01-preview\n```\n### POST Body for Batch Request\nTo send the _route range_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _route_range_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          5.86605,\n          50.9745\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 6000\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -122.201669,\n          47.615076\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 2000\n      }\n    }\n  ]\n}\n```\n\nA _route range_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-06-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`RouteRangeResponse`](/rest/api/maps/route/post-route-range#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "**Route Range Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Range Batch API sends batches of up to **100** queries as a single call to the [Route Range API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-range?view=rest-maps-2024-10-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/range:batch?api-version=2024-10-01-preview\n```\n### POST Body for Batch Request\nTo send the _route range_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _route_range_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          5.86605,\n          50.9745\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 6000\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -122.201669,\n          47.615076\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 2000\n      }\n    }\n  ]\n}\n```\n\nA _route range_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-10-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`RouteRangeResponse`](/rest/api/maps/route/post-route-range#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostRouteRangeBatch",
         "consumes": [
           "application/json"
@@ -487,12 +478,6 @@
               "$ref": "#/definitions/RouteRangeBatchResponse"
             }
           },
-          "207": {
-            "description": "Multi-Status. One or more batch items could not be processed and return different status code.",
-            "schema": {
-              "$ref": "#/definitions/RouteRangeBatchResponse"
-            }
-          },
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
@@ -511,7 +496,7 @@
     },
     "/route/matrix": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using a sync request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using a sync request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. Route Matrices can be calculated for driving, walking and truck routes. For example, a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call the Route Matrix API and use the travel cost to sort the drivers by their actual travel distance or time from the restaurant.\n\n\nRoute Matrices are used in several different types of applications, most commonly to solve the Travelling Salesman Problem (TSP) and Vehicle Routing Problem (VRP). For each origin-destination pair in the matrix, the travel time and distance are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).\n\n\n\n### API Limitations\n The synchronous processing of matrix is best suited for fast, small matrices of route calculation. To calculate larger matrices and heavy route calculation, use the asynchronous endpoint. The following limitation is applicable to the synchronous requests. If none of the rows in the following table match the request's parameters, the request does not meet the requirements and will not be processed.\n\n| Max matrix size | Max number of origins  | Max number of destinations | Additional limits\n |------------------|------------------------|----------------------------|------------|\n| 100              | 100         | 100              | N/A |\n| 200              | 200         | 200              | All origins and destinations should be contained in an axis-aligned 400 km x 400 km bounding box. Otherwise, some matrix cells will be resolved as OUT_OF_REGION.  |\n| 2500             | 1000        | 1000             | - `departAt` or `arriveAt` must be any.<br> - `traffic` must be historical.<br> - `travelMode` must be either driving or truck<br> - No other parameters can be used explicitly   |\n\n\nExamples:\n - Request of 10x20 matrix with `traffic=live`: This request will be processed with a bounding box limit, as it matches a limit of up to 200, which includes bounding box restrictions.\n\n - Request of 10x20 matrix with default parameters (`traffic=historical`): This request will be processed without a bounding box limit, as it matches a limit of up to 2500, which does  not impose bounding box restrictions.\n\n\n",
         "operationId": "Route_PostRouteMatrix",
         "consumes": [
           "application/geo+json"
@@ -567,7 +552,7 @@
     },
     "/route/matrix:async": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **50000** and for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).\n\n```\nPOST https://atlas.microsoft.com/route/matrix?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a URL in the Operation-Location field of the response header with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com. This URL should be checked periodically until the status is Succeeded. \n\n\nThe maximum size of a matrix for this API is **50000** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 500x100, 100x100, 280x170. 100x50 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **24** hours. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix:async?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to get the status of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}?api-version=1.0?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the resultUrl obtained in Step 3 to get the results\n\n \n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}/result?api-version=1.0?subscription-key={subscription-key}\n   ```\n\n\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Route Matrix Async` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell.  Route Matrices can be calculated for driving, walking and truck routes.\n\nRoute Matrices are used in several different types of applications, most commonly to solve the Travelling Salesman Problem (TSP) and Vehicle Routing Problem (VRP). For each origin-destination pair in the matrix, the travel time and distance are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **50000** (the number of origins multiplied by the number of destinations).\n\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a URL in the `operation-Location` field of the response header with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com. This URL should be checked periodically until the status is Succeeded. \n\n\nThe maximum size of a matrix for this API is **50000** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 500x100, 100x100, 280x170. 100x50 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **24** hours. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix:async?api-version=2024-10-01-preview&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the `operation-location` header in the response contains the URL to get the status of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}?api-version=2024-10-01-preview?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the resultUrl obtained in Step 3 to get the results\n\n \n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}/result?api-version=2024-10-01-preview?subscription-key={subscription-key}\n   ```\n\n\n\n ### API Limitations\n The asynchronous processing of matrix is best suited for larger matrices that require heavy route calculation. The following limitation is applicable to the asynchronous requests. If none of the rows in the following table match the request's parameters, the request does not meet the requirements and will not be processed.\n\n > Async requests supports up to 50K matrix size in a single request. If you want to request an increase to this limit, you can create an Azure Maps Technical Support Request in the Azure portal.\n\n \n| Max matrix size  | Max number of origins | Max number of destinations  | Additional limits |\n|------------------|-----------------------|-----------------------------|-------------------|\n| 2500             | 1000                  | 1000                        | All origins and destinations should be contained in an axis-aligned 400 km x 400 km bounding box. Otherwise some matrix cells will be resolved as OUT_OF_REGION.  |\n| 50,000           | 10,000                | 10,000                      | - `departAt` or `arriveAt` must be any.<br>- `traffic` must be historical.<br/>- `optimizeRoute` must be fastest.<br/>- `travelMode` must be either driving or truck. <br/>- No other parameters can be used explicitly.  |\n\n\n",
         "operationId": "Route_PostRouteMatrixAsync",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -637,14 +622,8 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Get a succeeded operation status": {
-            "$ref": "./examples/GetRouteOperationStatusSucceeded.json"
-          },
-          "Get a running operation status": {
-            "$ref": "./examples/GetRouteOperationStatusRunning.json"
-          },
-          "Get a failed operation status": {
-            "$ref": "./examples/GetRouteOperationStatusFailed.json"
+          "Retrieve the async matrix operation status": {
+            "$ref": "./examples/GetRouteOperationStatusCompleted.json"
           }
         },
         "parameters": [
@@ -661,6 +640,19 @@
             "schema": {
               "$ref": "#/definitions/RouteOperation"
             }
+          },
+          "404": {
+            "description": "The operation resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error occurred.",
@@ -690,7 +682,7 @@
         ],
         "x-ms-client-name": "Route_GetOperationResult",
         "x-ms-examples": {
-          "Successfully retrieve the async matrix result": {
+          "Retrieve the async matrix result": {
             "$ref": "./examples/GetRouteMatrixAsyncResult.json"
           }
         },
@@ -714,6 +706,19 @@
             "schema": {
               "$ref": "#/definitions/RouteOperationResponse"
             }
+          },
+          "404": {
+            "description": "The operation resource result was not found.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error occurred.",
@@ -753,15 +758,41 @@
           }
         },
         "travelMode": {
-          "$ref": "#/definitions/TravelModeEnum"
+          "description": "The mode of travel for the requested route. If not defined, the default value is \"driving\" that returns the route optimized for cars.\n\n`Note`: For truck travelMode, the requested truck route may not be available for the entire route. Where the truck route is not available for a particular section, the travelMode element of the response for that section will be \"other\".\n\nExample: \"travelMode\":\"driving\"",
+          "type": "string",
+          "default": "driving",
+          "enum": [
+            "driving",
+            "truck",
+            "walking"
+          ],
+          "x-ms-enum": {
+            "name": "TravelModeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "driving",
+                "description": "The returned routes are optimized for cars."
+              },
+              {
+                "value": "truck",
+                "description": "The returned routes are optimized for large size trucks based on the vehicle specification."
+              },
+              {
+                "value": "walking",
+                "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
+              }
+            ]
+          }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2024-10-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format. If not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "default": "any"
         },
         "arriveAt": {
-          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2024-10-01T09:30:00.000-07:00\"",
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -863,8 +894,8 @@
           "maximum": 359
         },
         "vehicleSpec": {
-          "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode",
-          "$ref": "#/definitions/VehicleSpec"
+          "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode",
+          "$ref": "#/definitions/RouteDirectionVehicleSpec"
         }
       }
     },
@@ -903,7 +934,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of points to snap to roads. You can have a maximum of 100 points. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "A set of points to snap to road network. You can have a maximum of 100 points and the two consecutive points must be within 2.5 kilometer of each other. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS point that cannot be snapped to a road network.",
           "minimum": 2,
           "maximum": 100,
           "items": {
@@ -911,17 +942,17 @@
           }
         },
         "interpolate": {
-          "description": "Specify whether to insert additional points between the snapped points to complete the full route path",
+          "description": "Specifies whether to return additional points between the snapped points to complete the full route path that smoothly follows the road geometry. \n\nThe interpolated points will have `isInterpolate:true` in the response which can be used to identify the snapped points from interpolated points.",
           "type": "boolean",
           "default": false
         },
         "includeSpeedLimit": {
-          "description": "Specify whether to include speed limit information for the snapped points. The unit is in kilometers per hour. `Note`: Only supported for driving travelMode",
+          "description": "Specifies whether to include speed limit information for the snapped points in the response. The unit is in kilometers per hour. \n\n`Note`: Only supported for driving travelMode.",
           "type": "boolean",
           "default": false
         },
         "travelMode": {
-          "description": "Specify the travel mode for snapping the coordinates. If unspecified, the default mode is \"driving\", which optimizes the snapped coordinates for driving routes.",
+          "description": "Specifies the routing profile for snapping the points. If unspecified, the default mode is \"driving\", which optimizes the snapped points for driving routes.",
           "type": "string",
           "default": "driving",
           "enum": [
@@ -934,11 +965,11 @@
             "values": [
               {
                 "value": "driving",
-                "description": "driving"
+                "description": "The points are snapped to the road suitable for cars."
               },
               {
                 "value": "walking",
-                "description": "walking."
+                "description": "The points are snapped to the pedestrian route including the use of sidewalks."
               }
             ]
           }
@@ -974,7 +1005,7 @@
           "$ref": "#/definitions/FeaturesItemTypeEnum"
         },
         "geometry": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+          "$ref": "#/definitions/RouteRangePointGeometry"
         },
         "properties": {
           "$ref": "#/definitions/InputRouteRangeProperties"
@@ -1010,7 +1041,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of MultiPoint for matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "A set of origin and destination points passed as GeoJSON MultiPoint features for the input matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
           "minimum": 2,
           "maximum": 2,
           "items": {
@@ -1018,17 +1049,17 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2024-10-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format. The `departAt` parameter cannot be used in conjunction with `arriveAt`.\n\nThe `departAt` also supports:\n\n `any` value tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\n`now` value to set the departure time to the processing time of each individual cell. Processing time may be any time between submission and its completion. This mode is best used together with traffic=live.\n\nDefault value: `any` if `departAt` is not specified.\n\nExamples:\n\n\"departAt\": \"2024-12-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
         "arriveAt": {
-          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2024-10-01T09:30:00.000-07:00\"",
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nThe `arriveAt` also supports `any` value which is tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\nDefault value: `any` if `arriveAt` is not specified.\n\nExample: \"arriveAt\": \"2024-12-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
         "travelMode": {
-          "$ref": "#/definitions/TravelModeEnum"
+          "$ref": "#/definitions/RouteMatrixTravelModeEnum"
         },
         "optimizeRoute": {
           "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastest\" which returns the route to minimize the travel time.\n\nExample: \"optimizeRoute\":\"fastest \"",
@@ -1044,7 +1075,7 @@
               {
                 "value": "fastest",
                 "name": "Fastest",
-                "description": "Finds the fastest route"
+                "description": "Finds the fastest route to optimize route by travel time.\n\nOnly `fastest` is supported for the Route Matrix sync API. To use the other types, check the Route Matrix async API."
               }
             ]
           }
@@ -1053,7 +1084,7 @@
           "$ref": "#/definitions/RouteMatrixTrafficEnum"
         },
         "avoid": {
-          "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RouteMatrixAvoidEnum"
@@ -1077,7 +1108,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of MultiPoint for matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "A set of origin and destination points passed as GeoJSON MultiPoint features for the input matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
           "minimum": 2,
           "maximum": 2,
           "items": {
@@ -1085,17 +1116,15 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2024-10-01T09:30:00.000-07:00\"",
-          "type": "string",
-          "format": "date-time"
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format. The `departAt` parameter cannot be used in conjunction with `arriveAt`.\n\nThe `departAt` also supports:\n\n `any` value tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\n`now` value to set the departure time to the processing time of each individual cell. Processing time may be any time between submission and its completion. This mode is best used together with traffic=live.\n\nDefault value: `any` if `departAt` is not specified.\n\nExamples:\n\n\"departAt\": \"2024-12-01T09:30:00.000-07:00\"",
+          "type": "string"
         },
         "arriveAt": {
-          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2024-10-01T09:30:00.000-07:00\"",
-          "type": "string",
-          "format": "date-time"
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nThe `arriveAt` also supports `any` value which is tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\nDefault value: `any` if `arriveAt` is not specified.\n\nExample: \"arriveAt\": \"2024-12-01T09:30:00.000-07:00\"",
+          "type": "string"
         },
         "travelMode": {
-          "$ref": "#/definitions/TravelModeEnum"
+          "$ref": "#/definitions/RouteMatrixTravelModeEnum"
         },
         "optimizeRoute": {
           "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastest\" which returns the route to minimize the travel time.\n\nExample: \"optimizeRoute\":\"shortest\"",
@@ -1112,12 +1141,12 @@
               {
                 "value": "shortest",
                 "name": "Shortest",
-                "description": "The route is calculated to minimize the distance."
+                "description": "Finds the shortest route to optimize route by travel distance."
               },
               {
                 "value": "fastest",
                 "name": "Fastest",
-                "description": "Finds the fastest route"
+                "description": "Finds the fastest route to optimize route by travel time."
               }
             ]
           }
@@ -1126,7 +1155,7 @@
           "$ref": "#/definitions/RouteMatrixTrafficEnum"
         },
         "avoid": {
-          "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RouteMatrixAvoidEnum"
@@ -1140,19 +1169,21 @@
     "RouteMatrixResponse": {
       "description": "This object is returned from a successful call.",
       "type": "object",
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ],
       "properties": {
         "type": {
-          "$ref": "#/definitions/FeatureTypeEnum"
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
         },
-        "features": {
-          "type": "array",
-          "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
-          "items": {
-            "$ref": "#/definitions/RouteMatrixFeatureItem"
-          }
+        "geometry": {
+          "description": "The geometry object is null",
+          "type": "object"
         },
-        "summary": {
-          "$ref": "#/definitions/RouteMatrixSummary"
+        "properties": {
+          "$ref": "#/definitions/RouteMatrixFeatureProperties"
         }
       }
     },
@@ -1293,7 +1324,7 @@
               "$ref": "#/definitions/FeaturesItemTypeEnum"
             },
             "geometry": {
-              "$ref": "#/definitions/Geometry"
+              "$ref": "#/definitions/RouteDirectionsGeometry"
             },
             "properties": {
               "$ref": "#/definitions/FeatureProperties"
@@ -1305,12 +1336,12 @@
         }
       ]
     },
-    "Geometry": {
+    "RouteDirectionsGeometry": {
       "type": "object",
       "description": "A valid `GeoJSON` Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "properties": {
         "type": {
-          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
+          "description": "Specifies the geometry type for the `GeoJSON` Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
           "type": "string"
         }
       },
@@ -1324,7 +1355,7 @@
       "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
         "type": {
-          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+          "description": "Specifies the geometry type for the `GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
           "type": "string"
         }
       },
@@ -1335,14 +1366,14 @@
     },
     "PointGeometry": {
       "type": "object",
-      "description": "Specifies the `GeoJSON` Point Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
+      "description": "The origin point passed as a valid `GeoJSON` Geometry object, from which the range polygon should be calculated. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.\n\n`Note`: The API will snap the requested origin point to the nearest road network and will use that for range calculation. It will be returned as a `center` point in the response.",
       "x-ms-discriminator-value": "Point",
       "allOf": [
         {
-          "$ref": "#/definitions/Geometry"
+          "$ref": "#/definitions/RouteDirectionsGeometry"
         },
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+          "$ref": "#/definitions/GeoJsonPoint"
         }
       ]
     },
@@ -1352,10 +1383,10 @@
       "x-ms-discriminator-value": "MultiLineString",
       "allOf": [
         {
-          "$ref": "#/definitions/Geometry"
+          "$ref": "#/definitions/RouteDirectionsGeometry"
         },
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineString"
+          "$ref": "#/definitions/GeoJsonMultiLineString"
         }
       ]
     },
@@ -1368,7 +1399,7 @@
           "$ref": "#/definitions/RouteRangeGeometry"
         },
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPolygon"
+          "$ref": "#/definitions/GeoJsonPolygon"
         }
       ]
     },
@@ -1385,6 +1416,54 @@
         }
       ]
     },
+    "GeoJsonPoint": {
+      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPointData"
+        }
+      ]
+    },
+    "GeoJsonMultiPoint": {
+      "description": "A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPointData"
+        }
+      ]
+    },
+    "GeoJsonMultiLineString": {
+      "description": "A valid `GeoJSON MultiLineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.5) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineStringData"
+        }
+      ]
+    },
+    "GeoJsonPolygon": {
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPolygonData"
+        }
+      ]
+    },
     "InputWaypointFeaturesItem": {
       "type": "object",
       "description": "Specifies the input waypoint and viaWaypoint `GeoJSON` feature object and additional properties. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
@@ -1393,7 +1472,7 @@
           "$ref": "#/definitions/FeaturesItemTypeEnum"
         },
         "geometry": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+          "$ref": "#/definitions/GeoJsonPoint"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1579,14 +1658,14 @@
               "$ref": "#/definitions/TrafficCongestionEnum"
             },
             "departureTime": {
-              "type": "string",
               "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
+              "type": "string",
               "format": "date-time",
               "readOnly": true
             },
             "arrivalTime": {
-              "type": "string",
               "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
+              "type": "string",
               "format": "date-time",
               "readOnly": true
             },
@@ -1730,14 +1809,14 @@
         },
         "departureTime": {
           "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
-          "format": "date-time",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "arrivalTime": {
           "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
-          "format": "date-time",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "subLegs": {
@@ -2521,8 +2600,52 @@
         }
       }
     },
+    "RouteRangeVehicleSpec": {
+      "type": "object",
+      "description": "Specifies the vehicle attributes such as vehicle height, weight, max speed, type of cargo, etc. to consider when calculating the reachable locations. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications. Vehicle attributes are specified within the vehicleSpec property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VehicleSpec"
+        },
+        {
+          "$ref": "#/definitions/AxleCount"
+        }
+      ]
+    },
     "RouteMatrixVehicleSpec": {
-      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n `Note`: Only supported for truck travelMode.",
+      "type": "object",
+      "description": "Specifies the vehicle attributes such as vehicle height, weight, max speed, type of cargo, etc. to consider when calculating the route matrix. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized route based on the vehicle specifications. Vehicle attributes are specified within the vehicleSpec property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VehicleSpec"
+        }
+      ]
+    },
+    "RouteDirectionVehicleSpec": {
+      "type": "object",
+      "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VehicleSpec"
+        },
+        {
+          "$ref": "#/definitions/AxleCount"
+        }
+      ]
+    },
+    "AxleCount": {
+      "type": "object",
+      "description": "The number of axles on the vehicle.",
+      "properties": {
+        "axleCount": {
+          "description": "The number of axles on the vehicle.",
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "VehicleSpec": {
+      "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode.",
       "type": "object",
       "properties": {
         "isVehicleCommercial": {
@@ -2697,30 +2820,8 @@
         }
       }
     },
-    "VehicleSpec": {
-      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n `Note`: Only supported for truck travelMode.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RouteMatrixVehicleSpec"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "axleCount": {
-              "description": "Number of axles on the vehicle. A value of 0 means that axle restrictions are not considered.",
-              "format": "int64",
-              "type": "integer",
-              "maximum": 1000000,
-              "minimum": 0,
-              "default": 0
-            }
-          }
-        }
-      ]
-    },
     "AvoidEnum": {
-      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
+      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tollRoads\"]",
       "type": "array",
       "items": {
         "type": "string",
@@ -2769,8 +2870,68 @@
         }
       }
     },
+    "RouteRangeAvoidEnum": {
+      "description": "Specifies restrictions that the route calculation should honor when determining the reachable locations. Avoid supports multiple values in a request.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tollRoads\"]",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "limitedAccessHighways",
+          "tollRoads",
+          "ferries",
+          "tunnels",
+          "borderCrossings",
+          "lowEmissionZones",
+          "unpavedRoads",
+          "carpools",
+          "carTrains"
+        ],
+        "x-ms-enum": {
+          "name": "RouteRangeAvoidEnum",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "limitedAccessHighways",
+              "description": "Avoids the use of limited access highways in the route."
+            },
+            {
+              "value": "tollRoads",
+              "description": "Avoids the use of toll roads in the route."
+            },
+            {
+              "value": "ferries",
+              "description": "Avoids the use of ferries in the route."
+            },
+            {
+              "value": "tunnels",
+              "description": "Avoids the use of tunnels in the route."
+            },
+            {
+              "value": "borderCrossings",
+              "description": "Avoids crossing country borders in the route."
+            },
+            {
+              "value": "lowEmissionZones",
+              "description": "Avoids low-emission zones in the route."
+            },
+            {
+              "value": "unpavedRoads",
+              "description": "Avoids unpaved roads in the route."
+            },
+            {
+              "value": "carpools",
+              "description": "Avoids routes that require use of carpool."
+            },
+            {
+              "value": "carTrains",
+              "description": "Avoids car trains."
+            }
+          ]
+        }
+      }
+    },
     "RouteMatrixAvoidEnum": {
-      "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.",
       "type": "string",
       "enum": [
         "tollRoads",
@@ -2783,18 +2944,18 @@
           {
             "value": "tollRoads",
             "name": "TollRoads",
-            "description": "Avoids toll roads."
+            "description": "Avoids the use of toll roads in the route."
           },
           {
             "value": "unpavedRoads",
             "name": "UnpavedRoads",
-            "description": "Avoids unpaved roads."
+            "description": "Avoids unpaved roads in the route."
           }
         ]
       }
     },
     "RouteMatrixTrafficEnum": {
-      "description": "Decides how traffic is considered for computing routes.",
+      "description": "Specifies how traffic is considered for computing routes.\n\nDefault value: `historical`",
       "type": "string",
       "default": "historical",
       "enum": [
@@ -2808,40 +2969,12 @@
           {
             "value": "historical",
             "name": "Historical",
-            "description": "Finds the route based on historical traffic data"
+            "description": "Route calculation considers historical travel times and long term closures. Traffic jams and short-term closures during the travel time window do not influence routing or travel time."
           },
           {
             "value": "live",
             "name": "Live",
-            "description": "Finds the route based on live traffic data."
-          }
-        ]
-      }
-    },
-    "TravelModeEnum": {
-      "description": "The mode of travel for the requested route. If not defined, the default value is \"driving\" that returns the route optimized for cars.\n\n`Note`: For truck travelMode, the requested truck route may not be available for the entire route. Where the truck route is not available for a particular section, the travelMode element of the response for that section will be \"other\".\n\nExample: \"travelMode\":\"driving\"",
-      "type": "string",
-      "default": "driving",
-      "enum": [
-        "driving",
-        "truck",
-        "walking"
-      ],
-      "x-ms-enum": {
-        "name": "TravelModeEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "driving",
-            "description": "The returned routes are optimized for cars."
-          },
-          {
-            "value": "truck",
-            "description": "The returned routes are optimized for large size trucks based on the vehicle specification."
-          },
-          {
-            "value": "walking",
-            "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
+            "description": "In addition to historical travel times, route calculation considers traffic jams and short- and long-term closures during the travel time window.\n\n`Note`: `traffic=live` may not be used in conjunction with `arriveAt=any` and `departAt=any`"
           }
         ]
       }
@@ -2889,6 +3022,34 @@
         ]
       }
     },
+    "RouteMatrixTravelModeEnum": {
+      "description": "Specifies the travel profile to consider when calculating the matrix. If not specified, the default value is \"driving\".\n\nExample: \"travelMode\":\"driving\"",
+      "type": "string",
+      "default": "driving",
+      "enum": [
+        "driving",
+        "truck",
+        "walking"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMatrixTravelModeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "driving",
+            "description": "Routing profile suitable for cars are used for route matrix calculation."
+          },
+          {
+            "value": "truck",
+            "description": "Routing profile suitable for commercial vehicles like trucks are used for route matrix calculation."
+          },
+          {
+            "value": "walking",
+            "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
+          }
+        ]
+      }
+    },
     "Order": {
       "description": "Sequence for visiting waypoints and viaWaypoints.",
       "type": "object",
@@ -2913,10 +3074,10 @@
           "$ref": "#/definitions/FeaturesItemTypeEnum"
         },
         "geometry": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+          "$ref": "#/definitions/GeoJsonPoint"
         },
         "properties": {
-          "description": "Feature properties.",
+          "description": "The properties object is required in a valid GeoJSON but it can be empty since the metadata is not used for snapping to road.",
           "type": "object"
         }
       },
@@ -2938,7 +3099,7 @@
               "$ref": "#/definitions/FeaturesItemTypeEnum"
             },
             "geometry": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+              "$ref": "#/definitions/GeoJsonPoint"
             },
             "bbox": {
               "$ref": "#/definitions/Bbox"
@@ -2955,16 +3116,16 @@
       "type": "object",
       "properties": {
         "inputIndex": {
-          "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
+          "description": "Identify the corresponding index in the original list of points for each snapped point. Only the snapped points will return indices and can be used to distinguish them from the interpolated points.",
           "format": "int64",
           "type": "integer"
         },
-        "isInterpolate": {
-          "description": "Identify whether this is the interpolation point.",
+        "isInterpolated": {
+          "description": "Identify whether this is the interpolated point.",
           "type": "boolean"
         },
         "name": {
-          "description": "Name of the road.",
+          "description": "Name of the road the point is snapped to.",
           "type": "string"
         },
         "speedLimitInKilometersPerHour": {
@@ -2976,15 +3137,15 @@
     },
     "InputRouteRangeProperties": {
       "type": "object",
-      "description": "Specifies the properties of Route Range",
+      "description": "Specifies the parameters to use for the calculation of isochrone polygon.",
       "properties": {
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2024-10-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format. If not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
         "isSimplifiedPolygon": {
-          "description": "Return simplified polygons for the route range.",
+          "description": "Use this to specify if you need simplified polygons that reduces the number of polygon vertices while preserving the shape. The API returns high definition polygon by default.",
           "type": "boolean",
           "default": "false"
         },
@@ -2995,9 +3156,7 @@
           "enum": [
             "shortest",
             "fastestWithoutTraffic",
-            "fastestWithTraffic",
-            "thrillingWithTraffic",
-            "thrillingWithoutTraffic"
+            "fastestWithTraffic"
           ],
           "x-ms-enum": {
             "name": "RouteRangeOptimizeRouteEnum",
@@ -3017,102 +3176,30 @@
                 "value": "fastestWithTraffic",
                 "name": "FastestWithTraffic",
                 "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
-              },
-              {
-                "value": "thrillingWithTraffic",
-                "name": "ThrillingWithTraffic",
-                "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
-              },
-              {
-                "value": "thrillingWithoutTraffic",
-                "name": "ThrillingWithoutTraffic",
-                "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
               }
             ]
           }
         },
         "avoid": {
-          "$ref": "#/definitions/AvoidEnum"
+          "$ref": "#/definitions/RouteRangeAvoidEnum"
         },
         "vehicleSpec": {
-          "$ref": "#/definitions/VehicleSpec"
+          "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
         "distanceBudgetInMeters ": {
-          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit.",
+          "description": "The distance budget specifies the maximum range in meters which can be travelled from the origin waypoint. It cannot be set when `timeBudgetInSec` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum distance supported is 360,000 meters; otherwise, it is 50,000,000 meters.\n\nExample: \"distanceBudgetInMeters\":5000",
           "type": "number",
           "minimum": 0,
-          "maximum": 500000
+          "maximum": 50000000
         },
         "timeBudgetInSec": {
-          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint.",
+          "description": "The time budget specifies the maximum time in seconds available for travel, defining how far one can go within this time constraint from the origin waypoint. It cannot be set when `distanceBudgetInMeters` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum time supported is 14,400 seconds; otherwise, it is 10,000,000 seconds.\n\nExample: \"timeBudgetInSec\":3600",
           "type": "number",
           "minimum": 0,
-          "maximum": 60000
-        },
-        "thrilling": {
-          "type": "object",
-          "description": "The thrilling object is used to describe a route with two main characteristics: windingness and hilliness and is used when optimizedRoute is thrilling mode.",
-          "properties": {
-            "windingness": {
-              "description": "Specify the windingness of the route. If unspecified, the default mode is \"normal\".",
-              "type": "string",
-              "default": "normal",
-              "enum": [
-                "normal",
-                "low",
-                "high"
-              ],
-              "x-ms-enum": {
-                "name": "WindingnessEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "normal",
-                    "description": "normal"
-                  },
-                  {
-                    "value": "low",
-                    "description": "low"
-                  },
-                  {
-                    "value": "high",
-                    "description": "high"
-                  }
-                ]
-              }
-            },
-            "hilliness": {
-              "description": "Specify the hilliness of the route. If unspecified, the default mode is \"normal\".",
-              "type": "string",
-              "default": "normal",
-              "enum": [
-                "normal",
-                "low",
-                "high"
-              ],
-              "x-ms-enum": {
-                "name": "HillinessEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "normal",
-                    "description": "normal"
-                  },
-                  {
-                    "value": "low",
-                    "description": "low"
-                  },
-                  {
-                    "value": "high",
-                    "description": "high"
-                  }
-                ]
-              }
-            }
-          }
+          "maximum": 10000000
         },
         "travelMode": {
-          "description": "Specify the travel mode. If unspecified, the default mode is \"driving\".",
+          "description": "Specifies the travel profile to consider when calculating the range polygon. If not specified, the default value is \"driving\".\n\nExample: \"travelMode\":\"driving\"",
           "type": "string",
           "default": "driving",
           "enum": [
@@ -3125,11 +3212,11 @@
             "values": [
               {
                 "value": "driving",
-                "description": "driving"
+                "description": "Routing profile suitable for cars are used for range polygon calculation."
               },
               {
                 "value": "truck",
-                "description": "truck."
+                "description": "Routing profile suitable for commercial vehicles like trucks are used for range polygon calculation."
               }
             ]
           }
@@ -3186,7 +3273,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The point type",
+          "description": "The feature types for the feature objects returned in the response.",
           "type": "string",
           "enum": [
             "center",
@@ -3198,11 +3285,11 @@
             "values": [
               {
                 "value": "center",
-                "description": "The center point for the range calculation."
+                "description": "The center point feature type represents the point used for the range polygon calculation."
               },
               {
                 "value": "boundary",
-                "description": "The boundary for the range calculation."
+                "description": "The boundary feature type represents the range polygon."
               }
             ]
           }
@@ -3211,16 +3298,16 @@
     },
     "InputRouteMatrixFeaturesItem": {
       "type": "object",
-      "description": "Specifies the input origins and destination points. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "Specifies the input origin and destination points and additional properties for the `GeoJSON` MultiPoint feature object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeaturesItemTypeEnum"
         },
         "geometry": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
+          "$ref": "#/definitions/GeoJsonMultiPoint"
         },
         "properties": {
-          "description": "Feature properties.",
+          "description": "MultiPoint feature properties object which specifies the origin features and destination features for the input matrix.",
           "type": "object",
           "$ref": "#/definitions/InputRouteMatrixProperties"
         }
@@ -3233,10 +3320,10 @@
     },
     "InputRouteMatrixProperties": {
       "type": "object",
-      "description": "Specifies the properties of Route Matrix",
+      "description": "Specifies the properties object for the input matrix.",
       "properties": {
         "pointType": {
-          "description": "The type of the route matrix.",
+          "description": "Specifies the origin MultiPoint type and destination MultiPoint type for the input matrix.",
           "type": "string",
           "enum": [
             "origins",
@@ -3248,42 +3335,42 @@
             "values": [
               {
                 "value": "origins",
-                "description": "The route matrix is calculated based on the distance between the points."
+                "description": "MultiPoint features that define the origin locations in the input matrix."
               },
               {
                 "value": "destinations",
-                "description": "The route matrix is calculated based on the duration between the points."
+                "description": "MultiPoint features that define the destination locations in the input matrix."
               }
             ]
           }
         }
       }
     },
-    "RouteMatrixFeatureItem": {
-      "type": "object",
-      "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
-      "allOf": [
-        {
-          "type": "object",
-          "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
-          "properties": {
-            "type": {
-              "$ref": "#/definitions/FeaturesItemTypeEnum"
-            },
-            "geometry": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
-            },
-            "properties": {
-              "$ref": "#/definitions/RouteMatrixFeatureProperties"
-            }
-          }
-        }
-      ]
-    },
     "RouteMatrixFeatureProperties": {
       "description": "Route Matrix properties.",
       "type": "object",
       "properties": {
+        "summary": {
+          "$ref": "#/definitions/RouteMatrixSummary"
+        },
+        "matrix": {
+          "description": "The matrix of route results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteMatrixItemResult"
+          }
+        }
+      }
+    },
+    "RouteMatrixItemResult": {
+      "type": "object",
+      "description": "Route Matrix item result",
+      "properties": {
+        "statusCode": {
+          "description": "The HTTP status code of the current cell.",
+          "type": "integer",
+          "format": "int32"
+        },
         "originIndex": {
           "description": "Index of the origin point",
           "type": "integer",
@@ -3295,12 +3382,12 @@
           "format": "int32"
         },
         "departureTime": {
-          "description": "The estimated departure time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
+          "description": "The estimated departure time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is `any`, then departureTime is absent.",
           "format": "date-time",
           "readOnly": true
         },
         "arrivalTime": {
-          "description": "The estimated arrival time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
+          "description": "The estimated arrival time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is any, then departureTime is absent.",
           "format": "date-time",
           "readOnly": true
         },
@@ -3323,6 +3410,108 @@
         },
         "error": {
           "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "RouteOperation": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Operation request.",
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the asynchronous operation.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the async operation.",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "StatusEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The operation has not started yet."
+              },
+              {
+                "value": "Running",
+                "description": "The operation is running."
+              },
+              {
+                "value": "Completed",
+                "description": "The operation has completed successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "The operation has failed."
+              }
+            ]
+          }
+        },
+        "kind": {
+          "$ref": "#/definitions/RouteOperationKindEnum"
+        },
+        "result": {
+          "description": "The result of async operation",
+          "type": "object",
+          "properties": {
+            "resultUrl": {
+              "description": "URL to the get the result of async operation",
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the operation was created."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the operation status was updated."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "RouteOperationKindEnum": {
+      "type": "string",
+      "description": "Type of asynchronous operation",
+      "enum": [
+        "RouteMatrix"
+      ],
+      "x-ms-enum": {
+        "name": "RouteOperationKindEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "RouteMatrix",
+            "description": "Route matrix asynchronous job."
+          }
+        ]
+      }
+    },
+    "RouteMatrixSummary": {
+      "type": "object",
+      "description": "Summary for the route matrix request",
+      "properties": {
+        "successfulCount": {
+          "description": "Number of successful routes within this matrix.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCount": {
+          "description": "Total number of routes within this matrix.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

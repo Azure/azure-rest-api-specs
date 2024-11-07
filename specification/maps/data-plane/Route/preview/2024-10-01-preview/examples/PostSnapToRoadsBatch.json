@@ -10,8 +10,8 @@
               "type": "Feature",
               "geometry": {
                 "coordinates": [
-                  -122.122353,
-                  47.672662
+                  -122.336729,
+                  47.590868
                 ],
                 "type": "Point"
               },
@@ -21,16 +21,43 @@
               "type": "Feature",
               "geometry": {
                 "coordinates": [
-                  -122.132452,
-                  47.644234
+                  -122.336042,
+                  47.601604
                 ],
                 "type": "Point"
               },
               "properties": {}
             }
           ],
-          "interpolate": false,
           "includeSpeedLimit": true,
+          "travelMode": "driving"
+        },
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.133269,
+                  47.6470965
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            },
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -74.00487,
+                  40.71396
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            }
+          ],
           "travelMode": "driving"
         }
       ]
@@ -38,53 +65,6 @@
   },
   "responses": {
     "200": {
-      "body": {
-        "summary": {
-          "successfulRequests": 1,
-          "totalRequests": 1
-        },
-        "batchItems": [
-          {
-            "type": "FeatureCollection",
-            "features": [
-              {
-                "type": "Feature",
-                "geometry": {
-                  "coordinates": [
-                    -122.125153,
-                    47.671762
-                  ],
-                  "type": "Point"
-                },
-                "properties": {
-                  "inputIndex": 0,
-                  "isInterpolate": false,
-                  "name": "NE 92nd St",
-                  "speedLimitInKilometersPerHour": 45
-                }
-              },
-              {
-                "type": "Feature",
-                "geometry": {
-                  "coordinates": [
-                    -122.123452,
-                    47.645234
-                  ],
-                  "type": "Point"
-                },
-                "properties": {
-                  "inputIndex": 1,
-                  "isInterpolate": false,
-                  "name": "NE 140th St",
-                  "speedLimitInKilometersPerHour": 55
-                }
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "207": {
       "body": {
         "summary": {
           "successfulRequests": 1,
@@ -98,40 +78,38 @@
                 "type": "Feature",
                 "geometry": {
                   "coordinates": [
-                    -122.125153,
-                    47.671762
+                    -122.336769,
+                    47.590885
                   ],
                   "type": "Point"
                 },
                 "properties": {
                   "inputIndex": 0,
-                  "isInterpolate": false,
-                  "name": "NE 92nd St",
-                  "speedLimitInKilometersPerHour": 45
+                  "name": "WA-99 N",
+                  "speedLimitInKilometersPerHour": 80
                 }
               },
               {
                 "type": "Feature",
                 "geometry": {
                   "coordinates": [
-                    -122.123452,
-                    47.645234
+                    -122.336008,
+                    47.601609
                   ],
                   "type": "Point"
                 },
                 "properties": {
                   "inputIndex": 1,
-                  "name": "NE 140th St",
-                  "speedLimitInKilometersPerHour": 55
+                  "name": "WA-99 N",
+                  "speedLimitInKilometersPerHour": 80
                 }
               }
-            ],
-            "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
+            ]
           },
           {
             "error": {
-              "code": "400 BadRequest",
-              "message": "Invalid request"
+              "code": "BadRequest",
+              "message": "The distance between two consecutive points (-122.133269,47.6470965) (-74.00487,40.71396) must be within 2.5 kilometers of each other."
             }
           }
         ]
