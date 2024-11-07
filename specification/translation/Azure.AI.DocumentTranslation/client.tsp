@@ -19,14 +19,17 @@ interface DocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   startTranslation is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getTranslationsStatus is DocumentTranslation.DocumentTranslationOperations.getTranslationsStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getDocumentStatus is DocumentTranslation.DocumentTranslationOperations.getDocumentStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getTranslationStatus is DocumentTranslation.DocumentTranslationOperations.getTranslationStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   cancelTranslation is DocumentTranslation.DocumentTranslationOperations.cancelTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getDocumentsStatus is DocumentTranslation.DocumentTranslationOperations.getDocumentsStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getSupportedFormats is DocumentTranslation.DocumentTranslationOperations.getSupportedFormats;
