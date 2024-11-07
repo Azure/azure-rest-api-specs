@@ -54,7 +54,7 @@ op createVectorStoreFile is Azure.Core.Foundations.Operation<
     @encodedName("application/json", "file_id")
     fileId?: string;
 
-    /** The data sorces to be used. This option is mutually exclusive with fileId. */
+    /** The data sources to be used. This option is mutually exclusive with fileId. */
     @doc("Azure asset ID.")
     @encodedName("application/json", "data_sources")
     dataSources?: VectorStoreDataSource[];

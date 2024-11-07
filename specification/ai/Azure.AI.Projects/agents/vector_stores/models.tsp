@@ -118,7 +118,7 @@ model VectorStoreOptions {
   /** The name of the vector store. */
   name?: string;
 
-  /** The vector store configuration, used when vector store is created from Azure asset ID. */
+  /** The vector store configuration, used when vector store is created from Azure asset URIs. */
   @encodedName("application/json", "configuration")
   storeConfiguration?: VectorStoreConfiguration;
 
