@@ -12,3 +12,13 @@ python:
   package-version: 1.0.0b1
   clear-output-folder: true
 ```
+
+``` yaml $(python)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/falcon/azure-mgmt-falcon/azure/mgmt/falcon
+```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```
