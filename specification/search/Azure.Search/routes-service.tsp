@@ -182,6 +182,7 @@ interface IndexersOperations {
      * Retrieves an indexer definition.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexers('{indexerName}')")
     @get
     get is SearchIndexerOperation<{}, SearchIndexer>;
@@ -199,6 +200,7 @@ interface IndexersOperations {
      * Creates a new indexer.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexers")
     @post
     create is SearchOperation<
@@ -263,6 +265,7 @@ interface SkillsetsOperations {
      * Deletes a skillset in a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/skillsets('{skillsetName}')")
     @delete
     delete is SearchSkillsetOperation<
@@ -365,6 +368,7 @@ interface SynonymMapsOperations {
      * Retrieves a synonym map definition.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/synonymmaps('{synonymMapName}')")
     @get
     get is SearchSynonymMapOperation<{}, SynonymMap>;
