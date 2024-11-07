@@ -6655,7 +6655,7 @@ model ScoringFunction {
     interpolation?: ScoringFunctionInterpolation;
 
     @doc("Type of ScoringFunction.")
-    kind: string;
+    type: string;
 }
 
 /**
@@ -7198,8 +7198,7 @@ model ListAliasesResult {
      */
     @visibility("read")
     @items
-    @encodedName("application/json", "value")
-    aliases: SearchAlias[];
+    value: SearchAlias[];
 }
 
 /**
@@ -8892,14 +8891,12 @@ model AMLParameters {
      * AML service to which the JSON payload will be sent. Only the https URI scheme
      * is allowed.
      */
-    @encodedName("application/json", "uri")
-    scoringUri: url;
+    uri: url;
 
     /**
      * (Required for key authentication) The key for the AML service.
      */
-    @encodedName("application/json", "key")
-    authenticationKey?: string;
+    key?: string;
 
     /**
      * (Required for token authentication). The Azure Resource Manager resource ID of
@@ -10022,14 +10019,12 @@ model AzureMachineLearningSkill extends SearchIndexerSkill {
      * AML service to which the JSON payload will be sent. Only the https URI scheme
      * is allowed.
      */
-    @encodedName("application/json", "uri")
-    scoringUri?: url;
+    uri?: url;
 
     /**
      * (Required for key authentication) The key for the AML service.
      */
-    @encodedName("application/json", "key")
-    authenticationKey?: string;
+    key?: string;
 
     /**
      * (Required for token authentication). The Azure Resource Manager resource ID of

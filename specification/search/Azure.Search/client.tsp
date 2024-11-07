@@ -88,3 +88,8 @@ namespace Customizations;
 @@clientName(TagScoringFunction.tag, "parameters");
 @@clientName(OcrSkill.detectOrientation, "shouldDetectOrientation");
 @@clientName(PIIDetectionSkill.maskingCharacter, "mask");
+@@clientName(ListAliasesResult.value, "aliases");
+@@clientName(AMLParameters.uri, "scoringUri");
+@@clientName(AMLParameters.key, "authenticationKey");
+@@clientName(AzureMachineLearningSkill.uri, "scoringUri");
+@@clientName(AzureMachineLearningSkill.key, "authenticationKey");

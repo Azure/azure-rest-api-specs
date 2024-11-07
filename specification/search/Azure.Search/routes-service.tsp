@@ -13,6 +13,7 @@ interface DataSourcesOperations {
      * Creates a new datasource or updates a datasource if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/datasources('{dataSourceName}')")
     @put
     createOrUpdate is SearchDataSourceOperation<
@@ -61,6 +62,7 @@ interface DataSourcesOperations {
      * Lists all datasources available for a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/datasources")
     @get
     list is SearchOperation<selectQuery, ListDataSourcesResult>;
@@ -132,6 +134,7 @@ interface IndexersOperations {
      * Creates a new indexer or updates an indexer if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexers('{indexerName}')")
     @put
     createOrUpdate is SearchIndexerOperation<
@@ -187,6 +190,7 @@ interface IndexersOperations {
      * Lists all indexers available for a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexers")
     @get
     list is SearchOperation<selectQuery, ListIndexersResult>;
@@ -223,6 +227,7 @@ interface SkillsetsOperations {
      * already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/skillsets('{skillsetName}')")
     @put
     createOrUpdate is SearchSkillsetOperation<
@@ -279,6 +284,7 @@ interface SkillsetsOperations {
      * List all skillsets in a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/skillsets")
     @get
     list is SearchOperation<selectQuery, ListSkillsetsResult>;
@@ -325,6 +331,7 @@ interface SynonymMapsOperations {
      * Creates a new synonym map or updates a synonym map if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/synonymmaps('{synonymMapName}')")
     @put
     createOrUpdate is SearchSynonymMapOperation<
@@ -366,6 +373,7 @@ interface SynonymMapsOperations {
      * Lists all synonym maps available for a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/synonymmaps")
     @get
     list is SearchOperation<selectQuery, ListSynonymMapsResult>;
@@ -418,6 +426,7 @@ interface IndexesOperations {
      * Creates a new search index or updates an index if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexes('{indexName}')")
     @put
     createOrUpdate is SearchIndexOperation<
@@ -526,6 +535,7 @@ interface AliasesOperations {
      * Creates a new search alias or updates an alias if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/aliases('{aliasName}')")
     @put
     createOrUpdate is SearchAliasOperation<
