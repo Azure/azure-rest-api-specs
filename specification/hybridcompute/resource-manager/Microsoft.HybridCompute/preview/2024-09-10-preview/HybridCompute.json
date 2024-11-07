@@ -2717,7 +2717,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/setupExtensions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/addExtensions": {
       "post": {
         "tags": [
           "MachineExtensions Setup"
@@ -2745,11 +2745,11 @@
             "description": "The name of the hybrid machine."
           },
           {
-            "name": "extensionSetupBody",
+            "name": "extensions",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MachineExtensionSetup"
+              "$ref": "#/definitions/SetupExtensionRequest"
             },
             "description": "Parameters supplied to the Setup Extensions operation."
           }
@@ -2758,7 +2758,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MachineExtensionSetup"
+              "$ref": "#/definitions/SetupExtensionRequest"
             }
           },
           "202": {
@@ -2788,7 +2788,7 @@
         },
         "x-ms-examples": {
           "Setup Machine Extensions": {
-            "$ref": "./examples/extension/Extension_Setup.json"
+            "$ref": "./examples/extension/Extension_Add.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -5568,10 +5568,10 @@
         }
       }
     },
-    "MachineExtensionSetup": {
+    "SetupExtensionRequest": {
       "type": "object",
       "properties": {
-        "extensionSetupList": {
+        "extensions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MachineExtensionProperties"
