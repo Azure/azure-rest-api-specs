@@ -1473,16 +1473,22 @@ union AzureOpenAIModelName {
 @added(Versions.v2024_11_01_preview)
 union AIStudioModelCatalogName {
     string,
+
     @doc("OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32")
     OpenAICLIPImageTextEmbeddingsVitBasePatch32: "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
+
     @doc("OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336")
     OpenAICLIPImageTextEmbeddingsViTLargePatch14336: "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
+
     @doc("Facebook-DinoV2-Image-Embeddings-ViT-Base")
     FacebookDinoV2ImageEmbeddingsViTBase: "Facebook-DinoV2-Image-Embeddings-ViT-Base",
+
     @doc("Facebook-DinoV2-Image-Embeddings-ViT-Giant")
     FacebookDinoV2ImageEmbeddingsViTGiant: "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
+
     @doc("Cohere-embed-v3-english")
     CohereEmbedV3English: "Cohere-embed-v3-english",
+
     @doc("Cohere-embed-v3-multilingual")
     CohereEmbedV3Multilingual: "Cohere-embed-v3-multilingual",
 }
@@ -7007,7 +7013,7 @@ model VectorSearchCompression {
      */
     @added(Versions.v2024_11_01_preview)
     truncationDimension?: int32;
-    
+
     @doc("Type of VectorSearchCompression.")
     kind: VectorSearchCompressionKind;
 }

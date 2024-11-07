@@ -519,7 +519,7 @@ interface AliasesOperations {
              * The definition of the alias to create.
              */
             @body
-            "alias": SearchAlias;
+            `alias`: SearchAlias;
         },
         SearchAlias
     >;
@@ -542,11 +542,12 @@ interface AliasesOperations {
         {
             ...matchingHeader;
             ...preferHeader;
+
             /**
              * The definition of the alias to create or update.
              */
             @body
-            "alias": SearchAlias;
+            `alias`: SearchAlias;
         },
         SearchAlias
     >;
