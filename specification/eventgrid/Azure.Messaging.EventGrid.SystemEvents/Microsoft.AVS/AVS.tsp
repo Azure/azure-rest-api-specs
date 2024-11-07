@@ -1,8 +1,12 @@
 /** Describes the schema of the Azure VMware Solution events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
+const MicrosoftAVSPrivateCloudUpdatingExample: AvsPrivateCloudUpdatingEventData = #{
+  operationId: "6dcd7db8-0679-40d9-bb8a-6f2a684395e2",
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdating event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAVSPrivateCloudUpdatingExample)
 model AvsPrivateCloudUpdatingEventData extends AvsPrivateCloudEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdated event. */
@@ -28,8 +32,16 @@ model AvsClusterDeletedEventData extends AvsClusterEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsClusterUpdatingEventData extends AvsClusterEventData {}
 
+//TODO: invalid escape sequence
+const MicrosoftAVSClusterUpdatedExample: AvsClusterUpdatedEventData = #{
+  addedHostNames: #["esx17-r04.p01.431cc\\u00e2\\u20ac\\u00a6"],
+  removedHostNames: #["esx15-r01.p01.431cc\\u00e2\\u20ac\\u00a6"],
+  inMaintenanceHostNames: #["esx01-r03.p01.431cc\\u00e2\\u20ac\\u00a6"],
+  operationId: "c8c0b304-2db3-402b-8a6b-06065e0e1755",
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAVSClusterUpdatedExample)
 model AvsClusterUpdatedEventData extends AvsClusterEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterFailed event. */
@@ -55,8 +67,15 @@ model AvsScriptExecutionFinishedEventData extends AvsScriptExecutionEventData {
 model AvsScriptExecutionCancelledEventData
   extends AvsScriptExecutionEventData {}
 
+const MicrosoftAVSScriptExecutionFailedExample: AvsScriptExecutionFailedEventData = #{
+  operationId: "fe1cb595-71c8-47d7-b505-60d39a44d53d",
+  failureMessage: "05/04/2023 03:15:40 Get-SpbmStoragePolicy SpbmStoragePolicy with name ' RAID-5 FTT-1' was not found using the specified filter(s).",
+  cmdletId: "Microsoft.AVS.Management@5.3.70/Set-LocationStoragePolicy",
+  output: #[],
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionFailed event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAVSScriptExecutionFailedExample)
 model AvsScriptExecutionFailedEventData extends AvsScriptExecutionEventData {
   /** Failure reason of an event. */
   failureMessage?: string;
