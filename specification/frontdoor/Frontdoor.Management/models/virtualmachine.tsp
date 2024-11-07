@@ -1,5 +1,7 @@
 import "./common.tsp";
 
+namespace Microsoft.Frontdoor;
+
 @doc("VirtualMachine Properties")
 model VmProperties {
   @doc("Unique identifier for the VM (hostname + VM) used as identifier")
@@ -7,7 +9,7 @@ model VmProperties {
 
   @doc("Provisioning state")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.Frontdoor.ProvisioningState;
 
   @doc("Name of the physical server/machine this VM is running atop of")
   physicalHostName: string;
@@ -31,7 +33,7 @@ model VmProperties {
   hostSerialNumber?: string;
 
   @doc("Type of machine being tracked (BaremetalVM)")
-  assetType?: AssetType;
+  assetType?: Microsoft.Frontdoor.AssetTypeVM;
 
   @doc("Logical Environment Name")
   environmentName?: string;
