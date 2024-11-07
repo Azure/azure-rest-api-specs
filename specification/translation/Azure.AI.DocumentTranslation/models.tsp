@@ -515,14 +515,14 @@ model DocumentTranslateBody {
   @header
   contentType: "multipart/form-data";
 
+  @doc("Document Translate Request Content")
+  @body
+  body: DocumentTranslateContent;
+
   @doc("Optional boolean parameter to translate text within an image in the document")
   @query("translateTextWithinImage")
   @added(Versions.v2024_11_01_preview)
   translateTextWithinImage?: boolean;
-
-  @doc("Document Translate Request Content")
-  @body
-  body: DocumentTranslateContent;
 }
 
 @doc("Start Translation Request Body")
