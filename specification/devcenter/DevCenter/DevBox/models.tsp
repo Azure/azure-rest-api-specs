@@ -142,6 +142,18 @@ union StopOnDisconnectEnableStatus {
   string,
 }
 
+@doc("Stop on no connect enable or disable status.")
+@added(APIVersions.v2024_10_01_preview)
+union StopOnNoConnectEnableStatus {
+  @doc("Stop on no connect is enabled on the Dev Box.")
+  Enabled: "Enabled",
+
+  @doc("Stop on no connect is not enabled on the Dev Box.")
+  Disabled: "Disabled",
+
+  string,
+}
+
 @doc("Pool status indicating whether a pool is available to create Dev Boxes.")
 union PoolHealthStatus {
   @doc("The pool health status is not known.")
@@ -187,6 +199,78 @@ union ScheduledFrequency {
   string,
 }
 
+@doc("Type of the parameter.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationTaskDefinitionParameterType {
+  @doc("The parameter accepts a string value.")
+  string: "string",
+
+  @doc("The parameter accepts a number value.")
+  number: "number",
+
+  @doc("The parameter accepts a boolean value.")
+  boolean: "boolean",
+
+  string,
+}
+
+@doc("What account to run the task as.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationTaskExecutionAccount {
+  @doc("The SYSTEM account.")
+  System: "System",
+
+  @doc("The account of the signed in user.")
+  User: "User",
+
+  string,
+}
+
+@doc("Status of a customization task.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationTaskStatus {
+  @doc("The task has not yet started.")
+  NotStarted: "NotStarted",
+
+  @doc("The task is currently executing.")
+  Running: "Running",
+
+  @doc("The task successfully executed.")
+  Succeeded: "Succeeded",
+
+  @doc("The task reference is not valid.")
+  FailedValidation: "FailedValidation",
+
+  @doc("he task was skipped.")
+  Skipped: "Skipped",
+
+  @doc("The task timed out.")
+  TimedOut: "TimedOut",
+
+  @doc("The task failed to execute.")
+  Failed: "Failed",
+
+  @doc("The task is awaiting the User Account Control (UAC) prompt to be approved. (See more at: https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/)")
+  WaitingForUserInputUac: "WaitingForUserInputUac",
+
+  @doc("The task is awaiting the user to connect to the Dev Box to execute.")
+  WaitingForUserSession: "WaitingForUserSession",
+
+  string,
+}
+
+@doc("Status of validating a list of customization tasks.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationTaskListValidationStatus {
+  @doc("Validation succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("Validation failed.")
+  Failed: "Failed",
+
+  string,
+}
+
 @doc("The power states of a Dev Box.")
 union PowerState {
   @doc("The Dev Box power state is not known.")
@@ -203,6 +287,36 @@ union PowerState {
 
   @doc("The Dev Box is hibernated.")
   Hibernated: "Hibernated",
+
+  string,
+}
+
+@doc("Status of validating a list of customization tasks.")
+@added(APIVersions.v2024_05_01_preview)
+union ListCustomizationGroupsIncludeProperty {
+  @doc("Include list of tasks in the response.")
+  tasks: "tasks",
+
+  string,
+}
+
+@doc("Status of a customization group.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationGroupStatus {
+  @doc("The customization group has not yet started.")
+  NotStarted: "NotStarted",
+
+  @doc("The customization group is currently executing.")
+  Running: "Running",
+
+  @doc("All tasks in the customization group successfully executed.")
+  Succeeded: "Succeeded",
+
+  @doc("At least one task in the customization group failed.")
+  Failed: "Failed",
+
+  @doc("At least one task in the customization group failed validation.")
+  ValidationFailed: "ValidationFailed",
 
   string,
 }
@@ -253,6 +367,14 @@ union DevBoxOperationKind {
   @doc("The operation represents a Dev Box repair.")
   Repair: "Repair",
 
+  @doc("The operation represents a Dev Box restore from snapshot.")
+  @added(APIVersions.v2024_09_01_preview)
+  RestoreSnapshot: "RestoreSnapshot",
+
+  @doc("The operation represents a Dev Box manual snapshot creation.")
+  @added(APIVersions.v2024_10_01_preview)
+  CaptureSnapshot: "CaptureSnapshot",
+
   string,
 }
 
@@ -267,6 +389,18 @@ union DevBoxRepairOutcome {
 
   @doc("The service did not identify any issues on the Dev Box.")
   NoIssuesDetected: "NoIssuesDetected",
+
+  string,
+}
+
+@doc("The type of snapshot.")
+@added(APIVersions.v2024_10_01_preview)
+union SnapshotType {
+  @doc("The snapshot type indicates that this is a manually taken snapshot.")
+  Manual: "Manual",
+
+  @doc("The snapshot type indicates that this is an automatically taken snapshot.")
+  Automatic: "Automatic",
 
   string,
 }
@@ -306,18 +440,22 @@ model Pool {
   imageReference?: ImageReference;
 
   @doc("""
-Indicates whether owners of Dev Boxes in this pool are local administrators on
-the Dev Boxes.
-""")
+    Indicates whether owners of Dev Boxes in this pool are local administrators on
+    the Dev Boxes.
+    """)
   localAdministrator?: LocalAdminStatus;
 
   @doc("Stop on disconnect configuration settings for Dev Boxes created in this pool.")
   stopOnDisconnect?: StopOnDisconnectConfiguration;
 
+  @doc("Stop on no connect configuration settings for Dev Boxes created in this pool.")
+  @added(APIVersions.v2024_10_01_preview)
+  stopOnNoConnect?: StopOnNoConnectConfiguration;
+
   @doc("""
-Overall health status of the Pool. Indicates whether or not the Pool is
-available to create Dev Boxes.
-""")
+    Overall health status of the Pool. Indicates whether or not the Pool is
+    available to create Dev Boxes.
+    """)
   healthStatus: PoolHealthStatus;
 
   @doc("Display name of the pool.")
@@ -374,7 +512,7 @@ model ImageReference {
   @visibility("read")
   osBuildNumber?: string;
 
-  @doc("The datetime that the backing image version was published.")
+  @doc("The datetime that the backing image version was published, in RFC3339 format.")
   @visibility("read")
   publishedDate?: utcDateTime;
 }
@@ -382,15 +520,27 @@ model ImageReference {
 @doc("Stop on disconnect configuration settings for Dev Boxes created in this pool.")
 model StopOnDisconnectConfiguration {
   @doc("""
-Indicates whether the feature to stop the devbox on disconnect once the grace
-period has lapsed is enabled.
-""")
+    Indicates whether the feature to stop the devbox on disconnect once the grace
+    period has lapsed is enabled.
+    """)
   status: StopOnDisconnectEnableStatus;
 
   @doc("""
-The specified time in minutes to wait before stopping a Dev Box once disconnect
-is detected.
-""")
+    The specified time in minutes to wait before stopping a Dev Box once disconnect
+    is detected.
+    """)
+  gracePeriodMinutes?: int32;
+}
+
+@doc("Stop on no connect configuration settings for Dev Boxes created in this pool.")
+@added(APIVersions.v2024_10_01_preview)
+model StopOnNoConnectConfiguration {
+  @doc("""
+    Enables the feature to stop a started Dev Box when it has not been connected to, once the grace period has lapsed.
+    """)
+  status: StopOnNoConnectEnableStatus;
+
+  @doc("The specified time in minutes to wait before stopping a Dev Box if no connection is made. This will only be present if stop on no connect is enabled.")
   gracePeriodMinutes?: int32;
 }
 
@@ -473,9 +623,9 @@ model DevBox {
   provisioningState?: DevBoxProvisioningState;
 
   @doc("""
-The current action state of the Dev Box. This is state is based on previous
-action performed by user.
-""")
+    The current action state of the Dev Box. This is state is based on previous
+    action performed by user.
+    """)
   @visibility("read")
   actionState?: string;
 
@@ -484,9 +634,9 @@ action performed by user.
   powerState?: PowerState;
 
   @doc("""
-A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
-00000000-0000-0000-0000-000000000000).
-""")
+    A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
+    00000000-0000-0000-0000-000000000000).
+    """)
   @visibility("read")
   uniqueId?: Azure.Core.uuid;
 
@@ -495,9 +645,9 @@ A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
   error?: Azure.Core.Foundations.Error;
 
   @doc("""
-Azure region where this Dev Box is located. This will be the same region as the
-Virtual Network it is attached to.
-""")
+    Azure region where this Dev Box is located. This will be the same region as the
+    Virtual Network it is attached to.
+    """)
   @visibility("read")
   location?: Azure.Core.azureLocation;
 
@@ -521,9 +671,14 @@ Virtual Network it is attached to.
   @visibility("read")
   imageReference?: ImageReference;
 
-  @doc("Creation time of this Dev Box.")
+  @doc("Creation time of this Dev Box, in RFC3339 format.")
   @visibility("read")
   createdTime?: utcDateTime;
+
+  @doc("Last time a user connected to this Dev Box, in RFC3339 format.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  lastConnectedTime?: utcDateTime;
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
   @visibility("read", "create")
@@ -537,6 +692,10 @@ model RemoteConnection {
 
   @doc("Link to open a Remote Desktop session.")
   rdpConnectionUrl?: url;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("Link to open a remote desktop session via a dev box's underlying Cloud PC (This will default to Windows App).")
+  cloudPcConnectionUrl?: url;
 }
 
 @doc("An action which will take place on a Dev Box.")
@@ -569,7 +728,7 @@ model DevBoxAction {
   @added(APIVersions.v2024_02_01)
   sourceType: DevBoxActionSourceType;
 
-  @doc("The earliest time that the action could occur (UTC).")
+  @doc("The earliest time that the action could occur (UTC), in RFC3339 format.")
   suspendedUntil?: utcDateTime;
 
   @doc("Details about the next run of this action.")
@@ -578,7 +737,7 @@ model DevBoxAction {
 
 @doc("Details about the next run of an action.")
 model DevBoxNextAction {
-  @doc("The time the action will be triggered (UTC).")
+  @doc("The time the action will be triggered (UTC), in RFC3339 format.")
   scheduledTime: utcDateTime;
 }
 
@@ -629,10 +788,10 @@ model DevBoxOperation {
   @doc("The object ID of the actor which initiated the operation.")
   createdByObjectId?: Azure.Core.uuid;
 
-  @doc("he time the operation started.")
+  @doc("he time the operation started, in RFC3339 format.")
   startTime?: utcDateTime;
 
-  @doc("The time the operation finished.")
+  @doc("The time the operation finished, in RFC3339 format.")
   endTime?: utcDateTime;
 
   @doc("Provisioning or operation error details. Populated only for error states.")
@@ -681,4 +840,211 @@ model DevBoxRepairOperationResult {
 
   @doc("The result message associated with the repair operation.")
   message?: string;
+}
+
+@doc("Information about a restore from snapshot operation on a Dev Box.")
+@added(APIVersions.v2024_09_01_preview)
+model DevBoxRestoreSnapshotOperation extends DevBoxOperation {
+  @doc("Specifies the snapshot id that was used for the restore operation.")
+  snapshotId: string;
+
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.RestoreSnapshot;
+}
+
+@doc("Information about a snapshot creation operation on a Dev Box.")
+@added(APIVersions.v2024_10_01_preview)
+model DevBoxCaptureSnapshotOperation extends DevBoxOperation {
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.CaptureSnapshot;
+}
+
+@doc("The Customization Task list result.")
+model PagedCustomizationTaskDefinition
+  is Azure.Core.Page<CustomizationTaskDefinition>;
+
+@doc("Represents a task to be used in customizing a Dev Box.")
+@added(APIVersions.v2024_05_01_preview)
+@resource("customizationTasks")
+@parentResource(Catalog)
+model CustomizationTaskDefinition {
+  @doc("Full name of the task: {catalogName}/{taskName}.")
+  @key("taskName")
+  @visibility("read")
+  name: string;
+
+  @doc("Name of the catalog that the task belongs to.")
+  @visibility("read")
+  catalogName: string;
+
+  @doc("The unique URI of the customization task.")
+  @visibility("read")
+  uri?: url;
+
+  @doc("Description of the task.")
+  description?: string;
+
+  @doc("Parameters for the task.")
+  parameters?: Record<CustomizationTaskDefinitionParameter>;
+}
+
+@doc("Parameters for a customization task.")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskDefinitionParameter {
+  @doc("Description of the parameter.")
+  description?: string;
+
+  @doc("Type of the parameter.")
+  type: CustomizationTaskDefinitionParameterType;
+
+  @doc("Whether or not the parameter is required.")
+  @visibility("read")
+  required?: boolean;
+
+  @doc("Default value for the parameter.")
+  default?: string;
+
+  @doc("Allowed values for the parameter.")
+  allowed?: string[];
+}
+
+@doc("Represents a list of tasks to apply to a Dev Box")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskList {
+  @doc("Tasks to apply.")
+  tasks?: CustomizationTask[];
+}
+
+@doc("A customization task to run on a Dev Box.")
+@resource("customizationTasks")
+@parentResource(Catalog)
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTask {
+  @doc("Name of the task.")
+  @key("taskName")
+  @visibility("read", "create")
+  name: string;
+
+  @doc("Parameters for the task.")
+  parameters?: Record<string>;
+
+  @doc("Display name to help differentiate multiple instances of the same task.")
+  displayName?: string;
+
+  @doc("Timeout, in seconds. Overrides any timeout provided on the task definition.")
+  timeoutInSeconds?: int32;
+
+  @doc("What account to run the task as.")
+  runAs?: CustomizationTaskExecutionAccount;
+
+  @doc("ID of the task instance.")
+  @visibility("read")
+  id?: string;
+
+  @doc("The unique URI for retrieving the task logs.")
+  @visibility("read")
+  logUri?: string;
+
+  @doc("Status of the task.")
+  @visibility("read")
+  status?: CustomizationTaskStatus;
+
+  @doc("Start time of the task, in RFC3339 format.")
+  @visibility("read")
+  startTime?: utcDateTime;
+
+  @doc("End time of the task, in RFC3339 format.")
+  @visibility("read")
+  endTime?: utcDateTime;
+}
+
+@doc("The operation result of validating a list of customization tasks.")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskListValidationOperationResult {
+  ...OperationStatus;
+
+  @doc("Outcome of validation.")
+  result?: CustomizationTaskListValidationResult;
+}
+
+@doc("The result of validating a list of customization tasks.")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskListValidationResult {
+  @doc("Outcome of validation.")
+  validationResult: CustomizationTaskListValidationStatus;
+
+  @doc("List of validation errors. Absent if no errors.")
+  errors?: CustomizationTaskListValidationError[];
+}
+
+@doc("All of the validation errors for a customization task.")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskListValidationError {
+  @doc("The customization task that the error is about.")
+  target: CustomizationTask;
+
+  @doc("List of validation errors for the task.")
+  details: Azure.Core.Foundations.Error[];
+}
+
+@doc("Represents a list of tasks to apply to a Dev Box.")
+@resource("customizationGroups")
+@parentResource(DevBox)
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationGroup {
+  @doc("""
+    Tasks to apply. Note by default tasks are excluded from the response when
+    listing customization groups. To include them, use the `include=tasks` query
+    parameter.
+    """)
+  tasks?: CustomizationTask[];
+
+  @doc("The unique URI of the customization group.")
+  @visibility("read")
+  uri?: string;
+
+  @doc("Name of the customization group.")
+  @key("customizationGroupName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read")
+  name: string;
+
+  @doc("Status of the customization group.")
+  @visibility("read")
+  status?: CustomizationGroupStatus;
+
+  @doc("Start time of the customization group, in RFC3339 format.")
+  @visibility("read")
+  startTime?: utcDateTime;
+
+  @doc("End time of the customization group, in RFC3339 format.")
+  @visibility("read")
+  endTime?: utcDateTime;
+}
+
+@added(APIVersions.v2024_09_01_preview)
+@doc("A DevBox snapshot")
+@resource("snapshots")
+@parentResource(DevBox)
+model DevBoxSnapshot {
+  @key("snapshotId")
+  @doc("The id of the snapshot. Should be treated as opaque string.")
+  @visibility("read")
+  snapshotId: string;
+
+  @doc("The datetime that the snapshot was created, in RFC3339 format.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("The datetime when the snapshot expires, will only be shown for a manual snapshot, in RFC3339 format.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  expirationTime?: utcDateTime;
+
+  @doc("The type of the snapshot indicates whether it is manual or automatic.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  snapshotType: SnapshotType;
 }

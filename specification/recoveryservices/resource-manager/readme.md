@@ -43,6 +43,18 @@ message-format: json
 ```
 
 
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.RecoveryServices/preview/2024-04-30-preview/registeredidentities.json
+  - Microsoft.RecoveryServices/preview/2024-04-30-preview/replicationusages.json
+  - Microsoft.RecoveryServices/preview/2024-04-30-preview/vaults.json
+  - Microsoft.RecoveryServices/preview/2024-04-30-preview/vaultusages.json
+```
+
 ### Tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.

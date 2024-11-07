@@ -1,0 +1,77 @@
+# Prefix with "~" to sort last in Actions list
+name: ~Templates - eng/tools - Test
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        description: Name of package under eng/tools
+        required: true
+        type: string
+      sparse-checkout-paths:
+        description: Paths for sparse checkout
+        type: string
+      lint:
+        description: Run 'npm run lint' if true
+        required: false
+        type: boolean
+      prettier:
+        description: Run 'npm run prettier' if true
+        required: false
+        type: boolean
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18, 20]
+        exclude:
+          - os: ubuntu-latest
+            node-version: 20
+          - os: windows-latest
+            node-version: 18
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+        shell: pwsh
+
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
+            eng
+            ${{ inputs.sparse-checkout-paths }}
+
+      - name: Setup Node ${{ matrix.node-version }} and run `npm ci`
+        uses: ./.github/actions/setup-node-npm-ci
+        with:
+          node-version: ${{ matrix.node-version }}.x
+
+      - run: npm run build
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run lint
+        if: inputs.lint == true
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run prettier
+        if: inputs.prettier == true
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}        
+
+      - run: npm run test:ci
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report-${{ matrix.os }}-${{ matrix.node-version }}
+          path: ./eng/tools/${{ inputs.package }}/coverage
+          if-no-files-found: ignore

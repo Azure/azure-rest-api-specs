@@ -16,6 +16,7 @@ namespace ClientForAcsMessages;
 })
 interface NotificationMessagesClient
   extends Azure.Communication.MessagesService.NotificationMessagesOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @access(Access.internal, "csharp")
   @clientName("downloadMediaInternal", "csharp")
   downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
@@ -35,4 +36,9 @@ interface MessageTemplateClient
 @@clientName(Azure.Communication.MessagesService.MessageTemplate.values,
   "templateValues",
   "python"
+);
+
+@@clientName(Azure.Communication.MessagesService.NotificationMessagesSendRequestBody.body,
+  "notificationContent",
+  "csharp,java"
 );

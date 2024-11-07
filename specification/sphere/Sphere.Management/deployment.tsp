@@ -1,15 +1,6 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "./deviceGroup.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 /**
@@ -38,7 +29,12 @@ interface Deployments {
   /**
    * Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Deployment>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Deployment,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
@@ -53,7 +49,7 @@ interface Deployments {
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
     {
-      ...BaseParameters<Deployment>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Deployment>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;

@@ -8,7 +8,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace("Microsoft.EdgeZones")
 @service({
@@ -121,19 +120,6 @@ model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
   name: string;
 }
 
-// We will use this in an interface
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
-@autoRoute
-@armResourceAction(TResource)
-@post
-@doc("Arm Resource Action Taking no request body object and returning result object")
-op ArmResourceActionNoBodySync<
-  TResource extends ArmResource,
-  TBaseParameters = BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResource> | ErrorResponse;
-
 @doc("ExtendedZone operations")
 @armResourceOperations
 interface ExtendedZones {
@@ -144,8 +130,8 @@ interface ExtendedZones {
   listBySubscription is ArmListBySubscription<ExtendedZone>;
 
   @doc("Registers a subscription for an Extended Zone")
-  register is ArmResourceActionNoBodySync<ExtendedZone>;
+  register is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
 
   @doc("Unregisters a subscription for an Extended Zone")
-  unregister is ArmResourceActionNoBodySync<ExtendedZone>;
+  unregister is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
 }

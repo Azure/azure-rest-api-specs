@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 import { join } from "path";
 import { EmitAutorestRule } from "../src/rules/emit-autorest.js";
 import { TsvTestHost } from "./tsv-test-host.js";
@@ -39,7 +40,7 @@ emit:
     host.readTspConfig = async (_folder: string) => `
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 `;
 
     const result = await new EmitAutorestRule().execute(host, TsvTestHost.folder);

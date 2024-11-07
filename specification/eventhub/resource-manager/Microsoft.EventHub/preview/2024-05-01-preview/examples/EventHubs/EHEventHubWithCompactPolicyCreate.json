@@ -10,7 +10,6 @@
         "messageRetentionInDays": 4,
         "partitionCount": 4,
         "status": "Active",
-        "messageTimestampType": "AppendTime",
         "userMetadata": "key",
         "captureDescription": {
           "enabled": true,
@@ -32,9 +31,11 @@
         },
         "retentionDescription": {
           "cleanupPolicy": "Compact",
-          "retentionTimeInHours": -1,
           "minCompactionLagInMins": 10,
           "tombstoneRetentionTimeInHours": 1
+        },
+        "messageTimestampDescription": {
+          "timestampType": "LogAppend"
         }
       }
     }
@@ -49,7 +50,6 @@
           "messageRetentionInDays": 4,
           "partitionCount": 4,
           "status": "Active",
-          "messageTimestampType": "AppendTime",
           "userMetadata": "key",
           "identifier": "identifierIDGUID",
           "createdAt": "2017-06-28T02:45:55.877Z",
@@ -83,6 +83,9 @@
             "retentionTimeInHours": -1,
             "minCompactionLagInMins": 10,
             "tombstoneRetentionTimeInHours": 1
+          },
+          "messageTimestampDescription": {
+            "timestampType": "LogAppend"
           }
         }
       }

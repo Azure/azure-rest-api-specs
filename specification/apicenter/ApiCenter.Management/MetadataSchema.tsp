@@ -6,7 +6,6 @@ import "./Service.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -32,7 +31,7 @@ interface MetadataSchemas {
   head(
     ...ResourceInstanceParameters<
       MetadataSchema,
-      BaseParameters<MetadataSchema>
+      Foundations.BaseParameters<MetadataSchema>
     >,
   ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing metadata schema.")

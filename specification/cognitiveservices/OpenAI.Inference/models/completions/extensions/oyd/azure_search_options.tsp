@@ -10,16 +10,16 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 @doc("""
-A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat
-extension.
-""")
+  A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat
+  extension.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model AzureSearchChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
   @doc("""
-  The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Azure Cognitive Search.
-  """)
+    The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
+    default value for Azure Cognitive Search.
+    """)
   type: AzureChatExtensionType.azureSearch;
 
   @doc("The parameters to use when configuring Azure Search.")
@@ -30,6 +30,16 @@ model AzureSearchChatExtensionConfiguration
 @doc("Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are APIKey, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.")
 model AzureSearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
+
+  @doc("""
+    The authentication method to use when accessing the defined data source.
+    Each data source type supports a specific set of available authentication methods; please see the documentation of
+    the data source for supported mechanisms.
+    If not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)
+    authentication.
+    """)
+  @clientName("Authentication", "csharp")
+  authentication?: OnYourDataAuthenticationOptions;
 
   @doc("The absolute endpoint path for the Azure Cognitive Search resource to use.")
   @clientName("SearchEndpoint", "csharp")
@@ -100,8 +110,8 @@ model AzureSearchIndexFieldMappingOptions {
 }
 
 @doc("""
-The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
-""")
+  The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union AzureSearchQueryType {
   string,

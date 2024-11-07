@@ -2487,7 +2487,7 @@
         },
         "aggregate": {
           "$ref": "#/definitions/PFAgFunc",
-          "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
+          "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
         },
         "condition": {
           "type": "string",
@@ -3086,7 +3086,7 @@
         },
         "testRunStatistics": {
           "type": "object",
-          "description": "Test run statistics.",
+          "description": "Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.\nThe sampler name is the same as the name mentioned in the test script.\nSampler name \"Total\" represents the aggregated statistics of all the samplers.",
           "additionalProperties": {
             "$ref": "#/definitions/TestRunStatistics"
           },
