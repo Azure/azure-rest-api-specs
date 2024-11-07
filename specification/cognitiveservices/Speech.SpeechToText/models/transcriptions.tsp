@@ -8,16 +8,24 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-namespace Azure.Speech;
+namespace Azure.Speech.SpeechToText;
 
+@doc("Transcription")
 model Transcription {
+  @doc("TranscriptionLinks")
   links?: TranscriptionLinks;
+
+  @doc("TranscriptionProperties")
   properties: TranscriptionProperties;
 
   @visibility("read")
+  @doc("The location of this entity.")
   self?: url;
 
+  @doc("EntityReference")
   `model`?: EntityReference;
+
+  @doc("EntityReference")
   dataset?: EntityReference;
 
   @doc("A list of content urls to get audio files to transcribe. Up to 1000 urls are allowed.\r\nThis property will not be returned in a response.")
@@ -40,12 +48,14 @@ model Transcription {
   @doc("The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.")
   customProperties?: Record<string>;
 
+  @doc("The project refernce of the object")
   project?: EntityReference;
 
   @visibility("read")
   @doc("The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
   lastActionDateTime?: utcDateTime;
 
+  @doc("The status of the object")
   status?: Status;
 
   @visibility("read")
@@ -53,6 +63,7 @@ model Transcription {
   createdDateTime?: utcDateTime;
 }
 
+@doc("TranscriptionUpdate")
 model TranscriptionUpdate {
   @doc("The name of the object.")
   displayName?: string;
@@ -63,60 +74,110 @@ model TranscriptionUpdate {
   @doc("The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.")
   customProperties?: Record<string>;
 
+  @doc("EntityReference")
   project?: EntityReference;
 }
 
+@doc("TranscriptionUpdate")
 model TranscriptionLinks {
   @visibility("read")
+  @doc("The location to get all files of this entity. See operation \"Transcriptions_ListFiles\" for more details.")
   files?: url;
 }
 
+@doc("TranscriptionProperties")
 model TranscriptionProperties {
+  @doc("A value indicating whether word level timestamps are requested. The default value is false.")
   wordLevelTimestampsEnabled?: boolean;
+
+  @doc("A value indicating whether word level timestamps for the display form are requested. The default value is false.")
   displayFormWordLevelTimestampsEnabled?: boolean;
 
   @visibility("read")
+  @doc("The duration of the transcription. The duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).")
   duration?: string;
 
+  @doc("A collection of the requested channel numbers. In the default case, the channels 0 and 1 are considered.")
   channels?: Array<int32>;
+
+  @doc("The requested destination container.\n\nRemarks\n\nWhen a destination container is used in combination with a timeToLive, the metadata of a transcription will be deleted normally, but the data stored in the destination container, including transcription results, will remain untouched, because no delete permissions are required for this container.\n\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\" instead of destinationContainerUrl, where blobs can be cleaned up.")
   destinationContainerUrl?: url;
+
+  @doc("The mode used for punctuation.")
   punctuationMode?: PunctuationMode;
+
+  @doc("Mode of profanity filtering.")
   profanityFilterMode?: ProfanityFilterMode;
+
+  @doc("How long the transcription will be kept in the system after it has completed. Once the transcription reaches the time to live after completion (successful or failed) it will be automatically deleted.\n\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account will also be deleted. Use either destinationContainerUrl to specify a separate container for result files which will not be deleted when the timeToLive expires, or retrieve the result files through the API and store them as needed.\n\nThe shortest supported duration is 6h, the longest supported duration is 31 days. 2 days (\"P2D\") is the recommended default value when data is consumed directly. The duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).")
   timeToLive: string;
+
+  @doc("EntityError")
   error?: EntityError;
 
   @doc("A value indicating whether diarization (speaker identification) is requested. The default value\r\nis `false`.\r\nIf this field is set to true and the improved diarization system is configured by specifying\r\n`DiarizationProperties`, the improved diarization system will provide diarization for a configurable\r\nrange of speakers.\r\nIf this field is set to true and the improved diarization system is not enabled (not specifying\r\n`DiarizationProperties`), the basic diarization system will distinguish between up to two speakers.\r\nNo extra charges are applied for the basic diarization.\r\n            \r\nThe basic diarization system is deprecated and will be removed in the next major version of the API.\r\nThis `diarizationEnabled` setting will also be removed.")
   @removed(ServiceApiVersions.V20241115)
   diarizationEnabled?: boolean;
 
+  @doc("DiarizationProperties")
   diarization?: DiarizationProperties;
+
+  @doc("LanguageIdentificationProperties")
   languageIdentification?: LanguageIdentificationProperties;
 }
 
 @doc("Describe the current state of the API.")
 union Status {
+  @doc("The long running operation has not yet started.")
   NotStarted: "NotStarted",
+
+  @doc("The long running operation is currently processing.")
   Running: "Running",
+
+  @doc("The long running operation has successfully completed.")
   Succeeded: "Succeeded",
+
+  @doc("The long running operation has failed.")
   Failed: "Failed",
+
+  string,
 }
 
 @doc("The mode used for punctuation.")
 union PunctuationMode {
+  @doc("No punctuation.")
   None: "None",
+
+  @doc("Dictated punctuation marks only, i.e., explicit punctuation.")
   Dictated: "Dictated",
+
+  @doc("Automatic punctuation.")
   Automatic: "Automatic",
+
+  @doc("Dictated punctuation marks or automatic punctuation.")
   DictatedAndAutomatic: "DictatedAndAutomatic",
+
+  string,
 }
 
 @doc("Mode of profanity filtering.")
 union ProfanityFilterMode {
+  @doc("Disable profanity filtering.")
   None: "None",
+
+  @doc("Remove profanity.")
   Removed: "Removed",
+
+  @doc("Add \"profanity\" XML tags</Profanity>")
   Tags: "Tags",
+
+  @doc("Mask the profanity with * except of the first letter, e.g., f***")
   Masked: "Masked",
+
+  string,
 }
 
+@doc("EntityError")
 model EntityError {
   @visibility("read")
   @doc("The code of this error.")
@@ -127,8 +188,10 @@ model EntityError {
   message?: string;
 }
 
+@doc("DiarizationProperties")
 model DiarizationProperties {
   @removed(ServiceApiVersions.V20241115)
+  @doc("DiarizationSpeakersProperties")
   speakers?: DiarizationSpeakersProperties;
 
   @added(ServiceApiVersions.V20241115)
@@ -143,6 +206,7 @@ model DiarizationProperties {
 }
 
 @removed(ServiceApiVersions.V20241115)
+@doc("DiarizationSpeakersProperties")
 model DiarizationSpeakersProperties {
   @minValue(1)
   @doc("A hint for the minimum number of speakers for diarization. Must be smaller than or equal to the maxSpeakers property.")
@@ -153,7 +217,9 @@ model DiarizationSpeakersProperties {
   maxCount?: int32;
 }
 
+@doc("LanguageIdentificationProperties")
 model LanguageIdentificationProperties {
+  @doc("The mode used for language identification.")
   mode?: LanguageIdentificationMode;
 
   @doc("The candidate locales for language identification (example [\"en-US\", \"de-DE\", \"es-ES\"]). A minimum of 2 and a maximum of 10 candidate locales, including the main locale for the transcription, is supported for continuous mode. For single language identification, the maximum number of candidate locales is unbounded.")
@@ -165,11 +231,18 @@ model LanguageIdentificationProperties {
 
 @doc("The mode used for language identification.")
 union LanguageIdentificationMode {
+  @doc("Continuous language identification (Default).")
   Continuous: "Continuous",
+
+  @doc("Single language identification. If no language can be identified, the error code NoLanguageIdentified is returned to the user. If there is ambiguity between multiple languages, the error code MultipleLanguagesIdentified is returned to the user.")
   Single: "Single",
+
+  string,
 }
 
+@doc("EntityReference")
 model EntityReference {
+  @doc("The location of the referenced entity.")
   self: url;
 }
 
@@ -187,6 +260,7 @@ model TranscribeResult {
   phrases: Array<Phrase>;
 }
 
+@doc("CombinedPhrases")
 model CombinedPhrases {
   @doc("The 0-based channel index. Only present if channel separation is enabled.")
   channel?: int32;
@@ -194,6 +268,7 @@ model CombinedPhrases {
   @doc("The complete transcribed text for the channel.") text: string;
 }
 
+@doc("A transcribed phrase.")
 model Phrase {
   @doc("The 0-based channel index. Only present if channel separation is enabled.")
   channel?: int32;
@@ -217,9 +292,10 @@ model Phrase {
   words?: Array<Word>;
 
   @doc("The locale of the phrase.") locale?: string;
-  @doc("The confidence value for the phrase.") confidence: float;
+  @doc("The confidence value for the phrase.") confidence: float32;
 }
 
+@doc("Time-stamped word in the display form.")
 model Word {
   @doc("The recognized word, including punctuation.") text: string;
 
@@ -235,9 +311,9 @@ model Word {
 }
 
 @doc("New format which conforms to the new Cognitive Services API guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains an outer error with error code, message, details, target and an inner error with more descriptive details.")
-@defaultResponse
 @error
 model Error {
+  @doc("High level error code.")
   code?: ErrorCode;
 
   @doc("Additional supportive details regarding the error and/or expected policies.")
@@ -249,9 +325,11 @@ model Error {
   @doc("The source of the error.\r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.")
   target?: string;
 
+  @doc("New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow. This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).")
   innerError?: InnerError;
 }
 
+#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
 @doc("Metadata for a fast transcription request.")
 model TranscribeDefinition {
   @doc("A list of possible locales for the transcription. If not specified, the locale of the speech in the audio is detected automatically from all supported locales.")
@@ -260,8 +338,10 @@ model TranscribeDefinition {
   @doc("Maps some or all candidate locales to a model URI to be used for transcription. If no mapping is given, the default model for the locale is used.")
   models?: Record<url>;
 
+  @doc("Mode of profanity filtering.")
   profanityFilterMode?: ProfanityFilterMode;
 
+  @doc("Mode of diarization.")
   @added(ServiceApiVersions.V20241115)
   diarization?: TranscribeDiarizationProperties;
 
@@ -283,23 +363,54 @@ model TranscribeDiarizationProperties {
 
 @doc("High level error codes.")
 union ErrorCode {
+  @doc("Representing the invalid request error code.")
   InvalidRequest: "InvalidRequest",
+
+  @doc("Representing the invalid argument error code.")
   InvalidArgument: "InvalidArgument",
+
+  @doc("Representing the internal server error error code.")
   InternalServerError: "InternalServerError",
+
+  @doc("Representing the service unavailable error code.")
   ServiceUnavailable: "ServiceUnavailable",
+
+  @doc("Representing the not found error code.")
   NotFound: "NotFound",
+
+  @doc("Representing the pipeline error error code.")
   PipelineError: "PipelineError",
+
+  @doc("Representing the conflict error code.")
   Conflict: "Conflict",
+
+  @doc("Representing the internal communication failed error code.")
   InternalCommunicationFailed: "InternalCommunicationFailed",
+
+  @doc("Representing the forbidden error code.")
   Forbidden: "Forbidden",
+
+  @doc("Representing the not allowed error code.")
   NotAllowed: "NotAllowed",
+
+  @doc("Representing the unauthorized error code.")
   Unauthorized: "Unauthorized",
+
+  @doc("Representing the unsupported media type error code.")
   UnsupportedMediaType: "UnsupportedMediaType",
+
+  @doc("Representing the too many requests error code.")
   TooManyRequests: "TooManyRequests",
+
+  @doc("Representing the unprocessable entity error code.")
   UnprocessableEntity: "UnprocessableEntity",
+
+  string,
 }
 
+@doc("InnerError")
 model InnerError {
+  @doc("Detailed error code enum.")
   code?: DetailedErrorCode;
 
   @doc("Additional supportive details regarding the error and/or expected policies.")
@@ -311,80 +422,225 @@ model InnerError {
   @doc("The source of the error.\r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.")
   target?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "This can be nested."
+  @doc("New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow. This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).")
   innerError?: InnerError;
 }
 
 @doc("Detailed error code enum.")
 union DetailedErrorCode {
+  @doc("Invalid parameter value.")
   InvalidParameterValue: "InvalidParameterValue",
+
+  @doc("Invalid request body format.")
   InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
+
+  @doc("Empty Request.")
   EmptyRequest: "EmptyRequest",
+
+  @doc("Missing Input Records.")
   MissingInputRecords: "MissingInputRecords",
+
+  @doc("Invalid Document.")
   InvalidDocument: "InvalidDocument",
+
+  @doc("Model Version Incorrect.")
   ModelVersionIncorrect: "ModelVersionIncorrect",
+
+  @doc("Invalid Document Batch.")
   InvalidDocumentBatch: "InvalidDocumentBatch",
+
+  @doc("Unsupported language code.")
   UnsupportedLanguageCode: "UnsupportedLanguageCode",
+
+  @doc("Data import failed.")
   DataImportFailed: "DataImportFailed",
+
+  @doc("In use violation.")
   InUseViolation: "InUseViolation",
+
+  @doc("Invalid locale.")
   InvalidLocale: "InvalidLocale",
+
+  @doc("Invalid base model.")
   InvalidBaseModel: "InvalidBaseModel",
+
+  @doc("Invalid adaptation mapping.")
   InvalidAdaptationMapping: "InvalidAdaptationMapping",
+
+  @doc("Invalid dataset.")
   InvalidDataset: "InvalidDataset",
+
+  @doc("Invalid test.")
   InvalidTest: "InvalidTest",
+
+  @doc("Failed dataset.")
   FailedDataset: "FailedDataset",
+
+  @doc("Invalid model.")
   InvalidModel: "InvalidModel",
+
+  @doc("Invalid transcription.")
   InvalidTranscription: "InvalidTranscription",
+
+  @doc("Invalid payload.")
   InvalidPayload: "InvalidPayload",
+
+  @doc("Invalid parameter.")
   InvalidParameter: "InvalidParameter",
+
+  @doc("Endpoint without logging.")
   EndpointWithoutLogging: "EndpointWithoutLogging",
+
+  @doc("Invalid permissions.")
   InvalidPermissions: "InvalidPermissions",
+
+  @doc("Invalid prerequisite.")
   InvalidPrerequisite: "InvalidPrerequisite",
+
+  @doc("Invalid product id.")
   InvalidProductId: "InvalidProductId",
+
+  @doc("Invalid subscription.")
   InvalidSubscription: "InvalidSubscription",
+
+  @doc("Invalid project.")
   InvalidProject: "InvalidProject",
+
+  @doc("Invalid project kind.")
   InvalidProjectKind: "InvalidProjectKind",
+
+  @doc("Invalid recordings uri.")
   InvalidRecordingsUri: "InvalidRecordingsUri",
+
+  @doc("Only one of urls or container or dataset.")
   OnlyOneOfUrlsOrContainerOrDataset: "OnlyOneOfUrlsOrContainerOrDataset",
+
+  @doc("Exceeded number of recordings uris.")
   ExceededNumberOfRecordingsUris: "ExceededNumberOfRecordingsUris",
+
+  @doc("Invalid channels.")
   InvalidChannels: "InvalidChannels",
+
+  @doc("Model mismatch.")
   ModelMismatch: "ModelMismatch",
+
+  @doc("Project gender mismatch.")
   ProjectGenderMismatch: "ProjectGenderMismatch",
+
+  @doc("Model deprecated.")
   ModelDeprecated: "ModelDeprecated",
+
+  @doc("Model exists.")
   ModelExists: "ModelExists",
+
+  @doc("Model not deployable.")
   ModelNotDeployable: "ModelNotDeployable",
+
+  @doc("Endpoint not updatable.")
   EndpointNotUpdatable: "EndpointNotUpdatable",
+
+  @doc("Single default endpoint.")
   SingleDefaultEndpoint: "SingleDefaultEndpoint",
+
+  @doc("Endpoint cannot be default.")
   EndpointCannotBeDefault: "EndpointCannotBeDefault",
+
+  @doc("Invalid model uri.")
   InvalidModelUri: "InvalidModelUri",
+
+  @doc("Subscription not found.")
   SubscriptionNotFound: "SubscriptionNotFound",
+
+  @doc("Quota violation.")
   QuotaViolation: "QuotaViolation",
+
+  @doc("Unsupported delta.")
   UnsupportedDelta: "UnsupportedDelta",
+
+  @doc("Unsupported filter.")
   UnsupportedFilter: "UnsupportedFilter",
+
+  @doc("Unsupported pagination.")
   UnsupportedPagination: "UnsupportedPagination",
+
+  @doc("Unsupported dynamic configuration.")
   UnsupportedDynamicConfiguration: "UnsupportedDynamicConfiguration",
+
+  @doc("Unsupported order by.")
   UnsupportedOrderBy: "UnsupportedOrderBy",
+
+  @doc("No utf8 with bom.")
   NoUtf8WithBom: "NoUtf8WithBom",
+
+  @doc("Model deployment not complete state.")
   ModelDeploymentNotCompleteState: "ModelDeploymentNotCompleteState",
+
+  @doc("Sku limits exist.")
   SkuLimitsExist: "SkuLimitsExist",
+
+  @doc("Deploying failed model.")
   DeployingFailedModel: "DeployingFailedModel",
+
+  @doc("Unsupported time range.")
   UnsupportedTimeRange: "UnsupportedTimeRange",
+
+  @doc("Invalid log date.")
   InvalidLogDate: "InvalidLogDate",
+
+  @doc("Invalid log id.")
   InvalidLogId: "InvalidLogId",
+
+  @doc("Invalid log start time.")
   InvalidLogStartTime: "InvalidLogStartTime",
+
+  @doc("Invalid log end time.")
   InvalidLogEndTime: "InvalidLogEndTime",
+
+  @doc("Invalid top for logs.")
   InvalidTopForLogs: "InvalidTopForLogs",
+
+  @doc("Invalid skip token for logs.")
   InvalidSkipTokenForLogs: "InvalidSkipTokenForLogs",
+
+  @doc("Delete not allowed.")
   DeleteNotAllowed: "DeleteNotAllowed",
+
+  @doc("Forbidden")
   Forbidden: "Forbidden",
+
+  @doc("Deploy not allowed.")
   DeployNotAllowed: "DeployNotAllowed",
+
+  @doc("Unexpected error.")
   UnexpectedError: "UnexpectedError",
+
+  @doc("Invalid collection.")
   InvalidCollection: "InvalidCollection",
+
+  @doc("Invalid callback uri.")
   InvalidCallbackUri: "InvalidCallbackUri",
+
+  @doc("Invalid sas validity duration.")
   InvalidSasValidityDuration: "InvalidSasValidityDuration",
+
+  @doc("Inaccessible customer storage.")
   InaccessibleCustomerStorage: "InaccessibleCustomerStorage",
+
+  @doc("Unsupported class based adaptation.")
   UnsupportedClassBasedAdaptation: "UnsupportedClassBasedAdaptation",
+
+  @doc("Invalid web hook event kind.")
   InvalidWebHookEventKind: "InvalidWebHookEventKind",
+
+  @doc("Invalid time to live.")
   InvalidTimeToLive: "InvalidTimeToLive",
+
+  @doc("Invalid source Azure resource ID.")
   InvalidSourceAzureResourceId: "InvalidSourceAzureResourceId",
+
+  @doc("Expired ModelCopyAuthorization.")
   ModelCopyAuthorizationExpired: "ModelCopyAuthorizationExpired",
+
+  string,
 }

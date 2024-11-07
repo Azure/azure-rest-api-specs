@@ -3,7 +3,8 @@ import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
-import "./routes/transcriptions.tsp";
+import "./routes/batch/transcriptions.tsp";
+import "./routes/fast/transcriptions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -14,17 +15,10 @@ using OpenAPI;
   title: "Azure Speech Services API",
 })
 @useAuth(
-  {
-    type: AuthType.apiKey,
-    name: "Ocp-Apim-Subscription-Key",
-    in: ApiKeyLocation.header,
-    description: "Provide your cognitive services account key here.",
-  } | {
-    type: AuthType.apiKey,
-    name: "Authorization",
-    in: ApiKeyLocation.header,
-    description: "Provide an access token from the JWT returned by the STS of this region. Make sure to add the management scope to the token by adding the following query string to the STS URL: ?scope=speechservicesmanagement",
-  }
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | ApiKeyAuth<
+    ApiKeyLocation.header,
+    "Authorization"
+  >
 )
 @server(
   "{endpoint}/speechtotext",
@@ -35,7 +29,7 @@ using OpenAPI;
   }
 )
 @versioned(ServiceApiVersions)
-namespace Azure.Speech;
+namespace Azure.Speech.SpeechToText;
 
 enum ServiceApiVersions {
   V20240515PRE: "2024-05-15-preview",
