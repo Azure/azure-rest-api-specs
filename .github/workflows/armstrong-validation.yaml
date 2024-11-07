@@ -21,7 +21,7 @@ jobs:
       run: |
         go version
         go install github.com/azure/armstrong@67fe406e78e3b94075932add869f8b11fb4dd0a6
-        echo '##vso[task.prependpath]$(HOME)/go/bin'
+        echo "$(HOME)/go/bin" >> $GITHUB_PATH
 
     - name: Setup Node and run `npm ci`
       uses: ./.github/actions/setup-node-npm-ci
