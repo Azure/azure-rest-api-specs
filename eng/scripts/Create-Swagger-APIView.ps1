@@ -13,6 +13,8 @@ param (
     [Parameter(Mandatory = $true)]
     [string]$APIViewArtifactsDirectoryName,
     [Parameter(Mandatory = $true)]
+    [string]$APIViewArtifactsName,
+    [Parameter(Mandatory = $true)]
     [string]$APIViewUri,
     [Parameter(Mandatory = $true)]
     [string]$BuildId,
@@ -56,7 +58,7 @@ $publishedPackages | ForEach-Object {
     return
   }
  
-  $query.Add('artifactName', $APIViewArtifactsDirectoryName)
+  $query.Add('artifactName', $APIViewArtifactsName)
   $query.Add('buildId', $BuildId)
   $query.Add('commitSha', $CommitSha)
   $query.Add('repoName', $RepoName)

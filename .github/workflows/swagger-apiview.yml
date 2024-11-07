@@ -16,6 +16,9 @@ on:
       APIViewArtifactsDirectoryName:
         description: 'APIView Artifacts Directory Name'
         default: 'SwaggerAPIViewArtifacts'
+      APIViewArtifactsName:
+        description: 'APIView Artifacts Name'
+        default: 'swaggerAPIViewArtifacts'
       APIViewAPIUri:
         description: 'URI for APIView Creation Endpoint'
         default: 'https:/apiview.dev/PullRequest/DetectAPIChanges'
@@ -34,6 +37,7 @@ jobs:
       AzureSdkForNetDevOpsFeed: ${{ github.event.inputs.AzureSdkForNetDevOpsFeed || 'https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json' }}
       SwaggerApiParserVersion: ${{ github.event.inputs.SwaggerApiParserVersion || '1.3.0-dev.20241029.2' }}
       APIViewArtifactsDirectoryName: ${{ github.event.inputs.APIViewArtifactsDirectoryName || 'SwaggerAPIViewArtifacts' }}
+      APIViewArtifactsName: ${{ github.event.inputs.APIViewArtifactsName || 'swaggerAPIViewArtifacts' }}
       APIViewAPIUri: ${{ github.event.inputs.APIViewAPIUri || 'https:/apiview.dev/PullRequest/DetectAPIChanges' }}
       PullRequestRef: ${{ github.event.pull_request.head.ref || github.event.inputs.PullRequestRef }}
       PullRequestNumber: ${{ github.event.pull_request.number || github.event.inputs.PullRequestNumber }}
@@ -70,7 +74,7 @@ jobs:
     - name: Publish Swagger APIView Artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: swaggerAPIViewArtifacts
+        name: ${{ env.APIViewArtifactsName }}
         path: ${{ github.workspace }}/artifacts/${{ env.APIViewArtifactsDirectoryName }}
 
     - name: Create Swagger APIView
@@ -79,6 +83,7 @@ jobs:
         eng/scripts/Create-Swagger-APIView.ps1 `
           -ArtiFactsStagingDirectory ${{ github.workspace }}/artifacts `
           -APIViewArtifactsDirectoryName ${{ env.APIViewArtifactsDirectoryName }} `
+          -APIViewArtifactsName ${{ env.APIViewArtifactsName }} `
           -APIViewUri ${{ env.APIViewAPIUri }} `
           -BuildId ${{ github.run_id }} `
           -RepoName ${{ github.repository }} `
