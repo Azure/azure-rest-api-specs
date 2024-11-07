@@ -232,44 +232,6 @@ model TranslationErrorResponse {
   error?: TranslationError;
 }
 
-@doc("Translation job Status Response")
-@pagedResult
-model TranslationsStatus {
-  @doc("The summary status of individual operation")
-  @items
-  value: TranslationStatus[];
-
-  @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
-  nextLink?: string;
-}
-
-@doc("Translation job status response")
-model TranslationStatus {
-  @doc("Id of the translation operation.")
-  id: string;
-
-  @doc("Operation created date time")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateTimeUtc: utcDateTime;
-
-  @doc("Date time in which the operation's status has been updated")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastActionDateTimeUtc: utcDateTime;
-
-  @doc("List of possible statuses for job or document")
-  status: Status;
-
-  @doc("""
-    This contains an outer error with error code, message, details, target and an
-    inner error with more descriptive details.
-    """)
-  error?: TranslationError;
-
-  @doc("Status Summary")
-  summary: StatusSummary;
-}
-
 @doc("""
   This contains an outer error with error code, message, details, target and an
   inner error with more descriptive details.
@@ -332,6 +294,44 @@ model InnerTranslationError {
     details(key value pair), inner error(this can be nested).
     """)
   innerError?: InnerTranslationError;
+}
+
+@doc("Translation job Status Response")
+@pagedResult
+model TranslationsStatus {
+  @doc("The summary status of individual operation")
+  @items
+  value: TranslationStatus[];
+
+  @doc("Url for the next page.  Null if no more pages available")
+  @Azure.Core.nextLink
+  nextLink?: string;
+}
+
+@doc("Translation job status response")
+model TranslationStatus {
+  @doc("Id of the translation operation.")
+  id: string;
+
+  @doc("Operation created date time")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTimeUtc: utcDateTime;
+
+  @doc("Date time in which the operation's status has been updated")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastActionDateTimeUtc: utcDateTime;
+
+  @doc("List of possible statuses for job or document")
+  status: Status;
+
+  @doc("""
+    This contains an outer error with error code, message, details, target and an
+    inner error with more descriptive details.
+    """)
+  error?: TranslationError;
+
+  @doc("Status Summary")
+  summary: StatusSummary;
 }
 
 @doc("Status Summary")
