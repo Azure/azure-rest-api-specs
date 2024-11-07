@@ -143,7 +143,8 @@ model ThreadRun {
   toolResources?: UpdateToolResourcesOptions | null;
 
   @doc("Determines if tools can be executed in parallel within the run.")
-  parallelToolCalls?: boolean;
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls: boolean;
 }
 
 /** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
@@ -204,6 +205,10 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden list of enabled tools that the agent should use to run the thread.")
   tools?: ToolDefinition[] | null;
+
+  @doc("Whether to enable parallel function calling during tool use.")
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean = true;
 
   /**
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
@@ -357,6 +362,10 @@ model CreateAndRunThreadOptions {
   @doc("The overridden list of enabled tools the agent should use to run the thread.")
   @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[] | null;
+
+  @doc("Whether to enable parallel function calling during tool use.")
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean = true;
 
   /** Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"

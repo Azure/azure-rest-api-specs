@@ -4042,6 +4042,12 @@
           },
           "x-ms-identifiers": []
         },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether to enable parallel function calling during tool use.",
+          "default": true,
+          "x-ms-client-name": "parallelToolCalls"
+        },
         "tool_resources": {
           "type": "object",
           "description": "Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis",
@@ -4213,6 +4219,12 @@
             "$ref": "#/definitions/Agents.ToolDefinition"
           },
           "x-ms-identifiers": []
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether to enable parallel function calling during tool use.",
+          "default": true,
+          "x-ms-client-name": "parallelToolCalls"
         },
         "stream": {
           "type": "boolean",
@@ -7018,9 +7030,10 @@
           ],
           "x-ms-client-name": "toolResources"
         },
-        "parallelToolCalls": {
+        "parallel_tool_calls": {
           "type": "boolean",
-          "description": "Determines if tools can be executed in parallel within the run."
+          "description": "Determines if tools can be executed in parallel within the run.",
+          "x-ms-client-name": "parallelToolCalls"
         }
       },
       "required": [
@@ -7046,7 +7059,8 @@
         "truncation_strategy",
         "tool_choice",
         "response_format",
-        "metadata"
+        "metadata",
+        "parallel_tool_calls"
       ]
     },
     "Agents.ThreadStreamEvent": {
