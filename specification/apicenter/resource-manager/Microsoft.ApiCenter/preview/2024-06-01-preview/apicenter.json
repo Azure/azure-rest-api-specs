@@ -4276,6 +4276,20 @@
         "azureApiManagementSource": {
           "$ref": "#/definitions/AzureApiManagementSource",
           "description": "API source configuration for Azure API Management."
+        },
+        "targetEnvironmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The target environment resource ID."
+        },
+        "targetLifecycleStage": {
+          "$ref": "#/definitions/LifecycleStage",
+          "description": "The target lifecycle stage."
+        },
+        "linkState": {
+          "$ref": "#/definitions/LinkState",
+          "description": "The state of the API source link",
+          "readOnly": true
         }
       }
     },
@@ -4445,20 +4459,6 @@
           "type": "string",
           "format": "arm-id",
           "description": "The resource ID of the managed identity that has access to the API Management instance."
-        },
-        "targetEnvironmentId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The target environment resource ID."
-        },
-        "targetLifecycleStage": {
-          "$ref": "#/definitions/LifecycleStage",
-          "description": "The target lifecycle stage."
-        },
-        "linkState": {
-          "$ref": "#/definitions/LinkState",
-          "description": "The state of the API source link",
-          "readOnly": true
         }
       },
       "required": [

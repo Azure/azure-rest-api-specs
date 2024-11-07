@@ -568,6 +568,22 @@ model ApiSourceProperties {
 
   @doc("API source configuration for Azure API Management.")
   azureApiManagementSource?: AzureApiManagementSource;
+
+  /**
+   * The target environment resource ID.
+   */
+  targetEnvironmentId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The target lifecycle stage.
+   */
+  targetLifecycleStage?: LifecycleStage;
+
+  /**
+   * The state of the API source link
+   */
+  @visibility("read")
+  linkState?: LinkState;
 }
 
 /**
@@ -607,22 +623,6 @@ model AzureApiManagementSource {
    * The resource ID of the managed identity that has access to the API Management instance.
    */
   msiResourceId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The target environment resource ID.
-   */
-  targetEnvironmentId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The target lifecycle stage.
-   */
-  targetLifecycleStage?: LifecycleStage;
-
-  /**
-   * The state of the API source link
-   */
-  @visibility("read")
-  linkState?: LinkState;
 }
 
 /**
