@@ -45,7 +45,7 @@ using TypeSpec.Versioning;
     Endpoint: string,
   }
 )
-namespace Language.Authoring.Conversations;
+namespace Language.Conversations.Authoring;
 
 /**
  * The available API versions.
