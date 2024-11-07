@@ -4191,7 +4191,8 @@
       "enum": [
         "initializing",
         "syncing",
-        "error"
+        "error",
+        "deleting"
       ],
       "x-ms-enum": {
         "name": "ApiSourceLinkState",
@@ -4200,17 +4201,22 @@
           {
             "name": "Initializing",
             "value": "initializing",
-            "description": "API source link is initializing."
+            "description": "The API source link is initializing."
           },
           {
             "name": "Syncing",
             "value": "syncing",
-            "description": "*\nAPI source is synching."
+            "description": "*\nThe API source is syncing."
           },
           {
             "name": "Error",
             "value": "error",
-            "description": "API source sync is blocked due to an error."
+            "description": "The API source sync is blocked due to an error."
+          },
+          {
+            "name": "Deleting",
+            "value": "deleting",
+            "description": "The API source is being deleted."
           }
         ]
       }
