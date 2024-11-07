@@ -12,9 +12,3 @@ python:
   package-version: 1.0.0b1
   clear-output-folder: true
 ```
-
-``` yaml $(python)
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/falcon/azure-mgmt-falcon/azure/mgmt/falcon
-```
