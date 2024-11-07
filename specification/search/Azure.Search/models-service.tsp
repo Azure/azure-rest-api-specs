@@ -5146,17 +5146,6 @@ model SearchIndexerDataContainer {
 }
 
 /**
- * Abstract base type for data identities.
- */
-@discriminator("odataType")
-model SearchIndexerDataIdentity {
-    /** The discriminator for derived types. */
-    #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-    @encodedName("application/json", "@odata.type")
-    odataType: string;
-}
-
-/**
  * Base type for data change detection policies.
  */
 @discriminator("odataType")
@@ -6164,21 +6153,6 @@ model SearchIndexerKnowledgeStoreBlobProjectionSelector
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreFileProjectionSelector
     extends SearchIndexerKnowledgeStoreBlobProjectionSelector {}
-
-/**
- * A dictionary of knowledge store-specific configuration properties. Each name is
- * the name of a specific property. Each value must be of a primitive type.
- */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-model SearchIndexerKnowledgeStoreParameters {
-    ...Record<unknown>;
-
-    /**
-     * Whether or not projections should synthesize a generated key name if one isn't
-     * already present.
-     */
-    synthesizeGeneratedKeyName?: boolean;
-}
 
 /**
  * Definition of additional projections to secondary search indexes.
@@ -8753,6 +8727,17 @@ model AzureOpenAIVectorizerParameters {
 }
 
 /**
+ * Abstract base type for data identities.
+ */
+@discriminator("odataType")
+model SearchIndexerDataIdentity {
+    /** The discriminator for derived types. */
+    #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+    @encodedName("application/json", "@odata.type")
+    odataType: string;
+}
+
+/**
  * Specifies a user-defined vectorizer for generating the vector embedding of a
  * query string. Integration of an external vectorizer is achieved using the
  * custom Web API interface of a skillset.
@@ -9155,6 +9140,21 @@ model TagScoringParameters {
      * to compare against the target field.
      */
     tagsParameter: string;
+}
+
+/**
+ * A dictionary of knowledge store-specific configuration properties. Each name is
+ * the name of a specific property. Each value must be of a primitive type.
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+model SearchIndexerKnowledgeStoreParameters {
+    ...Record<unknown>;
+
+    /**
+     * Whether or not projections should synthesize a generated key name if one isn't
+     * already present.
+     */
+    synthesizeGeneratedKeyName?: boolean;
 }
 
 /**
