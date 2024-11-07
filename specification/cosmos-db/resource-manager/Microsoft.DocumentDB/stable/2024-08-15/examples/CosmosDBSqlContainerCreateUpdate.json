@@ -32,7 +32,43 @@
                 ]
               }
             ],
-            "excludedPaths": []
+            "excludedPaths": [],
+            "vectorIndexes": [
+              {
+                "path": "/vectorPath1",
+                "type": "flat"
+              },
+              {
+                "path": "/vectorPath2",
+                "type": "quantizedFlat"
+              },
+              {
+                "path": "/vectorPath3",
+                "type": "diskANN"
+              }
+            ]
+          },
+          "vectorEmbeddingPolicy": {
+            "vectorEmbeddings": [
+              {
+                "path": "/vectorPath1",
+                "dataType": "float32",
+                "dimensions": 512,
+                "distanceFunction": "euclidean"
+              },
+              {
+                "path": "/vectorPath2",
+                "dataType": "uint8",
+                "dimensions": 512,
+                "distanceFunction": "cosine"
+              },
+              {
+                "path": "/vectorPath3",
+                "dataType": "int8",
+                "dimensions": 512,
+                "distanceFunction": "dotproduct"
+              }
+            ]
           },
           "partitionKey": {
             "paths": [
@@ -107,7 +143,43 @@
                   ]
                 }
               ],
-              "excludedPaths": []
+              "excludedPaths": [],
+              "vectorIndexes": [
+                {
+                  "path": "/vectorPath1",
+                  "type": "flat"
+                },
+                {
+                  "path": "/vectorPath2",
+                  "type": "quantizedFlat"
+                },
+                {
+                  "path": "/vectorPath3",
+                  "type": "diskANN"
+                }
+              ]
+            },
+            "vectorEmbeddingPolicy": {
+              "vectorEmbeddings": [
+                {
+                  "path": "/vectorPath1",
+                  "dataType": "float32",
+                  "dimensions": 512,
+                  "distanceFunction": "euclidean"
+                },
+                {
+                  "path": "/vectorPath2",
+                  "dataType": "uint8",
+                  "dimensions": 512,
+                  "distanceFunction": "cosine"
+                },
+                {
+                  "path": "/vectorPath3",
+                  "dataType": "int8",
+                  "dimensions": 512,
+                  "distanceFunction": "dotproduct"
+                }
+              ]
             },
             "partitionKey": {
               "paths": [
