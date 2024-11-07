@@ -83,7 +83,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedCertificateItem"
+              "$ref": "#/definitions/CertificateListResult"
             }
           },
           "default": {
@@ -565,7 +565,7 @@
     "/certificates/{certificate-name}/pending/merge": {
       "post": {
         "operationId": "MergeCertificate",
-        "summary": "Merges a certificate or a certificate chain with a key pair existing on the\nserver.",
+        "summary": "Merges a certificate or a certificate chain with a key pair existing on the server.",
         "description": "The MergeCertificate operation performs the merging of a certificate or\ncertificate chain with a key pair currently available in the service. This\noperation requires the certificates/create permission.",
         "parameters": [
           {
@@ -911,7 +911,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedCertificateIssuerItem"
+              "$ref": "#/definitions/CertificateIssuerListResult"
             }
           },
           "default": {
@@ -1178,7 +1178,7 @@
     "/deletedcertificates": {
       "get": {
         "operationId": "GetDeletedCertificates",
-        "summary": "Lists the deleted certificates in the specified vault currently available for\nrecovery.",
+        "summary": "Lists the deleted certificates in the specified vault currently available for recovery.",
         "description": "The GetDeletedCertificates operation retrieves the certificates in the current\nvault which are in a deleted state and ready for recovery or purging. This\noperation includes deletion-specific information. This operation requires the\ncertificates/get/list permission. This operation can only be enabled on\nsoft-delete enabled vaults.",
         "parameters": [
           {
@@ -1206,7 +1206,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDeletedCertificateItem"
+              "$ref": "#/definitions/DeletedCertificateListResult"
             }
           },
           "default": {
@@ -1320,7 +1320,7 @@
     "/deletedcertificates/{certificate-name}/recover": {
       "post": {
         "operationId": "RecoverDeletedCertificate",
-        "summary": "Recovers the deleted certificate back to its current version under\n/certificates.",
+        "summary": "Recovers the deleted certificate back to its current version under /certificates.",
         "description": "The RecoverDeletedCertificate operation performs the reversal of the Delete\noperation. The operation is applicable in vaults enabled for soft-delete, and\nmust be issued during the retention interval (available in the deleted\ncertificate's attributes). This operation requires the certificates/recover\npermission.",
         "parameters": [
           {
@@ -1691,17 +1691,13 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Certificate Identifier.",
-          "readOnly": true
+          "description": "Certificate Identifier."
         },
         "provider": {
           "type": "string",
           "description": "The issuer provider."
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "CertificateIssuerListResult": {
       "type": "object",
@@ -1779,8 +1775,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Certificate identifier.",
-          "readOnly": true
+          "description": "Certificate identifier."
         },
         "attributes": {
           "$ref": "#/definitions/CertificateAttributes",
@@ -1799,10 +1794,7 @@
           "description": "Thumbprint of the certificate.",
           "x-ms-client-name": "x509Thumbprint"
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "CertificateListResult": {
       "type": "object",
@@ -2110,8 +2102,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Certificate identifier.",
-          "readOnly": true
+          "description": "Certificate identifier."
         },
         "attributes": {
           "$ref": "#/definitions/CertificateAttributes",
@@ -2148,7 +2139,6 @@
         }
       },
       "required": [
-        "id",
         "recoveryId"
       ]
     },
@@ -2559,69 +2549,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "PagedCertificateIssuerItem": {
-      "type": "object",
-      "description": "Paged collection of CertificateIssuerItem items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CertificateIssuerItem items on this page",
-          "items": {
-            "$ref": "#/definitions/CertificateIssuerItem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedCertificateItem": {
-      "type": "object",
-      "description": "Paged collection of CertificateItem items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CertificateItem items on this page",
-          "items": {
-            "$ref": "#/definitions/CertificateItem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedDeletedCertificateItem": {
-      "type": "object",
-      "description": "Paged collection of DeletedCertificateItem items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DeletedCertificateItem items on this page",
-          "items": {
-            "$ref": "#/definitions/DeletedCertificateItem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "PendingCertificateSigningRequestResult": {
       "type": "object",

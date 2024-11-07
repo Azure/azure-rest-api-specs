@@ -180,14 +180,11 @@ model CertificateListResult is Azure.Core.Page<CertificateItem>;
 /**
  * The certificate item containing certificate metadata.
  */
-@resource("certificates")
 model CertificateItem {
   /**
    * Certificate identifier.
    */
-  @visibility("read")
-  @key // The ID isn't really the key; it should be the certificate name, but we don't have this attribute on the model
-  id: string;
+  id?: string;
 
   /**
    * The certificate management attributes.
@@ -651,14 +648,11 @@ model CertificateIssuerListResult is Azure.Core.Page<CertificateIssuerItem>;
 /**
  * The certificate issuer item containing certificate issuer metadata.
  */
-@resource("certificates/issuers")
 model CertificateIssuerItem {
   /**
    * Certificate Identifier.
    */
-  @visibility("read")
-  @key
-  id: string;
+  id?: string;
 
   /**
    * The issuer provider.
@@ -1033,7 +1027,6 @@ model DeletedCertificateListResult is Azure.Core.Page<DeletedCertificateItem>;
 /**
  * The deleted certificate item containing metadata about the deleted certificate.
  */
-@resource("deletedcertificates")
 model DeletedCertificateItem {
   ...CertificateItem;
 
