@@ -85,9 +85,21 @@ model SubscriptionDeletedEventData {
   eventSubscriptionId: string;
 }
 
+const MicrosoftEventGridMQTTClientCreatedOrUpdatedExample: EventGridMQTTClientCreatedOrUpdatedEventData = #{
+  createdOn: utcDateTime.fromISO("2023-07-29T01:14:34.2048108Z"),
+  updatedOn: utcDateTime.fromISO("2023-07-29T01:14:34.2048108Z"),
+  namespaceName: "myns",
+  clientName: "client1",
+  clientAuthenticationName: "client1",
+  state: "Enabled",
+  attributes: #{
+    attribute1: "value1",
+  },
+};
 /** Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+@example(MicrosoftEventGridMQTTClientCreatedOrUpdatedExample)
 model EventGridMQTTClientCreatedOrUpdatedEventData
   extends EventGridMQTTClientEventData {
   /** Configured state of the client. The value could be Enabled or Disabled */
@@ -128,15 +140,28 @@ long, and supports UTF-8 characters.
   namespaceName: string;
 }
 
+const MicrosoftEventGridMQTTClientDeletedExample: EventGridMQTTClientDeletedEventData = #{
+  namespaceName: "myns",
+  clientName: "client1",
+  clientAuthenticationName: "client1",
+};
 /** Event data for Microsoft.EventGrid.MQTTClientDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+@example(MicrosoftEventGridMQTTClientDeletedExample)
 model EventGridMQTTClientDeletedEventData
   extends EventGridMQTTClientEventData {}
 
+const MicrosoftEventGridMQTTClientSessionConnectedExample: EventGridMQTTClientSessionConnectedEventData = #{
+  namespaceName: "myns",
+  clientAuthenticationName: "client1",
+  clientSessionName: "session1",
+  sequenceNumber: 1,
+};
 /** Event data for Microsoft.EventGrid.MQTTClientSessionConnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+@example(MicrosoftEventGridMQTTClientSessionConnectedExample)
 model EventGridMQTTClientSessionConnectedEventData
   extends EventGridMQTTClientEventData {
   /** 
@@ -154,9 +179,17 @@ than the previous event.
   sequenceNumber: int64;
 }
 
+const MicrosoftEventGridMQTTClientSessionDisconnectedExample: EventGridMQTTClientSessionDisconnectedEventData = #{
+  namespaceName: "myns",
+  clientAuthenticationName: "client1",
+  clientSessionName: "session1",
+  sequenceNumber: 1,
+  disconnectionReason: "ClientInitiatedDisconnect",
+};
 /** Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+@example(MicrosoftEventGridMQTTClientSessionDisconnectedExample)
 model EventGridMQTTClientSessionDisconnectedEventData
   extends EventGridMQTTClientEventData {
   /**
