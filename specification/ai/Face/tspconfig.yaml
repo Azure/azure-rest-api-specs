@@ -39,6 +39,9 @@ options:
     package-dir: "azure-ai-vision-face"
     namespace: com.azure.ai.vision.face
     partial-update: true
+    customization-class: customization/src/main/java/FaceCustomizations.java
+    generate-samples: false
+    generate-tests: false
     flavor: azure
 linter:
   extends:
@@ -46,3 +49,4 @@ linter:
   disable:
     "@azure-tools/typespec-azure-core/operation-missing-api-version": "API version located in the host template"
     "@azure-tools/typespec-azure-core/use-standard-operations": "Most of our operation doesn't fit standard ops"
+    "@azure-tools/typespec-azure-core/use-standard-names": "Most of our operation doesn't fit standard ops"

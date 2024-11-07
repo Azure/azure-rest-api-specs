@@ -99,12 +99,22 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2024-10
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.Security/preview/2024-10-01-preview/defenderForStorageSettings.json
+  - Microsoft.Security/preview/2024-10-01-preview/operations.json
+```
 
 ### Tag: package-2024-08
 
@@ -155,6 +165,15 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
+```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.Security/preview/2024-07-01-preview/securityConnectors.json
 ```
 
 ### Tag: package-preview-2024-03
@@ -521,7 +540,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
-- Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-07-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
