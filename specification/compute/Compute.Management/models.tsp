@@ -1596,7 +1596,7 @@ model VirtualMachineScaleSetProperties {
    * Specifies the time at which the Virtual Machine Scale Set resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 
   /**
    * Optional property which must either be set to True or omitted.
@@ -1885,7 +1885,7 @@ model VirtualMachineScaleSetVMProfile {
    * Specifies the time in which this VM profile for the Virtual Machine Scale Set was created. This value will be added to VMSS Flex VM tags when creating/updating the VMSS VM Profile. Minimum API version for this property is 2023-09-01.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 }
 
 /**
@@ -4003,7 +4003,7 @@ model InstanceViewStatus {
   /**
    * The time of the status.
    */
-  time?: offsetDateTime;
+  time?: utcDateTime;
 }
 
 /**
@@ -4107,13 +4107,13 @@ model UpgradeOperationHistoryStatus {
    * Start time of the upgrade.
    */
   @visibility("read")
-  startTime?: offsetDateTime;
+  startTime?: utcDateTime;
 
   /**
    * End time of the upgrade.
    */
   @visibility("read")
-  endTime?: offsetDateTime;
+  endTime?: utcDateTime;
 }
 
 /**
@@ -4270,7 +4270,7 @@ model RollingUpgradeRunningStatus {
    * Start time of the upgrade.
    */
   @visibility("read")
-  startTime?: offsetDateTime;
+  startTime?: utcDateTime;
 
   /**
    * The last action performed on the rolling upgrade.
@@ -4282,7 +4282,7 @@ model RollingUpgradeRunningStatus {
    * Last action time of the upgrade.
    */
   @visibility("read")
-  lastActionTime?: offsetDateTime;
+  lastActionTime?: utcDateTime;
 }
 
 /**
@@ -4463,7 +4463,7 @@ model VirtualMachineScaleSetVMProperties {
    * Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 }
 
 /**
@@ -4610,22 +4610,22 @@ model MaintenanceRedeployStatus {
   /**
    * Start Time for the Pre Maintenance Window.
    */
-  preMaintenanceWindowStartTime?: offsetDateTime;
+  preMaintenanceWindowStartTime?: utcDateTime;
 
   /**
    * End Time for the Pre Maintenance Window.
    */
-  preMaintenanceWindowEndTime?: offsetDateTime;
+  preMaintenanceWindowEndTime?: utcDateTime;
 
   /**
    * Start Time for the Maintenance Window.
    */
-  maintenanceWindowStartTime?: offsetDateTime;
+  maintenanceWindowStartTime?: utcDateTime;
 
   /**
    * End Time for the Maintenance Window.
    */
-  maintenanceWindowEndTime?: offsetDateTime;
+  maintenanceWindowEndTime?: utcDateTime;
 
   /**
    * The Last Maintenance Operation Result Code.
@@ -5793,7 +5793,7 @@ model VirtualMachineProperties {
    * Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 }
 
 /**
@@ -5952,13 +5952,13 @@ model AvailablePatchSummary {
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  startTime?: offsetDateTime;
+  startTime?: utcDateTime;
 
   /**
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  lastModifiedTime?: offsetDateTime;
+  lastModifiedTime?: utcDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
@@ -6023,13 +6023,13 @@ model LastPatchInstallationSummary {
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  startTime?: offsetDateTime;
+  startTime?: utcDateTime;
 
   /**
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  lastModifiedTime?: offsetDateTime;
+  lastModifiedTime?: utcDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
@@ -6104,7 +6104,7 @@ model VirtualMachineAssessPatchesResult {
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  startDateTime?: offsetDateTime;
+  startDateTime?: utcDateTime;
 
   /**
    * The list of patches that have been detected as available for installation.
@@ -6170,13 +6170,13 @@ model VirtualMachineSoftwarePatchProperties {
    * The UTC timestamp when the repository published this patch.
    */
   @visibility("read")
-  publishedDate?: offsetDateTime;
+  publishedDate?: utcDateTime;
 
   /**
    * The UTC timestamp of the last update to this patch record.
    */
   @visibility("read")
-  lastModifiedDateTime?: offsetDateTime;
+  lastModifiedDateTime?: utcDateTime;
 
   /**
    * Describes the availability of a given patch.
@@ -6312,7 +6312,7 @@ model WindowsParameters {
   /**
    * This is used to install patches that were published on or before this given max published date.
    */
-  maxPatchPublishDate?: offsetDateTime;
+  maxPatchPublishDate?: utcDateTime;
 }
 
 /**
@@ -6409,7 +6409,7 @@ model VirtualMachineInstallPatchesResult {
    * The UTC timestamp when the operation began.
    */
   @visibility("read")
-  startDateTime?: offsetDateTime;
+  startDateTime?: utcDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
@@ -6637,7 +6637,7 @@ model ImageDeprecationStatus {
   /**
    * The time, in future, at which this image will be marked as deprecated. This scheduled time is chosen by the Publisher.
    */
-  scheduledDeprecationTime?: offsetDateTime;
+  scheduledDeprecationTime?: utcDateTime;
 
   /**
    * Describes the alternative option specified by the Publisher for this image when this image is deprecated.
@@ -7013,7 +7013,7 @@ model DedicatedHostProperties {
    * The date when the host was first provisioned.
    */
   @visibility("read")
-  provisioningTime?: offsetDateTime;
+  provisioningTime?: utcDateTime;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -7032,7 +7032,7 @@ model DedicatedHostProperties {
    * Specifies the time at which the Dedicated Host resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 }
 
 /**
@@ -7338,7 +7338,7 @@ model RestorePointProperties {
   /**
    * Gets the creation time of the restore point.
    */
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 
   /**
    * Resource Id of the source restore point from which a copy needs to be created.
@@ -7798,7 +7798,7 @@ model CapacityReservationProperties {
    * The date time when the capacity reservation was last updated.
    */
   @visibility("read")
-  provisioningTime?: offsetDateTime;
+  provisioningTime?: utcDateTime;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -7817,7 +7817,7 @@ model CapacityReservationProperties {
    * Specifies the time at which the Capacity Reservation resource was created. Minimum api-version: 2021-11-01.
    */
   @visibility("read")
-  timeCreated?: offsetDateTime;
+  timeCreated?: utcDateTime;
 }
 
 /**
@@ -7861,12 +7861,12 @@ model LogAnalyticsInputBase {
   /**
    * From time of the query
    */
-  fromTime: offsetDateTime;
+  fromTime: utcDateTime;
 
   /**
    * To time of the query
    */
-  toTime: offsetDateTime;
+  toTime: utcDateTime;
 
   /**
    * Group query result by Throttle Policy applied.
@@ -8173,12 +8173,12 @@ model VirtualMachineRunCommandInstanceView {
   /**
    * Script start time.
    */
-  startTime?: offsetDateTime;
+  startTime?: utcDateTime;
 
   /**
    * Script end time.
    */
-  endTime?: offsetDateTime;
+  endTime?: utcDateTime;
 
   /**
    * The resource status information.
