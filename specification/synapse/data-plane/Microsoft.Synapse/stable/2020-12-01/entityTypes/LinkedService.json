@@ -1596,6 +1596,34 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "allowZeroDateTime": {
+          "type": "object",
+          "description": "This allows the special “zero” date value 0000-00-00 to be retrieved from the database. Type: boolean."
+        },
+        "connectionTimeout": {
+          "type": "object",
+          "description": "The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error. Type: integer."
+        },
+        "convertZeroDateTime": {
+          "type": "object",
+          "description": "True to return DateTime.MinValue for date or datetime columns that have disallowed values. Type: boolean."
+        },
+        "guidFormat": {
+          "type": "object",
+          "description": "Determines which column type (if any) should be read as a GUID. Type: string. None: No column types are automatically read as a Guid; Char36: All CHAR(36) columns are read/written as a Guid using lowercase hex with hyphens, which matches UUID."
+        },
+        "sslCert": {
+          "type": "object",
+          "description": "The path to the client’s SSL certificate file in PEM format. SslKey must also be specified. Type: string."
+        },
+        "sslKey": {
+          "type": "object",
+          "description": "The path to the client’s SSL private key in PEM format. SslCert must also be specified. Type: string."
+        },
+        "treatTinyAsBoolean": {
+          "type": "object",
+          "description": "When set to true, TINYINT(1) values are returned as booleans. Type: bool."
         }
       }
     },
