@@ -1,0 +1,36 @@
+name: Armstrong Validation
+
+on: pull_request
+
+jobs:
+  armstrong-validation:
+    name: Armstrong Validation
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: 1.22.2
+
+    - name: Install Go Dependencies
+      run: |
+        go version
+        go install github.com/azure/armstrong@67fe406e78e3b94075932add869f8b11fb4dd0a6
+        echo '##vso[task.prependpath]$(HOME)/go/bin'
+
+    - name: Setup Node and run `npm ci`
+      uses: ./.github/actions/setup-node-npm-ci
+  
+    - name: Armstrong Validation
+      run: |
+        # Keep processing when errors are written. Nonzero exit will mark the 
+        # step as failed. 
+        $ErrorActionPreference = 'Continue'
+
+        ./eng/scripts/Armstrong-Validation.ps1 -Verbose
+      shell: pwsh
