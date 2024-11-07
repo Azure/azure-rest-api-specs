@@ -1,0 +1,25 @@
+name: TypeSpec Validation
+
+on: pull_request
+
+jobs:
+  typespec-validation:
+    name: TypeSpec Validation
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+
+    - name: Setup Node and run `npm ci`
+      uses: ./.github/actions/setup-node-npm-ci
+
+    - name: Validate Impacted Specs
+      run: |
+        # Keep processing when errors are written. Nonzero exit will mark the 
+        # step as failed. 
+        $ErrorActionPreference = 'Continue'
+
+        ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+      shell: pwsh

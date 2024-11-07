@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../shared/provisioningstate.tsp";
 import "../shared/resourceid.tsp";
 import "../shared/managedresourcegroupconfiguration.tsp";
+import "../shared/roleassignmentitem.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -189,6 +190,11 @@ model CommunityProperties {
   @madeOptional(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of services governed by a community.")
   governedServiceList?: GovernedServiceItem[];
+
+  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @doc("Community role assignments")
+  communityRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2024_11_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")

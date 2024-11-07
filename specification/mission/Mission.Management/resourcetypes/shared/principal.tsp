@@ -6,9 +6,9 @@ using TypeSpec.Versioning;
 namespace Microsoft.Mission;
 
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-@doc("Principal for maintenance mode or role assignments, for example")
+@doc("Principal for maintenance mode or role assignments")
 model Principal {
-  @doc("The object (or principal) id associated with the principal")
+  @doc("The object id associated with the principal")
   id: string;
 
   @doc("The type of the object id. We currently allow users, groups, and service principals")
