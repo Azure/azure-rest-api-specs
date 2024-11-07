@@ -8220,6 +8220,10 @@
           "items": {
             "$ref": "#/definitions/ComputedProperty"
           }
+        },
+        "vectorEmbeddingPolicy": {
+          "$ref": "#/definitions/VectorEmbeddingPolicy",
+          "description": "The Vector Embedding Policy for the container."
         }
       },
       "required": [
@@ -8274,6 +8278,26 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SpatialSpec"
+          }
+        },
+        "vectorIndexes": {
+          "description": "List of paths to include in the vector indexing",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorIndex"
+          }
+        }
+      }
+    },
+    "VectorEmbeddingPolicy": {
+      "type": "object",
+      "description": "Cosmos DB Vector Embedding Policy",
+      "properties": {
+        "vectorEmbeddings": {
+          "description": "List of vector embeddings",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorEmbedding"
           }
         }
       }
@@ -8342,6 +8366,70 @@
             "name": "IndexKind",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "VectorIndex": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        },
+        "type": {
+          "description": "Vector Indexing Type to be applied on the path",
+          "type": "string",
+          "default": "flat",
+          "enum": [
+            "flat",
+            "quantizedFlat",
+            "diskANN"
+          ],
+          "x-ms-enum": {
+            "name": "VectorIndexType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VectorEmbedding": {
+      "type": "object",
+      "description": "The paths that are included in indexing",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        },
+        "dataType": {
+          "description": "Indicates the type of Embedding",
+          "type": "string",
+          "enum": [
+            "float32",
+            "uint8",
+            "int8"
+          ],
+          "x-ms-enum": {
+            "name": "VectorDataType",
+            "modelAsString": true
+          }
+        },
+        "distanceFunction": {
+          "description": "Indicates the type of distance function of the Embedding",
+          "type": "string",
+          "enum": [
+            "euclidean",
+            "cosine",
+            "dotProduct"
+          ],
+          "x-ms-enum": {
+            "name": "DistanceFunction",
+            "modelAsString": true
+          }
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Value of dimension of the distance function"
         }
       }
     },
