@@ -1246,6 +1246,7 @@ union VectorSearchAlgorithmMetric {
  */
 union VectorSearchCompressionTarget {
     string,
+
     /**
      * 8-bit signed integer.
      */
@@ -1257,14 +1258,17 @@ union VectorSearchCompressionTarget {
  */
 union AzureOpenAIModelName {
     string,
+
     /**
      * TextEmbeddingAda002 model.
      */
     TextEmbeddingAda002: "text-embedding-ada-002",
+
     /**
      * TextEmbedding3Large model.
      */
     TextEmbedding3Large: "text-embedding-3-large",
+
     /**
      * TextEmbedding3Small model.
      */
@@ -4724,7 +4728,9 @@ union StopwordsList {
 model SearchIndexerDataSource {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
     @doc("Succesfully created or updated")
-    @statusCode _: 200 | 201;
+    @statusCode
+    _: 200 | 201;
+
     /**
      * The name of the datasource.
      */
@@ -4900,7 +4906,9 @@ model ListDataSourcesResult {
 model SearchIndexer {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
     @doc("Succesfully created or updated")
-    @statusCode _: 200 | 201;
+    @statusCode
+    _: 200 | 201;
+
     /**
      * The name of the indexer.
      */
@@ -5371,7 +5379,7 @@ model SearchIndexerWarning {
 
 /**
  * Represents the limits that can be applied to an indexer.
-*/
+ */
 model SearchIndexerLimits {
     /**
      * The maximum duration that the indexer is permitted to run for one execution.
@@ -5400,7 +5408,9 @@ model SearchIndexerLimits {
 model SearchIndexerSkillset {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
     @doc("Succesfully created or updated")
-    @statusCode _: 200 | 201;
+    @statusCode
+    _: 200 | 201;
+
     /**
      * The name of the skillset.
      */
@@ -5735,7 +5745,9 @@ model ListSkillsetsResult {
 model SynonymMap {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
     @doc("Succesfully created or updated")
-    @statusCode _: 200 | 201;
+    @statusCode
+    _: 200 | 201;
+
     /**
      * The name of the synonym map.
      */
@@ -5791,7 +5803,9 @@ model ListSynonymMapsResult {
 model SearchIndex {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
     @doc("Succesfully created or updated")
-    @statusCode _: 200 | 201;
+    @statusCode
+    _: 200 | 201;
+
     /**
      * The name of the index.
      */

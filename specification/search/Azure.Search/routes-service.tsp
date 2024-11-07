@@ -12,12 +12,14 @@ interface DataSourcesOperations {
      * Creates a new datasource or updates a datasource if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/datasources('{dataSourceName}')")
     @put
     createOrUpdate is SearchDataSourceOperation<
         {
             ...matchingHeader;
             ...preferHeader;
+
             /**
              * The definition of the datasource to create or update.
              */
@@ -46,21 +48,16 @@ interface DataSourcesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/datasources('{dataSourceName}')")
     @get
-    get is SearchDataSourceOperation<
-        {},
-        SearchIndexerDataSource
-    >;
+    get is SearchDataSourceOperation<{}, SearchIndexerDataSource>;
 
     /**
      * Lists all datasources available for a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/datasources")
     @get
-    list is SearchOperation<
-        selectQuery,
-        ListDataSourcesResult
-    >;
+    list is SearchOperation<selectQuery, ListDataSourcesResult>;
 
     /**
      * Creates a new datasource.
@@ -87,10 +84,7 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.reset")
     @post
-    reset is SearchIndexerOperation<
-        {},
-        void
-    >;
+    reset is SearchIndexerOperation<{}, void>;
 
     /**
      * Runs an indexer on-demand.
@@ -98,10 +92,7 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.run")
     @post
-    run is SearchIndexerOperation<
-        {},
-        void
-    >;
+    run is SearchIndexerOperation<{}, void>;
 
     /**
      * Creates a new indexer or updates an indexer if it already exists.
@@ -113,6 +104,7 @@ interface IndexersOperations {
         {
             ...matchingHeader;
             ...preferHeader;
+
             /**
              * The definition of the indexer to create or update.
              */
@@ -139,12 +131,10 @@ interface IndexersOperations {
      * Retrieves an indexer definition.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexers('{indexerName}')")
     @get
-    get is SearchIndexerOperation<
-        {},
-        SearchIndexer
-    >;
+    get is SearchIndexerOperation<{}, SearchIndexer>;
 
     /**
      * Lists all indexers available for a search service.
@@ -152,15 +142,13 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers")
     @get
-    list is SearchOperation<
-        selectQuery,
-        ListIndexersResult
-    >;
+    list is SearchOperation<selectQuery, ListIndexersResult>;
 
     /**
      * Creates a new indexer.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexers")
     @post
     create is SearchOperation<
@@ -180,10 +168,7 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.status")
     @get
-    getStatus is SearchIndexerOperation<
-        {},
-        SearchIndexerStatus
-    >;
+    getStatus is SearchIndexerOperation<{}, SearchIndexerStatus>;
 }
 
 interface SkillsetsOperations {
@@ -198,6 +183,7 @@ interface SkillsetsOperations {
         {
             ...matchingHeader;
             ...preferHeader;
+
             /**
              * The skillset containing one or more skills to create or update in a search
              * service.
@@ -212,6 +198,7 @@ interface SkillsetsOperations {
      * Deletes a skillset in a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/skillsets('{skillsetName}')")
     @delete
     delete is SearchSkillsetOperation<
@@ -227,21 +214,16 @@ interface SkillsetsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/skillsets('{skillsetName}')")
     @get
-    get is SearchSkillsetOperation<
-        {},
-        SearchIndexerSkillset
-    >;
+    get is SearchSkillsetOperation<{}, SearchIndexerSkillset>;
 
     /**
      * List all skillsets in a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/skillsets")
     @get
-    list is SearchOperation<
-        selectQuery,
-        ListSkillsetsResult
-    >;
+    list is SearchOperation<selectQuery, ListSkillsetsResult>;
 
     /**
      * Creates a new skillset in a search service.
@@ -266,12 +248,14 @@ interface SynonymMapsOperations {
      * Creates a new synonym map or updates a synonym map if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/synonymmaps('{synonymMapName}')")
     @put
     createOrUpdate is SearchSynonymMapOperation<
         {
             ...matchingHeader;
             ...preferHeader;
+
             /**
              * The definition of the synonym map to create or update.
              */
@@ -298,12 +282,10 @@ interface SynonymMapsOperations {
      * Retrieves a synonym map definition.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/synonymmaps('{synonymMapName}')")
     @get
-    get is SearchSynonymMapOperation<
-        {},
-        SynonymMap
-    >;
+    get is SearchSynonymMapOperation<{}, SynonymMap>;
 
     /**
      * Lists all synonym maps available for a search service.
@@ -311,10 +293,7 @@ interface SynonymMapsOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/synonymmaps")
     @get
-    list is SearchOperation<
-        selectQuery,
-        ListSynonymMapsResult
-    >;
+    list is SearchOperation<selectQuery, ListSynonymMapsResult>;
 
     /**
      * Creates a new synonym map.
@@ -358,20 +337,19 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes")
     @get
-    list is SearchOperation<
-        selectQuery,
-        ListIndexesResult
-    >;
+    list is SearchOperation<selectQuery, ListIndexesResult>;
 
     /**
      * Creates a new search index or updates an index if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexes('{indexName}')")
     @put
     createOrUpdate is SearchIndexOperation<
         {
             ...matchingHeader;
+
             /**
              * Allows new analyzers, tokenizers, token filters, or char filters to be added to
              * an index by taking the index offline for at least a few seconds. This
@@ -381,7 +359,9 @@ interface IndexesOperations {
              */
             @query
             allowIndexDowntime?: boolean;
+
             ...preferHeader;
+
             /**
              * The definition of the index to create or update.
              */
@@ -413,10 +393,7 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes('{indexName}')")
     @get
-    get is SearchIndexOperation<
-        {},
-        SearchIndex
-    >;
+    get is SearchIndexOperation<{}, SearchIndex>;
 
     /**
      * Returns statistics for the given index, including a document count and storage
@@ -425,10 +402,7 @@ interface IndexesOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexes('{indexName}')/search.stats")
     @get
-    getStatistics is SearchIndexOperation<
-        {},
-        GetIndexStatisticsResult
-    >;
+    getStatistics is SearchIndexOperation<{}, GetIndexStatisticsResult>;
 
     /**
      * Shows how an analyzer breaks text into tokens.
@@ -454,8 +428,4 @@ interface IndexesOperations {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @route("/servicestats")
 @get
-op getServiceStatistics is SearchOperation<
-    {
-    },
-    SearchServiceStatistics
->;
+op getServiceStatistics is SearchOperation<{}, SearchServiceStatistics>;

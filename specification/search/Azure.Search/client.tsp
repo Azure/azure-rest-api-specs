@@ -36,7 +36,9 @@ namespace Customizations;
 @@clientName(ListIndexersResult.value, "indexers");
 @@clientName(IndexerExecutionResult.itemsProcessed, "itemCount");
 @@clientName(IndexerExecutionResult.itemsFailed, "failedItemCount");
-@@clientName(SearchIndexerSkillset.cognitiveServices, "cognitiveServicesAccount");
+@@clientName(SearchIndexerSkillset.cognitiveServices,
+    "cognitiveServicesAccount"
+);
 @@clientName(SearchIndexerSkillset.indexProjections, "indexProjection");
 @@clientName(ListSkillsetsResult.value, "skillsets");
 @@clientName(ListSynonymMapsResult.value, "synonymMaps");
@@ -46,8 +48,12 @@ namespace Customizations;
 @@clientName(SearchField.vectorEncoding, "vectorEncodingFormat");
 @@clientName(ScoringProfile.text, "textWeights");
 @@clientName(SemanticSearch.defaultConfiguration, "defaultConfigurationName");
-@@clientName(SemanticPrioritizedFields.prioritizedContentFields, "contentFields");
-@@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields, "keywordsFields");
+@@clientName(SemanticPrioritizedFields.prioritizedContentFields,
+    "contentFields"
+);
+@@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields,
+    "keywordsFields"
+);
 @@clientName(VectorSearchProfile.algorithm, "algorithmConfigurationName");
 @@clientName(VectorSearchProfile.vectorizer, "vectorizerName");
 @@clientName(VectorSearchProfile.compression, "compressionName");
@@ -62,7 +68,9 @@ namespace Customizations;
 @@clientName(SearchServiceCounters.synonymMaps, "synonymMapCounter");
 @@clientName(SearchServiceCounters.skillsetCount, "skillsetCounter");
 @@clientName(SearchServiceCounters.vectorIndexSize, "vectorIndexSizeCounter");
-@@clientName(SearchServiceLimits.maxStoragePerIndex, "maxStoragePerIndexInBytes");
+@@clientName(SearchServiceLimits.maxStoragePerIndex,
+    "maxStoragePerIndexInBytes"
+);
 @@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms");
 @@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder");
 @@clientName(PathHierarchyTokenizerV2.skip, "numberOfTokensToSkip");
@@ -73,18 +81,26 @@ namespace Customizations;
 @@clientName(PhoneticTokenFilter.replace, "replaceOriginalTokens");
 @@clientName(StopwordsTokenFilter.removeTrailing, "removeTrailingStopWords");
 @@clientName(HnswAlgorithmConfiguration.hnswParameters, "parameters");
-@@clientName(ExhaustiveKnnAlgorithmConfiguration.exhaustiveKnnParameters, "parameters");
-@@clientName(ScalarQuantizationCompression.scalarQuantizationParameters, "parameters");
+@@clientName(ExhaustiveKnnAlgorithmConfiguration.exhaustiveKnnParameters,
+    "parameters"
+);
+@@clientName(ScalarQuantizationCompression.scalarQuantizationParameters,
+    "parameters"
+);
 @@clientName(AzureOpenAIVectorizer.azureOpenAIParameters, "parameters");
 @@clientName(AzureOpenAIVectorizerParameters.resourceUri, "resourceUrl");
 @@clientName(AzureOpenAIVectorizerParameters.deploymentId, "deploymentName");
 @@clientName(WebApiVectorizer.customWebApiParameters, "webApiParameters");
 @@clientName(WebApiVectorizerParameters.uri, "url");
-@@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity, "resourceId");
+@@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
+    "resourceId"
+);
 @@clientName(DistanceScoringFunction.distance, "parameters");
 @@clientName(FreshnessScoringFunction.freshness, "parameters");
 @@clientName(MagnitudeScoringFunction.magnitude, "parameters");
-@@clientName(MagnitudeScoringParameters.constantBoostBeyondRange, "shouldBoostBeyondRangeByConstant");
+@@clientName(MagnitudeScoringParameters.constantBoostBeyondRange,
+    "shouldBoostBeyondRangeByConstant"
+);
 @@clientName(TagScoringFunction.tag, "parameters");
 @@clientName(OcrSkill.detectOrientation, "shouldDetectOrientation");
 @@clientName(PIIDetectionSkill.maskingCharacter, "mask");

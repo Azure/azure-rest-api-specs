@@ -269,6 +269,7 @@ union IndexActionType {
  */
 union AutocompleteMode {
   string,
+
   /**
    * Only one term is suggested. If the query has two terms, only the last term is
    * completed. For example, if the input is 'washington medic', the suggested terms
@@ -880,7 +881,9 @@ model IndexAction {
 model IndexDocumentsResult {
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
   @doc("Response containing the status of operations for all actions in the batch.")
-  @statusCode _: 200 | 207;
+  @statusCode
+  _: 200 | 207;
+
   /**
    * The list of status information for each document in the indexing request.
    */

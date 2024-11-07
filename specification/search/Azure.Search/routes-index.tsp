@@ -8,25 +8,22 @@ using Azure.Core;
 
 namespace Search;
 
-
 @route("/indexes('{indexName}')")
 interface DocumentsOperations {
   /**
    * Queries the number of documents in the index.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/docs/$count")
   @get
-  count is SearchIndexOperation<
-    {
-    },
-    int32
-  >;
+  count is SearchIndexOperation<{}, int32>;
 
   /**
    * Searches for documents in the index.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/docs")
   @get
   searchGet is SearchIndexOperation<
@@ -52,10 +49,7 @@ interface DocumentsOperations {
        * of name:value pairs.
        */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
-      @query(#{
-        name: "facet",
-        explode: true,
-      })
+      @query(#{ name: "facet", explode: true })
       facets?: string[];
 
       /**
@@ -120,10 +114,7 @@ interface DocumentsOperations {
        * parameter string would be "mylocation--122.2,44.8" (without the quotes).
        */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
-      @query(#{
-        name: "scoringParameter",
-        explode: true,
-      })
+      @query(#{ name: "scoringParameter", explode: true })
       scoringParameters?: string[];
 
       /**
@@ -256,6 +247,7 @@ interface DocumentsOperations {
    * Searches for documents in the index.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/docs/search.post.search")
   @post
   searchPost is SearchIndexOperation<
@@ -297,6 +289,7 @@ interface DocumentsOperations {
    * Suggests documents in the index that match the given partial query text.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/docs/search.suggest")
   @get
   suggestGet is SearchIndexOperation<
@@ -414,7 +407,7 @@ interface DocumentsOperations {
   @route("/docs/search.index")
   @post
   index is SearchIndexOperation<
-    {      
+    {
       /**
        * The batch of index actions.
        */
@@ -429,6 +422,7 @@ interface DocumentsOperations {
    * the index.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/docs/search.autocomplete")
   @get
   autocompleteGet is SearchIndexOperation<

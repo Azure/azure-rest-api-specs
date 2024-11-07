@@ -26,10 +26,10 @@ alias preferHeader = {
 
 alias selectQuery = {
   @doc("""
-       Selects which top-level properties to retrieve.
-       Specified as a comma-separated list of JSON property names,
-       or '*' for all properties. The default is all properties.
-       """)  
+    Selects which top-level properties to retrieve.
+    Specified as a comma-separated list of JSON property names,
+    or '*' for all properties. The default is all properties.
+    """)
   @query
   $select?: string;
 };
