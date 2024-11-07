@@ -4337,7 +4337,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/SapVirtualInstanceIdentity",
+          "$ref": "#/definitions/SAPVirtualInstanceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -4355,6 +4355,56 @@
           "$ref": "#/definitions/ErrorDefinition",
           "description": "The Virtual Instance for SAP error body."
         }
+      }
+    },
+    "SAPVirtualInstanceIdentity": {
+      "type": "object",
+      "description": "Managed service identity (user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SAPVirtualInstanceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SAPVirtualInstanceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (where only None and UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "SAPVirtualInstanceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          }
+        ]
       }
     },
     "SAPVirtualInstanceListResult": {
@@ -4582,56 +4632,6 @@
             "name": "SoftShutdown",
             "value": "SoftShutdown",
             "description": "Soft shutdown of SAP system is initiated."
-          }
-        ]
-      }
-    },
-    "SapVirtualInstanceIdentity": {
-      "type": "object",
-      "description": "Managed service identity (user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/SapVirtualInstanceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
-            "x-nullable": true
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "SapVirtualInstanceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (where only None and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "SapVirtualInstanceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
           }
         ]
       }
@@ -5130,7 +5130,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/SapVirtualInstanceIdentity",
+          "$ref": "#/definitions/SAPVirtualInstanceIdentity",
           "description": "Managed service identity (user assigned identities)"
         },
         "properties": {
