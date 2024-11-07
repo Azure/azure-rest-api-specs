@@ -215,6 +215,23 @@ model Glossary {
   storageSource?: StorageSource;
 }
 
+@doc("""
+  Contains unified error information used for HTTP responses across any Cognitive
+  Service. Instances
+  can be created either through
+  Microsoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly
+  from
+  a controller.
+  """)
+@error
+model TranslationErrorResponse {
+  @doc("""
+    This contains an outer error with error code, message, details, target and an
+    inner error with more descriptive details.
+    """)
+  error?: TranslationError;
+}
+
 @doc("Translation job Status Response")
 @pagedResult
 model TranslationsStatus {

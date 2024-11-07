@@ -1338,6 +1338,16 @@
         ]
       }
     },
+    "TranslationErrorResponse": {
+      "type": "object",
+      "description": "Contains unified error information used for HTTP responses across any Cognitive\nService. Instances\ncan be created either through\nMicrosoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly\nfrom\na controller.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/TranslationError",
+          "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details."
+        }
+      }
+    },
     "TranslationStatus": {
       "type": "object",
       "description": "Translation job status response",
