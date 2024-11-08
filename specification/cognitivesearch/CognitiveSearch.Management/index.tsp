@@ -118,6 +118,7 @@ model Capacity {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 @discriminator("type")
 @doc("Pausing strategy for the index")
 model Pause {}

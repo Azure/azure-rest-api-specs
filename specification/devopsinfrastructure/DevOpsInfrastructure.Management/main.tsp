@@ -195,6 +195,7 @@ model Stateful extends AgentProfile {
   @doc("How long should stateful machines be kept around. The maximum is one week.")
   maxAgentLifetime: string;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 @doc("Defines pool buffer.")
 model ResourcePredictions {}
 

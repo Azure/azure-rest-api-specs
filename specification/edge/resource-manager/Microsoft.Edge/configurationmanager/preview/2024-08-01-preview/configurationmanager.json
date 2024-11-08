@@ -1687,6 +1687,189 @@
             "$ref": "./examples/DynamicSchemas_Get_MaximumSet_Gen.json"
           }
         }
+      },
+      "put": {
+        "operationId": "DynamicSchemas_CreateOrUpdate",
+        "tags": [
+          "DynamicSchemas"
+        ],
+        "description": "Create or update a DynamicSchema Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the Schema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicSchemaName",
+            "in": "path",
+            "description": "The name of the DynamicSchema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicSchema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DynamicSchema' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamicSchema"
+            }
+          },
+          "201": {
+            "description": "Resource 'DynamicSchema' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamicSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicSchemas_CreateOrUpdate": {
+            "$ref": "./examples/DynamicSchemas_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DynamicSchemas_Update",
+        "tags": [
+          "DynamicSchemas"
+        ],
+        "description": "update a DynamicSchema Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the Schema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicSchemaName",
+            "in": "path",
+            "description": "The name of the DynamicSchema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicSchemaUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicSchemas_Update": {
+            "$ref": "./examples/DynamicSchemas_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DynamicSchemas_Delete",
+        "tags": [
+          "DynamicSchemas"
+        ],
+        "description": "Delete a DynamicSchema Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the Schema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicSchemaName",
+            "in": "path",
+            "description": "The name of the DynamicSchema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicSchemas_Delete": {
+            "$ref": "./examples/DynamicSchemas_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas/{schemaName}/dynamicSchemas/{dynamicSchemaName}/versions": {
@@ -1806,6 +1989,213 @@
         "x-ms-examples": {
           "DynamicSchemaVersions_Get": {
             "$ref": "./examples/DynamicSchemaVersions_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DynamicSchemaVersions_CreateOrUpdate",
+        "tags": [
+          "DynamicSchemaVersions"
+        ],
+        "description": "Create or update a Dynamic Schema Version Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the Schema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicSchemaName",
+            "in": "path",
+            "description": "The name of the DynamicSchema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "schemaVersionName",
+            "in": "path",
+            "description": "The name of the SchemaVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicSchemaVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DynamicSchemaVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamicSchemaVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'DynamicSchemaVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamicSchemaVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicSchemaVersions_CreateOrUpdate": {
+            "$ref": "./examples/DynamicSchemaVersions_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DynamicSchemaVersions_Update",
+        "tags": [
+          "DynamicSchemaVersions"
+        ],
+        "description": "update a Dynamic Schema Version Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the Schema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicSchemaName",
+            "in": "path",
+            "description": "The name of the DynamicSchema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "schemaVersionName",
+            "in": "path",
+            "description": "The name of the SchemaVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicSchemaVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicSchemaVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicSchemaVersions_Update": {
+            "$ref": "./examples/DynamicSchemaVersions_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DynamicSchemaVersions_Delete",
+        "tags": [
+          "DynamicSchemaVersions"
+        ],
+        "description": "Delete a Dynamic Schema Version Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the Schema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicSchemaName",
+            "in": "path",
+            "description": "The name of the DynamicSchema",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "schemaVersionName",
+            "in": "path",
+            "description": "The name of the SchemaVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicSchemaVersions_Delete": {
+            "$ref": "./examples/DynamicSchemaVersions_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -4082,6 +4472,21 @@
         }
       }
     },
+    "DynamicSchemaUpdate": {
+      "type": "object",
+      "description": "DynamicSchema Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicSchemaProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "DynamicSchemaVersion": {
       "type": "object",
       "description": "Dynamic Schema Version Resource",
@@ -4118,24 +4523,20 @@
         "value"
       ]
     },
-    "HelmSolution": {
+    "DynamicSchemaVersionUpdate": {
       "type": "object",
-      "description": "Helm Solution Properties",
+      "description": "Dynamic Schema Version Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HelmSolutionProperties",
-          "description": "properties of helm solution"
+          "$ref": "#/definitions/SchemaVersionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "#/definitions/SolutionVersion"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ],
-      "x-ms-discriminator-value": "Helm"
+      ]
     },
     "HelmSolutionProperties": {
       "type": "object",
@@ -4950,15 +5351,20 @@
       "description": "Solution Version Resource",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/HelmSolutionProperties",
           "description": "The resource-specific properties for this resource."
         },
         "kind": {
-          "$ref": "#/definitions/SolutionVersionType",
-          "description": "Kind of solution version"
+          "type": "string",
+          "description": "Kind of solution version",
+          "enum": [
+            "Helm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
-      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -4988,24 +5394,6 @@
       "required": [
         "value"
       ]
-    },
-    "SolutionVersionType": {
-      "type": "string",
-      "description": "Available solution version types",
-      "enum": [
-        "Helm"
-      ],
-      "x-ms-enum": {
-        "name": "SolutionVersionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Helm",
-            "value": "Helm",
-            "description": "Helm solution version"
-          }
-        ]
-      }
     },
     "State": {
       "type": "string",

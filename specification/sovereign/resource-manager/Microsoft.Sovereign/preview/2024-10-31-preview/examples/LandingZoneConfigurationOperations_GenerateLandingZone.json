@@ -1,0 +1,37 @@
+{
+  "title": "LandingZoneConfigurationOperations_GenerateLandingZone",
+  "operationId": "LandingZoneConfigurationOperations_GenerateLandingZone",
+  "parameters": {
+    "api-version": "2024-10-31-preview",
+    "subscriptionId": "9B52DE5E-FE73-4C8B-8968-1E8F0097DDB8",
+    "resourceGroupName": "ExampleResourceGroup",
+    "landingZoneAccountName": "ExampleLZA",
+    "landingZoneConfigurationName": "ExampleLZC",
+    "body": {
+      "infrastructureAsCodeOutputOptions": "Bicep",
+      "deploymentPrefix": "mcfs",
+      "topLevelMgDisplayName": "TestMG",
+      "deploymentLocation": "eastus",
+      "existingManagementSubscriptionId": "/subscriptions/49804ded-c8b8-43b2-8dba-bab9dd7d81e1",
+      "existingIdentitySubscriptionId": "/subscriptions/26211934-4ed9-4c30-b139-13bd61286867",
+      "existingConnectivitySubscriptionId": "/subscriptions/08a376df-4789-4920-9de8-cf6900b55968",
+      "subscriptionBillingScope": null,
+      "existingTopLevelMgParentId": null,
+      "deploymentSuffix": "test",
+      "organization": "test"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "topLevelMgDisplayName": "MCFS",
+        "landingZoneConfigurationName": "ExampleLZC"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

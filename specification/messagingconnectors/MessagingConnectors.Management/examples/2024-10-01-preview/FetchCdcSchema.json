@@ -1,0 +1,65 @@
+{
+  "title": "SchemaOperations fetchCdcSchema",
+  "operationId": "SchemaOperations_Fetch",
+  "parameters": {
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "api-version": "2024-10-01-preview",
+    "location": "Central US EUAP",
+    "body": {
+      "connectorSchemaConfig": {
+        "connectorType": "SqlServerSource",
+        "serverName": "servername1",
+        "port": 8888,
+        "databaseName": "databasename1",
+        "userName": "username1",
+        "password": "password1",
+        "tables": "tables1,tables2"
+      },
+      "format": "Avro/1.12.0"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "schemas": [
+          {
+            "schemaFormat": "avro/1.1",
+            "schemaJson": "base64content",
+            "schemaProperties": {
+              "type": "CDC",
+              "tableName": "tableName1",
+              "cdcEventType": "DataChange",
+              "databaseName": "db1"
+            }
+          },
+          {
+            "schemaFormat": "avro/1.1",
+            "schemaJson": "base64content",
+            "schemaProperties": {
+              "type": "CDC",
+              "tableName": "tableName1",
+              "cdcEventType": "DataChange",
+              "databaseName": "db1"
+            }
+          },
+          {
+            "schemaFormat": "avro/1.1",
+            "schemaJson": "base64content",
+            "schemaProperties": {
+              "type": "CDC",
+              "tableName": "tableName1",
+              "cdcEventType": "DataChange",
+              "databaseName": "db1"
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "example.url",
+        "retry-after": "15"
+      }
+    }
+  }
+}

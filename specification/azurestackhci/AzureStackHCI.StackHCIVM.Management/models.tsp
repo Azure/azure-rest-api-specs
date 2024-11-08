@@ -463,6 +463,18 @@ model LogicalNetworkArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l2Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l3Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
   ]>;
 }
@@ -534,6 +546,10 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
+  @added(Versions.v2024_08_01_preview)
+  @doc("The credentials used to login to the image repository that has access to the specified image")
+  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
+
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -555,6 +571,17 @@ model GalleryImageProperties {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
     }
   ]>;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The credentials used to login to the image repository that has access to the specified image")
+model VmImageRepositoryCredentials {
+  @doc("Username for accessing image repository")
+  username: string;
+
+  @doc("Password for accessing image repository")
+  @secret
+  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -879,7 +906,7 @@ model NetworkInterfaceProperties {
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
 
-  @added(Versions.v2024_07_15_preview)
+  @added(Versions.v2024_09_01_preview)
   @doc("Boolean indicating whether this is a local network interface or if one should be created.")
   createFromLocal?: boolean = false;
 }
@@ -1141,11 +1168,11 @@ model VirtualHardDiskProperties {
   @secret
   downloadUrl?: string;
 
-  @added(Versions.v2024_07_15_preview)
+  @added(Versions.v2024_09_01_preview)
   @doc("Boolean indicating whether this is a local hard disk or if one should be created.")
   createFromLocal?: boolean = false;
 
-  @added(Versions.v2024_07_15_preview)
+  @added(Versions.v2024_09_01_preview)
   @doc("Operating system type of the OS disk. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
@@ -1292,7 +1319,7 @@ model VirtualMachineInstanceProperties {
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
 
-  @added(Versions.v2024_07_15_preview)
+  @added(Versions.v2024_09_01_preview)
   @doc("Boolean indicating whether this is a local virtual machine or if one should be created.")
   createFromLocal?: boolean = false;
 }

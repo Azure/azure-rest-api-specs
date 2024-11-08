@@ -27,11 +27,10 @@ These are the global settings for the contoso.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-10-01-preview
+tag: package-2023-12-01-preview
 ```
 
 ### Tag: package-2020-01-01-preview
-
 These settings apply only when `--tag=package-2020-01-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2020-01-01-preview'
@@ -74,11 +73,29 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
+  - Microsoft.Contoso/preview/2023-10-01-preview/openapi.json
+```
+
+### Tag: package-2023-11-01-preview
+
+These settings apply only when `--tag=package-2023-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11-01-preview'
+input-file:
+  - Microsoft.Contoso/preview/2023-11-01-preview/openapi.json
+```
+
+### Tag: package-2023-12-01-preview
+
+These settings apply only when `--tag=package-2023-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12-01-preview'
+input-file:
   - Microsoft.Contoso/preview/2020-01-01-preview/tower.json
   - Microsoft.Contoso/preview/2020-01-01-preview/extensionclusters.json
   - Microsoft.Contoso/preview/2020-01-01-preview/recipe.json
   - Microsoft.Contoso/preview/2021-04-01-preview/cnab.json
-  - Microsoft.Contoso/preview/2023-10-01-preview/openapi.json
+  - Microsoft.Contoso/preview/2023-12-01-preview/openapi.json
 ```
 
 ### Tag: package-package-canonical
