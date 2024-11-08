@@ -834,50 +834,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/skus": {
-      "get": {
-        "operationId": "NGroupsSkus_Get",
-        "x-ms-examples": {},
-        "summary": "Get the resource sku, resource type, and sku capacity of the NGroups resource.",
-        "description": "Get the resource sku, resource type, and sku capacity of the NGroups resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NGroupsNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NGroupsSkusList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}": {
       "get": {
         "operationId": "NGroups_Get",
         "x-ms-examples": {},
-        "summary": "Get the properties of the specified NGroups resource.",
+        "summary": "NGroups GET REST API",
         "description": "Get the properties of the specified NGroups resource.",
         "parameters": [
           {
@@ -911,8 +872,8 @@
       "put": {
         "operationId": "NGroups_CreateOrUpdate",
         "x-ms-examples": {},
-        "summary": "Create or update the NGroups resource.",
-        "description": "Create or update the NGroups resource.",
+        "summary": "NGroup PUT REST API",
+        "description": "Create or update a NGroups resource.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -962,7 +923,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -974,7 +935,7 @@
       "patch": {
         "operationId": "NGroups_Update",
         "x-ms-examples": {},
-        "summary": "Update a specified NGroups resource.",
+        "summary": "NGroups PATCH REST API",
         "description": "Update a specified NGroups resource.",
         "parameters": [
           {
@@ -1025,7 +986,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1037,7 +998,7 @@
       "delete": {
         "operationId": "NGroups_Delete",
         "x-ms-examples": {},
-        "summary": "Delete the NGroups resource.",
+        "summary": "NGroups Delete REST API",
         "description": "Deletes the NGroups resource.",
         "parameters": [
           {
@@ -1071,7 +1032,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1116,7 +1077,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1194,7 +1155,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1208,7 +1169,7 @@
       "get": {
         "operationId": "NGroups_ListByResourceGroup",
         "x-ms-examples": {},
-        "summary": "Gets a list of all NGroups resources under a resource group.",
+        "summary": "GET NGroups under a resource group REST API.",
         "description": "Gets a list of all NGroups resources under a resource group.",
         "parameters": [
           {
@@ -1244,7 +1205,7 @@
       "get": {
         "operationId": "NGroups_List",
         "x-ms-examples": {},
-        "summary": "Gets a list of all NGroups resources under a subscription.",
+        "summary": "List NGroups in a subscription.",
         "description": "Gets a list of all NGroups resources under a subscription.",
         "parameters": [
           {
@@ -1275,13 +1236,13 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
-        "operationId": "ContainerGroupProfile_ListBySubscription",
+        "operationId": "CGProfiles_ListBySubscription",
         "x-ms-examples": {
           "ContainerGroupProfilesList": {
             "$ref": "./examples/ContainerGroupProfilesList.json"
           }
         },
-        "summary": "Gets a list of all container group profiles under a subscription.",
+        "summary": "List container group profiles in a subscription.",
         "description": "Gets a list of all container group profiles under a subscription.",
         "parameters": [
           {
@@ -1312,13 +1273,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
-        "operationId": "ContainerGroupProfile_ListByResourceGroup",
+        "operationId": "CGProfiles_ListByResourceGroup",
         "x-ms-examples": {
           "ContainerGroupProfilesListByResourceGroup": {
             "$ref": "./examples/ContainerGroupProfilesListByResourceGroup.json"
           }
         },
-        "summary": "Gets a list of all container group profiles under a resource group.",
+        "summary": "List container group profiles in a resource group.",
         "description": "Gets a list of all container group profiles under a resource group.",
         "parameters": [
           {
@@ -1352,7 +1313,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}": {
       "put": {
-        "operationId": "ContainerGroupProfile_CreateOrUpdate",
+        "operationId": "CGProfile_CreateOrUpdate",
         "x-ms-examples": {
           "ContainerGroupProfilesCreateOrUpdate": {
             "$ref": "./examples/ContainerGroupProfilesCreateOrUpdate.json"
@@ -1418,19 +1379,19 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "patch": {
-        "operationId": "ContainerGroupProfile_Update",
+        "operationId": "CGProfile_Update",
         "x-ms-examples": {
           "ContainerGroupProfilesPatch": {
             "$ref": "./examples/ContainerGroupProfilesPatch.json"
           }
         },
-        "summary": "Update a specified ContainerGroupProfile.",
+        "summary": "Container group profile PATCH REST API.",
         "description": "Update a specified container group profile.",
         "parameters": [
           {
@@ -1470,7 +1431,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1517,13 +1478,13 @@
         }
       },
       "delete": {
-        "operationId": "ContainerGroupProfile_Delete",
+        "operationId": "CGProfile_Delete",
         "x-ms-examples": {
           "ContainerGroupProfilesDelete": {
             "$ref": "./examples/ContainerGroupProfilesDelete.json"
           }
         },
-        "summary": "Delete a ContainerGroupProfile.",
+        "summary": "Container group profile DELETE REST API.",
         "description": "Deletes a container group profile.",
         "parameters": [
           {
@@ -1557,7 +1518,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1566,7 +1527,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}/revisions": {
       "get": {
-        "operationId": "ContainerGroupProfile_ListAllRevisions",
+        "operationId": "CGProfile_ListAllRevisions",
         "x-ms-examples": {
           "ContainerGroupProfileListAllRevisions": {
             "$ref": "./examples/ContainerGroupProfileListAllRevisions.json"
@@ -1609,7 +1570,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}/revisions/{revisionNumber}": {
       "get": {
-        "operationId": "ContainerGroupProfile_GetByRevisionNumber",
+        "operationId": "CGProfile_GetByRevisionNumber",
         "x-ms-examples": {
           "ContainerGroupProfileGetByRevisionNumber": {
             "$ref": "./examples/ContainerGroupProfileGetByRevisionNumber.json"
@@ -3378,7 +3339,10 @@
           "items": {
             "$ref": "#/definitions/NGroupSkus"
           },
-          "description": "The list of NGroups SKUs."
+          "description": "The list of NGroups SKUs.",
+          "x-ms-identifiers": [
+            "sku"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -3424,6 +3388,10 @@
     "NGroup": {
       "type": "object",
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NGroupProperties"
@@ -3661,19 +3629,26 @@
           "description": "Contains information about the volumes that can be mounted by Containers in the Container Groups.",
           "items": {
             "$ref": "#/definitions/NGroupCGPropertyVolume"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "containers": {
           "type": "array",
           "description": "Contains information about Container which can be set while creating or updating the NGroups.",
           "items": {
             "$ref": "#/definitions/NGroupCGPropertyContainer"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
     "NGroupCGPropertyContainer": {
       "type": "object",
+      "description": "Container properties that can be provided with NGroups object.",
       "properties": {
         "name": {
           "type": "string",
@@ -3687,7 +3662,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VolumeMount"
-              }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             }
           }
         }
@@ -3719,12 +3697,16 @@
           "items": {
             "$ref": "#/definitions/FileShare",
             "description": "List of file shares that will be created and mounted on CGs."
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
     "FileShare": {
       "type": "object",
+      "description": "File shares that can be mounted on container groups.",
       "properties": {
         "name": {
           "type": "string"
@@ -3795,7 +3777,10 @@
           "description": "List of Application Gateway Backend Address Pools.",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
-          }
+          },
+          "x-ms-identifiers": [
+            "resource"
+          ]
         }
       }
     },
@@ -3808,12 +3793,16 @@
           "description": "List of Load Balancer Backend Address Pools.",
           "items": {
             "$ref": "#/definitions/LoadBalancerBackendAddressPool"
-          }
+          },
+          "x-ms-identifiers": [
+            "resource"
+          ]
         }
       }
     },
     "LoadBalancerBackendAddressPool": {
       "type": "object",
+      "description": "NGroups load balancer backend address pool",
       "properties": {
         "resource": {
           "type": "string",
@@ -3823,6 +3812,7 @@
     },
     "ApplicationGatewayBackendAddressPool": {
       "type": "object",
+      "description": "NGroups application gateway backend address pool",
       "properties": {
         "resource": {
           "type": "string",
