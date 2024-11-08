@@ -109,3 +109,6 @@ namespace Customizations;
 @@clientName(AMLParameters.key, "authenticationKey");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUri");
 @@clientName(AzureMachineLearningSkill.key, "authenticationKey");
+@@clientName(SkillNames, "skillNamesModel", "csharp");
+@@clientName(AMLParameters, "AzureMachineLearningParameters");
+@@clientName(AMLVectorizer, "AzureMachineLearningVectorizer");

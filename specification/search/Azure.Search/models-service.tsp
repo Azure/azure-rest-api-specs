@@ -6229,7 +6229,7 @@ model ListSkillsetsResult {
 
 @doc("The type of the skill names.")
 @added(Versions.v2024_11_01_preview)
-model SkillNamesModel {
+model SkillNames {
     /**
      * the names of skills to be reset.
      */

@@ -323,7 +323,7 @@ interface SkillsetsOperations {
              * will be reset.
              */
             @body
-            skillNames: SkillNamesModel;
+            skillNames: SkillNames;
         },
         void
     >;
