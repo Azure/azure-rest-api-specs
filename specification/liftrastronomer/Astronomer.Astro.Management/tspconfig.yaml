@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/astro"
 output-dir: "{project-root}/"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -14,3 +17,20 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/astronomer.json"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-astro"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-astro"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-astro"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
