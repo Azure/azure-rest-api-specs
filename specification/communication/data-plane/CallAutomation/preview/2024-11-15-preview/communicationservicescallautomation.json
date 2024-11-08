@@ -3242,8 +3242,12 @@
           "type": "string"
         },
         "operationContext": {
-          "description": "Used by customers to set the context for creating a new call. This property will be null for answering a call.",
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -3264,8 +3268,12 @@
           "type": "string"
         },
         "operationContext": {
-          "description": "Used by customers to set the context for creating a new call. This property will be null for answering a call.",
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -3356,6 +3364,10 @@
           "items": {
             "$ref": "#/definitions/CallParticipant"
           }
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -3442,6 +3454,10 @@
         "invitationId": {
           "description": "Invitation ID used to cancel the request.",
           "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -3467,7 +3483,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+          "description": "Contains the resulting SIP code, sub-code and message."
         },
         "invitationId": {
           "description": "Invitation ID used to cancel the request.",
@@ -3518,7 +3534,7 @@
           "type": "string"
         },
         "operationContext": {
-          "description": "Used by customers to correlate the request to the response event.",
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
         "resultInformation": {
@@ -3539,7 +3555,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "recordingId": {
@@ -3558,6 +3574,10 @@
         },
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -3566,24 +3586,24 @@
       "type": "object",
       "properties": {
         "callConnectionId": {
-          "description": "Gets or sets call connection ID.",
+          "description": "Call connection ID.",
           "type": "string"
         },
         "serverCallId": {
-          "description": "Gets or sets server call ID.",
+          "description": "Server call ID.",
           "type": "string"
         },
         "correlationId": {
-          "description": "Gets or sets correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
-          "description": "Gets or sets used by customers when calling mid-call actions to correlate the request to the response event.",
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Gets or sets contains the resulting SIP code, sub-code and message."
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -3599,7 +3619,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
@@ -3624,7 +3644,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
@@ -3654,12 +3674,16 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -3688,7 +3712,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
@@ -3764,7 +3788,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
@@ -3794,12 +3818,16 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -3815,7 +3843,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "resultInformation": {
@@ -3831,15 +3859,6 @@
     "ContinuousDtmfRecognitionToneReceived": {
       "type": "object",
       "properties": {
-        "sequenceId": {
-          "format": "int32",
-          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tone": {
-          "$ref": "#/definitions/Tone"
-        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string"
@@ -3849,12 +3868,21 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId or skype chain ID.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "sequenceId": {
+          "format": "int32",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "tone": {
+          "$ref": "#/definitions/Tone"
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
@@ -3874,7 +3902,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
@@ -3899,7 +3927,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
@@ -3924,7 +3952,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
@@ -3940,10 +3968,14 @@
     "MediaStreamingFailed": {
       "type": "object",
       "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
@@ -3954,19 +3986,12 @@
           "type": "string"
         },
         "operationContext": {
-          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-          "readOnly": true
-        },
-        "mediaStreamingUpdate": {
-          "$ref": "#/definitions/MediaStreamingUpdate",
-          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
-          "readOnly": true
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -4024,10 +4049,14 @@
     "MediaStreamingStarted": {
       "type": "object",
       "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
@@ -4038,29 +4067,26 @@
           "type": "string"
         },
         "operationContext": {
-          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-          "readOnly": true
-        },
-        "mediaStreamingUpdate": {
-          "$ref": "#/definitions/MediaStreamingUpdate",
-          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
-          "readOnly": true
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
     "MediaStreamingStopped": {
       "type": "object",
       "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
@@ -4071,19 +4097,12 @@
           "type": "string"
         },
         "operationContext": {
-          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-          "readOnly": true
-        },
-        "mediaStreamingUpdate": {
-          "$ref": "#/definitions/MediaStreamingUpdate",
-          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
-          "readOnly": true
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -4099,7 +4118,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
         "operationContext": {
@@ -4115,16 +4134,6 @@
     "TranscriptionFailed": {
       "type": "object",
       "properties": {
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code, sub-code and message.",
-          "readOnly": true
-        },
         "transcriptionUpdate": {
           "$ref": "#/definitions/TranscriptionUpdate",
           "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
@@ -4132,18 +4141,23 @@
         },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -4200,16 +4214,6 @@
     "TranscriptionStarted": {
       "type": "object",
       "properties": {
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code, sub-code and message.",
-          "readOnly": true
-        },
         "transcriptionUpdate": {
           "$ref": "#/definitions/TranscriptionUpdate",
           "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
@@ -4217,34 +4221,29 @@
         },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
     "TranscriptionStopped": {
       "type": "object",
       "properties": {
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code, sub-code and message.",
-          "readOnly": true
-        },
         "transcriptionUpdate": {
           "$ref": "#/definitions/TranscriptionUpdate",
           "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
@@ -4252,34 +4251,29 @@
         },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
     "TranscriptionUpdated": {
       "type": "object",
       "properties": {
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code, sub-code and message.",
-          "readOnly": true
-        },
         "transcriptionUpdate": {
           "$ref": "#/definitions/TranscriptionUpdate",
           "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
@@ -4287,18 +4281,23 @@
         },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     }
