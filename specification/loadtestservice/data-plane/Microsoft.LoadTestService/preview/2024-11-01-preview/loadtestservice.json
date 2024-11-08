@@ -5941,9 +5941,9 @@
         }
       }
     },
-    "TestRunEndedNotificationEvent": {
+    "TestRunEndedNotificationEventFilter": {
       "type": "object",
-      "description": "The notification event when the event type is TestRunEnded.",
+      "description": "The notification event filter when the event type is TestRunEnded.",
       "properties": {
         "condition": {
           "$ref": "#/definitions/TestRunEndedEventCondition",
@@ -5952,14 +5952,14 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEvent"
+          "$ref": "#/definitions/TestsNotificationEventFilter"
         }
       ],
       "x-ms-discriminator-value": "TestRunEnded"
     },
-    "TestRunEndedNotificationEventCreateOrUpdate": {
+    "TestRunEndedNotificationEventFilterCreateOrUpdate": {
       "type": "object",
-      "description": "The notification event when the event type is TestRunEnded.",
+      "description": "The notification event filter when the event type is TestRunEnded.",
       "properties": {
         "condition": {
           "$ref": "#/definitions/TestRunEndedEventCondition",
@@ -5968,7 +5968,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
+          "$ref": "#/definitions/TestsNotificationEventFilterCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TestRunEnded"
@@ -6123,9 +6123,9 @@
         }
       }
     },
-    "TestRunStartedNotificationEvent": {
+    "TestRunStartedNotificationEventFilter": {
       "type": "object",
-      "description": "The notification event when the event type is TestRunStarted.",
+      "description": "The notification event filter when the event type is TestRunStarted.",
       "properties": {
         "condition": {
           "$ref": "#/definitions/TestRunStartedEventCondition",
@@ -6134,14 +6134,14 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEvent"
+          "$ref": "#/definitions/TestsNotificationEventFilter"
         }
       ],
       "x-ms-discriminator-value": "TestRunStarted"
     },
-    "TestRunStartedNotificationEventCreateOrUpdate": {
+    "TestRunStartedNotificationEventFilterCreateOrUpdate": {
       "type": "object",
-      "description": "The notification event when the event type is TestRunStarted.",
+      "description": "The notification event filter when the event type is TestRunStarted.",
       "properties": {
         "condition": {
           "$ref": "#/definitions/TestRunStartedEventCondition",
@@ -6150,7 +6150,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
+          "$ref": "#/definitions/TestsNotificationEventFilterCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TestRunStarted"
@@ -6336,32 +6336,32 @@
         }
       }
     },
-    "TestsNotificationEvent": {
+    "TestsNotificationEventFilter": {
       "type": "object",
-      "description": "The notification event for tests.",
+      "description": "The notification event filter for Tests scope.",
       "properties": {
-        "name": {
+        "kind": {
           "$ref": "#/definitions/NotificationEventType",
           "description": "The event type"
         }
       },
-      "discriminator": "name",
+      "discriminator": "kind",
       "required": [
-        "name"
+        "kind"
       ]
     },
-    "TestsNotificationEventCreateOrUpdate": {
+    "TestsNotificationEventFilterCreateOrUpdate": {
       "type": "object",
-      "description": "The notification event for tests.",
+      "description": "The notification event filter for Tests scope.",
       "properties": {
-        "name": {
+        "kind": {
           "$ref": "#/definitions/NotificationEventType",
           "description": "The event type"
         }
       },
-      "discriminator": "name",
+      "discriminator": "kind",
       "required": [
-        "name"
+        "kind"
       ]
     },
     "TestsNotificationRule": {
@@ -6375,16 +6375,16 @@
             "type": "string"
           }
         },
-        "events": {
+        "eventFilters": {
           "type": "object",
-          "description": "The events to send notifications for.",
+          "description": "The event to receive notifications for along with filtering conditions.\nKey is a user-assigned identifier for the event filter.",
           "additionalProperties": {
-            "$ref": "#/definitions/TestsNotificationEvent"
+            "$ref": "#/definitions/TestsNotificationEventFilter"
           }
         }
       },
       "required": [
-        "events"
+        "eventFilters"
       ],
       "allOf": [
         {
@@ -6404,11 +6404,11 @@
             "type": "string"
           }
         },
-        "events": {
+        "eventFilters": {
           "type": "object",
-          "description": "The events to send notifications for.",
+          "description": "The event to receive notifications for along with filtering conditions.\nKey is a user-assigned identifier for the event filter.",
           "additionalProperties": {
-            "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
+            "$ref": "#/definitions/TestsNotificationEventFilterCreateOrUpdate"
           }
         }
       },
@@ -6578,42 +6578,42 @@
         "kind"
       ]
     },
-    "TriggerDisabledNotificationEvent": {
+    "TriggerDisabledNotificationEventFilter": {
       "type": "object",
-      "description": "The notification event when the event type is TriggerDisabled.",
+      "description": "The notification event filter when the event type is TriggerDisabled.",
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEvent"
+          "$ref": "#/definitions/TestsNotificationEventFilter"
         }
       ],
       "x-ms-discriminator-value": "TriggerDisabled"
     },
-    "TriggerDisabledNotificationEventCreateOrUpdate": {
+    "TriggerDisabledNotificationEventFilterCreateOrUpdate": {
       "type": "object",
-      "description": "The notification event when the event type is TriggerDisabled.",
+      "description": "The notification event filter when the event type is TriggerDisabled.",
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
+          "$ref": "#/definitions/TestsNotificationEventFilterCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TriggerDisabled"
     },
-    "TriggerEndedNotificationEvent": {
+    "TriggerEndedNotificationEventFilter": {
       "type": "object",
-      "description": "The notification event when the event type is TriggerEnded.",
+      "description": "The notification event filter when the event type is TriggerEnded.",
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEvent"
+          "$ref": "#/definitions/TestsNotificationEventFilter"
         }
       ],
       "x-ms-discriminator-value": "TriggerEnded"
     },
-    "TriggerEndedNotificationEventCreateOrUpdate": {
+    "TriggerEndedNotificationEventFilterCreateOrUpdate": {
       "type": "object",
-      "description": "The notification event when the event type is TriggerEnded.",
+      "description": "The notification event filter when the event type is TriggerEnded.",
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEventCreateOrUpdate"
+          "$ref": "#/definitions/TestsNotificationEventFilterCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TriggerEnded"

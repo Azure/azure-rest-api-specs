@@ -38,45 +38,45 @@ union NotificationEventType {
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@discriminator("name")
-@doc("The notification event for tests.")
-model TestsNotificationEvent {
+@discriminator("kind")
+@doc("The notification event filter for Tests scope.")
+model TestsNotificationEventFilter {
   @doc("The event type")
-  name: NotificationEventType;
+  kind: NotificationEventType;
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@doc("The notification event when the event type is TestRunEnded.")
-model TestRunEndedNotificationEvent extends TestsNotificationEvent {
+@doc("The notification event filter when the event type is TestRunEnded.")
+model TestRunEndedNotificationEventFilter extends TestsNotificationEventFilter {
   @doc("Event type for test run ended event.")
-  name: NotificationEventType.TestRunEnded;
+  kind: NotificationEventType.TestRunEnded;
 
   @doc("Event filtering condition.")
   condition?: TestRunEndedEventCondition;
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@doc("The notification event when the event type is TestRunStarted.")
-model TestRunStartedNotificationEvent extends TestsNotificationEvent {
+@doc("The notification event filter when the event type is TestRunStarted.")
+model TestRunStartedNotificationEventFilter extends TestsNotificationEventFilter {
   @doc("Event type for test run started event.")
-  name: NotificationEventType.TestRunStarted;
+  kind: NotificationEventType.TestRunStarted;
 
   @doc("Event filtering condition.")
   condition?: TestRunStartedEventCondition;
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@doc("The notification event when the event type is TriggerEnded.")
-model TriggerEndedNotificationEvent extends TestsNotificationEvent {
+@doc("The notification event filter when the event type is TriggerEnded.")
+model TriggerEndedNotificationEventFilter extends TestsNotificationEventFilter {
   @doc("Event type for trigger ended event.")
-  name: NotificationEventType.TriggerEnded;
+  kind: NotificationEventType.TriggerEnded;
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@doc("The notification event when the event type is TriggerDisabled.")
-model TriggerDisabledNotificationEvent extends TestsNotificationEvent {
+@doc("The notification event filter when the event type is TriggerDisabled.")
+model TriggerDisabledNotificationEventFilter extends TestsNotificationEventFilter {
   @doc("Event type for trigger disabled event.")
-  name: NotificationEventType.TriggerDisabled;
+  kind: NotificationEventType.TriggerDisabled;
 }
 
 @added(APIVersions.v2024_11_01_preview)
@@ -135,8 +135,11 @@ model TestsNotificationRule extends NotificationRule {
   @doc("The test ids to include. If not provided, the notification will be sent for all testIds.")
   testIds?: string[];
 
-  @doc("The events to send notifications for.")
-  events: Record<TestsNotificationEvent>;
+  @doc("""
+    The event to receive notifications for along with filtering conditions.
+    Key is a user-assigned identifier for the event filter.
+    """)
+  eventFilters: Record<TestsNotificationEventFilter>;
 }
 
 @added(APIVersions.v2024_11_01_preview)
