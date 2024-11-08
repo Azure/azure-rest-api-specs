@@ -3491,6 +3491,32 @@
         }
       }
     },
+    "AnswerFailed": {
+      "description": "The failed to answer call event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
     "CreateCallFailed": {
       "description": "The create call failed event.",
       "type": "object",
@@ -3859,6 +3885,15 @@
     "ContinuousDtmfRecognitionToneReceived": {
       "type": "object",
       "properties": {
+        "sequenceId": {
+          "format": "int32",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "tone": {
+          "$ref": "#/definitions/Tone"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string"
@@ -3871,22 +3906,13 @@
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code, sub-code and message."
-        },
-        "sequenceId": {
-          "format": "int32",
-          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tone": {
-          "$ref": "#/definitions/Tone"
-        },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
