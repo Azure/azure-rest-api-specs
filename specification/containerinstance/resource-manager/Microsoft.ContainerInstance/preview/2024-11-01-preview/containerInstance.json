@@ -1437,7 +1437,7 @@
         }
       },
       "get": {
-        "operationId": "ContainerGroupProfile_Get",
+        "operationId": "CGProfile_Get",
         "x-ms-examples": {
           "ContainerGroupProfilesGet_Succeeded": {
             "$ref": "./examples/ContainerGroupProfilesGet.json"
@@ -3862,23 +3862,27 @@
     },
     "ContainerGroupProfile": {
       "description": "container group profile object",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContainerGroupProfileProperties"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/ContainerGroupProfileProperties"
         }
       ]
     },
     "ContainerGroupProfileProperties": {
-      "description": "The container group profile properties",
       "type": "object",
+      "description": "The container group profile properties",
       "properties": {
-        "properties":{
-          "x-ms-client-flatten": true,
-          "type": "object",
-          "description": "The container group profile properties",
           "properties":{
             "sku": {
               "description": "The SKU for a container group.",
@@ -3996,8 +4000,7 @@
           }
         }
       }
-    }
-  },
+    },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
