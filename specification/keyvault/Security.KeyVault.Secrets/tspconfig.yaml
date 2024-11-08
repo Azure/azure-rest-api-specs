@@ -28,3 +28,13 @@ options:
   # "@azure-tools/typespec-csharp": true
   # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
   # "@azure-tools/typespec-ts": true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/security/keyvault"
+    package-dir: "azsecrets"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    override-client-name: "Client"
+    single-client: true
+    api-version: "7.5"
+    inject-spans: true

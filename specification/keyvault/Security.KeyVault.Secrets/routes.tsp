@@ -28,6 +28,7 @@ op setSecret is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
 
     /**
@@ -56,6 +57,7 @@ op deleteSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
   },
   DeletedSecretBundle
@@ -77,12 +79,14 @@ op updateSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
 
     /**
      * The version of the secret.
      */
     @path("secret-version")
+    @clientName("version", "go")
     secretVersion: string;
 
     /**
@@ -110,6 +114,7 @@ op getSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
 
     /**
@@ -117,6 +122,7 @@ op getSecret is Azure.Core.Foundations.Operation<
      * latest version of the secret is returned.
      */
     @path("secret-version")
+    @clientName("version", "go")
     secretVersion: string;
   },
   SecretBundle
@@ -161,6 +167,7 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
 
     /**
@@ -212,6 +219,7 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
   },
   DeletedSecretBundle
@@ -232,6 +240,7 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
   },
   void
@@ -252,6 +261,7 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
      * The name of the deleted secret.
      */
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
   },
   SecretBundle
@@ -272,6 +282,7 @@ op backupSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path("secret-name")
+    @clientName("name", "go")
     secretName: string;
   },
   BackupSecretResult
