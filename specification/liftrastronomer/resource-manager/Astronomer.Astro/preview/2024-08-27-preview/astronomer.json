@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Astronomer.Astro",
-    "version": "2023-08-01-preview",
+    "version": "2024-08-27-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -657,6 +657,16 @@
         "termId": {
           "type": "string",
           "description": "Plan Display Name for the marketplace offer"
+        },
+        "renewalMode": {
+          "$ref": "#/definitions/LiftrBase.RenewalMode",
+          "description": "Subscription renewal mode"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Current subscription end date and time",
+          "readOnly": true
         }
       },
       "required": [
@@ -692,7 +702,35 @@
         "termId": {
           "type": "string",
           "description": "Plan Display Name for the marketplace offer"
+        },
+        "renewalMode": {
+          "$ref": "#/definitions/LiftrBase.RenewalMode",
+          "description": "Subscription renewal mode"
         }
+      }
+    },
+    "LiftrBase.RenewalMode": {
+      "type": "string",
+      "description": "Subscription renewal mode",
+      "enum": [
+        "Auto",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "RenewalMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Automatic renewal"
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Manual renewal"
+          }
+        ]
       }
     },
     "LiftrBase.SingleSignOnProperties": {
