@@ -2,23 +2,21 @@
   "parameters": {
     "api-version": "2024-08-22-preview",
     "description": "User definied endpoint.",
-    "bundle": {
-      "metadata": {
-        "endpoints": {
-          "/content": {
-            "get": {
-              "forwarding_required": "always",
-              "authn_policies": [
-                {}
-              ]
-            }
+    "metadata": {
+      "endpoints": {
+        "/content": {
+          "get": {
+            "forwarding_required": "always",
+            "authn_policies": [
+              {}
+            ]
           }
         }
-      },
-      "modules": {
-        "name": "test.js",
-        "module": "TESTJS"
       }
+    },
+    "modules": {
+      "name": "test.js",
+      "module": "TESTJS"
     }
   },
   "responses": {
