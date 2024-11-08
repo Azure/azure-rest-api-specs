@@ -48,7 +48,7 @@ interface GalleryImages {
    * Update a gallery image definition.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<GalleryImage, GalleryImageUpdate>;
+  update is ArmCustomPatchSync<GalleryImage, GalleryImageUpdate>;
 
   /**
    * Delete a gallery image.

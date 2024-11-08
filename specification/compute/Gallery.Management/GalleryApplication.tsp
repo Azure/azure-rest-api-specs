@@ -50,7 +50,7 @@ interface GalleryApplications {
    * Update a gallery Application Definition.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<GalleryApplication, GalleryApplicationUpdate>;
+  update is ArmCustomPatchSync<GalleryApplication, GalleryApplicationUpdate>;
 
   /**
    * Delete a gallery Application.

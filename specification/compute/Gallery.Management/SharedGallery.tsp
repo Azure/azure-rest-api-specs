@@ -23,6 +23,20 @@ model SharedGallery
     SegmentName = "sharedGalleries",
     NamePattern = ""
   >;
+
+  /**
+   * The identifier information of community gallery.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  identifier?: CommunityGalleryIdentifier;
+
+  /**
+   * Resource location
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
 }
 
 @armResourceOperations
