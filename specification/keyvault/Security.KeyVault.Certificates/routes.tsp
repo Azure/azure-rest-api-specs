@@ -36,7 +36,9 @@ op getCertificates is Azure.Core.Foundations.Operation<
     @query("includePending")
     includePending?: boolean;
   },
-  CertificateListResult
+  CertificateListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -56,7 +58,9 @@ op deleteCertificate is Azure.Core.Foundations.Operation<
     @path("certificate-name")
     certificateName: string;
   },
-  DeletedCertificateBundle
+  DeletedCertificateBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -74,7 +78,9 @@ op setCertificateContacts is Azure.Core.Foundations.Operation<
      */
     @body contacts: Contacts;
   },
-  Contacts
+  Contacts,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -86,7 +92,12 @@ op setCertificateContacts is Azure.Core.Foundations.Operation<
 @summary("Lists the certificate contacts for a specified key vault.")
 @route("/certificates/contacts")
 @get
-op getCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
+op getCertificateContacts is Azure.Core.Foundations.Operation<
+  {},
+  Contacts,
+  {},
+  KeyVaultError
+>;
 
 /**
  * Deletes the certificate contacts for a specified key vault certificate. This
@@ -96,7 +107,12 @@ op getCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
 @summary("Deletes the certificate contacts for a specified key vault.")
 @route("/certificates/contacts")
 @delete
-op deleteCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
+op deleteCertificateContacts is Azure.Core.Foundations.Operation<
+  {},
+  Contacts,
+  {},
+  KeyVaultError
+>;
 
 /**
  * The GetCertificateIssuers operation returns the set of certificate issuer
@@ -118,7 +134,9 @@ op getCertificateIssuers is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  CertificateIssuerListResult
+  CertificateIssuerListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -147,7 +165,9 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameter: CertificateIssuerSetParameters;
   },
-  IssuerBundle
+  IssuerBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -175,7 +195,9 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameter: CertificateIssuerUpdateParameters;
   },
-  IssuerBundle
+  IssuerBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -195,7 +217,9 @@ op getCertificateIssuer is Azure.Core.Foundations.Operation<
     @path("issuer-name")
     issuerName: string;
   },
-  IssuerBundle
+  IssuerBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -215,7 +239,9 @@ op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
     @path("issuer-name")
     issuerName: string;
   },
-  IssuerBundle
+  IssuerBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -245,7 +271,9 @@ op createCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateCreateParameters;
   },
-  AcceptedResponse & CertificateOperation
+  AcceptedResponse & CertificateOperation,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -278,7 +306,9 @@ op importCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateImportParameters;
   },
-  CertificateBundle
+  CertificateBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -307,7 +337,9 @@ op getCertificateVersions is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  CertificateListResult
+  CertificateListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -327,7 +359,9 @@ op getCertificatePolicy is Azure.Core.Foundations.Operation<
     @path("certificate-name")
     certificateName: string;
   },
-  CertificatePolicy
+  CertificatePolicy,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -351,7 +385,9 @@ op updateCertificatePolicy is Azure.Core.Foundations.Operation<
      */
     @body certificatePolicy: CertificatePolicy;
   },
-  CertificatePolicy
+  CertificatePolicy,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -385,7 +421,9 @@ op updateCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateUpdateParameters;
   },
-  CertificateBundle
+  CertificateBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -411,7 +449,9 @@ op getCertificate is Azure.Core.Foundations.Operation<
     @path("certificate-version")
     certificateVersion: string;
   },
-  CertificateBundle
+  CertificateBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -438,7 +478,9 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
     @flattenProperty
     certificateOperation: CertificateOperationUpdateParameter;
   },
-  CertificateOperation
+  CertificateOperation,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -457,7 +499,9 @@ op getCertificateOperation is Azure.Core.Foundations.Operation<
     @path("certificate-name")
     certificateName: string;
   },
-  CertificateOperation
+  CertificateOperation,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -477,7 +521,9 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
     @path("certificate-name")
     certificateName: string;
   },
-  CertificateOperation
+  CertificateOperation,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -505,7 +551,9 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateMergeParameters;
   },
-  CreatedResponse & CertificateBundle
+  CreatedResponse & CertificateBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -525,7 +573,9 @@ op backupCertificate is Azure.Core.Foundations.Operation<
     @path("certificate-name")
     certificateName: string;
   },
-  BackupCertificateResult
+  BackupCertificateResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -546,7 +596,9 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateRestoreParameters;
   },
-  CertificateBundle
+  CertificateBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -577,7 +629,9 @@ op getDeletedCertificates is Azure.Core.Foundations.Operation<
     @query("includePending")
     includePending?: boolean;
   },
-  DeletedCertificateListResult
+  DeletedCertificateListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -598,7 +652,9 @@ op getDeletedCertificate is Azure.Core.Foundations.Operation<
     @path("certificate-name")
     certificateName: string;
   },
-  DeletedCertificateBundle
+  DeletedCertificateBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -619,7 +675,9 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
     @path("certificate-name")
     certificateName: string;
   },
-  void
+  void,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -641,5 +699,7 @@ op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
     @path("certificate-name")
     certificateName: string;
   },
-  CertificateBundle
+  CertificateBundle,
+  {},
+  KeyVaultError
 >;
