@@ -17,9 +17,9 @@ param (
     [ArgumentCompleter({ 'data-plane', 'resource-manager' })]
     [string] $ServiceType,
 
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [ValidateScript({
-            if (-not (Test-Path "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/$_")) {
+            if (-not $_ -and -not (Test-Path "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/$_")) {
                 $validProviders = (Get-ChildItem "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/" -Directory).Name -join ', '
                 throw "Service Provider not found. Valid options are: $validProviders"
             }
@@ -49,7 +49,15 @@ param (
     [string] $NewVersion,
     
     [Parameter(Mandatory = $true)]
-    [ValidateScript({ Get-Version $_ })]
+    [ValidateScript({ 
+        function script:Get-Version([string] $version) {
+            if ($version -match '^(?<status>stable|preview)/(?<version>(\d{4}-\d{2}-\d{2}|\d+\.\d+)(-preview(\.\d+)?)?)$') {
+                return $Matches['status'], $Matches['version']
+            }
+    
+            throw 'Version must start with "stable/" or "preview/" and end with either a date-based version (recommended) like 2024-01-05 or a major.minor semver, followed by an optional "-preview" for previews APIs.'
+        }
+        Get-Version $_ })]
     [ArgumentCompleter({
             param($commandName,
                 $parameterName,
@@ -73,38 +81,60 @@ $newApiVersionStatus, $newApiVersion = Get-Version $NewVersion
 $repoDirectory = Resolve-Path "$PSScriptRoot/../.."
 $readmeDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType" -Resolve
 
-$oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$oldApiVersionStatus/$oldApiVersion" -Resolve
-$newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$newApiVersionStatus/$newApiVersion"
+$providers = $Provider 
+if (-not $Provider) {
+    $providers = (Get-ChildItem "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/" -Directory).Name
+    Write-Host "Providers: $providers" 
+}
+
+foreach ($p in $providers) {
+$oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$p/$oldApiVersionStatus/$oldApiVersion/*" -Resolve
+$newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$p/$newApiVersionStatus/$newApiVersion"
 
 Write-Host "----------------------------------------" 
 Write-Host "Service Directory: $ServiceDirectory"
 Write-Host "Service Type: $ServiceType"
-Write-Host "Provider: $Provider"
+Write-Host "Provider: $p"
 Write-Host "Base Version: $BaseVersion"
 Write-Host "New Version: $NewVersion"
 Write-Host "----------------------------------------"
+
+Write-Host "$newDirectory $(Test-Path $newDirectory)"
+
+if (-not (Test-Path $newDirectory)) {
+    Write-Verbose "Destination not found: $newDirectory"
+    Write-Verbose "Creating directory: $newDirectory"
+    New-Item -Path $newDirectory -ItemType Directory
+}
 
 Write-Verbose "Copying $oldDirectory to $newDirectory"
 
 # Copy the specs and create and initial commit to make it easier to diff changes to the previous version in a PR.
 Copy-Item $oldDirectory $newDirectory -Recurse -Force
 
-New-GitAddAndCommit $newDirectory @"
+}
+
+$namespaceDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType"
+New-GitAddAndCommit $namespaceDirectory @"
 Copy files from $BaseVersion
 
 Copied the files in a separate commit.
 This allows reviewers to easily diff subsequent changes against the previous spec.
 "@
 
-# Replace the $oldApiVersion with the $newApiVersion within all files in $newDirectory.
-foreach ($file in Get-ChildItem $newDirectory -File -Recurse) {
-    Write-Verbose "Replacing any API versions in $file"
-    $content = $file | Get-Content -Raw
-    $content -replace $oldApiVersion, $newApiVersion | Set-Content $file.FullName
+foreach ($p in $providers) {
+    $newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$p/$newApiVersionStatus/$newApiVersion"
+    # Replace the $oldApiVersion with the $newApiVersion within all files in $newDirectory.
+    foreach ($file in Get-ChildItem $newDirectory -File -Recurse) {
+        Write-Verbose "Replacing any API versions in $file"
+        $content = $file | Get-Content -Raw
+        $content -replace $oldApiVersion, $newApiVersion | Set-Content $file.FullName
+    }
 }
 
+
 # Commit just the version changes.
-New-GitAddAndCommit $newDirectory @"
+New-GitAddAndCommit $namespaceDirectory @"
 Update version to $NewVersion
 
 Updated the API version from $BaseVersion to $NewVersion.
@@ -113,8 +143,8 @@ Updated the API version from $BaseVersion to $NewVersion.
 # Add new version tag in the readme file
 $readmeFile = Get-ChildItem $readmeDirectory -Filter 'readme.md'
 if ($readmeFile) {
-    $jsonFiles = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -ExpandProperty Name
-    $newReadmeTagBlock = Get-NewTagSection $newApiVersion $Provider $newApiVersionStatus $jsonFiles
+    
+    $newReadmeTagBlock = Get-NewTagSection $repoDirectory $newApiVersion $providers $newApiVersionStatus
     
     $readmeContent = $readmeFile | Get-Content -Raw
     $readmeContent = Get-ReadmeWithNewTag $readmeContent $newReadmeTagBlock

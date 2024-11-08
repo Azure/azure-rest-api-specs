@@ -1,8 +1,8 @@
-function Get-NewTagSection($apiVersion, $resourceProvider, $apiVersionStatus, $specFiles) {
+function Get-NewTagSection($repoDirectory, $apiVersion, $resourceProviders, $apiVersionStatus) {
 
     $tagVersion = $apiVersion -match '(?<date>\d{4}-\d{2})-\d{2}' 
     $tagVersion = $Matches['date']
-    $baseDir = "$resourceProvider/$apiVersionStatus/$apiVersion"
+    
     
     if ($apiVersionStatus -eq "preview") { 
         $tagVersion = "preview-" + $tagVersion  
@@ -17,8 +17,16 @@ These settings apply only when ``--tag=package-$tagVersion`` is specified on the
 input-file:
 "@
 
-    foreach ($specFile in $specFiles) {
-        $content += "`n  - $baseDir/$specFile"
+    
+    foreach ($resourceProvider in $resourceProviders)
+    {
+        $newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$resourceProvider/$newApiVersionStatus/$newApiVersion"
+        $specFiles = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -ExpandProperty Name
+        $baseDir = "$resourceProvider/$apiVersionStatus/$apiVersion"
+        Write-Verbose "Adding spec files under $baseDir"
+        foreach ($specFile in $specFiles) {
+            $content += "`n  - $baseDir/$specFile"
+        }
     }
 
     $content += "`n" + '```' + "`n"
