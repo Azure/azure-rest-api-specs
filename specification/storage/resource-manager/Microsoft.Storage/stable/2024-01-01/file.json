@@ -176,6 +176,9 @@
           },
           "ListShareSnapshots": {
             "$ref": "./examples/FileShareSnapshotsList.json"
+          },
+          "ListSharesPaidBursting": {
+            "$ref": "./examples/FileSharesList_PaidBursting.json"
           }
         },
         "description": "Lists all shares.",
@@ -246,6 +249,9 @@
           },
           "PutShares with Access Tier": {
             "$ref": "./examples/FileSharesPut_AccessTier.json"
+          },
+          "PutShares with Paid Bursting": {
+            "$ref": "./examples/FileSharesPut_PaidBursting.json"
           }
         },
         "description": "Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. ",
@@ -314,6 +320,9 @@
           },
           "UpdateShareAcls": {
             "$ref": "./examples/FileShareAclsPatch.json"
+          },
+          "UpdateSharePaidBursting": {
+            "$ref": "./examples/FileSharesPatch_PaidBursting.json"
           }
         },
         "description": "Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. ",
@@ -370,6 +379,9 @@
           },
           "GetShareStats": {
             "$ref": "./examples/FileSharesGet_Stats.json"
+          },
+          "GetSharePaidBursting": {
+            "$ref": "./examples/FileSharesGet_PaidBursting.json"
           }
         },
         "description": "Gets properties of a specified share.",
@@ -909,6 +921,26 @@
           "format": "date-time",
           "readOnly": true,
           "description": "Creation time of share snapshot returned in the response of list shares with expand param \"snapshots\"."
+        },
+        "fileSharePaidBursting": {
+          "type": "object",
+          "properties": {
+            "paidBurstingEnabled": {
+              "type": "boolean",
+              "description": "Indicates whether paid bursting is enabled for the share. This property is only for file shares created under Files Provisioned v1 SSD account type."
+            },
+            "paidBurstingMaxIops": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum paid bursting IOPS for the share. This property is only for file shares created under Files Provisioned v1 SSD account type. The maximum allowed value is 102400 which is the maximum allowed IOPS for a share."
+            },
+            "paidBurstingMaxBandwidthMibps": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum paid bursting bandwidth for the share, in mebibytes per second. This property is only for file shares created under Files Provisioned v1 SSD account type. The maximum allowed value is 10340 which is the maximum allowed bandwidth for a share."
+            }
+          },
+          "description": "File Share Paid Bursting properties."
         }
       },
       "description": "The properties of the file share."
