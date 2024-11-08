@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-/** Microsoft.ChangeSafety Resource Provider management API. */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/ChangeControl.Management/main.tsp."
 @armProviderNamespace
 @service({
   title: "Microsoft.ChangeSafety management service",
@@ -29,5 +29,3 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_04_01_preview: "2024-10-01-preview",
 }
-
-interface Operations extends Azure.ResourceManager.Operations {}
