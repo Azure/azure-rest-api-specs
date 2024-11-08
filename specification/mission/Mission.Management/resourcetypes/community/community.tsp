@@ -111,41 +111,52 @@ model GovernedServiceItem {
   initiatives?: string[];
 }
 
+@doc("Approval policy.")
+union ApprovalPolicy {
+  string,
+
+  @doc("Approval will be required for the specified action.")
+  Required: "Required",
+
+  @doc("Approval will not be required for the specified action.")
+  NotRequired: "NotRequired",
+}
+
 @added(Microsoft.Mission.Versions.v2024_11_01_preview)
 @doc("ApprovalSettings Properties")
 model ApprovalSettings {
-  @doc("Approval required for endpoint creation (True or False)")
-  endpointCreation?: boolean;
+  @doc("Approval required for endpoint creation (Required or NotRequired).")
+  endpointCreation?: ApprovalPolicy;
 
-  @doc("Approval required for endpoint update (True or False).")
-  endpointUpdate?: boolean;
+  @doc("Approval required for endpoint update (Required or NotRequired).")
+  endpointUpdate?: ApprovalPolicy;
 
-  @doc("Approval required for endpoint deletion (True or False).")
-  endpointDeletion?: boolean;
+  @doc("Approval required for endpoint deletion (Required or NotRequired).")
+  endpointDeletion?: ApprovalPolicy;
 
-  @doc("Approval required for enclave connection creation (True or False).")
-  connectionCreation?: boolean;
+  @doc("Approval required for enclave connection creation (Required or NotRequired).")
+  connectionCreation?: ApprovalPolicy;
 
-  @doc("Approval required for enclave connection update (True or False).")
-  connectionUpdate?: boolean;
+  @doc("Approval required for enclave connection update (Required or NotRequired).")
+  connectionUpdate?: ApprovalPolicy;
 
   @doc("Behavior of enclave connection update workflow after endpoint update is approved (Automatic or Manual).")
   connectionUpdateMode?: "Automatic" | "Manual" | string;
 
-  @doc("Approval required for enclave connection deletion (True or False).")
-  connectionDeletion?: boolean;
+  @doc("Approval required for enclave connection deletion (Required or NotRequired).")
+  connectionDeletion?: ApprovalPolicy;
 
-  @doc("Approval required for virtual enclave creation (True or False).")
-  enclaveCreation?: boolean;
+  @doc("Approval required for virtual enclave creation (Required or NotRequired).")
+  enclaveCreation?: ApprovalPolicy;
 
-  @doc("Approval required for virtual enclave deletion (True or False).")
-  enclaveDeletion?: boolean;
+  @doc("Approval required for virtual enclave deletion (Required or NotRequired).")
+  enclaveDeletion?: ApprovalPolicy;
 
-  @doc("Approval required for toggling maintenance mode (True or False).")
-  maintenanceMode?: boolean;
+  @doc("Approval required for toggling maintenance mode (Required or NotRequired).")
+  maintenanceMode?: ApprovalPolicy;
 
-  @doc("Approval required for deploying service catalog templates (True or False).")
-  serviceCatalogDeployment?: boolean;
+  @doc("Approval required for deploying service catalog templates (Required or NotRequired).")
+  serviceCatalogDeployment?: ApprovalPolicy;
 }
 
 @doc("Community Resource Properties")
