@@ -111,7 +111,8 @@ model GovernedServiceItem {
   initiatives?: string[];
 }
 
-@doc("Approval policy.")
+@added(Microsoft.Mission.Versions.v2024_11_01_preview)
+@doc("Approval Policy.")
 union ApprovalPolicy {
   string,
 
