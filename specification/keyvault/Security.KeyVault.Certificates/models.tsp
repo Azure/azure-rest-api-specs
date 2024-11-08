@@ -175,7 +175,23 @@ union ActionType {
 /**
  * The certificate list result.
  */
-model CertificateListResult is Azure.Core.Page<CertificateItem>;
+@pagedResult
+model CertificateListResult {
+  /**
+   * A response message containing a list of certificates in the key vault along with a link to the next page of
+   * certificates.
+   */
+  @items
+  @visibility("read")
+  value?: CertificateItem[];
+
+  /**
+   * The URL to get the next set of certificates.
+   */
+  @nextLink
+  @visibility("read")
+  nextLink?: string;
+}
 
 /**
  * The certificate item containing certificate metadata.

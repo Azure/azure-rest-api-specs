@@ -1805,20 +1805,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CertificateItem items on this page",
+          "description": "A response message containing a list of certificates in the key vault along with a link to the next page of\ncertificates.",
           "items": {
             "$ref": "#/definitions/CertificateItem"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of certificates.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "CertificateMergeParameters": {
       "type": "object",
