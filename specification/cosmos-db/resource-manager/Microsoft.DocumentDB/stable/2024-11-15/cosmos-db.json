@@ -8223,7 +8223,7 @@
         },
         "vectorEmbeddingPolicy": {
           "$ref": "#/definitions/VectorEmbeddingPolicy",
-          "description": "The Vector Embedding Policy for the container."
+          "description": "The vector embedding policy for the container."
         }
       },
       "required": [
@@ -8374,34 +8374,37 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+          "description": "The path to the vector field in the document."
         },
         "type": {
-          "description": "Vector Indexing Type to be applied on the path",
+          "description": "The index type of the vector. Currently, flat, diskANN, and quantizedFlat are supported.",
           "type": "string",
-          "default": "flat",
           "enum": [
             "flat",
-            "quantizedFlat",
-            "diskANN"
+            "diskANN",
+            "quantizedFlat"
           ],
           "x-ms-enum": {
             "name": "VectorIndexType",
             "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+        "path",
+        "type"
+      ]
     },
     "VectorEmbedding": {
       "type": "object",
-      "description": "The paths that are included in indexing",
+      "description": "Represents a vector embedding. A vector embedding is used to define a vector field in the documents.",
       "properties": {
         "path": {
           "type": "string",
-          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+          "description": "The path to the vector field in the document."
         },
         "dataType": {
-          "description": "Indicates the type of Embedding",
+          "description": "Indicates the data type of vector.",
           "type": "string",
           "enum": [
             "float32",
@@ -8414,7 +8417,7 @@
           }
         },
         "distanceFunction": {
-          "description": "Indicates the type of distance function of the Embedding",
+          "description": "The distance function to use for distance calculation in between vectors.",
           "type": "string",
           "enum": [
             "euclidean",
@@ -8428,10 +8431,16 @@
         },
         "dimensions": {
           "type": "integer",
-          "format": "int64",
-          "description": "Value of dimension of the distance function"
+          "format": "int32",
+          "description": "The number of dimensions in the vector."
         }
-      }
+      },
+      "required": [
+        "path",
+        "dataType",
+        "distanceFunction",
+        "dimensions"
+      ]
     },
     "CompositePathList": {
       "description": "List of composite path",
