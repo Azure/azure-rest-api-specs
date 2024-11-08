@@ -6227,6 +6227,7 @@ model ListSkillsetsResult {
     value: SearchIndexerSkillset[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
 @doc("The type of the skill names.")
 @added(Versions.v2024_11_01_preview)
 model SkillNames {
@@ -7149,6 +7150,11 @@ model AnalyzedTokenInfo {
  */
 @added(Versions.v2024_11_01_preview)
 model SearchAlias {
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+    @doc("Succesfully created or updated")
+    @statusCode
+    _: 200 | 201;
+
     /**
      * The name of the alias.
      */
