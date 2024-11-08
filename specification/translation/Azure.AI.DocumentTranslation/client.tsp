@@ -87,15 +87,6 @@ interface SingleDocumentTranslationClient {
 @@access(DocumentTranslation.FileFormatType, Access.public, "java");
 @@usage(DocumentTranslation.FileFormatType, Usage.output, "java");
 
-@@access(DocumentTranslation.TranslationError, Access.internal, "java");
-@@usage(DocumentTranslation.TranslationError, Usage.output, "java");
-
-@@access(DocumentTranslation.TranslationErrorCode, Access.internal, "java");
-@@usage(DocumentTranslation.TranslationErrorCode, Usage.output, "java");
-
-@@access(DocumentTranslation.InnerTranslationError, Access.internal, "java");
-@@usage(DocumentTranslation.InnerTranslationError, Usage.output, "java");
-
 @@access(DocumentTranslation.FileFormat, Access.public, "python");
 @@usage(DocumentTranslation.FileFormat, Usage.output, "python");
 @@access(DocumentTranslation.FileFormatType, Access.public, "python");
