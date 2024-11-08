@@ -7,8 +7,8 @@ param (
 )
 Set-StrictMode -Version 3
 
+. $PSScriptRoot/../common/scripts/logging.ps1
 . $PSScriptRoot/ChangedFiles-Functions.ps1
-. $PSScriptRoot/Logging-Functions.ps1
 
 function Get-Suppression {
   param (
