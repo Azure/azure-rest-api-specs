@@ -417,6 +417,7 @@ interface VirtualMachineScaleSets {
    * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("extensionRollingUpgrade")
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade")
   startExtensionUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
