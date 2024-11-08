@@ -9029,6 +9029,10 @@
         "openAuthenticationPolicies": {
           "$ref": "#/definitions/OpenAuthenticationAccessPolicies",
           "description": "The authentication policies for workflow."
+        },
+        "sasAuthenticationPolicy": {
+          "$ref": "#/definitions/SasAuthenticationPolicy",
+          "description": "The SAS authentication policy for workflow."
         }
       }
     },
@@ -9099,6 +9103,29 @@
           "type": "string",
           "description": "The value of the claim."
         }
+      }
+    },
+    "SasAuthenticationPolicy": {
+      "type": "object",
+      "description": "The SAS Authentication Policy of the logic app.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "$ref": "#/definitions/SasAuthenticationPolicyState",
+          "description": "SAS authentication policy state."
+        }
+      }
+    },
+    "SasAuthenticationPolicyState": {
+      "type": "string",
+      "description": "The SAS authentication policy state.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SasAuthenticationPolicyState",
+        "modelAsString": true
       }
     },
     "FlowEndpointsConfiguration": {
