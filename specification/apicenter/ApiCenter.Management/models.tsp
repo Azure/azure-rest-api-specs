@@ -671,5 +671,5 @@ union ApiSourceLinkState {
   /**
    * The API source is being deleted.
    */
-  Deleting: "deleting"
+  Deleting: "deleting",
 }
