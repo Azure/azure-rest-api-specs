@@ -10,15 +10,6 @@ using Azure.Core;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
 
-// model DeidentificationJobNameParameter {
-//   @doc("The name of a job.")
-//   @bodyRoot
-//   @maxLength(36)
-//   @minLength(3) // Must be 3 to match regex
-//   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
-//   name: string;
-// }
-
 @doc("A job containing a batch of documents to de-identify.")
 @resource("jobs")
 model DeidentificationJob {
@@ -132,7 +123,7 @@ model JobSummary {
 @doc("Details of a single document in a job.")
 @parentResource(DeidentificationJob) 
 @resource("documents")
-@access(Access.public, "csharp")
+@access(Access.public, "csharp,python")
 model DocumentDetails {
   @key
   @doc("Id of the document details.")

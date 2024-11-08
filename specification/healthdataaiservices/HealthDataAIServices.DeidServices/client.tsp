@@ -8,6 +8,6 @@ using Azure.ClientGenerator.Core;
 
 // @TypeSpec.Versioning.versioned(HealthDataAIServices.DeidServices.Versions)
 namespace HealthDataAIServices.DeidServices {
-  @@clientName(listJobDocuments, "listJobDocumentsInternal", "csharp");
-  @@clientName(listJobs, "listJobsInternal", "csharp");
+  @@clientName(listJobDocuments, "listJobDocumentsInternal", "csharp,python");
+  @@clientName(listJobs, "listJobsInternal", "csharp,python");
 }
