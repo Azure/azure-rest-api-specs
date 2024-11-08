@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-validation"
-  output-folder: "$(typescript-sdks-folder)/sdk/validation/arm-validation"
+  package-name: "@azure/arm-changeSafety"
+  output-folder: "$(typescript-sdks-folder)/sdk/changeSafety/arm-changeSafety"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

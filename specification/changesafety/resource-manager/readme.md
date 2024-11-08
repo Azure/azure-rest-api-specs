@@ -1,8 +1,9 @@
-# validation
+
+# ChangeSafety
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Validation.
+This is the AutoRest configuration file for ChangeSafety.
 
 ## Getting Started
 
@@ -22,12 +23,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the Validation.
+These are the global settings for the ChangeSafety.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
 tag: package-2024-10-01-preview
+openapi-subtype: providerHub
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -36,7 +37,28 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - Microsoft.ChangeSafety/validation/preview/2024-10-01-preview/validation.json
+  - Microsoft.ChangeSafety/ChangeControl/preview/2024-10-01-preview/ChangeControl.json
+```
+
+---
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
+    from: ChangeControl.json
+    where:
+      - $.definitions.ChangeStateProperties.properties.stageParameters
+      - $.definitions.Parameter.properties.metadata
+      - $.definitions.ParameterUpdate.properties.metadata
+      - $.definitions.Stage.properties.parameterValues
+      - $.definitions.StageProgressionProperties.properties.parameterValues
+      - $.definitions.StageProgressionPropertiesUpdate.properties.parameterValues
+      - $.definitions.RetrieveNextStagesResponseItem.properties.parameterValues
+      - $.definitions.StageMapProperties.properties.parameters
+      - $.definitions.StageMapPropertiesUpdate.properties.parameters
 ```
 
 ---
@@ -58,7 +80,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
-
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
