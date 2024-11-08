@@ -94,7 +94,12 @@ model ThreadMessage {
 model MessageAttachment {
   /** The ID of the file to attach to the message. */
   @encodedName("application/json", "file_id")
-  fileId: string;
+  fileId?: string;
+
+  /** The data sources to be used. This option is mutually exclusive with fileId. */
+  @doc("Azure asset ID.")
+  @encodedName("application/json", "data_sources")
+  dataSources?: VectorStoreDataSource[];
 
   /** The tools to add to this file. */
   tools: MessageAttachmentToolDefinition[];
