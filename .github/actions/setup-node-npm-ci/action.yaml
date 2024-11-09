@@ -14,8 +14,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - name: npm ci
-      run: |
+    - run: |
         echo "::group::npm ci"
         npm ci
         echo "::endgroup::"
