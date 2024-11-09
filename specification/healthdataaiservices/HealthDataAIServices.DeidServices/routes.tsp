@@ -39,7 +39,6 @@ op getJob is DeidentifyOperations.ResourceRead<DeidentificationJob>;
 
 @summary("List de-identification jobs.")
 @access(Access.internal, "csharp")
-@access(Access.internal, "python")
 op listJobs is DeidentifyOperations.ResourceList<
   DeidentificationJob,
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
@@ -49,7 +48,6 @@ op listJobs is DeidentifyOperations.ResourceList<
 @summary("List processed documents within a job.")
 @route("/jobs/{jobName}/documents")
 @access(Access.internal, "csharp")
-@access(Access.internal, "python")
 op listJobDocuments is Azure.Core.Foundations.Operation<
   {
     @doc("The name of a job.")
