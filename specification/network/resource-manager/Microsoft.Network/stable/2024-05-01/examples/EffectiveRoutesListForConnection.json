@@ -12,7 +12,6 @@
   "responses": {
     "200": {
       "body": {
-        "status": "Succeeded",
         "properties": {
           "output": {
             "value": [
@@ -44,7 +43,10 @@
       }
     },
     "202": {
-      "description": "Accepted and the operation will complete asynchronously."
+      "description": "Accepted and the operation will complete asynchronously.",
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
     }
   }
 }
