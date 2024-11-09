@@ -162,9 +162,8 @@ union KeyUsageType {
 /**
  * The type of the action.
  */
-union ActionType {
-  string,
-
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Intentional enum; orignially modelAsString=false"
+enum CertificatePolicyAction {
   /** A certificate policy that will email certificate contacts. */
   EmailContacts: "EmailContacts",
 
@@ -215,9 +214,10 @@ model CertificateItem {
   /**
    * Thumbprint of the certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "x5t")
   @encode("base64url")
-  x509Thumbprint?: bytes;
+  X509Thumbprint?: bytes;
 }
 
 /**
@@ -372,10 +372,11 @@ model CertificateBundle {
   /**
    * Thumbprint of the certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @visibility("read")
   @encodedName("application/json", "x5t")
   @encode("base64url")
-  x509Thumbprint?: bytes;
+  X509Thumbprint?: bytes;
 
   /**
    * The management policy.
@@ -430,8 +431,9 @@ model CertificatePolicy {
   /**
    * Properties of the X509 component of a certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "x509_props")
-  x509CertificateProperties?: X509CertificateProperties;
+  X509CertificateProperties?: X509CertificateProperties;
 
   /**
    * Actions that will be performed by Key Vault over the lifetime of a certificate.
@@ -442,8 +444,9 @@ model CertificatePolicy {
   /**
    * Parameters for the issuer of the X509 component of a certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "issuer")
-  issuerParameters?: IssuerParameters;
+  IssuerParameters?: IssuerParameters;
 
   /**
    * The certificate attributes.
@@ -597,7 +600,7 @@ model Action {
    * The type of the action.
    */
   @encodedName("application/json", "action_type")
-  actionType?: ActionType;
+  actionType?: CertificatePolicyAction;
 }
 
 /**
@@ -614,15 +617,17 @@ model IssuerParameters {
    * Certificate type as supported by the provider (optional); for example 'OV-SSL',
    * 'EV-SSL'
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "cty")
-  certificateType?: string;
+  CertificateType?: string;
 
   /**
    * Indicates if the certificates generated under this policy should be published
    * to certificate transparency logs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "cert_transparency")
-  certificateTransparency?: boolean;
+  CertificateTransparency?: boolean;
 }
 
 /**
@@ -638,8 +643,9 @@ model Contacts {
   /**
    * The contact list for the vault certificates.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "contacts")
-  contactList?: Contact[];
+  ContactList?: Contact[];
 }
 
 /**
@@ -649,8 +655,9 @@ model Contact {
   /**
    * Email address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "email")
-  emailAddress?: string;
+  EmailAddress?: string;
 
   /**
    * Name.
@@ -666,7 +673,23 @@ model Contact {
 /**
  * The certificate issuer list result.
  */
-model CertificateIssuerListResult is Azure.Core.Page<CertificateIssuerItem>;
+@pagedResult
+model CertificateIssuerListResult {
+  /**
+   * A response message containing a list of certificate issuers in the key vault along with a link to the next page of
+   * certificate issuers.
+   */
+  @items
+  @visibility("read")
+  value?: CertificateIssuerItem[];
+
+  /**
+   * The URL to get the next set of certificate issuers.
+   */
+  @nextLink
+  @visibility("read")
+  nextLink?: string;
+}
 
 /**
  * The certificate issuer item containing certificate issuer metadata.
@@ -716,14 +739,15 @@ model IssuerCredentials {
   /**
    * The user name/account name/account id.
    */
-  @encodedName("application/json", "account_id")
-  accountId?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  account_id?: string;
 
   /**
    * The password/secret/account key.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "pwd")
-  password?: string;
+  Password?: string;
 }
 
 /**
@@ -738,8 +762,8 @@ model OrganizationDetails {
   /**
    * Details of the organization administrator.
    */
-  @encodedName("application/json", "admin_details")
-  adminDetails?: AdministratorDetails[];
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  admin_details?: AdministratorDetails[];
 }
 
 /**
@@ -749,20 +773,21 @@ model AdministratorDetails {
   /**
    * First name.
    */
-  @encodedName("application/json", "first_name")
-  firstName?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  first_name?: string;
 
   /**
    * Last name.
    */
-  @encodedName("application/json", "last_name")
-  lastName?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  last_name?: string;
 
   /**
    * Email address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "email")
-  emailAddress?: string;
+  EmailAddress?: string;
 
   /**
    * Phone number.
@@ -899,8 +924,8 @@ model CertificateOperation {
   /**
    * Indicates if cancellation was requested on the certificate operation.
    */
-  @encodedName("application/json", "cancellation_requested")
-  cancellationRequested?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  cancellation_requested?: boolean;
 
   /**
    * Status of the certificate operation.
@@ -910,8 +935,8 @@ model CertificateOperation {
   /**
    * The status details of the certificate operation.
    */
-  @encodedName("application/json", "status_details")
-  statusDetails?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  status_details?: string;
 
   /**
    * Error encountered, if any, during the certificate operation.
@@ -926,8 +951,8 @@ model CertificateOperation {
   /**
    * Identifier for the certificate operation.
    */
-  @encodedName("application/json", "request_id")
-  requestId?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  request_id?: string;
 }
 
 /**
@@ -995,8 +1020,8 @@ model CertificateOperationUpdateParameter {
   /**
    * Indicates if cancellation was requested on the certificate operation.
    */
-  @encodedName("application/json", "cancellation_requested")
-  cancellationRequested: boolean;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  cancellation_requested: boolean;
 }
 
 /**
@@ -1041,13 +1066,29 @@ model CertificateRestoreParameters {
    * The backup blob associated with a certificate bundle.
    */
   @encodedName("application/json", "value")
+  @encode("base64url")
   certificateBundleBackup: bytes;
 }
 
 /**
  * A list of certificates that have been deleted in this vault.
  */
-model DeletedCertificateListResult is Azure.Core.Page<DeletedCertificateItem>;
+model DeletedCertificateListResult {
+  /**
+   * A response message containing a list of deleted certificates in the vault along with a link to the next page of
+   * deleted certificates.
+   */
+  @items
+  @visibility("read")
+  value?: DeletedCertificateItem[];
+
+  /**
+   * The URL to get the next set of deleted certificates.
+   */
+  @nextLink
+  @visibility("read")
+  nextLink?: string;
+}
 
 /**
  * The deleted certificate item containing metadata about the deleted certificate.
@@ -1056,10 +1097,9 @@ model DeletedCertificateItem {
   ...CertificateItem;
 
   /**
-   * The url of the recovery object, used to identify and recover the deleted
-   * certificate.
+   * The url of the recovery object, used to identify and recover the deleted certificate.
    */
-  recoveryId: string;
+  recoveryId?: string;
 
   /**
    * The time when the certificate is scheduled to be purged, in UTC

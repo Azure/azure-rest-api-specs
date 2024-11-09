@@ -1082,9 +1082,6 @@
           "GetDeletedCertificates": {
             "$ref": "./examples/GetDeletedCertificates-example.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1207,34 +1204,10 @@
       "description": "The action that will be executed.",
       "properties": {
         "action_type": {
-          "$ref": "#/definitions/ActionType",
+          "$ref": "#/definitions/CertificatePolicyAction",
           "description": "The type of the action.",
           "x-ms-client-name": "actionType"
         }
-      }
-    },
-    "ActionType": {
-      "type": "string",
-      "description": "The type of the action.",
-      "enum": [
-        "EmailContacts",
-        "AutoRenew"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EmailContacts",
-            "value": "EmailContacts",
-            "description": "A certificate policy that will email certificate contacts."
-          },
-          {
-            "name": "AutoRenew",
-            "value": "AutoRenew",
-            "description": "A certificate policy that will auto-renew a certificate."
-          }
-        ]
       }
     },
     "AdministratorDetails": {
@@ -1243,18 +1216,16 @@
       "properties": {
         "first_name": {
           "type": "string",
-          "description": "First name.",
-          "x-ms-client-name": "firstName"
+          "description": "First name."
         },
         "last_name": {
           "type": "string",
-          "description": "Last name.",
-          "x-ms-client-name": "lastName"
+          "description": "Last name."
         },
         "email": {
           "type": "string",
           "description": "Email address.",
-          "x-ms-client-name": "emailAddress"
+          "x-ms-client-name": "EmailAddress"
         },
         "phone": {
           "type": "string",
@@ -1377,7 +1348,7 @@
           "format": "base64url",
           "description": "Thumbprint of the certificate.",
           "readOnly": true,
-          "x-ms-client-name": "x509Thumbprint"
+          "x-ms-client-name": "X509Thumbprint"
         },
         "policy": {
           "$ref": "#/definitions/CertificatePolicy",
@@ -1485,20 +1456,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CertificateIssuerItem items on this page",
+          "description": "A response message containing a list of certificate issuers in the key vault along with a link to the next page of\ncertificate issuers.",
           "items": {
             "$ref": "#/definitions/CertificateIssuerItem"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of certificate issuers.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "CertificateIssuerSetParameters": {
       "type": "object",
@@ -1572,7 +1541,7 @@
           "type": "string",
           "format": "base64url",
           "description": "Thumbprint of the certificate.",
-          "x-ms-client-name": "x509Thumbprint"
+          "x-ms-client-name": "X509Thumbprint"
         }
       }
     },
@@ -1646,8 +1615,7 @@
         },
         "cancellation_requested": {
           "type": "boolean",
-          "description": "Indicates if cancellation was requested on the certificate operation.",
-          "x-ms-client-name": "cancellationRequested"
+          "description": "Indicates if cancellation was requested on the certificate operation."
         },
         "status": {
           "type": "string",
@@ -1655,8 +1623,7 @@
         },
         "status_details": {
           "type": "string",
-          "description": "The status details of the certificate operation.",
-          "x-ms-client-name": "statusDetails"
+          "description": "The status details of the certificate operation."
         },
         "error": {
           "$ref": "#/definitions/Error",
@@ -1668,8 +1635,7 @@
         },
         "request_id": {
           "type": "string",
-          "description": "Identifier for the certificate operation.",
-          "x-ms-client-name": "requestId"
+          "description": "Identifier for the certificate operation."
         }
       }
     },
@@ -1679,8 +1645,7 @@
       "properties": {
         "cancellation_requested": {
           "type": "boolean",
-          "description": "Indicates if cancellation was requested on the certificate operation.",
-          "x-ms-client-name": "cancellationRequested"
+          "description": "Indicates if cancellation was requested on the certificate operation."
         }
       }
     },
@@ -1706,7 +1671,7 @@
         "x509_props": {
           "$ref": "#/definitions/X509CertificateProperties",
           "description": "Properties of the X509 component of a certificate.",
-          "x-ms-client-name": "x509CertificateProperties"
+          "x-ms-client-name": "X509CertificateProperties"
         },
         "lifetime_actions": {
           "type": "array",
@@ -1720,12 +1685,36 @@
         "issuer": {
           "$ref": "#/definitions/IssuerParameters",
           "description": "Parameters for the issuer of the X509 component of a certificate.",
-          "x-ms-client-name": "issuerParameters"
+          "x-ms-client-name": "IssuerParameters"
         },
         "attributes": {
           "$ref": "#/definitions/CertificateAttributes",
           "description": "The certificate attributes."
         }
+      }
+    },
+    "CertificatePolicyAction": {
+      "type": "string",
+      "description": "The type of the action.",
+      "enum": [
+        "EmailContacts",
+        "AutoRenew"
+      ],
+      "x-ms-enum": {
+        "name": "CertificatePolicyAction",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "EmailContacts",
+            "value": "EmailContacts",
+            "description": "A certificate policy that will email certificate contacts."
+          },
+          {
+            "name": "AutoRenew",
+            "value": "AutoRenew",
+            "description": "A certificate policy that will auto-renew a certificate."
+          }
+        ]
       }
     },
     "CertificateRestoreParameters": {
@@ -1734,7 +1723,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "format": "byte",
+          "format": "base64url",
           "description": "The backup blob associated with a certificate bundle.",
           "x-ms-client-name": "certificateBundleBackup"
         }
@@ -1773,7 +1762,7 @@
         "email": {
           "type": "string",
           "description": "Email address.",
-          "x-ms-client-name": "emailAddress"
+          "x-ms-client-name": "EmailAddress"
         },
         "name": {
           "type": "string",
@@ -1800,7 +1789,7 @@
           "items": {
             "$ref": "#/definitions/Contact"
           },
-          "x-ms-client-name": "contactList",
+          "x-ms-client-name": "ContactList",
           "x-ms-identifiers": []
         }
       }
@@ -1829,7 +1818,7 @@
           "format": "base64url",
           "description": "Thumbprint of the certificate.",
           "readOnly": true,
-          "x-ms-client-name": "x509Thumbprint"
+          "x-ms-client-name": "X509Thumbprint"
         },
         "policy": {
           "$ref": "#/definitions/CertificatePolicy",
@@ -1897,11 +1886,11 @@
           "type": "string",
           "format": "base64url",
           "description": "Thumbprint of the certificate.",
-          "x-ms-client-name": "x509Thumbprint"
+          "x-ms-client-name": "X509Thumbprint"
         },
         "recoveryId": {
           "type": "string",
-          "description": "The url of the recovery object, used to identify and recover the deleted\ncertificate."
+          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
         },
         "scheduledPurgeDate": {
           "type": "integer",
@@ -1915,10 +1904,7 @@
           "description": "The time when the certificate was deleted, in UTC",
           "readOnly": true
         }
-      },
-      "required": [
-        "recoveryId"
-      ]
+      }
     },
     "DeletedCertificateListResult": {
       "type": "object",
@@ -1926,20 +1912,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DeletedCertificateItem items on this page",
+          "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of\ndeleted certificates.",
           "items": {
             "$ref": "#/definitions/DeletedCertificateItem"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of deleted certificates.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DeletionRecoveryLevel": {
       "type": "string",
@@ -2073,13 +2057,12 @@
       "properties": {
         "account_id": {
           "type": "string",
-          "description": "The user name/account name/account id.",
-          "x-ms-client-name": "accountId"
+          "description": "The user name/account name/account id."
         },
         "pwd": {
           "type": "string",
           "description": "The password/secret/account key.",
-          "x-ms-client-name": "password"
+          "x-ms-client-name": "Password"
         }
       }
     },
@@ -2094,12 +2077,12 @@
         "cty": {
           "type": "string",
           "description": "Certificate type as supported by the provider (optional); for example 'OV-SSL',\n'EV-SSL'",
-          "x-ms-client-name": "certificateType"
+          "x-ms-client-name": "CertificateType"
         },
         "cert_transparency": {
           "type": "boolean",
           "description": "Indicates if the certificates generated under this policy should be published\nto certificate transparency logs.",
-          "x-ms-client-name": "certificateTransparency"
+          "x-ms-client-name": "CertificateTransparency"
         }
       }
     },
@@ -2323,7 +2306,6 @@
           "items": {
             "$ref": "#/definitions/AdministratorDetails"
           },
-          "x-ms-client-name": "adminDetails",
           "x-ms-identifiers": []
         }
       }
