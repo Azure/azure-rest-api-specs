@@ -24,19 +24,19 @@ model EntitiesTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** (Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList */
-  @added(Versions.v2024_11_01)
+  @added(Versions.v2023_11_15_preview)
   inclusionList?: Array<EntityCategory>;
 
   /** (Optional) request parameter that filters out any entities that are included the excludeList. When a user specifies an excludeList, they cannot get a prediction returned with an entity in that list. We will apply inclusionList before exclusionList */
-  @added(Versions.v2024_11_01)
+  @added(Versions.v2023_11_15_preview)
   exclusionList?: Array<EntityCategory>;
 
   /** (Optional) describes the type of overlap policy to apply to the ner output. */
-  @added(Versions.v2024_11_01)
+  @added(Versions.v2023_11_15_preview)
   overlapPolicy?: BaseEntityOverlapPolicy;
 
   /** (Optional) request parameter that allows the user to provide settings for running the inference. */
-  @added(Versions.v2024_11_01)
+  @added(Versions.v2023_11_15_preview)
   inferenceOptions?: EntityInferenceOptions;
 }
 
@@ -56,21 +56,13 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
 
   /** Results for entity recognition. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, EntitiesResult)
-  results: EntitiesWithMetadataAutoResult;
+  results: EntitiesResult;
 }
 
 /** Contains the entity recognition task result. */
 model EntitiesResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2024_11_01, Array<EntitiesDocumentResult>)
-  documents: Array<EntitiesDocumentResultWithMetadata>;
-}
-
-/** Contains the entity recognition task result. */
-@added(Versions.v2024_11_15_preview)
-model EntitiesWithMetadataAutoResult is PreBuiltResult {
-  /** Response by document */
+  @typeChangedFrom(Versions.v2023_11_15_preview, Array<EntitiesDocumentResult>)
   documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;
 }
 
@@ -81,14 +73,14 @@ model EntitiesDocumentResult is DocumentResult {
 }
 
 /** Contains the entity recognition task result for the document with detected language. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2023_11_15_preview)
 model EntitiesDocumentResultWithDetectedLanguage {
   ...EntitiesDocumentResult;
   ...DocumentDetectedLanguage;
 }
 
 /** Contains the entity recognition task result for the document with metadata and detected language. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2023_11_15_preview)
 model EntitiesDocumentResultWithMetadataDetectedLanguage
   is EntitiesDocumentResultWithMetadata {
   ...DocumentDetectedLanguage;
@@ -126,7 +118,7 @@ model EntityRecognitionLROResult extends AnalyzeTextLROResult {
 }
 
 /** Contains all the entity categories detected by entity recognition. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union EntityCategory {
   string,
 
@@ -288,14 +280,14 @@ union EntityCategory {
 }
 
 /** The class that houses the inference options allowed for named entity recognition. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model EntityInferenceOptions {
   /** Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization. */
   excludeNormalizedValues?: boolean = false;
 }
 
 /** The abstract base class for entity OverlapPolicy. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 @discriminator("policyKind")
 model BaseEntityOverlapPolicy {
   /** The entity OverlapPolicy object kind. */
@@ -303,7 +295,7 @@ model BaseEntityOverlapPolicy {
 }
 
 /** Kinds of overlap policies supported. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union policyKind {
   string,
 
@@ -315,28 +307,28 @@ union policyKind {
 }
 
 /** Represents the Match longest overlap policy. No overlapping entities as far as it is possible. 1. If there are overlapping entities, the longest one will be returned. 2. If the set of characters predicted for 2 or more entities are exactly the same, select the entity that has the higher confidence score.3. If the entity scores are identical, return all entities that are still present after applying the previous rules. 3. If there is partial overlap (as in Hello Text Analytics) follow the above steps starting from 1. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model MatchLongestEntityPolicyType extends BaseEntityOverlapPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: policyKind.matchLongest;
 }
 
 /** Represents the allow overlap policy. Will apply no post processing logic for the entities. Whatever the model predicts is what will be returned to the user. This allows the user to get a full view of every single model's possible values and apply their own custom logic on entity selection */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model AllowOverlapEntityPolicyType extends BaseEntityOverlapPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: policyKind.allowOverlap;
 }
 
 /** Entity documents result with metadata. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model EntitiesDocumentResultWithMetadata is DocumentResult {
   /** Recognized entities in the document. */
   entities: Array<EntityWithMetadata>;
 }
 
 /** Entity tag object which contains the name of the tags abd any associated confidence score. Entity Tags are used to express some similarities/affinity between entities. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model EntityTag {
   /** Name of the tag. Entity Tag names will be unique globally. */
   name: string;
@@ -346,24 +338,24 @@ model EntityTag {
 }
 
 /** Entity object with tags. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model EntityWithTags is Entity {
   /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
-  type?: string;
+  type: string;
 
   /** List of entity tags. Tags are to express some similarities/affinity between entities. */
-  tags?: Array<EntityTag>;
+  tags: Array<EntityTag>;
 }
 
 /** Entity object with tags and metadata. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model EntityWithMetadata is EntityWithTags {
   /** The entity metadata object. */
   metadata?: BaseMetadata;
 }
 
 /** The Age Unit of measurement */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union AgeUnit {
   string,
 
@@ -384,7 +376,7 @@ union AgeUnit {
 }
 
 /** The Volume Unit of measurement */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union VolumeUnit {
   string,
 
@@ -474,7 +466,7 @@ union VolumeUnit {
 }
 
 /** The speed Unit of measurement */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union SpeedUnit {
   string,
 
@@ -521,7 +513,7 @@ union SpeedUnit {
   KilometersPerMillisecond: "KilometersPerMillisecond",
 }
 /** The area unit of measurement. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union AreaUnit {
   string,
 
@@ -566,7 +558,7 @@ union AreaUnit {
 }
 
 /** The length unit of measurement. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union LengthUnit {
   string,
 
@@ -623,7 +615,7 @@ union LengthUnit {
 }
 
 /** The information (data) Unit of measurement. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union InformationUnit {
   string,
 
@@ -668,7 +660,7 @@ union InformationUnit {
 }
 
 /** The temperature Unit of measurement. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union TemperatureUnit {
   string,
 
@@ -689,7 +681,7 @@ union TemperatureUnit {
 }
 
 /** The weight Unit of measurement. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union WeightUnit {
   string,
 
@@ -743,7 +735,7 @@ union WeightUnit {
 }
 
 /** The type of the extracted number entity. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union NumberKind {
   string,
 
@@ -767,7 +759,7 @@ union NumberKind {
 }
 
 /** The reference point that the ordinal number denotes. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union RelativeTo {
   string,
 
@@ -782,7 +774,7 @@ union RelativeTo {
 }
 
 /** The range inclusiveness of this property property. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union RangeInclusivity {
   string,
 
@@ -800,7 +792,7 @@ union RangeInclusivity {
 }
 
 /** An optional modifier of a date/time instance. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union TemporalModifier {
   string,
 
@@ -895,7 +887,7 @@ union RangeKind {
 }
 
 /** The abstract base class for entity Metadata. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 @discriminator("metadataKind")
 model BaseMetadata {
   /** The entity Metadata object kind. */
@@ -903,7 +895,7 @@ model BaseMetadata {
 }
 
 /** The entity Metadata object kind. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 union MetadataKind {
   string,
 
@@ -960,14 +952,14 @@ union MetadataKind {
 }
 
 /** Represents Metadata for quantities. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model QuantityMetadata {
   /** The numeric value that the extracted text denotes. */
   value: float64;
 }
 
 /** Represents the Age entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model AgeMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -979,7 +971,7 @@ model AgeMetadata extends BaseMetadata {
 }
 
 /** Represents the Volume entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model VolumeMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -991,7 +983,7 @@ model VolumeMetadata extends BaseMetadata {
 }
 
 /** Represents the Speed entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model SpeedMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1003,7 +995,7 @@ model SpeedMetadata extends BaseMetadata {
 }
 
 /** Represents the Area entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model AreaMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1015,7 +1007,7 @@ model AreaMetadata extends BaseMetadata {
 }
 
 /** Represents the Length entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model LengthMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1027,7 +1019,7 @@ model LengthMetadata extends BaseMetadata {
 }
 
 /** Represents the Information (data) entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model InformationMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1039,7 +1031,7 @@ model InformationMetadata extends BaseMetadata {
 }
 
 /** Represents the Information entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model TemperatureMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1051,7 +1043,7 @@ model TemperatureMetadata extends BaseMetadata {
 }
 
 /** Represents the Weight ) entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model WeightMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1063,7 +1055,7 @@ model WeightMetadata extends BaseMetadata {
 }
 
 /** Represents the Currency ) entity Metadata model. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model CurrencyMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1078,7 +1070,7 @@ model CurrencyMetadata extends BaseMetadata {
 }
 
 /** Represents the date value. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model DateValue {
   /** An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml) */
   timex: string;
@@ -1091,14 +1083,14 @@ model DateValue {
 }
 
 /** Base temporal metadata object. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model BaseTemporalMetadata {
   /** List of date values. */
   dateValues?: Array<DateValue>;
 }
 
 /** A Metadata for date entity instances. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model DateMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
 
@@ -1107,7 +1099,7 @@ model DateMetadata extends BaseMetadata {
 }
 
 /** A Metadata for datetime entity instances. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model DateTimeMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
 
@@ -1116,7 +1108,7 @@ model DateTimeMetadata extends BaseMetadata {
 }
 
 /** A Metadata for temporal set entity instances. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model TemporalSetMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
 
@@ -1125,7 +1117,7 @@ model TemporalSetMetadata extends BaseMetadata {
 }
 
 /** A Metadata for time entity instances. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model TimeMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
 
@@ -1134,7 +1126,7 @@ model TimeMetadata extends BaseMetadata {
 }
 
 /** A metadata for numeric entity instances. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model NumberMetadata extends BaseMetadata {
   /** Kind of the metadata. */
   metadataKind: MetadataKind.NumberMetadata;
@@ -1147,7 +1139,7 @@ model NumberMetadata extends BaseMetadata {
 }
 
 /** A metadata for numeric entity instances. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model OrdinalMetadata extends BaseMetadata {
   /** Kind of the metadata. */
   metadataKind: MetadataKind.OrdinalMetadata;
@@ -1163,7 +1155,7 @@ model OrdinalMetadata extends BaseMetadata {
 }
 
 /** represents the Metadata of a date and/or time span. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model TemporalSpanMetadata extends BaseMetadata {
   /** Kind of the metadata. */
   metadataKind: MetadataKind.TemporalSpanMetadata;
@@ -1173,7 +1165,7 @@ model TemporalSpanMetadata extends BaseMetadata {
 }
 
 /** Temporal span object. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model TemporalSpanValues {
   /** Start value for the span. */
   begin?: string;
@@ -1192,7 +1184,7 @@ model TemporalSpanValues {
 }
 
 /** represents the Metadata of numeric intervals. */
-@added(Versions.v2024_11_01)
+@added(Versions.v2023_11_15_preview)
 model NumericRangeMetadata extends BaseMetadata {
   /** Kind of the metadata. */
   metadataKind: MetadataKind.NumericRangeMetadata;

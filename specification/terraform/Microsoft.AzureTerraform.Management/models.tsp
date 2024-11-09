@@ -1,11 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using OpenAPI;
@@ -67,7 +65,7 @@ model ExportQuery extends BaseExportModel {
 @doc("Export parameter for individual resources.")
 model ExportResource extends BaseExportModel {
   @doc("The id of the resource to be exported")
-  resourceIds: armResourceIdentifier[];
+  resourceIds: string[];
 
   @doc("The Terraform resource name. Only works when `resourceIds` contains only one item.")
   resourceName?: string = "res-0";
@@ -103,7 +101,7 @@ model ExportResult {
   configuration?: string;
 
   @doc("A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform")
-  skippedResources?: armResourceIdentifier[];
+  skippedResources?: string[];
 
   @doc("A list of errors derived during exporting each resource")
   @extension("x-ms-identifiers", [])

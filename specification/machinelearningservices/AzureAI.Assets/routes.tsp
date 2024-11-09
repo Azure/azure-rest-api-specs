@@ -35,7 +35,6 @@ interface Indexes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @doc("Creates or updates a IndexVersion.")
   @route("/indexes/{name}/versions/{version}")
   @put
@@ -158,7 +157,6 @@ interface Prompts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @doc("Creates or updates a Prompt")
   @route("/prompts/{name}/versions/{version}")
   @put

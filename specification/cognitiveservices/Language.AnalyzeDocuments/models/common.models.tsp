@@ -117,6 +117,7 @@ model DetectedLanguage {
 }
 
 /** The script of the text. */
+@added(Versions.v2023_11_15_preview)
 union ScriptKind {
   string,
 
@@ -209,6 +210,7 @@ union ScriptKind {
 }
 
 /** Identifies the script of the input document. Maps to the ISO 15924 standard script code. */
+@added(Versions.v2023_11_15_preview)
 union ScriptCode {
   string,
 

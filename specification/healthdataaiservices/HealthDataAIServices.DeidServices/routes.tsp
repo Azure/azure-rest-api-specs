@@ -30,7 +30,6 @@ alias DeidentifyOperations = ResourceOperations<
 
 // Text-Deidentification Operations
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @summary("Create a de-identification job.")
 @pollingOperation(getJob)
 op deidentifyDocuments is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentificationJob>;

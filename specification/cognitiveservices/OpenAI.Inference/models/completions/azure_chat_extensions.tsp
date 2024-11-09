@@ -5,7 +5,6 @@ import "./extensions/oyd/azure_search_options.tsp";
 import "./extensions/oyd/azure_machinelearning_index_options.tsp";
 import "./extensions/oyd/azure_cosmosdb_options.tsp";
 import "./extensions/oyd/elasticsearch_options.tsp";
-import "./extensions/oyd/mongodb_options.tsp";
 import "./extensions/oyd/pinecone_options.tsp";
 
 namespace Azure.OpenAI;
@@ -25,7 +24,6 @@ union AzureChatExtensionType {
   azureSearch: "azure_search",
 
   @doc("Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension.")
-  @removed(ServiceApiVersions.v2024_08_01_Preview)
   azureMachineLearningIndex: "azure_ml_index",
 
   @doc("Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension.")
@@ -36,10 +34,6 @@ union AzureChatExtensionType {
 
   @doc("Represents the use of Pinecone index as an Azure OpenAI chat extension.")
   pinecone: "pinecone",
-
-  @added(ServiceApiVersions.v2024_08_01_Preview)
-  @doc("Represents the use of a MongoDB chat extension.")
-  mongoDB: "mongo_db",
 }
 
 @discriminator("type")
@@ -103,10 +97,6 @@ model AzureChatExtensionDataSourceResponseCitation {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
   @doc("The chunk ID of the citation.")
   chunk_id?: string;
-
-  /** The rerank score of the retrieved document. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
-  rerank_score?: float64;
 }
 
 /** The retrieved document. */
@@ -125,6 +115,10 @@ model AzureChatExtensionRetrievedDocument {
   /** The original search score of the retrieved document. */
   @encodedName("application/json", "original_search_score")
   originalSearchScore?: float64;
+
+  /** The rerank score of the retrieved document. */
+  @encodedName("application/json", "rerank_score")
+  rerankScore?: float64;
 
   /**
    * Represents the rationale for filtering the document. If the document does not undergo filtering,

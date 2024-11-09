@@ -5,7 +5,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.AzureFleet;
 
 @@clientName(Microsoft.AzureFleet, "ComputeFleetMgmt", "python");
-@@clientName(Microsoft.AzureFleet, "ComputeFleetManagementClient", "java");
 
 @@access(Operations.list, Access.internal, "csharp");
 

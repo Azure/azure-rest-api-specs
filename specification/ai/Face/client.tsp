@@ -85,20 +85,10 @@ interface FaceClient {
   verifyFromLargePersonGroup is FaceRecognitionOperations.verifyFromLargePersonGroup;
 }
 
-@client(
-  {
-    name: "administration.FaceAdministrationClient",
-    service: Face,
-  },
-  "java"
-)
-@client(
-  {
-    name: "FaceAdministrationClient",
-    service: Face,
-  },
-  "csharp,python,javascript,go"
-)
+@client({
+  name: "FaceAdministrationClient",
+  service: Face,
+})
 namespace FaceAdministrationClient {
   /**
    * Client options for LargeFaceListClient

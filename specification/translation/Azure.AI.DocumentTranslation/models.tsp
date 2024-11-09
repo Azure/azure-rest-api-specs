@@ -304,13 +304,13 @@ model TranslationsStatus {
   value: TranslationStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
 @doc("Translation job status response")
 model TranslationStatus {
-  @doc("Id of the translation operation.")
+  @doc("Id of the operation.")
   id: string;
 
   @doc("Operation created date time")
@@ -405,7 +405,7 @@ model DocumentsStatus {
   value: DocumentStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -433,7 +433,7 @@ model FileFormat {
   versions?: string[];
 
   @doc("Supported Type for this format")
-  type?: FileFormatType;
+  type?: string;
 }
 
 @doc("Document Translate Request Body")

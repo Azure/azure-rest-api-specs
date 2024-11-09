@@ -19,7 +19,8 @@
     "vitest": "^2.0.4"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc",
+    "postinstall": "cd ../suppressions && npm run build && cd ../typespec-validation && npm run build",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },

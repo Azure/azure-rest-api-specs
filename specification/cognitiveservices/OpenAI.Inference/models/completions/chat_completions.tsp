@@ -48,35 +48,6 @@ model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
   type: "json_object";
 }
 
-@added(ServiceApiVersions.v2024_08_01_Preview)
-@doc("""
-  A response format for Chat Completions that restricts responses to emitting JSON that conforms to a provided JSON
-  Schema for Structured Outputs.
-  """)
-model ChatCompletionsJsonSchemaResponseFormat
-  extends ChatCompletionsResponseFormat {
-  @doc("The discriminated object type, which is always 'json_schema' for this format.")
-  type: "json_schema";
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
-  json_schema: {
-    /** A description of what the response format is for, used by the model to determine how to respond in the format. */
-    description?: string;
-
-    /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
-    name: string;
-
-    #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
-    schema?: unknown;
-
-    @doc("""
-      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).
-      """)
-    strict?: boolean | null = false;
-  };
-}
-
 // Deferred to a near-term future release after publish; see:
 // https://github.com/Azure/azure-rest-api-specs/pull/30087
 //
@@ -427,13 +398,6 @@ model ChatChoiceLogProbabilityInfo {
     The list of log probability information entries for the choice's message content tokens, as requested via the 'logprobs' option.
     """)
   content: ChatTokenLogProbabilityResult[] | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
-  @added(ServiceApiVersions.v2024_08_01_Preview)
-  @doc("""
-    The list of log probability information entries for the choice's message refusal message tokens, as requested via the 'logprobs' option.
-    """)
-  refusal: ChatTokenLogProbabilityResult[] | null;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)

@@ -9,7 +9,8 @@
     "vitest": "^2.0.4"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc",
+    "postinstall": "npm run build",
     "test": "vitest",
     "test:ci": "vitest run --reporter=verbose"
   },

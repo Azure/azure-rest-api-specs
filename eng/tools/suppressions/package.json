@@ -7,7 +7,8 @@
     "get-suppressions": "cmd/get-suppressions.js"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc",
+    "postinstall": "npm run build",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
