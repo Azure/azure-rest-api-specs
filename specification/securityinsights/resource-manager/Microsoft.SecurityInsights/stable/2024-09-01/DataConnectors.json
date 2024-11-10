@@ -108,6 +108,9 @@
           },
           "Get a RestApiPoller data connector": {
             "$ref": "./examples/dataConnectors/GetRestApiPollerById.json"
+          },
+          "Get a MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
           }
         },
         "tags": [
@@ -155,6 +158,9 @@
           },
           "Creates or updates an Threat Intelligence Platform data connector.": {
             "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a MicrosoftThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreateMicrosoftThreatIntelligenceDataConnector.json"
           }
         },
         "tags": [
@@ -207,6 +213,9 @@
         "x-ms-examples": {
           "Delete an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/DeleteOfficeDataConnetor.json"
+          },
+          "Delete an MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/DeleteMicrosoftThreatIntelligenceDataConnector.json"
           }
         },
         "tags": [
@@ -1375,6 +1384,7 @@
         "AzureSecurityCenter",
         "MicrosoftCloudAppSecurity",
         "ThreatIntelligence",
+        "MicrosoftThreatIntelligence",
         "Office365",
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
@@ -1397,6 +1407,9 @@
           },
           {
             "value": "ThreatIntelligence"
+          },
+          {
+            "value": "MicrosoftThreatIntelligence"
           },
           {
             "value": "Office365"
@@ -1606,6 +1619,68 @@
           "description": "The available data types for the connector."
         }
       },
+      "type": "object"
+    },
+    "MSTIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTIDataConnectorProperties",
+          "description": "Microsoft Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTIDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "microsoftEmergingThreatFeed": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "The lookback period for the feed to be imported.",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence data connector.",
+          "type": "object",
+          "required": [
+            "lookbackPeriod"
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "microsoftEmergingThreatFeed"
+      ]
+    },
+    "MSTIDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MSTIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "OfficeDataConnector": {
