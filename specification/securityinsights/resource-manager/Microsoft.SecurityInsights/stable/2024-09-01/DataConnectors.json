@@ -1728,7 +1728,7 @@
       },
       "type": "object",
       "required": [
-        "microsoftEmergingThreatFeed"
+        "connector"
       ]
     },
     "PremiumMdtiDataConnectorProperties": {
@@ -1739,10 +1739,6 @@
         }
       ],
       "properties": {
-        "dataTypes": {
-          "$ref": "#/definitions/PremiumMdtiDataConnectorDataTypes",
-          "description": "The available data types for the connector."
-        },
         "lookbackPeriod": {
           "description": "The lookback period for the feed to be imported.",
           "type": "string"
@@ -1750,6 +1746,10 @@
         "requiredSKUsPresent": {
           "description": "The flag to indicate whether the tenant has the premium SKU required to access this connector.",
           "type": "boolean"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorDataTypes",
+          "description": "The available data types for the connector."
         }
       },
       "required": [
