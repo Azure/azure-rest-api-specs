@@ -111,6 +111,9 @@
           },
           "Get a MicrosoftThreatIntelligence data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
+          },
+          "Get a PremiumMicrosoftDefenderForThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetPremiumMicrosoftDefenderForThreatIntelligenceById.json"
           }
         },
         "tags": [
@@ -161,6 +164,9 @@
           },
           "Creates or updates a MicrosoftThreatIntelligence data connector.": {
             "$ref": "./examples/dataConnectors/CreateMicrosoftThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreatePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
           }
         },
         "tags": [
@@ -216,6 +222,9 @@
           },
           "Delete an MicrosoftThreatIntelligence data connector": {
             "$ref": "./examples/dataConnectors/DeleteMicrosoftThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreatePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
           }
         },
         "tags": [
@@ -1385,6 +1394,7 @@
         "MicrosoftCloudAppSecurity",
         "ThreatIntelligence",
         "MicrosoftThreatIntelligence",
+        "PremiumMicrosoftDefenderForThreatIntelligence",
         "Office365",
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
@@ -1410,6 +1420,9 @@
           },
           {
             "value": "MicrosoftThreatIntelligence"
+          },
+          {
+            "value": "PremiumMicrosoftDefenderForThreatIntelligence"
           },
           {
             "value": "Office365"
@@ -1680,6 +1693,68 @@
       },
       "required": [
         "dataTypes"
+      ],
+      "type": "object"
+    },
+    "PremiumMicrosoftDefenderForThreatIntelligence": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Premium Microsoft Defender for Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorProperties",
+          "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "PremiumMicrosoftDefenderForThreatIntelligence"
+    },
+    "PremiumMdtiDataConnectorDataTypes": {
+      "description": "The available data types for Premium Microsoft Defender for Threat Intelligence data connector.",
+      "properties": {
+        "connector": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for Premium Microsoft Defender for Threat Intelligence data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "microsoftEmergingThreatFeed"
+      ]
+    },
+    "PremiumMdtiDataConnectorProperties": {
+      "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        },
+        "lookbackPeriod": {
+          "description": "The lookback period for the feed to be imported.",
+          "type": "string"
+        },
+        "requiredSKUsPresent": {
+          "description": "The flag to indicate whether the tenant has the premium SKU required to access this connector.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "dataTypes",
+        "lookbackPeriod"
       ],
       "type": "object"
     },
