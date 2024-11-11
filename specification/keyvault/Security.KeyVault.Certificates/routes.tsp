@@ -16,6 +16,7 @@ namespace KeyVault;
  * specified key vault. This operation requires the certificates/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("List certificates in a specified key vault")
 @route("/certificates")
 @get
@@ -68,6 +69,7 @@ op deleteCertificate is Azure.Core.Foundations.Operation<
  * requires the certificates/managecontacts permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Sets the certificate contacts for the specified key vault.")
 @route("/certificates/contacts")
 @put
@@ -120,6 +122,7 @@ op deleteCertificateContacts is Azure.Core.Foundations.Operation<
  * certificates/manageissuers/getissuers permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("List certificate issuers for a specified key vault.")
 @route("/certificates/issuers")
 @get
@@ -144,6 +147,7 @@ op getCertificateIssuers is Azure.Core.Foundations.Operation<
  * issuer. This operation requires the certificates/setissuers permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Sets the specified certificate issuer.")
 @route("/certificates/issuers/{issuer-name}")
 @put
@@ -317,6 +321,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
  * permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("List the versions of a certificate.")
 @route("/certificates/{certificate-name}/versions")
 @get
@@ -664,6 +669,7 @@ op getDeletedCertificate is Azure.Core.Foundations.Operation<
  * requires the certificate/purge permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Permanently deletes the specified deleted certificate.")
 @route("/deletedcertificates/{certificate-name}")
 @delete
