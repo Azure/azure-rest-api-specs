@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/openapi3";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -487,7 +488,7 @@ model DeploymentProperties {
   customProperties?: CustomProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing service"
 @summary("Custom Properties")
 @doc("The custom metadata defined for API catalog entities.")
 model CustomProperties {}
@@ -556,4 +557,119 @@ model DeletedServiceProperties {
 
   @doc("UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
   softDeletionDate?: utcDateTime;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_06_01_preview)
+@doc("API source properties.")
+model ApiSourceProperties {
+  @doc("Indicates if the specification should be imported along with metadata.")
+  importSpecification?: ImportSpecificationOptions = ImportSpecificationOptions.OnDemand;
+
+  @doc("API source configuration for Azure API Management.")
+  azureApiManagementSource?: AzureApiManagementSource;
+
+  /**
+   * The target environment resource ID.
+   */
+  targetEnvironmentId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The target lifecycle stage.
+   */
+  targetLifecycleStage?: LifecycleStage;
+
+  /**
+   * The state of the API source link
+   */
+  @visibility("read")
+  linkState?: LinkState;
+}
+
+/**
+ * The API source specification import options.
+ */
+@added(Versions.v2024_06_01_preview)
+union ImportSpecificationOptions {
+  string,
+
+  /**
+   * Indicates that the specification should be never be imported.
+   */
+  Never: "never",
+
+  /**
+   * Indicates that the specification should be imported only by request.
+   */
+  OnDemand: "ondemand",
+
+  /**
+   * Indicates that the specification should always be imported along with metadata.
+   */
+  Always: "always",
+}
+
+/**
+ * API source configuration for Azure API Management.
+ */
+@added(Versions.v2024_06_01_preview)
+model AzureApiManagementSource {
+  /**
+   * API Management service resource ID.
+   */
+  resourceId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The resource ID of the managed identity that has access to the API Management instance.
+   */
+  msiResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * The link state.
+ */
+@added(Versions.v2024_06_01_preview)
+model LinkState {
+  /**
+   * The state of the link.
+   */
+  state?: ApiSourceLinkState;
+
+  /**
+   * The state message.
+   */
+  message?: string;
+
+  /**
+   * The timestamp of the last update of the link state.
+   */
+  lastUpdatedOn: utcDateTime;
+}
+
+/**
+ * The API source link state.
+ */
+@added(Versions.v2024_06_01_preview)
+union ApiSourceLinkState {
+  string,
+
+  /**
+   * The API source link is initializing.
+   */
+  Initializing: "initializing",
+
+  /***
+   * The API source is syncing.
+   */
+  Syncing: "syncing",
+
+  /**
+   * The API source sync is blocked due to an error.
+   */
+  Error: "error",
+
+  /**
+   * The API source is being deleted.
+   */
+  Deleting: "deleting",
 }
