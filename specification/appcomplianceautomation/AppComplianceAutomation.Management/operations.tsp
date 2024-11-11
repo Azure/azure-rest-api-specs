@@ -8,7 +8,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.AppComplianceAutomation;
 
@@ -29,7 +28,7 @@ interface AcatOperations {
     ErrorResponse extends {}
   >(
     ...HttpParameters,
-    @doc("Resource create parameters.") @body parameters: BodyParameter,
+    @doc("Resource create parameters.") @bodyRoot parameters: BodyParameter,
   ): Response | ErrorResponse;
 
   /**
@@ -53,7 +52,7 @@ interface AcatOperations {
   @armResourceCreateOrUpdate(Resource)
   @put
   AcatResourceCreateOrUpdateAsync<
-    Resource extends ArmResource,
+    Resource extends Foundations.Resource,
     BaseParameters = DefaultBaseParameters<Resource>,
     LroHeaders extends TypeSpec.Reflection.Model = Azure.Core.Foundations.RetryAfterHeader,
     Parameters extends {} = {},
@@ -82,7 +81,7 @@ interface AcatOperations {
    * @template Error Optional. The error response, if non-standard.
    */
   AcatResourceCreateOrReplaceAsync<
-    Resource extends ArmResource,
+    Resource extends Foundations.Resource,
     BaseParameters = DefaultBaseParameters<Resource>,
     LroHeaders extends TypeSpec.Reflection.Model = Azure.Core.Foundations.RetryAfterHeader,
     Parameters extends {} = {},
@@ -113,7 +112,7 @@ interface AcatOperations {
   @armResourceCreateOrUpdate(Resource)
   @put
   AcatResourceCreateOrReplaceSync<
-    Resource extends ArmResource,
+    Resource extends Foundations.Resource,
     BaseParameters = DefaultBaseParameters<Resource>,
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>,

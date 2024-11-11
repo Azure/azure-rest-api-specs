@@ -20,7 +20,7 @@ namespace Microsoft.AppComplianceAutomation;
 @parentResource(ReportResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
-model WebhookResource extends ProxyResourceBase {
+model WebhookResource extends Foundations.ProxyResource {
   /**
    * Webhook Name.
    */
@@ -61,7 +61,6 @@ interface WebhookResources {
    * Update an exiting AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @parameterVisibility("read")
   @operationId("Webhooks_Update")
   update is ArmCustomPatchSync<WebhookResource, WebhookResourcePatch>;
 
@@ -91,9 +90,4 @@ interface WebhookResources {
 );
 @@doc(WebhookResources.update::parameters.properties,
   "Parameters for the create or update operation"
-);
-
-@@encodedName(WebhookResources.update::parameters.properties,
-  "application/json",
-  "parameters"
 );

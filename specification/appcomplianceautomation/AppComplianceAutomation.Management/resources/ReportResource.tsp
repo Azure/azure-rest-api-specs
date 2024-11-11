@@ -10,7 +10,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -21,7 +20,7 @@ namespace Microsoft.AppComplianceAutomation;
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
-model ReportResource extends ProxyResourceBase {
+model ReportResource extends Foundations.ProxyResource {
   /**
    * Report Name.
    */
@@ -65,7 +64,6 @@ interface ReportResources {
    * Update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @parameterVisibility("read")
   @operationId("Reports_Update")
   update is ArmCustomPatchAsync<
     ReportResource,
@@ -167,8 +165,4 @@ interface ReportResources {
 );
 @@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
-);
-@@encodedName(ReportResources.update::parameters.properties,
-  "application/json",
-  "parameters"
 );

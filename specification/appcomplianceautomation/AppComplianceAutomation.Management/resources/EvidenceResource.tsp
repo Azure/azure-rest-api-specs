@@ -19,7 +19,7 @@ namespace Microsoft.AppComplianceAutomation;
 @parentResource(ReportResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(EvidenceProperties)
-model EvidenceResource extends ProxyResourceBase {
+model EvidenceResource extends Foundations.ProxyResource {
   /**
    * The evidence name.
    */
@@ -115,10 +115,6 @@ interface EvidenceResources {
 
 @@doc(EvidenceResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation"
-);
-@@encodedName(EvidenceResources.download::parameters.body,
-  "application/json",
-  "parameters"
 );
 @@doc(EvidenceResources.download::parameters.body,
   "Parameters for the query operation"

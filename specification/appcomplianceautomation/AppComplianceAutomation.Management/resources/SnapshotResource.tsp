@@ -20,7 +20,7 @@ namespace Microsoft.AppComplianceAutomation;
 @parentResource(ReportResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
-model SnapshotResource extends ProxyResourceBase {
+model SnapshotResource extends Foundations.ProxyResource {
   /**
    * Snapshot Name.
    */

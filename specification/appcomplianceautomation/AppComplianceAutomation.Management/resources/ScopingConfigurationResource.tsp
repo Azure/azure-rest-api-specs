@@ -23,7 +23,7 @@ namespace Microsoft.AppComplianceAutomation;
 @Azure.ResourceManager.Private.armResourceInternal(
   ScopingConfigurationProperties
 )
-model ScopingConfigurationResource extends ProxyResourceBase {
+model ScopingConfigurationResource extends Foundations.ProxyResource {
   @key("scopingConfiguration")
   @segment("scopingConfigurations")
   @visibility("read")

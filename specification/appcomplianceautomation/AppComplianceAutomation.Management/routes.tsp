@@ -16,10 +16,7 @@ namespace Microsoft.AppComplianceAutomation;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-alias PlaceholderResource = {
-  id: string;
-  type: string;
-};
+alias PlaceholderResource = Azure.ResourceManager.CommonTypes.Resource;
 
 alias ArmProviderActionAsync<
   Request extends {} | void,
@@ -84,12 +81,3 @@ interface ProviderActions {
     ListInUseStorageAccountsResponse
   >;
 }
-
-@@encodedName(ArmProviderActionAsync::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@encodedName(ArmProviderActionSync::parameters.body,
-  "application/json",
-  "parameters"
-);
