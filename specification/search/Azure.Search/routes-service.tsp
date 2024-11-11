@@ -34,7 +34,12 @@ interface DataSourcesOperations {
             @body
             dataSource: SearchIndexerDataSource;
         },
-        SearchIndexerDataSource
+        SearchIndexerDataSource & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -47,7 +52,12 @@ interface DataSourcesOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -81,7 +91,11 @@ interface DataSourcesOperations {
             @body
             dataSource: SearchIndexerDataSource;
         },
-        SearchIndexerDataSource
+        SearchIndexerDataSource & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 }
 
@@ -92,7 +106,14 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.reset")
     @post
-    reset is SearchIndexerOperation<{}, void>;
+    reset is SearchIndexerOperation<
+        {},
+        {
+            @doc("A process exit code.")
+            @statusCode
+            code: "204";
+        }
+    >;
 
     /**
      * Resets specific documents in the datasource to be selectively re-ingested by
@@ -119,7 +140,11 @@ interface IndexersOperations {
             @body
             keysOrIds?: DocumentKeysOrIds;
         },
-        void
+        {
+            @doc("A process exit code.")
+            @statusCode
+            code: "204";
+        }
     >;
 
     /**
@@ -128,7 +153,14 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.run")
     @post
-    run is SearchIndexerOperation<{}, void>;
+    run is SearchIndexerOperation<
+        {},
+        {
+            @doc("A process exit code.")
+            @statusCode
+            code: "202";
+        }
+    >;
 
     /**
      * Creates a new indexer or updates an indexer if it already exists.
@@ -162,7 +194,12 @@ interface IndexersOperations {
             @body
             indexer: SearchIndexer;
         },
-        SearchIndexer
+        SearchIndexer & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -175,7 +212,12 @@ interface IndexersOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -211,7 +253,11 @@ interface IndexersOperations {
             @body
             indexer: SearchIndexer;
         },
-        SearchIndexer
+        SearchIndexer & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 
     /**
@@ -258,7 +304,12 @@ interface SkillsetsOperations {
             @body
             skillset: SearchIndexerSkillset;
         },
-        SearchIndexerSkillset
+        SearchIndexerSkillset & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -272,7 +323,12 @@ interface SkillsetsOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -306,7 +362,11 @@ interface SkillsetsOperations {
             @body
             skillset: SearchIndexerSkillset;
         },
-        SearchIndexerSkillset
+        SearchIndexerSkillset & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 
     /**
@@ -348,7 +408,12 @@ interface SynonymMapsOperations {
             @body
             synonymMap: SynonymMap;
         },
-        SynonymMap
+        SynonymMap & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -361,7 +426,12 @@ interface SynonymMapsOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -396,7 +466,11 @@ interface SynonymMapsOperations {
             @body
             synonymMap: SynonymMap;
         },
-        SynonymMap
+        SynonymMap & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 }
 
@@ -415,7 +489,11 @@ interface IndexesOperations {
             @body
             index: SearchIndex;
         },
-        SearchIndex
+        SearchIndex & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 
     /**
@@ -455,7 +533,12 @@ interface IndexesOperations {
             @body
             index: SearchIndex;
         },
-        SearchIndex
+        SearchIndex & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -471,7 +554,12 @@ interface IndexesOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -525,7 +613,11 @@ interface AliasesOperations {
             @body
             `alias`: SearchAlias;
         },
-        SearchAlias
+        SearchAlias & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
     /**
      * Lists all aliases available for a search service.
@@ -553,7 +645,12 @@ interface AliasesOperations {
             @body
             `alias`: SearchAlias;
         },
-        SearchAlias
+        SearchAlias & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -568,7 +665,12 @@ interface AliasesOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**

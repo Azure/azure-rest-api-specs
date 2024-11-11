@@ -5044,11 +5044,6 @@ union StopwordsList {
  * Represents a datasource definition, which can be used to configure an indexer.
  */
 model SearchIndexerDataSource {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Successfully created or updated")
-    @statusCode
-    _: 200 | 201;
-
     /**
      * The name of the datasource.
      */
@@ -5255,11 +5250,6 @@ model DocumentKeysOrIds {
  * Represents an indexer.
  */
 model SearchIndexer {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Successfully created or updated")
-    @statusCode
-    _: 200 | 201;
-
     /**
      * The name of the indexer.
      */
@@ -5874,11 +5864,6 @@ model SearchIndexerLimits {
  * A list of skills.
  */
 model SearchIndexerSkillset {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Successfully created or updated")
-    @statusCode
-    _: 200 | 201;
-
     /**
      * The name of the skillset.
      */
@@ -6239,11 +6224,6 @@ model SkillNames {
  * Represents a synonym map definition.
  */
 model SynonymMap {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Successfully created or updated")
-    @statusCode
-    _: 200 | 201;
-
     /**
      * The name of the synonym map.
      */
@@ -6297,11 +6277,6 @@ model ListSynonymMapsResult {
  * behavior of an index.
  */
 model SearchIndex {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Successfully created or updated")
-    @statusCode
-    _: 200 | 201;
-
     /**
      * The name of the index.
      */
@@ -7147,11 +7122,6 @@ model AnalyzedTokenInfo {
  */
 @added(Versions.v2024_11_01_preview)
 model SearchAlias {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Successfully created or updated")
-    @statusCode
-    _: 200 | 201;
-
     /**
      * The name of the alias.
      */
