@@ -244,7 +244,7 @@ model TextAnalysisAuthoringProjectMetadata {
    * The new project name.
    */
   @key("projectName")
-  @visibility
+  @visibility("read")
   projectName: string;
 
   /**
@@ -710,7 +710,7 @@ model TextAnalysisAuthoringProjectDeployment {
    * Represents deployment name.
    */
   @key("deploymentName")
-  @visibility
+  @visibility("read")
   deploymentName: string;
 
   /**
@@ -885,7 +885,7 @@ model TextAnalysisAuthoringExportedTrainedModel {
    * The exported model name.
    */
   @key("exportedModelName")
-  @visibility
+  @visibility("read")
   exportedModelName: string;
 
   /**
@@ -1004,7 +1004,7 @@ model TextAnalysisAuthoringProjectTrainedModel {
    * The trained model label.
    */
   @key("trainedModelLabel")
-  @visibility
+  @visibility("read")
   label: string;
 
   /**
@@ -1106,7 +1106,7 @@ model TextAnalysisAuthoringDocumentEvaluationResult {
    * Represents the project kind.
    */
   @key
-  @visibility
+  @visibility("read")
   projectKind: ProjectKind;
 
   /**
@@ -1223,7 +1223,7 @@ model TextAnalysisAuthoringAssignedDeploymentResource {
    * The resource ID.
    */
   @key
-  @visibility
+  @visibility("read")
   azureResourceId: string;
 
   /**
@@ -1428,7 +1428,7 @@ model TextAnalysisAuthoringAssignedProjectDeploymentsMetadata {
    * Represents the project name.
    */
   @key
-  @visibility
+  @visibility("read")
   projectName: string;
 
   /**
@@ -1485,7 +1485,7 @@ model TextAnalysisAuthoringSupportedLanguage {
    * The language name.
    */
   @key
-  @visibility
+  @visibility("read")
   languageName: string;
 
   /**
@@ -1523,7 +1523,7 @@ model TextAnalysisAuthoringPrebuiltEntity {
    * The prebuilt entity category.
    */
   @key
-  @visibility
+  @visibility("read")
   category: string;
 
   /**
@@ -1563,7 +1563,7 @@ model TextAnalysisAuthoringTrainingConfigVersion {
    * Represents the version of the config.
    */
   @key
-  @visibility
+  @visibility("read")
   trainingConfigVersion: string;
 
   /**
