@@ -9,8 +9,12 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
+
 @doc("Request body for calling post-action")
 model ApprovalCallbackRequest {
+  @removed(Microsoft.Mission.Versions.v2024_11_01_preview)
   @doc("Resource Id of the item being approved or rejected")
   resourceId: string;
 
@@ -19,6 +23,10 @@ model ApprovalCallbackRequest {
 
   @doc("Approval status indicating 'Approved' or 'Rejected'")
   approvalStatus: "Approved" | "Rejected" | string;
+
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @doc("Payload requested by client upon approval action")
+  approvalCallbackPayload?: string;
 }
 
 @doc("Response body after handling of approvalCallbackRequest")
