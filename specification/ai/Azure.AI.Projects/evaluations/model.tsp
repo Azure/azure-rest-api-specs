@@ -216,9 +216,9 @@ model EvaluationSchedule {
   @visibility("read")
   systemData?: SystemData;
 
-  @doc("Status of the evaluation. It is set by service and is read-only.")
+  @doc("Provisioning State of the evaluation. It is set by service and is read-only.")
   @visibility("read")
-  provisioningStatus?: string;
+  provisioningState?: string;
 
   @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")
   tags?: Record<string>;
@@ -226,6 +226,10 @@ model EvaluationSchedule {
   @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   @visibility("read", "create")
   properties?: Record<string>;
+
+  @doc("Enabled status of the evaluation. It is set by service and is read-only.")
+  @visibility("read")
+  isEnabled?: string;
 
   @doc("Evaluators to be used for the evaluation.")
   @visibility("read", "create")
