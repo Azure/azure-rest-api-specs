@@ -999,8 +999,8 @@ union VectorSearchCompressionKind {
 
     /**
      * Binary Quantization, a type of compression method. In binary quantization, the
-     * original vectors values are compressed to the narrower binary type by
-     * discretizing and representing each component of a vector using binary values,
+     * original vectors values are compressed to the narrower binary type by discretizing
+     * and representing each component of a vector using binary values,
      * thereby reducing the overall data size.
      */
     BinaryQuantization: "binaryQuantization",
