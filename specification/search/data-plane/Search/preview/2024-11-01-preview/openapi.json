@@ -46,6 +46,240 @@
   },
   "tags": [],
   "paths": {
+    "/aliases": {
+      "get": {
+        "operationId": "AliasesOperations_List",
+        "description": "Lists all aliases available for a search service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListAliasesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "AliasesOperations_Create",
+        "description": "Creates a new search alias.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "alias",
+            "in": "body",
+            "description": "The definition of the alias to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAliasCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "201": {
+            "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/aliases('{aliasName}')": {
+      "get": {
+        "operationId": "AliasesOperations_Get",
+        "description": "Retrieves an alias definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "aliasName",
+            "in": "path",
+            "description": "The name of the alias.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "201": {
+            "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AliasesOperations_CreateOrUpdate",
+        "description": "Creates a new search alias or updates an alias if it already exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "return=representation"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "prefer"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "aliasName",
+            "in": "path",
+            "description": "The name of the alias.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alias",
+            "in": "body",
+            "description": "The definition of the alias to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAliasCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "201": {
+            "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AliasesOperations_Delete",
+        "description": "Deletes a search alias and its associated mapping to an index. This operation\nis permanent, with no recovery option. The mapped index is untouched by this\noperation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "aliasName",
+            "in": "path",
+            "description": "The name of the alias.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/datasources": {
       "get": {
         "operationId": "DataSourcesOperations_List",
@@ -198,6 +432,14 @@
               "modelAsString": false
             },
             "x-ms-client-name": "prefer"
+          },
+          {
+            "name": "ignoreResetRequirements",
+            "in": "query",
+            "description": "Ignores cache reset requirements.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "skipIndexerResetRequirementForCache"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -441,6 +683,21 @@
             "x-ms-client-name": "prefer"
           },
           {
+            "name": "ignoreResetRequirements",
+            "in": "query",
+            "description": "Ignores cache reset requirements.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "skipIndexerResetRequirementForCache"
+          },
+          {
+            "name": "disableCacheReprocessingChangeDetection",
+            "in": "query",
+            "description": "Disables cache reprocessing change detection.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -545,6 +802,54 @@
             "description": "The name of the indexer.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/indexers('{indexerName}')/search.resetdocs": {
+      "post": {
+        "operationId": "IndexersOperations_ResetDocs",
+        "description": "Resets specific documents in the datasource to be selectively re-ingested by\nthe indexer.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "description": "If false, keys or ids will be appended to existing ones. If true, only the keys\nor ids in this payload will be queued to be re-ingested.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "indexerName",
+            "in": "path",
+            "description": "The name of the indexer.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keysOrIds",
+            "in": "body",
+            "description": "The keys or ids of the documents to be re-ingested. If keys are provided, the\ndocument key field must be specified in the indexer configuration. If ids are\nprovided, the document key field is ignored.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DocumentKeysOrIds"
+            }
           }
         ],
         "responses": {
@@ -1161,7 +1466,7 @@
           {
             "name": "answers",
             "in": "query",
-            "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns answers extracted from key passages in the highest ranked documents.\nThe number of answers returned can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of answers>` option after the\nanswers parameter value, such as `extractive|count-3`. Default count is 1. The\nconfidence threshold can be configured by appending the pipe character `|`\nfollowed by the `threshold-<confidence threshold>` option after the answers\nparameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.",
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns answers extracted from key passages in the highest ranked documents.\nThe number of answers returned can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of answers>` option after the\nanswers parameter value, such as `extractive|count-3`. Default count is 1. The\nconfidence threshold can be configured by appending the pipe character `|`\nfollowed by the `threshold-<confidence threshold>` option after the answers\nparameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.\nThe maximum character length of answers can be configured by appending the pipe\ncharacter '|' followed by the 'count-<number of maximum character length>',\nsuch as 'extractive|maxcharlength-600'.",
             "required": false,
             "type": "string",
             "enum": [
@@ -1188,7 +1493,7 @@
           {
             "name": "captions",
             "in": "query",
-            "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns captions extracted from key passages in the highest ranked documents.\nWhen Captions is set to `extractive`, highlighting is enabled by default, and\ncan be configured by appending the pipe character `|` followed by the\n`highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults\nto `None`.",
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns captions extracted from key passages in the highest ranked documents.\nWhen Captions is set to `extractive`, highlighting is enabled by default, and\ncan be configured by appending the pipe character `|` followed by the\n`highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults\nto `None`. The maximum character length of captions can be configured by\nappending the pipe character '|' followed by the 'count-<number of maximum\ncharacter length>', such as 'extractive|maxcharlength-600'.",
             "required": false,
             "type": "string",
             "enum": [
@@ -1218,6 +1523,563 @@
             "description": "Allows setting a separate search query that will be solely used for semantic\nreranking, semantic captions and semantic answers. Is useful for scenarios\nwhere there is a need to use different queries between the base retrieval and\nranking phase, and the L2 semantic phase.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "queryRewrites",
+            "in": "query",
+            "description": "When QueryRewrites is set to `generative`, the query terms are sent to a\ngenerate model which will produce 10 (default) rewrites to help increase the\nrecall of the request. The requested count can be configured by appending the\npipe character `|` followed by the `count-<number of rewrites>` option, such as\n`generative|count-3`. Defaults to `None`. This parameter is only valid if the\nquery type is `semantic`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "none",
+              "generative"
+            ],
+            "x-ms-enum": {
+              "name": "QueryRewritesType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "None",
+                  "value": "none",
+                  "description": "Do not generate additional query rewrites for this query."
+                },
+                {
+                  "name": "Generative",
+                  "value": "generative",
+                  "description": "Generate alternative query terms to increase the recall of a search request."
+                }
+              ]
+            }
+          },
+          {
+            "name": "debug",
+            "in": "query",
+            "description": "Enables a debugging tool that can be used to further explore your search\nresults.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "disabled",
+              "semantic",
+              "vector",
+              "queryRewrites",
+              "all"
+            ],
+            "x-ms-enum": {
+              "name": "QueryDebugMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Disabled",
+                  "value": "disabled",
+                  "description": "No query debugging information will be returned."
+                },
+                {
+                  "name": "Semantic",
+                  "value": "semantic",
+                  "description": "Allows the user to further explore their reranked results."
+                },
+                {
+                  "name": "Vector",
+                  "value": "vector",
+                  "description": "Allows the user to further explore their hybrid and vector query results."
+                },
+                {
+                  "name": "QueryRewrites",
+                  "value": "queryRewrites",
+                  "description": "Allows the user to explore the list of query rewrites generated for their\nsearch request."
+                },
+                {
+                  "name": "All",
+                  "value": "all",
+                  "description": "Turn on all debug options."
+                }
+              ]
+            }
+          },
+          {
+            "name": "queryLanguage",
+            "in": "query",
+            "description": "The language of the query.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "none",
+              "en-us",
+              "en-gb",
+              "en-in",
+              "en-ca",
+              "en-au",
+              "fr-fr",
+              "fr-ca",
+              "de-de",
+              "es-es",
+              "es-mx",
+              "zh-cn",
+              "zh-tw",
+              "pt-br",
+              "pt-pt",
+              "it-it",
+              "ja-jp",
+              "ko-kr",
+              "ru-ru",
+              "cs-cz",
+              "nl-be",
+              "nl-nl",
+              "hu-hu",
+              "pl-pl",
+              "sv-se",
+              "tr-tr",
+              "hi-in",
+              "ar-sa",
+              "ar-eg",
+              "ar-ma",
+              "ar-kw",
+              "ar-jo",
+              "da-dk",
+              "no-no",
+              "bg-bg",
+              "hr-hr",
+              "hr-ba",
+              "ms-my",
+              "ms-bn",
+              "sl-sl",
+              "ta-in",
+              "vi-vn",
+              "el-gr",
+              "ro-ro",
+              "is-is",
+              "id-id",
+              "th-th",
+              "lt-lt",
+              "uk-ua",
+              "lv-lv",
+              "et-ee",
+              "ca-es",
+              "fi-fi",
+              "sr-ba",
+              "sr-me",
+              "sr-rs",
+              "sk-sk",
+              "nb-no",
+              "hy-am",
+              "bn-in",
+              "eu-es",
+              "gl-es",
+              "gu-in",
+              "he-il",
+              "ga-ie",
+              "kn-in",
+              "ml-in",
+              "mr-in",
+              "fa-ae",
+              "pa-in",
+              "te-in",
+              "ur-pk"
+            ],
+            "x-ms-enum": {
+              "name": "QueryLanguage",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "None",
+                  "value": "none",
+                  "description": "Query language not specified."
+                },
+                {
+                  "name": "EnUs",
+                  "value": "en-us",
+                  "description": "Query language value for English (United States)."
+                },
+                {
+                  "name": "EnGb",
+                  "value": "en-gb",
+                  "description": "Query language value for English (Great Britain)."
+                },
+                {
+                  "name": "EnIn",
+                  "value": "en-in",
+                  "description": "Query language value for English (India)."
+                },
+                {
+                  "name": "EnCa",
+                  "value": "en-ca",
+                  "description": "Query language value for English (Canada)."
+                },
+                {
+                  "name": "EnAu",
+                  "value": "en-au",
+                  "description": "Query language value for English (Australia)."
+                },
+                {
+                  "name": "FrFr",
+                  "value": "fr-fr",
+                  "description": "Query language value for French (France)."
+                },
+                {
+                  "name": "FrCa",
+                  "value": "fr-ca",
+                  "description": "Query language value for French (Canada)."
+                },
+                {
+                  "name": "DeDe",
+                  "value": "de-de",
+                  "description": "Query language value for German (Germany)."
+                },
+                {
+                  "name": "EsEs",
+                  "value": "es-es",
+                  "description": "Query language value for Spanish (Spain)."
+                },
+                {
+                  "name": "EsMx",
+                  "value": "es-mx",
+                  "description": "Query language value for Spanish (Mexico)."
+                },
+                {
+                  "name": "ZhCn",
+                  "value": "zh-cn",
+                  "description": "Query language value for Chinese (China)."
+                },
+                {
+                  "name": "ZhTw",
+                  "value": "zh-tw",
+                  "description": "Query language value for Chinese (Taiwan)."
+                },
+                {
+                  "name": "PtBr",
+                  "value": "pt-br",
+                  "description": "Query language value for Portuguese (Brazil)."
+                },
+                {
+                  "name": "PtPt",
+                  "value": "pt-pt",
+                  "description": "Query language value for Portuguese (Portugal)."
+                },
+                {
+                  "name": "ItIt",
+                  "value": "it-it",
+                  "description": "Query language value for Italian (Italy)."
+                },
+                {
+                  "name": "JaJp",
+                  "value": "ja-jp",
+                  "description": "Query language value for Japanese (Japan)."
+                },
+                {
+                  "name": "KoKr",
+                  "value": "ko-kr",
+                  "description": "Query language value for Korean (Korea)."
+                },
+                {
+                  "name": "RuRu",
+                  "value": "ru-ru",
+                  "description": "Query language value for Russian (Russia)."
+                },
+                {
+                  "name": "CsCz",
+                  "value": "cs-cz",
+                  "description": "Query language value for Czech (Czech Republic)."
+                },
+                {
+                  "name": "NlBe",
+                  "value": "nl-be",
+                  "description": "Query language value for Dutch (Belgium)."
+                },
+                {
+                  "name": "NlNl",
+                  "value": "nl-nl",
+                  "description": "Query language value for Dutch (Netherlands)."
+                },
+                {
+                  "name": "HuHu",
+                  "value": "hu-hu",
+                  "description": "Query language value for Hungarian (Hungary)."
+                },
+                {
+                  "name": "PlPl",
+                  "value": "pl-pl",
+                  "description": "Query language value for Polish (Poland)."
+                },
+                {
+                  "name": "SvSe",
+                  "value": "sv-se",
+                  "description": "Query language value for Swedish (Sweden)."
+                },
+                {
+                  "name": "TrTr",
+                  "value": "tr-tr",
+                  "description": "Query language value for Turkish (Turkey)."
+                },
+                {
+                  "name": "HiIn",
+                  "value": "hi-in",
+                  "description": "Query language value for Hindi (India)."
+                },
+                {
+                  "name": "ArSa",
+                  "value": "ar-sa",
+                  "description": "Query language value for Arabic (Saudi Arabia)."
+                },
+                {
+                  "name": "ArEg",
+                  "value": "ar-eg",
+                  "description": "Query language value for Arabic (Egypt)."
+                },
+                {
+                  "name": "ArMa",
+                  "value": "ar-ma",
+                  "description": "Query language value for Arabic (Morocco)."
+                },
+                {
+                  "name": "ArKw",
+                  "value": "ar-kw",
+                  "description": "Query language value for Arabic (Kuwait)."
+                },
+                {
+                  "name": "ArJo",
+                  "value": "ar-jo",
+                  "description": "Query language value for Arabic (Jordan)."
+                },
+                {
+                  "name": "DaDk",
+                  "value": "da-dk",
+                  "description": "Query language value for Danish (Denmark)."
+                },
+                {
+                  "name": "NoNo",
+                  "value": "no-no",
+                  "description": "Query language value for Norwegian (Norway)."
+                },
+                {
+                  "name": "BgBg",
+                  "value": "bg-bg",
+                  "description": "Query language value for Bulgarian (Bulgaria)."
+                },
+                {
+                  "name": "HrHr",
+                  "value": "hr-hr",
+                  "description": "Query language value for Croatian (Croatia)."
+                },
+                {
+                  "name": "HrBa",
+                  "value": "hr-ba",
+                  "description": "Query language value for Croatian (Bosnia and Herzegovina)."
+                },
+                {
+                  "name": "MsMy",
+                  "value": "ms-my",
+                  "description": "Query language value for Malay (Malaysia)."
+                },
+                {
+                  "name": "MsBn",
+                  "value": "ms-bn",
+                  "description": "Query language value for Malay (Brunei Darussalam)."
+                },
+                {
+                  "name": "SlSl",
+                  "value": "sl-sl",
+                  "description": "Query language value for Slovenian (Slovenia)."
+                },
+                {
+                  "name": "TaIn",
+                  "value": "ta-in",
+                  "description": "Query language value for Tamil (India)."
+                },
+                {
+                  "name": "ViVn",
+                  "value": "vi-vn",
+                  "description": "Query language value for Vietnamese (Viet Nam)."
+                },
+                {
+                  "name": "ElGr",
+                  "value": "el-gr",
+                  "description": "Query language value for Greek (Greece)."
+                },
+                {
+                  "name": "RoRo",
+                  "value": "ro-ro",
+                  "description": "Query language value for Romanian (Romania)."
+                },
+                {
+                  "name": "IsIs",
+                  "value": "is-is",
+                  "description": "Query language value for Icelandic (Iceland)."
+                },
+                {
+                  "name": "IdId",
+                  "value": "id-id",
+                  "description": "Query language value for Indonesian (Indonesia)."
+                },
+                {
+                  "name": "ThTh",
+                  "value": "th-th",
+                  "description": "Query language value for Thai (Thailand)."
+                },
+                {
+                  "name": "LtLt",
+                  "value": "lt-lt",
+                  "description": "Query language value for Lithuanian (Lithuania)."
+                },
+                {
+                  "name": "UkUa",
+                  "value": "uk-ua",
+                  "description": "Query language value for Ukrainian (Ukraine)."
+                },
+                {
+                  "name": "LvLv",
+                  "value": "lv-lv",
+                  "description": "Query language value for Latvian (Latvia)."
+                },
+                {
+                  "name": "EtEe",
+                  "value": "et-ee",
+                  "description": "Query language value for Estonian (Estonia)."
+                },
+                {
+                  "name": "CaEs",
+                  "value": "ca-es",
+                  "description": "Query language value for Catalan."
+                },
+                {
+                  "name": "FiFi",
+                  "value": "fi-fi",
+                  "description": "Query language value for Finnish (Finland)."
+                },
+                {
+                  "name": "SrBa",
+                  "value": "sr-ba",
+                  "description": "Query language value for Serbian (Bosnia and Herzegovina)."
+                },
+                {
+                  "name": "SrMe",
+                  "value": "sr-me",
+                  "description": "Query language value for Serbian (Montenegro)."
+                },
+                {
+                  "name": "SrRs",
+                  "value": "sr-rs",
+                  "description": "Query language value for Serbian (Serbia)."
+                },
+                {
+                  "name": "SkSk",
+                  "value": "sk-sk",
+                  "description": "Query language value for Slovak (Slovakia)."
+                },
+                {
+                  "name": "NbNo",
+                  "value": "nb-no",
+                  "description": "Query language value for Norwegian (Norway)."
+                },
+                {
+                  "name": "HyAm",
+                  "value": "hy-am",
+                  "description": "Query language value for Armenian (Armenia)."
+                },
+                {
+                  "name": "BnIn",
+                  "value": "bn-in",
+                  "description": "Query language value for Bengali (India)."
+                },
+                {
+                  "name": "EuEs",
+                  "value": "eu-es",
+                  "description": "Query language value for Basque."
+                },
+                {
+                  "name": "GlEs",
+                  "value": "gl-es",
+                  "description": "Query language value for Galician."
+                },
+                {
+                  "name": "GuIn",
+                  "value": "gu-in",
+                  "description": "Query language value for Gujarati (India)."
+                },
+                {
+                  "name": "HeIl",
+                  "value": "he-il",
+                  "description": "Query language value for Hebrew (Israel)."
+                },
+                {
+                  "name": "GaIe",
+                  "value": "ga-ie",
+                  "description": "Query language value for Irish (Ireland)."
+                },
+                {
+                  "name": "KnIn",
+                  "value": "kn-in",
+                  "description": "Query language value for Kannada (India)."
+                },
+                {
+                  "name": "MlIn",
+                  "value": "ml-in",
+                  "description": "Query language value for Malayalam (India)."
+                },
+                {
+                  "name": "MrIn",
+                  "value": "mr-in",
+                  "description": "Query language value for Marathi (India)."
+                },
+                {
+                  "name": "FaAe",
+                  "value": "fa-ae",
+                  "description": "Query language value for Persian (U.A.E.)."
+                },
+                {
+                  "name": "PaIn",
+                  "value": "pa-in",
+                  "description": "Query language value for Punjabi (India)."
+                },
+                {
+                  "name": "TeIn",
+                  "value": "te-in",
+                  "description": "Query language value for Telugu (India)."
+                },
+                {
+                  "name": "UrPk",
+                  "value": "ur-pk",
+                  "description": "Query language value for Urdu (Pakistan)."
+                }
+              ]
+            }
+          },
+          {
+            "name": "speller",
+            "in": "query",
+            "description": "Improve search recall by spell-correcting individual search query terms.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "none",
+              "lexicon"
+            ],
+            "x-ms-enum": {
+              "name": "QuerySpellerType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "None",
+                  "value": "none",
+                  "description": "Speller not enabled."
+                },
+                {
+                  "name": "Lexicon",
+                  "value": "lexicon",
+                  "description": "Speller corrects individual query terms using a static lexicon for the language\nspecified by the queryLanguage parameter."
+                }
+              ]
+            }
+          },
+          {
+            "name": "semanticFields",
+            "in": "query",
+            "description": "The list of field names used for semantic ranking.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2048,6 +2910,21 @@
             "x-ms-client-name": "prefer"
           },
           {
+            "name": "ignoreResetRequirements",
+            "in": "query",
+            "description": "Ignores cache reset requirements.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "skipIndexerResetRequirementForCache"
+          },
+          {
+            "name": "disableCacheReprocessingChangeDetection",
+            "in": "query",
+            "description": "Disables cache reprocessing change detection.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -2120,6 +2997,47 @@
             "description": "The name of the skillset.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/skillsets('{skillsetName}')/search.resetskills": {
+      "post": {
+        "operationId": "SkillsetsOperations_ResetSkills",
+        "description": "Reset an existing skillset in a search service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "skillsetName",
+            "in": "path",
+            "description": "The name of the skillset.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skillNames",
+            "in": "body",
+            "description": "The names of the skills to reset. If not specified, all skills in the skillset\nwill be reset.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkillNames"
+            }
           }
         ],
         "responses": {
@@ -2378,6 +3296,220 @@
     }
   },
   "definitions": {
+    "AIServicesAccountIdentity": {
+      "type": "object",
+      "description": "The multi-region account of an Azure AI service resource that's attached to a\nskillset.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "The user-assigned managed identity used for connections to AI Service. If not\nspecified, the system-assigned managed identity is used. On updates to the\nskillset, if the identity is unspecified, the value remains unchanged. If set\nto \"none\", the value of this property is cleared."
+        },
+        "subdomainUrl": {
+          "type": "string",
+          "description": "The subdomain url for the corresponding AI Service."
+        },
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of Azure AI service resource attached to a\nskillset.",
+          "enum": [
+            "#Microsoft.Azure.Search.AIServicesByIdentity"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "odataType"
+        }
+      },
+      "required": [
+        "identity",
+        "subdomainUrl",
+        "@odata.type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServicesAccount"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.AIServicesByIdentity"
+    },
+    "AIServicesAccountKey": {
+      "type": "object",
+      "description": "The account key of an Azure AI service resource that's attached to a skillset,\nto be used with the resource's subdomain.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key used to provision the Azure AI service resource attached to a skillset."
+        },
+        "subdomainUrl": {
+          "type": "string",
+          "description": "The subdomain url for the corresponding AI Service."
+        },
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of Azure AI service resource attached to a\nskillset.",
+          "enum": [
+            "#Microsoft.Azure.Search.AIServicesByKey"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "odataType"
+        }
+      },
+      "required": [
+        "key",
+        "subdomainUrl",
+        "@odata.type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServicesAccount"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.AIServicesByKey"
+    },
+    "AIServicesVisionParameters": {
+      "type": "object",
+      "description": "Specifies the AI Services Vision parameters for vectorizing a query image or\ntext.",
+      "properties": {
+        "modelVersion": {
+          "type": "string",
+          "description": "The version of the model to use when calling the AI Services Vision service. It\nwill default to the latest available when not specified."
+        },
+        "resourceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The resource URI of the AI Services resource."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API key of the designated AI Services resource."
+        },
+        "authIdentity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "The user-assigned managed identity used for outbound connections. If an\nauthResourceId is provided and it's not specified, the system-assigned managed\nidentity is used. On updates to the index, if the identity is unspecified, the\nvalue remains unchanged. If set to \"none\", the value of this property is\ncleared."
+        }
+      },
+      "required": [
+        "modelVersion",
+        "resourceUri"
+      ]
+    },
+    "AIServicesVisionVectorizer": {
+      "type": "object",
+      "description": "Specifies the AI Services Vision parameters for vectorizing a query image or\ntext.",
+      "properties": {
+        "AIServicesVisionParameters": {
+          "$ref": "#/definitions/AIServicesVisionParameters",
+          "description": "Contains the parameters specific to AI Services Vision embedding vectorization."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchVectorizer"
+        }
+      ],
+      "x-ms-discriminator-value": "aiServicesVision"
+    },
+    "AIStudioModelCatalogName": {
+      "type": "string",
+      "description": "The name of the embedding model from the Azure AI Studio Catalog that will be\ncalled.",
+      "enum": [
+        "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
+        "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
+        "Facebook-DinoV2-Image-Embeddings-ViT-Base",
+        "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
+        "Cohere-embed-v3-english",
+        "Cohere-embed-v3-multilingual"
+      ],
+      "x-ms-enum": {
+        "name": "AIStudioModelCatalogName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OpenAICLIPImageTextEmbeddingsVitBasePatch32",
+            "value": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
+            "description": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
+          },
+          {
+            "name": "OpenAICLIPImageTextEmbeddingsViTLargePatch14336",
+            "value": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
+            "description": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336"
+          },
+          {
+            "name": "FacebookDinoV2ImageEmbeddingsViTBase",
+            "value": "Facebook-DinoV2-Image-Embeddings-ViT-Base",
+            "description": "Facebook-DinoV2-Image-Embeddings-ViT-Base"
+          },
+          {
+            "name": "FacebookDinoV2ImageEmbeddingsViTGiant",
+            "value": "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
+            "description": "Facebook-DinoV2-Image-Embeddings-ViT-Giant"
+          },
+          {
+            "name": "CohereEmbedV3English",
+            "value": "Cohere-embed-v3-english",
+            "description": "Cohere-embed-v3-english"
+          },
+          {
+            "name": "CohereEmbedV3Multilingual",
+            "value": "Cohere-embed-v3-multilingual",
+            "description": "Cohere-embed-v3-multilingual"
+          }
+        ]
+      }
+    },
+    "AMLParameters": {
+      "type": "object",
+      "description": "Specifies the properties for connecting to an AML vectorizer.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "(Required for no authentication or key authentication) The scoring URI of the\nAML service to which the JSON payload will be sent. Only the https URI scheme\nis allowed."
+        },
+        "key": {
+          "type": "string",
+          "description": "(Required for key authentication) The key for the AML service."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "(Required for token authentication). The Azure Resource Manager resource ID of\nthe AML service. It should be in the format\nsubscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "(Optional) When specified, indicates the timeout for the http client making the\nAPI call."
+        },
+        "region": {
+          "type": "string",
+          "description": "(Optional for token authentication). The region the AML service is deployed in."
+        },
+        "modelName": {
+          "$ref": "#/definitions/AIStudioModelCatalogName",
+          "description": "The name of the embedding model from the Azure AI Studio Catalog that is\ndeployed at the provided endpoint."
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "AMLVectorizer": {
+      "type": "object",
+      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio\nModel Catalog for generating the vector embedding of a query string.",
+      "properties": {
+        "AMLParameters": {
+          "$ref": "#/definitions/AMLParameters",
+          "description": "Specifies the properties of the AML vectorizer."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchVectorizer"
+        }
+      ],
+      "x-ms-discriminator-value": "aml"
+    },
     "AnalyzeRequest": {
       "type": "object",
       "description": "Specifies some text and analysis components used to break that text into tokens.",
@@ -2393,6 +3525,10 @@
         "tokenizer": {
           "$ref": "#/definitions/LexicalTokenizerName",
           "description": "The name of the tokenizer to use to break the given text. If this parameter is\nnot specified, you must specify an analyzer instead. The tokenizer and analyzer\nparameters are mutually exclusive."
+        },
+        "normalizer": {
+          "$ref": "#/definitions/LexicalNormalizerName",
+          "description": "The name of the normalizer to use to normalize the given text."
         },
         "tokenFilters": {
           "type": "array",
@@ -2551,8 +3687,7 @@
       "properties": {
         "search": {
           "type": "string",
-          "description": "The search text on which to base autocomplete results.",
-          "x-ms-client-name": "searchText"
+          "description": "The search text on which to base autocomplete results."
         },
         "autocompleteMode": {
           "$ref": "#/definitions/AutocompleteMode",
@@ -2564,8 +3699,7 @@
         },
         "fuzzy": {
           "type": "boolean",
-          "description": "A value indicating whether to use fuzzy matching for the autocomplete query.\nDefault is false. When set to true, the query will autocomplete terms even if\nthere's a substituted or missing character in the search text. While this\nprovides a better experience in some scenarios, it comes at a performance cost\nas fuzzy autocomplete queries are slower and consume more resources.",
-          "x-ms-client-name": "useFuzzyMatching"
+          "description": "A value indicating whether to use fuzzy matching for the autocomplete query.\nDefault is false. When set to true, the query will autocomplete terms even if\nthere's a substituted or missing character in the search text. While this\nprovides a better experience in some scenarios, it comes at a performance cost\nas fuzzy autocomplete queries are slower and consume more resources."
         },
         "highlightPostTag": {
           "type": "string",
@@ -2617,7 +3751,6 @@
             "$ref": "#/definitions/AutocompleteItem"
           },
           "readOnly": true,
-          "x-ms-client-name": "results",
           "x-ms-identifiers": []
         }
       },
@@ -2642,6 +3775,59 @@
         "applicationId"
       ]
     },
+    "AzureMachineLearningSkill": {
+      "type": "object",
+      "description": "The AML skill allows you to extend AI enrichment with a custom Azure Machine\nLearning (AML) model. Once an AML model is trained and deployed, an AML skill\nintegrates it into AI enrichment.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "(Required for no authentication or key authentication) The scoring URI of the\nAML service to which the JSON payload will be sent. Only the https URI scheme\nis allowed."
+        },
+        "key": {
+          "type": "string",
+          "description": "(Required for key authentication) The key for the AML service."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "(Required for token authentication). The Azure Resource Manager resource ID of\nthe AML service. It should be in the format\nsubscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "(Optional) When specified, indicates the timeout for the http client making the\nAPI call."
+        },
+        "region": {
+          "type": "string",
+          "description": "(Optional for token authentication). The region the AML service is deployed in."
+        },
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "description": "(Optional) When specified, indicates the number of calls the indexer will make\nin parallel to the endpoint you have provided. You can decrease this value if\nyour endpoint is failing under too high of a request load, or raise it if your\nendpoint is able to accept more requests and you would like an increase in the\nperformance of the indexer. If not set, a default value of 5 is used. The\ndegreeOfParallelism can be set to a maximum of 10 and a minimum of 1."
+        },
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of skill.",
+          "enum": [
+            "#Microsoft.Skills.Custom.AmlSkill"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "odataType"
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.AmlSkill"
+    },
     "AzureOpenAIEmbeddingSkill": {
       "type": "object",
       "description": "Allows you to generate a vector embedding for a given text input using the\nAzure OpenAI resource.",
@@ -2649,13 +3835,11 @@
         "resourceUri": {
           "type": "string",
           "format": "uri",
-          "description": "The resource URI of the Azure OpenAI resource.",
-          "x-ms-client-name": "resourceUrl"
+          "description": "The resource URI of the Azure OpenAI resource."
         },
         "deploymentId": {
           "type": "string",
-          "description": "ID of the Azure OpenAI model deployment on the designated resource.",
-          "x-ms-client-name": "deploymentName"
+          "description": "ID of the Azure OpenAI model deployment on the designated resource."
         },
         "apiKey": {
           "type": "string",
@@ -2726,14 +3910,30 @@
         ]
       }
     },
+    "AzureOpenAITokenizerParameters": {
+      "type": "object",
+      "description": "Azure OpenAI Tokenizer parameters.",
+      "properties": {
+        "encoderModelName": {
+          "$ref": "#/definitions/SplitSkillEncoderModelName",
+          "description": "Only applies if the unit is set to azureOpenAITokens. Options include\n'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is\n'CL100k_base'."
+        },
+        "allowedSpecialTokens": {
+          "type": "array",
+          "description": "(Optional) Only applies if the unit is set to azureOpenAITokens. This parameter\ndefines a collection of special tokens that are permitted within the\ntokenization process.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "AzureOpenAIVectorizer": {
       "type": "object",
       "description": "Specifies the Azure OpenAI resource used to vectorize a query string.",
       "properties": {
         "azureOpenAIParameters": {
           "$ref": "#/definitions/AzureOpenAIVectorizerParameters",
-          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization.",
-          "x-ms-client-name": "parameters"
+          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization."
         }
       },
       "allOf": [
@@ -2750,13 +3950,11 @@
         "resourceUri": {
           "type": "string",
           "format": "uri",
-          "description": "The resource URI of the Azure OpenAI resource.",
-          "x-ms-client-name": "resourceUrl"
+          "description": "The resource URI of the Azure OpenAI resource."
         },
         "deploymentId": {
           "type": "string",
-          "description": "ID of the Azure OpenAI model deployment on the designated resource.",
-          "x-ms-client-name": "deploymentName"
+          "description": "ID of the Azure OpenAI model deployment on the designated resource."
         },
         "apiKey": {
           "type": "string",
@@ -2910,7 +4108,8 @@
         "delimitedText",
         "json",
         "jsonArray",
-        "jsonLines"
+        "jsonLines",
+        "markdown"
       ],
       "x-ms-enum": {
         "name": "BlobIndexerParsingMode",
@@ -2945,6 +4144,11 @@
             "name": "JsonLines",
             "value": "jsonLines",
             "description": "Set to jsonLines to extract individual JSON entities, separated by a new line,\nas separate documents."
+          },
+          {
+            "name": "Markdown",
+            "value": "markdown",
+            "description": "Set to markdown to extract content from markdown files."
           }
         ]
       }
@@ -3185,8 +4389,7 @@
         },
         "queryMode": {
           "type": "boolean",
-          "description": "A value that indicates whether the token filter is in query mode. When in query\nmode, the token filter generates bigrams and then removes common words and\nsingle terms followed by a common word. Default is false.",
-          "x-ms-client-name": "useQueryMode"
+          "description": "A value that indicates whether the token filter is in query mode. When in query\nmode, the token filter generates bigrams and then removes common words and\nsingle terms followed by a common word. Default is false."
         },
         "@odata.type": {
           "type": "string",
@@ -3512,6 +4715,46 @@
         ]
       }
     },
+    "CustomNormalizer": {
+      "type": "object",
+      "description": "Allows you to configure normalization for filterable, sortable, and facetable\nfields, which by default operate with strict matching. This is a user-defined\nconfiguration consisting of at least one or more filters, which modify the\ntoken that is stored.",
+      "properties": {
+        "tokenFilters": {
+          "type": "array",
+          "description": "A list of token filters used to filter out or modify the input token. For\nexample, you can specify a lowercase filter that converts all characters to\nlowercase. The filters are run in the order in which they are listed.",
+          "items": {
+            "$ref": "#/definitions/TokenFilterName"
+          }
+        },
+        "charFilters": {
+          "type": "array",
+          "description": "A list of character filters used to prepare input text before it is processed.\nFor instance, they can replace certain characters or symbols. The filters are\nrun in the order in which they are listed.",
+          "items": {
+            "$ref": "#/definitions/CharFilterName"
+          }
+        },
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of normalizer.",
+          "enum": [
+            "#Microsoft.Azure.Search.CustomNormalizer"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "odataType"
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LexicalNormalizer"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CustomNormalizer"
+    },
     "DataChangeDetectionPolicy": {
       "type": "object",
       "description": "Base type for data change detection policies.",
@@ -3549,6 +4792,17 @@
         "connectionString": {
           "type": "string",
           "description": "The connection string for the datasource. Set to `<unchanged>` (with brackets)\nif you don't want the connection string updated. Set to `<redacted>` if you\nwant to remove the connection string value from the datasource."
+        }
+      }
+    },
+    "DebugInfo": {
+      "type": "object",
+      "description": "Contains debugging information that can be used to further explore your search\nresults.",
+      "properties": {
+        "queryRewrites": {
+          "$ref": "#/definitions/QueryRewritesDebugInfo",
+          "description": "Contains debugging information specific to query rewrites.",
+          "readOnly": true
         }
       }
     },
@@ -3643,8 +4897,7 @@
       "properties": {
         "distance": {
           "$ref": "#/definitions/DistanceScoringParameters",
-          "description": "Parameter values for the distance scoring function.",
-          "x-ms-client-name": "parameters"
+          "description": "Parameter values for the distance scoring function."
         }
       },
       "required": [
@@ -3675,6 +4928,22 @@
         "referencePointParameter",
         "boostingDistance"
       ]
+    },
+    "DocumentDebugInfo": {
+      "type": "object",
+      "description": "Contains debugging information that can be used to further explore your search\nresults.",
+      "properties": {
+        "semantic": {
+          "$ref": "#/definitions/SemanticDebugInfo",
+          "description": "Contains debugging information specific to semantic ranking requests.",
+          "readOnly": true
+        },
+        "vectors": {
+          "$ref": "#/definitions/VectorsDebugInfo",
+          "description": "Contains debugging information specific to vector and hybrid search.",
+          "readOnly": true
+        }
+      }
     },
     "DocumentExtractionSkill": {
       "type": "object",
@@ -3714,6 +4983,186 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill"
+    },
+    "DocumentIntelligenceLayoutSkill": {
+      "type": "object",
+      "description": "A skill that extracts content and layout information (as markdown), via Azure\nAI Services, from files within the enrichment pipeline.",
+      "properties": {
+        "outputMode": {
+          "type": "string",
+          "description": "Controls the cardinality of the output produced by the skill. Default is\n'oneToMany'.",
+          "default": "oneToMany",
+          "enum": [
+            "oneToMany"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentIntelligenceLayoutSkillOutputMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "OneToMany",
+                "value": "oneToMany",
+                "description": "Specify the deepest markdown header section to parse."
+              }
+            ]
+          }
+        },
+        "markdownHeaderDepth": {
+          "type": "string",
+          "description": "The depth of headers in the markdown output. Default is h6.",
+          "default": "h6",
+          "enum": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "H1",
+                "value": "h1",
+                "description": "Header level 1."
+              },
+              {
+                "name": "H2",
+                "value": "h2",
+                "description": "Header level 2."
+              },
+              {
+                "name": "H3",
+                "value": "h3",
+                "description": "Header level 3."
+              },
+              {
+                "name": "H4",
+                "value": "h4",
+                "description": "Header level 4."
+              },
+              {
+                "name": "H5",
+                "value": "h5",
+                "description": "Header level 5."
+              },
+              {
+                "name": "H6",
+                "value": "h6",
+                "description": "Header level 6."
+              }
+            ]
+          }
+        },
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of skill.",
+          "enum": [
+            "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "odataType"
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill"
+    },
+    "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth": {
+      "type": "string",
+      "description": "The depth of headers in the markdown output. Default is h6.",
+      "enum": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "H1",
+            "value": "h1",
+            "description": "Header level 1."
+          },
+          {
+            "name": "H2",
+            "value": "h2",
+            "description": "Header level 2."
+          },
+          {
+            "name": "H3",
+            "value": "h3",
+            "description": "Header level 3."
+          },
+          {
+            "name": "H4",
+            "value": "h4",
+            "description": "Header level 4."
+          },
+          {
+            "name": "H5",
+            "value": "h5",
+            "description": "Header level 5."
+          },
+          {
+            "name": "H6",
+            "value": "h6",
+            "description": "Header level 6."
+          }
+        ]
+      }
+    },
+    "DocumentIntelligenceLayoutSkillOutputMode": {
+      "type": "string",
+      "description": "Controls the cardinality of the output produced by the skill. Default is\n'oneToMany'",
+      "enum": [
+        "oneToMany"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillOutputMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OneToMany",
+            "value": "oneToMany",
+            "description": "Specify the deepest markdown header section to parse."
+          }
+        ]
+      }
+    },
+    "DocumentKeysOrIds": {
+      "type": "object",
+      "description": "The type of the keysOrIds.",
+      "properties": {
+        "documentKeys": {
+          "type": "array",
+          "description": "document keys to be reset",
+          "items": {
+            "type": "string"
+          }
+        },
+        "datasourceDocumentIds": {
+          "type": "array",
+          "description": "datasource document identifiers to be reset",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "EdgeNGramTokenFilter": {
       "type": "object",
@@ -4316,8 +5765,7 @@
       "properties": {
         "exhaustiveKnnParameters": {
           "$ref": "#/definitions/ExhaustiveKnnParameters",
-          "description": "Contains the parameters specific to exhaustive KNN algorithm.",
-          "x-ms-client-name": "parameters"
+          "description": "Contains the parameters specific to exhaustive KNN algorithm."
         }
       },
       "allOf": [
@@ -4346,6 +5794,19 @@
           "format": "int64",
           "description": "The approximate count of documents falling within the bucket described by this\nfacet.",
           "readOnly": true
+        },
+        "@search.facets": {
+          "type": "object",
+          "description": "The nested facet query results for the search operation, organized as a\ncollection of buckets for each faceted field; null if the query did not contain\nany nested facets.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/FacetResult"
+            },
+            "type": "array",
+            "x-ms-identifiers": []
+          },
+          "readOnly": true,
+          "x-ms-client-name": "facets"
         }
       },
       "additionalProperties": {}
@@ -4395,8 +5856,7 @@
       "properties": {
         "freshness": {
           "$ref": "#/definitions/FreshnessScoringParameters",
-          "description": "Parameter values for the freshness scoring function.",
-          "x-ms-client-name": "parameters"
+          "description": "Parameter values for the freshness scoring function."
         }
       },
       "required": [
@@ -4489,8 +5949,7 @@
       "properties": {
         "hnswParameters": {
           "$ref": "#/definitions/HnswParameters",
-          "description": "Contains the parameters specific to HNSW algorithm.",
-          "x-ms-client-name": "parameters"
+          "description": "Contains the parameters specific to HNSW algorithm."
         }
       },
       "allOf": [
@@ -4531,6 +5990,45 @@
         "metric": {
           "$ref": "#/definitions/VectorSearchAlgorithmMetric",
           "description": "The similarity metric to use for vector comparisons."
+        }
+      }
+    },
+    "HybridCountAndFacetMode": {
+      "type": "string",
+      "description": "Determines whether the count and facets should includes all documents that\nmatched the search query, or only the documents that are retrieved within the\n'maxTextRecallSize' window. The default value is 'countAllResults'.",
+      "enum": [
+        "countRetrievableResults",
+        "countAllResults"
+      ],
+      "x-ms-enum": {
+        "name": "HybridCountAndFacetMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CountRetrievableResults",
+            "value": "countRetrievableResults",
+            "description": "Only include documents that were matched within the 'maxTextRecallSize'\nretrieval window when computing 'count' and 'facets'."
+          },
+          {
+            "name": "CountAllResults",
+            "value": "countAllResults",
+            "description": "Include all documents that were matched by the search query when computing\n'count' and 'facets', regardless of whether or not those documents are within\nthe 'maxTextRecallSize' retrieval window."
+          }
+        ]
+      }
+    },
+    "HybridSearch": {
+      "type": "object",
+      "description": "TThe query parameters to configure hybrid search behaviors.",
+      "properties": {
+        "maxTextRecallSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Determines the maximum number of documents to be retrieved by the text query\nportion of a hybrid search request. Those documents will be combined with the\ndocuments matching the vector queries to produce a single final list of\nresults. Choosing a larger maxTextRecallSize value will allow retrieving and\npaging through more documents (using the top and skip parameters), at the cost\nof higher resource utilization and higher latency. The value needs to be\nbetween 1 and 10,000. Default is 1000."
+        },
+        "countAndFacetMode": {
+          "$ref": "#/definitions/HybridCountAndFacetMode",
+          "description": "Determines whether the count and facets should includes all documents that\nmatched the search query, or only the documents that are retrieved within the\n'maxTextRecallSize' window."
         }
       }
     },
@@ -4984,7 +6482,6 @@
           "items": {
             "$ref": "#/definitions/IndexAction"
           },
-          "x-ms-client-name": "actions",
           "x-ms-identifiers": []
         }
       },
@@ -5003,7 +6500,6 @@
             "$ref": "#/definitions/IndexingResult"
           },
           "readOnly": true,
-          "x-ms-client-name": "results",
           "x-ms-identifiers": []
         }
       },
@@ -5033,6 +6529,53 @@
             "description": "The source document will be written into the indexer's target index. This is\nthe default pattern."
           }
         ]
+      }
+    },
+    "IndexerCurrentState": {
+      "type": "object",
+      "description": "Represents all of the state that defines and dictates the indexer's current\nexecution.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/IndexingMode",
+          "description": "The mode the indexer is running in.",
+          "readOnly": true
+        },
+        "allDocsInitialChangeTrackingState": {
+          "type": "string",
+          "description": "Change tracking state used when indexing starts on all documents in the\ndatasource.",
+          "readOnly": true
+        },
+        "allDocsFinalChangeTrackingState": {
+          "type": "string",
+          "description": "Change tracking state value when indexing finishes on all documents in the\ndatasource.",
+          "readOnly": true
+        },
+        "resetDocsInitialChangeTrackingState": {
+          "type": "string",
+          "description": "Change tracking state used when indexing starts on select, reset documents in\nthe datasource.",
+          "readOnly": true
+        },
+        "resetDocsFinalChangeTrackingState": {
+          "type": "string",
+          "description": "Change tracking state value when indexing finishes on select, reset documents\nin the datasource.",
+          "readOnly": true
+        },
+        "resetDocumentKeys": {
+          "type": "array",
+          "description": "The list of document keys that have been reset. The document key is the\ndocument's unique identifier for the data in the search index. The indexer will\nprioritize selectively re-ingesting these keys.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "resetDatasourceDocumentIds": {
+          "type": "array",
+          "description": "The list of datasource document ids that have been reset. The datasource\ndocument id is the unique identifier for the data in the datasource. The\nindexer will prioritize selectively re-ingesting these ids.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
       }
     },
     "IndexerExecutionEnvironment": {
@@ -5066,6 +6609,16 @@
         "status": {
           "$ref": "#/definitions/IndexerExecutionStatus",
           "description": "The outcome of this indexer execution.",
+          "readOnly": true
+        },
+        "statusDetail": {
+          "$ref": "#/definitions/IndexerExecutionStatusDetail",
+          "description": "The outcome of this indexer execution.",
+          "readOnly": true
+        },
+        "currentState": {
+          "$ref": "#/definitions/IndexerCurrentState",
+          "description": "All of the state that defines and dictates the indexer's current execution.",
           "readOnly": true
         },
         "errorMessage": {
@@ -5107,15 +6660,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of items that were processed during this indexer execution. This\nincludes both successfully processed items and items where indexing was\nattempted but failed.",
-          "readOnly": true,
-          "x-ms-client-name": "itemCount"
+          "readOnly": true
         },
         "itemsFailed": {
           "type": "integer",
           "format": "int32",
           "description": "The number of items that failed to be indexed during this indexer execution.",
-          "readOnly": true,
-          "x-ms-client-name": "failedItemCount"
+          "readOnly": true
         },
         "initialTrackingState": {
           "type": "string",
@@ -5172,6 +6723,24 @@
         ]
       }
     },
+    "IndexerExecutionStatusDetail": {
+      "type": "string",
+      "description": "Details the status of an individual indexer execution.",
+      "enum": [
+        "resetDocs"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionStatusDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResetDocs",
+            "value": "resetDocs",
+            "description": "Indicates that the reset that occurred was for a call to ResetDocs."
+          }
+        ]
+      }
+    },
     "IndexerStatus": {
       "type": "string",
       "description": "Represents the overall indexer status.",
@@ -5198,6 +6767,30 @@
             "name": "Running",
             "value": "running",
             "description": "Indicates that the indexer is running normally."
+          }
+        ]
+      }
+    },
+    "IndexingMode": {
+      "type": "string",
+      "description": "Represents the mode the indexer is executing in.",
+      "enum": [
+        "indexingAllDocs",
+        "indexingResetDocs"
+      ],
+      "x-ms-enum": {
+        "name": "IndexingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IndexingAllDocs",
+            "value": "indexingAllDocs",
+            "description": "The indexer is indexing all documents in the datasource."
+          },
+          {
+            "name": "IndexingResetDocs",
+            "value": "indexingResetDocs",
+            "description": "The indexer is indexing selective, reset documents in the datasource. The\ndocuments being indexed are defined on indexer status."
           }
         ]
       }
@@ -5241,7 +6834,8 @@
             "delimitedText",
             "json",
             "jsonArray",
-            "jsonLines"
+            "jsonLines",
+            "markdown"
           ],
           "x-ms-enum": {
             "name": "BlobIndexerParsingMode",
@@ -5276,6 +6870,11 @@
                 "name": "JsonLines",
                 "value": "jsonLines",
                 "description": "Set to jsonLines to extract individual JSON entities, separated by a new line,\nas separate documents."
+              },
+              {
+                "name": "Markdown",
+                "value": "markdown",
+                "description": "Set to markdown to extract content from markdown files."
               }
             ]
           }
@@ -5312,6 +6911,80 @@
           "type": "boolean",
           "description": "For CSV blobs, indicates that the first (non-blank) line of each blob contains\nheaders.",
           "default": true
+        },
+        "markdownParsingSubmode": {
+          "type": "string",
+          "description": "Specifies the submode that will determine whether a markdown file will be\nparsed into exactly one search document or multiple search documents. Default\nis `oneToMany`.",
+          "default": "oneToMany",
+          "enum": [
+            "oneToMany",
+            "oneToOne"
+          ],
+          "x-ms-enum": {
+            "name": "MarkdownParsingSubmode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "OneToMany",
+                "value": "oneToMany",
+                "description": "Indicates that each section of the markdown file (up to a specified depth) will\nbe parsed into individual search documents. This can result in a single\nmarkdown file producing multiple search documents. This is the default\nsub-mode."
+              },
+              {
+                "name": "OneToOne",
+                "value": "oneToOne",
+                "description": "Indicates that each markdown file will be parsed into a single search document."
+              }
+            ]
+          }
+        },
+        "markdownHeaderDepth": {
+          "type": "string",
+          "description": "Specifies the max header depth that will be considered while grouping markdown\ncontent. Default is `h6`.",
+          "default": "h6",
+          "enum": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "x-ms-enum": {
+            "name": "MarkdownHeaderDepth",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "h1",
+                "value": "h1",
+                "description": "Indicates that headers up to a level of h1 will be considered while grouping\nmarkdown content."
+              },
+              {
+                "name": "h2",
+                "value": "h2",
+                "description": "Indicates that headers up to a level of h2 will be considered while grouping\nmarkdown content."
+              },
+              {
+                "name": "h3",
+                "value": "h3",
+                "description": "Indicates that headers up to a level of h3 will be considered while grouping\nmarkdown content."
+              },
+              {
+                "name": "h4",
+                "value": "h4",
+                "description": "Indicates that headers up to a level of h4 will be considered while grouping\nmarkdown content."
+              },
+              {
+                "name": "h5",
+                "value": "h5",
+                "description": "Indicates that headers up to a level of h5 will be considered while grouping\nmarkdown content."
+              },
+              {
+                "name": "h6",
+                "value": "h6",
+                "description": "Indicates that headers up to a level of h6 will be considered while grouping\nmarkdown content. This is the default."
+              }
+            ]
+          }
         },
         "documentRoot": {
           "type": "string",
@@ -5458,8 +7131,7 @@
         "status": {
           "type": "boolean",
           "description": "A value indicating whether the indexing operation succeeded for the document\nidentified by the key.",
-          "readOnly": true,
-          "x-ms-client-name": "succeeded"
+          "readOnly": true
         },
         "statusCode": {
           "type": "integer",
@@ -5535,8 +7207,7 @@
         },
         "keepWordsCase": {
           "type": "boolean",
-          "description": "A value indicating whether to lower case all words first. Default is false.",
-          "x-ms-client-name": "lowerCaseKeepWords"
+          "description": "A value indicating whether to lower case all words first. Default is false."
         },
         "@odata.type": {
           "type": "string",
@@ -5853,16 +7524,14 @@
           "type": "integer",
           "format": "int32",
           "description": "The minimum length in characters. Default is 0. Maximum is 300. Must be less\nthan the value of max.",
-          "maximum": 300,
-          "x-ms-client-name": "minLength"
+          "maximum": 300
         },
         "max": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum length in characters. Default and maximum is 300.",
           "default": 300,
-          "maximum": 300,
-          "x-ms-client-name": "maxLength"
+          "maximum": 300
         },
         "@odata.type": {
           "type": "string",
@@ -6476,6 +8145,68 @@
         ]
       }
     },
+    "LexicalNormalizer": {
+      "type": "object",
+      "description": "Base type for normalizers.",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types.",
+          "x-ms-client-name": "odataType"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the char filter. It must only contain letters, digits, spaces,\ndashes or underscores, can only start and end with alphanumeric characters, and\nis limited to 128 characters."
+        }
+      },
+      "discriminator": "odataType",
+      "required": [
+        "@odata.type",
+        "name"
+      ]
+    },
+    "LexicalNormalizerName": {
+      "type": "string",
+      "description": "Defines the names of all text normalizers supported by the search engine.",
+      "enum": [
+        "asciifolding",
+        "elision",
+        "lowercase",
+        "standard",
+        "uppercase"
+      ],
+      "x-ms-enum": {
+        "name": "LexicalNormalizerName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AsciiFolding",
+            "value": "asciifolding",
+            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in\nthe first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their\nASCII equivalents, if such equivalents exist. See\nhttp://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html"
+          },
+          {
+            "name": "Elision",
+            "value": "elision",
+            "description": "Removes elisions. For example, \"l'avion\" (the plane) will be converted to\n\"avion\" (plane). See\nhttp://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html"
+          },
+          {
+            "name": "Lowercase",
+            "value": "lowercase",
+            "description": "Normalizes token text to lowercase. See\nhttps://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.html"
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "Standard normalizer, which consists of lowercase and asciifolding. See\nhttp://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html"
+          },
+          {
+            "name": "Uppercase",
+            "value": "uppercase",
+            "description": "Normalizes token text to uppercase. See\nhttps://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
+          }
+        ]
+      }
+    },
     "LexicalTokenizer": {
       "type": "object",
       "description": "Base type for tokenizers.",
@@ -6622,6 +8353,24 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.LimitTokenFilter"
     },
+    "ListAliasesResult": {
+      "type": "object",
+      "description": "Response from a List Aliases request. If successful, it includes the associated\nindex mappings for all aliases.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The aliases in the Search service.",
+          "items": {
+            "$ref": "#/definitions/SearchAliasItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ListDataSourcesResult": {
       "type": "object",
       "description": "Response from a List Datasources request. If successful, it includes the full\ndefinitions of all datasources.",
@@ -6633,7 +8382,6 @@
             "$ref": "#/definitions/SearchIndexerDataSourceItem"
           },
           "readOnly": true,
-          "x-ms-client-name": "dataSources",
           "x-ms-identifiers": []
         }
       },
@@ -6652,7 +8400,6 @@
             "$ref": "#/definitions/SearchIndexerItem"
           },
           "readOnly": true,
-          "x-ms-client-name": "indexers",
           "x-ms-identifiers": []
         }
       },
@@ -6671,7 +8418,6 @@
             "$ref": "#/definitions/SearchIndexItem"
           },
           "readOnly": true,
-          "x-ms-client-name": "indexes",
           "x-ms-identifiers": []
         }
       },
@@ -6690,7 +8436,6 @@
             "$ref": "#/definitions/SearchIndexerSkillsetItem"
           },
           "readOnly": true,
-          "x-ms-client-name": "skillsets",
           "x-ms-identifiers": []
         }
       },
@@ -6709,7 +8454,6 @@
             "$ref": "#/definitions/SynonymMapItem"
           },
           "readOnly": true,
-          "x-ms-client-name": "synonymMaps",
           "x-ms-identifiers": []
         }
       },
@@ -6828,8 +8572,7 @@
       "properties": {
         "magnitude": {
           "$ref": "#/definitions/MagnitudeScoringParameters",
-          "description": "Parameter values for the magnitude scoring function.",
-          "x-ms-client-name": "parameters"
+          "description": "Parameter values for the magnitude scoring function."
         }
       },
       "required": [
@@ -6858,8 +8601,7 @@
         },
         "constantBoostBeyondRange": {
           "type": "boolean",
-          "description": "A value indicating whether to apply a constant boost for field values beyond\nthe range end value; default is false.",
-          "x-ms-client-name": "shouldBoostBeyondRangeByConstant"
+          "description": "A value indicating whether to apply a constant boost for field values beyond\nthe range end value; default is false."
         }
       },
       "required": [
@@ -6900,6 +8642,78 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.MappingCharFilter"
+    },
+    "MarkdownHeaderDepth": {
+      "type": "string",
+      "description": "Specifies the max header depth that will be considered while grouping markdown\ncontent. Default is `h6`.",
+      "enum": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
+      "x-ms-enum": {
+        "name": "MarkdownHeaderDepth",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "h1",
+            "value": "h1",
+            "description": "Indicates that headers up to a level of h1 will be considered while grouping\nmarkdown content."
+          },
+          {
+            "name": "h2",
+            "value": "h2",
+            "description": "Indicates that headers up to a level of h2 will be considered while grouping\nmarkdown content."
+          },
+          {
+            "name": "h3",
+            "value": "h3",
+            "description": "Indicates that headers up to a level of h3 will be considered while grouping\nmarkdown content."
+          },
+          {
+            "name": "h4",
+            "value": "h4",
+            "description": "Indicates that headers up to a level of h4 will be considered while grouping\nmarkdown content."
+          },
+          {
+            "name": "h5",
+            "value": "h5",
+            "description": "Indicates that headers up to a level of h5 will be considered while grouping\nmarkdown content."
+          },
+          {
+            "name": "h6",
+            "value": "h6",
+            "description": "Indicates that headers up to a level of h6 will be considered while grouping\nmarkdown content. This is the default."
+          }
+        ]
+      }
+    },
+    "MarkdownParsingSubmode": {
+      "type": "string",
+      "description": "Specifies the submode that will determine whether a markdown file will be\nparsed into exactly one search document or multiple search documents. Default\nis `oneToMany`.",
+      "enum": [
+        "oneToMany",
+        "oneToOne"
+      ],
+      "x-ms-enum": {
+        "name": "MarkdownParsingSubmode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OneToMany",
+            "value": "oneToMany",
+            "description": "Indicates that each section of the markdown file (up to a specified depth) will\nbe parsed into individual search documents. This can result in a single\nmarkdown file producing multiple search documents. This is the default\nsub-mode."
+          },
+          {
+            "name": "OneToOne",
+            "value": "oneToOne",
+            "description": "Indicates that each markdown file will be parsed into a single search document."
+          }
+        ]
+      }
     },
     "MergeSkill": {
       "type": "object",
@@ -7690,6 +9504,32 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenizer"
     },
+    "NativeBlobSoftDeleteDeletionDetectionPolicy": {
+      "type": "object",
+      "description": "Defines a data deletion detection policy utilizing Azure Blob Storage's native\nsoft delete feature for deletion detection.",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of data deletion detection policy.",
+          "enum": [
+            "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "odataType"
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataDeletionDetectionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy"
+    },
     "OcrLineEnding": {
       "type": "string",
       "description": "Defines the sequence of characters to use between the lines of text recognized\nby the OCR skill. The default value is \"space\".",
@@ -7736,8 +9576,7 @@
         },
         "detectOrientation": {
           "type": "boolean",
-          "description": "A value indicating to turn orientation detection on or not. Default is false.",
-          "x-ms-client-name": "shouldDetectOrientation"
+          "description": "A value indicating to turn orientation detection on or not. Default is false."
         },
         "lineEnding": {
           "$ref": "#/definitions/OcrLineEnding",
@@ -8835,8 +10674,7 @@
         "maskingCharacter": {
           "type": "string",
           "description": "The character used to mask the text if the maskingMode parameter is set to\nreplace. Default is '*'.",
-          "maxLength": 1,
-          "x-ms-client-name": "mask"
+          "maxLength": 1
         },
         "modelVersion": {
           "type": "string",
@@ -8922,14 +10760,12 @@
         },
         "reverse": {
           "type": "boolean",
-          "description": "A value indicating whether to generate tokens in reverse order. Default is\nfalse.",
-          "x-ms-client-name": "reverseTokenOrder"
+          "description": "A value indicating whether to generate tokens in reverse order. Default is\nfalse."
         },
         "skip": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of initial tokens to skip. Default is 0.",
-          "x-ms-client-name": "numberOfTokensToSkip"
+          "description": "The number of initial tokens to skip. Default is 0."
         },
         "@odata.type": {
           "type": "string",
@@ -8960,8 +10796,7 @@
         "lowercase": {
           "type": "boolean",
           "description": "A value indicating whether terms should be lower-cased. Default is true.",
-          "default": true,
-          "x-ms-client-name": "lowerCaseTerms"
+          "default": true
         },
         "pattern": {
           "type": "string",
@@ -9228,8 +11063,7 @@
         "replace": {
           "type": "boolean",
           "description": "A value indicating whether encoded tokens should replace original tokens. If\nfalse, encoded tokens are added as synonyms. Default is true.",
-          "default": true,
-          "x-ms-client-name": "replaceOriginalTokens"
+          "default": true
         },
         "@odata.type": {
           "type": "string",
@@ -9283,7 +11117,7 @@
     },
     "QueryAnswerType": {
       "type": "string",
-      "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns answers extracted from key passages in the highest ranked documents.\nThe number of answers returned can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of answers>` option after the\nanswers parameter value, such as `extractive|count-3`. Default count is 1. The\nconfidence threshold can be configured by appending the pipe character `|`\nfollowed by the `threshold-<confidence threshold>` option after the answers\nparameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.",
+      "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns answers extracted from key passages in the highest ranked documents.\nThe number of answers returned can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of answers>` option after the\nanswers parameter value, such as `extractive|count-3`. Default count is 1. The\nconfidence threshold can be configured by appending the pipe character `|`\nfollowed by the `threshold-<confidence threshold>` option after the answers\nparameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.\nThe maximum character length of answers can be configured by appending the pipe\ncharacter '|' followed by the 'count-<number of maximum character length>',\nsuch as 'extractive|maxcharlength-600'.",
       "enum": [
         "none",
         "extractive"
@@ -9324,7 +11158,7 @@
     },
     "QueryCaptionType": {
       "type": "string",
-      "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns captions extracted from key passages in the highest ranked documents.\nWhen Captions is set to `extractive`, highlighting is enabled by default, and\ncan be configured by appending the pipe character `|` followed by the\n`highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults\nto `None`.",
+      "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns captions extracted from key passages in the highest ranked documents.\nWhen Captions is set to `extractive`, highlighting is enabled by default, and\ncan be configured by appending the pipe character `|` followed by the\n`highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults\nto `None`. The maximum character length of captions can be configured by\nappending the pipe character '|' followed by the 'count-<number of maximum\ncharacter length>', such as 'extractive|maxcharlength-600'.",
       "enum": [
         "none",
         "extractive"
@@ -9346,9 +11180,648 @@
         ]
       }
     },
+    "QueryDebugMode": {
+      "type": "string",
+      "description": "Enables a debugging tool that can be used to further explore your search\nresults. You can enable multiple debug modes simultaneously by separating them\nwith a | character, for example: semantic|queryRewrites.",
+      "enum": [
+        "disabled",
+        "semantic",
+        "vector",
+        "queryRewrites",
+        "all"
+      ],
+      "x-ms-enum": {
+        "name": "QueryDebugMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "No query debugging information will be returned."
+          },
+          {
+            "name": "Semantic",
+            "value": "semantic",
+            "description": "Allows the user to further explore their reranked results."
+          },
+          {
+            "name": "Vector",
+            "value": "vector",
+            "description": "Allows the user to further explore their hybrid and vector query results."
+          },
+          {
+            "name": "QueryRewrites",
+            "value": "queryRewrites",
+            "description": "Allows the user to explore the list of query rewrites generated for their\nsearch request."
+          },
+          {
+            "name": "All",
+            "value": "all",
+            "description": "Turn on all debug options."
+          }
+        ]
+      }
+    },
+    "QueryLanguage": {
+      "type": "string",
+      "description": "The language of the query.",
+      "enum": [
+        "none",
+        "en-us",
+        "en-gb",
+        "en-in",
+        "en-ca",
+        "en-au",
+        "fr-fr",
+        "fr-ca",
+        "de-de",
+        "es-es",
+        "es-mx",
+        "zh-cn",
+        "zh-tw",
+        "pt-br",
+        "pt-pt",
+        "it-it",
+        "ja-jp",
+        "ko-kr",
+        "ru-ru",
+        "cs-cz",
+        "nl-be",
+        "nl-nl",
+        "hu-hu",
+        "pl-pl",
+        "sv-se",
+        "tr-tr",
+        "hi-in",
+        "ar-sa",
+        "ar-eg",
+        "ar-ma",
+        "ar-kw",
+        "ar-jo",
+        "da-dk",
+        "no-no",
+        "bg-bg",
+        "hr-hr",
+        "hr-ba",
+        "ms-my",
+        "ms-bn",
+        "sl-sl",
+        "ta-in",
+        "vi-vn",
+        "el-gr",
+        "ro-ro",
+        "is-is",
+        "id-id",
+        "th-th",
+        "lt-lt",
+        "uk-ua",
+        "lv-lv",
+        "et-ee",
+        "ca-es",
+        "fi-fi",
+        "sr-ba",
+        "sr-me",
+        "sr-rs",
+        "sk-sk",
+        "nb-no",
+        "hy-am",
+        "bn-in",
+        "eu-es",
+        "gl-es",
+        "gu-in",
+        "he-il",
+        "ga-ie",
+        "kn-in",
+        "ml-in",
+        "mr-in",
+        "fa-ae",
+        "pa-in",
+        "te-in",
+        "ur-pk"
+      ],
+      "x-ms-enum": {
+        "name": "QueryLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Query language not specified."
+          },
+          {
+            "name": "EnUs",
+            "value": "en-us",
+            "description": "Query language value for English (United States)."
+          },
+          {
+            "name": "EnGb",
+            "value": "en-gb",
+            "description": "Query language value for English (Great Britain)."
+          },
+          {
+            "name": "EnIn",
+            "value": "en-in",
+            "description": "Query language value for English (India)."
+          },
+          {
+            "name": "EnCa",
+            "value": "en-ca",
+            "description": "Query language value for English (Canada)."
+          },
+          {
+            "name": "EnAu",
+            "value": "en-au",
+            "description": "Query language value for English (Australia)."
+          },
+          {
+            "name": "FrFr",
+            "value": "fr-fr",
+            "description": "Query language value for French (France)."
+          },
+          {
+            "name": "FrCa",
+            "value": "fr-ca",
+            "description": "Query language value for French (Canada)."
+          },
+          {
+            "name": "DeDe",
+            "value": "de-de",
+            "description": "Query language value for German (Germany)."
+          },
+          {
+            "name": "EsEs",
+            "value": "es-es",
+            "description": "Query language value for Spanish (Spain)."
+          },
+          {
+            "name": "EsMx",
+            "value": "es-mx",
+            "description": "Query language value for Spanish (Mexico)."
+          },
+          {
+            "name": "ZhCn",
+            "value": "zh-cn",
+            "description": "Query language value for Chinese (China)."
+          },
+          {
+            "name": "ZhTw",
+            "value": "zh-tw",
+            "description": "Query language value for Chinese (Taiwan)."
+          },
+          {
+            "name": "PtBr",
+            "value": "pt-br",
+            "description": "Query language value for Portuguese (Brazil)."
+          },
+          {
+            "name": "PtPt",
+            "value": "pt-pt",
+            "description": "Query language value for Portuguese (Portugal)."
+          },
+          {
+            "name": "ItIt",
+            "value": "it-it",
+            "description": "Query language value for Italian (Italy)."
+          },
+          {
+            "name": "JaJp",
+            "value": "ja-jp",
+            "description": "Query language value for Japanese (Japan)."
+          },
+          {
+            "name": "KoKr",
+            "value": "ko-kr",
+            "description": "Query language value for Korean (Korea)."
+          },
+          {
+            "name": "RuRu",
+            "value": "ru-ru",
+            "description": "Query language value for Russian (Russia)."
+          },
+          {
+            "name": "CsCz",
+            "value": "cs-cz",
+            "description": "Query language value for Czech (Czech Republic)."
+          },
+          {
+            "name": "NlBe",
+            "value": "nl-be",
+            "description": "Query language value for Dutch (Belgium)."
+          },
+          {
+            "name": "NlNl",
+            "value": "nl-nl",
+            "description": "Query language value for Dutch (Netherlands)."
+          },
+          {
+            "name": "HuHu",
+            "value": "hu-hu",
+            "description": "Query language value for Hungarian (Hungary)."
+          },
+          {
+            "name": "PlPl",
+            "value": "pl-pl",
+            "description": "Query language value for Polish (Poland)."
+          },
+          {
+            "name": "SvSe",
+            "value": "sv-se",
+            "description": "Query language value for Swedish (Sweden)."
+          },
+          {
+            "name": "TrTr",
+            "value": "tr-tr",
+            "description": "Query language value for Turkish (Turkey)."
+          },
+          {
+            "name": "HiIn",
+            "value": "hi-in",
+            "description": "Query language value for Hindi (India)."
+          },
+          {
+            "name": "ArSa",
+            "value": "ar-sa",
+            "description": "Query language value for Arabic (Saudi Arabia)."
+          },
+          {
+            "name": "ArEg",
+            "value": "ar-eg",
+            "description": "Query language value for Arabic (Egypt)."
+          },
+          {
+            "name": "ArMa",
+            "value": "ar-ma",
+            "description": "Query language value for Arabic (Morocco)."
+          },
+          {
+            "name": "ArKw",
+            "value": "ar-kw",
+            "description": "Query language value for Arabic (Kuwait)."
+          },
+          {
+            "name": "ArJo",
+            "value": "ar-jo",
+            "description": "Query language value for Arabic (Jordan)."
+          },
+          {
+            "name": "DaDk",
+            "value": "da-dk",
+            "description": "Query language value for Danish (Denmark)."
+          },
+          {
+            "name": "NoNo",
+            "value": "no-no",
+            "description": "Query language value for Norwegian (Norway)."
+          },
+          {
+            "name": "BgBg",
+            "value": "bg-bg",
+            "description": "Query language value for Bulgarian (Bulgaria)."
+          },
+          {
+            "name": "HrHr",
+            "value": "hr-hr",
+            "description": "Query language value for Croatian (Croatia)."
+          },
+          {
+            "name": "HrBa",
+            "value": "hr-ba",
+            "description": "Query language value for Croatian (Bosnia and Herzegovina)."
+          },
+          {
+            "name": "MsMy",
+            "value": "ms-my",
+            "description": "Query language value for Malay (Malaysia)."
+          },
+          {
+            "name": "MsBn",
+            "value": "ms-bn",
+            "description": "Query language value for Malay (Brunei Darussalam)."
+          },
+          {
+            "name": "SlSl",
+            "value": "sl-sl",
+            "description": "Query language value for Slovenian (Slovenia)."
+          },
+          {
+            "name": "TaIn",
+            "value": "ta-in",
+            "description": "Query language value for Tamil (India)."
+          },
+          {
+            "name": "ViVn",
+            "value": "vi-vn",
+            "description": "Query language value for Vietnamese (Viet Nam)."
+          },
+          {
+            "name": "ElGr",
+            "value": "el-gr",
+            "description": "Query language value for Greek (Greece)."
+          },
+          {
+            "name": "RoRo",
+            "value": "ro-ro",
+            "description": "Query language value for Romanian (Romania)."
+          },
+          {
+            "name": "IsIs",
+            "value": "is-is",
+            "description": "Query language value for Icelandic (Iceland)."
+          },
+          {
+            "name": "IdId",
+            "value": "id-id",
+            "description": "Query language value for Indonesian (Indonesia)."
+          },
+          {
+            "name": "ThTh",
+            "value": "th-th",
+            "description": "Query language value for Thai (Thailand)."
+          },
+          {
+            "name": "LtLt",
+            "value": "lt-lt",
+            "description": "Query language value for Lithuanian (Lithuania)."
+          },
+          {
+            "name": "UkUa",
+            "value": "uk-ua",
+            "description": "Query language value for Ukrainian (Ukraine)."
+          },
+          {
+            "name": "LvLv",
+            "value": "lv-lv",
+            "description": "Query language value for Latvian (Latvia)."
+          },
+          {
+            "name": "EtEe",
+            "value": "et-ee",
+            "description": "Query language value for Estonian (Estonia)."
+          },
+          {
+            "name": "CaEs",
+            "value": "ca-es",
+            "description": "Query language value for Catalan."
+          },
+          {
+            "name": "FiFi",
+            "value": "fi-fi",
+            "description": "Query language value for Finnish (Finland)."
+          },
+          {
+            "name": "SrBa",
+            "value": "sr-ba",
+            "description": "Query language value for Serbian (Bosnia and Herzegovina)."
+          },
+          {
+            "name": "SrMe",
+            "value": "sr-me",
+            "description": "Query language value for Serbian (Montenegro)."
+          },
+          {
+            "name": "SrRs",
+            "value": "sr-rs",
+            "description": "Query language value for Serbian (Serbia)."
+          },
+          {
+            "name": "SkSk",
+            "value": "sk-sk",
+            "description": "Query language value for Slovak (Slovakia)."
+          },
+          {
+            "name": "NbNo",
+            "value": "nb-no",
+            "description": "Query language value for Norwegian (Norway)."
+          },
+          {
+            "name": "HyAm",
+            "value": "hy-am",
+            "description": "Query language value for Armenian (Armenia)."
+          },
+          {
+            "name": "BnIn",
+            "value": "bn-in",
+            "description": "Query language value for Bengali (India)."
+          },
+          {
+            "name": "EuEs",
+            "value": "eu-es",
+            "description": "Query language value for Basque."
+          },
+          {
+            "name": "GlEs",
+            "value": "gl-es",
+            "description": "Query language value for Galician."
+          },
+          {
+            "name": "GuIn",
+            "value": "gu-in",
+            "description": "Query language value for Gujarati (India)."
+          },
+          {
+            "name": "HeIl",
+            "value": "he-il",
+            "description": "Query language value for Hebrew (Israel)."
+          },
+          {
+            "name": "GaIe",
+            "value": "ga-ie",
+            "description": "Query language value for Irish (Ireland)."
+          },
+          {
+            "name": "KnIn",
+            "value": "kn-in",
+            "description": "Query language value for Kannada (India)."
+          },
+          {
+            "name": "MlIn",
+            "value": "ml-in",
+            "description": "Query language value for Malayalam (India)."
+          },
+          {
+            "name": "MrIn",
+            "value": "mr-in",
+            "description": "Query language value for Marathi (India)."
+          },
+          {
+            "name": "FaAe",
+            "value": "fa-ae",
+            "description": "Query language value for Persian (U.A.E.)."
+          },
+          {
+            "name": "PaIn",
+            "value": "pa-in",
+            "description": "Query language value for Punjabi (India)."
+          },
+          {
+            "name": "TeIn",
+            "value": "te-in",
+            "description": "Query language value for Telugu (India)."
+          },
+          {
+            "name": "UrPk",
+            "value": "ur-pk",
+            "description": "Query language value for Urdu (Pakistan)."
+          }
+        ]
+      }
+    },
+    "QueryResultDocumentRerankerInput": {
+      "type": "object",
+      "description": "The raw concatenated strings that were sent to the semantic enrichment process.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The raw string for the title field that was used for semantic enrichment.",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "description": "The raw concatenated strings for the content fields that were used for semantic\nenrichment.",
+          "readOnly": true
+        },
+        "keywords": {
+          "type": "string",
+          "description": "The raw concatenated strings for the keyword fields that were used for semantic\nenrichment.",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryResultDocumentSemanticField": {
+      "type": "object",
+      "description": "Description of fields that were sent to the semantic enrichment process, as\nwell as how they were used",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field that was sent to the semantic enrichment process",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/SemanticFieldState",
+          "description": "The way the field was used for the semantic enrichment process (fully used,\npartially used, or unused)",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryResultDocumentSubscores": {
+      "type": "object",
+      "description": "The breakdown of subscores between the text and vector query components of the\nsearch query for this document. Each vector query is shown as a separate object\nin the same order they were received.",
+      "properties": {
+        "text": {
+          "$ref": "#/definitions/TextResult",
+          "description": "The BM25 or Classic score for the text portion of the query.",
+          "readOnly": true
+        },
+        "vectors": {
+          "type": "array",
+          "description": "The vector similarity and @search.score values for each vector query.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/SingleVectorFieldResult"
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "documentBoost": {
+          "type": "number",
+          "format": "double",
+          "description": "The BM25 or Classic score for the text portion of the query.",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryRewritesDebugInfo": {
+      "type": "object",
+      "description": "Contains debugging information specific to query rewrites.",
+      "properties": {
+        "text": {
+          "$ref": "#/definitions/QueryRewritesValuesDebugInfo",
+          "description": "List of query rewrites generated for the text query.",
+          "readOnly": true
+        },
+        "vectors": {
+          "type": "array",
+          "description": "List of query rewrites generated for the vectorizable text queries.",
+          "items": {
+            "$ref": "#/definitions/QueryRewritesValuesDebugInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryRewritesType": {
+      "type": "string",
+      "description": "This parameter is only valid if the query type is `semantic`. When\nQueryRewrites is set to `generative`, the query terms are sent to a generate\nmodel which will produce 10 (default) rewrites to help increase the recall of\nthe request. The requested count can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of rewrites>` option, such as\n`generative|count-3`. Defaults to `None`.",
+      "enum": [
+        "none",
+        "generative"
+      ],
+      "x-ms-enum": {
+        "name": "QueryRewritesType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Do not generate additional query rewrites for this query."
+          },
+          {
+            "name": "Generative",
+            "value": "generative",
+            "description": "Generate alternative query terms to increase the recall of a search request."
+          }
+        ]
+      }
+    },
+    "QueryRewritesValuesDebugInfo": {
+      "type": "object",
+      "description": "Contains debugging information specific to query rewrites.",
+      "properties": {
+        "inputQuery": {
+          "type": "string",
+          "description": "The input text to the generative query rewriting model. There may be cases\nwhere the user query and the input to the generative model are not identical.",
+          "readOnly": true
+        },
+        "rewrites": {
+          "type": "array",
+          "description": "List of query rewrites.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "QuerySpellerType": {
+      "type": "string",
+      "description": "Improve search recall by spell-correcting individual search query terms.",
+      "enum": [
+        "none",
+        "lexicon"
+      ],
+      "x-ms-enum": {
+        "name": "QuerySpellerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Speller not enabled."
+          },
+          {
+            "name": "Lexicon",
+            "value": "lexicon",
+            "description": "Speller corrects individual query terms using a static lexicon for the language\nspecified by the queryLanguage parameter."
+          }
+        ]
+      }
+    },
     "QueryType": {
       "type": "string",
-      "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full'\nif your query uses the Lucene query syntax.",
+      "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full'\nif your query uses the Lucene query syntax and 'semantic' if query syntax is\nnot needed.",
       "enum": [
         "simple",
         "full",
@@ -9436,6 +11909,26 @@
         ]
       }
     },
+    "RescoringOptions": {
+      "type": "object",
+      "description": "Contains the options for rescoring.",
+      "properties": {
+        "enableRescoring": {
+          "type": "boolean",
+          "description": "If set to true, after the initial search on the compressed vectors, the\nsimilarity scores are recalculated using the full-precision vectors. This will\nimprove recall at the expense of latency.",
+          "default": true
+        },
+        "defaultOversampling": {
+          "type": "number",
+          "format": "double",
+          "description": "Default oversampling factor. Oversampling retrieves a greater set of potential\ndocuments to offset the resolution loss due to quantization. This increases the\nset of results that will be rescored on full-precision vectors. Minimum value\nis 1, meaning no oversampling (1x). This parameter can only be set when\n'enableRescoring' is true. Higher values improve recall at the expense of\nlatency."
+        },
+        "rescoreStorageMethod": {
+          "$ref": "#/definitions/VectorSearchCompressionRescoreStorageMethod",
+          "description": "Controls the storage method for original vectors. This setting is immutable."
+        }
+      }
+    },
     "ResourceCounter": {
       "type": "object",
       "description": "Represents a resource's usage and quota.",
@@ -9461,8 +11954,7 @@
       "properties": {
         "scalarQuantizationParameters": {
           "$ref": "#/definitions/ScalarQuantizationParameters",
-          "description": "Contains the parameters specific to Scalar Quantization.",
-          "x-ms-client-name": "parameters"
+          "description": "Contains the parameters specific to Scalar Quantization."
         }
       },
       "allOf": [
@@ -9486,10 +11978,6 @@
       "type": "object",
       "description": "Base type for functions that can modify document scores during ranking.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Discriminator property for ScoringFunction."
-        },
         "fieldName": {
           "type": "string",
           "description": "The name of the field used as input to the scoring function."
@@ -9503,17 +11991,16 @@
           "$ref": "#/definitions/ScoringFunctionInterpolation",
           "description": "A value indicating how boosting will be interpolated across document scores;\ndefaults to \"Linear\"."
         },
-        "kind": {
+        "type": {
           "type": "string",
           "description": "Type of ScoringFunction."
         }
       },
       "discriminator": "type",
       "required": [
-        "type",
         "fieldName",
         "boost",
-        "kind"
+        "type"
       ]
     },
     "ScoringFunctionAggregation": {
@@ -9604,8 +12091,7 @@
         },
         "text": {
           "$ref": "#/definitions/TextWeights",
-          "description": "Parameters that boost scoring based on text matches in certain index fields.",
-          "x-ms-client-name": "textWeights"
+          "description": "Parameters that boost scoring based on text matches in certain index fields."
         },
         "functions": {
           "type": "array",
@@ -9648,6 +12134,146 @@
         ]
       }
     },
+    "SearchAlias": {
+      "type": "object",
+      "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the alias."
+        },
+        "indexes": {
+          "type": "array",
+          "description": "The name of the index this alias maps to. Only one index name may be specified.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "@odata.etag": {
+          "type": "string",
+          "description": "The ETag of the alias.",
+          "x-ms-client-name": "eTag"
+        }
+      },
+      "required": [
+        "name",
+        "indexes"
+      ]
+    },
+    "SearchAliasCreate": {
+      "type": "object",
+      "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+      "properties": {
+        "_": {
+          "type": "number",
+          "description": "Succesfully created or updated",
+          "enum": [
+            200,
+            201
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the alias."
+        },
+        "indexes": {
+          "type": "array",
+          "description": "The name of the index this alias maps to. Only one index name may be specified.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "@odata.etag": {
+          "type": "string",
+          "description": "The ETag of the alias.",
+          "x-ms-client-name": "eTag"
+        }
+      },
+      "required": [
+        "_",
+        "name",
+        "indexes"
+      ]
+    },
+    "SearchAliasCreateOrUpdate": {
+      "type": "object",
+      "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+      "properties": {
+        "_": {
+          "type": "number",
+          "description": "Succesfully created or updated",
+          "enum": [
+            200,
+            201
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the alias."
+        },
+        "indexes": {
+          "type": "array",
+          "description": "The name of the index this alias maps to. Only one index name may be specified.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "@odata.etag": {
+          "type": "string",
+          "description": "The ETag of the alias.",
+          "x-ms-client-name": "eTag"
+        }
+      },
+      "required": [
+        "_",
+        "name",
+        "indexes"
+      ]
+    },
+    "SearchAliasItem": {
+      "type": "object",
+      "description": "Represents an index alias, which describes a mapping from the alias name to an\nindex. The alias name can be used in place of the index name for supported\noperations.",
+      "properties": {
+        "_": {
+          "type": "number",
+          "description": "Succesfully created or updated",
+          "enum": [
+            200,
+            201
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the alias."
+        },
+        "indexes": {
+          "type": "array",
+          "description": "The name of the index this alias maps to. Only one index name may be specified.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "@odata.etag": {
+          "type": "string",
+          "description": "The ETag of the alias.",
+          "x-ms-client-name": "eTag"
+        }
+      },
+      "required": [
+        "_",
+        "name",
+        "indexes"
+      ]
+    },
     "SearchDocumentsResult": {
       "type": "object",
       "description": "Response containing search results from an index.",
@@ -9689,6 +12315,12 @@
           "x-ms-client-name": "answers",
           "x-ms-identifiers": []
         },
+        "@search.debugInfo": {
+          "$ref": "#/definitions/DebugInfo",
+          "description": "Debug information that applies to the search results as a whole.",
+          "readOnly": true,
+          "x-ms-client-name": "debugInfo"
+        },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
           "description": "Continuation JSON payload returned when the query can't return all the\nrequested results in a single response. You can use this JSON along with\n@odata.nextLink to formulate another POST Search request to get the next part\nof the search response.",
@@ -9702,7 +12334,6 @@
             "$ref": "#/definitions/SearchResult"
           },
           "readOnly": true,
-          "x-ms-client-name": "results",
           "x-ms-identifiers": []
         },
         "@odata.nextLink": {
@@ -9722,6 +12353,12 @@
           "description": "Type of partial response that was returned for a semantic ranking request.",
           "readOnly": true,
           "x-ms-client-name": "semanticPartialResponseType"
+        },
+        "@search.semanticQueryRewritesResultType": {
+          "$ref": "#/definitions/SemanticQueryRewritesResultType",
+          "description": "Type of query rewrite that was used to retrieve documents.",
+          "readOnly": true,
+          "x-ms-client-name": "semanticQueryRewritesResultType"
         }
       },
       "required": [
@@ -9780,23 +12417,24 @@
           "$ref": "#/definitions/LexicalAnalyzerName",
           "description": "The name of the analyzer used at indexing time for the field. This option can\nbe used only with searchable fields. It must be set together with\nsearchAnalyzer and it cannot be set together with the analyzer option.  This\nproperty cannot be set to the name of a language analyzer; use the analyzer\nproperty instead if you need a language analyzer. Once the analyzer is chosen,\nit cannot be changed for the field. Must be null for complex fields."
         },
+        "normalizer": {
+          "$ref": "#/definitions/LexicalNormalizerName",
+          "description": "The name of the normalizer to use for the field. This option can be used only\nwith fields with filterable, sortable, or facetable enabled. Once the\nnormalizer is chosen, it cannot be changed for the field. Must be null for\ncomplex fields."
+        },
         "dimensions": {
           "type": "integer",
           "format": "int32",
           "description": "The dimensionality of the vector field.",
           "minimum": 2,
-          "maximum": 2048,
-          "x-ms-client-name": "vectorSearchDimensions"
+          "maximum": 2048
         },
         "vectorSearchProfile": {
           "type": "string",
-          "description": "The name of the vector search profile that specifies the algorithm and\nvectorizer to use when searching the vector field.",
-          "x-ms-client-name": "vectorSearchProfileName"
+          "description": "The name of the vector search profile that specifies the algorithm and\nvectorizer to use when searching the vector field."
         },
         "vectorEncoding": {
           "$ref": "#/definitions/VectorEncodingFormat",
-          "description": "The encoding format to interpret the field contents.",
-          "x-ms-client-name": "vectorEncodingFormat"
+          "description": "The encoding format to interpret the field contents."
         },
         "synonymMaps": {
           "type": "array",
@@ -9981,6 +12619,14 @@
           },
           "x-ms-identifiers": []
         },
+        "normalizers": {
+          "type": "array",
+          "description": "The normalizers for the index.",
+          "items": {
+            "$ref": "#/definitions/LexicalNormalizer"
+          },
+          "x-ms-identifiers": []
+        },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
@@ -9991,8 +12637,7 @@
         },
         "semantic": {
           "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities.",
-          "x-ms-client-name": "semanticSearch"
+          "description": "Defines parameters for a search index that influence semantic capabilities."
         },
         "vectorSearch": {
           "$ref": "#/definitions/VectorSearch",
@@ -10092,6 +12737,14 @@
           },
           "x-ms-identifiers": []
         },
+        "normalizers": {
+          "type": "array",
+          "description": "The normalizers for the index.",
+          "items": {
+            "$ref": "#/definitions/LexicalNormalizer"
+          },
+          "x-ms-identifiers": []
+        },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
@@ -10102,8 +12755,7 @@
         },
         "semantic": {
           "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities.",
-          "x-ms-client-name": "semanticSearch"
+          "description": "Defines parameters for a search index that influence semantic capabilities."
         },
         "vectorSearch": {
           "$ref": "#/definitions/VectorSearch",
@@ -10204,6 +12856,14 @@
           },
           "x-ms-identifiers": []
         },
+        "normalizers": {
+          "type": "array",
+          "description": "The normalizers for the index.",
+          "items": {
+            "$ref": "#/definitions/LexicalNormalizer"
+          },
+          "x-ms-identifiers": []
+        },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
@@ -10214,8 +12874,7 @@
         },
         "semantic": {
           "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities.",
-          "x-ms-client-name": "semanticSearch"
+          "description": "Defines parameters for a search index that influence semantic capabilities."
         },
         "vectorSearch": {
           "$ref": "#/definitions/VectorSearch",
@@ -10316,6 +12975,14 @@
           },
           "x-ms-identifiers": []
         },
+        "normalizers": {
+          "type": "array",
+          "description": "The normalizers for the index.",
+          "items": {
+            "$ref": "#/definitions/LexicalNormalizer"
+          },
+          "x-ms-identifiers": []
+        },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
@@ -10326,8 +12993,7 @@
         },
         "semantic": {
           "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities.",
-          "x-ms-client-name": "semanticSearch"
+          "description": "Defines parameters for a search index that influence semantic capabilities."
         },
         "vectorSearch": {
           "$ref": "#/definitions/VectorSearch",
@@ -10395,8 +13061,7 @@
         },
         "disabled": {
           "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false.",
-          "x-ms-client-name": "isDisabled"
+          "description": "A value indicating whether the indexer is disabled. Default is false."
         },
         "@odata.etag": {
           "type": "string",
@@ -10406,6 +13071,10 @@
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your indexer\ndefinition (as well as indexer execution status) when you want full assurance\nthat no one, not even Microsoft, can decrypt them. Once you have encrypted your\nindexer definition, it will always remain encrypted. The search service will\nignore attempts to set this property to null. You can change this property as\nneeded if you want to rotate your encryption key; Your indexer definition (and\nindexer execution status) will be unaffected. Encryption with customer-managed\nkeys is not available for free search services, and is only available for paid\nservices created on or after January 1, 2019."
+        },
+        "cache": {
+          "$ref": "#/definitions/SearchIndexerCache",
+          "description": "Adds caching to an enrichment pipeline to allow for incremental modification\nsteps without having to rebuild the index every time."
         }
       },
       "required": [
@@ -10413,6 +13082,24 @@
         "dataSourceName",
         "targetIndexName"
       ]
+    },
+    "SearchIndexerCache": {
+      "type": "object",
+      "description": "The type of the cache.",
+      "properties": {
+        "storageConnectionString": {
+          "type": "string",
+          "description": "The connection string to the storage account where the cache data will be\npersisted."
+        },
+        "enableReprocessing": {
+          "type": "boolean",
+          "description": "Specifies whether incremental reprocessing is enabled."
+        },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "The user-assigned managed identity used for connections to the enrichment\ncache.  If the connection string indicates an identity (ResourceId) and it's\nnot specified, the system-assigned managed identity is used. On updates to the\nindexer, if the identity is unspecified, the value remains unchanged. If set to\n\"none\", the value of this property is cleared."
+        }
+      }
     },
     "SearchIndexerCreate": {
       "type": "object",
@@ -10475,8 +13162,7 @@
         },
         "disabled": {
           "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false.",
-          "x-ms-client-name": "isDisabled"
+          "description": "A value indicating whether the indexer is disabled. Default is false."
         },
         "@odata.etag": {
           "type": "string",
@@ -10486,6 +13172,10 @@
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your indexer\ndefinition (as well as indexer execution status) when you want full assurance\nthat no one, not even Microsoft, can decrypt them. Once you have encrypted your\nindexer definition, it will always remain encrypted. The search service will\nignore attempts to set this property to null. You can change this property as\nneeded if you want to rotate your encryption key; Your indexer definition (and\nindexer execution status) will be unaffected. Encryption with customer-managed\nkeys is not available for free search services, and is only available for paid\nservices created on or after January 1, 2019."
+        },
+        "cache": {
+          "$ref": "#/definitions/SearchIndexerCache",
+          "description": "Adds caching to an enrichment pipeline to allow for incremental modification\nsteps without having to rebuild the index every time."
         }
       },
       "required": [
@@ -10556,8 +13246,7 @@
         },
         "disabled": {
           "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false.",
-          "x-ms-client-name": "isDisabled"
+          "description": "A value indicating whether the indexer is disabled. Default is false."
         },
         "@odata.etag": {
           "type": "string",
@@ -10567,6 +13256,10 @@
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your indexer\ndefinition (as well as indexer execution status) when you want full assurance\nthat no one, not even Microsoft, can decrypt them. Once you have encrypted your\nindexer definition, it will always remain encrypted. The search service will\nignore attempts to set this property to null. You can change this property as\nneeded if you want to rotate your encryption key; Your indexer definition (and\nindexer execution status) will be unaffected. Encryption with customer-managed\nkeys is not available for free search services, and is only available for paid\nservices created on or after January 1, 2019."
+        },
+        "cache": {
+          "$ref": "#/definitions/SearchIndexerCache",
+          "description": "Adds caching to an enrichment pipeline to allow for incremental modification\nsteps without having to rebuild the index every time."
         }
       },
       "required": [
@@ -10658,6 +13351,10 @@
           "$ref": "#/definitions/SearchIndexerDataContainer",
           "description": "The data container for the datasource."
         },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit managed identity to use for this datasource. If not specified and\nthe connection string is a managed identity, the system-assigned managed\nidentity is used. If not specified, the value remains unchanged. If \"none\" is\nspecified, the value of this property is cleared."
+        },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
           "description": "The data change detection policy for the datasource."
@@ -10717,6 +13414,10 @@
         "container": {
           "$ref": "#/definitions/SearchIndexerDataContainer",
           "description": "The data container for the datasource."
+        },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit managed identity to use for this datasource. If not specified and\nthe connection string is a managed identity, the system-assigned managed\nidentity is used. If not specified, the value remains unchanged. If \"none\" is\nspecified, the value of this property is cleared."
         },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
@@ -10779,6 +13480,10 @@
           "$ref": "#/definitions/SearchIndexerDataContainer",
           "description": "The data container for the datasource."
         },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit managed identity to use for this datasource. If not specified and\nthe connection string is a managed identity, the system-assigned managed\nidentity is used. If not specified, the value remains unchanged. If \"none\" is\nspecified, the value of this property is cleared."
+        },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
           "description": "The data change detection policy for the datasource."
@@ -10840,6 +13545,10 @@
           "$ref": "#/definitions/SearchIndexerDataContainer",
           "description": "The data container for the datasource."
         },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit managed identity to use for this datasource. If not specified and\nthe connection string is a managed identity, the system-assigned managed\nidentity is used. If not specified, the value remains unchanged. If \"none\" is\nspecified, the value of this property is cleared."
+        },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
           "description": "The data change detection policy for the datasource."
@@ -10875,7 +13584,8 @@
         "azureblob",
         "azuretable",
         "mysql",
-        "adlsgen2"
+        "adlsgen2",
+        "onelake"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -10910,6 +13620,11 @@
             "name": "AdlsGen2",
             "value": "adlsgen2",
             "description": "Indicates an ADLS Gen2 datasource."
+          },
+          {
+            "name": "OneLake",
+            "value": "onelake",
+            "description": "Indicates a Microsoft Fabric OneLake datasource."
           }
         ]
       }
@@ -10920,8 +13635,7 @@
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
-          "description": "The fully qualified Azure resource Id of a user assigned managed identity\ntypically in the form\n\"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\"\nthat should have been assigned to the search service.",
-          "x-ms-client-name": "resourceId"
+          "description": "The fully qualified Azure resource Id of a user assigned managed identity\ntypically in the form\n\"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\"\nthat should have been assigned to the search service."
         },
         "@odata.type": {
           "type": "string",
@@ -11112,8 +13826,7 @@
         },
         "disabled": {
           "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false.",
-          "x-ms-client-name": "isDisabled"
+          "description": "A value indicating whether the indexer is disabled. Default is false."
         },
         "@odata.etag": {
           "type": "string",
@@ -11123,6 +13836,10 @@
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your indexer\ndefinition (as well as indexer execution status) when you want full assurance\nthat no one, not even Microsoft, can decrypt them. Once you have encrypted your\nindexer definition, it will always remain encrypted. The search service will\nignore attempts to set this property to null. You can change this property as\nneeded if you want to rotate your encryption key; Your indexer definition (and\nindexer execution status) will be unaffected. Encryption with customer-managed\nkeys is not available for free search services, and is only available for paid\nservices created on or after January 1, 2019."
+        },
+        "cache": {
+          "$ref": "#/definitions/SearchIndexerCache",
+          "description": "Adds caching to an enrichment pipeline to allow for incremental modification\nsteps without having to rebuild the index every time."
         }
       },
       "required": [
@@ -11147,6 +13864,14 @@
             "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjection"
           },
           "x-ms-identifiers": []
+        },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "The user-assigned managed identity used for connections to Azure Storage when\nwriting knowledge store projections. If the connection string indicates an\nidentity (ResourceId) and it's not specified, the system-assigned managed\nidentity is used. On updates to the indexer, if the identity is unspecified,\nthe value remains unchanged. If set to \"none\", the value of this property is\ncleared."
+        },
+        "parameters": {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreParameters",
+          "description": "A dictionary of knowledge store-specific configuration properties. Each name is\nthe name of a specific property. Each value must be of a primitive type."
         }
       },
       "required": [
@@ -11370,8 +14095,7 @@
         },
         "cognitiveServices": {
           "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about the Azure AI service to be used when running skills.",
-          "x-ms-client-name": "cognitiveServicesAccount"
+          "description": "Details about the Azure AI service to be used when running skills."
         },
         "knowledgeStore": {
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
@@ -11379,8 +14103,7 @@
         },
         "indexProjections": {
           "$ref": "#/definitions/SearchIndexerIndexProjection",
-          "description": "Definition of additional projections to secondary search index(es).",
-          "x-ms-client-name": "indexProjection"
+          "description": "Definition of additional projections to secondary search index(es)."
         },
         "@odata.etag": {
           "type": "string",
@@ -11430,8 +14153,7 @@
         },
         "cognitiveServices": {
           "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about the Azure AI service to be used when running skills.",
-          "x-ms-client-name": "cognitiveServicesAccount"
+          "description": "Details about the Azure AI service to be used when running skills."
         },
         "knowledgeStore": {
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
@@ -11439,8 +14161,7 @@
         },
         "indexProjections": {
           "$ref": "#/definitions/SearchIndexerIndexProjection",
-          "description": "Definition of additional projections to secondary search index(es).",
-          "x-ms-client-name": "indexProjection"
+          "description": "Definition of additional projections to secondary search index(es)."
         },
         "@odata.etag": {
           "type": "string",
@@ -11491,8 +14212,7 @@
         },
         "cognitiveServices": {
           "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about the Azure AI service to be used when running skills.",
-          "x-ms-client-name": "cognitiveServicesAccount"
+          "description": "Details about the Azure AI service to be used when running skills."
         },
         "knowledgeStore": {
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
@@ -11500,8 +14220,7 @@
         },
         "indexProjections": {
           "$ref": "#/definitions/SearchIndexerIndexProjection",
-          "description": "Definition of additional projections to secondary search index(es).",
-          "x-ms-client-name": "indexProjection"
+          "description": "Definition of additional projections to secondary search index(es)."
         },
         "@odata.etag": {
           "type": "string",
@@ -11552,8 +14271,7 @@
         },
         "cognitiveServices": {
           "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about the Azure AI service to be used when running skills.",
-          "x-ms-client-name": "cognitiveServicesAccount"
+          "description": "Details about the Azure AI service to be used when running skills."
         },
         "knowledgeStore": {
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
@@ -11561,8 +14279,7 @@
         },
         "indexProjections": {
           "$ref": "#/definitions/SearchIndexerIndexProjection",
-          "description": "Definition of additional projections to secondary search index(es).",
-          "x-ms-client-name": "indexProjection"
+          "description": "Definition of additional projections to secondary search index(es)."
         },
         "@odata.etag": {
           "type": "string",
@@ -11679,8 +14396,7 @@
       "properties": {
         "count": {
           "type": "boolean",
-          "description": "A value that specifies whether to fetch the total count of results. Default is\nfalse. Setting this value to true may have a performance impact. Note that the\ncount returned is an approximation.",
-          "x-ms-client-name": "includeTotalResultCount"
+          "description": "A value that specifies whether to fetch the total count of results. Default is\nfalse. Setting this value to true may have a performance impact. Note that the\ncount returned is an approximation."
         },
         "facets": {
           "type": "array",
@@ -11695,8 +14411,7 @@
         },
         "highlight": {
           "type": "string",
-          "description": "The comma-separated list of field names to use for hit highlights. Only\nsearchable fields can be used for hit highlighting.",
-          "x-ms-client-name": "highlightFields"
+          "description": "The comma-separated list of field names to use for hit highlights. Only\nsearchable fields can be used for hit highlighting."
         },
         "highlightPostTag": {
           "type": "string",
@@ -11713,8 +14428,7 @@
         },
         "orderby": {
           "type": "string",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses.",
-          "x-ms-client-name": "orderBy"
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses."
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
@@ -11739,10 +14453,13 @@
           "type": "string",
           "description": "The name of a scoring profile to evaluate match scores for matching documents\nin order to sort the results."
         },
+        "debug": {
+          "$ref": "#/definitions/QueryDebugMode",
+          "description": "Enables a debugging tool that can be used to further explore your reranked\nresults."
+        },
         "search": {
           "type": "string",
-          "description": "A full-text search query expression; Use \"*\" or omit this parameter to match\nall documents.",
-          "x-ms-client-name": "searchText"
+          "description": "A full-text search query expression; Use \"*\" or omit this parameter to match\nall documents."
         },
         "searchFields": {
           "type": "string",
@@ -11751,6 +14468,14 @@
         "searchMode": {
           "$ref": "#/definitions/SearchMode",
           "description": "A value that specifies whether any or all of the search terms must be matched\nin order to count the document as a match."
+        },
+        "queryLanguage": {
+          "$ref": "#/definitions/QueryLanguage",
+          "description": "A value that specifies the language of the search query."
+        },
+        "speller": {
+          "$ref": "#/definitions/QuerySpellerType",
+          "description": "A value that specified the type of the speller to use to spell-correct\nindividual search query terms."
         },
         "select": {
           "type": "string",
@@ -11792,6 +14517,14 @@
           "$ref": "#/definitions/QueryCaptionType",
           "description": "A value that specifies whether captions should be returned as part of the\nsearch response."
         },
+        "queryRewrites": {
+          "$ref": "#/definitions/QueryRewritesType",
+          "description": "A value that specifies whether query rewrites should be generated to augment\nthe search query."
+        },
+        "semanticFields": {
+          "type": "string",
+          "description": "The comma-separated list of field names used for semantic ranking."
+        },
         "vectorQueries": {
           "type": "array",
           "description": "The query parameters for vector and hybrid search queries.",
@@ -11803,6 +14536,10 @@
         "vectorFilterMode": {
           "$ref": "#/definitions/VectorFilterMode",
           "description": "Determines whether or not filters are applied before or after the vector search\nis performed. Default is 'preFilter' for new indexes."
+        },
+        "hybridSearch": {
+          "$ref": "#/definitions/HybridSearch",
+          "description": "The query parameters to configure hybrid search behaviors."
         }
       }
     },
@@ -11812,22 +14549,23 @@
       "properties": {
         "keyVaultKeyName": {
           "type": "string",
-          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest.",
-          "x-ms-client-name": "keyName"
+          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultKeyVersion": {
           "type": "string",
-          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest.",
-          "x-ms-client-name": "keyVersion"
+          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains\nthe key to be used to encrypt your data at rest. An example URI might be\n`https://my-keyvault-name.vault.azure.net`.",
-          "x-ms-client-name": "vaultUri"
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains\nthe key to be used to encrypt your data at rest. An example URI might be\n`https://my-keyvault-name.vault.azure.net`."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
           "description": "Optional Azure Active Directory credentials used for accessing your Azure Key\nVault. Not required if using managed identity instead."
+        },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit managed identity to use for this encryption key. If not specified\nand the access credentials property is null, the system-assigned managed\nidentity is used. On update to the resource, if the explicit identity is\nunspecified, it remains unchanged. If \"none\" is specified, the value of this\nproperty is cleared."
         }
       },
       "required": [
@@ -11875,6 +14613,16 @@
           "readOnly": true,
           "x-ms-client-name": "captions",
           "x-ms-identifiers": []
+        },
+        "@search.documentDebugInfo": {
+          "type": "array",
+          "description": "Contains debugging information that can be used to further explore your search\nresults.",
+          "items": {
+            "$ref": "#/definitions/DocumentDebugInfo"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "documentDebugInfo",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -11882,49 +14630,61 @@
       ],
       "additionalProperties": {}
     },
+    "SearchScoreThreshold": {
+      "type": "object",
+      "description": "The results of the vector query will filter based on the '@search.score' value.\nNote this is the @search.score returned as part of the search response. The\nthreshold direction will be chosen for higher @search.score.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The threshold will filter based on the '@search.score' value. Note this is the\n@search.score returned as part of the search response. The threshold direction\nwill be chosen for higher @search.score."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorThreshold"
+        }
+      ],
+      "x-ms-discriminator-value": "searchScore"
+    },
     "SearchServiceCounters": {
       "type": "object",
       "description": "Represents service-level resource counters and quotas.",
       "properties": {
         "documentCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of documents across all indexes in the service.",
-          "x-ms-client-name": "documentCounter"
+          "description": "Total number of documents across all indexes in the service."
         },
         "indexesCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of indexes.",
-          "x-ms-client-name": "indexCounter"
+          "description": "Total number of indexes."
         },
         "indexersCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of indexers.",
-          "x-ms-client-name": "indexerCounter"
+          "description": "Total number of indexers."
         },
         "dataSourcesCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of data sources.",
-          "x-ms-client-name": "dataSourceCounter"
+          "description": "Total number of data sources."
         },
         "storageSize": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total size of used storage in bytes.",
-          "x-ms-client-name": "storageSizeCounter"
+          "description": "Total size of used storage in bytes."
         },
         "synonymMaps": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of synonym maps.",
-          "x-ms-client-name": "synonymMapCounter"
+          "description": "Total number of synonym maps."
         },
         "skillsetCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of skillsets.",
-          "x-ms-client-name": "skillsetCounter"
+          "description": "Total number of skillsets."
         },
         "vectorIndexSize": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total memory consumption of all vector indexes within the service, in bytes.",
-          "x-ms-client-name": "vectorIndexSizeCounter"
+          "description": "Total memory consumption of all vector indexes within the service, in bytes."
         }
       },
       "required": [
@@ -11965,8 +14725,7 @@
         "maxStoragePerIndex": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum amount of storage in bytes allowed per index.",
-          "x-ms-client-name": "maxStoragePerIndexInBytes"
+          "description": "The maximum amount of storage in bytes allowed per index."
         }
       }
     },
@@ -12038,6 +14797,40 @@
         "prioritizedFields"
       ]
     },
+    "SemanticDebugInfo": {
+      "type": "object",
+      "description": "Contains debugging information specific to semantic ranking requests.",
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/QueryResultDocumentSemanticField",
+          "description": "The title field that was sent to the semantic enrichment process, as well as\nhow it was used",
+          "readOnly": true
+        },
+        "contentFields": {
+          "type": "array",
+          "description": "The content fields that were sent to the semantic enrichment process, as well\nas how they were used",
+          "items": {
+            "$ref": "#/definitions/QueryResultDocumentSemanticField"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "keywordFields": {
+          "type": "array",
+          "description": "The keyword fields that were sent to the semantic enrichment process, as well\nas how they were used",
+          "items": {
+            "$ref": "#/definitions/QueryResultDocumentSemanticField"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "rerankerInput": {
+          "$ref": "#/definitions/QueryResultDocumentRerankerInput",
+          "description": "The raw concatenated strings that were sent to the semantic enrichment process.",
+          "readOnly": true
+        }
+      }
+    },
     "SemanticErrorMode": {
       "type": "string",
       "description": "Allows the user to choose whether a semantic call should fail completely, or to\nreturn partial results.",
@@ -12105,6 +14898,36 @@
         "fieldName"
       ]
     },
+    "SemanticFieldState": {
+      "type": "string",
+      "description": "The way the field was used for the semantic enrichment process.",
+      "enum": [
+        "used",
+        "unused",
+        "partial"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticFieldState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Used",
+            "value": "used",
+            "description": "The field was fully used for semantic enrichment."
+          },
+          {
+            "name": "Unused",
+            "value": "unused",
+            "description": "The field was not used for semantic enrichment."
+          },
+          {
+            "name": "Partial",
+            "value": "partial",
+            "description": "The field was partially used for semantic enrichment."
+          }
+        ]
+      }
+    },
     "SemanticPrioritizedFields": {
       "type": "object",
       "description": "Describes the title, content, and keywords fields to be used for semantic\nranking, captions, highlights, and answers.",
@@ -12119,7 +14942,6 @@
           "items": {
             "$ref": "#/definitions/SemanticField"
           },
-          "x-ms-client-name": "contentFields",
           "x-ms-identifiers": []
         },
         "prioritizedKeywordsFields": {
@@ -12128,9 +14950,26 @@
           "items": {
             "$ref": "#/definitions/SemanticField"
           },
-          "x-ms-client-name": "keywordsFields",
           "x-ms-identifiers": []
         }
+      }
+    },
+    "SemanticQueryRewritesResultType": {
+      "type": "string",
+      "description": "Type of query rewrite that was used for this request.",
+      "enum": [
+        "originalQueryOnly"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticQueryRewritesResultType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OriginalQueryOnly",
+            "value": "originalQueryOnly",
+            "description": "Query rewrites were not successfully generated for this request. Only the\noriginal query was used to retrieve the results."
+          }
+        ]
       }
     },
     "SemanticSearch": {
@@ -12139,8 +14978,7 @@
       "properties": {
         "defaultConfiguration": {
           "type": "string",
-          "description": "Allows you to set the name of a default semantic configuration in your index,\nmaking it optional to pass it on as a query parameter every time.",
-          "x-ms-client-name": "defaultConfigurationName"
+          "description": "Allows you to set the name of a default semantic configuration in your index,\nmaking it optional to pass it on as a query parameter every time."
         },
         "configurations": {
           "type": "array",
@@ -12446,6 +15284,37 @@
         "@odata.type"
       ]
     },
+    "SingleVectorFieldResult": {
+      "type": "object",
+      "description": "A single vector field result. Both @search.score and vector similarity values\nare returned. Vector similarity is related to @search.score by an equation.",
+      "properties": {
+        "searchScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The @search.score value that is calculated from the vector similarity score.\nThis is the score that's visible in a pure single-field single-vector query.",
+          "readOnly": true
+        },
+        "vectorSimilarity": {
+          "type": "number",
+          "format": "double",
+          "description": "The vector similarity score for this document. Note this is the canonical\ndefinition of similarity metric, not the 'distance' version. For example,\ncosine similarity instead of cosine distance.",
+          "readOnly": true
+        }
+      }
+    },
+    "SkillNames": {
+      "type": "object",
+      "description": "The type of the skill names.",
+      "properties": {
+        "skillNames": {
+          "type": "array",
+          "description": "the names of skills to be reset.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SnowballTokenFilter": {
       "type": "object",
       "description": "A filter that stems words using a Snowball-generated stemmer. This token filter\nis implemented using Apache Lucene.",
@@ -12682,6 +15551,14 @@
           "format": "int32",
           "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the\nSplitSkill will discontinue splitting after processing the first\n'maximumPagesToTake' pages, in order to improve performance when only a few\ninitial pages are needed from each document."
         },
+        "unit": {
+          "$ref": "#/definitions/SplitSkillUnit",
+          "description": "Only applies if textSplitMode is set to pages. There are two possible values.\nThe choice of the values will decide the length (maximumPageLength and\npageOverlapLength) measurement. The default is 'characters', which means the\nlength will be measured by character."
+        },
+        "azureOpenAITokenizerParameters": {
+          "$ref": "#/definitions/AzureOpenAITokenizerParameters",
+          "description": "Only applies if the unit is set to azureOpenAITokens. If specified, the\nsplitSkill will use these parameters when performing the tokenization. The\nparameters are a valid 'encoderModelName' and an optional\n'allowedSpecialTokens' property."
+        },
         "@odata.type": {
           "type": "string",
           "description": "A URI fragment specifying the type of skill.",
@@ -12703,6 +15580,42 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SplitSkill"
+    },
+    "SplitSkillEncoderModelName": {
+      "type": "string",
+      "description": "A value indicating which tokenizer to use.",
+      "enum": [
+        "r50k_base",
+        "p50k_base",
+        "p50k_edit",
+        "cl100k_base"
+      ],
+      "x-ms-enum": {
+        "name": "SplitSkillEncoderModelName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "R50kBase",
+            "value": "r50k_base",
+            "description": "Refers to a base model trained with a 50,000 token vocabulary, often used in\ngeneral natural language processing tasks."
+          },
+          {
+            "name": "P50kBase",
+            "value": "p50k_base",
+            "description": "A base model with a 50,000 token vocabulary, optimized for prompt-based tasks."
+          },
+          {
+            "name": "P50kEdit",
+            "value": "p50k_edit",
+            "description": "Similar to p50k_base but fine-tuned for editing or rephrasing tasks with a\n50,000 token vocabulary."
+          },
+          {
+            "name": "CL100kBase",
+            "value": "cl100k_base",
+            "description": "A base model with a 100,000 token vocabulary."
+          }
+        ]
+      }
     },
     "SplitSkillLanguage": {
       "type": "string",
@@ -12910,6 +15823,30 @@
             "name": "zh",
             "value": "zh",
             "description": "Chinese (Simplified)"
+          }
+        ]
+      }
+    },
+    "SplitSkillUnit": {
+      "type": "string",
+      "description": "A value indicating which unit to use.",
+      "enum": [
+        "characters",
+        "azureOpenAITokens"
+      ],
+      "x-ms-enum": {
+        "name": "SplitSkillUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Characters",
+            "value": "characters",
+            "description": "The length will be measured by character."
+          },
+          {
+            "name": "AzureOpenAITokens",
+            "value": "azureOpenAITokens",
+            "description": "The length will be measured by an AzureOpenAI tokenizer from the tiktoken\nlibrary."
           }
         ]
       }
@@ -13594,8 +16531,7 @@
         "removeTrailing": {
           "type": "boolean",
           "description": "A value indicating whether to ignore the last search term if it's a stop word.\nDefault is true.",
-          "default": true,
-          "x-ms-client-name": "removeTrailingStopWords"
+          "default": true
         },
         "@odata.type": {
           "type": "string",
@@ -13630,7 +16566,6 @@
             "$ref": "#/definitions/SuggestResult"
           },
           "readOnly": true,
-          "x-ms-client-name": "results",
           "x-ms-identifiers": []
         },
         "@search.coverage": {
@@ -13655,8 +16590,7 @@
         },
         "fuzzy": {
           "type": "boolean",
-          "description": "A value indicating whether to use fuzzy matching for the suggestion query.\nDefault is false. When set to true, the query will find suggestions even if\nthere's a substituted or missing character in the search text. While this\nprovides a better experience in some scenarios, it comes at a performance cost\nas fuzzy suggestion searches are slower and consume more resources.",
-          "x-ms-client-name": "useFuzzyMatching"
+          "description": "A value indicating whether to use fuzzy matching for the suggestion query.\nDefault is false. When set to true, the query will find suggestions even if\nthere's a substituted or missing character in the search text. While this\nprovides a better experience in some scenarios, it comes at a performance cost\nas fuzzy suggestion searches are slower and consume more resources."
         },
         "highlightPostTag": {
           "type": "string",
@@ -13673,13 +16607,11 @@
         },
         "orderby": {
           "type": "string",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses.",
-          "x-ms-client-name": "orderBy"
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses."
         },
         "search": {
           "type": "string",
-          "description": "The search text to use to suggest documents. Must be at least 1 character, and\nno more than 100 characters.",
-          "x-ms-client-name": "searchText"
+          "description": "The search text to use to suggest documents. Must be at least 1 character, and\nno more than 100 characters."
         },
         "searchFields": {
           "type": "string",
@@ -13957,8 +16889,7 @@
       "properties": {
         "tag": {
           "$ref": "#/definitions/TagScoringParameters",
-          "description": "Parameter values for the tag scoring function.",
-          "x-ms-client-name": "parameters"
+          "description": "Parameter values for the tag scoring function."
         }
       },
       "required": [
@@ -13983,6 +16914,18 @@
       "required": [
         "tagsParameter"
       ]
+    },
+    "TextResult": {
+      "type": "object",
+      "description": "The BM25 or Classic score for the text portion of the query.",
+      "properties": {
+        "searchScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The BM25 or Classic score for the text portion of the query.",
+          "readOnly": true
+        }
+      }
     },
     "TextSplitMode": {
       "type": "string",
@@ -14951,6 +17894,14 @@
           "format": "float",
           "description": "Relative weight of the vector query when compared to other vector query and/or\nthe text query within the same search request. This value is used when\ncombining the results of multiple ranking lists produced by the different\nvector queries and/or the results retrieved through the text query. The higher\nthe weight, the higher the documents that matched that query will be in the\nfinal ranking. Default is 1.0 and the value needs to be a positive number\nlarger than zero."
         },
+        "threshold": {
+          "$ref": "#/definitions/VectorThreshold",
+          "description": "The threshold used for vector queries. Note this can only be set if all\n'fields' use the same similarity metric."
+        },
+        "filterOverride": {
+          "type": "string",
+          "description": "The OData filter expression to apply to this specific vector query. If no\nfilter expression is defined at the vector level, the expression defined in the\ntop level filter parameter is used instead."
+        },
         "kind": {
           "$ref": "#/definitions/VectorQueryKind",
           "description": "Type of query."
@@ -14966,7 +17917,9 @@
       "description": "The kind of vector query being performed.",
       "enum": [
         "vector",
-        "text"
+        "text",
+        "imageUrl",
+        "imageBinary"
       ],
       "x-ms-enum": {
         "name": "VectorQueryKind",
@@ -14981,6 +17934,16 @@
             "name": "Text",
             "value": "text",
             "description": "Vector query where a text value that needs to be vectorized is provided."
+          },
+          {
+            "name": "ImageUrl",
+            "value": "imageUrl",
+            "description": "Vector query where an url that represents an image value that needs to be\nvectorized is provided."
+          },
+          {
+            "name": "ImageBinary",
+            "value": "imageBinary",
+            "description": "Vector query where a base 64 encoded binary of an image that needs to be\nvectorized is provided."
           }
         ]
       }
@@ -15108,8 +18071,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name to associate with this particular configuration.",
-          "x-ms-client-name": "compressionName"
+          "description": "The name to associate with this particular configuration."
         },
         "rerankWithOriginalVectors": {
           "type": "boolean",
@@ -15120,6 +18082,15 @@
           "type": "number",
           "format": "double",
           "description": "Default oversampling factor. Oversampling will internally request more\ndocuments (specified by this multiplier) in the initial search. This increases\nthe set of results that will be reranked using recomputed similarity scores\nfrom full-precision vectors. Minimum value is 1, meaning no oversampling (1x).\nThis parameter can only be set when rerankWithOriginalVectors is true. Higher\nvalues improve recall at the expense of latency."
+        },
+        "rescoringOptions": {
+          "$ref": "#/definitions/RescoringOptions",
+          "description": "Contains the options for rescoring."
+        },
+        "truncationDimension": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of dimensions to truncate the vectors to. Truncating the vectors\nreduces the size of the vectors and the amount of data that needs to be\ntransferred during search. This can save storage cost and improve search\nperformance at the expense of recall. It should be only used for embeddings\ntrained with Matryoshka Representation Learning (MRL) such as OpenAI\ntext-embedding-3-large (small). The default value is null, which means no\ntruncation."
         },
         "kind": {
           "$ref": "#/definitions/VectorSearchCompressionKind",
@@ -15156,6 +18127,30 @@
         ]
       }
     },
+    "VectorSearchCompressionRescoreStorageMethod": {
+      "type": "string",
+      "description": "The storage method for the original full-precision vectors used for rescoring\nand internal index operations.",
+      "enum": [
+        "preserveOriginals",
+        "discardOriginals"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchCompressionRescoreStorageMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PreserveOriginals",
+            "value": "preserveOriginals",
+            "description": "This option preserves the original full-precision vectors. Choose this option\nfor maximum flexibility and highest quality of compressed search results. This\nconsumes more storage but allows for rescoring and oversampling."
+          },
+          {
+            "name": "DiscardOriginals",
+            "value": "discardOriginals",
+            "description": "This option discards the original full-precision vectors. Choose this option\nfor maximum storage savings. Since this option does not allow for rescoring and\noversampling, it will often cause slight to moderate reductions in quality."
+          }
+        ]
+      }
+    },
     "VectorSearchCompressionTarget": {
       "type": "string",
       "description": "The quantized data type of compressed vector values.",
@@ -15184,18 +18179,15 @@
         },
         "algorithm": {
           "type": "string",
-          "description": "The name of the vector search algorithm configuration that specifies the\nalgorithm and optional parameters.",
-          "x-ms-client-name": "algorithmConfigurationName"
+          "description": "The name of the vector search algorithm configuration that specifies the\nalgorithm and optional parameters."
         },
         "vectorizer": {
           "type": "string",
-          "description": "The name of the vectorization being configured for use with vector search.",
-          "x-ms-client-name": "vectorizerName"
+          "description": "The name of the vectorization being configured for use with vector search."
         },
         "compression": {
           "type": "string",
-          "description": "The name of the compression method configuration that specifies the compression\nmethod and optional parameters.",
-          "x-ms-client-name": "compressionName"
+          "description": "The name of the compression method configuration that specifies the compression\nmethod and optional parameters."
         }
       },
       "required": [
@@ -15209,8 +18201,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name to associate with this particular vectorization method.",
-          "x-ms-client-name": "vectorizerName"
+          "description": "The name to associate with this particular vectorization method."
         },
         "kind": {
           "$ref": "#/definitions/VectorSearchVectorizerKind",
@@ -15228,7 +18219,9 @@
       "description": "The vectorization method to be used during query time.",
       "enum": [
         "azureOpenAI",
-        "customWebApi"
+        "customWebApi",
+        "aiServicesVision",
+        "aml"
       ],
       "x-ms-enum": {
         "name": "VectorSearchVectorizerKind",
@@ -15243,9 +18236,109 @@
             "name": "CustomWebApi",
             "value": "customWebApi",
             "description": "Generate embeddings using a custom web endpoint at query time."
+          },
+          {
+            "name": "AIServicesVision",
+            "value": "aiServicesVision",
+            "description": "Generate embeddings for an image or text input at query time using the Azure AI\nServices Vision Vectorize API."
+          },
+          {
+            "name": "AML",
+            "value": "aml",
+            "description": "Generate embeddings using an Azure Machine Learning endpoint deployed via the\nAzure AI Studio Model Catalog at query time."
           }
         ]
       }
+    },
+    "VectorSimilarityThreshold": {
+      "type": "object",
+      "description": "The results of the vector query will be filtered based on the vector similarity\nmetric. Note this is the canonical definition of similarity metric, not the\n'distance' version. The threshold direction (larger or smaller) will be chosen\nautomatically according to the metric used by the field.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The threshold will filter based on the similarity metric value. Note this is\nthe canonical definition of similarity metric, not the 'distance' version. The\nthreshold direction (larger or smaller) will be chosen automatically according\nto the metric used by the field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorThreshold"
+        }
+      ],
+      "x-ms-discriminator-value": "vectorSimilarity"
+    },
+    "VectorThreshold": {
+      "type": "object",
+      "description": "The threshold used for vector queries.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/VectorThresholdKind",
+          "description": "Type of threshold."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "VectorThresholdKind": {
+      "type": "string",
+      "description": "The kind of vector query being performed.",
+      "enum": [
+        "vectorSimilarity",
+        "searchScore"
+      ],
+      "x-ms-enum": {
+        "name": "VectorThresholdKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VectorSimilarity",
+            "value": "vectorSimilarity",
+            "description": "The results of the vector query will be filtered based on the vector similarity\nmetric. Note this is the canonical definition of similarity metric, not the\n'distance' version. The threshold direction (larger or smaller) will be chosen\nautomatically according to the metric used by the field."
+          },
+          {
+            "name": "SearchScore",
+            "value": "searchScore",
+            "description": "The results of the vector query will filter based on the '@search.score' value.\nNote this is the @search.score returned as part of the search response. The\nthreshold direction will be chosen for higher @search.score."
+          }
+        ]
+      }
+    },
+    "VectorizableImageBinaryQuery": {
+      "type": "object",
+      "description": "The query parameters to use for vector search when a base 64 encoded binary of\nan image that needs to be vectorized is provided.",
+      "properties": {
+        "base64Image": {
+          "type": "string",
+          "description": "The base 64 encoded binary of an image to be vectorized to perform a vector\nsearch query."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorQuery"
+        }
+      ],
+      "x-ms-discriminator-value": "imageBinary"
+    },
+    "VectorizableImageUrlQuery": {
+      "type": "object",
+      "description": "The query parameters to use for vector search when an url that represents an\nimage value that needs to be vectorized is provided.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of an image to be vectorized to perform a vector search query."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorQuery"
+        }
+      ],
+      "x-ms-discriminator-value": "imageUrl"
     },
     "VectorizableTextQuery": {
       "type": "object",
@@ -15254,6 +18347,10 @@
         "text": {
           "type": "string",
           "description": "The text to be vectorized to perform a vector search query."
+        },
+        "queryRewrites": {
+          "$ref": "#/definitions/QueryRewritesType",
+          "description": "Can be configured to let a generative model rewrite the query before sending it\nto be vectorized."
         }
       },
       "required": [
@@ -15288,6 +18385,48 @@
         }
       ],
       "x-ms-discriminator-value": "vector"
+    },
+    "VectorsDebugInfo": {
+      "type": "object",
+      "description": "Contains debugging information specific to vector and hybrid search.",
+      "properties": {
+        "subscores": {
+          "$ref": "#/definitions/QueryResultDocumentSubscores",
+          "description": "The breakdown of subscores of the document prior to the chosen result set\nfusion/combination method such as RRF.",
+          "readOnly": true
+        }
+      }
+    },
+    "VisionVectorizeSkill": {
+      "type": "object",
+      "description": "Allows you to generate a vector embedding for a given image or text input using\nthe Azure AI Services Vision Vectorize API.",
+      "properties": {
+        "modelVersion": {
+          "type": "string",
+          "description": "The version of the model to use when calling the AI Services Vision service. It\nwill default to the latest available when not specified."
+        },
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of skill.",
+          "enum": [
+            "#Microsoft.Skills.Vision.VectorizeSkill"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "odataType"
+        }
+      },
+      "required": [
+        "modelVersion",
+        "@odata.type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Skills.Vision.VectorizeSkill"
     },
     "VisualFeature": {
       "type": "string",
@@ -15414,8 +18553,7 @@
       "properties": {
         "customWebApiParameters": {
           "$ref": "#/definitions/WebApiVectorizerParameters",
-          "description": "Specifies the properties of the user-defined vectorizer.",
-          "x-ms-client-name": "webApiParameters"
+          "description": "Specifies the properties of the user-defined vectorizer."
         }
       },
       "allOf": [
@@ -15432,8 +18570,7 @@
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI of the Web API providing the vectorizer.",
-          "x-ms-client-name": "url"
+          "description": "The URI of the Web API providing the vectorizer."
         },
         "httpHeaders": {
           "type": "object",
