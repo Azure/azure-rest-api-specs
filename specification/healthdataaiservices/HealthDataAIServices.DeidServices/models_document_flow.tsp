@@ -67,8 +67,6 @@ model DeidentificationJob {
   summary?: JobSummary;
 }
 
-
-
 @doc("List of statuses a job can have.")
 @lroStatus
 union JobStatus {
@@ -121,7 +119,7 @@ model JobSummary {
 }
 
 @doc("Details of a single document in a job.")
-@parentResource(DeidentificationJob) 
+@parentResource(DeidentificationJob)
 @resource("documents")
 @access(Access.public, "csharp,python")
 model DocumentDetails {

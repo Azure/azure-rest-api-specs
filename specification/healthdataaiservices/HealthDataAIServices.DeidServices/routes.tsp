@@ -57,10 +57,10 @@ op listJobDocuments is Azure.Core.Foundations.Operation<
     jobName: string;
 
     ...PaginationByTokenQueryParameters;
-  }, 
+  },
   Page<DocumentDetails>,
   Azure.Core.Foundations.ErrorResponse
->; 
+>;
 
 @doc("Query parameters for list operation.")
 model PaginationByTokenQueryParameters {
