@@ -604,8 +604,8 @@ union VectorFilterMode {
 
 /**
  * Determines whether the count and facets should includes all documents that
- * matched the search query, or only the documents that are retrieved within the
- * 'maxTextRecallSize' window. The default value is 'countAllResults'.
+ * matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize'
+ * window. The default value is 'countAllResults'.
  */
 @added(Versions.v2024_11_01_preview)
 union HybridCountAndFacetMode {
@@ -618,8 +618,8 @@ union HybridCountAndFacetMode {
   CountRetrievableResults: "countRetrievableResults",
 
   /**
-   * Include all documents that were matched by the search query when computing
-   * 'count' and 'facets', regardless of whether or not those documents are within
+   * Include all documents that were matched by the search query when computing 'count'
+   * and 'facets', regardless of whether or not those documents are within
    * the 'maxTextRecallSize' retrieval window.
    */
   CountAllResults: "countAllResults",
@@ -829,16 +829,13 @@ union AutocompleteMode {
 
   /**
    * Matching two-term phrases in the index will be suggested. For example, if the
-   * input is 'medic', the suggested terms could include 'medicare coverage' and
-   * 'medical assistant'.
+   * input is 'medic', the suggested terms could include 'medicare coverage' and 'medical assistant'.
    */
   TwoTerms: "twoTerms",
 
   /**
    * Completes the last term in a query with two or more terms, where the last two
-   * terms are a phrase that exists in the index. For example, if the input is
-   * 'washington medic', the suggested terms could include 'washington medicaid' and
-   * 'washington medical'.
+   * terms are a phrase that exists in the index. For example, if the input is 'washington medic', the suggested terms could include 'washington medicaid' and 'washington medical'.
    */
   OneTermWithContext: "oneTermWithContext",
 }
@@ -1311,8 +1308,8 @@ model VectorQuery {
 
   /**
    * Oversampling factor. Minimum value is 1. It overrides the 'defaultOversampling'
-   * parameter configured in the index definition. It can be set only when
-   * 'rerankWithOriginalVectors' is true. This parameter is only permitted when a
+   * parameter configured in the index definition. It can be set only when 'rerankWithOriginalVectors'
+   * is true. This parameter is only permitted when a
    * compression method is used on the underlying vector field.
    */
   oversampling?: float64;
@@ -1329,8 +1326,7 @@ model VectorQuery {
   weight?: float32;
 
   /**
-   * The threshold used for vector queries. Note this can only be set if all
-   * 'fields' use the same similarity metric.
+   * The threshold used for vector queries. Note this can only be set if all 'fields' use the same similarity metric.
    */
   @added(Versions.v2024_11_01_preview)
   threshold?: VectorThreshold;
@@ -1375,8 +1371,7 @@ model HybridSearch {
 
   /**
    * Determines whether the count and facets should includes all documents that
-   * matched the search query, or only the documents that are retrieved within the
-   * 'maxTextRecallSize' window.
+   * matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize' window.
    */
   countAndFacetMode?: HybridCountAndFacetMode;
 }

@@ -3717,8 +3717,7 @@ union TextTranslationSkillLanguage {
 }
 
 /**
- * Controls the cardinality of the output produced by the skill. Default is
- * 'oneToMany'
+ * Controls the cardinality of the output produced by the skill. Default is 'oneToMany'
  */
 @added(Versions.v2024_11_01_preview)
 union DocumentIntelligenceLayoutSkillOutputMode {
@@ -5046,7 +5045,7 @@ union StopwordsList {
  */
 model SearchIndexerDataSource {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Succesfully created or updated")
+    @doc("Successfully created or updated")
     @statusCode
     _: 200 | 201;
 
@@ -5257,7 +5256,7 @@ model DocumentKeysOrIds {
  */
 model SearchIndexer {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Succesfully created or updated")
+    @doc("Successfully created or updated")
     @statusCode
     _: 200 | 201;
 
@@ -5876,7 +5875,7 @@ model SearchIndexerLimits {
  */
 model SearchIndexerSkillset {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Succesfully created or updated")
+    @doc("Successfully created or updated")
     @statusCode
     _: 200 | 201;
 
@@ -6176,8 +6175,7 @@ model SearchIndexerIndexProjection {
  */
 model SearchIndexerIndexProjectionSelector {
     /**
-     * Name of the search index to project to. Must have a key field with the
-     * 'keyword' analyzer set.
+     * Name of the search index to project to. Must have a key field with the 'keyword' analyzer set.
      */
     targetIndexName: string;
 
@@ -6242,7 +6240,7 @@ model SkillNames {
  */
 model SynonymMap {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Succesfully created or updated")
+    @doc("Successfully created or updated")
     @statusCode
     _: 200 | 201;
 
@@ -6300,7 +6298,7 @@ model ListSynonymMapsResult {
  */
 model SearchIndex {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Succesfully created or updated")
+    @doc("Successfully created or updated")
     @statusCode
     _: 200 | 201;
 
@@ -7009,9 +7007,8 @@ model RescoringOptions {
      * Default oversampling factor. Oversampling retrieves a greater set of potential
      * documents to offset the resolution loss due to quantization. This increases the
      * set of results that will be rescored on full-precision vectors. Minimum value
-     * is 1, meaning no oversampling (1x). This parameter can only be set when
-     * 'enableRescoring' is true. Higher values improve recall at the expense of
-     * latency.
+     * is 1, meaning no oversampling (1x). This parameter can only be set when 'enableRescoring'
+     * is true. Higher values improve recall at the expense of latency.
      */
     defaultOversampling?: float64;
 
@@ -7151,7 +7148,7 @@ model AnalyzedTokenInfo {
 @added(Versions.v2024_11_01_preview)
 model SearchAlias {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-    @doc("Succesfully created or updated")
+    @doc("Successfully created or updated")
     @statusCode
     _: 200 | 201;
 
@@ -9771,8 +9768,8 @@ model SplitSkill extends SearchIndexerSkill {
 
     /**
      * Only applicable when textSplitMode is set to 'pages'. If specified, the
-     * SplitSkill will discontinue splitting after processing the first
-     * 'maximumPagesToTake' pages, in order to improve performance when only a few
+     * SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake'
+     * pages, in order to improve performance when only a few
      * initial pages are needed from each document.
      */
     maximumPagesToTake?: int32;
@@ -9789,8 +9786,7 @@ model SplitSkill extends SearchIndexerSkill {
     /**
      * Only applies if the unit is set to azureOpenAITokens. If specified, the
      * splitSkill will use these parameters when performing the tokenization. The
-     * parameters are a valid 'encoderModelName' and an optional
-     * 'allowedSpecialTokens' property.
+     * parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
     @added(Versions.v2024_11_01_preview)
@@ -9810,8 +9806,7 @@ model SplitSkill extends SearchIndexerSkill {
 model AzureOpenAITokenizerParameters {
     /**
      * Only applies if the unit is set to azureOpenAITokens. Options include
-     * 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is
-     * 'CL100k_base'.
+     * 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is 'CL100k_base'.
      */
     encoderModelName?: SplitSkillEncoderModelName;
 
@@ -9912,8 +9907,7 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
     parsingMode?: string;
 
     /**
-     * The type of data to be extracted for the skill. Will be set to
-     * 'contentAndMetadata' if not defined.
+     * The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined.
      */
     dataToExtract?: string;
 
@@ -9938,8 +9932,7 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
 @added(Versions.v2024_11_01_preview)
 model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
     /**
-     * Controls the cardinality of the output produced by the skill. Default is
-     * 'oneToMany'.
+     * Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.
      */
     outputMode?: DocumentIntelligenceLayoutSkillOutputMode = DocumentIntelligenceLayoutSkillOutputMode.OneToMany;
 
