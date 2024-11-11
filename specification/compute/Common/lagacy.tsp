@@ -222,12 +222,28 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response Optional. The response returned by the list
      */
     @autoRoute
-    @doc("Get a {name}", Resource)
+    @doc("List {name} resources", Resource)
     @get
     @listsResource(Resource)
     @segmentOf(Resource)
     @armResourceList(Resource)
     List<
+      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+      Parameters extends {} = {},
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>
+    >(...ParentParameters, ...Parameters): Response | ErrorType;
+
+    /**
+     * @dev List a resource
+     * @template Resource The resource being listed
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The response returned by the list
+     */
+    @doc("List {name} resources", Resource)
+    @get
+    @listsResource(Resource)
+    @armResourceList(Resource)
+    ListRoute<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
       Response extends {} = ArmResponse<ResourceListResult<Resource>>
