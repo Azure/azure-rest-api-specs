@@ -5147,7 +5147,7 @@ model SearchIndexerDataContainer {
 /**
  * Base type for data change detection policies.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model DataChangeDetectionPolicy {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -5158,7 +5158,7 @@ model DataChangeDetectionPolicy {
 /**
  * Base type for data deletion detection policies.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model DataDeletionDetectionPolicy {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -5934,7 +5934,7 @@ model SearchIndexerSkillset {
 /**
  * Base type for skills.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model SearchIndexerSkill {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -6017,7 +6017,7 @@ model OutputFieldMappingEntry {
 /**
  * Base type for describing any Azure AI service resource attached to a skillset.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model CognitiveServicesAccount {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -6680,7 +6680,7 @@ model SearchSuggester {
 /**
  * Base type for analyzers.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model LexicalAnalyzer {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -6698,7 +6698,7 @@ model LexicalAnalyzer {
 /**
  * Base type for tokenizers.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model LexicalTokenizer {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -6716,7 +6716,7 @@ model LexicalTokenizer {
 /**
  * Base type for token filters.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model TokenFilter {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -6734,7 +6734,7 @@ model TokenFilter {
 /**
  * Base type for character filters.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model CharFilter {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -6753,7 +6753,7 @@ model CharFilter {
  * Base type for normalizers.
  */
 @added(Versions.v2024_11_01_preview)
-@discriminator("@odata.type")
+@discriminator("odataType")
 model LexicalNormalizer {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -6774,7 +6774,7 @@ model LexicalNormalizer {
  * relevant the document is to that specific query. Those scores are used to rank
  * the search results.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model SimilarityAlgorithm {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -8732,7 +8732,7 @@ model AzureOpenAIVectorizerParameters {
 /**
  * Abstract base type for data identities.
  */
-@discriminator("@odata.type")
+@discriminator("odataType")
 model SearchIndexerDataIdentity {
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
