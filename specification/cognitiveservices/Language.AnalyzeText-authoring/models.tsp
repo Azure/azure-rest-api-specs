@@ -380,7 +380,6 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-@clientName("CreateProjectOptions")
 @clientName("CreateProjectConfig","csharp")
 model TextAnalysisAuthoringCreateProjectOptions {
   /**
@@ -448,7 +447,6 @@ model TextAnalysisAuthoringCopyAuthorizationOptions {
  * Represents the options for copying an existing project to another Azure
  * resource.
  */
-@clientName("CopyProjectOptions")
 @clientName("CopyProjectConfig","csharp")
 model TextAnalysisAuthoringCopyProjectOptions {
   /**
@@ -521,7 +519,6 @@ model TextAnalysisAuthoringExportedProjectAssets {
 /**
  * Represents the options for starting a new training job.
  */
-@clientName("TrainingJobOptions")
 @clientName("TrainingJobConfig","csharp")
 model TextAnalysisAuthoringTrainingJobOptions {
   /**
@@ -591,7 +588,6 @@ model TextAnalysisAuthoringDataGenerationConnectionInfo {
 /**
  * Represents the options used running the evaluation.
  */
-@clientName("EvaluationOptions")
 @clientName("EvaluationConfig","csharp")
 model TextAnalysisAuthoringEvaluationOptions {
   /**
@@ -829,7 +825,6 @@ model TextAnalysisAuthoringSwapDeploymentsJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
-@clientName("SwapDeploymentsOptions")
 @clientName("SwapDeploymentsConfig","csharp")
 model TextAnalysisAuthoringSwapDeploymentsOptions {
   /**
@@ -919,7 +914,6 @@ model TextAnalysisAuthoringExportedTrainedModel {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-@clientName("ExportedModelOptions")
 @clientName("ExportedModelConfig","csharp")
 model TextAnalysisAuthoringExportedModelOptions {
   /**
@@ -1235,7 +1229,6 @@ model TextAnalysisAuthoringAssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
-@clientName("AssignDeploymentResourcesOptions")
 @clientName("AssignDeploymentResourcesConfig","csharp")
 model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
@@ -1269,7 +1262,6 @@ model TextAnalysisAuthoringResourceMetadata {
  * Represents the options to unassign Azure resources from a project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("UnassignDeploymentResourcesOptions")
 @clientName("UnassignDeploymentResourcesConfig","csharp")
 model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
