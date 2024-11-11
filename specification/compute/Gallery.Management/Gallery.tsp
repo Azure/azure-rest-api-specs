@@ -60,7 +60,7 @@ interface Galleries {
    * Update a Shared Image Gallery.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Gallery, GalleryUpdate>;
+  update is ArmCustomPatchSync<Gallery, GalleryUpdate>;
 
   /**
    * Delete a Shared Image Gallery.
