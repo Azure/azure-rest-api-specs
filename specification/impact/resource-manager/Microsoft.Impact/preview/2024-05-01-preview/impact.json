@@ -1,0 +1,1914 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Impact",
+    "version": "2024-05-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "WorkloadImpacts"
+    },
+    {
+      "name": "ImpactCategories"
+    },
+    {
+      "name": "Insights"
+    },
+    {
+      "name": "Connectors"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Impact/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/connectors": {
+      "get": {
+        "operationId": "Connectors_ListBySubscription",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "List Connector resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connectors_ListBySubscription": {
+            "$ref": "./examples/Connectors_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/connectors/{connectorName}": {
+      "get": {
+        "operationId": "Connectors_Get",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Get a Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connectors_Get": {
+            "$ref": "./examples/Connectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Connectors_CreateOrUpdate",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Create a Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Connector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "201": {
+            "description": "Resource 'Connector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connectors_CreateOrUpdate": {
+            "$ref": "./examples/Connectors_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Connectors_Update",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Update a Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connectors_Update": {
+            "$ref": "./examples/Connectors_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Connectors_Delete",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Delete a Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connectors_Delete": {
+            "$ref": "./examples/Connectors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/impactCategories": {
+      "get": {
+        "operationId": "ImpactCategories_ListBySubscription",
+        "tags": [
+          "ImpactCategories"
+        ],
+        "description": "List ImpactCategory resources by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomParameters.categoryName"
+          },
+          {
+            "$ref": "#/parameters/CustomParameters.resourceType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImpactCategoryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ImpactCategories list by subscription": {
+            "$ref": "./examples/ImpactCategories_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/impactCategories/{impactCategoryName}": {
+      "get": {
+        "operationId": "ImpactCategories_Get",
+        "tags": [
+          "ImpactCategories"
+        ],
+        "description": "Get a ImpactCategory",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "impactCategoryName",
+            "in": "path",
+            "description": "Name of the impact category",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImpactCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get WorkloadImpact Resource by name": {
+            "$ref": "./examples/ImpactCategories_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts": {
+      "get": {
+        "operationId": "WorkloadImpacts_ListBySubscription",
+        "tags": [
+          "WorkloadImpacts"
+        ],
+        "description": "List WorkloadImpact resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadImpactListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List WorkloadImpact resources by subscription": {
+            "$ref": "./examples/WorkloadImpacts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}": {
+      "get": {
+        "operationId": "WorkloadImpacts_Get",
+        "tags": [
+          "WorkloadImpacts"
+        ],
+        "description": "Get a WorkloadImpact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadImpact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get WorkloadImpact Resource by name example": {
+            "$ref": "./examples/WorkloadImpact_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkloadImpacts_Create",
+        "tags": [
+          "WorkloadImpacts"
+        ],
+        "description": "Create a WorkloadImpact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadImpact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WorkloadImpact' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadImpact"
+            }
+          },
+          "201": {
+            "description": "Resource 'WorkloadImpact' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadImpact"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reporting Arm operation failure": {
+            "$ref": "./examples/WorkloadArmOperation_create.json"
+          },
+          "Reporting a connectivity impact": {
+            "$ref": "./examples/WorkloadConnectivityImpact_Create.json"
+          },
+          "Reporting availability related impact": {
+            "$ref": "./examples/WorkloadAvailability_Create.json"
+          },
+          "Reporting performance related impact": {
+            "$ref": "./examples/WorkloadPerformance_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WorkloadImpacts_Delete",
+        "tags": [
+          "WorkloadImpacts"
+        ],
+        "description": "Delete a WorkloadImpact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete WorkloadImpact Resource by name example": {
+            "$ref": "./examples/WorkloadImpact_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}/insights": {
+      "get": {
+        "operationId": "Insights_ListBySubscription",
+        "tags": [
+          "Insights"
+        ],
+        "description": "List Insight resources by workloadImpactName",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InsightListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Insight resources by workloadImpactName": {
+            "$ref": "./examples/Insights_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}/insights/{insightName}": {
+      "get": {
+        "operationId": "Insights_Get",
+        "tags": [
+          "Insights"
+        ],
+        "description": "Get Insight resources by workloadImpactName and insightName",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          },
+          {
+            "name": "insightName",
+            "in": "path",
+            "description": "Name of the insight",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Insight sample for Diagnostics category": {
+            "$ref": "./examples/Insights_Get_diagnostics.json"
+          },
+          "Get Insight sample for MitigationAction category": {
+            "$ref": "./examples/Insights_Get_mitigationAction.json"
+          },
+          "Get Insight sample for service health category": {
+            "$ref": "./examples/Insights_Get_servicehealth.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Insights_Create",
+        "tags": [
+          "Insights"
+        ],
+        "description": "Create Insight resource, This is Admin only operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          },
+          {
+            "name": "insightName",
+            "in": "path",
+            "description": "Name of the insight",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Insight' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          },
+          "201": {
+            "description": "Resource 'Insight' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creating an insight": {
+            "$ref": "./examples/Insights_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Insights_Delete",
+        "tags": [
+          "Insights"
+        ],
+        "description": "Delete Insight resource, This is Admin only operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          },
+          {
+            "name": "insightName",
+            "in": "path",
+            "description": "Name of the insight",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Insight": {
+            "$ref": "./examples/Insights_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalField": {
+      "type": "object",
+      "description": "additional user defined field.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the field."
+        },
+        "value": {
+          "type": "string",
+          "description": "value of the field."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "ClientIncidentDetails": {
+      "type": "object",
+      "description": "Client incident details ex: incidentId , incident source",
+      "properties": {
+        "clientIncidentId": {
+          "type": "string",
+          "description": "Client incident id. ex : id of the incident created to investigate and address the impact if any."
+        },
+        "clientIncidentSource": {
+          "$ref": "#/definitions/IncidentSource",
+          "description": "Client incident source. ex : source system name where the incident is created"
+        }
+      }
+    },
+    "ConfidenceLevel": {
+      "type": "string",
+      "description": "Degree of confidence on the impact being a platform issue.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidenceLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low confidence on azure being the source of impact"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium confidence on azure being the source of impact"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High confidence on azure being the source of impact"
+          }
+        ]
+      }
+    },
+    "Connectivity": {
+      "type": "object",
+      "description": "Details about connectivity issue. Applicable when root resource causing the issue is not identified. For example, when a VM is impacted due to a network issue, the impacted resource could be VM or the network. In such cases, the connectivity field will have the details about both VM and network.",
+      "properties": {
+        "protocol": {
+          "$ref": "#/definitions/Protocol",
+          "description": "Protocol used for the connection"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number for the connection"
+        },
+        "source": {
+          "$ref": "#/definitions/SourceOrTarget",
+          "description": "Source from which the connection was attempted"
+        },
+        "target": {
+          "$ref": "#/definitions/SourceOrTarget",
+          "description": "target which connection was attempted"
+        }
+      }
+    },
+    "Connector": {
+      "type": "object",
+      "description": "A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorListResult": {
+      "type": "object",
+      "description": "The response of a Connector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Connector items on this page",
+          "items": {
+            "$ref": "#/definitions/Connector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorProperties": {
+      "type": "object",
+      "description": "Details of the Connector.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "connectorId": {
+          "type": "string",
+          "description": "unique id of the connector.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "tenant id of this connector",
+          "readOnly": true
+        },
+        "connectorType": {
+          "$ref": "#/definitions/Platform",
+          "description": "connector type"
+        },
+        "lastRunTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last run time stamp of this connector in UTC time zone",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectorId",
+        "tenantId",
+        "connectorType",
+        "lastRunTimeStamp"
+      ]
+    },
+    "ConnectorPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the Connector.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/Platform",
+          "description": "connector type"
+        }
+      }
+    },
+    "ConnectorUpdate": {
+      "type": "object",
+      "description": "A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "Content": {
+      "type": "object",
+      "description": "Article details of the insight like title, description etc",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the insight"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the insight"
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ]
+    },
+    "ErrorDetailProperties": {
+      "type": "object",
+      "description": "ARM error code and error message associated with the impact",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "ARM Error code associated with the impact."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "ARM Error Message associated with the impact"
+        }
+      }
+    },
+    "ExpectedValueRange": {
+      "type": "object",
+      "description": "Max and Min Threshold values for the metric",
+      "properties": {
+        "min": {
+          "type": "number",
+          "format": "double",
+          "description": "Min threshold value for the metric"
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "Max threshold value for the metric"
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ]
+    },
+    "ImpactCategory": {
+      "type": "object",
+      "description": "ImpactCategory resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImpactCategoryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ImpactCategoryEnum": {
+      "type": "string",
+      "description": "List of impact categories.",
+      "enum": [
+        "Availability",
+        "Performance",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ImpactCategoryEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Availability",
+            "value": "Availability",
+            "description": "Availability category"
+          },
+          {
+            "name": "Performance",
+            "value": "Performance",
+            "description": "Performance category"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other category"
+          }
+        ]
+      }
+    },
+    "ImpactCategoryListResult": {
+      "type": "object",
+      "description": "The response of a ImpactCategory list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ImpactCategory items on this page",
+          "items": {
+            "$ref": "#/definitions/ImpactCategory"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ImpactCategoryProperties": {
+      "type": "object",
+      "description": "Impact category properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Unique ID of the category",
+          "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+        },
+        "parentCategoryId": {
+          "type": "string",
+          "description": "Unique ID of the parent category",
+          "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the category"
+        },
+        "requiredImpactProperties": {
+          "type": "array",
+          "description": "The workloadImpact properties which are required when reporting with the impact category",
+          "items": {
+            "$ref": "#/definitions/RequiredImpactProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "categoryId"
+      ]
+    },
+    "ImpactDetails": {
+      "type": "object",
+      "description": "details of of the impact for which insight has been generated.",
+      "properties": {
+        "impactedResourceId": {
+          "type": "string",
+          "description": "List of impacted Azure resources."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact was started according to reported impact."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact was ended according to reported impact."
+        },
+        "impactId": {
+          "type": "string",
+          "description": "Azure Id of the impact."
+        }
+      },
+      "required": [
+        "impactedResourceId",
+        "startTime",
+        "impactId"
+      ]
+    },
+    "ImpactedResource": {
+      "type": "object",
+      "description": "impacted azure resource id.",
+      "properties": {
+        "impactedResourceId": {
+          "type": "string",
+          "description": "impacted azure resource id"
+        }
+      },
+      "required": [
+        "impactedResourceId"
+      ]
+    },
+    "IncidentSource": {
+      "type": "string",
+      "description": "List of incident interfaces.",
+      "enum": [
+        "AzureDevops",
+        "ICM",
+        "Jira",
+        "ServiceNow",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "IncidentSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureDevops",
+            "value": "AzureDevops",
+            "description": "When source of Incident is AzureDevops"
+          },
+          {
+            "name": "ICM",
+            "value": "ICM",
+            "description": "When source of Incident is Microsoft ICM"
+          },
+          {
+            "name": "Jira",
+            "value": "Jira",
+            "description": "When source of Incident is Jira"
+          },
+          {
+            "name": "ServiceNow",
+            "value": "ServiceNow",
+            "description": "When source of Incident is ServiceNow"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "When source of Incident is Other"
+          }
+        ]
+      }
+    },
+    "Insight": {
+      "type": "object",
+      "description": "Insight resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InsightProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InsightCustomResourceCommonParameters": {
+      "type": "object",
+      "description": "context of post call for insight",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The ID of the target subscription. The value must be an UUID."
+        },
+        "provider": {
+          "type": "string",
+          "description": "The provider namespace for the resource.",
+          "enum": [
+            "Microsoft.Impact"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "azureResourceId": {
+          "type": "string",
+          "description": "Filter by resource type",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "apiVersion",
+        "subscriptionId",
+        "provider"
+      ]
+    },
+    "InsightDetails": {
+      "type": "object",
+      "description": "Body of the get all insights",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The ID of the azure resource."
+        }
+      }
+    },
+    "InsightListResult": {
+      "type": "object",
+      "description": "The response of a Insight list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Insight items on this page",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InsightProperties": {
+      "type": "object",
+      "description": "Impact category properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "category of the insight."
+        },
+        "status": {
+          "type": "string",
+          "description": "status of the insight. example resolved, repaired, other."
+        },
+        "eventId": {
+          "type": "string",
+          "description": "Identifier of the event that has been correlated with this insight. This can be used to aggregate insights for the same event."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Identifier that can be used to group similar insights."
+        },
+        "content": {
+          "$ref": "#/definitions/Content",
+          "description": "Contains title & description for the insight"
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event, which has been correlated the impact."
+        },
+        "insightUniqueId": {
+          "type": "string",
+          "description": "unique id of the insight."
+        },
+        "impact": {
+          "$ref": "#/definitions/ImpactDetails",
+          "description": "details of of the impact for which insight has been generated."
+        },
+        "additionalDetails": {
+          "type": "object",
+          "description": "additional details of the insight."
+        }
+      },
+      "required": [
+        "category",
+        "content",
+        "insightUniqueId",
+        "impact"
+      ]
+    },
+    "InsightUnderSubscription": {
+      "type": "object",
+      "description": "Insight resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InsightProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MetricUnit": {
+      "type": "string",
+      "description": "List of unit of the metric.",
+      "enum": [
+        "ByteSeconds",
+        "Bytes",
+        "BytesPerSecond",
+        "Cores",
+        "Count",
+        "CountPerSecond",
+        "MilliCores",
+        "MilliSeconds",
+        "NanoCores",
+        "Percent",
+        "Seconds",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "MetricUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ByteSeconds",
+            "value": "ByteSeconds",
+            "description": "When measurement is in ByteSeconds"
+          },
+          {
+            "name": "Bytes",
+            "value": "Bytes",
+            "description": "When measurement is in Bytes"
+          },
+          {
+            "name": "BytesPerSecond",
+            "value": "BytesPerSecond",
+            "description": "When measurement is in BytesPerSecond"
+          },
+          {
+            "name": "Cores",
+            "value": "Cores",
+            "description": "When measurement is in Cores"
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "When measurement is in Count"
+          },
+          {
+            "name": "CountPerSecond",
+            "value": "CountPerSecond",
+            "description": "When measurement is in CountPerSecond"
+          },
+          {
+            "name": "MilliCores",
+            "value": "MilliCores",
+            "description": "When measurement is in MilliCores"
+          },
+          {
+            "name": "MilliSeconds",
+            "value": "MilliSeconds",
+            "description": "When measurement is in MilliSeconds"
+          },
+          {
+            "name": "NanoCores",
+            "value": "NanoCores",
+            "description": "When measurement is in NanoCores"
+          },
+          {
+            "name": "Percent",
+            "value": "Percent",
+            "description": "When measurement is in Percent"
+          },
+          {
+            "name": "Seconds",
+            "value": "Seconds",
+            "description": "When measurement is in Seconds"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "When measurement is in Other than listed"
+          }
+        ]
+      }
+    },
+    "Performance": {
+      "type": "object",
+      "description": "Details about impacted performance metrics. Applicable for performance related impact",
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "Name of the Metric examples:  Disk, IOPs, CPU, GPU, Memory, details can be found from /impactCategories API"
+        },
+        "expected": {
+          "type": "number",
+          "format": "double",
+          "description": "Threshold value for the metric"
+        },
+        "actual": {
+          "type": "number",
+          "format": "double",
+          "description": "Observed value for the metric"
+        },
+        "expectedValueRange": {
+          "$ref": "#/definitions/ExpectedValueRange",
+          "description": "Max and Min Threshold values for the metric"
+        },
+        "unit": {
+          "$ref": "#/definitions/MetricUnit",
+          "description": "Unit of the metric ex: Bytes, Percentage, Count, Seconds, Milliseconds, Bytes/Second, Count/Second, etc.., Other"
+        }
+      }
+    },
+    "Platform": {
+      "type": "string",
+      "description": "Enum for connector types",
+      "enum": [
+        "AzureMonitor"
+      ],
+      "x-ms-enum": {
+        "name": "Platform",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureMonitor",
+            "value": "AzureMonitor",
+            "description": "Type of Azure Monitor"
+          }
+        ]
+      }
+    },
+    "Protocol": {
+      "type": "string",
+      "description": "List of protocols",
+      "enum": [
+        "TCP",
+        "UDP",
+        "HTTP",
+        "HTTPS",
+        "RDP",
+        "FTP",
+        "SSH",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "Protocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TCP",
+            "value": "TCP",
+            "description": "When communication protocol is TCP"
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "When communication protocol is UDP"
+          },
+          {
+            "name": "HTTP",
+            "value": "HTTP",
+            "description": "When communication protocol is HTTP"
+          },
+          {
+            "name": "HTTPS",
+            "value": "HTTPS",
+            "description": "When communication protocol is HTTPS"
+          },
+          {
+            "name": "RDP",
+            "value": "RDP",
+            "description": "When communication protocol is RDP"
+          },
+          {
+            "name": "FTP",
+            "value": "FTP",
+            "description": "When communication protocol is FTP"
+          },
+          {
+            "name": "SSH",
+            "value": "SSH",
+            "description": "When communication protocol is SSH"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "When communication protocol is Other"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Provisioning Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning Canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RequiredImpactProperties": {
+      "type": "object",
+      "description": "Required impact properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the property"
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Allowed values values for the property",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SourceOrTarget": {
+      "type": "object",
+      "description": "Resource details",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "Azure resource id, example /subscription/{subscription}/resourceGroup/{rg}/Microsoft.compute/virtualMachine/{vmName}",
+          "pattern": "(\\/[0-9a-zA-Z]+)*"
+        }
+      }
+    },
+    "Toolset": {
+      "type": "string",
+      "description": "List of azure interfaces.",
+      "enum": [
+        "Terraform",
+        "Puppet",
+        "Chef",
+        "SDK",
+        "Ansible",
+        "ARM",
+        "Portal",
+        "Shell",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "Toolset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Terraform",
+            "value": "Terraform",
+            "description": "If communication toolset is Terraform"
+          },
+          {
+            "name": "Puppet",
+            "value": "Puppet",
+            "description": "If communication toolset is Puppet"
+          },
+          {
+            "name": "Chef",
+            "value": "Chef",
+            "description": "If communication toolset is Chef"
+          },
+          {
+            "name": "SDK",
+            "value": "SDK",
+            "description": "If communication toolset is SDK"
+          },
+          {
+            "name": "Ansible",
+            "value": "Ansible",
+            "description": "If communication toolset is Ansible"
+          },
+          {
+            "name": "ARM",
+            "value": "ARM",
+            "description": "If communication toolset is ARM"
+          },
+          {
+            "name": "Portal",
+            "value": "Portal",
+            "description": "If communication toolset is Portal"
+          },
+          {
+            "name": "Shell",
+            "value": "Shell",
+            "description": "If communication toolset is Shell"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "If communication toolset is Other"
+          }
+        ]
+      }
+    },
+    "Workload": {
+      "type": "object",
+      "description": "Information about the impacted workload",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "the scenario for the workload"
+        },
+        "toolset": {
+          "$ref": "#/definitions/Toolset",
+          "description": "Tool used to interact with Azure. SDK, AzPortal, etc.., Other"
+        }
+      }
+    },
+    "WorkloadImpact": {
+      "type": "object",
+      "description": "Workload Impact properties",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadImpactProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkloadImpactListResult": {
+      "type": "object",
+      "description": "The response of a WorkloadImpact list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadImpact items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadImpact"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkloadImpactProperties": {
+      "type": "object",
+      "description": "Workload impact properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact was observed "
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact has ended "
+        },
+        "impactedResourceId": {
+          "type": "string",
+          "description": "Azure resource id of the impacted resource"
+        },
+        "impactUniqueId": {
+          "type": "string",
+          "description": "Unique ID of the impact (UUID)",
+          "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+          "readOnly": true
+        },
+        "reportedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact is reported",
+          "readOnly": true
+        },
+        "impactCategory": {
+          "type": "string",
+          "description": "Category of the impact,  details can found from /impactCategories API"
+        },
+        "impactDescription": {
+          "type": "string",
+          "description": "A detailed description of the impact"
+        },
+        "armCorrelationIds": {
+          "type": "array",
+          "description": "The ARM correlation ids, this is important field for control plane related impacts",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "performance": {
+          "type": "array",
+          "description": "Details about performance issue. Applicable for performance impacts.",
+          "items": {
+            "$ref": "#/definitions/Performance"
+          },
+          "x-ms-identifiers": []
+        },
+        "connectivity": {
+          "$ref": "#/definitions/Connectivity",
+          "description": "Details about connectivity issue. Applicable when root resource causing the issue is not identified. For example, when a VM is impacted due to a network issue, the impacted resource is identified as the VM, but the root cause is the network. In such cases, the connectivity field will have the details about the network issue"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API"
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorDetailProperties",
+          "description": "ARM error code and error message associated with the impact"
+        },
+        "workload": {
+          "$ref": "#/definitions/Workload",
+          "description": "Information about the impacted workload"
+        },
+        "impactGroupId": {
+          "type": "string",
+          "description": "Use this field to group impacts"
+        },
+        "confidenceLevel": {
+          "$ref": "#/definitions/ConfidenceLevel",
+          "description": "Degree of confidence on the impact being a platform issue"
+        },
+        "clientIncidentDetails": {
+          "$ref": "#/definitions/ClientIncidentDetails",
+          "description": "Client incident details ex: incidentId , incident source"
+        }
+      },
+      "required": [
+        "startDateTime",
+        "impactedResourceId",
+        "impactCategory"
+      ]
+    }
+  },
+  "parameters": {
+    "CustomParameters.categoryName": {
+      "name": "categoryName",
+      "in": "query",
+      "description": "Filter by category name ",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomParameters.resourceType": {
+      "name": "resourceType",
+      "in": "query",
+      "description": "Filter by resource type",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
