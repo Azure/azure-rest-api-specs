@@ -20,7 +20,7 @@ jobs:
     - name: Install Go Dependencies
       run: |
         go version
-        go install github.com/azure/armstrong@67fe406e78e3b94075932add869f8b11fb4dd0a6
+        go install github.com/azure/armstrong@latest
         echo "$(HOME)/go/bin" >> $GITHUB_PATH
 
     - name: Setup Node and run `npm ci`
@@ -30,7 +30,6 @@ jobs:
       run: |
         # Keep processing when errors are written. Nonzero exit will mark the 
         # step as failed. 
-        $ErrorActionPreference = 'Continue'
-
+        
         ./eng/scripts/Armstrong-Validation.ps1 -Verbose
       shell: pwsh
