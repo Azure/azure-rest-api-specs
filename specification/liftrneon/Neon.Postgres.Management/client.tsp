@@ -4,20 +4,21 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Neon.Postgres, "NeonPostgresMgmtClient", "python");
-@@clientName(Neon.Postgres.OrganizationResource, "NeonOrganization", "dotnet");
-@@clientName(LiftrBase.CompanyDetails, "NeonCompanyDetails", "dotnet");
-@@clientName(LiftrBase.MarketplaceDetails, "NeonMarketplaceDetails", "dotnet");
-@@clientName(LiftrBase.OfferDetails, "NeonOfferDetails", "dotnet");
-@@clientName(LiftrBase.UserDetails, "NeonUserDetails", "dotnet");
+@@clientName(Neon.Postgres.OrganizationResource, "NeonOrganization", "csharp");
+@@clientName(LiftrBase.CompanyDetails, "NeonCompanyDetails", "csharp");
+@@clientName(LiftrBase.MarketplaceDetails, "NeonMarketplaceDetails", "csharp");
+@@clientName(LiftrBase.OfferDetails, "NeonOfferDetails", "csharp");
+@@clientName(LiftrBase.UserDetails, "NeonUserDetails", "csharp");
 @@clientName(LiftrBase.Data.OrganizationProperties,
   "NeonOrganizationPropertes",
-  "dotnet"
+  "csharp"
 );
-@@clientName(LiftrBase.BaseResourceProperties.provisioningState,
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "NeonResourceProvisioningState",
-  "dotnet"
+  "csharp"
 );
 @@clientName(LiftrBase.SingleSignOnProperties,
   "NeonSingleSignOnProperties",
-  "dotnet"
+  "csharp"
 );
+@@clientName(LiftrBase.SingleSignOnStates, "NeonSingleSignOnState", "csharp");
