@@ -40,11 +40,12 @@ options:
     service-name: "RadiologyInsights"
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-health-insights-radiologyinsights"
-    flavor: azure
-    api-version: 2024-04-01
+    use-object-for-unknown: true
     polling:
       inferRadiologyInsights:
         final-type: com.azure.health.insights.radiologyinsights.models.RadiologyInsightsInferenceResult
+    flavor: azure
+    api-version: 2024-04-01
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true

@@ -1758,6 +1758,9 @@
         },
         "users": {
           "$ref": "#/definitions/Users"
+        },
+        "security": {
+          "$ref": "#/definitions/Security"
         }
       }
     },
@@ -1816,6 +1819,16 @@
       "properties": {
         "viewersCanEdit": {
           "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Security": {
+      "description": "Grafana security settings",
+      "type": "object",
+      "properties": {
+        "csrfAlwaysCheck": {
+          "description": "Set to true to execute the CSRF check even if the login cookie is not in a request (default false).",
           "type": "boolean"
         }
       }

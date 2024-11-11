@@ -22,6 +22,7 @@ directive:
     where: $.definitions.CurrencyResolution.properties.ISO4217
     reason: ISO should be upper case.
 ```
+
 ### Release 2024-11-15-preview
 
 These settings apply only when `--tag=release_2024_11_15_preview` is specified on the command line.
@@ -32,6 +33,7 @@ input-file:
   - preview/2024-11-15-preview/analyzetext.json
   - preview/2024-11-15-preview/analyzetext-authoring.json
   - preview/2024-11-15-preview/analyzeconversations-authoring.json
+  - preview/2024-11-15-preview/analyzedocuments.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:

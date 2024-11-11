@@ -1850,6 +1850,41 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "allowZeroDateTime": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "This allows the special “zero” date value 0000-00-00 to be retrieved from the database. Type: boolean."
+        },
+        "connectionTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error. Type: integer."
+        },
+        "convertZeroDateTime": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "True to return DateTime.MinValue for date or datetime columns that have disallowed values. Type: boolean."
+        },
+        "guidFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Determines which column type (if any) should be read as a GUID. Type: string. None: No column types are automatically read as a Guid; Char36: All CHAR(36) columns are read/written as a Guid using lowercase hex with hyphens, which matches UUID."
+        },
+        "sslCert": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The path to the client’s SSL certificate file in PEM format. SslKey must also be specified. Type: string."
+        },
+        "sslKey": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The path to the client’s SSL private key in PEM format. SslCert must also be specified. Type: string."
+        },
+        "treatTinyAsBoolean": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "When set to true, TINYINT(1) values are returned as booleans. Type: bool."
         }
       }
     },
@@ -4872,6 +4907,61 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer."
+        },
+        "username": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string."
+        },
+        "sslMode": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "SSL mode for connection. Type: integer. 0: disable, 1:allow, 2: prefer, 3: require, 4: verify-ca, 5: verify-full. Type: integer."
+        },
+        "timeout": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: integer."
+        },
+        "commandTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: integer."
+        },
+        "trustServerCertificate": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Whether to trust the server certificate without validating it. Type: boolean."
+        },
+        "readBufferSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Determines the size of the internal buffer uses when reading. Increasing may improve performance if transferring large values from the database. Type: integer."
+        },
+        "timezone": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Gets or sets the session timezone. Type: string."
+        },
+        "encoding": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Gets or sets the .NET encoding that will be used to encode/decode PostgreSQL string data. Type: string"
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
