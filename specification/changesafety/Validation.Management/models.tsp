@@ -66,7 +66,7 @@ model ValidatorProperties {
 @doc("The validator version properties.")
 model ValidatorVersionProperties {
   @doc("The ARM resource id of the parent validator resource.")
-  validatorId: string;
+  validatorId: Azure.Core.armResourceIdentifier;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
   @doc("The schema of parameters that is used for validation.")
