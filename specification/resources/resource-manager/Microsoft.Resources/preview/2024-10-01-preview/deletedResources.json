@@ -112,16 +112,16 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Resources/deletedResources": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deletedResources": {
       "get": {
         "tags": [
           "DeletedResources"
         ],
         "operationId": "DeletedResources_List",
-        "description": "Get deleted resources at specified scope",
+        "description": "Get deleted resources by subscription id",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ScopeParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -129,7 +129,49 @@
         ],
         "x-ms-examples": {
           "Get deleted resources at scope": {
-            "$ref": "./examples/GetScopedDeletedResources.json"
+            "$ref": "./examples/GetDeletedResourcesBySubscriptionId.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the deleted resources.",
+            "schema": {
+              "$ref": "#/definitions/DeletedResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deletedResources": {
+      "get": {
+        "tags": [
+          "DeletedResources"
+        ],
+        "operationId": "DeletedResources_List",
+        "description": "Get deleted resources by resource group name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get deleted resources at scope": {
+            "$ref": "./examples/GetDeletedResourcesByResourceGroup.json"
           }
         },
         "responses": {
