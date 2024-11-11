@@ -24,7 +24,7 @@ union Outcome {
   @doc("The validation succeeded.")
   Succeeded: "Succeeded",
 
-  @doc("THe validation failed.")
+  @doc("The validation failed.")
   Failed: "Failed",
 
   @doc("The validation is running and the outcome is not yet known.")
