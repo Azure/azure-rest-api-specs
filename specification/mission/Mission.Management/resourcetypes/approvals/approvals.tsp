@@ -25,6 +25,14 @@ union ApprovalStatus {
   @doc("ApprovalStatus Type Pending")
   Pending: "Pending",
 
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @doc("ApprovalStatus Type Deleted")
+  Deleted: "Deleted",
+
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @doc("ApprovalStatus Type Expired")
+  Expired: "Expired",
+
   string,
 }
 
@@ -46,6 +54,14 @@ model RequestMetadata {
 
   @doc("Approval status.")
   approvalStatus?: ApprovalStatus;
+
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @doc("Route name for the approval callback")
+  approvalCallbackRoute: string;
+
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @doc("Payload to be sent upon any action on approval request")
+  approvalCallbackPayload?: string;
 }
 
 @doc("Approver Metadata for approvals request.")
