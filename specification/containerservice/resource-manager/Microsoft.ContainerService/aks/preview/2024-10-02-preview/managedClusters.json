@@ -4501,6 +4501,10 @@
         "gatewayProfile": {
           "$ref": "#/definitions/AgentPoolGatewayProfile",
           "description": "Profile specific to a managed agent pool in Gateway mode. This field cannot be set if agent pool mode is not Gateway."
+        },
+        "status": {
+          "$ref": "#/definitions/AgentPoolStatus",
+          "description": "Contains read-only information about the Agent Pool."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -6266,6 +6270,10 @@
         "bootstrapProfile": {
           "$ref": "#/definitions/ManagedClusterBootstrapProfile",
           "description": "Profile of the cluster bootstrap configuration."
+        },
+        "status": {
+          "$ref": "#/definitions/ManagedClusterStatus",
+          "description": "Contains read-only information about the Managed Cluster."
         }
       },
       "description": "Properties of the managed cluster."
@@ -7281,6 +7289,30 @@
         }
       },
       "description": "An error response from the Container service."
+    },
+    "ManagedClusterStatus": {
+      "type": "object",
+      "properties": {
+        "provisioningError": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "title": "The error details information of the managed cluster.",
+          "readOnly": true,
+          "description": "Preserves the detailed info of failure. If there was no error, this field is omitted."
+        }
+      },
+      "description": "Contains read-only information about the Managed Cluster."
+    },
+    "AgentPoolStatus": {
+      "type": "object",
+      "properties": {
+        "provisioningError": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "title": "The error detail information of the agent pool.",
+          "readOnly": true,
+          "description": "Preserves the detailed info of failure. If there was no error, this field is omitted."
+        }
+      },
+      "description": "Contains read-only information about the Agent Pool."
     },
     "CloudErrorBody": {
       "type": "object",
