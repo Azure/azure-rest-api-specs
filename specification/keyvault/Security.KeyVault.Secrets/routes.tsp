@@ -40,7 +40,9 @@ op setSecret is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: SecretSetParameters;
   },
-  SecretBundle
+  SecretBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -61,7 +63,9 @@ op deleteSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  DeletedSecretBundle
+  DeletedSecretBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -98,7 +102,9 @@ op updateSecret is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: SecretUpdateParameters;
   },
-  SecretBundle
+  SecretBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -126,7 +132,9 @@ op getSecret is Azure.Core.Foundations.Operation<
     @clientName("version", "go")
     secretVersion: string;
   },
-  SecretBundle
+  SecretBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -151,7 +159,9 @@ op getSecrets is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  SecretListResult
+  SecretListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -182,7 +192,9 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  SecretListResult
+  SecretListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -206,7 +218,9 @@ op getDeletedSecrets is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  DeletedSecretListResult
+  DeletedSecretListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -226,7 +240,9 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  DeletedSecretBundle
+  DeletedSecretBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -248,7 +264,9 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  void
+  void,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -269,7 +287,9 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  SecretBundle
+  SecretBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -290,7 +310,9 @@ op backupSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  BackupSecretResult
+  BackupSecretResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -311,5 +333,7 @@ op restoreSecret is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: SecretRestoreParameters;
   },
-  SecretBundle
+  SecretBundle,
+  {},
+  KeyVaultError
 >;

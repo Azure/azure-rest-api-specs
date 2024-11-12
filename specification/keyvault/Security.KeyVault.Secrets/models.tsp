@@ -142,16 +142,18 @@ model Attributes {
   /**
    * Not before date in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "nbf")
   @encode("unixTimestamp", int32)
-  notBefore?: utcDateTime;
+  NotBefore?: utcDateTime;
 
   /**
    * Expiry date in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "exp")
   @encode("unixTimestamp", int32)
-  expires?: utcDateTime;
+  Expires?: utcDateTime;
 
   /**
    * Creation time in UTC.
