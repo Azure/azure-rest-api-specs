@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
@@ -298,7 +299,23 @@ model SecretUpdateParameters {
 /**
  * The secret list result.
  */
-model SecretListResult is Azure.Core.Page<SecretItem>;
+@pagedResult
+model SecretListResult {
+  /**
+   * A response message containing a list of secrets in the key vault along with a link to the next page of
+   * secrets.
+   */
+  @items
+  @visibility("read")
+  value?: SecretItem[];
+
+  /**
+   * The URL to get the next set of secrets.
+   */
+  @Azure.Core.nextLink
+  @visibility("read")
+  nextLink?: string;
+}
 
 /**
  * The secret item containing secret metadata.
@@ -335,7 +352,23 @@ model SecretItem {
 /**
  * The deleted secret list result
  */
-model DeletedSecretListResult is Azure.Core.Page<DeletedSecretItem>;
+@pagedResult
+model DeletedSecretListResult {
+  /**
+   * A response message containing a list of deleted secrets in the key vault along with a link to the next page of
+   * deleted secrets.
+   */
+  @items
+  @visibility("read")
+  value?: DeletedSecretItem[];
+
+  /**
+   * The URL to get the next set of deleted secrets.
+   */
+  @Azure.Core.nextLink
+  @visibility("read")
+  nextLink?: string;
+}
 
 /**
  * The deleted secret item containing metadata about the deleted secret.
