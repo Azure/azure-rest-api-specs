@@ -8852,8 +8852,8 @@ model AMLParameters {
 }
 
 /**
-   * A URI fragment specifying the type of identity.
-   */
+ * A URI fragment specifying the type of identity.
+ */
 model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."

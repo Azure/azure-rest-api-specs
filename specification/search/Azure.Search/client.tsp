@@ -173,8 +173,12 @@ namespace Customizations;
 @@clientName(SearchIndexerDataUserAssignedIdentity.`@odata.type`, "odataType");
 @@clientName(HighWaterMarkChangeDetectionPolicy.`@odata.type`, "odataType");
 @@clientName(SqlIntegratedChangeTrackingPolicy.`@odata.type`, "odataType");
-@@clientName(SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`, "odataType");
-@@clientName(NativeBlobSoftDeleteDeletionDetectionPolicy.`@odata.type`, "odataType");
+@@clientName(SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
+  "odataType"
+);
+@@clientName(NativeBlobSoftDeleteDeletionDetectionPolicy.`@odata.type`,
+  "odataType"
+);
 @@clientName(DefaultCognitiveServicesAccount.`@odata.type`, "odataType");
 @@clientName(CognitiveServicesAccountKey.`@odata.type`, "odataType");
 @@clientName(AIServicesAccountKey.`@odata.type`, "odataType");
