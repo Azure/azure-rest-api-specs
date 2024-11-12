@@ -127,7 +127,7 @@ model SecretAttributes {
    * at the end of the retention interval.
    */
   @visibility("read")
-  recoveryLevel?: DeletionRecoveryLevel;
+  recoveryLevel?: string; // DeletionRecoveryLevel, but this should be treated as an opaque string.
 }
 
 /**
