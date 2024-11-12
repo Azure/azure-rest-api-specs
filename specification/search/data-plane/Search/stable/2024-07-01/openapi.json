@@ -96,19 +96,13 @@
             "description": "The definition of the datasource to create.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchIndexerDataSourceCreate"
+              "$ref": "#/definitions/SearchIndexerDataSource"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Represents a datasource definition, which can be used to configure an indexer.",
-            "schema": {
-              "$ref": "#/definitions/SearchIndexerDataSource"
-            }
-          },
           "201": {
-            "description": "Represents a datasource definition, which can be used to configure an indexer.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SearchIndexerDataSource"
             }
@@ -143,13 +137,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Represents a datasource definition, which can be used to configure an indexer.",
-            "schema": {
-              "$ref": "#/definitions/SearchIndexerDataSource"
-            }
-          },
-          "201": {
-            "description": "Represents a datasource definition, which can be used to configure an indexer.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchIndexerDataSource"
             }
@@ -215,19 +203,19 @@
             "description": "The definition of the datasource to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchIndexerDataSourceCreateOrUpdate"
+              "$ref": "#/definitions/SearchIndexerDataSource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Represents a datasource definition, which can be used to configure an indexer.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchIndexerDataSource"
             }
           },
           "201": {
-            "description": "Represents a datasource definition, which can be used to configure an indexer.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SearchIndexerDataSource"
             }
@@ -277,6 +265,9 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -337,19 +328,13 @@
             "description": "The definition of the indexer to create.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchIndexerCreate"
+              "$ref": "#/definitions/SearchIndexer"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Represents an indexer.",
-            "schema": {
-              "$ref": "#/definitions/SearchIndexer"
-            }
-          },
           "201": {
-            "description": "Represents an indexer.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SearchIndexer"
             }
@@ -384,13 +369,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Represents an indexer.",
-            "schema": {
-              "$ref": "#/definitions/SearchIndexer"
-            }
-          },
-          "201": {
-            "description": "Represents an indexer.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchIndexer"
             }
@@ -456,19 +435,19 @@
             "description": "The definition of the indexer to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchIndexerCreateOrUpdate"
+              "$ref": "#/definitions/SearchIndexer"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Represents an indexer.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchIndexer"
             }
           },
           "201": {
-            "description": "Represents an indexer.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SearchIndexer"
             }
@@ -518,6 +497,9 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -580,8 +562,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -677,19 +659,13 @@
             "description": "The definition of the index to create.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchIndexCreate"
+              "$ref": "#/definitions/SearchIndex"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
-            "schema": {
-              "$ref": "#/definitions/SearchIndex"
-            }
-          },
           "201": {
-            "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SearchIndex"
             }
@@ -724,13 +700,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
-            "schema": {
-              "$ref": "#/definitions/SearchIndex"
-            }
-          },
-          "201": {
-            "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchIndex"
             }
@@ -803,19 +773,19 @@
             "description": "The definition of the index to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchIndexCreateOrUpdate"
+              "$ref": "#/definitions/SearchIndex"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchIndex"
             }
           },
           "201": {
-            "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SearchIndex"
             }
@@ -865,6 +835,9 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1944,19 +1917,13 @@
             "description": "The skillset containing one or more skills to create in a search service.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchIndexerSkillsetCreate"
+              "$ref": "#/definitions/SearchIndexerSkillset"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "A list of skills.",
-            "schema": {
-              "$ref": "#/definitions/SearchIndexerSkillset"
-            }
-          },
           "201": {
-            "description": "A list of skills.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SearchIndexerSkillset"
             }
@@ -1991,13 +1958,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of skills.",
-            "schema": {
-              "$ref": "#/definitions/SearchIndexerSkillset"
-            }
-          },
-          "201": {
-            "description": "A list of skills.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchIndexerSkillset"
             }
@@ -2063,19 +2024,19 @@
             "description": "The skillset containing one or more skills to create or update in a search\nservice.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchIndexerSkillsetCreateOrUpdate"
+              "$ref": "#/definitions/SearchIndexerSkillset"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "A list of skills.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchIndexerSkillset"
             }
           },
           "201": {
-            "description": "A list of skills.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SearchIndexerSkillset"
             }
@@ -2125,6 +2086,9 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2185,19 +2149,13 @@
             "description": "The definition of the synonym map to create.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SynonymMapCreate"
+              "$ref": "#/definitions/SynonymMap"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Represents a synonym map definition.",
-            "schema": {
-              "$ref": "#/definitions/SynonymMap"
-            }
-          },
           "201": {
-            "description": "Represents a synonym map definition.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SynonymMap"
             }
@@ -2232,13 +2190,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Represents a synonym map definition.",
-            "schema": {
-              "$ref": "#/definitions/SynonymMap"
-            }
-          },
-          "201": {
-            "description": "Represents a synonym map definition.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SynonymMap"
             }
@@ -2304,19 +2256,19 @@
             "description": "The definition of the synonym map to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SynonymMapCreateOrUpdate"
+              "$ref": "#/definitions/SynonymMap"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Represents a synonym map definition.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SynonymMap"
             }
           },
           "201": {
-            "description": "Represents a synonym map definition.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/SynonymMap"
             }
@@ -2366,6 +2318,9 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -6609,7 +6564,7 @@
           "type": "array",
           "description": "The datasources in the Search service.",
           "items": {
-            "$ref": "#/definitions/SearchIndexerDataSourceItem"
+            "$ref": "#/definitions/SearchIndexerDataSource"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -6627,7 +6582,7 @@
           "type": "array",
           "description": "The indexers in the Search service.",
           "items": {
-            "$ref": "#/definitions/SearchIndexerItem"
+            "$ref": "#/definitions/SearchIndexer"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -6645,7 +6600,7 @@
           "type": "array",
           "description": "The indexes in the Search service.",
           "items": {
-            "$ref": "#/definitions/SearchIndexItem"
+            "$ref": "#/definitions/SearchIndex"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -6663,7 +6618,7 @@
           "type": "array",
           "description": "The skillsets defined in the Search service.",
           "items": {
-            "$ref": "#/definitions/SearchIndexerSkillsetItem"
+            "$ref": "#/definitions/SearchIndexerSkillset"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -6681,7 +6636,7 @@
           "type": "array",
           "description": "The synonym maps in the Search service.",
           "items": {
-            "$ref": "#/definitions/SynonymMapItem"
+            "$ref": "#/definitions/SynonymMap"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -9963,339 +9918,6 @@
         "fields"
       ]
     },
-    "SearchIndexCreate": {
-      "type": "object",
-      "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the index."
-        },
-        "fields": {
-          "type": "array",
-          "description": "The fields of the index.",
-          "items": {
-            "$ref": "#/definitions/SearchField"
-          },
-          "x-ms-identifiers": []
-        },
-        "scoringProfiles": {
-          "type": "array",
-          "description": "The scoring profiles for the index.",
-          "items": {
-            "$ref": "#/definitions/ScoringProfile"
-          },
-          "x-ms-identifiers": []
-        },
-        "defaultScoringProfile": {
-          "type": "string",
-          "description": "The name of the scoring profile to use if none is specified in the query. If\nthis property is not set and no scoring profile is specified in the query, then\ndefault scoring (tf-idf) will be used."
-        },
-        "corsOptions": {
-          "$ref": "#/definitions/CorsOptions",
-          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the index."
-        },
-        "suggesters": {
-          "type": "array",
-          "description": "The suggesters for the index.",
-          "items": {
-            "$ref": "#/definitions/SearchSuggester"
-          },
-          "x-ms-identifiers": []
-        },
-        "analyzers": {
-          "type": "array",
-          "description": "The analyzers for the index.",
-          "items": {
-            "$ref": "#/definitions/LexicalAnalyzer"
-          },
-          "x-ms-identifiers": []
-        },
-        "tokenizers": {
-          "type": "array",
-          "description": "The tokenizers for the index.",
-          "items": {
-            "$ref": "#/definitions/LexicalTokenizer"
-          },
-          "x-ms-identifiers": []
-        },
-        "tokenFilters": {
-          "type": "array",
-          "description": "The token filters for the index.",
-          "items": {
-            "$ref": "#/definitions/TokenFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "charFilters": {
-          "type": "array",
-          "description": "The character filters for the index.",
-          "items": {
-            "$ref": "#/definitions/CharFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        },
-        "similarity": {
-          "$ref": "#/definitions/SimilarityAlgorithm",
-          "description": "The type of similarity algorithm to be used when scoring and ranking the\ndocuments matching a search query. The similarity algorithm can only be defined\nat index creation time and cannot be modified on existing indexes. If null, the\nClassicSimilarity algorithm is used."
-        },
-        "semantic": {
-          "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities."
-        },
-        "vectorSearch": {
-          "$ref": "#/definitions/VectorSearch",
-          "description": "Contains configuration options related to vector search."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the index.",
-          "x-ms-client-name": "eTag"
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "fields"
-      ]
-    },
-    "SearchIndexCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the index."
-        },
-        "fields": {
-          "type": "array",
-          "description": "The fields of the index.",
-          "items": {
-            "$ref": "#/definitions/SearchField"
-          },
-          "x-ms-identifiers": []
-        },
-        "scoringProfiles": {
-          "type": "array",
-          "description": "The scoring profiles for the index.",
-          "items": {
-            "$ref": "#/definitions/ScoringProfile"
-          },
-          "x-ms-identifiers": []
-        },
-        "defaultScoringProfile": {
-          "type": "string",
-          "description": "The name of the scoring profile to use if none is specified in the query. If\nthis property is not set and no scoring profile is specified in the query, then\ndefault scoring (tf-idf) will be used."
-        },
-        "corsOptions": {
-          "$ref": "#/definitions/CorsOptions",
-          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the index."
-        },
-        "suggesters": {
-          "type": "array",
-          "description": "The suggesters for the index.",
-          "items": {
-            "$ref": "#/definitions/SearchSuggester"
-          },
-          "x-ms-identifiers": []
-        },
-        "analyzers": {
-          "type": "array",
-          "description": "The analyzers for the index.",
-          "items": {
-            "$ref": "#/definitions/LexicalAnalyzer"
-          },
-          "x-ms-identifiers": []
-        },
-        "tokenizers": {
-          "type": "array",
-          "description": "The tokenizers for the index.",
-          "items": {
-            "$ref": "#/definitions/LexicalTokenizer"
-          },
-          "x-ms-identifiers": []
-        },
-        "tokenFilters": {
-          "type": "array",
-          "description": "The token filters for the index.",
-          "items": {
-            "$ref": "#/definitions/TokenFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "charFilters": {
-          "type": "array",
-          "description": "The character filters for the index.",
-          "items": {
-            "$ref": "#/definitions/CharFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        },
-        "similarity": {
-          "$ref": "#/definitions/SimilarityAlgorithm",
-          "description": "The type of similarity algorithm to be used when scoring and ranking the\ndocuments matching a search query. The similarity algorithm can only be defined\nat index creation time and cannot be modified on existing indexes. If null, the\nClassicSimilarity algorithm is used."
-        },
-        "semantic": {
-          "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities."
-        },
-        "vectorSearch": {
-          "$ref": "#/definitions/VectorSearch",
-          "description": "Contains configuration options related to vector search."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the index.",
-          "x-ms-client-name": "eTag"
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "fields"
-      ]
-    },
-    "SearchIndexItem": {
-      "type": "object",
-      "description": "Represents a search index definition, which describes the fields and search\nbehavior of an index.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the index."
-        },
-        "fields": {
-          "type": "array",
-          "description": "The fields of the index.",
-          "items": {
-            "$ref": "#/definitions/SearchField"
-          },
-          "x-ms-identifiers": []
-        },
-        "scoringProfiles": {
-          "type": "array",
-          "description": "The scoring profiles for the index.",
-          "items": {
-            "$ref": "#/definitions/ScoringProfile"
-          },
-          "x-ms-identifiers": []
-        },
-        "defaultScoringProfile": {
-          "type": "string",
-          "description": "The name of the scoring profile to use if none is specified in the query. If\nthis property is not set and no scoring profile is specified in the query, then\ndefault scoring (tf-idf) will be used."
-        },
-        "corsOptions": {
-          "$ref": "#/definitions/CorsOptions",
-          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the index."
-        },
-        "suggesters": {
-          "type": "array",
-          "description": "The suggesters for the index.",
-          "items": {
-            "$ref": "#/definitions/SearchSuggester"
-          },
-          "x-ms-identifiers": []
-        },
-        "analyzers": {
-          "type": "array",
-          "description": "The analyzers for the index.",
-          "items": {
-            "$ref": "#/definitions/LexicalAnalyzer"
-          },
-          "x-ms-identifiers": []
-        },
-        "tokenizers": {
-          "type": "array",
-          "description": "The tokenizers for the index.",
-          "items": {
-            "$ref": "#/definitions/LexicalTokenizer"
-          },
-          "x-ms-identifiers": []
-        },
-        "tokenFilters": {
-          "type": "array",
-          "description": "The token filters for the index.",
-          "items": {
-            "$ref": "#/definitions/TokenFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "charFilters": {
-          "type": "array",
-          "description": "The character filters for the index.",
-          "items": {
-            "$ref": "#/definitions/CharFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        },
-        "similarity": {
-          "$ref": "#/definitions/SimilarityAlgorithm",
-          "description": "The type of similarity algorithm to be used when scoring and ranking the\ndocuments matching a search query. The similarity algorithm can only be defined\nat index creation time and cannot be modified on existing indexes. If null, the\nClassicSimilarity algorithm is used."
-        },
-        "semantic": {
-          "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities."
-        },
-        "vectorSearch": {
-          "$ref": "#/definitions/VectorSearch",
-          "description": "Contains configuration options related to vector search."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the index.",
-          "x-ms-client-name": "eTag"
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "fields"
-      ]
-    },
     "SearchIndexer": {
       "type": "object",
       "description": "Represents an indexer.",
@@ -10359,166 +9981,6 @@
         }
       },
       "required": [
-        "name",
-        "dataSourceName",
-        "targetIndexName"
-      ]
-    },
-    "SearchIndexerCreate": {
-      "type": "object",
-      "description": "Represents an indexer.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the indexer."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the indexer."
-        },
-        "dataSourceName": {
-          "type": "string",
-          "description": "The name of the datasource from which this indexer reads data."
-        },
-        "skillsetName": {
-          "type": "string",
-          "description": "The name of the skillset executing with this indexer."
-        },
-        "targetIndexName": {
-          "type": "string",
-          "description": "The name of the index to which this indexer writes data."
-        },
-        "schedule": {
-          "$ref": "#/definitions/IndexingSchedule",
-          "description": "The schedule for this indexer."
-        },
-        "parameters": {
-          "$ref": "#/definitions/IndexingParameters",
-          "description": "Parameters for indexer execution."
-        },
-        "fieldMappings": {
-          "type": "array",
-          "description": "Defines mappings between fields in the data source and corresponding target\nfields in the index.",
-          "items": {
-            "$ref": "#/definitions/FieldMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "outputFieldMappings": {
-          "type": "array",
-          "description": "Output field mappings are applied after enrichment and immediately before\nindexing.",
-          "items": {
-            "$ref": "#/definitions/FieldMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the indexer.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your indexer\ndefinition (as well as indexer execution status) when you want full assurance\nthat no one, not even Microsoft, can decrypt them. Once you have encrypted your\nindexer definition, it will always remain encrypted. The search service will\nignore attempts to set this property to null. You can change this property as\nneeded if you want to rotate your encryption key; Your indexer definition (and\nindexer execution status) will be unaffected. Encryption with customer-managed\nkeys is not available for free search services, and is only available for paid\nservices created on or after January 1, 2019."
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "dataSourceName",
-        "targetIndexName"
-      ]
-    },
-    "SearchIndexerCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents an indexer.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the indexer."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the indexer."
-        },
-        "dataSourceName": {
-          "type": "string",
-          "description": "The name of the datasource from which this indexer reads data."
-        },
-        "skillsetName": {
-          "type": "string",
-          "description": "The name of the skillset executing with this indexer."
-        },
-        "targetIndexName": {
-          "type": "string",
-          "description": "The name of the index to which this indexer writes data."
-        },
-        "schedule": {
-          "$ref": "#/definitions/IndexingSchedule",
-          "description": "The schedule for this indexer."
-        },
-        "parameters": {
-          "$ref": "#/definitions/IndexingParameters",
-          "description": "Parameters for indexer execution."
-        },
-        "fieldMappings": {
-          "type": "array",
-          "description": "Defines mappings between fields in the data source and corresponding target\nfields in the index.",
-          "items": {
-            "$ref": "#/definitions/FieldMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "outputFieldMappings": {
-          "type": "array",
-          "description": "Output field mappings are applied after enrichment and immediately before\nindexing.",
-          "items": {
-            "$ref": "#/definitions/FieldMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the indexer.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your indexer\ndefinition (as well as indexer execution status) when you want full assurance\nthat no one, not even Microsoft, can decrypt them. Once you have encrypted your\nindexer definition, it will always remain encrypted. The search service will\nignore attempts to set this property to null. You can change this property as\nneeded if you want to rotate your encryption key; Your indexer definition (and\nindexer execution status) will be unaffected. Encryption with customer-managed\nkeys is not available for free search services, and is only available for paid\nservices created on or after January 1, 2019."
-        }
-      },
-      "required": [
-        "_",
         "name",
         "dataSourceName",
         "targetIndexName"
@@ -10625,189 +10087,6 @@
         }
       },
       "required": [
-        "name",
-        "type",
-        "credentials",
-        "container"
-      ]
-    },
-    "SearchIndexerDataSourceCreate": {
-      "type": "object",
-      "description": "Represents a datasource definition, which can be used to configure an indexer.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the datasource."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the datasource."
-        },
-        "type": {
-          "$ref": "#/definitions/SearchIndexerDataSourceType",
-          "description": "The type of the datasource."
-        },
-        "credentials": {
-          "$ref": "#/definitions/DataSourceCredentials",
-          "description": "Credentials for the datasource."
-        },
-        "container": {
-          "$ref": "#/definitions/SearchIndexerDataContainer",
-          "description": "The data container for the datasource."
-        },
-        "dataChangeDetectionPolicy": {
-          "$ref": "#/definitions/DataChangeDetectionPolicy",
-          "description": "The data change detection policy for the datasource."
-        },
-        "dataDeletionDetectionPolicy": {
-          "$ref": "#/definitions/DataDeletionDetectionPolicy",
-          "description": "The data deletion detection policy for the datasource."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the data source.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your\ndatasource definition when you want full assurance that no one, not even\nMicrosoft, can decrypt your data source definition. Once you have encrypted\nyour data source definition, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your datasource\ndefinition will be unaffected. Encryption with customer-managed keys is not\navailable for free search services, and is only available for paid services\ncreated on or after January 1, 2019."
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "type",
-        "credentials",
-        "container"
-      ]
-    },
-    "SearchIndexerDataSourceCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents a datasource definition, which can be used to configure an indexer.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the datasource."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the datasource."
-        },
-        "type": {
-          "$ref": "#/definitions/SearchIndexerDataSourceType",
-          "description": "The type of the datasource."
-        },
-        "credentials": {
-          "$ref": "#/definitions/DataSourceCredentials",
-          "description": "Credentials for the datasource."
-        },
-        "container": {
-          "$ref": "#/definitions/SearchIndexerDataContainer",
-          "description": "The data container for the datasource."
-        },
-        "dataChangeDetectionPolicy": {
-          "$ref": "#/definitions/DataChangeDetectionPolicy",
-          "description": "The data change detection policy for the datasource."
-        },
-        "dataDeletionDetectionPolicy": {
-          "$ref": "#/definitions/DataDeletionDetectionPolicy",
-          "description": "The data deletion detection policy for the datasource."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the data source.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your\ndatasource definition when you want full assurance that no one, not even\nMicrosoft, can decrypt your data source definition. Once you have encrypted\nyour data source definition, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your datasource\ndefinition will be unaffected. Encryption with customer-managed keys is not\navailable for free search services, and is only available for paid services\ncreated on or after January 1, 2019."
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "type",
-        "credentials",
-        "container"
-      ]
-    },
-    "SearchIndexerDataSourceItem": {
-      "type": "object",
-      "description": "Represents a datasource definition, which can be used to configure an indexer.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the datasource."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the datasource."
-        },
-        "type": {
-          "$ref": "#/definitions/SearchIndexerDataSourceType",
-          "description": "The type of the datasource."
-        },
-        "credentials": {
-          "$ref": "#/definitions/DataSourceCredentials",
-          "description": "Credentials for the datasource."
-        },
-        "container": {
-          "$ref": "#/definitions/SearchIndexerDataContainer",
-          "description": "The data container for the datasource."
-        },
-        "dataChangeDetectionPolicy": {
-          "$ref": "#/definitions/DataChangeDetectionPolicy",
-          "description": "The data change detection policy for the datasource."
-        },
-        "dataDeletionDetectionPolicy": {
-          "$ref": "#/definitions/DataDeletionDetectionPolicy",
-          "description": "The data deletion detection policy for the datasource."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the data source.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your\ndatasource definition when you want full assurance that no one, not even\nMicrosoft, can decrypt your data source definition. Once you have encrypted\nyour data source definition, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your datasource\ndefinition will be unaffected. Encryption with customer-managed keys is not\navailable for free search services, and is only available for paid services\ncreated on or after January 1, 2019."
-        }
-      },
-      "required": [
-        "_",
         "name",
         "type",
         "credentials",
@@ -10997,86 +10276,6 @@
         }
       },
       "additionalProperties": {}
-    },
-    "SearchIndexerItem": {
-      "type": "object",
-      "description": "Represents an indexer.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the indexer."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the indexer."
-        },
-        "dataSourceName": {
-          "type": "string",
-          "description": "The name of the datasource from which this indexer reads data."
-        },
-        "skillsetName": {
-          "type": "string",
-          "description": "The name of the skillset executing with this indexer."
-        },
-        "targetIndexName": {
-          "type": "string",
-          "description": "The name of the index to which this indexer writes data."
-        },
-        "schedule": {
-          "$ref": "#/definitions/IndexingSchedule",
-          "description": "The schedule for this indexer."
-        },
-        "parameters": {
-          "$ref": "#/definitions/IndexingParameters",
-          "description": "Parameters for indexer execution."
-        },
-        "fieldMappings": {
-          "type": "array",
-          "description": "Defines mappings between fields in the data source and corresponding target\nfields in the index.",
-          "items": {
-            "$ref": "#/definitions/FieldMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "outputFieldMappings": {
-          "type": "array",
-          "description": "Output field mappings are applied after enrichment and immediately before\nindexing.",
-          "items": {
-            "$ref": "#/definitions/FieldMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the indexer.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your indexer\ndefinition (as well as indexer execution status) when you want full assurance\nthat no one, not even Microsoft, can decrypt them. Once you have encrypted your\nindexer definition, it will always remain encrypted. The search service will\nignore attempts to set this property to null. You can change this property as\nneeded if you want to rotate your encryption key; Your indexer definition (and\nindexer execution status) will be unaffected. Encryption with customer-managed\nkeys is not available for free search services, and is only available for paid\nservices created on or after January 1, 2019."
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "dataSourceName",
-        "targetIndexName"
-      ]
     },
     "SearchIndexerKnowledgeStore": {
       "type": "object",
@@ -11337,183 +10536,6 @@
         }
       },
       "required": [
-        "name",
-        "skills"
-      ]
-    },
-    "SearchIndexerSkillsetCreate": {
-      "type": "object",
-      "description": "A list of skills.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the skillset."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the skillset."
-        },
-        "skills": {
-          "type": "array",
-          "description": "A list of skills in the skillset.",
-          "items": {
-            "$ref": "#/definitions/SearchIndexerSkill"
-          },
-          "x-ms-identifiers": []
-        },
-        "cognitiveServices": {
-          "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about the Azure AI service to be used when running skills."
-        },
-        "knowledgeStore": {
-          "$ref": "#/definitions/SearchIndexerKnowledgeStore",
-          "description": "Definition of additional projections to Azure blob, table, or files, of\nenriched data."
-        },
-        "indexProjections": {
-          "$ref": "#/definitions/SearchIndexerIndexProjection",
-          "description": "Definition of additional projections to secondary search index(es)."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the skillset.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your skillset\ndefinition when you want full assurance that no one, not even Microsoft, can\ndecrypt your skillset definition. Once you have encrypted your skillset\ndefinition, it will always remain encrypted. The search service will ignore\nattempts to set this property to null. You can change this property as needed\nif you want to rotate your encryption key; Your skillset definition will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "skills"
-      ]
-    },
-    "SearchIndexerSkillsetCreateOrUpdate": {
-      "type": "object",
-      "description": "A list of skills.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the skillset."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the skillset."
-        },
-        "skills": {
-          "type": "array",
-          "description": "A list of skills in the skillset.",
-          "items": {
-            "$ref": "#/definitions/SearchIndexerSkill"
-          },
-          "x-ms-identifiers": []
-        },
-        "cognitiveServices": {
-          "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about the Azure AI service to be used when running skills."
-        },
-        "knowledgeStore": {
-          "$ref": "#/definitions/SearchIndexerKnowledgeStore",
-          "description": "Definition of additional projections to Azure blob, table, or files, of\nenriched data."
-        },
-        "indexProjections": {
-          "$ref": "#/definitions/SearchIndexerIndexProjection",
-          "description": "Definition of additional projections to secondary search index(es)."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the skillset.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your skillset\ndefinition when you want full assurance that no one, not even Microsoft, can\ndecrypt your skillset definition. Once you have encrypted your skillset\ndefinition, it will always remain encrypted. The search service will ignore\nattempts to set this property to null. You can change this property as needed\nif you want to rotate your encryption key; Your skillset definition will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "skills"
-      ]
-    },
-    "SearchIndexerSkillsetItem": {
-      "type": "object",
-      "description": "A list of skills.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the skillset."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the skillset."
-        },
-        "skills": {
-          "type": "array",
-          "description": "A list of skills in the skillset.",
-          "items": {
-            "$ref": "#/definitions/SearchIndexerSkill"
-          },
-          "x-ms-identifiers": []
-        },
-        "cognitiveServices": {
-          "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about the Azure AI service to be used when running skills."
-        },
-        "knowledgeStore": {
-          "$ref": "#/definitions/SearchIndexerKnowledgeStore",
-          "description": "Definition of additional projections to Azure blob, table, or files, of\nenriched data."
-        },
-        "indexProjections": {
-          "$ref": "#/definitions/SearchIndexerIndexProjection",
-          "description": "Definition of additional projections to secondary search index(es)."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the skillset.",
-          "x-ms-client-name": "eTag"
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your skillset\ndefinition when you want full assurance that no one, not even Microsoft, can\ndecrypt your skillset definition. Once you have encrypted your skillset\ndefinition, it will always remain encrypted. The search service will ignore\nattempts to set this property to null. You can change this property as needed\nif you want to rotate your encryption key; Your skillset definition will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        }
-      },
-      "required": [
-        "_",
         "name",
         "skills"
       ]
@@ -13667,156 +12689,6 @@
         }
       },
       "required": [
-        "name",
-        "format",
-        "synonyms"
-      ]
-    },
-    "SynonymMapCreate": {
-      "type": "object",
-      "description": "Represents a synonym map definition.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the synonym map."
-        },
-        "format": {
-          "type": "string",
-          "description": "The format of the synonym map. Only the 'solr' format is currently supported.",
-          "enum": [
-            "solr"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "synonyms": {
-          "type": "string",
-          "description": "A series of synonym rules in the specified synonym map format. The rules must\nbe separated by newlines."
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the synonym map.",
-          "x-ms-client-name": "eTag"
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "format",
-        "synonyms"
-      ]
-    },
-    "SynonymMapCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents a synonym map definition.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the synonym map."
-        },
-        "format": {
-          "type": "string",
-          "description": "The format of the synonym map. Only the 'solr' format is currently supported.",
-          "enum": [
-            "solr"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "synonyms": {
-          "type": "string",
-          "description": "A series of synonym rules in the specified synonym map format. The rules must\nbe separated by newlines."
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the synonym map.",
-          "x-ms-client-name": "eTag"
-        }
-      },
-      "required": [
-        "_",
-        "name",
-        "format",
-        "synonyms"
-      ]
-    },
-    "SynonymMapItem": {
-      "type": "object",
-      "description": "Represents a synonym map definition.",
-      "properties": {
-        "_": {
-          "type": "number",
-          "description": "Succesfully created or updated",
-          "enum": [
-            200,
-            201
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the synonym map."
-        },
-        "format": {
-          "type": "string",
-          "description": "The format of the synonym map. Only the 'solr' format is currently supported.",
-          "enum": [
-            "solr"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "synonyms": {
-          "type": "string",
-          "description": "A series of synonym rules in the specified synonym map format. The rules must\nbe separated by newlines."
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key\nis used to provide an additional level of encryption-at-rest for your data when\nyou want full assurance that no one, not even Microsoft, can decrypt your data.\nOnce you have encrypted your data, it will always remain encrypted. The search\nservice will ignore attempts to set this property to null. You can change this\nproperty as needed if you want to rotate your encryption key; Your data will be\nunaffected. Encryption with customer-managed keys is not available for free\nsearch services, and is only available for paid services created on or after\nJanuary 1, 2019."
-        },
-        "@odata.etag": {
-          "type": "string",
-          "description": "The ETag of the synonym map.",
-          "x-ms-client-name": "eTag"
-        }
-      },
-      "required": [
-        "_",
         "name",
         "format",
         "synonyms"
