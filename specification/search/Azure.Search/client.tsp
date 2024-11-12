@@ -37,7 +37,7 @@ namespace Customizations;
 @@clientName(IndexerExecutionResult.itemsProcessed, "itemCount");
 @@clientName(IndexerExecutionResult.itemsFailed, "failedItemCount");
 @@clientName(SearchIndexerSkillset.cognitiveServices,
-    "cognitiveServicesAccount"
+  "cognitiveServicesAccount"
 );
 @@clientName(SearchIndexerSkillset.indexProjections, "indexProjection");
 @@clientName(ListSkillsetsResult.value, "skillsets");
@@ -49,10 +49,10 @@ namespace Customizations;
 @@clientName(ScoringProfile.text, "textWeights");
 @@clientName(SemanticSearch.defaultConfiguration, "defaultConfigurationName");
 @@clientName(SemanticPrioritizedFields.prioritizedContentFields,
-    "contentFields"
+  "contentFields"
 );
 @@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields,
-    "keywordsFields"
+  "keywordsFields"
 );
 @@clientName(VectorSearchProfile.algorithm, "algorithmConfigurationName");
 @@clientName(VectorSearchProfile.vectorizer, "vectorizerName");
@@ -69,7 +69,7 @@ namespace Customizations;
 @@clientName(SearchServiceCounters.skillsetCount, "skillsetCounter");
 @@clientName(SearchServiceCounters.vectorIndexSize, "vectorIndexSizeCounter");
 @@clientName(SearchServiceLimits.maxStoragePerIndex,
-    "maxStoragePerIndexInBytes"
+  "maxStoragePerIndexInBytes"
 );
 @@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms");
 @@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder");
@@ -82,10 +82,10 @@ namespace Customizations;
 @@clientName(StopwordsTokenFilter.removeTrailing, "removeTrailingStopWords");
 @@clientName(HnswAlgorithmConfiguration.hnswParameters, "parameters");
 @@clientName(ExhaustiveKnnAlgorithmConfiguration.exhaustiveKnnParameters,
-    "parameters"
+  "parameters"
 );
 @@clientName(ScalarQuantizationCompression.scalarQuantizationParameters,
-    "parameters"
+  "parameters"
 );
 @@clientName(AzureOpenAIVectorizer.azureOpenAIParameters, "parameters");
 @@clientName(AzureOpenAIVectorizerParameters.resourceUri, "resourceUrl");
@@ -93,13 +93,13 @@ namespace Customizations;
 @@clientName(WebApiVectorizer.customWebApiParameters, "webApiParameters");
 @@clientName(WebApiVectorizerParameters.uri, "url");
 @@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
-    "resourceId"
+  "resourceId"
 );
 @@clientName(DistanceScoringFunction.distance, "parameters");
 @@clientName(FreshnessScoringFunction.freshness, "parameters");
 @@clientName(MagnitudeScoringFunction.magnitude, "parameters");
 @@clientName(MagnitudeScoringParameters.constantBoostBeyondRange,
-    "shouldBoostBeyondRangeByConstant"
+  "shouldBoostBeyondRangeByConstant"
 );
 @@clientName(TagScoringFunction.tag, "parameters");
 @@clientName(OcrSkill.detectOrientation, "shouldDetectOrientation");
