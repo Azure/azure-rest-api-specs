@@ -689,9 +689,7 @@
             "password": {
               "description": "Certificate password.",
               "type": "string",
-              "x-ms-mutability": [
-                "create"
-              ]
+              "x-ms-secret": "true"
             },
             "friendlyName": {
               "description": "Friendly name of the certificate.",
@@ -769,11 +767,17 @@
               "readOnly": true
             },
             "keyVaultId": {
-              "description": "Key Vault Csm resource Id.",
-              "type": "string"
+              "description": "Azure Key Vault Csm resource Id.",
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": [
+                {
+                  "type": "Microsoft.KeyVault/vaults"
+                }
+              ]
             },
             "keyVaultSecretName": {
-              "description": "Key Vault secret name.",
+              "description": "Azure Key Vault secret name.",
               "type": "string"
             },
             "keyVaultSecretStatus": {
@@ -799,8 +803,14 @@
               }
             },
             "serverFarmId": {
-              "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
-              "type": "string"
+              "description": "Resource ID of the associated App Service plan.",
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": [
+                {
+                  "type": "Microsoft.Web/serverfarms"
+                }
+              ]
             },
             "canonicalName": {
               "description": "CNAME of the certificate to be issued via free certificate",
