@@ -3641,6 +3641,57 @@
         ]
       }
     },
+    "AMLParameters": {
+      "type": "object",
+      "description": "Specifies the properties for connecting to an AML vectorizer.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "(Required for no authentication or key authentication) The scoring URI of the\nAML service to which the JSON payload will be sent. Only the https URI scheme\nis allowed."
+        },
+        "key": {
+          "type": "string",
+          "description": "(Required for key authentication) The key for the AML service."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "(Required for token authentication). The Azure Resource Manager resource ID of\nthe AML service. It should be in the format\nsubscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "(Optional) When specified, indicates the timeout for the http client making the\nAPI call."
+        },
+        "region": {
+          "type": "string",
+          "description": "(Optional for token authentication). The region the AML service is deployed in."
+        },
+        "modelName": {
+          "$ref": "#/definitions/AIStudioModelCatalogName",
+          "description": "The name of the embedding model from the Azure AI Studio Catalog that is\ndeployed at the provided endpoint."
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "AMLVectorizer": {
+      "type": "object",
+      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio\nModel Catalog for generating the vector embedding of a query string.",
+      "properties": {
+        "AMLParameters": {
+          "$ref": "#/definitions/AMLParameters",
+          "description": "Specifies the properties of the AML vectorizer."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchVectorizer"
+        }
+      ],
+      "x-ms-discriminator-value": "aml"
+    },
     "AnalyzeRequest": {
       "type": "object",
       "description": "Specifies some text and analysis components used to break that text into tokens.",
@@ -3818,8 +3869,7 @@
       "properties": {
         "search": {
           "type": "string",
-          "description": "The search text on which to base autocomplete results.",
-          "x-ms-client-name": "searchText"
+          "description": "The search text on which to base autocomplete results."
         },
         "autocompleteMode": {
           "$ref": "#/definitions/AutocompleteMode",
@@ -3831,8 +3881,7 @@
         },
         "fuzzy": {
           "type": "boolean",
-          "description": "A value indicating whether to use fuzzy matching for the autocomplete query.\nDefault is false. When set to true, the query will autocomplete terms even if\nthere's a substituted or missing character in the search text. While this\nprovides a better experience in some scenarios, it comes at a performance cost\nas fuzzy autocomplete queries are slower and consume more resources.",
-          "x-ms-client-name": "useFuzzyMatching"
+          "description": "A value indicating whether to use fuzzy matching for the autocomplete query.\nDefault is false. When set to true, the query will autocomplete terms even if\nthere's a substituted or missing character in the search text. While this\nprovides a better experience in some scenarios, it comes at a performance cost\nas fuzzy autocomplete queries are slower and consume more resources."
         },
         "highlightPostTag": {
           "type": "string",
@@ -3884,7 +3933,6 @@
             "$ref": "#/definitions/AutocompleteItem"
           },
           "readOnly": true,
-          "x-ms-client-name": "results",
           "x-ms-identifiers": []
         }
       },
@@ -3909,43 +3957,6 @@
         "applicationId"
       ]
     },
-    "AzureMachineLearningParameters": {
-      "type": "object",
-      "description": "Specifies the properties for connecting to an AML vectorizer.",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "(Required for no authentication or key authentication) The scoring URI of the\nAML service to which the JSON payload will be sent. Only the https URI scheme\nis allowed.",
-          "x-ms-client-name": "scoringUri"
-        },
-        "key": {
-          "type": "string",
-          "description": "(Required for key authentication) The key for the AML service.",
-          "x-ms-client-name": "authenticationKey"
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "(Required for token authentication). The Azure Resource Manager resource ID of\nthe AML service. It should be in the format\nsubscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
-        },
-        "timeout": {
-          "type": "string",
-          "format": "duration",
-          "description": "(Optional) When specified, indicates the timeout for the http client making the\nAPI call."
-        },
-        "region": {
-          "type": "string",
-          "description": "(Optional for token authentication). The region the AML service is deployed in."
-        },
-        "modelName": {
-          "$ref": "#/definitions/AIStudioModelCatalogName",
-          "description": "The name of the embedding model from the Azure AI Studio Catalog that is\ndeployed at the provided endpoint."
-        }
-      },
-      "required": [
-        "uri"
-      ]
-    },
     "AzureMachineLearningSkill": {
       "type": "object",
       "description": "The AML skill allows you to extend AI enrichment with a custom Azure Machine\nLearning (AML) model. Once an AML model is trained and deployed, an AML skill\nintegrates it into AI enrichment.",
@@ -3953,13 +3964,11 @@
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "(Required for no authentication or key authentication) The scoring URI of the\nAML service to which the JSON payload will be sent. Only the https URI scheme\nis allowed.",
-          "x-ms-client-name": "scoringUri"
+          "description": "(Required for no authentication or key authentication) The scoring URI of the\nAML service to which the JSON payload will be sent. Only the https URI scheme\nis allowed."
         },
         "key": {
           "type": "string",
-          "description": "(Required for key authentication) The key for the AML service.",
-          "x-ms-client-name": "authenticationKey"
+          "description": "(Required for key authentication) The key for the AML service."
         },
         "resourceId": {
           "type": "string",
@@ -4001,22 +4010,6 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.AmlSkill"
     },
-    "AzureMachineLearningVectorizer": {
-      "type": "object",
-      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio\nModel Catalog for generating the vector embedding of a query string.",
-      "properties": {
-        "AMLParameters": {
-          "$ref": "#/definitions/AzureMachineLearningParameters",
-          "description": "Specifies the properties of the AML vectorizer."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/VectorSearchVectorizer"
-        }
-      ],
-      "x-ms-discriminator-value": "aml"
-    },
     "AzureOpenAIEmbeddingSkill": {
       "type": "object",
       "description": "Allows you to generate a vector embedding for a given text input using the\nAzure OpenAI resource.",
@@ -4024,13 +4017,11 @@
         "resourceUri": {
           "type": "string",
           "format": "uri",
-          "description": "The resource URI of the Azure OpenAI resource.",
-          "x-ms-client-name": "resourceUrl"
+          "description": "The resource URI of the Azure OpenAI resource."
         },
         "deploymentId": {
           "type": "string",
-          "description": "ID of the Azure OpenAI model deployment on the designated resource.",
-          "x-ms-client-name": "deploymentName"
+          "description": "ID of the Azure OpenAI model deployment on the designated resource."
         },
         "apiKey": {
           "type": "string",
@@ -4124,8 +4115,7 @@
       "properties": {
         "azureOpenAIParameters": {
           "$ref": "#/definitions/AzureOpenAIVectorizerParameters",
-          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization.",
-          "x-ms-client-name": "parameters"
+          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization."
         }
       },
       "allOf": [
@@ -4142,13 +4132,11 @@
         "resourceUri": {
           "type": "string",
           "format": "uri",
-          "description": "The resource URI of the Azure OpenAI resource.",
-          "x-ms-client-name": "resourceUrl"
+          "description": "The resource URI of the Azure OpenAI resource."
         },
         "deploymentId": {
           "type": "string",
-          "description": "ID of the Azure OpenAI model deployment on the designated resource.",
-          "x-ms-client-name": "deploymentName"
+          "description": "ID of the Azure OpenAI model deployment on the designated resource."
         },
         "apiKey": {
           "type": "string",
@@ -4583,8 +4571,7 @@
         },
         "queryMode": {
           "type": "boolean",
-          "description": "A value that indicates whether the token filter is in query mode. When in query\nmode, the token filter generates bigrams and then removes common words and\nsingle terms followed by a common word. Default is false.",
-          "x-ms-client-name": "useQueryMode"
+          "description": "A value that indicates whether the token filter is in query mode. When in query\nmode, the token filter generates bigrams and then removes common words and\nsingle terms followed by a common word. Default is false."
         },
         "@odata.type": {
           "type": "string",
@@ -5092,8 +5079,7 @@
       "properties": {
         "distance": {
           "$ref": "#/definitions/DistanceScoringParameters",
-          "description": "Parameter values for the distance scoring function.",
-          "x-ms-client-name": "parameters"
+          "description": "Parameter values for the distance scoring function."
         }
       },
       "required": [
@@ -5961,8 +5947,7 @@
       "properties": {
         "exhaustiveKnnParameters": {
           "$ref": "#/definitions/ExhaustiveKnnParameters",
-          "description": "Contains the parameters specific to exhaustive KNN algorithm.",
-          "x-ms-client-name": "parameters"
+          "description": "Contains the parameters specific to exhaustive KNN algorithm."
         }
       },
       "allOf": [
@@ -6053,8 +6038,7 @@
       "properties": {
         "freshness": {
           "$ref": "#/definitions/FreshnessScoringParameters",
-          "description": "Parameter values for the freshness scoring function.",
-          "x-ms-client-name": "parameters"
+          "description": "Parameter values for the freshness scoring function."
         }
       },
       "required": [
@@ -6147,8 +6131,7 @@
       "properties": {
         "hnswParameters": {
           "$ref": "#/definitions/HnswParameters",
-          "description": "Contains the parameters specific to HNSW algorithm.",
-          "x-ms-client-name": "parameters"
+          "description": "Contains the parameters specific to HNSW algorithm."
         }
       },
       "allOf": [
@@ -6681,7 +6664,6 @@
           "items": {
             "$ref": "#/definitions/IndexAction"
           },
-          "x-ms-client-name": "actions",
           "x-ms-identifiers": []
         }
       },
@@ -6700,7 +6682,6 @@
             "$ref": "#/definitions/IndexingResult"
           },
           "readOnly": true,
-          "x-ms-client-name": "results",
           "x-ms-identifiers": []
         }
       },
@@ -6861,15 +6842,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of items that were processed during this indexer execution. This\nincludes both successfully processed items and items where indexing was\nattempted but failed.",
-          "readOnly": true,
-          "x-ms-client-name": "itemCount"
+          "readOnly": true
         },
         "itemsFailed": {
           "type": "integer",
           "format": "int32",
           "description": "The number of items that failed to be indexed during this indexer execution.",
-          "readOnly": true,
-          "x-ms-client-name": "failedItemCount"
+          "readOnly": true
         },
         "initialTrackingState": {
           "type": "string",
@@ -7334,8 +7313,7 @@
         "status": {
           "type": "boolean",
           "description": "A value indicating whether the indexing operation succeeded for the document\nidentified by the key.",
-          "readOnly": true,
-          "x-ms-client-name": "succeeded"
+          "readOnly": true
         },
         "statusCode": {
           "type": "integer",
@@ -7411,8 +7389,7 @@
         },
         "keepWordsCase": {
           "type": "boolean",
-          "description": "A value indicating whether to lower case all words first. Default is false.",
-          "x-ms-client-name": "lowerCaseKeepWords"
+          "description": "A value indicating whether to lower case all words first. Default is false."
         },
         "@odata.type": {
           "type": "string",
@@ -7729,16 +7706,14 @@
           "type": "integer",
           "format": "int32",
           "description": "The minimum length in characters. Default is 0. Maximum is 300. Must be less\nthan the value of max.",
-          "maximum": 300,
-          "x-ms-client-name": "minLength"
+          "maximum": 300
         },
         "max": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum length in characters. Default and maximum is 300.",
           "default": 300,
-          "maximum": 300,
-          "x-ms-client-name": "maxLength"
+          "maximum": 300
         },
         "@odata.type": {
           "type": "string",
@@ -8571,7 +8546,6 @@
             "$ref": "#/definitions/SearchAlias"
           },
           "readOnly": true,
-          "x-ms-client-name": "aliases",
           "x-ms-identifiers": []
         }
       },
@@ -8590,7 +8564,6 @@
             "$ref": "#/definitions/SearchIndexerDataSource"
           },
           "readOnly": true,
-          "x-ms-client-name": "dataSources",
           "x-ms-identifiers": []
         }
       },
@@ -8609,7 +8582,6 @@
             "$ref": "#/definitions/SearchIndexer"
           },
           "readOnly": true,
-          "x-ms-client-name": "indexers",
           "x-ms-identifiers": []
         }
       },
@@ -8628,7 +8600,6 @@
             "$ref": "#/definitions/SearchIndex"
           },
           "readOnly": true,
-          "x-ms-client-name": "indexes",
           "x-ms-identifiers": []
         }
       },
@@ -8647,7 +8618,6 @@
             "$ref": "#/definitions/SearchIndexerSkillset"
           },
           "readOnly": true,
-          "x-ms-client-name": "skillsets",
           "x-ms-identifiers": []
         }
       },
@@ -8666,7 +8636,6 @@
             "$ref": "#/definitions/SynonymMap"
           },
           "readOnly": true,
-          "x-ms-client-name": "synonymMaps",
           "x-ms-identifiers": []
         }
       },
@@ -8785,8 +8754,7 @@
       "properties": {
         "magnitude": {
           "$ref": "#/definitions/MagnitudeScoringParameters",
-          "description": "Parameter values for the magnitude scoring function.",
-          "x-ms-client-name": "parameters"
+          "description": "Parameter values for the magnitude scoring function."
         }
       },
       "required": [
@@ -8815,8 +8783,7 @@
         },
         "constantBoostBeyondRange": {
           "type": "boolean",
-          "description": "A value indicating whether to apply a constant boost for field values beyond\nthe range end value; default is false.",
-          "x-ms-client-name": "shouldBoostBeyondRangeByConstant"
+          "description": "A value indicating whether to apply a constant boost for field values beyond\nthe range end value; default is false."
         }
       },
       "required": [
@@ -9791,8 +9758,7 @@
         },
         "detectOrientation": {
           "type": "boolean",
-          "description": "A value indicating to turn orientation detection on or not. Default is false.",
-          "x-ms-client-name": "shouldDetectOrientation"
+          "description": "A value indicating to turn orientation detection on or not. Default is false."
         },
         "lineEnding": {
           "$ref": "#/definitions/OcrLineEnding",
@@ -10890,8 +10856,7 @@
         "maskingCharacter": {
           "type": "string",
           "description": "The character used to mask the text if the maskingMode parameter is set to\nreplace. Default is '*'.",
-          "maxLength": 1,
-          "x-ms-client-name": "mask"
+          "maxLength": 1
         },
         "modelVersion": {
           "type": "string",
@@ -10977,14 +10942,12 @@
         },
         "reverse": {
           "type": "boolean",
-          "description": "A value indicating whether to generate tokens in reverse order. Default is\nfalse.",
-          "x-ms-client-name": "reverseTokenOrder"
+          "description": "A value indicating whether to generate tokens in reverse order. Default is\nfalse."
         },
         "skip": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of initial tokens to skip. Default is 0.",
-          "x-ms-client-name": "numberOfTokensToSkip"
+          "description": "The number of initial tokens to skip. Default is 0."
         },
         "@odata.type": {
           "type": "string",
@@ -11015,8 +10978,7 @@
         "lowercase": {
           "type": "boolean",
           "description": "A value indicating whether terms should be lower-cased. Default is true.",
-          "default": true,
-          "x-ms-client-name": "lowerCaseTerms"
+          "default": true
         },
         "pattern": {
           "type": "string",
@@ -11283,8 +11245,7 @@
         "replace": {
           "type": "boolean",
           "description": "A value indicating whether encoded tokens should replace original tokens. If\nfalse, encoded tokens are added as synonyms. Default is true.",
-          "default": true,
-          "x-ms-client-name": "replaceOriginalTokens"
+          "default": true
         },
         "@odata.type": {
           "type": "string",
@@ -12175,8 +12136,7 @@
       "properties": {
         "scalarQuantizationParameters": {
           "$ref": "#/definitions/ScalarQuantizationParameters",
-          "description": "Contains the parameters specific to Scalar Quantization.",
-          "x-ms-client-name": "parameters"
+          "description": "Contains the parameters specific to Scalar Quantization."
         }
       },
       "allOf": [
@@ -12313,8 +12273,7 @@
         },
         "text": {
           "$ref": "#/definitions/TextWeights",
-          "description": "Parameters that boost scoring based on text matches in certain index fields.",
-          "x-ms-client-name": "textWeights"
+          "description": "Parameters that boost scoring based on text matches in certain index fields."
         },
         "functions": {
           "type": "array",
@@ -12443,7 +12402,6 @@
             "$ref": "#/definitions/SearchResult"
           },
           "readOnly": true,
-          "x-ms-client-name": "results",
           "x-ms-identifiers": []
         },
         "@odata.nextLink": {
@@ -12536,18 +12494,15 @@
           "format": "int32",
           "description": "The dimensionality of the vector field.",
           "minimum": 2,
-          "maximum": 2048,
-          "x-ms-client-name": "vectorSearchDimensions"
+          "maximum": 2048
         },
         "vectorSearchProfile": {
           "type": "string",
-          "description": "The name of the vector search profile that specifies the algorithm and\nvectorizer to use when searching the vector field.",
-          "x-ms-client-name": "vectorSearchProfileName"
+          "description": "The name of the vector search profile that specifies the algorithm and\nvectorizer to use when searching the vector field."
         },
         "vectorEncoding": {
           "$ref": "#/definitions/VectorEncodingFormat",
-          "description": "The encoding format to interpret the field contents.",
-          "x-ms-client-name": "vectorEncodingFormat"
+          "description": "The encoding format to interpret the field contents."
         },
         "synonymMaps": {
           "type": "array",
@@ -12750,8 +12705,7 @@
         },
         "semantic": {
           "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities.",
-          "x-ms-client-name": "semanticSearch"
+          "description": "Defines parameters for a search index that influence semantic capabilities."
         },
         "vectorSearch": {
           "$ref": "#/definitions/VectorSearch",
@@ -12818,8 +12772,7 @@
         },
         "disabled": {
           "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false.",
-          "x-ms-client-name": "isDisabled"
+          "description": "A value indicating whether the indexer is disabled. Default is false."
         },
         "@odata.etag": {
           "type": "string",
@@ -13030,8 +12983,7 @@
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
-          "description": "The fully qualified Azure resource Id of a user assigned managed identity\ntypically in the form\n\"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\"\nthat should have been assigned to the search service.",
-          "x-ms-client-name": "resourceId"
+          "description": "The fully qualified Azure resource Id of a user assigned managed identity\ntypically in the form\n\"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\"\nthat should have been assigned to the search service."
         },
         "@odata.type": {
           "type": "string",
@@ -13407,8 +13359,7 @@
         },
         "cognitiveServices": {
           "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about the Azure AI service to be used when running skills.",
-          "x-ms-client-name": "cognitiveServicesAccount"
+          "description": "Details about the Azure AI service to be used when running skills."
         },
         "knowledgeStore": {
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
@@ -13416,8 +13367,7 @@
         },
         "indexProjections": {
           "$ref": "#/definitions/SearchIndexerIndexProjection",
-          "description": "Definition of additional projections to secondary search index(es).",
-          "x-ms-client-name": "indexProjection"
+          "description": "Definition of additional projections to secondary search index(es)."
         },
         "@odata.etag": {
           "type": "string",
@@ -13533,8 +13483,7 @@
       "properties": {
         "count": {
           "type": "boolean",
-          "description": "A value that specifies whether to fetch the total count of results. Default is\nfalse. Setting this value to true may have a performance impact. Note that the\ncount returned is an approximation.",
-          "x-ms-client-name": "includeTotalResultCount"
+          "description": "A value that specifies whether to fetch the total count of results. Default is\nfalse. Setting this value to true may have a performance impact. Note that the\ncount returned is an approximation."
         },
         "facets": {
           "type": "array",
@@ -13549,8 +13498,7 @@
         },
         "highlight": {
           "type": "string",
-          "description": "The comma-separated list of field names to use for hit highlights. Only\nsearchable fields can be used for hit highlighting.",
-          "x-ms-client-name": "highlightFields"
+          "description": "The comma-separated list of field names to use for hit highlights. Only\nsearchable fields can be used for hit highlighting."
         },
         "highlightPostTag": {
           "type": "string",
@@ -13567,8 +13515,7 @@
         },
         "orderby": {
           "type": "string",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses.",
-          "x-ms-client-name": "orderBy"
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses."
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
@@ -13599,8 +13546,7 @@
         },
         "search": {
           "type": "string",
-          "description": "A full-text search query expression; Use \"*\" or omit this parameter to match\nall documents.",
-          "x-ms-client-name": "searchText"
+          "description": "A full-text search query expression; Use \"*\" or omit this parameter to match\nall documents."
         },
         "searchFields": {
           "type": "string",
@@ -13690,18 +13636,15 @@
       "properties": {
         "keyVaultKeyName": {
           "type": "string",
-          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest.",
-          "x-ms-client-name": "keyName"
+          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultKeyVersion": {
           "type": "string",
-          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest.",
-          "x-ms-client-name": "keyVersion"
+          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains\nthe key to be used to encrypt your data at rest. An example URI might be\n`https://my-keyvault-name.vault.azure.net`.",
-          "x-ms-client-name": "vaultUri"
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains\nthe key to be used to encrypt your data at rest. An example URI might be\n`https://my-keyvault-name.vault.azure.net`."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
@@ -13800,43 +13743,35 @@
       "properties": {
         "documentCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of documents across all indexes in the service.",
-          "x-ms-client-name": "documentCounter"
+          "description": "Total number of documents across all indexes in the service."
         },
         "indexesCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of indexes.",
-          "x-ms-client-name": "indexCounter"
+          "description": "Total number of indexes."
         },
         "indexersCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of indexers.",
-          "x-ms-client-name": "indexerCounter"
+          "description": "Total number of indexers."
         },
         "dataSourcesCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of data sources.",
-          "x-ms-client-name": "dataSourceCounter"
+          "description": "Total number of data sources."
         },
         "storageSize": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total size of used storage in bytes.",
-          "x-ms-client-name": "storageSizeCounter"
+          "description": "Total size of used storage in bytes."
         },
         "synonymMaps": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of synonym maps.",
-          "x-ms-client-name": "synonymMapCounter"
+          "description": "Total number of synonym maps."
         },
         "skillsetCount": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total number of skillsets.",
-          "x-ms-client-name": "skillsetCounter"
+          "description": "Total number of skillsets."
         },
         "vectorIndexSize": {
           "$ref": "#/definitions/ResourceCounter",
-          "description": "Total memory consumption of all vector indexes within the service, in bytes.",
-          "x-ms-client-name": "vectorIndexSizeCounter"
+          "description": "Total memory consumption of all vector indexes within the service, in bytes."
         }
       },
       "required": [
@@ -13877,8 +13812,7 @@
         "maxStoragePerIndex": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum amount of storage in bytes allowed per index.",
-          "x-ms-client-name": "maxStoragePerIndexInBytes"
+          "description": "The maximum amount of storage in bytes allowed per index."
         }
       }
     },
@@ -14095,7 +14029,6 @@
           "items": {
             "$ref": "#/definitions/SemanticField"
           },
-          "x-ms-client-name": "contentFields",
           "x-ms-identifiers": []
         },
         "prioritizedKeywordsFields": {
@@ -14104,7 +14037,6 @@
           "items": {
             "$ref": "#/definitions/SemanticField"
           },
-          "x-ms-client-name": "keywordsFields",
           "x-ms-identifiers": []
         }
       }
@@ -14133,8 +14065,7 @@
       "properties": {
         "defaultConfiguration": {
           "type": "string",
-          "description": "Allows you to set the name of a default semantic configuration in your index,\nmaking it optional to pass it on as a query parameter every time.",
-          "x-ms-client-name": "defaultConfigurationName"
+          "description": "Allows you to set the name of a default semantic configuration in your index,\nmaking it optional to pass it on as a query parameter every time."
         },
         "configurations": {
           "type": "array",
@@ -15687,8 +15618,7 @@
         "removeTrailing": {
           "type": "boolean",
           "description": "A value indicating whether to ignore the last search term if it's a stop word.\nDefault is true.",
-          "default": true,
-          "x-ms-client-name": "removeTrailingStopWords"
+          "default": true
         },
         "@odata.type": {
           "type": "string",
@@ -15723,7 +15653,6 @@
             "$ref": "#/definitions/SuggestResult"
           },
           "readOnly": true,
-          "x-ms-client-name": "results",
           "x-ms-identifiers": []
         },
         "@search.coverage": {
@@ -15748,8 +15677,7 @@
         },
         "fuzzy": {
           "type": "boolean",
-          "description": "A value indicating whether to use fuzzy matching for the suggestion query.\nDefault is false. When set to true, the query will find suggestions even if\nthere's a substituted or missing character in the search text. While this\nprovides a better experience in some scenarios, it comes at a performance cost\nas fuzzy suggestion searches are slower and consume more resources.",
-          "x-ms-client-name": "useFuzzyMatching"
+          "description": "A value indicating whether to use fuzzy matching for the suggestion query.\nDefault is false. When set to true, the query will find suggestions even if\nthere's a substituted or missing character in the search text. While this\nprovides a better experience in some scenarios, it comes at a performance cost\nas fuzzy suggestion searches are slower and consume more resources."
         },
         "highlightPostTag": {
           "type": "string",
@@ -15766,13 +15694,11 @@
         },
         "orderby": {
           "type": "string",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses.",
-          "x-ms-client-name": "orderBy"
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses."
         },
         "search": {
           "type": "string",
-          "description": "The search text to use to suggest documents. Must be at least 1 character, and\nno more than 100 characters.",
-          "x-ms-client-name": "searchText"
+          "description": "The search text to use to suggest documents. Must be at least 1 character, and\nno more than 100 characters."
         },
         "searchFields": {
           "type": "string",
@@ -15900,8 +15826,7 @@
       "properties": {
         "tag": {
           "$ref": "#/definitions/TagScoringParameters",
-          "description": "Parameter values for the tag scoring function.",
-          "x-ms-client-name": "parameters"
+          "description": "Parameter values for the tag scoring function."
         }
       },
       "required": [
@@ -16886,8 +16811,7 @@
         "k": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of nearest neighbors to return as top hits.",
-          "x-ms-client-name": "kNearestNeighbors"
+          "description": "Number of nearest neighbors to return as top hits."
         },
         "fields": {
           "type": "string",
@@ -17084,8 +17008,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name to associate with this particular configuration.",
-          "x-ms-client-name": "compressionName"
+          "description": "The name to associate with this particular configuration."
         },
         "rerankWithOriginalVectors": {
           "type": "boolean",
@@ -17193,18 +17116,15 @@
         },
         "algorithm": {
           "type": "string",
-          "description": "The name of the vector search algorithm configuration that specifies the\nalgorithm and optional parameters.",
-          "x-ms-client-name": "algorithmConfigurationName"
+          "description": "The name of the vector search algorithm configuration that specifies the\nalgorithm and optional parameters."
         },
         "vectorizer": {
           "type": "string",
-          "description": "The name of the vectorization being configured for use with vector search.",
-          "x-ms-client-name": "vectorizerName"
+          "description": "The name of the vectorization being configured for use with vector search."
         },
         "compression": {
           "type": "string",
-          "description": "The name of the compression method configuration that specifies the compression\nmethod and optional parameters.",
-          "x-ms-client-name": "compressionName"
+          "description": "The name of the compression method configuration that specifies the compression\nmethod and optional parameters."
         }
       },
       "required": [
@@ -17218,8 +17138,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name to associate with this particular vectorization method.",
-          "x-ms-client-name": "vectorizerName"
+          "description": "The name to associate with this particular vectorization method."
         },
         "kind": {
           "$ref": "#/definitions/VectorSearchVectorizerKind",
@@ -17571,8 +17490,7 @@
       "properties": {
         "customWebApiParameters": {
           "$ref": "#/definitions/WebApiVectorizerParameters",
-          "description": "Specifies the properties of the user-defined vectorizer.",
-          "x-ms-client-name": "webApiParameters"
+          "description": "Specifies the properties of the user-defined vectorizer."
         }
       },
       "allOf": [
@@ -17589,8 +17507,7 @@
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI of the Web API providing the vectorizer.",
-          "x-ms-client-name": "url"
+          "description": "The URI of the Web API providing the vectorizer."
         },
         "httpHeaders": {
           "type": "object",
