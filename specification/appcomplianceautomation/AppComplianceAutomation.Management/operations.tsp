@@ -43,9 +43,17 @@ interface AcatOperations {
   #suppress "deprecated" "legacy"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "legacy"
-  @useFinalStateVia("azure-async-operation")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
   @autoRoute
   @doc("Create a {name}", Resource)
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   @armResourceCreateOrUpdate(Resource)
   @put
   AcatResourceCreateOrUpdateAsync<
@@ -56,8 +64,8 @@ interface AcatOperations {
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
       Resource,
       LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmAsyncOperationHeader &
-      ArmLroLocationHeader
+        ArmAsyncOperationHeader &
+        ArmLroLocationHeader
     >,
     Error extends {} = ErrorResponse
   > is AcatOperations.AcatCreateOperation<
