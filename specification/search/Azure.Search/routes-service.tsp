@@ -500,6 +500,7 @@ interface IndexesOperations {
      * Lists all indexes available for a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexes")
     @get
     list is SearchOperation<selectQuery, ListIndexesResult>;
