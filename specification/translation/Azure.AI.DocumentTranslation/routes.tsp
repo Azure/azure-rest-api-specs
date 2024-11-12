@@ -52,6 +52,7 @@ interface DocumentTranslationOperations {
     destination, it will be overwritten. The targetUrl for each target language
     must be unique.
     """)
+  @finalOperation(DocumentTranslationOperations.getTranslationStatus)
   @pollingOperation(DocumentTranslationOperations.getTranslationStatus)
   @route("/document/batches")
   @post
@@ -70,6 +71,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Returns a list of batch requests submitted and the status for each request")
   @doc("""
     Returns a list of batch requests submitted and the status for each
@@ -182,6 +184,7 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
+      @clientName("translationIds")
       @query("ids")
       ids?: uuid[];
 
@@ -215,7 +218,7 @@ interface DocumentTranslationOperations {
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The batch id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
 
@@ -239,7 +242,7 @@ interface DocumentTranslationOperations {
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
     },
@@ -247,6 +250,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Cancel a currently processing or queued translation")
   @doc("""
     Cancel a currently processing or queued translation.
@@ -263,7 +267,7 @@ interface DocumentTranslationOperations {
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation-id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
     },
@@ -271,6 +275,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Returns the status for all documents in a batch document translation request")
   @doc("""
     Returns the status for all documents in a batch document translation request.
@@ -325,7 +330,7 @@ interface DocumentTranslationOperations {
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
 
@@ -382,6 +387,7 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
+      @clientName("documentIds")
       @query("ids")
       ids?: uuid[];
 
