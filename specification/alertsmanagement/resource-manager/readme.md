@@ -47,10 +47,26 @@ openapi-type: arm
 tag: package-2023-03
 ```
 
+### Tag: package-preview-2024-03
 
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
 
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.AlertsManagement/preview/2024-03-01-preview/AlertProcessingRules.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: AlertProcessingRules.json
+    reason: Aleady implemented in AlertsManagement.json.
+```
+### Tag: package-preview-2024-01
 
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
+```yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json  
+```
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
@@ -91,8 +107,6 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 input-file:
   - Microsoft.AlertsManagement/preview/2023-01-01-preview/AlertRuleRecommendations.json
 ```
-
-
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
@@ -100,10 +114,10 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 ```yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
-  - Microsoft.AlertsManagement/preview/2023-07-12-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
-  - Microsoft.AlertsManagement/preview/2023-05-01-preview/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2024-03-01-preview/AlertProcessingRules.json
 ```
 ### Tag: package-2021-08
 
@@ -231,7 +245,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-trenton

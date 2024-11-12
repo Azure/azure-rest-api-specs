@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 
 @doc("Extracts content, layout, and structured data from documents.")
-@versioned(Versions)
+@versioned(DocumentIntelligence.Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
@@ -28,7 +28,7 @@ using TypeSpec.Http;
   "Extracts content, layout, and structured data from documents.",
   {
     @doc("The Document Intelligence service endpoint.")
-    endpoint: string,
+    endpoint: url,
   }
 )
 namespace DocumentIntelligence;
@@ -36,6 +36,6 @@ namespace DocumentIntelligence;
 @doc("Service API versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2023-10-31-preview version of the DocumentIntelligence service.")
-  v2023_10_31_preview: "2023-10-31-preview",
+  @doc("The 2024-07-31-preview version of the DocumentIntelligence service.")
+  v2024_07_31_preview: "2024-07-31-preview",
 }

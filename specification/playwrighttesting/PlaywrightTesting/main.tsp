@@ -94,30 +94,34 @@ model Account {
 }
 
 @doc("The account state.")
-enum AccountState {
+union AccountState {
+  string,
+
   @doc("The account is Active.")
-  Active,
+  "Active",
 
   @doc("The account is Inactive.")
-  Inactive,
+  "Inactive",
 }
 
 @doc("The ARM-based subscription state.")
-enum SubscriptionState {
+union SubscriptionState {
+  string,
+
   @doc("The subscription state is Registered.")
-  Registered,
+  "Registered",
 
   @doc("The subscription state is Warned.")
-  Warned,
+  "Warned",
 
   @doc("The subscription state is Suspended.")
-  Suspended,
+  "Suspended",
 
   @doc("The subscription state is Deleted.")
-  Deleted,
+  "Deleted",
 
   @doc("The subscription state is Unregistered.")
-  Unregistered,
+  "Unregistered",
 }
 
 @doc("Model of an access-token linked to an account.")
@@ -154,21 +158,25 @@ model AccessToken {
 }
 
 @doc("The access-token state.")
-enum AccessTokenState {
+union AccessTokenState {
+  string,
+
   @doc("The access-token is Active.")
-  Active,
+  "Active",
 
   @doc("The access-token is Expired.")
-  Expired,
+  "Expired",
 }
 
 @doc("The enablement status of a feature.")
-enum EnablementStatus {
+union EnablementStatus {
+  string,
+
   @doc("The feature is Enabled.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The feature is Disabled.")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 // Operations ////////////////////
@@ -182,35 +190,22 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface AccessTokens {
   // AccessToken Operations
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @doc("Creates an access-token with given access-token id in guid format.")
-  @example(
-    "./AccessTokens_CreateAccessToken.json",
-    "AccessTokens_CreateAccessToken"
-  )
   createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
 
   @doc("Get an access-token for given access-token id in guid format.")
-  @example("./AccessTokens_GetAccessToken.json", "AccessTokens_GetAccessToken")
   getAccessToken is Operations.ResourceRead<AccessToken>;
 
   @doc("Revoke an access-token with given access-token id in guid format.")
-  @example(
-    "./AccessTokens_DeleteAccessToken.json",
-    "AccessTokens_DeleteAccessToken"
-  )
   deleteAccessToken is Operations.ResourceDelete<AccessToken>;
 
   @doc("List access-tokens for a given accountId.")
-  @example(
-    "./AccessTokens_ListAccessTokens.json",
-    "AccessTokens_ListAccessTokens"
-  )
   listAccessTokens is Operations.ResourceList<AccessToken>;
 }
 
 interface Accounts {
   // Accounts Operations
   @doc("Get details of the ARM resource mapped to an account for the given accountId.")
-  @example("./Accounts_GetAccount.json", "Accounts_GetAccount")
   getAccount is Operations.ResourceRead<Account>;
 }

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "api-version": "2023-10-01",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
+          "provisioningState": "Updating",
+          "sqlServerLicenseType": "PAYG",
+          "sqlImageSku": "Enterprise",
+          "sqlImageOffer": "SQL2022-WS2022",
+          "leastPrivilegeMode": "Enabled",
+          "sqlManagement": "Full",
+          "enableAutomaticUpgrade": true,
+          "additionalVmPatch": "WU",
+          "osType": "Windows",
+          "virtualMachineIdentitySettings": {
+            "type": "SystemAssigned"
+          }
+        },
+        "location": "northeurope",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
+          "provisioningState": "Provisioning",
+          "sqlServerLicenseType": "PAYG",
+          "leastPrivilegeMode": "NotSet",
+          "enableAutomaticUpgrade": true,
+          "sqlImageSku": "Unknown"
+        },
+        "location": "northeurope",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
+      }
+    }
+  }
+}

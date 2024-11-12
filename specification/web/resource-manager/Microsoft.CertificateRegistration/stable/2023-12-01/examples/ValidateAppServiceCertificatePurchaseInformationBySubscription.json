@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2023-12-01",
+    "appServiceCertificateOrder": {
+      "location": "Global",
+      "properties": {
+        "certificates": {
+          "SampleCertName1": {
+            "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+            "keyVaultSecretName": "SampleSecretName1"
+          },
+          "SampleCertName2": {
+            "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+            "keyVaultSecretName": "SampleSecretName2"
+          }
+        },
+        "distinguishedName": "CN=SampleCustomDomain.com",
+        "validityInYears": 2,
+        "keySize": 2048,
+        "productType": "StandardDomainValidatedSsl",
+        "autoRenew": true
+      }
+    }
+  },
+  "responses": {
+    "204": {}
+  }
+}

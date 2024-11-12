@@ -26,9 +26,38 @@ These are the global settings for the DeveloperHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-08
+tag: package-preview-2024-08
 ```
 
+### Tag: package-preview-2024-08
+
+These settings apply only when `--tag=package-preview-2024-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-08'
+input-file:
+  - Microsoft.DevHub/preview/2024-08-01-preview/workflow.json
+  - Microsoft.DevHub/preview/2024-08-01-preview/iac.json
+suppressions:
+  - code: XmsPageableForListCalls
+    reason: False positive error for singleton resource Get API.
+    from: workflow.json
+  - code: AvoidAdditionalProperties
+    reason: Removing additionalProperties from the models will result in breaking changes.
+    from: workflow.json
+  - code: BodyTopLevelProperties
+    reason: False positive error for Collection Get API
+    from: workflow.json
+```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.DevHub/preview/2024-05-01-preview/workflow.json
+  - Microsoft.DevHub/preview/2024-05-01-preview/iac.json
+```
 
 ### Tag: package-2023-08
 
@@ -38,6 +67,7 @@ These settings apply only when `--tag=package-2023-08` is specified on the comma
 input-file:
   - Microsoft.DevHub/stable/2023-08-01/workflow.json
 ```
+
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
@@ -68,8 +98,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-java
 ```
 
 ## Python

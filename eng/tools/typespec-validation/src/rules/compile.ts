@@ -14,8 +14,7 @@ export class CompileRule implements Rule {
 
     if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
       let [err, stdout, stderr] = await host.runCmd(
-        `npx --no tsp compile . --warn-as-error`,
-        folder,
+        `npm exec --no -- tsp compile --warn-as-error ${folder}`,
       );
       if (
         stdout.toLowerCase().includes("no emitter was configured") ||
@@ -31,10 +30,11 @@ export class CompileRule implements Rule {
       stdOutput += stdout;
       errorOutput += stderr;
     }
-    if (await host.checkFileExists(path.join(folder, "client.tsp"))) {
+
+    const clientTsp = path.join(folder, "client.tsp");
+    if (await host.checkFileExists(clientTsp)) {
       let [err, stdout, stderr] = await host.runCmd(
-        `npx --no tsp compile client.tsp --no-emit --warn-as-error`,
-        folder,
+        `npm exec --no -- tsp compile --no-emit --warn-as-error ${clientTsp}`,
       );
       if (err) {
         success = false;
@@ -44,6 +44,15 @@ export class CompileRule implements Rule {
       errorOutput += stderr;
     }
 
+    if (success) {
+      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      stdOutput += gitDiffResult.stdOutput;
+      if (!gitDiffResult.success) {
+        success = false;
+        errorOutput += gitDiffResult.errorOutput;
+        errorOutput += `\nFiles have been changed after \`tsp compile\`. Run \`tsp compile\` and ensure all files are included in your change.`;
+      }
+    }
     return {
       success: success,
       stdOutput: stdOutput,

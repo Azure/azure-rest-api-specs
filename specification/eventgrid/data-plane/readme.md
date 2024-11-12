@@ -4,7 +4,6 @@
 
 This is the AutoRest configuration file for EventGrid.
 
-
 Multiple Azure services publish events to Azure Event Grid. This is the configuration file for generating
 the Publish API and the schemas for those events. Each Azure service publishing to Azure Event Grid has its own tag OpenAPI specification
 that describes the schemas for its events.
@@ -143,6 +142,8 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/common.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
+- Microsoft.ApiCenter/stable/2018-01-01/ApiCenter.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -154,7 +155,6 @@ input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
-- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
@@ -177,6 +177,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/common.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 ### Tag: package-2023-10-01-preview
@@ -188,8 +189,8 @@ input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
-- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/preview/2023-10-01-preview/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
@@ -207,6 +208,7 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 
 ```
 
@@ -214,13 +216,13 @@ input-file:
 
 These settings apply only when `--tag=package-2023-11-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-01-preview'
+``` yaml $(tag) == 'package-2023-11-01'
 input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
-- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/stable/2023-11-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
@@ -238,7 +240,26 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 
+```
+
+### Tag: package-2024-01-01
+
+These settings apply only when `--tag=package-2024-01-01` is specified on the command line. Will generate EventGrid SystemEvents from TypeSpec.
+
+``` yaml $(tag) == 'package-2024-01-01'
+input-file:
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2024-01-01/GeneratedSystemEvents.json
+```
+
+### Tag: package-2018-01-01-generated
+These settings apply only when `--tag=package-2018-01-01-generated` is specified on the command line. Will generate EventGrid SystemEvents from TypeSpec, with backcompat from what Swagger was doing for optional extensible enums.
+``` yaml $(tag) == '2018-01-01-generated'
+input-file:
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
 ```
 
 ### Suppression
@@ -333,6 +354,7 @@ input-file:
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/common.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+  - $(this-folder)/Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

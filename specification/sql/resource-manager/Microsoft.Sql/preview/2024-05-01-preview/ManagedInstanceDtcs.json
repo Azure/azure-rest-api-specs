@@ -1,0 +1,334 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dtc": {
+      "get": {
+        "tags": [
+          "ManagedInstanceDtcs"
+        ],
+        "description": "Gets a list of managed instance DTC settings.",
+        "operationId": "ManagedInstanceDtcs_ListByManagedInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified managed instance DTC settings.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtcListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 400 ManagedInstanceDtcStorageRouteRuleConflict - Microsoft Distributed Transaction Coordinator (MS DTC) cannot be enabled because required outbound traffic on port 445 to the MS DTC log on a remote storage cannot be enabled due to a conflict with an existing route. Please check the route table for the subnet hosting the instance to identify and solve the conflict. See https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/doc-changes-updates-known-issues?view=azuresql for more information.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 400 ManagedServerInvalidMSDTCDNSSuffix - DNS suffix '{0}' is not a valid DNS name. Please add only valid DNS names to MSDTC's suffix search list.\n\n * 404 ManagedInstanceDtcNotReady - DTC for Azure SQL Managed Instance not ready at the moment.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of managed instance DTC settings.": {
+            "$ref": "./examples/ManagedInstanceDtcList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dtc/{dtcName}": {
+      "get": {
+        "tags": [
+          "ManagedInstanceDtcs"
+        ],
+        "description": "Gets managed instance DTC settings.",
+        "operationId": "ManagedInstanceDtcs_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "dtcName",
+            "in": "path",
+            "description": "The name of the managed instance DTC.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "DtcName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified managed instance DTC settings.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtc"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcName - User tried to interact with Azure SQL Managed Instance DTC settings with a DTC name different from 'current'.\n\n * 400 InvalidUpdateDtcOperationParameters - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 InvalidDtcAuthenticationMethod - DTC authentication method \"{0}\" is not supported.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 400 ManagedInstanceDtcStorageRouteRuleConflict - Microsoft Distributed Transaction Coordinator (MS DTC) cannot be enabled because required outbound traffic on port 445 to the MS DTC log on a remote storage cannot be enabled due to a conflict with an existing route. Please check the route table for the subnet hosting the instance to identify and solve the conflict. See https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/doc-changes-updates-known-issues?view=azuresql for more information.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 400 ManagedServerInvalidMSDTCDNSSuffix - DNS suffix '{0}' is not a valid DNS name. Please add only valid DNS names to MSDTC's suffix search list.\n\n * 404 ManagedInstanceDtcNotReady - DTC for Azure SQL Managed Instance not ready at the moment.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets managed instance DTC settings.": {
+            "$ref": "./examples/ManagedInstanceDtcGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedInstanceDtcs"
+        ],
+        "description": "Updates managed instance DTC settings.",
+        "operationId": "ManagedInstanceDtcs_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "dtcName",
+            "in": "path",
+            "description": "The name of the managed instance DTC.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "DtcName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Managed instance DTC settings.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtc"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Applying DTC settings is in progress",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtc"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcName - User tried to interact with Azure SQL Managed Instance DTC settings with a DTC name different from 'current'.\n\n * 400 InvalidUpdateDtcOperationParameters - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 InvalidDtcAuthenticationMethod - DTC authentication method \"{0}\" is not supported.\n\n * 400 InvalidDtcXaTransactionsDefaultTimeoutValue - Invalid DTC XA Transactions default timeout value.\n\n * 400 InvalidDtcXaTransactionsMaximumTimeoutValue - Invalid DTC XA Transactions maximum timeout value.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 400 ManagedInstanceDtcStorageRouteRuleConflict - Microsoft Distributed Transaction Coordinator (MS DTC) cannot be enabled because required outbound traffic on port 445 to the MS DTC log on a remote storage cannot be enabled due to a conflict with an existing route. Please check the route table for the subnet hosting the instance to identify and solve the conflict. See https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/doc-changes-updates-known-issues?view=azuresql for more information.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 400 ManagedServerInvalidMSDTCDNSSuffix - DNS suffix '{0}' is not a valid DNS name. Please add only valid DNS names to MSDTC's suffix search list.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 404 ManagedInstanceDtcNotReady - DTC for Azure SQL Managed Instance not ready at the moment.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates managed instance DTC settings with all optional parameters specified.": {
+            "$ref": "./examples/ManagedInstanceDtcUpdateMax.json"
+          },
+          "Updates managed instance DTC settings by enabling DTC.": {
+            "$ref": "./examples/ManagedInstanceDtcUpdateEnableDtc.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceDtc": {
+      "description": "SQL Managed Instance DTC",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceDtcProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedInstanceDtcListResult": {
+      "description": "A list of managed instance's DTCs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceDtc"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceDtcProperties": {
+      "description": "The properties of managed instance DTC.",
+      "type": "object",
+      "properties": {
+        "dtcEnabled": {
+          "description": "Active status of managed instance DTC.",
+          "type": "boolean"
+        },
+        "securitySettings": {
+          "$ref": "#/definitions/ManagedInstanceDtcSecuritySettings",
+          "description": "Security settings of managed instance DTC."
+        },
+        "externalDnsSuffixSearchList": {
+          "description": "External dns suffix search list of managed instance DTC.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dtcHostNameDnsSuffix": {
+          "description": "Host name dns suffix of managed instance DTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of managed instance DTC.",
+          "enum": [
+            "Created",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ManagedInstanceDtcSecuritySettings": {
+      "description": "The Security Settings of managed instance DTC.",
+      "type": "object",
+      "properties": {
+        "transactionManagerCommunicationSettings": {
+          "$ref": "#/definitions/ManagedInstanceDtcTransactionManagerCommunicationSettings",
+          "description": "Transaction Manager communication settings of managed instance DTC."
+        },
+        "xaTransactionsEnabled": {
+          "description": "Allow XA Transactions to managed instance DTC.",
+          "type": "boolean"
+        },
+        "snaLu6point2TransactionsEnabled": {
+          "description": "Allow SNA LU 6.2 Transactions to managed instance DTC.",
+          "type": "boolean"
+        },
+        "xaTransactionsDefaultTimeout": {
+          "format": "int32",
+          "description": "Default timeout for XA Transactions (in seconds).",
+          "type": "integer"
+        },
+        "xaTransactionsMaximumTimeout": {
+          "format": "int32",
+          "description": "Maximum timeout for XA Transactions (in seconds).",
+          "type": "integer"
+        }
+      }
+    },
+    "ManagedInstanceDtcTransactionManagerCommunicationSettings": {
+      "description": "The Transaction Manager Communication Settings of managed instance DTC.",
+      "type": "object",
+      "properties": {
+        "allowInboundEnabled": {
+          "description": "Allow Inbound traffic to managed instance DTC.",
+          "type": "boolean"
+        },
+        "allowOutboundEnabled": {
+          "description": "Allow Outbound traffic of managed instance DTC.",
+          "type": "boolean"
+        },
+        "authentication": {
+          "description": "Authentication type of managed instance DTC.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

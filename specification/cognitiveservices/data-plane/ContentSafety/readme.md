@@ -26,7 +26,7 @@ These are the global settings for the Content Safety.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2023-10-15-preview
+tag: package-2024-02-15-preview
 ```
 
 ### Tag: package-2023-04-30-preview
@@ -56,6 +56,24 @@ input-file:
   - preview/2023-10-15-preview/contentsafety.json
 ```
 
+### Tag: package-2024-02-15-preview
+
+These settings apply only when `--tag=package-2024-02-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-15-preview'
+input-file:
+  - preview/2024-02-15-preview/contentsafety.json
+```
+
+### Tag: package-2024-09-01
+
+These settings apply only when `--tag=package-2024-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-01'
+input-file:
+  - stable/2024-09-01/contentsafety.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -65,7 +83,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js

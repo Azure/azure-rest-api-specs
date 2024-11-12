@@ -1,0 +1,157 @@
+{
+  "parameters": {
+    "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
+    "resourceGroupName": "resourceGroup1",
+    "hostPoolName": "hostPool1",
+    "api-version": "2024-01-16-preview",
+    "sessionHostConfiguration": {
+      "properties": {
+        "friendlyName": "Second Version, Updated Location",
+        "vmTags": {
+          "Department": "myDepartment",
+          "Team": "myTeam"
+        },
+        "vmLocation": "eastus2",
+        "vmResourceGroup": "myResourceGroup",
+        "vmNamePrefix": "westus2-vm",
+        "availabilityZones": [
+          1,
+          3
+        ],
+        "networkInfo": {
+          "subnetId": "/subscriptions/.../resourceGroups/.../providers/Microsoft.Network/virtualNetworks/.../subnets/subnet1",
+          "securityGroupId": "/subscriptions/.../resourceGroups/.../provider s/Microsoft.Network/networkSecurityGroups/nsg1"
+        },
+        "vmSizeId": "Standard_D2s_v3",
+        "diskInfo": {
+          "type": "Standard_LRS"
+        },
+        "customConfigurationScriptUrl": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+        "imageInfo": {
+          "type": "Marketplace",
+          "marketplaceInfo": {
+            "offer": "Windows-10",
+            "publisher": "MicrosoftWindowsDesktop",
+            "sku": "19h2-ent",
+            "exactVersion": "2019.0.20190115"
+          },
+          "customInfo": {
+            "resourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Compute/images/imageName"
+          }
+        },
+        "domainInfo": {
+          "activeDirectoryInfo": {
+            "domainCredentials": {
+              "usernameKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/myusername",
+              "passwordKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/mysecretname"
+            }
+          }
+        },
+        "securityInfo": {
+          "type": "TrustedLaunch",
+          "secureBootEnabled": true,
+          "vTpmEnabled": true
+        },
+        "vmAdminCredentials": {
+          "usernameKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/myusername",
+          "passwordKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/mysecretname"
+        },
+        "bootDiagnosticsInfo": {
+          "enabled": true,
+          "storageUri": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/storageAccountName"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostConfigurations/default/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      },
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostConfigurations/default",
+        "type": "Microsoft.DesktopVirtualization/hostPools/sessionHostConfigurations",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "version": "2022-10-21T17:18:19.1234567Z",
+          "friendlyName": "InitialConfiguration",
+          "provisioningState": "Provisioning",
+          "vmTags": {
+            "Department": "myDepartment",
+            "Team": "myTeam"
+          },
+          "vmLocation": "eastus2",
+          "vmResourceGroup": "myResourceGroup",
+          "vmNamePrefix": "westus2-vm",
+          "availabilityZones": [
+            1,
+            3
+          ],
+          "networkInfo": {
+            "subnetId": "/subscriptions/.../resourceGroups/.../providers/Microsoft.Network/virtualNetworks/.../subnets/subnet1",
+            "securityGroupId": "/subscriptions/.../resourceGroups/.../provider s/Microsoft.Network/networkSecurityGroups/nsg1"
+          },
+          "vmSizeId": "Standard_D2s_v3",
+          "diskInfo": {
+            "type": "Standard_LRS"
+          },
+          "customConfigurationScriptUrl": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+          "imageInfo": {
+            "type": "Marketplace",
+            "marketplaceInfo": {
+              "offer": "Windows-10",
+              "publisher": "MicrosoftWindowsDesktop",
+              "sku": "19h2-ent",
+              "exactVersion": "2019.0.20190115"
+            },
+            "customInfo": {
+              "resourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Compute/images/imageName"
+            }
+          },
+          "domainInfo": {
+            "joinType": "ActiveDirectory",
+            "activeDirectoryInfo": {
+              "domainCredentials": {
+                "usernameKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/myusername",
+                "passwordKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/mysecretname"
+              },
+              "ouPath": "OU=testOU,DC=domain,DC=Domain,DC=com",
+              "domainName": "wvdarmtest1.net"
+            },
+            "azureActiveDirectoryInfo": {
+              "mdmProviderGuid": "bdefabc0-95b4-48b3-b645-8a753a63c4fa"
+            }
+          },
+          "securityInfo": {
+            "type": "TrustedLaunch",
+            "secureBootEnabled": true,
+            "vTpmEnabled": true
+          },
+          "vmAdminCredentials": {
+            "usernameKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/myusername",
+            "passwordKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/mysecretname"
+          },
+          "bootDiagnosticsInfo": {
+            "enabled": true,
+            "storageUri": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/storageAccountName"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostConfigurations/default/operationResults/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostConfigurations/default/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "Retry-After": "60"
+      }
+    }
+  }
+}

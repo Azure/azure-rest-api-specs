@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingProfileName": "AAAA-AAAA-AAA-AAA",
+    "$filter": "properties/reservedResourceType eq 'VirtualMachineSoftware'",
+    "$orderby": "properties/userFriendlyAppliedScopeType asc",
+    "refreshsummary": "true",
+    "selectedState": "Succeeded"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/reservationOrders/00000000-0000-0000-0000-000000000001/reservations/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "microsoft.billing/billingAccounts/reservationOrders/reservations",
+            "location": "global",
+            "sku": {
+              "name": "mock_sku"
+            },
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "properties": {
+              "reservedResourceType": "VirtualMachineSoftware",
+              "userFriendlyRenewState": "Off",
+              "skuDescription": "Sku description",
+              "renew": false,
+              "archived": false,
+              "quantity": 1,
+              "appliedScopeType": "Shared",
+              "displayName": "VirtualMachineSoftware_01-18-2022_13-51",
+              "provisioningState": "Succeeded",
+              "term": "P3Y",
+              "displayProvisioningState": "Succeeded",
+              "userFriendlyAppliedScopeType": "Shared",
+              "expiryDateTime": "2025-01-18T21:54:31.0741034Z",
+              "purchaseDateTime": "2022-01-18T21:51:29.9063671Z",
+              "benefitStartTime": "2022-01-18T21:54:31.0741034Z",
+              "lastUpdatedDateTime": "0001-01-01T00:00:00.0000000",
+              "expiryDate": "2025-01-18",
+              "purchaseDate": "2022-01-18",
+              "effectiveDateTime": "0001-01-01T00:00:00Z",
+              "instanceFlexibility": "On",
+              "utilization": {
+                "trend": "SAME",
+                "aggregates": [
+                  {
+                    "grain": 1,
+                    "grainUnit": "days",
+                    "value": 0,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 7,
+                    "grainUnit": "days",
+                    "value": 0,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 30.0,
+                    "grainUnit": "days",
+                    "value": 0,
+                    "valueUnit": "percentage"
+                  }
+                ]
+              },
+              "billingPlan": "Monthly",
+              "billingScopeId": "/subscriptions/eef82110-c91b-4395-9420-fcfcbefc5a47",
+              "productCode": "20000000-0000-0000-0000-000000000005"
+            }
+          }
+        ],
+        "summary": {
+          "noBenefitCount": 0,
+          "warningCount": 0,
+          "succeededCount": 1,
+          "failedCount": 0,
+          "expiringCount": 0,
+          "expiredCount": 0,
+          "pendingCount": 0,
+          "cancelledCount": 0,
+          "processingCount": 0
+        },
+        "nextLink": null
+      }
+    }
+  }
+}

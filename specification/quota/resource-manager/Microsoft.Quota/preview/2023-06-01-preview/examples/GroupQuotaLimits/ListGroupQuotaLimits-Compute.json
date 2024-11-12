@@ -1,35 +1,64 @@
 {
   "operationId": "GroupQuotaLimits_List",
   "parameters": {
-    "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
-    "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
-    "api-version": "2023-06-01-preview"
+    "api-version": "2023-06-01-preview",
+    "resourceProviderName": "Microsoft.Compute",
+    "$filter": "location eq westus"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Compute/locations/westus/providers/Microsoft.Quota/groupQuotas/groupquota1/groupQuotaLimits/cores",
-            "type": "Microsoft.Quota/groupQuotaLimits",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/providers/Microsoft.Compute/locations/westus/groupQuotaLimits/cores",
+            "type": "Microsoft.Quota/groupQuotas/groupQuotaLimits",
             "name": "cores",
             "properties": {
               "limit": 100,
-              "comment": "Contoso requires more quota.",
+              "region": "westus",
               "name": {
-                "value": "cores",
-                "localizedValue": "Total Regional vCPUs"
+                "value": "standardddv4family",
+                "localizedValue": "standard DDv4 Family vCPUs"
               },
-              "unit": "vCPUs",
+              "unit": "count",
+              "availableLimit": 50,
+              "allocatedToSubscriptions": {
+                "value": [
+                  {
+                    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+                    "quotaAllocated": 20
+                  },
+                  {
+                    "subscriptionId": "A000000-0000-0000-0000-000000000000",
+                    "quotaAllocated": 30
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/providers/Microsoft.Compute/locations/westus/groupQuotaLimits/standardav2family",
+            "type": "Microsoft.Quota/groupQuotas/groupQuotaLimits",
+            "name": "standardav2family",
+            "properties": {
+              "limit": 100,
+              "region": "westus",
+              "name": {
+                "value": "standardav2family",
+                "localizedValue": "Standard AV2 Family vCPUs"
+              },
+              "unit": "count",
               "availableLimit": 80,
-              "assignedToSubscriptions": [
-                {
-                  "subscriptionId": "00000000-0000-0000-0000-000000000000",
-                  "quotaAllocated": 20
-                }
-              ],
-              "provisioningState": "Accepted"
+              "allocatedToSubscriptions": {
+                "value": [
+                  {
+                    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+                    "quotaAllocated": 20
+                  }
+                ]
+              }
             }
           }
         ],

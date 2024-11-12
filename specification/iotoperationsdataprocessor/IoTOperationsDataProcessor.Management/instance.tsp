@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
@@ -43,7 +42,12 @@ model InstanceProperties {
 @armResourceOperations
 interface Instances {
   get is ArmResourceRead<Instance>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Instance>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Instance,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchSync<Instance>;
   delete is ArmResourceDeleteWithoutOkAsync<Instance>;
   listByResourceGroup is ArmResourceListByParent<Instance>;

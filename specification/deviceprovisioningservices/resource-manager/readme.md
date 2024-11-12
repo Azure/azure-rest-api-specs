@@ -27,10 +27,18 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 azure-arm: true
-tag: package-preview-2023-03
+tag: package-preview-2025-02
 ```
 
 
+### Tag: package-preview-2025-02
+
+These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02'
+input-file:
+  - Microsoft.Devices/preview/2025-02-01-preview/iotdps.json
+```
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
@@ -134,7 +142,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

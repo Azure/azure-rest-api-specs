@@ -363,45 +363,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/triggerUpgrade": {
-      "post": {
-        "tags": [
-          "EventHubs Clusters Upgrade"
-        ],
-        "operationId": "Clusters_TriggerUpgradePost",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "description": "Trigger pending cluster upgrades if any. Bypasses any upgrade preferences set by customer.",
-        "x-ms-examples": {
-          "TriggerUpgradeInCluster": {
-            "$ref": "./examples/Clusters/TriggerUpgradeInCluster.json"
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Successfully started applying pending cluster upgrades"
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -463,10 +424,6 @@
             "supportsScaling": {
               "type": "boolean",
               "description": "A value that indicates whether Scaling is Supported."
-            },
-            "upgradePreferences": {
-              "$ref": "#/definitions/UpgradePreferences",
-              "description": "Properties of the cluster upgrade preferences."
             }
           },
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations."
@@ -544,37 +501,6 @@
         }
       },
       "description": "The full ARM ID of an Event Hubs Namespace"
-    },
-    "UpgradePreferences": {
-      "type": "object",
-      "properties": {
-        "startDayOfWeek": {
-          "type": "string",
-          "enum": [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Any"
-          ],
-          "description": "Preferred day of the week in UTC time to begin an upgrade. If 'Any' is selected, upgrade will proceed at any given weekday",
-          "x-ms-enum": {
-            "name": "startDayOfWeek",
-            "modelAsString": true
-          }
-        },
-        "startHourOfDay": {
-          "format": "int32",
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 23,
-          "description": "Preferred hour of the day in UTC time to begin an upgrade"
-        }
-      },
-      "description": "Contains all settings for the cluster upgrade window."
     }
   },
   "parameters": {}

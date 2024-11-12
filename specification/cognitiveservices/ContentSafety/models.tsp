@@ -1,48 +1,70 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Text analyze category.")
-enum TextCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+@doc("The harm category supported in Text content analysis.")
+union TextCategory {
+  string,
+
+  @doc("The harm category for Text - Hate.")
+  "Hate",
+
+  @doc("The harm category for Text - SelfHarm.")
+  "SelfHarm",
+
+  @doc("The harm category for Text - Sexual.")
+  "Sexual",
+
+  @doc("The harm category for Text - Violence.")
+  "Violence",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Image analyze category.")
-enum ImageCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+@doc("The harm category supported in Image content analysis.")
+union ImageCategory {
+  string,
+
+  @doc("The harm category for Image - Hate.")
+  "Hate",
+
+  @doc("The harm category for Image - SelfHarm.")
+  "SelfHarm",
+
+  @doc("The harm category for Image - Sexual.")
+  "Sexual",
+
+  @doc("The harm category for Image - Violence.")
+  "Violence",
 }
 
 @doc("The type of text analysis output.")
-enum AnalyzeTextOutputType {
+union AnalyzeTextOutputType {
+  string,
+
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  FourSeverityLevels: "FourSeverityLevels",
 
   @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
-  EightSeverityLevels,
+  EightSeverityLevels: "EightSeverityLevels",
 }
 
 @doc("The type of image analysis output.")
-enum AnalyzeImageOutputType {
+union AnalyzeImageOutputType {
+  string,
+
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  FourSeverityLevels: "FourSeverityLevels",
 }
 
 @doc("The text analysis request.")
 model AnalyzeTextOptions {
-  @doc("The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
+  @doc("The text to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
   @maxLength(10000)
   text: string;
 
@@ -94,7 +116,7 @@ model TextCategoriesAnalysis {
 
 @doc("The image analysis request.")
 model AnalyzeImageOptions {
-  @doc("The image needs to be analyzed.")
+  @doc("The image to be analyzed.")
   image: ImageData;
 
   @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
@@ -105,14 +127,14 @@ model AnalyzeImageOptions {
 }
 
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")
-@projectedName("csharp", "ContentSafetyImageData")
-@projectedName("java", "ContentSafetyImageData")
+@clientName("ContentSafetyImageData", "csharp")
+@clientName("ContentSafetyImageData", "java")
 model ImageData {
   @doc("The Base64 encoding of the image.")
   content?: bytes;
 
   @doc("The blob url of the image.")
-  @projectedName("csharp", "BlobUri")
+  @clientName("BlobUri", "csharp")
   blobUrl?: url;
 }
 
@@ -139,8 +161,8 @@ model TextBlocklist {
   @key("blocklistName")
   @visibility("read", "create", "query")
   @maxLength(64)
-  @projectedName("csharp", "Name")
-  @projectedName("java", "name")
+  @clientName("Name", "csharp")
+  @clientName("name", "java")
   blocklistName: string;
 
   @doc("Text blocklist description.")
@@ -162,9 +184,13 @@ model TextBlocklistItem {
   @maxLength(1024)
   description?: string;
 
-  @doc("BlocklistItem content.")
+  @doc("BlocklistItem content. The length is counted using Unicode code point.")
   @maxLength(128)
   text: string;
+
+  @added(ContentSafety.Versions.v2024_09_01)
+  @doc("An optional properties indicating whether this item is to be matched as a regular expression.")
+  isRegex?: boolean;
 }
 
 @doc("The request to add blocklistItems to a text blocklist.")
@@ -185,46 +211,57 @@ model RemoveTextBlocklistItemsOptions {
   blocklistItemIds: string[];
 }
 
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The protected material analysis request.")
-model AnalyzeTextProtectedMaterialOptions {
-  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
-  @maxLength(1000)
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The request of analyzing potential direct or indirect injection attacks.")
+model ShieldPromptOptions {
+  @doc("The user prompt to be analyzed, which may contain direct injection attacks.")
+  userPrompt?: string;
+
+  @doc("The documents to be analyzed, which may contain direct or indirect injection attacks.")
+  documents?: string[];
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The combined analysis results of potential direct or indirect injection attacks.")
+model ShieldPromptResult {
+  @doc("Direct injection attacks analysis result for the given user prompt.")
+  userPromptAnalysis?: UserPromptInjectionAnalysisResult;
+
+  @doc("Direct and indirect injection attacks analysis result for the given documents.")
+  documentsAnalysis?: DocumentInjectionAnalysisResult[];
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The individual analysis result of potential injection attacks in the given user prompt.")
+model UserPromptInjectionAnalysisResult {
+  @doc("Whether a potential injection attack is detected or not.")
+  attackDetected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The individual analysis result of potential injection attacks in the given documents.")
+model DocumentInjectionAnalysisResult {
+  @doc("Whether a potential injection attack is detected or not.")
+  attackDetected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The request of detecting potential protected material present in the given text.")
+model DetectTextProtectedMaterialOptions {
+  @doc("The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
   text: string;
 }
 
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The protected material analysis response.")
-model AnalyzeTextProtectedMaterialResult {
-  @doc("Analysis result for protected material.")
-  protectedMaterialAnalysis: ProtectedMaterialAnalysisResult;
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The combined detection results of potential protected material.")
+model DetectTextProtectedMaterialResult {
+  @doc("Analysis result for the given text.")
+  protectedMaterialAnalysis: TextProtectedMaterialAnalysisResult;
 }
 
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text protected material analysis response.")
-model ProtectedMaterialAnalysisResult {
-  @doc("Analysis result for protected material..")
-  detected: boolean;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text jailbreak analysis request.")
-model AnalyzeTextJailbreakOptions {
-  @doc("The text needs to be analyzed if it attempt to jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
-  @maxLength(1000)
-  text: string;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text jailbreak analysis request.")
-model AnalyzeTextJailbreakResult {
-  @doc("Analysis result for jailbreak.")
-  jailbreakAnalysis: JailbreakAnalysisResult;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text jailbreak analysis response.")
-model JailbreakAnalysisResult {
-  @doc("Analysis result for jailbreak.")
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The individual detection result of potential protected material.")
+model TextProtectedMaterialAnalysisResult {
+  @doc("Whether potential protected material is detected or not.")
   detected: boolean;
 }

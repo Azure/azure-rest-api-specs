@@ -2230,30 +2230,6 @@
         }
       }
     },
-    "PFAction": {
-      "type": "string",
-      "description": "Action to take on failure of pass/fail criteria.",
-      "enum": [
-        "continue",
-        "stop"
-      ],
-      "x-ms-enum": {
-        "name": "PFAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "continue",
-            "value": "continue",
-            "description": "Test will continue to run even if pass fail metric criteria metric gets failed."
-          },
-          {
-            "name": "stop",
-            "value": "stop",
-            "description": "Test run will stop if pass fail criteria metric is not passed."
-          }
-        ]
-      }
-    },
     "PFAgFunc": {
       "type": "string",
       "description": "Aggregation functions for pass/fail criteria.",
@@ -2511,7 +2487,7 @@
         },
         "aggregate": {
           "$ref": "#/definitions/PFAgFunc",
-          "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
+          "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
         },
         "condition": {
           "type": "string",
@@ -2527,9 +2503,29 @@
           "description": "The value to compare with the client metric. Allowed values - ‘error : [0.0 ,\n100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms."
         },
         "action": {
-          "$ref": "#/definitions/PFAction",
+          "type": "string",
           "description": "Action taken after the threshold is met. Default is ‘continue’.",
-          "default": "continue"
+          "default": "continue",
+          "enum": [
+            "continue",
+            "stop"
+          ],
+          "x-ms-enum": {
+            "name": "PFAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "continue",
+                "value": "continue",
+                "description": "Test will continue to run even if pass fail metric criteria metric gets failed."
+              },
+              {
+                "name": "stop",
+                "value": "stop",
+                "description": "Test run will stop if pass fail criteria metric is not passed."
+              }
+            ]
+          }
         },
         "actualValue": {
           "type": "number",
@@ -3090,7 +3086,7 @@
         },
         "testRunStatistics": {
           "type": "object",
-          "description": "Test run statistics.",
+          "description": "Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.\nThe sampler name is the same as the name mentioned in the test script.\nSampler name \"Total\" represents the aggregated statistics of all the samplers.",
           "additionalProperties": {
             "$ref": "#/definitions/TestRunStatistics"
           },

@@ -1,0 +1,696 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools": {
+      "get": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "description": "Gets all elastic pools in a server.",
+        "operationId": "ElasticPools_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticPoolListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 ElasticPoolScaleNotSupportedWithInaccessibleDatabases - The elastic pool contains inaccessible databases which have lost Azure Key Vault access required for TDE configuration. Please move the accessible databases to a different pool for scaling or restore the lost Azure Key Vault access for the inaccessible databases.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerQuotaExceeded - The server reached its limit for allowed Database Throughput Unit.\n\n * 400 SubscriptionVcoreQuotaExceeded - Could not perform the operation because subscription would exceed the allowed vCore quota.\n\n * 400 ElasticPoolAlreadyExists - The server already contains an elastic pool with the specified name.\n\n * 400 InvalidInputValueForEdition - Specified edition is not supported for elastic pool provisioning.\n\n * 400 ElasticPoolDtuBelowLimit - The requested DTU value is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDtuAboveLimit - The requested DTU value is too high for the requested elastic pool service tier.\n\n * 400 InvalidMaxSize - Invalid max size.\n\n * 400 ElasticPoolDbDtuMaxBelowLimit - The requested per database DTU max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbDtuMaxAboveLimit - The requested per database DTU max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseDtuMax - Attempting to set the DTU max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbDtuMinAboveLimit - The requested DTU min per database is too high for the requested service tier.\n\n * 400 ElasticPoolOverStorage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidInputValueForDatabaseDtuMin - Attempting to set the DTU min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 ElasticPoolDtuUnsupported - User tried to create or update an elastic pool with a DTU capacity that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolsNotEnabled - Elastic pools have not been enabled in this region.\n\n * 400 ElasticPoolNotEmpty - Request to delete an elastic pool that is not empty.\n\n * 400 ElasticPoolStorageBelowLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedGB - Attempting to set the elastic pool storage limit in gb which doesn't match the allowed values.\n\n * 400 ElasticPoolDatabaseLimit - The elastic pool has reached its limit for number of databases.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 InvalidInputValueDatabaseDtuMinLargerThanMax - Attempting to set the DTU min per database higher than the DTU max per database.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 ElasticPoolStorageBelowLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 ElasticPoolCapacityStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 ElasticPoolUpdateHkNotAllowed - The elastic pool cannot lower its service tier from Premium to Standard or Basic since one or more of its databases use memory-optimized objects.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 HSElasticPoolUpdateSloPRMSNotSupported - The service objective assignment for the database has failed. Please contact Microsoft customer support and provide the server name, database name and activity ID.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 ElasticPoolDbDtuMinBelowLimit - The requested per database DTU min is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxBelowLimit - The requested per database VCore max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxAboveLimit - The requested per database VCore max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMax - Attempting to set the VCore max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbVcoreMinBelowLimit - The requested per database VCore min is too low for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMin - Attempting to set the VCore min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 InvalidInputValueDatabaseVcoreMinLargerThanMax - Attempting to set the VCore min per database higher than the VCore max per database.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 CapacityGroupThresholdExceeded - Requested service level objective and storage size maps to specific capacity group and currently resources for this capacity group has reach threshold and further actions need sto be taken before more database can be placed in those rings.\n\n * 400 CapacityGroupThresholdCheckFail - Capacity group resource constraint check failed thus unable to verify whether enough capacity exist to complete the operation.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ElasticPoolNotFound - The specified elastic pool does not exist for the specified server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 ElasticPoolBusy - A management operation was attempted on an elastic pool which is busy.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 ElasticPoolUpdateLinksNotInCatchup - Cannot update elastic pool while one of its databases is performing a copy or geo-replication failover operation.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 ElasticPoolFailedMoveDbToElasticPool - Failed to move the database into elastic pool due to internal resource constraints. This may be a transient condition, please retry.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all elastic pools in a server": {
+            "$ref": "./examples/ElasticPoolListByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}": {
+      "get": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "description": "Gets an elastic pool.",
+        "operationId": "ElasticPools_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the elastic pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 ElasticPoolScaleNotSupportedWithInaccessibleDatabases - The elastic pool contains inaccessible databases which have lost Azure Key Vault access required for TDE configuration. Please move the accessible databases to a different pool for scaling or restore the lost Azure Key Vault access for the inaccessible databases.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerQuotaExceeded - The server reached its limit for allowed Database Throughput Unit.\n\n * 400 SubscriptionVcoreQuotaExceeded - Could not perform the operation because subscription would exceed the allowed vCore quota.\n\n * 400 ElasticPoolAlreadyExists - The server already contains an elastic pool with the specified name.\n\n * 400 InvalidInputValueForEdition - Specified edition is not supported for elastic pool provisioning.\n\n * 400 ElasticPoolDtuBelowLimit - The requested DTU value is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDtuAboveLimit - The requested DTU value is too high for the requested elastic pool service tier.\n\n * 400 InvalidMaxSize - Invalid max size.\n\n * 400 ElasticPoolDbDtuMaxBelowLimit - The requested per database DTU max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbDtuMaxAboveLimit - The requested per database DTU max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseDtuMax - Attempting to set the DTU max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbDtuMinAboveLimit - The requested DTU min per database is too high for the requested service tier.\n\n * 400 ElasticPoolOverStorage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidInputValueForDatabaseDtuMin - Attempting to set the DTU min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 ElasticPoolDtuUnsupported - User tried to create or update an elastic pool with a DTU capacity that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolsNotEnabled - Elastic pools have not been enabled in this region.\n\n * 400 ElasticPoolNotEmpty - Request to delete an elastic pool that is not empty.\n\n * 400 ElasticPoolStorageBelowLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedGB - Attempting to set the elastic pool storage limit in gb which doesn't match the allowed values.\n\n * 400 ElasticPoolDatabaseLimit - The elastic pool has reached its limit for number of databases.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 InvalidInputValueDatabaseDtuMinLargerThanMax - Attempting to set the DTU min per database higher than the DTU max per database.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 ElasticPoolStorageBelowLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 ElasticPoolCapacityStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 ElasticPoolUpdateHkNotAllowed - The elastic pool cannot lower its service tier from Premium to Standard or Basic since one or more of its databases use memory-optimized objects.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 HSElasticPoolUpdateSloPRMSNotSupported - The service objective assignment for the database has failed. Please contact Microsoft customer support and provide the server name, database name and activity ID.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 ElasticPoolDbDtuMinBelowLimit - The requested per database DTU min is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxBelowLimit - The requested per database VCore max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxAboveLimit - The requested per database VCore max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMax - Attempting to set the VCore max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbVcoreMinBelowLimit - The requested per database VCore min is too low for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMin - Attempting to set the VCore min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 InvalidInputValueDatabaseVcoreMinLargerThanMax - Attempting to set the VCore min per database higher than the VCore max per database.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 CapacityGroupThresholdExceeded - Requested service level objective and storage size maps to specific capacity group and currently resources for this capacity group has reach threshold and further actions need sto be taken before more database can be placed in those rings.\n\n * 400 CapacityGroupThresholdCheckFail - Capacity group resource constraint check failed thus unable to verify whether enough capacity exist to complete the operation.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ElasticPoolNotFound - The specified elastic pool does not exist for the specified server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 ElasticPoolBusy - A management operation was attempted on an elastic pool which is busy.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 ElasticPoolUpdateLinksNotInCatchup - Cannot update elastic pool while one of its databases is performing a copy or geo-replication failover operation.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 ElasticPoolFailedMoveDbToElasticPool - Failed to move the database into elastic pool due to internal resource constraints. This may be a transient condition, please retry.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an elastic pool": {
+            "$ref": "./examples/ElasticPoolGet.json"
+          },
+          "Get a Hyperscale elastic pool": {
+            "$ref": "./examples/HyperscaleElasticPoolGet.json"
+          },
+          "Get an elastic pool with preferred enclave type parameter": {
+            "$ref": "./examples/ElasticPoolGetWithPreferredEnclaveType.json"
+          },
+          "Get an elastic pool with Availability Zone": {
+            "$ref": "./examples/GetElasticPoolWithAvailabilityZone.json"
+          },
+          "Get an elastic pool with serverless properties": {
+            "$ref": "./examples/GetElasticPoolWithServerlessProperties.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "description": "Creates or updates an elastic pool.",
+        "operationId": "ElasticPools_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the elastic pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The elastic pool parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the elastic pool",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 ElasticPoolScaleNotSupportedWithInaccessibleDatabases - The elastic pool contains inaccessible databases which have lost Azure Key Vault access required for TDE configuration. Please move the accessible databases to a different pool for scaling or restore the lost Azure Key Vault access for the inaccessible databases.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerQuotaExceeded - The server reached its limit for allowed Database Throughput Unit.\n\n * 400 SubscriptionVcoreQuotaExceeded - Could not perform the operation because subscription would exceed the allowed vCore quota.\n\n * 400 ElasticPoolAlreadyExists - The server already contains an elastic pool with the specified name.\n\n * 400 InvalidInputValueForEdition - Specified edition is not supported for elastic pool provisioning.\n\n * 400 ElasticPoolDtuBelowLimit - The requested DTU value is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDtuAboveLimit - The requested DTU value is too high for the requested elastic pool service tier.\n\n * 400 InvalidMaxSize - Invalid max size.\n\n * 400 ElasticPoolDbDtuMaxBelowLimit - The requested per database DTU max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbDtuMaxAboveLimit - The requested per database DTU max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseDtuMax - Attempting to set the DTU max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbDtuMinAboveLimit - The requested DTU min per database is too high for the requested service tier.\n\n * 400 ElasticPoolOverStorage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidInputValueForDatabaseDtuMin - Attempting to set the DTU min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 ElasticPoolDtuUnsupported - User tried to create or update an elastic pool with a DTU capacity that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolsNotEnabled - Elastic pools have not been enabled in this region.\n\n * 400 ElasticPoolNotEmpty - Request to delete an elastic pool that is not empty.\n\n * 400 ElasticPoolStorageBelowLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedGB - Attempting to set the elastic pool storage limit in gb which doesn't match the allowed values.\n\n * 400 ElasticPoolDatabaseLimit - The elastic pool has reached its limit for number of databases.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 InvalidInputValueDatabaseDtuMinLargerThanMax - Attempting to set the DTU min per database higher than the DTU max per database.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 ElasticPoolStorageBelowLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 ElasticPoolCapacityStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 ElasticPoolUpdateHkNotAllowed - The elastic pool cannot lower its service tier from Premium to Standard or Basic since one or more of its databases use memory-optimized objects.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 HSElasticPoolUpdateSloPRMSNotSupported - The service objective assignment for the database has failed. Please contact Microsoft customer support and provide the server name, database name and activity ID.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 ElasticPoolDbDtuMinBelowLimit - The requested per database DTU min is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxBelowLimit - The requested per database VCore max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxAboveLimit - The requested per database VCore max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMax - Attempting to set the VCore max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbVcoreMinBelowLimit - The requested per database VCore min is too low for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMin - Attempting to set the VCore min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 InvalidInputValueDatabaseVcoreMinLargerThanMax - Attempting to set the VCore min per database higher than the VCore max per database.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 CapacityGroupThresholdExceeded - Requested service level objective and storage size maps to specific capacity group and currently resources for this capacity group has reach threshold and further actions need sto be taken before more database can be placed in those rings.\n\n * 400 CapacityGroupThresholdCheckFail - Capacity group resource constraint check failed thus unable to verify whether enough capacity exist to complete the operation.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidSkuName - Invalid SKU name.\n\n * 400 MismatchedSkuNameAndCapacity - Mismatch between SKU name and capacity.\n\n * 400 MismatchedSkuNameAndTier - Mismatch between SKU name and tier.\n\n * 400 MismatchedSkuNameAndFamily - Mismatch between SKU name and family.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 AvailabilityZoneNotSupported - Requested availability zones for databases and elastic pools is not valid.\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 ElasticPoolScaleNotSupportedWithInaccessibleDatabases - The elastic pool contains inaccessible databases which have lost Azure Key Vault access required for TDE configuration. Please move the accessible databases to a different pool for scaling or restore the lost Azure Key Vault access for the inaccessible databases.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerQuotaExceeded - The server reached its limit for allowed Database Throughput Unit.\n\n * 400 SubscriptionVcoreQuotaExceeded - Could not perform the operation because subscription would exceed the allowed vCore quota.\n\n * 400 ElasticPoolAlreadyExists - The server already contains an elastic pool with the specified name.\n\n * 400 InvalidInputValueForEdition - Specified edition is not supported for elastic pool provisioning.\n\n * 400 ElasticPoolDtuBelowLimit - The requested DTU value is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDtuAboveLimit - The requested DTU value is too high for the requested elastic pool service tier.\n\n * 400 InvalidMaxSize - Invalid max size.\n\n * 400 ElasticPoolDbDtuMaxBelowLimit - The requested per database DTU max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbDtuMaxAboveLimit - The requested per database DTU max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseDtuMax - Attempting to set the DTU max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbDtuMinAboveLimit - The requested DTU min per database is too high for the requested service tier.\n\n * 400 ElasticPoolOverStorage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidInputValueForDatabaseDtuMin - Attempting to set the DTU min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 ElasticPoolDtuUnsupported - User tried to create or update an elastic pool with a DTU capacity that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolsNotEnabled - Elastic pools have not been enabled in this region.\n\n * 400 ElasticPoolNotEmpty - Request to delete an elastic pool that is not empty.\n\n * 400 ElasticPoolStorageBelowLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedGB - Attempting to set the elastic pool storage limit in gb which doesn't match the allowed values.\n\n * 400 ElasticPoolDatabaseLimit - The elastic pool has reached its limit for number of databases.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 InvalidInputValueDatabaseDtuMinLargerThanMax - Attempting to set the DTU min per database higher than the DTU max per database.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 ElasticPoolStorageBelowLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 ElasticPoolCapacityStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 ElasticPoolUpdateHkNotAllowed - The elastic pool cannot lower its service tier from Premium to Standard or Basic since one or more of its databases use memory-optimized objects.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 HSElasticPoolUpdateSloPRMSNotSupported - The service objective assignment for the database has failed. Please contact Microsoft customer support and provide the server name, database name and activity ID.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 ElasticPoolDbDtuMinBelowLimit - The requested per database DTU min is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxBelowLimit - The requested per database VCore max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxAboveLimit - The requested per database VCore max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMax - Attempting to set the VCore max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbVcoreMinBelowLimit - The requested per database VCore min is too low for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMin - Attempting to set the VCore min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 InvalidInputValueDatabaseVcoreMinLargerThanMax - Attempting to set the VCore min per database higher than the VCore max per database.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 CapacityGroupThresholdExceeded - Requested service level objective and storage size maps to specific capacity group and currently resources for this capacity group has reach threshold and further actions need sto be taken before more database can be placed in those rings.\n\n * 400 CapacityGroupThresholdCheckFail - Capacity group resource constraint check failed thus unable to verify whether enough capacity exist to complete the operation.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 400 VBSEnclaveResourcePoolInvalidCombination - Adding a database with '{0}' preferredEnclaveType to an elastic pool '{1}' with '{2}' preferredEnclaveType is not supported. \nBefore adding the database to the elastic pool, ensure that the preferredEnclaveType is the same for both the database and the elastic pool. More information can be found on https://aka.ms/AlwaysEncryptedEnableSecureEnclaves\n\n * 400 VBSEnclaveNotSupportedForDW - The preferredEnclaveType is not supported for dedicated SQL Pools.\n\n * 400 VBSEnclaveNotSupportedForDCSeriesSLO - Configuring the 'VBS' preferredEnclaveType for databases using the DC-series hardware configuration is not supported. DC-series databases are pre-configured with Intel SGX enclaves. Virtualization based security (VBS) enclaves are not supported.\n\n * 400 VBSEnclaveNotSupportedForGeoReplicationWithDefaultEnclave - Configuring geo-replication is not supported for databases using different values of the preferredEnclaveType property. The primary '{0}' database on the '{1}' server uses the '{2}' preferredEnclaveType, whereas the specified preferredEnclaveType for the secondary '{3}' database on the '{4}' server is '{5}'.\n\n * 400 VBSEnclaveNotSupportedForPlannedFailoverBetweenDatabasesWithDifferentPreferredEnclaveTypes - Planned failover between primary and secondary database with different preferredEnclaveType is not supported for Virtualization-based security (VBS) enclaves.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ElasticPoolNotFound - The specified elastic pool does not exist for the specified server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ElasticPoolNotFound - The specified elastic pool does not exist for the specified server.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 ElasticPoolBusy - A management operation was attempted on an elastic pool which is busy.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 ElasticPoolUpdateLinksNotInCatchup - Cannot update elastic pool while one of its databases is performing a copy or geo-replication failover operation.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ElasticPoolBusy - A management operation was attempted on an elastic pool which is busy.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 ElasticPoolUpdateLinksNotInCatchup - Cannot update elastic pool while one of its databases is performing a copy or geo-replication failover operation.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 ElasticPoolFailedMoveDbToElasticPool - Failed to move the database into elastic pool due to internal resource constraints. This may be a transient condition, please retry.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ElasticPoolFailedMoveDbToElasticPool - Failed to move the database into elastic pool due to internal resource constraints. This may be a transient condition, please retry.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Created the elastic pool",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update elastic pool with minimum parameters": {
+            "$ref": "./examples/ElasticPoolCreateOrUpdateMin.json"
+          },
+          "Create or update elastic pool with all parameter": {
+            "$ref": "./examples/ElasticPoolCreateOrUpdateMax.json"
+          },
+          "Create or update elastic pool with maintenance configuration parameter": {
+            "$ref": "./examples/ElasticPoolCreateOrUpdateSetMaintenanceConfiguration.json"
+          },
+          "Create or update Hyperscale elastic pool with high availability replica count parameter": {
+            "$ref": "./examples/HyperscaleElasticPoolCreateOrUpdateSetHighAvailabilityReplicaCount.json"
+          },
+          "Create or update elastic pool with preferred enclave type parameter as Default": {
+            "$ref": "./examples/ElasticPoolCreateWithDefaultPreferredEnclaveType.json"
+          },
+          "Create or update elastic pool with preferred enclave type parameter as VBS": {
+            "$ref": "./examples/ElasticPoolCreateWithVBSPreferredEnclaveType.json"
+          },
+          "Create or Update an elastic pool with Availability Zone": {
+            "$ref": "./examples/CreateElasticPoolWithAvailabilityZone.json"
+          },
+          "Create or Update an elastic pool with serverless properties": {
+            "$ref": "./examples/ElasticPoolCreateOrUpdateServerlessProperties.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "description": "Deletes an elastic pool.",
+        "operationId": "ElasticPools_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the elastic pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted the elastic pool"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 ElasticPoolScaleNotSupportedWithInaccessibleDatabases - The elastic pool contains inaccessible databases which have lost Azure Key Vault access required for TDE configuration. Please move the accessible databases to a different pool for scaling or restore the lost Azure Key Vault access for the inaccessible databases.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerQuotaExceeded - The server reached its limit for allowed Database Throughput Unit.\n\n * 400 SubscriptionVcoreQuotaExceeded - Could not perform the operation because subscription would exceed the allowed vCore quota.\n\n * 400 ElasticPoolAlreadyExists - The server already contains an elastic pool with the specified name.\n\n * 400 InvalidInputValueForEdition - Specified edition is not supported for elastic pool provisioning.\n\n * 400 ElasticPoolDtuBelowLimit - The requested DTU value is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDtuAboveLimit - The requested DTU value is too high for the requested elastic pool service tier.\n\n * 400 InvalidMaxSize - Invalid max size.\n\n * 400 ElasticPoolDbDtuMaxBelowLimit - The requested per database DTU max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbDtuMaxAboveLimit - The requested per database DTU max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseDtuMax - Attempting to set the DTU max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbDtuMinAboveLimit - The requested DTU min per database is too high for the requested service tier.\n\n * 400 ElasticPoolOverStorage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidInputValueForDatabaseDtuMin - Attempting to set the DTU min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 ElasticPoolDtuUnsupported - User tried to create or update an elastic pool with a DTU capacity that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolsNotEnabled - Elastic pools have not been enabled in this region.\n\n * 400 ElasticPoolNotEmpty - Request to delete an elastic pool that is not empty.\n\n * 400 ElasticPoolStorageBelowLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedGB - Attempting to set the elastic pool storage limit in gb which doesn't match the allowed values.\n\n * 400 ElasticPoolDatabaseLimit - The elastic pool has reached its limit for number of databases.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 InvalidInputValueDatabaseDtuMinLargerThanMax - Attempting to set the DTU min per database higher than the DTU max per database.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 ElasticPoolStorageBelowLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 ElasticPoolCapacityStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 ElasticPoolUpdateHkNotAllowed - The elastic pool cannot lower its service tier from Premium to Standard or Basic since one or more of its databases use memory-optimized objects.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 HSElasticPoolUpdateSloPRMSNotSupported - The service objective assignment for the database has failed. Please contact Microsoft customer support and provide the server name, database name and activity ID.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 ElasticPoolDbDtuMinBelowLimit - The requested per database DTU min is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxBelowLimit - The requested per database VCore max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxAboveLimit - The requested per database VCore max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMax - Attempting to set the VCore max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbVcoreMinBelowLimit - The requested per database VCore min is too low for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMin - Attempting to set the VCore min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 InvalidInputValueDatabaseVcoreMinLargerThanMax - Attempting to set the VCore min per database higher than the VCore max per database.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 CapacityGroupThresholdExceeded - Requested service level objective and storage size maps to specific capacity group and currently resources for this capacity group has reach threshold and further actions need sto be taken before more database can be placed in those rings.\n\n * 400 CapacityGroupThresholdCheckFail - Capacity group resource constraint check failed thus unable to verify whether enough capacity exist to complete the operation.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ElasticPoolNotFound - The specified elastic pool does not exist for the specified server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 ElasticPoolBusy - A management operation was attempted on an elastic pool which is busy.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 ElasticPoolUpdateLinksNotInCatchup - Cannot update elastic pool while one of its databases is performing a copy or geo-replication failover operation.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 ElasticPoolFailedMoveDbToElasticPool - Failed to move the database into elastic pool due to internal resource constraints. This may be a transient condition, please retry.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Deleting the elastic pool is in progress."
+          },
+          "204": {
+            "description": "Elastic pool did not exist"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete an elastic pool": {
+            "$ref": "./examples/ElasticPoolDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "description": "Updates an elastic pool.",
+        "operationId": "ElasticPools_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the elastic pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The elastic pool update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticPoolUpdate"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the elastic pool",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 ElasticPoolScaleNotSupportedWithInaccessibleDatabases - The elastic pool contains inaccessible databases which have lost Azure Key Vault access required for TDE configuration. Please move the accessible databases to a different pool for scaling or restore the lost Azure Key Vault access for the inaccessible databases.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerQuotaExceeded - The server reached its limit for allowed Database Throughput Unit.\n\n * 400 SubscriptionVcoreQuotaExceeded - Could not perform the operation because subscription would exceed the allowed vCore quota.\n\n * 400 ElasticPoolAlreadyExists - The server already contains an elastic pool with the specified name.\n\n * 400 InvalidInputValueForEdition - Specified edition is not supported for elastic pool provisioning.\n\n * 400 ElasticPoolDtuBelowLimit - The requested DTU value is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDtuAboveLimit - The requested DTU value is too high for the requested elastic pool service tier.\n\n * 400 InvalidMaxSize - Invalid max size.\n\n * 400 ElasticPoolDbDtuMaxBelowLimit - The requested per database DTU max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbDtuMaxAboveLimit - The requested per database DTU max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseDtuMax - Attempting to set the DTU max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbDtuMinAboveLimit - The requested DTU min per database is too high for the requested service tier.\n\n * 400 ElasticPoolOverStorage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidInputValueForDatabaseDtuMin - Attempting to set the DTU min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 ElasticPoolDtuUnsupported - User tried to create or update an elastic pool with a DTU capacity that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolsNotEnabled - Elastic pools have not been enabled in this region.\n\n * 400 ElasticPoolNotEmpty - Request to delete an elastic pool that is not empty.\n\n * 400 ElasticPoolStorageBelowLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedGB - Attempting to set the elastic pool storage limit in gb which doesn't match the allowed values.\n\n * 400 ElasticPoolDatabaseLimit - The elastic pool has reached its limit for number of databases.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 InvalidInputValueDatabaseDtuMinLargerThanMax - Attempting to set the DTU min per database higher than the DTU max per database.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 ElasticPoolStorageBelowLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 ElasticPoolCapacityStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 ElasticPoolUpdateHkNotAllowed - The elastic pool cannot lower its service tier from Premium to Standard or Basic since one or more of its databases use memory-optimized objects.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 HSElasticPoolUpdateSloPRMSNotSupported - The service objective assignment for the database has failed. Please contact Microsoft customer support and provide the server name, database name and activity ID.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 ElasticPoolDbDtuMinBelowLimit - The requested per database DTU min is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxBelowLimit - The requested per database VCore max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxAboveLimit - The requested per database VCore max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMax - Attempting to set the VCore max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbVcoreMinBelowLimit - The requested per database VCore min is too low for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMin - Attempting to set the VCore min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 InvalidInputValueDatabaseVcoreMinLargerThanMax - Attempting to set the VCore min per database higher than the VCore max per database.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 CapacityGroupThresholdExceeded - Requested service level objective and storage size maps to specific capacity group and currently resources for this capacity group has reach threshold and further actions need sto be taken before more database can be placed in those rings.\n\n * 400 CapacityGroupThresholdCheckFail - Capacity group resource constraint check failed thus unable to verify whether enough capacity exist to complete the operation.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidSkuName - Invalid SKU name.\n\n * 400 MismatchedSkuNameAndCapacity - Mismatch between SKU name and capacity.\n\n * 400 MismatchedSkuNameAndTier - Mismatch between SKU name and tier.\n\n * 400 MismatchedSkuNameAndFamily - Mismatch between SKU name and family.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 AvailabilityZoneNotSupported - Requested availability zones for databases and elastic pools is not valid.\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 ElasticPoolScaleNotSupportedWithInaccessibleDatabases - The elastic pool contains inaccessible databases which have lost Azure Key Vault access required for TDE configuration. Please move the accessible databases to a different pool for scaling or restore the lost Azure Key Vault access for the inaccessible databases.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerQuotaExceeded - The server reached its limit for allowed Database Throughput Unit.\n\n * 400 SubscriptionVcoreQuotaExceeded - Could not perform the operation because subscription would exceed the allowed vCore quota.\n\n * 400 ElasticPoolAlreadyExists - The server already contains an elastic pool with the specified name.\n\n * 400 InvalidInputValueForEdition - Specified edition is not supported for elastic pool provisioning.\n\n * 400 ElasticPoolDtuBelowLimit - The requested DTU value is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDtuAboveLimit - The requested DTU value is too high for the requested elastic pool service tier.\n\n * 400 InvalidMaxSize - Invalid max size.\n\n * 400 ElasticPoolDbDtuMaxBelowLimit - The requested per database DTU max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbDtuMaxAboveLimit - The requested per database DTU max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseDtuMax - Attempting to set the DTU max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbDtuMinAboveLimit - The requested DTU min per database is too high for the requested service tier.\n\n * 400 ElasticPoolOverStorage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidInputValueForDatabaseDtuMin - Attempting to set the DTU min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 ElasticPoolDtuUnsupported - User tried to create or update an elastic pool with a DTU capacity that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolsNotEnabled - Elastic pools have not been enabled in this region.\n\n * 400 ElasticPoolNotEmpty - Request to delete an elastic pool that is not empty.\n\n * 400 ElasticPoolStorageBelowLimitGB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedGB - Attempting to set the elastic pool storage limit in gb which doesn't match the allowed values.\n\n * 400 ElasticPoolDatabaseLimit - The elastic pool has reached its limit for number of databases.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 InvalidInputValueDatabaseDtuMinLargerThanMax - Attempting to set the DTU min per database higher than the DTU max per database.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 ElasticPoolStorageBelowLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 ElasticPoolStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 ElasticPoolCapacityStorageNotAllowedMB - Attempting to set the elastic pool storage limit in mb which doesn't match the allowed values.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 ElasticPoolStorageAboveLimitMB - Attempting to set the elastic pool storage limit below the supported limit.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 ElasticPoolUpdateHkNotAllowed - The elastic pool cannot lower its service tier from Premium to Standard or Basic since one or more of its databases use memory-optimized objects.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 HSElasticPoolUpdateSloPRMSNotSupported - The service objective assignment for the database has failed. Please contact Microsoft customer support and provide the server name, database name and activity ID.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 ElasticPoolDbDtuMinBelowLimit - The requested per database DTU min is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxBelowLimit - The requested per database VCore max is too low for the requested elastic pool service tier.\n\n * 400 ElasticPoolDbVcoreMaxAboveLimit - The requested per database VCore max is too high for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMax - Attempting to set the VCore max per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 ElasticPoolDbVcoreMinBelowLimit - The requested per database VCore min is too low for the requested elastic pool service tier.\n\n * 400 InvalidInputValueForDatabaseVcoreMin - Attempting to set the VCore min per database for the Resource Pool which doesn't match the allowed values.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 InvalidInputValueDatabaseVcoreMinLargerThanMax - Attempting to set the VCore min per database higher than the VCore max per database.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 CapacityGroupThresholdExceeded - Requested service level objective and storage size maps to specific capacity group and currently resources for this capacity group has reach threshold and further actions need sto be taken before more database can be placed in those rings.\n\n * 400 CapacityGroupThresholdCheckFail - Capacity group resource constraint check failed thus unable to verify whether enough capacity exist to complete the operation.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 400 VBSEnclaveResourcePoolInvalidCombination - Adding a database with '{0}' preferredEnclaveType to an elastic pool '{1}' with '{2}' preferredEnclaveType is not supported. \nBefore adding the database to the elastic pool, ensure that the preferredEnclaveType is the same for both the database and the elastic pool. More information can be found on https://aka.ms/AlwaysEncryptedEnableSecureEnclaves\n\n * 400 VBSEnclaveNotSupportedForDW - The preferredEnclaveType is not supported for dedicated SQL Pools.\n\n * 400 VBSEnclaveNotSupportedForDCSeriesSLO - Configuring the 'VBS' preferredEnclaveType for databases using the DC-series hardware configuration is not supported. DC-series databases are pre-configured with Intel SGX enclaves. Virtualization based security (VBS) enclaves are not supported.\n\n * 400 VBSEnclaveNotSupportedForGeoReplicationWithDefaultEnclave - Configuring geo-replication is not supported for databases using different values of the preferredEnclaveType property. The primary '{0}' database on the '{1}' server uses the '{2}' preferredEnclaveType, whereas the specified preferredEnclaveType for the secondary '{3}' database on the '{4}' server is '{5}'.\n\n * 400 VBSEnclaveNotSupportedForPlannedFailoverBetweenDatabasesWithDifferentPreferredEnclaveTypes - Planned failover between primary and secondary database with different preferredEnclaveType is not supported for Virtualization-based security (VBS) enclaves.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ElasticPoolNotFound - The specified elastic pool does not exist for the specified server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ElasticPoolNotFound - The specified elastic pool does not exist for the specified server.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 ElasticPoolBusy - A management operation was attempted on an elastic pool which is busy.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 ElasticPoolUpdateLinksNotInCatchup - Cannot update elastic pool while one of its databases is performing a copy or geo-replication failover operation.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ElasticPoolBusy - A management operation was attempted on an elastic pool which is busy.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 ElasticPoolUpdateLinksNotInCatchup - Cannot update elastic pool while one of its databases is performing a copy or geo-replication failover operation.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 ElasticPoolFailedMoveDbToElasticPool - Failed to move the database into elastic pool due to internal resource constraints. This may be a transient condition, please retry.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ElasticPoolFailedMoveDbToElasticPool - Failed to move the database into elastic pool due to internal resource constraints. This may be a transient condition, please retry.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update an elastic pool with minimum parameters": {
+            "$ref": "./examples/ElasticPoolUpdateMin.json"
+          },
+          "Update an elastic pool with all parameter": {
+            "$ref": "./examples/ElasticPoolUpdateMax.json"
+          },
+          "Assigns maintenance configuration to an elastic pool.": {
+            "$ref": "./examples/ElasticPoolUpdateAssignMaintenanceConfiguration.json"
+          },
+          "Resets maintenance configuration of an elastic pool to default.": {
+            "$ref": "./examples/ElasticPoolUpdateResetMaintenanceConfiguration.json"
+          },
+          "Update high availability replica count of a Hyperscale elastic pool.": {
+            "$ref": "./examples/HyperscaleElasticPoolUpdateSetHighAvailabilityReplicaCount.json"
+          },
+          "Update an elastic pool with preferred enclave type parameter as Default": {
+            "$ref": "./examples/ElasticPoolUpdateWithDefaultPreferredEnclaveType.json"
+          },
+          "Update an elastic pool with preferred enclave type parameter as VBS": {
+            "$ref": "./examples/ElasticPoolUpdateWithVBSPreferredEnclaveType.json"
+          },
+          "Update an elastic pool with serverless properties": {
+            "$ref": "./examples/ElasticPoolUpdateServerlessProperties.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/failover": {
+      "post": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "description": "Failovers an elastic pool.",
+        "operationId": "ElasticPools_Failover",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the elastic pool to failover.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed elastic pool failover."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 ElasticPoolFailoverThrottled - There was a recent failover on the elastic pool.\n\n * 400 ElasticPoolFailoverNotSupportedOnSKU - This type of customer initiated failover is not supported on the given SKU.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ElasticPoolNotInStateToFailover - The elastic pool or a database within the elastic pool is currently in a state such that failover cannot be issued.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Elastic pool failover is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Failover an elastic pool": {
+            "$ref": "./examples/FailoverElasticPool.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ElasticPool": {
+      "description": "An elastic pool.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The elastic pool SKU.\r\n\r\nThe list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or the following command:\r\n\r\n```azurecli\r\naz sql elastic-pool list-editions -l <location> -o table\r\n````\r\n"
+        },
+        "kind": {
+          "description": "Kind of elastic pool. This is metadata used for the Azure portal experience.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ElasticPoolProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ElasticPoolListResult": {
+      "description": "The result of an elastic pool list request.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPool"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticPoolPerDatabaseSettings": {
+      "description": "Per database settings of an elastic pool.",
+      "type": "object",
+      "properties": {
+        "minCapacity": {
+          "format": "double",
+          "description": "The minimum capacity all databases are guaranteed.",
+          "type": "number"
+        },
+        "maxCapacity": {
+          "format": "double",
+          "description": "The maximum capacity any one database can consume.",
+          "type": "number"
+        },
+        "autoPauseDelay": {
+          "format": "int32",
+          "description": "Auto Pause Delay for per database within pool",
+          "type": "integer"
+        }
+      }
+    },
+    "ElasticPoolProperties": {
+      "description": "Properties of an elastic pool",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "The state of the elastic pool.",
+          "enum": [
+            "Creating",
+            "Ready",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ElasticPoolState",
+            "modelAsString": true
+          }
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the elastic pool (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "maxSizeBytes": {
+          "format": "int64",
+          "description": "The storage limit for the database elastic pool in bytes.",
+          "type": "integer"
+        },
+        "minCapacity": {
+          "format": "double",
+          "description": "Minimal capacity that serverless pool will not shrink below, if not paused",
+          "type": "number"
+        },
+        "perDatabaseSettings": {
+          "$ref": "#/definitions/ElasticPoolPerDatabaseSettings",
+          "description": "The per database settings for the elastic pool."
+        },
+        "zoneRedundant": {
+          "description": "Whether or not this elastic pool is zone redundant, which means the replicas of this elastic pool will be spread across multiple availability zones.",
+          "type": "boolean"
+        },
+        "licenseType": {
+          "description": "The license type to apply for this elastic pool.",
+          "enum": [
+            "LicenseIncluded",
+            "BasePrice"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ElasticPoolLicenseType",
+            "modelAsString": true
+          }
+        },
+        "maintenanceConfigurationId": {
+          "description": "Maintenance configuration id assigned to the elastic pool. This configuration defines the period when the maintenance updates will will occur.",
+          "type": "string"
+        },
+        "highAvailabilityReplicaCount": {
+          "format": "int32",
+          "description": "The number of secondary replicas associated with the Business Critical, Premium, or Hyperscale edition elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic pools.",
+          "type": "integer"
+        },
+        "autoPauseDelay": {
+          "format": "int32",
+          "description": "Time in minutes after which elastic pool is automatically paused. A value of -1 means that automatic pause is disabled",
+          "type": "integer"
+        },
+        "preferredEnclaveType": {
+          "description": "Type of enclave requested on the elastic pool.",
+          "enum": [
+            "Default",
+            "VBS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlwaysEncryptedEnclaveType",
+            "modelAsString": true
+          }
+        },
+        "availabilityZone": {
+          "description": "Specifies the availability zone the pool's primary replica is pinned to.",
+          "enum": [
+            "NoPreference",
+            "1",
+            "2",
+            "3"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AvailabilityZoneType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ElasticPoolUpdate": {
+      "description": "An elastic pool update.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku"
+        },
+        "properties": {
+          "$ref": "#/definitions/ElasticPoolUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ElasticPoolUpdateProperties": {
+      "description": "Properties of an elastic pool",
+      "type": "object",
+      "properties": {
+        "maxSizeBytes": {
+          "format": "int64",
+          "description": "The storage limit for the database elastic pool in bytes.",
+          "type": "integer"
+        },
+        "minCapacity": {
+          "format": "double",
+          "description": "Minimal capacity that serverless pool will not shrink below, if not paused",
+          "type": "number"
+        },
+        "perDatabaseSettings": {
+          "$ref": "#/definitions/ElasticPoolPerDatabaseSettings",
+          "description": "The per database settings for the elastic pool."
+        },
+        "zoneRedundant": {
+          "description": "Whether or not this elastic pool is zone redundant, which means the replicas of this elastic pool will be spread across multiple availability zones.",
+          "type": "boolean"
+        },
+        "licenseType": {
+          "description": "The license type to apply for this elastic pool.",
+          "enum": [
+            "LicenseIncluded",
+            "BasePrice"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ElasticPoolLicenseType",
+            "modelAsString": true
+          }
+        },
+        "maintenanceConfigurationId": {
+          "description": "Maintenance configuration id assigned to the elastic pool. This configuration defines the period when the maintenance updates will will occur.",
+          "type": "string"
+        },
+        "highAvailabilityReplicaCount": {
+          "format": "int32",
+          "description": "The number of secondary replicas associated with the Business Critical, Premium, or Hyperscale edition elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic pools.",
+          "type": "integer"
+        },
+        "autoPauseDelay": {
+          "format": "int32",
+          "description": "Time in minutes after which elastic pool is automatically paused. A value of -1 means that automatic pause is disabled",
+          "type": "integer"
+        },
+        "preferredEnclaveType": {
+          "description": "Type of enclave requested on the elastic pool.",
+          "enum": [
+            "Default",
+            "VBS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlwaysEncryptedEnclaveType",
+            "modelAsString": true
+          }
+        },
+        "availabilityZone": {
+          "description": "Specifies the availability zone the pool's primary replica is pinned to.",
+          "enum": [
+            "NoPreference",
+            "1",
+            "2",
+            "3"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AvailabilityZoneType",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

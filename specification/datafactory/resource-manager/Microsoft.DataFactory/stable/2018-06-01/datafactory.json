@@ -4048,7 +4048,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedIdentityCredentialResource"
+              "$ref": "#/definitions/CredentialResource"
             }
           }
         ],
@@ -4056,7 +4056,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ManagedIdentityCredentialResource"
+              "$ref": "#/definitions/CredentialResource"
             }
           },
           "default": {
@@ -4106,7 +4106,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ManagedIdentityCredentialResource"
+              "$ref": "#/definitions/CredentialResource"
             }
           },
           "304": {
@@ -7645,7 +7645,7 @@
           "type": "array",
           "description": "List of credentials.",
           "items": {
-            "$ref": "#/definitions/ManagedIdentityCredentialResource"
+            "$ref": "#/definitions/CredentialResource"
           }
         },
         "nextLink": {
@@ -7665,24 +7665,6 @@
         "properties": {
           "$ref": "./entityTypes/ManagedPrivateEndpoint.json#/definitions/ManagedPrivateEndpoint",
           "description": "Managed private endpoint properties."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "ManagedIdentityCredentialResource": {
-      "description": "Credential resource type.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "./entityTypes/Credential.json#/definitions/ManagedIdentityCredential",
-          "description": "Managed Identity Credential properties."
         }
       },
       "required": [

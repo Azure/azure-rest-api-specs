@@ -26,18 +26,36 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-08
+tag: package-2024-05-01
 ```
 
+### Tag: package-2024-05-01
+
+These settings apply only when `--tag=package-2024-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05-01'
+input-file:
+  - Microsoft.AppConfiguration/stable/2024-05-01/appconfiguration.json
+```
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.AppConfiguration/preview/2023-09-01-preview/appconfiguration.json
+```
 
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - Microsoft.AppConfiguration/preview/2023-08-01-preview/appconfiguration.json
 ```
+
 ### Tag: package-2023-03-01
 
 These settings apply only when `--tag=packge-2023-03-01` is specified on the command line.
@@ -139,7 +157,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js

@@ -21,7 +21,16 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-03-01
+tag: package-2023-09-01
+```
+
+### Tag: package-2023-09-01
+
+These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-01'
+input-file:
+- Microsoft.AVS/stable/2023-09-01/vmware.json
 ```
 
 ### Tag: package-2023-03-01
@@ -98,7 +107,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
@@ -108,61 +117,16 @@ swagger-to-sdk:
 
 ## Suppression
 
-### AutoRest v2 Suppressions
 ``` yaml
 directive:
-  - suppress: pathresourceprovidernamepascalcase
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-    from:
-      - vmware.json
 
-  - suppress: TrackedResourceListByImmediateParent
-    reason: list by immediate parent operations are defined
-    from: vmware.json
-    
-  - suppress: TrackedResourceListByResourceGroup
-    reason: the PrivateClouds_List operation is by resource group
-    from: vmware.json
-
-  - suppress: EnumInsteadOfBoolean
-    reason: standard property for Operation
-    from: vmware.json
-    where: $.definitions.Operation.properties.isDataAction
-    
-  - suppress: EnumInsteadOfBoolean
-    reason: standard property for MetricSpecification
-    from: vmware.json
-    where: $.definitions.MetricSpecification.properties.fillGapWithZero
-
-  - suppress: AvoidNestedProperties
-    reason: x-ms-client-flatten not needed for Operation
-    from: vmware.json
-    where: $.definitions.Operation.properties.properties
-
-  - suppress: RequiredReadOnlySystemData
-    reason: systemData is not in this API version
-    from: vmware.json
-
-  - suppress: EnumInsteadOfBoolean
-    reason: standard property defined by Geneva Metrics
-    from: vmware.json
-    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
-
-  - suppress: ParametersOrder
-    reason: Breaking change to update the parameters order
+  - transform: $["x-ms-client-flatten"] = false
     from: vmware.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].get
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
+      - $.definitions.Addon.properties.properties
+      - $.definitions.PlacementPolicy.properties.properties
+      - $.definitions.WorkloadNetworkDhcp.properties.properties
 
-```
-
-### AutoRest v3 Suppressions
-``` yaml
 suppressions:
     
   - code: pathresourceprovidernamepascalcase
@@ -181,14 +145,10 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
     
   - code: ConsistentPatchProperties
-    reason: The properties are consistent for the discriminator hierarchy.
+    reason: The PlacementPolicies_Update properties are consistent for the discriminator hierarchy.
     from: vmware.json
-    # where:
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch
-    #   - $.definitions.PlacementPolicyUpdate.properties.vmMembers
-    #   - $.definitions.PlacementPolicyUpdate.properties.hostMembers
-    #   - $.definitions.PlacementPolicyUpdate.properties.affinityStrength
-    #   - $.definitions.PlacementPolicyUpdate.properties.azureHybridBenefitType
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters[6]["schema"]
 
   - code: DefinitionsPropertiesNamesCamelCase
     reason: Breaking change to update existing property names
@@ -202,47 +162,140 @@ suppressions:
       - $.definitions.WorkloadNetworkPublicIPProperties.properties.publicIPBlock
       - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
 
-  - code: ArmResourcePropertiesBag
-    reason: Breaking change to update existing property names
+  - code: PatchResponseCodes
+    reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
     from: vmware.json
     where:
-      - $.definitions.PlacementPolicy
-
-  - code: DeleteOperationAsyncResponseValidation
-    reason: x-ms-long-running-operation-options does not need to be set if you follow ARM guidelines
-    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
-    from: vmware.json
-
-  - code: PatchSkuProperty
-    reason: sku can not be updated
-    from: vmware.json
-    # where:
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
-    #   - $.definitions.PrivateCloudUpdate
-    #   - $.definitions.ClusterUpdate
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
 
   - code: LroPatch202
-    reason: Breaking change to add response
+    reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
     from: vmware.json
-    # where:
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch.responses
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch.responses
 
-  - code: UnSupportedPatchProperties
-    reason: Breaking change to remove name or type properties
+  - code: PostResponseCodes
+    reason: PrivateClouds_RotateNsxtPassword & PrivateClouds_RotateVcenterPassword respond with 202 & 204. Changing it is breaking.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateNsxtPassword"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateVcenterPassword"].post
+
+  - code: XmsClientName
+    reason: False positives. https://github.com/Azure/azure-sdk-tools/issues/7886
     from: vmware.json
-    # where: 
-    #   - $ $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].put.parameters[4] # privateCloud
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/addons/{addonName}"].put.parameters[5] # addon
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}"].put.parameters[5] # authorization
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/cloudLinks/{cloudLinkName}"].put.parameters[5] # cloudLink
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].put.parameters[5] # cluster
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores/{datastoreName}"].put.parameters[6] # datastore
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].put.parameters[6] # placementPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/globalReachConnections/{globalReachConnectionName}"].put.parameters[5] # globalReachConnection
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}"].put.parameters[5] # hcxEnterpriseSite
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptExecutions/{scriptExecutionName}"].put.parameters[5] # scriptExecution
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].patch.parameters[5] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].put.parameters[5] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].put.parameters[5] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].patch.parameters[5] # workloadNetworkDnsService
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].put.parameters[5] # workloadNetworkDnsService
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].patch.parameters[5] # workloadNetworkDnsZone
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].put.parameters[5] # workloadNetworkDnsZone
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].patch.parameters[5] # workloadNetworkPortMirroring
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].put.parameters[5] # workloadNetworkPortMirroring
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].put.parameters[5] # workloadNetworkPublicIP
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch.parameters[5] # workloadNetworkSegment
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].put.parameters[5] # workloadNetworkSegment
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].patch.parameters[5] # workloadNetworkVmGroup
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].put.parameters[5] # workloadNetworkVmGroup
 
-  - code: XmsLongRunningOperationOptions
-    reason: This option is designed for cases where the server does NOT follow ARM guidelines
-    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  - code: XmsClientNameParameter
+    reason: False positives. https://github.com/Azure/azure-sdk-tools/issues/7887
     from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].put.parameters[4]["x-ms-client-name"] # privateCloud
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/addons/{addonName}"].put.parameters[5]["x-ms-client-name"] # addon
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}"].put.parameters[5]["x-ms-client-name"] # authorization
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/cloudLinks/{cloudLinkName}"].put.parameters[5]["x-ms-client-name"] # cloudLink
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].put.parameters[5]["x-ms-client-name"] # cluster
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores/{datastoreName}"].put.parameters[6]["x-ms-client-name"] # datastore
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].put.parameters[6]["x-ms-client-name"] # placementPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/globalReachConnections/{globalReachConnectionName}"].put.parameters[5]["x-ms-client-name"] # globalReachConnection
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}"].put.parameters[5]["x-ms-client-name"] # hcxEnterpriseSite
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptExecutions/{scriptExecutionName}"].put.parameters[5]["x-ms-client-name"] # scriptExecution
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkDnsService
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkDnsService
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkDnsZone
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkDnsZone
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkPortMirroring
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkPortMirroring
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkPublicIP
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkSegment
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkSegment
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkVmGroup
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkVmGroup
 
-  # just warnings
-  # - code: IgnoredPropertyNextToRef
-  # - code: LroLocationHeader
-  #   from: vmware.json
+  - code: docLinkLocale
+    reason: False positives. https://github.com/Azure/azure-sdk-tools/issues/7888
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].put.parameters[4]["x-ms-client-name"] # privateCloud
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/addons/{addonName}"].put.parameters[5]["x-ms-client-name"] # addon
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}"].put.parameters[5]["x-ms-client-name"] # authorization
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/cloudLinks/{cloudLinkName}"].put.parameters[5]["x-ms-client-name"] # cloudLink
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].put.parameters[5]["x-ms-client-name"] # cluster
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores/{datastoreName}"].put.parameters[6]["x-ms-client-name"] # datastore
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].put.parameters[6]["x-ms-client-name"] # placementPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/globalReachConnections/{globalReachConnectionName}"].put.parameters[5]["x-ms-client-name"] # globalReachConnection
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}"].put.parameters[5]["x-ms-client-name"] # hcxEnterpriseSite
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptExecutions/{scriptExecutionName}"].put.parameters[5]["x-ms-client-name"] # scriptExecution
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkDhcp
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkDnsService
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkDnsService
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkDnsZone
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkDnsZone
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkPortMirroring
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkPortMirroring
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkPublicIP
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkSegment
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkSegment
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].patch.parameters[5]["x-ms-client-name"] # workloadNetworkVmGroup
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].put.parameters[5]["x-ms-client-name"] # workloadNetworkVmGroup
+
+  - code: XmsPageableForListCalls
+    reasons: This are gets on a TypeSpec @singleton. These are false positives.
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/iscsiPaths/default"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default"].get
+
+  - code: PatchBodyParametersSchema
+    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7802
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch.parameters[4].schema.properties.identity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch.parameters[4].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch.parameters[5].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].patch.parameters[5].schema.properties.properties
+
+  - code: EvenSegmentedPathForPutOperation
+    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7801
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/iscsiPaths/default"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"]
 ```
 
 ## TypeScript
