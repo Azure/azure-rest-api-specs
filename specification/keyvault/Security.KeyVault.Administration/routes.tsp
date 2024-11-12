@@ -12,12 +12,11 @@ using Azure.ClientGenerator.Core;
 
 namespace KeyVault;
 
-alias KeyVaultOperations = StandardResourceOperations;
-
 /**
  * Returns the status of full backup operation
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @route("/backup/{jobId}/pending")
 @get
 op fullBackupStatus is Azure.Core.Foundations.Operation<
@@ -28,7 +27,9 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
     @path
     jobId: string;
   },
-  FullBackupOperation
+  FullBackupOperation,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -69,7 +70,9 @@ op fullBackup is Azure.Core.Foundations.Operation<
      * The backup operation.
      */
     @body response: FullBackupOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -108,13 +111,16 @@ op preFullBackup is Azure.Core.Foundations.Operation<
      * The backup operation.
      */
     @body response: FullBackupOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
  * Returns the status of restore operation
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @route("/restore/{jobId}/pending")
 @get
 op restoreStatus is Azure.Core.Foundations.Operation<
@@ -125,7 +131,9 @@ op restoreStatus is Azure.Core.Foundations.Operation<
     @path
     jobId: string;
   },
-  RestoreOperation
+  RestoreOperation,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -164,7 +172,9 @@ op preFullRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: RestoreOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -202,7 +212,9 @@ op fullRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: RestoreOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -250,7 +262,9 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: SelectiveKeyRestoreOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -274,7 +288,9 @@ op updateSetting is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: UpdateSettingRequest;
   },
-  Setting
+  Setting,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -290,7 +306,9 @@ op getSetting is Azure.Core.Foundations.Operation<
     @path("setting-name")
     settingName: string;
   },
-  Setting
+  Setting,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -323,7 +341,9 @@ interface RoleDefinitions {
       @path
       roleDefinitionName: string;
     },
-    RoleDefinition
+    RoleDefinition,
+    {},
+    KeyVaultError
   >;
 
   /**
@@ -352,7 +372,9 @@ interface RoleDefinitions {
       @body
       parameters: RoleDefinitionCreateParameters;
     },
-    CreatedResponse & RoleDefinition
+    CreatedResponse & RoleDefinition,
+    {},
+    KeyVaultError
   >;
 
   /**
@@ -374,7 +396,9 @@ interface RoleDefinitions {
       @path
       roleDefinitionName: string;
     },
-    RoleDefinition
+    RoleDefinition,
+    {},
+    KeyVaultError
   >;
 
   /**
@@ -397,7 +421,9 @@ interface RoleDefinitions {
       @query("$filter")
       $filter?: string;
     },
-    RoleDefinitionListResult
+    RoleDefinitionListResult,
+    {},
+    KeyVaultError
   >;
 }
 
@@ -422,7 +448,9 @@ interface RoleAssignments {
       @path
       roleAssignmentName: string;
     },
-    RoleAssignment
+    RoleAssignment,
+    {},
+    KeyVaultError
   >;
 
   /**
@@ -450,7 +478,9 @@ interface RoleAssignments {
       @body
       parameters: RoleAssignmentCreateParameters;
     },
-    CreatedResponse & RoleAssignment
+    CreatedResponse & RoleAssignment,
+    {},
+    KeyVaultError
   >;
 
   /**
@@ -472,7 +502,9 @@ interface RoleAssignments {
       @path
       roleAssignmentName: string;
     },
-    RoleAssignment
+    RoleAssignment,
+    {},
+    KeyVaultError
   >;
 
   /**
@@ -496,6 +528,8 @@ interface RoleAssignments {
       @query("$filter")
       $filter?: string;
     },
-    RoleAssignmentListResult
+    RoleAssignmentListResult,
+    {},
+    KeyVaultError
   >;
 }
