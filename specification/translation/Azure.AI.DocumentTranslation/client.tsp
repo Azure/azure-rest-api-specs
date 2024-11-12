@@ -11,6 +11,10 @@ using TypeSpec.Versioning;
 @TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v2024_05_01)
 namespace ClientCustomizations;
 
+op getTranslationsStatus(options: DocumentTranslation.GetTranslationsStatusOptions): DocumentTranslation.TranslationsStatus;
+
+@@override(DocumentTranslation.DocumentTranslationOperations.getTranslationsStatus, ClientCustomizations.DocumentTranslationClient.getTranslationsStatus, "java");
+
 @client({
   name: "DocumentTranslationClient",
   service: DocumentTranslation,
@@ -259,7 +263,3 @@ interface SingleDocumentTranslationClient {
   "totalCharactersChargedCount",
   "java"
 );
-
-op getTranslationsStatus(options: DocumentTranslation.GetTranslationsStatusOptions): DocumentTranslation.TranslationsStatus;
-
-@@override(DocumentTranslationClient.getTranslationsStatus, getTranslationsStatus, "java");
