@@ -258,12 +258,13 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates key vault account setting, stores it, then returns the setting name and value to the client.")
-@route("/settings/{settingName}")
+@route("/settings/{setting-name}")
 @patch
 op updateSetting is Azure.Core.Foundations.Operation<
   {
     /** The name of the account setting. Must be a valid settings option. */
-    @path settingName: string;
+    @path("setting-name")
+    settingName: string;
 
     /**
      * The parameters to update an account setting.
@@ -281,12 +282,13 @@ op updateSetting is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Get specified account setting object.")
-@route("/settings/{settingName}")
+@route("/settings/{setting-name}")
 @get
 op getSetting is Azure.Core.Foundations.Operation<
   {
     /** The name of the account setting. Must be a valid settings option. */
-    @path settingName: string;
+    @path("setting-name")
+    settingName: string;
   },
   Setting
 >;
