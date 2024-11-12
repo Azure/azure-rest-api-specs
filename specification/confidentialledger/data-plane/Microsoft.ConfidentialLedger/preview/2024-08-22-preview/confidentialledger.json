@@ -701,10 +701,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/MetadataParameter"
-          },
-          {
-            "$ref": "#/parameters/ModuleParameter"
+            "$ref": "#/parameters/BundleParameter"
           }
         ],
         "responses": {
@@ -1822,24 +1819,14 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
-    "MetadataParameter": {
-      "name": "metadata",
-      "description": "metadata parameter description",
+    "BundleParameter": {
+      "name": "bundle",
+      "description": "bundle parameter description",
       "in": "body",
       "required": true,
       "x-ms-parameter-location": "method",
       "schema": {
-        "$ref": "#/definitions/Metadata"
-      }
-    },
-    "ModuleParameter": {
-      "name": "modules",
-      "description": "module parameter description",
-      "in": "body",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "schema": {
-        "$ref": "#/definitions/ModuleDef_array"
+        "$ref": "#/definitions/Bundle"
       }
     },
     "ModuleNameParameter": {
@@ -1880,4 +1867,4 @@
       "type": "string"
     }
   }
-}
+  }
