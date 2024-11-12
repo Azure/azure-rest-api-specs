@@ -13,20 +13,20 @@ Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
 */
 const MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample: ResourceNotificationsResourceManagementCreatedOrUpdatedEventData = #{
   resourceInfo: #{
-    tags: {},
+    tags: #{},
     id: "/subscriptions/{subcription-id} /resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storageAccount-name}",
     name: "StorageAccount-name",
     type: "Microsoft.Storage/storageAccounts",
     location: "eastus",
     properties: #{
-      privateEndpointConnections: [],
+      privateEndpointConnections: #[],
       minimumTlsVersion: "TLS1_2",
       allowBlobPublicAccess: 1,
       allowSharedKeyAccess: 1,
       networkAcls: #{
         bypass: "AzureServices",
-        virtualNetworkRules: [],
-        ipRules: [],
+        virtualNetworkRules: #[],
+        ipRules: #[],
         defaultAction: "Allow",
       },
       supportsHttpsTrafficOnly: 1,
@@ -71,7 +71,7 @@ const MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample: ResourceNo
     },
   },
   operationalInfo: #{
-    resourceEventTime: "2023-07-28T20:13:10.8418063Z",
+    resourceEventTime: utcDateTime.fromISO("2023-07-28T20:13:10.8418063Z"),
   },
   apiVersion: "2019-06-01",
 };

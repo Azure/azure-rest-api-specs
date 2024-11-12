@@ -1,7 +1,16 @@
 /** Describes the schema of the Azure API Center events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
+const MicrosoftApiCenterApiDefinitionAddedExample : ApiCenterApiDefinitionAddedEventData = #{
+  title: "OpenAPI",
+  description: "Default spec",
+  specification: #{
+    name: "openapi",
+    version: "3.0.1"
+}};
+
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event. */
+@example(MicrosoftApiCenterApiDefinitionAddedExample)
 model ApiCenterApiDefinitionAddedEventData {
   /** API definition title. */
   title: string;
@@ -13,6 +22,15 @@ model ApiCenterApiDefinitionAddedEventData {
   specification?: ApiCenterApiSpecification;
 }
 
+const MicrosoftApiCenterApiDefinitionUpdatedExample : ApiCenterApiDefinitionUpdatedEventData = #{
+  title: "OpenAPI",
+  description: "Default spec",
+  specification: #{
+    name: "openapi",
+    version: "3.0.1"
+}};
+
+@ example(MicrosoftApiCenterApiDefinitionUpdatedExample)
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event. */
 model ApiCenterApiDefinitionUpdatedEventData {
   /** API definition title. */
