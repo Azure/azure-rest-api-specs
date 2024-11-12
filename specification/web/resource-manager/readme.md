@@ -116,6 +116,7 @@ input-file:
   - Microsoft.Web/stable/2024-11-01/Recommendations.json
   - Microsoft.Web/stable/2024-11-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2024-11-01/ResourceProvider.json
+  - Microsoft.Web/stable/2024-11-01/SiteCertificates.json
   - Microsoft.Web/stable/2024-11-01/StaticSites.json
   - Microsoft.Web/stable/2024-11-01/WebApps.json
 ```
