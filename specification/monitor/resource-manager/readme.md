@@ -1507,6 +1507,8 @@ directive:
     from: scheduledQueryRule_API.json
     where: $.definitions.Actions.properties.actionProperties
     reason: "This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values."
+  - suppress: INVALID_TYPE
+    from: 
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
