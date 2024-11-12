@@ -10,6 +10,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/models.tsp";
 import "../Common/operations.tsp";
+import "../Common/lagacy.tsp";
 import "./models.tsp";
 import "./VirtualMachineScaleSet.tsp";
 import "./RollingUpgradeStatusInfo.tsp";

@@ -27,43 +27,71 @@ model VirtualMachineScaleSetVM
   /**
    * The virtual machine instance ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   instanceId?: string;
 
   /**
    * The virtual machine SKU.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   sku?: Sku;
 
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   plan?: Plan;
 
   /**
    * The virtual machine child extension resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   resources?: VirtualMachineExtension[];
 
   /**
    * The virtual machine zones.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   zones?: string[];
 
   /**
    * The identity of the virtual machine, if configured.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   identity?: VirtualMachineIdentity;
 
   /**
    * Etag is property returned in Update/Get response of the VMSS VM, so that customer can supply it in the header to ensure optimistic updates.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   etag?: string;
 }
+
+alias VirtualMachineScaleSetPath = {
+  ...Azure.ResourceManager.Legacy.BasePath;
+  ...KeysOf<ResourceNameParameter<
+    VirtualMachineScaleSet,
+    SegmentName = "virtualMachineScaleSets",
+    KeyName = "virtualMachineScaleSetName"
+  >>;
+};
+
+@armResourceOperations
+interface VirtualMachineScaleSetVMSOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      VirtualMachineScaleSetPath,
+      KeysOf<{
+        ...ResourceNameParameter<
+          VirtualMachineScaleSetVM,
+          SegmentName = "virtualMachines"
+        >,
+      }>
+    > {}
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMS {
@@ -105,7 +133,7 @@ interface VirtualMachineScaleSetVMS {
       @header
       IfNoneMatch?: string;
     },
-    Response = ArmResourceCreatedResponse<VirtualMachineScaleSetVM> | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
       @bodyRoot _: VirtualMachineScaleSetVM;
     })
   >;
@@ -134,15 +162,9 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_List")
-  list is ComputeResourceListByParent<
+  list is VirtualMachineScaleSetVMSOps.List<
     VirtualMachineScaleSetVM,
     Parameters = {
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      virtualMachineScaleSetName: string;
-
       /**
        * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
        */
@@ -182,7 +204,7 @@ interface VirtualMachineScaleSetVMS {
   deallocate is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    void
+    OkResponse
   >;
 
   /**
@@ -190,6 +212,7 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
   getInstanceView is ComputeResourceActionSync<
     VirtualMachineScaleSetVM,
@@ -205,18 +228,19 @@ interface VirtualMachineScaleSetVMS {
   reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     VirtualMachineScaleSetVMReimageParameters,
-    void
+    OkResponse
   >;
 
   /**
    * Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("reimageall")
   @operationId("VirtualMachineScaleSetVMs_ReimageAll")
   reimageAll is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    void
+    OkResponse
   >;
 
   /**
@@ -249,7 +273,7 @@ interface VirtualMachineScaleSetVMS {
   performMaintenance is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    void
+    OkResponse
   >;
 
   /**
@@ -260,7 +284,7 @@ interface VirtualMachineScaleSetVMS {
   powerOff is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
@@ -275,14 +299,22 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_Redeploy")
-  redeploy is ComputeResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  redeploy is ComputeResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    OkResponse
+  >;
 
   /**
    * Restarts a virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_Restart")
-  restart is ComputeResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  restart is ComputeResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    OkResponse
+  >;
 
   /**
    * The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
@@ -307,7 +339,11 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_Start")
-  start is ComputeResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  start is ComputeResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    OkResponse
+  >;
 
   /**
    * Run command on a virtual machine in a VM scale set.
