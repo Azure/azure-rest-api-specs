@@ -1,11 +1,26 @@
 
 <#
 .DESCRIPTION
+  Create APIView for the published packages. Send DevOps artifacts information to APIView to create APIView for the published packages.
 
-
-.PARAMETER ArtifactName
-  Temporary directory for files being processed. Use $(Agent.TempDirectory) on DevOps
-
+.PARAMETER ArtiFactsStagingDirectory
+  The DevOps artifacts staging directory. Use $(Build.ArtifactStagingDirectory) on DevOps
+.PARAMETER APIViewArtifactsDirectoryName
+ Temporary Directory for processing the APIView artifacts
+.PARAMETER APIViewArtifactsName
+  The name of the APIView artifact
+.PARAMETER APIViewUri
+ The EndPoint for creating APIView https://apiviewstagingtest.com/PullRequest/DetectAPIChanges
+.PARAMETER BuildId
+TGhe BuildId of the Run
+.PARAMETER RepoName
+  Repo name eg Azure/azure-rest-api-specs
+.PARAMETER PullRequestNumber
+  The PR number
+.PARAMETER Language
+  The language of the resource provider `Swagger` or `TypeSpec`
+.PARAMETER CommitSha
+  The commit sha of the current branch. Uusally the merge commit of the PR.
 #>
 param (
     [Parameter(Mandatory = $true)]
@@ -66,7 +81,6 @@ $publishedPackages | ForEach-Object {
   $query.Add('packageName', $_.BaseName)
   $query.Add('language', $Language)
   $query.Add('commentOnPR', $true)
-  $query.Add('location', "GitHub")
 
   $uri = [System.UriBuilder]$APIViewUri
   $uri.Query = $query.ToString()

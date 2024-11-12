@@ -1,0 +1,62 @@
+parameters:
+  - name: AzureSdkForNetDevOpsFeed
+    type: string
+    default: 'https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json'
+  - name: SwaggerApiParserVersion
+    type: string
+    default: '1.3.0-dev.20241010.1'
+  - name: APIViewArtifactsDirectoryName
+    type: string
+    default: 'SwaggerAPIViewArtifacts'
+  - name: APIViewArtifactsName
+    type: string
+    default: 'swaggerAPIViewArtifacts'
+  - name: APIViewAPIUri
+    type: string
+    default: 'https://apiviewstagingtest.com/PullRequest/DetectAPIChanges'
+
+trigger: none
+
+jobs:
+- job:
+  pool:
+    name: azsdk-pool-mms-ubuntu-2204-general
+    vmImage: ubuntu-22.04
+
+  steps:
+  - pwsh: |
+      dotnet tool install Azure.Sdk.Tools.SwaggerApiParser `
+        --version ${{ parameters.SwaggerApiParserVersion }}  `
+        --add-source ${{ parameters.AzureSdkForNetDevOpsFeed }} `
+        --global
+    displayName: Install APIView Swagger Parser
+
+  - pwsh: |
+      $(Build.SourcesDirectory)/eng/scripts/Swagger-APIView.ps1 `
+        -TempDirectory "$(Agent.TempDirectory)" `
+        -ArtiFactsStagingDirectory "$(Build.ArtifactStagingDirectory)" `
+        -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} 
+    displayName: Generate Swagger APIView Tokens
+    ignoreLASTEXITCODE: true
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/${{ parameters.APIViewArtifactsDirectoryName }}'
+      artifactName: '${{ parameters.APIViewArtifactsName }}'
+      publishLocation: 'pipeline'
+    displayName: 'Publish Swagger APIView Artifacts'
+
+  - pwsh: |
+      eng/scripts/Create-APIView.ps1 `
+        -ArtiFactsStagingDirectory $(Build.ArtifactStagingDirectory) `
+        -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} `
+        -APIViewArtifactsName ${{ parameters.APIViewArtifactsName }} `
+        -APIViewUri ${{ parameters.APIViewAPIUri }} `
+        -BuildId $(Build.BuildId) `
+        -RepoName $(Build.Repository.Name) `
+        -PullRequestNumber $(System.PullRequest.PullRequestId)`
+        -Language 'Swagger' `
+        -CommitSha $(Build.SourceVersion)
+    displayName: Create Swagger APIView
+
+  
