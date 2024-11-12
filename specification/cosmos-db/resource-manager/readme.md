@@ -600,11 +600,6 @@ input-file:
   - Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
 modelerfour:
   lenient-model-deduplication: true
-<<<<<<< HEAD
-tag: package-preview-2024-12-01
-=======
-tag: package-2024-11-15
->>>>>>> main
 ```
 
 ### Tag: package-preview-2021-04
