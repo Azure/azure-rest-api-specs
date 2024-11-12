@@ -3489,23 +3489,11 @@
         "subdomainUrl": {
           "type": "string",
           "description": "The subdomain url for the corresponding AI Service."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of Azure AI service resource attached to a\nskillset.",
-          "enum": [
-            "#Microsoft.Azure.Search.AIServicesByIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
         "identity",
-        "subdomainUrl",
-        "@odata.type"
+        "subdomainUrl"
       ],
       "allOf": [
         {
@@ -3525,23 +3513,11 @@
         "subdomainUrl": {
           "type": "string",
           "description": "The subdomain url for the corresponding AI Service."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of Azure AI service resource attached to a\nskillset.",
-          "enum": [
-            "#Microsoft.Azure.Search.AIServicesByKey"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
         "key",
-        "subdomainUrl",
-        "@odata.type"
+        "subdomainUrl"
       ],
       "allOf": [
         {
@@ -3790,22 +3766,8 @@
         "preserveOriginal": {
           "type": "boolean",
           "description": "A value indicating whether the original token will be kept. Default is false."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.AsciiFoldingTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -3987,22 +3949,8 @@
           "type": "integer",
           "format": "int32",
           "description": "(Optional) When specified, indicates the number of calls the indexer will make\nin parallel to the endpoint you have provided. You can decrease this value if\nyour endpoint is failing under too high of a request load, or raise it if your\nendpoint is able to accept more requests and you would like an increase in the\nperformance of the indexer. If not set, a default value of 5 is used. The\ndegreeOfParallelism can be set to a maximum of 10 and a minimum of 1."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Custom.AmlSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -4039,22 +3987,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of dimensions the resulting output embeddings should have. Only\nsupported in text-embedding-3 and later models."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -4165,21 +4099,8 @@
           "type": "number",
           "format": "double",
           "description": "This property controls how the length of a document affects the relevance\nscore. By default, a value of 0.75 is used. A value of 0.0 means no length\nnormalization is applied, while a value of 1.0 means the score is fully\nnormalized by the length of the document."
-        },
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Search.BM25Similarity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SimilarityAlgorithm"
@@ -4341,15 +4262,14 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         },
         "name": {
           "type": "string",
           "description": "The name of the char filter. It must only contain letters, digits, spaces,\ndashes or underscores, can only start and end with alphanumeric characters, and\nis limited to 128 characters."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type",
         "name"
@@ -4387,22 +4307,8 @@
         "outputUnigrams": {
           "type": "boolean",
           "description": "A value indicating whether to output both unigrams and bigrams (if true), or\njust bigrams (if false). Default is false."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.CjkBigramTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -4449,21 +4355,6 @@
     "ClassicSimilarityAlgorithm": {
       "type": "object",
       "description": "Legacy similarity algorithm which uses the Lucene TFIDFSimilarity\nimplementation of TF-IDF. This variation of TF-IDF introduces static document\nlength normalization as well as coordinating factors that penalize documents\nthat only partially match the searched queries.",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Search.ClassicSimilarity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
-        }
-      },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SimilarityAlgorithm"
@@ -4481,22 +4372,8 @@
           "description": "The maximum token length. Default is 255. Tokens longer than the maximum length\nare split. The maximum token length that can be used is 300 characters.",
           "default": 255,
           "maximum": 300
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.ClassicTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -4510,15 +4387,14 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         },
         "description": {
           "type": "string",
           "description": "Description of the Azure AI service resource attached to a skillset."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type"
       ]
@@ -4530,22 +4406,10 @@
         "key": {
           "type": "string",
           "description": "The key used to provision the Azure AI service resource attached to a skillset."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of Azure AI service resource attached to a\nskillset.",
-          "enum": [
-            "#Microsoft.Azure.Search.CognitiveServicesByKey"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "key",
-        "@odata.type"
+        "key"
       ],
       "allOf": [
         {
@@ -4572,22 +4436,10 @@
         "queryMode": {
           "type": "boolean",
           "description": "A value that indicates whether the token filter is in query mode. When in query\nmode, the token filter generates bigrams and then removes common words and\nsingle terms followed by a common word. Default is false."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.CommonGramTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "commonWords",
-        "@odata.type"
+        "commonWords"
       ],
       "allOf": [
         {
@@ -4599,22 +4451,6 @@
     "ConditionalSkill": {
       "type": "object",
       "description": "A skill that enables scenarios that require a Boolean operation to determine\nthe data to assign to an output.",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Util.ConditionalSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
-        }
-      },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -4664,22 +4500,10 @@
           "items": {
             "$ref": "#/definitions/CharFilterName"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of analyzer.",
-          "enum": [
-            "#Microsoft.Azure.Search.CustomAnalyzer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "tokenizer",
-        "@odata.type"
+        "tokenizer"
       ],
       "allOf": [
         {
@@ -4808,22 +4632,8 @@
           "type": "integer",
           "format": "int32",
           "description": "A global flag for FuzzyEditDistance. If FuzzyEditDistance is not set in\nCustomEntity, this value will be the default value."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.CustomEntityLookupSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -4914,22 +4724,8 @@
           "items": {
             "$ref": "#/definitions/CharFilterName"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of normalizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.CustomNormalizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalNormalizer"
@@ -4943,11 +4739,10 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type"
       ]
@@ -4958,11 +4753,10 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type"
       ]
@@ -4991,22 +4785,6 @@
     "DefaultCognitiveServicesAccount": {
       "type": "object",
       "description": "An empty object that represents the default Azure AI service resource for a\nskillset.",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of Azure AI service resource attached to a\nskillset.",
-          "enum": [
-            "#Microsoft.Azure.Search.DefaultCognitiveServices"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
-        }
-      },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/CognitiveServicesAccount"
@@ -5049,22 +4827,10 @@
         "onlyLongestMatch": {
           "type": "boolean",
           "description": "A value indicating whether to add only the longest matching subword to the\noutput. Default is false."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "wordList",
-        "@odata.type"
+        "wordList"
       ],
       "allOf": [
         {
@@ -5143,22 +4909,8 @@
           "type": "object",
           "description": "A dictionary of configurations for the skill.",
           "additionalProperties": {}
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Util.DocumentExtractionSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -5237,22 +4989,8 @@
               }
             ]
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -5365,22 +5103,8 @@
         "side": {
           "$ref": "#/definitions/EdgeNGramTokenFilterSide",
           "description": "Specifies which side of the input the n-gram should be generated from. Default\nis \"front\"."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.EdgeNGramTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -5433,22 +5157,8 @@
         "side": {
           "$ref": "#/definitions/EdgeNGramTokenFilterSide",
           "description": "Specifies which side of the input the n-gram should be generated from. Default\nis \"front\"."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -5480,22 +5190,8 @@
           "items": {
             "$ref": "#/definitions/TokenCharacterKind"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.EdgeNGramTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -5513,22 +5209,8 @@
           "items": {
             "type": "string"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.ElisionTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -5607,22 +5289,8 @@
         "modelVersion": {
           "type": "string",
           "description": "The version of the model to use when calling the Text Analytics service. It\nwill default to the latest available when not specified. We recommend you do\nnot specify this value unless absolutely necessary."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.V3.EntityLinkingSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -5653,22 +5321,8 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence\nscore is greater than the value specified. If not set (default), or if\nexplicitly set to null, all entities will be included."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.EntityRecognitionSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -5850,22 +5504,8 @@
         "modelVersion": {
           "type": "string",
           "description": "The version of the model to use when calling the Text Analytics API. It will\ndefault to the latest available when not specified. We recommend you do not\nspecify this value unless absolutely necessary."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.V3.EntityRecognitionSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -6101,22 +5741,10 @@
         "highWaterMarkColumnName": {
           "type": "string",
           "description": "The name of the high water mark column."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of data change detection policy.",
-          "enum": [
-            "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "highWaterMarkColumnName",
-        "@odata.type"
+        "highWaterMarkColumnName"
       ],
       "allOf": [
         {
@@ -6235,22 +5863,8 @@
           "items": {
             "$ref": "#/definitions/ImageDetail"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Vision.ImageAnalysisSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -7390,22 +7004,10 @@
         "keepWordsCase": {
           "type": "boolean",
           "description": "A value indicating whether to lower case all words first. Default is false."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.KeepTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "keepWords",
-        "@odata.type"
+        "keepWords"
       ],
       "allOf": [
         {
@@ -7430,22 +7032,8 @@
         "modelVersion": {
           "type": "string",
           "description": "The version of the model to use when calling the Text Analytics service. It\nwill default to the latest available when not specified. We recommend you do\nnot specify this value unless absolutely necessary."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.KeyPhraseExtractionSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -7575,22 +7163,10 @@
         "ignoreCase": {
           "type": "boolean",
           "description": "A value indicating whether to ignore case. If true, all words are converted to\nlower case first. Default is false."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.KeywordMarkerTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "keywords",
-        "@odata.type"
+        "keywords"
       ],
       "allOf": [
         {
@@ -7608,22 +7184,8 @@
           "format": "int32",
           "description": "The read buffer size in bytes. Default is 256.",
           "default": 256
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.KeywordTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -7641,22 +7203,8 @@
           "description": "The maximum token length. Default is 256. Tokens longer than the maximum length\nare split. The maximum token length that can be used is 300 characters.",
           "default": 256,
           "maximum": 300
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.KeywordTokenizerV2"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -7675,22 +7223,8 @@
         "modelVersion": {
           "type": "string",
           "description": "The version of the model to use when calling the Text Analytics service. It\nwill default to the latest available when not specified. We recommend you do\nnot specify this value unless absolutely necessary."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.LanguageDetectionSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -7714,22 +7248,8 @@
           "description": "The maximum length in characters. Default and maximum is 300.",
           "default": 300,
           "maximum": 300
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.LengthTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -7743,15 +7263,14 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         },
         "name": {
           "type": "string",
           "description": "The name of the analyzer. It must only contain letters, digits, spaces, dashes\nor underscores, can only start and end with alphanumeric characters, and is\nlimited to 128 characters."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type",
         "name"
@@ -8333,15 +7852,14 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         },
         "name": {
           "type": "string",
           "description": "The name of the char filter. It must only contain letters, digits, spaces,\ndashes or underscores, can only start and end with alphanumeric characters, and\nis limited to 128 characters."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type",
         "name"
@@ -8395,15 +7913,14 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         },
         "name": {
           "type": "string",
           "description": "The name of the tokenizer. It must only contain letters, digits, spaces, dashes\nor underscores, can only start and end with alphanumeric characters, and is\nlimited to 128 characters."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type",
         "name"
@@ -8512,22 +8029,8 @@
         "consumeAllTokens": {
           "type": "boolean",
           "description": "A value indicating whether all tokens from the input must be consumed even if\nmaxTokenCount is reached. Default is false."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.LimitTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -8660,22 +8163,8 @@
           "items": {
             "type": "string"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of analyzer.",
-          "enum": [
-            "#Microsoft.Azure.Search.StandardAnalyzer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalAnalyzer"
@@ -8692,22 +8181,8 @@
           "format": "int32",
           "description": "The maximum token length. Default is 255. Tokens longer than the maximum length\nare split.",
           "default": 255
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.StandardTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -8725,22 +8200,8 @@
           "description": "The maximum token length. Default is 255. Tokens longer than the maximum length\nare split. The maximum token length that can be used is 300 characters.",
           "default": 255,
           "maximum": 300
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.StandardTokenizerV2"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -8801,22 +8262,10 @@
           "items": {
             "type": "string"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of char filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.MappingCharFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "mappings",
-        "@odata.type"
+        "mappings"
       ],
       "allOf": [
         {
@@ -8910,22 +8359,8 @@
           "type": "string",
           "description": "The tag indicates the end of the merged text. By default, the tag is an empty\nspace.",
           "default": " "
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.MergeSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -8951,22 +8386,8 @@
         "language": {
           "$ref": "#/definitions/MicrosoftStemmingTokenizerLanguage",
           "description": "The language to use. The default is English."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -8992,22 +8413,8 @@
         "language": {
           "$ref": "#/definitions/MicrosoftTokenizerLanguage",
           "description": "The language to use. The default is English."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -9576,22 +8983,8 @@
           "format": "int32",
           "description": "The maximum n-gram length. Default is 2.",
           "default": 2
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.NGramTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -9616,22 +9009,8 @@
           "description": "The maximum n-gram length. Default is 2. Maximum is 300.",
           "default": 2,
           "maximum": 300
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.NGramTokenFilterV2"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -9663,22 +9042,8 @@
           "items": {
             "$ref": "#/definitions/TokenCharacterKind"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.NGramTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -9689,22 +9054,6 @@
     "NativeBlobSoftDeleteDeletionDetectionPolicy": {
       "type": "object",
       "description": "Defines a data deletion detection policy utilizing Azure Blob Storage's native\nsoft delete feature for deletion detection.",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of data deletion detection policy.",
-          "enum": [
-            "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
-        }
-      },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataDeletionDetectionPolicy"
@@ -9763,22 +9112,8 @@
         "lineEnding": {
           "$ref": "#/definitions/OcrLineEnding",
           "description": "Defines the sequence of characters to use between the lines of text recognized\nby the OCR skill. The default value is \"space\"."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Vision.OcrSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -10872,22 +10207,8 @@
         "domain": {
           "type": "string",
           "description": "If specified, will set the PII domain to include only a subset of the entity\ncategories. Possible values include: 'phi', 'none'. Default is 'none'."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.PIIDetectionSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -10948,22 +10269,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of initial tokens to skip. Default is 0."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.PathHierarchyTokenizerV2"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -11019,22 +10326,10 @@
           "type": "boolean",
           "description": "A value indicating whether to return the original token even if one of the\npatterns matches. Default is true.",
           "default": true
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.PatternCaptureTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "patterns",
-        "@odata.type"
+        "patterns"
       ],
       "allOf": [
         {
@@ -11054,23 +10349,11 @@
         "replacement": {
           "type": "string",
           "description": "The replacement text."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of char filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.PatternReplaceCharFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
         "pattern",
-        "replacement",
-        "@odata.type"
+        "replacement"
       ],
       "allOf": [
         {
@@ -11090,23 +10373,11 @@
         "replacement": {
           "type": "string",
           "description": "The replacement text."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.PatternReplaceTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
         "pattern",
-        "replacement",
-        "@odata.type"
+        "replacement"
       ],
       "allOf": [
         {
@@ -11133,22 +10404,8 @@
           "format": "int32",
           "description": "The zero-based ordinal of the matching group in the regular expression pattern\nto extract into tokens. Use -1 if you want to use the entire pattern to split\nthe input into tokens, irrespective of matching groups. Default is -1.",
           "default": -1
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.PatternTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -11246,22 +10503,8 @@
           "type": "boolean",
           "description": "A value indicating whether encoded tokens should replace original tokens. If\nfalse, encoded tokens are added as synonyms. Default is true.",
           "default": true
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.PhoneticTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -12835,34 +12078,17 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "A URI fragment specifying the type of identity."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type"
       ]
     },
     "SearchIndexerDataNoneIdentity": {
       "type": "object",
-      "description": "Clears the identity property of a datasource.",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of identity.",
-          "enum": [
-            "#Microsoft.Azure.Search.DataNoneIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
-        }
-      },
-      "required": [
-        "@odata.type"
-      ],
+      "description": "A URI fragment specifying the type of identity.",
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerDataIdentity"
@@ -12984,22 +12210,10 @@
         "userAssignedIdentity": {
           "type": "string",
           "description": "The fully qualified Azure resource Id of a user assigned managed identity\ntypically in the form\n\"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\"\nthat should have been assigned to the search service."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of identity.",
-          "enum": [
-            "#Microsoft.Azure.Search.DataUserAssignedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "userAssignedIdentity",
-        "@odata.type"
+        "userAssignedIdentity"
       ],
       "allOf": [
         {
@@ -13298,8 +12512,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         },
         "name": {
           "type": "string",
@@ -13330,7 +12543,7 @@
           "x-ms-identifiers": []
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type",
         "inputs",
@@ -14108,22 +13321,8 @@
         "defaultLanguageCode": {
           "$ref": "#/definitions/SentimentSkillLanguage",
           "description": "A value indicating which language code to use. Default is `en`."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.SentimentSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -14248,22 +13447,8 @@
         "modelVersion": {
           "type": "string",
           "description": "The version of the model to use when calling the Text Analytics service. It\nwill default to the latest available when not specified. We recommend you do\nnot specify this value unless absolutely necessary."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.V3.SentimentSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -14274,22 +13459,6 @@
     "ShaperSkill": {
       "type": "object",
       "description": "A skill for reshaping the outputs. It creates a complex type to support\ncomposite fields (also known as multipart fields).",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Util.ShaperSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
-        }
-      },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -14333,22 +13502,8 @@
           "type": "string",
           "description": "The string to insert for each position at which there is no token. Default is\nan underscore (\"_\").",
           "default": "_"
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.ShingleTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -14362,11 +13517,10 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type"
       ]
@@ -14409,22 +13563,10 @@
         "language": {
           "$ref": "#/definitions/SnowballTokenFilterLanguage",
           "description": "The language to use."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.SnowballTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "language",
-        "@odata.type"
+        "language"
       ],
       "allOf": [
         {
@@ -14588,22 +13730,8 @@
         "softDeleteMarkerValue": {
           "type": "string",
           "description": "The marker value that identifies an item as deleted."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of data deletion detection policy.",
-          "enum": [
-            "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataDeletionDetectionPolicy"
@@ -14645,22 +13773,8 @@
         "azureOpenAITokenizerParameters": {
           "$ref": "#/definitions/AzureOpenAITokenizerParameters",
           "description": "Only applies if the unit is set to azureOpenAITokens. If specified, the\nsplitSkill will use these parameters when performing the tokenization. The\nparameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.SplitSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -14941,22 +14055,6 @@
     "SqlIntegratedChangeTrackingPolicy": {
       "type": "object",
       "description": "Defines a data change detection policy that captures changes using the\nIntegrated Change Tracking feature of Azure SQL Database.",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of data change detection policy.",
-          "enum": [
-            "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
-        }
-      },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataChangeDetectionPolicy"
@@ -14974,22 +14072,10 @@
           "items": {
             "type": "string"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.StemmerOverrideTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "rules",
-        "@odata.type"
+        "rules"
       ],
       "allOf": [
         {
@@ -15005,22 +14091,10 @@
         "language": {
           "$ref": "#/definitions/StemmerTokenFilterLanguage",
           "description": "The language to use."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.StemmerTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "language",
-        "@odata.type"
+        "language"
       ],
       "allOf": [
         {
@@ -15375,22 +14449,8 @@
           "items": {
             "type": "string"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of analyzer.",
-          "enum": [
-            "#Microsoft.Azure.Search.StopAnalyzer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalAnalyzer"
@@ -15619,22 +14679,8 @@
           "type": "boolean",
           "description": "A value indicating whether to ignore the last search term if it's a stop word.\nDefault is true.",
           "default": true
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.StopwordsTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -15796,22 +14842,10 @@
           "type": "boolean",
           "description": "A value indicating whether all words in the list of synonyms (if => notation is\nnot used) will map to one another. If true, all words in the list of synonyms\n(if => notation is not used) will map to one another. The following list:\nincredible, unbelievable, fabulous, amazing is equivalent to: incredible,\nunbelievable, fabulous, amazing => incredible, unbelievable, fabulous, amazing.\nIf false, the following list: incredible, unbelievable, fabulous, amazing will\nbe equivalent to: incredible, unbelievable, fabulous, amazing => incredible.\nDefault is true.",
           "default": true
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.SynonymTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "synonyms",
-        "@odata.type"
+        "synonyms"
       ],
       "allOf": [
         {
@@ -15903,22 +14937,10 @@
         "suggestedFrom": {
           "$ref": "#/definitions/TextTranslationSkillLanguage",
           "description": "The language code to translate documents from when neither the fromLanguageCode\ninput nor the defaultFromLanguageCode parameter are provided, and the automatic\nlanguage detection is unsuccessful. Default is `en`."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Text.TranslationSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "defaultToLanguageCode",
-        "@odata.type"
+        "defaultToLanguageCode"
       ],
       "allOf": [
         {
@@ -16436,15 +15458,14 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "odataType"
+          "description": "The discriminator for derived types."
         },
         "name": {
           "type": "string",
           "description": "The name of the token filter. It must only contain letters, digits, spaces,\ndashes or underscores, can only start and end with alphanumeric characters, and\nis limited to 128 characters."
         }
       },
-      "discriminator": "odataType",
+      "discriminator": "@odata.type",
       "required": [
         "@odata.type",
         "name"
@@ -16676,22 +15697,8 @@
           "description": "The length at which terms will be truncated. Default and maximum is 300.",
           "default": 300,
           "maximum": 300
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.TruncateTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -16709,22 +15716,8 @@
           "description": "The maximum token length. Default is 255. Tokens longer than the maximum length\nare split. The maximum token length that can be used is 300 characters.",
           "default": 255,
           "maximum": 300
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of tokenizer.",
-          "enum": [
-            "#Microsoft.Azure.Search.UaxUrlEmailTokenizer"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LexicalTokenizer"
@@ -16739,22 +15732,8 @@
         "onlyOnSamePosition": {
           "type": "boolean",
           "description": "A value indicating whether to remove duplicates only at the same position.\nDefault is false."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.UniqueTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
@@ -17341,22 +16320,10 @@
         "modelVersion": {
           "type": "string",
           "description": "The version of the model to use when calling the AI Services Vision service. It\nwill default to the latest available when not specified."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Vision.VectorizeSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "modelVersion",
-        "@odata.type"
+        "modelVersion"
       ],
       "allOf": [
         {
@@ -17460,22 +16427,10 @@
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "description": "The user-assigned managed identity used for outbound connections. If an\nauthResourceId is provided and it's not specified, the system-assigned managed\nidentity is used. On updates to the indexer, if the identity is unspecified,\nthe value remains unchanged. If set to \"none\", the value of this property is\ncleared."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of skill.",
-          "enum": [
-            "#Microsoft.Skills.Custom.WebApiSkill"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
       "required": [
-        "uri",
-        "@odata.type"
+        "uri"
       ],
       "allOf": [
         {
@@ -17586,22 +16541,8 @@
           "items": {
             "type": "string"
           }
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of token filter.",
-          "enum": [
-            "#Microsoft.Azure.Search.WordDelimiterTokenFilter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "odataType"
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TokenFilter"
