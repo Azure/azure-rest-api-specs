@@ -6029,7 +6029,6 @@ model SearchIndexerKnowledgeStore {
    * A list of additional projections to perform during indexing.
    */
   projections: SearchIndexerKnowledgeStoreProjection[];
-
   /**
    * The user-assigned managed identity used for connections to Azure Storage when
    * writing knowledge store projections. If the connection string indicates an
@@ -9910,6 +9909,7 @@ model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
    * The depth of headers in the markdown output. Default is h6.
    */
   markdownHeaderDepth?: DocumentIntelligenceLayoutSkillMarkdownHeaderDepth = DocumentIntelligenceLayoutSkillMarkdownHeaderDepth.H6;
+
 
   /**
    * A URI fragment specifying the type of skill.
