@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2024-08-01-preview"
+    "version": "2024-10-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -59,7 +59,7 @@
           {
             "in": "path",
             "name": "location",
-            "description": "the region",
+            "description": "The region",
             "required": true,
             "type": "string"
           },
@@ -2152,6 +2152,15 @@
             "$ref": "#/definitions/ClientConnectionCountRule"
           },
           "x-ms-identifiers": []
+        },
+        "clientTrafficControlRules": {
+          "description": "Rules to control the client traffic",
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientTrafficControlRule"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2171,6 +2180,28 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ClientConnectionCountRuleDiscriminator",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
+    },
+    "ClientTrafficControlRule": {
+      "description": "A base class for client traffic control rules",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "TrafficThrottleByJwtSignatureRule",
+            "TrafficThrottleByUserIdRule",
+            "TrafficThrottleByJwtCustomClaimRule"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClientTrafficControlRuleDiscriminator",
             "modelAsString": true
           }
         }
@@ -3007,6 +3038,14 @@
           "maximum": 120,
           "minimum": 1,
           "type": "integer"
+        },
+        "keepAliveIntervalInSeconds": {
+          "format": "int32",
+          "description": "Gets or sets the Keep-Alive Interval. Optional to set.\r\nValue is in seconds.\r\nThe default value is 15 seconds.\r\nCustomers should set this value to a shorter period if they want the service to send keep-alive messages more frequently, \r\nensuring timely checks of the connection status.\r\nConversely, customers can set this value to a longer period if they want the service to send keep-alive messages less frequently, \r\nreducing network traffic, but note that it may take longer to detect a disconnection.\r\nThis interval ensures that the connection is maintained by sending periodic keep-alive messages to the client.",
+          "default": 15,
+          "maximum": 120,
+          "minimum": 1,
+          "type": "integer"
         }
       }
     },
@@ -3685,6 +3724,91 @@
         }
       },
       "x-ms-discriminator-value": "ThrottleByUserIdRule"
+    },
+    "TrafficThrottleByJwtCustomClaimRule": {
+      "description": "Throttle the client traffic by a custom JWT claim",
+      "required": [
+        "claimName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientTrafficControlRule"
+        }
+      ],
+      "properties": {
+        "claimName": {
+          "description": "The name of the claim in the JWT token. The message bytes with the same claim value will be aggregated. If the claim is not found in the token, the rule will be skipped.",
+          "type": "string"
+        },
+        "maxInboundMessageBytes": {
+          "format": "int64",
+          "description": "Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT claim will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "aggregationWindowInSeconds": {
+          "format": "int32",
+          "description": "The aggregation window for the message bytes. The message bytes will be aggregated in this window and be reset after the window. Default value is 60 seconds.",
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 10,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "TrafficThrottleByJwtCustomClaimRule"
+    },
+    "TrafficThrottleByJwtSignatureRule": {
+      "description": "Throttle the client traffic by the JWT signature",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientTrafficControlRule"
+        }
+      ],
+      "properties": {
+        "maxInboundMessageBytes": {
+          "format": "int64",
+          "description": "Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT signature will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "aggregationWindowInSeconds": {
+          "format": "int32",
+          "description": "The aggregation window for the message bytes. The message bytes will be aggregated in this window and be reset after the window. Default value is 60 seconds.",
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 10,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "TrafficThrottleByJwtSignatureRule"
+    },
+    "TrafficThrottleByUserIdRule": {
+      "description": "Throttle the client traffic by the user ID",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientTrafficControlRule"
+        }
+      ],
+      "properties": {
+        "maxInboundMessageBytes": {
+          "format": "int64",
+          "description": "Maximum accumulated inbound message bytes allowed for the same user ID within a time window. Clients with the same user ID will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "aggregationWindowInSeconds": {
+          "format": "int32",
+          "description": "The aggregation window for the message bytes. The message bytes will be aggregated in this window and be reset after the window. Default value is 60 seconds.",
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 10,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "TrafficThrottleByUserIdRule"
     },
     "UpstreamAuthSettings": {
       "description": "Upstream auth settings. If not set, no auth is used for upstream messages.",
