@@ -16,6 +16,7 @@ namespace KeyVault;
  * operation requires the secrets/set permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Sets a secret in a specified key vault.")
 @route("/secrets/{secret-name}")
 @put
@@ -135,6 +136,7 @@ op getSecret is Azure.Core.Foundations.Operation<
  * requires the secrets/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("List secrets in a specified key vault.")
 @route("/secrets")
 @get
@@ -158,6 +160,7 @@ op getSecrets is Azure.Core.Foundations.Operation<
  * permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("List all versions of the specified secret.")
 @route("/secrets/{secret-name}/versions")
 @get
@@ -188,6 +191,7 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
  * permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Lists deleted secrets for the specified vault.")
 @route("/deletedsecrets")
 @get
@@ -231,6 +235,7 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
  * enabled vault. This operation requires the secrets/purge permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Permanently deletes the specified secret.")
 @route("/deletedsecrets/{secret-name}")
 @delete
