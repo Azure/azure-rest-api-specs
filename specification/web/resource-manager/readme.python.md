@@ -18,9 +18,10 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2023-12-01"
+default-api-version: "2024-04-01"
 clear-output-folder: true
 batch:
+  - tag: package-2024-04
   - tag: package-2023-12
   - tag: package-2023-01
   - tag: package-2022-09
@@ -45,6 +46,16 @@ batch:
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
 perform-load: false
 clear-output-folder: false
+```
+
+### Tag: package-2024-04 and python
+
+These settings apply only when `--tag=package-2024-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-04' && $(python)
+namespace: azure.mgmt.web.v2024_04_01
+output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2024_04_01
 ```
 
 ### Tag: package-2023-12 and python
