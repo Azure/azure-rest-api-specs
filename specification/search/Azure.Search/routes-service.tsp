@@ -26,7 +26,12 @@ interface DataSourcesOperations {
             @body
             dataSource: SearchIndexerDataSource;
         },
-        SearchIndexerDataSource
+        SearchIndexerDataSource & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -39,7 +44,12 @@ interface DataSourcesOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -73,7 +83,11 @@ interface DataSourcesOperations {
             @body
             dataSource: SearchIndexerDataSource;
         },
-        SearchIndexerDataSource
+        SearchIndexerDataSource & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 }
 
@@ -84,7 +98,14 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.reset")
     @post
-    reset is SearchIndexerOperation<{}, void>;
+    reset is SearchIndexerOperation<
+        {},
+        {
+            @doc("A process exit code.")
+            @statusCode
+            code: "204";
+        }
+    >;
 
     /**
      * Runs an indexer on-demand.
@@ -92,12 +113,20 @@ interface IndexersOperations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     @route("/indexers('{indexerName}')/search.run")
     @post
-    run is SearchIndexerOperation<{}, void>;
+    run is SearchIndexerOperation<
+        {},
+        {
+            @doc("A process exit code.")
+            @statusCode
+            code: "202";
+        }
+    >;
 
     /**
      * Creates a new indexer or updates an indexer if it already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexers('{indexerName}')")
     @put
     createOrUpdate is SearchIndexerOperation<
@@ -111,7 +140,12 @@ interface IndexersOperations {
             @body
             indexer: SearchIndexer;
         },
-        SearchIndexer
+        SearchIndexer & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -124,7 +158,12 @@ interface IndexersOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -140,6 +179,7 @@ interface IndexersOperations {
      * Lists all indexers available for a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexers")
     @get
     list is SearchOperation<selectQuery, ListIndexersResult>;
@@ -159,7 +199,11 @@ interface IndexersOperations {
             @body
             indexer: SearchIndexer;
         },
-        SearchIndexer
+        SearchIndexer & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 
     /**
@@ -177,6 +221,7 @@ interface SkillsetsOperations {
      * already exists.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/skillsets('{skillsetName}')")
     @put
     createOrUpdate is SearchSkillsetOperation<
@@ -191,7 +236,12 @@ interface SkillsetsOperations {
             @body
             skillset: SearchIndexerSkillset;
         },
-        SearchIndexerSkillset
+        SearchIndexerSkillset & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -205,7 +255,12 @@ interface SkillsetsOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -239,7 +294,11 @@ interface SkillsetsOperations {
             @body
             skillset: SearchIndexerSkillset;
         },
-        SearchIndexerSkillset
+        SearchIndexerSkillset & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 }
 
@@ -262,7 +321,12 @@ interface SynonymMapsOperations {
             @body
             synonymMap: SynonymMap;
         },
-        SynonymMap
+        SynonymMap & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -275,7 +339,12 @@ interface SynonymMapsOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
@@ -291,6 +360,7 @@ interface SynonymMapsOperations {
      * Lists all synonym maps available for a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/synonymmaps")
     @get
     list is SearchOperation<selectQuery, ListSynonymMapsResult>;
@@ -309,7 +379,11 @@ interface SynonymMapsOperations {
             @body
             synonymMap: SynonymMap;
         },
-        SynonymMap
+        SynonymMap & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 }
 
@@ -328,13 +402,18 @@ interface IndexesOperations {
             @body
             index: SearchIndex;
         },
-        SearchIndex
+        SearchIndex & {
+            @doc("A process exit code.")
+            @statusCode
+            code: "201";
+        }
     >;
 
     /**
      * Lists all indexes available for a search service.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @route("/indexes")
     @get
     list is SearchOperation<selectQuery, ListIndexesResult>;
@@ -368,7 +447,12 @@ interface IndexesOperations {
             @body
             index: SearchIndex;
         },
-        SearchIndex
+        SearchIndex & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "200" | "201";
+        }
     >;
 
     /**
@@ -384,7 +468,12 @@ interface IndexesOperations {
         {
             ...matchingHeader;
         },
-        void
+        {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+            @doc("A process exit code.")
+            @statusCode
+            code: "204" | "404";
+        }
     >;
 
     /**
