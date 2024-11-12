@@ -48,14 +48,10 @@ interface Evaluations {
 
   update is EvaluationsOperations.ResourceUpdate<Evaluation>;
 
-  @sharedRoute
-  getScheduleOperationStatus is EvaluationsOperations.GetResourceOperationStatus<EvaluationSchedule>;
-
   getSchedule is EvaluationsOperations.ResourceRead<EvaluationSchedule>;
-  
-  @pollingOperation(Evaluations.getScheduleOperationStatus)
+
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createOrReplaceSchedule is EvaluationsOperations.LongRunningResourceCreateOrUpdate<EvaluationSchedule>;
+  createOrReplaceSchedule is EvaluationsOperations.ResourceCreateOrReplace<EvaluationSchedule>;
 
   listSchedule is EvaluationsOperations.ResourceList<
     EvaluationSchedule,
