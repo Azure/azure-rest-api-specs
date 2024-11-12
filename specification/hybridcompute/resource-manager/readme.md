@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-09
+tag: package-preview-2024-11-10
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -76,6 +76,16 @@ directive:
   # we don't want enable PATCH for run command
   - remove-operation: MachineRunCommands_Update
 
+```
+
+### Tag: package-preview-2024-11-10-preview
+
+These settings apply only when `--tag=package-preview-2024-11-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11-10-preview'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-11-10-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-11-10-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-preview-2024-09
