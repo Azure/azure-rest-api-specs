@@ -83,3 +83,12 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: WindowsImageBuilder.json
+    reason: Needed value. Exception provided in API Design review meeting. Note - suppressing entire file due to bug with where field. Suppression targets are as follows, $.definitions.WindowsImageTemplateDistributor.properties.artifactTags, $.definitions.WindowsImageTemplateProperties.properties.managedResourceTags, $.definitions.UserAssignedIdentities, $.definitions.WindowsImageTemplateUpdateParameters.properties.tags
+```
