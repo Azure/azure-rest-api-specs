@@ -5142,23 +5142,23 @@ model SearchIndexerDataContainer {
 /**
  * Base type for data change detection policies.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model DataChangeDetectionPolicy {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 }
 
 /**
  * Base type for data deletion detection policies.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model DataDeletionDetectionPolicy {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 }
 
 /**
@@ -5919,12 +5919,12 @@ model SearchIndexerSkillset {
 /**
  * Base type for skills.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model SearchIndexerSkill {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 
   /**
    * The name of the skill which uniquely identifies it within the skillset. A skill
@@ -6002,12 +6002,12 @@ model OutputFieldMappingEntry {
 /**
  * Base type for describing any Azure AI service resource attached to a skillset.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model CognitiveServicesAccount {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 
   /**
    * Description of the Azure AI service resource attached to a skillset.
@@ -6655,12 +6655,12 @@ model SearchSuggester {
 /**
  * Base type for analyzers.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model LexicalAnalyzer {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 
   /**
    * The name of the analyzer. It must only contain letters, digits, spaces, dashes
@@ -6673,12 +6673,12 @@ model LexicalAnalyzer {
 /**
  * Base type for tokenizers.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model LexicalTokenizer {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 
   /**
    * The name of the tokenizer. It must only contain letters, digits, spaces, dashes
@@ -6691,12 +6691,12 @@ model LexicalTokenizer {
 /**
  * Base type for token filters.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model TokenFilter {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 
   /**
    * The name of the token filter. It must only contain letters, digits, spaces,
@@ -6709,12 +6709,12 @@ model TokenFilter {
 /**
  * Base type for character filters.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model CharFilter {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 
   /**
    * The name of the char filter. It must only contain letters, digits, spaces,
@@ -6728,12 +6728,12 @@ model CharFilter {
  * Base type for normalizers.
  */
 @added(Versions.v2024_11_01_preview)
-@discriminator("odataType")
+@discriminator("@odata.type")
 model LexicalNormalizer {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 
   /**
    * The name of the char filter. It must only contain letters, digits, spaces,
@@ -6749,12 +6749,12 @@ model LexicalNormalizer {
  * relevant the document is to that specific query. Those scores are used to rank
  * the search results.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model SimilarityAlgorithm {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 }
 
 /**
@@ -7294,8 +7294,8 @@ model CustomAnalyzer extends LexicalAnalyzer {
   /**
    * A URI fragment specifying the type of analyzer.
    */
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.CustomAnalyzer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.CustomAnalyzer";
 }
 
 /**
@@ -7328,7 +7328,7 @@ model PatternAnalyzer extends LexicalAnalyzer {
    * A URI fragment specifying the type of analyzer.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  odataType: "#Microsoft.Azure.Search.PatternAnalyzer";
+  `@odata.type`: "#Microsoft.Azure.Search.PatternAnalyzer";
 }
 
 /**
@@ -7351,9 +7351,8 @@ model LuceneStandardAnalyzer extends LexicalAnalyzer {
   /**
    * A URI fragment specifying the type of analyzer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.StandardAnalyzer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.StandardAnalyzer";
 }
 
 /**
@@ -7369,8 +7368,8 @@ model StopAnalyzer extends LexicalAnalyzer {
   /**
    * A URI fragment specifying the type of analyzer.
    */
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.StopAnalyzer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.StopAnalyzer";
 }
 
 /**
@@ -7398,9 +7397,8 @@ model CustomNormalizer extends LexicalNormalizer {
   /**
    * A URI fragment specifying the type of normalizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.CustomNormalizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.CustomNormalizer";
 }
 
 /**
@@ -7418,9 +7416,8 @@ model ClassicTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.ClassicTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.ClassicTokenizer";
 }
 
 /**
@@ -7450,8 +7447,8 @@ model EdgeNGramTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
 }
 
 /**
@@ -7467,9 +7464,8 @@ model KeywordTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.KeywordTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizer";
 }
 
 /**
@@ -7487,9 +7483,8 @@ model KeywordTokenizerV2 extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.KeywordTokenizerV2";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizerV2";
 }
 
 /**
@@ -7519,8 +7514,8 @@ model MicrosoftLanguageTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer";
 }
 
 /**
@@ -7551,9 +7546,8 @@ model MicrosoftLanguageStemmingTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer";
 }
 
 /**
@@ -7583,9 +7577,8 @@ model NGramTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.NGramTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.NGramTokenizer";
 }
 
 /**
@@ -7623,8 +7616,8 @@ model PathHierarchyTokenizerV2 extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
 }
 
 /**
@@ -7653,9 +7646,8 @@ model PatternTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.PatternTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.PatternTokenizer";
 }
 
 /**
@@ -7672,9 +7664,8 @@ model LuceneStandardTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.StandardTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizer";
 }
 
 /**
@@ -7692,9 +7683,8 @@ model LuceneStandardTokenizerV2 extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.StandardTokenizerV2";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizerV2";
 }
 
 /**
@@ -7712,9 +7702,8 @@ model UaxUrlEmailTokenizer extends LexicalTokenizer {
   /**
    * A URI fragment specifying the type of tokenizer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
 }
 
 /**
@@ -7732,9 +7721,8 @@ model AsciiFoldingTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
 }
 
 /**
@@ -7756,9 +7744,8 @@ model CjkBigramTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.CjkBigramTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.CjkBigramTokenFilter";
 }
 
 /**
@@ -7788,9 +7775,8 @@ model CommonGramTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.CommonGramTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.CommonGramTokenFilter";
 }
 
 /**
@@ -7833,9 +7819,8 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
 }
 
 /**
@@ -7863,9 +7848,8 @@ model EdgeNGramTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
 }
 
 /**
@@ -7896,9 +7880,8 @@ model EdgeNGramTokenFilterV2 extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2";
 }
 
 /**
@@ -7914,9 +7897,8 @@ model ElisionTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.ElisionTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.ElisionTokenFilter";
 }
 
 /**
@@ -7937,9 +7919,8 @@ model KeepTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.KeepTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.KeepTokenFilter";
 }
 
 /**
@@ -7960,9 +7941,8 @@ model KeywordMarkerTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
 }
 
 /**
@@ -7986,9 +7966,8 @@ model LengthTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.LengthTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.LengthTokenFilter";
 }
 
 /**
@@ -8010,9 +7989,8 @@ model LimitTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.LimitTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.LimitTokenFilter";
 }
 
 /**
@@ -8034,9 +8012,8 @@ model NGramTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.NGramTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilter";
 }
 
 /**
@@ -8061,9 +8038,8 @@ model NGramTokenFilterV2 extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.NGramTokenFilterV2";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilterV2";
 }
 
 /**
@@ -8085,9 +8061,8 @@ model PatternCaptureTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
 }
 
 /**
@@ -8112,9 +8087,8 @@ model PatternReplaceTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
 }
 
 /**
@@ -8136,9 +8110,8 @@ model PhoneticTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.PhoneticTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.PhoneticTokenFilter";
 }
 
 /**
@@ -8187,9 +8160,8 @@ model ShingleTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.ShingleTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.ShingleTokenFilter";
 }
 
 /**
@@ -8205,9 +8177,8 @@ model SnowballTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.SnowballTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.SnowballTokenFilter";
 }
 
 /**
@@ -8223,9 +8194,8 @@ model StemmerTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.StemmerTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.StemmerTokenFilter";
 }
 
 /**
@@ -8245,9 +8215,8 @@ model StemmerOverrideTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
 }
 
 /**
@@ -8282,9 +8251,8 @@ model StopwordsTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.StopwordsTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.StopwordsTokenFilter";
 }
 
 /**
@@ -8321,9 +8289,8 @@ model SynonymTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.SynonymTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.SynonymTokenFilter";
 }
 
 /**
@@ -8340,9 +8307,8 @@ model TruncateTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.TruncateTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.TruncateTokenFilter";
 }
 
 /**
@@ -8359,9 +8325,8 @@ model UniqueTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.UniqueTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.UniqueTokenFilter";
 }
 
 /**
@@ -8432,9 +8397,8 @@ model WordDelimiterTokenFilter extends TokenFilter {
   /**
    * A URI fragment specifying the type of token filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
 }
 
 /**
@@ -8453,9 +8417,8 @@ model MappingCharFilter extends CharFilter {
   /**
    * A URI fragment specifying the type of char filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.MappingCharFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.MappingCharFilter";
 }
 
 /**
@@ -8480,9 +8443,8 @@ model PatternReplaceCharFilter extends CharFilter {
   /**
    * A URI fragment specifying the type of char filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.PatternReplaceCharFilter";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.PatternReplaceCharFilter";
 }
 
 /**
@@ -8492,9 +8454,9 @@ model PatternReplaceCharFilter extends CharFilter {
  * that only partially match the searched queries.
  */
 model ClassicSimilarityAlgorithm extends SimilarityAlgorithm {
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.ClassicSimilarity";
+  /** The discriminator for derived types. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.ClassicSimilarity";
 }
 
 /**
@@ -8521,9 +8483,9 @@ model BM25SimilarityAlgorithm extends SimilarityAlgorithm {
    */
   b?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.BM25Similarity";
+  /** The discriminator for derived types. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.BM25Similarity";
 }
 
 /**
@@ -8702,12 +8664,14 @@ model AzureOpenAIVectorizerParameters {
 /**
  * Abstract base type for data identities.
  */
-@discriminator("odataType")
+@discriminator("@odata.type")
 model SearchIndexerDataIdentity {
-  /** The discriminator for derived types. */
+  /**
+   * A URI fragment specifying the type of identity.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: string;
 }
 
 /**
@@ -8888,15 +8852,12 @@ model AMLParameters {
 }
 
 /**
- * Clears the identity property of a datasource.
- */
-model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
-  /**
    * A URI fragment specifying the type of identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.DataNoneIdentity";
+model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
+  /** The discriminator for derived types. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.DataNoneIdentity";
 }
 
 /**
@@ -8914,9 +8875,8 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
   /**
    * A URI fragment specifying the type of identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
 }
 
 /**
@@ -8932,9 +8892,8 @@ model HighWaterMarkChangeDetectionPolicy extends DataChangeDetectionPolicy {
   /**
    * A URI fragment specifying the type of data change detection policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
 }
 
 /**
@@ -8945,9 +8904,8 @@ model SqlIntegratedChangeTrackingPolicy extends DataChangeDetectionPolicy {
   /**
    * A URI fragment specifying the type of data change detection policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
 }
 
 /**
@@ -8970,9 +8928,8 @@ model SoftDeleteColumnDeletionDetectionPolicy
   /**
    * A URI fragment specifying the type of data deletion detection policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
 }
 
 /**
@@ -8985,9 +8942,8 @@ model NativeBlobSoftDeleteDeletionDetectionPolicy
   /**
    * A URI fragment specifying the type of data deletion detection policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy";
 }
 
 /**
@@ -9139,9 +9095,8 @@ model DefaultCognitiveServicesAccount extends CognitiveServicesAccount {
    * A URI fragment specifying the type of Azure AI service resource attached to a
    * skillset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.DefaultCognitiveServices";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.DefaultCognitiveServices";
 }
 
 /**
@@ -9158,9 +9113,8 @@ model CognitiveServicesAccountKey extends CognitiveServicesAccount {
    * A URI fragment specifying the type of Azure AI service resource attached to a
    * skillset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.CognitiveServicesByKey";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.CognitiveServicesByKey";
 }
 
 /**
@@ -9184,9 +9138,8 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
    * A URI fragment specifying the type of Azure AI service resource attached to a
    * skillset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.AIServicesByKey";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.AIServicesByKey";
 }
 
 /**
@@ -9213,9 +9166,8 @@ model AIServicesAccountIdentity extends CognitiveServicesAccount {
    * A URI fragment specifying the type of Azure AI service resource attached to a
    * skillset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Azure.Search.AIServicesByIdentity";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.AIServicesByIdentity";
 }
 
 /**
@@ -9340,9 +9292,8 @@ model ConditionalSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Util.ConditionalSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Util.ConditionalSkill";
 }
 
 /**
@@ -9370,9 +9321,8 @@ model KeyPhraseExtractionSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
 }
 
 /**
@@ -9398,9 +9348,8 @@ model OcrSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Vision.OcrSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Vision.OcrSkill";
 }
 
 /**
@@ -9426,9 +9375,8 @@ model ImageAnalysisSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Vision.ImageAnalysisSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Vision.ImageAnalysisSkill";
 }
 
 /**
@@ -9453,9 +9401,8 @@ model LanguageDetectionSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.LanguageDetectionSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.LanguageDetectionSkill";
 }
 
 /**
@@ -9466,9 +9413,8 @@ model ShaperSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Util.ShaperSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Util.ShaperSkill";
 }
 
 /**
@@ -9491,9 +9437,8 @@ model MergeSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.MergeSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.MergeSkill";
 }
 
 /**
@@ -9528,9 +9473,8 @@ model EntityRecognitionSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.EntityRecognitionSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.EntityRecognitionSkill";
 }
 
 /**
@@ -9545,9 +9489,8 @@ model SentimentSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.SentimentSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.SentimentSkill";
 }
 
 /**
@@ -9579,9 +9522,8 @@ model SentimentSkillV3 extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.V3.SentimentSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.V3.SentimentSkill";
 }
 
 /**
@@ -9611,9 +9553,8 @@ model EntityLinkingSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.V3.EntityLinkingSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.V3.EntityLinkingSkill";
 }
 
 /**
@@ -9648,9 +9589,8 @@ model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.V3.EntityRecognitionSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.V3.EntityRecognitionSkill";
 }
 
 /**
@@ -9706,9 +9646,8 @@ model PIIDetectionSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.PIIDetectionSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.PIIDetectionSkill";
 }
 
 /**
@@ -9765,9 +9704,8 @@ model SplitSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.SplitSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.SplitSkill";
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -9831,9 +9769,8 @@ model CustomEntityLookupSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.CustomEntityLookupSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.CustomEntityLookupSkill";
 }
 
 /**
@@ -9862,9 +9799,8 @@ model TextTranslationSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.TranslationSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.TranslationSkill";
 }
 
 /**
@@ -9890,9 +9826,8 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Util.DocumentExtractionSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Util.DocumentExtractionSkill";
 }
 
 /**
@@ -9914,9 +9849,8 @@ model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill";
 }
 
 /**
@@ -9977,9 +9911,8 @@ model WebApiSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Custom.WebApiSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Custom.WebApiSkill";
 }
 
 /**
@@ -10032,9 +9965,8 @@ model AzureMachineLearningSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Custom.AmlSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Custom.AmlSkill";
 }
 
 /**
@@ -10054,9 +9986,8 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill";
 }
 
 /**
@@ -10074,7 +10005,6 @@ model VisionVectorizeSkill extends SearchIndexerSkill {
   /**
    * A URI fragment specifying the type of skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @encodedName("application/json", "@odata.type")
-  odataType: "#Microsoft.Skills.Vision.VectorizeSkill";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Vision.VectorizeSkill";
 }
