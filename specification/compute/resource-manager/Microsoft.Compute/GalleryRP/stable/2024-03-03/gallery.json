@@ -3801,6 +3801,7 @@
       "properties": {
         "resourceArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "arm id of the soft-deleted resource"
         },
         "softDeletedArtifactType": {
@@ -3809,7 +3810,7 @@
         },
         "softDeletedTime": {
           "type": "string",
-          "description": "The timestamp for when the resource is soft-deleted."
+          "description": "The timestamp for when the resource is soft-deleted. In dateTime offset format."
         }
       },
       "type": "object",
@@ -4115,13 +4116,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExecutedValidation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "platformAttributes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PlatformAttribute"
           },
+          "x-ms-identifiers": ["name"],
           "description": "This specifies the pub, offer, sku and version of the image version metadata"
         }
       },
