@@ -259,3 +259,7 @@ interface SingleDocumentTranslationClient {
   "totalCharactersChargedCount",
   "java"
 );
+
+op getTranslationsStatus(options: DocumentTranslation.GetTranslationsStatusOptions): DocumentTranslation.TranslationsStatus;
+
+@@override(DocumentTranslationClient.getTranslationsStatus, getTranslationsStatus, "java");
