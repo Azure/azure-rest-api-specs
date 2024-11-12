@@ -263,13 +263,25 @@ model OsProfile {
   @doc("Determines how the service should be run. By default, this will be set to Service.")
   logonType?: LogonType;
 }
+
+@doc("The certificate store name type")
+union CertificateStoreNameOption {
+  string,
+
+  @doc("The X.509 certificate store for personal certificates.")
+  "My",
+
+  @doc("The X.509 certificate store for trusted root certificate authorities (CAs).")
+  "Root",
+}
+
 @doc("The secret management settings of the machines in the pool.")
 model SecretsManagementSettings {
   @doc("Where to store certificates on the machine.")
   certificateStoreLocation?: string;
 
   @doc("Name of the certificate store to use on the machine, currently 'My' and 'Root' are supported.")
-  certificateStoreName?: string;
+  certificateStoreName?: CertificateStoreNameOption;
 
   @doc("The list of certificates to install on all machines in the pool.")
   observedCertificates: url[];
@@ -277,6 +289,7 @@ model SecretsManagementSettings {
   @doc("Defines if the key of the certificates should be exportable.")
   keyExportable: boolean;
 }
+
 @doc("Determines how the service should be run.")
 union LogonType {
   string,
@@ -786,11 +799,22 @@ union CheckNameAvailabilityReason {
   "AlreadyExists",
 }
 
+@doc("AvailabilityStatus of a name.")
+union AvailabilityStatus {
+  string,
+
+  @doc("The name is available.")
+  "Available",
+
+  @doc("The name is unavailable")
+  "Unavailable",
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
 @doc("The CheckNameAvailability operation response.")
 model CheckNameAvailabilityResult {
-  @doc("True if the name is available, otherwise false.")
-  available: boolean;
+  @doc("Availability status of the name.")
+  available: AvailabilityStatus;
 
   @doc("A message explaining why the name is unavailable. Will be null if the name is available.")
   message: string;

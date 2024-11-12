@@ -699,6 +699,30 @@
       ],
       "x-ms-discriminator-value": "Automatic"
     },
+    "AvailabilityStatus": {
+      "type": "string",
+      "description": "AvailabilityStatus of a name.",
+      "enum": [
+        "Available",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The name is available."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The name is unavailable"
+          }
+        ]
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -817,6 +841,30 @@
         ]
       }
     },
+    "CertificateStoreNameOption": {
+      "type": "string",
+      "description": "The certificate store name type",
+      "enum": [
+        "My",
+        "Root"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateStoreNameOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "My",
+            "value": "My",
+            "description": "The X.509 certificate store for personal certificates."
+          },
+          {
+            "name": "Root",
+            "value": "Root",
+            "description": "The X.509 certificate store for trusted root certificate authorities (CAs)."
+          }
+        ]
+      }
+    },
     "CheckNameAvailability": {
       "type": "object",
       "description": "The parameters used to check the availability of a resource.",
@@ -864,8 +912,8 @@
       "description": "The CheckNameAvailability operation response.",
       "properties": {
         "available": {
-          "type": "boolean",
-          "description": "True if the name is available, otherwise false."
+          "$ref": "#/definitions/AvailabilityStatus",
+          "description": "Availability status of the name."
         },
         "message": {
           "type": "string",
@@ -1968,7 +2016,7 @@
           "description": "Where to store certificates on the machine."
         },
         "certificateStoreName": {
-          "type": "string",
+          "$ref": "#/definitions/CertificateStoreNameOption",
           "description": "Name of the certificate store to use on the machine, currently 'My' and 'Root' are supported."
         },
         "observedCertificates": {
