@@ -1,0 +1,4741 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure AI Health Insights",
+    "version": "2024-10-01",
+    "description": "Azure AI Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/health-insights",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AzureKey": []
+    },
+    {
+      "EntraIdToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "The secret key for your Azure Cognitive Services subscription.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "EntraIdToken": {
+      "type": "oauth2",
+      "description": "The Microsoft Entra Id Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "RadiologyInsights"
+    },
+    {
+      "name": "TrialMatcher"
+    }
+  ],
+  "paths": {
+    "/radiology-insights/jobs/{id}": {
+      "get": {
+        "operationId": "RadiologyInsights_GetJob",
+        "tags": [
+          "RadiologyInsights"
+        ],
+        "summary": "Get Radiology Insights job details",
+        "description": "Gets the status and details of the Radiology Insights job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique ID of the job.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RadiologyInsightsJob"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/HealthInsightsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status and details of the Radiology Insights job.": {
+            "$ref": "./examples/SuccessfulRadiologyInsightsResponse.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RadiologyInsights_CreateJob",
+        "tags": [
+          "RadiologyInsights"
+        ],
+        "summary": "Create Radiology Insights job",
+        "description": "Creates a Radiology Insights job with the given request body.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique ID of the job.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RadiologyInsightsJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RadiologyInsightsJob"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RadiologyInsightsJob"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/HealthInsightsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a Radiology Insights job with the given request body.": {
+            "$ref": "./examples/SuccessfulRadiologyInsightsRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/trial-matcher/jobs/{id}": {
+      "get": {
+        "operationId": "TrialMatcher_GetJob",
+        "tags": [
+          "TrialMatcher"
+        ],
+        "summary": "Get Trial Matcher job details",
+        "description": "Gets the status and details of the Trial Matcher job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique ID of the job.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TrialMatcherJob"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/HealthInsightsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status and details of the Trial Matcher job.": {
+            "$ref": "./examples/SuccessfulTrialMatcherResponse.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TrialMatcher_CreateJob",
+        "tags": [
+          "TrialMatcher"
+        ],
+        "summary": "Create Trial Matcher job",
+        "description": "Creates a Trial Matcher job with the given request body.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique ID of the job.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrialMatcherJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TrialMatcherJob"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TrialMatcherJob"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/HealthInsightsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a Trial Matcher job with the given request body.": {
+            "$ref": "./examples/SuccessfulTrialMatcherRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AgeMismatchInference": {
+      "type": "object",
+      "description": "A notification for age mismatch is displayed when the age mentioned in a document for a specific patient does not match the age specified in the patient information.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "ageMismatch"
+    },
+    "AreaGeometry": {
+      "type": "object",
+      "description": "`GeoJSON` geometry, representing the area circle's center.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJsonGeometryType",
+          "description": "`GeoJSON` geometry type."
+        },
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates of the area circle's center, represented according to the `GeoJSON` standard.\nThis is an array of 2 decimal numbers, longitude and latitude (precisely in this order).",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ]
+    },
+    "AreaProperties": {
+      "type": "object",
+      "description": "`GeoJSON` object properties.",
+      "properties": {
+        "subType": {
+          "$ref": "#/definitions/GeoJsonPropertiesSubType",
+          "description": "`GeoJSON` object sub-type."
+        },
+        "radius": {
+          "type": "number",
+          "format": "double",
+          "description": "The radius of the area's circle, in meters."
+        }
+      },
+      "required": [
+        "subType",
+        "radius"
+      ]
+    },
+    "AssessmentValueRange": {
+      "type": "object",
+      "description": "A range of values.",
+      "properties": {
+        "minimum": {
+          "type": "string",
+          "description": "The minimum value."
+        },
+        "maximum": {
+          "type": "string",
+          "description": "The maximum value."
+        }
+      },
+      "required": [
+        "minimum",
+        "maximum"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "ClinicalCodedElement": {
+      "type": "object",
+      "description": "A piece of clinical information, expressed as a code in a clinical coding system.",
+      "properties": {
+        "system": {
+          "type": "string",
+          "description": "The clinical coding system, e.g. ICD-10, SNOMED-CT, UMLS."
+        },
+        "code": {
+          "type": "string",
+          "description": "The code within the given clinical coding system."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this coded concept in the coding system."
+        },
+        "value": {
+          "type": "string",
+          "description": "A value associated with the code within the given clinical coding system."
+        }
+      },
+      "required": [
+        "system",
+        "code"
+      ]
+    },
+    "ClinicalDocumentType": {
+      "type": "string",
+      "description": "The type of the clinical document.",
+      "enum": [
+        "consultation",
+        "dischargeSummary",
+        "historyAndPhysical",
+        "radiologyReport",
+        "procedure",
+        "progress",
+        "laboratory",
+        "pathologyReport"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalDocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Consultation",
+            "value": "consultation"
+          },
+          {
+            "name": "DischargeSummary",
+            "value": "dischargeSummary"
+          },
+          {
+            "name": "HistoryAndPhysical",
+            "value": "historyAndPhysical"
+          },
+          {
+            "name": "RadiologyReport",
+            "value": "radiologyReport"
+          },
+          {
+            "name": "Procedure",
+            "value": "procedure"
+          },
+          {
+            "name": "Progress",
+            "value": "progress"
+          },
+          {
+            "name": "Laboratory",
+            "value": "laboratory"
+          },
+          {
+            "name": "PathologyReport",
+            "value": "pathologyReport"
+          }
+        ]
+      }
+    },
+    "ClinicalNoteEvidence": {
+      "type": "object",
+      "description": "A piece of evidence from a clinical note (text document).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the document containing the evidence."
+        },
+        "text": {
+          "type": "string",
+          "description": "The actual text span which is evidence for the inference."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The start index of the evidence text span in the document (0 based).",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the evidence text span.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "id",
+        "offset",
+        "length"
+      ]
+    },
+    "ClinicalTrialMetadata": {
+      "type": "object",
+      "description": "Trial data which is of interest to the potential participant.",
+      "properties": {
+        "phases": {
+          "type": "array",
+          "description": "Phases which are relevant for the clinical trial.\nEach clinical trial can be in a certain phase or in multiple phases.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialPhase"
+          }
+        },
+        "studyType": {
+          "$ref": "#/definitions/ClinicalTrialStudyType",
+          "description": "Possible study types of a clinical trial."
+        },
+        "recruitmentStatus": {
+          "$ref": "#/definitions/ClinicalTrialRecruitmentStatus",
+          "description": "Possible recruitment status of a clinical trial."
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Medical conditions and their synonyms which are relevant for the clinical trial, given as strings.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "sponsors": {
+          "type": "array",
+          "description": "Sponsors/collaborators involved with the trial.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Contact details of the trial administrators, for patients that want to participate in the trial.",
+          "items": {
+            "$ref": "#/definitions/ContactDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "facilities": {
+          "type": "array",
+          "description": "Research facilities where the clinical trial is conducted.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialResearchFacility"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "conditions"
+      ]
+    },
+    "ClinicalTrialPhase": {
+      "type": "string",
+      "description": "Possible phases of a clinical trial.",
+      "enum": [
+        "notApplicable",
+        "earlyPhase1",
+        "phase1",
+        "phase2",
+        "phase3",
+        "phase4"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialPhase",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "notApplicable"
+          },
+          {
+            "name": "EarlyPhase1",
+            "value": "earlyPhase1"
+          },
+          {
+            "name": "Phase1",
+            "value": "phase1"
+          },
+          {
+            "name": "Phase2",
+            "value": "phase2"
+          },
+          {
+            "name": "Phase3",
+            "value": "phase3"
+          },
+          {
+            "name": "Phase4",
+            "value": "phase4"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialPurpose": {
+      "type": "string",
+      "description": "Possible purposes of a clinical trial.",
+      "enum": [
+        "notApplicable",
+        "screening",
+        "diagnostic",
+        "prevention",
+        "healthServicesResearch",
+        "treatment",
+        "deviceFeasibility",
+        "supportiveCare",
+        "basicScience",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialPurpose",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "notApplicable"
+          },
+          {
+            "name": "Screening",
+            "value": "screening"
+          },
+          {
+            "name": "Diagnostic",
+            "value": "diagnostic"
+          },
+          {
+            "name": "Prevention",
+            "value": "prevention"
+          },
+          {
+            "name": "HealthServicesResearch",
+            "value": "healthServicesResearch"
+          },
+          {
+            "name": "Treatment",
+            "value": "treatment"
+          },
+          {
+            "name": "DeviceFeasibility",
+            "value": "deviceFeasibility"
+          },
+          {
+            "name": "SupportiveCare",
+            "value": "supportiveCare"
+          },
+          {
+            "name": "BasicScience",
+            "value": "basicScience"
+          },
+          {
+            "name": "Other",
+            "value": "other"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialRecruitmentStatus": {
+      "type": "string",
+      "description": "Possible recruitment status of a clinical trial.",
+      "enum": [
+        "unknownStatus",
+        "notYetRecruiting",
+        "recruiting",
+        "enrollingByInvitation"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialRecruitmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UnknownStatus",
+            "value": "unknownStatus"
+          },
+          {
+            "name": "NotYetRecruiting",
+            "value": "notYetRecruiting"
+          },
+          {
+            "name": "Recruiting",
+            "value": "recruiting"
+          },
+          {
+            "name": "EnrollingByInvitation",
+            "value": "enrollingByInvitation"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialRegistryFilter": {
+      "type": "object",
+      "description": "A filter defining a subset of clinical trials from a given clinical trial registry (e.g. clinicaltrials.gov).",
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "description": "Trials with any of the given medical conditions will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the medical conditions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "studyTypes": {
+          "type": "array",
+          "description": "Trials with any of the given study types will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the study types.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialStudyType"
+          }
+        },
+        "recruitmentStatuses": {
+          "type": "array",
+          "description": "Trials with any of the given recruitment statuses will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the recruitment statuses.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialRecruitmentStatus"
+          }
+        },
+        "sponsors": {
+          "type": "array",
+          "description": "Trials with any of the given sponsors will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the sponsors.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phases": {
+          "type": "array",
+          "description": "Trials with any of the given phases will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the phases.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialPhase"
+          }
+        },
+        "purposes": {
+          "type": "array",
+          "description": "Trials with any of the given purposes will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the purposes.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialPurpose"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "Trials with any of the given identifiers will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "Trials with any of the given sources will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the sources.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialSource"
+          }
+        },
+        "facilityNames": {
+          "type": "array",
+          "description": "Trials with any of the given facility names will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facilityLocations": {
+          "type": "array",
+          "description": "Trials with any of the given facility locations will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility locations.",
+          "items": {
+            "$ref": "#/definitions/GeographicLocation"
+          },
+          "x-ms-identifiers": []
+        },
+        "facilityAreas": {
+          "type": "array",
+          "description": "Trials with any of the given facility area boundaries will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility area boundaries.",
+          "items": {
+            "$ref": "#/definitions/GeographicArea"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClinicalTrialResearchFacility": {
+      "type": "object",
+      "description": "Details of a research facility where a clinical trial is conducted.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The facility's name."
+        },
+        "city": {
+          "type": "string",
+          "description": "City name."
+        },
+        "state": {
+          "type": "string",
+          "description": "State name."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "Country/region name."
+        }
+      },
+      "required": [
+        "name",
+        "countryOrRegion"
+      ]
+    },
+    "ClinicalTrialSource": {
+      "type": "string",
+      "description": "Possible sources of a clinical trial.",
+      "enum": [
+        "custom",
+        "clinicaltrials.gov"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "custom"
+          },
+          {
+            "name": "ClinicaltrialsGov",
+            "value": "clinicaltrials.gov"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialStudyType": {
+      "type": "string",
+      "description": "Possible study types of a clinical trial.",
+      "enum": [
+        "interventional",
+        "observational",
+        "expandedAccess",
+        "patientRegistries"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialStudyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Interventional",
+            "value": "interventional"
+          },
+          {
+            "name": "Observational",
+            "value": "observational"
+          },
+          {
+            "name": "ExpandedAccess",
+            "value": "expandedAccess"
+          },
+          {
+            "name": "PatientRegistries",
+            "value": "patientRegistries"
+          }
+        ]
+      }
+    },
+    "ClinicalTrials": {
+      "type": "object",
+      "description": "The clinical trials that the patient(s) should be matched to.\nThe trial selection can be given as a list of custom clinical trials and/or a list of filters to known clinical trial registries.\nIn case both are given, the resulting trial set is a union of the two sets.",
+      "properties": {
+        "customTrials": {
+          "type": "array",
+          "description": "A list of clinical trials.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.ResearchStudy"
+          }
+        },
+        "registryFilters": {
+          "type": "array",
+          "description": "A list of filters, each one creating a selection of trials from a given\nclinical trial registry.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialRegistryFilter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CompleteOrderDiscrepancyInference": {
+      "type": "object",
+      "description": "A complete order discrepancy is shown when one or more body parts and/or measurements that should be in the document (because there is a complete order) are not present.",
+      "properties": {
+        "orderType": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast."
+        },
+        "missingBodyParts": {
+          "type": "array",
+          "description": "List of missing body parts required by a complete order : SNOMED CT codes.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "missingBodyPartMeasurements": {
+          "type": "array",
+          "description": "List of missing body parts that require measurement by a complete order : SNOMED CT codes.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        }
+      },
+      "required": [
+        "orderType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "completeOrderDiscrepancy"
+    },
+    "ContactDetails": {
+      "type": "object",
+      "description": "A person's contact details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The person's name."
+        },
+        "email": {
+          "type": "string",
+          "description": "The person's email."
+        },
+        "phone": {
+          "type": "string",
+          "description": "A person's phone number."
+        }
+      }
+    },
+    "CriticalResult": {
+      "type": "object",
+      "description": "Critical Result consists of two properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description : medical problem."
+        },
+        "finding": {
+          "$ref": "#/definitions/Fhir.R4.Observation",
+          "description": "Finding linked to the critical result."
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "CriticalResultInference": {
+      "type": "object",
+      "description": "Critical results refer to findings of utmost importance that may require timely attention due to their potential impact on patient care.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CriticalResult",
+          "description": "The complete Critical Result, as outlined below, will be reused for the recommendation."
+        }
+      },
+      "required": [
+        "result"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "criticalResult"
+    },
+    "DocumentAdministrativeMetadata": {
+      "type": "object",
+      "description": "Document administrative metadata",
+      "properties": {
+        "orderedProcedures": {
+          "type": "array",
+          "description": "List of procedure information associated with the document.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/OrderedProcedure"
+          },
+          "x-ms-identifiers": []
+        },
+        "encounterId": {
+          "type": "string",
+          "description": "Reference to the encounter associated with the document."
+        }
+      }
+    },
+    "DocumentAuthor": {
+      "type": "object",
+      "description": "Document author",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "author id"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Text representation of the full name"
+        }
+      }
+    },
+    "DocumentContent": {
+      "type": "object",
+      "description": "The content of the patient document.",
+      "properties": {
+        "sourceType": {
+          "$ref": "#/definitions/DocumentContentSourceType",
+          "description": "The type of the content's source.\nIn case the source type is 'inline', the content is given as a string (for instance, text).\nIn case the source type is 'reference', the content is given as a URI."
+        },
+        "value": {
+          "type": "string",
+          "description": "The content of the document, given either inline (as a string) or as a reference (URI)."
+        }
+      },
+      "required": [
+        "sourceType",
+        "value"
+      ]
+    },
+    "DocumentContentSourceType": {
+      "type": "string",
+      "description": "The type of the content's source.\nIn case the source type is 'inline', the content is given as a string (for instance, text).\nIn case the source type is 'reference', the content is given as a URI.",
+      "enum": [
+        "inline",
+        "reference"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentContentSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "inline",
+            "description": "The content is given as a string (for instance, text)."
+          },
+          {
+            "name": "Reference",
+            "value": "reference",
+            "description": "The content is given as a URI."
+          }
+        ]
+      }
+    },
+    "DocumentType": {
+      "type": "string",
+      "description": "The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).",
+      "enum": [
+        "note",
+        "fhirBundle",
+        "dicom",
+        "genomicSequencing"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Note",
+            "value": "note"
+          },
+          {
+            "name": "FhirBundle",
+            "value": "fhirBundle"
+          },
+          {
+            "name": "Dicom",
+            "value": "dicom"
+          },
+          {
+            "name": "GenomicSequencing",
+            "value": "genomicSequencing"
+          }
+        ]
+      }
+    },
+    "EncounterClass": {
+      "type": "string",
+      "description": "Known values codes that can be used to indicate the class of encounter (TODO://Based on FHIR value set--http://....).",
+      "enum": [
+        "inpatient",
+        "ambulatory",
+        "observation",
+        "emergency",
+        "virtual",
+        "healthHome"
+      ],
+      "x-ms-enum": {
+        "name": "EncounterClass",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InPatient",
+            "value": "inpatient",
+            "description": "A patient encounter where a patient is admitted by a hospital or equivalent facility, assigned to a location where patients generally stay at least overnight and provided with room, board, and continuous nursing service."
+          },
+          {
+            "name": "Ambulatory",
+            "value": "ambulatory",
+            "description": "The term ambulatory usually implies that the patient has come to the location and is not assigned to a bed. Sometimes referred to as an outpatient encounter."
+          },
+          {
+            "name": "Observation",
+            "value": "observation",
+            "description": "An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge."
+          },
+          {
+            "name": "Emergency",
+            "value": "emergency",
+            "description": "A patient encounter that takes place at a dedicated healthcare service delivery location where the patient receives immediate evaluation and treatment, provided until the patient can be discharged or responsibility for the patient's care is transferred elsewhere (for example, the patient could be admitted as an inpatient or transferred to another facility."
+          },
+          {
+            "name": "Virtual",
+            "value": "virtual",
+            "description": "A patient encounter where the patient is not physically present for the encounter, such as in a telehealth encounter, phone call, or electronic communication."
+          },
+          {
+            "name": "HealthHome",
+            "value": "healthHome",
+            "description": "Healthcare encounter that takes place in the residence of the patient or a designee"
+          }
+        ]
+      }
+    },
+    "ExtendedClinicalCodedElement": {
+      "type": "object",
+      "description": "A piece of clinical information, expressed as a code in a clinical coding system, extended by semantic information.",
+      "properties": {
+        "system": {
+          "type": "string",
+          "description": "The clinical coding system, e.g. ICD-10, SNOMED-CT, UMLS."
+        },
+        "code": {
+          "type": "string",
+          "description": "The code within the given clinical coding system."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this coded concept in the coding system."
+        },
+        "value": {
+          "type": "string",
+          "description": "A value associated with the code within the given clinical coding system."
+        },
+        "semanticType": {
+          "type": "string",
+          "description": "The [UMLS semantic type](https://www.nlm.nih.gov/research/umls/META3_current_semantic_types.html) associated with the coded concept."
+        },
+        "category": {
+          "type": "string",
+          "description": "The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom, Medication, Examination."
+        }
+      },
+      "required": [
+        "system",
+        "code"
+      ]
+    },
+    "Fhir.R4.Annotation": {
+      "type": "object",
+      "description": "A text note which also  contains information about who made the statement and when\nBased on [FHIR Annotation](https://www.hl7.org/fhir/R4/datatypes.html#Annotation)",
+      "properties": {
+        "authorString": {
+          "type": "string",
+          "description": "Individual responsible for the annotation"
+        },
+        "time": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "When the annotation was made"
+        },
+        "text": {
+          "type": "string",
+          "description": "The annotation - text content (as markdown)"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.CodeableConcept": {
+      "type": "object",
+      "description": "Concept - reference to a terminology or just text\nBased on [FHIR CodeableConcept](https://www.hl7.org/fhir/R4/datatypes.html#CodeableConcept)",
+      "properties": {
+        "coding": {
+          "type": "array",
+          "description": "Code defined by a terminology system",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Coding"
+          }
+        },
+        "text": {
+          "type": "string",
+          "description": "Plain text representation of the concept"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Coding": {
+      "type": "object",
+      "description": "A Coding is a representation of a defined concept using a symbol from a defined \"code system\".\nBased on [FHIR Coding](https://www.hl7.org/fhir/R4/datatypes.html#Coding)",
+      "properties": {
+        "system": {
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
+          "description": "Identity of the terminology system"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the system - if relevant"
+        },
+        "code": {
+          "type": "string",
+          "description": "Symbol in syntax defined by the system"
+        },
+        "display": {
+          "type": "string",
+          "description": "Representation defined by the system"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Condition": {
+      "type": "object",
+      "description": "Detailed information about conditions, problems or diagnoses\nBased on [FHIR Condition](https://www.hl7.org/fhir/R4/condition.html)",
+      "properties": {
+        "identifier": {
+          "type": "array",
+          "description": "External Ids for this condition",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Identifier"
+          }
+        },
+        "clinicalStatus": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "active | recurrence | relapse | inactive | remission | resolved"
+        },
+        "verificationStatus": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "unconfirmed | provisional | differential | confirmed | refuted | entered-in-error"
+        },
+        "category": {
+          "type": "array",
+          "description": "problem-list-item | encounter-diagnosis",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "severity": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Subjective severity of condition"
+        },
+        "code": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Identification of the condition, problem or diagnosis"
+        },
+        "bodySite": {
+          "type": "array",
+          "description": "Anatomical location, if relevant",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "encounter": {
+          "$ref": "#/definitions/Fhir.R4.Reference",
+          "description": "Encounter created as part of"
+        },
+        "onsetDateTime": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "Estimated or actual date,  date-time, or age"
+        },
+        "onsetAge": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Estimated or actual date,  date-time, or age"
+        },
+        "onsetPeriod": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "Estimated or actual date,  date-time, or age"
+        },
+        "onsetRange": {
+          "$ref": "#/definitions/Fhir.R4.Range",
+          "description": "Estimated or actual date,  date-time, or age"
+        },
+        "onsetString": {
+          "type": "string",
+          "description": "Estimated or actual date,  date-time, or age"
+        },
+        "abatementDateTime": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "When in resolution/remission"
+        },
+        "abatementAge": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "When in resolution/remission"
+        },
+        "abatementPeriod": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "When in resolution/remission"
+        },
+        "abatementRange": {
+          "$ref": "#/definitions/Fhir.R4.Range",
+          "description": "When in resolution/remission"
+        },
+        "abatementString": {
+          "type": "string",
+          "description": "When in resolution/remission"
+        },
+        "recordedDate": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "Date record was first recorded"
+        },
+        "stage": {
+          "type": "array",
+          "description": "stge/grade, usually assessed formally",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.ConditionStage"
+          },
+          "x-ms-identifiers": []
+        },
+        "note": {
+          "type": "array",
+          "description": "Additional information about the Condition",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Annotation"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.DomainResource"
+        }
+      ],
+      "x-ms-discriminator-value": "Condition"
+    },
+    "Fhir.R4.ConditionStage": {
+      "type": "object",
+      "description": "Stage/grade, usually assessed formally\nBased on [FHIR Condition.Stage](https://www.hl7.org/fhir/R4/condition.html)",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Simple summary (disease specific)"
+        },
+        "type": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Kind of staging"
+        }
+      }
+    },
+    "Fhir.R4.ContactDetail": {
+      "type": "object",
+      "description": "Contact details (See: https://www.hl7.org/fhir/R4/metadatatypes.html#ContactDetail)",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of an individual to contact"
+        },
+        "telecom": {
+          "type": "array",
+          "description": "Contact details for individual or organization",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.ContactPoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.ContactPoint": {
+      "type": "object",
+      "description": "Details for all kinds of technology mediated contact points for a person or organization, including telephone, email, etc.\nSee https://www.hl7.org/fhir/R4/datatypes.html#ContactPoint",
+      "properties": {
+        "system": {
+          "$ref": "#/definitions/Fhir.R4.ContactPointSystem",
+          "description": "phone | fax | email | pager | url | sms | other"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual contact point details"
+        },
+        "use": {
+          "$ref": "#/definitions/Fhir.R4.ContactPointUse",
+          "description": "home | work | temp | old | mobile - purpose of this contact point"
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specify preferred order of use (1 = highest)"
+        },
+        "period": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "Time period when the contact point was/is in use"
+        }
+      }
+    },
+    "Fhir.R4.ContactPointSystem": {
+      "type": "string",
+      "description": "Contact Point System\nsee https://www.hl7.org/fhir/R4/valueset-contact-point-system.html",
+      "enum": [
+        "phone",
+        "fax",
+        "email",
+        "pager",
+        "url",
+        "sms",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "ContactPointSystem",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Phone",
+            "value": "phone",
+            "description": "Phone"
+          },
+          {
+            "name": "Fax",
+            "value": "fax",
+            "description": "Fax"
+          },
+          {
+            "name": "Email",
+            "value": "email",
+            "description": "Email"
+          },
+          {
+            "name": "Pager",
+            "value": "pager",
+            "description": "Pager"
+          },
+          {
+            "name": "Url",
+            "value": "url",
+            "description": "Url"
+          },
+          {
+            "name": "Sms",
+            "value": "sms",
+            "description": "Sms"
+          },
+          {
+            "name": "Other",
+            "value": "other",
+            "description": "Other"
+          }
+        ]
+      }
+    },
+    "Fhir.R4.ContactPointUse": {
+      "type": "string",
+      "description": "Contact Point Use\nSee: \thttp://hl7.org/fhir/ValueSet/contact-point-use",
+      "enum": [
+        "home",
+        "work",
+        "temp",
+        "old",
+        "mobile"
+      ],
+      "x-ms-enum": {
+        "name": "ContactPointUse",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Home",
+            "value": "home",
+            "description": "Home"
+          },
+          {
+            "name": "Work",
+            "value": "work",
+            "description": "Work"
+          },
+          {
+            "name": "Temp",
+            "value": "temp",
+            "description": "Temp"
+          },
+          {
+            "name": "Old",
+            "value": "old",
+            "description": "Old"
+          },
+          {
+            "name": "Mobile",
+            "value": "mobile",
+            "description": "Mobile"
+          }
+        ]
+      }
+    },
+    "Fhir.R4.DomainResource": {
+      "type": "object",
+      "description": "A resource with narrative, extensions, and contained resources\nBased on [FHIR DomainResource](https://www.hl7.org/fhir/domainresource.html)",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Discriminator property for DomainResource."
+        },
+        "text": {
+          "$ref": "#/definitions/Fhir.R4.Narrative",
+          "description": "Text summary of the resource, for human interpretation"
+        },
+        "contained": {
+          "type": "array",
+          "description": "Contained, inline Resources",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Resource"
+          }
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        },
+        "modifierExtension": {
+          "type": "array",
+          "description": "Extensions that cannot be ignored",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        }
+      },
+      "discriminator": "resourceType",
+      "required": [
+        "resourceType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Resource"
+        }
+      ]
+    },
+    "Fhir.R4.Element": {
+      "type": "object",
+      "description": "The base definition for all elements contained inside a resource.\nBased on [FHIR Element](https://www.hl7.org/fhir/R4/element.html)",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique id for inter-element referencing"
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        }
+      }
+    },
+    "Fhir.R4.Extension": {
+      "type": "object",
+      "description": "Base for all elements\nBased on [FHIR Element](https://www.hl7.org/fhir/R4/element.html)",
+      "properties": {
+        "url": {
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
+          "description": "Source of the definition for the extension code - a logical name or a URL."
+        },
+        "valueQuantity": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Value as Quantity"
+        },
+        "valueCodeableConcept": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Value as CodeableConcept"
+        },
+        "valueString": {
+          "type": "string",
+          "description": "Value as string"
+        },
+        "valueBoolean": {
+          "type": "boolean",
+          "description": "Value as boolean"
+        },
+        "valueInteger": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Value as integer"
+        },
+        "valueRange": {
+          "$ref": "#/definitions/Fhir.R4.Range",
+          "description": "Value as Range."
+        },
+        "valueRatio": {
+          "$ref": "#/definitions/Fhir.R4.Ratio",
+          "description": "Value as Ratio."
+        },
+        "valueSampledData": {
+          "$ref": "#/definitions/Fhir.R4.SampledData",
+          "description": "Value as SampledData."
+        },
+        "valueTime": {
+          "type": "string",
+          "format": "time",
+          "description": "Value as time (hh:mm:ss)"
+        },
+        "valueDateTime": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "Value as dateTime."
+        },
+        "valuePeriod": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "Value as Period."
+        },
+        "valueReference": {
+          "$ref": "#/definitions/Fhir.R4.Reference",
+          "description": "Value as reference."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Identifier": {
+      "type": "object",
+      "description": "An identifier intended for computation\nBased on [FHIR Identifier](https://www.hl7.org/fhir/R4/identifier.html)",
+      "properties": {
+        "use": {
+          "type": "string",
+          "description": "usual | official | temp | secondary | old (If known)"
+        },
+        "type": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Description of identifier"
+        },
+        "system": {
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
+          "description": "The namespace for the identifier value"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value that is unique"
+        },
+        "period": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "Time period when id is/was valid for use"
+        },
+        "assigner": {
+          "$ref": "#/definitions/Fhir.R4.Reference",
+          "description": "Organization that issued id (may be just text)"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Meta": {
+      "type": "object",
+      "description": "Metadata about a resource\nBased on [FHIR Meta](https://www.hl7.org/fhir/R4/resource.html#Meta)",
+      "properties": {
+        "versionId": {
+          "type": "string",
+          "description": "The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted."
+        },
+        "lastUpdated": {
+          "$ref": "#/definitions/Fhir.R4.fhirInstant",
+          "description": "When the resource last changed - e.g. when the version changed."
+        },
+        "source": {
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
+          "description": "A uri that identifies the source system of the resource. This provides a minimal amount of Provenance information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc."
+        },
+        "profile": {
+          "type": "array",
+          "description": "A list of profiles (references to [StructureDefinition](https://www.hl7.org/fhir/structuredefinition.html) resources) that this resource claims to conform to. The URL is a reference to [StructureDefinition.url](https://www.hl7.org/fhir/structuredefinition-definitions.html#StructureDefinition.url).",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.fhirUri"
+          }
+        },
+        "security": {
+          "type": "array",
+          "description": "Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Coding"
+          }
+        },
+        "tag": {
+          "type": "array",
+          "description": "Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Coding"
+          }
+        }
+      }
+    },
+    "Fhir.R4.Narrative": {
+      "type": "object",
+      "description": "Any resource that is a [DomainResource](https://www.hl7.org/fhir/domainresource.html) may include a human-readable narrative that contains a summary of the resource and may be used to represent the content of the resource to a human.\nBased on [FHIR Narrative](https://www.hl7.org/fhir/R4/narrative.html#Narrative)",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "generated, extensions, additional, empty"
+        },
+        "div": {
+          "type": "string",
+          "description": "xhtml"
+        }
+      },
+      "required": [
+        "status",
+        "div"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Observation": {
+      "type": "object",
+      "description": "Detailed information about observations\nBased on [FHIR Observation](https://www.hl7.org/fhir/R4/observation.html)",
+      "properties": {
+        "identifier": {
+          "type": "array",
+          "description": "Business Identifier for observation",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Identifier"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/Fhir.R4.ObservationStatusCodeType",
+          "description": "registered | preliminary | final | amended +"
+        },
+        "category": {
+          "type": "array",
+          "description": "Classification of  type of observation",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "code": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Type of observation (code / type)"
+        },
+        "subject": {
+          "$ref": "#/definitions/Fhir.R4.Reference",
+          "description": "Who and/or what the observation is about"
+        },
+        "encounter": {
+          "$ref": "#/definitions/Fhir.R4.Reference",
+          "description": "Healthcare event during which this observation is made"
+        },
+        "effectiveDateTime": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "Clinically relevant time/time-period for observation"
+        },
+        "effectivePeriod": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "Clinically relevant time/time-period for observation"
+        },
+        "effectiveInstant": {
+          "$ref": "#/definitions/Fhir.R4.fhirInstant",
+          "description": "Clinically relevant time/time-period for observation"
+        },
+        "issued": {
+          "$ref": "#/definitions/Fhir.R4.fhirInstant",
+          "description": "Date/Time this version was made available"
+        },
+        "valueQuantity": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Actual result"
+        },
+        "valueCodeableConcept": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Actual result"
+        },
+        "valueString": {
+          "type": "string",
+          "description": "Actual result"
+        },
+        "valueBoolean": {
+          "type": "boolean",
+          "description": "Actual result"
+        },
+        "valueInteger": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Actual result"
+        },
+        "valueRange": {
+          "$ref": "#/definitions/Fhir.R4.Range",
+          "description": "Actual result"
+        },
+        "valueRatio": {
+          "$ref": "#/definitions/Fhir.R4.Ratio",
+          "description": "Actual result"
+        },
+        "valueSampledData": {
+          "$ref": "#/definitions/Fhir.R4.SampledData",
+          "description": "Actual result"
+        },
+        "valueTime": {
+          "type": "string",
+          "format": "time",
+          "description": "Actual result"
+        },
+        "valueDateTime": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "Actual result"
+        },
+        "valuePeriod": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "Actual result"
+        },
+        "dataAbsentReason": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Why the result is missing"
+        },
+        "interpretation": {
+          "type": "array",
+          "description": "High, low, normal, etc.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "note": {
+          "type": "array",
+          "description": "Comments about the observation",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Annotation"
+          }
+        },
+        "bodySite": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Observed body part"
+        },
+        "method": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "How it was done"
+        },
+        "referenceRange": {
+          "type": "array",
+          "description": "Provides guide for interpretation",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.ObservationReferenceRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "hasMember": {
+          "type": "array",
+          "description": "Related resource that belongs to the Observation group",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Reference"
+          }
+        },
+        "derivedFrom": {
+          "type": "array",
+          "description": "Related measurements the observation is made from",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Reference"
+          }
+        },
+        "component": {
+          "type": "array",
+          "description": "Component results",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.ObservationComponent"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "code"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.DomainResource"
+        }
+      ],
+      "x-ms-discriminator-value": "Observation"
+    },
+    "Fhir.R4.ObservationComponent": {
+      "type": "object",
+      "description": "Component results\nBased on [FHIR Observation.component](https://www.hl7.org/fhir/R4/observation.html)",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Type of component observation (code / type)"
+        },
+        "valueQuantity": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Value as Quantity"
+        },
+        "valueCodeableConcept": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Value as CodeableConcept"
+        },
+        "valueString": {
+          "type": "string",
+          "description": "Value as string"
+        },
+        "valueBoolean": {
+          "type": "boolean",
+          "description": "Value as boolean"
+        },
+        "valueInteger": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Value as integer"
+        },
+        "valueRange": {
+          "$ref": "#/definitions/Fhir.R4.Range",
+          "description": "Value as Range."
+        },
+        "valueRatio": {
+          "$ref": "#/definitions/Fhir.R4.Ratio",
+          "description": "Value as Ratio."
+        },
+        "valueSampledData": {
+          "$ref": "#/definitions/Fhir.R4.SampledData",
+          "description": "Value as SampledData."
+        },
+        "valueTime": {
+          "type": "string",
+          "format": "time",
+          "description": "Value as time (hh:mm:ss)"
+        },
+        "valueDateTime": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "Value as dateTime."
+        },
+        "valuePeriod": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "Value as Period."
+        },
+        "valueReference": {
+          "$ref": "#/definitions/Fhir.R4.Reference",
+          "description": "Value as reference."
+        },
+        "dataAbsentReason": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Why the component result is missing"
+        },
+        "interpretation": {
+          "type": "array",
+          "description": "High, low, normal, etc.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "referenceRange": {
+          "type": "array",
+          "description": "Provides guide for interpretation of component result",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.ObservationReferenceRange"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.ObservationReferenceRange": {
+      "type": "object",
+      "description": "Provides guide for interpretation of component result\nBased on [FHIR Observation.referenceRange](https://www.hl7.org/fhir/R4/observation.html)",
+      "properties": {
+        "low": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Low Range, if relevant"
+        },
+        "high": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "High Range, if relevant"
+        },
+        "type": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Reference range qualifier"
+        },
+        "appliesTo": {
+          "type": "array",
+          "description": "Reference range population",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "age": {
+          "$ref": "#/definitions/Fhir.R4.Range",
+          "description": "Applicable age range, if relevant"
+        },
+        "text": {
+          "type": "string",
+          "description": "Text based reference range in an observation"
+        }
+      }
+    },
+    "Fhir.R4.ObservationStatusCodeType": {
+      "type": "string",
+      "description": "Observation Status\nBased on [FHIR ObservationStatus](https://www.hl7.org/fhir/R4/valueset-observation-status.html)",
+      "enum": [
+        "registered",
+        "preliminary",
+        "final",
+        "amended",
+        "corrected",
+        "cancelled",
+        "entered-in-error",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ObservationStatusCodeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registered",
+            "value": "registered",
+            "description": "The existence of the observation is registered, but there is no result yet available."
+          },
+          {
+            "name": "Preliminary",
+            "value": "preliminary",
+            "description": "This is an initial or interim observation: data may be incomplete or unverified."
+          },
+          {
+            "name": "Final",
+            "value": "final",
+            "description": "The observation is complete and verified by an authorized person."
+          },
+          {
+            "name": "Amended",
+            "value": "amended",
+            "description": "Subsequent to being Final, the observation has been modified subsequent.  This includes updates/new information and corrections."
+          },
+          {
+            "name": "Corrected",
+            "value": "corrected",
+            "description": "Subsequent to being Final, the observation has been modified to correct an error in the test result."
+          },
+          {
+            "name": "Cancelled",
+            "value": "cancelled",
+            "description": "The observation is unavailable because the measurement was not started or not completed (also sometimes called \"aborted\")."
+          },
+          {
+            "name": "EnteredInError",
+            "value": "entered-in-error",
+            "description": "The observation has been withdrawn following previous final release."
+          },
+          {
+            "name": "Unknown",
+            "value": "unknown",
+            "description": "The observation status is unknown.  Note that \"unknown\" is a value of last resort and every attempt should be made to provide a meaningful value other than \"unknown\"."
+          }
+        ]
+      }
+    },
+    "Fhir.R4.Period": {
+      "type": "object",
+      "description": "A time period defined by a start and end date and optionally time\nBased on [FHIR Period](https://www.hl7.org/fhir/R4/datatypes.html#Period)",
+      "properties": {
+        "start": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "Starting time with inclusive boundary"
+        },
+        "end": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "End time with inclusive boundary, if not ongoing"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Quantity": {
+      "type": "object",
+      "description": "A measured or measurable amount\nBased on [FHIR Quantity](https://www.hl7.org/fhir/R4/datatypes.html#Quantity)",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Numerical value (with implicit precision)"
+        },
+        "comparator": {
+          "type": "string",
+          "description": "< | <= | >= | > - how to understand the value"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit representation"
+        },
+        "system": {
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
+          "description": "System that defines coded unit form"
+        },
+        "code": {
+          "type": "string",
+          "description": "Coded form of the unit"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Range": {
+      "type": "object",
+      "description": "A set of ordered Quantities defined by a low and high limit\nBased on [FHIR Range](https://www.hl7.org/fhir/R4/datatypes.html#Range)",
+      "properties": {
+        "low": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Low limit"
+        },
+        "high": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "High limit"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Ratio": {
+      "type": "object",
+      "description": "A ratio of two Quantity values - a numerator and a denominator\nBased on [FHIR Ratio](https://www.hl7.org/fhir/R4/datatypes.html#Ratio)",
+      "properties": {
+        "numerator": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Numerator value"
+        },
+        "denominator": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Denominator value"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.Reference": {
+      "type": "object",
+      "description": "A reference from one resource to another\nBased on [FHIR Reference](https://www.hl7.org/fhir/R4/references.html)",
+      "properties": {
+        "reference": {
+          "type": "string",
+          "description": "Literal reference, Relative, internal or absolute URL"
+        },
+        "type": {
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
+          "description": "Type the reference refers to (e.g. \"Patient\")"
+        },
+        "identifier": {
+          "$ref": "#/definitions/Fhir.R4.Identifier",
+          "description": "Logical reference, when literal reference is not known"
+        },
+        "display": {
+          "type": "string",
+          "description": "Text alternative for the resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.ResearchStudy": {
+      "type": "object",
+      "description": "Detailed information about Research Study\nBased on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)",
+      "properties": {
+        "identifier": {
+          "type": "array",
+          "description": "Business Identifier for study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Identifier"
+          }
+        },
+        "title": {
+          "type": "string",
+          "description": "Name for this study"
+        },
+        "protocol": {
+          "type": "array",
+          "description": "Steps followed in executing study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Reference"
+          }
+        },
+        "partOf": {
+          "type": "array",
+          "description": "Part of larger study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Reference"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/Fhir.R4.ResearchStudyStatusCodeType",
+          "description": "active | administratively-completed | approved | closed-to-accrual | closed-to-accrual-and-intervention | completed | disapproved | in-review | temporarily-closed-to-accrual | temporarily-closed-to-accrual-and-intervention | withdrawn"
+        },
+        "primaryPurposeType": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "treatment | prevention | diagnostic | supportive-care | screening | health-services-research | basic-science | device-feasibility"
+        },
+        "phase": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "n-a | early-phase-1 | phase-1 | phase-1-phase-2 | phase-2 | phase-2-phase-3 | phase-3 | phase-4"
+        },
+        "category": {
+          "type": "array",
+          "description": "Classifications for the study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "focus": {
+          "type": "array",
+          "description": "Drugs, devices, etc. under study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "condition": {
+          "type": "array",
+          "description": "Condition being studied",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "contact": {
+          "type": "array",
+          "description": "Contact details for the study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.ContactDetail"
+          }
+        },
+        "keyword": {
+          "type": "array",
+          "description": "Used to search for the study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "location": {
+          "type": "array",
+          "description": "Geographic region(s) for study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "What this is study doing"
+        },
+        "enrollment": {
+          "type": "array",
+          "description": "Inclusion & exclusion criteria",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Reference"
+          }
+        },
+        "period": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "When the study began and ended"
+        },
+        "sponsor": {
+          "$ref": "#/definitions/Fhir.R4.Reference",
+          "description": "Organization that initiates and is legally responsible for the study"
+        },
+        "principalInvestigator": {
+          "$ref": "#/definitions/Fhir.R4.Reference",
+          "description": "Researcher who oversees multiple aspects of the study"
+        },
+        "site": {
+          "type": "array",
+          "description": "Facility where study activities are conducted",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Reference"
+          }
+        },
+        "reasonStopped": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "accrual-goal-met | closed-due-to-toxicity | closed-due-to-lack-of-study-progress | temporarily-closed-per-study-design"
+        },
+        "note": {
+          "type": "array",
+          "description": "Comments made about the study",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Annotation"
+          }
+        },
+        "arm": {
+          "type": "array",
+          "description": "Defined path through the study for a subject",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Label for study arm"
+              },
+              "type": {
+                "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+                "description": "Categorization of study arm"
+              },
+              "description": {
+                "type": "string",
+                "description": "Short explanation of study path"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "x-ms-identifiers": []
+        },
+        "objective": {
+          "type": "array",
+          "description": "A goal for the study",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Label for the objective"
+              },
+              "type": {
+                "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+                "description": "primary | secondary | exploratory"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.DomainResource"
+        }
+      ],
+      "x-ms-discriminator-value": "ResearchStudy"
+    },
+    "Fhir.R4.ResearchStudyStatusCodeType": {
+      "type": "string",
+      "description": "https://www.hl7.org/fhir/R4/codesystem-research-study-status.html",
+      "enum": [
+        "active",
+        "administratively-completed",
+        "approved",
+        "closed-to-accrual",
+        "closed-to-accrual-and-intervention",
+        "completed",
+        "disapproved",
+        "in-review",
+        "temporarily-closed-to-accrual",
+        "temporarily-closed-to-accrual-and-intervention",
+        "withdrawn"
+      ],
+      "x-ms-enum": {
+        "name": "ResearchStudyStatusCodeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The study is open for accrual."
+          },
+          {
+            "name": "AdministrativelyCompleted",
+            "value": "administratively-completed",
+            "description": "Study is completed prematurely and will not resume; patients are no longer examined nor treated."
+          },
+          {
+            "name": "Approved",
+            "value": "approved",
+            "description": "Protocol is approved by the review board."
+          },
+          {
+            "name": "ClosedToAccrual",
+            "value": "closed-to-accrual",
+            "description": "Study is closed for accrual; patients can be examined and treated."
+          },
+          {
+            "name": "ClosedToAccrualAndIntervention",
+            "value": "closed-to-accrual-and-intervention",
+            "description": "The study is closed to accrual and intervention, i.e. the study is closed to enrollment, all study subjects have completed treatment or intervention but are still being followed according to the primary objective of the study."
+          },
+          {
+            "name": "Completed",
+            "value": "completed",
+            "description": "Study is closed to accrual and intervention, i.e. the study is closed to enrollment, all study subjects have completed treatment or intervention but are still being followed according to the primary objective of the study."
+          },
+          {
+            "name": "Disapproved",
+            "value": "disapproved",
+            "description": "Protocol was disapproved by the review board."
+          },
+          {
+            "name": "InReview",
+            "value": "in-review",
+            "description": "Protocol is submitted to the review board for approval."
+          },
+          {
+            "name": "TemporarilyClosedToAccrual",
+            "value": "temporarily-closed-to-accrual",
+            "description": "The study is temporarily closed to accrual; a pause in accrual while study is reviewed, but is expected to resume."
+          },
+          {
+            "name": "TemporarilyClosedToAccrualAndIntervention",
+            "value": "temporarily-closed-to-accrual-and-intervention",
+            "description": "Study is temporarily closed for accrual; can be potentially resumed in the future"
+          },
+          {
+            "name": "Withdrawn",
+            "value": "withdrawn",
+            "description": "Protocol was withdrawn by the lead organization."
+          }
+        ]
+      }
+    },
+    "Fhir.R4.Resource": {
+      "type": "object",
+      "description": "Resource is the ancestor of DomainResource from which most resources are derived. Bundle, Parameters, and Binary extend Resource directly.\nBased on [FHIR Resource](https://www.hl7.org/fhir/r4/resource.html",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of resource"
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "meta": {
+          "$ref": "#/definitions/Fhir.R4.Meta",
+          "description": "Metadata about the resource"
+        },
+        "implicitRules": {
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
+          "description": "A set of rules under which this content was created"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the resource content"
+        }
+      },
+      "required": [
+        "resourceType"
+      ],
+      "additionalProperties": {}
+    },
+    "Fhir.R4.SampledData": {
+      "type": "object",
+      "description": "A series of measurements taken by a device\nBased on [FHIR SampledData](https://www.hl7.org/fhir/R4/datatypes.html#SampledData)",
+      "properties": {
+        "origin": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "Zero value and units"
+        },
+        "period": {
+          "type": "number",
+          "format": "double",
+          "description": "Number of milliseconds between samples"
+        },
+        "factor": {
+          "type": "number",
+          "format": "double",
+          "description": "Multiply data by this before adding to origin"
+        },
+        "lowerLimit": {
+          "type": "number",
+          "format": "double",
+          "description": "Lower limit of detection"
+        },
+        "upperLimit": {
+          "type": "number",
+          "format": "double",
+          "description": "Upper limit of detection"
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of sample points at each time point",
+          "minimum": 1
+        },
+        "data": {
+          "type": "string",
+          "description": "Decimal values with spaces, or \"E\" | \"U\" | \"L\""
+        }
+      },
+      "required": [
+        "origin",
+        "period",
+        "dimensions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
+    },
+    "Fhir.R4.fhirDateTime": {
+      "type": "string",
+      "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]{1,9})?)?)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)?)?)?"
+    },
+    "Fhir.R4.fhirInstant": {
+      "type": "string",
+      "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]{1,9})?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))"
+    },
+    "Fhir.R4.fhirUri": {
+      "type": "string"
+    },
+    "FindingInference": {
+      "type": "object",
+      "description": "Findings in a radiology report typically describe abnormalities, lesions, or other notable observations related to the anatomy or pathology of the imaged area.",
+      "properties": {
+        "finding": {
+          "$ref": "#/definitions/Fhir.R4.Observation",
+          "description": "Finding data : contains extensions, fields and components linked with the finding."
+        }
+      },
+      "required": [
+        "finding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "finding"
+    },
+    "FindingOptions": {
+      "type": "object",
+      "description": "Finding options.",
+      "properties": {
+        "provideFocusedSentenceEvidence": {
+          "type": "boolean",
+          "description": "If this is true, provide the sentence that contains the first token of the finding's clinical indicator (i.e. the medical problem), if there is one. This sentence is provided as an extension with url 'ci_sentence', next to the token evidence. Default is false."
+        }
+      }
+    },
+    "FollowupCommunicationInference": {
+      "type": "object",
+      "description": "Follow-up communication involves the exchange of important information, recommendations, or updates between radiologists and other healthcare professionals involved in a patient's care.",
+      "properties": {
+        "communicatedAt": {
+          "type": "array",
+          "description": "Communication date and time.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "recipient": {
+          "type": "array",
+          "description": "Recipient of the communication.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/MedicalProfessionalType"
+          }
+        },
+        "wasAcknowledged": {
+          "type": "boolean",
+          "description": "Communication was acknowledged."
+        }
+      },
+      "required": [
+        "wasAcknowledged"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "followupCommunication"
+    },
+    "FollowupRecommendationInference": {
+      "type": "object",
+      "description": "Follow-up recommendations offer guidance to healthcare providers on managing and monitoring patients based on the findings of imaging studies.",
+      "properties": {
+        "effectiveAt": {
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
+          "description": "Date and time are displayed when the procedure is recommended to be done at a specific point in time."
+        },
+        "effectivePeriod": {
+          "$ref": "#/definitions/Fhir.R4.Period",
+          "description": "The period is shown if a specific period is mentioned, with a start and end date-time."
+        },
+        "findings": {
+          "type": "array",
+          "description": "Findings related to the recommendation.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/RecommendationFinding"
+          },
+          "x-ms-identifiers": []
+        },
+        "isConditional": {
+          "type": "boolean",
+          "description": "The conditional value indicates whether or not the sentence containing the recommendation includes a conditional statement. Keywords for conditional statements include 'if', 'when', 'unless', and so on."
+        },
+        "isOption": {
+          "type": "boolean",
+          "description": "The option value indicates whether or not the sentence containing the recommendation includes an optional statement. Keywords for optional statements include 'recommend', 'consider', and so on."
+        },
+        "isGuideline": {
+          "type": "boolean",
+          "description": "The guideline value indicates whether or not the recommendation is part of a guideline section that compiles all recommendations applicable to various findings."
+        },
+        "isHedging": {
+          "type": "boolean",
+          "description": "Hedging refers to ambiguous, vague or imprecise language within the sentence of the recommendation. Keywords for hedging are 'can be','may be',and so on."
+        },
+        "recommendedProcedure": {
+          "$ref": "#/definitions/ProcedureRecommendation",
+          "description": "The procedure recommendation can be a generic procedure or an imaging procedure."
+        }
+      },
+      "required": [
+        "isConditional",
+        "isOption",
+        "isGuideline",
+        "isHedging",
+        "recommendedProcedure"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "followupRecommendation"
+    },
+    "FollowupRecommendationOptions": {
+      "type": "object",
+      "description": "Follow-up recommendation options.",
+      "properties": {
+        "includeRecommendationsWithNoSpecifiedModality": {
+          "type": "boolean",
+          "description": "Include/Exclude follow-up recommendations without a specific radiology procedure. Default is false."
+        },
+        "includeRecommendationsInReferences": {
+          "type": "boolean",
+          "description": "Include/Exclude follow-up recommendations in references to a guideline or article. Default is false."
+        },
+        "provideFocusedSentenceEvidence": {
+          "type": "boolean",
+          "description": "If this is true, provide one or more sentences as evidence for the recommendation, next to the token evidence. The start and end positions of these sentences will be put in an extension with url 'modality_sentences'. Default is false."
+        }
+      }
+    },
+    "GenericProcedureRecommendation": {
+      "type": "object",
+      "description": "Generic procedure information.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Procedure modality : SNOMED CT code."
+        },
+        "description": {
+          "type": "string",
+          "description": "Procedure description : MANAGEMENT PROCEDURE (PROCEDURE) or CONSULTATION (PROCEDURE) based on SNOMED CT."
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcedureRecommendation"
+        }
+      ],
+      "x-ms-discriminator-value": "genericProcedureRecommendation"
+    },
+    "GeoJsonGeometryType": {
+      "type": "string",
+      "description": "`GeoJSON` geometry type.",
+      "enum": [
+        "Point"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonGeometryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Point",
+            "value": "Point"
+          }
+        ]
+      }
+    },
+    "GeoJsonPropertiesSubType": {
+      "type": "string",
+      "description": "`GeoJSON` object sub-type.",
+      "enum": [
+        "Circle"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonPropertiesSubType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Circle",
+            "value": "Circle"
+          }
+        ]
+      }
+    },
+    "GeoJsonType": {
+      "type": "string",
+      "description": "`GeoJSON` type.",
+      "enum": [
+        "Feature"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Feature",
+            "value": "Feature"
+          }
+        ]
+      }
+    },
+    "GeographicArea": {
+      "type": "object",
+      "description": "A geographic area, expressed as a `Circle` geometry represented using a `GeoJSON Feature` (see [GeoJSON spec](https://tools.ietf.org/html/rfc7946)).",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJsonType",
+          "description": "`GeoJSON` type."
+        },
+        "geometry": {
+          "$ref": "#/definitions/AreaGeometry",
+          "description": "`GeoJSON` geometry, representing the area circle's center."
+        },
+        "properties": {
+          "$ref": "#/definitions/AreaProperties",
+          "description": "`GeoJSON` object properties."
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
+    },
+    "GeographicLocation": {
+      "type": "object",
+      "description": "A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.\nIn case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.\nIn case a state is specified (without a city), country/region should be added.",
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "City name."
+        },
+        "state": {
+          "type": "string",
+          "description": "State name."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "Country/region name."
+        }
+      },
+      "required": [
+        "countryOrRegion"
+      ]
+    },
+    "GuidanceInference": {
+      "type": "object",
+      "description": "A guidance inference collects structured information about a specific finding in the report and can possibly propose appropriate follow-up recommendations, based upon established, evidence-based best practices i.e. ACR guidelines.",
+      "properties": {
+        "finding": {
+          "$ref": "#/definitions/FindingInference",
+          "description": "The finding associated with the guidance."
+        },
+        "identifier": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "The guidance identifier, as a concept"
+        },
+        "presentGuidanceInformation": {
+          "type": "array",
+          "description": "presentGuidanceInformation lists each item of the structured information (e.g. laterality) and corresponding details (left, right, bilateral) that is present in the document.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/PresentGuidanceInformation"
+          },
+          "x-ms-identifiers": []
+        },
+        "ranking": {
+          "$ref": "#/definitions/GuidanceRankingType",
+          "description": "See doc of GuidanceRankingType."
+        },
+        "recommendationProposals": {
+          "type": "array",
+          "description": "The proposed follow-up recommendations, if any. If this is filled, missingGuidanceInformation cannot be filled (and vice versa).",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/FollowupRecommendationInference"
+          },
+          "x-ms-identifiers": []
+        },
+        "missingGuidanceInformation": {
+          "type": "array",
+          "description": "Contains all missing items that are needed to determine follow-up.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "finding",
+        "identifier",
+        "ranking"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "guidance"
+    },
+    "GuidanceOptions": {
+      "type": "object",
+      "description": "Guidance options.",
+      "properties": {
+        "showGuidanceInHistory": {
+          "type": "boolean",
+          "description": "If this is true, also show guidances from a clinical history section i.e. if the first token of the associated finding's clinical indicator is in this section. Default is false."
+        }
+      },
+      "required": [
+        "showGuidanceInHistory"
+      ]
+    },
+    "GuidanceRankingType": {
+      "type": "string",
+      "description": "Refers to how important a clinical guidance is",
+      "enum": [
+        "high",
+        "low"
+      ],
+      "x-ms-enum": {
+        "name": "GuidanceRankingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "high",
+            "description": "high"
+          },
+          {
+            "name": "Low",
+            "value": "low",
+            "description": "low"
+          }
+        ]
+      }
+    },
+    "HealthInsightsErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ImagingProcedure": {
+      "type": "object",
+      "description": "Imaging procedure.",
+      "properties": {
+        "modality": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Modality : SNOMED CT code."
+        },
+        "anatomy": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Anatomy : SNOMED CT code."
+        },
+        "laterality": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Laterality : SNOMED CT code."
+        },
+        "contrast": {
+          "$ref": "#/definitions/RadiologyCodeWithTypes",
+          "description": "Contrast : see RadiologyCodeWithTypes (below)."
+        },
+        "view": {
+          "$ref": "#/definitions/RadiologyCodeWithTypes",
+          "description": "View : see RadiologyCodeWithTypes (below)."
+        }
+      },
+      "required": [
+        "modality",
+        "anatomy"
+      ]
+    },
+    "ImagingProcedureRecommendation": {
+      "type": "object",
+      "description": "Imaging procedures.",
+      "properties": {
+        "procedureCodes": {
+          "type": "array",
+          "description": "LOINC codes for the procedure.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "imagingProcedures": {
+          "type": "array",
+          "description": "Imaging procedures.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ImagingProcedure"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "imagingProcedures"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcedureRecommendation"
+        }
+      ],
+      "x-ms-discriminator-value": "imagingProcedureRecommendation"
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "The status of the processing job.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "canceled"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "notStarted"
+          },
+          {
+            "name": "Running",
+            "value": "running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "canceled"
+          }
+        ]
+      }
+    },
+    "LateralityDiscrepancyInference": {
+      "type": "object",
+      "description": "A laterality mismatch occurs when there is a discrepancy between the clinical documentation and the ordered procedure (orderLateralityMismatch), a contradiction within the clinical document (textLateralityContradiction), or when no laterality is mentioned (textLateralityMissing).",
+      "properties": {
+        "lateralityIndication": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Laterality indication : SNOMED CT code for laterality qualifier value."
+        },
+        "discrepancyType": {
+          "$ref": "#/definitions/LateralityDiscrepancyType",
+          "description": "Mismatch type : orderLateralityMismatch, textLateralityContradiction, textLateralityMissing."
+        }
+      },
+      "required": [
+        "discrepancyType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "lateralityDiscrepancy"
+    },
+    "LateralityDiscrepancyType": {
+      "type": "string",
+      "description": "Laterality discrepancy type",
+      "enum": [
+        "orderLateralityMismatch",
+        "textLateralityContradiction",
+        "textLateralityMissing"
+      ],
+      "x-ms-enum": {
+        "name": "LateralityDiscrepancyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OrderLateralityMismatch",
+            "value": "orderLateralityMismatch",
+            "description": "Mismatch between order and text"
+          },
+          {
+            "name": "TextLateralityContradiction",
+            "value": "textLateralityContradiction",
+            "description": "Contradiction in text"
+          },
+          {
+            "name": "TextLateralityMissing",
+            "value": "textLateralityMissing",
+            "description": "Missing laterality in text"
+          }
+        ]
+      }
+    },
+    "LimitedOrderDiscrepancyInference": {
+      "type": "object",
+      "description": "A limited order discrepancy occurs when there is a limited order, but all body parts and measurements that are needed for a complete order are present in the document.",
+      "properties": {
+        "orderType": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast."
+        },
+        "presentBodyParts": {
+          "type": "array",
+          "description": "List of body parts found in the document : SNOMED CT codes.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "presentBodyPartMeasurements": {
+          "type": "array",
+          "description": "List of body parts that are measured according to the document : SNOMED CT codes.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        }
+      },
+      "required": [
+        "orderType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "limitedOrderDiscrepancy"
+    },
+    "MedicalProfessionalType": {
+      "type": "string",
+      "description": "Medical Professional Type",
+      "enum": [
+        "unknown",
+        "doctor",
+        "nurse",
+        "midwife",
+        "physicianAssistant"
+      ],
+      "x-ms-enum": {
+        "name": "MedicalProfessionalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "unknown",
+            "description": "Unknown medical professional type"
+          },
+          {
+            "name": "Doctor",
+            "value": "doctor",
+            "description": "Doctor medical professional type"
+          },
+          {
+            "name": "Nurse",
+            "value": "nurse",
+            "description": "Nurse medical professional type"
+          },
+          {
+            "name": "Midwife",
+            "value": "midwife",
+            "description": "Technician medical professional type"
+          },
+          {
+            "name": "PhysicianAssistant",
+            "value": "physicianAssistant",
+            "description": "Technician medical professional type"
+          }
+        ]
+      }
+    },
+    "ModelVersion": {
+      "type": "string",
+      "description": "The version of the model used for inference, expressed as the model date."
+    },
+    "NeededClinicalInfo": {
+      "type": "array",
+      "description": "Clinical information which is needed to provide better trial matching results for the patient.",
+      "items": {
+        "$ref": "#/definitions/ExtendedClinicalCodedElement"
+      },
+      "x-ms-identifiers": []
+    },
+    "OrderedProcedure": {
+      "type": "object",
+      "description": "Procedure information",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Procedure code"
+        },
+        "description": {
+          "type": "string",
+          "description": "Procedure description"
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        }
+      }
+    },
+    "PatientDetails": {
+      "type": "object",
+      "description": "Patient structured information, including demographics and known structured clinical information.",
+      "properties": {
+        "sex": {
+          "$ref": "#/definitions/PatientSex",
+          "description": "The patient's sex."
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The patient's date of birth."
+        },
+        "clinicalInfo": {
+          "type": "array",
+          "description": "Known clinical information for the patient, structured.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Resource"
+          }
+        }
+      }
+    },
+    "PatientDocument": {
+      "type": "object",
+      "description": "A clinical document related to a patient. Document here is in the wide sense - not just a text document (note).",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DocumentType",
+          "description": "The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document)."
+        },
+        "clinicalType": {
+          "$ref": "#/definitions/ClinicalDocumentType",
+          "description": "The type of the clinical document."
+        },
+        "id": {
+          "type": "string",
+          "description": "A given identifier for the document. Has to be unique across all documents for a single patient.",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "description": "A 2 letter ISO 639-1 representation of the language of the document."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the document was created."
+        },
+        "authors": {
+          "type": "array",
+          "description": "Document author(s)",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/DocumentAuthor"
+          }
+        },
+        "specialtyType": {
+          "$ref": "#/definitions/SpecialtyType",
+          "description": "specialty type the document"
+        },
+        "administrativeMetadata": {
+          "$ref": "#/definitions/DocumentAdministrativeMetadata",
+          "description": "Administrative metadata for the document."
+        },
+        "content": {
+          "$ref": "#/definitions/DocumentContent",
+          "description": "The content of the patient document."
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "content"
+      ]
+    },
+    "PatientEncounter": {
+      "type": "object",
+      "description": "visit/encounter information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the visit.",
+          "minLength": 1
+        },
+        "period": {
+          "$ref": "#/definitions/TimePeriod",
+          "description": "Time period of the visit.\nIn case of admission, use timePeriod.start to indicate the admission time and timePeriod.end to indicate the discharge time."
+        },
+        "class": {
+          "$ref": "#/definitions/EncounterClass",
+          "description": "The class of the encounter."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PatientRecord": {
+      "type": "object",
+      "description": "A patient record, including their clinical information and data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A given identifier for the patient. Has to be unique across all patients in a single request.",
+          "minLength": 1
+        },
+        "details": {
+          "$ref": "#/definitions/PatientDetails",
+          "description": "Patient structured information, including demographics and known structured clinical information."
+        },
+        "encounters": {
+          "type": "array",
+          "description": "Patient encounters/visits.",
+          "items": {
+            "$ref": "#/definitions/PatientEncounter"
+          }
+        },
+        "patientDocuments": {
+          "type": "array",
+          "description": "Patient unstructured clinical data, given as documents.",
+          "items": {
+            "$ref": "#/definitions/PatientDocument"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PatientSex": {
+      "type": "string",
+      "description": "The patient's sex.",
+      "enum": [
+        "female",
+        "male",
+        "unspecified"
+      ],
+      "x-ms-enum": {
+        "name": "PatientSex",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Female",
+            "value": "female"
+          },
+          {
+            "name": "Male",
+            "value": "male"
+          },
+          {
+            "name": "Unspecified",
+            "value": "unspecified"
+          }
+        ]
+      }
+    },
+    "PresentGuidanceInformation": {
+      "type": "object",
+      "description": "An item of the structured information (e.g. laterality or size) and one or more corresponding details (e.g. left or size-value)",
+      "properties": {
+        "presentGuidanceItem": {
+          "type": "string",
+          "description": "The item of the structured information "
+        },
+        "sizes": {
+          "type": "array",
+          "description": "A list of size values, if the item is about size.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Observation"
+          }
+        },
+        "maximumDiameterAsInText": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "The maximum diameter value, if the item is about the maximum diameter."
+        },
+        "presentGuidanceValues": {
+          "type": "array",
+          "description": "The list of item values that are mentioned in the report.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        }
+      },
+      "required": [
+        "presentGuidanceItem"
+      ]
+    },
+    "ProcedureRecommendation": {
+      "type": "object",
+      "description": "The procedure recommendation can be a generic procedure or an imaging procedure.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for ProcedureRecommendation."
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "QualityMeasureComplianceType": {
+      "type": "string",
+      "description": "Whether the document is compliant.",
+      "enum": [
+        "notEligible",
+        "performanceNotMet",
+        "performanceMet",
+        "denominatorException"
+      ],
+      "x-ms-enum": {
+        "name": "QualityMeasureComplianceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotEligible",
+            "value": "notEligible",
+            "description": "not eligible"
+          },
+          {
+            "name": "PerformanceNotMet",
+            "value": "performanceNotMet",
+            "description": "performance not met"
+          },
+          {
+            "name": "PerformanceMet",
+            "value": "performanceMet",
+            "description": "performance met"
+          },
+          {
+            "name": "DenominatorException",
+            "value": "denominatorException",
+            "description": "denominator exception"
+          }
+        ]
+      }
+    },
+    "QualityMeasureInference": {
+      "type": "object",
+      "description": "A QualityMeasure inference captures the  MIPS ('measure based incentive payment system') quality measure criteria in the document that are used to measure the data completeness.",
+      "properties": {
+        "qualityMeasureDenominator": {
+          "type": "string",
+          "description": "The denominator, which identifies the QualityMeasure kind."
+        },
+        "complianceType": {
+          "$ref": "#/definitions/QualityMeasureComplianceType",
+          "description": "The ComplianceType indicates whether the document is compliant for the specified QualityMeasure or not, or if exceptions apply."
+        },
+        "qualityCriteria": {
+          "type": "array",
+          "description": "List of quality criteria identified in the document, if any. ",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "qualityMeasureDenominator",
+        "complianceType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "qualityMeasure"
+    },
+    "QualityMeasureOptions": {
+      "type": "object",
+      "description": "Quality Measure Options.",
+      "properties": {
+        "measureTypes": {
+          "type": "array",
+          "description": "Id(s) of the MIPS measures that need to be evaluated in the document",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/QualityMeasureType"
+          }
+        }
+      },
+      "required": [
+        "measureTypes"
+      ]
+    },
+    "QualityMeasureType": {
+      "type": "string",
+      "description": "Mips types that can be checked by the engine.",
+      "enum": [
+        "mips76",
+        "mips147",
+        "mips195",
+        "mips360",
+        "mips364",
+        "mips405",
+        "mips406",
+        "mips436",
+        "mips145",
+        "acrad36",
+        "acrad37",
+        "acrad38",
+        "acrad39",
+        "acrad40",
+        "acrad41",
+        "acrad42",
+        "mednax55",
+        "msn13",
+        "msn15",
+        "qmm26",
+        "qmm17",
+        "qmm18",
+        "qmm19"
+      ],
+      "x-ms-enum": {
+        "name": "QualityMeasureType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mips76",
+            "value": "mips76",
+            "description": "Mips 76"
+          },
+          {
+            "name": "Mips147",
+            "value": "mips147",
+            "description": "Mips 147"
+          },
+          {
+            "name": "Mips195",
+            "value": "mips195",
+            "description": "Mips 195"
+          },
+          {
+            "name": "Mips360",
+            "value": "mips360",
+            "description": "Mips 360"
+          },
+          {
+            "name": "Mips364",
+            "value": "mips364",
+            "description": "Mips 364"
+          },
+          {
+            "name": "Mips405",
+            "value": "mips405",
+            "description": "Mips 405"
+          },
+          {
+            "name": "Mips406",
+            "value": "mips406",
+            "description": "Mips 406"
+          },
+          {
+            "name": "Mips436",
+            "value": "mips436",
+            "description": "Mips 436"
+          },
+          {
+            "name": "Mips145",
+            "value": "mips145",
+            "description": "Mips 145"
+          },
+          {
+            "name": "Acrad36",
+            "value": "acrad36",
+            "description": "Acrad 36"
+          },
+          {
+            "name": "Acrad37",
+            "value": "acrad37",
+            "description": "Acrad 37"
+          },
+          {
+            "name": "Acrad38",
+            "value": "acrad38",
+            "description": "Acrad 38"
+          },
+          {
+            "name": "Acrad39",
+            "value": "acrad39",
+            "description": "Acrad 39"
+          },
+          {
+            "name": "Acrad40",
+            "value": "acrad40",
+            "description": "Acrad 40"
+          },
+          {
+            "name": "Acrad41",
+            "value": "acrad41",
+            "description": "Acrad 41"
+          },
+          {
+            "name": "Acrad42",
+            "value": "acrad42",
+            "description": "Acrad 42"
+          },
+          {
+            "name": "Mednax55",
+            "value": "mednax55",
+            "description": "Mednax55"
+          },
+          {
+            "name": "Msn13",
+            "value": "msn13",
+            "description": "Msn13"
+          },
+          {
+            "name": "Msn15",
+            "value": "msn15",
+            "description": "Msn15"
+          },
+          {
+            "name": "Qmm26",
+            "value": "qmm26",
+            "description": "Qmm26"
+          },
+          {
+            "name": "Qmm17",
+            "value": "qmm17",
+            "description": "Qmm17"
+          },
+          {
+            "name": "Qmm18",
+            "value": "qmm18",
+            "description": "Qmm18"
+          },
+          {
+            "name": "Qmm19",
+            "value": "qmm19",
+            "description": "Qmm19"
+          }
+        ]
+      }
+    },
+    "RadiologyCodeWithTypes": {
+      "type": "object",
+      "description": "Radiology code with types : used in imaging procedure recommendation for contrast and view.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "The SNOMED CT code indicates whether imaging was conducted with or without contrast in the case of contrast, and in the case of views, it denotes the number of views."
+        },
+        "types": {
+          "type": "array",
+          "description": "The collection of types will indicate the contrast substance used in the case of contrast and, in the case of views, it will specify the types of views, such as lateral and frontal, etc.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "types"
+      ]
+    },
+    "RadiologyInsightsData": {
+      "type": "object",
+      "description": "Contains the list of patients, and configuration data.",
+      "properties": {
+        "patients": {
+          "type": "array",
+          "description": "The list of patients, including their clinical information and data.",
+          "items": {
+            "$ref": "#/definitions/PatientRecord"
+          }
+        },
+        "configuration": {
+          "$ref": "#/definitions/RadiologyInsightsModelConfiguration",
+          "description": "Configuration affecting the Radiology Insights model's inference."
+        }
+      },
+      "required": [
+        "patients"
+      ]
+    },
+    "RadiologyInsightsInference": {
+      "type": "object",
+      "description": "An inference made by the Radiology Insights model regarding a patient.\n  - AgeMismatch\n  - SexMismatch\n  - LateralityDiscrepancy\n  - CompleteOrderDiscrepancy\n  - LimitedOrderDiscrepancy\n  - Finding\n  - CriticalResult\n  - FollowupRecommendation\n  - RadiologyProcedure\n  - FollowupCommunication",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for RadiologyInsightsInference."
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "RadiologyInsightsInferenceOptions": {
+      "type": "object",
+      "description": "Options regarding follow up recommendation inferences and finding inferences.",
+      "properties": {
+        "followupRecommendationOptions": {
+          "$ref": "#/definitions/FollowupRecommendationOptions",
+          "description": "Follow-up recommendation options."
+        },
+        "findingOptions": {
+          "$ref": "#/definitions/FindingOptions",
+          "description": "Finding options."
+        },
+        "guidanceOptions": {
+          "$ref": "#/definitions/GuidanceOptions",
+          "description": "Guidance options."
+        },
+        "qualityMeasureOptions": {
+          "$ref": "#/definitions/QualityMeasureOptions",
+          "description": "QualityMeasureOptions."
+        }
+      }
+    },
+    "RadiologyInsightsInferenceResult": {
+      "type": "object",
+      "description": "The inference results for the Radiology Insights request. If field 'status' has value 'succeeded', then field 'result' will contain an instance of RadiologyInsightsInferenceResult.",
+      "properties": {
+        "patientResults": {
+          "type": "array",
+          "description": "Results for the patients given in the request.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/RadiologyInsightsPatientResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion",
+          "description": "The version of the model used for inference, expressed as the model date.",
+          "pattern": "^(?:[2][0-9]{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])(?:-preview)?)$"
+        }
+      },
+      "required": [
+        "patientResults",
+        "modelVersion"
+      ]
+    },
+    "RadiologyInsightsInferenceType": {
+      "type": "string",
+      "description": "A Radiology Insights inference types.",
+      "enum": [
+        "ageMismatch",
+        "lateralityDiscrepancy",
+        "sexMismatch",
+        "completeOrderDiscrepancy",
+        "limitedOrderDiscrepancy",
+        "finding",
+        "criticalResult",
+        "followupRecommendation",
+        "followupCommunication",
+        "radiologyProcedure",
+        "scoringAndAssessment",
+        "guidance",
+        "qualityMeasure"
+      ],
+      "x-ms-enum": {
+        "name": "RadiologyInsightsInferenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AgeMismatch",
+            "value": "ageMismatch",
+            "description": "Age mismatch inference type"
+          },
+          {
+            "name": "LateralityDiscrepancy",
+            "value": "lateralityDiscrepancy",
+            "description": "Laterality discrepancy inference type"
+          },
+          {
+            "name": "SexMismatch",
+            "value": "sexMismatch",
+            "description": "Sex mismatch inference type"
+          },
+          {
+            "name": "CompleteOrderDiscrepancy",
+            "value": "completeOrderDiscrepancy",
+            "description": "Complete order discrepancy inference type"
+          },
+          {
+            "name": "LimitedOrderDiscrepancy",
+            "value": "limitedOrderDiscrepancy",
+            "description": "Limited order discrepancy inference type"
+          },
+          {
+            "name": "Finding",
+            "value": "finding",
+            "description": "Finding inference type"
+          },
+          {
+            "name": "CriticalResult",
+            "value": "criticalResult",
+            "description": "Critical finding inference type"
+          },
+          {
+            "name": "FollowupRecommendation",
+            "value": "followupRecommendation",
+            "description": "Recommendation inference type"
+          },
+          {
+            "name": "FollowupCommunication",
+            "value": "followupCommunication",
+            "description": "Followup Communication inference type"
+          },
+          {
+            "name": "RadiologyProcedure",
+            "value": "radiologyProcedure",
+            "description": "Radiology Procedure inference type"
+          },
+          {
+            "name": "ScoringAndAssessment",
+            "value": "scoringAndAssessment",
+            "description": "Scoring and assessment inference type"
+          },
+          {
+            "name": "Guidance",
+            "value": "guidance",
+            "description": "Guidance inference type"
+          },
+          {
+            "name": "QualityMeasure",
+            "value": "qualityMeasure",
+            "description": "Guidance measure inference type"
+          }
+        ]
+      }
+    },
+    "RadiologyInsightsJob": {
+      "type": "object",
+      "description": "Response for the Radiology Insights request.",
+      "properties": {
+        "jobData": {
+          "$ref": "#/definitions/RadiologyInsightsData",
+          "description": "The request data for the operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "result": {
+          "$ref": "#/definitions/RadiologyInsightsInferenceResult",
+          "description": "The result of the operation.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the job.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The status of the job.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was created.",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job is set to expire.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was last updated.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "RadiologyInsightsModelConfiguration": {
+      "type": "object",
+      "description": "Configuration affecting the Radiology Insights model's inference.",
+      "properties": {
+        "verbose": {
+          "type": "boolean",
+          "description": "An indication whether the model should produce verbose output.",
+          "default": false
+        },
+        "includeEvidence": {
+          "type": "boolean",
+          "description": "An indication whether the model's output should include evidence for the inferences.",
+          "default": true
+        },
+        "inferenceTypes": {
+          "type": "array",
+          "description": "This is a list of inference types to be inferred for the current request. It could be used if only part of the Radiology Insights inferences are required. If this list is omitted or empty, the model will return all the inference types.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/RadiologyInsightsInferenceType"
+          }
+        },
+        "inferenceOptions": {
+          "$ref": "#/definitions/RadiologyInsightsInferenceOptions",
+          "description": "Options regarding follow up recommendation inferences and finding inferences."
+        },
+        "locale": {
+          "type": "string",
+          "description": "Local for the model to use. If not specified, the model will use the default locale."
+        }
+      }
+    },
+    "RadiologyInsightsPatientResult": {
+      "type": "object",
+      "description": "Results of the model's work for a single patient.",
+      "properties": {
+        "patientId": {
+          "type": "string",
+          "description": "Identifier given for the patient in the request."
+        },
+        "inferences": {
+          "type": "array",
+          "description": "The model's inferences for the given patient.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/RadiologyInsightsInference"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "patientId",
+        "inferences"
+      ]
+    },
+    "RadiologyProcedureInference": {
+      "type": "object",
+      "description": "Radiology procedures are the specific imaging studies or examinations ordered for the patient, extracted from the document information and text.",
+      "properties": {
+        "procedureCodes": {
+          "type": "array",
+          "description": "LOINC codes for the procedure.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
+          }
+        },
+        "imagingProcedures": {
+          "type": "array",
+          "description": "Imaging procedures.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ImagingProcedure"
+          },
+          "x-ms-identifiers": []
+        },
+        "orderedProcedure": {
+          "$ref": "#/definitions/OrderedProcedure",
+          "description": "Ordered procedure information from the document information or text."
+        }
+      },
+      "required": [
+        "imagingProcedures",
+        "orderedProcedure"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "radiologyProcedure"
+    },
+    "RecommendationFinding": {
+      "type": "object",
+      "description": "Finding reference for recommendation.",
+      "properties": {
+        "finding": {
+          "$ref": "#/definitions/Fhir.R4.Observation",
+          "description": "Finding linked to a recommendation."
+        },
+        "criticalFinding": {
+          "$ref": "#/definitions/CriticalResult",
+          "description": "Critical result linked to a recommendation."
+        },
+        "recommendationFindingStatus": {
+          "$ref": "#/definitions/RecommendationFindingStatusType",
+          "description": "Recommendation finding status."
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        }
+      },
+      "required": [
+        "recommendationFindingStatus"
+      ]
+    },
+    "RecommendationFindingStatusType": {
+      "type": "string",
+      "description": "Recommendation finding status",
+      "enum": [
+        "present",
+        "differential",
+        "ruleOut",
+        "conditional"
+      ],
+      "x-ms-enum": {
+        "name": "RecommendationFindingStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Present",
+            "value": "present",
+            "description": "Present finding status"
+          },
+          {
+            "name": "Differential",
+            "value": "differential",
+            "description": "Differential finding status"
+          },
+          {
+            "name": "RuleOut",
+            "value": "ruleOut",
+            "description": "Rule out finding status"
+          },
+          {
+            "name": "Conditional",
+            "value": "conditional",
+            "description": "Conditional finding status"
+          }
+        ]
+      }
+    },
+    "ScoringAndAssessmentCategoryType": {
+      "type": "string",
+      "description": "The category that gets a value, e.g. BIRADS, Z-SCORE or FRAX SCORE",
+      "enum": [
+        "BIRADS",
+        "C-RADS COLONIC FINDINGS",
+        "CAD-RADS",
+        "LI-RADS",
+        "LUNG-RADS",
+        "NI-RADS",
+        "O-RADS",
+        "PI-RADS",
+        "TI-RADS",
+        "C-RADS EXTRACOLONIC FINDINGS",
+        "LIFETIME BREAST CANCER RISK",
+        "ASCVD RISK",
+        "MODIFIED GAIL MODEL RISK",
+        "TYRER CUSICK MODEL RISK",
+        "AGATSTON SCORE",
+        "10 YEAR CHD RISK",
+        "Z-SCORE",
+        "T-SCORE",
+        "CALCIUM VOLUME SCORE",
+        "US LI-RADS VISUALIZATION SCORE",
+        "US LI-RADS",
+        "CEUS LI-RADS",
+        "TREATMENT RESPONSE LI-RADS",
+        "O-RADS MRI",
+        "CALCIUM MASS SCORE",
+        "RISK OF MALIGNANCY INDEX",
+        "HNPCC MUTATION RISK",
+        "ALBERTA STROKE PROGRAM EARLY CT SCORE",
+        "KELLGREN-LAWRENCE GRADING SCALE",
+        "TONNIS CLASSIFICATION",
+        "CALCIUM SCORE (UNSPECIFIED)",
+        "10 YEAR CHD RISK (OBSERVED AGE)",
+        "10 YEAR CHD RISK (ARTERIAL AGE)",
+        "FRAX SCORE"
+      ],
+      "x-ms-enum": {
+        "name": "ScoringAndAssessmentCategoryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BIRADS",
+            "value": "BIRADS",
+            "description": "BIRADS"
+          },
+          {
+            "name": "C_RADS_COLONIC_FINDINGS",
+            "value": "C-RADS COLONIC FINDINGS",
+            "description": "C-RADS COLONIC FINDINGS"
+          },
+          {
+            "name": "CAD_RADS",
+            "value": "CAD-RADS",
+            "description": "CAD-RADS"
+          },
+          {
+            "name": "LI_RADS",
+            "value": "LI-RADS",
+            "description": "LI-RADS"
+          },
+          {
+            "name": "LUNG_RADS",
+            "value": "LUNG-RADS",
+            "description": "LUNG-RADS"
+          },
+          {
+            "name": "NI_RADS",
+            "value": "NI-RADS",
+            "description": "NI-RADS"
+          },
+          {
+            "name": "O_RADS",
+            "value": "O-RADS",
+            "description": "O-RADS"
+          },
+          {
+            "name": "PI_RADS",
+            "value": "PI-RADS",
+            "description": "PI-RADS"
+          },
+          {
+            "name": "TI_RADS",
+            "value": "TI-RADS",
+            "description": "TI-RADS"
+          },
+          {
+            "name": "C_RADS_EXTRACOLONIC_FINDINGS",
+            "value": "C-RADS EXTRACOLONIC FINDINGS",
+            "description": "C-RADS EXTRACOLONIC FINDINGS"
+          },
+          {
+            "name": "LIFETIME_BREAST_CANCER_RISK",
+            "value": "LIFETIME BREAST CANCER RISK",
+            "description": "LIFETIME BREAST CANCER RISK"
+          },
+          {
+            "name": "ASCVD_RISK",
+            "value": "ASCVD RISK",
+            "description": "ASCVD RISK"
+          },
+          {
+            "name": "MODIFIED_GAIL_MODEL_RISK",
+            "value": "MODIFIED GAIL MODEL RISK",
+            "description": "MODIFIED GAIL MODEL RISK"
+          },
+          {
+            "name": "TYRER_CUSICK_MODEL_RISK",
+            "value": "TYRER CUSICK MODEL RISK",
+            "description": "TYRER CUSICK MODEL RISK"
+          },
+          {
+            "name": "AGATSTON_SCORE",
+            "value": "AGATSTON SCORE",
+            "description": "AGATSTON SCORE"
+          },
+          {
+            "name": "TEN_YEAR_CHD_RISK",
+            "value": "10 YEAR CHD RISK",
+            "description": "10 YEAR CHD RISK"
+          },
+          {
+            "name": "Z_SCORE",
+            "value": "Z-SCORE",
+            "description": "Z-SCORE"
+          },
+          {
+            "name": "T_SCORE",
+            "value": "T-SCORE",
+            "description": "T-SCORE"
+          },
+          {
+            "name": "CALCIUM_VOLUME_SCORE",
+            "value": "CALCIUM VOLUME SCORE",
+            "description": "CALCIUM VOLUME SCORE"
+          },
+          {
+            "name": "US_LI_RADS_VISUALIZATION_SCORE",
+            "value": "US LI-RADS VISUALIZATION SCORE",
+            "description": "US LI-RADS VISUALIZATION SCORE"
+          },
+          {
+            "name": "US_LI_RADS",
+            "value": "US LI-RADS",
+            "description": "US LI-RADS"
+          },
+          {
+            "name": "CEUS_LI_RADS",
+            "value": "CEUS LI-RADS",
+            "description": "CEUS LI-RADS"
+          },
+          {
+            "name": "TREATMENT_RESPONSE_LI_RADS",
+            "value": "TREATMENT RESPONSE LI-RADS",
+            "description": "TREATMENT RESPONSE LI-RADS"
+          },
+          {
+            "name": "O_RADS_MRI",
+            "value": "O-RADS MRI",
+            "description": "O-RADS MRI"
+          },
+          {
+            "name": "CALCIUM_MASS_SCORE",
+            "value": "CALCIUM MASS SCORE",
+            "description": "CALCIUM MASS SCORE"
+          },
+          {
+            "name": "RISK_OF_MALIGNANCY_INDEX",
+            "value": "RISK OF MALIGNANCY INDEX",
+            "description": "RISK OF MALIGNANCY INDEX"
+          },
+          {
+            "name": "HNPCC_MUTATION_RISK",
+            "value": "HNPCC MUTATION RISK",
+            "description": "HNPCC MUTATION RISK"
+          },
+          {
+            "name": "ALBERTA_STROKE_PROGRAM_EARLY_CT_SCORE",
+            "value": "ALBERTA STROKE PROGRAM EARLY CT SCORE",
+            "description": "ALBERTA STROKE PROGRAM EARLY CT SCORE"
+          },
+          {
+            "name": "KELLGREN_LAWRENCE_GRADING_SCALE",
+            "value": "KELLGREN-LAWRENCE GRADING SCALE",
+            "description": "KELLGREN-LAWRENCE GRADING SCALE"
+          },
+          {
+            "name": "TONNIS_CLASSIFICATION",
+            "value": "TONNIS CLASSIFICATION",
+            "description": "TONNIS CLASSIFICATION"
+          },
+          {
+            "name": "CALCIUM_SCORE_UNSPECIFIED",
+            "value": "CALCIUM SCORE (UNSPECIFIED)",
+            "description": "CALCIUM SCORE (UNSPECIFIED)"
+          },
+          {
+            "name": "TEN_YEAR_CHD_RISK_OBSERVED_AGE",
+            "value": "10 YEAR CHD RISK (OBSERVED AGE)",
+            "description": "10 YEAR CHD RISK (OBSERVED AGE)"
+          },
+          {
+            "name": "TEN_YEAR_CHD_RISK_ARTERIAL_AGE",
+            "value": "10 YEAR CHD RISK (ARTERIAL AGE)",
+            "description": "10 YEAR CHD RISK (ARTERIAL AGE)"
+          },
+          {
+            "name": "FRAX_SCORE",
+            "value": "FRAX SCORE",
+            "description": "FRAX SCORE"
+          }
+        ]
+      }
+    },
+    "ScoringAndAssessmentInference": {
+      "type": "object",
+      "description": "Identifies and highlights Risk, Scoring, Assessment and Classifications and correspondent values dictated in a report, e.g. 'BIRADS 5'",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ScoringAndAssessmentCategoryType",
+          "description": "Category, e.g. BIRADS"
+        },
+        "categoryDescription": {
+          "type": "string",
+          "description": "The expansion of the category (which is an abbreviation.)"
+        },
+        "singleValue": {
+          "type": "string",
+          "description": "The value. If the value is a range, use field valueRange."
+        },
+        "rangeValue": {
+          "$ref": "#/definitions/AssessmentValueRange",
+          "description": "The range."
+        }
+      },
+      "required": [
+        "category",
+        "categoryDescription"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "scoringAndAssessment"
+    },
+    "SexMismatchInference": {
+      "type": "object",
+      "description": "A notification for a sex mismatch is displayed when the gender, personal pronouns, gender-related body parts, or gender-related procedures mentioned in a patient's clinical document are either inconsistent or do not match the gender specified in the patient information.",
+      "properties": {
+        "sexIndication": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "Sex indication : SNOMED CT code for gender finding."
+        }
+      },
+      "required": [
+        "sexIndication"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "sexMismatch"
+    },
+    "SpecialtyType": {
+      "type": "string",
+      "description": "Known values codes that can be used to indicate the type of the Specialty.",
+      "enum": [
+        "pathology",
+        "radiology"
+      ],
+      "x-ms-enum": {
+        "name": "SpecialtyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pathology",
+            "value": "pathology",
+            "description": "pathology"
+          },
+          {
+            "name": "Radiology",
+            "value": "radiology",
+            "description": "radiology"
+          }
+        ]
+      }
+    },
+    "TimePeriod": {
+      "type": "object",
+      "description": "A duration of time during which an event is happening",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Starting time with inclusive boundary"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time with inclusive boundary, if not ongoing"
+        }
+      }
+    },
+    "TrialMatcherData": {
+      "type": "object",
+      "description": "The body of the Trial Matcher request.",
+      "properties": {
+        "patients": {
+          "type": "array",
+          "description": "The list of patients, including their clinical information and data.",
+          "items": {
+            "$ref": "#/definitions/PatientRecord"
+          }
+        },
+        "configuration": {
+          "$ref": "#/definitions/TrialMatcherModelConfiguration",
+          "description": "Configuration affecting the Trial Matcher model's inference."
+        }
+      },
+      "required": [
+        "patients"
+      ]
+    },
+    "TrialMatcherInference": {
+      "type": "object",
+      "description": "An inference made by the Trial Matcher model regarding a patient.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TrialMatcherInferenceType",
+          "description": "The type of the Trial Matcher inference."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the inference, as relevant for the given inference type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description corresponding to the inference value."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence score for this inference.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidence": {
+          "type": "array",
+          "description": "The evidence corresponding to the inference value.",
+          "items": {
+            "$ref": "#/definitions/TrialMatcherInferenceEvidence"
+          },
+          "x-ms-identifiers": []
+        },
+        "clinicalTrialId": {
+          "type": "string",
+          "description": "The identifier of the clinical trial.",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/definitions/ClinicalTrialSource",
+          "description": "Possible sources of a clinical trial."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ClinicalTrialMetadata",
+          "description": "Trial data which is of interest to the potential participant."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "TrialMatcherInferenceEvidence": {
+      "type": "object",
+      "description": "A piece of evidence corresponding to a Trial Matcher inference.",
+      "properties": {
+        "eligibilityCriteriaEvidence": {
+          "type": "string",
+          "description": "A piece of evidence from the eligibility criteria text of a clinical trial."
+        },
+        "patientDataEvidence": {
+          "$ref": "#/definitions/ClinicalNoteEvidence",
+          "description": "A piece of evidence from a clinical note (text document)."
+        },
+        "patientInfoEvidence": {
+          "$ref": "#/definitions/ClinicalCodedElement",
+          "description": "A piece of clinical information, expressed as a code in a clinical coding\nsystem."
+        },
+        "importance": {
+          "type": "number",
+          "format": "float",
+          "description": "A value indicating how important this piece of evidence is for the inference.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "TrialMatcherInferenceResult": {
+      "type": "object",
+      "description": "The inference results for the Trial Matcher request.",
+      "properties": {
+        "patientResults": {
+          "type": "array",
+          "description": "Results for the patients given in the request.",
+          "items": {
+            "$ref": "#/definitions/TrialMatcherPatientResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion",
+          "description": "The version of the model used for inference, expressed as the model date."
+        },
+        "knowledgeGraphLastUpdateDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date when the clinical trials knowledge graph was last updated."
+        }
+      },
+      "required": [
+        "patientResults",
+        "modelVersion"
+      ]
+    },
+    "TrialMatcherInferenceType": {
+      "type": "string",
+      "description": "The type of the Trial Matcher inference.",
+      "enum": [
+        "trialEligibility"
+      ],
+      "x-ms-enum": {
+        "name": "TrialMatcherInferenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TrialEligibility",
+            "value": "trialEligibility"
+          }
+        ]
+      }
+    },
+    "TrialMatcherJob": {
+      "type": "object",
+      "description": "Response for the Trial Matcher request.",
+      "properties": {
+        "jobData": {
+          "$ref": "#/definitions/TrialMatcherData",
+          "description": "The request data for the operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "result": {
+          "$ref": "#/definitions/TrialMatcherInferenceResult",
+          "description": "The result of the operation.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the job.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The status of the job.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was created.",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job is set to expire.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was last updated.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "TrialMatcherModelConfiguration": {
+      "type": "object",
+      "description": "Configuration affecting the Trial Matcher model's inference.",
+      "properties": {
+        "verbose": {
+          "type": "boolean",
+          "description": "An indication whether the model should produce verbose output.",
+          "default": false
+        },
+        "includeEvidence": {
+          "type": "boolean",
+          "description": "An indication whether the model's output should include evidence for the inferences.",
+          "default": true
+        },
+        "clinicalTrials": {
+          "$ref": "#/definitions/ClinicalTrials",
+          "description": "The clinical trials that the patient(s) should be matched to. The trial\nselection can be given as a list of custom clinical trials and/or a list of\nfilters to known clinical trial registries. In case both are given, the\nresulting trial set is a union of the two sets."
+        }
+      },
+      "required": [
+        "clinicalTrials"
+      ]
+    },
+    "TrialMatcherPatientResult": {
+      "type": "object",
+      "description": "The results of the model's work for a single patient.",
+      "properties": {
+        "patientId": {
+          "type": "string",
+          "description": "The identifier given for the patient in the request."
+        },
+        "inferences": {
+          "type": "array",
+          "description": "The inference results for the patient.",
+          "items": {
+            "$ref": "#/definitions/TrialMatcherInference"
+          },
+          "x-ms-identifiers": []
+        },
+        "neededClinicalInfo": {
+          "$ref": "#/definitions/NeededClinicalInfo",
+          "description": "Clinical information which is needed to provide better trial matching results for the patient."
+        }
+      },
+      "required": [
+        "patientId",
+        "inferences"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.ExpandQueryParameter": {
+      "name": "expand",
+      "in": "query",
+      "description": "Expand the indicated resources into the response.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
