@@ -30,11 +30,11 @@ openapi-type: arm
 tag: package-preview-2024-12-01
 ```
 
-### Tag: package-preview-2024-12-01-preview
+### Tag: package-preview-2024-12-01
 
-These settings apply only when `--tag=package-preview-2024-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-12-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-12-01-preview'
+```yaml $(tag) == 'package-preview-2024-12-01'
 input-file:
   - Microsoft.DocumentDB/preview/2024-12-01-preview/chaosFault.json
   - Microsoft.DocumentDB/preview/2024-12-01-preview/cosmos-db.json
@@ -50,6 +50,23 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-12-01-preview/services.json
   - Microsoft.DocumentDB/preview/2024-12-01-preview/throughputpool.json
   - Microsoft.DocumentDB/preview/2024-12-01-preview/tablerbac.json
+```
+
+### Tag: package-2024-11-15
+
+These settings apply only when `--tag=package-2024-11-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-15'
+input-file:
+  - Microsoft.DocumentDB/stable/2024-11-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2024-11-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2024-11-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2024-11-15/notebook.json
+  - Microsoft.DocumentDB/stable/2024-11-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2024-11-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2024-11-15/rbac.json
+  - Microsoft.DocumentDB/stable/2024-11-15/restorable.json
+  - Microsoft.DocumentDB/stable/2024-11-15/services.json
 ```
 
 ### Tag: package-preview-2024-09
@@ -583,7 +600,11 @@ input-file:
   - Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
 modelerfour:
   lenient-model-deduplication: true
+<<<<<<< HEAD
 tag: package-preview-2024-12-01
+=======
+tag: package-2024-11-15
+>>>>>>> main
 ```
 
 ### Tag: package-preview-2021-04
