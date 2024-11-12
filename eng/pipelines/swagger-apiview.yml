@@ -45,6 +45,7 @@ jobs:
       artifactName: '${{ parameters.APIViewArtifactsName }}'
       publishLocation: 'pipeline'
     displayName: 'Publish Swagger APIView Artifacts'
+    condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
   - pwsh: |
       eng/scripts/Create-APIView.ps1 `
@@ -58,5 +59,6 @@ jobs:
         -Language 'Swagger' `
         -CommitSha $(Build.SourceVersion)
     displayName: Create Swagger APIView
+    condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
   
