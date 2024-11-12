@@ -1382,8 +1382,7 @@ interface Blob {
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
       ...BlobContentMd5ResponseHeader;
-    },
-    "application/octet-stream"
+    }
   >;
 
   /** The Get Blob Tags operation enables users to get tags on a blob. */

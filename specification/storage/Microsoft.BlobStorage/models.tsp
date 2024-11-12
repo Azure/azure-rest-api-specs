@@ -179,7 +179,7 @@ model ListContainersSegmentResponse {
   @Xml.name("Marker") marker?: string;
 
   /** The max results of the containers. */
-  @Xml.name("MaxResults") maxxResults?: int32;
+  @Xml.name("MaxResults") maxResults?: int32;
 
   /** The container segment. */
   // TODO: should this be unwrapped? The swagger shows it as wrapped. Example in docs: https://learn.microsoft.com/en-us/rest/api/storageservices/list-containers2?tabs=microsoft-entra-id#response-body
@@ -187,7 +187,7 @@ model ListContainersSegmentResponse {
 
   /** The next marker of the containers. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
-  @nextLink
+  @Azure.Core.nextLink
   @Xml.name("NextMarker")
   NextMarker?: string;
 }
@@ -878,7 +878,7 @@ model ListBlobsFlatSegmentResponse {
   @Xml.name("Segment") segment: BlobFlatListSegment;
 
   /** The next marker of the blobs. */
-  @nextLink
+  @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -900,7 +900,7 @@ model PageList {
   @Xml.name("ClearRange") clearRange?: ClearRange[];
 
   /** The next marker. */
-  @nextLink
+  @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -1961,7 +1961,7 @@ model ListBlobsHierarchySegmentResponse {
   @Xml.name("Segment") segment: BlobHierarchyListSegment;
 
   /** The next marker of the blobs. */
-  @nextLink
+  @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
