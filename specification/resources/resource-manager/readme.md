@@ -1580,6 +1580,9 @@ directive:
   - suppress: GetCollectionResponseSchema
     from: dataBoundaries.json
     reason: "Do not have any list calls."
+  - suppress: RepeatedPathInfo
+    from: deleteOptions.json
+    reason: "SubscriptionId in deleteOptionsDefinition is read only and not needed as request parameter."    
 ```
 
 ---
