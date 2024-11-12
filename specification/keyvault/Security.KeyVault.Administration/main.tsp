@@ -29,7 +29,7 @@ using Azure.Core;
   ]>
 )
 @service({
-  title: "Key Vault",
+  title: "KeyVaultClient",
 })
 @versioned(Versions)
 @server(
