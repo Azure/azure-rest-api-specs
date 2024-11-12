@@ -27,7 +27,7 @@ model VirtualMachineScaleSet {
     "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
     """)
   @visibility("read")
-  id: string;
+  id: armResourceIdentifier;
 
   @doc("Type of the virtualMachineScaleSet")
   @visibility("read")
@@ -57,6 +57,6 @@ model VirtualMachineScaleSetListResult {
   value: Array<VirtualMachineScaleSet>;
 
   @doc("The link to the next page of items")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: url;
 }
