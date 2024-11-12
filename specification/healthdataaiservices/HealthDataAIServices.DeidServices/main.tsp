@@ -15,7 +15,7 @@ using Azure.Core.Traits;
   title: "Azure Health Data Services de-identification service",
 })
 @server(
-  "https://{endpoint}",
+  "{endpoint}",
   "De-identification Service service endpoint",
   {
     @doc("Url of your De-identification Service.")
