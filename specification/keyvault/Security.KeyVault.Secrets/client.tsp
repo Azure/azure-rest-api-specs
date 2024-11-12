@@ -15,9 +15,11 @@ using KeyVault;
 @@clientName(SecretRestoreParameters, "RestoreSecretParameters", "go");
 @@clientName(SecretSetParameters, "SetSecretParameters", "go");
 @@clientName(SecretUpdateParameters, "UpdateSecretPropertiesParameters", "go");
-@@clientName(DeletedSecretListResult, "DeletedSecretPropertiesListResult", "go");
+@@clientName(DeletedSecretListResult,
+  "DeletedSecretPropertiesListResult",
+  "go"
+);
 @@clientName(SecretListResult, "SecretPropertiesListResult", "go");
-
 
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
 @@clientName(getSecrets, "ListSecretProperties", "go");
