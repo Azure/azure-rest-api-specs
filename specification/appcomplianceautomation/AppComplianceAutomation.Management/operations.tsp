@@ -40,15 +40,12 @@ interface AcatOperations {
    * @template Response Optional. The success response for the createOrUpdate operation
    * @template Error Optional. The error response, if non-standard.
    */
+  #suppress "deprecated" "legacy"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "legacy"
+  @useFinalStateVia("azure-async-operation")
   @autoRoute
   @doc("Create a {name}", Resource)
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   @armResourceCreateOrUpdate(Resource)
   @put
   AcatResourceCreateOrUpdateAsync<
@@ -58,7 +55,9 @@ interface AcatOperations {
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
       Resource,
-      LroHeaders
+      LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader &
+      ArmLroLocationHeader
     >,
     Error extends {} = ErrorResponse
   > is AcatOperations.AcatCreateOperation<
