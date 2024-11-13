@@ -168,3 +168,8 @@ interface ReportResources {
 @@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
+#suppress "deprecated" "Deprecated: Using encodedName for the body property is meaningless."
+@@encodedName(ReportResources.update::parameters.properties,
+  "application/json",
+  "parameters"
+);

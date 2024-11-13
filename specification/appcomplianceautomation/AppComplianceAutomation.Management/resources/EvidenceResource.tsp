@@ -118,6 +118,11 @@ interface EvidenceResources {
 @@doc(EvidenceResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation"
 );
+#suppress "deprecated" "Deprecated: Using encodedName for the body property is meaningless."
+@@encodedName(EvidenceResources.download::parameters.body,
+  "application/json",
+  "parameters"
+);
 @@doc(EvidenceResources.download::parameters.body,
   "Parameters for the query operation"
 );

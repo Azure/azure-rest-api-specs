@@ -93,3 +93,9 @@ interface WebhookResources {
 @@doc(WebhookResources.update::parameters.properties,
   "Parameters for the create or update operation"
 );
+
+#suppress "deprecated" "Deprecated: Using encodedName for the body property is meaningless."
+@@encodedName(WebhookResources.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
