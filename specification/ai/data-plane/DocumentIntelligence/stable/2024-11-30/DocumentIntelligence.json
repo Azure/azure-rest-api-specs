@@ -1928,6 +1928,10 @@
       "type": "object",
       "description": "Status and result of the analyze batch operation.",
       "properties": {
+        "resultId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Analyze batch operation result ID."
+        },
         "status": {
           "$ref": "#/definitions/OperationStatus",
           "description": "Operation status.  notStarted, running, succeeded, or failed"
@@ -2177,6 +2181,11 @@
       "required": [
         "modelId"
       ]
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "AzureBlobContentSource": {
       "type": "object",
