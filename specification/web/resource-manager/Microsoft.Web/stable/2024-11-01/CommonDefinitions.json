@@ -999,7 +999,14 @@
         "subnetResourceId": {
           "description": "The Virtual Network subnet's Azure resource ID",
           "type": "string",
-          "format": "arm-id"
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         },
         "swiftSupported": {
           "description": "Boolean flag indicating whether Swift integration is supported",
@@ -1046,7 +1053,14 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "format": "arm-id"
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.Web/serverfarms"
+                    }
+                  ]
+                }
               }
             },
             "connectedSitesId": {
@@ -1054,7 +1068,17 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "format": "arm-id"
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.Web/sites"
+                    },
+                    {
+                      "type": "Microsoft.Web/sites/slots"
+                    }
+                  ]
+                }
               }
             }
           }
