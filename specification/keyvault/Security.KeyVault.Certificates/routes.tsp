@@ -464,6 +464,7 @@ op getCertificate is Azure.Core.Foundations.Operation<
  * operation requires the certificates/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@parameterVisibility
 @summary("Updates a certificate operation.")
 @route("/certificates/{certificate-name}/pending")
 @patch
