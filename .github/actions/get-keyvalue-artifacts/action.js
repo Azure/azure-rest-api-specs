@@ -4,8 +4,6 @@
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 module.exports = async ({ github, context, core }) => {
-  console.log("context: " + JSON.stringify(context, null, 2));
-
   let owner = process.env.OWNER;
   let repo = process.env.REPO;
   let run_id = parseInt(process.env.RUN_ID || "");
