@@ -4179,7 +4179,16 @@
         },
         "status": {
           "type": "string",
-          "description": "This property specifies the status of the validationProfile of the image version."
+          "description": "This property specifies the status of the validationProfile of the image version.",
+          "enum": [
+            "Unknown",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsString": true
+          }
         },
         "version": {
           "type": "string",
