@@ -3216,6 +3216,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceResetSkills": {
+            "$ref": "./examples/SearchServiceResetSkills.json"
+          }
         }
       }
     },
@@ -3656,7 +3661,7 @@
       "type": "object",
       "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio\nModel Catalog for generating the vector embedding of a query string.",
       "properties": {
-        "AMLParameters": {
+        "amlParameters": {
           "$ref": "#/definitions/AMLParameters",
           "description": "Specifies the properties of the AML vectorizer."
         }
@@ -12954,6 +12959,10 @@
       "type": "object",
       "description": "Represents service-level resource counters and quotas.",
       "properties": {
+        "aliasesCount": {
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of aliases."
+        },
         "documentCount": {
           "$ref": "#/definitions/ResourceCounter",
           "description": "Total number of documents across all indexes in the service."
@@ -12988,6 +12997,7 @@
         }
       },
       "required": [
+        "aliasesCount",
         "documentCount",
         "indexesCount",
         "indexersCount",
