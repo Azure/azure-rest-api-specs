@@ -27,7 +27,24 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-preview-2024-09
+tag: package-2024-11-15
+```
+
+### Tag: package-2024-11-15
+
+These settings apply only when `--tag=package-2024-11-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-15'
+input-file:
+  - Microsoft.DocumentDB/stable/2024-11-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2024-11-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2024-11-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2024-11-15/notebook.json
+  - Microsoft.DocumentDB/stable/2024-11-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2024-11-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2024-11-15/rbac.json
+  - Microsoft.DocumentDB/stable/2024-11-15/restorable.json
+  - Microsoft.DocumentDB/stable/2024-11-15/services.json
 ```
 
 ### Tag: package-preview-2024-09
@@ -561,7 +578,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
 modelerfour:
   lenient-model-deduplication: true
-tag: package-preview-2024-09
+tag: package-2024-11-15
 ```
 
 ### Tag: package-preview-2021-04
