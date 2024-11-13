@@ -1,6 +1,6 @@
 {
   "operationId": "NotificationRuleAdministration_CreateOrUpdateNotificationRule",
-  "title": "Create or update a notification rule.",
+  "title": "Create or update a notification rule for tests.",
   "parameters": {
     "api-version": "2024-11-01-preview",
     "notificationRuleId": "12345678-1234-1234-1234-123456789012",
@@ -39,12 +39,6 @@
               "ScheduleTrigger"
             ]
           }
-        },
-        "eventfilter3": {
-          "kind": "TriggerEnded"
-        },
-        "eventfilter4": {
-          "kind": "TriggerDisabled"
         }
       }
     }
@@ -87,12 +81,6 @@
                 "ScheduleTrigger"
               ]
             }
-          },
-          "eventfilter3": {
-            "kind": "TriggerEnded"
-          },
-          "eventfilter4": {
-            "kind": "TriggerDisabled"
           }
         },
         "createdDateTime": "2024-05-01T16:43:46.072Z",
@@ -112,8 +100,8 @@
         "testIds": [
           "12345678-1234-1234-1234-123456789012"
         ],
-        "events": {
-          "event1": {
+        "eventFilters": {
+          "eventfilter1": {
             "name": "TestRunEnded",
             "condition": {
               "testRunStatuses": [
@@ -130,7 +118,7 @@
               ]
             }
           },
-          "event2": {
+          "eventfilter2": {
             "name": "TestRunStarted",
             "condition": {
               "createdByTypes": [
@@ -138,12 +126,6 @@
                 "ScheduleTrigger"
               ]
             }
-          },
-          "event3": {
-            "name": "TriggerEnded"
-          },
-          "event4": {
-            "name": "TriggerDisabled"
           }
         },
         "createdDateTime": "2024-05-01T16:43:46.072Z",

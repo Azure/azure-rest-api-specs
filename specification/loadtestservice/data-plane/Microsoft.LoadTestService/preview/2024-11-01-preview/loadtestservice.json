@@ -85,6 +85,12 @@
             "$ref": "#/parameters/ListNotificationRuleQueryParams.testIds"
           },
           {
+            "$ref": "#/parameters/ListNotificationRuleQueryParams.triggerIds"
+          },
+          {
+            "$ref": "#/parameters/ListNotificationRuleQueryParams.scopes"
+          },
+          {
             "$ref": "#/parameters/ListNotificationRuleQueryParams.lastModifiedStartTime"
           },
           {
@@ -233,8 +239,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a notification rule.": {
-            "$ref": "./examples/CreateOrUpdateNotificationRule.json"
+          "Create or update a notification rule for tests.": {
+            "$ref": "./examples/CreateOrUpdateNotificationRule_Tests.json"
+          },
+          "Create or update a notification rule for triggers.": {
+            "$ref": "./examples/CreateOrUpdateNotificationRule_Triggers.json"
           }
         }
       },
@@ -3741,7 +3750,8 @@
       "type": "string",
       "description": "Scope type of a notification rule.",
       "enum": [
-        "Tests"
+        "Tests",
+        "Triggers"
       ],
       "x-ms-enum": {
         "name": "NotificationScopeType",
@@ -3751,6 +3761,11 @@
             "name": "Tests",
             "value": "Tests",
             "description": "Notification rule is for Tests."
+          },
+          {
+            "name": "Triggers",
+            "value": "Triggers",
+            "description": "Notification rule is for Triggers."
           }
         ]
       }
@@ -5914,7 +5929,7 @@
         "properties"
       ]
     },
-    "TestRunEndedEventCondition": {
+    "TestRunEndedEventFilterCondition": {
       "type": "object",
       "description": "TestRunEnded Event condition.",
       "properties": {
@@ -5946,7 +5961,7 @@
       "description": "The notification event filter when the event type is TestRunEnded.",
       "properties": {
         "condition": {
-          "$ref": "#/definitions/TestRunEndedEventCondition",
+          "$ref": "#/definitions/TestRunEndedEventFilterCondition",
           "description": "Event filtering condition."
         }
       },
@@ -5962,7 +5977,7 @@
       "description": "The notification event filter when the event type is TestRunEnded.",
       "properties": {
         "condition": {
-          "$ref": "#/definitions/TestRunEndedEventCondition",
+          "$ref": "#/definitions/TestRunEndedEventFilterCondition",
           "description": "Event filtering condition."
         }
       },
@@ -6110,7 +6125,7 @@
         }
       }
     },
-    "TestRunStartedEventCondition": {
+    "TestRunStartedEventFilterCondition": {
       "type": "object",
       "description": "TestRunStarted Event condition.",
       "properties": {
@@ -6128,7 +6143,7 @@
       "description": "The notification event filter when the event type is TestRunStarted.",
       "properties": {
         "condition": {
-          "$ref": "#/definitions/TestRunStartedEventCondition",
+          "$ref": "#/definitions/TestRunStartedEventFilterCondition",
           "description": "Event filtering condition."
         }
       },
@@ -6144,7 +6159,7 @@
       "description": "The notification event filter when the event type is TestRunStarted.",
       "properties": {
         "condition": {
-          "$ref": "#/definitions/TestRunStartedEventCondition",
+          "$ref": "#/definitions/TestRunStartedEventFilterCondition",
           "description": "Event filtering condition."
         }
       },
@@ -6583,7 +6598,7 @@
       "description": "The notification event filter when the event type is TriggerDisabled.",
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEventFilter"
+          "$ref": "#/definitions/TriggersNotificationEventFilter"
         }
       ],
       "x-ms-discriminator-value": "TriggerDisabled"
@@ -6593,7 +6608,7 @@
       "description": "The notification event filter when the event type is TriggerDisabled.",
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEventFilterCreateOrUpdate"
+          "$ref": "#/definitions/TriggersNotificationEventFilterCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TriggerDisabled"
@@ -6603,7 +6618,7 @@
       "description": "The notification event filter when the event type is TriggerEnded.",
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEventFilter"
+          "$ref": "#/definitions/TriggersNotificationEventFilter"
         }
       ],
       "x-ms-discriminator-value": "TriggerEnded"
@@ -6613,7 +6628,7 @@
       "description": "The notification event filter when the event type is TriggerEnded.",
       "allOf": [
         {
-          "$ref": "#/definitions/TestsNotificationEventFilterCreateOrUpdate"
+          "$ref": "#/definitions/TriggersNotificationEventFilterCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "TriggerEnded"
@@ -6671,6 +6686,89 @@
           }
         ]
       }
+    },
+    "TriggersNotificationEventFilter": {
+      "type": "object",
+      "description": "The notification event filter for Triggers scope.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/NotificationEventType",
+          "description": "The event type"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "TriggersNotificationEventFilterCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event filter for Triggers scope.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/NotificationEventType",
+          "description": "The event type"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "TriggersNotificationRule": {
+      "type": "object",
+      "description": "Triggers Notification rule model.",
+      "properties": {
+        "triggerIds": {
+          "type": "array",
+          "description": "The trigger ids to include. If not provided, the notification will be sent for all triggerIds.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eventFilters": {
+          "type": "object",
+          "description": "The event to receive notifications for along with filtering conditions.\nKey is a user-assigned identifier for the event filter.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TriggersNotificationEventFilter"
+          }
+        }
+      },
+      "required": [
+        "eventFilters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Triggers"
+    },
+    "TriggersNotificationRuleCreateOrUpdate": {
+      "type": "object",
+      "description": "Triggers Notification rule model.",
+      "properties": {
+        "triggerIds": {
+          "type": "array",
+          "description": "The trigger ids to include. If not provided, the notification will be sent for all triggerIds.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eventFilters": {
+          "type": "object",
+          "description": "The event to receive notifications for along with filtering conditions.\nKey is a user-assigned identifier for the event filter.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TriggersNotificationEventFilterCreateOrUpdate"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationRuleCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Triggers"
     },
     "WeekDays": {
       "type": "string",
@@ -6814,10 +6912,26 @@
       "default": 50,
       "x-ms-parameter-location": "method"
     },
+    "ListNotificationRuleQueryParams.scopes": {
+      "name": "scopes",
+      "in": "query",
+      "description": "Search based on notification rules for the provided scopes.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "ListNotificationRuleQueryParams.testIds": {
       "name": "testIds",
       "in": "query",
       "description": "Search based on notification rules associated with the provided test ids.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListNotificationRuleQueryParams.triggerIds": {
+      "name": "triggerIds",
+      "in": "query",
+      "description": "Search based on notification rules associated with the provided trigger ids.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
