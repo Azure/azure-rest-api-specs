@@ -153,7 +153,7 @@ model ResourceOperationError {
 @doc("The details of a response from an operation on a resource")
 model ResourceOperationDetails {
   @doc("Operation identifier for the unique operation")
-  operationId?: string;
+  operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
   resourceId?: armResourceIdentifier;
