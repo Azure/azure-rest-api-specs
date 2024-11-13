@@ -26,15 +26,15 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-11-01
+tag: package-2024-11-preview
 ```
 
 
-### Tag: package-preview-2024-11-01-preview
+### Tag: package-2024-11-preview
 
-These settings apply only when `--tag=package-preview-2024-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-11-01-preview'
+```yaml $(tag) == 'package-2024-11-preview'
 input-file:
 ```
 
