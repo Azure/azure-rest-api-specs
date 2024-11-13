@@ -122,29 +122,6 @@ swagger-to-sdk:
 ```
 
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-```yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  clear-output-folder: true
-batch:
-  - package-webservices: true
-    namespace: Microsoft.Azure.Management.MachineLearning.WebServices
-    output-folder: $(csharp-sdks-folder)/machinelearning/Microsoft.Azure.Management.MachineLearning/src/Generated/WebServices
-  - package-commitmentPlans: true
-    namespace: Microsoft.Azure.Management.MachineLearning.CommitmentPlans
-    output-folder: $(csharp-sdks-folder)/machinelearning/Microsoft.Azure.Management.MachineLearning/src/Generated/CommitmentPlans
-  - package-workspaces: true
-    namespace: Microsoft.Azure.Management.MachineLearning.Workspaces
-    output-folder: $(csharp-sdks-folder)/machinelearning/Microsoft.Azure.Management.MachineLearning/src/Generated/Workspaces
-```
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
