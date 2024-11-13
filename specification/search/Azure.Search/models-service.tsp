@@ -7175,6 +7175,12 @@ model SearchServiceStatistics {
  */
 model SearchServiceCounters {
   /**
+   * Total number of aliases.
+   */
+  @added(Versions.v2024_11_01_preview)
+  aliasesCount: ResourceCounter;
+
+  /**
    * Total number of documents across all indexes in the service.
    */
   documentCount: ResourceCounter;
@@ -8799,7 +8805,7 @@ model AMLVectorizer extends VectorSearchVectorizer {
   /**
    * Specifies the properties of the AML vectorizer.
    */
-  AMLParameters?: AMLParameters;
+  amlParameters?: AMLParameters;
 
   /**
    * The name of the kind of vectorization method being configured for use with
