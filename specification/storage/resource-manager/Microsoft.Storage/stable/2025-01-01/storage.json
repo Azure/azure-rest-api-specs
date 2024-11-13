@@ -3075,6 +3075,10 @@
           "$ref": "#/definitions/ActiveDirectoryProperties",
           "description": "Required if directoryServiceOptions are AD, optional if they are AADKERB."
         },
+        "smbOAuthSettings": {
+          "$ref": "#/definitions/SmbOAuthSettings",
+          "description": "Required if Managed Identities are allowed to mount Azure file share using OAuth token."
+        },
         "defaultSharePermission": {
           "type": "string",
           "description": "Default share permission for users using Kerberos authentication if RBAC role is not assigned.",
@@ -3094,6 +3098,18 @@
         "directoryServiceOptions"
       ],
       "description": "Settings for Azure Files identity based authentication."
+    },
+    "SmbOAuthSettings": {
+      "properties": {
+        "isSmbOAuthEnabled": {
+          "type": "boolean",
+          "description": "Allow Managed Identities to mount Azure file share using OAuth token."
+        }
+      },
+      "required": [
+        "isSmbOAuthEnabled"
+      ],
+      "description": "Settings to mount Azure file share using OAuth token."
     },
     "ActiveDirectoryProperties": {
       "properties": {
