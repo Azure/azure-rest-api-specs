@@ -11,8 +11,8 @@ module.exports = async ({ github, context, core }) => {
   let run_id = parseInt(process.env.RUN_ID || "");
 
   if (!owner || !repo || !run_id) {
-    // TODO: Add support for more event types
-    if (context.eventName == "workflow_run" && context.payload.action == "completed") {
+    // Add support for more event types as needed
+    if (context.eventName === "workflow_run" && context.payload.action === "completed") {
       const payload =
         /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
           context.payload
