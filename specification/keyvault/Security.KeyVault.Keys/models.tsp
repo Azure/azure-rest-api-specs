@@ -1212,5 +1212,6 @@ model KeyExportParameters {
   /**
    * The encryption algorithm to use to protected the exported key material
    */
+  @minLength(1)
   enc?: KeyEncryptionAlgorithm;
 }
