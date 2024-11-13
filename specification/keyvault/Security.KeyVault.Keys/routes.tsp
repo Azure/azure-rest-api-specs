@@ -89,6 +89,7 @@ op rotateKey is Azure.Core.Foundations.Operation<
  * of the key. This operation requires the keys/import permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("""
   Imports an externally created key, stores it, and returns key parameters and
   attributes to the client.
@@ -208,6 +209,7 @@ op getKey is Azure.Core.Foundations.Operation<
  * This operation requires the keys/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Retrieves a list of individual key versions with the same key name.")
 @route("/keys/{key-name}/versions")
 @get
@@ -238,6 +240,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
  * provided in the response. Individual versions of a key are not listed in the
  * response. This operation requires the keys/list permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("List keys in the specified vault.")
 op getKeys is KeyVaultOperations.ResourceList<KeyItem, KeyVaultListParameters>;
 
@@ -574,6 +577,7 @@ op release is Azure.Core.Foundations.Operation<
  * vault, it will return an error if invoked on a non soft-delete enabled vault.
  * This operation requires the keys/list permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Lists the deleted keys in the specified vault.")
 op getDeletedKeys is KeyVaultOperations.ResourceList<
   DeletedKeyItem,
@@ -608,6 +612,7 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
  * keys/purge permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Permanently deletes the specified key.")
 @route("/deletedkeys/{key-name}")
 @delete
@@ -668,6 +673,7 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
  * operation requires the keys/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Updates the rotation policy for a key.")
 @route("/keys/{key-name}/rotationpolicy")
 @put
