@@ -11,6 +11,8 @@ module.exports = async ({ github, context, core }) => {
   let run_id = parseInt(process.env.RUN_ID || "");
 
   if (!owner || !repo || !run_id) {
+    // TODO: Replace with call to context.extractInputs()
+
     // Add support for more event types as needed
     if (context.eventName === "workflow_run" && context.payload.action === "completed") {
       const payload =
