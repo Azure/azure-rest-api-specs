@@ -5,7 +5,6 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
