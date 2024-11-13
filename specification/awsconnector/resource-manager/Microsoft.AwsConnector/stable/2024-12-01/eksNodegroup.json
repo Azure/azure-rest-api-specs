@@ -1,0 +1,732 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EksNodegroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/eksNodegroups": {
+      "get": {
+        "operationId": "EksNodegroups_ListBySubscription",
+        "tags": [
+          "EksNodegroups"
+        ],
+        "description": "List EksNodegroup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EksNodegroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksNodegroups_ListBySubscription": {
+            "$ref": "./examples/EksNodegroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/eksNodegroups": {
+      "get": {
+        "operationId": "EksNodegroups_ListByResourceGroup",
+        "tags": [
+          "EksNodegroups"
+        ],
+        "description": "List EksNodegroup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EksNodegroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksNodegroups_ListByResourceGroup": {
+            "$ref": "./examples/EksNodegroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/eksNodegroups/{name}": {
+      "get": {
+        "operationId": "EksNodegroups_Get",
+        "tags": [
+          "EksNodegroups"
+        ],
+        "description": "Get a EksNodegroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EksNodegroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EksNodegroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksNodegroups_Get": {
+            "$ref": "./examples/EksNodegroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EksNodegroups_CreateOrReplace",
+        "tags": [
+          "EksNodegroups"
+        ],
+        "description": "Create a EksNodegroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EksNodegroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EksNodegroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EksNodegroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EksNodegroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'EksNodegroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EksNodegroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksNodegroups_CreateOrReplace": {
+            "$ref": "./examples/EksNodegroups_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EksNodegroups_Update",
+        "tags": [
+          "EksNodegroups"
+        ],
+        "description": "Update a EksNodegroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EksNodegroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EksNodegroupTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EksNodegroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksNodegroups_Update": {
+            "$ref": "./examples/EksNodegroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EksNodegroups_Delete",
+        "tags": [
+          "EksNodegroups"
+        ],
+        "description": "Delete a EksNodegroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EksNodegroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksNodegroups_Delete": {
+            "$ref": "./examples/EksNodegroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsEksNodegroupProperties": {
+      "type": "object",
+      "description": "Definition of awsEksNodegroup",
+      "properties": {
+        "amiType": {
+          "type": "string",
+          "description": "The AMI type for your node group."
+        },
+        "arn": {
+          "type": "string",
+          "description": "Property arn"
+        },
+        "capacityType": {
+          "type": "string",
+          "description": "The capacity type of your managed node group."
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Name of the cluster to create the node group in."
+        },
+        "diskSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The root device disk size (in GiB) for your node group instances."
+        },
+        "forceUpdateEnabled": {
+          "type": "boolean",
+          "description": "Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue."
+        },
+        "id": {
+          "type": "string",
+          "description": "Property id"
+        },
+        "instanceTypes": {
+          "type": "array",
+          "description": "Specify the instance types for a node group.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "labels": {
+          "type": "object",
+          "description": "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "launchTemplate": {
+          "$ref": "#/definitions/LaunchTemplateSpecification",
+          "description": "An object representing a node group's launch template specification. An object representing a launch template specification for AWS EKS Nodegroup."
+        },
+        "nodeRole": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the IAM role to associate with your node group."
+        },
+        "nodegroupName": {
+          "type": "string",
+          "description": "The unique name to give your node group."
+        },
+        "releaseVersion": {
+          "type": "string",
+          "description": "The AMI version of the Amazon EKS-optimized AMI to use with your node group."
+        },
+        "remoteAccess": {
+          "$ref": "#/definitions/RemoteAccess",
+          "description": "The remote access (SSH) configuration to use with your node group. An object representing a remote access configuration specification for AWS EKS Nodegroup."
+        },
+        "scalingConfig": {
+          "$ref": "#/definitions/ScalingConfig",
+          "description": "The scaling configuration details for the Auto Scaling group that is created for your node group. An object representing a auto scaling group specification for AWS EKS Nodegroup."
+        },
+        "subnets": {
+          "type": "array",
+          "description": "The subnets to use for the Auto Scaling group that is created for your node group.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "tags": {
+          "type": "object",
+          "description": "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "taints": {
+          "type": "array",
+          "description": "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
+          "items": {
+            "$ref": "#/definitions/Taint"
+          },
+          "x-ms-identifiers": []
+        },
+        "updateConfig": {
+          "$ref": "#/definitions/UpdateConfig",
+          "description": "The node group update configuration. The node group update configuration."
+        },
+        "version": {
+          "type": "string",
+          "description": "The Kubernetes version to use for your managed nodes."
+        }
+      }
+    },
+    "EksNodegroup": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EksNodegroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EksNodegroupListResult": {
+      "type": "object",
+      "description": "The response of a EksNodegroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EksNodegroup items on this page",
+          "items": {
+            "$ref": "#/definitions/EksNodegroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EksNodegroupProperties": {
+      "type": "object",
+      "description": "Definition of EksNodegroup",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEksNodegroupProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "EksNodegroupTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in EksNodegroup resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LaunchTemplateSpecification": {
+      "type": "object",
+      "description": "Definition of LaunchTemplateSpecification",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Property id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Property name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Property version"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RemoteAccess": {
+      "type": "object",
+      "description": "Definition of RemoteAccess",
+      "properties": {
+        "ec2SshKey": {
+          "type": "string",
+          "description": "Property ec2SshKey"
+        },
+        "sourceSecurityGroups": {
+          "type": "array",
+          "description": "Property sourceSecurityGroups",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ScalingConfig": {
+      "type": "object",
+      "description": "Definition of ScalingConfig",
+      "properties": {
+        "desiredSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property desiredSize"
+        },
+        "maxSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property maxSize"
+        },
+        "minSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property minSize"
+        }
+      }
+    },
+    "Taint": {
+      "type": "object",
+      "description": "Definition of Taint",
+      "properties": {
+        "effect": {
+          "type": "string",
+          "description": "Property effect"
+        },
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
+    },
+    "UpdateConfig": {
+      "type": "object",
+      "description": "Definition of UpdateConfig",
+      "properties": {
+        "maxUnavailable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100."
+        },
+        "maxUnavailablePercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
