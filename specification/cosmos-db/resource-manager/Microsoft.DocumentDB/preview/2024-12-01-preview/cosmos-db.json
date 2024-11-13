@@ -10140,6 +10140,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComputedProperty"
+          },
+          "vectorEmbeddingPolicy": {
+            "$ref": "#/definitions/VectorEmbeddingPolicy",
+            "description": "The vector embedding policy for the container."
           }
         }
       },
@@ -10195,6 +10199,26 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SpatialSpec"
+          }
+        },
+        "vectorIndexes": {
+          "description": "List of paths to include in the vector indexing",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorIndex"
+          }
+        }
+      }
+    },
+    "VectorEmbeddingPolicy": {
+      "type": "object",
+      "description": "Cosmos DB Vector Embedding Policy",
+      "properties": {
+        "vectorEmbeddings": {
+          "description": "List of vector embeddings",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorEmbedding"
           }
         }
       }
@@ -10265,6 +10289,80 @@
           }
         }
       }
+    },
+    "VectorIndex": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the vector field in the document."
+        },
+        "type": {
+          "description": "The index type of the vector. Currently, flat, diskANN, and quantizedFlat are supported.",
+          "type": "string",
+          "default": "flat",
+          "enum": [
+            "flat",
+            "quantizedFlat",
+            "diskANN"
+          ],
+          "x-ms-enum": {
+            "name": "VectorIndexType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "path",
+        "type"
+      ]
+    },
+    "VectorEmbedding": {
+      "type": "object",
+      "description": "Represents a vector embedding. A vector embedding is used to define a vector field in the documents.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the vector field in the document."
+        },
+        "dataType": {
+          "description": "Indicates the data type of vector.",
+          "type": "string",
+          "enum": [
+            "float32",
+            "uint8",
+            "int8"
+          ],
+          "x-ms-enum": {
+            "name": "VectorDataType",
+            "modelAsString": true
+          }
+        },
+        "distanceFunction": {
+          "description": "The distance function to use for distance calculation in between vectors.",
+          "type": "string",
+          "enum": [
+            "euclidean",
+            "cosine",
+            "dotproduct"
+          ],
+          "x-ms-enum": {
+            "name": "DistanceFunction",
+            "modelAsString": true
+          }
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of dimensions in the vector."
+        }
+      },
+      "required": [
+        "path",
+        "dataType",
+        "distanceFunction",
+        "dimensions"
+      ]
     },
     "CompositePathList": {
       "description": "List of composite path",
