@@ -153,7 +153,7 @@ model AssetPageResult {
   mark?: string;
 
   @doc("The link to access the next page of results.  Not set if at the end of the result set.")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 
   @doc("The items in the current page of results.")
@@ -554,7 +554,7 @@ model DiscoRunPageResult {
   totalElements?: int64;
 
   @doc("The link to access the next page of results.  Not set if at the end of the result set.")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 
   @doc("The items in the current page of results.")
