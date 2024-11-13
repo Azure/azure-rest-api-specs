@@ -153,26 +153,26 @@ model ResourceOperationError {
 @doc("The details of a response from an operation on a resource")
 model ResourceOperationDetails {
   @doc("Operation identifier for the unique operation")
-  operationId: string;
+  operationId?: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  resourceId: armResourceIdentifier;
+  resourceId?: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
-  opType: ResourceOperationType = ResourceOperationType.Unknown;
+  opType?: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
-  subscriptionId: string;
+  subscriptionId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Deadline for the operation")
-  deadline: offsetDateTime;
+  deadline?: offsetDateTime;
 
   @doc("Type of deadline of the operation")
-  deadlineType: DeadlineType = DeadlineType.Unknown;
+  deadlineType?: DeadlineType = DeadlineType.Unknown;
 
   @doc("Current state of the operation")
-  state: OperationState = OperationState.Unknown;
+  state?: OperationState = OperationState.Unknown;
 
   @doc("Timezone for the operation")
   timezone?: string;
