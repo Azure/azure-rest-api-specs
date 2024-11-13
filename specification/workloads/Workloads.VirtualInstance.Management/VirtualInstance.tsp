@@ -13,7 +13,8 @@ model VirtualInstance is TrackedResource<VirtualInstanceProperties> {
   ...ResourceNameParameter<
     Resource = VirtualInstance,
     KeyName = "virtualInstanceName",
-    SegmentName = "virtualInstances"
+    SegmentName = "virtualInstances",
+    NamePattern = "^[a-zA-Z0-9-_]{3,64}$"
   >;
   ...ManagedServiceIdentityProperty;
   ...ResourceKindProperty;
@@ -55,8 +56,8 @@ interface VirtualInstances {
 
 @@doc(VirtualInstance.name, "The name of the Virtual Instance resource");
 @@doc(VirtualInstances.create::parameters.resource,
-  "Virtual Instance resource request body."
+  "Request body to create the Virtual Instance resource."
 );
 @@doc(VirtualInstances.update::parameters.properties,
-  "Request body to update a Virtual Instance resource."
+  "Request body to update the Virtual Instance resource."
 );

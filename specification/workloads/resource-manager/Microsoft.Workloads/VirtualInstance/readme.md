@@ -27,22 +27,38 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-11
+tag: package-preview-2024-12
 ```
 
 
-### Tag: package-2024-11-01-preview
+### Tag: package-2024-12-01-preview
 
-These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-12` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-11-01-preview'
+``` yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
-  - preview/2024-11-01-preview/VirtualInstance.json
-  - ../operations/preview/2024-11-01-preview/operations.json
+  - preview/2024-12-01-preview/VirtualInstance.json
+  - ../operations/preview/2024-12-01-preview/operations.json
 suppressions:
     - code: AvoidAdditionalProperties
-      from: preview/2024-11-01-preview/VirtualInstance.json
+      from: VirtualInstance.json
+      where: $.definitions.VirtualInstanceProperties.properties.metadata
       reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    - code: AvoidAdditionalProperties
+      from: VirtualInstance.json
+      where: $.definitions.WorkloadComponentProperties.properties.metadata
+      reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    - code: AvoidAdditionalProperties
+      from: VirtualInstance.json
+      where: $.definitions.UpdateVirtualInstanceProperties.properties.metadata
+      reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    - code: AvoidAdditionalProperties
+      from: VirtualInstance.json
+      where: $.definitions.UpdateWorkloadComponentProperties.properties.metadata
+      reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    - code: PatchBodyParametersSchema
+      from: VirtualInstance.json
+      reason: All the properties defined within PATCH payload are optional. The field getting flagged is within ManagedServiceIdentity and is not added by us. This seems like an open false positive from ARM common types.
 ```
 
 ---
@@ -56,12 +72,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
 ```
@@ -70,18 +80,6 @@ swagger-to-sdk:
 
 See configuration in [readme.az.md](./readme.az.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)
