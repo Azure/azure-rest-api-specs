@@ -22,8 +22,14 @@ module.exports = async ({ github, context, core }) => {
         );
 
       // Only update vars not already set
-      owner = owner || payload.workflow_run.head_repository.owner.login;
-      repo = repo || payload.workflow_run.head_repository.name;
+
+      // Owner and repo for the PR target
+      owner = owner || payload.workflow_run.repository.owner.login;
+      repo = repo || payload.workflow_run.repository.name;
+
+      // Owner and repo for the PR head (may be different than target for fork PRs)
+      const head_owner = payload.workflow_run.head_repository.owner.login;
+      const head_repo = payload.workflow_run.head_repository.name;
 
       if (!issue_number) {
         let commit_sha =
@@ -32,8 +38,8 @@ module.exports = async ({ github, context, core }) => {
         // Must call this API, since 'payload.workflow_run.pull_requests' is empty for fork PRs
         const { data: pullRequests } =
           await github.rest.repos.listPullRequestsAssociatedWithCommit({
-            owner: owner,
-            repo: repo,
+            owner: head_owner,
+            repo: head_repo,
             commit_sha: commit_sha,
           });
 
