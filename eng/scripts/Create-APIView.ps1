@@ -290,8 +290,7 @@ function New-RestSpecsAPIViewReviews {
     }
 
     if (-not $query['baselineCodeFile']) {
-      LogWarning "'Baseline' APIView token file not found for resource provider '$($_.BaseName)'. Skipping APIView creation."
-      return
+      LogWarning "'Baseline' APIView token file not found for resource provider '$($_.BaseName)'. Created APIView without baseline."
     }
   
     $query.Add('artifactName', $APIViewArtifactsName)
