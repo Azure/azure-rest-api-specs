@@ -4124,7 +4124,9 @@
           "items": {
             "$ref": "#/definitions/PlatformAttribute"
           },
-          "x-ms-identifiers": ["name"],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "This specifies the pub, offer, sku and version of the image version metadata"
         }
       },
@@ -4179,7 +4181,16 @@
         },
         "status": {
           "type": "string",
-          "description": "This property specifies the status of the validationProfile of the image version."
+          "description": "This property specifies the status of the validationProfile of the image version.",
+          "enum": [
+            "Unknown",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsString": true
+          }
         },
         "version": {
           "type": "string",
