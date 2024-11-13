@@ -5,7 +5,7 @@ const { extractInputs } = require('../context');
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
-module.exports = async ({ github, context }) => {
+module.exports = async ({ github, context, core }) => {
   console.log("context: " + JSON.stringify(context, null, 2));
 
   let owner = process.env.OWNER;
@@ -33,12 +33,22 @@ module.exports = async ({ github, context }) => {
       labels: [name],
     });
   } else if (value && value.toLowerCase() === "false") {
-    await github.rest.issues.removeLabel({
-      owner: owner,
-      repo: repo,
-      issue_number: issue_number,
-      name: name,
-    });
+    try {
+      await github.rest.issues.removeLabel({
+        owner: owner,
+        repo: repo,
+        issue_number: issue_number,
+        name: name,
+      });
+    }
+    catch (error) {
+      if (error.status === 404) {
+        core.info(`Ignoring error: ${error.status} - ${error.message}`);
+      }
+      else {
+        throw error;
+      }
+    }
   } else {
     throw new Error(`Invalid value: '${value}'`);
   }
