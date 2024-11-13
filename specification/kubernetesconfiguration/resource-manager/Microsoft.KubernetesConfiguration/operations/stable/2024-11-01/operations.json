@@ -34,57 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/operations": {
-      "get": {
-        "tags": [
-          "Operations in a Cluster"
-        ],
-        "operationId": "OperationStatus_List",
-        "description": "List Async Operations, currently in progress, in a cluster",
-        "x-ms-examples": {
-          "AsyncOperationStatus List": {
-            "$ref": "./examples/ListAsyncOperationStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
-          },
-          {
-            "$ref": "../../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
-          },
-          {
-            "$ref": "../../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operations in a cluster",
-            "schema": {
-              "$ref": "../../../common/2023-05-01-preview/definitions.json#/definitions/OperationStatusList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.KubernetesConfiguration/operations": {
       "get": {
         "tags": [
