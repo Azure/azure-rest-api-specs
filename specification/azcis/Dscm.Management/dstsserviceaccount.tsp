@@ -8,6 +8,7 @@ using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -51,7 +52,7 @@ model DstsServiceAccountResourceProperties {
 
   @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
-  armLocation?: string;
+  azureLocation?: azureLocation;
 
   @doc("Provisioning state.")
   @visibility("read")
