@@ -416,7 +416,7 @@ model KeyAttributes {
    * the retention interval.
    */
   @visibility("read")
-  recoveryLevel?: DeletionRecoveryLevel;
+  recoveryLevel?: string; // DeletionRecoveryLevel, but this should be treated as an opaque string.
 
   /**
    * Indicates if the private key can be exported. Release policy must be provided
