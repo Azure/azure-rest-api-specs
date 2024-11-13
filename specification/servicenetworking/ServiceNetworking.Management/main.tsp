@@ -148,6 +148,7 @@ model WafPolicy {
 @added(Versions.v2024_11_01_preview)
 model IpAccessPolicy {
   /** Ip Acess Policy Rules List* */
+  @OpenAPI.extension("x-ms-identifiers", [])
   rules?: IpAccessRule[];
 }
 
