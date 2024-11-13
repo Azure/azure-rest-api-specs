@@ -18,7 +18,7 @@ namespace Azure.AI.Projects.Agents;
  * tool requires a list of vector store IDs.
  */
 model ToolResources {
-  /** Resources to be used by the `code_interpreter tool` consisting of file IDs. */
+  /** Resources to be used by the `code_interpreter` tool consisting of file IDs. */
   @encodedName("application/json", "code_interpreter")
   codeInterpreter?: CodeInterpreterToolResource;
 
@@ -43,7 +43,7 @@ model CodeInterpreterToolResource {
   @maxItems(20)
   fileIds?: string[] = #[];
 
-  /** The data sources to be used. This option is mutually exclusive with fileIds. */
+  /** The data sources to be used. This option is mutually exclusive with the `fileIds` property. */
   @maxItems(20)
   @encodedName("application/json", "data_sources")
   dataSources?: VectorStoreDataSource[];
@@ -62,9 +62,9 @@ model FileSearchToolResource {
   vectorStoreIds?: string[];
 
   /**
-   * The list of vector store configuration objects from Azure. This list is limited to one
-   * element. The only element of this list contains 
-   * the list of azure asset IDs used by the search tool.
+   * The list of vector store configuration objects from Azure.
+   * This list is limited to one element.
+   * The only element of this list contains the list of azure asset IDs used by the search tool.
    */
   @maxItems(1)
   @encodedName("application/json", "vector_stores")
@@ -169,9 +169,11 @@ model CreateFileSearchToolResourceVectorStoreOptions {
   @encodedName("application/json", "chunking_strategy")
   chunkingStrategy: VectorStoreChunkingStrategyRequest;
 
-  /** Set of 16 key-value pairs that can be attached to a vector store. This can be useful for storing additional information
-   * about the vector store in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of
-   *  512 characters long. */
+  /** 
+   * Set of 16 key-value pairs that can be attached to a vector store. This can be useful for storing additional 
+   * information about the vector store in a structured format. Keys can be a maximum of 64 characters long and 
+   * values can be a maximum of 512 characters long. 
+   */
   ...OptionalNullableMetadata;
 }
 
