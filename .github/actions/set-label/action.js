@@ -22,8 +22,8 @@ module.exports = async ({ github, context, core }) => {
         );
 
       // Only update vars not already set
-      owner = owner || payload.workflow_run.repository.owner.login;
-      repo = repo || payload.workflow_run.repository.name;
+      owner = owner || payload.workflow_run.head_repository.owner.login;
+      repo = repo || payload.workflow_run.head_repository.name;
 
       if (!issue_number) {
         let commit_sha =
