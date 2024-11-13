@@ -130,8 +130,33 @@ model OutputSkillVariable extends SkillVariable {
   @doc("Skill inputs that were used in generating the output of the skill evaluation")
   skillInputs: Record<string> | null;
 
+  @doc("Skill output language")
+  outputLanguage: string | null;
+
   @doc("Enum indicating the output type of the skill. Supports StructuredOutput and Primitive")
   outputType: SkillOutputType;
+}
+
+model EvaluationResultOutput {
+  skillOutputType: SkillOutputType;
+  primitiveOutput: OutputSkillVariable?;
+  structuredOutput: SkillStructuredOutput?;
+  primitiveOutputValue: string?;
+}
+
+model SkillStructuredOutput {
+  components: Array<SkillOutputComponent>;
+}
+
+model SkillOutputComponent {
+  action: SkillOutputAction;
+  includeInEvalResultAsRawComponent: boolean;
+}
+
+enum SkillOutputComponentAction {
+  None,
+  Summarize,
+  Substitute,
 }
 
 @doc("Auth Location")

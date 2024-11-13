@@ -42,7 +42,7 @@ namespace SkillContext {
   @doc("Sets the skill output")
   op setSkillOutput(
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-    @body outputSkillVariable: OutputSkillVariable,
+    @body evaluationResultOutput: EvaluationResultOutput,
   ): NoContentResponse;
 
   @get
