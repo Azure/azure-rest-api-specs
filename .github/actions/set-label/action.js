@@ -27,7 +27,7 @@ module.exports = async ({ github, context, core }) => {
       owner = owner || payload.workflow_run.repository.owner.login;
       repo = repo || payload.workflow_run.repository.name;
 
-      // Owner and repo for the PR head (may be different than target for fork PRs)
+      // Owner and repo for the PR head (may differ from target for fork PRs)
       const head_owner = payload.workflow_run.head_repository.owner.login;
       const head_repo = payload.workflow_run.head_repository.name;
 
