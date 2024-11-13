@@ -1,0 +1,66 @@
+parameters:
+  - name: SwaggerApiParserVersion
+    type: string
+    default: '1.3.0-dev.20241029.2'
+  - name: APIViewArtifactsDirectoryName
+    type: string
+    default: 'SwaggerAPIViewArtifacts'
+  - name: APIViewArtifactsName
+    type: string
+    default: 'swaggerAPIViewArtifacts'
+  - name: APIViewAPIUri
+    type: string
+    default: 'https://apiview.dev/PullRequest/DetectAPIChanges'
+
+pr:
+   branches:
+     include:
+       - main
+
+jobs:
+- job:
+  pool:
+    name: azsdk-pool-mms-ubuntu-2204-general
+    vmImage: ubuntu-22.04
+
+  steps:
+  - checkout: self
+    fetchDepth: 0
+  
+  - pwsh: |
+      dotnet tool install Azure.Sdk.Tools.SwaggerApiParser `
+        --version ${{ parameters.SwaggerApiParserVersion }}  `
+        --add-source https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json `
+        --global
+    displayName: Install APIView Swagger Parser
+
+  - pwsh: |
+      . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
+      New-SwaggerAPIViewTokens `
+        -TempDirectory "$(Agent.TempDirectory)" `
+        -ArtiFactsStagingDirectory "$(Build.ArtifactStagingDirectory)" `
+        -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} 
+    displayName: Generate Swagger APIView Tokens
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/${{ parameters.APIViewArtifactsDirectoryName }}'
+      artifactName: '${{ parameters.APIViewArtifactsName }}'
+      publishLocation: 'pipeline'
+    displayName: 'Publish Swagger APIView Artifacts'
+    condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
+
+  - pwsh: |
+      . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
+      New-RestSpecsAPIViewReviews `
+        -ArtiFactsStagingDirectory $(Build.ArtifactStagingDirectory) `
+        -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} `
+        -APIViewArtifactsName ${{ parameters.APIViewArtifactsName }} `
+        -APIViewUri ${{ parameters.APIViewAPIUri }} `
+        -BuildId $(Build.BuildId) `
+        -RepoName $(Build.Repository.Name) `
+        -PullRequestNumber $(System.PullRequest.PullRequestNumber)`
+        -Language 'Swagger' `
+        -CommitSha $(Build.SourceVersion)
+    displayName: Create Swagger APIView
+    condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
