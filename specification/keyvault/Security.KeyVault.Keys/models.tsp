@@ -778,7 +778,6 @@ model KeyItem {
   /**
    * Key identifier.
    */
-  @visibility("read")
   kid?: string;
 
   /**
