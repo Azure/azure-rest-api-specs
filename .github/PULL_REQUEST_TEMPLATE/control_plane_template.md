@@ -51,7 +51,7 @@ If one or multiple validation error/warning suppression(s) is detected in your P
 <details>
 <summary>Generating SDKs from TypeSpec</summary>
 
-For services using TypeSpec, if the Azure SDK generation fails or skips in multiple languages, check that the tspconfig.yaml is properly set up and committed in the PR. Refer to [the sample tspconfig.yaml]( https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml).
+For services using TypeSpec, if the Azure SDK generation fails or skips in multiple languages, check that the tspconfig.yaml is properly set up and committed in the PR. Refer to [the sample tspconfig.yaml](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml).
 
 </details>
 
