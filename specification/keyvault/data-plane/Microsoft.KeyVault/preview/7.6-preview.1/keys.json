@@ -495,7 +495,7 @@
     },
     "/keys/{key-name}/{key-version}/decrypt": {
       "post": {
-        "operationId": "Decrypt",
+        "operationId": "decrypt",
         "summary": "Decrypts a single block of encrypted data.",
         "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the\ntarget encryption key and specified algorithm. This operation is the reverse of\nthe ENCRYPT operation; only a single block of data may be decrypted, the size\nof this block is dependent on the target key and the algorithm to be used. The\nDECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key\nVault since it uses the private portion of the key. This operation requires the\nkeys/decrypt permission. Microsoft recommends not to use CBC algorithms for\ndecryption without first ensuring the integrity of the ciphertext using an\nHMAC, for example. See\nhttps://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode\nfor more information.",
         "parameters": [
@@ -547,12 +547,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Decrypt example": {
+            "$ref": "./examples/decrypt-example.json"
+          }
         }
       }
     },
     "/keys/{key-name}/{key-version}/encrypt": {
       "post": {
-        "operationId": "Encrypt",
+        "operationId": "encrypt",
         "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored\nin a key vault.",
         "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an\nencryption key that is stored in Azure Key Vault. Note that the ENCRYPT\noperation only supports a single block of data, the size of which is dependent\non the target key and the encryption algorithm to be used. The ENCRYPT\noperation is only strictly necessary for symmetric keys stored in Azure Key\nVault since protection with an asymmetric key can be performed using public\nportion of the key. This operation is supported for asymmetric keys as a\nconvenience for callers that have a key-reference but do not have access to the\npublic key material. This operation requires the keys/encrypt permission.",
         "parameters": [
@@ -604,12 +609,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Encrypt example": {
+            "$ref": "./examples/encrypt-example.json"
+          }
         }
       }
     },
     "/keys/{key-name}/{key-version}/release": {
       "post": {
-        "operationId": "Release",
+        "operationId": "release",
         "summary": "Releases a key.",
         "description": "The release key operation is applicable to all key types. The target key must\nbe marked exportable. This operation requires the keys/release permission.",
         "parameters": [
@@ -661,12 +671,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Release": {
+            "$ref": "./examples/release-example.json"
+          }
         }
       }
     },
     "/keys/{key-name}/{key-version}/sign": {
       "post": {
-        "operationId": "Sign",
+        "operationId": "sign",
         "summary": "Creates a signature from a digest using the specified key.",
         "description": "The SIGN operation is applicable to asymmetric and symmetric keys stored in\nAzure Key Vault since this operation uses the private portion of the key. This\noperation requires the keys/sign permission.",
         "parameters": [
@@ -718,12 +733,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Sign": {
+            "$ref": "./examples/sign-example.json"
+          }
         }
       }
     },
     "/keys/{key-name}/{key-version}/unwrapkey": {
       "post": {
-        "operationId": "UnwrapKey",
+        "operationId": "unwrapKey",
         "summary": "Unwraps a symmetric key using the specified key that was initially used for\nwrapping that key.",
         "description": "The UNWRAP operation supports decryption of a symmetric key using the target\nkey encryption key. This operation is the reverse of the WRAP operation. The\nUNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key\nVault since it uses the private portion of the key. This operation requires the\nkeys/unwrapKey permission.",
         "parameters": [
@@ -775,12 +795,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Unwrapkey": {
+            "$ref": "./examples/unwrapKey-example.json"
+          }
         }
       }
     },
     "/keys/{key-name}/{key-version}/verify": {
       "post": {
-        "operationId": "Verify",
+        "operationId": "verify",
         "summary": "Verifies a signature using a specified key.",
         "description": "The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault.\nVERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault\nsince signature verification can be performed using the public portion of the\nkey but this operation is supported as a convenience for callers that only have\na key-reference and not the public portion of the key. This operation requires\nthe keys/verify permission.",
         "parameters": [
@@ -832,12 +857,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Verify": {
+            "$ref": "./examples/verify-example.json"
+          }
         }
       }
     },
     "/keys/{key-name}/{key-version}/wrapkey": {
       "post": {
-        "operationId": "WrapKey",
+        "operationId": "wrapKey",
         "summary": "Wraps a symmetric key using a specified key.",
         "description": "The WRAP operation supports encryption of a symmetric key using a key\nencryption key that has previously been stored in an Azure Key Vault. The WRAP\noperation is only strictly necessary for symmetric keys stored in Azure Key\nVault since protection with an asymmetric key can be performed using the public\nportion of the key. This operation is supported for asymmetric keys as a\nconvenience for callers that have a key-reference but do not have access to the\npublic key material. This operation requires the keys/wrapKey permission.",
         "parameters": [
@@ -888,6 +918,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Wrapkey": {
+            "$ref": "./examples/wrapKey-example.json"
           }
         }
       }

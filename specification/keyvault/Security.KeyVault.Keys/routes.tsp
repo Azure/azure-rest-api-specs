@@ -1,13 +1,15 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
 
 namespace KeyVault;
 
@@ -315,6 +317,8 @@ op restoreKey is Azure.Core.Foundations.Operation<
  * public key material. This operation requires the keys/encrypt permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("encrypt")
 @summary("""
   Encrypts an arbitrary sequence of bytes using an encryption key that is stored
   in a key vault.
@@ -360,6 +364,8 @@ op encrypt is Azure.Core.Foundations.Operation<
  * for more information.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("decrypt")
 @summary("Decrypts a single block of encrypted data.")
 @route("/keys/{key-name}/{key-version}/decrypt")
 @post
@@ -394,6 +400,8 @@ op decrypt is Azure.Core.Foundations.Operation<
  * operation requires the keys/sign permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("sign")
 @summary("Creates a signature from a digest using the specified key.")
 @route("/keys/{key-name}/{key-version}/sign")
 @post
@@ -431,6 +439,8 @@ op sign is Azure.Core.Foundations.Operation<
  * the keys/verify permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("verify")
 @summary("Verifies a signature using a specified key.")
 @route("/keys/{key-name}/{key-version}/verify")
 @post
@@ -469,6 +479,8 @@ op verify is Azure.Core.Foundations.Operation<
  * public key material. This operation requires the keys/wrapKey permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("wrapKey")
 @summary("Wraps a symmetric key using a specified key.")
 @route("/keys/{key-name}/{key-version}/wrapkey")
 @post
@@ -505,6 +517,8 @@ op wrapKey is Azure.Core.Foundations.Operation<
  * keys/unwrapKey permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("unwrapKey")
 @summary("""
   Unwraps a symmetric key using the specified key that was initially used for
   wrapping that key.
@@ -541,6 +555,8 @@ op unwrapKey is Azure.Core.Foundations.Operation<
  * be marked exportable. This operation requires the keys/release permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("release")
 @summary("Releases a key.")
 @route("/keys/{key-name}/{key-version}/release")
 @post
