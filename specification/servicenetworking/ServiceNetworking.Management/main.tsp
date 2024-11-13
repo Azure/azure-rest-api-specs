@@ -19,8 +19,11 @@ enum Versions {
   v2023_11_01: "2023-11-01",
 
   /** 2024-05-01 preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_05_01_preview: "2024-05-01-preview",
+
+  /** 2024-11-01 preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2024_11_01_preview: "2024-11-01-preview",
 }
 
 using TypeSpec.Http;
@@ -114,6 +117,10 @@ model SecurityPolicyProperties {
   /** Web Application Firewall Policy of the Traffic Controller Security Policy */
   wafPolicy?: WafPolicy;
 
+  /** Ip Access Policy of the Traffic Controller Security Policy* */
+  @added(Versions.v2024_11_01_preview)
+  ipAccessPolicy?: IpAccessPolicy;
+
   /** Provisioning State of Traffic Controller SecurityPolicy Resource */
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -125,12 +132,48 @@ union PolicyType {
 
   /** Policy of Type WAF */
   WAF: "waf",
+
+  /** Policy of Type IpAccessRules */
+  @added(Versions.v2024_11_01_preview)
+  IpAccessRules: "ipAccessRules",
 }
 
 /** Web Application Firewall Policy */
 model WafPolicy {
   /** Resource ID of the WAF */
   id: string;
+}
+
+/** Ip Access Policy* */
+@added(Versions.v2024_11_01_preview)
+model IpAccessPolicy {
+  /** Ip Acess Policy Rules List* */
+  rules?: IpAccessRule[];
+}
+
+/** Ip Access Policy Rules * */
+@added(Versions.v2024_11_01_preview)
+model IpAccessRule {
+  /** Priority of the Ip Access Rule * */
+  priority: int64;
+
+  /** Source Address Prefixed Applied by the Rule * */
+  sourceAddressPrefixes: string[];
+
+  /** Action of the Rule* */
+  action: IpAccessRuleAction;
+}
+
+/** Action of Ip Access Rule * */
+@added(Versions.v2024_11_01_preview)
+union IpAccessRuleAction {
+  string,
+
+  /** Allow Source Ip Prefixes * */
+  Allow: "allow",
+
+  /** Deny Source Ip Prefixes * */
+  Deny: "deny",
 }
 
 /** SecurityPolicyConfigurations Subresource of Traffic Controller. */
