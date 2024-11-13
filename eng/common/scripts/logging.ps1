@@ -50,8 +50,7 @@ function LogSuccess {
   Write-Host "${green}$args${reset}"
 }
 
-function LogErrorForFile($file, $errorString)
-{
+function LogErrorForFile($file, $errorString) {
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.logissue type=error;sourcepath=$file;linenumber=1;columnnumber=1;]$errorString" -replace "`n", "%0D%0A")
   }
