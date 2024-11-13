@@ -144,36 +144,36 @@ model WafPolicy {
   id: string;
 }
 
-/** Ip Access Policy* */
+/** Ip Access Policy */
 @added(Versions.v2024_11_01_preview)
 model IpAccessPolicy {
-  /** Ip Acess Policy Rules List* */
+  /** Ip Access Policy Rules List */
   @OpenAPI.extension("x-ms-identifiers", [])
   rules?: IpAccessRule[];
 }
 
-/** Ip Access Policy Rules * */
+/** Ip Access Policy Rules */
 @added(Versions.v2024_11_01_preview)
 model IpAccessRule {
-  /** Priority of the Ip Access Rule * */
+  /** Priority of the Ip Access Rule */
   priority: int64;
 
-  /** Source Address Prefixed Applied by the Rule * */
+  /** Source Address Prefixed Applied by the Rule */
   sourceAddressPrefixes: string[];
 
-  /** Action of the Rule* */
+  /** Action of the Rule */
   action: IpAccessRuleAction;
 }
 
-/** Action of Ip Access Rule * */
+/** Action of Ip Access Rule */
 @added(Versions.v2024_11_01_preview)
 union IpAccessRuleAction {
   string,
 
-  /** Allow Source Ip Prefixes * */
+  /** Allow Source Ip Prefixes */
   Allow: "allow",
 
-  /** Deny Source Ip Prefixes * */
+  /** Deny Source Ip Prefixes */
   Deny: "deny",
 }
 

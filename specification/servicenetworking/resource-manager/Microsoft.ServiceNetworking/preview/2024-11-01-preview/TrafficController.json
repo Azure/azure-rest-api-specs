@@ -1549,11 +1549,11 @@
     },
     "IpAccessPolicy": {
       "type": "object",
-      "description": "Ip Access Policy*",
+      "description": "Ip Access Policy",
       "properties": {
         "rules": {
           "type": "array",
-          "description": "Ip Acess Policy Rules List*",
+          "description": "Ip Access Policy Rules List",
           "items": {
             "$ref": "#/definitions/IpAccessRule"
           },
@@ -1563,23 +1563,23 @@
     },
     "IpAccessRule": {
       "type": "object",
-      "description": "Ip Access Policy Rules *",
+      "description": "Ip Access Policy Rules",
       "properties": {
         "priority": {
           "type": "integer",
           "format": "int64",
-          "description": "Priority of the Ip Access Rule *"
+          "description": "Priority of the Ip Access Rule"
         },
         "sourceAddressPrefixes": {
           "type": "array",
-          "description": "Source Address Prefixed Applied by the Rule *",
+          "description": "Source Address Prefixed Applied by the Rule",
           "items": {
             "type": "string"
           }
         },
         "action": {
           "$ref": "#/definitions/IpAccessRuleAction",
-          "description": "Action of the Rule*"
+          "description": "Action of the Rule"
         }
       },
       "required": [
@@ -1590,7 +1590,7 @@
     },
     "IpAccessRuleAction": {
       "type": "string",
-      "description": "Action of Ip Access Rule *",
+      "description": "Action of Ip Access Rule",
       "enum": [
         "allow",
         "deny"
@@ -1602,12 +1602,12 @@
           {
             "name": "Allow",
             "value": "allow",
-            "description": "Allow Source Ip Prefixes *"
+            "description": "Allow Source Ip Prefixes"
           },
           {
             "name": "Deny",
             "value": "deny",
-            "description": "Deny Source Ip Prefixes *"
+            "description": "Deny Source Ip Prefixes"
           }
         ]
       }
