@@ -1767,7 +1767,6 @@
       "type": "string",
       "format": "arm-id",
       "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "pattern": "^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+)$",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -2091,7 +2090,6 @@
       "type": "string",
       "format": "arm-id",
       "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "pattern": "^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.DeviceRegistry/namespaces/(.+)$",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -2199,7 +2197,7 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
@@ -2613,7 +2611,7 @@
       "description": "Details of the EdgeProvisioning OnboardingService.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
@@ -3120,7 +3118,7 @@
           "description": "The policy status"
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
@@ -3180,7 +3178,7 @@
           "description": "The policy status"
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
@@ -3236,7 +3234,6 @@
       "type": "string",
       "format": "arm-id",
       "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "pattern": "^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+?)/onboardingServices/(.+?)/policies/(.+)$",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -3282,6 +3279,49 @@
       "required": [
         "ttl"
       ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted by the server."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "PublicKeyDetails": {
       "type": "object",
@@ -3409,7 +3449,6 @@
       "type": "string",
       "format": "arm-id",
       "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "pattern": "^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+)$",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -3471,7 +3510,6 @@
       "type": "string",
       "format": "arm-id",
       "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "pattern": "^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.Storage/storageAccounts/(.+)$",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./discoveryServices.tsp";
 import "./ownershipVoucherPublicKeys.tsp";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -62,7 +63,7 @@ model OnboardingService
 model OnboardingServiceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @visibility("read")
   @doc("The onboarding service device endpoints.")
@@ -148,7 +149,7 @@ model PolicyProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @doc("The bootstrap authentication rule.")
   bootstrapAuthentication: BootstrapAuthenticationRule;
@@ -188,7 +189,6 @@ model SelectedIdentity {
   resourceId?: SelectedIdentityResourceId;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+)$")
 scalar SelectedIdentityResourceId
   extends armResourceIdentifier<[
     {
@@ -269,7 +269,6 @@ model DeviceRegistryNamespaceDeviceJitProperties {
   namespaceResourceId: DeviceRegistryNamespaceResourceId;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.DeviceRegistry/namespaces/(.+)$")
 @added(Versions.v2024_12_01_preview)
 scalar DeviceRegistryNamespaceResourceId
   extends armResourceIdentifier<[
@@ -359,7 +358,6 @@ model StorageAccountOwnershipVoucherStorage extends OwnershipVoucherStorage {
   containerUri: url;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/Microsoft.Storage/storageAccounts/(.+)$")
 @added(Versions.v2024_12_01_preview)
 scalar StorageAccountResourceId
   extends armResourceIdentifier<[
@@ -490,7 +488,6 @@ model AllocationEndpoint {
   hostName: string;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+)$")
 scalar AllocationEndpointResourceId
   extends armResourceIdentifier<[
     {
@@ -717,7 +714,7 @@ model PolicyPatchProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @doc("The bootstrap authentication rule.")
   bootstrapAuthentication?: PatchBootstrapAuthenticationRule;
@@ -949,7 +946,6 @@ model DeviceState
   name: string;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+?)/onboardingServices/(.+?)/policies/(.+)$")
 scalar PolicyResourceId
   extends armResourceIdentifier<[
     {
@@ -994,7 +990,7 @@ model DeviceStateProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @added(Versions.v2024_12_01_preview)
   @visibility("read")
