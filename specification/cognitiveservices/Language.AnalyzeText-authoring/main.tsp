@@ -45,7 +45,7 @@ using TypeSpec.Versioning;
     Endpoint: string,
   }
 )
-namespace Language.Authoring.Analyzetext;
+namespace Language.Authoring.AnalyzeText;
 
 /**
  * The available API versions.
