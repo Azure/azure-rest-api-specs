@@ -7,7 +7,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace DocumentTranslation;
 @doc("Document Translate Request Content")
@@ -542,7 +541,6 @@ model GetTranslationsStatusOptions {
   maxpagesize?: int32 = 50;
 
   @doc("Ids to use in filtering")
-  @clientName("translationIds")
   @query("ids")
   ids?: uuid[];
 
@@ -566,7 +564,6 @@ model GetTranslationsStatusOptions {
 @doc("Get Documents Status options")
 model GetDocumentsStatusOptions {
   @doc("Format - uuid.  The operation id")
-  @clientName("translationId")
   @path
   id: uuid;
 
@@ -623,7 +620,6 @@ model GetDocumentsStatusOptions {
   maxpagesize?: int32 = 50;
 
   @doc("Ids to use in filtering")
-  @clientName("documentIds")
   @query("ids")
   ids?: uuid[];
 

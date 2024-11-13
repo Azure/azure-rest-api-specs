@@ -50,6 +50,14 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
 
+@@clientName(DocumentTranslation.GetTranslationsStatusOptions.ids,
+  "translationIds"
+);
+
+@@clientName(DocumentTranslation.GetDocumentsStatusOptions.id, "translationId");
+
+@@clientName(DocumentTranslation.GetDocumentsStatusOptions.ids, "documentIds");
+
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
   "csharp, java"
