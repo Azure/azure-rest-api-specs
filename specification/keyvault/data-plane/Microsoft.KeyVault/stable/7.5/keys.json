@@ -1517,21 +1517,19 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DeletedKeyItem items on this page",
+          "description": "A response message containing a list of deleted keys in the key vault along with a link to the next page of\ndeleted keys.",
           "items": {
             "$ref": "#/definitions/DeletedKeyItem"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of deleted keys.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DeletionRecoveryLevel": {
       "type": "string",
@@ -2295,21 +2293,19 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The KeyItem items on this page",
+          "description": "A response message containing a list of keys in the key vault along with a link to the next page of keys.",
           "items": {
             "$ref": "#/definitions/KeyItem"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of keys.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "KeyOperationResult": {
       "type": "object",

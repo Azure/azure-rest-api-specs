@@ -754,7 +754,22 @@ model KeyUpdateParameters {
 /**
  * The key list result.
  */
-model KeyListResult is Azure.Core.Page<KeyItem>;
+@pagedResult
+model KeyListResult {
+  /**
+   * A response message containing a list of keys in the key vault along with a link to the next page of keys.
+   */
+  @items
+  @visibility("read")
+  value?: KeyItem[];
+
+  /**
+   * The URL to get the next set of keys.
+   */
+  @Azure.Core.nextLink
+  @visibility("read")
+  nextLink?: string;
+}
 
 /**
  * The key item containing key metadata.
@@ -983,7 +998,23 @@ model KeyReleaseResult {
 /**
  * A list of keys that have been deleted in this vault.
  */
-model DeletedKeyListResult is Azure.Core.Page<DeletedKeyItem>;
+@pagedResult
+model DeletedKeyListResult {
+  /**
+   * A response message containing a list of deleted keys in the key vault along with a link to the next page of
+   * deleted keys.
+   */
+  @items
+  @visibility("read")
+  value?: DeletedKeyItem[];
+
+  /**
+   * The URL to get the next set of deleted keys.
+   */
+  @Azure.Core.nextLink
+  @visibility("read")
+  nextLink?: string;
+}
 
 /**
  * The deleted key item containing the deleted key metadata and information about
