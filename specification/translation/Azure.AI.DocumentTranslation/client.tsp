@@ -36,10 +36,6 @@ interface DocumentTranslationClient {
   getSupportedFormats is DocumentTranslation.DocumentTranslationOperations.getSupportedFormats;
 }
 
-op getTranslationsStatusHello(options: DocumentTranslation.GetTranslationsStatusOptions): DocumentTranslation.TranslationsStatus;
-
-@@override(DocumentTranslationClient.getTranslationsStatus, ClientCustomizations.getTranslationsStatusHello, "java");
-
 @client({
   name: "SingleDocumentTranslationClient",
   service: DocumentTranslation,
@@ -78,6 +74,10 @@ interface SingleDocumentTranslationClient {
 @@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
 @@convenientAPI(DocumentTranslationClient.getSupportedFormats, false, "java");
+
+@@convenientAPI(DocumentTranslationClient.getTranslationsStatus, false, "java");
+
+@@convenientAPI(DocumentTranslationClient.getDocumentsStatus, false, "java");
 
 @@access(DocumentTranslationClient.getSupportedFormats,
   Access.internal,
