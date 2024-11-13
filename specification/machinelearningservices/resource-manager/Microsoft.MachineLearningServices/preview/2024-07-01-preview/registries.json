@@ -637,6 +637,13 @@
           "$ref": "#/definitions/ManagedResourceGroupSettings",
           "x-nullable": true
         },
+        "syndicatedRegistries": {
+          "description": "Dictionary of syndicated registries. Key is Guid and value is a SyndicatedRegistry",
+          "additionalProperties": {
+             "$ref": "#/definitions/SyndicatedRegistry"
+          },
+          "x-nullable": true
+        },
         "mlFlowRegistryUri": {
           "description": "MLFlow Registry URI for the Registry",
           "type": "string",
@@ -710,6 +717,17 @@
           },
           "x-nullable": true,
           "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "SyndicatedRegistry": {
+      "description": "A registry that is syndicated",
+      "type": "object",
+      "properties": {
+        "RegistryId": {
+          "description": "The Registry Id of the syndicated Registry",
+          "type": "string"
         }
       },
       "additionalProperties": false
