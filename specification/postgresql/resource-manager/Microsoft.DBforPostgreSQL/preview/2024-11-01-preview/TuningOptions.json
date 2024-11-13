@@ -347,24 +347,14 @@
     },
     "IndexRecommendationListResult": {
       "description": "A list of available index recommendations.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A list of available index recommendations.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IndexRecommendationResource"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
-          "type": "string"
-        }
-      }
+      "uniqueItems": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IndexRecommendationResource"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
     },
     "TuningOptionsResource": {
       "type": "object",
@@ -376,25 +366,15 @@
       "description": "Stores property that features impact on some metric if this recommended action is applied."
     },
     "TuningOptionsListResult": {
-      "description": "A list of server tuning options.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A list of available tuning options.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TuningOptionsResource"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
-          "type": "string"
-        }
-      }
+      "description": "A list of available tuning options for the server.",
+      "uniqueItems": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TuningOptionsResource"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
     }
   },
   "parameters": {
