@@ -13,19 +13,6 @@ using TypeSpec.Rest;
 
 namespace KeyVault;
 
-alias KeyVaultOperations = StandardResourceOperations;
-
-alias KeyVaultListParameters = ListQueryParametersTrait<{
-  /**
-   * Maximum number of results to return in a page. If not specified the service
-   * will return up to 25 results.
-   */
-  @maxValue(25)
-  @minValue(1)
-  @query("maxresults")
-  maxresults?: int32;
-}>;
-
 /**
  * The create key operation can be used to create any key type in Azure Key Vault.
  * If the named key already exists, Azure Key Vault creates a new version of the
@@ -242,9 +229,24 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
  * provided in the response. Individual versions of a key are not listed in the
  * response. This operation requires the keys/list permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("List keys in the specified vault.")
-op getKeys is KeyVaultOperations.ResourceList<KeyItem, KeyVaultListParameters>;
+@route("/keys")
+@get
+op getKeys is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Maximum number of results to return in a page. If not specified the service
+     * will return up to 25 results.
+     */
+    @maxValue(25)
+    @minValue(1)
+    @query("maxresults")
+    maxresults?: int32;
+  },
+  KeyListResult
+>;
 
 /**
  * The Key Backup operation exports a key from Azure Key Vault in a protected
@@ -593,11 +595,23 @@ op release is Azure.Core.Foundations.Operation<
  * vault, it will return an error if invoked on a non soft-delete enabled vault.
  * This operation requires the keys/list permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Lists the deleted keys in the specified vault.")
-op getDeletedKeys is KeyVaultOperations.ResourceList<
-  DeletedKeyItem,
-  KeyVaultListParameters
+@route("/deletedkeys")
+@get
+op getDeletedKeys is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Maximum number of results to return in a page. If not specified the service
+     * will return up to 25 results.
+     */
+    @maxValue(25)
+    @minValue(1)
+    @query("maxresults")
+    maxresults?: int32;
+  },
+  DeletedKeyListResult
 >;
 
 /**

@@ -774,14 +774,12 @@ model KeyListResult {
 /**
  * The key item containing key metadata.
  */
-@resource("keys")
 model KeyItem {
   /**
    * Key identifier.
    */
   @visibility("read")
-  @key // The ID isn't really the key; it should be the key name, but we don't have this attribute on the model
-  kid: string;
+  kid?: string;
 
   /**
    * The key management attributes.
@@ -1020,7 +1018,6 @@ model DeletedKeyListResult {
  * The deleted key item containing the deleted key metadata and information about
  * deletion.
  */
-@resource("deletedkeys")
 model DeletedKeyItem {
   ...KeyItem;
 

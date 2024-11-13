@@ -76,7 +76,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDeletedKeyItem"
+              "$ref": "#/definitions/DeletedKeyListResult"
             }
           },
           "default": {
@@ -256,7 +256,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedKeyItem"
+              "$ref": "#/definitions/KeyListResult"
             }
           },
           "default": {
@@ -1541,10 +1541,7 @@
           "description": "The time when the key was deleted, in UTC",
           "readOnly": true
         }
-      },
-      "required": [
-        "kid"
-      ]
+      }
     },
     "DeletedKeyListResult": {
       "type": "object",
@@ -2317,10 +2314,7 @@
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a\ncertificate, then managed will be true.",
           "readOnly": true
         }
-      },
-      "required": [
-        "kid"
-      ]
+      }
     },
     "KeyListResult": {
       "type": "object",
@@ -2698,50 +2692,6 @@
           "description": "The type of the action. The value should be compared case-insensitively."
         }
       }
-    },
-    "PagedDeletedKeyItem": {
-      "type": "object",
-      "description": "Paged collection of DeletedKeyItem items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DeletedKeyItem items on this page",
-          "items": {
-            "$ref": "#/definitions/DeletedKeyItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedKeyItem": {
-      "type": "object",
-      "description": "Paged collection of KeyItem items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The KeyItem items on this page",
-          "items": {
-            "$ref": "#/definitions/KeyItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "RandomBytes": {
       "type": "object",
