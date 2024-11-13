@@ -157,7 +157,7 @@ model ApplicationProperties {
   category: Category;
 
   /**
-   * Privacy rights request email address TO DO need to find out what this actually is
+   * Privacy rights request email address.
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
   privacyRightsRequestEmailAddress: string;
