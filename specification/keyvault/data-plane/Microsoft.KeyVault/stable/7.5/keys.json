@@ -1178,30 +1178,6 @@
     }
   },
   "definitions": {
-    "ActionType": {
-      "type": "string",
-      "description": "The type of the action. The value should be compared case-insensitively.",
-      "enum": [
-        "Rotate",
-        "Notify"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Rotate",
-            "value": "Rotate",
-            "description": "Rotate the key based on the key policy."
-          },
-          {
-            "name": "Notify",
-            "value": "Notify",
-            "description": "Trigger Event Grid events. Defaults to 30 days before expiry. Key Vault only."
-          }
-        ]
-      }
-    },
     "Attributes": {
       "type": "object",
       "description": "The object attributes managed by the KeyVault service.",
@@ -2326,6 +2302,30 @@
         }
       }
     },
+    "KeyRotationPolicyAction": {
+      "type": "string",
+      "description": "The type of the action. The value should be compared case-insensitively.",
+      "enum": [
+        "Rotate",
+        "Notify"
+      ],
+      "x-ms-enum": {
+        "name": "KeyRotationPolicyAction",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Rotate",
+            "value": "Rotate",
+            "description": "Rotate the key based on the key policy."
+          },
+          {
+            "name": "Notify",
+            "value": "Notify",
+            "description": "Trigger Event Grid events. Defaults to 30 days before expiry. Key Vault only."
+          }
+        ]
+      }
+    },
     "KeyRotationPolicyAttributes": {
       "type": "object",
       "description": "The key rotation policy attributes.",
@@ -2481,7 +2481,7 @@
       "description": "The action that will be executed.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ActionType",
+          "$ref": "#/definitions/KeyRotationPolicyAction",
           "description": "The type of the action. The value should be compared case-insensitively."
         }
       }
