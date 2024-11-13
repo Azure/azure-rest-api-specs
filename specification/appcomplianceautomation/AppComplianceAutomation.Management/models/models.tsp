@@ -223,6 +223,9 @@ union CategoryStatus {
   @doc("The category is pending for approval.")
   PendingApproval: "PendingApproval",
 
+  @doc("The category is collecting assessment.")
+  AssessmentCollecting: "AssessmentCollecting",
+
   string,
 }
 
@@ -242,6 +245,9 @@ union ControlFamilyStatus {
   @doc("The control family is pending for approval.")
   PendingApproval: "PendingApproval",
 
+  @doc("The control family is collecting assessment.")
+  AssessmentCollecting: "AssessmentCollecting",
+
   string,
 }
 
@@ -260,6 +266,9 @@ union ControlStatus {
 
   @doc("The control is pending for approval.")
   PendingApproval: "PendingApproval",
+
+  @doc("The control is collecting assessment.")
+  AssessmentCollecting: "AssessmentCollecting",
 
   string,
 }
@@ -311,6 +320,9 @@ union ResponsibilityStatus {
 
   @doc("The responsibility is pending for approval.")
   PendingApproval: "PendingApproval",
+
+  @doc("The responsibility is collecting assessment.")
+  AssessmentCollecting: "AssessmentCollecting",
 
   string,
 }
