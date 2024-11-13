@@ -691,7 +691,7 @@ model GalleryApplicationProperties {
   /**
    * The end of life date of the gallery Application Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
@@ -917,12 +917,12 @@ model GalleryArtifactPublishingProfileBase {
    * The timestamp for when the gallery image version is published.
    */
   @visibility("read")
-  publishedDate?: offsetDateTime;
+  publishedDate?: utcDateTime;
 
   /**
    * The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * Specifies the storage account type to be used to store the image. This property is not updatable.
@@ -1206,7 +1206,7 @@ model GalleryImageProperties {
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * This is the gallery image definition identifier.
@@ -1724,7 +1724,7 @@ model SharedGalleryImageProperties {
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * This is the gallery image definition identifier.
@@ -1794,12 +1794,12 @@ model SharedGalleryImageVersionProperties {
   /**
    * The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  publishedDate?: offsetDateTime;
+  publishedDate?: utcDateTime;
 
   /**
    * The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
@@ -1986,7 +1986,7 @@ model CommunityGalleryImageProperties {
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * This is the community gallery image definition identifier.
@@ -2082,12 +2082,12 @@ model CommunityGalleryImageVersionProperties {
   /**
    * The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  publishedDate?: offsetDateTime;
+  publishedDate?: utcDateTime;
 
   /**
    * The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
