@@ -1,4 +1,5 @@
 // @ts-check
+
 /**
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
