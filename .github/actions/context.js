@@ -2,9 +2,10 @@
 /**
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
- * @returns {Promise<{owner: string, repo: string, issue_number: number}>}
+ * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @returns {Promise<{owner: string, repo: string, issue_number: number, run_id: number }>}
  */
-async function extractInputs(github, context) {
+async function extractInputs(github, context, core) {
   // Add support for more event types as needed
   if (
     context.eventName === "workflow_run" &&
@@ -15,9 +16,6 @@ async function extractInputs(github, context) {
         context.payload
       );
 
-    // Owner and repo for the PR target
-    const owner = payload.workflow_run.repository.owner.login;
-    const repo = payload.workflow_run.repository.name;
     let issue_number;
 
     const pull_requests = payload.workflow_run.pull_requests;
@@ -51,7 +49,12 @@ async function extractInputs(github, context) {
       }
     }
 
-    return { owner: owner, repo: repo, issue_number: issue_number };
+    return {
+      owner: payload.workflow_run.repository.owner.login,
+      repo: payload.workflow_run.repository.name,
+      issue_number: issue_number,
+      run_id: payload.workflow_run.id,
+    };
   } else {
     throw new Error(
       `Invalid context: '${context.eventName}:${context.payload.action}'.  Expected 'workflow_run:completed'.`,

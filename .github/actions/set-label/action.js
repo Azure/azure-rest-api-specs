@@ -11,7 +11,7 @@ module.exports = async ({ github, context, core }) => {
   let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
 
   if (!owner || !repo || !issue_number) {
-    let inputsFromContext = await extractInputs(github, context);
+    let inputsFromContext = await extractInputs(github, context, core);
     owner = owner || inputsFromContext.owner;
     repo = repo || inputsFromContext.repo;
     issue_number = issue_number || inputsFromContext.issue_number;

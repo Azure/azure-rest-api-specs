@@ -1,5 +1,7 @@
 // @ts-check
 
+const { extractInputs } = require('../context');
+
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
@@ -9,24 +11,10 @@ module.exports = async ({ github, context, core }) => {
   let run_id = parseInt(process.env.RUN_ID || "");
 
   if (!owner || !repo || !run_id) {
-    // TODO: Replace with call to context.extractInputs()
-
-    // Add support for more event types as needed
-    if (context.eventName === "workflow_run" && context.payload.action === "completed") {
-      const payload =
-        /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
-          context.payload
-        );
-
-      // Only update vars not already set
-      owner = owner || payload.workflow_run.repository.owner.login;
-      repo = repo || payload.workflow_run.repository.name;
-      run_id = run_id || payload.workflow_run.id;
-    } else {
-      throw new Error(
-        `Invalid context: '${context.eventName}:${context.payload.action}'.  Expected 'workflow_run:completed'.`,
-      );
-    }
+    let inputsFromContext = await extractInputs(github, context, core);
+    owner = owner || inputsFromContext.owner;
+    repo = repo || inputsFromContext.repo;
+    run_id = run_id || inputsFromContext.run_id;
   }
 
   const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
@@ -34,8 +22,6 @@ module.exports = async ({ github, context, core }) => {
     repo: repo,
     run_id: run_id,
   });
-
-  console.log("artifacts: " + JSON.stringify(artifacts, null, 2));
 
   const artifactNames = artifacts.data.artifacts.map((a) => a.name);
 
