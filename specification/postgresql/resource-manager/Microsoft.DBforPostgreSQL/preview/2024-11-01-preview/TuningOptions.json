@@ -118,7 +118,15 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IndexRecommendationListResult"
+              "description": "A list of available index recommendations.",
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IndexRecommendationResource"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             }
           },
           "default": {
@@ -160,7 +168,15 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TuningOptionsListResult"
+              "description": "A list of available tuning options for the server.",
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TuningOptionsResource"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             }
           },
           "default": {
@@ -339,17 +355,6 @@
       ],
       "description": "Index recommendation properties."
     },
-    "IndexRecommendationListResult": {
-      "description": "A list of available index recommendations.",
-      "uniqueItems": false,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/IndexRecommendationResource"
-      },
-      "x-ms-identifiers": [
-        "name"
-      ]
-    },
     "TuningOptionsResource": {
       "type": "object",
       "allOf": [
@@ -358,17 +363,6 @@
         }
       ],
       "description": "Stores property that features impact on some metric if this recommended action is applied."
-    },
-    "TuningOptionsListResult": {
-      "description": "A list of available tuning options for the server.",
-      "uniqueItems": false,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/TuningOptionsResource"
-      },
-      "x-ms-identifiers": [
-        "name"
-      ]
     }
   },
   "parameters": {
