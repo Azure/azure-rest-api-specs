@@ -45,7 +45,9 @@ op createKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyCreateParameters;
   },
-  KeyBundle
+  KeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -69,7 +71,9 @@ op rotateKey is Azure.Core.Foundations.Operation<
     @path("key-name")
     keyName: string;
   },
-  KeyBundle
+  KeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -104,7 +108,9 @@ op importKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyImportParameters;
   },
-  KeyBundle
+  KeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -125,7 +131,9 @@ op deleteKey is Azure.Core.Foundations.Operation<
     @path("key-name")
     keyName: string;
   },
-  DeletedKeyBundle
+  DeletedKeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -162,7 +170,9 @@ op updateKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyUpdateParameters;
   },
-  KeyBundle
+  KeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -190,7 +200,9 @@ op getKey is Azure.Core.Foundations.Operation<
     @path("key-version")
     keyVersion: string;
   },
-  KeyBundle
+  KeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -219,7 +231,9 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  KeyListResult
+  KeyListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -245,7 +259,9 @@ op getKeys is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  KeyListResult
+  KeyListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -275,7 +291,9 @@ op backupKey is Azure.Core.Foundations.Operation<
     @path("key-name")
     keyName: string;
   },
-  BackupKeyResult
+  BackupKeyResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -304,7 +322,9 @@ op restoreKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyRestoreParameters;
   },
-  KeyBundle
+  KeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -349,7 +369,9 @@ op encrypt is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyOperationsParameters;
   },
-  KeyOperationResult
+  KeyOperationResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -393,7 +415,9 @@ op decrypt is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyOperationsParameters;
   },
-  KeyOperationResult
+  KeyOperationResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -429,7 +453,9 @@ op sign is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeySignParameters;
   },
-  KeyOperationResult
+  KeyOperationResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -468,7 +494,9 @@ op verify is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyVerifyParameters;
   },
-  KeyVerifyResult
+  KeyVerifyResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -508,7 +536,9 @@ op wrapKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyOperationsParameters;
   },
-  KeyOperationResult
+  KeyOperationResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -549,7 +579,9 @@ op unwrapKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyOperationsParameters;
   },
-  KeyOperationResult
+  KeyOperationResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -584,7 +616,9 @@ op release is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyReleaseParameters;
   },
-  KeyReleaseResult
+  KeyReleaseResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -611,7 +645,9 @@ op getDeletedKeys is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  DeletedKeyListResult
+  DeletedKeyListResult,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -632,7 +668,9 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
     @path("key-name")
     keyName: string;
   },
-  DeletedKeyBundle
+  DeletedKeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -654,7 +692,9 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
     @path("key-name")
     keyName: string;
   },
-  void
+  void,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -676,7 +716,9 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
     @path("key-name")
     keyName: string;
   },
-  KeyBundle
+  KeyBundle,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -695,7 +737,9 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
     @path("key-name")
     keyName: string;
   },
-  KeyRotationPolicy
+  KeyRotationPolicy,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -721,7 +765,9 @@ op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
     @body
     keyRotationPolicy: KeyRotationPolicy;
   },
-  KeyRotationPolicy
+  KeyRotationPolicy,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -739,5 +785,7 @@ op getRandomBytes is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: GetRandomBytesRequest;
   },
-  RandomBytes
+  RandomBytes,
+  {},
+  KeyVaultError
 >;
