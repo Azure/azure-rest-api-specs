@@ -38,7 +38,8 @@ jobs:
     displayName: Install APIView Swagger Parser
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Swagger-APIView.ps1 `
+      . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
+      New-SwaggerAPIViewTokens `
         -TempDirectory "$(Agent.TempDirectory)" `
         -ArtiFactsStagingDirectory "$(Build.ArtifactStagingDirectory)" `
         -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} 
@@ -53,7 +54,8 @@ jobs:
     condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
   - pwsh: |
-      eng/scripts/Create-APIView.ps1 `
+      . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
+      New-RestSpecsAPIViewReviews `
         -ArtiFactsStagingDirectory $(Build.ArtifactStagingDirectory) `
         -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} `
         -APIViewArtifactsName ${{ parameters.APIViewArtifactsName }} `
@@ -65,5 +67,3 @@ jobs:
         -CommitSha $(Build.SourceVersion)
     displayName: Create Swagger APIView
     condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
-
-  
