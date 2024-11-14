@@ -681,7 +681,10 @@
           "items": {
             "$ref": "#/definitions/MetricAlertResource"
           },
-          "description": "the values for the alert rule resources."
+          "description": "the values for the alert rule resources.",
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       },
       "description": "Represents a collection of alert rule resources."
@@ -694,7 +697,10 @@
           "items": {
             "$ref": "#/definitions/MetricAlertStatus"
           },
-          "description": "the values for the alert rule resources."
+          "description": "the values for the alert rule resources.",
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       },
       "description": "Represents a collection of alert rule resources."
@@ -1049,39 +1055,44 @@
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Unlocalized string which can be used to programmatically identify the error.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error (for example, the name of the property in error).",
-          "type": "string"
-        },
-        "details": {
-          "description": "An array of additional nested error response info objects, as described by this contract.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          }
-        },
-        "additionalInfo": {
-          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "description": "The type of additional information.",
-                "type": "string"
-              },
-              "info": {
-                "description": "The additional information specific to the type.",
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Unlocalized string which can be used to programmatically identify the error.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language.",
+              "type": "string"
+            },
+            "target": {
+              "description": "The target of the particular error (for example, the name of the property in error).",
+              "type": "string"
+            },
+            "details": {
+              "description": "An array of additional nested error response info objects, as described by this contract.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetail"
+              }
+            },
+            "additionalInfo": {
+              "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+              "type": "array",
+              "items": {
                 "type": "object",
-                "additionalProperties": true
+                "properties": {
+                  "type": {
+                    "description": "The type of additional information.",
+                    "type": "string"
+                  },
+                  "info": {
+                    "description": "The additional information specific to the type.",
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
               }
             }
           }
