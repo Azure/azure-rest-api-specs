@@ -12,12 +12,14 @@ using Microsoft.Chaos;
 @@clientName(CapabilityType, "ChaosCapabilityType");
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.TrackedResource.properties);
+@@flattenProperty(Experiment.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.ProxyResource.properties);
+@@flattenProperty(ExperimentExecution.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
-);
+@@flattenProperty(Target.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
-);
+@@flattenProperty(TargetType.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Capability.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(CapabilityType.properties);
