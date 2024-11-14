@@ -40,7 +40,6 @@ interface Experiments {
   /**
    * The operation to update an experiment.
    */
-  @parameterVisibility
   update is ArmCustomPatchAsync<Experiment, ExperimentUpdate>;
 
   /**
