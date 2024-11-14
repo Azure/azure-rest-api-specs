@@ -50,6 +50,14 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
 
+@@clientName(DocumentTranslation.GetTranslationsStatusOptions.ids,
+  "translationIds"
+);
+
+@@clientName(DocumentTranslation.GetDocumentsStatusOptions.id, "translationId");
+
+@@clientName(DocumentTranslation.GetDocumentsStatusOptions.ids, "documentIds");
+
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
   "csharp, java"
@@ -73,6 +81,10 @@ interface SingleDocumentTranslationClient {
 @@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
 @@convenientAPI(DocumentTranslationClient.getSupportedFormats, false, "java");
+
+@@convenientAPI(DocumentTranslationClient.getTranslationsStatus, false, "java");
+
+@@convenientAPI(DocumentTranslationClient.getDocumentsStatus, false, "java");
 
 @@access(DocumentTranslationClient.getSupportedFormats,
   Access.internal,
