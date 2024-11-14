@@ -526,7 +526,7 @@ union InputType {
 }
 
 /**
- * Sepcify the application environment of the report.
+ * Specify the application environment of the report.
  */
 union AppEnvironment {
   @doc("The application environment of the report is Production.")
@@ -854,7 +854,7 @@ model ReportProperties {
   timeZone: string;
 
   /**
-   * Optional property to specify the application environment of the report. e.g. "Production", "Non-prouction".
+   * Optional property to specify the application environment of the report. e.g. "Production", "Non-production".
    */
   @added(Versions.v2024_12_15_preview)
   appEnvironment?: AppEnvironment;
