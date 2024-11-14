@@ -8,7 +8,9 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v2024_05_01)
+@TypeSpec.Versioning.useDependency(
+  DocumentTranslation.Versions.v2024_11_01_preview
+)
 namespace ClientCustomizations;
 
 @client({
