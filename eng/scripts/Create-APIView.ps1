@@ -4,21 +4,21 @@
 
 <#
 .DESCRIPTION
-  Get the readme.md file associated with a swagger file.
+  Get the readme.md file associated with a swagger/typespec file.
 
-.PARAMETER SwaggerFile
-  Path to a swagger files inside the 'specification' directory.
+.PARAMETER SpecFile
+  Path to swagger/typespec files inside the 'specification' directory.
 
 .OUTPUTS
-  the readme.md file associated with the swagger file or null if not found.
+  the readme.md file associated with the swagger/typespec file or null if not found.
 #>
-function Get-SwaggerReadMeFile {
+function Get-ReadMeFile {
     param (
         [Parameter(Mandatory = $true)]
-        [string]$SwaggerFile
+        [string]$SpecFile
     )
     
-    $currentPath = Resolve-Path $SwaggerFile
+    $currentPath = Resolve-Path $SpecFile
     
     while ($currentPath -ne [System.IO.Path]::GetPathRoot($currentPath)) {
         $currentPath = [System.IO.Path]::GetDirectoryName($currentPath)
@@ -181,7 +181,7 @@ function New-SwaggerAPIViewTokens {
   # Get Related Swagger ReadMe Files
   $swaggerReadMeFiles = [System.Collections.Generic.HashSet[string]]::new()
   $changedSwaggerFiles | ForEach-Object {
-    $readmeFile = Get-SwaggerReadMeFile -swaggerFile $_
+    $readmeFile = Get-ReadMeFile -SpecFile $_
     if ($readmeFile) {
         $swaggerReadMeFiles.Add($readmeFile) | Out-Null
     }

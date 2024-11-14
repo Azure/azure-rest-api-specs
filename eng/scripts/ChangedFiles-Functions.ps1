@@ -28,6 +28,16 @@ function Get-ChangedSwaggerFiles($changedFiles = (Get-ChangedFiles)) {
   return $changedSwaggerFiles
 }
 
+function Get-ChangedTypespecFiles($changedFiles = (Get-ChangedFiles)) {
+  $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
+
+  $changedTypespecFiles = $changedFiles.Where({ 
+    $_.EndsWith(".tsp") -or $_.EndsWith("tspconfig.yaml")
+  })
+    
+  return $changedTypespecFiles
+}
+
 function Get-ChangedFilesUnderSpecification($changedFiles = (Get-ChangedFiles)) {
   $changedFilesUnderSpecification = $changedFiles.Where({ 
     $_.StartsWith("specification")
