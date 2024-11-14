@@ -61,7 +61,7 @@ interface ReportResources {
    * Create a new AppComplianceAutomation report or update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_CreateOrUpdate")
+  @operationId("Reports_CreateOrUpdate")
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceAsync<
     ReportResource,
     BaseParameters<ReportResource>
@@ -71,7 +71,7 @@ interface ReportResources {
    * Update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_Update")
+  @operationId("Reports_Update")
   update is ArmCustomPatchAsync<
     ReportResource,
     ReportResourcePatch,
@@ -82,7 +82,7 @@ interface ReportResources {
    * Delete an AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_Delete")
+  @operationId("Reports_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReportResource,
     BaseParameters<ReportResource>
