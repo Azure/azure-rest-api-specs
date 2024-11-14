@@ -475,7 +475,6 @@ model AnalyzeResultOperation {
 @doc("Status and result of the analyze batch operation.")
 model AnalyzeBatchResultOperation {
   @doc("Analyze batch operation result ID.")
-  @path
   resultId?: uuid;
 
   @doc("Operation status.  notStarted, running, succeeded, or failed")
