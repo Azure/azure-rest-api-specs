@@ -35,7 +35,7 @@ interface ExperimentExecutions {
   /**
    * Get a list of executions of an Experiment resource.
    */
-  listAll is ArmResourceListByParent<
+  list is ArmResourceListByParent<
     ExperimentExecution,
     Response = ExperimentExecutionListResult
   >;
