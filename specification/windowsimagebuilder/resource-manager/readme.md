@@ -90,5 +90,6 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: AvoidAdditionalProperties
     from: WindowsImageBuilder.json
-    reason: Needed value. Exception provided in API Design review meeting. Note - suppressing entire file due to bug with where field. Suppression targets are as follows, $.definitions.WindowsImageTemplateDistributor.properties.artifactTags, $.definitions.WindowsImageTemplateProperties.properties.managedResourceTags, $.definitions.UserAssignedIdentities, $.definitions.WindowsImageTemplateUpdateParameters.properties.tags
+    reason: Using additionalProperties only for user-defined tags and common types, as permitted by this documentation.- https://github.com/Azure/azure-openapi-validator/blob/main/docs/avoid-additional-properties.md
+ Suppression targets are as follows, $.definitions.WindowsImageTemplateDistributor.properties.artifactTags,  $.definitions.UserAssignedIdentities, $.definitions.WindowsImageTemplateUpdateParameters.properties.tags
 ```
