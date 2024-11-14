@@ -85,7 +85,7 @@ union MessageContentKind {
   button: "button",
 
   @doc("The Url action type.")
-  media: "Url",
+  url: "url",
 }
 
 @doc("The WhatsApp button sub type.")
@@ -265,13 +265,13 @@ model InteractiveMessage {
   header?: MessageContent;
 
   @doc("Gets or Sets Message body text. Emojis, markdown, and links are supported.")
-  Body: MessageContent;
+  body: MessageContent;
 
   @doc("Gets or Sets Message footer text. Emojis, markdown, and links are supported.")
-  Footer?: MessageContent;
+  footer?: MessageContent;
 
   @doc("The binding object to get or set Action which describes options user have to respond to message.")
-  ActionBindings: ActionBindings;
+  actionBindings: ActionBindings;
 }
 
 @discriminator("kind")
@@ -291,21 +291,27 @@ model TextMessageContent extends MessageContent {
 }
 
 @doc("The message content of type document information.")
-model DocumentMessageContent extends MediaMessageContent {
+model DocumentMessageContent extends MessageContent {
   @doc("Message content kind is document.")
   kind: MessageContentKind.document;
+
+    ...MediaMessageContent
 }
 
 @doc("The message content of type image information.")
-model ImageMessageContent extends MediaMessageContent {
+model ImageMessageContent extends MessageContent {
   @doc("Message content kind is image.")
   kind: MessageContentKind.image;
+
+    ...MediaMessageContent
 }
 
 @doc("The message content of type image information.")
-model VideoMessageContent extends MediaMessageContent {
+model VideoMessageContent extends MessageContent {
   @doc("Message content kind is video.")
   kind: MessageContentKind.video;
+
+  ...MediaMessageContent
 }
 
 @doc("The message content of type Button information.")
@@ -321,12 +327,14 @@ model ButtonContent extends MessageContent {
 }
 
 @doc("The message content of type Url information.")
-model UrlContent extends MediaMessageContent {
+model UrlContent extends MessageContent {
   @doc("Message content kind is url.")
   kind: MessageContentKind.url;
 
   @doc("Title of the url content.")
   title: string;
+
+    ...MediaMessageContent
 }
 
 @doc("The message content of type List information.")
@@ -363,7 +371,7 @@ model ListOptionRow {
 }
 
 @doc("The message content of type media.")
-model MediaMessageContent extends MessageContent {
+model MediaMessageContent {
   @doc("MediaUri of the media content.")
   mediaUri: string;
 }
