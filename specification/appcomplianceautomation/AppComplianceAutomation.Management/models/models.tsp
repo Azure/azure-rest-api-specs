@@ -526,6 +526,20 @@ union InputType {
 }
 
 /**
+ * Sepcify the application environment of the report.
+ */
+union AppEnvironment {
+  @doc("The application environment of the report is Production.")
+  Production: "Production",
+
+  @doc("The application environment of the report is NonProduction.")
+  NonProduction: "NonProduction",
+
+  string,
+}
+
+
+/**
  * The get collection count request body.
  */
 @doc("Get collection count's request object.")
@@ -839,6 +853,16 @@ model ReportProperties {
    * An example of valid timezone id is "Pacific Standard Time".
    */
   timeZone: string;
+
+    /**
+   * Optional property to specify the application environment of the report. e.g. "Production", "Non-prouction".
+   */
+    appEnvironment?: AppEnvironment;
+
+    /**
+     * Optional property to specify the linked report for the current report.
+     */
+    linkedReport?: string;
 
   /**
    * List of resource data.

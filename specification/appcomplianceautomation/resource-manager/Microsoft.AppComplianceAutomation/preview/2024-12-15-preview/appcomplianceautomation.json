@@ -480,6 +480,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Report_CreateOrUpdate": {
+            "$ref": "./examples/Report_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -540,6 +545,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Report_Update": {
+            "$ref": "./examples/Report_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -716,7 +726,7 @@
         },
         "x-ms-examples": {
           "Evidence_ListByReport": {
-            "$ref": "./examples/Evidence_ListByReport.json"
+            "$ref": "./examples/Evidences_ListByReport.json"
           }
         },
         "x-ms-pageable": {
@@ -852,7 +862,7 @@
         },
         "x-ms-examples": {
           "Evidence_CreateOrUpdate": {
-            "$ref": "./examples/Evidence_CreateOrUpdate.json"
+            "$ref": "./examples/Evidences_CreateOrUpdate.json"
           }
         }
       },
@@ -2042,6 +2052,30 @@
     }
   },
   "definitions": {
+    "AppEnvironment": {
+      "type": "string",
+      "description": "Sepcify the application environment of the report.",
+      "enum": [
+        "Production",
+        "NonProduction"
+      ],
+      "x-ms-enum": {
+        "name": "AppEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "The application environment of the report is Production."
+          },
+          {
+            "name": "NonProduction",
+            "value": "NonProduction",
+            "description": "The application environment of the report is NonProduction."
+          }
+        ]
+      }
+    },
     "Category": {
       "type": "object",
       "description": "A class represent the compliance category.",
@@ -3472,6 +3506,14 @@
         "timeZone": {
           "type": "string",
           "description": "Report collection trigger time's time zone, the available list can be obtained by executing \"Get-TimeZone -ListAvailable\" in PowerShell.\nAn example of valid timezone id is \"Pacific Standard Time\"."
+        },
+        "appEnvironment": {
+          "$ref": "#/definitions/AppEnvironment",
+          "description": "Optional property to specify the application environment of the report. e.g. \"Production\", \"Non-prouction\"."
+        },
+        "linkedReport": {
+          "type": "string",
+          "description": "Optional property to specify the linked report for the current report."
         },
         "resources": {
           "type": "array",
