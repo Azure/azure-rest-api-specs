@@ -854,15 +854,17 @@ model ReportProperties {
    */
   timeZone: string;
 
-    /**
-   * Optional property to specify the application environment of the report. e.g. "Production", "Non-prouction".
-   */
-    appEnvironment?: AppEnvironment;
+  /**
+ * Optional property to specify the application environment of the report. e.g. "Production", "Non-prouction".
+ */
+  @added(Versions.v2024_12_15_preview)
+  appEnvironment?: AppEnvironment;
 
-    /**
-     * Optional property to specify the linked report for the current report.
-     */
-    linkedReport?: string;
+  /**
+   * Optional property to specify the linked report for the current report.
+   */
+  @added(Versions.v2024_12_15_preview)
+  linkedReport?: string;
 
   /**
    * List of resource data.
