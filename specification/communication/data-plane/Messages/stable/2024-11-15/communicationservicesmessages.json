@@ -619,11 +619,11 @@
           "description": "Gets or Sets Header content. Supports the following types:text, images etc."
         },
         "body": {
-          "$ref": "#/definitions/MessageContent",
+          "$ref": "#/definitions/TextMessageContent",
           "description": "Gets or Sets Message body text. Emojis, markdown, and links are supported."
         },
         "footer": {
-          "$ref": "#/definitions/MessageContent",
+          "$ref": "#/definitions/TextMessageContent",
           "description": "Gets or Sets Message footer text. Emojis, markdown, and links are supported."
         },
         "actionBindings": {
@@ -757,7 +757,7 @@
       "enum": [
         "whatsAppList",
         "whatsAppButton",
-        "whatsAppUrl"
+        "whatsAppQuickAction"
       ],
       "x-ms-enum": {
         "name": "MessageActionBindingKind",
@@ -774,8 +774,8 @@
             "description": "The WhatsApp Button action binding kind."
           },
           {
-            "name": "whatsAppUrl",
-            "value": "whatsAppUrl",
+            "name": "whatsAppQuickAction",
+            "value": "whatsAppQuickAction",
             "description": "The WhatsApp Url action binding kind."
           }
         ]
@@ -1589,7 +1589,7 @@
           "$ref": "#/definitions/ActionBindings"
         }
       ],
-      "x-ms-discriminator-value": "whatsAppUrl"
+      "x-ms-discriminator-value": "whatsAppQuickAction"
     }
   },
   "parameters": {

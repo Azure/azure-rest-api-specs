@@ -59,7 +59,7 @@ union MessageActionBindingKind {
   whatsAppButton: "whatsAppButton",
 
   @doc("The WhatsApp Url action binding kind.")
-  whatsAppUrl: "whatsAppUrl",
+  whatsAppQuickAction: "whatsAppQuickAction",
 }
 
 @doc("The InteractiveMessage action kind.")
@@ -265,10 +265,10 @@ model InteractiveMessage {
   header?: MessageContent;
 
   @doc("Gets or Sets Message body text. Emojis, markdown, and links are supported.")
-  body: MessageContent;
+  body: TextMessageContent;
 
   @doc("Gets or Sets Message footer text. Emojis, markdown, and links are supported.")
-  footer?: MessageContent;
+  footer?: TextMessageContent;
 
   @doc("The binding object to get or set Action which describes options user have to respond to message.")
   actionBindings: ActionBindings;
@@ -407,7 +407,7 @@ model WhatsAppButtonActionBindings extends ActionBindings {
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppUrlActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsApp.")
-  actionBindingKind: MessageActionBindingKind.whatsAppUrl;
+  actionBindingKind: MessageActionBindingKind.whatsAppQuickAction;
 
   @doc("Kind of MessageActionBinding.")
   actions: UrlContent[];
