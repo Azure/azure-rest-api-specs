@@ -242,7 +242,7 @@ model OperationErrorDetails {
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The compute operationid of the Start/Deallocate/Hibernate request")
-  azureOperationId?: string;
+  azureOperationName?: string;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
   @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
