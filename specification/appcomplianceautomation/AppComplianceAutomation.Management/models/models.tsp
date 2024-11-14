@@ -538,7 +538,6 @@ union AppEnvironment {
   string,
 }
 
-
 /**
  * The get collection count request body.
  */
@@ -855,8 +854,8 @@ model ReportProperties {
   timeZone: string;
 
   /**
- * Optional property to specify the application environment of the report. e.g. "Production", "Non-prouction".
- */
+   * Optional property to specify the application environment of the report. e.g. "Production", "Non-prouction".
+   */
   @added(Versions.v2024_12_15_preview)
   appEnvironment?: AppEnvironment;
 
