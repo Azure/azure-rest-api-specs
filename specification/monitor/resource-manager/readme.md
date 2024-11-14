@@ -1512,13 +1512,16 @@ directive:
     reason: "Requires Swagger version update to resolve the types issue"
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: metricAlert_API.json
-    reason: "This suppression is required because the nextLink property is not applicable in our context"
+    reason: "This suppression is required because the nextLink property is not applicable"
   - suppress: GetCollectionResponseSchema
     from: metricAlert_API.json
     reason: "both list and single get requests, have an array response."
   - suppress: XmsPageableForListCalls
     from: metricAlert_API.json
-    reason: "x-ms-pageable is not applicable in our context."
+    reason: "x-ms-pageable is not applicable."
+  - suppress: PutResponseCodes
+    from: metricAlert_API.json
+    reason: "response 201 is not required."
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
