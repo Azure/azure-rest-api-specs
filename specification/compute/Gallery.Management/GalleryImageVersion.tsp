@@ -58,7 +58,7 @@ interface GalleryImageVersions {
    * Update a gallery image version.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<GalleryImageVersion, GalleryImageVersionUpdate>;
+  update is ArmCustomPatchAsync<GalleryImageVersion, GalleryImageVersionUpdate>;
 
   /**
    * Delete a gallery image version.
