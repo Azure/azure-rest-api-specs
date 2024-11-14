@@ -107,11 +107,24 @@ alias Params = {
 @doc("The schedule details for the user request")
 model Schedule {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The deadline for the operation")
-  deadline: offsetDateTime;
+  deadline?: offsetDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
+  @doc("The deadline for the operation")
+  deadLine?: offsetDateTime;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The timezone for the operation")
-  timezone: string;
+  timezone?: string;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
+  @doc("The timezone for the operation")
+  timeZone?: string;
 
   @doc("The deadlinetype of the operation, this can either be InitiateAt or CompleteBy")
   deadlineType: DeadlineType = DeadlineType.Unknown;
@@ -174,8 +187,14 @@ model ResourceOperationDetails {
   @doc("Current state of the operation")
   state?: OperationState = OperationState.Unknown;
 
+  @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("Timezone for the operation")
   timezone?: string;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
+  @doc("Timezone for the operation")
+  timeZone?: string;
 
   @doc("Operation level errors if they exist")
   resourceOperationError?: ResourceOperationError;
@@ -212,11 +231,23 @@ model OperationErrorDetails {
   @doc("The error details of the operation")
   errorDetails: string;
 
+  @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The timestamp of the error occurence")
-  timestamp: offsetDateTime;
+  timestamp?: offsetDateTime;
 
+  @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
+  @doc("The timestamp of the error occurence")
+  timeStamp?: offsetDateTime;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The compute operationid of the Start/Deallocate/Hibernate request")
-  azureOperationName: string;
+  azureOperationName?: string;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
+  @doc("The compute operationid of the Start/Deallocate/Hibernate request")
+  crpOperationId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
