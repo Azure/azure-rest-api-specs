@@ -57,7 +57,7 @@ interface GalleryApplicationVersions {
    * Update a gallery Application Version.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
     GalleryApplicationVersionUpdate
   >;

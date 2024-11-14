@@ -691,7 +691,7 @@ model GalleryApplicationProperties {
   /**
    * The end of life date of the gallery Application Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
@@ -917,12 +917,12 @@ model GalleryArtifactPublishingProfileBase {
    * The timestamp for when the gallery image version is published.
    */
   @visibility("read")
-  publishedDate?: offsetDateTime;
+  publishedDate?: utcDateTime;
 
   /**
    * The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * Specifies the storage account type to be used to store the image. This property is not updatable.
@@ -1206,7 +1206,7 @@ model GalleryImageProperties {
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  endOfLifeDate?: utcDateTime;
 
   /**
    * This is the gallery image definition identifier.
@@ -1714,26 +1714,31 @@ model SharedGalleryImageProperties {
   /**
    * This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. Possible values are: **Windows,** **Linux.**
    */
+  @visibility("read")
   osType: OperatingSystemTypes;
 
   /**
    * This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.
    */
+  @visibility("read")
   osState: OperatingSystemStateTypes;
 
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  @visibility("read")
+  endOfLifeDate?: utcDateTime;
 
   /**
    * This is the gallery image definition identifier.
    */
+  @visibility("read")
   identifier: GalleryImageIdentifier;
 
   /**
    * The properties describe the recommended machine configuration for this Image Definition. These properties are updatable.
    */
+  @visibility("read")
   recommended?: RecommendedMachineConfiguration;
 
   /**
@@ -1745,38 +1750,45 @@ model SharedGalleryImageProperties {
    * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  @visibility("read")
   hyperVGeneration?: HyperVGeneration;
 
   /**
    * A list of gallery image features.
    */
   @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility("read")
   features?: GalleryImageFeature[];
 
   /**
    * Describes the gallery image definition purchase plan. This is used by marketplace images.
    */
+  @visibility("read")
   purchasePlan?: ImagePurchasePlan;
 
   /**
    * The architecture of the image. Applicable to OS disks only.
    */
+  @visibility("read")
   architecture?: Architecture;
 
   /**
    * Privacy statement uri for the current community gallery image.
    */
+  @visibility("read")
   privacyStatementUri?: string;
 
   /**
    * End-user license agreement for the current community gallery image.
    */
+  @visibility("read")
   eula?: string;
 
   /**
    * The artifact tags of a shared gallery resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility("read")
   artifactTags?: Record<string>;
 }
 
@@ -1794,27 +1806,32 @@ model SharedGalleryImageVersionProperties {
   /**
    * The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  publishedDate?: offsetDateTime;
+  @visibility("read")
+  publishedDate?: utcDateTime;
 
   /**
    * The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  @visibility("read")
+  endOfLifeDate?: utcDateTime;
 
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
    */
+  @visibility("read")
   excludeFromLatest?: boolean;
 
   /**
    * Describes the storage profile of the image version.
    */
+  @visibility("read")
   storageProfile?: SharedGalleryImageVersionStorageProfile;
 
   /**
    * The artifact tags of a shared gallery resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility("read")
   artifactTags?: Record<string>;
 }
 
@@ -1825,12 +1842,14 @@ model SharedGalleryImageVersionStorageProfile {
   /**
    * This is the OS disk image.
    */
+  @visibility("read")
   osDiskImage?: SharedGalleryOSDiskImage;
 
   /**
    * A list of data disk images.
    */
   @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @visibility("read")
   dataDiskImages?: SharedGalleryDataDiskImage[];
 }
 
@@ -1856,6 +1875,7 @@ model SharedGalleryDiskImage {
   /**
    * The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'
    */
+  @visibility("read")
   hostCaching?: SharedGalleryHostCaching;
 }
 
@@ -1867,6 +1887,7 @@ model SharedGalleryDataDiskImage extends SharedGalleryDiskImage {
   /**
    * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
    */
+  @visibility("read")
   lun: int32;
 }
 
@@ -1885,11 +1906,13 @@ model CommunityGalleryProperties {
    * The artifact tags of a community gallery resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility("read")
   artifactTags?: Record<string>;
 
   /**
    * The metadata of community gallery.
    */
+  @visibility("read")
   communityMetadata?: CommunityGalleryMetadata;
 }
 
@@ -1900,26 +1923,31 @@ model CommunityGalleryMetadata {
   /**
    * The publisher URI of this community gallery.
    */
+  @visibility("read")
   publisherUri?: url;
 
   /**
    * The publisher email id of this community gallery.
    */
+  @visibility("read")
   publisherContact: string;
 
   /**
    * The end-user license agreement for this community gallery.
    */
+  @visibility("read")
   eula?: string;
 
   /**
    * A list of public names the gallery has.
    */
+  @visibility("read")
   publicNames: string[];
 
   /**
    * The link for the privacy statement of this community gallery from the gallery publisher.
    */
+  @visibility("read")
   privacyStatementUri?: url;
 }
 
@@ -1976,26 +2004,31 @@ model CommunityGalleryImageProperties {
   /**
    * This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. Possible values are: **Windows,** **Linux.**
    */
+  @visibility("read")
   osType: OperatingSystemTypes;
 
   /**
    * This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.
    */
+  @visibility("read")
   osState: OperatingSystemStateTypes;
 
   /**
    * The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  @visibility("read")
+  endOfLifeDate?: utcDateTime;
 
   /**
    * This is the community gallery image definition identifier.
    */
+  @visibility("read")
   identifier: CommunityGalleryImageIdentifier;
 
   /**
    * The properties describe the recommended machine configuration for this Image Definition. These properties are updatable.
    */
+  @visibility("read")
   recommended?: RecommendedMachineConfiguration;
 
   /**
@@ -2007,32 +2040,38 @@ model CommunityGalleryImageProperties {
    * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  @visibility("read")
   hyperVGeneration?: HyperVGeneration;
 
   /**
    * A list of gallery image features.
    */
   @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility("read")
   features?: GalleryImageFeature[];
 
   /**
    * Describes the gallery image definition purchase plan. This is used by marketplace images.
    */
+  @visibility("read")
   purchasePlan?: ImagePurchasePlan;
 
   /**
    * The architecture of the image. Applicable to OS disks only.
    */
+  @visibility("read")
   architecture?: Architecture;
 
   /**
    * Privacy statement URI for the current community gallery image.
    */
+  @visibility("read")
   privacyStatementUri?: string;
 
   /**
    * The end-user license agreement for the current community gallery image.
    */
+  @visibility("read")
   eula?: string;
 
   /**
@@ -2045,6 +2084,7 @@ model CommunityGalleryImageProperties {
    * The artifact tags of a community gallery resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility("read")
   artifactTags?: Record<string>;
 }
 
@@ -2055,16 +2095,19 @@ model CommunityGalleryImageIdentifier {
   /**
    * The name of the gallery image definition publisher.
    */
+  @visibility("read")
   publisher?: string;
 
   /**
    * The name of the gallery image definition offer.
    */
+  @visibility("read")
   offer?: string;
 
   /**
    * The name of the gallery image definition SKU.
    */
+  @visibility("read")
   sku?: string;
 }
 
@@ -2082,21 +2125,25 @@ model CommunityGalleryImageVersionProperties {
   /**
    * The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  publishedDate?: offsetDateTime;
+  @visibility("read")
+  publishedDate?: utcDateTime;
 
   /**
    * The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
    */
-  endOfLifeDate?: offsetDateTime;
+  @visibility("read")
+  endOfLifeDate?: utcDateTime;
 
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
    */
+  @visibility("read")
   excludeFromLatest?: boolean;
 
   /**
    * Describes the storage profile of the image version.
    */
+  @visibility("read")
   storageProfile?: SharedGalleryImageVersionStorageProfile;
 
   /**
@@ -2109,6 +2156,7 @@ model CommunityGalleryImageVersionProperties {
    * The artifact tags of a community gallery resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility("read")
   artifactTags?: Record<string>;
 }
 

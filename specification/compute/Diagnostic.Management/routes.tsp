@@ -21,6 +21,7 @@ interface DiagnosticOperationsOperations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @operationId("DiagnosticOperations_Read")
+  @armResourceRead(ComputeDiagnosticsOperationResult)
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnosticOperations/{operationId}")
   @get
   read(
