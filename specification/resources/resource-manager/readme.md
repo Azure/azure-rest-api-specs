@@ -1560,6 +1560,9 @@ directive:
   - suppress: ParametersInPointGet
     from: policySetDefinitions.json
     reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
+  - suppress: ParametersInPointGet
+    from: policySetDefinitionVersions.json
+    reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: policyAssignments.json
     reason: "Policy assignments can have a manged identity associated with them.  This requires a location."
