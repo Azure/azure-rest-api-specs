@@ -880,21 +880,19 @@
           "type": "string",
           "description": "The error details of the operation"
         },
-        "timestamp": {
+        "timeStamp": {
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of the error occurence"
         },
-        "azureOperationName": {
+        "crpOperationId": {
           "type": "string",
           "description": "The compute operationid of the Start/Deallocate/Hibernate request"
         }
       },
       "required": [
         "errorCode",
-        "errorDetails",
-        "timestamp",
-        "azureOperationName"
+        "errorDetails"
       ]
     },
     "OperationErrorsResult": {
@@ -1214,7 +1212,7 @@
             ]
           }
         },
-        "timezone": {
+        "timeZone": {
           "type": "string",
           "description": "Timezone for the operation"
         },
@@ -1328,12 +1326,12 @@
       "type": "object",
       "description": "The schedule details for the user request",
       "properties": {
-        "deadline": {
+        "deadLine": {
           "type": "string",
           "format": "date-time",
           "description": "The deadline for the operation"
         },
-        "timezone": {
+        "timeZone": {
           "type": "string",
           "description": "The timezone for the operation"
         },
@@ -1370,8 +1368,6 @@
         }
       },
       "required": [
-        "deadline",
-        "timezone",
         "deadlineType"
       ]
     },
