@@ -22,8 +22,10 @@ options:
     "package-dir": "azure-keyvault-secrets"
     "package-name": "azure-keyvault-secrets"
     "output-path": "./azure/keyvault/secrets/_generated"
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
+  "@azure-tools/typespec-java":
+    "package-dir": "azure-security-keyvault-secrets"
+    "namespace": "com.azure.security.keyvault.secrets.implementation"
+    "customization-class": "swagger/src/main/java/SecretsCustomizations.java"
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
