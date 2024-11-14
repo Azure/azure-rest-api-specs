@@ -283,6 +283,12 @@
               "$ref": "#/definitions/MetricAlertResource"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MetricAlertResource"
+            }
+          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -427,6 +433,7 @@
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -465,6 +472,7 @@
       "description": "An azure resource object"
     },
     "MetricAlertAction": {
+      "type": "object",
       "description": "An alert action.",
       "properties": {
         "actionGroupId": {
@@ -490,6 +498,7 @@
         "criteria",
         "scopes"
       ],
+      "type": "object",
       "properties": {
         "description": {
           "type": "string",
@@ -562,6 +571,7 @@
       "description": "An alert rule."
     },
     "MetricAlertPropertiesPatch": {
+      "type": "object",
       "properties": {
         "description": {
           "type": "string",
@@ -653,6 +663,7 @@
       "description": "The metric alert resource."
     },
     "MetricAlertResourcePatch": {
+      "type": "object",
       "properties": {
         "tags": {
           "additionalProperties": {
@@ -669,6 +680,7 @@
       "description": "The metric alert resource for patch operations."
     },
     "MetricAlertResourceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -681,6 +693,7 @@
       "description": "Represents a collection of alert rule resources."
     },
     "MetricAlertStatusCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -693,6 +706,7 @@
       "description": "Represents a collection of alert rule resources."
     },
     "MetricAlertStatusProperties": {
+      "type": "object",
       "description": "An alert status properties.",
       "properties": {
         "dimensions": {
@@ -714,6 +728,7 @@
       }
     },
     "MetricAlertStatus": {
+      "type": "object",
       "description": "An alert status.",
       "properties": {
         "name": {
@@ -849,6 +864,7 @@
       "description": "Criterion to filter metrics."
     },
     "MetricDimension": {
+      "type": "object",
       "required": [
         "name",
         "operator",
@@ -1018,6 +1034,7 @@
       "description": "Criterion for dynamic threshold."
     },
     "DynamicThresholdFailingPeriods": {
+      "type": "object",
       "required": [
         "numberOfEvaluationPeriods",
         "minFailingPeriodsToAlert"
@@ -1039,12 +1056,77 @@
       "type": "object",
       "properties": {
         "code": {
-          "description": "Error code",
+          "description": "Unlocalized string which can be used to programmatically identify the error.",
           "type": "string"
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
+          "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language.",
           "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error (for example, the name of the property in error).",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of additional nested error response info objects, as described by this contract.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "additionalInfo": {
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of additional information.",
+                "type": "string"
+              },
+              "info": {
+                "description": "The additional information specific to the type.",
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "Describes details of an error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Unlocalized string which can be used to programmatically identify the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Describes the error in detail and provides debugging information.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error (for example, the name of the property in error).",
+          "type": "string"
+        },
+        "additionalInfo": {
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of additional information.",
+                "type": "string"
+              },
+              "info": {
+                "description": "The additional information specific to the type.",
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
         }
       }
     }

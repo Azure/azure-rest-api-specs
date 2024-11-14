@@ -1510,6 +1510,15 @@ directive:
   - suppress: INVALID_TYPE
     from: metricAlert_API.json
     reason: "Requires Swagger version update to resolve the types issue"
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: metricAlert_API.json
+    reason: "This suppression is required because the nextLink property is not applicable in our context"
+  - suppress: GetCollectionResponseSchema
+    from: metricAlert_API.json
+    reason: "both list and single get requests, have an array response."
+  - suppress: XmsPageableForListCalls
+    from: metricAlert_API.json
+    reason: "x-ms-pageable is not applicable in our context."
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
