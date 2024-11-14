@@ -38,15 +38,6 @@ input-file:
   - Microsoft.ContainerInstance/preview/2024-11-01-preview/containerInstance.json
 ```
 
-### Tag: package-preview-2024-11
-
-These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-11'
-input-file:
-  - Microsoft.ContainerInstance/preview/2024-11-01-preview/containerInstance.json
-```
-
 ### Tag: package-preview-2024-10
 
 These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
