@@ -90,6 +90,9 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: AvoidAdditionalProperties
     from: WindowsImageBuilder.json
-    reason: Using additionalProperties only for user-defined tags and common types, as permitted by this documentation.https://github.com/Azure/azure-openapi-validator/blob/main/docs/avoid-additional-properties.md
-    where: $.definitions.WindowsImageTemplateDistributor.properties.artifactTags,$.definitions.UserAssignedIdentities, $.definitions.WindowsImageTemplateUpdateParameters.properties.tags
+    reason: Using additionalProperties only for user-defined tags and common types.
+    where: 
+		- $.definitions.WindowsImageTemplateDistributor.properties.artifactTags
+		- $.definitions.UserAssignedIdentities
+        - $.definitions.WindowsImageTemplateUpdateParameters.properties.tags
 ```
