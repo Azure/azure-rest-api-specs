@@ -937,7 +937,7 @@ model AvsStorageContainerProperties {
 
   @added(Versions.v4_preview)
   @doc("Current VMware datastore associate with this storage container")
-  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
+  @pattern("(^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9])?$")
   @visibility("read")
   datastore?: string;
 
