@@ -46,7 +46,7 @@ model DocumentModelAnalyzeRequestParams {
   @maxLength(64)
   modelId: string;
 
-  @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
+  @doc("1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
   @query
   @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
   pages?: string;
@@ -95,7 +95,7 @@ model DocumentClassifierAnalyzeRequestParams {
   @query
   split?: SplitMode = SplitMode.none;
 
-  @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
+  @doc("1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
   @query
   @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
   pages?: string;
