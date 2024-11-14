@@ -841,30 +841,6 @@
         ]
       }
     },
-    "CertificateStoreNameOption": {
-      "type": "string",
-      "description": "The certificate store name type",
-      "enum": [
-        "My",
-        "Root"
-      ],
-      "x-ms-enum": {
-        "name": "CertificateStoreNameOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "My",
-            "value": "My",
-            "description": "The X.509 certificate store for personal certificates."
-          },
-          {
-            "name": "Root",
-            "value": "Root",
-            "description": "The X.509 certificate store for trusted root certificate authorities (CAs)."
-          }
-        ]
-      }
-    },
     "CheckNameAvailability": {
       "type": "object",
       "description": "The parameters used to check the availability of a resource.",
@@ -2014,10 +1990,6 @@
         "certificateStoreLocation": {
           "type": "string",
           "description": "Where to store certificates on the machine."
-        },
-        "certificateStoreName": {
-          "$ref": "#/definitions/CertificateStoreNameOption",
-          "description": "Name of the certificate store to use on the machine, currently 'My' and 'Root' are supported."
         },
         "observedCertificates": {
           "type": "array",

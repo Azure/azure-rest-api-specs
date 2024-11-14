@@ -264,24 +264,10 @@ model OsProfile {
   logonType?: LogonType;
 }
 
-@doc("The certificate store name type")
-union CertificateStoreNameOption {
-  string,
-
-  @doc("The X.509 certificate store for personal certificates.")
-  "My",
-
-  @doc("The X.509 certificate store for trusted root certificate authorities (CAs).")
-  "Root",
-}
-
 @doc("The secret management settings of the machines in the pool.")
 model SecretsManagementSettings {
   @doc("Where to store certificates on the machine.")
   certificateStoreLocation?: string;
-
-  @doc("Name of the certificate store to use on the machine, currently 'My' and 'Root' are supported.")
-  certificateStoreName?: CertificateStoreNameOption;
 
   @doc("The list of certificates to install on all machines in the pool.")
   observedCertificates: url[];
