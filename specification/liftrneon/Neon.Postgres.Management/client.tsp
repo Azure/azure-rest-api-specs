@@ -10,7 +10,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(LiftrBase.OfferDetails, "NeonOfferDetails", "csharp");
 @@clientName(LiftrBase.UserDetails, "NeonUserDetails", "csharp");
 @@clientName(LiftrBase.Data.OrganizationProperties,
-  "NeonOrganizationPropertes",
+  "NeonOrganizationProperties",
   "csharp"
 );
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
