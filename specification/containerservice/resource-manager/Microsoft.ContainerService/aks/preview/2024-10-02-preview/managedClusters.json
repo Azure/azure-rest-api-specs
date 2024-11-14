@@ -110,6 +110,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/nodeImageVersions": {
+      "get": {
+        "tags": [
+          "ContainerService"
+        ],
+        "summary": "Gets a list of supported NodeImage versions in the specified subscription.",
+        "description": "Only returns the latest version of each node image. For example there may be an AKSUbuntu-1804gen2containerd-2024.01.26, but only AKSUbuntu-1804gen2containerd-2024.02.02 is visible in this list.",
+        "operationId": "ContainerService_ListNodeImageVersions",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeImageVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Node Image Versions": {
+            "$ref": "./examples/NodeImageVersions_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/managedClusters": {
       "get": {
         "tags": [
@@ -10152,6 +10195,50 @@
         }
       },
       "description": "components of given Kubernetes version."
+    },
+    "NodeImageVersionsListResult": {
+      "description": "Holds an array NodeImageVersions",
+      "properties": {
+        "value": {
+          "description": "Array of AKS Node Image versions.",
+          "items": {
+            "$ref": "#/definitions/NodeImageVersion"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "fullName"
+          ]
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of machine results.",
+          "format": "uri",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NodeImageVersion": {
+      "description": "node image version profile for given major.minor.patch release.",
+      "properties": {
+        "os": {
+          "description": "The operating system of the node image. Example: AKSUbuntu",
+          "type": "string"
+        },
+        "sku": {
+          "description": "The SKU or flavor of the node image. Example: 2004gen2containerd",
+          "type": "string"
+        },
+        "version": {
+          "description": "major.minor.patch version of the node image version release. Example: 2024.02.02",
+          "type": "string"
+        },
+        "fullName": {
+          "description": "The OS + SKU + version of the node image. Example: AKSUbuntu-1804gen2containerd-2024.02.02",
+          "type": "string"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
