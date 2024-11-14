@@ -42,6 +42,58 @@ union CommunicationMessageKind {
 
   @doc("Template message type.")
   template: "template",
+
+  @added(Versions.c2024_11_15)
+  @doc("Interactive message type.")
+  interactive: "interactive",
+}
+
+@doc("The type of the Interactive message.")
+union InteractiveMessageKind {
+  string,
+
+  @doc("The InteractiveList message kind.")
+  interactiveList: "interactiveList",
+
+  @doc("The InteractiveButton message kind.")
+  interactiveButton: "interactiveButton",
+
+  @doc("The interactiveMedia message kind.")
+  interactiveMedia: "interactiveMedia",
+}
+
+@doc("The Message action binding Kind like WhatsAppList.")
+union MessageActionBindingKind {
+  string,
+
+  @doc("The WhatsApp action binding kind.")
+  whatsApp: "whatsApp",
+}
+
+@doc("The InteractiveMessage action kind.")
+union MessageContentKind {
+  string,
+
+  @doc("The text action type.")
+  text: "text",
+
+  @doc("The image action type.")
+  image: "image",
+
+  @doc("The video action type.")
+  video: "video",
+
+  @doc("The document action type.")
+  document: "document",
+
+  @doc("The List action type.")
+  list: "list",
+
+  @doc("The Button action type.")
+  button: "button",
+
+  @doc("The Media action type.")
+  media: "media",
 }
 
 @doc("The WhatsApp button sub type.")
@@ -203,6 +255,49 @@ model AudioNotificationContent extends NotificationContent {
   kind: CommunicationMessageKind.audio;
 
   ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_11_15)
+@doc("A request to send an Interactive message notification.")
+model InteractiveNotificationContent extends NotificationContent {
+  @doc("Message notification type is Interactive.")
+  kind: CommunicationMessageKind.interactive;
+
+  @doc("The interactiveMessage object used to create interactive messages.")
+  interactiveMessage: InteractiveMessage;
+}
+
+@doc("The InteractiveMessage object used to create interactive messages.")
+model InteractiveMessage {
+  @doc("Name of the template.")
+  interactiveKind: interactiveMessageKind;
+
+  @doc("Gets or Sets Header content. Supports the following types:text, images etc.")
+  header?: MessageContent;
+
+  @doc("Gets or Sets Message body text. Emojis, markdown, and links are supported.")
+  Body: MessageContent;
+
+  @doc("Gets or Sets Message footer text. Emojis, markdown, and links are supported.")
+  Footer?: MessageContent;
+
+  @doc("The binding object to get or set Action which describes options user have to respond to message.")
+  ActionBindings: ActionBindings;
+}
+
+@doc("The message content object used to create interactive messages components.")
+model MessageContent {
+  @doc("Kind of MessageContent.")
+  kind: MessageContentKind;
+}
+
+@doc("The message content object used to create interactive messages components.")
+model ActionBindings {
+  @doc("Kind of MessageActionBinding.")
+  actionBindingKind: MessageActionBindingKind;
+
+  @doc("Kind of MessageActionBinding.")
+  actions: MessageContent[];
 }
 
 @doc("A request to send a template notification.")
@@ -459,4 +554,8 @@ enum Versions {
   @doc("Azure Communication Messages 2024-08-30 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_08_30: "2024-08-30",
+
+  @doc("Azure Communication Messages 2024-11-15 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_11_15: "2024-11-15",
 }
