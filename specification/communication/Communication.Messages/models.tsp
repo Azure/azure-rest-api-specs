@@ -295,7 +295,7 @@ model DocumentMessageContent extends MessageContent {
   @doc("Message content kind is document.")
   kind: MessageContentKind.document;
 
-    ...MediaMessageContent
+  ...MediaMessageContent;
 }
 
 @doc("The message content of type image information.")
@@ -303,7 +303,7 @@ model ImageMessageContent extends MessageContent {
   @doc("Message content kind is image.")
   kind: MessageContentKind.image;
 
-    ...MediaMessageContent
+  ...MediaMessageContent;
 }
 
 @doc("The message content of type image information.")
@@ -311,7 +311,7 @@ model VideoMessageContent extends MessageContent {
   @doc("Message content kind is video.")
   kind: MessageContentKind.video;
 
-  ...MediaMessageContent
+  ...MediaMessageContent;
 }
 
 @doc("The message content of type Button information.")
@@ -334,7 +334,7 @@ model UrlContent extends MessageContent {
   @doc("Title of the url content.")
   title: string;
 
-    ...MediaMessageContent
+  ...MediaMessageContent;
 }
 
 @doc("The message content of type List information.")
@@ -412,7 +412,6 @@ model WhatsAppUrlActionBindings extends ActionBindings {
   @doc("Kind of MessageActionBinding.")
   actions: UrlContent[];
 }
-
 
 @doc("A request to send a template notification.")
 model TemplateNotificationContent extends NotificationContent {
