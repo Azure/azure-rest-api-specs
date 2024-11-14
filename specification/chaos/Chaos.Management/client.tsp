@@ -10,16 +10,3 @@ using Microsoft.Chaos;
 @@clientName(TargetType, "ChaosTargetType");
 @@clientName(Capability, "ChaosCapability");
 @@clientName(CapabilityType, "ChaosCapabilityType");
-
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Experiment.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ExperimentExecution.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Target.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(TargetType.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Capability.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(CapabilityType.properties);
