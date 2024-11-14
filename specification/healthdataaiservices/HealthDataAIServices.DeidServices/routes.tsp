@@ -99,6 +99,7 @@ op deidentifyText is Azure.Core.RpcOperation<
   {
     @doc("Request body for de-identification operation.")
     @body
+    @clientName("content", "csharp")
     body: DeidentificationContent;
   },
   DeidentificationResult,
