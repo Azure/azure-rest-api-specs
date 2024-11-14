@@ -139,9 +139,9 @@ model OutputSkillVariable extends SkillVariable {
 
 model EvaluationResultOutput {
   skillOutputType: SkillOutputType;
-  primitiveOutput: OutputSkillVariable?;
-  structuredOutput: SkillStructuredOutput?;
-  primitiveOutputValue: string?;
+  primitiveOutput?: OutputSkillVariable;
+  structuredOutput?: SkillStructuredOutput;
+  primitiveOutputValue?: string;
 }
 
 model SkillStructuredOutput {
@@ -149,7 +149,7 @@ model SkillStructuredOutput {
 }
 
 model SkillOutputComponent {
-  action: SkillOutputAction;
+  action: SkillOutputComponentAction;
   includeInEvalResultAsRawComponent: boolean;
 }
 
