@@ -48,26 +48,18 @@ union CommunicationMessageKind {
   interactive: "interactive",
 }
 
-@doc("The type of the Interactive message.")
-union InteractiveMessageKind {
-  string,
-
-  @doc("The InteractiveList message kind.")
-  interactiveList: "interactiveList",
-
-  @doc("The InteractiveButton message kind.")
-  interactiveButton: "interactiveButton",
-
-  @doc("The interactiveMedia message kind.")
-  interactiveMedia: "interactiveMedia",
-}
-
 @doc("The Message action binding Kind like WhatsAppList.")
 union MessageActionBindingKind {
   string,
 
-  @doc("The WhatsApp action binding kind.")
-  whatsApp: "whatsApp",
+  @doc("The WhatsApp List action binding kind.")
+  whatsAppList: "whatsAppList",
+
+  @doc("The WhatsApp Button action binding kind.")
+  whatsAppButton: "whatsAppButton",
+
+  @doc("The WhatsApp Url action binding kind.")
+  whatsAppUrl: "whatsAppUrl",
 }
 
 @doc("The InteractiveMessage action kind.")
@@ -92,8 +84,8 @@ union MessageContentKind {
   @doc("The Button action type.")
   button: "button",
 
-  @doc("The Media action type.")
-  media: "media",
+  @doc("The Url action type.")
+  media: "Url",
 }
 
 @doc("The WhatsApp button sub type.")
@@ -269,9 +261,6 @@ model InteractiveNotificationContent extends NotificationContent {
 
 @doc("The InteractiveMessage object used to create interactive messages.")
 model InteractiveMessage {
-  @doc("Name of the template.")
-  interactiveKind: interactiveMessageKind;
-
   @doc("Gets or Sets Header content. Supports the following types:text, images etc.")
   header?: MessageContent;
 
@@ -285,13 +274,102 @@ model InteractiveMessage {
   ActionBindings: ActionBindings;
 }
 
+@discriminator("kind")
 @doc("The message content object used to create interactive messages components.")
 model MessageContent {
   @doc("Kind of MessageContent.")
   kind: MessageContentKind;
 }
 
-@doc("The message content object used to create interactive messages components.")
+@doc("The message content of type text information.")
+model TextMessageContent extends MessageContent {
+  @doc("Message content kind is text.")
+  kind: MessageContentKind.text;
+
+  @doc("The text value.")
+  text: string;
+}
+
+@doc("The message content of type document information.")
+model DocumentMessageContent extends MediaMessageContent {
+  @doc("Message content kind is document.")
+  kind: MessageContentKind.document;
+}
+
+@doc("The message content of type image information.")
+model ImageMessageContent extends MediaMessageContent {
+  @doc("Message content kind is image.")
+  kind: MessageContentKind.image;
+}
+
+@doc("The message content of type image information.")
+model VideoMessageContent extends MediaMessageContent {
+  @doc("Message content kind is video.")
+  kind: MessageContentKind.video;
+}
+
+@doc("The message content of type Button information.")
+model ButtonContent extends MessageContent {
+  @doc("Message content kind is Button.")
+  kind: MessageContentKind.button;
+
+  @doc("Unique Id of the button content.")
+  id: string;
+
+  @doc("Title of the button content.")
+  title: string;
+}
+
+@doc("The message content of type Url information.")
+model UrlContent extends MediaMessageContent {
+  @doc("Message content kind is url.")
+  kind: MessageContentKind.url;
+
+  @doc("Title of the url content.")
+  title: string;
+}
+
+@doc("The message content of type List information.")
+model ListContent extends MessageContent {
+  @doc("Message content kind is list.")
+  kind: MessageContentKind.list;
+
+  @doc("Title of the list content.")
+  title: string;
+
+  @doc("Options for list content.")
+  options: ListOption[];
+}
+
+@doc("The List option content.")
+model ListOption {
+  @doc("Title of the sub section of list.")
+  title: string;
+
+  @doc("Rows of subsection of the list content.")
+  rows: ListOptionRow[];
+}
+
+@doc("The List option row content.")
+model ListOptionRow {
+  @doc("Id of the row option.")
+  id: string;
+
+  @doc("Title of the row option.")
+  title: string;
+
+  @doc("Description of the row option.")
+  rows: string;
+}
+
+@doc("The message content of type media.")
+model MediaMessageContent extends MessageContent {
+  @doc("MediaUri of the media content.")
+  mediaUri: string;
+}
+
+@discriminator("actionBindingKind")
+@doc("Binding actions to the interactive message.")
 model ActionBindings {
   @doc("Kind of MessageActionBinding.")
   actionBindingKind: MessageActionBindingKind;
@@ -299,6 +377,34 @@ model ActionBindings {
   @doc("Kind of MessageActionBinding.")
   actions: MessageContent[];
 }
+
+@doc("WhatsApp Binding actions to the interactive message.")
+model WhatsAppListActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsApp.")
+  actionBindingKind: MessageActionBindingKind.whatsAppList;
+
+  @doc("Kind of MessageActionBinding.")
+  actions: ListContent[];
+}
+
+@doc("WhatsApp Binding actions to the interactive message.")
+model WhatsAppButtonActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsApp.")
+  actionBindingKind: MessageActionBindingKind.whatsAppButton;
+
+  @doc("Kind of MessageActionBinding.")
+  actions: ButtonContent[];
+}
+
+@doc("WhatsApp Binding actions to the interactive message.")
+model WhatsAppUrlActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsApp.")
+  actionBindingKind: MessageActionBindingKind.whatsAppUrl;
+
+  @doc("Kind of MessageActionBinding.")
+  actions: UrlContent[];
+}
+
 
 @doc("A request to send a template notification.")
 model TemplateNotificationContent extends NotificationContent {
