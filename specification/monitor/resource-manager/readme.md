@@ -1513,6 +1513,9 @@ directive:
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: metricAlert_API.json
     reason: "This suppression is required because the nextLink property is not applicable"
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: metricBaselines_API.json
+    reason: "This suppression is required because the nextLink property is not applicable"
   - suppress: GetCollectionResponseSchema
     from: metricAlert_API.json
     reason: "both list and single get requests, have an array response."
