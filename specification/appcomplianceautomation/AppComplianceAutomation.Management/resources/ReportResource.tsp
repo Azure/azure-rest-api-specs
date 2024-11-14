@@ -10,6 +10,8 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
+using TypeSpec.Versioning;
+
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -40,6 +42,10 @@ model ReportResource extends Foundations.ProxyResource {
   @Azure.ClientGenerator.Core.flattenProperty
   @extension("x-ms-client-name", "properties")
   properties: ReportProperties;
+  
+  @added(Versions.v2024_12_15_preview)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
