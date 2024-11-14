@@ -11,8 +11,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Capability.tsp";
 import "./CapabilityType.tsp";
-import "./Experiment.tsp";
-import "./ExperimentExecution.tsp";
+//import "./Experiment.tsp";
+//import "./ExperimentExecution.tsp";
 import "./TargetType.tsp";
 import "./Target.tsp";
 
