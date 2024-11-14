@@ -7,6 +7,8 @@
  * @returns {Promise<{owner: string, repo: string, issue_number: number, run_id: number }>}
  */
 async function extractInputs(github, context, core) {
+  core.info(`extractInputs(${context.eventName}, ${context.payload.action})`)
+
   // Add support for more event types as needed
   if (
     context.eventName === "workflow_run" &&
@@ -34,6 +36,7 @@ async function extractInputs(github, context, core) {
 
       let commit_sha = process.env.COMMIT_SHA || payload.workflow_run.head_sha;
 
+      core.info(`listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${commit_sha})`);
       const { data: pullRequests } =
         await github.rest.repos.listPullRequestsAssociatedWithCommit({
           owner: head_owner,
@@ -50,12 +53,16 @@ async function extractInputs(github, context, core) {
       }
     }
 
-    return {
+    const inputs = {
       owner: payload.workflow_run.repository.owner.login,
       repo: payload.workflow_run.repository.name,
       issue_number: issue_number,
       run_id: payload.workflow_run.id,
     };
+
+    core.info(`inputs: ${JSON.stringify(inputs)}`);
+
+    return inputs;
   } else {
     throw new Error(
       `Invalid context: '${context.eventName}:${context.payload.action}'.  Expected 'workflow_run:completed'.`,

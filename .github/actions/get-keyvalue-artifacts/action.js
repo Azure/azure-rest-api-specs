@@ -17,6 +17,7 @@ module.exports = async ({ github, context, core }) => {
     run_id = run_id || inputsFromContext.run_id;
   }
 
+  core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
   const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
     owner: owner,
     repo: repo,
@@ -24,6 +25,7 @@ module.exports = async ({ github, context, core }) => {
   });
 
   const artifactNames = artifacts.data.artifacts.map((a) => a.name);
+  core.info(`artifactNames: ${JSON.stringify(artifactNames)}`)
 
   for (const artifactName of artifactNames) {
     // If artifactName has format "key=value", add the key and value as env vars.
@@ -34,6 +36,7 @@ module.exports = async ({ github, context, core }) => {
     if (firstEquals !== -1) {
       const key = artifactName.substring(0, firstEquals);
       const value = artifactName.substring(firstEquals + 1);
+      core.info(`exportVariable(${key}, ${value})`);
       core.exportVariable(key, value);
     }
   }
