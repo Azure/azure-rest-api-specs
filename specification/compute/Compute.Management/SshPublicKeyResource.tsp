@@ -85,7 +85,12 @@ interface SshPublicKeyResources {
   @operationId("SshPublicKeys_GenerateKeyPair")
   generateKeyPair is ComputeResourceActionSync<
     SshPublicKeyResource,
-    SshGenerateKeyPairInputParameters,
+    {
+      /**
+       * Parameters supplied to generate the SSH public key.
+       */
+      @bodyRoot parameters?: SshGenerateKeyPairInputParameters;
+    },
     SshPublicKeyGenerateKeyPairResult
   >;
 }

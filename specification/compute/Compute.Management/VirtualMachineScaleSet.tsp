@@ -343,9 +343,10 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     {
       /**
-       * A list of virtual machine instance IDs from the VM scale set.
+       * Parameters for Reimaging VM ScaleSet.
        */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
+      @bodyRoot
+      vmScaleSetReimageInput?: VirtualMachineScaleSetReimageParameters;
     },
     OkResponse
   >;

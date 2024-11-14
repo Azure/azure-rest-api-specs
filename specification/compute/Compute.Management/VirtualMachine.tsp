@@ -308,7 +308,12 @@ interface VirtualMachines {
    */
   reimage is ComputeResourceActionAsync<
     VirtualMachine,
-    VirtualMachineReimageParameters,
+    {
+      /**
+       * Parameters supplied to the Reimage Virtual Machine operation.
+       */
+      @bodyRoot parameters?: VirtualMachineReimageParameters;
+    },
     NoContentResponse
   >;
 
@@ -323,9 +328,7 @@ interface VirtualMachines {
   retrieveBootDiagnosticsData is ComputeResourceActionSync<
     VirtualMachine,
     void,
-    RetrieveBootDiagnosticsDataResult &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    RetrieveBootDiagnosticsDataResult,
     Parameters = {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
@@ -341,9 +344,7 @@ interface VirtualMachines {
   simulateEviction is ComputeResourceActionSync<
     VirtualMachine,
     void,
-    NoContentResponse &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    NoContentResponse
   >;
 
   /**

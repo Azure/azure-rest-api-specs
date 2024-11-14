@@ -13,13 +13,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface UsageOperations {
   /**
    * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usage_List")
+  @autoRoute
   @get
   @action("usages")
   list is ComputeProviderActionAsync<
@@ -29,13 +30,14 @@ interface UsageOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineSizesOperations {
   /**
    * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineSizes_List")
+  @autoRoute
   @get
   @action("vmSizes")
   list is ComputeProviderActionAsync<
@@ -45,13 +47,14 @@ interface VirtualMachineSizesOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineScaleSetsOperations {
   /**
    * Gets all the VM scale sets under the specified subscription for the specified location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSets_ListByLocation")
+  @autoRoute
   @get
   @action("virtualMachineScaleSets")
   listByLocation is ComputeProviderActionAsync<
@@ -61,13 +64,14 @@ interface VirtualMachineScaleSetsOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachinesOperations {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachines_ListByLocation")
+  @autoRoute
   @get
   @action("virtualMachines")
   listByLocation is ComputeProviderActionAsync<
@@ -77,13 +81,14 @@ interface VirtualMachinesOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineImagesEdgeZoneOperations {
   /**
    * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImagesEdgeZone_ListPublishers")
+  @autoRoute
   @get
   @action("publishers")
   listPublishers is ComputeProviderActionAsync<
@@ -107,6 +112,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImagesEdgeZone_ListOffers")
+  @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ComputeProviderActionAsync<
@@ -137,6 +143,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImagesEdgeZone_ListSkus")
+  @autoRoute
   @get
   @action("skus")
   listSkus is ComputeProviderActionAsync<
@@ -174,6 +181,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImagesEdgeZone_List")
+  @autoRoute
   @get
   @action("versions")
   list is ComputeProviderActionAsync<
@@ -276,13 +284,14 @@ interface VirtualMachineImagesEdgeZoneOperations {
   ): ArmResponse<VirtualMachineImage> | CloudError;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineImagesOperations {
   /**
    * Gets a list of all virtual machine image versions for the specified edge zone
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListByEdgeZone")
+  @autoRoute
   @get
   @action("vmimages")
   listByEdgeZone is ComputeProviderActionAsync<
@@ -304,6 +313,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListPublishers")
+  @autoRoute
   @get
   @action("publishers")
   listPublishers is ComputeProviderActionAsync<
@@ -318,6 +328,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListOffers")
+  @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ComputeProviderActionAsync<
@@ -341,6 +352,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListSkus")
+  @autoRoute
   @get
   @action("skus")
   listSkus is ComputeProviderActionAsync<
@@ -371,6 +383,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_List")
+  @autoRoute
   @get
   @action("versions")
   list is ComputeProviderActionAsync<
@@ -456,17 +469,20 @@ interface VirtualMachineImagesOperations {
   ): ArmResponse<VirtualMachineImage> | CloudError;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface LogAnalyticsOperations {
   /**
    * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @operationId("LogAnalytics_ExportRequestRateByInterval")
+  @autoRoute
   @post
   @action("logAnalytics/apiAccess/getRequestRateByInterval")
   exportRequestRateByInterval is ComputeProviderActionAsync<
-    Response = LogAnalyticsOperationResult | void,
+    Response = LogAnalyticsOperationResult | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
     Request = RequestRateByIntervalInput
@@ -475,24 +491,28 @@ interface LogAnalyticsOperations {
    * Export logs that show total throttled Api requests for this subscription in the given time window.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @operationId("LogAnalytics_ExportThrottledRequests")
+  @autoRoute
   @post
   @action("logAnalytics/apiAccess/getThrottledRequests")
   exportThrottledRequests is ComputeProviderActionAsync<
-    Response = LogAnalyticsOperationResult | void,
+    Response = LogAnalyticsOperationResult | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
     Request = ThrottledRequestsInput
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineRunCommandsOperations {
   /**
    * Lists all available run commands for a subscription in a location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineRunCommands_List")
+  @autoRoute
   @get
   @action("runCommands")
   list is ComputeProviderActionAsync<
@@ -534,3 +554,7 @@ interface VirtualMachineRunCommandsOperations {
     accept: "application/json, text/json",
   ): ArmResponse<RunCommandDocument> | CloudError;
 }
+
+@@doc(LogAnalyticsOperations.exportRequestRateByInterval::parameters.body,
+  "Parameters supplied to the LogAnalytics getRequestRateByInterval Api."
+);

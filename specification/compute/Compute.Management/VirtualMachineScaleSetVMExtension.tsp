@@ -76,7 +76,7 @@ interface VirtualMachineScaleSetVMExtensions {
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
     VirtualMachineScaleSetVMExtensionUpdate,
-    Response = OkResponse &
+    Response = ArmResponse<VirtualMachineScaleSetVMExtension> &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;

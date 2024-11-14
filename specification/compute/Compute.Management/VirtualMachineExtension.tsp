@@ -53,7 +53,9 @@ interface VirtualMachineExtensions {
   update is ComputeCustomPatchAsync<
     VirtualMachineExtension,
     VirtualMachineExtensionUpdate,
-    Response = ArmResponse<VirtualMachineExtension>
+    Response = ArmResponse<VirtualMachineExtension> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -55,12 +55,15 @@ interface Images {
   /**
    * Update an image.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @parameterVisibility
   update is ComputeCustomPatchAsync<
     Image,
     ImageUpdate,
-    Response = ArmResponse<Image> | ArmCreatedResponse<Image>
+    Response = ArmResponse<Image> | ArmResourceCreatedResponse<
+      Image,
+      LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
