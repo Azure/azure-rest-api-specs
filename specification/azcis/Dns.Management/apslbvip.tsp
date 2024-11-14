@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -18,8 +19,8 @@ model ApSlbVipResourceProperties {
   @doc("Gets or sets the auto pilot DNS name. This is case-insensitive")
   autoPilotDnsName: string;
 
-  @doc("Azure location")
-  azureLocation?: string;
+  @doc("The Azure location")
+  azureLocation?: azureLocation;
 
   @doc("Provisioning state")
   @visibility("read")
