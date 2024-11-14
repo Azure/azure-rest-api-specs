@@ -5,6 +5,7 @@ import "./models-service.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Search;
 
@@ -151,9 +152,10 @@ interface IndexersOperations {
    * Runs an indexer on-demand.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @pollingOperation(IndexersOperations.getStatus)
   @route("/indexers('{indexerName}')/search.run")
   @post
-  run is SearchIndexerOperation<
+  run is SearchIndexerLongRunningOperation<
     {},
     {
       @doc("A process exit code.")
@@ -264,6 +266,7 @@ interface IndexersOperations {
    * Returns the current status and execution history of an indexer.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "Pre-existing API contract"
   @route("/indexers('{indexerName}')/search.status")
   @get
   getStatus is SearchIndexerOperation<{}, SearchIndexerStatus>;

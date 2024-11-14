@@ -106,6 +106,18 @@ alias SearchIndexerOperation<
   TError
 >;
 
+alias SearchIndexerLongRunningOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.LongRunningOperation<
+  TParams & ClientRequestIdHeader & indexerNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
 alias SearchDataSourceOperation<
   TParams extends Reflection.Model,
   TResponse,
