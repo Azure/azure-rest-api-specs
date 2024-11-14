@@ -1355,6 +1355,136 @@
         }
       }
     },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots/{snapshotName}/controls": {
+      "get": {
+        "operationId": "Control_List",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation control list.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.skipToken"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.top"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.select"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.filter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.orderby"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.offerGuid"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.reportCreatorTenantId"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "snapshotName",
+            "in": "path",
+            "description": "Snapshot Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ControlResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Control_List": {
+            "$ref": "./examples/Control_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots/{snapshotName}/controls/{controlId}": {
+      "get": {
+        "operationId": "Control_Get",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation control and its properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "snapshotName",
+            "in": "path",
+            "description": "Snapshot Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{1,64}$"
+          },
+          {
+            "name": "controlId",
+            "in": "path",
+            "description": "Control Id.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ControlResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Control_Get": {
+            "$ref": "./examples/Control_Get.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots/{snapshotName}/download": {
       "post": {
         "operationId": "Snapshots_Download",
@@ -2117,7 +2247,7 @@
         ]
       }
     },
-    "Control": {
+    "ControlEssentialInfo": {
       "type": "object",
       "description": "A class represent the control.",
       "properties": {
@@ -2150,17 +2280,6 @@
           "$ref": "#/definitions/ControlStatus",
           "description": "Control status.",
           "readOnly": true
-        },
-        "responsibilities": {
-          "type": "array",
-          "description": "List of customer responsibility.",
-          "items": {
-            "$ref": "#/definitions/Responsibility"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "responsibilityId"
-          ]
         }
       }
     },
@@ -2182,7 +2301,7 @@
           "type": "array",
           "description": "List of controls.",
           "items": {
-            "$ref": "#/definitions/Control"
+            "$ref": "#/definitions/ControlEssentialInfo"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -2232,6 +2351,95 @@
           }
         ]
       }
+    },
+    "ControlProperties": {
+      "type": "object",
+      "description": "A class represent the control.",
+      "properties": {
+        "controlId": {
+          "type": "string",
+          "description": "The Id of the control. e.g. \"Operational_Security_10\"",
+          "readOnly": true
+        },
+        "controlName": {
+          "type": "string",
+          "description": "The name of the control. e.g. \"Unsupported OS and Software.\"",
+          "readOnly": true
+        },
+        "controlFullName": {
+          "type": "string",
+          "description": "The full name of the control. e.g. \"Validate that unsupported operating systems and software components are not in use.\"",
+          "readOnly": true
+        },
+        "controlDescription": {
+          "type": "string",
+          "description": "The control's description",
+          "readOnly": true
+        },
+        "controlDescriptionHyperLink": {
+          "type": "string",
+          "description": "The hyper link to the control's description'.",
+          "readOnly": true
+        },
+        "controlStatus": {
+          "$ref": "#/definitions/ControlStatus",
+          "description": "Control status.",
+          "readOnly": true
+        },
+        "responsibilities": {
+          "type": "array",
+          "description": "List of customer responsibility.",
+          "items": {
+            "$ref": "#/definitions/Responsibility"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "responsibilityId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Azure lifecycle management",
+          "readOnly": true
+        }
+      }
+    },
+    "ControlResource": {
+      "type": "object",
+      "description": "A class represent a AppComplianceAutomation control resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ControlProperties",
+          "description": "Control's property.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ControlResourceListResult": {
+      "type": "object",
+      "description": "The response of a ControlResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ControlResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ControlResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ControlStatus": {
       "type": "string",
