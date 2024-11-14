@@ -957,6 +957,9 @@ directive:
   - suppress: MissingSegmentsInNestedResourceListOperation
     from: tablerbac.json
     reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: PutResponseCodes
+    from: dataTransferService.json
+    reason: Suppressing errors for existing APIs
 
 ```
 

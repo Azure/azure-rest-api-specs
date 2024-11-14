@@ -369,7 +369,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommandPostBody"
+              "$ref": "#/definitions/CommandAsyncPostBody"
             },
             "description": "Specification which command to run where"
           }
@@ -397,7 +397,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -475,7 +475,7 @@
           "200": {
             "description": "Success. Return a command resource.",
             "schema": {
-              "$ref": "#/definitions/ListCommands"
+              "$ref": "#/definitions/CommandPublicResource"
             }
           },
           "default": {
@@ -1555,6 +1555,36 @@
           "description": "If true, stops cassandra before executing the command and then start it again"
         },
         "readwrite": {
+          "type": "boolean",
+          "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
+        }
+      }
+    },
+    "CommandAsyncPostBody": {
+      "description": "Specification of which command to run where",
+      "type": "object",
+      "required": [
+        "command",
+        "host"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The command which should be run"
+        },
+        "arguments": {
+          "type": "object",
+          "description": "The arguments for the command to be run"
+        },
+        "host": {
+          "type": "string",
+          "description": "IP address of the cassandra host to run the command on"
+        },
+        "cassandra-stop-start": {
+          "type": "boolean",
+          "description": "If true, stops cassandra before executing the command and then start it again"
+        },
+        "readWrite": {
           "type": "boolean",
           "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
         }
