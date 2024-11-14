@@ -37,10 +37,10 @@ interface Experiments {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Experiment>;
 
-  /**
-   * The operation to update an experiment.
-   */
-  update is ArmCustomPatchAsync<Experiment, ExperimentUpdate>;
+  // /**
+  //  * The operation to update an experiment.
+  //  */
+  // update is ArmCustomPatchAsync<Experiment, ExperimentUpdate>;
 
   /**
    * Delete a Experiment resource.
