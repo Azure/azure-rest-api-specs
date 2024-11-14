@@ -66,7 +66,7 @@ interface ReportResources {
    * Update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Reports_Update")
+  @operationId("Report_Update")
   update is ArmCustomPatchAsync<
     ReportResource,
     ReportResourcePatch,
