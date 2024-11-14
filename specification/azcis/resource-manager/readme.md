@@ -42,11 +42,13 @@ These settings apply only when `--tag=2024-06-24-preview` is specified on the co
 
 ```yaml $(tag) == '2024-06-24-preview'
 input-file:
-  - Microsoft.AzureCis/preview/2024-06-24-preview/dns.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/aad.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/certificate.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/dns.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/dscm.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/environment.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/pav2.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
 ```
 

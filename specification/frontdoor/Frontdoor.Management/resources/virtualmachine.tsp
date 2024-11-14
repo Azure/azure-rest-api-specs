@@ -30,8 +30,6 @@ model VmResource is ProxyResource<VmProperties> {
   name: string;
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 @armResourceOperations
 interface VmResources {
   get is ArmLocResourceRead<VmResource>;
