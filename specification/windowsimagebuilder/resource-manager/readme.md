@@ -92,7 +92,7 @@ directive:
     from: WindowsImageBuilder.json
     reason: Using additionalProperties only for user-defined tags and common types.
     where: 
-        - $.definitions.WindowsImageTemplateDistributor.properties.artifactTags
+        - $.definitions.WindowsImageDistributor.properties.artifactTags
         - $.definitions.UserAssignedIdentities
-        - $.definitions.WindowsImageTemplateUpdateParameters.properties.tags
+        - $.definitions.WindowsImageTagUpdateParameters.properties.tags
 ```
