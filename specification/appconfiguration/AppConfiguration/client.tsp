@@ -10,10 +10,10 @@ namespace SdkCustomizations;
 // Python specific customizations
 #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
 model MyClientOptions {
-    /**
-     * Used to guarantee real-time consistency between requests.
-     */
-    syncToken?: string;
+  /**
+   * Used to guarantee real-time consistency between requests.
+   */
+  syncToken?: string;
 }
 @@clientInitialization(AzureAppConfiguration, MyClientOptions, "python");
 @@clientName(KeyValueFields, "ConfigurationSettingFields", "python");
