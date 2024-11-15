@@ -36,6 +36,10 @@ These settings apply only when `--tag=package-2024-11-01-preview` is specified o
 ``` yaml $(tag) == 'package-2024-11-01-preview'
 input-file:
 - preview/2024-11-01-preview/search.json
+- suppressions:
+ - code: LroExtension 
+   from: search.json
+   reason: Legacy swagger file
 ```
 
 ### Tag: package-2024-07-01
@@ -45,4 +49,8 @@ These settings apply only when `--tag=package-2024-07-01` is specified on the co
 ``` yaml $(tag) == 'package-2024-07-01'
 input-file:
 - stable/2024-07-01/search.json
+- suppressions:
+ - code: LroExtension 
+   from: search.json
+   reason: Legacy swagger file
 ```
