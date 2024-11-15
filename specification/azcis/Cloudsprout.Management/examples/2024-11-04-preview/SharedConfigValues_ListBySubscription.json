@@ -3,7 +3,7 @@
   "operationId": "SharedConfigValues_ListBySubscription",
   "parameters": {
     "subscriptionId": "123e4567-e89b-12d3-a456-426614174000",
-    "api-version": "2024-08-31-preview"
+    "api-version": "2024-11-04-preview"
   },
   "responses": {
     "200": {
@@ -14,24 +14,13 @@
             "name": "prodUSEastAzcis",
             "type": "Microsoft.AzureCis/sharedConfigValues",
             "properties": {
-              "sharedValues": [
-                {
-                  "moniker": "test_namespace_one.test_label_one",
-                  "value": "test_value_one",
-                  "scope": {
-                    "geoType": "Cloud",
-                    "geoValue": "Public"
-                  }
-                },
-                {
-                  "moniker": "test_namespace_two.test_label_two",
-                  "value": "test_value_two",
-                  "scope": {
-                    "geoType": "Cloud",
-                    "geoValue": "Public"
-                  }
-                }
-              ],
+              "moniker": "test_namespace_one.test_label_one",
+              "value": "test_value_one",
+              "scope": {
+                "geoType": "Cloud",
+                "geoValue": "Public",
+                "envType": "Prod"
+              },
               "cloudSproutEnv": "Prod"
             }
           }

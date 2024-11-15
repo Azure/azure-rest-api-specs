@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure CIS FRP",
-    "version": "2024-08-31-preview",
+    "version": "2024-11-04-preview",
     "description": "CloudSprout Service",
     "x-typespec-generated": [
       {
@@ -354,16 +354,21 @@
       "properties": {
         "geoType": {
           "type": "string",
-          "description": "GeoType. The valid value is Cloud."
+          "description": "GeoType. The valid values are Cloud, Geography, Region."
         },
         "geoValue": {
           "type": "string",
           "description": "The GeoValue for the specified GeoType. If GeoType is Cloud, GeoValue is the applicable cloud name for the Moniker value."
+        },
+        "envType": {
+          "type": "string",
+          "description": "EnvType. The valid value are Prod, PPE, Test, Dev."
         }
       },
       "required": [
         "geoType",
-        "geoValue"
+        "geoValue",
+        "envType"
       ]
     },
     "SharedConfigValuesProvisioningState": {
@@ -443,32 +448,6 @@
       "type": "object",
       "description": "SharedConfigValuesResource properties",
       "properties": {
-        "sharedValues": {
-          "type": "array",
-          "description": "The array of config values needs to be published or consumed.",
-          "items": {
-            "$ref": "#/definitions/SharedValue"
-          },
-          "x-ms-identifiers": []
-        },
-        "cloudSproutEnv": {
-          "type": "string",
-          "description": "CloudSprout environment to publish or consume the value to. Optional."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/SharedConfigValuesProvisioningState",
-          "description": "Resource Provisioning state",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "sharedValues"
-      ]
-    },
-    "SharedValue": {
-      "type": "object",
-      "description": "The config whose value needs to be published or consumed.",
-      "properties": {
         "moniker": {
           "type": "string",
           "description": "The unique name in CloudSprout whose value needs to be published or consumed."
@@ -480,6 +459,15 @@
         "scope": {
           "$ref": "#/definitions/Scope",
           "description": "Scope of Moniker value. Optional."
+        },
+        "cloudSproutEnv": {
+          "type": "string",
+          "description": "CloudSprout environment to publish or consume the value to. Optional."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/SharedConfigValuesProvisioningState",
+          "description": "Resource Provisioning state",
+          "readOnly": true
         }
       },
       "required": [
