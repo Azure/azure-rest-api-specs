@@ -1758,6 +1758,14 @@ model IndexAction {
 }
 
 /**
+ * A document retrieved via a document lookup operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+model LookupDocument {
+  ...Record<unknown>;
+}
+
+/**
  * Response containing the status of operations for all documents in the indexing
  * request.
  */
