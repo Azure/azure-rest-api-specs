@@ -37,9 +37,9 @@ These settings apply only when `--tag=package-2024-11-01-preview` is specified o
 input-file:
 - preview/2024-11-01-preview/search.json
 - suppressions:
- - code: LroExtension 
-   from: search.json
-   reason: Legacy swagger file
+  - code: LroExtension 
+    from: search.json
+    reason: Legacy swagger file
 ```
 
 ### Tag: package-2024-07-01
@@ -50,7 +50,7 @@ These settings apply only when `--tag=package-2024-07-01` is specified on the co
 input-file:
 - stable/2024-07-01/search.json
 - suppressions:
- - code: LroExtension 
-   from: search.json
-   reason: Legacy swagger file
+  - code: LroExtension 
+    from: search.json
+    reason: Legacy swagger file
 ```
