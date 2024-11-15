@@ -2,7 +2,7 @@ import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
@@ -40,17 +40,12 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsRouterWorkerSelector.ttlSeconds,
-  "getTimeToLive",
+  "timeToLive",
   "java"
 );
 
 @@clientName(MediaLiveEventChannelArchiveHeartbeatEventData.channelLatencyMs,
   "channelLatency",
-  "java"
-);
-
-@@clientName(StorageDirectoryDeletedEventData.recursive,
-  "isRecursive",
   "java"
 );
 
@@ -121,11 +116,6 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
-@@clientName(AcsRouterWorkerSelector.ttlSeconds,
-  "getTimeToLive",
-  "java"
-);
-
 @@clientName(AcsRouterWorkerSelector.value,
   "labelValue",
   "java"
@@ -141,55 +131,209 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
-// @@clientName(KeyVaultCertificateExpiredEventData.NBF,
-//   "foo",
-//   "java"
-// );
+@@clientName(KeyVaultAccessPolicyChangedEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultAccessPolicyChangedEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultCertificateExpiredEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultCertificateExpiredEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultKeyNearExpiryEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultKeyNearExpiryEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultKeyExpiredEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultKeyExpiredEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultSecretNearExpiryEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultSecretNearExpiryEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultSecretExpiredEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultSecretExpiredEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(KeyVaultCertificateNearExpiryEventData.NBF,
+  "Nbf",
+  "java"
+);
+
+@@clientName(KeyVaultCertificateNearExpiryEventData.EXP,
+  "Exp",
+  "java"
+);
+
+@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
+  "channelKind",
+  "java"
+);
+
+@@clientName(AcsMessageReceivedEventData.channelType,
+  "channelKind",
+  "java"
+);
+
+@@clientName(AcsMessageReceivedEventData.media,
+  "mediaContent",
+  "java"
+);
+
+@@clientName(AcsMessageReceivedEventData.interactive,
+  "interactiveContent",
+  "java"
+);
+
+@@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
+  "operationalDetails",
+  "java"
+);
+
+@@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
+  "resourceDetails",
+  "java"
+);
+
+@@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+  "operationalDetails",
+  "java"
+);
+
+@@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+  "resourceDetails",
+  "java"
+);
 
 
 
 
 /*
 
-todo:
+Remaining diffs explained:
 
-fix return types:
-MediaLiveEventChannelArchiveHeartbeatEventData.channelLatency
-AcsRouterWorkerSelector.getTimeToLive
-AcsRecordingFileStatusUpdaetdEventData.getRecordingDuration() {
-StorageDirectoryDeletedEventData.getIsRecursive string->Boolean, also needs a custom rename it seems.
-MediaLiveEventIngestHeartbeatEventData:
-- getIngestDriftValue went from Integer to String
-- getLastFragmentArrivalTime went from Datetime to String
+Resource(Action|Delete|Write)(Cancel|Failure|Success)EventData:
+These had a bunch of customization in v1 due to changing return types from Strings to actual types.
+In those cases new methods were added that included "Resource", like getHttpRequest->getResourceHttpRequest..
+In v2, I think we can just leave the methods as they are and not include "Resource".
+
+Setters are removed as now these are properly immutable.
+
+Overridden getters from base methods for optional fields are showing up. This is a bug, probably.
+
+Several instances of Map<String, Object> moving to Map<String, BinaryData> based on recent codegen changes.
+determination:
+I think this is a good change we should keep.
 
 DeviceTwinInfo:
 float getVersion->Double getVersion, same for getCloudTodeviceMessageCount
 these were defined as number in swagger, float32 in TSP
-
-
-
-
-all the Nbf/Exp/etc stuff from previous swagger customization needs to come over
-- blocked on an issue in typespec, may need to customize in the mean time.
+determination:
+Given that Double is what we use for a float32, let's just keep this.
 
 
 Handful of things went from `object` to `Map<String,Object>` due to moving from being a `object` in Swagger to `Record<unknown>` in TSP
  - need to check these manually to see what the ux is.
+ - DeviceTelemtryEventProperties.getBody
+ - MachineLearningServicesModelDeployedEventData.getServiceProperties, getServiceTags
+ - MachineLearningServicesModelRegisteredEventData.getModelProperties, getModelTags
+ - MachineLearningServicesRunCompletedEventData.getRunProperties, getRunTags
+ - MachineLearningServicesRunStatusChangedEventData.getRunProperites, getRunTags
+ - StorageAsyncOperationInitiatedEventData.getStorageDiagnostics
+ - StorageBlobCreatedEventData.getStorageDiagnostics
+ - StorageBlobDeletedEventData.getStorageDiagnostics
+ - StorageBlobRenamedEventData.getStorageDiagnostics
+ - StorageBlobTierChangedEventData.getStorageDiagnostics
+ - StorageDirectoryCreatedEventData.getStorageDiagnostics
+ - StorageDirectoryDeletedEventData.getStorageDiagnostics
+ - StorageDirectoryRenamedEventData.getStorageDiagnostics
+
+ Determination:
+ These all wind up correct. In all cases the payload example has a key/value of some sort.
+ Users will have to modify existing code to handle this by either knowing what key they want
+ or by iterating them. We could go back to bundle everything into a top level object representing 
+ the whole json, but I think that is overkill.
 
 
-need to validate we want:
 AcsCommunicationIdentifierKind - now is CommunicationIdentifierModelKind
 AcsMicrosoftTeamsAppIdentifier - now is MicrosoftTeamsAppIdentifierModel
-AcsRouterCommunicationError - was previously ResponseError for these usages, should this still be? Only appears on AcsRouterJobClassificationFailedEventData.
+
+Determination: I think these are fine but I am willing to change them.
 
 
-validated correct removal:
-AcsChatMemberAddedToThreadWithUserEventData  - deprecated
-AcsChatMemberRemovedFromThreadWithUserEventData - deprecated
-AcsChatThreadMemberProperties - only appeared in the previous two
+Healthcare FHIR events:
+Lots of method name changes due to moving where "Fhir" is in the name or simply omitting it.
 
-diffs I kept:
-fhir in healthcare events
+Determination: Keeping these. It's harmless and they aren't really any better or worse.
+.NET did keep this customization, but that is due largely I think to their desire to 
+use type forwarders.
 
 
 */
