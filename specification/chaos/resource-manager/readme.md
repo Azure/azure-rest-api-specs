@@ -28,9 +28,54 @@ These are the global settings for the chaos.
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-preview-2024-03
+tag: package-2025-01
 ```
 
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.Chaos/stable/2025-01-01/openapi.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+```
 
 ### Tag: package-preview-2024-03
 
