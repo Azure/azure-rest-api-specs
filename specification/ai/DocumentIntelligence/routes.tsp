@@ -18,9 +18,17 @@ alias ServiceTraits = NoConditionalRequests &
 op DocumentIntelligenceOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model & Foundations.RetryAfterHeader
-> is Foundations.Operation<TParams, TResponse, ServiceTraits, ErrorResponse>;
+> is Foundations.Operation<
+  TParams,
+  TResponse,
+  ServiceTraits,
+  DocumentIntelligenceErrorResponse
+>;
 
-alias DIResourceOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
+alias DIResourceOperations = ResourceOperations<
+  ServiceTraits,
+  DocumentIntelligenceErrorResponse
+>;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template"
 op DocumentIntelligenceLongRunningOperation<
@@ -35,7 +43,7 @@ op DocumentIntelligenceLongRunningOperation<
       operationLocation: ResourceLocation<TResponse>;
     },
   ServiceTraits,
-  ErrorResponse
+  DocumentIntelligenceErrorResponse
 >;
 
 @doc("Document model analyze request parameters.")
@@ -72,7 +80,7 @@ model DocumentModelAnalyzeRequestParams {
 
   @doc("Format of the analyze result top-level content.")
   @query
-  outputContentFormat?: ContentFormat = ContentFormat.text;
+  outputContentFormat?: DocumentContentFormat = DocumentContentFormat.text;
 
   @doc("Additional outputs to generate during analysis.")
   @query
@@ -141,7 +149,7 @@ interface DocumentModels {
       @path
       resultId: uuid;
     },
-    AnalyzeResultOperation
+    AnalyzeOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -233,7 +241,7 @@ interface DocumentModels {
       ...DocumentModelAnalyzeRequestParams;
       ...AnalyzeFromStreamRequestParams;
     },
-    AnalyzeResultOperation
+    AnalyzeOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -254,7 +262,7 @@ interface DocumentModels {
       @bodyRoot
       analyzeRequest?: AnalyzeDocumentRequest;
     },
-    AnalyzeResultOperation
+    AnalyzeOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -273,7 +281,7 @@ interface DocumentModels {
       @path
       resultId: uuid;
     },
-    AnalyzeBatchResultOperation
+    AnalyzeBatchOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -293,7 +301,7 @@ interface DocumentModels {
       @body
       analyzeBatchRequest?: AnalyzeBatchDocumentsRequest;
     },
-    AnalyzeBatchResultOperation
+    AnalyzeBatchOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -308,7 +316,7 @@ interface DocumentModels {
       @maxLength(64)
       modelId: string;
     },
-    Foundations.CustomPage<AnalyzeBatchResultOperation>
+    Foundations.CustomPage<AnalyzeBatchOperation>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -374,7 +382,7 @@ interface DocumentModels {
       @bodyRoot
       authorizeCopyRequest: AuthorizeCopyRequest;
     },
-    CopyAuthorization
+    ModelCopyAuthorization
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -392,7 +400,7 @@ interface DocumentModels {
 
       @doc("Copy to request parameters.")
       @bodyRoot
-      copyToRequest: CopyAuthorization;
+      copyToRequest: ModelCopyAuthorization;
     },
     DocumentModelCopyToOperationDetails
   >;
@@ -407,7 +415,7 @@ interface DocumentModels {
 
 interface MiscellaneousOperations {
   @doc("Lists all operations.")
-  listOperations is DIResourceOperations.ResourceList<OperationDetails>;
+  listOperations is DIResourceOperations.ResourceList<DocumentIntelligenceOperationDetails>;
 
   @sharedRoute
   @doc("Gets operation info.")
@@ -431,13 +439,16 @@ interface MiscellaneousOperations {
 
   @sharedRoute
   @doc("Gets operation info.")
-  getOperation is DIResourceOperations.ResourceRead<OperationDetails>;
+  getOperation is DIResourceOperations.ResourceRead<DocumentIntelligenceOperationDetails>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Return information about the current resource.")
   @route("/info")
   @get
-  getResourceInfo is DocumentIntelligenceOperation<{}, ResourceDetails>;
+  getResourceInfo is DocumentIntelligenceOperation<
+    {},
+    DocumentIntelligenceResourceDetails
+  >;
 }
 
 interface DocumentClassifiers {
@@ -476,7 +487,7 @@ interface DocumentClassifiers {
       ...DocumentClassifierAnalyzeRequestParams;
       ...AnalyzeFromStreamRequestParams;
     },
-    AnalyzeResultOperation
+    AnalyzeOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -497,7 +508,7 @@ interface DocumentClassifiers {
       @bodyRoot
       classifyRequest: ClassifyDocumentRequest;
     },
-    AnalyzeResultOperation
+    AnalyzeOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -516,7 +527,7 @@ interface DocumentClassifiers {
       @path
       resultId: uuid;
     },
-    AnalyzeResultOperation
+    AnalyzeOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"

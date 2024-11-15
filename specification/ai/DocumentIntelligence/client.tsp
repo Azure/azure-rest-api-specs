@@ -126,7 +126,7 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(ContentSourceKind.azureBlob, "Blob", "csharp");
 @@clientName(ContentSourceKind.azureBlobFileList, "BlobFileList", "csharp");
 @@clientName(ContentSourceKind.url, "Uri", "csharp");
-@@clientName(CopyAuthorization.expirationDateTime, "ExpiresOn", "csharp");
+@@clientName(ModelCopyAuthorization.expirationDateTime, "ExpiresOn", "csharp");
 @@clientName(Document, "AnalyzedDocument", "csharp");
 @@clientName(Document.docType, "DocumentType", "csharp");
 @@clientName(DocumentAnalysisFeature.styleFont, "FontStyling", "csharp");
@@ -166,13 +166,22 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentModelDetails.docTypes, "DocumentTypes", "csharp");
 @@clientName(DocumentModelDetails.expirationDateTime, "ExpiresOn", "csharp");
 @@clientName(DocumentModelDetails.modifiedDateTime, "ModifiedOn", "csharp");
-@@clientName(Error, "DocumentIntelligenceError", "csharp");
+@@clientName(DocumentIntelligenceError, "DocumentIntelligenceError", "csharp");
 @@clientName(FontStyle, "DocumentFontStyle", "csharp");
 @@clientName(FontWeight, "DocumentFontWeight", "csharp");
 // https://github.com/Azure/typespec-azure/issues/417
-@@clientName(InnerError.innererror, "InnerErrorObject", "csharp");
-@@clientName(OperationDetails.createdDateTime, "CreatedOn", "csharp");
-@@clientName(OperationDetails.lastUpdatedDateTime, "LastUpdatedOn", "csharp");
+@@clientName(DocumentIntelligenceInnerError.innererror,
+  "InnerErrorObject",
+  "csharp"
+);
+@@clientName(DocumentIntelligenceOperationDetails.createdDateTime,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(DocumentIntelligenceOperationDetails.lastUpdatedDateTime,
+  "LastUpdatedOn",
+  "csharp"
+);
 @@clientName(Warning, "DocumentIntelligenceWarning", "csharp");
 
 @@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "python");

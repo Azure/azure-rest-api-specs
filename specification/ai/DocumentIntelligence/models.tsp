@@ -34,7 +34,7 @@ union StringIndexType {
 }
 
 @doc("Format of the content in analyzed result.")
-union ContentFormat {
+union DocumentContentFormat {
   string,
 
   @doc("Plain text representation of the document content without any formatting.")
@@ -313,7 +313,7 @@ union SplitMode {
 
 @lroStatus
 @doc("Operation status.")
-union OperationStatus {
+union DocumentIntelligenceOperationStatus {
   string,
 
   @doc("The operation has not started yet.")
@@ -405,13 +405,13 @@ model AnalyzeBatchDocumentsRequest {
 
 @doc("Error response object.")
 @error
-model ErrorResponse {
+model DocumentIntelligenceErrorResponse {
   @doc("Error info.")
-  error: Error;
+  error: DocumentIntelligenceError;
 }
 
 @doc("The error object.")
-model Error {
+model DocumentIntelligenceError {
   @doc("One of a server-defined set of error codes.")
   code: string;
 
@@ -422,15 +422,15 @@ model Error {
   target?: string;
 
   @doc("An array of details about specific errors that led to this reported error.")
-  details?: Error[];
+  details?: DocumentIntelligenceError[];
 
   @doc("An object containing more specific information than the current object about the error.")
-  innererror?: InnerError;
+  innererror?: DocumentIntelligenceInnerError;
 }
 
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
 @doc("An object containing more specific information about the error.")
-model InnerError {
+model DocumentIntelligenceInnerError {
   @doc("One of a server-defined set of error codes.")
   code?: string;
 
@@ -438,7 +438,7 @@ model InnerError {
   message?: string;
 
   @doc("Inner error.")
-  innererror?: InnerError;
+  innererror?: DocumentIntelligenceInnerError;
 }
 
 @doc("The error object.")
@@ -454,9 +454,9 @@ model Warning {
 }
 
 @doc("Status and result of the analyze operation.")
-model AnalyzeResultOperation {
+model AnalyzeOperation {
   @doc("Operation status.  notStarted, running, succeeded, or failed")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
   createdDateTime: utcDateTime;
@@ -465,7 +465,7 @@ model AnalyzeResultOperation {
   lastUpdatedDateTime: utcDateTime;
 
   @doc("Encountered error during document analysis.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 
   @lroResult
   @doc("Document analysis result.")
@@ -473,12 +473,12 @@ model AnalyzeResultOperation {
 }
 
 @doc("Status and result of the analyze batch operation.")
-model AnalyzeBatchResultOperation {
+model AnalyzeBatchOperation {
   @doc("Analyze batch operation result ID.")
   resultId?: uuid;
 
   @doc("Operation status.  notStarted, running, succeeded, or failed")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("Date and time (UTC) when the operation was submitted.")
   createdDateTime: utcDateTime;
@@ -492,7 +492,7 @@ model AnalyzeBatchResultOperation {
   percentCompleted?: int32;
 
   @doc("Encountered error during batch document analysis.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 
   @lroResult
   @doc("Batch document analysis result.")
@@ -517,7 +517,7 @@ model AnalyzeBatchResult {
 @doc("Operation detail for a document in a batch analysis.")
 model AnalyzeBatchOperationDetail {
   @doc("Analyze status.  succeeded, failed, or skipped")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("URL of the source document.")
   sourceUrl: url;
@@ -526,7 +526,7 @@ model AnalyzeBatchOperationDetail {
   resultUrl?: url;
 
   @doc("Encountered error.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 }
 
 @doc("Document analysis result.")
@@ -542,7 +542,7 @@ model AnalyzeResult {
   stringIndexType: StringIndexType;
 
   @doc("Format of the analyze result top-level content.")
-  contentFormat?: ContentFormat;
+  contentFormat?: DocumentContentFormat;
 
   @doc("""
     Concatenate string representation of all textual and visual elements in reading
@@ -1249,7 +1249,7 @@ model AuthorizeCopyRequest {
   Authorization to copy a document model to the specified target resource and
   modelId.
   """)
-model CopyAuthorization {
+model ModelCopyAuthorization {
   @doc("ID of the target Azure resource where the document model should be copied to.")
   targetResourceId: string;
 
@@ -1318,14 +1318,14 @@ model ClassifierCopyAuthorization {
 @doc("Operation info.")
 @resource("operations")
 @discriminator("kind")
-model OperationDetails {
+model DocumentIntelligenceOperationDetails {
   @doc("Operation ID")
   @key
   @visibility("read", "create")
   operationId: string;
 
   @doc("Operation status.  notStarted, running, completed, or failed")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("Operation progress (0-100).")
   @minValue(0)
@@ -1351,7 +1351,7 @@ model OperationDetails {
   tags?: Record<string>;
 
   @doc("Encountered error.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 }
 
 @resource("documentModels")
@@ -1567,7 +1567,7 @@ model ClassifyDocumentRequest {
 }
 
 @doc("General information regarding the current resource.")
-model ResourceDetails {
+model DocumentIntelligenceResourceDetails {
   @doc("Details regarding custom document models.")
   customDocumentModels: CustomDocumentModelsDetails;
 }
@@ -1582,7 +1582,8 @@ model CustomDocumentModelsDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentModelBuildOperationDetails extends OperationDetails {
+model DocumentModelBuildOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1592,7 +1593,8 @@ model DocumentModelBuildOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentModelComposeOperationDetails extends OperationDetails {
+model DocumentModelComposeOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1602,7 +1604,8 @@ model DocumentModelComposeOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentModelCopyToOperationDetails extends OperationDetails {
+model DocumentModelCopyToOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1612,7 +1615,8 @@ model DocumentModelCopyToOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentClassifierCopyToOperationDetails extends OperationDetails {
+model DocumentClassifierCopyToOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentClassifierDetails;
@@ -1622,7 +1626,8 @@ model DocumentClassifierCopyToOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentClassifierBuildOperationDetails extends OperationDetails {
+model DocumentClassifierBuildOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentClassifierDetails;
