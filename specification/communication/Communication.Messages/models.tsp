@@ -43,7 +43,7 @@ union CommunicationMessageKind {
   @doc("Template message type.")
   template: "template",
 
-  @added(Versions.c2024_11_15)
+  @added(Versions.c2024_11_15_Preview)
   @doc("Interactive message type.")
   interactive: "interactive",
 }
@@ -249,7 +249,7 @@ model AudioNotificationContent extends NotificationContent {
   ...MediaNotificationContentBase;
 }
 
-@added(Versions.c2024_11_15)
+@added(Versions.c2024_11_15_Preview)
 @doc("A request to send an Interactive message notification.")
 model InteractiveNotificationContent extends NotificationContent {
   @doc("Message notification type is Interactive.")
@@ -259,6 +259,7 @@ model InteractiveNotificationContent extends NotificationContent {
   interactiveMessage: InteractiveMessage;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The InteractiveMessage object used to create interactive messages.")
 model InteractiveMessage {
   @doc("Gets or Sets Header content. Supports the following types:text, images etc.")
@@ -274,6 +275,7 @@ model InteractiveMessage {
   actionBindings: ActionBindings;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @discriminator("kind")
 @doc("The message content object used to create interactive messages components.")
 model MessageContent {
@@ -281,6 +283,7 @@ model MessageContent {
   kind: MessageContentKind;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The message content of type text information.")
 model TextMessageContent extends MessageContent {
   @doc("Message content kind is text.")
@@ -290,6 +293,7 @@ model TextMessageContent extends MessageContent {
   text: string;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The message content of type document information.")
 model DocumentMessageContent extends MessageContent {
   @doc("Message content kind is document.")
@@ -298,6 +302,7 @@ model DocumentMessageContent extends MessageContent {
   ...MediaMessageContent;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The message content of type image information.")
 model ImageMessageContent extends MessageContent {
   @doc("Message content kind is image.")
@@ -306,6 +311,7 @@ model ImageMessageContent extends MessageContent {
   ...MediaMessageContent;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The message content of type image information.")
 model VideoMessageContent extends MessageContent {
   @doc("Message content kind is video.")
@@ -314,6 +320,7 @@ model VideoMessageContent extends MessageContent {
   ...MediaMessageContent;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The message content of type Button information.")
 model ButtonContent extends MessageContent {
   @doc("Message content kind is Button.")
@@ -326,6 +333,7 @@ model ButtonContent extends MessageContent {
   title: string;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The message content of type Url information.")
 model UrlContent extends MessageContent {
   @doc("Message content kind is url.")
@@ -337,6 +345,7 @@ model UrlContent extends MessageContent {
   ...MediaMessageContent;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The message content of type List information.")
 model ListContent extends MessageContent {
   @doc("Message content kind is list.")
@@ -349,6 +358,7 @@ model ListContent extends MessageContent {
   options: ListOption[];
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The List option content.")
 model ListOption {
   @doc("Title of the sub section of list.")
@@ -358,6 +368,7 @@ model ListOption {
   rows: ListOptionRow[];
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The List option row content.")
 model ListOptionRow {
   @doc("Id of the row option.")
@@ -370,12 +381,14 @@ model ListOptionRow {
   rows: string;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The message content of type media.")
 model MediaMessageContent {
   @doc("MediaUri of the media content.")
   mediaUri: string;
 }
 
+@added(Versions.c2024_11_15_Preview)
 @discriminator("actionBindingKind")
 @doc("Binding actions to the interactive message.")
 model ActionBindings {
@@ -386,6 +399,7 @@ model ActionBindings {
   actions: MessageContent[];
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppListActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsApp.")
@@ -395,6 +409,7 @@ model WhatsAppListActionBindings extends ActionBindings {
   actions: ListContent[];
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppButtonActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsApp.")
@@ -404,8 +419,9 @@ model WhatsAppButtonActionBindings extends ActionBindings {
   actions: ButtonContent[];
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
-model WhatsAppUrlActionBindings extends ActionBindings {
+model WhatsAppQuickActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsApp.")
   actionBindingKind: MessageActionBindingKind.whatsAppQuickAction;
 
@@ -670,5 +686,5 @@ enum Versions {
 
   @doc("Azure Communication Messages 2024-11-15 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  c2024_11_15: "2024-11-15",
+  c2024_11_15_Preview: "2024-11-15-preview",
 }
