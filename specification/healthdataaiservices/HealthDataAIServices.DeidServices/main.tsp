@@ -19,7 +19,7 @@ using Azure.Core.Traits;
   "De-identification Service service endpoint",
   {
     @doc("Url of your De-identification Service.")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @versioned(HealthDataAIServices.DeidServices.Versions)
