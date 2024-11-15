@@ -14,6 +14,7 @@ namespace Microsoft.Chaos;
  * Model that represents a Target resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+@extensionResource
 model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
   ...ResourceNameParameter<
     Resource = Target,

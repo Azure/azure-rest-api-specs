@@ -43,7 +43,7 @@ interface ExperimentExecutions {
   /**
    * Execution details of an experiment resource.
    */
-  details is ArmResourceActionSync<
+  getExecutionDetails is ArmResourceActionSync<
     ExperimentExecution,
     void,
     ExperimentExecutionDetails

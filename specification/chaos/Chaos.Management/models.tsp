@@ -12,23 +12,6 @@ namespace Microsoft.Chaos;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-alias PlaceholderResource = Azure.ResourceManager.Foundations.TrackedResource;
-
-alias ArmProviderActionAsync<
-  Request extends {} | void,
-  Response extends {} | void,
-  Parameters extends {} = {},
-  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
-    Azure.Core.Foundations.RetryAfterHeader
-> = Azure.ResourceManager.ArmResourceActionAsync<
-  PlaceholderResource,
-  Request,
-  Response | ArmAcceptedLroResponse<"Accepted", LroHeaders>,
-  BaseParameters = ApiVersionParameter,
-  Parameters = Parameters,
-  LroHeaders = ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>>
->;
-
 /**
  * Current provisioning state for a given Azure Chaos resource.
  */
