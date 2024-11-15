@@ -54,3 +54,9 @@ suppressions:
     from: search.json
     reason: Legacy swagger file
 ```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: INVALID_TYPE
+```
