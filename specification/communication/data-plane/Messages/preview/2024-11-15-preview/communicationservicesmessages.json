@@ -325,7 +325,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "Kind of MessageActionBinding.",
+          "description": "List of actions for Interactive message.",
           "items": {
             "$ref": "#/definitions/MessageContent"
           },
@@ -1474,18 +1474,6 @@
     "WhatsAppButtonActionBindings": {
       "type": "object",
       "description": "WhatsApp Binding actions to the interactive message.",
-      "properties": {
-        "actions": {
-          "type": "array",
-          "description": "Kind of MessageActionBinding.",
-          "items": {
-            "$ref": "#/definitions/ButtonContent"
-          }
-        }
-      },
-      "required": [
-        "actions"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ActionBindings"
@@ -1496,19 +1484,6 @@
     "WhatsAppListActionBindings": {
       "type": "object",
       "description": "WhatsApp Binding actions to the interactive message.",
-      "properties": {
-        "actions": {
-          "type": "array",
-          "description": "Kind of MessageActionBinding.",
-          "items": {
-            "$ref": "#/definitions/ListContent"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "actions"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ActionBindings"
@@ -1633,19 +1608,6 @@
     "WhatsAppQuickActionBindings": {
       "type": "object",
       "description": "WhatsApp Binding actions to the interactive message.",
-      "properties": {
-        "actions": {
-          "type": "array",
-          "description": "Kind of MessageActionBinding.",
-          "items": {
-            "$ref": "#/definitions/UrlContent"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "actions"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ActionBindings"
