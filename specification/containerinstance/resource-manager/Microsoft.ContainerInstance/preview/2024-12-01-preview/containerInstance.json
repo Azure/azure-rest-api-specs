@@ -2322,9 +2322,16 @@
             },
             "subnetIds": {
               "type": "array",
-              "description": "The subnet resource IDs for a container group.",
+              "description": "The infra subnet resource IDs for a container group.",
               "items": {
                 "$ref": "#/definitions/ContainerGroupSubnetId"
+              }
+            },
+			"additionalSubnetIds": {
+              "type": "array",
+              "description": "The customer subnet resource IDs for a container group.",
+              "items": {
+                "$ref": "#/definitions/AdditionalContainerGroupSubnetId"
               }
             },
             "dnsConfig": {
@@ -2570,6 +2577,23 @@
     },
     "ContainerGroupSubnetId": {
       "description": "Container group subnet information.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID of virtual network and subnet.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Friendly name for the subnet.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+	"AdditionalContainerGroupSubnetId": {
+      "description": "Additional Container group subnet information.",
       "type": "object",
       "properties": {
         "id": {
