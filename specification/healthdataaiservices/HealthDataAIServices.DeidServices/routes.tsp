@@ -59,7 +59,7 @@ op listJobDocuments is Azure.Core.Foundations.Operation<
 
     ...PaginationByTokenQueryParameters;
   },
-  Page<DocumentDetails>,
+  Page<DeidentificationDocumentDetails>,
   Azure.Core.Foundations.ErrorResponse
 >;
 

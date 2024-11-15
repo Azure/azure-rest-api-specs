@@ -22,7 +22,7 @@ model DeidentificationJob {
   name: string;
 
   @doc("Operation to perform on the input documents.")
-  operation?: OperationType = OperationType.Surrogate;
+  operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Storage location to perform the operation on.")
   sourceLocation: SourceStorageLocation;
@@ -38,7 +38,7 @@ model DeidentificationJob {
   @doc("Current status of a job.")
   @visibility("read")
   @pollingOperationParameter
-  status: JobStatus;
+  status: DeidentificationJobStatus;
 
   @doc("Error when job fails in it's entirety.")
   @visibility("read")
@@ -64,12 +64,12 @@ model DeidentificationJob {
 
   @doc("Summary of a job. Exists only when the job is completed.")
   @visibility("read")
-  summary?: JobSummary;
+  summary?: DeidentificationJobSummary;
 }
 
 @doc("List of statuses a job can have.")
 @lroStatus
-union JobStatus {
+union DeidentificationJobStatus {
   // Cannot use Azure.Core.Foundations.OperationState. because it is not a union type.
   @doc("Job has been submitted and is waiting to be processed.")
   NotStarted: "NotStarted",
@@ -97,7 +97,7 @@ union JobStatus {
 }
 
 @doc("Summary metrics of a job.")
-model JobSummary {
+model DeidentificationJobSummary {
   @doc("Number of documents that have completed.")
   @clientName("successfulCount", "java")
   successful: int32;
@@ -122,17 +122,17 @@ model JobSummary {
 @parentResource(DeidentificationJob)
 @resource("documents")
 @access(Access.public, "csharp,python")
-model DocumentDetails {
+model DeidentificationDocumentDetails {
   @key
   @doc("Id of the document details.")
   @visibility("read")
   id: string;
 
   @doc("Location for the input.")
-  input: DocumentLocation;
+  input: DeidentificationDocumentLocation;
 
   @doc("Location for the output.")
-  output?: DocumentLocation;
+  output?: DeidentificationDocumentLocation;
 
   @doc("Status of the document.")
   status: Azure.Core.Foundations.OperationState;
@@ -142,7 +142,7 @@ model DocumentDetails {
 }
 
 @doc("Location of a document.")
-model DocumentLocation {
+model DeidentificationDocumentLocation {
   @doc("Location of document in storage.")
   @maxLength(1024)
   location: url;

@@ -17,7 +17,7 @@ model DeidentificationContent {
   inputText: string;
 
   @doc("Operation to perform on the input documents.")
-  operation?: OperationType = OperationType.Surrogate;
+  operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Customization parameters to override default service behaviors.")
   customizations?: CustomizationOptions;

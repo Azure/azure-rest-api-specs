@@ -13,7 +13,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{endpoint}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -21,7 +21,9 @@
         "in": "path",
         "description": "Url of your De-identification Service.",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -100,11 +102,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "De-identify text.": {
-            "$ref": "./examples/DeidentifyText.json"
-          }
         }
       }
     },
@@ -152,11 +149,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List de-identification jobs.": {
-            "$ref": "./examples/ListJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -212,11 +204,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get a de-identification job.": {
-            "$ref": "./examples/GetJob.json"
           }
         }
       },
@@ -301,11 +288,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create a de-identification job.": {
-            "$ref": "./examples/DeidentifyDocuments.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
@@ -355,11 +337,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a de-identification job.": {
-            "$ref": "./examples/DeleteJob.json"
           }
         }
       }
@@ -413,11 +390,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Cancel a de-identification job.": {
-            "$ref": "./examples/CancelJob.json"
-          }
         }
       }
     },
@@ -451,7 +423,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDocumentDetails"
+              "$ref": "#/definitions/PagedDeidentificationDocumentDetails"
             }
           },
           "default": {
@@ -465,11 +437,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List processed documents within a job.": {
-            "$ref": "./examples/ListJobDocuments.json"
           }
         },
         "x-ms-pageable": {
@@ -622,7 +589,7 @@
             "Tag"
           ],
           "x-ms-enum": {
-            "name": "OperationType",
+            "name": "DeidentificationOperationType",
             "modelAsString": true,
             "values": [
               {
@@ -652,6 +619,59 @@
         "inputText"
       ]
     },
+    "DeidentificationDocumentDetails": {
+      "type": "object",
+      "description": "Details of a single document in a job.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the document details.",
+          "readOnly": true
+        },
+        "input": {
+          "$ref": "#/definitions/DeidentificationDocumentLocation",
+          "description": "Location for the input."
+        },
+        "output": {
+          "$ref": "#/definitions/DeidentificationDocumentLocation",
+          "description": "Location for the output."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Status of the document."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error when document fails."
+        }
+      },
+      "required": [
+        "id",
+        "input",
+        "status"
+      ]
+    },
+    "DeidentificationDocumentLocation": {
+      "type": "object",
+      "description": "Location of a document.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "description": "Location of document in storage.",
+          "maxLength": 1024
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location",
+        "etag"
+      ]
+    },
     "DeidentificationJob": {
       "type": "object",
       "description": "A job containing a batch of documents to de-identify.",
@@ -674,7 +694,7 @@
             "Tag"
           ],
           "x-ms-enum": {
-            "name": "OperationType",
+            "name": "DeidentificationOperationType",
             "modelAsString": true,
             "values": [
               {
@@ -708,7 +728,7 @@
           "description": "Customization parameters to override default service behaviors."
         },
         "status": {
-          "$ref": "#/definitions/JobStatus",
+          "$ref": "#/definitions/DeidentificationJobStatus",
           "description": "Current status of a job.",
           "readOnly": true
         },
@@ -736,7 +756,7 @@
           "readOnly": true
         },
         "summary": {
-          "$ref": "#/definitions/JobSummary",
+          "$ref": "#/definitions/DeidentificationJobSummary",
           "description": "Summary of a job. Exists only when the job is completed.",
           "readOnly": true
         }
@@ -750,91 +770,7 @@
         "createdAt"
       ]
     },
-    "DeidentificationResult": {
-      "type": "object",
-      "description": "Response body for de-identification operation.",
-      "properties": {
-        "outputText": {
-          "type": "string",
-          "description": "Output text after de-identification. Not available for \"Tag\" operation."
-        },
-        "taggerResult": {
-          "$ref": "#/definitions/PhiTaggerResult",
-          "description": "Result of the \"Tag\" operation. Only available for \"Tag\" Operation."
-        }
-      }
-    },
-    "DocumentDetails": {
-      "type": "object",
-      "description": "Details of a single document in a job.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id of the document details.",
-          "readOnly": true
-        },
-        "input": {
-          "$ref": "#/definitions/DocumentLocation",
-          "description": "Location for the input."
-        },
-        "output": {
-          "$ref": "#/definitions/DocumentLocation",
-          "description": "Location for the output."
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Status of the document."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error when document fails."
-        }
-      },
-      "required": [
-        "id",
-        "input",
-        "status"
-      ]
-    },
-    "DocumentLocation": {
-      "type": "object",
-      "description": "Location of a document.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "format": "uri",
-          "description": "Location of document in storage.",
-          "maxLength": 1024
-        },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "The entity tag for this resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location",
-        "etag"
-      ]
-    },
-    "JobCustomizationOptions": {
-      "type": "object",
-      "description": "Customizations options to override default service behaviors for job usage.",
-      "properties": {
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when Operation is Redact.",
-          "minLength": 1,
-          "maxLength": 16
-        },
-        "surrogateLocale": {
-          "type": "string",
-          "description": "Locale in which the output surrogates are written.",
-          "default": "en-US"
-        }
-      }
-    },
-    "JobStatus": {
+    "DeidentificationJobStatus": {
       "type": "string",
       "description": "List of statuses a job can have.",
       "enum": [
@@ -846,7 +782,7 @@
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "JobStatus",
+        "name": "DeidentificationJobStatus",
         "modelAsString": true,
         "values": [
           {
@@ -882,7 +818,7 @@
         ]
       }
     },
-    "JobSummary": {
+    "DeidentificationJobSummary": {
       "type": "object",
       "description": "Summary metrics of a job.",
       "properties": {
@@ -920,17 +856,47 @@
         "bytesProcessed"
       ]
     },
-    "PagedDeidentificationJob": {
+    "DeidentificationResult": {
       "type": "object",
-      "description": "Paged collection of DeidentificationJob items",
+      "description": "Response body for de-identification operation.",
+      "properties": {
+        "outputText": {
+          "type": "string",
+          "description": "Output text after de-identification. Not available for \"Tag\" operation."
+        },
+        "taggerResult": {
+          "$ref": "#/definitions/PhiTaggerResult",
+          "description": "Result of the \"Tag\" operation. Only available for \"Tag\" Operation."
+        }
+      }
+    },
+    "JobCustomizationOptions": {
+      "type": "object",
+      "description": "Customizations options to override default service behaviors for job usage.",
+      "properties": {
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        },
+        "surrogateLocale": {
+          "type": "string",
+          "description": "Locale in which the output surrogates are written.",
+          "default": "en-US"
+        }
+      }
+    },
+    "PagedDeidentificationDocumentDetails": {
+      "type": "object",
+      "description": "Paged collection of DeidentificationDocumentDetails items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DeidentificationJob items on this page",
+          "description": "The DeidentificationDocumentDetails items on this page",
           "items": {
-            "$ref": "#/definitions/DeidentificationJob"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/DeidentificationDocumentDetails"
+          }
         },
         "nextLink": {
           "type": "string",
@@ -942,16 +908,17 @@
         "value"
       ]
     },
-    "PagedDocumentDetails": {
+    "PagedDeidentificationJob": {
       "type": "object",
-      "description": "Paged collection of DocumentDetails items",
+      "description": "Paged collection of DeidentificationJob items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DocumentDetails items on this page",
+          "description": "The DeidentificationJob items on this page",
           "items": {
-            "$ref": "#/definitions/DocumentDetails"
-          }
+            "$ref": "#/definitions/DeidentificationJob"
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",

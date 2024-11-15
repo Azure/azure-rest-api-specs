@@ -9,7 +9,7 @@ using Azure.Core;
 namespace HealthDataAIServices.DeidServices;
 
 @doc("Enum of supported Operation Types.")
-union OperationType {
+union DeidentificationOperationType {
   @doc("Redact Operation will remove all entities of PHI and replace them with a placeholder value.")
   Redact: "Redact",
 
