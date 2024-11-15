@@ -6,6 +6,17 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ConnectedCache.json"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/connectedcache"
+    package-dir: "armconnectedcache"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
