@@ -21,13 +21,38 @@ alias LivenessSessionWithVerifyDescription = """
   *
     * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.
     * A token lifetime of 10 minutes.
-  
+
   > [!NOTE]
   >
   > *
   >   * Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation.
   >   * To retrieve a result, use the Get Liveness With Verify Session.
   >   * To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.
+  """;
+
+alias CreateLivenessSessionDescription = """
+  ${SessionCommonDescription}
+  
+  Permissions includes...
+  >
+  *
+    * Ability to call /detectLiveness/singleModal for up to 3 retries.
+    * A token lifetime of 10 minutes.
+
+  > [!NOTE]
+  > Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.
+  """;
+alias CreateLivenessWithVerifySessionWithVerifyImageDescription = """
+  ${LivenessSessionWithVerifyDescription}
+  
+  Recommended Option: VerifyImage is provided during session creation.
+  """;
+alias CreateLivenessWithVerifySessionDescription = """
+  ${LivenessSessionWithVerifyDescription}
+  
+  Alternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.
+  > [!NOTE]
+  > Extra measures should be taken to validate that the client is sending the expected VerifyImage.
   """;
 alias SessionCreationSuccess = "A successful call create a session for a client device and provide an authorization token for use by the client application for a limited purpose and time.";
 alias DeleteSessionSummary = "Delete all session related information for matching the specified session id.";
@@ -41,6 +66,15 @@ alias ListSessionDescription = """
   The result should be ordered by sessionId in ascending order.
   """;
 alias ListSessionAuditEntriesDescription = "Gets session requests and response body for the session.";
+alias CreateLivenessSessionSummary = "Create a new detect liveness session.";
+alias GetLivenessSessionResultDescription = "Get session result of detectLiveness/singleModal call.";
+alias ListLivenessSessionsSummary = "Lists sessions for /detectLiveness/SingleModal.";
+alias CreateLivenessWithVerifySessionWithVerifyImageSummary = "Create a new liveness session with verify. Provide the verify image during session creation.";
+alias CreateLivenessWithVerifySessionSummary = "Create a new liveness session with verify. Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.";
+alias GetLivenessWithVerifySessionResultDescription = "Get session result of detectLivenessWithVerify/singleModal call.";
+alias ListLivenessWithVerifySessionsSummary = "Lists sessions for /detectLivenessWithVerify/SingleModal.";
+alias GetSessionImageDescription = "Get session image stored during the liveness session.";
+alias SuccessfullyDeletedSession = "Successfully deleted session and all correlated data.";
 
 @get
 @action("audit")
@@ -54,19 +88,8 @@ op FaceLivenessSessionListAuditEntries<TResource extends TypeSpec.Reflection.Mod
 >;
 
 interface LivenessSessionOperations {
-  @doc("""
-    ${SessionCommonDescription}
-    
-    Permissions includes...
-    >
-    *
-      * Ability to call /detectLiveness/singleModal for up to 3 retries.
-      * A token lifetime of 10 minutes.
-    
-    > [!NOTE]
-    > Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.
-    """)
-  @summary("Create a new detect liveness session.")
+  @doc(CreateLivenessSessionDescription)
+  @summary(CreateLivenessSessionSummary)
   @returnsDoc(SessionCreationSuccess)
   createLivenessSession is FaceResourceCreateWithServiceProvidedName<
     LivenessSession,
@@ -76,14 +99,14 @@ interface LivenessSessionOperations {
 
   @summary(DeleteSessionSummary)
   @doc(DeleteSessionDescription)
-  @returnsDoc("Successfully deleted session and all correlated data.")
+  @returnsDoc(SuccessfullyDeletedSession)
   deleteLivenessSession is FaceResourceDeleteOperation<LivenessSession>;
 
-  @doc("Get session result of detectLiveness/singleModal call.")
+  @doc(GetLivenessSessionResultDescription)
   getLivenessSessionResult is FaceResourceReadOperation<LivenessSession>;
 
   @doc(ListSessionDescription)
-  @summary("Lists sessions for /detectLiveness/SingleModal.")
+  @summary(ListLivenessSessionsSummary)
   getLivenessSessions is FaceResourceListOperation<
     LivenessSession,
     LivenessSessionItem
@@ -93,12 +116,8 @@ interface LivenessSessionOperations {
   getLivenessSessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessSession>;
 
   #suppress "@azure-tools/typespec-azure-core/byos" "Representation of existing multipart/form-data operation"
-  @doc("""
-    ${LivenessSessionWithVerifyDescription}
-    
-    Recommended Option: VerifyImage is provided during session creation.
-    """)
-  @summary("Create a new liveness session with verify. Provide the verify image during session creation.")
+  @doc(CreateLivenessWithVerifySessionWithVerifyImageDescription)
+  @summary(CreateLivenessWithVerifySessionWithVerifyImageSummary)
   @returnsDoc(SessionCreationSuccess)
   @sharedRoute
   createLivenessWithVerifySessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
@@ -107,14 +126,8 @@ interface LivenessSessionOperations {
     CreateLivenessWithVerifySessionResult
   >;
 
-  @doc("""
-    ${LivenessSessionWithVerifyDescription}
-    
-    Alternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.
-    > [!NOTE]
-    > Extra measures should be taken to validate that the client is sending the expected VerifyImage.
-    """)
-  @summary("Create a new liveness session with verify. Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.")
+  @doc(CreateLivenessWithVerifySessionDescription)
+  @summary(CreateLivenessWithVerifySessionSummary)
   @returnsDoc(SessionCreationSuccess)
   @sharedRoute
   createLivenessWithVerifySession is FaceResourceCreateWithServiceProvidedName<
@@ -125,18 +138,14 @@ interface LivenessSessionOperations {
 
   @summary(DeleteSessionSummary)
   @doc(DeleteSessionDescription)
-  @returnsDoc("Successfully deleted session and all correlated data.")
+  @returnsDoc(SuccessfullyDeletedSession)
   deleteLivenessWithVerifySession is FaceResourceDeleteOperation<LivenessWithVerifySession>;
 
-  @doc("Get session result of detectLivenessWithVerify/singleModal call.")
+  @doc(GetLivenessWithVerifySessionResultDescription)
   getLivenessWithVerifySessionResult is FaceResourceReadOperation<LivenessWithVerifySession>;
 
-  @summary("Lists sessions for /detectLivenessWithVerify/SingleModal.")
-  @doc("""
-    List sessions from the last sessionId greater than the \"start\".
-    
-    The result should be ordered by sessionId in ascending order.
-    """)
+  @summary(ListLivenessWithVerifySessionsSummary)
+  @doc(ListSessionDescription)
   getLivenessWithVerifySessions is FaceResourceListOperation<
     LivenessWithVerifySession,
     LivenessSessionItem
@@ -147,7 +156,7 @@ interface LivenessSessionOperations {
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Does not fit in resource operation pattern."
   @added(Versions.v1_2_preview_1)
-  @doc("Get session image stored during the liveness session.")
+  @doc(GetSessionImageDescription)
   @get
   @route("session/sessionImages/{sessionImageId}")
   getSessionImage is Azure.Core.RpcOperation<
