@@ -28,7 +28,7 @@ These are the global settings for the PrivateLinkScopes.
 title: PrivateLinkScopesClient
 description: PrivateLinkScopes Client
 openapi-type: arm
-tag: package-2024-11
+tag: package-preview-2024-11
 ```
 
 ---

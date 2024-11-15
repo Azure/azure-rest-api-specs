@@ -2,11 +2,11 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Flux KubernetesConfiguration.
+This is the AutoRest configuration file for KubernetesConfiguration Extensions.
 
 ## Getting Started
 
-To build the SDKs for Flux KubernetesConfiguration, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for KubernetesConfiguration extension types, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 
@@ -25,22 +25,24 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the KubernetesConfiguration.
 
 ``` yaml
-title: FluxConfigurationClient
-description: KubernetesConfiguration Flux Client
+title: ExtensionTypesClient
+description: KubernetesConfiguration Extension Types Client
 openapi-type: arm
-tag: package-2024-11
+tag: package-preview-2024-11
 ```
 
 ---
 
-### Tag: package-2024-11
+### Tag: package-preview-2024-11
 
-These settings apply only when `--tag=package-2024-11` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-11'
+``` yaml $(tag) == 'package-preview-2024-11'
 input-file:
-  - stable/2024-11-01/fluxconfiguration.json
+  - preview/2024-11-01-preview/extensionTypes.json
 ```
+
+---
 
 # Code Generation
 
