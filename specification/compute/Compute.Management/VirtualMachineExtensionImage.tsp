@@ -17,8 +17,8 @@ model VirtualMachineExtensionImage
   is Azure.ResourceManager.TrackedResource<VirtualMachineExtensionImageProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineExtensionImage,
-    KeyName = "version",
-    SegmentName = "versions",
+    KeyName = "type",
+    SegmentName = "types",
     NamePattern = ""
   >;
 }
@@ -29,12 +29,20 @@ alias ImageTypePath = {
   ...LocationParameter;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @path @segment("publishers") publisherName: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @path @segment("types") type: string;
 };
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineExtensionImageOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      ImageTypePath & KeysOf<VirtualMachineExtensionImage>,
+      {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        @path @segment("versions") version: string,
+      }
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface VirtualMachineExtensionImageTypeOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       ImageTypePath,
       KeysOf<VirtualMachineExtensionImage>
@@ -48,14 +56,14 @@ interface VirtualMachineExtensionImages {
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}")
   get is VirtualMachineExtensionImageOps.ReadRoute<VirtualMachineExtensionImage>;
 
-  // /**
-  //  * Gets a list of virtual machine extension image types.
-  //  */
-  // @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types")
-  // listTypes is VirtualMachineExtensionImageOps.ListRoute<
-  //   VirtualMachineExtensionImage,
-  //   Response = ArmResponse<VirtualMachineExtensionImage[]>
-  // >;
+  /**
+   * Gets a list of virtual machine extension image types.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types")
+  listTypes is VirtualMachineExtensionImageTypeOps.ListRoute<
+    VirtualMachineExtensionImage,
+    Response = ArmResponse<VirtualMachineExtensionImage[]>
+  >;
 
   /**
    * Gets a list of virtual machine extension image versions.

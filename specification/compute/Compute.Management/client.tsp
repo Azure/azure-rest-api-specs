@@ -228,3 +228,7 @@ using Microsoft.Compute;
 @@clientName(LogAnalyticsOperations.exportRequestRateByInterval::parameters.body,
   "parameters"
 );
+
+@@clientName(VirtualMachineScaleSetVMRunCommands.update::parameters.body,
+  "runCommand"
+);
