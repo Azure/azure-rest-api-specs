@@ -83,14 +83,14 @@ union ExperimentActionType {
   string,
   discrete: "discrete",
   continuous: "continuous",
-  delay: "delay"
+  delay: "delay",
 }
 
 /**
  * Model that represents the post action response.
  */
 model PostActionResponse {
-    /**
+  /**
    * The name of the resource.
    */
   @visibility("read")
@@ -100,7 +100,7 @@ model PostActionResponse {
    * The statusUrl of the post action.
    */
   @visibility("read")
-  statusUrl?: string; 
+  statusUrl?: string;
 }
 
 /**
@@ -148,7 +148,7 @@ model CapabilityProperties {
    * Capability resource provisioning state. Not currently implemented.
    */
   @visibility("read")
-  provisioningState?: ProvisioningState;  
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -231,7 +231,7 @@ model CapabilityTypeProperties {
    * Capability type resource provisioning state. Not currently implemented.
    */
   @visibility("read")
-  provisioningState?: ProvisioningState;  
+  provisioningState?: ProvisioningState;
 
   /**
    * Control plane actions necessary to execute capability type.
@@ -338,7 +338,7 @@ model ChaosExperimentAction {
   /**
    * Chaos experiment action discriminator type
    */
-  type: ExperimentActionType
+  type: ExperimentActionType;
 }
 
 /**
@@ -357,7 +357,7 @@ model ChaosTargetSelector {
   /**
    * Chaos target selector discriminator type
    */
-  type: SelectorType; 
+  type: SelectorType;
 
   /**
    * Model that represents available filter types that can be applied to a targets list.
@@ -376,7 +376,7 @@ model ChaosTargetFilter {
   /**
    * Chaos target filter discriminator type
    */
-  type: FilterType    
+  type: FilterType;
 }
 
 /**
@@ -387,6 +387,7 @@ model ExperimentUpdate {
    * The tags of the experiment resource.
    */
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
   /** Updatable managed service identity */
   identity?: ManagedServiceIdentityUpdate;
 }
@@ -420,11 +421,11 @@ model ExperimentExecutionProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stoppedAt?: utcDateTime;
 
-    /**
+  /**
    * Experiment execution resource provisioning state. Not currently implemented.
    */
-    @visibility("read")
-    provisioningState?: ProvisioningState; 
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -725,7 +726,7 @@ model TargetTypeProperties {
    * Target type resource provisioning state. Not currently implemented.
    */
   @visibility("read")
-  provisioningState?: ProvisioningState;    
+  provisioningState?: ProvisioningState;
 }
 
 /**
