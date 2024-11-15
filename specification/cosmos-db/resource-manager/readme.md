@@ -960,17 +960,33 @@ directive:
   - suppress: PutResponseCodes
     from: dataTransferService.json
     reason: Suppressing errors for existing APIs
+  - suppress: PutResponseCodes
+    from: cosmos-db.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/graphs/{graphName}"].put
+    reason: Suppressing errors for existing APIs
   - suppress: DeleteResponseCodes
     from: cosmos-db.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/graphs/{graphName}"].delete
     reason: Suppressing errors for existing APIs
   - suppress: PutResponseCodes
     from: cosmos-db.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/graphs/{graphName}"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}"].put
+    reason: Suppressing errors for existing APIs
+  - suppress: DeleteResponseCodes
+    from: cosmos-db.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}"].delete
+    reason: Suppressing errors for existing APIs
+  - suppress: PutResponseCodes
+    from: cosmos-db.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default"].put
     reason: Suppressing errors for existing APIs
   - suppress: BodyTopLevelProperties
     from: managedCassandra.json
     where: $.definitions.CommandPublicResource
+    reason: Suppressing errors for existing APIs
+  - suppress: BodyTopLevelProperties
+    from: managedCassandra.json
+    where: $.definitions.BackupResource
     reason: Suppressing errors for existing APIs
 
 ```
